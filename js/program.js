@@ -117,15 +117,112 @@ var playerEndBidTimer = 0;
 var timer = 0;
 var previousTime = Date.now();
 //
+//Class declarations
+//
+ //A vector for 2d space.
+ 
+// datatype {integer} x - Center x coordinate.
+// datatype {integer} y - Center y coordinate.
+// @datatype {integer} dx - Change in x.
+// datatype {integer} dy - Change in y.
+function Vector(x, y, dx, dy) 
+{
+  // position
+  this.x = x || 0;
+  this.y = y || 0;
+  // direction
+  this.dx = dx || 0;
+  this.dy = dy || 0;
+  //function advance(){}
+}
+
+// Move the player advance the vectors position by dx,dy
+Vector.prototype.advance = function() 
+{
+  this.x += this.dx;
+  this.y += this.dy;
+};
+//
+//vehicle attributes
+//price, originality, condition, name;
+// create a 'class' Vehicle
+var Vehicle = function(node) 
+{
+	Vector.call(Vehicle,  VEHICLE_XPOS,  VEHICLE_YPOS, Vehicle.dx, Vehicle.dy);
+	//var atrs = node.attributes;
+	this.price = 0;	//parseInt(atrs.getNamedItem('price') );
+	this.condition = 0;
+	this.originality = 0;
+	this.name = "";
+	//var upgrades = node.getElementById('upgrades');
+	//this.parts = [];
+	//for(part in upgrades){
+		//parts.append(Vehiclepart(part) );
+	//}
+	this.image = new Image();
+	this.image.src = 'images/vehicle.jpg';
+//	make
+//	year
+//	Vehicle.prototype.image = new Image(image);
+
+	function displayInfo() 
+	{ 
+		 //this.image.src = 'images/vehicle.jpg';
+		 //alert("hello, I have " + this.price + " price and a condition of " + this.condition + "shit for originality by this much" + this.originality + "my name is " + this.name + this.image);
+		 
+		 context.fillText( this.name  ,VEHICLE_XPOS + 40, 120);
+		 context.fillText( "Value"+ this.price  ,VEHICLE_XPOS + 40, 140);
+		 context.fillText( "Orig" + this.originality  ,VEHICLE_XPOS + 40, 160);
+		 context.fillText( "Condition"+ this.condition  ,VEHICLE_XPOS + 40, 180);
+		 Vehicle.draw = function() 
+		 {
+			context.drawImage(this.image,VEHICLE_XPOS,VEHICLE_YPOS);
+		 }
+	}
+	function getOriginality()
+	{	//returns the cummulative originallity of this care and all its upgrades and parts
+		var ret = this.originality;
+		return ret;
+	}
+};
+//var image = new Image();
+//image.src = 'images/vehicle.jpg';
+
+//Vehicle.prototype.image = new Image(image);
+/*
+Vehicle.prototype.displayInfo = function() 
+{ 
+	 //this.image.src = 'images/vehicle.jpg';
+     //alert("hello, I have " + this.price + " price and a condition of " + this.condition + "shit for originality by this much" + this.originality + "my name is " + this.name + this.image);
+     
+     context.fillText( this.name  ,VEHICLE_XPOS + 40, 120);
+     context.fillText( "Value"+ this.price  ,VEHICLE_XPOS + 40, 140);
+     context.fillText( "Orig" + this.originality  ,VEHICLE_XPOS + 40, 160);
+     context.fillText( "Condition"+ this.condition  ,VEHICLE_XPOS + 40, 180);
+     Vehicle.draw = function() 
+     {
+     	context.drawImage(this.image,VEHICLE_XPOS,VEHICLE_YPOS);
+     }
+};
+*/
+//var vehicleInstance = new Vehicle();
+//vehicleInstance.displayInfo(); // displays: Hello, I have 0 price and max speed of 0
 //
 //TODO, access from html database, or other markup file
 //
 var userGarage = [
 	//Vehicle(car.name, car.price, car.originality, car.condition)
 ];
+
 var vDoc = document.querySelector('link[rel="import"]');	//document Vehicles.html
-var vehicles = document.getElementById('Vehicles');
-//var cn = vehicles.firstChild;
+//var text = vDoc.querySelector('.doc');
+//document.body.appendChild(text.cloneNode(true) );
+var vehicles = vDoc.getElementsByTagName("Vehicle");	//returns an array of html element nodes
+var v = vehicles[0];
+//var cn = v.childNodes;
+//var atrs=v.attributes;
+//var price = atrs.getNamedItem('price');
+//var cn = vehicles.childNodes;
 //for(var carNode in vehicles.childNodes){
 	//var newCar = Vehicle(car)
 	//instantiate js object or retain html node 'car' for read only access
@@ -274,7 +371,6 @@ var assetLoader = (function()
   };
 })();
 
-
 //Show asset loading progress
 //@datatype {integer} progress - Number of assets loaded
 //@datatype {integer} total - Total number of assets
@@ -379,32 +475,6 @@ function Animation(spritesheet, frameSpeed, startFrame, endFrame)
   };
 }
 
- //A vector for 2d space.
- 
-// datatype {integer} x - Center x coordinate.
-// datatype {integer} y - Center y coordinate.
-// @datatype {integer} dx - Change in x.
-// datatype {integer} dy - Change in y.
-function Vector(x, y, dx, dy) 
-{
-  // position
-  this.x = x || 0;
-  this.y = y || 0;
-  // direction
-  this.dx = dx || 0;
-  this.dy = dy || 0;
-}
-
-
-// Move the player advance the vectors position by dx,dy
-Vector.prototype.advance = function() 
-{
-  this.x += this.dx;
-  this.y += this.dy;
-};
-
-//Vehicles
-
 // The player object
 var player = (function(player) 
 {
@@ -447,10 +517,8 @@ var player = (function(player)
   return player;
 })(Object.create(Vector.prototype));
 
-/**
- * Sprites are anything drawn to the screen (ground, enemies, etc.)*/
 function Sprite(x, y, type) 
-{
+{	//Sprites are anything drawn to the screen (ground, enemies, etc.)
   this.x      = x;
   this.y      = y;
   this.width  = standWidth;
@@ -479,7 +547,6 @@ Sprite.prototype = Object.create(Vector.prototype);
 //Game Loop 
 function update()
 {
-    
 	var deltaTime = (Date.now() - previousTime) / 1000;
     previousTime = Date.now();
     timer += deltaTime;
@@ -491,13 +558,13 @@ function update()
     
     if(timer >= 400.00)
 	{
-	  mainMenu();
+		mainMenu();
 	}
 	
 	//Auction Mode Game Display and everything happening in Auction 
 	if(inAuctionMode)
 	{
-		auctionTimer ++;
+		auctionTimer++;
 	
 		//player
 		updatePlayer();
@@ -505,6 +572,7 @@ function update()
 		bidTimers();
 		enemyBidding();
 		currentBidder();
+	
 		if(playerDidBid)
 		{
 			bidderCooldown ++;
@@ -519,20 +587,17 @@ function update()
 	  	}
 	  	findEndBidder();
 	  	renderAuction();
-
 	    
 	}
 	else
 	{
 		inAuctionMode = false;
-	}
-	
+	}	
 
 }
 
 function updatePlayer() 
 {
-  
   player.update();
   player.draw();
 
@@ -557,7 +622,7 @@ function shuffleArray(array)
     var counter = array.length, temp, index;
 
     // While there are elements in the array
-    while (counter > 0) 
+    while(counter > 0)
     {
         // Pick a random index
         index = Math.floor(Math.random() * counter);
@@ -569,13 +634,22 @@ function shuffleArray(array)
         temp = array[counter];
         array[counter] = array[index];
         array[index] = temp;
-       
     }
 
-    return array;
+    return array;	//copies array, will be diffrent from one passed out
 }
 function bidTimers()
-{
+{	//increment bid timers if not expired, else reset
+//	for(var i = 0; i < bidTimers.length; i++)
+//	{		
+//		if(startEndBid){ 
+//			endBidTimer[i]++;
+//		}
+//		else{
+//			endBidTimer[i] = 0;
+//		}
+//	}
+
 	if(startEndBid)
 	{ 
 		endBidTimer ++;
@@ -594,7 +668,7 @@ function bidTimers()
 	}
 	if(startEndBid3)
 	{ 
-		endBidTimer3 ++;
+		endBidTimer3++;
 	}
 	else
 	{
@@ -602,7 +676,7 @@ function bidTimers()
 	}
 	if(startEndBid4)
 	{ 
-		endBidTimer4 ++;
+		endBidTimer4++;
 	}
 	else
 	{
@@ -610,7 +684,7 @@ function bidTimers()
 	}
 	if(startPlayerEndBid)
 	{
-		playerEndBidTimer ++;
+		playerEndBidTimer++;
 	}
 	else
 	{
@@ -623,13 +697,13 @@ function animate()
 {
   context.clearRect(0, 0, canvas.width, canvas.height);
   document.getElementById('gameMenu').style.display = 'true';  
-  if (!stop) 
+  if(!stop) 
   {
     requestAnimFrame( animate );
   
   	update();
   	
-	timer ++;
+	timer++;
     ticker++;
   }
 }
@@ -733,8 +807,7 @@ function splash()
   animate();
   $('#progress').hide();
   $('#splash').show();
-  $('.sound').show();
-  
+  $('.sound').show(); 
 }
  
 //Main Menu  
@@ -742,10 +815,11 @@ function mainMenu()
 {
   for (var sound in assetLoader.sounds) 
   {
-    if (assetLoader.sounds.hasOwnProperty(sound)) 
-    {
-      assetLoader.sounds[sound].muted = !playSound;
-    }
+	//redundant. sounds should have this property, as it's what being iterated over
+	if (assetLoader.sounds.hasOwnProperty(sound))
+	{
+	  assetLoader.sounds[sound].muted = !playSound;
+	}
   }
  
   $('#progress').hide();
@@ -758,31 +832,31 @@ function mainMenu()
 // Start the game - reset all variables and entities, spawn ground and water.
 function startGame() 
 {
-  document.getElementById('game-over').style.display = 'none';
+	document.getElementById('game-over').style.display = 'none';
   
-  player.reset();
-  ticker = 0;
-  stop = false;
-  money = 50000;
-  playerBid = 0;
-  
-  context.font = '26px arial, sans-serif';
-  // Create gradient
-  var gradient=context.createLinearGradient(36,40,600,1);
-  gradient.addColorStop("0","magenta");
-  gradient.addColorStop("0.5","blue");
-  gradient.addColorStop("1.0","green");
-  // Fill with gradient
-  context.fillStyle = gradient;
- 
-  animate();
-  update();
-  
-  assetLoader.sounds.gameOver.pause();
-  assetLoader.sounds.bg.currentTime = 0;
-  assetLoader.sounds.bg.loop = true;
-  assetLoader.sounds.bg.play();
-      
+	player.reset();
+	ticker = 0;
+	stop = false;
+	money = 50000;
+	playerBid = 0;
+	
+	context.font = '26px arial, sans-serif';
+	// Create gradient
+	var gradient=context.createLinearGradient(36,40,600,1);
+	gradient.addColorStop("0","magenta");
+	gradient.addColorStop("0.5","blue");
+	gradient.addColorStop("1.0","green");
+	// Fill with gradient
+	context.fillStyle = gradient;
+	
+	animate();
+	update();
+	
+	assetLoader.sounds.gameOver.pause();
+	assetLoader.sounds.bg.currentTime = 0;
+	assetLoader.sounds.bg.loop = true;
+	assetLoader.sounds.bg.play();
+	  
 }
 function resetStates()
 {
@@ -799,19 +873,20 @@ function repairState()
   
 }
 function addFundsMode()
-{
-	
+{	
   document.getElementById('AddFunds').style.display = 'true';
   inAddFundsMode = true;
+//   appState = GameMode.AddFunds;
+	//init payPay buttons, need api
 }
 //Auction State
 function auctionMode() 
 {
-   context.clearRect(0, 0, canvas.width, canvas.height);
+	context.clearRect(0, 0, canvas.width, canvas.height);
 
    document.getElementById('Auction').style.display = 'true';
    inAuctionMode = true;
- 
+//   appState = GameMode.Auction;
    ticker = 0;
    stop = false;
    money = 50000;
@@ -851,22 +926,20 @@ function playerBidding()
 		startEndBid2 = false;
 		startEndBid3 = false;
 		startEndBid4 = false;
-		startPlayerEndBid = true;
-	  		
+		startPlayerEndBid = true; 		
 	}
 	
 	if(playerBid <= money)
 	{
 		playerDidBid = true;
-	
 	}
 	else
 	{
-	//cant bid above your cash 
-	//call a new function to alert player hes &$#k up
-	 gameOver();
-	 
-	 startPlayerEndBid = false;
+		//cant bid above your cash 
+		//call a new function to alert player hes &$#k up
+		gameOver();
+		
+		startPlayerEndBid = false;
 	}
 	//Wins BId	
 	if((enemyBids[0] == 0) && (enemyBids[1] == 0) && (enemyBid[2] == 0) && (enemyBid[3] == 0) && (money >= currentBid))
@@ -939,9 +1012,7 @@ function bidFinder()
 		startEndBid3 = false;
 		startEndBid4 = true;
 		startPlayerEndBid = false;
-	}
-	
-	
+	}	
 }
 var enemyCanBid = false;
 function enemyBidding() 
@@ -950,7 +1021,7 @@ function enemyBidding()
 	var upPerc =  0.18 * currentBid;
 	var startBid = vehiclePrice * 0.02;
 	//var upPerc = startBid ;
-	if( currentBid >= 0 )
+	if( currentBid >= 0)
 	{
 		if((enemyBids[0] < currentBid) && (enemyBids[0] < enemyCap)&&(enemyCanBid))
 		{
@@ -971,9 +1042,7 @@ function enemyBidding()
 		{
 		    enemyBids[3] = currentBid + upPerc;
 		    
-		}
-
-					
+		}					
 	}
 	else if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]))
 	{
