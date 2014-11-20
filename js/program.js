@@ -113,6 +113,7 @@ var playerEndBidTimer = 0;
 //DT
 var timer = 0;
 var previousTime = Date.now();
+
 //
 //
 //TODO, access from html database, or other markup file
@@ -396,7 +397,7 @@ function update()
 	else
 	{
 		inAuctionMode = false;
-		GameMode = Running;
+		this.GameMode = Running;
 		
 	}
 	
@@ -816,7 +817,7 @@ function startGame()
   gradient.addColorStop("1.0","green");
   // Fill with gradient
   context.fillStyle = gradient;
- 
+  this.appState = GameMode.Running;
   animate();
   update();
   
