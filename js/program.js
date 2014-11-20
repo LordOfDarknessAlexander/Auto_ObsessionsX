@@ -396,10 +396,10 @@ function update()
 	else
 	{
 		inAuctionMode = false;
-		switchStates();
+		GameMode = Running;
 		
 	}
-
+	
 }
 
 
