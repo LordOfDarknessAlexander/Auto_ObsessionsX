@@ -455,3 +455,485 @@ a
   height: 600px;
   position: absolute;
 }
+
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) 
+{
+/* Styles */
+	
+	#auction
+	{
+	  background: url('../images/auctionButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;; 
+	  cursor:pointer;
+	}
+	#repair
+	{
+	  background: url('../images/repairButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;	  
+	  cursor:pointer;
+	
+	  
+	}
+	#repairBackButton
+	{
+	  background: url('../images/repairBackButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;		 
+	  cursor:pointer;
+	
+		
+	}
+	#addFundsBackButton
+	{
+	  background: url('../images/repairBackButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;		  
+	  cursor:pointer;
+	
+		
+	}
+	
+	#auctionBackButton
+	{
+	  background: url('../images/repairBackButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;		  
+	  cursor:pointer;
+	
+		
+	}
+	
+	#addFunds
+	{
+	   background: url('../images/addFundsButton.png') no-repeat 0 0;
+	   color: white;
+	   font-weight: bold;
+	   width:200px;
+	   height:100px;		   
+	   cursor:pointer;
+	}
+	#myCars
+	{
+	   background: url('../images/inventoryButton.png') no-repeat 0 0;
+	   color: white;
+	   font-weight: bold;
+	   width:200px;
+	   height:100px;		   
+	   cursor:pointer;
+	 
+	}
+	
+	#bid
+	{
+	  background: url('../images/bidButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:200px;		  
+	  cursor:pointer;
+	
+	}
+	#purchaseButton
+	{
+	  background: url('../images/bidButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;	
+	  cursor:pointer;
+	
+	}
+	
+	
+	.sound-off 
+	{
+	  background-image: url('../images/soundOff.png');
+	  background-repeat: no-repeat;
+	}
+	
+	#main 
+	{
+	  display: none;
+	  height: 100%;
+	  overflow: auto;
+	  margin: auto;
+	  position: absolute;
+	  top: 0; left: 0; bottom: 0; right: 0;
+	}
+	#menu.gameMenu
+	{
+		
+	  /*background-image: url('../images/logo.png');*/
+	  display:inline-block;
+	  text-align: center;
+	  padding-top: 92px;
+	  z-index: 1;
+	  width: 60%;
+	  height: 100%;
+	  position: absolute;
+	
+	}
+		
+	.button 
+	{
+	  display: block;
+	  width: 200px;
+	  height:200px;
+	  margin: 0 auto;
+	  height: 30px;
+	  line-height: 30px;
+	  border: 1px solid #AA2666;
+	  color: white;
+	  font-weight: bold;
+	  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	  background-color: #FF0DFF;
+	  background-image: -webkit-linear-gradient(bottom, #990000 0%, #990000 100%);
+	  background-image:         linear-gradient(to bottom, #990000 0%, #B30D5D 100%);
+	  border-radius: 5px;
+	 }
+
+	
+	.button:hover 
+	{
+	  background-color: #990099;
+	  background-image: -webkit-linear-gradient(bottom, #B30D5D 0%, #FB1886 100%);
+	  background-image:         linear-gradient(to bottom, #B30D5D 0%, #FB1886 100%);
+	}
+		
+	#main 
+	{
+	  display: none;
+	  height: 100%;
+	  overflow: auto;
+	  margin: auto;
+	  position: absolute;
+	  top: 0; left: 0; bottom: 0; right: 0;
+	}
+	#menu.gameMenu
+	{
+		
+	  /*background-image: url('../images/logo.png');*/
+	  display:inline-block;
+	  text-align: center;
+	  padding-top: 92px;
+	  z-index: 1;
+	  width: 60%;
+	  height: 100%;
+	  position: absolute;
+	
+	}
+	#money
+	{
+	 color:aqua;
+		
+	}
+	#enemyBid
+	{
+	 color:aqua;
+		
+	}
+	
+	#gameMenu 
+	{
+	
+	  display: none;
+	  text-align: center;
+	  padding-top: 92px;
+	  z-index: 1;
+	  width: 60%;
+	  height: 100%;	  
+	  position: absolute;
+	}
+	#gameMenu  li 
+	{
+	  padding: 10px 0;
+	  display:inline;
+	  margin: 8px;
+	  margin-top: 8em;
+	}
+	
+	#Auction
+	{
+	  
+	  display: none;
+	  text-align: center;
+	  padding-top: 92px;
+	  z-index: 1;
+	  width: 60%;
+	  height: 100%;	  
+	  position: absolute;
+	}
+	
+	#menu.Auction
+	{
+		
+	  display: none;
+	  text-align: center;
+	  padding-top: 92px;
+	  z-index: 1;
+	  width: 60%;
+	  height: 100%;	  
+	  position: absolute;
+	
+	}
+	#Auction  li 
+	{
+	  padding: 5px 0;
+	}
+	
+	#RepairShop
+	{
+	  
+	  display: none;
+	  text-align: center;
+	  padding-top: 92px;
+	  z-index: 1;
+	  width: 60%;
+	  height: 100%;	  
+	  position: absolute;
+	}
+	
+	#menu.RepairShop
+	{
+		
+	 
+	  display: none;
+	  text-align: center;
+	  padding-top: 92px;
+	  z-index: 1;
+	  width: 60%;
+	  height: 100%;	  
+	  position: absolute;
+	
+	}
+	#RepairShop  li 
+	{
+	  padding: 5px 0;
+	}
+	#AddFunds
+	{
+	  background-image: url('../images/logo.png');
+	  display: none;
+	  text-align: center;
+	  padding-top: 92px;
+	  z-index: 1;
+	  width: 60%;
+	  height: 100%;	  
+	  position: absolute;
+	}
+	
+	#menu.AddFunds
+	{
+		
+	 background-image: url('../images/logo.png');
+	  display: none;
+	  text-align: center;
+	  padding-top: 92px;
+	  z-index: 1;
+	  width: 60%;
+	  height: 100%;	
+	  position: absolute;
+	
+	}
+	#AddFunds  li 
+	{
+	  padding: 5px 0;
+	}
+	
+	
+	#main h1 
+	{
+	  color: #AFCAAF;
+	  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	}
+
+
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) 
+{
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) 
+{
+/* Styles */
+	
+	#auction
+	{
+	  background: url('../images/auctionButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px; 
+	  cursor:pointer;
+	}
+	#repair
+	{
+	  background: url('../images/repairButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;
+	  cursor:pointer;
+
+	}
+	#repairBackButton
+	{
+	  background: url('../images/repairBackButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;	  cursor:pointer;
+
+	}
+	#addFundsBackButton
+	{
+	  background: url('../images/repairBackButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;	 
+	  cursor:pointer;
+	
+	}
+	
+	#auctionBackButton
+	{
+	  background: url('../images/repairBackButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;	  
+	  cursor:pointer;
+		
+	}
+	
+	#addFunds
+	{
+	   background: url('../images/addFundsButton.png') no-repeat 0 0;
+	   color: white;
+	   font-weight: bold;
+	   width:200px;
+	   height:100px;	   
+	   cursor:pointer;
+	}
+	#myCars
+	{
+	   background: url('../images/inventoryButton.png') no-repeat 0 0;
+	   color: white;
+	   font-weight: bold;
+	   width:200px;
+	   height:100px;	   
+	   cursor:pointer;
+	 
+	}
+	
+	#bid
+	{
+	  background: url('../images/bidButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;
+	  cursor:pointer;
+	
+	}
+	#purchaseButton
+	{
+	  background: url('../images/bidButton.png') no-repeat 0 0;
+	  color: white;
+	  font-weight: bold;
+	  width:200px;
+	  height:100px;
+	  cursor:pointer;
+	
+	}
+	
+	
+	.sound-off 
+	{
+	  background-image: url('../images/soundOff.png');
+	  background-repeat: no-repeat;
+	}
+	
+	#main 
+	{
+	  display: none;
+	  height: 100%;
+	  overflow: auto;
+	  margin: auto;
+	  position: absolute;
+	  top: 0; left: 0; bottom: 0; right: 0;
+	}
+	#menu.gameMenu
+	{
+		
+	  /*background-image: url('../images/logo.png');*/
+	  display:inline-block;
+	  text-align: center;
+	  padding-top: 92px;
+	  z-index: 1;
+	  width: 140%;
+	  height: 100%;
+	  position: absolute;
+	
+	}
+
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) 
+{
+/* Styles */
+}
+/**********
+iPad 3
+**********/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) 
+{
+/* Styles */
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) 
+{
+/* Styles */
+}
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) 
+{
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) 
+{
+/* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) 
+{
+/* Styles */
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) 
+{
+/* Styles */
+}

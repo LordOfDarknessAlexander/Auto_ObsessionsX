@@ -6,7 +6,6 @@ var context = canvas.getContext('2d');
 var width = canvas.getAttribute('width');
 var height = canvas.getAttribute('height');
 var player, money, stop, ticker;
-//random comment
 var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
 var playSound;
 var splashTimer = 600.00;
