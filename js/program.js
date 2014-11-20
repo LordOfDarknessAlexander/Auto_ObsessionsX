@@ -69,13 +69,10 @@ var inAuctionMode = false;
 var inRepairMode = false;
 var inAddFundsMode = false;
 //solution
-//var GameMode = {
-	//emulate an enum
-//	Auction : 1,
-	//RepairMode : 2,
-//	AddFunds :3
-//}
-//appState = GameMode.Splash;	//app may only exist in one state at a time
+
+
+
+
 //
 //AI Variables
 var playerBid = 0;
@@ -120,26 +117,29 @@ var previousTime = Date.now();
 //
 //TODO, access from html database, or other markup file
 //
+/*
 var userGarage = [
-	//Vehicle(car.name, car.price, car.originality, car.condition)
+	Vehicle(car.name, car.price, car.originality, car.condition)
 ];
 var vDoc = document.querySelector('link[rel="import"]');	//document Vehicles.html
 var vehicles = document.getElementById('Vehicles');
-//var cn = vehicles.firstChild;
-//for(var carNode in vehicles.childNodes){
-	//var newCar = Vehicle(car)
+var cn = vehicles.firstChild;
+for(var carNode in vehicles.childNodes){
+	var newCar = Vehicle(car)
 	//instantiate js object or retain html node 'car' for read only access
-//}
-/*
+}
+
 function loadUsergarage(){
 	//serialize user cars from html, to be upgraded
-	//userDoc = 
-	//for(var car in garage){
-		//var dbCarNode = dbCars.getElementById(car.id)
-		//userCars.append(new Vehicle(dbCarNode) );
-	//}
+	userDoc = 
+	for(var car in garage){
+		var dbCarNode = dbCars.getElementById(car.id)
+		userCars.append(new Vehicle(dbCarNode) );
+	}
 }
+
 */
+
 // set the sound preference
 if (canUseLocalStorage) 
 {
@@ -310,6 +310,100 @@ function garageDoor()
 		backgroundY = -1000;
 	}
 }	
+var appState;
+var GameMode = 
+{
+	//emulate an enum
+	Running : 1,
+	Auction : 2,
+	Repair : 3,
+	AddFunds :4,
+
+}
+appState = GameMode.Running;	//app may only exist in one state at a time
+
+
+var Repair;
+var AddFunds;
+var Running;
+
+
+function switchStates( GameMode) 
+{
+
+	 switch (GameMode) 
+	 {
+	      case Auction:
+		        auctionMode();
+		        inAuctionMode;
+		        break;
+		    case Repair:
+		        repairState();
+		        inRepairMode;
+		        break;
+		        
+		    case AddFunds:
+		    	addFundsMode();
+		    	inAddFundsMode;
+		    default:
+		         Running; 
+	     // etc...
+	 }
+}
+
+
+function update()
+{
+    
+	var deltaTime = (Date.now() - previousTime) / 1000;
+    previousTime = Date.now();
+    timer += deltaTime;
+    
+    garageDoor();
+	//Order of draws matters
+    context.drawImage(backgroundImage, 0,-10);
+    context.drawImage(splashImage, 0, backgroundY);
+    
+    if(timer >= 400.00)
+	{
+	  mainMenu();
+	}
+
+	switchStates();	
+	
+	if(inAuctionMode)
+	{
+		updatePlayer();
+		//call bidder ai functions
+		bidTimers();
+		enemyBidding();
+		currentBidder();
+		if(playerDidBid)
+		{
+			bidderCooldown ++;
+			enemyCanBid = false;
+		}
+	  
+	  	if(	bidderCooldown >= 1500)
+	  	{
+	  		enemyCanBid = true;
+	  		bidderCooldown = 0;
+	  		
+	  	}
+	  	findEndBidder();
+	  	renderAuction();
+	}
+	else
+	{
+		inAuctionMode = false;
+		switchStates();
+		
+	}
+
+}
+
+
+
 //Creates a Spritesheet
 //datatype {string} - Path to the image.
 //datatype {number} - Width (in px) of each frame.
@@ -477,58 +571,6 @@ function Sprite(x, y, type)
 }
 Sprite.prototype = Object.create(Vector.prototype);
 //Game Loop 
-function update()
-{
-    
-	var deltaTime = (Date.now() - previousTime) / 1000;
-    previousTime = Date.now();
-    timer += deltaTime;
-    
-    garageDoor();
-	//Order of draws matters
-    context.drawImage(backgroundImage, 0,-10);
-    context.drawImage(splashImage, 0, backgroundY);
-    
-    if(timer >= 400.00)
-	{
-	  mainMenu();
-	}
-	
-	//Auction Mode Game Display and everything happening in Auction 
-	if(inAuctionMode)
-	{
-		auctionTimer ++;
-	
-		//player
-		updatePlayer();
-		//call bidder ai functions
-		bidTimers();
-		enemyBidding();
-		currentBidder();
-		if(playerDidBid)
-		{
-			bidderCooldown ++;
-			enemyCanBid = false;
-		}
-	  
-	  	if(	bidderCooldown >= 1500)
-	  	{
-	  		enemyCanBid = true;
-	  		bidderCooldown = 0;
-	  		
-	  	}
-	  	findEndBidder();
-	  	renderAuction();
-
-	    
-	}
-	else
-	{
-		inAuctionMode = false;
-	}
-	
-
-}
 
 function updatePlayer() 
 {
@@ -822,10 +864,16 @@ function auctionMode()
    context.font = '26px arial, sans-serif';
    update();
       
+   auctionTimer ++;
+	
+		
+   
    console.log(endBidTimer);
    auctionMode.update = function() 
    {
      playerBidding();
+     //player
+	
    }
   
   $('#Auction').show();
