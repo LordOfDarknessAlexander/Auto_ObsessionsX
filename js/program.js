@@ -68,12 +68,7 @@ var enemyBids = [1,2,3,4];
 var inAuctionMode = false;
 var inRepairMode = false;
 var inAddFundsMode = false;
-//solution
 
-
-
-
-//
 //AI Variables
 var playerBid = 0;
 //temp
@@ -83,7 +78,7 @@ var currentBid = 0;
 var vehiclePrice = 20000;
 //static bidding caps results in obvious behaviour,
 //ie. starting an auction with more than 1.25 of vehicle price will always win
-//function price(){return rand(0.2, 1.25) * vehiclePrice;}
+function price(){return Math.random(0.2, 1.25) * vehiclePrice;}
 //var enemyCap = [price(), price(), price(), price()];	//new array for every new auction?
 var enemyCap = 1.25 * vehiclePrice;
 var enemyCap2 = 0.8 * vehiclePrice;
@@ -99,7 +94,7 @@ var endBidTimer2 = 0;
 var endBidTimer3 = 0;
 var endBidTimer4 = 0;
 var playerDidBid = false;
-var auctionTimer = 0;
+
 var playerNextBid = currentBid + (currentBid * 0.1);
 
 //BidTImers Booleans
@@ -296,6 +291,12 @@ assetLoader.finished = function()
 splashImage.onload = function()
 {
 	context.drawImage(splashImage, 0,0);
+	appState = GameMode.Splash;
+	if(appState == GameMode.Splash)
+    {
+	 console.log("Splashing");
+    }	
+
 };
 //Main Background of game
 backgroundImage.onload = function()
@@ -319,15 +320,19 @@ var GameMode =
 	Auction : 2,
 	Repair : 3,
 	AddFunds :4,
+	Splash   : 5,
+	Main_Menu : 6,
 
 }
 appState = GameMode.Running;	//app may only exist in one state at a time
 
 
-var Repair;
+var Repair ;
 var AddFunds;
 var Running;
-
+var Splash;
+var Main_Menu;
+switchStates();	
 
 function switchStates( GameMode) 
 {
@@ -341,6 +346,7 @@ function switchStates( GameMode)
 		    case Repair:
 		        repairState();
 		        inRepairMode;
+		        console.log("Im getting a fix");
 		        break;
 		        
 		    case AddFunds:
@@ -365,12 +371,12 @@ function update()
     context.drawImage(backgroundImage, 0,-10);
     context.drawImage(splashImage, 0, backgroundY);
     
-    if(timer >= 400.00)
+	if(timer >= 600)
 	{
-	  mainMenu();
+		appState = GameMode.Running;
+		timer = 0;
 	}
-
-	switchStates();	
+    
 	
 	if(inAuctionMode)
 	{
@@ -379,6 +385,7 @@ function update()
 		bidTimers();
 		enemyBidding();
 		currentBidder();
+		price();
 		if(playerDidBid)
 		{
 			bidderCooldown ++;
@@ -672,6 +679,12 @@ function animate()
   
   	update();
   	
+    if(timer >= 400.00)
+	{
+	  mainMenu();
+	  appState = GameMode.MainMenu;
+	  
+	}  
 	timer ++;
     ticker++;
   }
@@ -756,7 +769,7 @@ function renderAuction()
 	    //current bid
     context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
     
-    context.fillText('Auction Time :  ' + auctionTimer  ,200, 400);
+   // context.fillText('Auction Time :  ' + auctionTimer  ,200, 400);
       // draw the money HUD
     context.fillText('Money :  ' + '$'+ money  , canvas.width - 240, 66);
     //player bid
@@ -774,6 +787,9 @@ function splash()
 {
   document.getElementById('splash');
   animate();
+ 	
+  	
+ 
   $('#progress').hide();
   $('#splash').show();
   $('.sound').show();
@@ -790,7 +806,23 @@ function mainMenu()
       assetLoader.sounds[sound].muted = !playSound;
     }
   }
- 
+  appState = GameMode.Main_Menu;
+  if(appState == GameMode.Main_Menu)
+  {
+	console.log("Main Menu");
+  }
+  else
+  {
+  	 appState = GameMode.Running;
+  }	
+  if(timer = 0)
+  {
+   appState = GameMode.Running;
+   appState != GameMode.Running;
+   appState != GameMode.Main_Menu;
+
+  }
+
   $('#progress').hide();
   $('#splash').hide();
   $('#main').show();
@@ -821,6 +853,15 @@ function startGame()
   animate();
   update();
   
+  if(appState == GameMode.Running)
+  {
+	console.log("Run , run squirrel");
+	
+	appState != GameMode.Main_Menu;
+
+  }	
+
+  
   assetLoader.sounds.gameOver.pause();
   assetLoader.sounds.bg.currentTime = 0;
   assetLoader.sounds.bg.loop = true;
@@ -839,19 +880,37 @@ function repairState()
 {
   document.getElementById('RepairShop').style.display = 'true';
   inRepairMode = true;
+  //this.appState = GameMode.Repair;
+  /*
+  if(appState == GameMode.Repair)
+  {
+	console.log("Man im in repairmode");
+	appState != GameMode.Running;
+	appState != GameMode.Main_Menu;
+
+  }	
+*/
   
 }
 function addFundsMode()
 {
-	
+  appState = GameMode.AddFunds;
+
   document.getElementById('AddFunds').style.display = 'true';
   inAddFundsMode = true;
+  if(appState == GameMode.AddFunds)
+  {
+	console.log("save your money u cants save the world");
+	appState != GameMode.Running;
+	appState != GameMode.Main_Menu;
+  }	
+
 }
 //Auction State
 function auctionMode() 
 {
    context.clearRect(0, 0, canvas.width, canvas.height);
-
+   
    document.getElementById('Auction').style.display = 'true';
    inAuctionMode = true;
    appState = GameMode.Auction;
@@ -865,19 +924,19 @@ function auctionMode()
    context.font = '26px arial, sans-serif';
    update();
       
-   auctionTimer ++;
+  
 	
 	if(appState == GameMode.Auction)
 	{
-		console.log("Snap, crackle , pop")
+		console.log("Snap, crackle , pop");
 	}		
   	 
   
    auctionMode.update = function() 
    {
      playerBidding();
-     //player
-	
+     
+     //player 
    }
   
   $('#Auction').show();
@@ -1107,7 +1166,6 @@ $('.play').click(function()
 {
   $('#menu').hide();
   $('#gameMenu').show();
-
   startGame();
   
 });
