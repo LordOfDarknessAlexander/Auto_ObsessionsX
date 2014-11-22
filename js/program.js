@@ -773,7 +773,7 @@ function mainMenu()
 function startGame() 
 {
   document.getElementById('game-over').style.display = 'none';
-  
+  appState = GameMode.Running;
   player.reset();
   ticker = 0;
   stop = false;
@@ -814,7 +814,7 @@ function resetStates()
 	inAuctionMode = false;
 	inAddFundsMode = false;
 	stop = false;
-	
+	appState = GameMode.Running;
 }
 
 //Repair State
@@ -823,7 +823,7 @@ function repairState()
   stop = true;
   document.getElementById('RepairShop').style.display = 'true';
   inRepairMode = true;
-  this.appState = GameMode.Repair;
+  appState = GameMode.Repair;
  // this.stop;
   if(appState == GameMode.Repair)
   {
