@@ -1,113 +1,38 @@
-(function ($) {
-// define variables
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
-//aspect ratio
-var width = canvas.getAttribute('width');
-var height = canvas.getAttribute('height');
-var player, money, stop, ticker;
-//random comment
-var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
-var playSound;
-var splashTimer = 600.00;
-//InMenu UI Constansts
+$(document).ready(function ()
+{
 
-var buttonsPlaceY = 200;
-//Enemy Bid Timer check
-var BID_THRESHOLD = 4000;
-//Player Pos
-var PLAYER_XPOS = 50;
-var PLAYER_YPOS = 50;
-//Bidder Pos
-var BIDDER_XPOS = 650;
-var BIDDER_YPOS = 250;
-var ENEMY_X = 80;
-var VEHICLE_XPOS = 660;
-var VEHICLE_YPOS = 850;
- 
-//background images
-//garage doors
-var splashImage = new Image();
-splashImage.src = "images/MBackground.png";
-//Menu Background Image
-var backgroundImage = new Image();
-backgroundImage.src = "images/inventoryMenu.png";
+	function init()
+	{
+	  if (!stop) 
+	  {
+	    requestAnimFrame( init);
+	  
+	  	update();
+	  	
+	    if(timer >= 400.00)
+		{
+		  mainMenu();
+		  
+		  
+		}  
+		timer ++;
+	    ticker++;
+	  }
+	
+	}
+	function auctionInit()
+	{
+	  if (!auctionStop) 
+	  {
+	    requestAnimFrame( auctionInit);
+	  
+	  	update();
+		timer ++;
+	    ticker++;
+	  }
+	
+	}
 
-//Menu velocity 
-var backgroundY = 0;
-var speed = 0.3;
-//Enemy Avatars
-//Sad enemy avatars
-var slimer = new Image();
-slimer.src = 'images/slime.png';
-//Happy Enemies
-var curBidImage = new Image();
-curBidImage.src = 'images/slime2.png';
-
-//Buttons functions
-var auctionButton = {};
-var auctionBackButton = {};
-var repairButton = {};
-var bidButton = {};
-var inventoryButton = {};
-//Repair Shop Buttons
-var purchaseButton = {};
-var repairBackButton = {};
-var addFundsButton = {};
-var addFundsBackButoon = {};
-//AI
-//Create an empty array of Bidders
-var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Behemoth ", "Quatarian " ,"Ol G ", "Cindy ","Bobby ","Obama ", "OsamaBinBombin ","Ortega Mammon ","LOD Alexander ","Meatwad ","Candela","Oprah ","Jerry Springer ","Sam Jaxon ",
-"Moody Blue ","Shitake Shroom ","Macabre ","Sancho Pancho ","Quijote ","Leo ","Centurion ","Omega Pepper ","Osiris Moon ","Sass McFrass ","Smiley ","Budapest Guy ","Larry Queen ","Special Head ","Primitivo Montoya ","The Skywalker ","Sam Squirrel ","Dante ","Sparkles King ","Onion Knight "];
-var enemyBids = [1,2,3,4]; 
-
-//AuctionMode Game HUD bool 
-//the app can not exit in a superposition of states,
-//having multiple booleans means being inAuctionMode and inRepairMode and/or inAddFundmode,
-//at the same time is possible, which is no possible and could lead to bugs!
-var inAuctionMode = false;
-var inRepairMode = false;
-var inAddFundsMode = false;
-
-//AI Variables
-var playerBid = 0;
-//temp
-var bidAmount = 200;
-var currentBid = 0;
-//var asking = upPerc + currentBid;
-var vehiclePrice = 20000;
-//static bidding caps results in obvious behaviour,
-//ie. starting an auction with more than 1.25 of vehicle price will always win
-function price(){return Math.random(0.2, 1.25) * vehiclePrice;}
-//var enemyCap = [price(), price(), price(), price()];	//new array for every new auction?
-var enemyCap = 1.25 * vehiclePrice;
-var enemyCap2 = 0.8 * vehiclePrice;
-var enemyCap3 = 0.7 * vehiclePrice;
-var enemyCap4 = 0.9 * vehiclePrice;
-
-//AI cooldown timer
-var bidderCooldown = 0;
-var playerCanBid = false;
-var currentBid = vehiclePrice * 0.1;
-var endBidTimer = 0;
-var endBidTimer2 = 0;
-var endBidTimer3 = 0;
-var endBidTimer4 = 0;
-var playerDidBid = false;
-
-var playerNextBid = currentBid + (currentBid * 0.1);
-
-//BidTImers Booleans
-var startEndBid = false;
-var startEndBid2 = false;
-var startEndBid3 = false;
-var startEndBid4 = false;
-var startPlayerEndBid = false;
-var playerEndBidTimer = 0;
-
-//DT
-var timer = 0;
-var previousTime = Date.now();
 
 //
 //
@@ -151,7 +76,7 @@ if (canUseLocalStorage)
   }
 }
 
-update();
+
 //Asset pre-loader object. Loads all images
 var assetLoader = (function() 
 {
@@ -284,18 +209,15 @@ assetLoader.progress = function(progress, total)
 //Load the splash screen first
 assetLoader.finished = function() 
 {
-  splash();
+ 
+ switchStates();
 }
 
 //Garage Doors	
 splashImage.onload = function()
 {
 	context.drawImage(splashImage, 0,0);
-	appState = GameMode.Splash;
-	if(appState == GameMode.Splash)
-    {
-	 console.log("Splashing");
-    }	
+	
 
 };
 //Main Background of game
@@ -312,19 +234,20 @@ function garageDoor()
 		backgroundY = -1000;
 	}
 }	
+//States
 var appState;
 var GameMode = 
 {
-	//emulate an enum
-	Running : 1,
-	Auction : 2,
-	Repair : 3,
-	AddFunds :4,
-	Splash   : 5,
-	Main_Menu : 6,
+	Splash   : 1,
+	Main_Menu : 2,
+	Running : 3,
+	Auction : 4,
+	Repair : 5,
+	AddFunds :6,
+	
 
-}
-appState = GameMode.Running;	//app may only exist in one state at a time
+};
+appState = GameMode.Splash;	//app may only exist in one state at a time
 
 
 var Repair ;
@@ -332,54 +255,80 @@ var AddFunds;
 var Running;
 var Splash;
 var Main_Menu;
-switchStates();	
+
 
 function switchStates( GameMode) 
 {
-
+	 
 	 switch (GameMode) 
 	 {
+	 	 case Splash:
+		        splash();
+		       // appState == GameMode.Splash;
+		        break;
+		        
+		  case Main_Menu:
+		        mainMenu();
+		        inAuctionMode;
+		        appState == GameMode.Main_Menu;
+		        break;  
+		           
 	      case Auction:
 		        auctionMode();
 		        inAuctionMode;
+		       // appState == GameMode.Auction;
 		        break;
-		    case Repair:
+		  case Repair:
 		        repairState();
 		        inRepairMode;
 		        console.log("Im getting a fix");
+		       // appState == GameMode.Repair;
 		        break;
 		        
-		    case AddFunds:
+		  case AddFunds:
 		    	addFundsMode();
 		    	inAddFundsMode;
+		    	appState = GameMode.AddFunds;
 		    default:
 		         Running; 
 	     // etc...
 	 }
 }
+function updatedStates()
+{
+	if(inAuctionMode == true)
+	{
+		appState == GameMode.Auction;
+		appState != GameMode.Splash;
+		appState != GameMode.Main_Menu;
+		appState != GameMode.Repair;
+		appState != GameMode.AddFunds;
+	}
+	else if(inRepairMode == true)
+	{
+		appState != GameMode.Auction;
+		appState != GameMode.Splash;
+		appState != GameMode.Main_Menu;
+		appState == GameMode.Repair;
+		appState != GameMode.AddFunds;
+	}
 
-
-function update()
+}
+function update(deltaTime)
 {
     
-	var deltaTime = (Date.now() - previousTime) / 1000;
-    previousTime = Date.now();
-    timer += deltaTime;
-    
+
+    updatedStates();
     garageDoor();
 	//Order of draws matters
     context.drawImage(backgroundImage, 0,-10);
     context.drawImage(splashImage, 0, backgroundY);
-    
-	if(timer >= 600)
-	{
-		appState = GameMode.Running;
-		timer = 0;
-	}
-    
+    timer ++;
 	
+	//if(appState == GameMode.Auction)
 	if(inAuctionMode)
 	{
+		//stop = false;
 		updatePlayer();
 		//call bidder ai functions
 		bidTimers();
@@ -673,21 +622,6 @@ function animate()
 {
   context.clearRect(0, 0, canvas.width, canvas.height);
   document.getElementById('gameMenu').style.display = 'true';  
-  if (!stop) 
-  {
-    requestAnimFrame( animate );
-  
-  	update();
-  	
-    if(timer >= 400.00)
-	{
-	  mainMenu();
-	  appState = GameMode.MainMenu;
-	  
-	}  
-	timer ++;
-    ticker++;
-  }
 }
 //Game HUD
 function renderAuction()
@@ -786,10 +720,14 @@ function renderAuction()
 function splash() 
 {
   document.getElementById('splash');
-  animate();
- 	
-  	
- 
+  init();
+  update();
+  appState = GameMode.Splash;
+  if(appState == GameMode.Splash)
+  {
+	 console.log("Splashing");
+  }	
+  
   $('#progress').hide();
   $('#splash').show();
   $('.sound').show();
@@ -799,6 +737,7 @@ function splash()
 //Main Menu  
 function mainMenu() 
 {
+ 
   for (var sound in assetLoader.sounds) 
   {
     if (assetLoader.sounds.hasOwnProperty(sound)) 
@@ -815,9 +754,9 @@ function mainMenu()
   {
   	 appState = GameMode.Running;
   }	
-  if(timer = 0)
+  if(appState = GameMode.Running)
   {
-   appState = GameMode.Running;
+   
    appState != GameMode.Running;
    appState != GameMode.Main_Menu;
 
@@ -849,14 +788,15 @@ function startGame()
   gradient.addColorStop("1.0","green");
   // Fill with gradient
   context.fillStyle = gradient;
-  this.appState = GameMode.Running;
-  animate();
+  appState = GameMode.Running;
+  
   update();
   
+
   if(appState == GameMode.Running)
   {
 	console.log("Run , run squirrel");
-	
+	//switchStates();	
 	appState != GameMode.Main_Menu;
 
   }	
@@ -873,15 +813,18 @@ function resetStates()
 	inRepairMode = false;
 	inAuctionMode = false;
 	inAddFundsMode = false;
+	stop = false;
+	
 }
 
 //Repair State
 function repairState()
 {
+  stop = true;
   document.getElementById('RepairShop').style.display = 'true';
   inRepairMode = true;
-  //this.appState = GameMode.Repair;
-  /*
+  this.appState = GameMode.Repair;
+ // this.stop;
   if(appState == GameMode.Repair)
   {
 	console.log("Man im in repairmode");
@@ -889,13 +832,12 @@ function repairState()
 	appState != GameMode.Main_Menu;
 
   }	
-*/
-  
 }
 function addFundsMode()
 {
+  stop = true;
   appState = GameMode.AddFunds;
-
+	
   document.getElementById('AddFunds').style.display = 'true';
   inAddFundsMode = true;
   if(appState == GameMode.AddFunds)
@@ -910,12 +852,13 @@ function addFundsMode()
 function auctionMode() 
 {
    context.clearRect(0, 0, canvas.width, canvas.height);
-   
+   auctionStop = false;
    document.getElementById('Auction').style.display = 'true';
    inAuctionMode = true;
    appState = GameMode.Auction;
    ticker = 0;
-   stop = false;
+   stop = true;
+   auctionInit();
    money = 50000;
    playerBid = 0;
  	
@@ -1125,7 +1068,7 @@ function gameOver()
 {
   document.getElementById('game-over').style.display = 'true';
   resetStates();
-  //stop = true;
+  stop = true;
   //Show a message that player has insufficient funds
   $('#money').html(money);
   $('#game-over').show();
@@ -1167,6 +1110,7 @@ $('.play').click(function()
   $('#menu').hide();
   $('#gameMenu').show();
   startGame();
+  appState = GameMode.Running;
   
 });
 //GameOver screen restart button
@@ -1221,6 +1165,7 @@ $('#repairBackButton').click(function()
 {
   $('#RepairShop').hide();
   $('#gameMenu').show();
+  resetStates();
 
 });
 //Game Menu Add funds portal button
@@ -1271,4 +1216,4 @@ $('.sound').click(function()
 });
 
 assetLoader.downloadAll();
-})(jQuery);
+});
