@@ -1,0 +1,38 @@
+﻿/*Inventory Menu Buttons and stylings*/
+#auction
+{
+  background: url('../images/auctionButton.png') no-repeat 0 0;
+  color: white;
+  font-weight: bold;
+  width:150px;
+  height:50px; 
+  cursor:pointer;
+}
+#repair
+{
+  background: url('../images/repairButton.png') no-repeat 0 0;
+  color: white;
+  font-weight: bold;
+  width:150px;
+  height:50px;
+  cursor:pointer;
+}
+#addFunds
+{
+   background: url('../images/addFundsButton.png') no-repeat 0 0;
+   color: white;
+   font-weight: bold;
+   width:150px;
+   height:50px;
+   cursor:pointer;
+}
+#myCars
+{
+   background: url('../images/inventoryButton.png') no-repeat 0 0;
+   color: white;
+   font-weight: bold;
+   width:150px;
+   height:50px;
+   cursor:pointer;
+ 
+}

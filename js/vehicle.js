@@ -26,7 +26,7 @@ Vector.prototype.advance = function()
 
 var Vehicle = function(imgSrc)
 {
-	Vector.call(Vehicle,  VEHICLE_XPOS,  VEHICLE_YPOS, Vehicle.dx, Vehicle.dy);
+	Vector.call(Vehicle, VEHICLE_XPOS,  VEHICLE_YPOS, Vehicle.dx, Vehicle.dy);
 	this.price = 0;
 	this.condition = 0;
 	this.originality = 0;

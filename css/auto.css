@@ -117,38 +117,6 @@ a
   background-image: url('../images/soundOn.png');
   background-repeat: no-repeat;
 }
-/* Inventory Menu Buttons*/
-#auction
-{
-  background: url('../images/auctionButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px; 
-  cursor:pointer;
-}
-#repair
-{
-  background: url('../images/repairButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
-
-  
-}
-#repairBackButton
-{
-  background: url('../images/repairBackButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
-
-	
-}
 #addFundsBackButton
 {
   background: url('../images/repairBackButton.png') no-repeat 0 0;
@@ -156,64 +124,8 @@ a
   font-weight: bold;
   width:150px;
   height:50px;
-  cursor:pointer;
-
-	
+  cursor:pointer;	
 }
-
-#auctionBackButton
-{
-  background: url('../images/repairBackButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
-
-	
-}
-
-#addFunds
-{
-   background: url('../images/addFundsButton.png') no-repeat 0 0;
-   color: white;
-   font-weight: bold;
-   width:150px;
-   height:50px;
-   cursor:pointer;
-}
-#myCars
-{
-   background: url('../images/inventoryButton.png') no-repeat 0 0;
-   color: white;
-   font-weight: bold;
-   width:150px;
-   height:50px;
-   cursor:pointer;
- 
-}
-
-#bid
-{
-  background: url('../images/bidButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
-
-}
-#purchaseButton
-{
-  background: url('../images/bidButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
-
-}
-
 
 .sound-off 
 {
@@ -232,7 +144,6 @@ a
 }
 #menu.gameMenu
 {
-	
   /*background-image: url('../images/logo.png');*/
   display:inline-block;
   text-align: center;
@@ -367,8 +278,6 @@ a
   color: #AFCAAF;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
-
-
 
 .button 
 {

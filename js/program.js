@@ -4,16 +4,17 @@ $(document).ready(function()
 	{
 	  if (!stop) 
 	  {
-	    requestAnimFrame( init);
+	    requestAnimFrame(init);
 	  
 	  	update();
 	  	
 	    if(timer >= 400.00)
 		{
+			appState = GameMode.Main_Menu;
 		  mainMenu();
 		  
 		}  
-		timer ++;
+		timer++;
 	    ticker++;
 	  }
 	
@@ -34,15 +35,14 @@ $(document).ready(function()
 //TODO, access from html database, or other markup file
 //
 //test, user ca select between 3 cars
-var currentCar = null;
-
+//var currentCar = null;
 var userGarage = [
 	Vehicle('images/vehicle.jpg'),
 	Vehicle('images/vehicle.jpg'),
 	Vehicle('images/vehicle.jpg')
 ];
-currentCar = userGarage[0];
-   
+var currentCar = userGarage[0];
+
 function createReader()
 {
 	if (window.XMLHttpRequest)
@@ -65,11 +65,7 @@ function createReader()
 	
 	return xmlhttp;
 }
-var userGarage = [
-	//Vehicle('images/vehicle.jpg'),
-	//Vehicle('images/vehicle.jpg'),
-	//Vehicle('images/vehicle.jpg')
-];
+
 function openDoc(url, reader)
 {	//parse xml document in xml DOM object
 	reader.open("GET",url,false);
@@ -118,11 +114,11 @@ function loadXMLDoc(url)
 }
 
 //LOAD Vehicle XML, this was working, now can't find source file!
-//if(loadXMLDoc('vehicles.xml') == false)
-//{	//loading xml resource failed, display warning
-//	window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
-//}
-
+/*if(loadXMLDoc('../vehicles.xml') == false)
+{	//loading xml resource failed, display warning
+	window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
+}
+*/
 /*
 var vDoc = document.querySelector('link[rel="import"]');	//document Vehicles.html
 var vehicles = document.getElementById('Vehicles');
@@ -274,8 +270,10 @@ var assetLoader = (function()
 //@datatype {integer} total - Total number of assets
 assetLoader.progress = function(progress, total) 
 {
+  //$'.progress-bar')
   var pBar = document.getElementById('progress-bar');
   pBar.value = progress / total;
+  //$('.p')
   document.getElementById('p').innerHTML = Math.round(pBar.value * 100) + "%";
 }
 
@@ -389,7 +387,7 @@ function update(deltaTime)
 	else
 	{
 		
-		this.GameMode = Running;
+		//this.GameMode = Running;
 		
 	}
 	
@@ -726,17 +724,16 @@ function splash()
 {
   document.getElementById('splash');
   init();
-  update();
-  appState = GameMode.Splash;
-  if(appState == GameMode.Splash)
-  {
-	 console.log("Splashing");
-  }	
+//  update();
+  //appState = GameMode.Splash;
+  //if(appState == GameMode.Splash)
+  //{
+	 //console.log("Splashing");
+  //}	
   
   $('#progress').hide();
   $('#splash').show();
-  $('.sound').show();
-  
+  $('.sound').show();  
 }
  
 //Main Menu  
@@ -750,7 +747,7 @@ function mainMenu()
       assetLoader.sounds[sound].muted = !playSound;
     }
   }
-  appState = GameMode.Main_Menu;
+  //appState = GameMode.Main_Menu;
   if(appState == GameMode.Main_Menu)
   {
 	console.log("Main Menu");
@@ -835,6 +832,7 @@ function addFundsMode()
 function auctionMode() 
 {
    context.clearRect(0, 0, canvas.width, canvas.height);
+   //$('Auction').style.display = 'true';
    document.getElementById('Auction').style.display = 'true';
    auctionStop = false;
    appState = GameMode.Auction;
@@ -1027,6 +1025,15 @@ function enemyBidding()
 
 function findEndBidder()
 {
+	//for(var i = 0; i < bidders.length; i++)
+	//{
+		//if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
+		//{
+			//gameOver();
+			//alert("Sold to " + bidders[i]);			
+		//}
+	//}
+
 	if((currentBid == enemyBids[0]) && (endBidTimer >= BID_THRESHOLD))
 	{
 		gameOver();
