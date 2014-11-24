@@ -1,6 +1,6 @@
 ﻿// define variables
 var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
-var canvas = document.getElementById('canvas');
+var canvas = document.getElementById('canvas');	//$("canvas")?
 var context = canvas.getContext('2d');
 //aspect ratio
 var width = canvas.getAttribute('width');
@@ -80,7 +80,7 @@ var currentBid = 0;
 var vehiclePrice = 20000;
 //static bidding caps results in obvious behaviour,
 //ie. starting an auction with more than 1.25 of vehicle price will always win
-//function price(){return Math.random(0.2, 1.25) * vehiclePrice;}
+//function price(){return Math.random(0.2, 1.25) * vehiclePrice;}	//result can also be weighted, prefering higher or lower bids
 //var enemyCap = [price(), price(), price(), price()];	//new array for every new auction?
 var enemyCap = 1.25 * vehiclePrice;
 var enemyCap2 = 0.8 * vehiclePrice;
@@ -91,6 +91,7 @@ var enemyCap4 = 0.9 * vehiclePrice;
 var bidderCooldown = 0;
 var playerCanBid = false;
 var currentBid = vehiclePrice * 0.1;
+//var endBidTimers = []
 var endBidTimer = 0;
 var endBidTimer2 = 0;
 var endBidTimer3 = 0;

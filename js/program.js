@@ -1,6 +1,5 @@
-$(document).ready(function ()
+$(document).ready(function()
 {
-
 	function init()
 	{
 	  if (!stop) 
@@ -31,17 +30,18 @@ $(document).ready(function ()
 	  }
 	
 	}
-
-
-//
 //
 //TODO, access from html database, or other markup file
 //
+//test, user ca select between 3 cars
+var currentCar = null;
+
 var userGarage = [
-	//Vehicle('images/vehicle.jpg'),
-	//Vehicle('images/vehicle.jpg'),
-	//Vehicle('images/vehicle.jpg')
+	Vehicle('images/vehicle.jpg'),
+	Vehicle('images/vehicle.jpg'),
+	Vehicle('images/vehicle.jpg')
 ];
+currentCar = userGarage[0];
    
 function createReader()
 {
@@ -465,31 +465,6 @@ function Animation(spritesheet, frameSpeed, startFrame, endFrame)
       spritesheet.frameWidth, spritesheet.frameHeight);
   };
 }
-
- //A vector for 2d space.
- 
-// datatype {integer} x - Center x coordinate.
-// datatype {integer} y - Center y coordinate.
-// @datatype {integer} dx - Change in x.
-// datatype {integer} dy - Change in y.
-function Vector(x, y, dx, dy) 
-{
-  // position
-  this.x = x || 0;
-  this.y = y || 0;
-  // direction
-  this.dx = dx || 0;
-  this.dy = dy || 0;
-}
-
-
-// Move the player advance the vectors position by dx,dy
-Vector.prototype.advance = function() 
-{
-  this.x += this.dx;
-  this.y += this.dy;
-};
-
 //Vehicles
 
 // The player object
