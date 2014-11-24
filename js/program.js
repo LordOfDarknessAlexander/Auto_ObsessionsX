@@ -248,13 +248,6 @@ var GameMode =
 appState = GameMode.Splash;	//app may only exist in one state at a time
 
 
-var Repair ;
-var AddFunds;
-var Running;
-var Splash;
-var Main_Menu;
-
-
 function switchStates( GameMode) 
 {
 	 
@@ -303,14 +296,14 @@ function update(deltaTime)
 		bidTimers();
 		enemyBidding();
 		currentBidder();
-		price();
+		//price();
 		if(playerDidBid)
 		{
 			bidderCooldown ++;
 			enemyCanBid = false;
 		}
 	  
-	  	if(	bidderCooldown >= 1500)
+	  	if(	bidderCooldown >= ENEMY_WAIT)
 	  	{
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
@@ -586,12 +579,6 @@ function bidTimers()
 	}	
 }
 
-//Update the Game Loop
-function animate() 
-{
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  document.getElementById('gameMenu').style.display = 'true';  
-}
 //Game HUD
 function renderAuction()
 {
@@ -672,9 +659,9 @@ function renderAuction()
 	    //current bid
     context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
     
-    context.fillText('Game Timer :  ' + timer  ,200, 400);
+    context.fillText('Game Timer :  ' + timer.toFixed(2)  ,200, 400);
       // draw the money HUD
-    context.fillText('Money :  ' + '$'+ money  , canvas.width - 240, 66);
+    context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
     //player bid
     /*
     context.fillText('End Bid Time :  ' + bidders[0] + endBidTimer  ,200, 460);
@@ -730,7 +717,9 @@ function mainMenu()
 // Start the game - reset all variables and entities, spawn ground and water.
 function startGame() 
 {
+  context.clearRect(0, 0, canvas.width, canvas.height);
   document.getElementById('game-over').style.display = 'none';
+  document.getElementById('gameMenu').style.display = 'true';  
   appState = GameMode.Running;
   player.reset();
   ticker = 0;
@@ -819,6 +808,8 @@ function auctionMode()
 	{
 		auctionStop = true;
 		appState = GameMode.Running;
+		//enemyBids.length = 0;
+		resetStates();
 	}		
   	 
   
@@ -838,11 +829,12 @@ function auctionMode()
   assetLoader.sounds.bg.loop = true;
   assetLoader.sounds.bg.play();
 }
+
 //Player Bidding Function
 function playerBidding() 
 { 
 	//player Cooldown button
-	if(	bidderCooldown >= 500)
+	if(	bidderCooldown >= PLAYER_WAIT)
 	{
   		playerBid = currentBid + playerNextBid;
   		playerCanBid = true;
@@ -989,23 +981,23 @@ function findEndBidder()
 	if((currentBid == enemyBids[0]) && (endBidTimer >= BID_THRESHOLD))
 	{
 		gameOver();
-	   //alert("Sold to " + bidders[0]);
+	    alert("Sold to " + bidders[0]);
 		
 	}
 	else if((currentBid == enemyBids[1]) && (endBidTimer2 >= BID_THRESHOLD))
 	{
 		gameOver();
-		 //alert("Sold to " + bidders[1]);
+		 alert("Sold to " + bidders[1]);
 	}
 	else if ((currentBid == enemyBids[2]) && (endBidTimer3 >= BID_THRESHOLD))
 	{
 		gameOver();
-		 //alert("Sold to " + bidders[2]);
+		 alert("Sold to " + bidders[2]);
 	}
 	else if((currentBid == enemyBids[3]) && (endBidTimer4 >= BID_THRESHOLD))
 	{
 		gameOver();
-		// alert("Sold to " + bidders[3]);
+		 alert("Sold to " + bidders[3]);
 	}
 	
 }

@@ -8,13 +8,20 @@ var height = canvas.getAttribute('height');
 var player, money, stop, ticker;
 //random comment
 
+//States
+var Repair;
+var AddFunds;
+var Running;
+var Splash;
+var Main_Menu;
+
 var playSound;
 var splashTimer = 600.00;
 //InMenu UI Constansts
 
 var buttonsPlaceY = 200;
 //Enemy Bid Timer check
-var BID_THRESHOLD = 4000;
+var BID_THRESHOLD = 1600;
 //Player Pos
 var PLAYER_XPOS = 50;
 var PLAYER_YPOS = 50;
@@ -62,8 +69,9 @@ var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Beh
 "Moody Blue ","Shitake Shroom ","Macabre ","Sancho Pancho ","Quijote ","Leo ","Centurion ","Omega Pepper ","Osiris Moon ","Sass McFrass ","Smiley ","Budapest Guy ","Larry Queen ","Special Head ","Primitivo Montoya ","The Skywalker ","Sam Squirrel ","Dante ","Sparkles King ","Onion Knight "];
 var enemyBids = [1,2,3,4]; 
 
-
 //AI Variables
+var PLAYER_WAIT = 300;
+var ENEMY_WAIT = 700;
 var playerBid = 0;
 //temp
 var bidAmount = 200;
@@ -72,7 +80,7 @@ var currentBid = 0;
 var vehiclePrice = 20000;
 //static bidding caps results in obvious behaviour,
 //ie. starting an auction with more than 1.25 of vehicle price will always win
-function price(){return Math.random(0.2, 1.25) * vehiclePrice;}
+//function price(){return Math.random(0.2, 1.25) * vehiclePrice;}
 //var enemyCap = [price(), price(), price(), price()];	//new array for every new auction?
 var enemyCap = 1.25 * vehiclePrice;
 var enemyCap2 = 0.8 * vehiclePrice;
