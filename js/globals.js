@@ -62,13 +62,6 @@ var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Beh
 "Moody Blue ","Shitake Shroom ","Macabre ","Sancho Pancho ","Quijote ","Leo ","Centurion ","Omega Pepper ","Osiris Moon ","Sass McFrass ","Smiley ","Budapest Guy ","Larry Queen ","Special Head ","Primitivo Montoya ","The Skywalker ","Sam Squirrel ","Dante ","Sparkles King ","Onion Knight "];
 var enemyBids = [1,2,3,4]; 
 
-//AuctionMode Game HUD bool 
-//the app can not exit in a superposition of states,
-//having multiple booleans means being inAuctionMode and inRepairMode and/or inAddFundmode,
-//at the same time is possible, which is no possible and could lead to bugs!
-var inAuctionMode = false;
-var inRepairMode = false;
-var inAddFundsMode = false;
 
 //AI Variables
 var playerBid = 0;
@@ -95,7 +88,7 @@ var endBidTimer2 = 0;
 var endBidTimer3 = 0;
 var endBidTimer4 = 0;
 var playerDidBid = false;
-
+var enemyCanBid = false;
 var playerNextBid = currentBid + (currentBid * 0.1);
 
 //BidTImers Booleans

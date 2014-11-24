@@ -13,7 +13,6 @@ $(document).ready(function ()
 		{
 		  mainMenu();
 		  
-		  
 		}  
 		timer ++;
 	    ticker++;
@@ -209,7 +208,6 @@ assetLoader.progress = function(progress, total)
 //Load the splash screen first
 assetLoader.finished = function() 
 {
- 
  switchStates();
 }
 
@@ -264,71 +262,42 @@ function switchStates( GameMode)
 	 {
 	 	 case Splash:
 		        splash();
-		       // appState == GameMode.Splash;
 		        break;
 		        
 		  case Main_Menu:
 		        mainMenu();
-		        inAuctionMode;
-		        appState == GameMode.Main_Menu;
-		        break;  
+		    	break;  
 		           
 	      case Auction:
 		        auctionMode();
-		        inAuctionMode;
-		       // appState == GameMode.Auction;
 		        break;
+		        
 		  case Repair:
 		        repairState();
-		        inRepairMode;
-		        console.log("Im getting a fix");
-		       // appState == GameMode.Repair;
 		        break;
 		        
 		  case AddFunds:
 		    	addFundsMode();
-		    	inAddFundsMode;
-		    	appState = GameMode.AddFunds;
+		    	
+		    	
 		    default:
 		         Running; 
 	     // etc...
 	 }
 }
-function updatedStates()
-{
-	if(inAuctionMode == true)
-	{
-		appState == GameMode.Auction;
-		appState != GameMode.Splash;
-		appState != GameMode.Main_Menu;
-		appState != GameMode.Repair;
-		appState != GameMode.AddFunds;
-	}
-	else if(inRepairMode == true)
-	{
-		appState != GameMode.Auction;
-		appState != GameMode.Splash;
-		appState != GameMode.Main_Menu;
-		appState == GameMode.Repair;
-		appState != GameMode.AddFunds;
-	}
 
-}
 function update(deltaTime)
 {
     
-
-    updatedStates();
     garageDoor();
 	//Order of draws matters
     context.drawImage(backgroundImage, 0,-10);
     context.drawImage(splashImage, 0, backgroundY);
     timer ++;
 	
-	//if(appState == GameMode.Auction)
-	if(inAuctionMode)
+	if(appState == GameMode.Auction)
 	{
-		//stop = false;
+		
 		updatePlayer();
 		//call bidder ai functions
 		bidTimers();
@@ -352,7 +321,7 @@ function update(deltaTime)
 	}
 	else
 	{
-		inAuctionMode = false;
+		
 		this.GameMode = Running;
 		
 	}
@@ -703,7 +672,7 @@ function renderAuction()
 	    //current bid
     context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
     
-   // context.fillText('Auction Time :  ' + auctionTimer  ,200, 400);
+    context.fillText('Game Timer :  ' + timer  ,200, 400);
       // draw the money HUD
     context.fillText('Money :  ' + '$'+ money  , canvas.width - 240, 66);
     //player bid
@@ -750,18 +719,7 @@ function mainMenu()
   {
 	console.log("Main Menu");
   }
-  else
-  {
-  	 appState = GameMode.Running;
-  }	
-  if(appState = GameMode.Running)
-  {
-   
-   appState != GameMode.Running;
-   appState != GameMode.Main_Menu;
-
-  }
-
+  
   $('#progress').hide();
   $('#splash').hide();
   $('#main').show();
@@ -777,6 +735,7 @@ function startGame()
   player.reset();
   ticker = 0;
   stop = false;
+  auctionStop = true;
   money = 50000;
   playerBid = 0;
   
@@ -790,18 +749,14 @@ function startGame()
   context.fillStyle = gradient;
   appState = GameMode.Running;
   
-  update();
-  
+  switchStates();
 
   if(appState == GameMode.Running)
   {
 	console.log("Run , run squirrel");
-	//switchStates();	
-	appState != GameMode.Main_Menu;
 
   }	
 
-  
   assetLoader.sounds.gameOver.pause();
   assetLoader.sounds.bg.currentTime = 0;
   assetLoader.sounds.bg.loop = true;
@@ -810,10 +765,6 @@ function startGame()
 }
 function resetStates()
 {
-	inRepairMode = false;
-	inAuctionMode = false;
-	inAddFundsMode = false;
-	stop = false;
 	appState = GameMode.Running;
 }
 
@@ -822,14 +773,11 @@ function repairState()
 {
   stop = true;
   document.getElementById('RepairShop').style.display = 'true';
-  inRepairMode = true;
   appState = GameMode.Repair;
  // this.stop;
   if(appState == GameMode.Repair)
   {
 	console.log("Man im in repairmode");
-	appState != GameMode.Running;
-	appState != GameMode.Main_Menu;
 
   }	
 }
@@ -839,12 +787,9 @@ function addFundsMode()
   appState = GameMode.AddFunds;
 	
   document.getElementById('AddFunds').style.display = 'true';
-  inAddFundsMode = true;
   if(appState == GameMode.AddFunds)
   {
 	console.log("save your money u cants save the world");
-	appState != GameMode.Running;
-	appState != GameMode.Main_Menu;
   }	
 
 }
@@ -852,9 +797,8 @@ function addFundsMode()
 function auctionMode() 
 {
    context.clearRect(0, 0, canvas.width, canvas.height);
-   auctionStop = false;
    document.getElementById('Auction').style.display = 'true';
-   inAuctionMode = true;
+   auctionStop = false;
    appState = GameMode.Auction;
    ticker = 0;
    stop = true;
@@ -865,13 +809,16 @@ function auctionMode()
    shuffleArray(enemyBids);
    shuffleArray(bidders);
    context.font = '26px arial, sans-serif';
-   update();
-      
   
-	
+      	
 	if(appState == GameMode.Auction)
 	{
 		console.log("Snap, crackle , pop");
+	}
+	else
+	{
+		auctionStop = true;
+		appState = GameMode.Running;
 	}		
   	 
   
@@ -879,7 +826,6 @@ function auctionMode()
    {
      playerBidding();
      
-     //player 
    }
   
   $('#Auction').show();
@@ -997,7 +943,7 @@ function bidFinder()
 	
 	
 }
-var enemyCanBid = false;
+
 function enemyBidding() 
 {
 	//upPercentage of vehicle for next bid
@@ -1069,6 +1015,7 @@ function gameOver()
   document.getElementById('game-over').style.display = 'true';
   resetStates();
   stop = true;
+  auctionStop = true;
   //Show a message that player has insufficient funds
   $('#money').html(money);
   $('#game-over').show();
@@ -1082,6 +1029,7 @@ function sold()
 {
   document.getElementById('sold').style.display = 'true';
   stop = true;
+  auctionStop = true;
   $('#enemyBid').html(enemyBid);
   $('#sold').show();
   assetLoader.sounds.bg.pause();
@@ -1094,7 +1042,6 @@ function sold()
 $('.credits').click(function() 
 {
   $('#main').hide();
-  
   $('#menu').addClass('credits');
   $('#credits').show();
 });
@@ -1110,8 +1057,6 @@ $('.play').click(function()
   $('#menu').hide();
   $('#gameMenu').show();
   startGame();
-  appState = GameMode.Running;
-  
 });
 //GameOver screen restart button
 $('.restart').click(function() 
@@ -1119,6 +1064,7 @@ $('.restart').click(function()
   $('#game-over').hide();
   $('#gameMenu').hide();
 
+  resetStates();
   startGame();
 });
 
@@ -1134,12 +1080,11 @@ $('#auction').click(function()
 //Auction State Back Button
 $('#auctionBackButton').click(function()
 {
-	inAuctionMode = false;
 	resetStates();
+	startGame();
   
   $('#menu').removeClass('Auction');
   $('#Auction').hide();
- 
   $('#menu').addClass('gameMenu');
   $('#gameMenu').show();
   
@@ -1154,7 +1099,6 @@ $('#bid').click(function()
 //Repair to menu Repair
 $('#repair').click(function()
 {
-  
   $('#gameMenu').hide();
   $('#RepairShop').show();
   repairState();
