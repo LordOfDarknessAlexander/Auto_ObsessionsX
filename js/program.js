@@ -47,11 +47,11 @@ function createReader()
 {
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
+		xmlhttp = new XMLHttpRequest();
 	}
 	else
 	{
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 		  
 	if(xmlhttp)
@@ -71,7 +71,7 @@ var userGarage = [
 	//Vehicle('images/vehicle.jpg')
 ];
 function openDoc(url, reader)
-{
+{	//parse xml document in xml DOM object
 	reader.open("GET",url,false);
 	reader.send();
 	var doc=reader.responseXML;
@@ -79,7 +79,14 @@ function openDoc(url, reader)
 	return doc;
 }
 function loadCars(doc){
-	var list = doc.childNodes;//getElementsByTagName('Vehicles');
+	//carNodes = doc.getElementsByTagName('Vehicle');
+	//carsLength = carNodes.length;
+	//for(var i = 0; i < carsLength; i++){
+		//var item = carNodes.item(i);
+		//item.getAttribute("name"); 
+		//create new car
+	//}
+	var list = doc.childNodes;
 	var node = list[0];	//acessing nodes work
 //	var v = node.item(i);
 	//var cn = node.childNodes;
@@ -110,10 +117,12 @@ function loadXMLDoc(url)
 	return true;
 }
 
-if(loadXMLDoc('xvehicles.xml') == false)
-{	//loading xml resource failed, display warning
-	window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
-}
+//LOAD Vehicle XML, this was working, now can't find source file!
+//if(loadXMLDoc('vehicles.xml') == false)
+//{	//loading xml resource failed, display warning
+//	window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
+//}
+
 /*
 var vDoc = document.querySelector('link[rel="import"]');	//document Vehicles.html
 var vehicles = document.getElementById('Vehicles');
