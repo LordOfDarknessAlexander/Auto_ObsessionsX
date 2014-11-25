@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="css/gameMenu.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/auction.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/repair.css" type="text/css" media="screen">
-    <!--link rel="stylesheet" href="css/garage.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="css/funds.css" type="text/css" media="screen"-->
+    <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/funds.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/credits.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/garage.css" type="text/css" media="screen">
     <script type="text/javascript" src="js/jquery.2.1.1.min.js"></script>
 </head>
 <body>
@@ -50,8 +52,8 @@
         </div><!--end menu-->
        
         <canvas id="canvas" width="900" height="600">
-          <p>You're browser does not support the required functionality to play this game.</p>
-          <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
+            <p>You're browser does not support the required functionality to play this game.</p>
+            <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
         </canvas>
  
 		<div id="gameMenu">
@@ -86,13 +88,18 @@
        
 		<div id="AddFunds">
       		<h1>AddFunds</h1>
+			<input type="button" id="addFundsBackButton" onmouseover="addFundsBackButton()" onclick="startGame()">
           	<ul>
-            <li><input type="button" id="addFundsBackButton" onmouseover="addFundsBackButton()" onclick="startGame()"></li>
-            <!--li><input type="button" id="addAllowanceBtn" onclick="addAllowance()"></li>
-            <li><input type="button" id="addMinorFundsBtn" onclick="addMinorFunds()"></li>
-            <li><input type="button" id="addMediumFundsBtn" onclick="addMediumFunds()"></li>
-            <li><input type="button" id="addMajorFundsBtn" onclick="addMajoFunds()"></li-->
-          </ul>
+                <li><input type="button" id="addAllowanceBtn" value="Get Credits"></li>
+                <li><input type="button" id="addMinorFundsBtn" value="chump change"></li>
+                <li><input type="button" id="addMediumFundsBtn" value="stack of bills"></li>
+                <li><input type="button" id="addMajorFundsBtn" value="Pile 'o Cash"></li>
+        	</ul>
+		</div>
+        <div id="Garage">
+      		<h1>Garage</h1>
+			<input type='button' id='garageBackBtn' value='back'>
+          	<ul><!--list is populated in '../program.js' from '../user.xml'--></ul>
 		</div>
 	</div><!--end wrapper-->
 

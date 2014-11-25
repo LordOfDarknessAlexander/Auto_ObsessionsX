@@ -1,21 +1,36 @@
-﻿/*Action UI stylings*/
+﻿/*repair page UI stylings*/
+#RepairShop
+{  
+	display: none;
+	text-align: center;
+	padding-top: 92px;
+	z-index: 1;
+	width: 900px;
+	height: 600px;
+	position: absolute;
+}
+
+#RepairShop li 
+{	/*styles all list items of node with id RepairShop*/
+	padding: 5px 0;
+}
+
 #purchaseButton
 {
-  background: url('../images/bidButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
+	background: url('../images/bidButton.png') no-repeat 0 0;
+	color: white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;
 }
 #repairBackButton
 {
-  background: url('../images/repairBackButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
-
+	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	color: white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;
 	
 }

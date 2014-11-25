@@ -1,6 +1,6 @@
-﻿/*Action UI stylings*/
-#Auction
-{	/*Auction page stylings*/  
+﻿/*repair page UI stylings*/
+#Garage
+{  
 	display: none;
 	text-align: center;
 	padding-top: 92px;
@@ -10,12 +10,11 @@
 	position: absolute;
 }
 
-#Auction  li 
-{
+#Garage li 
+{	/*styles all list items of node with id RepairShop*/
 	padding: 5px 0;
 }
-
-#auctionBackButton
+#garageBackBtn
 {
 	background: url('../images/repairBackButton.png') no-repeat 0 0;
 	color: white;
@@ -23,14 +22,5 @@
 	width:150px;
 	height:50px;
 	cursor:pointer;
-}
-
-#bid
-{
-	background: url('../images/bidButton.png') no-repeat 0 0;
-	color: white;
-	font-weight: bold;
-	width:150px;
-	height:50px;
-	cursor:pointer;
+	
 }

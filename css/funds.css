@@ -1,0 +1,66 @@
+﻿/*funds page UI stylings*/
+#AddFunds
+{
+	background-image: url('../images/logo.png');
+	display: none;
+	text-align: center;
+	padding-top: 92px;
+	z-index: 1;
+	width: 900px;
+	height: 600px;
+	position: absolute;
+}
+
+#AddFunds  li 
+{
+	padding: 10px 0;
+	display:inline;
+	margin: 8px;
+	margin-top: 8em;
+}
+#addFundsBackButton
+{
+	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	color: white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;	
+}
+
+#addMinorFundsBtn
+{
+	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	color: white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;	
+}
+#addMediumFundsBtn
+{
+	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	color: white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;	
+}
+#addMajorFundsBtn
+{
+	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	color: white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;	
+}
+#addAllowanceBtn
+{
+	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	color: white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;	
+}

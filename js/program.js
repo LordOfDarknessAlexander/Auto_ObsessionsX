@@ -1,3 +1,4 @@
+//$(function()	//shorthand for $(document).ready(
 $(document).ready(function()
 {
 	function init()
@@ -8,7 +9,7 @@ $(document).ready(function()
 	  
 	  	update();
 	  	
-	    if(timer >= 400.00)
+	    if(timer >= 40.00)
 		{
 			appState = GameMode.Main_Menu;
 		  mainMenu();
@@ -41,11 +42,11 @@ var userGarage = [
 	Vehicle('images/vehicle.jpg'),
 	Vehicle('images/vehicle.jpg')
 ];
-var currentCar = userGarage[0];
+var currentCar = userGarage[0];	//copy constructed car, altering currentCar doesn't change usergarage[0]
 
 function createReader()
 {
-	if (window.XMLHttpRequest)
+	if(window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp = new XMLHttpRequest();
 	}
@@ -59,7 +60,7 @@ function createReader()
 		
 	}
 	else
-	{
+	{	//open warning page, error loading data
 	  window.open("/pdf/2014Schedule.pdf", "_blank");
 	}
 	
@@ -82,6 +83,7 @@ function loadCars(doc){
 		//item.getAttribute("name"); 
 		//create new car
 	//}
+	//use jquery?
 	var list = doc.childNodes;
 	var node = list[0];	//acessing nodes work
 //	var v = node.item(i);
@@ -270,7 +272,7 @@ var assetLoader = (function()
 //@datatype {integer} total - Total number of assets
 assetLoader.progress = function(progress, total) 
 {
-  //$'.progress-bar')
+  //$('.progress-bar')
   var pBar = document.getElementById('progress-bar');
   pBar.value = progress / total;
   //$('.p')
@@ -319,10 +321,8 @@ var GameMode =
 };
 appState = GameMode.Splash;	//app may only exist in one state at a time
 
-
 function switchStates( GameMode) 
-{
-	 
+{	 //call various update based on appState
 	 switch (GameMode) 
 	 {
 	 	 case Splash:
@@ -344,7 +344,6 @@ function switchStates( GameMode)
 		  case AddFunds:
 		    	addFundsMode();
 		    	
-		    	
 		    default:
 		         Running; 
 	     // etc...
@@ -353,12 +352,11 @@ function switchStates( GameMode)
 
 function update(deltaTime)
 {
-    
     garageDoor();
 	//Order of draws matters
     context.drawImage(backgroundImage, 0,-10);
     context.drawImage(splashImage, 0, backgroundY);
-    timer ++;
+    timer++;
 	
 	if(appState == GameMode.Auction)
 	{
@@ -371,11 +369,11 @@ function update(deltaTime)
 		//price();
 		if(playerDidBid)
 		{
-			bidderCooldown ++;
+			bidderCooldown++;
 			enemyCanBid = false;
 		}
 	  
-	  	if(	bidderCooldown >= ENEMY_WAIT)
+	  	if(bidderCooldown >= ENEMY_WAIT)
 	  	{
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
@@ -385,21 +383,18 @@ function update(deltaTime)
 	  	renderAuction();
 	}
 	else
-	{
-		
+	{		
 		//this.GameMode = Running;
 		
 	}
 	
 }
-
-
-
+//
 //Creates a Spritesheet
 //datatype {string} - Path to the image.
 //datatype {number} - Width (in px) of each frame.
 //datatype {number} - Height (in px) of each frame.
-
+//
 function SpriteSheet(path, frameWidth, frameHeight) 
 {
   this.image = new Image();
@@ -511,6 +506,7 @@ var player = (function(player)
  * Sprites are anything drawn to the screen (ground, enemies, etc.)*/
 function Sprite(x, y, type) 
 {
+	//this.position = new Vector2(x,y);
   this.x      = x;
   this.y      = y;
   this.width  = standWidth;
@@ -583,7 +579,15 @@ function shuffleArray(array)
     return array;
 }
 function bidTimers()
-{
+{	//updates AI bidding timers
+	/*for(var i = 0; i < startEndBid.length; i++){
+		if(startEndBid[i]){ 
+			endBidTimer[i]++;
+		}
+		else{
+			endBidTimer[i] = 0;
+		}
+	}*/
 	if(startEndBid)
 	{ 
 		endBidTimer ++;
@@ -616,6 +620,7 @@ function bidTimers()
 	{
 		endBidTimer4 = 0;
 	}
+	
 	if(startPlayerEndBid)
 	{
 		playerEndBidTimer ++;
@@ -722,7 +727,7 @@ function renderAuction()
 //Show the splash after loading all assets 
 function splash() 
 {
-  document.getElementById('splash');
+  //document.getElementById('splash');
   init();
 //  update();
   //appState = GameMode.Splash;
@@ -759,7 +764,7 @@ function mainMenu()
   $('#menu').addClass('main');
   $('.sound').show();
 }
-
+  money = 50000;
 // Start the game - reset all variables and entities, spawn ground and water.
 function startGame() 
 {
@@ -771,7 +776,7 @@ function startGame()
   ticker = 0;
   stop = false;
   auctionStop = true;
-  money = 50000;
+
   playerBid = 0;
   
   context.font = '26px arial, sans-serif';
@@ -805,47 +810,48 @@ function resetStates()
 
 //Repair State
 function repairState()
-{
-  stop = true;
-  document.getElementById('RepairShop').style.display = 'true';
-  appState = GameMode.Repair;
- // this.stop;
-  if(appState == GameMode.Repair)
-  {
-	console.log("Man im in repairmode");
-
-  }	
+{	//repair state update
+	stop = true;
+	//$('.RepairShop').style.display = 'true';
+	//document.getElementById('RepairShop').style.display = 'true';
+	
+	appState = GameMode.Repair;
+	// this.stop;
+	if(appState == GameMode.Repair)
+	{
+		console.log("Man im in repairmode");	
+	}	
 }
 function addFundsMode()
-{
-  stop = true;
-  appState = GameMode.AddFunds;
-	
-  document.getElementById('AddFunds').style.display = 'true';
-  if(appState == GameMode.AddFunds)
-  {
-	console.log("save your money u cants save the world");
-  }	
-
+{	//store update
+	stop = true;
+	appState = GameMode.AddFunds;
+	//$('.AddFunds').style.display = 'true';	
+//	document.getElementById('AddFunds').style.display = 'true';
+	if(appState == GameMode.AddFunds)
+	{
+		console.log("save your money u cants save the world");
+	}		
 }
 //Auction State
-function auctionMode() 
-{
+function auctionMode()
+{	//in-Auction update, core of game logic
    context.clearRect(0, 0, canvas.width, canvas.height);
    //$('Auction').style.display = 'true';
-   document.getElementById('Auction').style.display = 'true';
+   //document.getElementById('Auction').style.display = 'true';
    auctionStop = false;
    appState = GameMode.Auction;
    ticker = 0;
    stop = true;
-   auctionInit();
-   money = 50000;
+   //money = 50000;
    playerBid = 0;
+   
+   auctionInit();
  	
    shuffleArray(enemyBids);
    shuffleArray(bidders);
-   context.font = '26px arial, sans-serif';
-  
+
+   context.font = '26px arial, sans-serif';  
       	
 	if(appState == GameMode.Auction)
 	{
@@ -857,8 +863,7 @@ function auctionMode()
 		appState = GameMode.Running;
 		//enemyBids.length = 0;
 		resetStates();
-	}		
-  	 
+	}  	 
   
    auctionMode.update = function() 
    {
@@ -901,11 +906,11 @@ function playerBidding()
 	}
 	else
 	{
-	//cant bid above your cash 
-	//call a new function to alert player hes &$#k up
-	 gameOver();
-	 
-	 startPlayerEndBid = false;
+		//cant bid above your cash 
+		//call a new function to alert player hes &$#k up
+		 gameOver();
+		 
+		 startPlayerEndBid = false;
 	}
 	//Wins BId	
 	if((enemyBids[0] == 0) && (enemyBids[1] == 0) && (enemyBid[2] == 0) && (enemyBid[3] == 0) && (money >= currentBid))
@@ -915,7 +920,7 @@ function playerBidding()
 	
 	if(money <= 0)
 	{
-		money = 0;
+		money = 0;	//player has no money but doesn't win auction?
 		gameOver();	
 	}
 }
@@ -932,14 +937,11 @@ function currentBidder()
 	else if((playerBid < enemyBids[0])||(playerBid < enemyBids[1])||(playerBid < enemyBids[2])||(playerBid < enemyBids[3]))
 	{
 	  bidFinder();
-	  
 	}
-	
 }
 
 function bidFinder()
-{
-
+{	//determine bidder
 	if((enemyBids[0] > enemyBids[1]) && (enemyBids[0] > enemyBids[2]) && (enemyBids[0] > enemyBids[3]))
 	{
 		currentBid = enemyBids[0];
@@ -979,8 +981,6 @@ function bidFinder()
 		startEndBid4 = true;
 		startPlayerEndBid = false;
 	}
-	
-	
 }
 
 function enemyBidding() 
@@ -991,36 +991,38 @@ function enemyBidding()
 	//var upPerc = startBid ;
 	if( currentBid >= 0 )
 	{
+		/*for(var i = 0; i < enemyBids.length; i++){
+			if(enemyCanBid){
+				if((enemyBids[i] < currentBid) && (enemyBids[i] < enemyCap) )
+				{
+				  enemyBids[i]  = currentBid + upPerc;
+				  enemyCanBid = false;
+				  break;
+				}
+			}
+		}*/
 		if((enemyBids[0] < currentBid) && (enemyBids[0] < enemyCap)&&(enemyCanBid))
 		{
 		  enemyBids[0]  = currentBid + upPerc;
-		  
 		}
 		else if((enemyBids[1] < currentBid) && (enemyBids[1] < enemyCap2)&&(enemyCanBid))
 		{
 		    enemyBids[1] = currentBid + upPerc;
-		    
 		}
 		else if((enemyBids[2] < currentBid) && (enemyBids[2] < enemyCap3)&&(enemyCanBid))
 		{
 		    enemyBids[2] = currentBid + upPerc;
-		    
 		}
 		else if((enemyBids[3] < currentBid) && (enemyBids[3] < enemyCap4)&&(enemyCanBid))
 		{
-		    enemyBids[3] = currentBid + upPerc;
-		    
-		}
-
-					
+		    enemyBids[3] = currentBid + upPerc;   
+		}					
 	}
 	else if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]))
 	{
 		sold();
 		money = money - currentBid;
 	}
-	
-
 }
 
 function findEndBidder()
@@ -1060,50 +1062,63 @@ function findEndBidder()
 //End the game and restart
 function gameOver() 
 {
-  document.getElementById('game-over').style.display = 'true';
-  resetStates();
-  stop = true;
-  auctionStop = true;
-  //Show a message that player has insufficient funds
-  $('#money').html(money);
-  $('#game-over').show();
- // assetLoader.sounds.bg.pause();
-  assetLoader.sounds.gameOver.currentTime = 0;
-  assetLoader.sounds.gameOver.play();
+	//$('.game-over').style.display = 'true';
+	document.getElementById('game-over').style.display = 'true';
+	resetStates();
+	stop = true;
+	auctionStop = true;
+	//Show a message that player has insufficient funds
+	$('#money').html(money);	//set value in the html element
+	$('#game-over').show();
+	// assetLoader.sounds.bg.pause();
+	assetLoader.sounds.gameOver.currentTime = 0;
+	assetLoader.sounds.gameOver.play();
 }
 
 //push vehicle in to inventory and tell player he won bidding
 function sold() 
 {
-  document.getElementById('sold').style.display = 'true';
-  stop = true;
-  auctionStop = true;
-  $('#enemyBid').html(enemyBid);
-  $('#sold').show();
-  assetLoader.sounds.bg.pause();
-  assetLoader.sounds.gameOver.currentTime = 0;
-  assetLoader.sounds.gameOver.play();
+	//$('.sold').style.display = 'true';
+	document.getElementById('sold').style.display = 'true';
+	stop = true;
+	auctionStop = true;
+	$('#enemyBid').html(enemyBid);
+	$('#sold').show();
+	assetLoader.sounds.bg.pause();
+	assetLoader.sounds.gameOver.currentTime = 0;
+	assetLoader.sounds.gameOver.play();
 }
 
 // Click handlers for the different menu screens
 //Credits 
-$('.credits').click(function() 
+function jqToggleCredits() 
 {
+	$('#main').toggle();	//hides if shown
+	$('#main').children().toggle();	//hides/showns all child elements
+	$('#menu').toggleClass('credits');	//adds class else removes if already added
+	$('#credits').toggle();	//shows if hidden
+}
+$('.credits').click(jqToggleCredits);
+$('.back').click(jqToggleCredits);
+/*{
   $('#main').hide();
   $('#menu').addClass('credits');
   $('#credits').show();
-});
+});*/
 //Credits Back button
-$('.back').click(function() 
+/*$('.back').click(toggleCredits);function() 
 {
   $('#credits').hide();
   $('#menu').removeClass('credits');
-});
+});*/
 //Menu state start game button
 $('.play').click(function() 
 {
   $('#menu').hide();
   $('#gameMenu').show();
+  //delete splash
+  //delete credits
+  //delete menu image, since the game can not navigate back to this screen after clicking
   startGame();
 });
 //GameOver screen restart button
@@ -1124,6 +1139,7 @@ $('#auction').click(function()
 	$('#gameMenu').hide();
 	$('#menu').addClass('auction'); 	
 	auctionMode();
+	//appState = GameMode.Auction;
 });
 //Auction State Back Button
 $('#auctionBackButton').click(function()
@@ -1131,50 +1147,63 @@ $('#auctionBackButton').click(function()
 	resetStates();
 	startGame();
   
-  $('#menu').removeClass('Auction');
-  $('#Auction').hide();
-  $('#menu').addClass('gameMenu');
-  $('#gameMenu').show();
-  
+	$('#Auction').hide();
+	$('#gameMenu').show();
+	$('#menu').removeClass('Auction');
+	$('#menu').addClass('gameMenu');
+	//appState = GameMode.Main_Menu;
 });
 //Inside Auction Bid Button
 $('#bid').click(function()
 {
-  playerBidding();
-  playerDidBid = true;
+	playerBidding();
+	playerDidBid = true;
 });
-
 //Repair to menu Repair
+/*function toogleRepair(){
+	$('#gameMenu').toggle();
+	$('#RepairShop').toggle();
+    //$('#RepairShop').children().toggle(0();
+}*/
 $('#repair').click(function()
 {
-  $('#gameMenu').hide();
-  $('#RepairShop').show();
-  repairState();
-
+	//toggleRepair();
+	$('#gameMenu').hide();
+	$('#RepairShop').show();
+	repairState();
+	//appState = GameMode.Repair;
 });
 //RepairMenu Back Button 
 $('#repairBackButton').click(function()
 {
-  $('#RepairShop').hide();
-  $('#gameMenu').show();
-  resetStates();
-
+	//toggleRepair();
+  	$('#RepairShop').hide();
+  	$('#gameMenu').show();
+	resetStates();
+//appState = GameMode.Main_mMnu;
 });
 //Game Menu Add funds portal button
+function jqToggleFunds(){
+	$('#gameMenu').toggle();
+    $('#AddFunds').toggle();
+    //$('#menu').toggleClass('AddFunds');
+}
 $('#addFunds').click(function() 
 {
-	$('#gameMenu').hide();
-    $('#AddFunds').show();
+	jqToggleFunds();
+//	$('#gameMenu').hide();
+//    $('#AddFunds').show();
     $('#menu').addClass('AddFunds');
 	addFundsMode();
-	
+	//appState = GameMode.AddFunds;
 });
 //Inside AddFunds State Bacjbutton 
 $('#addFundsBackButton').click(function()
 {
-  $('#AddFunds').hide();
-  $('#gameMenu').show();
-  
+	jqToggleFunds();
+//  $('#AddFunds').hide();
+//  $('#gameMenu').show();
+  //appState = GameMode.Main_Menu;
 });
 
 //Sound Button
@@ -1206,6 +1235,49 @@ $('.sound').click(function()
     }
   }
 });
-
+//
+//Funds State interface
+//
+function addFunds(val)
+{
+	var MAX_MONEY = 50000000;
+	var newTotal = money + val;
+	money = newTotal > MAX_MONEY ? MAX_MONEY : newTotal;
+}
+$('#addAllowanceBtn').click(function()
+{	//allowance accumulates every few seconds
+	money += 1;
+});
+$('#addMinorFundsBtn').click(function()
+{	//open paypal form
+	//transfering game currency to user's account
+	addFunds(500);
+});
+$('#addMediumFundsBtn').click(function()
+{	//open paypal form
+	//transfering game currency to user's account
+	addFunds(1500);
+});
+$('#addMajorFundsBtn').click(function()
+{	//open paypal form
+	//transfere game currency to user's account
+	addFunds(50000);
+});
+//
+//Garage State interface
+//
+function jqToggleGarage(){
+	$('#gameMenu').toggle();
+	$('#Garage').toggle();
+}
+$('#myCars').click(function()
+{
+	jqToggleGarage();
+//	appState = GameMode.Garage;
+});
+$('#garageBackBtn').click(function(){
+	jqToggleGarage();
+	//appState = GameMOde.MainMenu;
+});
 assetLoader.downloadAll();
 });
