@@ -9,7 +9,7 @@ $(document).ready(function()
 	  
 	  	update();
 	  	
-	    if(timer >= 40.00)
+	    if((timer >= 300.00) && (timer <= 900.00))
 		{
 			appState = GameMode.Main_Menu;
 		  mainMenu();
