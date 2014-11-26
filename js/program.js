@@ -294,18 +294,6 @@ function updatePlayer()
   player.draw();
 
 }
-//Request Animation Polyfill
-var requestAnimFrame = (function()
-{
-  return  window.requestAnimationFrame       ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          window.oRequestAnimationFrame      ||
-          window.msRequestAnimationFrame     ||
-          function(callback, element){
-            window.setTimeout(callback, 1000 / 60);
-          };
-})();
 
 
 //Sort Items arrays
@@ -709,7 +697,7 @@ function bidFinder()
 	{
 		setBid(3);
 	}
-	}
+}
 
 function enemyBidding() 
 {
