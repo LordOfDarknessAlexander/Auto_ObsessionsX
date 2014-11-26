@@ -1053,7 +1053,10 @@ function jqToggleCredits()
 	$('#credits').toggle();	//shows if hidden
 }
 $('.credits').click(jqToggleCredits);
-$('.back').click(jqToggleCredits);
+$('.back').click(jqToggleCredits)
+{
+	$('#menu').show();
+};
 //Menu state start game button
 
 $('.play').click(function() 
