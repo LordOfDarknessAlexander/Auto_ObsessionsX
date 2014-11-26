@@ -25,7 +25,7 @@ $(document).ready(function()
 	  if (!auctionStop) 
 	  {
 	    requestAnimFrame( auctionInit);
-	  
+	    
 	  	update();
 		timer ++;
 	    ticker++;
@@ -360,7 +360,23 @@ function update(deltaTime)
 	
 	if(appState == GameMode.Auction)
 	{
-		
+		//Enemy Bids
+		enemyBids.push(enemyBid);
+	    enemyBids.push(enemyBid1);
+	    enemyBids.push(enemyBid2);
+	    enemyBids.push(enemyBid3);
+	    //Enemy Win timers
+	    endBidTimers.push(endBidTimer);
+	    endBidTimers.push(endBidTimer2);
+	 	endBidTimers.push(endBidTimer3);
+	   	endBidTimers.push(endBidTimer4);
+	    //Bools to find winner
+	    startEndBids.push(startEndBid);
+	    startEndBids.push(startEndBid2);
+	    startEndBids.push(startEndBid3);
+	    startEndBids.push(startEndBid4);
+	    
+	 
 		updatePlayer();
 		//call bidder ai functions
 		bidTimers();
@@ -379,15 +395,11 @@ function update(deltaTime)
 	  		bidderCooldown = 0;
 	  		
 	  	}
-	  	findEndBidder();
+	  	
 	  	renderAuction();
+	  	findEndBidder();
 	}
-	else
-	{		
-		//this.GameMode = Running;
 		
-	}
-	
 }
 //
 //Creates a Spritesheet
@@ -580,47 +592,26 @@ function shuffleArray(array)
 }
 function bidTimers()
 {	//updates AI bidding timers
-	/*for(var i = 0; i < startEndBid.length; i++){
-		if(startEndBid[i]){ 
-			endBidTimer[i]++;
+
+	for(var i = 0; i < startEndBids.length; i++)
+	{
+		if(startEndBids[i] = true)
+		{ 
+			
+			endBidTimers[i]++;
 		}
-		else{
-			endBidTimer[i] = 0;
+		else
+		{
+			endBidTimers[i] = 0;
 		}
-	}*/
-	if(startEndBid)
-	{ 
-		endBidTimer ++;
-	}
-	else
-	{
-		endBidTimer = 0;
-	}
-	if(startEndBid2)
-	{ 
-		endBidTimer2 ++;
-	}
-	else
-	{
-		endBidTimer2 = 0;
-	}
-	if(startEndBid3)
-	{ 
-		endBidTimer3 ++;
-	}
-	else
-	{
-		endBidTimer3 = 0;
-	}
-	if(startEndBid4)
-	{ 
-		endBidTimer4 ++;
-	}
-	else
-	{
-		endBidTimer4 = 0;
 	}
 	
+	//array element of timers being updated in their containers
+	//tied to individual array element player that has the bid about to win
+   	
+   		
+	   					
+	//Player end bid
 	if(startPlayerEndBid)
 	{
 		playerEndBidTimer ++;
@@ -629,6 +620,7 @@ function bidTimers()
 	{
 		playerEndBidTimer = 0;
 	}	
+	
 }
 
 //Game HUD
@@ -660,7 +652,7 @@ function renderAuction()
 	
   	//Enemy 1
 	//draw them depending on current bid
-  	if((enemyBids[0] >= currentBid)|| ( enemyBids[4] >= currentBid))
+  	if((enemyBids[0] >= currentBid))
   	{
   		player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
   		  		
@@ -671,7 +663,7 @@ function renderAuction()
   	  	
   	}
     //Enemy 2
-  	if( ( enemyBids[1] >= currentBid) || ( enemyBids[5] >= currentBid))
+  	if(enemyBids[1] >= currentBid)
   	{
   		player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);
   		
@@ -682,7 +674,7 @@ function renderAuction()
   		
   	}
   	//Enemy3
-  	if(( enemyBids[2] >= currentBid) || ( enemyBids[6] >= currentBid))
+  	if( enemyBids[2] >= currentBid )
   	{
   	    player3 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X , 70);
   	 	
@@ -693,7 +685,7 @@ function renderAuction()
   		 
   	}
   	//Enemy4
-  	if(( enemyBids[3] >= currentBid) || ( enemyBids[7] >= currentBid))
+  	if( enemyBids[3] >= currentBid)
   	{
   	    player4 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X , 70);
   	 	
@@ -715,26 +707,21 @@ function renderAuction()
       // draw the money HUD
     context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
     //player bid
-    /*
+    
     context.fillText('End Bid Time :  ' + bidders[0] + endBidTimer  ,200, 460);
     context.fillText('End Bid Time2 :  ' + bidders[1] + endBidTimer2  ,200, 480);
     context.fillText('End Bid Time3 :  ' + bidders[2] + endBidTimer3  ,200, 500);
     context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimer4  ,200, 520);
     context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);
-    */
+    
     
 }
 //Show the splash after loading all assets 
 function splash() 
 {
-  //document.getElementById('splash');
+  
   init();
-//  update();
-  //appState = GameMode.Splash;
-  //if(appState == GameMode.Splash)
-  //{
-	 //console.log("Splashing");
-  //}	
+	
   
   $('#progress').hide();
   $('#splash').show();
@@ -752,12 +739,7 @@ function mainMenu()
       assetLoader.sounds[sound].muted = !playSound;
     }
   }
-  //appState = GameMode.Main_Menu;
-  if(appState == GameMode.Main_Menu)
-  {
-	console.log("Main Menu");
-  }
-  
+   
   $('#progress').hide();
   $('#splash').hide();
   $('#main').show();
@@ -812,8 +794,6 @@ function resetStates()
 function repairState()
 {	//repair state update
 	stop = true;
-	//$('.RepairShop').style.display = 'true';
-	//document.getElementById('RepairShop').style.display = 'true';
 	
 	appState = GameMode.Repair;
 	// this.stop;
@@ -826,8 +806,6 @@ function addFundsMode()
 {	//store update
 	stop = true;
 	appState = GameMode.AddFunds;
-	//$('.AddFunds').style.display = 'true';	
-//	document.getElementById('AddFunds').style.display = 'true';
 	if(appState == GameMode.AddFunds)
 	{
 		console.log("save your money u cants save the world");
@@ -837,8 +815,6 @@ function addFundsMode()
 function auctionMode()
 {	//in-Auction update, core of game logic
    context.clearRect(0, 0, canvas.width, canvas.height);
-   //$('Auction').style.display = 'true';
-   //document.getElementById('Auction').style.display = 'true';
    auctionStop = false;
    appState = GameMode.Auction;
    ticker = 0;
@@ -847,6 +823,11 @@ function auctionMode()
    playerBid = 0;
    
    auctionInit();
+  
+     for(var i = 0; i < enemyBids.length; ++i)
+    {
+     enemyBids.push[i];
+    }
  	
    shuffleArray(enemyBids);
    shuffleArray(bidders);
@@ -861,7 +842,7 @@ function auctionMode()
 	{
 		auctionStop = true;
 		appState = GameMode.Running;
-		//enemyBids.length = 0;
+		
 		resetStates();
 	}  	 
   
@@ -991,74 +972,43 @@ function enemyBidding()
 	//var upPerc = startBid ;
 	if( currentBid >= 0 )
 	{
-		/*for(var i = 0; i < enemyBids.length; i++){
-			if(enemyCanBid){
+	
+		for(var i = 0; i < enemyBids.length; i++)
+		{
+			if(enemyCanBid)
+			{
 				if((enemyBids[i] < currentBid) && (enemyBids[i] < enemyCap) )
 				{
 				  enemyBids[i]  = currentBid + upPerc;
-				  enemyCanBid = false;
+				 
 				  break;
 				}
 			}
-		}*/
-		if((enemyBids[0] < currentBid) && (enemyBids[0] < enemyCap)&&(enemyCanBid))
-		{
-		  enemyBids[0]  = currentBid + upPerc;
 		}
-		else if((enemyBids[1] < currentBid) && (enemyBids[1] < enemyCap2)&&(enemyCanBid))
-		{
-		    enemyBids[1] = currentBid + upPerc;
-		}
-		else if((enemyBids[2] < currentBid) && (enemyBids[2] < enemyCap3)&&(enemyCanBid))
-		{
-		    enemyBids[2] = currentBid + upPerc;
-		}
-		else if((enemyBids[3] < currentBid) && (enemyBids[3] < enemyCap4)&&(enemyCanBid))
-		{
-		    enemyBids[3] = currentBid + upPerc;   
-		}					
-	}
-	else if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]))
+	 }
+	
+	//if the bidders bid is at o or less than the current bid player wings bid
+	/*
+     if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]))
 	{
 		sold();
 		money = money - currentBid;
-	}
+	}*/
+	
 }
 
 function findEndBidder()
 {
-	//for(var i = 0; i < bidders.length; i++)
-	//{
-		//if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
-		//{
-			//gameOver();
-			//alert("Sold to " + bidders[i]);			
-		//}
-	//}
-
-	if((currentBid == enemyBids[0]) && (endBidTimer >= BID_THRESHOLD))
+	for(var i = 0; i < bidders.length; i++)
 	{
-		gameOver();
-	    alert("Sold to " + bidders[0]);
-		
+		if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
+		{
+			gameOver();
+			alert("Sold to " + bidders[i]);			
+		}
 	}
-	else if((currentBid == enemyBids[1]) && (endBidTimer2 >= BID_THRESHOLD))
-	{
-		gameOver();
-		 alert("Sold to " + bidders[1]);
-	}
-	else if ((currentBid == enemyBids[2]) && (endBidTimer3 >= BID_THRESHOLD))
-	{
-		gameOver();
-		 alert("Sold to " + bidders[2]);
-	}
-	else if((currentBid == enemyBids[3]) && (endBidTimer4 >= BID_THRESHOLD))
-	{
-		gameOver();
-		 alert("Sold to " + bidders[3]);
-	}
-	
 }
+
 //End the game and restart
 function gameOver() 
 {
@@ -1082,7 +1032,11 @@ function sold()
 	document.getElementById('sold').style.display = 'true';
 	stop = true;
 	auctionStop = true;
-	$('#enemyBid').html(enemyBid);
+	for(var i = 0; i < enemyBids.length; i++)
+	{
+		$('#enemyBid').html(enemyBids[i]);
+	}
+	
 	$('#sold').show();
 	assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
@@ -1100,18 +1054,8 @@ function jqToggleCredits()
 }
 $('.credits').click(jqToggleCredits);
 $('.back').click(jqToggleCredits);
-/*{
-  $('#main').hide();
-  $('#menu').addClass('credits');
-  $('#credits').show();
-});*/
-//Credits Back button
-/*$('.back').click(toggleCredits);function() 
-{
-  $('#credits').hide();
-  $('#menu').removeClass('credits');
-});*/
 //Menu state start game button
+
 $('.play').click(function() 
 {
   $('#menu').hide();
@@ -1139,7 +1083,7 @@ $('#auction').click(function()
 	$('#gameMenu').hide();
 	$('#menu').addClass('auction'); 	
 	auctionMode();
-	//appState = GameMode.Auction;
+
 });
 //Auction State Back Button
 $('#auctionBackButton').click(function()
@@ -1151,7 +1095,7 @@ $('#auctionBackButton').click(function()
 	$('#gameMenu').show();
 	$('#menu').removeClass('Auction');
 	$('#menu').addClass('gameMenu');
-	//appState = GameMode.Main_Menu;
+	
 });
 //Inside Auction Bid Button
 $('#bid').click(function()
@@ -1180,30 +1124,25 @@ $('#repairBackButton').click(function()
   	$('#RepairShop').hide();
   	$('#gameMenu').show();
 	resetStates();
-//appState = GameMode.Main_mMnu;
+
 });
 //Game Menu Add funds portal button
 function jqToggleFunds(){
 	$('#gameMenu').toggle();
     $('#AddFunds').toggle();
-    //$('#menu').toggleClass('AddFunds');
+    
 }
 $('#addFunds').click(function() 
 {
 	jqToggleFunds();
-//	$('#gameMenu').hide();
-//    $('#AddFunds').show();
     $('#menu').addClass('AddFunds');
 	addFundsMode();
-	//appState = GameMode.AddFunds;
+	
 });
 //Inside AddFunds State Bacjbutton 
 $('#addFundsBackButton').click(function()
 {
 	jqToggleFunds();
-//  $('#AddFunds').hide();
-//  $('#gameMenu').show();
-  //appState = GameMode.Main_Menu;
 });
 
 //Sound Button

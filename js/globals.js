@@ -67,11 +67,14 @@ var addFundsBackButoon = {};
 //Create an empty array of Bidders
 var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Behemoth ", "Quatarian " ,"Ol G ", "Cindy ","Bobby ","Obama ", "OsamaBinBombin ","Ortega Mammon ","LOD Alexander ","Meatwad ","Candela","Oprah ","Jerry Springer ","Sam Jaxon ",
 "Moody Blue ","Shitake Shroom ","Macabre ","Sancho Pancho ","Quijote ","Leo ","Centurion ","Omega Pepper ","Osiris Moon ","Sass McFrass ","Smiley ","Budapest Guy ","Larry Queen ","Special Head ","Primitivo Montoya ","The Skywalker ","Sam Squirrel ","Dante ","Sparkles King ","Onion Knight "];
-var enemyBids = [1,2,3,4]; 
-
+var enemyBids = []; 
+var enemyBid = 1;
+var enemyBid1 = 2;
+var enemyBid2 = 3;
+var enemyBid3 = 4;
 //AI Variables
 var PLAYER_WAIT = 300;
-var ENEMY_WAIT = 700;
+var ENEMY_WAIT = 500;
 var playerBid = 0;
 //temp
 var bidAmount = 200;
@@ -91,16 +94,20 @@ var enemyCap4 = 0.9 * vehiclePrice;
 var bidderCooldown = 0;
 var playerCanBid = false;
 var currentBid = vehiclePrice * 0.1;
-//var endBidTimers = []
+
+var endBidTimers = [];
+
 var endBidTimer = 0;
 var endBidTimer2 = 0;
 var endBidTimer3 = 0;
 var endBidTimer4 = 0;
+
 var playerDidBid = false;
 var enemyCanBid = false;
 var playerNextBid = currentBid + (currentBid * 0.1);
 
 //BidTImers Booleans
+var startEndBids = [false,false,false,false]
 var startEndBid = false;
 var startEndBid2 = false;
 var startEndBid3 = false;
