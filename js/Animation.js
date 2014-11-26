@@ -1,6 +1,5 @@
 ﻿function Animation(spritesheet, frameSpeed, startFrame, endFrame) 
 {
-
   var animationSequence = [];  // array holding the order of the animation
   var currentFrame = 0;        // the current frame to draw
   var counter = 0;             // keep track of frame rate

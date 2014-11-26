@@ -131,8 +131,31 @@ for(var carNode in vehicles.childNodes){
 }
 */
 
-
-
+function initGarage()
+{	//initilize user's garage will available cars,
+	//accessed from user.xml, referenced from database vehicle.xml
+	//parse user xml
+	//get user with ID
+	//var userNode = getElementById('');
+	//for(child in userNode)
+	//{
+		//var carID = child.getAttributeById('id');
+		//userGarage.push(VehicleXML.getElementById(carID) );
+	//}
+	return;
+}
+function addCar(car)
+{	//call after user wins auction, adding car to garage and user.xml
+	//
+	//var garage = userNode.getElementById('garage');
+	//if(node with id exists){
+		//alert('already own car with id:' + car.id);
+	//}else
+	//{
+		//garage.addNode('<ch>' + car.id + '</ch>');
+		//commit changes to server
+	//}
+}
 
 //Show asset loading progress
 //@datatype {integer} progress - Number of assets loaded
@@ -241,8 +264,6 @@ function update(deltaTime)
 	}
 		
 }
-//Vehicles
-
 // The player object
 var player = (function(player) 
 {
@@ -346,11 +367,6 @@ function bidTimers()
 		}
 	}
 	
-	//array element of timers being updated in their containers
-	//tied to individual array element player that has the bid about to win
-   	
-   		
-	   					
 	//Player end bid
 	if(startPlayerEndBid)
 	{
