@@ -132,139 +132,6 @@ for(var carNode in vehicles.childNodes){
 */
 
 
-// set the sound preference
-if (canUseLocalStorage) 
-{
-  playSound = (localStorage.getItem('kandi.playSound') === "true")
-
-  if (playSound) 
-  {
-    $('.sound').addClass('sound-on').removeClass('sound-off');
-  }
-  else 
-  {
-    $('.sound').addClass('sound-off').removeClass('sound-on');
-  }
-}
-
-
-//Asset pre-loader object. Loads all images
-var assetLoader = (function() 
-{
-  // images dictionary
-  this.images        = 
-  {
- 	  //player
-     'avatar_normal'  : 'images/normal_walk.png',
-     
-   };
-
-  // sounds dictionary
-  this.sounds      = 
-  {
-    'bg'            : 'sounds/D.mp3',
-    'jump'          : 'sounds/jump.mp3',
-    'gameOver'      : 'sounds/gameOver.mp3'
-  };
-
-  var assetsLoaded = 0;                                // how many assets have been loaded
-  var numImages      = Object.keys(this.images).length;    // total number of image assets
-  var numSounds    = Object.keys(this.sounds).length;  // total number of sound assets
-  this.totalAssest = numImages;                          // total number of assets
-
-   //Ensure all assets are loaded before using them
-   // datatype {number} dic  - Dictionary name ('images', 'sounds', 'fonts')
-   // datatype {number} name - Asset name in the dictionary
-  function assetLoaded(dic, name) 
-  {
-    // don't count assets that have already loaded
-    if (this[dic][name].status !== 'loading') 
-    {
-      return;
-    }
-
-    this[dic][name].status = 'loaded';
-    assetsLoaded++;
-
-    // progress callback
-    if (typeof this.progress === 'function') 
-    {
-      this.progress(assetsLoaded, this.totalAssest);
-    }
-
-    // finished callback
-    if (assetsLoaded === this.totalAssest && typeof this.finished === 'function') 
-    {
-      this.finished();
-    }
-  }
-
-  //Check the ready state of an Audio file.
-  //datatype {object} sound - Name of the audio asset that was loaded.
-   
-  function _checkAudioState(sound) 
-  {
-    if (this.sounds[sound].status === 'loading' && this.sounds[sound].readyState === 4) 
-    {
-      assetLoaded.call(this, 'sounds', sound);
-    }
-  }
-  
-  //Create assets, set callback for asset loading, set asset source
-  this.downloadAll = function() 
-  {
-    var _this = this;
-    var src;
-
-    //Load images
-    for (var image in this.images) 
-    {
-      if (this.images.hasOwnProperty(image)) 
-      {
-        src = this.images[image];
-
-        // create a closure for event binding
-        (function(_this, image) {
-          _this.images[image] = new Image();
-          _this.images[image].status = 'loading';
-          _this.images[image].name = image;
-          _this.images[image].onload = function() { assetLoaded.call(_this, 'images', image) };
-          _this.images[image].src = src;
-        })(_this, image);
-      }
-    }
-
-    //Load sounds
-    for (var sound in this.sounds) 
-    {
-      if (this.sounds.hasOwnProperty(sound)) 
-      {
-        src = this.sounds[sound];
-
-        // create a closure for event binding
-        (function(_this, sound) {
-          _this.sounds[sound] = new Audio();
-          _this.sounds[sound].status = 'loading';
-          _this.sounds[sound].name = sound;
-          _this.sounds[sound].addEventListener('canplay', function() 
-          {
-            _checkAudioState.call(_this, sound);
-          });
-          _this.sounds[sound].src = src;
-          _this.sounds[sound].preload = 'auto';
-          _this.sounds[sound].load();
-        })(_this, sound);
-      }
-    }
-  }
-  
-  return {
-    images: this.images,
-    sounds: this.sounds,
-    totalAssest: this.totalAssest,
-    downloadAll: this.downloadAll
-  };
-})();
 
 
 //Show asset loading progress
@@ -308,17 +175,6 @@ function garageDoor()
 }	
 //States
 var appState;
-var GameMode = 
-{
-	Splash   : 1,
-	Main_Menu : 2,
-	Running : 3,
-	Auction : 4,
-	Repair : 5,
-	AddFunds :6,
-	
-
-};
 appState = GameMode.Splash;	//app may only exist in one state at a time
 
 function switchStates( GameMode) 
@@ -361,26 +217,6 @@ function update(deltaTime)
 	if(appState == GameMode.Auction)
 	{
 		//this shouldn't happen every update otherwise,
-		//the array grows every frame, then crash!
-		//Also initializing array with values is faster than using push()
-		// moving to globals.js
-		//Enemy Bids
-/*		enemyBids.push(enemyBid);
-	    enemyBids.push(enemyBid1);
-	    enemyBids.push(enemyBid2);
-	    enemyBids.push(enemyBid3);
-	    //Enemy Win timers
-	    endBidTimers.push(endBidTimer);
-	    endBidTimers.push(endBidTimer2);
-	 	endBidTimers.push(endBidTimer3);
-	   	endBidTimers.push(endBidTimer4);
-	    //Bools to find winner
-	    startEndBids.push(startEndBid);
-	    startEndBids.push(startEndBid2);
-	    startEndBids.push(startEndBid3);
-	    startEndBids.push(startEndBid4);
-	*/    
-	 
 		updatePlayer();
 		//call bidder ai functions
 		bidTimers();
@@ -404,75 +240,6 @@ function update(deltaTime)
 	  	findEndBidder();
 	}
 		
-}
-//
-//Creates a Spritesheet
-//datatype {string} - Path to the image.
-//datatype {number} - Width (in px) of each frame.
-//datatype {number} - Height (in px) of each frame.
-//
-function SpriteSheet(path, frameWidth, frameHeight) 
-{
-  this.image = new Image();
-  this.frameWidth = frameWidth;
-  this.frameHeight = frameHeight;
-
-  // calculate the number of frames in a row after the image loads
-  var self = this;
-  this.image.onload = function() 
-  {
-    self.framesPerRow = Math.floor(self.image.width / self.frameWidth);
-  };
-
-  this.image.src = path;
-}
-
-//Creates an animation from a spritesheet.
-//datatype {SpriteSheet} - The spritesheet used to create the animation.
-//datatype {number}      - Number of frames to wait for before transitioning the animation.
-//datatype {array}       - Range or sequence of frame numbers for the animation.
-//datatype{boolean}     - Repeat the animation once completed.
- 
-function Animation(spritesheet, frameSpeed, startFrame, endFrame) 
-{
-
-  var animationSequence = [];  // array holding the order of the animation
-  var currentFrame = 0;        // the current frame to draw
-  var counter = 0;             // keep track of frame rate
-
-  // start and end range for frames
-  for (var frameNumber = startFrame; frameNumber <= endFrame; frameNumber++)
-    animationSequence.push(frameNumber);
-
-   // Update the animation
-  this.update = function() 
-  {
-    // update to the next frame if it is time
-    if (counter == (frameSpeed - 1))
-      currentFrame = (currentFrame + 1) % animationSequence.length;
-
-     // update the counter
-     counter = (counter + 1) % frameSpeed;
-  };
-
-
-// Draw the current frame
-// datatype {integer} x - X position to draw
-// datatype {integer} y - Y position to draw
-
-  this.draw = function(x, y) 
-  {
-    // get the row and col of the frame
-    var row = Math.floor(animationSequence[currentFrame] / spritesheet.framesPerRow);
-    var col = Math.floor(animationSequence[currentFrame] % spritesheet.framesPerRow);
-
-    context.drawImage(
-      spritesheet.image,
-      col * spritesheet.frameWidth, row * spritesheet.frameHeight,
-      spritesheet.frameWidth, spritesheet.frameHeight,
-      x, y,
-      spritesheet.frameWidth, spritesheet.frameHeight);
-  };
 }
 //Vehicles
 
@@ -518,36 +285,6 @@ var player = (function(player)
   return player;
 })(Object.create(Vector.prototype));
 
-/**
- * Sprites are anything drawn to the screen (ground, enemies, etc.)*/
-function Sprite(x, y, type) 
-{
-	//this.position = new Vector2(x,y);
-  this.x      = x;
-  this.y      = y;
-  this.width  = standWidth;
-  this.height = standWidth;
-  this.type   = type;
-  Vector.call(this, x, y, 0, 0);
-
-  //Update the Sprite's position by the player's speed
-   
-  this.update = function() 
-  {
-    this.dx = -player.speed;
-    this.advance();
-  };
-
-  // Draw the sprite at it's current position
-  this.draw = function() 
-  {
-    context.save();
-    context.translate(0.5,0.5);
-    context.drawImage(assetLoader.images[this.type], this.x, this.y);
-    context.restore();
-  };
-}
-Sprite.prototype = Object.create(Vector.prototype);
 //Game Loop 
 
 function updatePlayer() 
@@ -626,99 +363,6 @@ function bidTimers()
 	
 }
 
-//Game HUD
-function renderAuction()
-{
-	var player1;
-  	var player2;
-  	var player3;
-  	var player4;
-  	
-	if(( playerBid == currentBid)&& (playerDidBid))
-  	{
-  		player.y = 10;
-  		context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 90);
-  	}
-  	else
-  	{
-  	  player.y = 150;
-  	  context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 230);
-  	}
-  	
-  	if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
-  	{
-		playerBid != currentBid;
-		
-	}
-	
-	//ENENMY HUD
-	
-  	//Enemy 1
-	//draw them depending on current bid
-  	if((enemyBids[0] >= currentBid))
-  	{
-  		player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
-  		  		
-  	}
-  	else
-  	{
-  		player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X, 120);
-  	  	
-  	}
-    //Enemy 2
-  	if(enemyBids[1] >= currentBid)
-  	{
-  		player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);
-  		
-  	}
-  	else
-  	{
-  		player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X, 160);
-  		
-  	}
-  	//Enemy3
-  	if( enemyBids[2] >= currentBid )
-  	{
-  	    player3 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X , 70);
-  	 	
-  	}
-  	else
-  	{
-  		 player3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X, 180);
-  		 
-  	}
-  	//Enemy4
-  	if( enemyBids[3] >= currentBid)
-  	{
-  	    player4 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X , 70);
-  	 	
-  	}
-	else
-	{
-		player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X, 200);
-		
-	}
-	
-    //current bid HUD
-    var gorguts;
-    gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
-    
-	    //current bid
-    context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
-    
-    context.fillText('Game Timer :  ' + timer.toFixed(2)  ,200, 400);
-      // draw the money HUD
-    context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
-    //player bid
-    
-    context.fillText('End Bid Time :  ' + bidders[0] + endBidTimers[0]  ,200, 460);
-    context.fillText('End Bid Time2 :  ' + bidders[1] + endBidTimers[1]  ,200, 480);
-    context.fillText('End Bid Time3 :  ' + bidders[2] + endBidTimers[2]  ,200, 500);
-    context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimers[3]  ,200, 520);
-    context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);
-    
-    
-}
 //Show the splash after loading all assets 
 function splash() 
 {
@@ -828,11 +472,6 @@ function auctionMode()
    
    auctionInit();
   
-     //for(var i = 0; i < enemyBids.length; ++i)
-    //{
-     //enemyBids.push[i];
-    //}
- 	
    shuffleArray(enemyBids);
    shuffleArray(bidders);
 
@@ -866,6 +505,100 @@ function auctionMode()
   assetLoader.sounds.bg.loop = true;
   assetLoader.sounds.bg.play();
 }
+//Game HUD
+function renderAuction()
+{
+	var player1;
+  	var player2;
+  	var player3;
+  	var player4;
+  	
+	if(( playerBid == currentBid)&& (playerDidBid))
+  	{
+  		player.y = 10;
+  		context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 90);
+  	}
+  	else
+  	{
+  	  player.y = 150;
+  	  context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 230);
+  	}
+  	
+  	if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
+  	{
+		playerBid != currentBid;
+		
+	}
+	
+	//ENENMY HUD
+	
+  	//Enemy 1
+	//draw them depending on current bid
+  	if((enemyBids[0] >= currentBid))
+  	{
+  		player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
+  		  		
+  	}
+  	else
+  	{
+  		player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X, 120);
+  	  	
+  	}
+    //Enemy 2
+  	if(enemyBids[1] >= currentBid)
+  	{
+  		player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);
+  		
+  	}
+  	else
+  	{
+  		player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X, 160);
+  		
+  	}
+  	//Enemy3
+  	if( enemyBids[2] >= currentBid )
+  	{
+  	    player3 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X , 70);
+  	 	
+  	}
+  	else
+  	{
+  		 player3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X, 180);
+  		 
+  	}
+  	//Enemy4
+  	if( enemyBids[3] >= currentBid)
+  	{
+  	    player4 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X , 70);
+  	 	
+  	}
+	else
+	{
+		player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X, 200);
+		
+	}
+	
+    //current bid HUD
+    var gorguts;
+    gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
+    
+	    //current bid
+    context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
+    
+    context.fillText('Game Timer :  ' + timer.toFixed(2)  ,200, 400);
+      // draw the money HUD
+    context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
+    //player bid
+    
+    context.fillText('End Bid Time :  ' + bidders[0] + endBidTimers[0]  ,200, 460);
+    context.fillText('End Bid Time2 :  ' + bidders[1] + endBidTimers[1]  ,200, 480);
+    context.fillText('End Bid Time3 :  ' + bidders[2] + endBidTimers[2]  ,200, 500);
+    context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimers[3]  ,200, 520);
+    context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);
+    
+    
+}
+
 
 //Player Bidding Function
 function playerBidding() 
@@ -927,15 +660,18 @@ function currentBidder()
 
 function bidFinder()
 {	//determine bidder
-	function checkBid(index){
+	function checkBid(index)
+	{
 		//check if the enemy at the current index has a higher bid than the other AI's
 		var ret = true;
 		for(var i = 0; i < enemyBids.length; i++)
 		{
 			if(index != i){
-				if(enemyBids[index] > enemyBids[i]){
+				if(enemyBids[index] > enemyBids[i])
+				{
 					continue;
-				}else
+				}
+				else
 				{
 					ret = false;
 					break;
@@ -944,10 +680,12 @@ function bidFinder()
 		}
 		return ret;
 	}
-	function setBid(index){
+	function setBid(index)
+	{
 		currentBid = enemyBids[index];
 		
-		for(var i = 0; i < startEndBids.length; i++){
+		for(var i = 0; i < startEndBids.length; i++)
+		{
 			startEndBids[i] = (i == index ? true : false);
 		}
 		
@@ -955,59 +693,23 @@ function bidFinder()
 
 	}
 	
-	if(checkBid(0) ){
+	if(checkBid(0) )
+	{
 		setBid(0);
 	}
-	else if(checkBid(1) ){
+	else if(checkBid(1) )
+	{
 		setBid(1);
 	}
-	else if(checkBid(2) ){
+	else if(checkBid(2) )
+	{
 		setBid(2);
 	}
-	else if(checkBid(3) ){
+	else if(checkBid(3) )
+	{
 		setBid(3);
 	}
-	/*OBSOLETE
-	if((enemyBids[0] > enemyBids[1]) && (enemyBids[0] > enemyBids[2]) && (enemyBids[0] > enemyBids[3]))
-	{
-		currentBid = enemyBids[0];
-		startEndBids[0] = true;
-		startEndBids[1] = false;
-		startEndBids[2] = false;
-		startEndBids[3] = false;
-		startPlayerEndBid = false;
-		 
 	}
-	else if((enemyBids[1] > enemyBids[0]) && (enemyBids[1] > enemyBids[2]) && (enemyBids[1] > enemyBids[3]))
-	{
-		currentBid = enemyBids[1];
-		startEndBids[0] = false;
-		startEndBids[1] = true;
-		startEndBids[2] = false;
-		startEndBids[3] = false;
-		startPlayerEndBid = false;
-
-	}
-	else if((enemyBids[2] > enemyBids[0]) && (enemyBids[2] > enemyBids[1]) && (enemyBids[2] > enemyBids[3]))
-	{
-		currentBid = enemyBids[2];
-		startEndBids[0] = false;
-		startEndBids[1] = false;
-		startEndBids[2] = true;
-		startEndBids[3] = false;
-		startPlayerEndBid = false;
-
-	}
-	else if((enemyBids[3] > enemyBids[0]) && (enemyBids[3] > enemyBids[1]) && (enemyBids[3] > enemyBids[2]))	
-	{
-		currentBid = enemyBids[3];
-		startEndBids[0] = false;
-		startEndBids[1] = false;
-		startEndBids[2] = false;
-		startEndBids[3] = true;
-		startPlayerEndBid = false;
-	}*/
-}
 
 function enemyBidding() 
 {

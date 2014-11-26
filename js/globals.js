@@ -68,11 +68,7 @@ var addFundsBackButoon = {};
 var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Behemoth ", "Quatarian " ,"Ol G ", "Cindy ","Bobby ","Obama ", "OsamaBinBombin ","Ortega Mammon ","LOD Alexander ","Meatwad ","Candela","Oprah ","Jerry Springer ","Sam Jaxon ",
 "Moody Blue ","Shitake Shroom ","Macabre ","Sancho Pancho ","Quijote ","Leo ","Centurion ","Omega Pepper ","Osiris Moon ","Sass McFrass ","Smiley ","Budapest Guy ","Larry Queen ","Special Head ","Primitivo Montoya ","The Skywalker ","Sam Squirrel ","Dante ","Sparkles King ","Onion Knight "];
 var enemyBids = [1,2,3,4]; 
-//var enemyBid = 1;
-//var enemyBid1 = 2;
-//var enemyBid2 = 3;
-//var enemyBid3 = 4;
-//AI Variables
+
 var PLAYER_WAIT = 300;
 var ENEMY_WAIT = 500;
 var playerBid = 0;
