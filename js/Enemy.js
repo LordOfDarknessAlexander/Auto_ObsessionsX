@@ -23,5 +23,5 @@ var enemies = [
 
 function price(bias)
 {
-  return (lerp(Math.random(0.2, 1.25), bias, Math.random(0.0,1.0) ) * vehiclePrice);
+  //return (lerp(Math.random(0.2, 1.25), bias, Math.random(0.0,1.0) ) * vehiclePrice);
 }	

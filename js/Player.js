@@ -39,3 +39,10 @@ var player = (function(player)
 
   return player;
 })(Object.create(Vector.prototype));
+
+function updatePlayer() 
+{
+  player.update();
+  player.draw();
+
+}

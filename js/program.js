@@ -201,8 +201,9 @@ function garageDoor()
 }	
 //States
 var appState;
-appState = GAME_MODE.SPLASH;	//app may only exist in one state at a time
+appState = GAME_MODE.SPLASH;	
 
+//app may only exist in one state at a time
 function switchStates( GAME_MODE) 
 {	 //call various update based on appState
 	 switch (GAME_MODE) 
@@ -269,14 +270,6 @@ function update(deltaTime)
 }
 
 //Game Loop 
-
-function updatePlayer() 
-{
-  
-  player.update();
-  player.draw();
-
-}
 
 
 //Sort Items arrays
@@ -375,10 +368,6 @@ function startGame()
   assetLoader.sounds.bg.play();
       
 }
-function resetStates()
-{
-	appState = GAME_MODE.Running;
-}
 
 function auctionMode()
 {	//in-Auction update, core of game logic
@@ -448,6 +437,12 @@ function addFundsMode()
 		console.log("save your money u cants save the world");
 	}		
 }
+
+function resetStates()
+{
+	appState = GAME_MODE.RUNNING;
+}
+
 //End the game and restart
 function gameOver() 
 {
@@ -587,34 +582,6 @@ $('.sound').click(function()
       assetLoader.sounds[sound].muted = !playSound;
     }
   }
-});
-//
-//Funds State interface
-//
-function addFunds(val)
-{
-	var MAX_MONEY = 50000000;
-	var newTotal = money + val;
-	money = newTotal > MAX_MONEY ? MAX_MONEY : newTotal;
-}
-$('#addAllowanceBtn').click(function()
-{	//allowance accumulates every few seconds
-	money += 1;
-});
-$('#addMinorFundsBtn').click(function()
-{	//open paypal form
-	//transfering game currency to user's account
-	addFunds(500);
-});
-$('#addMediumFundsBtn').click(function()
-{	//open paypal form
-	//transfering game currency to user's account
-	addFunds(1500);
-});
-$('#addMajorFundsBtn').click(function()
-{	//open paypal form
-	//transfere game currency to user's account
-	addFunds(50000);
 });
 
 assetLoader.downloadAll();

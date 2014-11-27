@@ -1,188 +1,5 @@
 ﻿//Auction State
-
-function bidTimers()
-{	//updates AI bidding timers
-
-	for(var i = 0; i < startEndBids.length; i++)
-	{
-		if(startEndBids[i] = true)
-		{			
-			endBidTimers[i]++;
-		}
-		else
-		{
-			endBidTimers[i] = 0;
-		}
-	}
-	
-	//Player end bid
-	if(startPlayerEndBid)
-	{
-		playerEndBidTimer ++;
-	}
-	else
-	{
-		playerEndBidTimer = 0;
-	}	
-	
-}
-
 //Player Bidding Function
-function playerBidding() 
-{ 
-	//player Cooldown button
-	if(	bidderCooldown >= PLAYER_WAIT)
-	{
-  		playerBid = currentBid + playerNextBid;
-  		playerCanBid = true;
-  		bidderCooldown = 0;
-  		startEndBids[0] = false;
-		startEndBids[1] = false;
-		startEndBids[2] = false;
-		startEndBids[3] = false;
-		startPlayerEndBid = true;
-	  		
-	}
-	
-	if(playerBid <= money)
-	{
-		playerDidBid = true;
-	
-	}
-	else
-	{
-		//cant bid above your cash 
-		//call a new function to alert player hes &$#k up
-		 gameOver();
-		 
-		 startPlayerEndBid = false;
-	}
-	//Wins BId	
-	if((enemyBids[0] == 0) && (enemyBids[1] == 0) && (enemyBids[2] == 0) && (enemyBids[3] == 0) && (money >= currentBid))
-	{
-	  money = money - currentBid;
-	}
-	
-	if(money <= 0)
-	{
-		money = 0;	//player has no money but doesn't win auction?
-		gameOver();	
-	}
-}
-//Player Bidding Function
-function currentBidder()
-{
-	//Player has the current bid
-	if((playerBid > enemyBids[0])&&(playerBid > enemyBids[1])&&(playerBid > enemyBids[2])&&(playerBid > enemyBids[3]))
-	{
-	   currentBid = playerBid;
-	   
-	}
-	//Find the player who has the highest bid dirty way enemy bidder 1 if it is not players bid then call func to find thru enemies
-	else if((playerBid < enemyBids[0])||(playerBid < enemyBids[1])||(playerBid < enemyBids[2])||(playerBid < enemyBids[3]))
-	{
-	  bidFinder();
-	}
-}
-
-function bidFinder()
-{	//determine bidder
-	function checkBid(index)
-	{
-		//check if the enemy at the current index has a higher bid than the other AI's
-		var ret = true;
-		for(var i = 0; i < enemyBids.length; i++)
-		{
-			if(index != i){
-				if(enemyBids[index] > enemyBids[i])
-				{
-					continue;
-				}
-				else
-				{
-					ret = false;
-					break;
-				}
-			}
-		}
-		return ret;
-	}
-	function setBid(index)
-	{
-		currentBid = enemyBids[index];
-		
-		for(var i = 0; i < startEndBids.length; i++)
-		{
-			startEndBids[i] = (i == index ? true : false);
-		}
-		
-		startPlayerEndBid = false;
-
-	}
-	
-	if(checkBid(0) )
-	{
-		setBid(0);
-	}
-	else if(checkBid(1) )
-	{
-		setBid(1);
-	}
-	else if(checkBid(2) )
-	{
-		setBid(2);
-	}
-	else if(checkBid(3) )
-	{
-		setBid(3);
-	}
-}
-
-function enemyBidding() 
-{
-	//upPercentage of vehicle for next bid
-	var upPerc =  0.18 * currentBid;
-	var startBid = vehiclePrice * 0.02;
-	//var upPerc = startBid ;
-	if( currentBid >= 0 )
-	{	
-		for(var i = 0; i < enemyBids.length; i++)
-		{
-			if(enemyCanBid)
-			{
-				if((enemyBids[i] < currentBid) && (enemyBids[i] < enemyCap) )
-				{
-				  enemyBids[i] = currentBid + upPerc;
-				 
-				  break;
-				}
-			}
-		}
-	 }
-	
-	//if the bidders bid is at o or less than the current bid player wings bid
-	/*
-     if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]))
-	{
-		sold();
-		money = money - currentBid;
-	}*/
-	
-}
-
-function findEndBidder()
-{
-	for(var i = 0; i < bidders.length; i++)
-	{
-		if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
-		{
-			gameOver();
-			alert("Sold to " + bidders[i]);			
-		}
-	}
-}
-
-//Game HUD
 function renderAuction()
 {
 	var player1;
@@ -275,5 +92,192 @@ function renderAuction()
     
     
 }
+
+
+function bidTimers()
+{	//updates AI bidding timers
+
+	for(var i = 0; i < startEndBids.length; i++)
+	{
+		if(startEndBids[i] = true)
+		{			
+			endBidTimers[i]++;
+		}
+		else
+		{
+			endBidTimers[i] = 0;
+		}
+	}
+	
+	//Player end bid
+	if(startPlayerEndBid)
+	{
+		playerEndBidTimer ++;
+	}
+	else
+	{
+		playerEndBidTimer = 0;
+	}	
+	
+}
+
+function playerBidding() 
+{ 
+	//player Cooldown button
+	if(	bidderCooldown >= PLAYER_WAIT)
+	{
+  		playerBid = currentBid + playerNextBid;
+  		playerCanBid = true;
+  		bidderCooldown = 0;
+  		startEndBids[0] = false;
+		startEndBids[1] = false;
+		startEndBids[2] = false;
+		startEndBids[3] = false;
+		startPlayerEndBid = true;
+	  		
+	}
+	
+	if(playerBid <= money)
+	{
+		playerDidBid = true;
+	
+	}
+	else
+	{
+		//cant bid above your cash 
+		//call a new function to alert player hes &$#k up
+		 _program.gameOver();
+		 
+		 startPlayerEndBid = false;
+	}
+	//Wins BId	
+	if((enemyBids[0] == 0) && (enemyBids[1] == 0) && (enemyBids[2] == 0) && (enemyBids[3] == 0) && (money >= currentBid))
+	{
+	  money = money - currentBid;
+	}
+	
+	if(money <= 0)
+	{
+		money = 0;	//player has no money but doesn't win auction?
+		gameOver();	
+	}
+}
+function enemyBidding() 
+{
+	//upPercentage of vehicle for next bid
+	var upPerc =  0.18 * currentBid;
+	var startBid = vehiclePrice * 0.02;
+	//var upPerc = startBid ;
+	if( currentBid >= 0 )
+	{	
+		for(var i = 0; i < enemyBids.length; i++)
+		{
+			if(enemyCanBid)
+			{
+				if((enemyBids[i] < currentBid) && (enemyBids[i] < enemyCap) )
+				{
+				  enemyBids[i] = currentBid + upPerc;
+				 
+				  break;
+				}
+			}
+		}
+	 }
+	
+	//if the bidders bid is at o or less than the current bid player wings bid
+	/*
+     if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]))
+	{
+		sold();
+		money = money - currentBid;
+	}*/
+	
+}
+
+
+//Player Bidding Function
+function currentBidder()
+{
+	//Player has the current bid
+	if((playerBid > enemyBids[0])&&(playerBid > enemyBids[1])&&(playerBid > enemyBids[2])&&(playerBid > enemyBids[3]))
+	{
+	   currentBid = playerBid;
+	   
+	}
+	//Find the player who has the highest bid dirty way enemy bidder 1 if it is not players bid then call func to find thru enemies
+	else if((playerBid < enemyBids[0])||(playerBid < enemyBids[1])||(playerBid < enemyBids[2])||(playerBid < enemyBids[3]))
+	{
+	  bidFinder();
+	}
+}
+
+function bidFinder()
+{	//determine bidder
+	function checkBid(index)
+	{
+		//check if the enemy at the current index has a higher bid than the other AI's
+		var ret = true;
+		for(var i = 0; i < enemyBids.length; i++)
+		{
+			if(index != i){
+				if(enemyBids[index] > enemyBids[i])
+				{
+					continue;
+				}
+				else
+				{
+					ret = false;
+					break;
+				}
+			}
+		}
+		return ret;
+	}
+	function setBid(index)
+	{
+		currentBid = enemyBids[index];
+		
+		for(var i = 0; i < startEndBids.length; i++)
+		{
+			startEndBids[i] = (i == index ? true : false);
+		}
+		
+		startPlayerEndBid = false;
+
+	}
+	
+	if(checkBid(0) )
+	{
+		setBid(0);
+	}
+	else if(checkBid(1) )
+	{
+		setBid(1);
+	}
+	else if(checkBid(2) )
+	{
+		setBid(2);
+	}
+	else if(checkBid(3) )
+	{
+		setBid(3);
+	}
+}
+
+function findEndBidder()
+{
+	for(var i = 0; i < bidders.length; i++)
+	{
+		if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
+		{
+			gameOver();
+			alert("Sold to " + bidders[i]);			
+		}
+	}
+}
+
+
+
+//Game HUD
 
 
