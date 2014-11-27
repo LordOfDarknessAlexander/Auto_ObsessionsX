@@ -6,6 +6,4 @@
 	AUCTION : 4,
 	REPAIR : 5,
 	ADD_FUNDS :6,
-	
-
 };

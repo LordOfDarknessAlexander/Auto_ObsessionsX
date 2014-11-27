@@ -3,8 +3,8 @@ var canUseLocalStorage = 'localStorage' in window && window.localStorage !== nul
 var canvas = document.getElementById('canvas');	//$("canvas")?
 var context = canvas.getContext('2d');
 //aspect ratio
-var width = canvas.getAttribute('width');
-var height = canvas.getAttribute('height');
+var width = canvas.getAttribute('width'),
+	height = canvas.getAttribute('height');
 var player, money, stop, ticker;
 //random comment
 
@@ -67,10 +67,7 @@ var addFundsBackButoon = {};
 //Create an empty array of Bidders
 var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Behemoth ", "Quatarian " ,"Ol G ", "Cindy ","Bobby ","Obama ", "OsamaBinBombin ","Ortega Mammon ","LOD Alexander ","Meatwad ","Candela","Oprah ","Jerry Springer ","Sam Jaxon ",
 "Moody Blue ","Shitake Shroom ","Macabre ","Sancho Pancho ","Quijote ","Leo ","Centurion ","Omega Pepper ","Osiris Moon ","Sass McFrass ","Smiley ","Budapest Guy ","Larry Queen ","Special Head ","Primitivo Montoya ","The Skywalker ","Sam Squirrel ","Dante ","Sparkles King ","Onion Knight "];
-var enemyBids = [1,2,3,4]; 
 
-var PLAYER_WAIT = 300;
-var ENEMY_WAIT = 500;
 var playerBid = 0;
 //temp
 var bidAmount = 200;
@@ -82,33 +79,18 @@ var vehiclePrice = 20000;
 //ie. starting an auction with more than 1.25 of vehicle price will always win
 
 //new array for every new auction? preferably in the auction button qjuery callback
-
-var price;
 var enemyCap = 1.25 * vehiclePrice;
 var enemyCap2 = 0.8 * vehiclePrice;
 var enemyCap3 = 0.7 * vehiclePrice;
 var enemyCap4 = 0.9 * vehiclePrice;
-
-//AI cooldown timer
-var bidderCooldown = 0;
-var playerCanBid = false;
-var currentBid = vehiclePrice * 0.1;
-
-var endBidTimers = [0,0,0,0];
-
-var playerDidBid = false;
-var enemyCanBid = false;
-var playerNextBid = currentBid + (currentBid * 0.1);
-
-//BidTImers Booleans
-var startEndBids = [false,false,false,false];
-
+/*
 var startEndBid = false;
 var startEndBid2 = false;
 var startEndBid3 = false;
-var startEndBid4 = false;
-var startPlayerEndBid = false;
-var playerEndBidTimer = 0;
+var startEndBid4 = false;*/
+
+var startPlayerEndBid = false;	//player local
+var playerEndBidTimer = 0;	//player local
 
 //DT
 var timer = 0;
@@ -117,3 +99,10 @@ var previousTime = Date.now();
 var deltaTime = (Date.now() - previousTime) / 1000;
 previousTime = Date.now();
 timer += deltaTime;
+
+var appState = GAME_MODE.SPLASH;	
+
+function resetStates()
+{
+	appState = GAME_MODE.RUNNING;
+}

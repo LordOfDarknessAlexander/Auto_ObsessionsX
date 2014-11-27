@@ -10,6 +10,19 @@
 		startEndBid = false;
 	}
 }
+function price(bias)
+{
+	var b = (bias == 'undefined' ? 0 : bias);
+	function lerp(Min, Max, t){
+		if(Min > Max){
+			var tmp = Min;
+			Min = Max;
+			Max = tmp;
+		}
+		return Min + (Max - Min) * t;
+	};
+  	return vehiclePrice * lerp(Math.random(0.4, 1.25), bias, Math.random(0.0,1.0) );
+}
 //have a single array encapsulating all AI players,
 //oppossed to seperate arrays for each property
 //as names don't matter they can still be random
@@ -20,8 +33,3 @@ var enemies = [
 	new Enemy(price())
 ];	//
 //result can also be weighted, prefering higher or lower bids
-
-function price(bias)
-{
-  //return (lerp(Math.random(0.2, 1.25), bias, Math.random(0.0,1.0) ) * vehiclePrice);
-}	

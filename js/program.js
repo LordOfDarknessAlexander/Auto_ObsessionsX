@@ -12,7 +12,7 @@ $(document).ready(function()
 	    if((timer >= 300.00) && (timer <= 900.00))
 		{
 			appState = GAME_MODE.Main_Menu;
-		  mainMenu();
+		  	mainMenu();
 		  
 		}  
 		timer++;
@@ -20,21 +20,17 @@ $(document).ready(function()
 	  }
 	
 	}
-	
 	function auctionInit()
 	{
-	  if (!auctionStop) 
-	  {
-	    requestAnimFrame( auctionInit);
-	    
-	  	update();
-		timer ++;
-	    ticker++;
-	  }
-	
+		if(!auctionStop) 
+		{
+			requestAnimFrame( auctionInit);
+			
+			update();
+			timer++;
+			ticker++;
+		}
 	}
-
-	
 //
 //TODO, access from html database, or other markup file
 //
@@ -199,9 +195,6 @@ function garageDoor()
 		backgroundY = -1000;
 	}
 }	
-//States
-var appState;
-appState = GAME_MODE.SPLASH;	
 
 //app may only exist in one state at a time
 function switchStates( GAME_MODE) 
@@ -246,57 +239,10 @@ function update(deltaTime)
 		//this shouldn't happen every update otherwise,
 		updatePlayer();
 		//call bidder ai functions
-		bidTimers();
-		enemyBidding();
-		currentBidder();
-		//price();
-		if(playerDidBid)
-		{
-			bidderCooldown++;
-			enemyCanBid = false;
-		}
-	  
-	  	if(bidderCooldown >= ENEMY_WAIT)
-	  	{
-	  		enemyCanBid = true;
-	  		bidderCooldown = 0;
-	  		
-	  	}
-	  	
-	  	renderAuction();
-	  	findEndBidder();
+		Auction.update();
 	}
 		
 }
-
-//Game Loop 
-
-
-//Sort Items arrays
-function shuffleArray(array) 
-{
-    var counter = array.length, temp, index;
-
-    // While there are elements in the array
-    while (counter > 0) 
-    {
-        // Pick a random index
-        index = Math.floor(Math.random() * counter);
-
-        // Decrease counter by 1
-        counter--;
-
-        // And swap the last element with it
-        temp = array[counter];
-        array[counter] = array[index];
-        array[index] = temp;
-       
-    }
-
-    return array;
-}
-
-
 //Show the splash after loading all assets 
 function splash() 
 {
@@ -365,8 +311,24 @@ function startGame()
   assetLoader.sounds.gameOver.pause();
   assetLoader.sounds.bg.currentTime = 0;
   assetLoader.sounds.bg.loop = true;
-  assetLoader.sounds.bg.play();
-      
+  assetLoader.sounds.bg.play();  
+}
+function shuffleArray(array) 
+{	//sort array items
+    var counter = array.length, temp, index;
+    // While there are elements in the array
+    while (counter > 0) 
+    {   // Pick a random index
+        index = Math.floor(Math.random() * counter);
+        // Decrease counter by 1
+        counter--;
+        // And swap the last element with it
+        temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+       
+    }
+    return array;
 }
 
 function auctionMode()
@@ -400,7 +362,7 @@ function auctionMode()
   
    auctionMode.update = function() 
    {
-     playerBidding();
+    	Auction.playerBidding();
      
    }
   
@@ -414,8 +376,6 @@ function auctionMode()
   assetLoader.sounds.bg.loop = true;
   assetLoader.sounds.bg.play();
 }
-
-
 //Repair State
 function repairState()
 {	//repair state update
@@ -436,11 +396,6 @@ function addFundsMode()
 	{
 		console.log("save your money u cants save the world");
 	}		
-}
-
-function resetStates()
-{
-	appState = GAME_MODE.RUNNING;
 }
 
 //End the game and restart
@@ -527,7 +482,7 @@ $('#auctionBackButton').click(function()
 //Inside Auction Bid Button
 $('#bid').click(function()
 {
-	playerBidding();
+	Auction.playerBidding();
 	playerDidBid = true;
 });
 //Repair to menu Repair
