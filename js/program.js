@@ -11,7 +11,7 @@ $(document).ready(function()
 	  	
 	    if((timer >= 300.00) && (timer <= 900.00))
 		{
-			appState = GameMode.Main_Menu;
+			appState = GAME_MODE.Main_Menu;
 		  mainMenu();
 		  
 		}  
@@ -201,11 +201,11 @@ function garageDoor()
 }	
 //States
 var appState;
-appState = GameMode.Splash;	//app may only exist in one state at a time
+appState = GAME_MODE.SPLASH;	//app may only exist in one state at a time
 
-function switchStates( GameMode) 
+function switchStates( GAME_MODE) 
 {	 //call various update based on appState
-	 switch (GameMode) 
+	 switch (GAME_MODE) 
 	 {
 	 	 case SPLASH:
 		        splash();
@@ -227,7 +227,7 @@ function switchStates( GameMode)
 		    	addFundsMode();
 		    	
 		    default:
-		         Running; 
+		         RUNNING; 
 	     // etc...
 	 }
 }
@@ -240,7 +240,7 @@ function update(deltaTime)
     context.drawImage(splashImage, 0, backgroundY);
     timer++;
 	
-	if(appState == GameMode.AUCTION)
+	if(appState == GAME_MODE.AUCTION)
 	{
 		//this shouldn't happen every update otherwise,
 		updatePlayer();
@@ -343,7 +343,7 @@ function startGame()
   //$('#game-over').style.display = 'none';
   document.getElementById('game-over').style.display = 'none';
   document.getElementById('gameMenu').style.display = 'true';  
-  appState = GameMode.RUNNING;
+  appState = GAME_MODE.RUNNING;
   player.reset();
   ticker = 0;
   stop = false;
@@ -359,11 +359,11 @@ function startGame()
   gradient.addColorStop("1.0","green");
   // Fill with gradient
   context.fillStyle = gradient;
-  appState = GameMode.RUNNING;
+  appState = GAME_MODE.RUNNING;
   
   switchStates();
 
-  if(appState == GameMode.RUNNING)
+  if(appState == GAME_MODE.RUNNING)
   {
 	console.log("Run , run squirrel");
 
@@ -377,14 +377,14 @@ function startGame()
 }
 function resetStates()
 {
-	appState = GameMode.Running;
+	appState = GAME_MODE.Running;
 }
 
 function auctionMode()
 {	//in-Auction update, core of game logic
    context.clearRect(0, 0, canvas.width, canvas.height);
    auctionStop = false;
-   appState = GameMode.AUCTION;
+   appState = GAME_MODE.AUCTION;
    ticker = 0;
    stop = true;
    //money = 50000;
@@ -397,14 +397,14 @@ function auctionMode()
 
    context.font = '26px arial, sans-serif';  
       	
-	if(appState == GameMode.AUCTION)
+	if(appState == GAME_MODE.AUCTION)
 	{
 		console.log("Snap, crackle , pop");
 	}
 	else
 	{
 		auctionStop = true;
-		appState = GameMode.RUNNING;
+		appState = GAME_MODE.RUNNING;
 		
 		resetStates();
 	}  	 
@@ -432,9 +432,9 @@ function repairState()
 {	//repair state update
 	stop = true;
 	
-	appState = GameMode.REPAIR;
+	appState = GAME_MODE.REPAIR;
 	// this.stop;
-	if(appState == GameMode.REPAIR)
+	if(appState == GAME_MODE.REPAIR)
 	{
 		console.log("Man im in repairmode");	
 	}	
@@ -442,8 +442,8 @@ function repairState()
 function addFundsMode()
 {	//store update
 	stop = true;
-	appState = GameMode.ADD_FUNDS;
-	if(appState == GameMode.ADD_FUNDS)
+	appState = GAME_MODE.ADD_FUNDS;
+	if(appState == GAME_MODE.ADD_FUNDS)
 	{
 		console.log("save your money u cants save the world");
 	}		
@@ -547,7 +547,7 @@ $('#repair').click(function()
 	$('#gameMenu').hide();
 	$('#RepairShop').show();
 	repairState();
-	//appState = GameMode.Repair;
+	//appState = GAME_MODE.Repair;
 });
 //RepairMenu Back Button 
 $('#repairBackButton').click(function()
@@ -556,7 +556,7 @@ $('#repairBackButton').click(function()
   	$('#RepairShop').hide();
   	$('#gameMenu').show();
 	resetStates();
-	//appState = gamemode.Main_Menu;
+	//appState = GAME_MODE.Main_Menu;
 });
 
 //Sound Button

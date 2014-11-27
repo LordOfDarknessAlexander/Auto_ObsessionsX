@@ -1,11 +1,11 @@
-﻿var GameMode = 
+﻿var GAME_MODE = 
 {
-	Splash   : 1,
-	Main_Menu : 2,
-	Running : 3,
-	Auction : 4,
-	Repair : 5,
-	AddFunds :6,
+	SPLASH   : 1,
+	MAIN_MENU : 2,
+	RUNNING : 3,
+	AUCTION : 4,
+	REPAIR : 5,
+	ADD_FUNDS :6,
 	
 
 };
