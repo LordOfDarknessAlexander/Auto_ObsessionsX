@@ -30,7 +30,7 @@
 
 #addMinorFundsBtn
 {
-	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color: white;
 	font-weight: bold;
 	width:150px;
@@ -39,7 +39,7 @@
 }
 #addMediumFundsBtn
 {
-	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color: white;
 	font-weight: bold;
 	width:150px;
@@ -48,7 +48,7 @@
 }
 #addMajorFundsBtn
 {
-	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color: white;
 	font-weight: bold;
 	width:150px;
@@ -57,7 +57,7 @@
 }
 #addAllowanceBtn
 {
-	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color: white;
 	font-weight: bold;
 	width:150px;

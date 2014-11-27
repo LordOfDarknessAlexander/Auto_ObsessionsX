@@ -214,11 +214,11 @@ function switchStates( GAME_MODE)
 		        break;
 		        
 		  case REPAIR:
-		        repairState();
+		        Repair.update();
 		        break;
 		        
 		  case ADD_FUNDS:
-		    	addFundsMode();
+		    	Store.update();
 		    	
 		    default:
 		         RUNNING; 
@@ -274,7 +274,7 @@ function mainMenu()
   $('.sound').show();
 }
 
-  money = 50000;
+money = 50000;
 // Start the game - reset all variables and entities, spawn ground and water.
 function startGame() 
 {
@@ -376,28 +376,6 @@ function auctionMode()
   assetLoader.sounds.bg.loop = true;
   assetLoader.sounds.bg.play();
 }
-//Repair State
-function repairState()
-{	//repair state update
-	stop = true;
-	
-	appState = GAME_MODE.REPAIR;
-	// this.stop;
-	if(appState == GAME_MODE.REPAIR)
-	{
-		console.log("Man im in repairmode");	
-	}	
-}
-function addFundsMode()
-{	//store update
-	stop = true;
-	appState = GAME_MODE.ADD_FUNDS;
-	if(appState == GAME_MODE.ADD_FUNDS)
-	{
-		console.log("save your money u cants save the world");
-	}		
-}
-
 //End the game and restart
 function gameOver() 
 {
@@ -496,7 +474,6 @@ $('#repair').click(function()
 	//toggleRepair();
 	$('#gameMenu').hide();
 	$('#RepairShop').show();
-	repairState();
 	//appState = GAME_MODE.Repair;
 });
 //RepairMenu Back Button 

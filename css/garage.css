@@ -16,7 +16,7 @@
 }
 #garageBackBtn
 {
-	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color: white;
 	font-weight: bold;
 	width:150px;
