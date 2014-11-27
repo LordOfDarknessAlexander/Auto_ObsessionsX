@@ -1,7 +1,5 @@
 ﻿//Auction State
 
-
-
 function bidTimers()
 {	//updates AI bidding timers
 
@@ -28,101 +26,6 @@ function bidTimers()
 	}	
 	
 }
-
-//Game HUD
-function renderAuction()
-{
-	var player1;
-  	var player2;
-  	var player3;
-  	var player4;
-  	
-	if(( playerBid == currentBid)&& (playerDidBid))
-  	{
-  		player.y = 10;
-  		context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 90);
-  	}
-  	else
-  	{
-  	  player.y = 150;
-  	  context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 230);
-  	}
-  	
-  	if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
-  	{
-		playerBid != currentBid;
-		
-	}
-	
-	//ENENMY HUD
-	
-  	//Enemy 1
-	//draw them depending on current bid
-  	if((enemyBids[0] >= currentBid))
-  	{
-  		player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
-  		  		
-  	}
-  	else
-  	{
-  		player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X, 120);
-  	  	
-  	}
-    //Enemy 2
-  	if(enemyBids[1] >= currentBid)
-  	{
-  		player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);
-  		
-  	}
-  	else
-  	{
-  		player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X, 160);
-  		
-  	}
-  	//Enemy3
-  	if( enemyBids[2] >= currentBid )
-  	{
-  	    player3 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X , 70);
-  	 	
-  	}
-  	else
-  	{
-  		 player3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X, 180);
-  		 
-  	}
-  	//Enemy4
-  	if( enemyBids[3] >= currentBid)
-  	{
-  	    player4 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X , 70);
-  	 	
-  	}
-	else
-	{
-		player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X, 200);
-		
-	}
-	
-    //current bid HUD
-    var gorguts;
-    gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
-    
-	    //current bid
-    context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
-    
-    context.fillText('Game Timer :  ' + timer.toFixed(2)  ,200, 400);
-      // draw the money HUD
-    context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
-    //player bid
-    
-    context.fillText('End Bid Time :  ' + bidders[0] + endBidTimers[0]  ,200, 460);
-    context.fillText('End Bid Time2 :  ' + bidders[1] + endBidTimers[1]  ,200, 480);
-    context.fillText('End Bid Time3 :  ' + bidders[2] + endBidTimers[2]  ,200, 500);
-    context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimers[3]  ,200, 520);
-    context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);
-    
-    
-}
-
 
 //Player Bidding Function
 function playerBidding() 
@@ -278,4 +181,99 @@ function findEndBidder()
 		}
 	}
 }
+
+//Game HUD
+function renderAuction()
+{
+	var player1;
+  	var player2;
+  	var player3;
+  	var player4;
+  	
+	if(( playerBid == currentBid)&& (playerDidBid))
+  	{
+  		player.y = 10;
+  		context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 90);
+  	}
+  	else
+  	{
+  	  player.y = 150;
+  	  context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 230);
+  	}
+  	
+  	if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
+  	{
+		playerBid != currentBid;
+		
+	}
+	
+	//ENENMY HUD
+	
+  	//Enemy 1
+	//draw them depending on current bid
+  	if((enemyBids[0] >= currentBid))
+  	{
+  		player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
+  		  		
+  	}
+  	else
+  	{
+  		player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X, 120);
+  	  	
+  	}
+    //Enemy 2
+  	if(enemyBids[1] >= currentBid)
+  	{
+  		player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);
+  		
+  	}
+  	else
+  	{
+  		player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X, 160);
+  		
+  	}
+  	//Enemy3
+  	if( enemyBids[2] >= currentBid )
+  	{
+  	    player3 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X , 70);
+  	 	
+  	}
+  	else
+  	{
+  		 player3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X, 180);
+  		 
+  	}
+  	//Enemy4
+  	if( enemyBids[3] >= currentBid)
+  	{
+  	    player4 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X , 70);
+  	 	
+  	}
+	else
+	{
+		player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X, 200);
+		
+	}
+	
+    //current bid HUD
+    var gorguts;
+    gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
+    
+	    //current bid
+    context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
+    
+    context.fillText('Game Timer :  ' + timer.toFixed(2)  ,200, 400);
+      // draw the money HUD
+    context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
+    //player bid
+    
+    context.fillText('End Bid Time :  ' + bidders[0] + endBidTimers[0]  ,200, 460);
+    context.fillText('End Bid Time2 :  ' + bidders[1] + endBidTimers[1]  ,200, 480);
+    context.fillText('End Bid Time3 :  ' + bidders[2] + endBidTimers[2]  ,200, 500);
+    context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimers[3]  ,200, 520);
+    context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);
+    
+    
+}
+
 

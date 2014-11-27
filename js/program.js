@@ -207,23 +207,23 @@ function switchStates( GameMode)
 {	 //call various update based on appState
 	 switch (GameMode) 
 	 {
-	 	 case Splash:
+	 	 case SPLASH:
 		        splash();
 		        break;
 		        
-		  case Main_Menu:
+		  case MAIN_MENU:
 		        mainMenu();
 		    	break;  
 		           
-	      case Auction:
+	      case AUCTION:
 		        auctionMode();
 		        break;
 		        
-		  case Repair:
+		  case REPAIR:
 		        repairState();
 		        break;
 		        
-		  case AddFunds:
+		  case ADD_FUNDS:
 		    	addFundsMode();
 		    	
 		    default:
@@ -240,7 +240,7 @@ function update(deltaTime)
     context.drawImage(splashImage, 0, backgroundY);
     timer++;
 	
-	if(appState == GameMode.Auction)
+	if(appState == GameMode.AUCTION)
 	{
 		//this shouldn't happen every update otherwise,
 		updatePlayer();
@@ -304,8 +304,6 @@ function shuffleArray(array)
 }
 
 
-
-
 //Show the splash after loading all assets 
 function splash() 
 {
@@ -336,6 +334,7 @@ function mainMenu()
   $('#menu').addClass('main');
   $('.sound').show();
 }
+
   money = 50000;
 // Start the game - reset all variables and entities, spawn ground and water.
 function startGame() 
@@ -344,7 +343,7 @@ function startGame()
   //$('#game-over').style.display = 'none';
   document.getElementById('game-over').style.display = 'none';
   document.getElementById('gameMenu').style.display = 'true';  
-  appState = GameMode.Running;
+  appState = GameMode.RUNNING;
   player.reset();
   ticker = 0;
   stop = false;
@@ -360,11 +359,11 @@ function startGame()
   gradient.addColorStop("1.0","green");
   // Fill with gradient
   context.fillStyle = gradient;
-  appState = GameMode.Running;
+  appState = GameMode.RUNNING;
   
   switchStates();
 
-  if(appState == GameMode.Running)
+  if(appState == GameMode.RUNNING)
   {
 	console.log("Run , run squirrel");
 
@@ -385,7 +384,7 @@ function auctionMode()
 {	//in-Auction update, core of game logic
    context.clearRect(0, 0, canvas.width, canvas.height);
    auctionStop = false;
-   appState = GameMode.Auction;
+   appState = GameMode.AUCTION;
    ticker = 0;
    stop = true;
    //money = 50000;
@@ -398,14 +397,14 @@ function auctionMode()
 
    context.font = '26px arial, sans-serif';  
       	
-	if(appState == GameMode.Auction)
+	if(appState == GameMode.AUCTION)
 	{
 		console.log("Snap, crackle , pop");
 	}
 	else
 	{
 		auctionStop = true;
-		appState = GameMode.Running;
+		appState = GameMode.RUNNING;
 		
 		resetStates();
 	}  	 
@@ -433,9 +432,9 @@ function repairState()
 {	//repair state update
 	stop = true;
 	
-	appState = GameMode.Repair;
+	appState = GameMode.REPAIR;
 	// this.stop;
-	if(appState == GameMode.Repair)
+	if(appState == GameMode.REPAIR)
 	{
 		console.log("Man im in repairmode");	
 	}	
@@ -443,8 +442,8 @@ function repairState()
 function addFundsMode()
 {	//store update
 	stop = true;
-	appState = GameMode.AddFunds;
-	if(appState == GameMode.AddFunds)
+	appState = GameMode.ADD_FUNDS;
+	if(appState == GameMode.ADD_FUNDS)
 	{
 		console.log("save your money u cants save the world");
 	}		

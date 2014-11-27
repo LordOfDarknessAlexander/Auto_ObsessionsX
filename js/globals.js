@@ -9,11 +9,11 @@ var player, money, stop, ticker;
 //random comment
 
 //States
-var Repair;
-var AddFunds;
-var Running;
-var Splash;
-var Main_Menu;
+var REPAIR;
+var ADD_FUNDS;
+var RUNNING;
+var SPLASH;
+var MAIN_MENU;
 
 var playSound;
 var splashTimer = 600.00;
@@ -95,11 +95,6 @@ var playerCanBid = false;
 var currentBid = vehiclePrice * 0.1;
 
 var endBidTimers = [0,0,0,0];
-
-//var endBidTimer = 0;
-//var endBidTimer2 = 0;
-//var endBidTimer3 = 0;
-//var endBidTimer4 = 0;
 
 var playerDidBid = false;
 var enemyCanBid = false;
