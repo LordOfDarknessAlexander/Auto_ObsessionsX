@@ -21,8 +21,9 @@ var player = (function(player)
   {
     player.anim = player.walkAnim;
     player.anim.update();
+    
   };
-
+ 
   //Draw the player at it's current position
    
   player.draw = function() 
@@ -40,9 +41,3 @@ var player = (function(player)
   return player;
 })(Object.create(Vector.prototype));
 
-function updatePlayer() 
-{
-  player.update();
-  player.draw();
-
-}

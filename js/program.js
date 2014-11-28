@@ -26,7 +26,13 @@ $(document).ready(function()
 		{
 			requestAnimFrame( auctionInit);
 			
-			update();
+			if(appState == GAME_MODE.AUCTION)
+			{
+				update();
+			    Auction.update();				
+			}
+			
+			
 			timer++;
 			ticker++;
 		}
@@ -211,6 +217,8 @@ function switchStates( GAME_MODE)
 		           
 	      case AUCTION:
 		        auctionMode();
+		        
+		        
 		        break;
 		        
 		  case REPAIR:
@@ -234,13 +242,6 @@ function update(deltaTime)
     context.drawImage(splashImage, 0, backgroundY);
     timer++;
 	
-	if(appState == GAME_MODE.AUCTION)
-	{
-		//this shouldn't happen every update otherwise,
-		updatePlayer();
-		//call bidder ai functions
-		Auction.update();
-	}
 		
 }
 //Show the splash after loading all assets 
@@ -331,7 +332,7 @@ function shuffleArray(array)
     return array;
 }
 
-function auctionMode()
+function auctionMode(deltaTime)
 {	//in-Auction update, core of game logic
    context.clearRect(0, 0, canvas.width, canvas.height);
    auctionStop = false;
@@ -351,6 +352,7 @@ function auctionMode()
 	if(appState == GAME_MODE.AUCTION)
 	{
 		console.log("Snap, crackle , pop");
+		
 	}
 	else
 	{

@@ -8,7 +8,6 @@ var currentBid = vehiclePrice * 0.1;
 
 var enemyBids = [1,2,3,4]; 
 var endBidTimers = [0,0,0,0];
-
 var playerDidBid = false;
 var enemyCanBid = false;
 var playerNextBid = currentBid + (currentBid * 0.1);
@@ -18,7 +17,7 @@ var startEndBids = [false,false,false,false];
 
 var Auction =
 {
-	//var enemies= [];
+	//var enemies = [];
 	//resart:function(){delete enemies; this.initAI();}
 	//initAI:function(){enemies = [new Enemy()];}
 	update : function()
@@ -26,6 +25,8 @@ var Auction =
 		Auction.bidTimers();
 		Auction.enemyBidding();
 		Auction.currentBidder();
+		Auction.updatePlayer();
+		Auction.endAuction();
 		//price();
 		if(playerDidBid)
 		{
@@ -37,7 +38,7 @@ var Auction =
 	  	{
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
-	  		
+
 	  	}
 	  	
 	  	Auction.render();
@@ -133,6 +134,13 @@ var Auction =
 		context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimers[3]  ,200, 520);
 		context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);		
 	},
+	updatePlayer : function() 
+	{
+	  player.update();
+	  player.draw();
+	
+	},
+
 	bidTimers : function()
 	{	//updates AI bidding timers	
 		for(var i = 0; i < startEndBids.length; i++)
@@ -177,7 +185,7 @@ var Auction =
 		{
 			//cant bid above your cash 
 			//call a new function to alert player hes &$#k up
-			 _program.gameOver();
+			endAuction();
 			 
 			 startPlayerEndBid = false;
 		}
@@ -190,7 +198,7 @@ var Auction =
 		if(money <= 0)
 		{
 			money = 0;	//player has no money but doesn't win auction?
-			gameOver();	
+			endAuction();	
 		}
 	},
 	enemyBidding : function()
@@ -295,9 +303,14 @@ var Auction =
 		{
 			if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
 			{
-				gameOver();
+				endAuction();
 				alert("Sold to " + bidders[i]);			
 			}
 		}
+	},
+	endAuction : function()
+	{
+		//gameOver();
 	}
+	
 };
