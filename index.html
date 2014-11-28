@@ -12,7 +12,11 @@
     <link rel="stylesheet" href="css/funds.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/credits.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/garage.css" type="text/css" media="screen">
+    <!--scripts here are executed before the form is parsed-->
     <script type="text/javascript" src="js/jquery.2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
+    <script type="text/javascript" src="js/payRequest.js"></script>
+    <script type="text/javascript" src="js/Vector.js"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -89,12 +93,31 @@
 		<div id="AddFunds">
       		<h1>AddFunds</h1>
 			<input type="button" id="addFundsBackButton" onmouseover="addFundsBackButton()" onclick="startGame()">
-          	<ul>
-                <li><input type="button" id="addAllowanceBtn" value="Get Credits"></li>
-                <li><input type="button" id="addMinorFundsBtn" value="chump change"></li>
-                <li><input type="button" id="addMediumFundsBtn" value="stack of bills"></li>
-                <li><input type="button" id="addMajorFundsBtn" value="Pile 'o Cash"></li>
-        	</ul>
+            <form action="https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay" target="PPDGFrame" class="standard">
+            <ul>
+                <!--doesn't work if is type='button' Also, stylings no longer work :(-->
+                <li><input type='button' id="addAllowanceBtn" value="Get Credits"></li>
+                <li><input type="image" id="addMinorFundsBtn" value="chump change"></li>
+                <li><input type="image" id="addMediumFundsBtn" value="stack of bills"></li>
+                <li><input type="image" id="addMajorFundsBtn" value="Pile 'o Cash"></li>
+                
+                <!--label for="buy">Buy Now:</label>
+                <input type="image" id="submitBtn" value="Pay with PayPal" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif"-->
+                <input id="type" type="hidden" name="expType" value="light">
+                <!--replace 'insert_pay_key' with Vendor's-->
+                <input id="paykey" type="hidden" name="paykey" value="insert_pay_key">
+	        </ul>
+            </form>
+
+			<script type="text/javascript" charset="utf-8">
+            var minorFundsPPFlow = payRequest(1.99, {trigger: 'addMinorFundsBtn'});
+            </script>
+            <script type="text/javascript" charset="utf-8">
+            var mediumFundsPPFlow = payRequest(4.99, {trigger:'addMediumFundsBtn'});
+            </script>
+            <script type="text/javascript" charset="utf-8">
+            var majorFundsPPFlow = payRequest(9.99, {trigger:'addMediumFundsBtn'});
+            </script>
 		</div>
         <div id="Garage">
       		<h1>Garage</h1>
@@ -113,12 +136,11 @@
     	<h2>Sold to Rascal ,Chris create vehicles array so we can push this to inventory<span id="money"></span> ahoy!</h2>
 		<a href="javascript:void(0)" class="button restart">Try again?</a>
     </div> 
-	
+
     <script type="text/javascript" src="js/globals.js"></script><!--is rendered first-->
     <script type="text/javascript" src="js/LoadAssets.js"></script> 
     <script type="text/javascript" src="js/GameMode.js"></script>
     <!--2D sprite/animation classes-->
-    <script type="text/javascript" src="js/Vector.js"></script>
     <script type="text/javascript" src="js/SpriteSheet.js"></script>
     <script type="text/javascript" src="js/Animation.js"></script>
     <script type="text/javascript" src="js/Sprite.js"></script>
@@ -126,13 +148,14 @@
     <script type="text/javascript" src="js/Player.js"></script> 
     <script type="text/javascript" src="js/Enemy.js"></script>
     <!--game object classes-->
-    <script type="text/javascript" src="js/vehicle.js"></script>
     <script type="text/javascript" src="js/requestAnimationFrame.js"></script>
+    <script type="text/javascript" src="js/vehicle.js"></script>
     <script type="text/javascript" src="js/jqueryLib.js"></script>
-    <!--game states-->
+    <!--game states, doesn't work if placed in subfolder-->
     <script type="text/javascript" src="js/Auction.js"></script>
     <script type="text/javascript" src="js/Add_Funds.js"></script>
     <script type="text/javascript" src="js/Repair.js"></script>
+    <script type="text/javascript" src="js/Garage.js"></script>
     <script type="text/javascript" src="js/program.js"></script>
     
 	<!--link rel="import" href="Vehicles.html" type="text/html"><!--include link's source in this document, only supported by newest versions of chrome!-->

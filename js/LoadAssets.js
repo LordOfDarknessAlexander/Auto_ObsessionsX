@@ -1,9 +1,9 @@
 ﻿// set the sound preference
-if (canUseLocalStorage) 
+if(canUseLocalStorage) 
 {
   playSound = (localStorage.getItem('kandi.playSound') === "true")
 
-  if (playSound) 
+  if(playSound) 
   {
     $('.sound').addClass('sound-on').removeClass('sound-off');
   }

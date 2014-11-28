@@ -37,17 +37,6 @@ $(document).ready(function()
 			ticker++;
 		}
 	}
-//
-//TODO, access from html database, or other markup file
-//
-//test, user ca select between 3 cars
-//var currentCar = null;
-var userGarage = [
-	Vehicle('images/vehicle.jpg'),
-	Vehicle('images/vehicle.jpg'),
-	Vehicle('images/vehicle.jpg')
-];
-var currentCar = userGarage[0];	//copy constructed car, altering currentCar doesn't change usergarage[0]
 
 function createReader()
 {
@@ -76,7 +65,7 @@ function openDoc(url, reader)
 {	//parse xml document in xml DOM object
 	reader.open("GET",url,false);
 	reader.send();
-	var doc=reader.responseXML;
+	var doc=reader.responseXML;	//access DOM object tree
   
 	return doc;
 }
@@ -121,11 +110,13 @@ function loadXMLDoc(url)
 }
 
 //LOAD Vehicle XML, this was working, now can't find source file!
-/*if(loadXMLDoc('../vehicles.xml') == false)
-{	//loading xml resource failed, display warning
-	window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
-}
-*/
+//var vehiclePath = './vehicles.xml';	//should be the location of file on server
+
+//if(loadXMLDoc(vehiclePath) == false)
+//{	//loading xml resource failed, display warning
+	//window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
+//}
+
 /*
 var vDoc = document.querySelector('link[rel="import"]');	//document Vehicles.html
 var vehicles = document.getElementById('Vehicles');

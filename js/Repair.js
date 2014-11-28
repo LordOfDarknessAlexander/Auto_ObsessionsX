@@ -8,6 +8,6 @@ var Repair = {
 	},
 	render : function()
 	{
-		//draw user's money, etc...
+		//additional rendering
 	}
 };
