@@ -12,7 +12,7 @@ $(document).ready(function()
 	  	
 	    if((timer >= 300.00) && (timer <= 900.00))
 		{
-			appState = GAME_MODE.Main_Menu;
+			appState = GAME_MODE.MAIN_MENU;
 		  	mainMenu();
 		  
 		}  
