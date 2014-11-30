@@ -1,4 +1,5 @@
 //$(function()	//shorthand for $(document).ready(
+var AutoObessesions = {};
 $(document).ready(function()
 {
 	function init()
@@ -207,7 +208,7 @@ function switchStates( GAME_MODE)
 		    	break;  
 		           
 	      case AUCTION:
-		        auctionMode();
+		        Auction.update();
 		        
 		        
 		        break;
@@ -332,11 +333,13 @@ function auctionMode(deltaTime)
    stop = true;
    //money = 50000;
    playerBid = 0;
+   Auction.endAuction();
    
    auctionInit();
   
    shuffleArray(enemyBids);
    shuffleArray(bidders);
+   shuffleArray(enemyCaps);
 
    context.font = '26px arial, sans-serif';  
       	
@@ -356,7 +359,7 @@ function auctionMode(deltaTime)
    auctionMode.update = function() 
    {
     	Auction.playerBidding();
-     
+     	console.log(endGame);
    }
   
   $('#Auction').show();
@@ -369,27 +372,21 @@ function auctionMode(deltaTime)
   assetLoader.sounds.bg.loop = true;
   assetLoader.sounds.bg.play();
 }
-//End the game and restart
-function gameOver() 
+Auction.endAuction = function()
 {
-	//$('.game-over').style.display = 'true';
-	document.getElementById('game-over').style.display = 'true';
-	resetStates();
-	stop = true;
-	auctionStop = true;
-	//Show a message that player has insufficient funds
-	$('#money').html(money);	//set value in the html element
-	$('#game-over').show();
-	//reset AI timers
-	startEndBids = [false,false,false,false];
-	endBidTimers = [0,0,0,0];
-	// assetLoader.sounds.bg.pause();
-	assetLoader.sounds.gameOver.currentTime = 0;
-	assetLoader.sounds.gameOver.play();
-}
+	if(endGame)
+    {
+    	Auction.sold();
+    	
+    }
+    else
+	{
+	  endGame == false;
+	}
 
+}
 //push vehicle in to inventory and tell player he won bidding
-function sold() 
+Auction.sold = function()
 {
 	//$('.sold').style.display = 'true';
 	document.getElementById('sold').style.display = 'true';
@@ -400,12 +397,33 @@ function sold()
 	{
 		$('#enemyBid').html(enemyBids[i]);	//write enemy bid to html?
 	}
-	
+	//enemy wins vehicle
 	$('#sold').show();
 	assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
 	assetLoader.sounds.gameOver.play();
 }
+
+
+function gameOver() 
+{
+	//$('.game-over').style.display = 'true';
+	auctionStop = true;
+	document.getElementById('game-over').style.display = 'true';
+	resetStates();
+	stop = true;
+		//Show a message that player has insufficient funds
+	$('#money').html(money);	//set value in the html element
+	$('#game-over').show();
+	//reset AI timers
+	startEndBids = [false,false,false,false];
+	endBidTimers = [0,0,0,0];
+	// assetLoader.sounds.bg.pause();
+	assetLoader.sounds.gameOver.currentTime = 0;
+	assetLoader.sounds.gameOver.play();
+		
+}
+
 //
 //Menu state start game button
 //

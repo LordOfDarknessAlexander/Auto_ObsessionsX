@@ -26,10 +26,12 @@ function price(bias)
 //have a single array encapsulating all AI players,
 //oppossed to seperate arrays for each property
 //as names don't matter they can still be random
+
 var enemies = [
 	new Enemy(price()),
-	new Enemey(price()),
+	new Enemy(price()),
 	new Enemy(price()),
 	new Enemy(price())
 ];	//
+
 //result can also be weighted, prefering higher or lower bids

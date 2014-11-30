@@ -6,6 +6,7 @@ var context = canvas.getContext('2d');
 var width = canvas.getAttribute('width'),
 	height = canvas.getAttribute('height');
 var player, money, stop, ticker;
+
 //random comment
 
 //States
@@ -79,16 +80,14 @@ var vehiclePrice = 20000;
 //ie. starting an auction with more than 1.25 of vehicle price will always win
 
 //new array for every new auction? preferably in the auction button qjuery callback
+
 var enemyCap = 1.25 * vehiclePrice;
 var enemyCap2 = 0.8 * vehiclePrice;
 var enemyCap3 = 0.7 * vehiclePrice;
 var enemyCap4 = 0.9 * vehiclePrice;
-/*
-var startEndBid = false;
-var startEndBid2 = false;
-var startEndBid3 = false;
-var startEndBid4 = false;*/
-
+var enemyCap5 = 0.6 * vehiclePrice;
+var enemyCap6 = 0.2 * vehiclePrice;
+var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
 var startPlayerEndBid = false;	//player local
 var playerEndBidTimer = 0;	//player local
 
@@ -99,6 +98,7 @@ var previousTime = Date.now();
 var deltaTime = (Date.now() - previousTime) / 1000;
 previousTime = Date.now();
 timer += deltaTime;
+var endGame = false;
 
 var appState = GAME_MODE.SPLASH;	
 
