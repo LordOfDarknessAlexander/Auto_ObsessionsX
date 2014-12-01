@@ -11,7 +11,7 @@ var endBidTimers = [0,0,0,0];
 var playerDidBid = false;
 var enemyCanBid = false;
 var playerNextBid = currentBid + (currentBid * 0.1);
-var enemies = [];
+//var enemies = [];
 //BidTImers Booleans
 var startEndBids = [false,false,false,false];
 
@@ -26,10 +26,10 @@ var Auction =
 	
 	initAI : function()
 	{
-	  //var enemies = [(Enemy(price(0.2)),(Enemy(price(0.2)),(Enemy(price(0.2)),(Enemy(price(0.2))];
+	  enemies = [new Enemy(price(0.2)),new Enemy(price(0.2)), new Enemy(price(0.2)),new Enemy(price(0.2))];
 	  for(var i = 0; i < enemies.length; i++)
 	  {
-	  	 enemies.push(i);
+	  	 
 	  	 console.log(i);
 	  	 break;
 	  }
@@ -51,7 +51,7 @@ var Auction =
 		}
 	  	  for(var i = 0; i < enemies.length; i++)
 		  {
-		  	 enemies.push(i);
+		  	 //enemies.push(i);
 		  	 console.log(i);
 		  	 break;
 		  }
@@ -102,26 +102,26 @@ var Auction =
 		if((enemyBids[0] >= currentBid))
 		{
 			player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
-			//enemies.push(0);
+			
 					
 		}
 		else
 		{
 			player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X, 120);
-			player1 == enemies.push(0);
+		
 			
 		}
 		//Enemy 2
 		if(enemyBids[1] >= currentBid)
 		{
 			player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);
-			enemies.push(1);
+			
 			
 		}
 		else
 		{
 			player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X, 160);
-			enemies.push(1);
+			
 			
 		}
 		//Enemy3
@@ -239,15 +239,6 @@ var Auction =
 			money = money - currentBid;
 		}
 	},
-	enemyCappers : function()
-	{
-		for(var i = 0; i < enemyCaps.length; i++)
-		{
-			enemieCaps.push(i);
-	  	    console.log(i);
-
-		}
-	},
 	enemyBidding : function()
 	{
 		//upPercentage of vehicle for next bid
@@ -259,9 +250,9 @@ var Auction =
 			for(var i = 0; i < enemyBids.length; i++)
 			{
 				if(enemyCanBid)
-				{
-					if((enemyBids[i] < currentBid) && (enemyBids[i] < enemyCaps[i]) )
-					{
+				{//
+					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap))
+					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
 					 
 					  break;

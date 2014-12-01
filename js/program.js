@@ -209,8 +209,6 @@ function switchStates( GAME_MODE)
 		           
 	      case AUCTION:
 		        Auction.update();
-		        
-		        
 		        break;
 		        
 		  case REPAIR:
@@ -339,8 +337,7 @@ function auctionMode(deltaTime)
   
    shuffleArray(enemyBids);
    shuffleArray(bidders);
-   shuffleArray(enemyCaps);
-
+ 
    context.font = '26px arial, sans-serif';  
       	
 	if(appState == GAME_MODE.AUCTION)
