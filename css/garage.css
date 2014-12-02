@@ -1,4 +1,4 @@
-﻿/*repair page UI stylings*/
+﻿/*garage UI stylings*/
 #Garage
 {  
 	display: none;
@@ -13,6 +13,29 @@
 #Garage li 
 {	/*styles all list items of node with id RepairShop*/
 	padding: 5px 0;
+	display:inline;
+}
+#Garage li button
+{	/*styling for list items*/
+	padding: 10px 0;
+	/*display:inline;*/
+	color: white;
+	margin: 8px;
+	margin-top: 8em;
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	position: relative;
+}
+#Garage li button label
+{	
+	display:block;
+	color: white;
+	margin: 8px;
+}
+#Garage li button label#make
+{	
+	display:block;
+	color: white;
+	margin: 8px;
 }
 #garageBackBtn
 {
@@ -21,6 +44,14 @@
 	font-weight: bold;
 	width:150px;
 	height:50px;
-	cursor:pointer;
-	
+	cursor:pointer;	
+}
+#addFundsBackButton
+{
+	background: url('../images/repairBackButton.png') no-repeat 0 0;
+	color: white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;	
 }

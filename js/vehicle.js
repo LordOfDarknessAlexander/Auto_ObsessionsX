@@ -5,13 +5,13 @@ var Vehicle = function(imgSrc)	//xmlNode)
 	this.price = 0;
 	this.condition = 0;
 	this.originality = 0;
-	this.name = "";
-	//	make
-	//	year
+	this.name = '';
+	this.make = '';
+	this.year = '';
 	this.id = 0;
 	//parts = []	//only retain currently upgraded parts
 	this.image = new Image();
-	image.src = imgSrc;	//'images/vehicle.jpg';	//getFullPath
+	image.src = imgSrc;	//getFullPath();'images/vehicle.jpg';	//getFullPath
 	//
 	this.displayInfo = function(){
 		context.fillText(this.name, VEHICLE_XPOS + 40, 120);

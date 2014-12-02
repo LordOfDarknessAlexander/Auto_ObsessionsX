@@ -1,7 +1,7 @@
 //$(function()	//shorthand for $(document).ready(
 var AutoObessesions = {};
 $(document).ready(function()
-{
+{{
 	function init()
 	{
 	  if (!stop) 
@@ -493,7 +493,61 @@ $('#repairBackButton').click(function()
 	resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });
-
+function setCarBtnText(btnIndex, car)
+{
+	var btn = $('#carSelBtn' + btnIndex);
+	btn.children('label#make').text(car.make);
+	btn.children('label#year').text(car.year);
+	btn.children('label#name').text(car.name);
+}
+//var btnStr = '<li><button id=\'carSelBtn1\'><label id=\'make\'></label><label id=\'year\'></label><label id=\'name\'></label></button></li>';
+function rotateBtns()
+{	
+	var c = new Vehicle('images/vehicle.jpg');
+	c.make = 'Jaguar';
+	c.year = '1969';
+	c.name = 'E-Type Series II 4.2 Roadster';
+	var c1 = new Vehicle('images/vehicle.jpg');
+	c1.make = 'GMC';
+	c1.year = '1997';
+	c1.name = 'Sierra';
+	
+	setCarBtnText(1, c);
+	setCarBtnText(2, c1);
+	var btns = [
+		$('#carSelBtn0'),
+		$('#carSelBtn1'),
+		$('#carSelBtn2')
+		//$('#carSelBtn3'),
+		//$('#carSelBtn4')
+		
+	];
+	//btns[0].children('label#make').text('Jaguar');
+	//btns[0].children('label#year').text('1969');
+	//btns[0].children('label#name').text('E-Type Series II 4.2 Roadster');
+	   
+	//
+	//
+	//for(var i = 0; i < btns.length; i++)
+	//{
+		//var tmp = btns[i];
+		//if(tmp.positio.left <= 100)
+		//{
+			//hide
+			//animate
+			//tmp.animate({left:'250px'}, 200);
+		//}else if(tmp.hidden() )
+		//{
+			//animate
+			//show
+		//}
+		//else{
+			//tmp.animate({right:'50px'}, 200);
+		//}
+	//}
+	
+}
+$('#carSelBtn0').click(rotateBtns);
 //Sound Button
 $('.sound').click(function() 
 {
