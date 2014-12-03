@@ -1,7 +1,7 @@
 //$(function()	//shorthand for $(document).ready(
 var AutoObessesions = {};
 $(document).ready(function()
-{{
+{
 	function init()
 	{
 	  if (!stop) 
