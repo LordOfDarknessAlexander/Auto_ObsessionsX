@@ -28,6 +28,20 @@ userGarage[2].name = 'Sierra';
 var Garage = {
 	init : function()
 	{	//called to load assests and initialize private vars
+		//delete userGarage;
+		//init cars from local storage
+		//add buttons for each car avaiable in garage
+		//var carList = $('#Garage'.children('ul#carBtns');
+		//carList.clear();	//remove previous values, otherwise cars will be repeated
+		//for(var i =0; i < userGarage.length;i++){
+			//carList.add(carBtnStr);
+		//}
+		//load interface
+		//appState = GAME_MODE.GARAGE;
+	},
+	exit : function()
+	{	//remove resources, effectivly 'closing' the state
+		//appState = GAME_MODE.MAIN;
 	},
 	update : function()
 	{
@@ -36,5 +50,21 @@ var Garage = {
 	render : function()
 	{
 		//additional rendering
+	},
+	save : function()
+	{	//saves garage and current car to local storage
+		//
+		//for(var i = 0; i < userGarage.length; i++){
+			//JSON.stringify(userGarage[i]);
+		//}
 	}
 };
+$('#myCars').click(function()
+{
+	jqToggleGarage();
+	//Garage.init();
+});
+$('#garageBackBtn').click(function(){
+	jqToggleGarage();
+	//Garage.exit();
+});

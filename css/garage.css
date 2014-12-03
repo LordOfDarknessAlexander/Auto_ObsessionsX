@@ -25,17 +25,39 @@
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	position: relative;
 }
+#Garage div#userCar
+{	/*styling for list items*/
+	/*display:inline;*/
+	color: white;
+	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
+	position:absolute;
+	top:150px;
+	right:50px;
+	width: 150px;
+	height:110px;
+}
 #Garage li button label
 {	
 	display:block;
 	color: white;
 	margin: 8px;
+	font-size:0.75em;	/*12px*/
 }
-#Garage li button label#make
-{	
+#Garage li button img
+{	position:absolute;
+	/*position element in to left corner of parent*/
+	top:0px;
+	right:0px;
+	width:80px;
+	height:60px;
+}
+#Garage li button label#make,
+#Garage li button label#year
+{	/*overrides elements with specific id's*/
 	display:block;
 	color: white;
 	margin: 8px;
+	text-align:left;
 }
 #garageBackBtn
 {

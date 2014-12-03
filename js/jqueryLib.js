@@ -36,12 +36,3 @@ function jqToggleGarage()
 	$('#gameMenu').toggle();
 	$('#Garage').toggle();
 }
-$('#myCars').click(function()
-{
-	jqToggleGarage();
-//	appState = GameMode.Garage;
-});
-$('#garageBackBtn').click(function(){
-	jqToggleGarage();
-	//appState = GameMOde.MainMenu;
-});

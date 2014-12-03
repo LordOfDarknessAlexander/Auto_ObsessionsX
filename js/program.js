@@ -493,35 +493,36 @@ $('#repairBackButton').click(function()
 	resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });
-function setCarBtnText(btnIndex, car)
+function setCurrentCar(index)
 {
-	var btn = $('#carSelBtn' + btnIndex);
+	var btn = $('#userCar');
+	var src = $('carSelBtn' + index.data.index);
+	//}
+	btn.children('label#make').text(src.children('label#make').text() );
+	btn.children('label#year').text(src.children('label#year').text() );
+	btn.children('label#name').text(src.children('label#name').text() );
+}
+function setCarBtnText(index, car)
+{
+	var btn = $('#carSelBtn' + index);
+	//var car = userGarage[i];
 	btn.children('label#make').text(car.make);
 	btn.children('label#year').text(car.year);
 	btn.children('label#name').text(car.name);
 }
 //var btnStr = '<li><button id=\'carSelBtn1\'><label id=\'make\'></label><label id=\'year\'></label><label id=\'name\'></label></button></li>';
-function rotateBtns()
-{	
-	var c = new Vehicle('images/vehicle.jpg');
-	c.make = 'Jaguar';
-	c.year = '1969';
-	c.name = 'E-Type Series II 4.2 Roadster';
-	var c1 = new Vehicle('images/vehicle.jpg');
-	c1.make = 'GMC';
-	c1.year = '1997';
-	c1.name = 'Sierra';
-	
-	setCarBtnText(1, c);
-	setCarBtnText(2, c1);
-	var btns = [
+function rotateBtns(index)
+{		
+	//setCarBtnText(index.data.index, c);
+//	setCarBtnText(2, c1);
+	/*var btns = [
 		$('#carSelBtn0'),
 		$('#carSelBtn1'),
 		$('#carSelBtn2')
 		//$('#carSelBtn3'),
 		//$('#carSelBtn4')
 		
-	];
+	];*/
 	//btns[0].children('label#make').text('Jaguar');
 	//btns[0].children('label#year').text('1969');
 	//btns[0].children('label#name').text('E-Type Series II 4.2 Roadster');
@@ -547,7 +548,43 @@ function rotateBtns()
 	//}
 	
 }
-$('#carSelBtn0').click(rotateBtns);
+/*
+var cars = [
+	new Vehicle('images/vehicle.jpg'),
+	new Vehicle('images/vehicle.jpg'),
+	new Vehicle('images/vehicle.jpg')
+];
+cars[0].make = 'Jaguar';
+cars[0].year = '1969';
+cars[0].name = 'E-Type Series II 4.2 Roadster';
+
+cars[1].make = 'GMC';
+cars[1].year = '1997';
+cars[1].name = 'Sierra';
+*/
+//setCarBtnText(1, c);
+//setCarBtnText(2, c1);
+
+//for(var i = 0; i < 3; i++){
+	//$('#carSelBtn' + i).click({index:i}, setCurrentCar);
+	//setCarBtnText(index.data.index, cars[i]);
+//}
+function initUser(userName, pw)
+{	//load a registered user after comfirmation from server
+}
+function initGuest()
+{	//loads guest profile, if one does not exist it is created
+	if('guest' in Storage.local){
+		//returns an object of format {money:number, garage:[]}
+		//player = JSON.parse(Storage.local.guest);
+	}
+	else{
+		//create new guest account, to be stored in browser
+		//Storage.local.guest = JSON.stringify({money:50000, garage:[]});
+	}
+
+}
+$('#guestPlay').click(initGuest);
 //Sound Button
 $('.sound').click(function() 
 {
