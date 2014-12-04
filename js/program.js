@@ -493,23 +493,6 @@ $('#repairBackButton').click(function()
 	resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });
-function setCurrentCar(index)
-{
-	var btn = $('#userCar');
-	var src = $('carSelBtn' + index.data.index);
-	//}
-	btn.children('label#make').text(src.children('label#make').text() );
-	btn.children('label#year').text(src.children('label#year').text() );
-	btn.children('label#name').text(src.children('label#name').text() );
-}
-function setCarBtnText(index, car)
-{
-	var btn = $('#carSelBtn' + index);
-	//var car = userGarage[i];
-	btn.children('label#make').text(car.make);
-	btn.children('label#year').text(car.year);
-	btn.children('label#name').text(car.name);
-}
 //var btnStr = '<li><button id=\'carSelBtn1\'><label id=\'make\'></label><label id=\'year\'></label><label id=\'name\'></label></button></li>';
 function rotateBtns(index)
 {		
@@ -548,27 +531,6 @@ function rotateBtns(index)
 	//}
 	
 }
-/*
-var cars = [
-	new Vehicle('images/vehicle.jpg'),
-	new Vehicle('images/vehicle.jpg'),
-	new Vehicle('images/vehicle.jpg')
-];
-cars[0].make = 'Jaguar';
-cars[0].year = '1969';
-cars[0].name = 'E-Type Series II 4.2 Roadster';
-
-cars[1].make = 'GMC';
-cars[1].year = '1997';
-cars[1].name = 'Sierra';
-*/
-//setCarBtnText(1, c);
-//setCarBtnText(2, c1);
-
-//for(var i = 0; i < 3; i++){
-	//$('#carSelBtn' + i).click({index:i}, setCurrentCar);
-	//setCarBtnText(index.data.index, cars[i]);
-//}
 function initUser(userName, pw)
 {	//load a registered user after comfirmation from server
 }
@@ -584,7 +546,7 @@ function initGuest()
 	}
 
 }
-$('#guestPlay').click(initGuest);
+//$('#guestPlay').click(initGuest);
 //Sound Button
 $('.sound').click(function() 
 {

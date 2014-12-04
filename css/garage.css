@@ -1,4 +1,7 @@
 ﻿/*garage UI stylings*/
+/*:root{
+	--default-btn-bg: url('../images/defaultBtn.png') no-repeat 0 0;
+}*/
 #Garage
 {  
 	display: none;
@@ -35,6 +38,23 @@
 	right:50px;
 	width: 150px;
 	height:110px;
+	display:inline;
+}
+#Garage div#userCar img
+{	position:absolute;
+	/*position element in to left corner of parent*/
+	top:0px;
+	right:0px;
+	width:80px;
+	height:60px;
+}
+#Garage div#userCar label
+{	/*overrides elements with specific id's*/
+	display:block;
+	color: white;
+	margin: 8px;
+	text-align:left;
+	font-size:0.75em;	/*12px*/
 }
 #Garage li button label
 {	
@@ -61,7 +81,7 @@
 }
 #garageBackBtn
 {
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	background:url('../images/defaultBtn.png') no-repeat 0 0;/*var(--default-btn-bg);*/
 	color: white;
 	font-weight: bold;
 	width:150px;
