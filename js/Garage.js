@@ -3,6 +3,7 @@
 //
 //test, user ca select between 3 cars
 //var currentCar = null;
+
 var userGarage = [
 	Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969'),
 	Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969'),
@@ -22,8 +23,19 @@ var Garage = {
 		//if(curCarIndex === null && userGarage.length != 0){
 			//curCarIndex = 0;
 		//}
+		//var btnStr = "<li><button id=\'carSelBtn1\'><label id=\'make\'></label><label id=\'year\'></label><label id=\'name\'></label><img src=\'images/vehicle.jpg\'></button></li>";
+		var list = $('#carBtns')
+		list.empty();	//remove any buttons if there were any previously
+		
 		for(var i = 0; i < userGarage.length; i++){
-			//add button to list
+			//add buttons to list
+			src = "\'images/vehicle.jpg\'";	//userGarage[i].getFullPath();
+			list.append("<li><button id=\'carSelBtn" + i + "\'>" +
+			"<label id=\'make\'></label>" +
+			"<label id=\'year\'></label>" +
+			"<label id=\'name\'></label>" +
+			"<img src=" + src + "></button></li>");
+			
 			$('#carSelBtn' + i).click({index:i}, this.setCurrentCar);
 			this.setCarBtnText(i);
 		}

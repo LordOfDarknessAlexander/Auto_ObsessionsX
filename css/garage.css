@@ -27,6 +27,7 @@
 	margin-top: 8em;
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	position: relative;
+	width:12em;
 }
 #Garage div#userCar
 {	/*styling for list items*/
@@ -56,6 +57,7 @@
 	text-align:left;
 	font-size:0.75em;	/*12px*/
 }
+/*list item button labels*/
 #Garage li button label
 {	
 	display:block;
@@ -71,8 +73,7 @@
 	width:80px;
 	height:60px;
 }
-#Garage li button label#make,
-#Garage li button label#year
+#Garage li button label
 {	/*overrides elements with specific id's*/
 	display:block;
 	color: white;

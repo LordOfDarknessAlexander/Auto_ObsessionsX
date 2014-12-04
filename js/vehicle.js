@@ -1,9 +1,20 @@
 ﻿//vehicle 'class' and any other api
+//the vehicle ID property is a string representation of a bitfield with the sturcture:
+//	0x{DA, 0086, 0A}:{make, year, model}
+//values are between 00 and FF, allowing for 255x255x255 unique vehicles
+//ID's can be prceedurally generated!
+
+function carPart(condition, originality){
+	return {
+		cond : condition,
+		orig : originality
+	};
+}
 function Vehicle(Name, Make, Year)
 {
 	var img = new Image()
 	img.src = 'images/vehicle.jpg';	//getFullPath
-	
+	//returns a new vehicle object
 	return {
 		//pos:new Vector(VEHICLE_XPOS, VEHICLE_YPOS,0,0)
 		price:0,
@@ -13,7 +24,7 @@ function Vehicle(Name, Make, Year)
 		make : Make,
 		year : Year,
 		id : 0,
-		//parts = []	//only retain currently upgraded parts
+		//parts : [],	//only retain currently upgraded parts
 		image : img,
 		//
 		displayInfo : function(){
@@ -46,10 +57,14 @@ function Vehicle(Name, Make, Year)
 			}*/
 			return ret;
 		},
-		getFullPath : function(){
-			//returns the absolute url for the image path of this car on the server
+		getFullPath : function()
+		{	//returns the absolute url for the image path of this car on the server
 			//return baseURL + 'images/vehicles/' + this.make + '/' + year + '/' + this.name + '.jpg';
 			return '';
+		},
+		initParts : functon()
+		{	//loads parts
+			//if(this.parts.length !=
 		}
 	};
 }

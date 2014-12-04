@@ -15,6 +15,11 @@ var playerNextBid = currentBid + (currentBid * 0.1);
 //BidTImers Booleans
 var startEndBids = [false,false,false,false];
 
+//var carsForSale = [
+	//dynamic list of cars id's, determined by a script after parsing vehicle database
+	
+//];
+
 var Auction =
 {
 

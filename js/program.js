@@ -493,9 +493,9 @@ $('#repairBackButton').click(function()
 	resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });
-//var btnStr = '<li><button id=\'carSelBtn1\'><label id=\'make\'></label><label id=\'year\'></label><label id=\'name\'></label></button></li>';
-function rotateBtns(index)
-{		
+
+//function rotateBtns(index)
+//{		
 	//setCarBtnText(index.data.index, c);
 //	setCarBtnText(2, c1);
 	/*var btns = [
@@ -530,7 +530,7 @@ function rotateBtns(index)
 		//}
 	//}
 	
-}
+//}
 function initUser(userName, pw)
 {	//load a registered user after comfirmation from server
 }

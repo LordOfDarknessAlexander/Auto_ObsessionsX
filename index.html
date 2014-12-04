@@ -70,8 +70,12 @@
               <li><input type="button" id="myCars" onmouseover="inventoryButton()" onclick="inventoryState()"></li>
             </ul>
 		</div>
-      
-		<div id="Auction">
+      	
+        <div id='AuctionSelect'>
+        	<!--select which car to bid for-->
+        </div>
+		
+        <div id="Auction">
             <h1>Auction</h1>
             <ul>
               <li><input type="button" id="bid" onmouseover="bidButton()" onclick="playerBid()"></li>
@@ -129,9 +133,8 @@
 				<label id='name'>n:</label>
 				<img src='images/vehicle.jpg'>
 			</div>
-          	<ul>
-			<!--list is populated in '../program.js' from '../user.xml'-->
-			<li><button id='carSelBtn0'>
+          	<ul id='carBtns'><!--list is populated in '../program.js' from '../user.xml'--></ul>
+            <!--li><button id='carSelBtn0'>
 				<label id='make'></label>
 				<label id='year'></label>
 				<label id='name'></label>
@@ -146,10 +149,9 @@
 				<label id='make'></label>
 				<label id='year'></label>
 				<label id='name'></label>
-			</button></li>
+			</button></li-->
 			<!--li><button id='carSel3'>3</button></li>
 			<li><button id='carSel4'>4</button></li-->
-			</ul>
 		</div>
 	</div><!--end wrapper-->
 
