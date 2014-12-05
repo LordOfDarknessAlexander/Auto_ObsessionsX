@@ -344,7 +344,6 @@ var Auction =
 		{
 			if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
 			{
-				
 				this.sold();
 				alert("Sold to " + bidders[i]);
 							
@@ -359,7 +358,7 @@ var Auction =
 		 
 	},
 	buyOut : function()
-	{	//user 'buys out' the auction,
+	{	//user 'buys out' the auction, placing the max bid
 		//bidding continues until only 1 bidder remains
 	}
 	

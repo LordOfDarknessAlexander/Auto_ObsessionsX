@@ -7,7 +7,9 @@
 function carPart(condition, originality){
 	return {
 		cond : condition,
-		orig : originality
+		orig : originality,
+		repaired:false
+		//getCondition:function(){return repaired ? this.condition + 25 : this.condition;
 	};
 }
 function Vehicle(Name, Make, Year)

@@ -69,6 +69,20 @@ a
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
 }
+#main form#login
+{
+	color:red;
+	position:absolute;
+	left:5%;
+	top:25%;
+}
+#main form#register
+{
+	color:red;
+	position:absolute;
+	right:5%;
+	top:25%;
+}
 
 #progress 
 {

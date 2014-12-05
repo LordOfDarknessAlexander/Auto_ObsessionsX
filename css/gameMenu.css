@@ -16,6 +16,29 @@
 	margin: 8px;
 	margin-top: 8em;
 }
+#gameMenu div#menuLeft
+{
+	position:absolute;
+	color:red;
+	left:5%;
+	top:30%;
+}
+#gameMenu div#menuRight
+{
+	position:absolute;
+	color:red;
+	right:5%;
+	top:30%;
+}
+#gameMenu div button
+{
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	color:red;
+	font-weight: bold;
+	width:150px;
+	height:50px; 
+	cursor:pointer;
+}
 /*game menu navigation buttons*/
 #auction
 {
