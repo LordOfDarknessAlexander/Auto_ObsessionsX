@@ -358,5 +358,9 @@ var Auction =
 		 this.gameOver();	
 		 
 	},
+	buyOut : function()
+	{	//user 'buys out' the auction,
+		//bidding continues until only 1 bidder remains
+	}
 	
 };

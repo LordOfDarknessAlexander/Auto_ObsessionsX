@@ -62,9 +62,20 @@ function Vehicle(Name, Make, Year)
 			//return baseURL + 'images/vehicles/' + this.make + '/' + year + '/' + this.name + '.jpg';
 			return '';
 		},
-		initParts : functon()
+		initParts : function()
 		{	//loads parts
-			//if(this.parts.length !=
+			//var thisXML = xmlDoc.ElementById(this.id);
+			//if(this.parts.length != 0)
+				//this.parts = [];	//reset parts array
+			//var bfParts = ;	//bitfield representing which upgrades this car has aquired
+			//for(var i = 0; i < MAX_PARTS; i++)
+			//{	//var val = bfParts & (1 << i);
+				//if(val != 0)
+				//{	//user's car has upgrades part
+					//var node = parts[val];
+					//this.parts.append(carPart(node) );	//add upgrade to list
+				//}
+			//}
 		}
 	};
 }

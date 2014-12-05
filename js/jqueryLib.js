@@ -12,10 +12,15 @@ $('.back').click(jqToggleCredits);
 //
 //Game Menu Add funds portal button
 //
+function jqSetCash(val)
+{
+	$("label#userCash").html(val.toString());
+}
 function jqToggleFunds()
 {
 	$('#gameMenu').toggle();
     $('#AddFunds').toggle();
+	jqSetCash(money);
 }
 $('#addFunds').click(function() 
 {

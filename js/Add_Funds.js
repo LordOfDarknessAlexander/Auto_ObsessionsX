@@ -16,16 +16,19 @@ var Store = {
 		//draw user's money, etc...
 	}
 };
+
 function addFunds(val)
 {
 	var MAX_MONEY = 50000000;
 	var newTotal = money + val;
 	money = newTotal > MAX_MONEY ? MAX_MONEY : newTotal;
+	jqSetCash(money);
 }
 //jQuery Interface
 $('#addAllowanceBtn').click(function()
 {	//allowance accumulates every few seconds
-	money += 1;
+	var val = 1;//Counter;
+	addFunds(val);
 });
 $('#addMinorFundsBtn').click(function()
 {	//open paypal form
