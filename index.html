@@ -207,12 +207,22 @@
       		<h1>Garage</h1>
 			<input type='button' id='garageBackBtn' value='back'>
             <div id='userCar'>
+				<img src='images/vehicle.jpg'>
 				<label id='make'>m:</label>
 				<label id='year'>y:</label>
 				<label id='name'>n:</label>
-				<img src='images/vehicle.jpg'>
+                <div id='progressBars'>
+                    <progress id='drivetrainPB' value='0.0'></progress><br>
+                    <progress id='bodyPB' value='0.0'></progress><br>
+                    <progress id='interiorPB' value='0.0\'></progress><br>
+                    <progress id='docsPB' value='0.0'></progress>
+                </div>
 			</div>
-          	<ul id='carBtns'><!--list is populated in '../program.js' from '../user.xml'--></ul>
+          	<ul id='carBtns'>
+            <!--list is populated in '../program.js' from '../user.xml'
+            the list items don't have to exist but the root tag must-->
+            </ul>
+            
             <!--li><button id='carSelBtn0'>
 				<label id='make'></label>
 				<label id='year'></label>

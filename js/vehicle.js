@@ -3,7 +3,24 @@
 //	0x{DA, 0086, 0A}:{make, year, model}
 //values are between 00 and FF, allowing for 255x255x255 unique vehicles
 //ID's can be prceedurally generated!
-
+//namespace AO
+/*
+function driveterain()
+{	//return object representing a vehicle's driveterain
+}
+function carStats()
+{
+	this.MAX = {
+		//substruct representing static maximum for vehicle upgrades
+		//ENGINE:,
+		//TRANSMISSION/
+		//DRIVE_AXEL/
+		//EXHAUST/
+		//FUEL_SYSTEM/
+	};
+	return {
+	};
+}*/
 function carPart(condition, originality){
 	return {
 		cond : condition,

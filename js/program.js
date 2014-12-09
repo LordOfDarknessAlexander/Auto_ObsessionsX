@@ -30,7 +30,7 @@ $(document).ready(function()
 			if(appState == GAME_MODE.AUCTION)
 			{
 				update();
-			    Auction.update();				
+			    Auction.update();
 			}
 			
 			

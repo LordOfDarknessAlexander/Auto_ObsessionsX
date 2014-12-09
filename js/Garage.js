@@ -30,11 +30,23 @@ var Garage = {
 		for(var i = 0; i < userGarage.length; i++){
 			//add buttons to list
 			src = "\'images/vehicle.jpg\'";	//userGarage[i].getFullPath();
-			list.append("<li><button id=\'carSelBtn" + i + "\'>" +
-			"<label id=\'make\'></label>" +
-			"<label id=\'year\'></label>" +
-			"<label id=\'name\'></label>" +
-			"<img src=" + src + "></button></li>");
+			list.append("<li>" +
+			"<button id=\'carSelBtn" + i + "\'>" +
+			"<label id=\'carName\'>Car Name</label>" +
+			//"<label id=\'year\'></label>" +
+			//"<label id=\'name\'></label>" +
+			"<label id=\'carInfo\'></label>" +
+			//progress bar max default is 1.0
+			//
+			//"<div id=\'pbLabels'>" +
+				//"<label id=\'dt\'>drivetrain</label>" +
+				//"<label id=\'body\'>body</label>" +
+				//"<label id=\'interior\'>interior</label>" +
+				//"<label id=\'docs\'>documentation</label>" +
+			//"</div>" +			
+			//
+			"<img src=" + src + "></button>" +
+			"</li>");
 			
 			$('#carSelBtn' + i).click({index:i}, this.setCurrentCar);
 			this.setCarBtnText(i);
@@ -69,18 +81,23 @@ var Garage = {
 	
 		curCarIndex = i;	//maintain index, instead of copying a car
 		//}
-		btn.children('label#make').text(src.children('label#make').text() );
-		btn.children('label#year').text(src.children('label#year').text() );
-		btn.children('label#name').text(src.children('label#name').text() );
+		//btn.children('label#make').text(src.children('label#make').text() );
+		//btn.children('label#year').text(src.children('label#year').text() );
+		//btn.children('label#name').text(src.children('label#name').text() );
+		
+		var pb = $('progress#drivetrainPB');
+		pb.attr('value', '0.5');
 	},
 	setCarBtnText : function(index)
 	{
 		var car = userGarage[index];
 		var btn = $('#carSelBtn' + index);
 		//var car = userGarage[i];
-		btn.children('label#make').text(car.make);
-		btn.children('label#year').text(car.year);
-		btn.children('label#name').text(car.name);
+		btn.children('label#carName').text(car.make + ' ' + car.year + ' '+ car.name);
+		btn.children('label#carInfo').text('Default car info');
+		//btn.children('label#make').text(car.make);
+		//btn.children('label#year').text(car.year);
+		//btn.children('label#name').text(car.name);
 	}
 };
 

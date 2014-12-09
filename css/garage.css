@@ -27,7 +27,7 @@
 	margin-top: 8em;
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	position: relative;
-	width:12em;
+	width:21em;
 }
 #Garage div#userCar
 {	/*styling for list items*/
@@ -58,12 +58,21 @@
 	font-size:0.75em;	/*12px*/
 }
 /*list item button labels*/
-#Garage li button label
+#Garage li div#progressBars progress
+{	
+	/*display:inline-block;
+	backgorund-color:rgb(127,127,127);*/
+	/*color: white;*/
+	right:0;
+}
+#Garage div#pbLabels label
 {	
 	display:block;
 	color: white;
 	margin: 8px;
 	font-size:0.75em;	/*12px*/
+	right:0;
+	top:0;
 }
 #Garage li button img
 {	position:absolute;
