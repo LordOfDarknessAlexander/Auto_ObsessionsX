@@ -14,6 +14,7 @@ var playerNextBid = currentBid + (currentBid * 0.1);
 
 //BidTImers Booleans
 var startEndBids = [false,false,false,false];
+var playerWon = false;
 
 //var carsForSale = [
 	//dynamic list of cars id's, determined by a script after parsing vehicle database
@@ -65,6 +66,7 @@ var Auction =
 		  	 console.log(i);
 		  	 break;
 		}
+		
 
 	  	if(bidderCooldown >= ENEMY_WAIT)
 	  	{
@@ -76,6 +78,7 @@ var Auction =
 	  	Auction.render();
 	  	Auction.findEndBidder();
 	  	Auction.endAuction();
+	  	Auction.buyOut();
 	  	
 	},
 	render : function()
@@ -214,7 +217,8 @@ var Auction =
 			startEndBids[1] = false;
 			startEndBids[2] = false;
 			startEndBids[3] = false;
-			startPlayerEndBid = true;				
+			startPlayerEndBid = true;	
+						
 		}
 		
 		if(playerBid <= money)
@@ -232,21 +236,18 @@ var Auction =
 			 startPlayerEndBid = false;
 		}
 		//Wins BId	
-		if((enemyBids[0] == 0) && (enemyBids[1] == 0) && (enemyBids[2] == 0) && (enemyBids[3] == 0) && (money >= currentBid))
-		{
-		  money = money - currentBid;
-		}
-		
+				
 		if(money <= 0)
 		{
 			money = 0;	//player has no money but doesn't win auction?
 			endAuction();	
 			
 		}
-		if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]) && (playerDidBid))
+		if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]) && (playerDidBid)  && (playerEndBidTimer >= 600) )
 		{
-			endAuction();
-			money = money - currentBid;
+			//buyOut();
+			playerWon = true;
+			
 		}
 	},
 	enemyBidding : function()
@@ -342,6 +343,7 @@ var Auction =
 		if((playerBid > enemyBids[0])&&(playerBid > enemyBids[1])&&(playerBid > enemyBids[2])&&(playerBid > enemyBids[3]))
 		{
 		   currentBid = playerBid;
+		   startPlayerEndBid = true;
 		   
 		}
 		//Find the player who has the highest bid dirty way enemy bidder 1 if it is not players bid then call func to find thru enemies
@@ -372,6 +374,18 @@ var Auction =
 	buyOut : function()
 	{	//user 'buys out' the auction, placing the max bid
 		//bidding continues until only 1 bidder remains
+		if(playerWon)
+		{
+			money = money - currentBid;
+			//push vehicle to garage
+			alert("Sold to the player");
+			auctionStop = true;
+		}
+		else
+		{
+			playerWon = false;
+		}
+		 
 	}
 	
 };
