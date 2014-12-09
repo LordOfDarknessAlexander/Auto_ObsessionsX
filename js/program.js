@@ -110,81 +110,62 @@ function loadXMLDoc(url)
 	return true;
 }
 
-//LOAD Vehicle XML, this was working, now can't find source file!
-//var vehiclePath = './vehicles.xml';	//should be the location of file on server
-
-//if(loadXMLDoc(vehiclePath) == false)
-//{	//loading xml resource failed, display warning
-	//window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
-//}
-
 /*
+//LOAD Vehicle XML, this was working, now can't find source file!
+var vehiclePath = './vehicles.xml';	//should be the location of file on server
+
+if(loadXMLDoc(vehiclePath) == false)
+{	//loading xml resource failed, display warning
+	window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
+}
+
+
 var vDoc = document.querySelector('link[rel="import"]');	//document Vehicles.html
 var vehicles = document.getElementById('Vehicles');
 var cn = vehicles.firstChild;
-for(var carNode in vehicles.childNodes){
-	var newCar = Vehicle(car)
+for(var carNode in vehicles.childNodes)
+{
+	var newCar = Vehicle(car);
 	//instantiate js object or retain html node 'car' for read only access
 }
-*/
+
 
 function initGarage()
 {	//initilize user's garage will available cars,
 	//accessed from user.xml, referenced from database vehicle.xml
 	//parse user xml
 	//get user with ID
-	//var userNode = getElementById('');
-	//for(child in userNode)
-	//{
-		//var carID = child.getAttributeById('id');
-		//userGarage.push(VehicleXML.getElementById(carID) );
-	//}
+	var userNode = getElementById('');
+	for(child in userNode)
+	{
+		var carID = child.getAttributeById('id');
+		userGarage.push(VehicleXML.getElementById(carID) );
+	}
 	return;
 }
 function addCar(car)
 {	//call after user wins auction, adding car to garage and user.xml
-	//
-	//var garage = userNode.getElementById('garage');
-	//if(node with id exists){
-		//alert('already own car with id:' + car.id);
-	//}else
-	//{
-		//garage.addNode('<ch>' + car.id + '</ch>');
+	var garage = userNode.getElementById('garage');
+	if(node with id exists)
+	{
+		alert('already own car with id:' + car.id);
+	}
+	else
+	{
+		garage.addNode('<ch>' + car.id + '</ch>');
 		//commit changes to server
-	//}
+	}
 }
+*/
 
-//Show asset loading progress
-//@datatype {integer} progress - Number of assets loaded
-//@datatype {integer} total - Total number of assets
-assetLoader.progress = function(progress, total) 
-{
-  //$('.progress-bar')
-  var pBar = document.getElementById('progress-bar');
-  pBar.value = progress / total;
-  //$('.p')
-  document.getElementById('p').innerHTML = Math.round(pBar.value * 100) + "%";
-}
+
 
 //Load the splash screen first
 assetLoader.finished = function() 
 {
- switchStates();
+  switchStates();
 }
 
-//Garage Doors	
-splashImage.onload = function()
-{
-	context.drawImage(splashImage, 0,0);
-	
-
-};
-//Main Background of game
-backgroundImage.onload = function()
-{
-	context.drawImage(backgroundImage, 50, -10);
-}	
-	
 function garageDoor()
 {
 	backgroundY -= speed;
@@ -246,14 +227,11 @@ function update(deltaTime)
     context.drawImage(splashImage, 0, backgroundY);
     timer++;
 	
-		
 }
 //Show the splash after loading all assets 
 function splash() 
 {
-  
   init();
-	
   $('#progress').hide();
   $('#splash').show();
   $('.sound').show();  
@@ -412,7 +390,7 @@ Auction.endAuction = function()
 	}
 
 }
-//push vehicle in to inventory and tell player he won bidding
+//if enemy wins auction
 Auction.sold = function()
 {
 	//$('.sold').style.display = 'true';

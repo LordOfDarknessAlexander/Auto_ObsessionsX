@@ -131,3 +131,31 @@ var assetLoader = (function()
     downloadAll: this.downloadAll
   };
 })();
+
+//Show asset loading progress
+//@datatype {integer} progress - Number of assets loaded
+//@datatype {integer} total - Total number of assets
+assetLoader.progress = function(progress, total) 
+{
+  //$('.progress-bar')
+  var pBar = document.getElementById('progress-bar');
+  pBar.value = progress / total;
+  //$('.p')
+  document.getElementById('p').innerHTML = Math.round(pBar.value * 100) + "%";
+}
+
+
+//Garage Doors	
+splashImage.onload = function()
+{
+	context.drawImage(splashImage, 0,0);
+	
+
+};
+//Main Background of game
+backgroundImage.onload = function()
+{
+	context.drawImage(backgroundImage, 50, -10);
+}	
+	
+
