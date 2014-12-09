@@ -486,7 +486,7 @@ $('.restart').click(function()
 
 //InMenuButtons
 //auction Button
-$('#auction').click(function() 
+$('#toAuctionBtn').click(function() 
 {
 	$('#auction').show();
 	$('#gameMenu').hide();
@@ -518,7 +518,7 @@ $('#bid').click(function()
 	$('#RepairShop').toggle();
     //$('#RepairShop').children().toggle(0();
 }*/
-$('#repair').click(function()
+$('#buyUpgradesBtn').click(function()
 {
 	//toggleRepair();
 	$('#gameMenu').hide();
