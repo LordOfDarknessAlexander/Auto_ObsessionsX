@@ -29,14 +29,15 @@
 	position: relative;
 	width:21em;
 }
+/*current user car stylings*/
 #Garage div#userCar
 {	/*styling for list items*/
 	/*display:inline;*/
 	color: white;
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 	position:absolute;
-	top:150px;
-	right:50px;
+	top:120px;
+	left:50px;
 	width: 150px;
 	height:110px;
 	display:inline;
@@ -57,6 +58,8 @@
 	text-align:left;
 	font-size:0.75em;	/*12px*/
 }
+/*selected car div stylings*/
+
 /*list item button labels*/
 #Garage li div#progressBars progress
 {	
@@ -91,19 +94,13 @@
 }
 #garageBackBtn
 {
-	background:url('../images/defaultBtn.png') no-repeat 0 0;/*var(--default-btn-bg);*/
+	background:url('../images/backBtn.png') no-repeat 0 0;/*var(--default-btn-bg);*/
 	color: white;
 	font-weight: bold;
 	width:150px;
 	height:50px;
-	cursor:pointer;	
-}
-#addFundsBackButton
-{
-	background: url('../images/repairBackButton.png') no-repeat 0 0;
-	color: white;
-	font-weight: bold;
-	width:150px;
-	height:50px;
-	cursor:pointer;	
+	cursor:pointer;
+	position:absolute;
+	left: 5em;
+	bottom:2em;
 }

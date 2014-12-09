@@ -43,3 +43,10 @@ function jqToggleGarage()
 	$('#gameMenu').toggle();
 	$('#Garage').toggle();
 }
+function jqToggleCarView()
+{
+	$('#Garage').toggle();
+	$('#CarView').toggle();	//this doesn't show
+}
+$('button#carViewBackBtn').click(jqToggleCarView);
+$('button#viewCar').click(jqToggleCarView);

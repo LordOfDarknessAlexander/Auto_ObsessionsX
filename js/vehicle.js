@@ -5,20 +5,32 @@
 //ID's can be prceedurally generated!
 //namespace AO
 /*
-function driveterain()
+function Driveterain(e,t,da,e,fs)
 {	//return object representing a vehicle's driveterain
+	this.MAX = {
+	//substruct representing static maximum for vehicle upgrades
+	//ENGINE:6,
+	//TRANSMISSION:6,
+	//DRIVE_AXEL:6,
+	//EXHAUST:6,
+	//FUEL_SYSTEM:6
+	};
+	return {
+		//substruct representing surrent upgrades done to a car
+		//ENGINE:e,
+		//TRANSMISSION:t,
+		//DRIVE_AXEL:da,
+		//EXHAUST:e,
+		//FUEL_SYSTEM:fs
+	};
 }
 function carStats()
 {
-	this.MAX = {
-		//substruct representing static maximum for vehicle upgrades
-		//ENGINE:,
-		//TRANSMISSION/
-		//DRIVE_AXEL/
-		//EXHAUST/
-		//FUEL_SYSTEM/
-	};
 	return {
+		drivetrain:Drivetrain(),
+		body:carBody(),
+		interior:carInterior(),
+		carDocs:carDocs(),
 	};
 }*/
 function carPart(condition, originality){

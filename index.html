@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/funds.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/credits.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/garage.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/carView.css" type="text/css" media="screen">
     <!--scripts here are executed before the form is parsed-->
     <script type="text/javascript" src="js/jquery.2.1.1.min.js"></script>
     <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
@@ -205,19 +206,36 @@
 		</div>
         <div id="Garage">
       		<h1>Garage</h1>
+            <button id='select'>Select</button>
+            <button id='viewCar'>View</button>
 			<input type='button' id='garageBackBtn' value='back'>
             <div id='userCar'>
 				<img src='images/vehicle.jpg'>
+				<!--label id='curCarName'>m:</label>
+				<label id='curCarInfo'>current car info</label-->
 				<label id='make'>m:</label>
 				<label id='year'>y:</label>
 				<label id='name'>n:</label>
                 <div id='progressBars'>
+                	<!--progress bar 'value' attribute is between 0.0 and 1.0-->
                     <progress id='drivetrainPB' value='0.0'></progress><br>
                     <progress id='bodyPB' value='0.0'></progress><br>
                     <progress id='interiorPB' value='0.0\'></progress><br>
                     <progress id='docsPB' value='0.0'></progress>
                 </div>
 			</div>
+            <!--div id='selectedCar'>
+				<img src='images/vehicle.jpg'>
+				<label id='curCarName'>m:</label>
+				<label id='curCarInfo'>current car info</label>
+                <div id='progressBars'>
+                    <progress id='drivetrainPB' value='0.0'></progress><br>
+                    <progress id='bodyPB' value='0.0'></progress><br>
+                    <progress id='interiorPB' value='0.0\'></progress><br>
+                    <progress id='docsPB' value='0.0'></progress>
+                </div>
+			</div-->
+
           	<ul id='carBtns'>
             <!--list is populated in '../program.js' from '../user.xml'
             the list items don't have to exist but the root tag must-->
@@ -242,8 +260,25 @@
 			<!--li><button id='carSel3'>3</button></li>
 			<li><button id='carSel4'>4</button></li-->
 		</div>
+        <div id='CarView'>
+            <!--display vehicle stats and actions-->
+            <button id='selectBtn'>Select</button>
+            <button id='sellBtn'>Sell</button>
+            <!--img src=''-->
+            <!--div id='statLabels'>
+                <lable>Drivetrain</label>
+                <lable>Body</label>
+                <lable>Interior</label>
+                <lable>Documents</label>
+            </div-->
+            <!--div id='carInfoBoxes'></div-->
+            <label id='carInfo'>Default Info</label>
+            <button id='carViewBackBtn'>Back</button>
+            <button id='homeBtn'>Home</button>
+        </div>
+
 	</div><!--end wrapper-->
-	  <div id="=Register">
+	<div id="=Register">
             <li><input type="button" id="bid" value="Bid" onmouseover="bidButton()" onclick="playerBid()"></li>
        
             </div>
@@ -256,8 +291,8 @@
     <div id="sold">
     	<h2>Sold to Rascal ,Chris create vehicles array so we can push this to inventory<span id="money"></span> ahoy!</h2>
 		<a href="javascript:void(0)" class="button restart">Try again?</a>
-    </div> 
-
+    </div>
+    
     <script type="text/javascript" src="js/globals.js"></script><!--is rendered first-->
     <script type="text/javascript" src="js/LoadAssets.js"></script> 
     <script type="text/javascript" src="js/GameMode.js"></script>
