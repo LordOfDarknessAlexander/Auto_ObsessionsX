@@ -88,6 +88,10 @@ function Vehicle(Name, Make, Year)
 			}*/
 			return ret;
 		},
+		getFullName : function()
+		{	//returns a string representing the 'proper' car name
+			return this.make + ' ' + this.year + ' ' + this.name;
+		},
 		getFullPath : function()
 		{	//returns the absolute url for the image path of this car on the server
 			//return baseURL + 'images/vehicles/' + this.make + '/' + year + '/' + this.name + '.jpg';

@@ -22,7 +22,7 @@ function addFunds(val)
 	var MAX_MONEY = 50000000;
 	var newTotal = money + val;
 	money = newTotal > MAX_MONEY ? MAX_MONEY : newTotal;
-	jqSetCash(money);
+	jq.setCash(money);
 }
 //jQuery Interface
 $('#addAllowanceBtn').click(function()
