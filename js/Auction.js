@@ -6,12 +6,12 @@ var bidderCooldown = 0;
 var playerCanBid = false;
 var currentBid = vehiclePrice * 0.1;
 
-var enemyBids = [1,2,3,4]; 
+var enemyBids = [0,0,0,0]; 
 var endBidTimers = [0,0,0,0];
 var playerDidBid = false;
 var enemyCanBid = false;
 var playerNextBid = currentBid + (currentBid * 0.1);
-//var enemies = [];
+
 //BidTImers Booleans
 var startEndBids = [false,false,false,false];
 
@@ -31,13 +31,18 @@ var Auction =
 	
 	initAI : function()
 	{
-	  enemies = [new Enemy(price(0.2)),new Enemy(price(0.2)), new Enemy(price(0.2)),new Enemy(price(0.2))];
-	  for(var i = 0; i < enemies.length; i++)
-	  {
-	  	 
-	  	 console.log(i);
-	  	 break;
-	  }
+		
+		enemies = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
+		for(var i = 0; i < enemies.length; i++)
+		{
+		  	// enemies.price = enemyCaps;
+		  	//enemies.price() = vehiclePrice;
+		  	//enemies.price == vehiclePrice * 0.2;
+		  	
+		  	console.log(i);
+		  	break;
+		}
+	  
 
 	 
 	},	
@@ -54,12 +59,12 @@ var Auction =
 			bidderCooldown++;
 			enemyCanBid = false;
 		}
-	  	  for(var i = 0; i < enemies.length; i++)
-		  {
+	  	for(var i = 0; i < enemies.length; i++)
+		{
 		  	 //enemies.push(i);
 		  	 console.log(i);
 		  	 break;
-		  }
+		}
 
 	  	if(bidderCooldown >= ENEMY_WAIT)
 	  	{
@@ -253,16 +258,23 @@ var Auction =
 		if( currentBid >= 0 )
 		{	
 			for(var i = 0; i < enemyBids.length; i++)
-			{
+			{		
+						
+				enemies.price = 1;
+
 				if(enemyCanBid)
 				{//
-					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap))
+					//if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap) )
+					if((enemies[i]) > (enemyCaps) && (enemyBids[i] < currentBid))
 					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
+					//  console.log(enemyCaps);
 					 
 					  break;
 					}
 				}
+				
+			
 			}
 		 }
 		

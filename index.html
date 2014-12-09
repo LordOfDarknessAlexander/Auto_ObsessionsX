@@ -38,6 +38,7 @@
                    <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
                    <!--li><a href="javascript:void(0)" class="playGuest">Play as Guest</a></li-->
                    <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
+                   <li><a href="javascript:void(0)" class="button Register">Sign Up</a></li>
                 </ul>
                 <form id='login'>
                 	User ID:	<input id='userID' type='text'><br>
@@ -45,21 +46,23 @@
                     Password:	<input id='userPW' type='text'><br>
                     <button id='forgotPW'>Forgot Password?</button><br>
                 </form>
+                
                 <form id='register'>
-                   	Name:<input id='userID' type='text'><br>
-                    Address:<input id='userPW' type='text'><br>
-                    City:<input id='userCity' type='text'><br>
-                    State/Prov:<input id='userSP' type='text'><br>
-                    Country:<input id='userCountry' type='text'><br>
-                    Zip/Postal:<input id='userZP' type='text'><br>
-                    D.O.B.:<input id='userDOB' type='text'><br><!--change to date selector?-->
-                    Username:<input id='userName' type='text'><br>
-                    Password:<input id='userPW' type='text'><br>
-                    Confirm Password:<input id='userPWConfirm' type='text'><br>
-                    <input type='submit' value='SUBMIT'>
-                </form>
+	               	Name:<input id='userID' type='text'><br>
+	                Address:<input id='userPW' type='text'><br>
+	                City:<input id='userCity' type='text'><br>
+	                State/Prov:<input id='userSP' type='text'><br>
+	                Country:<input id='userCountry' type='text'><br>
+	                Zip/Postal:<input id='userZP' type='text'><br>
+	                D.O.B.:<input id='userDOB' type='text'><br><!--change to date selector?-->
+	                Username:<input id='userName' type='text'><br>
+	                Password:<input id='userPW' type='text'><br>
+	                Confirm Password:<input id='userPWConfirm' type='text'><br>
+                <input type='submit' value='SUBMIT'>
+            	</form>
+               
             </div>
-            
+          
             <div id="credits">
             	<!--could just be a link at the bottom of the page-->
                 <ul>
@@ -75,6 +78,7 @@
                 <a href="javascript:void(0)" class="button back">Back</a>
             </div> 
         </div><!--end menu-->
+          
        
         <canvas id="canvas" width="900" height="600">
             <p>You're browser does not support the required functionality to play this game.</p>
@@ -90,10 +94,10 @@
                 <label id='mileMarker'></label>
             </div-->
             <ul>
-              <li><input type="button" id="auction" onmouseover="auctionButton()" onclick="auctionMode()"></li>
-              <li><input type="button" id="addFunds" onmouseover="addFundsButton()" onclick="addFundMode()"></li>
-              <li><input type="button" id="repair" onmouseover="repairButton()" onclick="repairState()"></li>
-              <li><input type="button" id="myCars" onmouseover="inventoryButton()" onclick="inventoryState()"></li>
+              <li><input type="button" id="auction" value="Auction" onmouseover="auctionButton()" onclick="auctionMode()"></li>
+              <li><input type="button" id="addFunds" value="Add Funds" onmouseover="addFundsButton()" onclick="addFundMode()"></li>
+              <li><input type="button" id="repair" value="Repair" onmouseover="repairButton()" onclick="repairState()"></li>
+              <li><input type="button" id="myCars" value="My Cars" onmouseover="inventoryButton()" onclick="inventoryState()"></li>
             </ul>
               <div id='menuRight'>
             	<button id='profile'>My Profile</button><br>
@@ -121,10 +125,10 @@
         <div id="Auction">
             <h1>Auction</h1>
             <ul>
-              <li><input type="button" id="bid" onmouseover="bidButton()" onclick="playerBid()"></li>
+              <li><input type="button" id="bid" value="Bid" onmouseover="bidButton()" onclick="playerBid()"></li>
            </ul>
             <ul>
-              <li><input type="button" id="auctionBackButton" onmouseover="auctionBackButton()" onclick="startGame()"></li>
+              <li><input type="button" id="auctionBackButton" onmouseover="auctionBackButton()"  value="Back" onclick="startGame()"></li>
            </ul>
 		</div>
       
@@ -143,7 +147,7 @@
 				<!--buttons added dynamically from script-->
            </div>
 		</div>
-       
+     
 		<div id="AddFunds">
       		<h1>AddFunds</h1>
 			<input type="button" id="addFundsBackButton" onmouseover="addFundsBackButton()" onclick="startGame()">
@@ -229,7 +233,10 @@
 			<li><button id='carSel4'>4</button></li-->
 		</div>
 	</div><!--end wrapper-->
-
+	  <div id="=Register">
+            <li><input type="button" id="bid" value="Bid" onmouseover="bidButton()" onclick="playerBid()"></li>
+       
+            </div>
 	<div id="game-over">
     	<h2>Sold to Other Guy  <span id="bidders[]"></span> ahoy!</h2>
         <!--input type="button" id="restartBtn" value="Tried Again?"-->

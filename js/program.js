@@ -217,7 +217,21 @@ function switchStates( GAME_MODE)
 		        
 		  case ADD_FUNDS:
 		    	Store.update();
+		    	break;
 		    	
+		  case TUTORIAL:
+		    	//Tutorial.update();
+		    	break;
+		    	
+		  case NEW_USER:
+		    	//Register();
+		    	splash();
+		    	break;
+		    	
+		  case LOGIN_USER:
+		    	//Login.update();
+		    	break;
+		    	    	
 		    default:
 		         RUNNING; 
 	     // etc...
@@ -240,10 +254,24 @@ function splash()
   
   init();
 	
-  
   $('#progress').hide();
   $('#splash').show();
   $('.sound').show();  
+}
+
+function Register()
+{
+	stop = true;
+	auctionStop = true;
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	$('#Register').show();
+	appState = GAME_MODE.NEW_USER;
+	if(appState == GAME_MODE.NEW_USER)
+	{
+		console.log("Register THis");
+	
+	}	
+
 }
  
 //Main Menu  
@@ -337,6 +365,8 @@ function auctionMode(deltaTime)
   
    shuffleArray(enemyBids);
    shuffleArray(bidders);
+   shuffleArray(enemyCaps);
+  // shuffleArray(vehiclePrice);
  
    context.font = '26px arial, sans-serif';  
       	
@@ -433,6 +463,17 @@ $('.play').click(function()
   //delete menu image, since the game can not navigate back to this screen after clicking
   startGame();
 });
+$('.Register').click(function() 
+{
+  $('#menu').hide();
+  $('#Register').show();
+  //delete splash
+  //delete credits
+  //delete menu image, since the game can not navigate back to this screen after clicking
+  startGame();
+});
+
+
 //GameOver screen restart button
 $('.restart').click(function() 
 {

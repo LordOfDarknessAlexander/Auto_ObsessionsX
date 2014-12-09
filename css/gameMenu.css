@@ -8,27 +8,31 @@
 	width: 900px;
 	height: 600px;
 	position: absolute;
+	bottom: 3%;
+	
 }
 #gameMenu  li 
 {
 	padding: 10px 0;
 	display:inline;
 	margin: 8px;
+	color:red;
 	margin-top: 8em;
+	top: 20%;
 }
 #gameMenu div#menuLeft
 {
 	position:absolute;
 	color:red;
 	left:5%;
-	top:30%;
+	top:40%;
 }
 #gameMenu div#menuRight
 {
 	position:absolute;
 	color:red;
 	right:5%;
-	top:30%;
+	top:40%;
 }
 #gameMenu div button
 {
@@ -45,14 +49,16 @@
 	background: url('../images/auctionButton.png') no-repeat 0 0;
 	color: white;
 	font-weight: bold;
+	font-size: 1em;
 	width:150px;
 	height:50px; 
 	cursor:pointer;
+	
 }
 #repair
 {
 	background: url('../images/repairButton.png') no-repeat 0 0;
-	color: white;
+	color:  white;
 	font-weight: bold;
 	width:150px;
 	height:50px;
@@ -61,7 +67,7 @@
 #addFunds
 {
 	background: url('../images/addFundsButton.png') no-repeat 0 0;
-	color: white;
+	color:  white;
 	font-weight: bold;
 	width:150px;
 	height:50px;
@@ -70,7 +76,7 @@
 #myCars
 {
 	background: url('../images/inventoryButton.png') no-repeat 0 0;
-	color: white;
+	color:  white;
 	font-weight: bold;
 	width:150px;
 	height:50px;

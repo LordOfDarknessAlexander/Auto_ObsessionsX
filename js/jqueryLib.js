@@ -9,6 +9,8 @@ function jqToggleCredits()
 }
 $('.credits').click(jqToggleCredits);
 $('.back').click(jqToggleCredits);
+
+
 //
 //Game Menu Add funds portal button
 //
