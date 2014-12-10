@@ -64,6 +64,7 @@ var Auction =
 		{
 			bidderCooldown++;
 			enemyCanBid = false;
+			
 		}
 	  	for(var i = 0; i < enemies.length; i++)
 		{
@@ -200,6 +201,7 @@ var Auction =
 			}
 			else{
 				endBidTimers[i] = 0;
+				 goingTimer = 0;
 			}
 		}		
 		//Player end bid
@@ -271,8 +273,8 @@ var Auction =
 
 				if(enemyCanBid)
 				{//
-					//if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap) )
-					if((enemies[i]) > (enemyCaps) && (enemyBids[i] < currentBid))
+					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap) )
+					//if((enemies[i]) > (enemyCaps) && (enemyBids[i] < currentBid))
 					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
 					//  console.log(enemyCaps);
@@ -350,6 +352,7 @@ var Auction =
 		{
 		   currentBid = playerBid;
 		   startPlayerEndBid = true;
+		   goingTimer = 0;
 		   
 		}
 		//Find the player who has the highest bid dirty way enemy bidder 1 if it is not players bid then call func to find thru enemies
