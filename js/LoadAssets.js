@@ -30,7 +30,10 @@ var assetLoader = (function()
   {
     'bg'            : 'sounds/D.mp3',
     'jump'          : 'sounds/jump.mp3',
-    'gameOver'      : 'sounds/gameOver.mp3'
+    'gameOver'      : 'sounds/gameOver.mp3',
+    'bidder'		: 'sounds/auction.wav',
+    'going'			: 'sounds/going.mp3',
+    'sold'			: 'sounds/sold.wav',
   };
 
   var assetsLoaded = 0;                                // how many assets have been loaded

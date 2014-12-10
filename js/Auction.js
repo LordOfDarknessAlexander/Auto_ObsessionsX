@@ -15,11 +15,14 @@ var playerNextBid = currentBid + (currentBid * 0.1);
 //BidTImers Booleans
 var startEndBids = [false,false,false,false];
 var playerWon = false;
+var goingTimer = 0;
 
 //var carsForSale = [
 	//dynamic list of cars id's, determined by a script after parsing vehicle database
 	
 //];
+
+
 
 var Auction =
 {
@@ -53,6 +56,8 @@ var Auction =
 		Auction.enemyBidding();
 		Auction.currentBidder();
 		Auction.updatePlayer();
+		
+		console.log("Going" + goingTimer);
 		
 		//price();
 		if(playerDidBid)
@@ -171,11 +176,12 @@ var Auction =
 		  // draw the money HUD
 		context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
 		//player bid
-		
+		/*
 		context.fillText('End Bid Time :  ' + bidders[0] + endBidTimers[0]  ,200, 460);
 		context.fillText('End Bid Time2 :  ' + bidders[1] + endBidTimers[1]  ,200, 480);
 		context.fillText('End Bid Time3 :  ' + bidders[2] + endBidTimers[2]  ,200, 500);
 		context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimers[3]  ,200, 520);
+		*/
 		context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);		
 	},
 	updatePlayer : function() 
@@ -270,11 +276,11 @@ var Auction =
 					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
 					//  console.log(enemyCaps);
-					 
+					  assetLoader.sounds.bidder.play();
 					  break;
 					}
 				}
-				
+								
 			
 			}
 		 }
@@ -358,8 +364,32 @@ var Auction =
 		{
 			if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
 			{
-				this.sold();
-				alert("Sold to " + bidders[i]);
+				//end auction with enemy bidder
+				//this.sold();
+				//alert("Sold to " + bidders[i]);
+				goingTimer ++;
+				if((goingTimer > 300) && (goingTimer < 460))
+				{
+					//alert("Going Once " );
+					context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
+					assetLoader.sounds.jump.play();
+				}
+				else if((goingTimer > 470) && (goingTimer < 600))
+				{
+					//alert("Going Twice " );
+					context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
+					assetLoader.sounds.jump.play();
+
+				}
+				else if(goingTimer > 660)
+				{
+					this.sold();
+					alert("Sold to " + bidders[i]);
+					context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
+					
+				}
+				
+				
 							
 			}
 		}
@@ -368,7 +398,8 @@ var Auction =
 	endAuction : function()
 	{
 		 endGame == true;
-		 this.gameOver();	
+		 this.gameOver();
+		 assetLoader.sounds.bidder.pause();	
 		 
 	},
 	buyOut : function()
@@ -380,6 +411,8 @@ var Auction =
 			//push vehicle to garage
 			alert("Sold to the player");
 			auctionStop = true;
+			assetLoader.sounds.bidder.pause();
+			assetLoader.sounds.sold.play();
 		}
 		else
 		{

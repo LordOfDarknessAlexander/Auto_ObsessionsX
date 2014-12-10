@@ -335,7 +335,7 @@ function auctionMode(deltaTime)
    appState = GAME_MODE.AUCTION;
    ticker = 0;
    stop = true;
-   //money = 50000;
+ 
    playerBid = 0;
    Auction.endAuction();
    
@@ -373,6 +373,8 @@ function auctionMode(deltaTime)
   $('.sound').show();
 
   assetLoader.sounds.gameOver.pause();
+  assetLoader.sounds.going.pause();
+  assetLoader.sounds.sold.pause();
   assetLoader.sounds.bg.currentTime = 0;
   assetLoader.sounds.bg.loop = true;
   assetLoader.sounds.bg.play();
@@ -407,6 +409,8 @@ Auction.sold = function()
 	assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
 	assetLoader.sounds.gameOver.play();
+	assetLoader.sounds.bidder.pause();
+	assetLoader.sounds.sold.play();
 }
 
 
