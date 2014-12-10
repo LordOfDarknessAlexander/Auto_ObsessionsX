@@ -27,6 +27,11 @@
 	left:5%;
 	top:40%;
 }
+#gameMenu img#homeImg
+{
+	height:20em;
+	width:25em;
+}
 #gameMenu div#menuRight
 {
 	position:absolute;

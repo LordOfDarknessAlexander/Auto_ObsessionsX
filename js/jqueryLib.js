@@ -1,57 +1,89 @@
 ﻿//This file contains jQuery functions for manipulation of the application's 'index.html'
-//functions are visable to any file linking this document
-
+//functions and objects are visable to any file linking this document
 var jq = {
 	//namespace containing application bindings for jquery,
 	//preforms qjery call one then stores the result as an object
 	userCash:$("label#userCash"),
 	setCash : function(val)
-	{
+	{	//set the html for the userCash label, to be displayed in browser
 		this.userCash.html(val.toString());
 	},
-	//main : {
-		//menu:
-	//},
+	Main : {
+		menu:$('#main')
+	},
+	Game : {	//rename to something less vague
+		menu : $('#gameMenu'),
+		homeImg : $('img#homeImg'),
+		//left menu
+		toCarsBtn : $(''),
+		//toProjBtn : $(''),
+		//toGarageBtn : $(''),
+		toAuctionBtn : $('#toAuctionBtn'),
+		repairBtn : $('#buyUpgradesBtn')
+		//right menu
+		//toProfileBtn:$(''),
+		//toMsgBtn:$(''),
+		//torankingsBtn:$(''),
+	},
 	Credits : {
+		//menu:$('#credits'),
+		//backBtn:$(''),
 		toggle : function()
 		{	//displays the credits screen if hiden or hides it if visable
-			$('#main').toggle();	//hides if shown
-			$('#main').children().toggle();	//hides/showns all child elements
+			//$('#main').toggle();	//hides if shown
+			//$('#main').children().toggle();	//hides/showns all child elements
+			jq.Main.menu.toggle();	//hides if shown
+			jq.Main.menu.children().toggle();	//hides/showns all child elements
+
 			$('#menu').toggleClass('credits');	//adds class else removes if already added
 			$('#credits').toggle();	//shows if hidden
 		}
 	},
 	Garage : {
 		menu : $('#Garage'),
+		backBtn : $('#garageBackBtn'),
+		//selectCarBtn:,
+		//viewCarBtn:$(),
 		toggle : function()
-		{
+		{	//from game menu to garage, or vice versa
 			$('#gameMenu').toggle();
 			this.menu.toggle();	//this refers to jq.Garage
 			//$('#Garage').toggle();
 		}
 	},
+	Auction : {
+		//menu : $('#Auction')\
+		backBtn : $('#auctionBackButton')
+	},
 	CarView : {
 		menu : $('#CarView'),
 		backBtn : $('button#carViewBackBtn'),
+		carImg : $('img#car'),
 		toggle : function()
 		{	//go from (my cars to car view) || (car view to my cars)
 			//jq.Garage.menu.toggle();
 			//this.menu.toggle();
-			$('#Garage').toggle();
-			$('#CarView').toggle();
+			jq.Garage.menu.toggle();
+			$('#CarView').toggle();	//this.menu doesn't work...
 		}
 	},
 	Funds : {
 		menu : $('#AddFunds'),
 		backBtn : $('#addFundsBackButton'),
 		toggle : function()
-		{
+		{	//from game menu to funds or vice versa
 			$('#gameMenu').toggle();
 			this.menu.toggle();
 			//this.menu.toggle();
 			jq.setCash(money);
 		}
+	},
+	RepairShop : {
+		menu : $('#RepairShop'),
+		backBtn : $('#repairBackButton')
 	}
+	//Projects
+	//Vehicles
 };
 /*
 function jqToggleCredits() 
@@ -63,26 +95,16 @@ function jqToggleCredits()
 }*/
 $('.credits').click(jq.Credits.toggle);
 $('.back').click(jq.Credits.toggle);
-
-
 //
 //Game Menu Add funds portal button
 //
-/*
-function jqToggleFunds()
-{
-	$('#gameMenu').toggle();
-	$('#AddFunds').toggle();
-	jqSetCash(money);
-}*/
 $('#addFunds').click(function() 
 {
 	jq.Funds.toggle();
     $('#menu').addClass('AddFunds');
 	addFundsMode();	//is ok to call external functions, as long as they are defined in program.js
 });
-//Inside AddFunds State Bacjbutton 
-//$('#addFundsBackButton')
+//
 jq.Funds.backBtn.click(function()
 {
 	jq.Funds.toggle();
@@ -102,4 +124,10 @@ function jqToggleCarView()
 	//jq.Garage.menu.toggle();
 	$('#Garage').toggle();
 	$('#CarView').toggle();
+}*//*
+function jqToggleFunds()
+{
+	$('#gameMenu').toggle();
+	$('#AddFunds').toggle();
+	jqSetCash(money);
 }*/

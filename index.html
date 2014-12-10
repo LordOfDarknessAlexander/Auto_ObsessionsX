@@ -87,6 +87,7 @@
         </canvas>
  
 		<div id="gameMenu">
+        	<!--Root Game Menu, hub for page navigation-->
             <h1>My Inventory</h1>
             <!--div id='statBar'>
                 <label id='cash'></label>
@@ -100,7 +101,8 @@
               <!--li><input type="button" id="repair" value="Repair" onmouseover="repairButton()" onclick="repairState()"></li-->
               <!--li><input type="button" id="myCars" value="My Cars" onmouseover="inventoryButton()" onclick="inventoryState()"></li-->
             </ul>
-              <div id='menuRight'>
+            <img id='homeImg' src='images\\garageEmpty.png'>
+			<div id='menuRight'>
             	<button id='profile'>My Profile</button><br>
              	<button id='messages'>My Messages</button><br>
               	<button id='rankings'>Rankings</button><br>
@@ -141,9 +143,11 @@
            <ul>
               <li><input type="button" id="repairBackButton" onmouseover="repairBackButton()" onclick="startGame()"></li>
            </ul>
+           
            <div id='upgrades'>
            		<!--buttons added dynamically from script-->
            </div>
+           
            <div id='repair'>
 				<!--buttons added dynamically from script-->
            </div>
@@ -263,7 +267,7 @@
             <!--display vehicle stats and actions-->
             <button id='selectCarBtn'>Select</button>
             <button id='sellBtn'>Sell</button>
-            <!--img src=''-->
+            <img id='car' src='images\\vehicle.jpg'>
             <!--div id='statLabels'>
                 <lable>Drivetrain</label>
                 <lable>Body</label>

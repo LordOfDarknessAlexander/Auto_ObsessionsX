@@ -468,22 +468,25 @@ $('.restart').click(function()
 
 //InMenuButtons
 //auction Button
-$('#toAuctionBtn').click(function() 
+jq.Game.toAuctionBtn.click(function() 
 {
 	$('#auction').show();
-	$('#gameMenu').hide();
+	//$('#gameMenu').hide();
+	jq.Game.menu.hide();
 	$('#menu').addClass('auction'); 	
 	auctionMode();
 
 });
 //Auction State Back Button
-$('#auctionBackButton').click(function()
+jq.Auction.backBtn.click(function()
 {
 	resetStates();
 	startGame();
   
 	$('#Auction').hide();
-	$('#gameMenu').show();
+	jq.Game.menu.show();
+	//var car = userGarage[curCarIndex];
+	//jq.Game.homeImg.attr('src', car.getFullPath() );
 	$('#menu').removeClass('Auction');
 	$('#menu').addClass('gameMenu');
 	
@@ -500,19 +503,21 @@ $('#bid').click(function()
 	$('#RepairShop').toggle();
     //$('#RepairShop').children().toggle(0();
 }*/
-$('#buyUpgradesBtn').click(function()
+jq.Game.repairBtn.click(function()
 {
 	//toggleRepair();
-	$('#gameMenu').hide();
-	$('#RepairShop').show();
+	//$('#gameMenu')
+	jq.Game.menu.hide();
+	jq.RepairShop.menu.show();
 	//appState = GAME_MODE.Repair;
 });
 //RepairMenu Back Button 
-$('#repairBackButton').click(function()
+jq.RepairShop.backBtn.click(function()
 {
 	//toggleRepair();
-  	$('#RepairShop').hide();
-  	$('#gameMenu').show();
+  	jq.RepairShop.menu.hide();
+ 	//$('#gameMenu')
+	jq.Game.menu.show();
 	resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });

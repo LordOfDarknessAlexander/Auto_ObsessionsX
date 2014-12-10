@@ -19,6 +19,7 @@ var Garage = {
 	init : function()
 	{	//called to load assests and initialize private vars
 		//delete userGarage;
+		//selCarIndex = null;
 		//init cars from local storage
 		//add buttons for each car avaiable in garage
 		//var carList = $('#Garage'.children('ul#carBtns');
@@ -111,12 +112,23 @@ var Garage = {
 	}
 };
 
+var CarView = {
+	//carView state object
+	init : function(index)
+	{
+		var car = userGarage[selCarIndex];
+		jq.CarView.carImg.attr('src', 'images\\vehicle.jpg');	//car.getFullPath() );
+		//jq.CarView.carInfo.text(xmlCarinfo.getElemById(car.id) );
+	}
+	//update, ender, exit?
+};
+
 $('#myCars').click(function()
 {
 	jq.Garage.toggle();
 	Garage.init();
 });
-$('#garageBackBtn').click(function(){
+jq.Garage.backBtn.click(function(){
 	jq.Garage.toggle();
 	//Garage.exit();
 });
@@ -134,5 +146,6 @@ $('button#selectCarBtn').click(function()
 	if(selCarIndex !== null)
 	{
 		this.setCurrentCar({index:selCarIndex});
+		jq.Game.homeImg.attr('src', 'images\\vehicle.jpg');	//set home car image
 	}
 });
