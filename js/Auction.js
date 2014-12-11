@@ -1,6 +1,6 @@
 ﻿//Global Auction State Object, no caps as object is not const
-var PLAYER_WAIT = 300;
-var ENEMY_WAIT = 500;
+var PLAYER_WAIT = 200;
+var ENEMY_WAIT = 400;
 //AI cooldown timer
 var bidderCooldown = 0;
 var playerCanBid = false;
@@ -14,7 +14,6 @@ var playerNextBid = currentBid + (currentBid * 0.1);
 
 //BidTImers Booleans
 var startEndBids = [false,false,false,false];
-var playerWon = false;
 var goingTimer = 0;
 
 //var carsForSale = [
@@ -46,7 +45,14 @@ var Auction =
 		  	console.log(i);
 		  	break;
 		}
-	  
+	  	for(var i = 0; i < enemyCaps.length; ++ i)
+		{
+			if(enemies == 0)
+			{
+				enemyCaps[i]++;
+			}
+		}
+
 
 	 
 	},	
@@ -57,8 +63,9 @@ var Auction =
 		Auction.currentBidder();
 		Auction.updatePlayer();
 		
-		console.log("Going" + goingTimer);
 		
+		console.log("Going" + goingTimer);
+		//enemies[i] ++;
 		//price();
 		if(playerDidBid)
 		{
@@ -68,7 +75,7 @@ var Auction =
 		}
 	  	for(var i = 0; i < enemies.length; i++)
 		{
-		  	 //enemies.push(i);
+		  //	enemies[i] ++;
 		  	 console.log(i);
 		  	 break;
 		}
@@ -120,26 +127,26 @@ var Auction =
 		//draw them depending on current bid
 		if((enemyBids[0] >= currentBid))
 		{
-			player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
+			player1 = enemies[0] +  context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
 			
 					
 		}
 		else
 		{
-			player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X, 120);
+			player1 = enemies[0] + context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X, 120);
 		
 			
 		}
 		//Enemy 2
 		if(enemyBids[1] >= currentBid)
 		{
-			player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);
+			player2 = enemies[1] + context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);
 			
 			
 		}
 		else
 		{
-			player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X, 160);
+			player2 = enemies[1] + context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X, 160);
 			
 			
 		}
@@ -189,6 +196,12 @@ var Auction =
 	{
 	  player.update();
 	  player.draw();
+	  if((playerBid >= currentBid) && (playerEndBidTimer > ENEMY_WAIT) && (enemyBids.length > 0))
+	  {
+			playerWon = true;
+			this.buyOut();
+			
+	  }
 	
 	},
 
@@ -196,19 +209,23 @@ var Auction =
 	{	//updates AI bidding timers	
 		for(var i = 0; i < startEndBids.length; i++)
 		{
-			if(startEndBids[i] = true){			
+			if(startEndBids[i] = true)
+			{			
 				endBidTimers[i]++;
 			}
-			else{
+			else
+			{
 				endBidTimers[i] = 0;
 				 goingTimer = 0;
 			}
 		}		
 		//Player end bid
-		if(startPlayerEndBid){
+		if(startPlayerEndBid)
+		{
 			playerEndBidTimer ++;
 		}
-		else{
+		else
+		{
 			playerEndBidTimer = 0;
 		}	
 		
@@ -251,13 +268,18 @@ var Auction =
 			endAuction();	
 			
 		}
-		if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]) && (playerDidBid)  && (playerEndBidTimer >= 600) )
+		/*
+		if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]) && (playerDidBid)  && (playerEndBidTimer >= 900) )
 		{
 			//buyOut();
 			playerWon = true;
 			
-		}
+		}*/
+		
+		
+	
 	},
+
 	enemyBidding : function()
 	{
 		//upPercentage of vehicle for next bid
@@ -273,11 +295,11 @@ var Auction =
 
 				if(enemyCanBid)
 				{//
-					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap) )
+					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap2) )
 					//if((enemies[i]) > (enemyCaps) && (enemyBids[i] < currentBid))
 					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
-					//  console.log(enemyCaps);
+					  console.log(enemyCaps);
 					  assetLoader.sounds.bidder.play();
 					  break;
 					}
@@ -291,7 +313,6 @@ var Auction =
 		
 		
 	},
-	
 	bidFinder : function()
 	{	//determine bidder
 		function checkBid(index)
@@ -367,32 +388,27 @@ var Auction =
 		{
 			if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
 			{
-				//end auction with enemy bidder
-				//this.sold();
-				//alert("Sold to " + bidders[i]);
 				goingTimer ++;
-				if((goingTimer > 300) && (goingTimer < 460))
+				if((goingTimer > 300) && (goingTimer < 560))
 				{
 					//alert("Going Once " );
 					context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
 					assetLoader.sounds.jump.play();
 				}
-				else if((goingTimer > 470) && (goingTimer < 600))
+				else if((goingTimer > 470) && (goingTimer < 700))
 				{
 					//alert("Going Twice " );
 					context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
 					assetLoader.sounds.jump.play();
 
 				}
-				else if(goingTimer > 660)
+				else if(goingTimer > 760)
 				{
 					this.sold();
 					alert("Sold to " + bidders[i]);
 					context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
 					
 				}
-				
-				
 							
 			}
 		}
@@ -411,6 +427,7 @@ var Auction =
 		if(playerWon)
 		{
 			money = money - currentBid;
+			this.playerBuyOut();
 			//push vehicle to garage
 			alert("Sold to the player");
 			auctionStop = true;

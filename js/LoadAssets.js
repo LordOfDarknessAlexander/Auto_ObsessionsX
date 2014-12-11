@@ -31,9 +31,9 @@ var assetLoader = (function()
     'bg'            : 'sounds/D.mp3',
     'jump'          : 'sounds/jump.mp3',
     'gameOver'      : 'sounds/gameOver.mp3',
-    'bidder'		: 'sounds/auction.wav',
+    'bidder'		: 'sounds/bidders.mp3',
     'going'			: 'sounds/going.mp3',
-    'sold'			: 'sounds/sold.wav',
+    'sold'			: 'sounds/sold.mp3',
   };
 
   var assetsLoaded = 0;                                // how many assets have been loaded

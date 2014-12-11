@@ -365,6 +365,14 @@ function auctionMode(deltaTime)
    {
     	Auction.playerBidding();
      	console.log(endGame);
+     	if((playerBid >= currentBid) && (playerEndBidTimer >= 300) && (enemyBids.length > 0))
+		{
+			//playerWon = true;
+			buyOut();
+			
+		}
+
+     
    }
   
   $('#Auction').show();
@@ -412,6 +420,16 @@ Auction.sold = function()
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
 }
+Auction.playerBuyOut = function()
+{
+	money = money - currentBid;
+	//push vehicle to garage
+	alert("Sold to the player");
+	auctionStop = true;
+	assetLoader.sounds.bidder.pause();
+	assetLoader.sounds.sold.play();
+
+}
 
 
 function gameOver() 
@@ -432,6 +450,22 @@ function gameOver()
 	assetLoader.sounds.gameOver.play();
 		
 }
+
+Auction.buyOut = function()
+{
+	if(playerWon)
+    {
+    	Auction.playerBuyOut();
+    	
+    }
+    else
+	{
+	  playerWon == false;
+	  
+	}
+
+}
+
 
 //
 //Menu state start game button
