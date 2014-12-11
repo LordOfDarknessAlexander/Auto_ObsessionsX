@@ -420,18 +420,6 @@ Auction.sold = function()
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
 }
-Auction.playerBuyOut = function()
-{
-	money = money - currentBid;
-	//push vehicle to garage
-	alert("Sold to the player");
-	auctionStop = true;
-	assetLoader.sounds.bidder.pause();
-	assetLoader.sounds.sold.play();
-
-}
-
-
 function gameOver() 
 {
 	//$('.game-over').style.display = 'true';
@@ -465,6 +453,20 @@ Auction.buyOut = function()
 	}
 
 }
+
+Auction.playerBuyOut = function()
+{
+	money = money - currentBid;
+	//push vehicle to garage
+	alert("Sold to the player");
+	auctionStop = true;
+	assetLoader.sounds.bidder.pause();
+	assetLoader.sounds.sold.play();
+
+}
+
+
+
 
 
 //
