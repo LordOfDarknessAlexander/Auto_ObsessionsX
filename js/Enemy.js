@@ -1,14 +1,16 @@
 ﻿function Enemy(bidCap)
 {	//enemy class
-	this.bidCap = bidCap;
-	this.endBidTimer = 0;
-	this.startEndBid = false;
-	
-	this.reset = function()
-	{
-		endBidTimer = 0;
-		startEndBid = false;
-	}
+	return {
+		bidCap : bidCap,
+		endBidTimer : 0,
+		startEndBid : false,
+		//	
+		reset : function()
+		{
+			this.endBidTimer = 0;
+			this.startEndBid = false;
+		}
+	};
 }
 function price(bias)
 {
@@ -28,10 +30,10 @@ function price(bias)
 //as names don't matter they can still be random
 
 var enemies = [
-	new Enemy(price()),
-	new Enemy(price()),
-	new Enemy(price()),
-	new Enemy(price())
+	Enemy(price()),
+	Enemy(price()),
+	Enemy(price()),
+	Enemy(price())
 ];	//
 
 //result can also be weighted, prefering higher or lower bids

@@ -41,14 +41,14 @@ function carPart(condition, originality){
 		//getCondition:function(){return repaired ? this.condition + 25 : this.condition;
 	};
 }
-function Vehicle(Name, Make, Year)
+function Vehicle(Name, Make, Year, Price)
 {
 	var img = new Image()
 	img.src = 'images/vehicle.jpg';	//getFullPath
 	//returns a new vehicle object
 	return {
 		//pos:new Vector(VEHICLE_XPOS, VEHICLE_YPOS,0,0)
-		price:0,
+		_price:Price,	//original sale price on year made, does not change
 		condition:0,
 		originality:0,
 		name : Name,
@@ -58,7 +58,17 @@ function Vehicle(Name, Make, Year)
 		//parts : [],	//only retain currently upgraded parts
 		image : img,
 		//
+		getPrice : function()
+		{	//calculates sale price based on age, condition and completed upgrades
+			//var upgradeCost = 0;
+			//for(var i = 0; i < parts.length; i++)
+			//{
+				//upgradeCost += parts[i].getPrice();
+			//}
+			return this._price; // + upgradeCost;
+		},
 		displayInfo : function(){
+			//context if from globals
 			context.fillText(this.name, VEHICLE_XPOS + 40, 120);
 			context.fillText("Value"+ this.price  ,VEHICLE_XPOS + 40, 140);
 			context.fillText("Orig" + this.originality  ,VEHICLE_XPOS + 40, 160);
@@ -114,6 +124,14 @@ function Vehicle(Name, Make, Year)
 		}
 	};
 }
+//TEMPORARY
+//xml data base of cars, loaded from server
+var xdbCars = [
+	Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969', 25000),
+	Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969', 18000),
+	Vehicle('Sierra', 'GMC', '1997', 12000)
+	//...etc
+];
 /*
 var Vehicle = function(imgSrc)	//xmlNode)
 {

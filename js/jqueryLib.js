@@ -51,9 +51,15 @@ var jq = {
 			//$('#Garage').toggle();
 		}
 	},
+	AuctionSelect : {
+		menu : $('#AuctionSelect'),
+		backBtn : $('#asBackBtn')
+	},
 	Auction : {
-		//menu : $('#Auction')\
+		menu : $('#Auction'),
 		backBtn : $('#auctionBackButton')
+		//cashLabel:$('#myCash'),
+        //carPrice:$('#carPrice');
 	},
 	CarView : {
 		menu : $('#CarView'),

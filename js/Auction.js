@@ -16,17 +16,54 @@ var playerNextBid = currentBid + (currentBid * 0.1);
 var startEndBids = [false,false,false,false];
 var playerWon = false;
 var goingTimer = 0;
-
-//var carsForSale = [
-	//dynamic list of cars id's, determined by a script after parsing vehicle database
-	
-//];
-
-
-
+//var _curCar = null;	//current call for sale at Auction
+//
+function shuffleArray(array) 
+{	//sort array items
+    var counter = array.length, temp, index;
+    // While there are elements in the array
+    while (counter > 0) 
+    {   // Pick a random index
+        index = Math.floor(Math.random() * counter);
+        // Decrease counter by 1
+        counter--;
+        // And swap the last element with it
+        temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+       
+    }
+    return array;
+}
 var Auction =
-{
+{	//manages the state for purchasing cars
+	init:function()
+	{	//call to start an auction for car
+		//_curCar = xbdCars[carIndex];
+		appState = GAME_MODE.AUCTION;
+		auctionStop = false;
+		
+		playerBid = 0;
+		this.endAuction();
+		//
+		shuffleArray(enemyBids);
+		shuffleArray(bidders);
+		shuffleArray(enemyCaps);
+		//		
+		context.font = '26px arial, sans-serif';  
 
+		$('#Auction').show();
+		//$('#menu').removeClass('gameMenu');
+		//$('#menu').addClass('Auction');
+		$('.sound').show();
+		
+		assetLoader.sounds.gameOver.pause();
+		assetLoader.sounds.going.pause();
+		assetLoader.sounds.sold.pause();
+		assetLoader.sounds.bg.currentTime = 0;
+		assetLoader.sounds.bg.loop = true;
+		assetLoader.sounds.bg.play();
+	},
 	resart:function()
 	{
 		delete enemies; 
@@ -47,8 +84,6 @@ var Auction =
 		  	break;
 		}
 	  
-
-	 
 	},	
 	update : function()
 	{
@@ -170,12 +205,12 @@ var Auction =
 		var gorguts;
 		gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
 		
-			//current bid
+
+		//these could be HTML elements in the Auction div
 		context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
-		
-		context.fillText('Game Timer :  ' + timer.toFixed(2)  ,200, 400);
-		  // draw the money HUD
 		context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
+
+		context.fillText('Game Timer :  ' + timer.toFixed(2)  ,200, 400);
 		//player bid
 		/*
 		context.fillText('End Bid Time :  ' + bidders[0] + endBidTimers[0]  ,200, 460);
@@ -191,7 +226,6 @@ var Auction =
 	  player.draw();
 	
 	},
-
 	bidTimers : function()
 	{	//updates AI bidding timers	
 		for(var i = 0; i < startEndBids.length; i++)
@@ -390,16 +424,13 @@ var Auction =
 					alert("Sold to " + bidders[i]);
 					context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
 					
-				}
-				
-				
-							
+				}			
 			}
 		}
-	},
-	
+	},	
 	endAuction : function()
 	{
+		//if user won save to storage or pass to next state
 		 endGame == true;
 		 this.gameOver();
 		 assetLoader.sounds.bidder.pause();	
@@ -420,8 +451,6 @@ var Auction =
 		else
 		{
 			playerWon = false;
-		}
-		 
-	}
-	
+		}		 
+	}	
 };

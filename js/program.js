@@ -27,15 +27,15 @@ $(document).ready(function()
 		{
 			requestAnimFrame( auctionInit);
 			
-			if(appState == GAME_MODE.AUCTION)
-			{
+			//if(appState == GAME_MODE.AUCTION)
+			//{
 				update();
 			    Auction.update();
-			}
+			//}
 			
 			
-			timer++;
-			ticker++;
+			//timer++;
+			//ticker++;
 		}
 	}
 
@@ -178,45 +178,45 @@ function garageDoor()
 //app may only exist in one state at a time
 function switchStates( GAME_MODE) 
 {	 //call various update based on appState
-	 switch (GAME_MODE) 
-	 {
-	 	 case SPLASH:
-		        splash();
-		        break;
+	switch (GAME_MODE) 
+	{
+		case SPLASH:
+			splash();
+		break;
+		
+		case MAIN_MENU:
+			mainMenu();
+		break;  
+		   
+		case AUCTION:
+			Auction.update();
+		break;
 		        
-		  case MAIN_MENU:
-		        mainMenu();
-		    	break;  
-		           
-	      case AUCTION:
-		        Auction.update();
-		        break;
-		        
-		  case REPAIR:
-		        Repair.update();
-		        break;
-		        
-		  case ADD_FUNDS:
-		    	Store.update();
-		    	break;
-		    	
-		  case TUTORIAL:
-		    	//Tutorial.update();
-		    	break;
-		    	
-		  case NEW_USER:
-		    	//Register();
-		    	splash();
-		    	break;
-		    	
-		  case LOGIN_USER:
-		    	//Login.update();
-		    	break;
-		    	    	
-		    default:
-		         RUNNING; 
-	     // etc...
-	 }
+		case REPAIR:
+			Repair.update();
+		break;
+		
+		case ADD_FUNDS:
+			Store.update();
+		break;
+		
+		case TUTORIAL:
+			//Tutorial.update();
+		break;
+		
+		case NEW_USER:
+			//Register();
+			splash();
+		break;
+		
+		case LOGIN_USER:
+			//Login.update();
+		break;
+			
+		default:
+			RUNNING; 
+		// etc...
+	}
 }
 
 function update(deltaTime)
@@ -310,74 +310,56 @@ function startGame()
   assetLoader.sounds.bg.loop = true;
   assetLoader.sounds.bg.play();  
 }
-function shuffleArray(array) 
-{	//sort array items
-    var counter = array.length, temp, index;
-    // While there are elements in the array
-    while (counter > 0) 
-    {   // Pick a random index
-        index = Math.floor(Math.random() * counter);
-        // Decrease counter by 1
-        counter--;
-        // And swap the last element with it
-        temp = array[counter];
-        array[counter] = array[index];
-        array[index] = temp;
-       
-    }
-    return array;
-}
 
 function auctionMode(deltaTime)
 {	//in-Auction update, core of game logic
    context.clearRect(0, 0, canvas.width, canvas.height);
-   auctionStop = false;
-   appState = GAME_MODE.AUCTION;
+   //auctionStop = false;
+   //appState = GAME_MODE.AUCTION;
    ticker = 0;
    stop = true;
  
-   playerBid = 0;
-   Auction.endAuction();
-   
+   //playerBid = 0;
+   //Auction.endAuction();
    auctionInit();
   
-   shuffleArray(enemyBids);
-   shuffleArray(bidders);
-   shuffleArray(enemyCaps);
+   //shuffleArray(enemyBids);
+   //shuffleArray(bidders);
+   //shuffleArray(enemyCaps);
   // shuffleArray(vehiclePrice);
  
-   context.font = '26px arial, sans-serif';  
+   //context.font = '26px arial, sans-serif';  
       	
-	if(appState == GAME_MODE.AUCTION)
-	{
-		console.log("Snap, crackle , pop");
+	//if(appState == GAME_MODE.AUCTION)
+	//{
+	//	console.log("Snap, crackle , pop");
 		
-	}
-	else
-	{
-		auctionStop = true;
-		appState = GAME_MODE.RUNNING;
+	//}
+	//else
+	//{
+		//auctionStop = true;
+		//appState = GAME_MODE.RUNNING;
 		
-		resetStates();
-	}  	 
+		//resetStates();
+	//}  	 
   
-   auctionMode.update = function() 
-   {
-    	Auction.playerBidding();
-     	console.log(endGame);
-   }
+   //auctionMode.update = function() 
+  // {
+    	//Auction.playerBidding();
+     	//console.log(endGame);
+   //}
   
-  $('#Auction').show();
-  $('#menu').removeClass('gameMenu');
-  $('#menu').addClass('Auction');
-  $('.sound').show();
+  //$('#Auction').show();
+  //$('#menu').removeClass('gameMenu');
+  //$('#menu').addClass('Auction');
+  //$('.sound').show();
 
-  assetLoader.sounds.gameOver.pause();
-  assetLoader.sounds.going.pause();
-  assetLoader.sounds.sold.pause();
-  assetLoader.sounds.bg.currentTime = 0;
-  assetLoader.sounds.bg.loop = true;
-  assetLoader.sounds.bg.play();
+  //assetLoader.sounds.gameOver.pause();
+  //assetLoader.sounds.going.pause();
+  //assetLoader.sounds.sold.pause();
+  //assetLoader.sounds.bg.currentTime = 0;
+  //assetLoader.sounds.bg.loop = true;
+  //assetLoader.sounds.bg.play();
 }
 Auction.endAuction = function()
 {
@@ -468,15 +450,29 @@ $('.restart').click(function()
 
 //InMenuButtons
 //auction Button
+jq.AuctionSelect.backBtn.click(function() 
+{
+	jq.Game.menu.toggle();
+	jq.AuctionSelect.menu.toggle();
+	//$('#menu').addClass('auction');
+	//AuctionSelect.init();
+});
+jq.Game.toAuctionBtn.click(function() 
+{
+	jq.Game.menu.hide();
+	jq.AuctionSelect.menu.show();
+	//$('#menu').addClass('auction');
+	AuctionSelect.init();
+});/*
 jq.Game.toAuctionBtn.click(function() 
 {
 	$('#auction').show();
 	//$('#gameMenu').hide();
 	jq.Game.menu.hide();
-	$('#menu').addClass('auction'); 	
+	//$('#menu').addClass('auction');
+	Auction.init();
 	auctionMode();
-
-});
+});*/
 //Auction State Back Button
 jq.Auction.backBtn.click(function()
 {
@@ -487,8 +483,8 @@ jq.Auction.backBtn.click(function()
 	jq.Game.menu.show();
 	//var car = userGarage[curCarIndex];
 	//jq.Game.homeImg.attr('src', car.getFullPath() );
-	$('#menu').removeClass('Auction');
-	$('#menu').addClass('gameMenu');
+	//$('#menu').removeClass('Auction');
+	//$('#menu').addClass('gameMenu');
 	
 });
 //Inside Auction Bid Button

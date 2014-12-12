@@ -20,7 +20,7 @@ var Garage = {
 	{	//called to load assests and initialize private vars
 		//delete userGarage;
 		//selCarIndex = null;
-		//init cars from local storage
+		//init cars from local storage, or parsed from database on server
 		//add buttons for each car avaiable in garage
 		//var carList = $('#Garage'.children('ul#carBtns');
 		//carList.clear();	//remove previous values, otherwise cars will be repeated

@@ -7,6 +7,7 @@ var context = canvas.getContext('2d');
 //aspect ratio
 var width = canvas.getAttribute('width'),
 	height = canvas.getAttribute('height');
+
 var player, money, stop, ticker;
 /*
 var Storage = {
@@ -61,7 +62,7 @@ slimer.src = 'images/slime.png';
 //Happy Enemies
 var curBidImage = new Image();
 curBidImage.src = 'images/slime2.png';
-
+/*
 //Buttons functions
 var auctionButton = {};
 var auctionBackButton = {};
@@ -73,7 +74,7 @@ var purchaseButton = {};
 var repairBackButton = {};
 var addFundsButton = {};
 var addFundsBackButoon = {};
-
+*/
 //AI
 //Create an empty array of Bidders
 var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Behemoth ", "Quatarian " ,"Ol G ", "Cindy ","Bobby ","Obama ", "OsamaBinBombin ","Ortega Mammon ","LOD Alexander ","Meatwad ","Candela","Oprah ","Jerry Springer ","Sam Jaxon ",

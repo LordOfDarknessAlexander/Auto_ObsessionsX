@@ -40,4 +40,35 @@ var player = (function(player)
 
   return player;
 })(Object.create(Vector.prototype));
+//UPDATE
+/*
+function player()
+{
+	return {
+		position : Vector(PLAYER_XPOS, PLAYER_YPOS, 0, player.dy);
+		size : Vector(PLAYER_XPOS, PLAYER_YPOS, 0, player.dy);
+		speed     = 6;
+		// spritesheets
+		sheet : new SpriteSheet('images/normal_walk.png', player.width, player.height);
+		walkAnim  : new Animation(player.sheet, 4, 0, 15);
+		jumpAnim  : new Animation(player.sheet, 4, 15, 15);
+		fallAnim  : new Animation(player.sheet, 4, 11, 11);
+		anim      : player.walkAnim;
+		//update
+		update : function() 
+		{
+			this.anim = player.walkAnim;
+			this.anim.update();
+		},	
+		draw : function() 
+		{
+			this.anim.draw(player.x, player.y);
+		},		
+		reset : function() 
+		{
+			this.position.x = PLAYER_XPOS;
+			this.position.y = PLAYER_YPOS;
+		}
+	};
+}*/
 
