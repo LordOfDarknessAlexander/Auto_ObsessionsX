@@ -22,6 +22,7 @@ var player = (function(player)
     player.anim = player.walkAnim;
     player.anim.update();
     
+    
   };
  
   //Draw the player at it's current position
