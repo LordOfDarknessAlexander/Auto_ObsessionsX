@@ -2,8 +2,24 @@
 var PLAYER_WAIT = 300;
 var ENEMY_WAIT = 500;
 //AI cooldown timer
+/*var user = {
+	canBid:false,
+	didBid:false,
+	didWin:false,
+	startEndBid:false,
+	endBidTimer:0,
+	bid:0	//current bid
+};*/
 var bidderCooldown = 0;
 var playerCanBid = false;
+
+var playerBid = 0;
+//temp
+var bidAmount = 200;
+var currentBid = 0;
+//var asking = upPerc + currentBid;
+//var vehiclePrice = [20000,400,858,966666,898989,78787,85888];
+//var vehiclePrice = 20000;
 var currentBid = vehiclePrice * 0.1;
 
 var enemyBids = [0,0,0,0]; 
@@ -16,6 +32,26 @@ var playerNextBid = currentBid + (currentBid * 0.1);
 var startEndBids = [false,false,false,false];
 var playerWon = false;
 var goingTimer = 0;
+
+var startPlayerEndBid = false;	//player local
+var playerEndBidTimer = 0;	//player local
+var vehiclePrice = 20000;
+//static bidding caps results in obvious behaviour,
+//ie. starting an auction with more than 1.25 of vehicle price will always win
+
+//new array for every new auction? preferably in the auction button qjuery callback
+
+var enemyCap = 1.25 * vehiclePrice;
+var enemyCap2 = 0.8 * vehiclePrice;
+var enemyCap3 = 0.7 * vehiclePrice;
+var enemyCap4 = 0.9 * vehiclePrice;
+var enemyCap5 = 0.6 * vehiclePrice;
+var enemyCap6 = 0.2 * vehiclePrice;
+var playerWon = false;
+
+var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
+
+//var _car = xbdCars[0];	//null;	////current car being sold, private var of Auction
 //var _curCar = null;	//current call for sale at Auction
 //
 function shuffleArray(array) 
@@ -39,11 +75,16 @@ var Auction =
 {	//manages the state for purchasing cars
 	init:function()
 	{	//call to start an auction for car
-		//_curCar = xbdCars[carIndex];
+		//_car = xbdCars[0];	
 		appState = GAME_MODE.AUCTION;
 		auctionStop = false;
 		
 		playerBid = 0;
+		//if(car !== null)
+		//{
+			//vehiclePrice = car.getPrice();
+			//currentBid = vehiclePrice;
+		//}
 		this.endAuction();
 		//
 		shuffleArray(enemyBids);
@@ -71,8 +112,7 @@ var Auction =
 	},
 	
 	initAI : function()
-	{
-		
+	{	//initislize an array of AI players		
 		enemies = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
 		for(var i = 0; i < enemies.length; i++)
 		{
@@ -107,7 +147,6 @@ var Auction =
 		  	 console.log(i);
 		  	 break;
 		}
-		
 
 	  	if(bidderCooldown >= ENEMY_WAIT)
 	  	{
@@ -120,11 +159,10 @@ var Auction =
 	  	Auction.findEndBidder();
 	  	Auction.endAuction();
 	  	Auction.buyOut();
-	  	
 	},
 	render : function()
 	{
-	
+		//context.clearRect(0, 0, canvas.width, canvas.height);
 		var player1;
 		var player2;
 		var player3;
@@ -259,8 +297,7 @@ var Auction =
 			startEndBids[1] = false;
 			startEndBids[2] = false;
 			startEndBids[3] = false;
-			startPlayerEndBid = true;	
-						
+			startPlayerEndBid = true;						
 		}
 		
 		if(playerBid <= money)
@@ -285,7 +322,11 @@ var Auction =
 			endAuction();	
 			
 		}
-		if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]) && (playerDidBid)  && (playerEndBidTimer >= 600) )
+		if(playerDidBid &&
+			(playerBid > enemyBids[0]) &&
+			(playerBid > enemyBids[1]) &&
+			(playerBid > enemyBids[2]) &&
+			(playerBid > enemyBids[3])  && (playerEndBidTimer >= 600) )
 		{
 			//buyOut();
 			playerWon = true;
@@ -301,8 +342,7 @@ var Auction =
 		if( currentBid >= 0 )
 		{	
 			for(var i = 0; i < enemyBids.length; i++)
-			{		
-						
+			{						
 				enemies.price = 1;
 
 				if(enemyCanBid)
@@ -316,16 +356,10 @@ var Auction =
 					  break;
 					}
 				}
-								
-			
 			}
 		 }
-		
 		//if the bidders bid is at o or less than the current bid player wins bid
-		
-		
-	},
-	
+	},	
 	bidFinder : function()
 	{	//determine bidder
 		function checkBid(index)
@@ -358,8 +392,7 @@ var Auction =
 				startEndBids[i] = (i == index ? true : false);
 			}
 			
-			startPlayerEndBid = false;
-	
+			startPlayerEndBid = false;	
 		}
 		
 		if(checkBid(0) )
@@ -382,7 +415,10 @@ var Auction =
 	currentBidder : function()
 	{	//Player Bidding Function
 		//Player has the current bid
-		if((playerBid > enemyBids[0])&&(playerBid > enemyBids[1])&&(playerBid > enemyBids[2])&&(playerBid > enemyBids[3]))
+		if( (playerBid > enemyBids[0])&&
+			(playerBid > enemyBids[1])&&
+			(playerBid > enemyBids[2])&&
+			(playerBid > enemyBids[3]) )
 		{
 		   currentBid = playerBid;
 		   startPlayerEndBid = true;

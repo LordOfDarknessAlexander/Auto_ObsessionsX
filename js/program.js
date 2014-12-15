@@ -1,5 +1,38 @@
 //$(function()	//shorthand for $(document).ready(
 var AutoObessesions = {};
+
+function garageDoor()
+{
+	backgroundY -= speed;
+	if(backgroundY == -1 * height)
+	{
+		backgroundY = -1000;
+	}
+}
+function update(deltaTime)
+{
+    garageDoor();	//should splash update
+	//Order of draws matters
+    context.drawImage(backgroundImage, 0,-10);
+    context.drawImage(splashImage, 0, backgroundY);
+    timer++;
+}
+Auction.setup = function()
+{
+	if(!auctionStop) 
+	{
+		requestAnimFrame(Auction.setup);
+		
+		//if(appState == GAME_MODE.AUCTION)
+		//{
+			update();
+			Auction.update();
+		//}
+		//timer++;
+		//ticker++;
+	}
+}
+//executed after the html document is processed
 $(document).ready(function()
 {
 	function init()
@@ -20,23 +53,6 @@ $(document).ready(function()
 	    ticker++;
 	  }
 	
-	}
-	function auctionInit()
-	{
-		if(!auctionStop) 
-		{
-			requestAnimFrame( auctionInit);
-			
-			//if(appState == GAME_MODE.AUCTION)
-			//{
-				update();
-			    Auction.update();
-			//}
-			
-			
-			//timer++;
-			//ticker++;
-		}
 	}
 
 function createReader()
@@ -158,21 +174,10 @@ function addCar(car)
 }
 */
 
-
-
 //Load the splash screen first
 assetLoader.finished = function() 
 {
   switchStates();
-}
-
-function garageDoor()
-{
-	backgroundY -= speed;
-	if(backgroundY == -1 * height)
-	{
-		backgroundY = -1000;
-	}
 }	
 
 //app may only exist in one state at a time
@@ -219,15 +224,6 @@ function switchStates( GAME_MODE)
 	}
 }
 
-function update(deltaTime)
-{
-    garageDoor();
-	//Order of draws matters
-    context.drawImage(backgroundImage, 0,-10);
-    context.drawImage(splashImage, 0, backgroundY);
-    timer++;
-	
-}
 //Show the splash after loading all assets 
 function splash() 
 {
@@ -254,8 +250,7 @@ function Register()
  
 //Main Menu  
 function mainMenu() 
-{
- 
+{ 
   for (var sound in assetLoader.sounds) 
   {
     if (assetLoader.sounds.hasOwnProperty(sound)) 
@@ -275,40 +270,40 @@ money = 50000;
 // Start the game - reset all variables and entities, spawn ground and water.
 function startGame() 
 {
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  //$('#game-over').style.display = 'none';
-  document.getElementById('game-over').style.display = 'none';
-  document.getElementById('gameMenu').style.display = 'true';  
-  appState = GAME_MODE.RUNNING;
-  player.reset();
-  ticker = 0;
-  stop = false;
-  auctionStop = true;
-
-  playerBid = 0;
-  
-  context.font = '26px arial, sans-serif';
-  // Create gradient
-  var gradient=context.createLinearGradient(36,40,600,1);
-  gradient.addColorStop("0","magenta");
-  gradient.addColorStop("0.5","blue");
-  gradient.addColorStop("1.0","green");
-  // Fill with gradient
-  context.fillStyle = gradient;
-  appState = GAME_MODE.RUNNING;
-  
-  switchStates();
-
-  if(appState == GAME_MODE.RUNNING)
-  {
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	//$('#game-over').style.display = 'none';
+	document.getElementById('game-over').style.display = 'none';
+	document.getElementById('gameMenu').style.display = 'true';  
+	appState = GAME_MODE.RUNNING;
+	player.reset();
+	ticker = 0;
+	stop = false;
+	auctionStop = true;
+	
+	playerBid = 0;
+	
+	context.font = '26px arial, sans-serif';
+	// Create gradient
+	var gradient=context.createLinearGradient(36,40,600,1);
+	gradient.addColorStop("0","magenta");
+	gradient.addColorStop("0.5","blue");
+	gradient.addColorStop("1.0","green");
+	// Fill with gradient
+	context.fillStyle = gradient;
+	appState = GAME_MODE.RUNNING;
+	
+	switchStates();
+	
+	if(appState == GAME_MODE.RUNNING)
+	{
 	console.log("Run , run squirrel");
-
-  }	
-
-  assetLoader.sounds.gameOver.pause();
-  assetLoader.sounds.bg.currentTime = 0;
-  assetLoader.sounds.bg.loop = true;
-  assetLoader.sounds.bg.play();  
+	
+	}	
+	
+	assetLoader.sounds.gameOver.pause();
+	assetLoader.sounds.bg.currentTime = 0;
+	assetLoader.sounds.bg.loop = true;
+	assetLoader.sounds.bg.play();
 }
 
 function auctionMode(deltaTime)
@@ -321,7 +316,7 @@ function auctionMode(deltaTime)
  
    //playerBid = 0;
    //Auction.endAuction();
-   auctionInit();
+   Auction.setup();//auctionInit();
   
    //shuffleArray(enemyBids);
    //shuffleArray(bidders);
@@ -365,8 +360,7 @@ Auction.endAuction = function()
 {
 	if(endGame)
     {
-    	Auction.sold();
-    	
+    	Auction.sold();    	
     }
     else
 	{
@@ -456,14 +450,14 @@ jq.AuctionSelect.backBtn.click(function()
 	jq.AuctionSelect.menu.toggle();
 	//$('#menu').addClass('auction');
 	//AuctionSelect.init();
-});
+});/*
 jq.Game.toAuctionBtn.click(function() 
 {
 	jq.Game.menu.hide();
 	jq.AuctionSelect.menu.show();
 	//$('#menu').addClass('auction');
 	AuctionSelect.init();
-});/*
+});*/
 jq.Game.toAuctionBtn.click(function() 
 {
 	$('#auction').show();
@@ -472,7 +466,7 @@ jq.Game.toAuctionBtn.click(function()
 	//$('#menu').addClass('auction');
 	Auction.init();
 	auctionMode();
-});*/
+});
 //Auction State Back Button
 jq.Auction.backBtn.click(function()
 {

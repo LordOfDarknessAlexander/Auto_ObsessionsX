@@ -67,6 +67,11 @@ function Vehicle(Name, Make, Year, Price)
 			//}
 			return this._price; // + upgradeCost;
 		},
+		getInfo : function()
+		{	//var node = xbdCarInfo.getElementById(this._id);
+			//return node.text;
+			return 'Default Car Info';
+		},
 		displayInfo : function(){
 			//context if from globals
 			context.fillText(this.name, VEHICLE_XPOS + 40, 120);
@@ -125,7 +130,8 @@ function Vehicle(Name, Make, Year, Price)
 	};
 }
 //TEMPORARY
-//xml data base of cars, loaded from server
+//xml data base of cars, loaded from server,
+//will be an XML Dom object, instead of an array
 var xdbCars = [
 	Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969', 25000),
 	Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969', 18000),

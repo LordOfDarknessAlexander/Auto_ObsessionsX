@@ -16,11 +16,11 @@ var AuctionSelect =
 			
 			var btnStr = "<li>" + 
 				"<img src=\'" + "images\\vehicle.jpg"/*car.getFullPath()*/ + "\'>" +
-				"<label id=\'" + labelID + "\'>" + car.getFullName() + "</label>" +
+				"<label id=\'" + labelID + "\'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
 				"<button id=\'" + btnID + "\'\'>" + 
-					"<label id=\'price\'>carPrice</label><br>" +
+					"<label id=\'price\'>$" + (car.getPrice() ).toString() + "</label><br>" +
 					"Bid Now!<br>" +
-					//"<label id=\'expireTime\'>Time Auction expires!</label>" +
+					//"<label id=\'expireTime\'>Auction expire time!</label>" +
 				"</button>" +
 			"</li><br>";
 			this.list.append(btnStr);
@@ -36,6 +36,7 @@ var AuctionSelect =
 		var i = obj.data.index;
 		jq.AuctionSelect.menu.toggle();
 		jq.Auction.menu.toggle();
+		//Auction.setup();
 		Auction.init(i);
 	},
 	update : function()
