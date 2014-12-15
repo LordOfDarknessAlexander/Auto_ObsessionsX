@@ -1,6 +1,17 @@
 ﻿//Global Auction State Object, no caps as object is not const
 var PLAYER_WAIT = 300;
 var ENEMY_WAIT = 500;
+var enemyCap = 1.25 * vehiclePrice;
+var enemyCap2 = 0.8 * vehiclePrice;
+var enemyCap3 = 0.7 * vehiclePrice;
+var enemyCap4 = 0.9 * vehiclePrice;
+var enemyCap5 = 0.6 * vehiclePrice;
+var enemyCap6 = 0.2 * vehiclePrice;
+var playerWon = false;
+
+
+var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
+
 //AI cooldown timer
 /*var user = {
 	canBid:false,
@@ -31,7 +42,6 @@ var playerNextBid = currentBid + (currentBid * 0.1);
 
 //BidTImers Booleans
 var startEndBids = [false,false,false,false];
-var playerWon = false;
 var goingTimer = 0;
 
 var startPlayerEndBid = false;	//player local
