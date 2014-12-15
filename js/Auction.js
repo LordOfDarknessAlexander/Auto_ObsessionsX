@@ -1,6 +1,7 @@
 ﻿//Global Auction State Object, no caps as object is not const
 var PLAYER_WAIT = 300;
 var ENEMY_WAIT = 500;
+
 var enemyCap = 1.25 * vehiclePrice;
 var enemyCap2 = 0.8 * vehiclePrice;
 var enemyCap3 = 0.7 * vehiclePrice;
@@ -82,13 +83,13 @@ var Auction =
 		auctionStop = false;
 		playerWon = false;
 		playerBid = 0;
-		//if(car !== null)
-		//{
-			//vehiclePrice = car.getPrice();
-			//currentBid = vehiclePrice;
-		//}
-		//this.endAuction();
-		//
+		/*
+		if(car !== null)
+		{
+			vehiclePrice = car.getPrice();
+			currentBid = vehiclePrice;
+		}
+		*/
 		shuffleArray(enemyBids);
 		shuffleArray(bidders);
 		shuffleArray(enemyCaps);
@@ -160,11 +161,7 @@ var Auction =
 	render : function()
 	{
 		//context.clearRect(0, 0, canvas.width, canvas.height);
-		var player1;
-		var player2;
-		var player3;
-		var player4;
-		
+			
 		
 		
 		if(( playerBid == currentBid)&& (playerDidBid))
@@ -190,49 +187,49 @@ var Auction =
 		//draw them depending on current bid
 		if((enemyBids[0] >= currentBid))
 		{
-			player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
+			enemies[0] =  context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
 			
 					
 		}
 		else
 		{
-			player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X, 120);
+			enemies[0] =   context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X, 120);
 		
 			
 		}
 		//Enemy 2
 		if(enemyBids[1] >= currentBid)
 		{
-			player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);
+			enemies[1] = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);
 			
 			
 		}
 		else
 		{
-			player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X, 160);
+			enemies[1] = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X, 160);
 			
 			
 		}
 		//Enemy3
 		if( enemyBids[2] >= currentBid )
 		{
-			player3 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X , 70);
+			enemies[2] = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X , 70);
 			
 		}
 		else
 		{
-			 player3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X, 180);
+			 enemies[2] = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X, 180);
 			 
 		}
 		//Enemy4
 		if( enemyBids[3] >= currentBid)
 		{
-			player4 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X , 70);
+			enemies[3] = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X , 70);
 			
 		}
 		else
 		{
-			player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X, 200);
+			enemies[3] =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X, 200);
 			
 		}
 		
