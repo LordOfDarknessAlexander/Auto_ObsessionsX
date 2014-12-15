@@ -11,10 +11,8 @@ var width = canvas.getAttribute('width'),
 var player, money, stop, ticker;
 /*
 var Storage = {
-	canUseLocal:'localStorage' in window && window.localStorage !== null,
-	canUseSession,
-	local: canUseLocal ? window.localStorage : null,
-	//session:canUseSession ? code.sessionStorage : null,
+	local: window.localStorage
+	//session:code.sessionStorage
 };
 */
 //States
@@ -26,6 +24,7 @@ var MAIN_MENU;
 var TUTORIAL;
 var NEW_USER;
 var LOGIN_USER;
+
 
 
 var playSound;
@@ -80,9 +79,25 @@ var addFundsBackButoon = {};
 //Create an empty array of Bidders
 var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Behemoth ", "Quatarian " ,"Ol G ", "Cindy ","Bobby ","Obama ", "OsamaBinBombin ","Ortega Mammon ","LOD Alexander ","Meatwad ","Candela","Oprah ","Jerry Springer ","Sam Jaxon ",
 "Moody Blue ","Shitake Shroom ","Macabre ","Sancho Pancho ","Quijote ","Leo ","Centurion ","Omega Pepper ","Osiris Moon ","Sass McFrass ","Smiley ","Budapest Guy ","Larry Queen ","Special Head ","Primitivo Montoya ","The Skywalker ","Sam Squirrel ","Dante ","Sparkles King ","Onion Knight "];
-//
-//Global frame timer
-//
+
+var vehiclePrice = 20000;
+//static bidding caps results in obvious behaviour,
+//ie. starting an auction with more than 1.25 of vehicle price will always win
+
+//new array for every new auction? preferably in the auction button qjuery callback
+
+var enemyCap = 1.25 * vehiclePrice;
+var enemyCap2 = 0.8 * vehiclePrice;
+var enemyCap3 = 0.7 * vehiclePrice;
+var enemyCap4 = 0.9 * vehiclePrice;
+var enemyCap5 = 0.6 * vehiclePrice;
+var enemyCap6 = 0.2 * vehiclePrice;
+var playerWon = false;
+
+
+var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
+
+//DT
 var timer = 0;
 var previousTime = Date.now();
 
@@ -90,10 +105,8 @@ var deltaTime = (Date.now() - previousTime) / 1000;
 previousTime = Date.now();
 timer += deltaTime;
 var endGame = false;
-//
-//
-//
-var appState = GAME_MODE.SPLASH;	//appState is an integer
+
+var appState = GAME_MODE.SPLASH;	
 
 function resetStates()
 {

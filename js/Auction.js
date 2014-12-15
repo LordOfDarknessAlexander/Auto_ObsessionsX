@@ -35,13 +35,13 @@ var goingTimer = 0;
 
 var startPlayerEndBid = false;	//player local
 var playerEndBidTimer = 0;	//player local
-var vehiclePrice = 20000;
+//var vehiclePrice = 20000;
 //static bidding caps results in obvious behaviour,
 //ie. starting an auction with more than 1.25 of vehicle price will always win
 
 //new array for every new auction? preferably in the auction button qjuery callback
 
-var enemyCap = 1.25 * vehiclePrice;
+/*var enemyCap = 1.25 * vehiclePrice;
 var enemyCap2 = 0.8 * vehiclePrice;
 var enemyCap3 = 0.7 * vehiclePrice;
 var enemyCap4 = 0.9 * vehiclePrice;
@@ -50,7 +50,7 @@ var enemyCap6 = 0.2 * vehiclePrice;
 var playerWon = false;
 
 var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
-
+*/
 //var _car = xbdCars[0];	//null;	////current car being sold, private var of Auction
 //var _curCar = null;	//current call for sale at Auction
 //
