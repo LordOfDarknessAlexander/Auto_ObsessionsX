@@ -10,6 +10,7 @@ var ENEMY_WAIT = 500;
 	endBidTimer:0,
 	bid:0	//current bid
 };*/
+var vehiclePrice = 20000;
 var bidderCooldown = 0;
 var playerCanBid = false;
 
@@ -35,22 +36,13 @@ var goingTimer = 0;
 
 var startPlayerEndBid = false;	//player local
 var playerEndBidTimer = 0;	//player local
-//var vehiclePrice = 20000;
+
 //static bidding caps results in obvious behaviour,
 //ie. starting an auction with more than 1.25 of vehicle price will always win
 
 //new array for every new auction? preferably in the auction button qjuery callback
 
-/*var enemyCap = 1.25 * vehiclePrice;
-var enemyCap2 = 0.8 * vehiclePrice;
-var enemyCap3 = 0.7 * vehiclePrice;
-var enemyCap4 = 0.9 * vehiclePrice;
-var enemyCap5 = 0.6 * vehiclePrice;
-var enemyCap6 = 0.2 * vehiclePrice;
-var playerWon = false;
 
-var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
-*/
 //var _car = xbdCars[0];	//null;	////current car being sold, private var of Auction
 //var _curCar = null;	//current call for sale at Auction
 //
@@ -85,7 +77,7 @@ var Auction =
 			//vehiclePrice = car.getPrice();
 			//currentBid = vehiclePrice;
 		//}
-		this.endAuction();
+		//this.endAuction();
 		//
 		shuffleArray(enemyBids);
 		shuffleArray(bidders);
@@ -141,13 +133,6 @@ var Auction =
 			enemyCanBid = false;
 			
 		}
-	  	for(var i = 0; i < enemies.length; i++)
-		{
-		  	 //enemies.push(i);
-		  	 console.log(i);
-		  	 break;
-		}
-
 	  	if(bidderCooldown >= ENEMY_WAIT)
 	  	{
 	  		enemyCanBid = true;
@@ -157,8 +142,8 @@ var Auction =
 	  	
 	  	Auction.render();
 	  	Auction.findEndBidder();
-	  	Auction.endAuction();
 	  	Auction.buyOut();
+	  
 	},
 	render : function()
 	{
@@ -328,7 +313,7 @@ var Auction =
 			(playerBid > enemyBids[2]) &&
 			(playerBid > enemyBids[3])  && (playerEndBidTimer >= 600) )
 		{
-			//buyOut();
+			
 			playerWon = true;
 			
 		}
@@ -464,14 +449,6 @@ var Auction =
 			}
 		}
 	},	
-	endAuction : function()
-	{
-		//if user won save to storage or pass to next state
-		 endGame == true;
-		 this.gameOver();
-		 assetLoader.sounds.bidder.pause();	
-		 
-	},
 	buyOut : function()
 	{	//user 'buys out' the auction, placing the max bid
 		//bidding continues until only 1 bidder remains
@@ -488,5 +465,25 @@ var Auction =
 		{
 			playerWon = false;
 		}		 
+	},
+	sold : function()
+	{	//user 'buys out' the auction, placing the max bid
+		//bidding continues until only 1 bidder remains
+		document.getElementById('sold').style.display = 'true';
+		stop = true;
+		auctionStop = true;
+		
+		for(var i = 0; i < enemyBids.length; i++)
+		{
+			$('#enemyBid').html(enemyBids[i]);	//write enemy bid to html?
+		}
+		//enemy wins vehicle
+		$('#sold').show();
+		assetLoader.sounds.bg.pause();
+		assetLoader.sounds.gameOver.currentTime = 0;
+		assetLoader.sounds.gameOver.play();
+		assetLoader.sounds.bidder.pause();
+		assetLoader.sounds.sold.play();
 	}	
+	
 };

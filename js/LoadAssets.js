@@ -32,7 +32,7 @@ var assetLoader = (function()
     'jump'          : 'sounds/jump.mp3',
     'gameOver'      : 'sounds/gameOver.mp3',
     'bidder'		: 'sounds/bidders.mp3',
-    'going'			: 'sounds/going.mp3',
+    'going'			: 'sounds/jump.mp3',
     'sold'			: 'sounds/sold.mp3',
   };
 

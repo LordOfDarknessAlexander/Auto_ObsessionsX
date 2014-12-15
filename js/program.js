@@ -22,14 +22,8 @@ Auction.setup = function()
 	if(!auctionStop) 
 	{
 		requestAnimFrame(Auction.setup);
-		
-		//if(appState == GAME_MODE.AUCTION)
-		//{
-			update();
-			Auction.update();
-		//}
-		//timer++;
-		//ticker++;
+		update();
+		Auction.update();
 	}
 }
 //executed after the html document is processed
@@ -309,84 +303,11 @@ function startGame()
 function auctionMode(deltaTime)
 {	//in-Auction update, core of game logic
    context.clearRect(0, 0, canvas.width, canvas.height);
-   //auctionStop = false;
-   //appState = GAME_MODE.AUCTION;
    ticker = 0;
    stop = true;
  
-   //playerBid = 0;
-   //Auction.endAuction();
-   Auction.setup();//auctionInit();
+   Auction.setup();
   
-   //shuffleArray(enemyBids);
-   //shuffleArray(bidders);
-   //shuffleArray(enemyCaps);
-  // shuffleArray(vehiclePrice);
- 
-   //context.font = '26px arial, sans-serif';  
-      	
-	//if(appState == GAME_MODE.AUCTION)
-	//{
-	//	console.log("Snap, crackle , pop");
-		
-	//}
-	//else
-	//{
-		//auctionStop = true;
-		//appState = GAME_MODE.RUNNING;
-		
-		//resetStates();
-	//}  	 
-  
-   //auctionMode.update = function() 
-  // {
-    	//Auction.playerBidding();
-     	//console.log(endGame);
-   //}
-  
-  //$('#Auction').show();
-  //$('#menu').removeClass('gameMenu');
-  //$('#menu').addClass('Auction');
-  //$('.sound').show();
-
-  //assetLoader.sounds.gameOver.pause();
-  //assetLoader.sounds.going.pause();
-  //assetLoader.sounds.sold.pause();
-  //assetLoader.sounds.bg.currentTime = 0;
-  //assetLoader.sounds.bg.loop = true;
-  //assetLoader.sounds.bg.play();
-}
-Auction.endAuction = function()
-{
-	if(endGame)
-    {
-    	Auction.sold();    	
-    }
-    else
-	{
-	  endGame == false;
-	}
-
-}
-//if enemy wins auction
-Auction.sold = function()
-{
-	//$('.sold').style.display = 'true';
-	document.getElementById('sold').style.display = 'true';
-	stop = true;
-	auctionStop = true;
-	
-	for(var i = 0; i < enemyBids.length; i++)
-	{
-		$('#enemyBid').html(enemyBids[i]);	//write enemy bid to html?
-	}
-	//enemy wins vehicle
-	$('#sold').show();
-	assetLoader.sounds.bg.pause();
-	assetLoader.sounds.gameOver.currentTime = 0;
-	assetLoader.sounds.gameOver.play();
-	assetLoader.sounds.bidder.pause();
-	assetLoader.sounds.sold.play();
 }
 
 
