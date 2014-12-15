@@ -70,7 +70,7 @@ var Auction =
 		//_car = xbdCars[0];	
 		appState = GAME_MODE.AUCTION;
 		auctionStop = false;
-		
+		playerWon = false;
 		playerBid = 0;
 		//if(car !== null)
 		//{
@@ -86,8 +86,6 @@ var Auction =
 		context.font = '26px arial, sans-serif';  
 
 		$('#Auction').show();
-		//$('#menu').removeClass('gameMenu');
-		//$('#menu').addClass('Auction');
 		$('.sound').show();
 		
 		assetLoader.sounds.gameOver.pause();
@@ -139,7 +137,11 @@ var Auction =
 	  		bidderCooldown = 0;
 
 	  	}
-	  	
+	  	if(playerWon)
+		{
+			this.buyOut();	
+			console.log("Winner");
+		}
 	  	Auction.render();
 	  	Auction.findEndBidder();
 	  	Auction.buyOut();
@@ -247,6 +249,15 @@ var Auction =
 	{
 	  player.update();
 	  player.draw();
+	  if(playerDidBid &&
+			(playerBid > enemyBids[0]) &&
+			(playerBid > enemyBids[1]) &&
+			(playerBid > enemyBids[2]) &&
+			(playerBid > enemyBids[3])  && (playerEndBidTimer >= 600) )
+		{
+			
+			playerWon = true;
+		}
 	
 	},
 	bidTimers : function()
@@ -304,19 +315,10 @@ var Auction =
 		if(money <= 0)
 		{
 			money = 0;	//player has no money but doesn't win auction?
-			endAuction();	
+			sold();	
 			
 		}
-		if(playerDidBid &&
-			(playerBid > enemyBids[0]) &&
-			(playerBid > enemyBids[1]) &&
-			(playerBid > enemyBids[2]) &&
-			(playerBid > enemyBids[3])  && (playerEndBidTimer >= 600) )
-		{
-			
-			playerWon = true;
-			
-		}
+		
 	},
 	enemyBidding : function()
 	{
@@ -332,7 +334,7 @@ var Auction =
 
 				if(enemyCanBid)
 				{//
-					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap) )
+					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap6) )
 					//if((enemies[i]) > (enemyCaps) && (enemyBids[i] < currentBid))
 					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
