@@ -80,31 +80,34 @@ function openDoc(url, reader)
   
 	return doc;
 }
-function loadCars(doc){
-	//carNodes = doc.getElementsByTagName('Vehicle');
-	//carsLength = carNodes.length;
-	//for(var i = 0; i < carsLength; i++){
-		//var item = carNodes.item(i);
-		//item.getAttribute("name"); 
+function loadCars(doc)
+{
+	carNodes = doc.getElementsByTagName('Vehicle');
+	carsLength = carNodes.length;
+	for(var i = 0; i < carsLength; i++)
+	{
+		var item = carNodes.item(i);
+		item.getAttribute("name"); 
 		//create new car
-	//}
+	}
 	//use jquery?
 	var list = doc.childNodes;
 	var node = list[0];	//acessing nodes work
-//	var v = node.item(i);
-	//var cn = node.childNodes;
+	var v = node.item(i);
+	var cn = node.childNodes;
 	var atrs = node.attributes;
 	//TODO:accessing attribute elements breaks...
 	
-//	var parts = node.getElementById('upgrades');
-//	var name = atrs.getNamedItem('name');
-//	var n = node.getAttribute('name');
-	//var atrs = node.attributes;
-	//var n = node.getAttribute('year');
-//	var n = node.getAttribute('make');
-	//for(var i = 0; i < list.length; i++){
-		//userGarage.append(Vehicle(list[i]) )
-//	}
+	var parts = node.getElementById('upgrades');
+	var name = atrs.getNamedItem('name');
+	var n = node.getAttribute('name');
+	var atrs = node.attributes;
+	var n = node.getAttribute('year');
+	var n = node.getAttribute('make');
+	for(var i = 0; i < list.length; i++)
+	{
+		userGarage.append(Vehicle(list[i]) )
+	}
 }
 
 function loadXMLDoc(url)
@@ -265,7 +268,6 @@ money = 50000;
 function startGame() 
 {
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	//$('#game-over').style.display = 'none';
 	document.getElementById('game-over').style.display = 'none';
 	document.getElementById('gameMenu').style.display = 'true';  
 	appState = GAME_MODE.RUNNING;
@@ -371,7 +373,8 @@ jq.AuctionSelect.backBtn.click(function()
 	jq.AuctionSelect.menu.toggle();
 	//$('#menu').addClass('auction');
 	//AuctionSelect.init();
-});/*
+});
+/*
 jq.Game.toAuctionBtn.click(function() 
 {
 	jq.Game.menu.hide();

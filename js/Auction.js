@@ -163,7 +163,6 @@ var Auction =
 		//context.clearRect(0, 0, canvas.width, canvas.height);
 			
 		
-		
 		if(( playerBid == currentBid)&& (playerDidBid))
 		{
 			player.y = 10;
@@ -256,6 +255,7 @@ var Auction =
 	{
 	  player.update();
 	  player.draw();
+	  //Wins BId
 	  if(playerDidBid &&
 			(playerBid > enemyBids[0]) &&
 			(playerBid > enemyBids[1]) &&
@@ -312,12 +312,10 @@ var Auction =
 		{
 			//cant bid above your cash 
 			//call a new function to alert player hes &$#k up
-			//endAuction();
 			this.sold();
-			 
 			 startPlayerEndBid = false;
 		}
-		//Wins BId	
+			
 				
 		if(money <= 0)
 		{
@@ -341,11 +339,11 @@ var Auction =
 
 				if(enemyCanBid)
 				{//
-					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap6) )
+					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[0]) )
 					//if((enemies[i]) > (enemyCaps) && (enemyBids[i] < currentBid))
 					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
-					//  console.log(enemyCaps);
+					  console.log("EC" + enemyCaps[0]);
 					  assetLoader.sounds.bidder.play();
 					  break;
 					}
