@@ -160,7 +160,7 @@ var Auction =
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
 	  	}
-	  	
+	  	console.log("EnemyCaps " + enemyCaps[0]);
 	  	Auction.findEndBidder();
 	  	Auction.endAuction();
 		
@@ -277,6 +277,16 @@ var Auction =
 	{
 	  player.update();
 	  player.draw();
+	  if(playerDidBid &&
+			(playerBid > enemyBids[0]) &&
+			(playerBid > enemyBids[1]) &&
+			(playerBid > enemyBids[2]) &&
+			(playerBid > enemyBids[3])  && (playerEndBidTimer >= 600) )
+		{
+			//buyOut();
+			playerWon = true;
+			
+		}
 	
 	},
 	bidTimers : function()
@@ -337,16 +347,7 @@ var Auction =
 			endAuction();	
 			
 		}
-		if(playerDidBid &&
-			(playerBid > enemyBids[0]) &&
-			(playerBid > enemyBids[1]) &&
-			(playerBid > enemyBids[2]) &&
-			(playerBid > enemyBids[3])  && (playerEndBidTimer >= 600) )
-		{
-			//buyOut();
-			playerWon = true;
-			
-		}
+		
 	},
 	enemyBidding : function()
 	{
@@ -362,11 +363,11 @@ var Auction =
 
 				if(enemyCanBid)
 				{//
-					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCap) )
+					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[0]) )
 					//if((enemies[i]) > (enemyCaps) && (enemyBids[i] < currentBid))
 					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
-					//  console.log(enemyCaps);
+					  console.log("EnemyCaps " + enemyCaps[0]);
 					  assetLoader.sounds.bidder.play();
 					  break;
 					}
