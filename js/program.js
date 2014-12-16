@@ -13,6 +13,7 @@ function update(deltaTime)
 {
     garageDoor();	//should splash update
 	//Order of draws matters
+	//this isn't needed, set the background in css of the div element being displayed
     context.drawImage(backgroundImage, 0,-10);
     context.drawImage(splashImage, 0, backgroundY);
     timer++;
@@ -32,29 +33,6 @@ Auction.setup = function()
 		//ticker++;
 	}
 }
-//executed after the html document is processed
-$(document).ready(function()
-{
-	function init()
-	{
-	  if (!stop) 
-	  {
-	    requestAnimFrame(init);
-	  
-	  	update();
-	  	
-	    if((timer >= 300.00) && (timer <= 900.00))
-		{
-			appState = GAME_MODE.MAIN_MENU;
-		  	mainMenu();
-		  
-		}  
-		timer++;
-	    ticker++;
-	  }
-	
-	}
-
 function createReader()
 {
 	if(window.XMLHttpRequest)
@@ -86,6 +64,29 @@ function openDoc(url, reader)
   
 	return doc;
 }
+//executed after the html document is processed
+$(document).ready(function()
+{
+	function init()
+	{
+	  if (!stop) 
+	  {
+	    requestAnimFrame(init);
+	  
+	  	update();
+	  	
+	    if((timer >= 300.00) && (timer <= 900.00))
+		{
+			appState = GAME_MODE.MAIN_MENU;
+		  	mainMenu();
+		  
+		}  
+		timer++;
+	    ticker++;
+	  }
+	
+	}
+
 function loadCars(doc){
 	//carNodes = doc.getElementsByTagName('Vehicle');
 	//carsLength = carNodes.length;
@@ -371,18 +372,38 @@ Auction.endAuction = function()
 Auction.sold = function()
 {	//enemy wins auction, car goes to them
 	//$('.sold').style.display = 'true';
-	document.getElementById('sold').style.display = 'true';
+	//document.getElementById('sold').style.display = 'true';
 	stop = true;
 	auctionStop = true;
 	
-	for(var i = 0; i < enemyBids.length; i++)
-	{
-		$('#enemyBid').html(enemyBids[i]);	//write enemy bid to html?
-	}
+	//for(var i = 0; i < enemyBids.length; i++)
+	//{
+		//$('#enemyBid').html(enemyBids[i]);	//write enemy bid to html?
+	//}
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
 	$('#sold').show();
 	//disable user from entering an auction for this car again
+	
+	//in case of unintended bugs, make sure user doesn't already own car
+	if(playerWon && Auction._car !== null)
+	{
+		var hasCar = false;
+		
+		for(var i = 0; i < userGarage.length; i++)
+		{
+			if(Auction._car.name/*id*/ == userGarage[i].name/*id*/)
+			{
+				hasCar = true;
+				break;
+			}
+		}
+		if(!hasCar){
+			userGarage.push(Auction._car);	//creates a copy of car, giving it to user
+			Auction._car = null;	//no more car to sell
+		}
+		//Garage.save();
+	}
 	assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
 	assetLoader.sounds.gameOver.play();
@@ -404,6 +425,9 @@ function gameOver()
 	//reset AI timers
 	startEndBids = [false,false,false,false];
 	endBidTimers = [0,0,0,0];
+	//
+	//disable user from entering auction for this car
+	//Auction._car = null;	//no more car to sell
 	// assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
 	assetLoader.sounds.gameOver.play();		

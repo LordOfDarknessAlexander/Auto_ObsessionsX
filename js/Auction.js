@@ -52,7 +52,6 @@ var playerWon = false;
 
 var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
 */
-var _car = xdbCars[0];	//null;	////current car being sold, private var of Auction
 //
 function shuffleArray(array) 
 {	//sort array items
@@ -73,9 +72,10 @@ function shuffleArray(array)
 }
 var Auction =
 {	//manages the state for purchasing cars
+	_car : xdbCars[0],	//null;	////current car being sold, private var of Auction
 	init:function()
 	{	//call to start an auction for car
-		var index = 0;
+		var index = 1;
 		//endGame = false;
 		
 		if(index < xdbCars.length)	//make sure index is within bounds to be safe
@@ -165,9 +165,13 @@ var Auction =
 	  	Auction.endAuction();
 		
 		if(!auctionStop)
+		{
 		  	Auction.render();
+		}
 		else
+		{	//clear drawing when auction stops
 			context.clearRect(0, 0, canvas.width, canvas.height);
+		}
 			
 	  	Auction.buyOut();
 	},
@@ -497,6 +501,7 @@ var Auction =
 			//push vehicle to garage
 			alert("Sold to the player");
 			auctionStop = true;
+			Auction.sold();
 			assetLoader.sounds.bidder.pause();
 			assetLoader.sounds.sold.play();
 		}

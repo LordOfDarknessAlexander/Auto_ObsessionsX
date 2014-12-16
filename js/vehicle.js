@@ -44,17 +44,18 @@ function carPart(condition, originality){
 function Vehicle(Name, Make, Year, Price)
 {
 	var img = new Image()
-	img.src = 'images/vehicle.jpg';	//getFullPath
+	img.src = 'images/vehicle.jpg';	//getFullPath();
 	//returns a new vehicle object
 	return {
 		//pos:new Vector(VEHICLE_XPOS, VEHICLE_YPOS,0,0)
 		_price:Price,	//original sale price on year made, does not change
 		condition:0,
 		originality:0,
-		name : Name,
-		make : Make,
-		year : Year,
-		id : 0,
+		name : Name,	////node.attr('name'),
+		make : Make,	//node.attr('make'),
+		year : Year,	//node.attr('year'),
+		id : 0,	//node.attr('id'),
+		//_info: node.text(),
 		//parts : [],	//only retain currently upgraded parts
 		image : img,
 		//

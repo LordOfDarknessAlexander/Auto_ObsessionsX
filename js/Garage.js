@@ -5,9 +5,9 @@
 //var currentCar = null;
 
 var userGarage = [
-	Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969'),
-	Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969'),
-	Vehicle('Sierra', 'GMC', '1997')
+	//Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969'),
+	//Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969'),
+	//Vehicle('Sierra', 'GMC', '1997')
 ];
 //copy constructed car, altering currentCar doesn't change usergarage[0],
 //retain the index instead and access directly to mdoify.
@@ -32,29 +32,37 @@ var Garage = {
 		var list = $('#carBtns')
 		list.empty();	//remove any buttons if there were any previously
 		
-		for(var i = 0; i < userGarage.length; i++){
-			//add buttons to list
-			src = "\'images/vehicle.jpg\'";	//userGarage[i].getFullPath();
-			list.append("<li>" +
-			"<button id=\'carSelBtn" + i + "\'>" +
-			"<label id=\'carName\'>Car Name</label>" +
-			//"<label id=\'year\'></label>" +
-			//"<label id=\'name\'></label>" +
-			"<label id=\'carInfo\'></label>" +
-			//progress bar max default is 1.0
-			//
-			//"<div id=\'pbLabels'>" +
-				//"<label id=\'dt\'>drivetrain</label>" +
-				//"<label id=\'body\'>body</label>" +
-				//"<label id=\'interior\'>interior</label>" +
-				//"<label id=\'docs\'>documentation</label>" +
-			//"</div>" +			
-			//
-			"<img src=" + src + "></button>" +
-			"</li>");
-			
-			$('#carSelBtn' + i).click({index:i}, this.setCurrentCar);	//this.setSelectedCar);
-			this.setCarBtnText(i);
+		if(userGarage.length == 0)
+		{	//empty grage so display img instead of buttons
+			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
+			list.append(src);
+		}
+		else
+		{		
+			for(var i = 0; i < userGarage.length; i++){
+				//add buttons to list
+				src = "\'images/vehicle.jpg\'";	//userGarage[i].getFullPath();
+				list.append("<li>" +
+				"<button id=\'carSelBtn" + i + "\'>" +
+				"<label id=\'carName\'>Car Name</label>" +
+				//"<label id=\'year\'></label>" +
+				//"<label id=\'name\'></label>" +
+				"<label id=\'carInfo\'></label>" +
+				//progress bar max default is 1.0
+				//
+				//"<div id=\'pbLabels'>" +
+					//"<label id=\'dt\'>drivetrain</label>" +
+					//"<label id=\'body\'>body</label>" +
+					//"<label id=\'interior\'>interior</label>" +
+					//"<label id=\'docs\'>documentation</label>" +
+				//"</div>" +			
+				//
+				"<img src=" + src + "></button>" +
+				"</li>");
+				
+				$('#carSelBtn' + i).click({index:i}, this.setCurrentCar);	//this.setSelectedCar);
+				this.setCarBtnText(i);
+			}
 		}
 		//load interface
 		//appState = GAME_MODE.GARAGE;
@@ -75,7 +83,8 @@ var Garage = {
 	{	//saves garage and current car to local storage
 		//
 		//for(var i = 0; i < userGarage.length; i++){
-			//JSON.stringify(userGarage[i]);
+			//var str = JSON.stringify(userGarage[i]);
+			//save to storage or write to databse/file
 		//}
 	},
 	//setSelectedCar : function(obj)
@@ -116,9 +125,12 @@ var CarView = {
 	//carView state object
 	init : function(index)
 	{
-		var car = userGarage[selCarIndex];
-		jq.CarView.carImg.attr('src', 'images\\vehicle.jpg');	//car.getFullPath() );
-		//jq.CarView.carInfo.text(xmlCarinfo.getElemById(car.id) );
+		if(selCarIndex !== null && userGarage.length != 0)
+		{
+			var car = userGarage[selCarIndex];
+			jq.CarView.carImg.attr('src', 'images\\vehicle.jpg');	//car.getFullPath() );
+			//jq.CarView.carInfo.text(xmlCarinfo.getElemById(car.id) );
+		}
 	}
 	//update, ender, exit?
 };

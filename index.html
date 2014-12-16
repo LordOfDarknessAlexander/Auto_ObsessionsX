@@ -314,9 +314,10 @@
     	<h2>Sold to Rascal ,Chris create vehicles array so we can push this to inventory<span id="money"></span> ahoy!</h2>
 		<!--a href="javascript:void(0)" class="button restart">Try again?</a-->
         <button id='restart'>restart</button>
+        <!--img id='newCarImg'--><!--purchased car, src set in Auction.js-->
     </div>
     
-    <script type="text/javascript" src="js/globals.js"></script><!--is rendered first-->
+    <script type="text/javascript" src="js/globals.js"></script><!--is parsed first-->
     <script type="text/javascript" src="js/LoadAssets.js"></script> 
     <!--2D sprite/animation classes-->
     <script type="text/javascript" src="js/SpriteSheet.js"></script>
@@ -329,11 +330,13 @@
     <script type="text/javascript" src="js/vehicle.js"></script>
     <script type="text/javascript" src="js/jqueryLib.js"></script>
     <!--game states, doesn't work if placed in subfolder-->
+    <script type="text/javascript" src="js/Garage.js"></script>
+    <!--Auction and Repair states is dependant upon userGarage in Garage.js
+    	to push cars or modify cars in the users garage, so parse first-->
+    <script type="text/javascript" src="js/Repair.js"></script>
     <script type="text/javascript" src="js/Auction.js"></script>
     <script type="text/javascript" src="js/AuctionSelect.js"></script>
     <script type="text/javascript" src="js/Add_Funds.js"></script>
-    <script type="text/javascript" src="js/Repair.js"></script>
-    <script type="text/javascript" src="js/Garage.js"></script>
     <!--program main-->
     <script type="text/javascript" src="js/program.js"></script>
     
