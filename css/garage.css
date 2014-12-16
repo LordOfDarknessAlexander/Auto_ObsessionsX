@@ -3,7 +3,8 @@
 	--default-btn-bg: url('../images/defaultBtn.png') no-repeat 0 0;
 }*/
 #Garage
-{  
+{
+	background: url('../images/inventoryMenu.png') no-repeat 0 0;
 	display: none;
 	text-align: center;
 	padding-top: 92px;

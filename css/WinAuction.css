@@ -1,0 +1,23 @@
+﻿/*Action UI stylings*/
+#game-over
+{	/*Auction page stylings*/
+	background: url('../images/inventoryMenu.png') no-repeat 0 0;
+	display: none;
+	text-align: center;
+	padding-top: 92px;
+	z-index: 1;
+	width: 900px;
+	height: 600px;
+	position: absolute;
+}
+/*
+#auctionBackButton
+{
+	background: url('../images/backBtn.png') no-repeat 0 0;
+	color: white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;
+}
+*/

@@ -102,7 +102,6 @@ var assetLoader = (function()
         })(_this, image);
       }
     }
-
     //Load sounds
     for (var sound in this.sounds) 
     {

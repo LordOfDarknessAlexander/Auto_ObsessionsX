@@ -366,11 +366,10 @@ Auction.endAuction = function()
 	{
 	  endGame == false;
 	}
-
 }
-//if enemy wins auction
+
 Auction.sold = function()
-{
+{	//enemy wins auction, car goes to them
 	//$('.sold').style.display = 'true';
 	document.getElementById('sold').style.display = 'true';
 	stop = true;
@@ -380,15 +379,16 @@ Auction.sold = function()
 	{
 		$('#enemyBid').html(enemyBids[i]);	//write enemy bid to html?
 	}
-	//enemy wins vehicle
+	jq.Auction.menu.hide();
+	//jq.Auction.menu.children().hide();
 	$('#sold').show();
+	//disable user from entering an auction for this car again
 	assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
 	assetLoader.sounds.gameOver.play();
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
 }
-
 
 function gameOver() 
 {
@@ -399,16 +399,15 @@ function gameOver()
 	stop = true;
 		//Show a message that player has insufficient funds
 	$('#money').html(money);	//set value in the html element
+	//$('#Auction').hide();
 	$('#game-over').show();
 	//reset AI timers
 	startEndBids = [false,false,false,false];
 	endBidTimers = [0,0,0,0];
 	// assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
-	assetLoader.sounds.gameOver.play();
-		
+	assetLoader.sounds.gameOver.play();		
 }
-
 //
 //Menu state start game button
 //
@@ -594,6 +593,10 @@ $('.sound').click(function()
     }
   }
 });
-
+$('button#restart').click(function(){
+	$('#sold').hide();
+	jq.Game.menu.show();
+	appState = GAME_MODE.MAIN_MENU;
+});
 assetLoader.downloadAll();
 });

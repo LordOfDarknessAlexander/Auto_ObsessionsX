@@ -9,6 +9,7 @@ var ENEMY_WAIT = 500;
 	startEndBid:false,
 	endBidTimer:0,
 	bid:0	//current bid
+	//functions
 };*/
 var bidderCooldown = 0;
 var playerCanBid = false;
@@ -51,8 +52,7 @@ var playerWon = false;
 
 var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
 */
-//var _car = xbdCars[0];	//null;	////current car being sold, private var of Auction
-//var _curCar = null;	//current call for sale at Auction
+var _car = xdbCars[0];	//null;	////current car being sold, private var of Auction
 //
 function shuffleArray(array) 
 {	//sort array items
@@ -75,16 +75,23 @@ var Auction =
 {	//manages the state for purchasing cars
 	init:function()
 	{	//call to start an auction for car
-		//_car = xbdCars[0];	
+		var index = 0;
+		//endGame = false;
+		
+		if(index < xdbCars.length)	//make sure index is within bounds to be safe
+			_car = xdbCars[index];	
+		
 		appState = GAME_MODE.AUCTION;
 		auctionStop = false;
 		
 		playerBid = 0;
-		//if(car !== null)
-		//{
-			//vehiclePrice = car.getPrice();
-			//currentBid = vehiclePrice;
-		//}
+		
+		if(_car !== null)
+		{
+			vehiclePrice = _car.getPrice();
+			currentBid = vehiclePrice * 0.1;
+		}
+		//else, no car game breaks...
 		this.endAuction();
 		//
 		shuffleArray(enemyBids);
@@ -152,17 +159,25 @@ var Auction =
 	  	{
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
-
 	  	}
 	  	
-	  	Auction.render();
 	  	Auction.findEndBidder();
 	  	Auction.endAuction();
+		
+		if(!auctionStop)
+		  	Auction.render();
+		else
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			
 	  	Auction.buyOut();
 	},
 	render : function()
 	{
-		//context.clearRect(0, 0, canvas.width, canvas.height);
+		//if(endGame){
+			//context.clearRect(0, 0, canvas.width, canvas.height);
+			//return;
+		//}
+		
 		var player1;
 		var player2;
 		var player3;
@@ -484,9 +499,10 @@ var Auction =
 			assetLoader.sounds.bidder.pause();
 			assetLoader.sounds.sold.play();
 		}
-		else
-		{
-			playerWon = false;
-		}		 
+		//playWon is alread false, this is pointless
+		//else
+		//{
+			//playerWon = false;
+		//}		 
 	}	
 };

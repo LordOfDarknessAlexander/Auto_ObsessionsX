@@ -11,6 +11,8 @@ var width = canvas.getAttribute('width'),
 var player, money, stop, ticker;
 /*
 var Storage = {
+	canUseLocal:'localStorage' in window && window.localStorage !== null,
+	//canUseSession:,
 	local: window.localStorage
 	//session:code.sessionStorage
 };
@@ -62,19 +64,7 @@ slimer.src = 'images/slime.png';
 //Happy Enemies
 var curBidImage = new Image();
 curBidImage.src = 'images/slime2.png';
-/*
-//Buttons functions
-var auctionButton = {};
-var auctionBackButton = {};
-var repairButton = {};
-var bidButton = {};
-var inventoryButton = {};
-//Repair Shop Buttons
-var purchaseButton = {};
-var repairBackButton = {};
-var addFundsButton = {};
-var addFundsBackButoon = {};
-*/
+//
 //AI
 //Create an empty array of Bidders
 var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Behemoth ", "Quatarian " ,"Ol G ", "Cindy ","Bobby ","Obama ", "OsamaBinBombin ","Ortega Mammon ","LOD Alexander ","Meatwad ","Candela","Oprah ","Jerry Springer ","Sam Jaxon ",
@@ -96,8 +86,7 @@ var playerWon = false;
 
 
 var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
-
-//DT
+//Global frame timer
 var timer = 0;
 var previousTime = Date.now();
 
