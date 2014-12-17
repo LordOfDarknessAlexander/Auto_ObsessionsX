@@ -231,6 +231,9 @@ function splash()
 {
   init();
   $('#progress').hide();
+  $('#splash').removeClass('#Register');
+  $('#Register').hide();
+
   $('#splash').show();
   $('.sound').show();  
 }
@@ -241,6 +244,9 @@ function Register()
 	auctionStop = true;
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	$('#Register').show();
+	//$('#RegisterForm').show();
+
+	getMyContact();
 	appState = GAME_MODE.NEW_USER;
 	if(appState == GAME_MODE.NEW_USER)
 	{
@@ -263,6 +269,8 @@ function mainMenu()
    
   $('#progress').hide();
   $('#splash').hide();
+  $('#Register').hide();
+  $('#menu').removeClass('#Register');
   $('#main').show();
   $('#menu').addClass('main');
   $('.sound').show();
@@ -449,10 +457,10 @@ $('.Register').click(function()
 {
   $('#menu').hide();
   $('#Register').show();
+  Register();
   //delete splash
   //delete credits
   //delete menu image, since the game can not navigate back to this screen after clicking
-  startGame();
 });
 
 

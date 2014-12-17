@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">-
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,orientation=portrait">
     <title>Auto Obsessions</title>
     <link rel="stylesheet" href="css/auto.css" type="text/css" media="screen">
@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/garage.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/carView.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/LoseAuction.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/register.css" type="text/css" media="screen">
     <!--scripts here are executed before the page is parsed,
     	they must not be dependant on any other script but should be
         dependencies of js code at the end of the page-->
@@ -24,6 +25,7 @@
     <script type="text/javascript" src="js/payRequest.js"></script>
     <script type="text/javascript" src="js/Vector.js"></script>
     <script type="text/javascript" src="js/GameMode.js"></script>
+    <script type="text/javascript" src="js/Users.js"></script>
     <script type="text/javascript" src="js/requestAnimationFrame.js"></script>
 </head>
 <body>
@@ -296,10 +298,28 @@
         </div>
 
 	</div><!--end wrapper-->
-	<div id="=Register">
-            <li><input type="button" id="bid" value="Bid" onmouseover="bidButton()" onclick="playerBid()"></li>
+	<div id="Register">
+      
+     <!---       	  
+     <form id='register'>
+	               	Name:<input id='userID' type='text'><br>
+	                Address:<input id='userPW' type='text'><br>
+	                City:<input id='userCity' type='text'><br>
+	                State/Prov:<input id='userSP' type='text'><br>
+	                Country:<input id='userCountry' type='text'><br>
+	                Zip/Postal:<input id='userZP' type='text'><br>
+	                D.O.B.:<input id='userDOB' type='text'><br><!--change to date selector?--> <!---
+	                Username:<input id='userName' type='text'><br>
+	                Password:<input id='userPW' type='text'><br>
+	                Confirm Password:<input id='userPWConfirm' type='text'><br>
+                <input type='submit' value='SUBMIT'>
+            	</form>
+
+       ----->
+       </div> <!--end reg div --->
+
        
-            </div>
+           
 	<div id="game-over">
        	<!--win auction-->
     	<h2>Sold to Other Guy  <span id="bidders[]"></span> ahoy!</h2>
