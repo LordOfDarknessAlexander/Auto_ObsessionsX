@@ -29,6 +29,16 @@ var Garage = {
 			//curCarIndex = 0;
 		//}
 		//var btnStr = "<li><button id=\'carSelBtn1\'><label id=\'make\'></label><label id=\'year\'></label><label id=\'name\'></label><img src=\'images/vehicle.jpg\'></button></li>";
+		if(Storage.local !== null && 'userGarage' in Storage.local)
+		{
+			//userGarage = JSON.parse(Storage.local.userGarage);
+			//var jsonArray = JSON.parse(Storage.local.userGarage);	//returns an array
+			
+			//for(var i = 0; i < jsonArray.length; i++)
+			//{
+				//userGarage.push(JSON.parse(jsonArray[i]) );
+			//}
+		}
 		var list = $('#carBtns')
 		list.empty();	//remove any buttons if there were any previously
 		
@@ -86,6 +96,15 @@ var Garage = {
 			//var str = JSON.stringify(userGarage[i]);
 			//save to storage or write to databse/file
 		//}
+		if(Storage.local !== null)
+		{
+			//var array = [];
+			//for(var i = 0; i < userGarage.length; i++)
+			//{
+				//array.push(JSON.stringify(userGarage[i]) );
+			//}
+			//Storage.local['userGarage'] = JSON.stringify(array);
+		}
 	},
 	//setSelectedCar : function(obj)
 	//{	//sets and displays 

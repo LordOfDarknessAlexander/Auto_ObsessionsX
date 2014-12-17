@@ -36,7 +36,7 @@
 	    name='E-Type Series II 4.2 Roadster'
         year='1969'
         make='Jaguar'>
-
+		Vehicle info about important stuff
         <upgrades>
         	<part>
             	<id>ventilation</id>

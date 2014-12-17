@@ -9,14 +9,14 @@ var width = canvas.getAttribute('width'),
 	height = canvas.getAttribute('height');
 
 var player, money, stop, ticker;
-/*
+
 var Storage = {
-	canUseLocal:'localStorage' in window && window.localStorage !== null,
+	//canUseLocal:,
 	//canUseSession:,
-	local: window.localStorage
+	local:('localStorage' in window && window.localStorage !== null) ? window.localStorage : null
 	//session:code.sessionStorage
 };
-*/
+
 //States
 var REPAIR;
 var ADD_FUNDS;

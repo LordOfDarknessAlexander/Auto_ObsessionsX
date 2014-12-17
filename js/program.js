@@ -67,6 +67,7 @@ function openDoc(url, reader)
 //executed after the html document is processed
 $(document).ready(function()
 {
+	Storage.local.clear();
 	function init()
 	{
 	  if (!stop) 
@@ -402,7 +403,7 @@ Auction.sold = function()
 			userGarage.push(Auction._car);	//creates a copy of car, giving it to user
 			Auction._car = null;	//no more car to sell
 		}
-		//Garage.save();
+		Garage.save();
 	}
 	assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
