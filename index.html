@@ -299,7 +299,13 @@
 
 	</div><!--end wrapper-->
 	<div id="Register">
-      
+      <div id="myContacts">
+		  <div>N: <span id="fullname" contenteditable="true" onkeyup="storeMyContact(this.id)"></span></div>
+		  <div>P: <span id="phone" contenteditable="true" onkeyup="storeMyContact(this.id)"></span></div>
+		  <div>E: <span id="email" contenteditable="true" onkeyup="storeMyContact(this.id)"></span></div>
+	   	  <div><a onclick="clearLocal(); getMyContact();" href="javascript:void(0);">Clear All Of My Data</a></div>
+		</div>
+
      <!---       	  
      <form id='register'>
 	               	Name:<input id='userID' type='text'><br>
