@@ -38,6 +38,7 @@ var AuctionSelect =
 		jq.Auction.menu.toggle();
 		//Auction.setup();
 		Auction.init(i);
+		//Auction.setup();
 	},
 	update : function()
 	{

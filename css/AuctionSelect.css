@@ -1,6 +1,7 @@
 ﻿/*Action UI stylings*/
 #AuctionSelect
-{	/*Auction page stylings*/  
+{	/*Auction page stylings*/ 
+	background: url('../images/inventoryMenu.png') no-repeat 0 0; 
 	display: none;
 	text-align: center;
 	padding-top: 92px;

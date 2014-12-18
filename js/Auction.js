@@ -58,24 +58,24 @@ function shuffleArray(array)
 var Auction =
 {	//manages the state for purchasing cars
 	_car : xdbCars[0],	//null;	////current car being sold, private var of Auction
-	init:function()
+	init:function(index)
 	{	//call to start an auction for car
-		var index = 1;
+		//var i = 1;
 		//endGame = false;
-		
-		if(index < xdbCars.length)	//make sure index is within bounds to be safe
-			_car = xdbCars[index];	
-		
 		appState = GAME_MODE.AUCTION;
 		auctionStop = false;
 		
 		playerBid = 0;
+		
+		if(index < xdbCars.length)	//make sure index is within bounds to be safe
+			_car = xdbCars[index];	
 		
 		if(_car !== null)
 		{
 			vehiclePrice = _car.getPrice();
 			currentBid = vehiclePrice * 0.1;
 		}
+		//initAI();
 		//else, no car game breaks...
 		this.endAuction();
 		//
@@ -89,6 +89,8 @@ var Auction =
 		//$('#menu').removeClass('gameMenu');
 		//$('#menu').addClass('Auction');
 		$('.sound').show();
+		
+		this.setup();
 		
 		assetLoader.sounds.gameOver.pause();
 		assetLoader.sounds.going.pause();
@@ -166,7 +168,6 @@ var Auction =
 			//context.clearRect(0, 0, canvas.width, canvas.height);
 			//return;
 		//}
-		
 		var player1;
 		var player2;
 		var player3;

@@ -20,6 +20,7 @@ function update(deltaTime)
 }
 Auction.setup = function()
 {
+	context.clearRect(0, 0, canvas.width, canvas.height);
 	if(!auctionStop) 
 	{
 		requestAnimFrame(Auction.setup);
@@ -33,6 +34,57 @@ Auction.setup = function()
 		//ticker++;
 	}
 }
+function auctionMode(deltaTime)
+{	//in-Auction update, core of game logic
+   //context.clearRect(0, 0, canvas.width, canvas.height);
+   //auctionStop = false;
+   //appState = GAME_MODE.AUCTION;
+   ticker = 0;
+   stop = true;
+ 
+   //playerBid = 0;
+   //Auction.endAuction();
+   Auction.setup();//auctionInit();
+  
+   //shuffleArray(enemyBids);
+   //shuffleArray(bidders);
+   //shuffleArray(enemyCaps);
+  // shuffleArray(vehiclePrice);
+ 
+   //context.font = '26px arial, sans-serif';  
+      	
+	//if(appState == GAME_MODE.AUCTION)
+	//{
+	//	console.log("Snap, crackle , pop");
+		
+	//}
+	//else
+	//{
+		//auctionStop = true;
+		//appState = GAME_MODE.RUNNING;
+		
+		//resetStates();
+	//}  	 
+  
+   //auctionMode.update = function() 
+  // {
+    	//Auction.playerBidding();
+     	//console.log(endGame);
+   //}
+  
+  //$('#Auction').show();
+  //$('#menu').removeClass('gameMenu');
+  //$('#menu').addClass('Auction');
+  //$('.sound').show();
+
+  //assetLoader.sounds.gameOver.pause();
+  //assetLoader.sounds.going.pause();
+  //assetLoader.sounds.sold.pause();
+  //assetLoader.sounds.bg.currentTime = 0;
+  //assetLoader.sounds.bg.loop = true;
+  //assetLoader.sounds.bg.play();
+}
+
 function createReader()
 {
 	if(window.XMLHttpRequest)
@@ -317,56 +369,6 @@ function startGame()
 	assetLoader.sounds.bg.play();
 }
 
-function auctionMode(deltaTime)
-{	//in-Auction update, core of game logic
-   context.clearRect(0, 0, canvas.width, canvas.height);
-   //auctionStop = false;
-   //appState = GAME_MODE.AUCTION;
-   ticker = 0;
-   stop = true;
- 
-   //playerBid = 0;
-   //Auction.endAuction();
-   Auction.setup();//auctionInit();
-  
-   //shuffleArray(enemyBids);
-   //shuffleArray(bidders);
-   //shuffleArray(enemyCaps);
-  // shuffleArray(vehiclePrice);
- 
-   //context.font = '26px arial, sans-serif';  
-      	
-	//if(appState == GAME_MODE.AUCTION)
-	//{
-	//	console.log("Snap, crackle , pop");
-		
-	//}
-	//else
-	//{
-		//auctionStop = true;
-		//appState = GAME_MODE.RUNNING;
-		
-		//resetStates();
-	//}  	 
-  
-   //auctionMode.update = function() 
-  // {
-    	//Auction.playerBidding();
-     	//console.log(endGame);
-   //}
-  
-  //$('#Auction').show();
-  //$('#menu').removeClass('gameMenu');
-  //$('#menu').addClass('Auction');
-  //$('.sound').show();
-
-  //assetLoader.sounds.gameOver.pause();
-  //assetLoader.sounds.going.pause();
-  //assetLoader.sounds.sold.pause();
-  //assetLoader.sounds.bg.currentTime = 0;
-  //assetLoader.sounds.bg.loop = true;
-  //assetLoader.sounds.bg.play();
-}
 Auction.endAuction = function()
 {
 	if(endGame)
@@ -483,14 +485,14 @@ jq.AuctionSelect.backBtn.click(function()
 	jq.AuctionSelect.menu.toggle();
 	//$('#menu').addClass('auction');
 	//AuctionSelect.init();
-});/*
+});
 jq.Game.toAuctionBtn.click(function() 
 {
 	jq.Game.menu.hide();
 	jq.AuctionSelect.menu.show();
 	//$('#menu').addClass('auction');
 	AuctionSelect.init();
-});*/
+});/*
 jq.Game.toAuctionBtn.click(function() 
 {
 	$('#auction').show();
@@ -499,7 +501,7 @@ jq.Game.toAuctionBtn.click(function()
 	//$('#menu').addClass('auction');
 	Auction.init();
 	auctionMode();
-});
+});*/
 //Auction State Back Button
 jq.Auction.backBtn.click(function()
 {
