@@ -1,4 +1,4 @@
-//$(function()	//shorthand for $(document).ready(
+//Application main
 var AutoObessesions = {};
 
 function garageDoor()
@@ -23,7 +23,7 @@ Auction.setup = function()
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	if(!auctionStop) 
 	{
-		requestAnimFrame(Auction.setup);
+		requestAnimFrame(Auction.setup);	//recursive call, bad
 		
 		//if(appState == GAME_MODE.AUCTION)
 		//{
@@ -116,10 +116,14 @@ function openDoc(url, reader)
   
 	return doc;
 }
+//$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed
 $(document).ready(function()
-{
-	Storage.local.clear();
+{	//Declare functions and objects dependant on the html
+	//document being loaded within this callback,
+	//such as jQuery/ui callback bindings,
+	//loading assets and 'core' game logic
+	//Storage.local.clear();
 	function init()
 	{
 	  if (!stop) 
@@ -246,7 +250,7 @@ function switchStates( GAME_MODE)
 		case MAIN_MENU:
 			mainMenu();
 		break;  
-		   
+		//do not need auction select
 		case AUCTION:
 			Auction.update();
 		break;

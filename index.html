@@ -11,15 +11,16 @@
     <link rel="stylesheet" href="css/gameMenu.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/AuctionSelect.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/auction.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/LoseAuction.css" type="text/css" media="screen">
+    <!--link rel="stylesheet" href="css/WinAuction.css" type="text/css" media="screen"-->
     <link rel="stylesheet" href="css/repair.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/funds.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/garage.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/carView.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="css/LoseAuction.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/register.css" type="text/css" media="screen">
     <!--scripts here are executed before the page is parsed,
     	they must not be dependant on any other script but should be
-        dependencies of js code at the end of the page-->
+        dependencies of js code included at the end of the page-->
     <script type="text/javascript" src="js/jquery.2.1.1.min.js"></script>
     <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
     <script type="text/javascript" src="js/payRequest.js"></script>
@@ -350,7 +351,10 @@
 					    <option>25</option>       
 					    <option>26</option>       
 					    <option>27</option>       
-					    <option>28</option>       
+					    <option>28</option> 
+                        <!--There needs to be js to validate dates,
+                        what about non-valid enteries such as,
+                        June 31st, Feb 30th(and leap years), etc-->
 					    <option>29</option>       
 					    <option>30</option>       
 					    <option>31</option>       
@@ -414,23 +418,24 @@
     <script type="text/javascript" src="js/globals.js"></script><!--is parsed first-->
     <script type="text/javascript" src="js/LoadAssets.js"></script> 
     <!--2D sprite/animation classes-->
-    <script type="text/javascript" src="js/SpriteSheet.js"></script>
-    <script type="text/javascript" src="js/Animation.js"></script>
-    <script type="text/javascript" src="js/Sprite.js"></script>
-    <!---->
+    <script type="text/javascript" src="js/2D/SpriteSheet.js"></script>
+    <script type="text/javascript" src="js/2D/Animation.js"></script>
+    <script type="text/javascript" src="js/2D/Sprite.js"></script>
+    <!--game entities-->
     <script type="text/javascript" src="js/Player.js"></script> 
     <script type="text/javascript" src="js/Enemy.js"></script>
-    <!--game object classes-->
     <script type="text/javascript" src="js/vehicle.js"></script>
+    <script type="text/javascript" src="js/entity/parts.js"></script>
+    <!--jquery bindings-->
     <script type="text/javascript" src="js/jqueryLib.js"></script>
     <!--game states, doesn't work if placed in subfolder-->
-    <script type="text/javascript" src="js/Garage.js"></script>
+    <script type="text/javascript" src="js/state/Garage.js"></script>
     <!--Auction and Repair states is dependant upon userGarage in Garage.js
     	to push cars or modify cars in the users garage, so parse first-->
-    <script type="text/javascript" src="js/Repair.js"></script>
-    <script type="text/javascript" src="js/Auction.js"></script>
-    <script type="text/javascript" src="js/AuctionSelect.js"></script>
-    <script type="text/javascript" src="js/Add_Funds.js"></script>
+    <script type="text/javascript" src="js/state/Repair.js"></script>
+    <script type="text/javascript" src="js/state/Auction.js"></script>
+    <script type="text/javascript" src="js/state/AuctionSelect.js"></script>
+    <script type="text/javascript" src="js/state/Add_Funds.js"></script>
     <!--program main-->
     <script type="text/javascript" src="js/program.js"></script>
     

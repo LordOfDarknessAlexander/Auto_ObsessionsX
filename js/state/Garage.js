@@ -46,9 +46,14 @@ var Garage = {
 		{	//empty grage so display img instead of buttons
 			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
 			list.append(src);
+			$('div#userCar').hide();
+			//$('div#selectedCar').hide();
 		}
 		else
-		{		
+		{
+			$('div#userCar').show();
+			//$('div#selectedCar').show();
+			
 			for(var i = 0; i < userGarage.length; i++){
 				//add buttons to list
 				src = "\'images/vehicle.jpg\'";	//userGarage[i].getFullPath();
@@ -133,7 +138,7 @@ var Garage = {
 		var btn = $('#carSelBtn' + index);
 		//var car = userGarage[i];
 		btn.children('label#carName').text(car.getFullName() );
-		btn.children('label#carInfo').text('Default car info');
+		btn.children('label#carInfo').text(car.getInfo() );
 		//btn.children('label#make').text(car.make);
 		//btn.children('label#year').text(car.year);
 		//btn.children('label#name').text(car.name);

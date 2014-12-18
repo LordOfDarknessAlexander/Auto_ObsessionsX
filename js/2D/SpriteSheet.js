@@ -7,6 +7,7 @@
 function SpriteSheet(path, frameWidth, frameHeight) 
 {
   this.image = new Image();
+  //size = Vector2(frameWidth, frameHeight);
   this.frameWidth = frameWidth;
   this.frameHeight = frameHeight;
 
