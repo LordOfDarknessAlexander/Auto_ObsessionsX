@@ -32,8 +32,9 @@ var assetLoader = (function()
     'jump'          : 'sounds/jump.mp3',
     'gameOver'      : 'sounds/gameOver.mp3',
     'bidder'		: 'sounds/bidders.mp3',
-    'going'			: 'sounds/jump.mp3',
+    'going'			: 'sounds/cheer.mp3',
     'sold'			: 'sounds/sold.mp3',
+    'engine'		: 'sounds/engine.wav',
   };
 
   var assetsLoaded = 0;                                // how many assets have been loaded

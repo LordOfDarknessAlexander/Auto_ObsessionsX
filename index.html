@@ -57,21 +57,7 @@
                     <button id='forgotPW'>Forgot Password?</button><br>
                 </form>
                 
-                <form id='register'>
-	               	Name:<input id='userID' type='text'><br>
-	                Address:<input id='userPW' type='text'><br>
-	                City:<input id='userCity' type='text'><br>
-	                State/Prov:<input id='userSP' type='text'><br>
-	                Country:<input id='userCountry' type='text'><br>
-	                Zip/Postal:<input id='userZP' type='text'><br>
-	                D.O.B.:<input id='userDOB' type='text'><br><!--change to date selector?-->
-	                Username:<input id='userName' type='text'><br>
-	                Password:<input id='userPW' type='text'><br>
-	                Confirm Password:<input id='userPWConfirm' type='text'><br>
-                <input type='submit' value='SUBMIT'>
-            	</form>
-               
-            </div>
+              </div>
           
             <div id="credits">
             	<!--could just be a link at the bottom of the page-->
@@ -306,7 +292,7 @@
 	   	  <div><a onclick="clearLocal(); getMyContact();" href="javascript:void(0);">Clear All Of My Data</a></div>
 		</div>
 
-     <!---       	  
+          	  
      <form id='register'>
 	               	Name:<input id='userID' type='text'><br>
 	                Address:<input id='userPW' type='text'><br>
@@ -314,15 +300,97 @@
 	                State/Prov:<input id='userSP' type='text'><br>
 	                Country:<input id='userCountry' type='text'><br>
 	                Zip/Postal:<input id='userZP' type='text'><br>
-	                D.O.B.:<input id='userDOB' type='text'><br><!--change to date selector?--> <!---
+	                D.O.B.:<input id='userDOB' type='text'><br><!--change to date selector?--> 
+	                
+					  <fieldset class="date"> 
+					  <legend>Date Of Birth </legend> 
+					  <label for="month_start">Month</label> 
+					  <select id="month_start" 
+					          name="month_start" /> 
+					    <option>January</option>       
+					    <option>February</option>       
+					    <option>March</option>       
+					    <option>April</option>       
+					    <option>May</option>       
+					    <option>June</option>       
+					    <option>July</option>       
+					    <option>August</option>       
+					    <option>September</option>       
+					    <option>October</option>       
+					    <option>November</option>       
+					    <option>December</option>       
+					  </select> 
+					  <label for="day_start">Day</label> 
+					  <select id="day_start" 
+					          name="day_start" /> 
+					    <option>1</option>       
+					    <option>2</option>       
+					    <option>3</option>       
+					    <option>4</option>       
+					    <option>5</option>       
+					    <option>6</option>       
+					    <option>7</option>       
+					    <option>8</option>       
+					    <option>9</option>       
+					    <option>10</option>       
+					    <option>11</option>       
+					    <option>12</option>       
+					    <option>13</option>       
+					    <option>14</option>       
+					    <option>15</option>       
+					    <option>16</option>       
+					    <option>17</option>       
+					    <option>18</option>       
+					    <option>19</option>       
+					    <option>20</option>       
+					    <option>21</option>       
+					    <option>22</option>       
+					    <option>23</option>       
+					    <option>24</option>       
+					    <option>25</option>       
+					    <option>26</option>       
+					    <option>27</option>       
+					    <option>28</option>       
+					    <option>29</option>       
+					    <option>30</option>       
+					    <option>31</option>       
+					  </select> - 
+					  <label for="year_start">Year</label> 
+					  <select id="year_start" 
+					         name="year_start" />
+					    <option>2009</option>       
+					    <option>2010</option>       
+					    <option>2011</option>       
+					    <option>2012</option>       
+					    <option>2013</option>       
+					    <option>2014</option>       
+					    <option>2015</option>       
+					    <option>2016</option>       
+					    <option>2017</option>       
+					    <option>2018</option>       
+					    <option>2009</option>       
+					    <option>2010</option>       
+					    <option>2011</option>       
+					    <option>2012</option>       
+					    <option>2013</option>       
+					    <option>2014</option>       
+					    <option>2015</option>       
+					    <option>2016</option>       
+					    <option>2017</option>       
+					    <option>2018</option>       
+					  </select> 
+					  <span class="inst">(Month-Day-Year)</span> 
+					</fieldset> 
+
+	                
 	                Username:<input id='userName' type='text'><br>
 	                Password:<input id='userPW' type='text'><br>
 	                Confirm Password:<input id='userPWConfirm' type='text'><br>
                 <input type='submit' value='SUBMIT'>
             	</form>
 
-       ----->
-       </div> <!--end reg div --->
+      
+       </div> 
 
        
            
@@ -337,7 +405,7 @@
 	
     <div id="sold">
     	<!--lose auction-->
-    	<h2>Sold to Rascal ,Chris create vehicles array so we can push this to inventory<span id="money"></span> ahoy!</h2>
+    	<h2><span id="money"></span> ahoy!</h2>
 		<!--a href="javascript:void(0)" class="button restart">Try again?</a-->
         <button id='restart'>restart</button>
         <!--img id='newCarImg'--><!--purchased car, src set in Auction.js-->

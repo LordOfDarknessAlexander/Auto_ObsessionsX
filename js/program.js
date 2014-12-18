@@ -233,6 +233,7 @@ function splash()
   $('#progress').hide();
   $('#splash').removeClass('#Register');
   $('#Register').hide();
+   assetLoader.sounds.engine.play();
 
   $('#splash').show();
   $('.sound').show();  

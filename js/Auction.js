@@ -36,23 +36,8 @@ var goingTimer = 0;
 
 var startPlayerEndBid = false;	//player local
 var playerEndBidTimer = 0;	//player local
-//var vehiclePrice = 20000;
-//static bidding caps results in obvious behaviour,
-//ie. starting an auction with more than 1.25 of vehicle price will always win
-
-//new array for every new auction? preferably in the auction button qjuery callback
-
-/*var enemyCap = 1.25 * vehiclePrice;
-var enemyCap2 = 0.8 * vehiclePrice;
-var enemyCap3 = 0.7 * vehiclePrice;
-var enemyCap4 = 0.9 * vehiclePrice;
-var enemyCap5 = 0.6 * vehiclePrice;
-var enemyCap6 = 0.2 * vehiclePrice;
-var playerWon = false;
-
-var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
-*/
 //
+
 function shuffleArray(array) 
 {	//sort array items
     var counter = array.length, temp, index;
@@ -208,6 +193,7 @@ var Auction =
 		
 		//ENENMY HUD
 		
+				
 		//Enemy 1
 		//draw them depending on current bid
 		if((enemyBids[0] >= currentBid))
@@ -269,12 +255,6 @@ var Auction =
 
 		context.fillText('Game Timer :  ' + timer.toFixed(2)  ,200, 400);
 		//player bid
-		/*
-		context.fillText('End Bid Time :  ' + bidders[0] + endBidTimers[0]  ,200, 460);
-		context.fillText('End Bid Time2 :  ' + bidders[1] + endBidTimers[1]  ,200, 480);
-		context.fillText('End Bid Time3 :  ' + bidders[2] + endBidTimers[2]  ,200, 500);
-		context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimers[3]  ,200, 520);
-		*/
 		context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);		
 	},
 	updatePlayer : function() 
@@ -368,7 +348,6 @@ var Auction =
 				if(enemyCanBid)
 				{//
 					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[0]) )
-					//if((enemies[i]) > (enemyCaps) && (enemyBids[i] < currentBid))
 					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
 					  console.log("EnemyCaps " + enemyCaps[0]);
@@ -458,20 +437,18 @@ var Auction =
 			if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
 			{
 				//end auction with enemy bidder
-				//this.sold();
-				//alert("Sold to " + bidders[i]);
 				goingTimer ++;
 				if((goingTimer > 300) && (goingTimer < 460))
 				{
 					//alert("Going Once " );
 					context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
-					assetLoader.sounds.jump.play();
+					assetLoader.sounds.going.play();
 				}
 				else if((goingTimer > 470) && (goingTimer < 600))
 				{
 					//alert("Going Twice " );
 					context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
-					assetLoader.sounds.jump.play();
+					assetLoader.sounds.going.play();
 
 				}
 				else if(goingTimer > 660)
