@@ -36,53 +36,11 @@ Auction.setup = function()
 }
 function auctionMode(deltaTime)
 {	//in-Auction update, core of game logic
-   //context.clearRect(0, 0, canvas.width, canvas.height);
-   //auctionStop = false;
-   //appState = GAME_MODE.AUCTION;
    ticker = 0;
    stop = true;
  
-   //playerBid = 0;
-   //Auction.endAuction();
    Auction.setup();//auctionInit();
   
-   //shuffleArray(enemyBids);
-   //shuffleArray(bidders);
-   //shuffleArray(enemyCaps);
-  // shuffleArray(vehiclePrice);
- 
-   //context.font = '26px arial, sans-serif';  
-      	
-	//if(appState == GAME_MODE.AUCTION)
-	//{
-	//	console.log("Snap, crackle , pop");
-		
-	//}
-	//else
-	//{
-		//auctionStop = true;
-		//appState = GAME_MODE.RUNNING;
-		
-		//resetStates();
-	//}  	 
-  
-   //auctionMode.update = function() 
-  // {
-    	//Auction.playerBidding();
-     	//console.log(endGame);
-   //}
-  
-  //$('#Auction').show();
-  //$('#menu').removeClass('gameMenu');
-  //$('#menu').addClass('Auction');
-  //$('.sound').show();
-
-  //assetLoader.sounds.gameOver.pause();
-  //assetLoader.sounds.going.pause();
-  //assetLoader.sounds.sold.pause();
-  //assetLoader.sounds.bg.currentTime = 0;
-  //assetLoader.sounds.bg.loop = true;
-  //assetLoader.sounds.bg.play();
 }
 
 function createReader()
@@ -268,8 +226,8 @@ function switchStates( GAME_MODE)
 		break;
 		
 		case NEW_USER:
-			//Register();
-			splash();
+			Register();
+			
 		break;
 		
 		case LOGIN_USER:
@@ -363,7 +321,7 @@ function startGame()
 	
 	if(appState == GAME_MODE.RUNNING)
 	{
-	console.log("Run , run squirrel");
+	  console.log("Run , run squirrel");
 	
 	}	
 	

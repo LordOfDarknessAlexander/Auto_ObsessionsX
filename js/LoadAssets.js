@@ -155,10 +155,6 @@ splashImage.onload = function()
 	
 
 };
-//Main Background of game
-backgroundImage.onload = function()
-{
-	context.drawImage(backgroundImage, 50, -10);
-}	
+	
 	
 

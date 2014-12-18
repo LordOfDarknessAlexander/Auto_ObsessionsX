@@ -373,6 +373,7 @@ var Auction =
 					if(enemyBids[index] > enemyBids[i])
 					{
 						continue;
+						
 					}
 					else
 					{
@@ -444,6 +445,7 @@ var Auction =
 					//alert("Going Once " );
 					context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
 					assetLoader.sounds.going.play();
+					shuffleArray(enemyCaps);
 				}
 				else if((goingTimer > 470) && (goingTimer < 600))
 				{
