@@ -1,6 +1,6 @@
 ﻿//Global Auction State Object, no caps as object is not const
-var PLAYER_WAIT = 300;
-var ENEMY_WAIT = 500;
+var PLAYER_WAIT = 200;
+var ENEMY_WAIT = 300;
 //AI cooldown timer
 /*var user = {
 	canBid:false,
@@ -153,7 +153,10 @@ var Auction =
 		
 		if(!auctionStop)
 		{
+			
 		  	Auction.render();
+		  	
+		  	
 		}
 		else
 		{	//clear drawing when auction stops
@@ -173,8 +176,9 @@ var Auction =
 		var player3;
 		var player4;
 		
+		context.drawImage(backgroundImage, 0,-10);
 		
-		
+		player.draw();
 		if(( playerBid == currentBid)&& (playerDidBid))
 		{
 			player.y = 10;
@@ -244,6 +248,28 @@ var Auction =
 			player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X, 200);
 			
 		}
+		//Going crowd roars someone is about to win the bid
+		if((goingTimer > 300) && (goingTimer < 460))
+		{
+			//alert("Going Once " );
+			context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
+			assetLoader.sounds.going.play();
+			
+		}
+		else if((goingTimer > 470) && (goingTimer < 600))
+		{
+			//alert("Going Twice " );
+			context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
+			assetLoader.sounds.going.play();
+
+		}
+		else if(goingTimer > 660)
+		{
+			this.sold();
+			alert("Sold to " + bidders[i]);
+			context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
+			
+		}			
 		
 		//current bid HUD
 		var gorguts;
@@ -261,12 +287,12 @@ var Auction =
 	updatePlayer : function() 
 	{
 	  player.update();
-	  player.draw();
+	  
 	  if(playerDidBid &&
 			(playerBid > enemyBids[0]) &&
 			(playerBid > enemyBids[1]) &&
 			(playerBid > enemyBids[2]) &&
-			(playerBid > enemyBids[3])  && (playerEndBidTimer >= 600) )
+			(playerBid > enemyBids[3])  && (playerEndBidTimer >= ENEMY_WAIT + 100) )
 		{
 			//buyOut();
 			playerWon = true;
@@ -440,27 +466,8 @@ var Auction =
 			{
 				//end auction with enemy bidder
 				goingTimer ++;
-				if((goingTimer > 300) && (goingTimer < 460))
-				{
-					//alert("Going Once " );
-					context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
-					assetLoader.sounds.going.play();
-					shuffleArray(enemyCaps);
-				}
-				else if((goingTimer > 470) && (goingTimer < 600))
-				{
-					//alert("Going Twice " );
-					context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
-					assetLoader.sounds.going.play();
-
-				}
-				else if(goingTimer > 660)
-				{
-					this.sold();
-					alert("Sold to " + bidders[i]);
-					context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
-					
-				}			
+				shuffleArray(enemyCaps);
+				
 			}
 		}
 	},	
@@ -485,10 +492,6 @@ var Auction =
 			assetLoader.sounds.bidder.pause();
 			assetLoader.sounds.sold.play();
 		}
-		//playWon is alread false, this is pointless
-		//else
-		//{
-			//playerWon = false;
-		//}		 
+			 
 	}	
 };

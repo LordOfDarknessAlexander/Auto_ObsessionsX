@@ -12,26 +12,21 @@ function garageDoor()
 function update(deltaTime)
 {
     garageDoor();	//should splash update
-	//Order of draws matters
-	//this isn't needed, set the background in css of the div element being displayed
-    context.drawImage(backgroundImage, 0,-10);
+    
     context.drawImage(splashImage, 0, backgroundY);
     timer++;
 }
 Auction.setup = function()
 {
 	context.clearRect(0, 0, canvas.width, canvas.height);
+	
 	if(!auctionStop) 
 	{
 		requestAnimFrame(Auction.setup);	//recursive call, bad
 		
-		//if(appState == GAME_MODE.AUCTION)
-		//{
-			update();
-			Auction.update();
-		//}
-		//timer++;
-		//ticker++;
+		update();
+		Auction.update();
+		
 	}
 }
 function auctionMode(deltaTime)
@@ -81,15 +76,17 @@ $(document).ready(function()
 	//document being loaded within this callback,
 	//such as jQuery/ui callback bindings,
 	//loading assets and 'core' game logic
-	//Storage.local.clear();
+	Storage.local.clear();
 	function init()
 	{
 	  if (!stop) 
 	  {
+	  
 	    requestAnimFrame(init);
 	  
-	  	update();
-	  	
+	  	//update();
+	  	$('#splash').removeClass('#Register');
+  		$('#Register').hide();
 	    if((timer >= 300.00) && (timer <= 900.00))
 		{
 			appState = GAME_MODE.MAIN_MENU;
@@ -245,8 +242,7 @@ function splash()
 {
   init();
   $('#progress').hide();
-  $('#splash').removeClass('#Register');
-  $('#Register').hide();
+ 
    assetLoader.sounds.engine.play();
 
   $('#splash').show();
@@ -350,10 +346,6 @@ Auction.sold = function()
 	stop = true;
 	auctionStop = true;
 	
-	//for(var i = 0; i < enemyBids.length; i++)
-	//{
-		//$('#enemyBid').html(enemyBids[i]);	//write enemy bid to html?
-	//}
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
 	$('#sold').show();
