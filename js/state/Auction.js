@@ -86,6 +86,7 @@ var Auction =
 		context.font = '26px arial, sans-serif';  
 
 		$('#Auction').show();
+		$('div#Auction img#auctionCar').attr('src', 'images\\vehicle.jpg');
 		//$('#menu').removeClass('gameMenu');
 		//$('#menu').addClass('Auction');
 		$('.sound').show();

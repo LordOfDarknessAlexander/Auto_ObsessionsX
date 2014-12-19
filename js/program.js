@@ -475,6 +475,7 @@ $('#bid').click(function()
 {
 	Auction.playerBidding();
 	playerDidBid = true;
+	$('#bid').text("Bid:" + playerNextBid.toString() );
 });
 //Repair to menu Repair
 /*function toogleRepair(){

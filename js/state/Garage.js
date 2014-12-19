@@ -39,21 +39,25 @@ var Garage = {
 				//userGarage.push(JSON.parse(jsonArray[i]) );
 			//}
 		}
-		var list = $('#carBtns')
+		var list = $('#carBtns');
 		list.empty();	//remove any buttons if there were any previously
 		
 		if(userGarage.length == 0)
 		{	//empty grage so display img instead of buttons
 			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
 			list.append(src);
-			$('div#userCar').hide();
+			$('div#Garage #userCar').hide();
 			//$('div#selectedCar').hide();
+			$('div#Garage #select').hide();
+			$('div#Garage #viewCar').hide();
 		}
 		else
 		{
-			$('div#userCar').show();
+			$('div#Garage #userCar').show();
 			//$('div#selectedCar').show();
-			
+			$('div#Garage #select').show();
+			$('div#Garage #viewCar').show();
+						
 			for(var i = 0; i < userGarage.length; i++){
 				//add buttons to list
 				src = "\'images/vehicle.jpg\'";	//userGarage[i].getFullPath();

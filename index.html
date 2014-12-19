@@ -131,11 +131,14 @@
             <!--label id='myCash'>money</label>
             <label id='carPrice'>price</label-->
             <ul>
-              <li><input type="button" id="bid" value="Bid" onmouseover="bidButton()" onclick="playerBid()"></li>
+              <li><button id="bid">"Bid:money"</button></li>
            </ul>
             <ul>
-              <li><input type="button" id="auctionBackButton" onmouseover="auctionBackButton()"  value="Back" onclick="startGame()"></li>
+              <li><button id="auctionBackButton">Back</button></li>
            </ul>
+           <img id='auctionCar'>
+           <label id='info'></label>
+           <button id="homeBtn">Home</button>
 		</div>
       
 		<div id="RepairShop">
@@ -425,7 +428,7 @@
     <script type="text/javascript" src="js/Player.js"></script> 
     <script type="text/javascript" src="js/Enemy.js"></script>
     <script type="text/javascript" src="js/vehicle.js"></script>
-    <script type="text/javascript" src="js/entity/parts.js"></script>
+    <!--script type="text/javascript" src="js/entity/parts.js"></script-->
     <!--jquery bindings-->
     <script type="text/javascript" src="js/jqueryLib.js"></script>
     <!--game states, doesn't work if placed in subfolder-->
