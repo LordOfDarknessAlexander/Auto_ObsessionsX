@@ -242,11 +242,9 @@ function splash()
 {
   init();
   $('#progress').hide();
- 
-   assetLoader.sounds.engine.play();
-
   $('#splash').show();
   $('.sound').show();  
+  assetLoader.sounds.engine.play();
 }
 
 function Register()
@@ -313,7 +311,7 @@ function startGame()
 	context.fillStyle = gradient;
 	appState = GAME_MODE.RUNNING;
 	
-	switchStates();
+	//switchStates();
 	
 	if(appState == GAME_MODE.RUNNING)
 	{

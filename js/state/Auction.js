@@ -31,8 +31,11 @@ var playerNextBid = currentBid + (currentBid * 0.1);
 
 //BidTImers Booleans
 var startEndBids = [false,false,false,false];
+var playerWinning = false;
 var playerWon = false;
 var goingTimer = 0;
+var pGTimer = 0;
+
 
 var startPlayerEndBid = false;	//player local
 var playerEndBidTimer = 0;	//player local
@@ -66,6 +69,17 @@ var Auction =
 		auctionStop = false;
 		
 		playerBid = 0;
+		//auction buddies
+		var player1 = enemies[0];
+		var player2 = enemies[1];
+		var player3 = enemies[2];
+		var player4 = enemies[3];
+		
+		player1 == enemyCaps[0];
+		player2 == enemyCaps[1];
+		player3 == enemyCaps[2];
+		player4 == enemyCaps[3];
+		
 		
 		if(index < xdbCars.length)	//make sure index is within bounds to be safe
 			_car = xdbCars[index];	
@@ -126,6 +140,8 @@ var Auction =
 		Auction.enemyBidding();
 		Auction.currentBidder();
 		Auction.updatePlayer();
+		Auction.going();
+		Auction.playerGoing();
 		
 		console.log("Going" + goingTimer);
 		
@@ -148,6 +164,15 @@ var Auction =
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
 	  	}
+	  	if(playerWinning)
+	  	{
+	  		pGTimer ++;
+	  	}
+	  	else
+	  	{
+	  		pGTimer = 0;
+	  	}
+	  	
 	  	console.log("EnemyCaps " + enemyCaps[0]);
 	  	Auction.findEndBidder();
 	  	Auction.endAuction();
@@ -172,10 +197,7 @@ var Auction =
 			//context.clearRect(0, 0, canvas.width, canvas.height);
 			//return;
 		//}
-		var player1;
-		var player2;
-		var player3;
-		var player4;
+		
 		
 		context.drawImage(backgroundImage, 0,-10);
 		
@@ -202,7 +224,7 @@ var Auction =
 				
 		//Enemy 1
 		//draw them depending on current bid
-		if((enemyBids[0] >= currentBid))
+		if(enemyBids[0] >= currentBid)
 		{
 			player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2) ,ENEMY_X , 70);
 			
@@ -249,28 +271,10 @@ var Auction =
 			player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X, 200);
 			
 		}
-		//Going crowd roars someone is about to win the bid
-		if((goingTimer > 300) && (goingTimer < 460))
-		{
-			//alert("Going Once " );
-			context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
-			assetLoader.sounds.going.play();
-			
-		}
-		else if((goingTimer > 470) && (goingTimer < 600))
-		{
-			//alert("Going Twice " );
-			context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
-			assetLoader.sounds.going.play();
-
-		}
-		else if(goingTimer > 660)
-		{
-			this.sold();
-			alert("Sold to " + bidders[i]);
-			context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
-			
-		}			
+		this.going();
+		//call crowd for the player winning
+		this.playerGoing();
+		
 		
 		//current bid HUD
 		var gorguts;
@@ -296,7 +300,11 @@ var Auction =
 			(playerBid > enemyBids[3])  && (playerEndBidTimer >= ENEMY_WAIT + 100) )
 		{
 			//buyOut();
-			playerWon = true;
+			this.playerGoing();
+			playerWinning = true;
+			
+			console.log("player Going");
+						
 			
 		}
 	
@@ -471,7 +479,57 @@ var Auction =
 				
 			}
 		}
+	},
+	going : function()
+	{
+		//Going crowd roars someone is about to win the bid
+		if((goingTimer > 300) && (goingTimer < 460))
+		{
+			//alert("Going Once " );
+			context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
+			assetLoader.sounds.going.play();
+			
+		}
+		else if((goingTimer > 470) && (goingTimer < 600))
+		{
+			//alert("Going Twice " );
+			context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
+			assetLoader.sounds.going.play();
+
+		}
+		else if(goingTimer > 660)
+		{
+			this.sold();
+			alert("Sold to " + bidders[i]);
+			context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
+			
+		}			
 	},	
+	playerGoing : function()
+	{
+		//Going crowd roars someone is about to win the bid
+		if((pGTimer > 300) && (pGTimer < 460))
+		{
+			//alert("Going Once " );
+			context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
+			assetLoader.sounds.going.play();
+			
+		}
+		else if((pGTimer > 470) && (pGTimer < 600))
+		{
+			//alert("Going Twice " );
+			context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
+			assetLoader.sounds.going.play();
+
+		}
+		else if(pGTimer > 660)
+		{
+			playerWon = true;
+			context.fillText( "Sold to the Player" ,ENEMY_X + 600 , 310);
+			
+		}			
+
+	},
 	endAuction : function()
 	{
 		//if user won save to storage or pass to next state

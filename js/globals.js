@@ -100,10 +100,11 @@ var appState = GAME_MODE.SPLASH;
 function resetStates()
 {
 	appState = GAME_MODE.RUNNING;
-	stop = false;
-	auctionStop = true;
-	endGame = false;
-	playerWon = false;
+	//stop = false;
+	//auctionStop = false;
+	//endGame = false;
+	//playerWon = false;
+	startGame();
 	
 
 
