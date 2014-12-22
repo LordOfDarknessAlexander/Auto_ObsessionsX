@@ -14,6 +14,10 @@ function update(deltaTime)
     //garageDoor();	//should splash update
     
    // context.drawImage(splashImage, 0, backgroundY);
+   if(restarted)
+   {
+   	 console.log("Chicken Fingers restarting");
+   }
     timer++;
 }
 Auction.setup = function()
@@ -84,9 +88,10 @@ $(document).ready(function()
 	  
 	    requestAnimFrame(init);
 	  
-	  	//update();
-	  	$('#splash').removeClass('#Register');
-  		$('#Register').hide();
+	  	update();
+	  
+  		delete Register;
+  		
 	    if((timer >= 300.00) && (timer <= 900.00))
 		{
 			appState = GAME_MODE.MAIN_MENU;
@@ -190,7 +195,10 @@ function addCar(car)
 //Load the splash screen first
 assetLoader.finished = function() 
 {
-  switchStates();
+	$('#splash').removeClass('#Register');
+  	$('#Register').hide();
+  	switchStates();
+  
 }	
 
 //app may only exist in one state at a time
@@ -373,8 +381,10 @@ Auction.sold = function()
 	assetLoader.sounds.gameOver.play();
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
+//	delete Auction;
 	endGame = true;
 	auctionEnded = true;
+	
 }
 
 function gameOver() 
@@ -405,8 +415,9 @@ $('.play').click(function()
 {
   $('#menu').hide();
   $('#gameMenu').show();
-  //delete splash
-  //delete credits
+  delete splash;
+  delete credits;
+  delete mainMenu;
   //delete menu image, since the game can not navigate back to this screen after clicking
   startGame();
 });
@@ -426,7 +437,7 @@ $('.restart').click(function()
 {
   $('#game-over').hide();
   $('#gameMenu').hide();
-  resetStates();
+  //resetStates();
   //startGame();
   restarted = true;
 });
@@ -460,7 +471,7 @@ jq.Game.toAuctionBtn.click(function()
 //Auction State Back Button
 jq.Auction.backBtn.click(function()
 {
-	resetStates();
+	//resetStates();
 	startGame();
   
 	$('#Auction').hide();
@@ -585,10 +596,17 @@ $('.sound').click(function()
     }
   }
 });
+//restart GameOver /sold button
 $('button#restart').click(function(){
 	$('#sold').hide();
 	jq.Game.menu.show();
 	appState = GAME_MODE.MAIN_MENU;
+	delete gameOver;
+	auctionEnded = true;
+	//delete Auction;
+	restarted = true;
+	Auction.setup();
+	
 });
 assetLoader.downloadAll();
 });

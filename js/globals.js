@@ -28,7 +28,7 @@ var NEW_USER;
 var LOGIN_USER;
 
 
-var restarted = false;
+
 var playSound;
 var splashTimer = 600.00;
 //InMenu UI Constansts
@@ -95,6 +95,7 @@ previousTime = Date.now();
 timer += deltaTime;
 var endGame = false;
 var auctionEnded = false;
+var restarted = false;
 
 var appState = GAME_MODE.SPLASH;	
 

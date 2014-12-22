@@ -120,19 +120,41 @@ var Auction =
 		assetLoader.sounds.bg.loop = true;
 		assetLoader.sounds.bg.play();
 	},
-	resart:function()
+	destroy : function()
 	{
-			
-		playerWon = false;
-		endGame = false;
-		auctionStop = false;
+		delete enemies; 
+	    delete enemyBids;
+		delete bidders;
+		delete enemyCaps;
+		delete pGTimer;
+		delete goingTimer;
+		delete endBidTimers;
+		console.log("Destroying Auction snaps");
+		delete player;	
+	},
+	resart : function()
+	{
+		delete sold;
+		delete gameOver;	
+		
+		//playerWon = false;
+		//endGame = false;
+		//auctionStop = false;
+		var enemy1; 
+		var enemy2; 
+		var enemy3; 
+		var enemy4;
+		
+	//	enemyBids = [0,0,0,0];
+	//	endBidTimers = [0,0,0,0];
+	//	enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
 			
 		this.initAI();
 		
 		this.init();
-		$('#sold').hide();
+		
 
-		//this.setup();
+		///this.setup();
 		
 		
 				
@@ -196,31 +218,21 @@ var Auction =
 	  	console.log("EnemyCaps " + enemyCaps[0]);
 	  	Auction.findEndBidder();
 	  	Auction.endAuction();
+	  	Auction.destroy();
 	  	
 		if(auctionEnded)
 		{
-			delete enemies; 
-		    delete enemyBids;
-			delete bidders;
-			delete enemyCaps;
-			console.log("Destroying Auction snaps");
-			//delete player;
+			this.destroy();
 					
 		}
 		if(endGame)
 		{
-			delete enemies; 
-		    delete enemyBids;
-			delete bidders;
-			delete enemyCaps;
-			console.log("Losers");
-			//delete player;
-					
+			this.destroy();					
 		}
 
 		if(restarted)
 		{
-			//create enemies;
+			
 			auctionStop = false;
 			this.restart();
 			
@@ -351,7 +363,7 @@ var Auction =
 			this.playerGoing();
 			playerWinning = true;
 			
-			console.log("player Going");
+			console.log("player Going" + pGTimer);
 						
 			
 		}
@@ -591,16 +603,16 @@ var Auction =
 		if(playerWon)
 		{
 			money = money - currentBid;
+			auctionEnded = true;
+		
 			//endGame == true;
 			//push vehicle to garage
-			//alert("Sold to the player");
-			context.fillText( "Sold to the Player" ,ENEMY_X + 600 , 310);
-			auctionStop = true;
+			//auctionStop = true;
 			Auction.sold();
 			
 			assetLoader.sounds.bidder.pause();
 			assetLoader.sounds.sold.play();
-			auctionEnded = true;
+			
 			//this.resart();
 			
 		}
