@@ -59,6 +59,7 @@ var jq = {
 	Auction : {
 		menu : $('#Auction'),
 		backBtn : $('#auctionBackButton')
+				
 		//cashLabel:$('#myCash'),
         //carPrice:$('#carPrice');
 	},

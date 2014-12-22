@@ -11,9 +11,9 @@ function garageDoor()
 }
 function update(deltaTime)
 {
-    garageDoor();	//should splash update
+    //garageDoor();	//should splash update
     
-    context.drawImage(splashImage, 0, backgroundY);
+   // context.drawImage(splashImage, 0, backgroundY);
     timer++;
 }
 Auction.setup = function()
@@ -22,9 +22,9 @@ Auction.setup = function()
 	
 	if(!auctionStop) 
 	{
-		requestAnimFrame(Auction.setup);	//recursive call, bad
+		window.requestAnimFrame(Auction.setup);	//recursive call, bad
 		
-		update();
+		//update();
 		Auction.update();
 		
 	}
@@ -373,6 +373,8 @@ Auction.sold = function()
 	assetLoader.sounds.gameOver.play();
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
+	endGame = true;
+	auctionEnded = true;
 }
 
 function gameOver() 
@@ -380,7 +382,7 @@ function gameOver()
 	//$('.game-over').style.display = 'true';
 	auctionStop = true;
 	document.getElementById('game-over').style.display = 'true';
-	resetStates();
+	//resetStates();
 	stop = true;
 		//Show a message that player has insufficient funds
 	$('#money').html(money);	//set value in the html element
@@ -424,9 +426,9 @@ $('.restart').click(function()
 {
   $('#game-over').hide();
   $('#gameMenu').hide();
-
   resetStates();
-  startGame();
+  //startGame();
+  restarted = true;
 });
 
 //InMenuButtons
@@ -435,6 +437,7 @@ jq.AuctionSelect.backBtn.click(function()
 {
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
+	Auction.setup();
 	//$('#menu').addClass('auction');
 	//AuctionSelect.init();
 });

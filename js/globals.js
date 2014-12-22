@@ -28,7 +28,7 @@ var NEW_USER;
 var LOGIN_USER;
 
 
-
+var restarted = false;
 var playSound;
 var splashTimer = 600.00;
 //InMenu UI Constansts
@@ -94,6 +94,7 @@ var deltaTime = (Date.now() - previousTime) / 1000;
 previousTime = Date.now();
 timer += deltaTime;
 var endGame = false;
+var auctionEnded = false;
 
 var appState = GAME_MODE.SPLASH;	
 
@@ -104,8 +105,6 @@ function resetStates()
 	//auctionStop = false;
 	//endGame = false;
 	//playerWon = false;
-	startGame();
-	
-
+	//startGame();	
 
 }
