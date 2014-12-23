@@ -120,23 +120,11 @@ var Auction =
 		assetLoader.sounds.bg.loop = true;
 		assetLoader.sounds.bg.play();
 	},
-	destroy : function()
-	{
-		delete enemies; 
-	    delete enemyBids;
-		delete bidders;
-		delete enemyCaps;
-		delete pGTimer;
-		delete goingTimer;
-		delete endBidTimers;
-		console.log("Destroying Auction snaps");
-		delete player;	
-	},
-	resart : function()
+	restart : function()
 	{
 		delete sold;
 		delete gameOver;	
-		
+		console.log("Restarting Auction snaps");
 		//playerWon = false;
 		//endGame = false;
 		//auctionStop = false;
@@ -150,13 +138,9 @@ var Auction =
 	//	enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
 			
 		this.initAI();
-		
 		this.init();
-		
-
-		///this.setup();
-		
-		
+		this.setup();
+	
 				
 	},
 	
@@ -219,6 +203,7 @@ var Auction =
 	  	Auction.findEndBidder();
 	  	Auction.endAuction();
 	  	Auction.destroy();
+	  	//Auction.restart();
 	  	
 		if(auctionEnded)
 		{
@@ -558,6 +543,7 @@ var Auction =
 			alert("Sold to " + bidders[i]);
 			context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
 			
+			
 		}			
 	},	
 	playerGoing : function()
@@ -589,7 +575,7 @@ var Auction =
 	endAuction : function()
 	{
 		//if user won save to storage or pass to next state
-		 endGame == true;
+		 endGame = true;
 		 auctionEnded = true;
 		 this.gameOver();
 		 assetLoader.sounds.bidder.pause();	
@@ -604,18 +590,28 @@ var Auction =
 		{
 			money = money - currentBid;
 			auctionEnded = true;
-		
 			//endGame == true;
 			//push vehicle to garage
 			//auctionStop = true;
 			Auction.sold();
-			
 			assetLoader.sounds.bidder.pause();
 			assetLoader.sounds.sold.play();
-			
 			//this.resart();
 			
 		}
 			 
-	}	
+	},
+	destroy : function()
+	{
+		delete enemies; 
+	    delete enemyBids;
+		delete bidders;
+		delete enemyCaps;
+		delete pGTimer;
+		delete goingTimer;
+		delete endBidTimers;
+		console.log("Destroying Auction snaps");
+		delete player;	
+	}
+	
 };

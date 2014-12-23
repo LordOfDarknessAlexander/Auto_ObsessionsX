@@ -28,7 +28,7 @@ Auction.setup = function()
 	{
 		window.requestAnimFrame(Auction.setup);	//recursive call, bad
 		
-		//update();
+		update();
 		Auction.update();
 		
 	}
@@ -249,6 +249,7 @@ function switchStates( GAME_MODE)
 function splash() 
 {
   init();
+  
   $('#progress').hide();
   $('#splash').show();
   $('.sound').show();  
@@ -283,7 +284,7 @@ function mainMenu()
       assetLoader.sounds[sound].muted = !playSound;
     }
   }
-   
+  delete splash;
   $('#progress').hide();
   $('#splash').hide();
   $('#Register').hide();
@@ -319,7 +320,7 @@ function startGame()
 	context.fillStyle = gradient;
 	appState = GAME_MODE.RUNNING;
 	
-	//switchStates();
+	switchStates();
 	
 	if(appState == GAME_MODE.RUNNING)
 	{
@@ -415,7 +416,7 @@ $('.play').click(function()
 {
   $('#menu').hide();
   $('#gameMenu').show();
-  delete splash;
+  
   delete credits;
   delete mainMenu;
   //delete menu image, since the game can not navigate back to this screen after clicking
@@ -431,7 +432,7 @@ $('.Register').click(function()
   //delete menu image, since the game can not navigate back to this screen after clicking
 });
 
-
+/*
 //GameOver screen restart button
 $('.restart').click(function() 
 {
@@ -441,7 +442,7 @@ $('.restart').click(function()
   //startGame();
   restarted = true;
 });
-
+*/
 //InMenuButtons
 //auction Button
 jq.AuctionSelect.backBtn.click(function() 
