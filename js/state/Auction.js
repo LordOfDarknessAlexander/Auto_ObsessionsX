@@ -253,12 +253,12 @@ var Auction =
 		if(( playerBid == currentBid)&& (playerDidBid))
 		{
 			player.y = 10;
-			context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 90);
+			context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X , 90);
 		}
 		else
 		{
 		  player.y = 150;
-		  context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 230);
+		  context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X , 230);
 		}
 		
 		if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
@@ -333,9 +333,7 @@ var Auction =
 		//context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
 		context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
 
-		context.fillText('Game Timer :  ' + timer.toFixed(2)  ,200, 400);
-		//player bid
-		context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);		
+			
 	},
 	updatePlayer : function() 
 	{
@@ -581,8 +579,9 @@ var Auction =
 		 endGame = true;
 		 auctionEnded = true;
 		 this.gameOver();
+		 //this.sold();
 		 assetLoader.sounds.bidder.pause();	
-		 //this.resart();
+		 
 		
 		 
 	},
@@ -599,7 +598,6 @@ var Auction =
 			Auction.sold();
 			assetLoader.sounds.bidder.pause();
 			assetLoader.sounds.sold.play();
-			//this.resart();
 			
 		}
 			 

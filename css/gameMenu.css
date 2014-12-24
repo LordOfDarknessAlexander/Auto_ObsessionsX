@@ -9,7 +9,7 @@
 	width: 900px;
 	height: 600px;
 	position: absolute;
-	bottom: 3%;
+	
 	
 }
 #gameMenu  li 
@@ -32,6 +32,7 @@
 {
 	height:20em;
 	width:25em;
+	bottom: 4em;
 }
 #gameMenu div#menuRight
 {
@@ -49,6 +50,51 @@
 	height:50px; 
 	cursor:pointer;
 }
+/* Stat Bar Game HUD */
+
+#statBar
+{
+	margin-top:-9em;
+	margin-left:32em;
+	
+}
+
+
+#money
+{
+  margin-top:-6em;
+  font-family:"Kozuka Gothic Pro B";
+  color: #237D07;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+#tokens
+{
+  margin-top:-6em;
+  font-family:"Kozuka Gothic Pro B";
+  color: #78C40B;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+#prestige
+{
+  margin-top:-6em;
+  font-family:"Kozuka Gothic Pro B";
+  color: #F17013;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+#mileMarker
+{
+  margin-top:-6em;
+  font-family:"Kozuka Gothic Pro B";
+  color: #F13A1F;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+
+
 /*game menu navigation buttons*/
 #auction
 {

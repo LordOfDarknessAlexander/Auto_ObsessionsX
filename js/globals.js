@@ -37,8 +37,6 @@ var buttonsPlaceY = 200;
 //Enemy Bid Timer check
 var BID_THRESHOLD = 3600;
 //Player Pos, should be local in Player class
-var PLAYER_XPOS = 50;
-var PLAYER_YPOS = 50;
 //Bidder Pos
 var BIDDER_XPOS = 650;
 var BIDDER_YPOS = 250;

@@ -1,4 +1,7 @@
 ﻿// The player object
+var PLAYER_XPOS = 20;
+var PLAYER_YPOS = 20;
+
 var player = (function(player) 
 {
   // add properties directly to the player imported object

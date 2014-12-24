@@ -318,7 +318,7 @@ function startGame()
 	gradient.addColorStop("1.0","green");
 	// Fill with gradient
 	context.fillStyle = gradient;
-	appState = GAME_MODE.RUNNING;
+	//appState = GAME_MODE.RUNNING;
 	
 	switchStates();
 	
@@ -409,6 +409,7 @@ function gameOver()
 	assetLoader.sounds.gameOver.currentTime = 0;
 	assetLoader.sounds.gameOver.play();		
 }
+
 //
 //Menu state start game button
 //
