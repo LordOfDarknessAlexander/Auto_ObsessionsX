@@ -1,19 +1,27 @@
-﻿//
-//Repair State interface
-//
+﻿/*Repair State interface, mod your ride and upgrade parts
+Dependant on state\Garage.js, for userGarage and car index
+and Vehicle.js for Cars and Parts*/
 var Repair = {
 	update : function()
 	{
-		stop = true;
 	},
 	render : function()
 	{
-		//additional rendering
+		//additional rendering to 2D context
 	},
-	initButtons : function()
+	init : function()
+	{
+		var car = userGarage[curCarIndex];
+		var img = $('#userCar');
+		img.attr('src', car.getFullPath() );
+		
+		this._initButtons();		
+	},
+	_initButtons : function()
 	{
 		//var car = userGarage[curCarIndex];
 		//var upgradeNode = xmlDB.getElementById(car.id).getElementById('upgrades');
+
 		//for each node in upgradeNode
 		/*{
 			$("#Repair#upgrades").clear();

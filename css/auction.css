@@ -41,6 +41,18 @@ div#Auction #bid
 	cursor:pointer;
 	position:absolute;
 	left:10%;
+	bottom:30%;
+}
+div#Auction label#carPrice
+{
+	background:black;
+	color:white;
+
+	width:150px;
+	height:50px;
+
+	position:absolute;
+	left:10%;
 	bottom:40%;
 }
 div#Auction button#homeBtn
@@ -55,7 +67,7 @@ div#Auction button#homeBtn
 	right:5%;
 	bottom:5%;
 }
-div#Auction label#info
+div#Auction label#carInfo
 {
 	background-color:grey;/* url('../images/defaultBtn.png') no-repeat 0 0;*/
 	color:black;

@@ -35,9 +35,13 @@ function carStats()
 }*/
 function carPart(condition, originality){
 	return {
-		cond : condition,
-		orig : originality,
-		repaired:false
+		_iconPath : 'images/defaultPart.png',
+		_cond : condition,
+		_orig : originality,
+		_repaired:false,
+		//getFullPath() : function()
+		//{	//return file path of image resource for this icon
+		//}
 		//getCondition:function(){return repaired ? this.condition + 25 : this.condition;
 	};
 }
@@ -53,6 +57,17 @@ function Vehicle(Name, Make, Year, Price)
 	var img = new Image()
 	img.src = 'images/vehicle.jpg';	//ret.getFullPath();
 	//returns a new vehicle object
+	 //tmpParts = [];
+	//var bfParts = parseInt(carNode.attr('parts') );
+	//var carNode
+	
+	//for(var i = 0; i < MAX_PARTS; i++)
+	//{
+		//var index = bfParts & (1 << i);
+		//if(index){
+			//tmpParts.append(carPart(
+		//}
+	//}
 
 	return {
 		//pos:new Vector(VEHICLE_XPOS, VEHICLE_YPOS,0,0)
@@ -64,7 +79,7 @@ function Vehicle(Name, Make, Year, Price)
 		year : Year,	//parseInt(node.attr('year') ),
 		id : '0',	//node.attr('id'),
 		//_info: node.text(),
-		//parts : [],	//only retain currently upgraded parts
+		//_parts : tmpParts,	//only retain currently upgraded parts, array is copied
 		image : img,
 		//
 		getPrice : function()
@@ -118,11 +133,12 @@ function Vehicle(Name, Make, Year, Price)
 		},
 		getFullPath : function()
 		{	//returns the absolute url for the image path of this car on the server
-			//return baseURL + 'images/vehicles/' + this.make + '/' + year + '/' + this.name + '.jpg';
-			return '';
+			return /*baseURL +*/ 'images\\cars\\' + this.make + '\\' + this.year + '\\' + this.name + '.jpg';
+			//return '';
 		},
 		initParts : function()
 		{	//loads parts
+			//this._parts = [];
 			//var thisXML = xmlDoc.ElementById(this.id);
 			//if(this.parts.length != 0)
 				//this.parts = [];	//reset parts array
@@ -188,7 +204,7 @@ var cn = $('#0x00DA86B0', carDoc);
 var xdbCars = [
 	Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969', 25000),
 	//Vehicle(cn.attr("name"), 'Chevrolet','1969', parseInt(cn.attr('_price') ) ),
-	Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969', 18000),
+	Vehicle('Camaro RS-Z28 Sport Coupe', 'Chevrolet','1969', 18000),
 	Vehicle('Sierra', 'GMC', '1997', 12000)
 	//...etc
 ];

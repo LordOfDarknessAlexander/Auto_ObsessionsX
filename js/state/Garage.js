@@ -60,7 +60,7 @@ var Garage = {
 						
 			for(var i = 0; i < userGarage.length; i++){
 				//add buttons to list
-				src = "\'images/vehicle.jpg\'";	//userGarage[i].getFullPath();
+				src = userGarage[i].getFullPath();	//"\'images/vehicle.jpg\'";
 				list.append("<li>" +
 				"<button id=\'carSelBtn" + i + "\'>" +
 				"<label id=\'carName\'>Car Name</label>" +
@@ -76,7 +76,7 @@ var Garage = {
 					//"<label id=\'docs\'>documentation</label>" +
 				//"</div>" +			
 				//
-				"<img src=" + src + "></button>" +
+				"<img src=\'" + src + "\'></button>" +
 				"</li>");
 				
 				$('#carSelBtn' + i).click({index:i}, this.setCurrentCar);	//this.setSelectedCar);
@@ -127,6 +127,7 @@ var Garage = {
 		var btn = $('#userCar');
 		var src = $('#carSelBtn' + i);	//$('#selectedCar');
 	
+		//show user car stats div
 		curCarIndex = i;	//maintain index, instead of copying a car
 		//}
 		btn.children('label#carName').text(src.children('label#carName').text() );
@@ -156,7 +157,7 @@ var CarView = {
 		if(selCarIndex !== null && userGarage.length != 0)
 		{
 			var car = userGarage[selCarIndex];
-			jq.CarView.carImg.attr('src', 'images\\vehicle.jpg');	//car.getFullPath() );
+			jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
 			//jq.CarView.carInfo.text(xmlCarinfo.getElemById(car.id) );
 		}
 	}

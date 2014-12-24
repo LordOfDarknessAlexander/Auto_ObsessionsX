@@ -95,6 +95,7 @@ var Auction =
 			vehiclePrice = _car.getPrice();
 			currentBid = vehiclePrice * 0.1;
 		}
+		jq.Auction.carPrice.text('car value:\n' + _car.getPrice().toFixed(2) );
 		//initAI();
 		//else, no car game breaks...
 		this.endAuction();
@@ -106,7 +107,9 @@ var Auction =
 		context.font = '26px arial, sans-serif';  
 
 		$('#Auction').show();
-		$('div#Auction img#auctionCar').attr('src', 'images\\vehicle.jpg');
+		this.setBidBtnText();
+		$('div#Auction img#auctionCar').attr('src', _car.getFullPath() );
+		$('div#Auction label#carInfo').text(/*'<h1>' + */_car.getFullName() + '-\n    ' + _car.getInfo() );
 		//$('#menu').removeClass('gameMenu');
 		//$('#menu').addClass('Auction');
 		$('.sound').show();
@@ -322,12 +325,12 @@ var Auction =
 		
 		
 		//current bid HUD
-		var gorguts;
-		gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
+		//var gorguts;
+		//gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
 		
 
 		//these could be HTML elements in the Auction div
-		context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
+		//context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
 		context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
 
 		context.fillText('Game Timer :  ' + timer.toFixed(2)  ,200, 400);
@@ -612,6 +615,10 @@ var Auction =
 		delete endBidTimers;
 		console.log("Destroying Auction snaps");
 		delete player;	
+	},
+	setBidBtnText : function()
+	{
+		$('#bid').text("Bid: $" + currentBid.toFixed(2) );
 	}
 	
 };

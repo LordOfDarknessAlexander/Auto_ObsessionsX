@@ -16,7 +16,7 @@ var AuctionSelect =
 			var car = xdbCars[i];	//ao.xdbCars[i];
 			
 			var btnStr = "<li id=\'" + liID + "\'>" + 
-				"<img src=\'" + "images\\vehicle.jpg"/*car.getFullPath()*/ + "\'>" +
+				"<img src=\'" + car.getFullPath()/*car.getFullPath()*/ + "\'>" +
 				"<label id=\'" + labelID + "\'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
 				"<button id=\'" + btnID + "\'\'>" + 
 					"<label id=\'price\'>$" + (car.getPrice() ).toString() + "</label><br>" +

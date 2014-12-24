@@ -488,7 +488,8 @@ $('#bid').click(function()
 {
 	Auction.playerBidding();
 	playerDidBid = true;
-	$('#bid').text("Bid:" + playerNextBid.toString() );
+	//$('#bid').text(
+	Auction.setBidBtnText();
 });
 //Repair to menu Repair
 /*function toogleRepair(){

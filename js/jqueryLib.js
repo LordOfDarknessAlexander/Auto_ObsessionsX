@@ -58,7 +58,9 @@ var jq = {
 	},
 	Auction : {
 		menu : $('#Auction'),
-		backBtn : $('#auctionBackButton')
+		backBtn : $('#auctionBackButton'),
+		homeBtn : $('div#Auction button#homeBtn'),
+		carPrice : $('div#Auction label#carPrice')
 				
 		//cashLabel:$('#myCash'),
         //carPrice:$('#carPrice');
@@ -66,6 +68,7 @@ var jq = {
 	CarView : {
 		menu : $('#CarView'),
 		backBtn : $('button#carViewBackBtn'),
+		homeBtn : $('div#CarView button#homeBtn'),
 		carImg : $('img#car'),
 		toggle : function()
 		{	//go from (my cars to car view) || (car view to my cars)
