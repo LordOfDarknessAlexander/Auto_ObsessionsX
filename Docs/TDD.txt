@@ -1,0 +1,10 @@
+Technical Design Document(under construction)
+
+This document laysout the technical standards used in the development of AO.
+
+File formats
+	All large image resources, such as backgrounds, car photos assume the JPG format.
+	All audio files are MP3.
+
+Future Consideration
+	Currently considering inegration of php and/or sql for server-side coding.

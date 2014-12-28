@@ -37,12 +37,15 @@ li
 }
 
 a 
-{
+{	/*styling for all anchor elements on page*/
   text-decoration: none;
   color: inherit;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
-
+button
+{	/*all button elements will hare this background unless otherwise specified*/
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
+}
 .wrapper 
 {
  height:600px;

@@ -11,11 +11,25 @@ var Repair = {
 	},
 	init : function()
 	{
-		var car = userGarage[curCarIndex];
-		var img = $('#userCar');
-		img.attr('src', car.getFullPath() );
-		
-		this._initButtons();		
+		//appState = GAME_MODE.Repair;
+		if(curCarIndex !== null && userGarage.length != 0)
+		{
+			var car = userGarage[curCarIndex];
+			var img = $('div#RepairShop img#userCar');
+			img.attr('src', car.getFullPath() );
+			
+			this._initButtons();
+
+			$('div#RepairShop div#upgrades').show();
+			$('div#RepairShop div#repairs').show();
+		}
+		else
+		{
+			//show empty garage, please purchase a car
+			$('div#RepairShop img#userCar').attr('src', 'images/garageEmpty.png');
+			$('div#RepairShop div#upgrades').hide();
+			$('div#RepairShop div#repairs').hide();
+		}
 	},
 	_initButtons : function()
 	{

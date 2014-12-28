@@ -504,7 +504,7 @@ jq.Game.repairBtn.click(function()
 	//$('#gameMenu')
 	jq.Game.menu.hide();
 	jq.RepairShop.menu.show();
-	//appState = GAME_MODE.Repair;
+	Repair.init();
 });
 //RepairMenu Back Button 
 jq.RepairShop.backBtn.click(function()

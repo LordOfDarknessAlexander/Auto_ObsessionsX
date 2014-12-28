@@ -30,14 +30,35 @@
 	background: url('../images/repairBackButton.png') no-repeat 0 0;
 	color: white;
 	font-weight: bold;
+	position: absolute;
 	width:150px;
 	height:50px;
+	left:5%;
+	bottom:0%;
 	cursor:pointer;
 	
-}/*
-div#RepairShop #div#upgrades
-{
 }
-div#RepairShop #div#repairs
+div#RepairShop div#upgrades
 {
-}*/
+	position: absolute;
+	width:15%;
+	top:30%;
+	height:60%;
+	left:5%;
+}
+div#RepairShop div#repairs
+{
+	position: absolute;
+	width:15%;
+	height:40%;
+	top:30%;
+	right:5%;
+}
+div#RepairShop img#userCar
+{
+	position: absolute;
+	width: 40%;
+	height: 40%;
+	left:30%;
+	top:30%;
+}

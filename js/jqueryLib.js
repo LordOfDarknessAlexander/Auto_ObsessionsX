@@ -91,7 +91,9 @@ var jq = {
 	},
 	RepairShop : {
 		menu : $('#RepairShop'),
-		backBtn : $('#repairBackButton')
+		backBtn : $('#repairBackButton'),
+		upgrades : $('div#RepairShop div#upgrades'),
+		repairs : $('div#RepairShop div#repairs')
 	}
 	//Projects
 	//Vehicles
