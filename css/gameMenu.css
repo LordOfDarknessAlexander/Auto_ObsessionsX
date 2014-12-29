@@ -1,7 +1,7 @@
 ﻿/*Inventory Menu Buttons and stylings*/
 #gameMenu 
 {
-	background: url('../images/inventoryMenu.png') no-repeat 0 0;
+	background: url('../images/defaultBG.jpg') no-repeat 0 0;
 	display: none;
 	text-align: center;
 	padding-top: 92px;
@@ -28,6 +28,7 @@
 	left:5%;
 	top:40%;
 }
+
 #gameMenu img#homeImg
 {
 	height:20em;
@@ -52,48 +53,45 @@
 }
 /* Stat Bar Game HUD */
 
-#statBar
+div#statBar
 {
-	margin-top:-9em;
-	margin-left:32em;
-	
+	position:absolute;
+	top:30%;
+	left:2%;
+	width:100%;
+	height:5%;
+	/*child elements inherit values, unless otherwise specified*/
+	font-family:"Kozuka Gothic Pro B";
+	text-align:left;
+	color:white;
+	/*font-weight: bold;
+	font-size:1.2em;*/
 }
 
-
-#money
+div#statBar label#money
 {
-  margin-top:-6em;
-  font-family:"Kozuka Gothic Pro B";
-  color: #237D07;
-  font-weight: bold;
-  font-size: 1.2em;
+	position:absolute;
+	left:0%;
+	width:25%;
 }
-#tokens
+div#statBar label#tokens
 {
-  margin-top:-6em;
-  font-family:"Kozuka Gothic Pro B";
-  color: #78C40B;
-  font-weight: bold;
-  font-size: 1.2em;
+	position:absolute;
+	left:25%;
+	width:25%;
 }
-#prestige
+div#statBar label#prestige
 {
-  margin-top:-6em;
-  font-family:"Kozuka Gothic Pro B";
-  color: #F17013;
-  font-weight: bold;
-  font-size: 1.2em;
+	position:absolute;
+	left:50%;
+	width:25%;
 }
-#mileMarker
+div#statBar label#mileMarker
 {
-  margin-top:-6em;
-  font-family:"Kozuka Gothic Pro B";
-  color: #F13A1F;
-  font-weight: bold;
-  font-size: 1.2em;
+	position:absolute;
+	left:75%;
+	width:25%;
 }
-
-
 
 /*game menu navigation buttons*/
 #auction

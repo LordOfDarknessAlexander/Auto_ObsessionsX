@@ -45,6 +45,7 @@ a
 button
 {	/*all button elements will hare this background unless otherwise specified*/
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	color:red;
 }
 .wrapper 
 {
@@ -53,6 +54,15 @@ button
   position: absolute;
   top: 5px;
   left: 5px;
+}
+img#adBar
+{
+	background:url('../images/defaultBtn.png') no-repeat 0 0;
+	position:absolute;
+	width:50%;
+	height:5%;
+	left:25%
+	bottom:5%;
 }
 
 #Register

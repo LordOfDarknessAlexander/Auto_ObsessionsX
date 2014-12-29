@@ -1,7 +1,7 @@
 ﻿/*repair page UI stylings*/
 #RepairShop
 {  
-	background: url('../images/inventoryMenu.png') no-repeat 0 0;
+	background: url('../images/defaultBG.jpg') no-repeat 0 0;
 	display: none;
 	text-align: center;
 	padding-top: 92px;
@@ -60,5 +60,5 @@ div#RepairShop img#userCar
 	width: 40%;
 	height: 40%;
 	left:30%;
-	top:30%;
+	top:40%;
 }

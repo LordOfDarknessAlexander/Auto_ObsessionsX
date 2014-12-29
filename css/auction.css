@@ -1,7 +1,9 @@
 ﻿/*Action UI stylings*/
 div#Auction
 {	/*Auction page stylings*/ 
+	/*background: url('../images/defaultBG.jpg') no-repeat 0 0;*/
 	display: none;
+	overflow:scroll;
 	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
@@ -68,7 +70,7 @@ div#Auction button#homeBtn
 div#Auction label#carInfo
 {
 	background-image:url('../images/checkers.png');
-	color:black;
+	color:red;
 	font-weight:bold;
 	width:60%;
 	height:20%;
