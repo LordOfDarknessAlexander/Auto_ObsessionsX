@@ -86,10 +86,10 @@ else
   
 	function storeMyContact(id) 
 	{
-		var fullname	= document.getElementById('fullname').innerHTML;
+		var fullName	= document.getElementById('fullName').innerHTML;
 		var phone		= document.getElementById('phone').innerHTML;
 		var email		= document.getElementById('email').innerHTML;
-		localStorage.setItem('mcFull',fullname);
+		localStorage.setItem('mcFull',fullName);
 		localStorage.setItem('mcPhone',phone);
 		localStorage.setItem('mcEmail',email);
 	}
@@ -98,25 +98,25 @@ else
   {
     if ( localStorage.getItem('mcFull')) 
     {
-      var fullname	= localStorage.getItem('mcFull');
+      var fullName	= localStorage.getItem('mcFull');
       var phone		= localStorage.getItem('mcPhone');
       var email		= localStorage.getItem('mcEmail');
     }
     else 
     {
-      var fullname	= 'Click And Enter A Name';
+      var fullName	= 'Click And Enter A Name';
       var phone		= 'Click And Enter A Phone Number';
       var email		= 'Click And Enter An Email Address';
     }
-    document.getElementById('fullname').innerHTML = fullname;
+    document.getElementById('fullName').innerHTML = fullName;
     document.getElementById('phone').innerHTML = phone;
     document.getElementById('email').innerHTML = email;
   }
  
   function store()
   {
-     var fullname = document.getElementById("fullname");
-     localStorage.setItem("fullname", fullname.value);
+     var fullName = document.getElementById("fullName");
+     localStorage.setItem("fullName", fullName.value);
      
      var phone = document.getElementById("phone");
      localStorage.setItem("phone", phone.value);
@@ -124,7 +124,7 @@ else
      var email = document.getElementById("email");
      localStorage.setItem("email", email.value);
      
-     console.log("full Name " + fullname.value + "Phone " + phone.value + "email" + email.value);
+     console.log("full Name " + fullName.value + "Phone " + phone.value + "email" + email.value);
 
   }
 	

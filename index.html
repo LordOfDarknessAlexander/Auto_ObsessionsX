@@ -27,6 +27,7 @@
     <script type="text/javascript" src="js/Vector.js"></script>
     <script type="text/javascript" src="js/GameMode.js"></script>
     <script type="text/javascript" src="js/Users.js"></script>
+    <script type="text/javascript" src="js/FormValidation.js"></script>
     <script type="text/javascript" src="js/requestAnimationFrame.js"></script>
 </head>
 <body>
@@ -339,110 +340,63 @@
 	   	  <div><a onclick="clearLocal(); getMyContact();" href="javascript:void(0);">Clear All Of My Data</a></div>
 		</div>
 
-          	  
-     <form id='register'>
-	               	Name:<input id='userID' type='text'><br>
-	                Address:<input id='userPW' type='text'><br>
-	                City:<input id='userCity' type='text'><br>
-	                State/Prov:<input id='userSP' type='text'><br>
-	                Country:<input id='userCountry' type='text'><br>
-	                Zip/Postal:<input id='userZP' type='text'><br>
-	                D.O.B.:<input id='userDOB' type='text'><br><!--change to date selector?--> 
-	                
-					  <fieldset class="date"> 
-					  <legend>Date Of Birth </legend> 
-					  <label for="month_start">Month</label> 
-					  <select id="month_start" 
-					          name="month_start" /> 
-					    <option>January</option>       
-					    <option>February</option>       
-					    <option>March</option>       
-					    <option>April</option>       
-					    <option>May</option>       
-					    <option>June</option>       
-					    <option>July</option>       
-					    <option>August</option>       
-					    <option>September</option>       
-					    <option>October</option>       
-					    <option>November</option>       
-					    <option>December</option>       
-					  </select> 
-					  <label for="day_start">Day</label> 
-					  <select id="day_start" 
-					          name="day_start" /> 
-					    <option>1</option>       
-					    <option>2</option>       
-					    <option>3</option>       
-					    <option>4</option>       
-					    <option>5</option>       
-					    <option>6</option>       
-					    <option>7</option>       
-					    <option>8</option>       
-					    <option>9</option>       
-					    <option>10</option>       
-					    <option>11</option>       
-					    <option>12</option>       
-					    <option>13</option>       
-					    <option>14</option>       
-					    <option>15</option>       
-					    <option>16</option>       
-					    <option>17</option>       
-					    <option>18</option>       
-					    <option>19</option>       
-					    <option>20</option>       
-					    <option>21</option>       
-					    <option>22</option>       
-					    <option>23</option>       
-					    <option>24</option>       
-					    <option>25</option>       
-					    <option>26</option>       
-					    <option>27</option>       
-					    <option>28</option> 
-                        <!--There needs to be js to validate dates,
-                        what about non-valid enteries such as,
-                        June 31st, Feb 30th(and leap years), etc-->
-					    <option>29</option>       
-					    <option>30</option>       
-					    <option>31</option>       
-					  </select> - 
-					  <label for="year_start">Year</label> 
-					  <select id="year_start" 
-					         name="year_start" />
-					    <option>2009</option>       
-					    <option>2010</option>       
-					    <option>2011</option>       
-					    <option>2012</option>       
-					    <option>2013</option>       
-					    <option>2014</option>       
-					    <option>2015</option>       
-					    <option>2016</option>       
-					    <option>2017</option>       
-					    <option>2018</option>       
-					    <option>2009</option>       
-					    <option>2010</option>       
-					    <option>2011</option>       
-					    <option>2012</option>       
-					    <option>2013</option>       
-					    <option>2014</option>       
-					    <option>2015</option>       
-					    <option>2016</option>       
-					    <option>2017</option>       
-					    <option>2018</option>       
-					  </select> 
-					  <span class="inst">(Month-Day-Year)</span> 
-					</fieldset> 
-
-	                
-	                Username:<input id='userName' type='text'><br>
-	                Password:<input id='userPW' type='text'><br>
-	                Confirm Password:<input id='userPWConfirm' type='text'><br>
-                <input type='submit' value='SUBMIT'>
-            	</form>
-
-      
+         <h1>Registration Form</h1>
+		<form method="post" action="Process.html"
+				onsubmit="return validate(this);">
+			<table border="0" cellspacing="2" cellpadding="2">
+		      <tr>
+		        <td>First Name:</td>
+		        <td><input type="text" name="FirstName" size="20"></td>
+		      </tr>
+		      <tr>
+		        <td>Middle Initial:</td>
+		        <td><input type="text" name="MidInit" size="2"></td>
+		      </tr>
+		      <tr>
+		        <td> Last Name:</td>
+		        <td><input type="text" name="LastName" size="20"></td>
+		      </tr>
+		      <tr>
+		        <td>City: </td>
+		        <td><input type="text" name="City" size="20"></td>
+		      </tr>
+		      <tr>
+		        <td>State: </td>
+		        <td><input type="text" name="State" size="2"></td>
+		      </tr>
+		      <tr>
+		        <td>Country:</td>
+		        <td><input type="text" name="Country" size="20"></td>
+		      </tr>
+		      <tr>
+		        <td>Zip: </td>
+		        <td><input type="text" name="Zip" size="10"></td>
+		      </tr>
+		      <tr>
+		        <td>Email: </td>
+		        <td><input type="text" name="Email" size="30"></td>
+		      </tr>
+		      <tr>
+		        <td>Username:</td>
+		        <td><input type="text" name="Username" size="10"></td>
+		      </tr>
+		      <tr>
+		        <td>Password:</td>
+		        <td><input type="password" name="Password1" size="10"></td>
+		      </tr>
+		      <tr>
+		        <td>Repeat Password: </td>
+		        <td><input type="password" name="Password2" size="10"></td>
+		      </tr>
+		      <tr>
+		        <td colspan="2" align="center">
+					<input name="submit" type="submit" value="Submit">
+					<input name="reset" type="reset" value="Reset Form">
+				</td>
+		      </tr>
+		    </table>
+		</form>
        </div> 
-
-       
            
 	<div id="game-over">
        	<!--win auction-->

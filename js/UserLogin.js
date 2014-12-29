@@ -24,7 +24,8 @@ function userLogin()
 	{
 		alert ("Login was successful");
 		//window.location = "http://www.google.com";
-	    userNames[i] == userText;
+		
+	  //  userNames[i] == userText;
 	    userLogged = true;
 	   // localStorage.setItem('mcFull',fullname);
 
