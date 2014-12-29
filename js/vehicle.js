@@ -205,7 +205,8 @@ var xdbCars = [
 	Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969', 25000),
 	//Vehicle(cn.attr("name"), 'Chevrolet','1969', parseInt(cn.attr('_price') ) ),
 	Vehicle('Camaro RS-Z28 Sport Coupe', 'Chevrolet','1969', 18000),
-	Vehicle('Sierra', 'GMC', '1997', 12000)
+	Vehicle('Sierra', 'GMC', '1997', 12000),
+	Vehicle('S5 Coupe', 'Audi', '2013', 57000)
 	//...etc
 ];
 

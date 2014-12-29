@@ -87,6 +87,35 @@ var logos = [
 	'jegs',
 	'napa'
 ];
+var userStats = {
+	money:0,
+	tokens:2,
+	prestige:0,
+	markers:0
+};
+function setMoney()
+{
+	$('label#money', jq.Game.menu).text('Money: ' + money.toString() );
+}
+function setTokens()
+{
+	$('label#tokens', jq.Game.menu).text('Tokens: ' + userStats.tokens.toString() );
+}
+function setPrestige()
+{
+	$('label#prestige', jq.Game.menu).text('Money: ' + userStats.prestige.toString() );
+}
+function setMarkers()
+{	//updates html lable element, within context of the Game menu only
+	$('label#mileMarker', jq.Game.menu).text('Mile Markers: ' + userStats.markers.toString() );
+}
+function setStatBar()
+{
+	setMoney();
+	setTokens();
+	setPrestige();
+	setMarkers();
+}
 function setAdBG()
 {
 	//floor returns an integer, random returns, random returns a float
@@ -327,7 +356,7 @@ function mainMenu()
 money = 50000;
 // Start the game - reset all variables and entities, spawn ground and water.
 function startGame() 
-{
+{	//initialize the game state
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	//$('#game-over').style.display = 'none';
 	document.getElementById('game-over').style.display = 'none';
@@ -350,6 +379,9 @@ function startGame()
 	// Fill with gradient
 	context.fillStyle = gradient;
 	//appState = GAME_MODE.RUNNING;
+	
+	setStatBar();
+	setAdBG();
 	
 	switchStates();
 	
@@ -448,7 +480,7 @@ $('.play').click(function()
 {
   $('#menu').hide();
   $('#gameMenu').show();
-  
+  //can no longer navigate to credits or the root menus anymore
   delete credits;
   delete mainMenu;
   //delete menu image, since the game can not navigate back to this screen after clicking
@@ -478,7 +510,9 @@ $('.restart').click(function()
 //InMenuButtons
 //auction Button
 jq.AuctionSelect.backBtn.click(function() 
-{ setAdBG();
+{ 	
+	setAdBG();
+	setStatBar();
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
 	Auction.setup();
@@ -508,13 +542,24 @@ jq.Auction.backBtn.click(function()
 	startGame();
   
 	$('#Auction').hide();
-	jq.Game.menu.show();
+	jq.AuctionSelect.menu.show();
+	
 	//var car = userGarage[curCarIndex];
 	//jq.Game.homeImg.attr('src', car.getFullPath() );
 	//$('#menu').removeClass('Auction');
 	//$('#menu').addClass('gameMenu');
 	
 });
+jq.Auction.homeBtn.click(function()
+{
+	//Auction.cancel();	//stop the auction, aborting the sale
+	jq.Auction.menu.hide();
+	jq.Game.menu.show();
+	setStatBar();
+	setAdBG();
+	//appState = GAME_STATE.MAIN;
+});
+
 //Inside Auction Bid Button
 $('#bid').click(function()
 {

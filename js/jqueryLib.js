@@ -69,7 +69,7 @@ var jq = {
 	CarView : {
 		menu : $('#CarView'),
 		backBtn : $('button#carViewBackBtn'),
-		homeBtn : $('div#CarView button#homeBtn'),
+		homeBtn : $('div#CarView button#homeBtn'),	//$('button#homeBtn', jq.CarView.menu),
 		carImg : $('img#car'),
 		toggle : function()
 		{	//go from (my cars to car view) || (car view to my cars)
