@@ -1,6 +1,7 @@
 //Application main
 var AutoObessesions = {};
 
+
 function garageDoor()
 {
 	backgroundY -= speed;
@@ -18,7 +19,14 @@ function update(deltaTime)
    {
    	 console.log("Chicken Fingers restarting");
    }
-    timer++;
+   timer++;
+   if(userLogged)
+   {
+   		
+   		
+   		userHUD();
+   		console.log("User Screen");
+   }
 }
 Auction.setup = function()
 {
@@ -273,6 +281,10 @@ function Register()
 	}	
 
 }
+function userHUD(userName)
+{
+	context.fillText( "Welcome" + userText,ENEMY_X + 600 , 270);
+}
  
 //Main Menu  
 function mainMenu() 
@@ -285,6 +297,7 @@ function mainMenu()
     }
   }
   delete splash;
+  
   $('#progress').hide();
   $('#splash').hide();
   $('#Register').hide();
@@ -302,6 +315,7 @@ function startGame()
 	//$('#game-over').style.display = 'none';
 	document.getElementById('game-over').style.display = 'none';
 	document.getElementById('gameMenu').style.display = 'true';  
+	$('#money').html(money);
 	appState = GAME_MODE.RUNNING;
 	player.reset();
 	ticker = 0;
@@ -611,5 +625,6 @@ $('button#restart').click(function(){
 	Auction.setup();
 	
 });
+
 assetLoader.downloadAll();
 });

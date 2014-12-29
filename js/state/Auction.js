@@ -107,6 +107,7 @@ var Auction =
 		context.font = '26px arial, sans-serif';  
 
 		$('#Auction').show();
+		$('#money').html(money);
 		this.setBidBtnText();
 		$('div#Auction img#auctionCar').attr('src', _car.getFullPath() );
 		$('div#Auction label#carInfo').text(/*'<h1>' + */_car.getFullName() + '-\n    ' + _car.getInfo() );
@@ -248,6 +249,7 @@ var Auction =
 		
 		
 		context.drawImage(backgroundImage, 0,-10);
+		
 		
 		player.draw();
 		if(( playerBid == currentBid)&& (playerDidBid))

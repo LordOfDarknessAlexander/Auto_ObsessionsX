@@ -96,6 +96,15 @@ var auctionEnded = false;
 var restarted = false;
 
 var appState = GAME_MODE.SPLASH;	
+//Users login counts
+
+var userLogged = false;
+
+//user HUD
+var userText = "";
+var currentUser;
+var userCash;
+var userScore;
 
 function resetStates()
 {

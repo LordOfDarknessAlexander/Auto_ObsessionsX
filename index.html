@@ -46,20 +46,35 @@
          
             <div id="main">
                 <h1>Auto Obsessions</h1>
+                
+                 <div id="login">
+	                <form name = "login">
+						<p>ENTER USER NAME <input type="text" name="username">
+						<br>
+						<br>
+						 ENTER PASSWORD <input type="password" name="pword">
+						 <br>
+						 <br>
+						<input type="button" value="Check In" name="Submit" onclick= "userLogin()">
+						</p>
+					</form>
+				</div>
                 <ul>
                    <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
                    <!--li><a href="javascript:void(0)" class="playGuest">Play as Guest</a></li-->
                    <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
                    <li><a href="javascript:void(0)" class="button Register">Sign Up</a></li>
                 </ul>
+                <!--
                 <form id='login'>
                 	User ID:	<input id='userID' type='text'><br>
                     <button id='forgotID'>Forgot ID?</button><br>
                     Password:	<input id='userPW' type='text'><br>
                     <button id='forgotPW'>Forgot Password?</button><br>
                 </form>
-                
-              </div>
+                -->
+           
+                </div>
           
             <div id="credits">
             	<!--could just be a link at the bottom of the page-->
@@ -88,7 +103,7 @@
         	 <h1>My Home</h1>
              <!--HUD ---->
             <div id='statBar'>             
-                <label id='money'>Money:</label>
+                <label id='money'>Money: </label>
                 <label id='tokens'>Tokens:</label>
                 <label id='prestige'>Prestige:</label>
                 <label id='mileMarker'>Mile Makers:</label>
@@ -448,6 +463,8 @@
     
     <script type="text/javascript" src="js/globals.js"></script><!--is parsed first-->
     <script type="text/javascript" src="js/LoadAssets.js"></script> 
+    <script type="text/javascript" src="js/UserLogin.js"></script> 
+    
     <!--2D sprite/animation classes-->
     <script type="text/javascript" src="js/2D/SpriteSheet.js"></script>
     <script type="text/javascript" src="js/2D/Animation.js"></script>

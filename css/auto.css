@@ -79,7 +79,13 @@ img#adBar
 
 
 }
-
+#login
+{
+	position: absolute;
+	float: left;
+	top : 20%;
+	
+}
 
 #splash
 {
