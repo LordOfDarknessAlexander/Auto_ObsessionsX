@@ -57,12 +57,12 @@ button
 }
 img#adBar
 {
-	background:url('../images/defaultBtn.png') no-repeat 0 0;
+	/*background:url('../images/logos/AutoZone.png') no-repeat 0 0;*/
 	position:absolute;
 	width:50%;
-	height:5%;
-	left:25%
-	bottom:5%;
+	height:8%;
+	left:25%;
+	bottom:2%;
 }
 
 #Register

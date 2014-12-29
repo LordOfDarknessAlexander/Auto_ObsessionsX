@@ -74,21 +74,30 @@ function checkEmail(email)
 
 function validate(form)
 {
+	//registered name
 	var firstName = form.FirstName.value;
 	var midInit = form.MidInit.value;
 	var lastName = form.LastName.value;
+	//location info
 	var city = form.City.value;
 	var state = form.State.value;
 	var country = form.Country.value;
 	var zipCode = form.Zip.value;
+	//personal info
 	var email = form.Email.value;
 	var userName = form.Username.value;
 	var password1 = form.Password1.value;
 	var password2 = form.Password2.value;
+	//
 	var errors = [];
 	
 	if (!checkLength(firstName)) 
-	{
+	{	//user errors.append, array is being indexed outside outside its bounds(.length -1)!
+		//javascript resizes the array, apparently. This is bad practice,
+		//as it may cause security issues with other languages
+		//eg. allocate array of 3 ints
+		//[0,1,2](<-end of array)[array@length of 3], accessing data in another piece of memory,
+		//which may be uninitialized or already allocated as a different object
 		errors[errors.length] = "You must enter a first name.";
 	}
 

@@ -81,6 +81,20 @@ function openDoc(url, reader)
   
 	return doc;
 }
+var logos = [
+	'AutoZone',
+	'shelby',
+	'jegs',
+	'napa'
+];
+function setAdBG()
+{
+	//floor returns an integer, random returns, random returns a float
+	var i = Math.floor(Math.random() * (logos.length - 1) ),	//[0,logos.length-1]
+		src = "images\\logos\\" + logos[i] + ".png";
+	jq.adBar.attr('src', src);
+	jq.adBar.show();
+}
 //$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed
 $(document).ready(function()
@@ -89,6 +103,9 @@ $(document).ready(function()
 	//such as jQuery/ui callback bindings,
 	//loading assets and 'core' game logic
 	Storage.local.clear();
+	
+	//jq.Game.homeImg.hide();
+	
 	function init()
 	{
 	  if (!stop) 
@@ -461,7 +478,7 @@ $('.restart').click(function()
 //InMenuButtons
 //auction Button
 jq.AuctionSelect.backBtn.click(function() 
-{
+{ setAdBG();
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
 	Auction.setup();

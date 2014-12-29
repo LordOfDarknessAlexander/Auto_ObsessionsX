@@ -31,9 +31,11 @@
 
 #gameMenu img#homeImg
 {
-	height:20em;
-	width:25em;
-	bottom: 4em;
+	position:absolute;
+	height:50%;
+	width:50%;
+	left:25%;
+	bottom:12%;
 }
 #gameMenu div#menuRight
 {
