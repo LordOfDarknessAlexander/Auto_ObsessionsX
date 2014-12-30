@@ -265,30 +265,31 @@
             <button id='viewCar'>View</button>
 			<input type='button' id='garageBackBtn' value='back'>
             <div id='userCar'>
-				<img src='images/vehicle.jpg'>
+				<img id='carImg' src='images/vehicle.jpg'>
 				<!--label id='curCarName'>m:</label>
 				<label id='curCarInfo'>current car info</label-->
-				<label id='carName'>name</label>
+				<label id='carName'>name</label>-
 				<label id='carInfo'>info</label>
+                <!---->
                 <div id='progressBars'>
                 	<!--progress bar 'value' attribute is between 0.0 and 1.0-->
+                    driveterrain<progress id='drivetrainPB' value='0.0'></progress><br>
+                    body<progress id='bodyPB' value='0.0'></progress><br>
+                    interior<progress id='interiorPB' value='0.0\'></progress><br>
+                    documents<progress id='docsPB' value='0.0'></progress>
+                </div>
+			</div>
+            <div id='selectedCar'>
+				<img id='carImg' src='images/vehicle.jpg'>
+				<label id='carName'></label>
+				<label id='carInfo'></label>
+                <div id='progressBars'>
                     <progress id='drivetrainPB' value='0.0'></progress><br>
                     <progress id='bodyPB' value='0.0'></progress><br>
                     <progress id='interiorPB' value='0.0\'></progress><br>
                     <progress id='docsPB' value='0.0'></progress>
                 </div>
 			</div>
-            <!--div id='selectedCar'>
-				<img src='images/vehicle.jpg'>
-				<label id='curCarName'>m:</label>
-				<label id='curCarInfo'>current car info</label>
-                <div id='progressBars'>
-                    <progress id='drivetrainPB' value='0.0'></progress><br>
-                    <progress id='bodyPB' value='0.0'></progress><br>
-                    <progress id='interiorPB' value='0.0\'></progress><br>
-                    <progress id='docsPB' value='0.0'></progress>
-                </div>
-			</div-->
 
           	<ul id='carBtns'>
             <!--list is populated in '../program.js' from '../user.xml'

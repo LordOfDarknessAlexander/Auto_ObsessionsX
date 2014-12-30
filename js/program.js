@@ -567,9 +567,6 @@ jq.Auction.backBtn.click(function()
 	$('#Auction').hide();
 	jq.AuctionSelect.menu.show();
 	
-	
-	//var car = userGarage[curCarIndex];
-	//jq.Game.homeImg.attr('src', car.getFullPath() );
 	//$('#menu').removeClass('Auction');
 	//$('#menu').addClass('gameMenu');
 	
@@ -581,6 +578,12 @@ jq.Auction.homeBtn.click(function()
 	jq.Game.menu.show();
 	setStatBar();
 	setAdBG();
+	
+	var car = Garage.getCurrentCar();
+	
+	if(car !== null){
+		//jq.Game.homeImg.attr('src', car.getFullPath() );
+	}
 	//appState = GAME_STATE.MAIN;
 });
 

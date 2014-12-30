@@ -43,13 +43,28 @@
 	color: white;
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 	position:absolute;
+	text-align::left;
 	top:120px;
 	left:50px;
-	width: 150px;
+	width:300px;
 	height:110px;
 	display:inline;
 }
-#Garage div#userCar img
+div#Garage div#selectedCar
+{	/*styling for list items*/
+	/*display:inline;*/
+	color:red;
+	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
+	position:absolute;
+	text-align::left;
+	top:120px;
+	right:5%;
+	width:30%;
+	height:15%;
+	display:inline;
+}
+div#Garage div#userCar img,
+div#Garage div#selectedCar img
 {	position:absolute;
 	/*position element in to left corner of parent*/
 	top:0px;
@@ -57,7 +72,8 @@
 	width:80px;
 	height:60px;
 }
-#Garage div#userCar label
+div#Garage div#userCar label,
+#Garage div#selectedCar label
 {	/*overrides elements with specific id's*/
 	display:block;
 	color: white;
@@ -68,12 +84,18 @@
 /*selected car div stylings*/
 
 /*list item button labels*/
+#div#userCar div#progressBars
+{
+	/*text-align:left;
+	font-size:0.75em;*/
+}
 #Garage li div#progressBars progress
 {	
 	/*display:inline-block;
 	backgorund-color:rgb(127,127,127);*/
 	/*color: white;*/
 	right:0;
+	width:50%;
 }
 #Garage div#pbLabels label
 {	

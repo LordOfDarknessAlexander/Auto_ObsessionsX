@@ -81,7 +81,7 @@ function Vehicle(Name, Make, Year, Price)
 		//_info: node.text(),
 		//_parts : tmpParts,	//only retain currently upgraded parts, array is copied
 		image : img,
-		//
+		//getters
 		getPrice : function()
 		{	//calculates sale price based on age, condition and completed upgrades
 			//var upgradeCost = 0;
@@ -95,6 +95,16 @@ function Vehicle(Name, Make, Year, Price)
 		{	//var node = xbdCars.getElementById(this._id);
 			//return node.text;
 			return 'Default Car Info';
+		},
+		getStats : function()
+		{	//returns a constant object representing completion of upgreades,
+			//values in range [0.0,1.0]
+			return {
+				_driveterrain:0.15,	//this._dt.completion()
+				_body:0.23,			//this._body.completion()
+				_interior:0.62,
+				_docs:0.73
+			};
 		},
 		displayInfo : function(){
 			//context if from globals

@@ -351,7 +351,7 @@ var Auction =
 			(playerBid > enemyBids[0]) &&
 			(playerBid > enemyBids[1]) &&
 			(playerBid > enemyBids[2]) &&
-			(playerBid > enemyBids[3])  && (playerEndBidTimer >= ENEMY_WAIT + 100) )
+			(playerBid > enemyBids[3]) && (playerEndBidTimer >= ENEMY_WAIT + 100) )
 		{
 			//buyOut();
 			this.playerGoing();
@@ -381,8 +381,7 @@ var Auction =
 		}
 		else{
 			playerEndBidTimer = 0;
-		}	
-		
+		}		
 	},
 	playerBidding : function() 
 	{ 

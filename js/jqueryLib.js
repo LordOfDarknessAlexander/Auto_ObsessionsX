@@ -21,11 +21,15 @@ var jq = {
 		//toProjBtn : $(''),
 		//toGarageBtn : $(''),
 		toAuctionBtn : $('#toAuctionBtn'),
-		repairBtn : $('#buyUpgradesBtn')
+		repairBtn : $('#buyUpgradesBtn'),
 		//right menu
 		//toProfileBtn:$(''),
 		//toMsgBtn:$(''),
 		//torankingsBtn:$(''),
+		setHomeImg : function(src)
+		{
+			this.homeImg.attr('src', src);
+		}
 	},
 	Credits : {
 		//menu:$('#credits'),
@@ -42,10 +46,10 @@ var jq = {
 		}
 	},
 	Garage : {
-		menu : $('#Garage'),
+		menu : $('div#Garage'),
 		backBtn : $('#garageBackBtn'),
-		//selectCarBtn:,
-		//viewCarBtn:$(),
+		selectBtn:$('div#Garage button#select'),
+		viewBtn:$('div#Garage button#viewCar'),
 		toggle : function()
 		{	//from game menu to garage, or vice versa
 			$('#gameMenu').toggle();

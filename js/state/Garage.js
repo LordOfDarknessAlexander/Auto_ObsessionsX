@@ -9,6 +9,8 @@ var userGarage = [
 	//Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969'),
 	//Vehicle('Sierra', 'GMC', '1997')
 ];
+userGarage.push(xdbCars[1]);
+userGarage.push(xdbCars[2]);
 //copy constructed car, altering currentCar doesn't change usergarage[0],
 //retain the index instead and access directly to mdoify.
 //value of null means no selection
@@ -47,7 +49,7 @@ var Garage = {
 			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
 			list.append(src);
 			$('div#Garage #userCar').hide();
-			//$('div#selectedCar').hide();
+			$('div#selectedCar').hide();
 			$('div#Garage #select').hide();
 			$('div#Garage #viewCar').hide();
 		}
@@ -79,12 +81,16 @@ var Garage = {
 				"<img src=\'" + src + "\'></button>" +
 				"</li>");
 				
-				$('#carSelBtn' + i).click({index:i}, this.setCurrentCar);	//this.setSelectedCar);
+				$('#carSelBtn' + i).click({index:i}, this.setSelectCar);	//this.setSelectedCar);
 				this.setCarBtnText(i);
 			}
 		}
 		//load interface
 		//appState = GAME_MODE.GARAGE;
+	},
+	getCurrentCar : function()
+	{	//returns a vehicle, if one is selected or null
+		return (curCarIndex !== null && userGarage.length != 0) ? userGarage[curCarIndex] : null;
 	},
 	exit : function()
 	{	//remove resources, effectivly 'closing' the state
@@ -121,21 +127,97 @@ var Garage = {
 		//if(obj !== null && !== 'undefined')
 			//selCarIndex = obj.data.index;
 	//},
-	setCurrentCar : function(index)
+	setCurrentCar : function()
+	{
+		if(selCarIndex === null)
+			return;	//no selected car, do nothing
+	
+		if(selCarIndex < userGarage.length)
+		{
+			var i = selCarIndex;
+			var btn = $('#userCar');
+			var src = $('#carSelBtn' + i);
+		
+			//show user car stats div
+			curCarIndex = i;	//maintain index, instead of copying a car
+			//
+			btn.children('label#carName').text(src.children('label#carName').text() );
+			btn.children('label#carInfo').text(src.children('label#carInfo').text() );
+			//btn.children('label#name').text(src.children('label#name').text() );
+			
+			var car = userGarage[i],
+				stats = car.getStats();
+			
+			$('div#userCar img#carImg').attr('src', car.getFullPath() );
+			$('div#userCar label#carName').text(car.getFullName() );;
+			$('div#userCar label#carInfo').text(car.getInfo() );
+			
+			function set(jqo, value)
+			{
+				if(value <= 0.3){
+					jqo.css('background', '#ff0000');
+				}
+				else if(value > 0.3 && value <= 0.6){
+					jqo.css('background', '#ffff00');
+				}
+				else if(value > 0.6 && value <= 1.0){
+					jqo.css('background', '#00ff00');
+				}
+					
+				jqo.attr('value', value.toString());
+			}
+			//set progress bar
+			set($('progress#drivetrainPB'), stats._driveterrain);
+			set($('progress#bodyPB'), stats._body);
+			set($('progress#interiorPB'), stats._interior);
+			set($('progress#docsPB'), stats._docs);
+		}
+	},
+	setSelectCar : function(index)
 	{
 		var i = index.data.index;
-		var btn = $('#userCar');
-		var src = $('#carSelBtn' + i);	//$('#selectedCar');
 	
-		//show user car stats div
-		curCarIndex = i;	//maintain index, instead of copying a car
-		//}
-		btn.children('label#carName').text(src.children('label#carName').text() );
-		btn.children('label#carInfo').text(src.children('label#carInfo').text() );
-		//btn.children('label#name').text(src.children('label#name').text() );
+		if(i < userGarage.length)
+		{
+			var btn = $('div#selectedCar');
+			var src = $('#carSelBtn' + i);
 		
-		var pb = $('progress#drivetrainPB');
-		pb.attr('value', '0.5');
+			//show user car stats div
+			selCarIndex = i;	//maintain index, instead of copying a car
+			//
+			btn.children('label#carName').text(src.children('label#carName').text() );
+			btn.children('label#carInfo').text(src.children('label#carInfo').text() );
+			//btn.children('label#name').text(src.children('label#name').text() );
+			
+			var car = userGarage[i],
+				stats = car.getStats();
+			
+			//$('div#userCar img#carImg').attr('src', car.getFullPath() );
+			//$('div#userCar label#carName').text(car.getFullName() );;
+			//$('div#userCar label#carInfo').text(car.getInfo() );
+			$('div#selectedCar img#carImg').attr('src', car.getFullPath() );
+			$('div#selectedCar label#carName').text(car.getFullName() );
+			$('div#selectedCar label#carInfo').text(car.getInfo() );
+			
+			function set(jqo, value)
+			{
+				/*if(value <= 0.3){
+					jqo.css('background', '#ff0000');
+				}
+				else if(value > 0.3 && value <= 0.6){
+					jqo.css('background', '#ffff00');
+				}
+				else if(value > 0.6 && value <= 1.0){
+					jqo.css('background', '#00ff00');
+				}*/
+					
+				jqo.attr('value', value.toString());
+			}
+			set($('div#selectedCar progress#drivetrainPB'), stats._driveterrain);
+			set($('div#selectedCar progress#bodyPB'), stats._body);
+			set($('div#selectedCar progress#interiorPB'), stats._interior);
+			set($('div#selectedCar progress#docsPB'), stats._docs);
+		}
 	},
 	setCarBtnText : function(index)
 	{
@@ -173,7 +255,18 @@ jq.Garage.backBtn.click(function(){
 	jq.Garage.toggle();
 	//Garage.exit();
 });
-$('button#viewCar').click(function()
+jq.CarView.homeBtn.click(function()
+{
+	jq.Game.menu.show();
+	jq.CarView.menu.hide();
+	//appState = GAME_STATE.MAIN;
+});
+jq.Garage.selectBtn.click(function()
+{
+	if(selCarIndex !== null)
+		Garage.setCurrentCar(selCarIndex);
+});
+jq.Garage.viewBtn.click(function()
 {
 	if(curCarIndex !== null)
 	{
@@ -182,11 +275,14 @@ $('button#viewCar').click(function()
 	}
 	//else, do nothing, user has not clicked on a car
 });
-$('button#selectCarBtn').click(function()
+$('div#Garage button#select').click(function()
 {
 	if(selCarIndex !== null)
 	{
-		this.setCurrentCar({index:selCarIndex});
-		jq.Game.homeImg.attr('src', 'images\\vehicle.jpg');	//set home car image
+		Garage.setCurrentCar();
+		
+		var car = Garage.getCurrentCar();
+		
+		jq.Game.setHomeImg(car.getFullPath() );	//set home car image
 	}
 });
