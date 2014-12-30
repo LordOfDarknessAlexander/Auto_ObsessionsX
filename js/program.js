@@ -15,9 +15,26 @@ function update(deltaTime)
     //garageDoor();	//should splash update
     
    // context.drawImage(splashImage, 0, backgroundY);
+   if(auctionOver)
+   {
+   	 restarted = true;
+   }
    if(restarted)
    {
    	 console.log("Chicken Fingers restarting");
+   	 auctionStop = false;
+   	 Auction.restart();
+   	 Auction.init();
+	// endGame = false;
+	// auctionEnded = false;
+	
+	 auctionMode();
+	 startGame();
+	
+   }
+   if(auctionOver)
+   {
+   	 restarted = true;
    }
    timer++;
    if(userLogged)
@@ -36,7 +53,6 @@ Auction.setup = function()
 	{
 		window.requestAnimFrame(Auction.setup);	//recursive call, bad
 		
-		update();
 		Auction.update();
 		
 	}
@@ -45,8 +61,14 @@ function auctionMode(deltaTime)
 {	//in-Auction update, core of game logic
    ticker = 0;
    stop = true;
- 
+    $('#money').html(money);
+    /*
+    if(restarted)
+    {
+    	Auction.init();
+    }*/
    Auction.setup();//auctionInit();
+  
   
 }
 
@@ -401,11 +423,13 @@ Auction.endAuction = function()
 {
 	if(endGame)
     {
-    	Auction.sold();    	
+    	Auction.sold();
+    	  	
     }
     else
 	{
 	  endGame == false;
+	  //Auction.setup();
 	}
 }
 
@@ -415,7 +439,10 @@ Auction.sold = function()
 	//document.getElementById('sold').style.display = 'true';
 	stop = true;
 	auctionStop = true;
-	
+	goingTimer = 0;
+	startEndBids = [false,false,false,false];
+	endBidTimers = [0,0,0,0];
+
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
 	$('#sold').show();
@@ -437,8 +464,10 @@ Auction.sold = function()
 		if(!hasCar){
 			userGarage.push(Auction._car);	//creates a copy of car, giving it to user
 			Auction._car = null;	//no more car to sell
+			
 		}
 		Garage.save();
+		
 	}
 	assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
@@ -446,8 +475,10 @@ Auction.sold = function()
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
 //	delete Auction;
-	endGame = true;
-	auctionEnded = true;
+//	endGame = true;
+	delete Auction;
+//	auctionOver = true;
+	//auctionEnded = true;
 	
 }
 
@@ -495,18 +526,6 @@ $('.Register').click(function()
   //delete credits
   //delete menu image, since the game can not navigate back to this screen after clicking
 });
-
-/*
-//GameOver screen restart button
-$('.restart').click(function() 
-{
-  $('#game-over').hide();
-  $('#gameMenu').hide();
-  //resetStates();
-  //startGame();
-  restarted = true;
-});
-*/
 //InMenuButtons
 //auction Button
 jq.AuctionSelect.backBtn.click(function() 
@@ -516,15 +535,20 @@ jq.AuctionSelect.backBtn.click(function()
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
 	Auction.setup();
+	
 	//$('#menu').addClass('auction');
 	//AuctionSelect.init();
 });
 jq.Game.toAuctionBtn.click(function() 
 {
+	
 	jq.Game.menu.hide();
 	jq.AuctionSelect.menu.show();
 	//$('#menu').addClass('auction');
 	AuctionSelect.init();
+   	 
+   
+	
 });/*
 jq.Game.toAuctionBtn.click(function() 
 {
@@ -539,10 +563,10 @@ jq.Game.toAuctionBtn.click(function()
 jq.Auction.backBtn.click(function()
 {
 	//resetStates();
-	startGame();
-  
+	
 	$('#Auction').hide();
 	jq.AuctionSelect.menu.show();
+	
 	
 	//var car = userGarage[curCarIndex];
 	//jq.Game.homeImg.attr('src', car.getFullPath() );
@@ -645,7 +669,7 @@ function initGuest()
 	}
 
 }
-
+/*
 function saveGameState() 
 {
     if (!supportsLocalStorage()) { return false; }
@@ -659,7 +683,7 @@ function saveGameState()
     localStorage["halma.selectedpiecehasmoved"] = gSelectedPieceHasMoved;
     localStorage["halma.movecount"] = gMoveCount;
     return true;
-}
+}*/
 
 //$('#guestPlay').click(initGuest);
 //Sound Button

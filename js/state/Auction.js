@@ -107,7 +107,7 @@ var Auction =
 		context.font = '26px arial, sans-serif';  
 
 		$('#Auction').show();
-		$('#money').html(money);
+		
 		this.setBidBtnText();
 		$('div#Auction img#auctionCar').attr('src', _car.getFullPath() );
 		$('div#Auction label#carInfo').text(/*'<h1>' + */_car.getFullName() + '-\n    ' + _car.getInfo() );
@@ -129,21 +129,25 @@ var Auction =
 		delete sold;
 		delete gameOver;	
 		console.log("Restarting Auction snaps");
-		//playerWon = false;
-		//endGame = false;
-		//auctionStop = false;
+		playerWon = false;
+		endGame = false;
+		auctionStop = false;
+		
 		var enemy1; 
 		var enemy2; 
 		var enemy3; 
 		var enemy4;
+		player.restart();
+		enemyBids = [0,0,0,0];
+		endBidTimers = [0,0,0,0];
+		enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
 		
-	//	enemyBids = [0,0,0,0];
-	//	endBidTimers = [0,0,0,0];
-	//	enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
 			
-		this.initAI();
-		this.init();
+		//this.initAI();
+		
 		this.setup();
+		
+		$('#GameOver').hide();
 	
 				
 	},
@@ -221,8 +225,10 @@ var Auction =
 
 		if(restarted)
 		{
-			
-			auctionStop = false;
+			//stop = true;
+			//auctionStop = false;
+			//endGame = false;
+			//auctionEnded = false;
 			this.restart();
 			
 			
@@ -398,15 +404,7 @@ var Auction =
 			playerDidBid = true;
 		
 		}
-		else
-		{
-			//cant bid above your cash 
-			//call a new function to alert player hes &$#k up
-			//endAuction();
-			this.sold();
-			 
-			 startPlayerEndBid = false;
-		}
+		
 		//Wins BId	
 				
 		
@@ -429,7 +427,6 @@ var Auction =
 					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[0]) )
 					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
-					  console.log("EnemyCaps " + enemyCaps[0]);
 					  assetLoader.sounds.bidder.play();
 					  break;
 					}
@@ -543,7 +540,7 @@ var Auction =
 		else if(goingTimer > 660)
 		{
 			this.sold();
-			alert("Sold to " + bidders[i]);
+			//alert("Sold to " + bidders[i]);
 			context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
 			
 			
@@ -570,7 +567,7 @@ var Auction =
 		{
 			playerWon = true;
 			context.fillText( "Sold to the Player" ,ENEMY_X + 600 , 310);
-			alert("Sold to the player");
+			//alert("Sold to the player");
 			
 		}			
 
@@ -602,6 +599,7 @@ var Auction =
 			assetLoader.sounds.sold.play();
 			
 		}
+		//auctionOver = true;
 			 
 	},
 	destroy : function()
@@ -614,7 +612,19 @@ var Auction =
 		delete goingTimer;
 		delete endBidTimers;
 		console.log("Destroying Auction snaps");
-		delete player;	
+		delete player;
+		endGame = false;
+		playerWon = false;
+		auctionStop = false;
+		auctionEnded = false;
+		if(restarted)
+		{
+			Auction.setUp();
+			this.init();
+			
+		}
+			
+			
 	},
 	setBidBtnText : function()
 	{

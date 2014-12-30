@@ -94,6 +94,7 @@ timer += deltaTime;
 var endGame = false;
 var auctionEnded = false;
 var restarted = false;
+var auctionOver = false;
 
 var appState = GAME_MODE.SPLASH;	
 //Users login counts

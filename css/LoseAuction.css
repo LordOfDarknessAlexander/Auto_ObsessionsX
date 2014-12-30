@@ -1,4 +1,4 @@
-﻿/*Action UI stylings*/
+﻿/*Auction UI stylings*/
 #sold
 {	/*Auction page stylings*/ 
 	background: url('../images/inventoryMenu.png') no-repeat 0 0;
@@ -9,6 +9,7 @@
 	width: 900px;
 	height: 600px;
 	position: absolute;
+	top:-60%;
 }
 
 #sold button
