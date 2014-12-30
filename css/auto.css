@@ -1,4 +1,11 @@
-﻿*, *:before, *:after {
+﻿/*imports relative to this document, or an absolute url.
+makes maintainability easier, allowing structured includes of css sheets
+but prevents asynchronous parsing of files, as if they were included as
+<linl> tags in the html source*/
+@import url("menu.css");
+@import url("credits.css");
+
+*, *:before, *:after {
   box-sizing: border-box;
 }
 

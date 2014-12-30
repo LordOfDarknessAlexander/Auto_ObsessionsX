@@ -1,4 +1,14 @@
 ﻿/*Inventory Menu Buttons and stylings*/
+@import url("AuctionSelect.css");
+@import url("repair.css");
+@import url("funds.css");
+@import url("garage.css");
+/*vehicles
+projects
+garage
+partsSupply
+repair
+*/
 #gameMenu 
 {
 	background: url('../images/defaultBG.jpg') no-repeat 0 0;
