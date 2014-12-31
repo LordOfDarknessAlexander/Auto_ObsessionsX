@@ -34,6 +34,7 @@ var goingTimer = 0;
 var pGTimer = 0;
 var startPlayerEndBid = false;	//player local
 var playerEndBidTimer = 0;	//player local
+
 //
 
 function shuffleArray(array) 
@@ -129,12 +130,12 @@ var Auction =
 		 enemy2; 
 		 enemy3; 
 		 enemy4;
-
+			
+		 restartTimer = 0;	
 		 console.log("Restarting Auction snaps");
-		 delete sold;
-		 delete gameOver;
+		 console.log("serving crackers" + restartTimer);
 		 bidderCooldown = 0;
-		 playerCanBid = false;
+		 playerCanBid = true;
 		
 		 playerBid = 0;
 		//temp
@@ -145,7 +146,7 @@ var Auction =
 		 enemyBids = [0,0,0,0]; 
 		 endBidTimers = [0,0,0,0];
 		 enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6]
-		 playerDidBid = false;
+		 playerDidBid = true;
 		 enemyCanBid = false;
 		 playerNextBid = currentBid + (currentBid * 0.1);
 		
@@ -158,8 +159,10 @@ var Auction =
 		 startPlayerEndBid = false;	//player local
 		 playerEndBidTimer = 0;	
 		 player.restart();
+		 auctionStop = false;
 		 this.setup();
 		 this.init();
+		 this.update();
 		 	
 				
 	},
@@ -222,7 +225,7 @@ var Auction =
 	  	console.log("EnemyCaps " + enemyCaps[0]);
 	  	Auction.findEndBidder();
 	  	Auction.endAuction();
-	  	Auction.destroy();
+	  //	Auction.destroy();
 	  	//Auction.restart();
 	  	
 		if(auctionEnded)
@@ -239,14 +242,16 @@ var Auction =
 
 		if(restarted)
 		{
-			//stop = true;
-			//auctionStop = false;
-			//endGame = false;
-			//auctionEnded = false;
 			Auction.render();
 			//this.restart();
+			restartTimer ++;
 			
 			
+		}
+		
+		if(restartTimer > 600)
+		{
+			restarted = false;
 		}
 		if(!auctionStop)
 		//if((!endGame) || (!auctionEnded) )

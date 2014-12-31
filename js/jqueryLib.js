@@ -74,6 +74,7 @@ var jq = {
 		menu : $('#CarView'),
 		backBtn : $('button#carViewBackBtn'),
 		homeBtn : $('div#CarView button#homeBtn'),	//$('button#homeBtn', jq.CarView.menu),
+		sellBtn : $('div#CarView button#sellBtn'),
 		carImg : $('img#car'),
 		carInfo : $('div#CarView label#carInfo'),
 		toggle : function()

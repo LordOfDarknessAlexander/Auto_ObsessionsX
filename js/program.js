@@ -14,7 +14,6 @@ function update(deltaTime)
 {
     //garageDoor();	//should splash update
     
-   // context.drawImage(splashImage, 0, backgroundY);
    if(auctionOver)
    {
    	 restarted = true;
@@ -22,14 +21,15 @@ function update(deltaTime)
    if(restarted)
    {
    	 console.log("Chicken Fingers restarting");
-   	 auctionStop = false;
+   	 Auction.restart();
+   	 //auctionStop = false;
   // 	 Auction.restart();
    	// Auction.init();
 	// endGame = false;
 	// auctionEnded = false;
-	
+	 restartTimer++;
 	 auctionMode();
-	 startGame();
+	// startGame();
 	
    }
    if(auctionOver)
@@ -449,12 +449,13 @@ Auction.sold = function()
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
 	$('#sold').show();
-	$('div#sold label').text("Congratualtions! You've won the auction for the:" + car.getFullName() );
+	
 	//disable user from entering an auction for this car again
 	
 	//in case of unintended bugs, make sure user doesn't already own car
 	if(playerWon && Auction._car !== null)
 	{
+		$('div#sold label').text("Congratualtions! You've won the auction for the:" + Auction._car.getFullName() );
 		var hasCar = false;
 		
 		for(var i = 0; i < userGarage.length; i++)
@@ -478,6 +479,16 @@ Auction.sold = function()
 	assetLoader.sounds.gameOver.play();
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
+	if(playerWon)
+	{
+		auctionEnded = true
+		auctionOver = true;
+	}
+	else
+	{
+		endGame = true
+	}
+
 //	delete Auction;
 	
 	// endGame = true;
