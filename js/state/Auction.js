@@ -18,9 +18,6 @@ var playerBid = 0;
 //temp
 var bidAmount = 200;
 var currentBid = 0;
-//var asking = upPerc + currentBid;
-//var vehiclePrice = [20000,400,858,966666,898989,78787,85888];
-//var vehiclePrice = 20000;
 var currentBid = vehiclePrice * 0.1;
 
 var enemyBids = [0,0,0,0]; 
@@ -35,9 +32,6 @@ var playerWinning = false;
 var playerWon = false;
 var goingTimer = 0;
 var pGTimer = 0;
-
-
-
 var startPlayerEndBid = false;	//player local
 var playerEndBidTimer = 0;	//player local
 //
@@ -126,29 +120,47 @@ var Auction =
 	},
 	restart : function()
 	{
-		delete sold;
-		delete gameOver;	
-		console.log("Restarting Auction snaps");
-		playerWon = false;
-		endGame = false;
-		auctionStop = false;
-		
-		var enemy1; 
-		var enemy2; 
-		var enemy3; 
-		var enemy4;
-		player.restart();
-		enemyBids = [0,0,0,0];
-		endBidTimers = [0,0,0,0];
-		enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
-		
-			
-		//this.initAI();
-		
-		this.setup();
-		
-		$('#GameOver').hide();
 	
+		 delete sold;
+		 delete gameOver;
+		 delete buyOut;	
+				
+		 enemy1; 
+		 enemy2; 
+		 enemy3; 
+		 enemy4;
+
+		 console.log("Restarting Auction snaps");
+		 delete sold;
+		 delete gameOver;
+		 bidderCooldown = 0;
+		 playerCanBid = false;
+		
+		 playerBid = 0;
+		//temp
+		 bidAmount = 200;
+		 currentBid = 0;
+		 currentBid = vehiclePrice * 0.1;
+		
+		 enemyBids = [0,0,0,0]; 
+		 endBidTimers = [0,0,0,0];
+		 enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6]
+		 playerDidBid = false;
+		 enemyCanBid = false;
+		 playerNextBid = currentBid + (currentBid * 0.1);
+		
+		//BidTImers Booleans
+		 startEndBids = [false,false,false,false];
+		 playerWinning = false;
+		 playerWon = false;
+		 goingTimer = 0;
+		 pGTimer = 0;
+		 startPlayerEndBid = false;	//player local
+		 playerEndBidTimer = 0;	
+		 player.restart();
+		 this.setup();
+		 this.init();
+		 	
 				
 	},
 	
@@ -215,11 +227,13 @@ var Auction =
 	  	
 		if(auctionEnded)
 		{
+			
 			this.destroy();
 					
 		}
 		if(endGame)
 		{
+			
 			this.destroy();					
 		}
 
@@ -229,16 +243,19 @@ var Auction =
 			//auctionStop = false;
 			//endGame = false;
 			//auctionEnded = false;
-			this.restart();
+			Auction.render();
+			//this.restart();
 			
 			
 		}
 		if(!auctionStop)
+		//if((!endGame) || (!auctionEnded) )
 		{
 			
 		  	Auction.render();
 		  
 		}
+		
 		else
 		{	//clear drawing when auction stops
 			context.clearRect(0, 0, canvas.width, canvas.height);
@@ -539,6 +556,7 @@ var Auction =
 		else if(goingTimer > 660)
 		{
 			this.sold();
+			
 			//alert("Sold to " + bidders[i]);
 			context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
 			
@@ -574,10 +592,10 @@ var Auction =
 	endAuction : function()
 	{
 		//if user won save to storage or pass to next state
-		 endGame = true;
-		 auctionEnded = true;
+		
+		// auctionEnded = true;
 		 this.gameOver();
-		 //this.sold();
+		 this.sold();
 		 assetLoader.sounds.bidder.pause();	
 		 
 		
@@ -590,6 +608,7 @@ var Auction =
 		{
 			money = money - currentBid;
 			auctionEnded = true;
+			
 			//endGame == true;
 			//push vehicle to garage
 			//auctionStop = true;
@@ -598,7 +617,7 @@ var Auction =
 			assetLoader.sounds.sold.play();
 			
 		}
-		//auctionOver = true;
+		
 			 
 	},
 	destroy : function()
@@ -616,14 +635,8 @@ var Auction =
 		playerWon = false;
 		auctionStop = false;
 		auctionEnded = false;
-		if(restarted)
-		{
-			Auction.setUp();
-			this.init();
-			
-		}
-			
-			
+		
+		
 	},
 	setBidBtnText : function()
 	{
