@@ -32,9 +32,11 @@
 	color: white;
 	margin: 8px;
 	margin-top: 8em;
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 	position: relative;
-	width:21em;
+	width:15%;
+	height:15%;
+	cursor:pointer;
 }
 /*current user car stylings*/
 #Garage div#userCar

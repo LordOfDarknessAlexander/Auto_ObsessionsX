@@ -9,31 +9,35 @@ var userGarage = [
 	//Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969'),
 	//Vehicle('Sierra', 'GMC', '1997')
 ];
+userGarage.push(xdbCars[0]);
 userGarage.push(xdbCars[1]);
-userGarage.push(xdbCars[2]);
+userGarage.push(xdbCars[3]);
 //copy constructed car, altering currentCar doesn't change usergarage[0],
 //retain the index instead and access directly to mdoify.
 //value of null means no selection
 var curCarIndex = null,	//user's currect car index
-	selCarIndex = null;	//user's selected car index
+	selCarIndex = null;
 //
 var Garage = {
+	//_curCarIndex : null,
+	//_selCarIndex : null,	//user's selected car index
 	init : function()
 	{	//called to load assests and initialize private vars
 		//delete userGarage;
-		//selCarIndex = null;
+		selCarIndex = null;
 		//init cars from local storage, or parsed from database on server
 		//add buttons for each car avaiable in garage
 		//var carList = $('#Garage'.children('ul#carBtns');
 		//carList.clear();	//remove previous values, otherwise cars will be repeated
-		
+		//this._selCarIndex = null;
 		//if(curCarIndex === null && userGarage.length != 0){
 			//curCarIndex = 0;
 		//}
 		//var btnStr = "<li><button id=\'carSelBtn1\'><label id=\'make\'></label><label id=\'year\'></label><label id=\'name\'></label><img src=\'images/vehicle.jpg\'></button></li>";
 		if(Storage.local !== null && 'userGarage' in Storage.local)
 		{
-			//userGarage = JSON.parse(Storage.local.userGarage);
+			//this._curCarIndex = JSON.parse(Storage.local.curCarIndex);
+			//this._userGarage = JSON.parse(Storage.local.userGarage);
 			//var jsonArray = JSON.parse(Storage.local.userGarage);	//returns an array
 			
 			//for(var i = 0; i < jsonArray.length; i++)
@@ -60,15 +64,16 @@ var Garage = {
 			$('div#Garage #select').show();
 			$('div#Garage #viewCar').show();
 						
-			for(var i = 0; i < userGarage.length; i++){
-				//add buttons to list
-				src = userGarage[i].getFullPath();	//"\'images/vehicle.jpg\'";
-				list.append("<li>" +
+			for(var i = 0; i < userGarage.length; i++)
+			{	//add buttons to list
+				var car = userGarage[i];
+				src = car.getFullPath();	//"\'images/vehicle.jpg\'";
+				list.append("<li>" +	//id = \'" + i "\'>"
 				"<button id=\'carSelBtn" + i + "\'>" +
-				"<label id=\'carName\'>Car Name</label>" +
+				//"<label id=\'carName\'>" + car.getFullName() + "</label>" +
 				//"<label id=\'year\'></label>" +
 				//"<label id=\'name\'></label>" +
-				"<label id=\'carInfo\'></label>" +
+//				"<label id=\'carInfo\'>" + car.getInfo() + "</label>" +
 				//progress bar max default is 1.0
 				//
 				//"<div id=\'pbLabels'>" +
@@ -82,7 +87,7 @@ var Garage = {
 				"</li>");
 				
 				$('#carSelBtn' + i).click({index:i}, this.setSelectCar);	//this.setSelectedCar);
-				this.setCarBtnText(i);
+				//this.setCarBtnText(i);
 			}
 		}
 		//load interface
@@ -240,7 +245,7 @@ var CarView = {
 		{
 			var car = userGarage[selCarIndex];
 			jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
-			//jq.CarView.carInfo.text(xmlCarinfo.getElemById(car.id) );
+			jq.CarView.carInfo.text(car.getFullName() + '-\n    ' + car.getInfo()) ;//xmlCarinfo.getElemById(car.id) );
 		}
 	}
 	//update, ender, exit?
@@ -261,6 +266,10 @@ jq.CarView.homeBtn.click(function()
 	jq.CarView.menu.hide();
 	//appState = GAME_STATE.MAIN;
 });
+jq.CarView.sellBtn.click(function()
+{
+	//send car to auction!
+});
 jq.Garage.selectBtn.click(function()
 {
 	if(selCarIndex !== null)
@@ -268,10 +277,10 @@ jq.Garage.selectBtn.click(function()
 });
 jq.Garage.viewBtn.click(function()
 {
-	if(curCarIndex !== null)
+	if(selCarIndex !== null)
 	{
 		jq.CarView.toggle();
-		//CarView.init(selCarIndex);
+		CarView.init();
 	}
 	//else, do nothing, user has not clicked on a car
 });

@@ -75,6 +75,7 @@ var jq = {
 		backBtn : $('button#carViewBackBtn'),
 		homeBtn : $('div#CarView button#homeBtn'),	//$('button#homeBtn', jq.CarView.menu),
 		carImg : $('img#car'),
+		carInfo : $('div#CarView label#carInfo'),
 		toggle : function()
 		{	//go from (my cars to car view) || (car view to my cars)
 			//jq.Garage.menu.toggle();

@@ -103,6 +103,7 @@ function openDoc(url, reader)
   
 	return doc;
 }
+//names of files in folder imgaes\\logos to be used as ads
 var logos = [
 	'AutoZone',
 	'shelby',
@@ -125,7 +126,7 @@ function setTokens()
 }
 function setPrestige()
 {
-	$('label#prestige', jq.Game.menu).text('Money: ' + userStats.prestige.toString() );
+	$('label#prestige', jq.Game.menu).text('Prestige: ' + userStats.prestige.toString() );
 }
 function setMarkers()
 {	//updates html lable element, within context of the Game menu only
@@ -139,7 +140,7 @@ function setStatBar()
 	setMarkers();
 }
 function setAdBG()
-{
+{	//set a random ad
 	//floor returns an integer, random returns, random returns a float
 	var i = Math.floor(Math.random() * (logos.length - 1) ),	//[0,logos.length-1]
 		src = "images\\logos\\" + logos[i] + ".png";
@@ -448,6 +449,7 @@ Auction.sold = function()
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
 	$('#sold').show();
+	$('div#sold label').text("Congratualtions! You've won the auction for the:" + car.getFullName() );
 	//disable user from entering an auction for this car again
 	
 	//in case of unintended bugs, make sure user doesn't already own car
