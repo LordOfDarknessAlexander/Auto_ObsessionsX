@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,orientation=portrait">
     <title>Auto Obsessions/Register</title>
-     <link rel="stylesheet" href="css/auto.css" type="text/css" media="screen">
-     <link rel="stylesheet" href="css/register.css" type="text/css" media="screen">
+     <link rel="stylesheet" href="../ServerAO/css/auto.css" type="text/css" media="screen">
+     <link rel="stylesheet" href="../ServerAO/css/register.css" type="text/css" media="screen">
     <!--scripts here are executed before the page is parsed,
     	they must not be dependant on any other script but should be
         dependencies of js code at the end of the page-->
-    <script type="text/javascript" src="js/jquery.2.1.1.min.js"></script>
+    <script type="text/javascript" src="../ServerAO/js/jquery.2.1.1.min.js"></script>
 
-    <script type="text/javascript" src="js/Users.js"></script>
+    <script type="text/javascript" src="../ServerAO/js/Users.js"></script>
     
-    <script type="text/javascript" src="js/FormValidation.js"></script>
+    <script type="text/javascript" src="../ServerAO/js/FormValidation.js"></script>
 </head>
 <body>
 	<div class="wrapper">
@@ -38,78 +38,59 @@
 				    </form>
 				    -->
 				    
-				    <h1>Registration Form</h1>
-<form method="post" action="Process.html"
-			onsubmit="return validate(this);">
-	<table border="0" cellspacing="2" cellpadding="2">
-      <tr>
-        <td>First Name:</td>
-        <td><input type="text" name="FirstName" size="20"></td>
-      </tr>
-      <tr>
-        <td>Middle Initial:</td>
-        <td><input type="text" name="MidInit" size="2"></td>
-      </tr>
-      <tr>
-        <td> Last Name:</td>
-        <td><input type="text" name="LastName" size="20"></td>
-      </tr>
-      <tr>
-        <td>City: </td>
-        <td><input type="text" name="City" size="20"></td>
-      </tr>
-      <tr>
-        <td>State: </td>
-        <td><input type="text" name="State" size="2"></td>
-      </tr>
-      <tr>
-        <td>Country:</td>
-        <td><input type="text" name="Country" size="20"></td>
-      </tr>
-      <tr>
-        <td>Zip: </td>
-        <td><input type="text" name="Zip" size="10"></td>
-      </tr>
-      <tr>
-        <td>Email: </td>
-        <td><input type="text" name="Email" size="30"></td>
-      </tr>
-      <tr>
-        <td>Username:</td>
-        <td><input type="text" name="Username" size="10"></td>
-      </tr>
-      <tr>
-        <td>Password:</td>
-        <td><input type="password" name="Password1" size="10"></td>
-      </tr>
-      <tr>
-        <td>Repeat Password: </td>
-        <td><input type="password" name="Password2" size="10"></td>
-      </tr>
-      <tr>
-        <td colspan="2" align="center">
-			<input name="submit" type="submit" value="Submit">
-			<input name="reset" type="reset" value="Reset Form">
-		</td>
-      </tr>
-    </table>
-</form>
+				    <form id='register' action='register.php' method='post'
+					    accept-charset='UTF-8'>
+					<fieldset >
+					<legend>Register</legend>
+					<input type='hidden' name='submitted' id='submitted' value='1'/>
+					<label for='name' >Your Full Name*: </label>
+					<input type='text' name='name' id='name' maxlength="50" />
+					<label for='email' >Email Address*:</label>
+					<input type='text' name='email' id='email' maxlength="50" />
+					 
+					<label for='username' >UserName*:</label>
+					<input type='text' name='username' id='username' maxlength="50" />
+					 
+					<label for='password' >Password*:</label>
+					<input type='password' name='password' id='password' maxlength="50" />
+					<input type='submit' name='Submit' value='Submit' />
+					 
+					</fieldset>
+					</form>
+
+				    
 
 				  </div> <!--end register form --->
     
       <br>
       <br>
       <br>
-      
-	   <div id="myContacts">
-		  <div>N: <span id="fullname" contenteditable="true" onkeyup="storeMyContact(this.id)"></span></div>
-		  <div>P: <span id="phone" contenteditable="true" onkeyup="storeMyContact(this.id)"></span></div>
-		  <div>E: <span id="email" contenteditable="true" onkeyup="storeMyContact(this.id)"></span></div>
-	   	  <div><a onclick="clearLocal(); getMyContact();" href="javascript:void(0);">Clear All Of My Data</a></div>
+     <div id='fg_membersite_content'>
+		<h2>Auto-Obsessions Membership </h2>
+		<ul>
+		<li><a href='Scripts/register.php'>Register</a></li>
+		<li><a href='Scripts/confirmreg.php'>Confirm registration</a></li>
+		<li><a href='Scripts/login.php'>Login</a></li>
+		<li><a href='Scripts/access-controlled.php'>Auto-Obsessions member's only page</a></li>
+		</ul>
 		</div>
-      <script>
-  		getMyContact();
-	  </script>
+
+		<script type='text/javascript'>
+// <![CDATA[
+
+    var frmvalidator  = new Validator("login");
+    frmvalidator.EnableOnPageErrorDisplay();
+    frmvalidator.EnableMsgsTogether();
+
+    frmvalidator.addValidation("username","req","Please provide your username");
+    
+    frmvalidator.addValidation("password","req","Please provide the password");
+
+// ]]>
+</script>
+
+
+	        
        
        </div> <!--end reg div --->
                
