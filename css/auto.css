@@ -54,6 +54,10 @@ button
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color:red;
 }
+/*button:hover
+{	alters all button appearences when being moused over
+	background-color:red;
+}*/
 .wrapper 
 {
  height:600px;
