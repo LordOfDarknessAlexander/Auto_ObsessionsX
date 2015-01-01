@@ -115,6 +115,8 @@ var userStats = {
 	tokens:2,
 	prestige:0,
 	markers:0
+//	fromJSON:function(){JSON.},
+//	toJSON:function(){JSON.}
 };
 function setMoney()
 {
@@ -382,7 +384,7 @@ function startGame()
 {	//initialize the game state
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	//$('#game-over').style.display = 'none';
-	document.getElementById('game-over').style.display = 'none';
+	//document.getElementById('game-over').style.display = 'none';
 	document.getElementById('gameMenu').style.display = 'true';  
 	$('#money').html(money);
 	appState = GAME_MODE.RUNNING;
@@ -455,7 +457,8 @@ Auction.sold = function()
 	//in case of unintended bugs, make sure user doesn't already own car
 	if(playerWon && Auction._car !== null)
 	{
-		$('div#sold label').text("Congratualtions! You've won the auction for the:" + Auction._car.getFullName() );
+		//Auction._car is not the right object!?
+		$('div#sold label').text(Auction._car.getFullName() );
 		var hasCar = false;
 		
 		for(var i = 0; i < userGarage.length; i++)
@@ -479,6 +482,7 @@ Auction.sold = function()
 	assetLoader.sounds.gameOver.play();
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
+	
 	if(playerWon)
 	{
 		auctionEnded = true
@@ -498,16 +502,16 @@ Auction.sold = function()
 }
 
 function gameOver() 
-{
+{	//depricated
 	//$('.game-over').style.display = 'true';
 	auctionStop = true;
-	document.getElementById('game-over').style.display = 'true';
+	//document.getElementById('game-over').style.display = 'true';
 	//resetStates();
 	stop = true;
 		//Show a message that player has insufficient funds
 	$('#money').html(money);	//set value in the html element
 	//$('#Auction').hide();
-	$('#game-over').show();
+	//$('#game-over').show();
 	//reset AI timers
 	startEndBids = [false,false,false,false];
 	endBidTimers = [0,0,0,0];
@@ -586,6 +590,15 @@ jq.Auction.backBtn.click(function()
 	//$('#menu').addClass('gameMenu');
 	
 });
+//jq.Auction.buyOutBtn.click(function()
+//{	
+//	Auction.buyOut();
+//});
+//$('div#sold button#garage').click(function()
+//{
+//	jq.Sold.menu.hide();
+	//jq.Garage.menu.toggle();
+//});
 jq.Auction.homeBtn.click(function()
 {
 	//Auction.cancel();	//stop the auction, aborting the sale

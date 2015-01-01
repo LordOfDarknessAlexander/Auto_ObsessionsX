@@ -82,19 +82,16 @@ var Auction =
 		enemies[3] == enemyCaps[3];
 		*/
 	
+		if(index < xdbCars.length){	//make sure index is within bounds to be safe
+			Auction._car = xdbCars[index];	//copy assigned
+		}
 		
-		
-		
-		
-		if(index < xdbCars.length)	//make sure index is within bounds to be safe
-			_car = xdbCars[index];	//copy assigned
-		
-		if(_car !== null)
+		if(Auction._car !== null)
 		{
-			vehiclePrice = _car.getPrice();
+			vehiclePrice = Auction._car.getPrice();
 			currentBid = vehiclePrice * 0.1;
 		}
-		jq.Auction.carPrice.text('car value:\n' + _car.getPrice().toFixed(2) );
+		jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
 		//initAI();
 		//else, no car game breaks...
 		this.endAuction();
@@ -105,11 +102,12 @@ var Auction =
 		//		
 		context.font = '26px arial, sans-serif';  
 
-		$('#Auction').show();
+		jq.Auction.menu.show();		//$('#Auction').show();
 		
 		this.setBidBtnText();
-		$('div#Auction img#auctionCar').attr('src', _car.getFullPath() );
-		$('div#Auction label#carInfo').text(/*'<h1>' + */_car.getFullName() + '-\n    ' + _car.getInfo() );
+		
+		$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
+		$('div#Auction label#carInfo').text(/*'<h1>' + */Auction._car.getFullName() + '-\n    ' + Auction._car.getInfo() );
 		//$('#menu').removeClass('gameMenu');
 		//$('#menu').addClass('Auction');
 		$('.sound').show();

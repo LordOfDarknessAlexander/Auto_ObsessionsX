@@ -21,6 +21,8 @@ var curCarIndex = null,	//user's currect car index
 var Garage = {
 	//_curCarIndex : null,
 	//_selCarIndex : null,	//user's selected car index
+	//toJSON:function(){//serialize curCarIndex},
+	//fromJSON:function(){this._curCarIndex = index;},
 	init : function()
 	{	//called to load assests and initialize private vars
 		//delete userGarage;
@@ -48,18 +50,27 @@ var Garage = {
 		var list = $('#carBtns');
 		list.empty();	//remove any buttons if there were any previously
 		
+		if(curCarIndex === null)
+			$('div#Garage #userCar').hide();
+		else
+			this.setCurrentCar();
+
+		if(selCarIndex === null)
+			$('div#selectedCar').hide();
+		else
+			this.setSelectCar({index:selCarIndex});
+				
 		if(userGarage.length == 0)
 		{	//empty grage so display img instead of buttons
 			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
 			list.append(src);
-			$('div#Garage #userCar').hide();
-			$('div#selectedCar').hide();
+	
 			$('div#Garage #select').hide();
 			$('div#Garage #viewCar').hide();
 		}
 		else
 		{
-			$('div#Garage #userCar').show();
+			//$('div#Garage #userCar').show();
 			//$('div#selectedCar').show();
 			$('div#Garage #select').show();
 			$('div#Garage #viewCar').show();
@@ -176,6 +187,8 @@ var Garage = {
 			set($('progress#bodyPB'), stats._body);
 			set($('progress#interiorPB'), stats._interior);
 			set($('progress#docsPB'), stats._docs);
+			
+			$('div#Garage #userCar').show();
 		}
 	},
 	setSelectCar : function(index)
@@ -222,6 +235,8 @@ var Garage = {
 			set($('div#selectedCar progress#bodyPB'), stats._body);
 			set($('div#selectedCar progress#interiorPB'), stats._interior);
 			set($('div#selectedCar progress#docsPB'), stats._docs);
+			
+			$('div#selectedCar').show();
 		}
 	},
 	setCarBtnText : function(index)
