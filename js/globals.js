@@ -8,7 +8,7 @@ var context = canvas.getContext('2d');
 var width = canvas.getAttribute('width'),
 	height = canvas.getAttribute('height');
 
-var player, money, stop, ticker;
+var player, stop, ticker;
 
 var Storage = {
 	//canUseLocal:,
@@ -16,7 +16,43 @@ var Storage = {
 	local:('localStorage' in window && window.localStorage !== null) ? window.localStorage : null
 	//session:code.sessionStorage
 };
+//names of files in folder imgaes\\logos to be used as ads
+var logos = [
+	'AutoZone',
+	'shelby',
+	'jegs',
+	'napa'
+];
+var userStats = {
+	money:0,
+	tokens:2,
+	prestige:0,
+	markers:0
+};
 
+function saveUser()
+{	//saves user stats as a JSON string to the browsers local storage
+	if(Storage.local !== null){
+		Storage.local._stats = JSON.stringify(userStats);
+	}
+	//else local storage not available
+}
+function loadUser()
+{	//serialize user stats from local storage, if played previously
+	if(Storage.local !== null){
+		if('_stats' in Storage.local){
+			userStats = JSON.parse(Storage.local._stats);
+		}
+		else{	//no previous save data
+			userStats = {
+				money:50000,
+				tokens:2,
+				prestige:1,
+				markers:0
+			};
+		}
+	}
+}
 //States
 var REPAIR;
 var ADD_FUNDS;
@@ -91,6 +127,7 @@ var previousTime = Date.now();
 var deltaTime = (Date.now() - previousTime) / 1000;
 previousTime = Date.now();
 timer += deltaTime;
+
 var endGame = false;
 var auctionEnded = false;
 var restarted = false;

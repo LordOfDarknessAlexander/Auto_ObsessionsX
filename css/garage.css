@@ -25,6 +25,15 @@
 	width:40%;
 	height:40%;
 }
+div#Garage div#carListView
+{
+	display: none;
+	overflow:scroll;
+
+	position:absolute;
+	height:70%;
+	bottom:0%;
+}
 #Garage li button
 {	/*styling for list items*/
 	padding: 10px 0;

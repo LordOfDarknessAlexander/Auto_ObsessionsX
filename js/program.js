@@ -1,7 +1,24 @@
 //Application main
 var AutoObessesions = {};
 
-
+//function getLastAllowanceTime()
+//{
+	//if(Storage.local !== null)
+	//{
+		//if('_lastAllowanceTime' in Storage.local)
+		//{
+			//return parseInt(Storage.locla._lastAllowanceTime);
+		//}
+	//}
+//}
+//function setLastAllowanceTime()
+//{
+	//if(Storage.local !== null)
+	//{
+		//var time = Date.now()	//a time of 0
+		//Storage.local._lastAllowance = time.toString();
+	//}
+//}
 function garageDoor()
 {
 	backgroundY -= speed;
@@ -61,7 +78,7 @@ function auctionMode(deltaTime)
 {	//in-Auction update, core of game logic
    ticker = 0;
    stop = true;
-    $('#money').html(money);
+    //$('#money').html(money);
     /*
     if(restarted)
     {
@@ -103,24 +120,10 @@ function openDoc(url, reader)
   
 	return doc;
 }
-//names of files in folder imgaes\\logos to be used as ads
-var logos = [
-	'AutoZone',
-	'shelby',
-	'jegs',
-	'napa'
-];
-var userStats = {
-	money:0,
-	tokens:2,
-	prestige:0,
-	markers:0
-//	fromJSON:function(){JSON.},
-//	toJSON:function(){JSON.}
-};
+
 function setMoney()
 {
-	$('label#money', jq.Game.menu).text('Money: ' + money.toString() );
+	$('label#money', jq.Game.menu).text('Money: ' + userStats.money.toString() );
 }
 function setTokens()
 {
@@ -156,31 +159,32 @@ $(document).ready(function()
 	//document being loaded within this callback,
 	//such as jQuery/ui callback bindings,
 	//loading assets and 'core' game logic
-	Storage.local.clear();
+	//Storage.local.clear();
 	
+	loadUser();
+	//userStats.money = 150;
+	//saveUser();
 	//jq.Game.homeImg.hide();
 	
 	function init()
 	{
-	  if (!stop) 
-	  {
-	  
-	    requestAnimFrame(init);
-	  
-	  	update();
-	  
-  		delete Register;
-  		
-	    if((timer >= 300.00) && (timer <= 900.00))
+		if(!stop) 
 		{
-			appState = GAME_MODE.MAIN_MENU;
-		  	mainMenu();
-		  
-		}  
-		timer++;
-	    ticker++;
-	  }
-	
+			requestAnimFrame(init);
+			
+			update();
+			
+			//delete Register;	//deleting this every frame is bad idea
+			
+			if((timer >= 300.00) && (timer <= 900.00))
+			{
+				appState = GAME_MODE.MAIN_MENU;
+				mainMenu();
+			  
+			}  
+			timer++;
+			ticker++;
+		}	
 	}
 
 function loadCars(doc){
@@ -378,7 +382,7 @@ function mainMenu()
   $('.sound').show();
 }
 
-money = 50000;
+//money = 50000;
 // Start the game - reset all variables and entities, spawn ground and water.
 function startGame() 
 {	//initialize the game state
@@ -386,7 +390,7 @@ function startGame()
 	//$('#game-over').style.display = 'none';
 	//document.getElementById('game-over').style.display = 'none';
 	document.getElementById('gameMenu').style.display = 'true';  
-	$('#money').html(money);
+	//$('#money').html(money);
 	appState = GAME_MODE.RUNNING;
 	player.reset();
 	ticker = 0;
@@ -474,6 +478,7 @@ Auction.sold = function()
 			Auction._car = null;	//no more car to sell
 			
 		}
+		//userSave();
 		Garage.save();
 		
 	}
@@ -509,7 +514,7 @@ function gameOver()
 	//resetStates();
 	stop = true;
 		//Show a message that player has insufficient funds
-	$('#money').html(money);	//set value in the html element
+	//$('#money').html(money);	//set value in the html element
 	//$('#Auction').hide();
 	//$('#game-over').show();
 	//reset AI timers
@@ -636,6 +641,8 @@ jq.Game.repairBtn.click(function()
 	jq.Game.menu.hide();
 	jq.RepairShop.menu.show();
 	Repair.init();
+
+	//saveUser();	//save user stats after purchasing
 });
 //RepairMenu Back Button 
 jq.RepairShop.backBtn.click(function()
@@ -647,7 +654,12 @@ jq.RepairShop.backBtn.click(function()
 	resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });
-
+jq.Funds.backBtn.click(function()
+{
+	jq.Funds.toggle();
+	setStatBar();
+	saveUser();
+});
 //function rotateBtns(index)
 //{		
 	//setCarBtnText(index.data.index, c);

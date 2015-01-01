@@ -93,7 +93,7 @@ var jq = {
 			$('#gameMenu').toggle();
 			this.menu.toggle();
 			//this.menu.toggle();
-			jq.setCash(money);
+			jq.setCash(userStats.money);
 		}
 	},
 	RepairShop : {
@@ -125,10 +125,6 @@ $('#addFunds').click(function()
 	addFundsMode();	//is ok to call external functions, as long as they are defined in program.js
 });
 //
-jq.Funds.backBtn.click(function()
-{
-	jq.Funds.toggle();
-});
 jq.CarView.backBtn.click(jq.CarView.toggle);
 //
 //Garage State interface

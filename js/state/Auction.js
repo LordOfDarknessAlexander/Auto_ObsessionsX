@@ -349,7 +349,7 @@ var Auction =
 
 		//these could be HTML elements in the Auction div
 		//context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
-		context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
+		//context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
 	},
 	updatePlayer : function() 
 	{
@@ -402,7 +402,7 @@ var Auction =
 			startPlayerEndBid = true;						
 		}
 		
-		if(playerBid <= money)
+		if(playerBid <= userStats.money)
 		{
 			playerDidBid = true;
 		}
@@ -594,7 +594,7 @@ var Auction =
 		
 		if(playerWon)
 		{
-			money = money - currentBid;
+			userStats.money = userStats.money - currentBid;
 			auctionEnded = true;
 			
 			//endGame == true;

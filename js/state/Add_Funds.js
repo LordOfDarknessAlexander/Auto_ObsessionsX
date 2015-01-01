@@ -20,14 +20,20 @@ var Store = {
 function addFunds(val)
 {
 	var MAX_MONEY = 50000000;
-	var newTotal = money + val;
-	money = newTotal > MAX_MONEY ? MAX_MONEY : newTotal;
-	jq.setCash(money);
+	var newTotal = userStats.money + val;
+	userStats.money = newTotal > MAX_MONEY ? MAX_MONEY : newTotal;
+	jq.setCash(userStats.money);
 }
 //jQuery Interface
 $('#addAllowanceBtn').click(function()
 {	//allowance accumulates every few seconds
-	var val = 1;//Counter;
+	//var
+		//last = getLastAllowanceTime(),
+		//now = Date.now(),
+		//delta = now - last;
+		//carValue = getCollectionValue();
+	
+	var val = 1;	//(base + carvalue) * delta;
 	addFunds(val);
 });
 $('#addMinorFundsBtn').click(function()

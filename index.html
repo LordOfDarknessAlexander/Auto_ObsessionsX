@@ -21,6 +21,7 @@
     <!--scripts here are executed before the page is parsed,p
     	they must not be dependant on any other script but should be
         dependencies of js code included at the end of the page-->
+    <!--TODO:see if scripts can be included using <?php>!-->
     <script type="text/javascript" src="js/jquery.2.1.1.min.js"></script>
     <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
     <script type="text/javascript" src="js/payRequest.js"></script>
@@ -290,11 +291,12 @@
                 </div>
 			</div>
 
-			<!--div id='carListView'></div-->
-          	<ul id='carBtns'>
-            <!--list is populated in '../program.js' from '../user.xml'
-            the list items don't have to exist but the root tag must-->
-            </ul>
+			<!--div id='carListView'-->
+          		<ul id='carBtns'>
+                <!--list is populated in '../program.js' from '../user.xml'
+                the list items don't have to exist but the root tag must-->
+                </ul>
+			<!--/div-->
 		</div>
         <div id='CarView'>
             <!--display vehicle stats and actions-->
