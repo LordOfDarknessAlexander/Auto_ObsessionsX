@@ -21,6 +21,7 @@ var playerNextBid = currentBid + (currentBid * 0.1);
 var startEndBids = [false,false,false,false];
 var playerWinning = false;
 var playerWon = false;
+//there only needs to be 1 timer to track the closing of the auction
 var goingTimer = 0;
 var pGTimer = 0;
 var startPlayerEndBid = false;	//player local
@@ -162,7 +163,7 @@ var Auction =
 		// player.restart();
 		 */
 		 this.setup();
-		 this.init();			
+		 this.init();	//init requires a car index, this will break		
 	},
 	
 	initAI : function()

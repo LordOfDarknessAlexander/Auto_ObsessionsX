@@ -110,6 +110,7 @@ function openDoc(url, reader)
 	return doc;
 }
 
+//js.StatBar = {
 function setMoney()
 {
 	$('label#money', jq.Game.menu).text('Money: ' + userStats.money.toString() );
@@ -491,7 +492,7 @@ $('.Register').click(function()
   $('#menu').hide();
   $('#Register').show();
   Register();
-  delete mainMenu;
+  delete mainMenu;	//don't delete, can still navigate back to this page
   //delete credits
   //delete menu image, since the game can not navigate back to this screen after clicking
 });
@@ -556,6 +557,7 @@ jq.Auction.homeBtn.click(function()
 	//Auction.cancel();	//stop the auction, aborting the sale
 	jq.Auction.menu.hide();
 	jq.Game.menu.show();
+	
 	setStatBar();
 	setAdBG();
 	
@@ -597,6 +599,8 @@ jq.RepairShop.backBtn.click(function()
 	//toggleRepair();
   	jq.RepairShop.menu.hide();
  	//$('#gameMenu')
+	setStatsBar();
+	setAdBG();
 	jq.Game.menu.show();
 	resetStates();
 	//appState = GAME_MODE.Main_Menu;
@@ -605,6 +609,7 @@ jq.Funds.backBtn.click(function()
 {
 	jq.Funds.toggle();
 	setStatBar();
+	setAdBG();
 	saveUser();
 });
 //function rotateBtns(index)
