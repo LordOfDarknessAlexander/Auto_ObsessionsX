@@ -94,7 +94,7 @@ var Auction =
 		jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
 		//initAI();
 		//else, no car game breaks...
-		this.endAuction();
+		//this.endAuction();
 		//
 		shuffleArray(enemyBids);
 		shuffleArray(bidders);
@@ -196,13 +196,7 @@ var Auction =
 			bidderCooldown++;
 			enemyCanBid = false;			
 		}
-	  	//for(var i = 0; i < enemies.length; i++)
-		//{
-		  	 //enemies.push(i);
-		  	 //console.log(i);
-		  	 //break;
-		//}
-
+	  	
 	  	if(bidderCooldown >= ENEMY_WAIT)
 	  	{	//enemy bid cooldown has refreshed
 	  		enemyCanBid = true;
@@ -220,10 +214,8 @@ var Auction =
 	  	console.log("EnemyCaps " + enemyCaps[0]);
 	  	Auction.findEndBidder();
 		//
-	  	Auction.endAuction();
-	  	//Auction.destroy();
-	  	//Auction.restart();
-	  	
+	  	//Auction.endAuction();
+	 	  	
 		if(auctionEnded)
 		{
 			
@@ -238,10 +230,6 @@ var Auction =
 
 		if(restarted)
 		{
-			//stop = true;
-			//auctionStop = false;
-			//endGame = false;
-			//auctionEnded = false;
 			Auction.render();
 			//this.restart();
 			
@@ -264,10 +252,7 @@ var Auction =
 	},
 	render : function()
 	{
-		//if(endGame){
-			//context.clearRect(0, 0, canvas.width, canvas.height);
-			//return;
-		//}		
+			
 		
 		context.drawImage(backgroundImage, 0,-10);
 		
@@ -406,6 +391,12 @@ var Auction =
 		{
 			playerDidBid = true;
 		}
+		else
+		{
+			 this.sold();
+			 startPlayerEndBid = false;
+		}
+
 		
 		//Wins BId
 	},
@@ -543,7 +534,7 @@ var Auction =
 			//else
 				//lock-out car from further sale
 			this.sold();
-			
+			endGame = true;
 			//alert("Sold to " + bidders[i]);
 			context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
 		}			
@@ -574,23 +565,24 @@ var Auction =
 		}			
 
 	},
-	//endAuction : function()
-	//{	//closes the auction
+	/*
+	endAuction : function()
+	{	//closes the auction calls sold in program to end with a loss
 		//if user won save to storage or pass to next state
 		
-		// auctionEnded = true;
-		 //this.gameOver();
-		 //this.sold();
-		 //assetLoader.sounds.bidder.pause();	 
-	//},
+		 auctionEnded = true;
+		 this.sold();
+		 assetLoader.sounds.bidder.pause();	
+
+	},*/
 	buyOut : function()
 	{	//user 'buys out' the auction, placing the max bid,
 		//bidding continues until only 1 bidder remains
 		//
 		//disable buyout button for remainder of auction
-		//var btn = $('div#Auction button#buyOut');
-		//btn.click(function(){});
-		//btn.css('opacity', '0.65');
+		var btn = $('div#Auction button#buyOut');
+		btn.click(function(){});
+		btn.css('opacity', '0.65');
 		
 		if(playerWon)
 		{

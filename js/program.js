@@ -387,8 +387,6 @@ function mainMenu()
 function startGame() 
 {	//initialize the game state
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	//$('#game-over').style.display = 'none';
-	//document.getElementById('game-over').style.display = 'none';
 	document.getElementById('gameMenu').style.display = 'true';  
 	//$('#money').html(money);
 	appState = GAME_MODE.RUNNING;
@@ -425,7 +423,7 @@ function startGame()
 	assetLoader.sounds.bg.loop = true;
 	assetLoader.sounds.bg.play();
 }
-
+/*
 Auction.endAuction = function()
 {
 	if(endGame)
@@ -439,7 +437,7 @@ Auction.endAuction = function()
 	  //Auction.setup();
 	}
 }
-
+*/
 Auction.sold = function()
 {	//enemy wins auction, car goes to them
 	//$('.sold').style.display = 'true';
@@ -506,29 +504,6 @@ Auction.sold = function()
 	
 }
 
-function gameOver() 
-{	//depricated
-	//$('.game-over').style.display = 'true';
-	auctionStop = true;
-	//document.getElementById('game-over').style.display = 'true';
-	//resetStates();
-	stop = true;
-		//Show a message that player has insufficient funds
-	//$('#money').html(money);	//set value in the html element
-	//$('#Auction').hide();
-	//$('#game-over').show();
-	//reset AI timers
-	startEndBids = [false,false,false,false];
-	endBidTimers = [0,0,0,0];
-	//
-	//disable user from entering auction for this car
-	//Auction._car = null;	//no more car to sell
-	// assetLoader.sounds.bg.pause();
-	assetLoader.sounds.gameOver.currentTime = 0;
-	assetLoader.sounds.gameOver.play();		
-}
-
-//
 //Menu state start game button
 //
 $('.play').click(function() 
@@ -595,15 +570,17 @@ jq.Auction.backBtn.click(function()
 	//$('#menu').addClass('gameMenu');
 	
 });
-//jq.Auction.buyOutBtn.click(function()
-//{	
-//	Auction.buyOut();
-//});
-//$('div#sold button#garage').click(function()
-//{
-//	jq.Sold.menu.hide();
-	//jq.Garage.menu.toggle();
-//});
+/*
+jq.Auction.buyOutBtn.click(function()
+{	
+	Auction.buyOut();
+});
+$('div#sold button#garage').click(function()
+{
+	jq.Sold.menu.hide();
+	jq.Garage.menu.toggle();
+});
+*/
 jq.Auction.homeBtn.click(function()
 {
 	//Auction.cancel();	//stop the auction, aborting the sale
@@ -712,21 +689,6 @@ function initGuest()
 	}
 
 }
-/*
-function saveGameState() 
-{
-    if (!supportsLocalStorage()) { return false; }
-    localStorage["halma.game.in.progress"] = gGameInProgress;
-    for (var i = 0; i < kNumPieces; i++) 
-    {
-	localStorage["halma.piece." + i + ".row"] = gPieces[i].row;
-	localStorage["halma.piece." + i + ".column"] = gPieces[i].column;
-    }
-    localStorage["halma.selectedpiece"] = gSelectedPieceIndex;
-    localStorage["halma.selectedpiecehasmoved"] = gSelectedPieceHasMoved;
-    localStorage["halma.movecount"] = gMoveCount;
-    return true;
-}*/
 
 //$('#guestPlay').click(initGuest);
 //Sound Button
