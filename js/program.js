@@ -38,15 +38,9 @@ function update(deltaTime)
    if(restarted)
    {
    	 console.log("Chicken Fingers restarting");
-   	 Auction.restart();
-   	 //auctionStop = false;
-  // 	 Auction.restart();
-   	// Auction.init();
-	// endGame = false;
-	// auctionEnded = false;
-	 restartTimer++;
+   	 //Auction.restart();
+	
 	 auctionMode();
-	// startGame();
 	
    }
    if(auctionOver)
@@ -56,8 +50,6 @@ function update(deltaTime)
    timer++;
    if(userLogged)
    {
-   		
-   		
    		userHUD();
    		console.log("User Screen");
    }
@@ -78,13 +70,10 @@ function auctionMode(deltaTime)
 {	//in-Auction update, core of game logic
    ticker = 0;
    stop = true;
+   
     //$('#money').html(money);
-    /*
-    if(restarted)
-    {
-    	Auction.init();
-    }*/
-   Auction.setup();//auctionInit();
+    Auction.setup();//auctionInit();
+   
   
   
 }
@@ -423,21 +412,7 @@ function startGame()
 	assetLoader.sounds.bg.loop = true;
 	assetLoader.sounds.bg.play();
 }
-/*
-Auction.endAuction = function()
-{
-	if(endGame)
-    {
-    	Auction.sold();
-    	  	
-    }
-    else
-	{
-	  endGame == false;
-	  //Auction.setup();
-	}
-}
-*/
+
 Auction.sold = function()
 {	//enemy wins auction, car goes to them
 	//$('.sold').style.display = 'true';
@@ -453,6 +428,7 @@ Auction.sold = function()
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
 	$('#sold').show();
+	
 	
 	//disable user from entering an auction for this car again
 	
@@ -495,12 +471,6 @@ Auction.sold = function()
 	{
 		endGame = true
 	}
-
-//	delete Auction;
-	
-	// endGame = true;
-//	auctionOver = true;
-	//auctionEnded = true;
 	
 }
 
@@ -521,7 +491,7 @@ $('.Register').click(function()
   $('#menu').hide();
   $('#Register').show();
   Register();
-  //delete splash
+  delete mainMenu;
   //delete credits
   //delete menu image, since the game can not navigate back to this screen after clicking
 });

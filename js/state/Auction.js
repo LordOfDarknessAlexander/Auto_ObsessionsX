@@ -25,6 +25,7 @@ var goingTimer = 0;
 var pGTimer = 0;
 var startPlayerEndBid = false;	//player local
 var playerEndBidTimer = 0;	//player local
+var enemyWinning = false;
 //
 
 function shuffleArray(array) 
@@ -47,7 +48,9 @@ function shuffleArray(array)
 var Auction =
 {	//manages the state for purchasing cars
 	//_enemies:[],
-	/*_user : {	//object representing the current human player
+	/*
+	//need to use namsespace to allow private vars we could implement and make all auction vars private
+	_user : {	//object representing the current human player
 		canBid:false,
 		didBid:false,
 		didWin:false,
@@ -124,17 +127,14 @@ var Auction =
 	restart : function()
 	{
 		 delete sold;
-		 delete gameOver;
 		 delete buyOut;	
-				
+		/*		
 		 enemy1; 
 		 enemy2; 
 		 enemy3; 
 		 enemy4;
 
 		 console.log("Restarting Auction snaps");
-		 delete sold;
-		 delete gameOver;
 		 bidderCooldown = 0;
 		 playerCanBid = false;
 		
@@ -159,8 +159,8 @@ var Auction =
 		 pGTimer = 0;
 		 startPlayerEndBid = false;	//player local
 		 playerEndBidTimer = 0;	
-		 player.restart();
-		 
+		// player.restart();
+		 */
 		 this.setup();
 		 this.init();			
 	},
@@ -189,11 +189,12 @@ var Auction =
 		Auction.going();
 		Auction.playerGoing();
 		
-		console.log("Going" + goingTimer);
+		
+		
 		
 		if(playerDidBid)
 		{
-			bidderCooldown++;
+			bidderCooldown ++;
 			enemyCanBid = false;			
 		}
 	  	
@@ -202,8 +203,10 @@ var Auction =
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
 	  	}
+	  	
 	  	if(playerWinning)
 	  	{
+	  		//this.sold();
 	  		pGTimer ++;
 	  	}
 	  	else
@@ -211,16 +214,18 @@ var Auction =
 	  		pGTimer = 0;
 	  	}
 	  	
+	  	if(enemyWinning)
+	  	{
+	  	   goingTimer ++;
+	  	   //this.going();
+	  	}
 	  	console.log("EnemyCaps " + enemyCaps[0]);
+	  	
 	  	Auction.findEndBidder();
-		//
-	  	//Auction.endAuction();
-	 	  	
+	  	
 		if(auctionEnded)
 		{
-			
-			this.destroy();
-					
+			this.destroy();		
 		}
 		if(endGame)
 		{
@@ -232,17 +237,12 @@ var Auction =
 		{
 			Auction.render();
 			//this.restart();
-			
-			
-		}
-		if(!auctionStop)
-		//if((!endGame) || (!auctionEnded) )
-		{
-			
-		  	Auction.render();
-		  
 		}
 		
+		if(!auctionStop)
+		{
+		  	Auction.render();
+		}
 		else
 		{	//clear drawing when auction stops
 			context.clearRect(0, 0, canvas.width, canvas.height);
@@ -358,6 +358,7 @@ var Auction =
 		{
 			if(startEndBids[i] == true){			
 				endBidTimers[i]++;
+				
 			}
 			else{
 				endBidTimers[i] = 0;
@@ -365,11 +366,17 @@ var Auction =
 			}
 		}		
 		//Player end bid
-		if(startPlayerEndBid){
+		if(startPlayerEndBid)
+		{
 			playerEndBidTimer++;
 		}
 		else{
 			playerEndBidTimer = 0;
+		}
+		if(endBidTimers[i] >= BID_THRESHOLD )
+		{
+			goingTimer++;
+			console.log("cookie count " + goingTimer);
 		}		
 	},
 	playerBidding : function() 
@@ -406,11 +413,11 @@ var Auction =
 		var upPerc =  0.18 * currentBid;
 		var startBid = vehiclePrice * 0.02;
 		//var upPerc = startBid ;
-		if(currentBid >= 0)
+		if(!playerWon)
 		{	
 			for(var i = 0; i < enemyBids.length; i++)
 			{						
-				enemies.price = 1;
+				//enemies.price = 1;
 
 				if(enemyCanBid)	//global cooldown timer has refreshed, bidding now available
 				{//
@@ -420,6 +427,7 @@ var Auction =
 					  assetLoader.sounds.bidder.play();
 					  break;	//breaks on first available bidder?
 					}
+					
 				}
 			}
 		 }
@@ -473,8 +481,9 @@ var Auction =
 		{
 			setBid(2);
 		}
-		else if(checkBid(3) )
+		else 
 		{
+			checkBid(3);
 			setBid(3);
 		}
 	},
@@ -504,12 +513,23 @@ var Auction =
 			if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
 			{	//enemeny is able to place bid
 				//end auction with enemy bidder
-				goingTimer++;
+				enemyWinning = true;
+				
+				if(enemyWinning)
+				{
+				  	console.log("enemys winning" + goingTimer);
+	   				goingTimer ++;
+	   			//	this.going();
+	   				
+	   				
+					
+				}
 				shuffleArray(enemyCaps);
 				
 			}
 		}
 	},
+
 	going : function()
 	{	//begin sale count down after a waiting period if no other bids are offered
 		//Going crowd roars someone is about to win the bid
@@ -533,8 +553,9 @@ var Auction =
 				//sell car
 			//else
 				//lock-out car from further sale
+			endGame = true;	
 			this.sold();
-			endGame = true;
+			
 			//alert("Sold to " + bidders[i]);
 			context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
 		}			
@@ -559,22 +580,13 @@ var Auction =
 		else if(pGTimer > 660)
 		{
 			playerWon = true;
+			this.buyOut();
 			context.fillText( "Sold to the Player" ,ENEMY_X + 600 , 310);
 			//alert("Sold to the player");
 			
 		}			
 
 	},
-	/*
-	endAuction : function()
-	{	//closes the auction calls sold in program to end with a loss
-		//if user won save to storage or pass to next state
-		
-		 auctionEnded = true;
-		 this.sold();
-		 assetLoader.sounds.bidder.pause();	
-
-	},*/
 	buyOut : function()
 	{	//user 'buys out' the auction, placing the max bid,
 		//bidding continues until only 1 bidder remains
@@ -588,8 +600,7 @@ var Auction =
 		{
 			userStats.money = userStats.money - currentBid;
 			auctionEnded = true;
-			
-			//endGame == true;
+	
 			//push vehicle to garage
 			//auctionStop = true;
 			Auction.sold();
