@@ -129,7 +129,7 @@ var Auction =
 	{
 		 delete sold;
 		 delete buyOut;	
-		/*		
+			
 		 enemy1; 
 		 enemy2; 
 		 enemy3; 
@@ -160,8 +160,8 @@ var Auction =
 		 pGTimer = 0;
 		 startPlayerEndBid = false;	//player local
 		 playerEndBidTimer = 0;	
-		// player.restart();
-		 */
+		 player.reset();
+		 
 		 this.setup();
 		 this.init();	//init requires a car index, this will break		
 	},
@@ -189,13 +189,18 @@ var Auction =
 		Auction.updatePlayer();
 		Auction.going();
 		Auction.playerGoing();
-		/*
+		
 		if(enemyWinning)
 	  	{
-	  	   goingTimer ++;
-	  	   this.going();
+	  	   
+	  	   console.log("enemys winning" + goingTimer);
+	  	 
 	  	}
-		*/
+	  	else
+	  	{
+	  		goingTimer = 0;
+	  	}
+		
 		
 		if(playerDidBid)
 		{
@@ -278,7 +283,7 @@ var Auction =
 		
 		//ENENMY HUD
 		
-				
+		this.going();		
 		//Enemy 1
 		//draw them depending on current bid
 		if(enemyBids[0] >= currentBid)
@@ -323,7 +328,7 @@ var Auction =
 			enemy4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X, 200);
 			
 		}
-		this.going();
+		
 		//call crowd for the player winning
 		this.playerGoing();
 		
@@ -363,7 +368,7 @@ var Auction =
 			}
 			else{
 				endBidTimers[i] = 0;
-				 goingTimer = 0;
+	
 			}
 		}		
 		//Player end bid
@@ -374,12 +379,6 @@ var Auction =
 		else{
 			playerEndBidTimer = 0;
 		}
-		if(endBidTimers[i] >= BID_THRESHOLD )
-		{
-			//goingTimer++;
-			enemyWinning = true;
-			console.log("cookie count " + goingTimer);
-		}		
 	},
 	playerBidding : function() 
 	{	//if CD timer has refreshed
@@ -489,6 +488,28 @@ var Auction =
 			checkBid(3);
 			setBid(3);
 		}
+		
+		/*
+		 switch (checkBid()) 
+         {
+            case 1:
+            checkBid(0)
+               setBid(0);
+                break;
+            case 2:
+             checkBid(1)
+               setBid(1);
+                break;
+            case 3:
+             checkBid(2)
+               setBid(2); 
+               break;
+            case 4:
+             checkBid(3)
+               setBid(3);
+                break;             
+        }*/
+
 	},
 	currentBidder : function()
 	{	//determine if player has highest bid
@@ -517,59 +538,54 @@ var Auction =
 			{	//enemeny is able to place bid
 				//end auction with enemy bidder
 				enemyWinning = true;
-				
-				if(enemyWinning)
-				{
-				  	
-	   				goingTimer ++;
-	   				this.going();
-	   				console.log("enemys winning" + goingTimer);
-	   				
-				}
-				shuffleArray(enemyCaps);
-				
 			}
+			shuffleArray(enemyCaps);
 		}
 	},
 
 	going : function()
 	{	//begin sale count down after a waiting period if no other bids are offered
 		//Going crowd roars someone is about to win the bid
-		/*
-		if((goingTimer > 300) && (goingTimer < 460))
-		{
-			//alert("Going Once " );
-			context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
-			assetLoader.sounds.going.play();
-			
-		}
-		else if((goingTimer > 470) && (goingTimer < 600))
-		{
-			//alert("Going Twice " );
-			context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
-			assetLoader.sounds.going.play();
-
-		}
-		else if(goingTimer > 660)
-		{
-			//if(playerWon)
-				//sell car
-			//else
-				//lock-out car from further sale
-			endGame = true;	
-			this.sold();
-			
-			//alert("Sold to " + bidders[i]);
-			context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
-		}	*/
-		if(enemyWinning)
+		
+		
+		while((playerDidBid) && (enemyWinning) && (goingTimer < 6660))
 		{
 			goingTimer++;
+			if((goingTimer > 0) && (goingTimer < 1060))
+			{
+				//alert("Going Once " );
+				context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
+				assetLoader.sounds.going.play();
+				
+			}
+			else if((goingTimer > 1060) && (goingTimer < 4000))
+			{
+				//alert("Going Twice " );
+				context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
+				assetLoader.sounds.going.play();
+	
+			}
+			else if(goingTimer >= 6660)
+			{
+				//if(playerWon)
+					//sell car
+				//else
+					//lock-out car from further sale
+				endGame = true;	
+				this.sold();
+				enemyWinning = false;
+				goingTimer = 0;
+				//alert("Sold to " + bidders[i]);
+				context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
+			}	
+			
 		}
+		/*
 		if((goingTimer > 0) && (goingTimer < 2))
 		{
 			context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
 			assetLoader.sounds.going.play();
+			//goingTimer++;
 		}
 		else if((goingTimer > 1) && (goingTimer < 3))
 		//else if(goingTimer > 1)
@@ -587,7 +603,7 @@ var Auction =
 		{
 			enemyWinning = false;
 		}
-		
+		*/
 		
 		
 	},	
