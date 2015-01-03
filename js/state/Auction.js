@@ -189,14 +189,19 @@ var Auction =
 		Auction.updatePlayer();
 		Auction.going();
 		Auction.playerGoing();
-		
-		
-		
+		/*
+		if(enemyWinning)
+	  	{
+	  	   goingTimer ++;
+	  	   this.going();
+	  	}
+		*/
 		
 		if(playerDidBid)
 		{
 			bidderCooldown ++;
-			enemyCanBid = false;			
+			enemyCanBid = false;
+			enemyWinning = false;			
 		}
 	  	
 	  	if(bidderCooldown >= ENEMY_WAIT)
@@ -207,7 +212,6 @@ var Auction =
 	  	
 	  	if(playerWinning)
 	  	{
-	  		//this.sold();
 	  		pGTimer ++;
 	  	}
 	  	else
@@ -215,11 +219,7 @@ var Auction =
 	  		pGTimer = 0;
 	  	}
 	  	
-	  	if(enemyWinning)
-	  	{
-	  	   goingTimer ++;
-	  	   //this.going();
-	  	}
+	  	
 	  	console.log("EnemyCaps " + enemyCaps[0]);
 	  	
 	  	Auction.findEndBidder();
@@ -237,7 +237,7 @@ var Auction =
 		if(restarted)
 		{
 			Auction.render();
-			//this.restart();
+			this.restart();
 		}
 		
 		if(!auctionStop)
@@ -376,7 +376,8 @@ var Auction =
 		}
 		if(endBidTimers[i] >= BID_THRESHOLD )
 		{
-			goingTimer++;
+			//goingTimer++;
+			enemyWinning = true;
 			console.log("cookie count " + goingTimer);
 		}		
 	},
@@ -398,6 +399,7 @@ var Auction =
 		if(playerBid <= userStats.money)
 		{
 			playerDidBid = true;
+			
 		}
 		else
 		{
@@ -518,12 +520,11 @@ var Auction =
 				
 				if(enemyWinning)
 				{
-				  	console.log("enemys winning" + goingTimer);
+				  	
 	   				goingTimer ++;
-	   			//	this.going();
+	   				this.going();
+	   				console.log("enemys winning" + goingTimer);
 	   				
-	   				
-					
 				}
 				shuffleArray(enemyCaps);
 				
@@ -534,6 +535,7 @@ var Auction =
 	going : function()
 	{	//begin sale count down after a waiting period if no other bids are offered
 		//Going crowd roars someone is about to win the bid
+		/*
 		if((goingTimer > 300) && (goingTimer < 460))
 		{
 			//alert("Going Once " );
@@ -559,7 +561,35 @@ var Auction =
 			
 			//alert("Sold to " + bidders[i]);
 			context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
-		}			
+		}	*/
+		if(enemyWinning)
+		{
+			goingTimer++;
+		}
+		if((goingTimer > 0) && (goingTimer < 2))
+		{
+			context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
+			assetLoader.sounds.going.play();
+		}
+		else if((goingTimer > 1) && (goingTimer < 3))
+		//else if(goingTimer > 1)
+		{
+			context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
+			assetLoader.sounds.going.play();
+			
+		}
+		else if(goingTimer > 3)
+		{
+			endGame = true;	
+			this.sold();
+		}
+		else
+		{
+			enemyWinning = false;
+		}
+		
+		
+		
 	},	
 	playerGoing : function()
 	{	//depreicated
