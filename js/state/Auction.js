@@ -192,9 +192,8 @@ var Auction =
 		
 		if(enemyWinning)
 	  	{
-	  	   
-	  	   console.log("enemys winning" + goingTimer);
-	  	 
+	  	    goingTimer ++;
+	  	    console.log("enemys winning" + goingTimer);
 	  	}
 	  	else
 	  	{
@@ -283,7 +282,7 @@ var Auction =
 		
 		//ENENMY HUD
 		
-		this.going();		
+				
 		//Enemy 1
 		//draw them depending on current bid
 		if(enemyBids[0] >= currentBid)
@@ -331,7 +330,7 @@ var Auction =
 		
 		//call crowd for the player winning
 		this.playerGoing();
-		
+		this.going();
 		
 		//current bid HUD
 		//var gorguts;
@@ -417,7 +416,8 @@ var Auction =
 		//var upPerc = startBid ;
 		if(!playerWon)
 		{	
-			for(var i = 0; i < enemyBids.length; i++)
+		
+			for(var i = 0; i < enemyCaps.length; i++)
 			{						
 				//enemies.price = 1;
 
@@ -425,11 +425,34 @@ var Auction =
 				{//
 					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[0]) )
 					{//enemies[i].bidCap)
+					  if( enemyBids[i]  < 4)
+					  {
+					  	  shuffleArray(enemyCaps);
+					  }
+					  enemyCaps[i] == enemyBids[i];					  					  
+					  break;	//breaks on first available bidder?
+					}
+					
+				}
+			}
+			
+			for(var i = 0; i < enemyBids.length; i++)
+			{						
+				//enemies.price = 1;
+
+				if(enemyCanBid)	//global cooldown timer has refreshed, bidding now available
+				{//
+					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[i]) )
+					{//enemies[i].bidCap)
 					  enemyBids[i] = currentBid + upPerc;
 					  assetLoader.sounds.bidder.play();
 					  break;	//breaks on first available bidder?
 					}
 					
+				}
+				else
+				{
+				   enemyWinning = true;
 				}
 			}
 		 }
@@ -446,7 +469,8 @@ var Auction =
 				{
 					if(enemyBids[index] > enemyBids[i])
 					{
-						continue;						
+						continue;	
+											
 					}
 					else
 					{
@@ -539,33 +563,36 @@ var Auction =
 				//end auction with enemy bidder
 				enemyWinning = true;
 			}
-			shuffleArray(enemyCaps);
+			//shuffleArray(enemyCaps);
 		}
 	},
 
 	going : function()
 	{	//begin sale count down after a waiting period if no other bids are offered
 		//Going crowd roars someone is about to win the bid
-		
-		
-		while((playerDidBid) && (enemyWinning) && (goingTimer < 6660))
+		//break out of while if someone outbids current bidder or if player does,
+		//breaks out of the while loop and enemyWinning becomes false
+		while((playerDidBid) && (enemyWinning) && (goingTimer < 660))
 		{
-			goingTimer++;
-			if((goingTimer > 0) && (goingTimer < 1060))
+			//goingTimer++;
+			if((goingTimer > 0) && (goingTimer < 360))
 			{
 				//alert("Going Once " );
+				goingTimer ++
 				context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
 				assetLoader.sounds.going.play();
+				break;
 				
 			}
-			else if((goingTimer > 1060) && (goingTimer < 4000))
+			else if((goingTimer > 370) && (goingTimer < 650))
 			{
 				//alert("Going Twice " );
 				context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
 				assetLoader.sounds.going.play();
+				break;
 	
 			}
-			else if(goingTimer >= 6660)
+			else if(goingTimer >= 660)
 			{
 				//if(playerWon)
 					//sell car
@@ -577,34 +604,14 @@ var Auction =
 				goingTimer = 0;
 				//alert("Sold to " + bidders[i]);
 				context.fillText( "Sold to " +  bidders[i],ENEMY_X + 600 , 310);
+				break;
 			}	
-			
+			else
+			{
+				enemyWinning = false;
+			}
+	
 		}
-		/*
-		if((goingTimer > 0) && (goingTimer < 2))
-		{
-			context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
-			assetLoader.sounds.going.play();
-			//goingTimer++;
-		}
-		else if((goingTimer > 1) && (goingTimer < 3))
-		//else if(goingTimer > 1)
-		{
-			context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
-			assetLoader.sounds.going.play();
-			
-		}
-		else if(goingTimer > 3)
-		{
-			endGame = true;	
-			this.sold();
-		}
-		else
-		{
-			enemyWinning = false;
-		}
-		*/
-		
 		
 	},	
 	playerGoing : function()
@@ -616,12 +623,14 @@ var Auction =
 			context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
 			assetLoader.sounds.going.play();
 			
+			
 		}
 		else if((pGTimer > 470) && (pGTimer < 600))
 		{
 			//alert("Going Twice " );
 			context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
 			assetLoader.sounds.going.play();
+			
 
 		}
 		else if(pGTimer > 660)
@@ -647,7 +656,6 @@ var Auction =
 		{
 			userStats.money = userStats.money - currentBid;
 			auctionEnded = true;
-	
 			//push vehicle to garage
 			//auctionStop = true;
 			Auction.sold();
