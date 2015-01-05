@@ -54,6 +54,38 @@ button
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color:red;
 }
+button#backBtn
+{   /*sets properties for all button tags with id backBtn*/
+	background: url('../images/backBtn.png') no-repeat 0 0;
+	position:absolute;
+	left:5%;
+	bottom:0%;
+	width:10%;
+	height:10%;
+}
+button#homeBtn
+{
+	background: url('../images/homeBtn.png') no-repeat 0 0;
+    cursor:pointer;
+	color:red;
+	font-weight: bold;
+    
+	position:absolute;
+    width:10%;
+	height:10%;
+	
+	right:5%;
+	bottom:5%;
+}
+/*button#homekBtn
+{   sets properties for all button tags with id homeBtn
+	background: url('../images/backBtn.png') no-repeat 0 0;
+	
+	left:5%;
+	bottom:0%;
+	width:10%;
+	height:10%;
+}*/
 /*button:hover
 {	alters all button appearences when being moused over
 	background-color:red;

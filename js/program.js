@@ -73,41 +73,7 @@ function auctionMode(deltaTime)
    
     //$('#money').html(money);
     Auction.setup();//auctionInit();
-   
   
-  
-}
-
-function createReader()
-{
-	if(window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp = new XMLHttpRequest();
-	}
-	else
-	{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-		  
-	if(xmlhttp)
-	{
-		
-	}
-	else
-	{	//open warning page, error loading data
-	  window.open("/pdf/2014Schedule.pdf", "_blank");
-	}
-	
-	return xmlhttp;
-}
-
-function openDoc(url, reader)
-{	//parse xml document in xml DOM object
-	reader.open("GET",url,false);
-	reader.send();
-	var doc=reader.responseXML;	//access DOM object tree
-  
-	return doc;
 }
 
 //js.StatBar = {
@@ -176,7 +142,35 @@ $(document).ready(function()
 			ticker++;
 		}	
 	}
+function openDoc(url, reader)
+{	//parse xml document in xml DOM object
+	reader.open("GET",url,true);    //breaks if set to false; ASync is good anyways, we want this
+	reader.send();  //this is where the current issue is!
+    
+	var doc = reader.responseXML;	//access DOM object tree
+    alert(doc);
+	return doc;
+}
+function createReader()
+{   //creates an xml http request
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+	if(window.XMLHttpRequest)
+	{
+		return new XMLHttpRequest();
+	}
+	else{
+		return new ActiveXObject("Microsoft.XMLHTTP");
+	}
 
+	if(xmlhttp){
+		
+	}//open warning page, error loading data
+	else{	
+	  window.open("/pdf/2014Schedule.pdf", "_blank");
+	}
+	
+	return xmlhttp;
+}
 function loadCars(doc){
 	//carNodes = doc.getElementsByTagName('Vehicle');
 	//carsLength = carNodes.length;
@@ -186,46 +180,51 @@ function loadCars(doc){
 		//create new car
 	//}
 	//use jquery?
-	var list = doc.childNodes;
-	var node = list[0];	//acessing nodes work
+    //alert(doc);
+	//var list = doc.childNodes;
+	//var node = list[1];	//acessing nodes work
 //	var v = node.item(i);
 	//var cn = node.childNodes;
-	var atrs = node.attributes;
+	//var atrs = node.attributes;
 	//TODO:accessing attribute elements breaks...
 	
 //	var parts = node.getElementById('upgrades');
-//	var name = atrs.getNamedItem('name');
+	//var
+        //name = atrs.getNamedItem('name'),
+        //make = atrs.getNamedItem('make'),
+        //year = atrs.getNamedItem('year');
+    
+    //userGarage.push(Vehicle(name, make, year, 10000) );    //list[i]) )
 //	var n = node.getAttribute('name');
 	//var atrs = node.attributes;
 	//var n = node.getAttribute('year');
 //	var n = node.getAttribute('make');
 	//for(var i = 0; i < list.length; i++){
-		//userGarage.append(Vehicle(list[i]) )
+		//userGarage.push(Vehicle(list[i]) )
 //	}
 }
 
 function loadXMLDoc(url)
 {
 	reader = createReader();
-	var doc = openDoc(url, reader);
+    var doc = openDoc(url, reader);
 	
-	if(typeof doc === 'undefined')
+	if(typeof doc === 'undefined' || doc === null)
 	{
+        alert('could not parse xml from server');
 		return false;
 	}
 	loadCars(doc);
 	return true;
 }
-
 /*
 //LOAD Vehicle XML, this was working, now can't find source file!
-var vehiclePath = './vehicles.xml';	//should be the location of file on server
+var vehiclePath = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/vehicles.xml';	//should be the location of file on server
 
 if(loadXMLDoc(vehiclePath) == false)
 {	//loading xml resource failed, display warning
 	window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
 }
-
 
 var vDoc = document.querySelector('link[rel="import"]');	//document Vehicles.html
 var vehicles = document.getElementById('Vehicles');
@@ -599,10 +598,10 @@ jq.RepairShop.backBtn.click(function()
 	//toggleRepair();
   	jq.RepairShop.menu.hide();
  	//$('#gameMenu')
-	setStatsBar();
+	setStatBar();
 	setAdBG();
 	jq.Game.menu.show();
-	resetStates();
+	//resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });
 jq.Funds.backBtn.click(function()

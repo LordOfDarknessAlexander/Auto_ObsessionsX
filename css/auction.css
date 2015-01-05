@@ -54,7 +54,7 @@ div#Auction label#carPrice
 	left:10%;
 	bottom:40%;
 }
-div#Auction button#homeBtn
+/*div#Auction button#homeBtn
 {
 	background: url('../images/homeBtn.png') no-repeat 0 0;
 	color:red;
@@ -65,7 +65,7 @@ div#Auction button#homeBtn
 	position:absolute;
 	right:5%;
 	bottom:5%;
-}
+}*/
 div#Auction label#carInfo
 {
 	background-image:url('../images/checkers.png');

@@ -47,7 +47,7 @@ var Garage = {
 				//userGarage.push(JSON.parse(jsonArray[i]) );
 			//}
 		}
-		var list = $('#carBtns');	//div#carListView 
+		var list = $('div#carListView ul#carBtns');
 		list.empty();	//remove any buttons if there were any previously
 		
 		if(curCarIndex === null)

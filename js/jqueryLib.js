@@ -47,7 +47,7 @@ var jq = {
 	},
 	Garage : {
 		menu : $('div#Garage'),
-		backBtn : $('#garageBackBtn'),
+		backBtn : $('div#Garage button#backBtn'),
 		selectBtn:$('div#Garage button#select'),
 		viewBtn:$('div#Garage button#viewCar'),
 		toggle : function()
@@ -63,7 +63,7 @@ var jq = {
 	},
 	Auction : {
 		menu : $('#Auction'),
-		backBtn : $('#auctionBackButton'),
+		backBtn : $('div#Auction button#backBtn'),
 		homeBtn : $('div#Auction button#homeBtn'),
 		carPrice : $('div#Auction label#carPrice')
 				
@@ -72,7 +72,7 @@ var jq = {
 	},
 	CarView : {
 		menu : $('#CarView'),
-		backBtn : $('button#carViewBackBtn'),
+		backBtn : $('div#CarView button#backBtn'),
 		homeBtn : $('div#CarView button#homeBtn'),	//$('button#homeBtn', jq.CarView.menu),
 		sellBtn : $('div#CarView button#sellBtn'),
 		carImg : $('img#car'),
@@ -97,8 +97,8 @@ var jq = {
 		}
 	},
 	RepairShop : {
-		menu : $('#RepairShop'),
-		backBtn : $('#repairBackButton'),
+		menu : $('div#RepairShop'),
+		backBtn : $('div#RepairShop button#backBtn'),
 		upgrades : $('div#RepairShop div#upgrades'),
 		repairs : $('div#RepairShop div#repairs')
 	}

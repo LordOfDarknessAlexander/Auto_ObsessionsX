@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Ross Driedger (Earz Music Software) -->
 <!--VehicleList id=Vehicles-->
 	<Vehicle
        	id='0x00DA86B0'
-	    name='Camaro RS/Z28 Sport Coupe'>
-        <year>1969</year>
-        <make>Chevrolet</make>
-        
+	    name='Camaro RS/Z28 Sport Coupe'
+        year='1969'
+        make='Chevrolet'>
+        This is stuff about this specific car!
         <upgrades>
         	<part>
             	<id>ventilation</id>

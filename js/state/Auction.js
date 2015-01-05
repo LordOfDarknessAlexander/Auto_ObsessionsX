@@ -424,7 +424,6 @@ var Auction =
 					  assetLoader.sounds.bidder.play();
 					  break;	//breaks on first available bidder?
 				    }
-				    									
 				}
 			}
 		 }
@@ -468,7 +467,6 @@ var Auction =
 					if(enemyBids[index] > enemyBids[i])
 					{
 						continue;	
-											
 					}
 					else
 					{
@@ -481,9 +479,8 @@ var Auction =
 		}
 		function setBid(index)
 		{	//
-			currentBid = enemyBids[index];
-			
-			//iterate over AI, assing the bidder at index as the current bidder,
+			currentBid = enemyBids[index];			
+			//iterate over AI, assigning the bidder at index as the current bidder,
 			//assigning all others to false
 			for(var i = 0; i < startEndBids.length; i++)
 			{
@@ -491,8 +488,9 @@ var Auction =
 			}
 			
 			startPlayerEndBid = false;	
-		}
-		
+		}		
+        //check the bids of each AI to determine the highest bid,
+        //then setting the state;
 		if(checkBid(0) )
 		{
 			setBid(0);
@@ -511,7 +509,10 @@ var Auction =
 			setBid(3);
 		}
 		
-		/*
+		/*DO NOT IMPLIMENT:The bids must be checked with elseif statements,
+        switch will only execute one branch then terminate.
+        using a for loop would be preffered as the code must check each AI's bid
+        to determine a winner and assign the appropriate state.
 		 switch (checkBid()) 
          {
             case 1:
@@ -614,9 +615,7 @@ var Auction =
 			{
 				enemyWinning = false;
 			}
-	
 		}
-		
 	},	
 	playerGoing : function()
 	{	//depreicated

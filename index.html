@@ -97,7 +97,7 @@
           
        
         <canvas id="canvas" width="900" height="600">
-            <p>You're browser does not support the required functionality to play this game.</p>
+            <p>Your browser does not support the required functionality to play this game.</p>
             <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
         </canvas>
  
@@ -155,30 +155,24 @@
              <div style="margin-top:-6em;margin-left:26em">
                <p>Money<label id='money'>  money</label></p>
             </div>
-         
 
             <!--label id='myCash'>money</label>
             <label id='carPrice'>price</label-->
             <ul>
               <li><button id="bid">"Bid:money"</button></li>
-           </ul>
-            <ul>
-              <li><button id="auctionBackButton">Back</button></li>
-           </ul>
-           <img id='auctionCar'>
-           <label id='carPrice'></label>
-           <label id='carInfo'></label>
-           <button id="homeBtn">Home</button>
+            </ul>
+            <button id="backBtn">Back</button>
+            </ul>
+            <img id='auctionCar'>
+            <label id='carPrice'></label>
+            <label id='carInfo'></label>
+            <button id='homeBtn'>Home</button>
 		</div>
       
 		<div id="RepairShop">
-            <h1>Repair Shop</h1>
-            <!--ul>
-              <li><input type="button" id="purchaseButton" onmouseover="purchaseButton()" onclick="purchasePart()"></li>
-           </ul-->
-           <ul>
-              <li><input type="button" id="repairBackButton" onmouseover="repairBackButton()" onclick="startGame()"></li>
-           </ul>
+            <h1>Repair Shop</h1>           
+           
+           <button id='backBtn'>Back</button>
            
            <div id='upgrades'>
 				<h2>Upgrades</h2>
@@ -259,15 +253,23 @@
             var majorFundsPPFlow = payRequest(9.99, {trigger:'addMajorFundsBtn'});
             </script>
             
-            <label id='userCash'><!--display user's currency--></label>
+            <label id='userCash'><!--displays money--></label>
 		</div>
         
         <div id="Garage">
       		<h1>Garage</h1>
             <button id='select'>Select</button>
             <button id='viewCar'>View</button>
-			<input type='button' id='garageBackBtn' value='back'>
+			<button id='backBtn'>Back</button>
+            
+            <div id='carListView'>
+          		<ul id='carBtns'>
+                <!--list contents added dynamically at run time!-->
+                </ul>
+			</div>
+            
             <div id='userCar'>
+                <!--display for currently selected vehicle-->
 				<img id='carImg' src='images/vehicle.jpg'>
 				<!--label id='curCarName'>m:</label>
 				<label id='curCarInfo'>current car info</label-->
@@ -283,6 +285,7 @@
                 </div>
 			</div>
             <div id='selectedCar'>
+                <!--display vehicle picked by user-->
 				<img id='carImg' src='images/vehicle.jpg'>
 				<label id='carName'></label>
 				<label id='carInfo'></label>
@@ -294,12 +297,10 @@
                 </div>
 			</div>
 
-			<!--div id='carListView'-->
-          		<ul id='carBtns'>
-                <!--list is populated in '../program.js' from '../user.xml'
-                the list items don't have to exist but the root tag must-->
-                </ul>
-			<!--/div-->
+            <!--ul id='carBtns'>
+            <!--list is populated in '../program.js' from '../user.xml'
+            the list items dont have to exist but the root tag must-->
+            </ul-->
 		</div>
         <div id='CarView'>
             <!--display vehicle stats and actions-->
@@ -314,7 +315,7 @@
             </div-->
             <!--div id='carInfoBoxes'></div-->
             <label id='carInfo'>Default Info</label>
-            <button id='carViewBackBtn'>Back</button>
+            <button id='backBtn'>Back</button>
             <button id='homeBtn'>Home</button>
         </div>
         

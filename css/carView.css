@@ -43,7 +43,7 @@ div#CarView button#sellBtn
 	width:15%;
 	height:10%;
 }
-
+/*
 div#CarView button#carViewBackBtn
 {
 	background: url('../images/backBtn.png') no-repeat 0 0;
@@ -52,8 +52,8 @@ div#CarView button#carViewBackBtn
 	bottom:0%;
 	width:10%;
 	height:10%;
-}
-
+}*/
+/*
 div#CarView button#homeBtn
 {
 	background: url('../images/homeBtn.png') no-repeat 0 0;
@@ -62,7 +62,7 @@ div#CarView button#homeBtn
 	bottom:0%;
 	width:10%;
 	height:10%;
-}
+}*/
 div#CarView label#carInfo
 {
 	color:black;
