@@ -71,7 +71,7 @@ var splashTimer = 600.00;
 
 var buttonsPlaceY = 200;
 //Enemy Bid Timer check
-var BID_THRESHOLD = 3600;
+var BID_THRESHOLD = 200;
 //Player Pos, should be local in Player class
 //Bidder Pos
 var BIDDER_XPOS = 650;

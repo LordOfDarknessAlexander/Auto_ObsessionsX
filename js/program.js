@@ -337,7 +337,7 @@ function Register()
 	$('#Register').show();
 	//$('#RegisterForm').show();
 
-	getMyContact();
+	
 	appState = GAME_MODE.NEW_USER;
 	if(appState == GAME_MODE.NEW_USER)
 	{

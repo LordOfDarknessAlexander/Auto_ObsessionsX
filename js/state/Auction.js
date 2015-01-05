@@ -72,20 +72,14 @@ var Auction =
 		appState = GAME_MODE.AUCTION;
 		auctionStop = false;
 
-		
 		playerBid = 0;
 		//auction buddies
-		var enemy1; //= enemies[0];
-		var enemy2; //= enemies[1];
-		var enemy3; //= enemies[2];
-		var enemy4; //= enemies[3];
-		/*
-		enemies[0] == enemyCaps[0];
-		enemies[1] == enemyCaps[1];
-		enemies[2] == enemyCaps[2];
-		enemies[3] == enemyCaps[3];
-		*/
-	
+		var enemy1; 
+		var enemy2; 
+		var enemy3; 
+		var enemy4; 
+			
+		
 		if(index < xdbCars.length){	//make sure index is within bounds to be safe
 			Auction._car = xdbCars[index];	//copy assigned
 		}
@@ -102,7 +96,7 @@ var Auction =
 		//
 		shuffleArray(enemyBids);
 		shuffleArray(bidders);
-		shuffleArray(enemyCaps);
+		//shuffleArray(enemyCaps);
 		//		
 		context.font = '26px arial, sans-serif';  
 
@@ -184,22 +178,23 @@ var Auction =
 	update : function()
 	{	//main update logic, calle dper frame
 		Auction.bidTimers();
+		Auction.assignEnemyBidCaps();
 		Auction.enemyBidding();
 		Auction.currentBidder();
 		Auction.updatePlayer();
 		Auction.going();
 		Auction.playerGoing();
-		
+		Auction.findEndBidder();
 		if(enemyWinning)
 	  	{
-	  	    goingTimer ++;
+	  	    //goingTimer ++;
 	  	    console.log("enemys winning" + goingTimer);
-	  	}
+	  	}/*
 	  	else
 	  	{
 	  		goingTimer = 0;
-	  	}
-		
+	  	}*/
+		console.log("enemys winning" + endBidTimers);
 		
 		if(playerDidBid)
 		{
@@ -214,6 +209,7 @@ var Auction =
 	  		bidderCooldown = 0;
 	  	}
 	  	
+	  	
 	  	if(playerWinning)
 	  	{
 	  		pGTimer ++;
@@ -223,10 +219,12 @@ var Auction =
 	  		pGTimer = 0;
 	  	}
 	  	
+	  	console.log("EnemyCaps1 " + enemyCaps[0]);
+	  	console.log("EnemyCaps2 " + enemyCaps[1]);
+	  	console.log("EnemyCaps3 " + enemyCaps[2]);
+	  	console.log("EnemyCaps4 " + enemyCaps[3]);
 	  	
-	  	console.log("EnemyCaps " + enemyCaps[0]);
 	  	
-	  	Auction.findEndBidder();
 	  	
 		if(auctionEnded)
 		{
@@ -234,14 +232,13 @@ var Auction =
 		}
 		if(endGame)
 		{
-			
 			this.destroy();					
 		}
 
 		if(restarted)
 		{
 			Auction.render();
-			this.restart();
+			//this.restart();
 		}
 		
 		if(!auctionStop)
@@ -363,7 +360,7 @@ var Auction =
 		{
 			if(startEndBids[i] == true){			
 				endBidTimers[i]++;
-				
+								
 			}
 			else{
 				endBidTimers[i] = 0;
@@ -416,30 +413,9 @@ var Auction =
 		//var upPerc = startBid ;
 		if(!playerWon)
 		{	
-		
-			for(var i = 0; i < enemyCaps.length; i++)
-			{						
-				//enemies.price = 1;
-
-				if(enemyCanBid)	//global cooldown timer has refreshed, bidding now available
-				{//
-					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[0]) )
-					{//enemies[i].bidCap)
-					  if( enemyBids[i]  < 4)
-					  {
-					  	  shuffleArray(enemyCaps);
-					  }
-					  enemyCaps[i] == enemyBids[i];					  					  
-					  break;	//breaks on first available bidder?
-					}
-					
-				}
-			}
-			
 			for(var i = 0; i < enemyBids.length; i++)
 			{						
 				//enemies.price = 1;
-
 				if(enemyCanBid)	//global cooldown timer has refreshed, bidding now available
 				{//
 					if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[i]) )
@@ -447,16 +423,38 @@ var Auction =
 					  enemyBids[i] = currentBid + upPerc;
 					  assetLoader.sounds.bidder.play();
 					  break;	//breaks on first available bidder?
-					}
-					
-				}
-				else
-				{
-				   enemyWinning = true;
+				    }
+				    									
 				}
 			}
 		 }
+		 else
+		 {
+		 	enemyWinning = true;
+		 }
 		//if the bidders bid is at o or less than the current bid player wins bid
+	},
+	assignEnemyBidCaps : function()
+	{
+		for(var i = 0; i < enemyCaps.length; i++)
+		{						
+			//enemies.price = 1;
+
+			if(enemyCanBid)	//global cooldown timer has refreshed, bidding now available
+			{//
+				if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[i]) )
+				{//enemies[i].bidCap)
+				  if( enemyBids[i]  < 4)
+				  {
+				  	  shuffleArray(enemyCaps);
+				  }
+				  enemyCaps[i] == enemyBids[i];					  					  
+				  break;	//breaks on first available bidder?
+				}
+				
+			}
+			
+		}
 	},	
 	bidFinder : function()
 	{	//determine bidder
@@ -556,13 +554,19 @@ var Auction =
 	},
 	findEndBidder : function()
 	{	//determine who holds the bid, incrementing timer
+		for (var i = 0, sum = 0; i < endBidTimers.length; sum += endBidTimers[i++]);
 		for(var i = 0; i < bidders.length; i++)
 		{
-			if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
+			//if((currentBid == enemyBids[i]) && (endBidTimers[i] >= BID_THRESHOLD))
+			if((currentBid == enemyBids[i]) && (sum >= BID_THRESHOLD))				
 			{	//enemeny is able to place bid
 				//end auction with enemy bidder
 				enemyWinning = true;
+				console.log("Sum "+ sum);
+				//this.going();
+				
 			}
+						
 			//shuffleArray(enemyCaps);
 		}
 	},

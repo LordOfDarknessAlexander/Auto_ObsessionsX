@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,orientation=portrait">
+    <title>Auto Obsessions/Register</title>
+     <link rel="stylesheet" href="../ServerAO/css/auto.css" type="text/css" media="screen">
+     <link rel="stylesheet" href="../ServerAO/css/register.css" type="text/css" media="screen">
+    <!--scripts here are executed before the page is parsed,
+    	they must not be dependant on any other script but should be
+        dependencies of js code at the end of the page-->
+    <script type="text/javascript" src="../ServerAO/js/jquery.2.1.1.min.js"></script>
+
+</head>
+<body>
+	<div class="wrapper">
+    	<div class="sound sound-off"></div>   
+        	<div id="Register">
+   
+			    <section id="content" style="height: 600px; top: -15px">
+		        <h2 style="text-align:center;padding-top:25px">Tournament Registration</h2>
+		        <div style="text-align:center:"> 
+		           <table style="width:300px">
+		            <tr>
+		              <th>First Name</th>
+		              <th>Last Name</th> 
+		              <th>email</th>
+		              <th>Username</th>
+		              <th>Password</th>
+		              <th>Home Town</th>
+		             
+		            </tr>
+		
+					<?php
+					
+					  $link = mysqli_connect("axl.netfirmsmysql.com","d60274290","d60274290","d60274290"); 
+					  if (mysqli_connect_errno()) 
+					  {
+					    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+					  }
+					
+					  $result = mysqli_query($link,"SELECT * FROM registrations");
+					
+					  while($row = mysqli_fetch_array($result)) 
+					  {
+					    echo "<tr>  <td> " . $row['firstname'] . 
+					         "</td> <td>" . $row['lastname'] . 
+					         "</td> <td>" . $row['email'] . 
+					         "</td> <td>" . $row['username'] . 
+					         "</td> <td>" . $row['password'] .
+					         "</td> <td>" . $row['hometown'];
+					         
+					         switch ($row['staying']) 
+					         {
+					            case 1:
+					                echo "Rookie";
+					                break;
+					            case 2:
+					                echo "Seasoned";
+					                break;
+					            case 3:
+					                echo "Killer";
+					                break;
+					            case 4:
+					                echo "Conqueror";
+					                break;
+					            case 5:
+					                echo "Other";
+					                break;
+					                
+					        }
+					         
+					         echo "</td> </tr>";
+					  }
+					
+					  mysqli_close($link);
+					
+					?> 
+		      
+		           </table>
+		        </div>
+		    </section> 
+	        
+       
+       		</div> <!--end reg div --->
+               
+      </div> <!--end wrapper div --->
+          
+                     
+       
+          
+    
+   
+
+    
+	<!--link rel="import" href="Vehicles.html" type="text/html"><!--include link's source in this document, only supported by newest versions of chrome!-->
+</body>
+</html>
