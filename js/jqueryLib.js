@@ -5,6 +5,7 @@ var jq = {
 	//preforms qjery call one then stores the result as an object
 	//canvas:$('#canvas'),
 	adBar:$('img#adBar'),
+    statBar:$('div#statBar'),
 	userCash:$("label#userCash"),
 	setCash : function(val)
 	{	//set the html for the userCash label, to be displayed in browser
@@ -17,15 +18,19 @@ var jq = {
 		menu : $('#gameMenu'),
 		homeImg : $('img#homeImg'),
 		//left menu
-		toCarsBtn : $(''),
+		toCarsBtn : $('div#gameMenu button#myCars'),
 		//toProjBtn : $(''),
 		//toGarageBtn : $(''),
 		toAuctionBtn : $('#toAuctionBtn'),
+        //toPartsSupply:$(""),
 		repairBtn : $('#buyUpgradesBtn'),
 		//right menu
 		//toProfileBtn:$(''),
 		//toMsgBtn:$(''),
-		//torankingsBtn:$(''),
+		//toRankingsBtn:$(''),
+        //toSearchBtn:$(""),
+        //toBuisnessBtn:$(''),
+        //toFAQBtn:$(''),
 		setHomeImg : function(src)
 		{
 			this.homeImg.attr('src', src);
@@ -101,7 +106,12 @@ var jq = {
 		backBtn : $('div#RepairShop button#backBtn'),
 		upgrades : $('div#RepairShop div#upgrades'),
 		repairs : $('div#RepairShop div#repairs')
-	}
+	},
+    Sold : {
+        menu : $('div#sold'),
+        homeBtn:$('div#sold button#homeBtn'),
+        garageBtn:$('div#sold button#garageBtn'),
+    }
 	//Projects
 	//Vehicles
 };

@@ -46,7 +46,7 @@ li
 a 
 {	/*styling for all anchor elements on page*/
   text-decoration: none;
-  color: inherit;
+  color:blue;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 button
@@ -138,12 +138,28 @@ img#adBar
   z-index: 20;
 
 }
-
+p#legal
+{
+    font-size:0.65em;
+    color:white;
+    
+    position:absolute;
+    bottom:0%;
+    left:0%;
+}
+/* visited link */
+#div#main a:visited {
+    color: #00FFFF;
+}
+/* mouse over link */
+div#main a:hover {
+    color:purple;
+}
 #main 
 {
   display: none;
   height: 60%;
-  overflow: auto;
+  /*overflow: auto;*/
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
@@ -153,7 +169,7 @@ img#adBar
 	color:red;
 	position:absolute;
 	left:5%;
-	top:25%;
+	top:0%;
 }
 #main form#register
 {

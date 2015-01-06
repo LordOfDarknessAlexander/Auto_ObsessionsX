@@ -1,13 +1,13 @@
-﻿/*Inventory Menu Buttons and stylings*/
+﻿/*Main Game Menu stylings*/
 @import url("AuctionSelect.css");
 @import url("repair.css");
 @import url("funds.css");
 @import url("garage.css");
-/*vehicles
-projects
-garage
-partsSupply
-repair
+/*vehicles.css");
+projects.css");
+garage.css");
+partsSupply.css");
+repair.css");
 */
 #gameMenu 
 {
@@ -18,9 +18,7 @@ repair
 	z-index: 1;
 	width: 900px;
 	height: 600px;
-	position: absolute;
-	
-	
+	position: absolute;	
 }
 #gameMenu  li 
 {
@@ -79,31 +77,14 @@ div#statBar
 	/*font-weight: bold;
 	font-size:1.2em;*/
 }
-
-div#statBar label#money
-{
-	position:absolute;
-	left:0%;
-	width:25%;
+div#statBar label{
+    position:absolute;
+    width:25%;
 }
-div#statBar label#tokens
-{
-	position:absolute;
-	left:25%;
-	width:25%;
-}
-div#statBar label#prestige
-{
-	position:absolute;
-	left:50%;
-	width:25%;
-}
-div#statBar label#mileMarker
-{
-	position:absolute;
-	left:75%;
-	width:25%;
-}
+div#statBar label#money{left:0%;}
+div#statBar label#tokens{left:25%;}
+div#statBar label#prestige{left:50%;}
+div#statBar label#mileMarker{left:75%;}
 
 /*game menu navigation buttons*/
 #auction

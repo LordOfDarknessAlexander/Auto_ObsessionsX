@@ -79,15 +79,15 @@ function auctionMode(deltaTime)
 //js.StatBar = {
 function setMoney()
 {
-	$('label#money', jq.Game.menu).text('Money: ' + userStats.money.toString() );
+	$('div#statBar label#money').text('Money: ' + userStats.money.toString() );
 }
 function setTokens()
 {
-	$('label#tokens', jq.Game.menu).text('Tokens: ' + userStats.tokens.toString() );
+	$('div#statBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
 }
 function setPrestige()
 {
-	$('label#prestige', jq.Game.menu).text('Prestige: ' + userStats.prestige.toString() );
+	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
 }
 function setMarkers()
 {	//updates html lable element, within context of the Game menu only
@@ -95,6 +95,7 @@ function setMarkers()
 }
 function setStatBar()
 {
+    jq.statBar.show();
 	setMoney();
 	setTokens();
 	setPrestige();
@@ -478,22 +479,22 @@ Auction.sold = function()
 //
 $('.play').click(function() 
 {
-  $('#menu').hide();
-  $('#gameMenu').show();
-  //can no longer navigate to credits or the root menus anymore
-  delete credits;
-  delete mainMenu;
-  //delete menu image, since the game can not navigate back to this screen after clicking
-  startGame();
+    $('#menu').hide();
+    $('#gameMenu').show();
+    //can no longer navigate to credits or the root menus anymore
+    delete credits;
+    delete mainMenu;
+    //delete menu image, since the game can not navigate back to this screen after clicking
+    startGame();
 });
 $('.Register').click(function() 
 {
-  $('#menu').hide();
-  $('#Register').show();
-  Register();
-  delete mainMenu;	//don't delete, can still navigate back to this page
-  //delete credits
-  //delete menu image, since the game can not navigate back to this screen after clicking
+    $('#menu').hide();
+    $('#Register').show();
+    Register();
+    delete mainMenu;	//don't delete, can still navigate back to this page
+    //delete credits
+    //delete menu image, since the game can not navigate back to this screen after clicking
 });
 //InMenuButtons
 //auction Button
@@ -510,14 +511,10 @@ jq.AuctionSelect.backBtn.click(function()
 });
 jq.Game.toAuctionBtn.click(function() 
 {
-	
 	jq.Game.menu.hide();
 	jq.AuctionSelect.menu.show();
 	//$('#menu').addClass('auction');
 	AuctionSelect.init();
-   	 
-   
-	
 });/*
 jq.Game.toAuctionBtn.click(function() 
 {
@@ -544,13 +541,16 @@ jq.Auction.backBtn.click(function()
 jq.Auction.buyOutBtn.click(function()
 {	
 	Auction.buyOut();
-});
-$('div#sold button#garage').click(function()
+});*/
+jq.Sold.garageBtn.click(function()
 {
-	jq.Sold.menu.hide();
-	jq.Garage.menu.toggle();
+	//jq.Sold.menu.
+    jq.Sold.menu.hide();
+	jq.Garage.menu.show();
+    Garage.init();
+    //appState = GAME_MODE.GARAGE:
 });
-*/
+
 jq.Auction.homeBtn.click(function()
 {
 	//Auction.cancel();	//stop the auction, aborting the sale
@@ -661,42 +661,41 @@ function initGuest()
 		//create new guest account, to be stored in browser
 		//Storage.local.guest = JSON.stringify({money:50000, garage:[]});
 	}
-
 }
 
 //$('#guestPlay').click(initGuest);
 //Sound Button
 $('.sound').click(function() 
 {
-  var $this = $(this);
-  // sound off
-  if ($this.hasClass('sound-on')) 
-  {
-    $this.removeClass('sound-on').addClass('sound-off');
-    playSound = false;
-  }
-  // sound on
-  else 
-  {
-    $this.removeClass('sound-off').addClass('sound-on');
-    playSound = true;
-  }
-  if (canUseLocalStorage) 
-  {
-    localStorage.setItem('kandi.playSound', playSound);
-  }
-  // mute or unmute all sounds
-  for (var sound in assetLoader.sounds) 
-  {
-    if (assetLoader.sounds.hasOwnProperty(sound)) 
+    var $this = $(this);    //references the jq object calling .click, not the function!
+    // sound off
+    if($this.hasClass('sound-on')) 
     {
-      assetLoader.sounds[sound].muted = !playSound;
+        $this.removeClass('sound-on').addClass('sound-off');
+        playSound = false;
     }
-  }
+    else // sound on
+    {    
+        $this.removeClass('sound-off').addClass('sound-on');
+        playSound = true;
+    }
+    
+    if(canUseLocalStorage) 
+    {
+        localStorage.setItem('kandi.playSound', playSound);
+    }
+    // mute or unmute all sounds
+    for(var sound in assetLoader.sounds) 
+    {
+        if(assetLoader.sounds.hasOwnProperty(sound)) 
+        {
+            assetLoader.sounds[sound].muted = !playSound;
+        }
+    }
 });
 //restart GameOver /sold button
-$('button#restart').click(function(){
-	$('#sold').hide();
+jq.Sold.homeBtn.click(function(){
+	jq.Sold.menu.hide();
 	jq.Game.menu.show();
 	appState = GAME_MODE.MAIN_MENU;
 	delete gameOver;
@@ -705,8 +704,7 @@ $('button#restart').click(function(){
 	auctionMode();
 	//delete Auction;
 	restarted = true;
-	Auction.setup();
-	
+	Auction.setup();	
 });
 
 assetLoader.downloadAll();

@@ -21,7 +21,7 @@
     <!--scripts here are executed before the page is parsed,p
     	they must not be dependant on any other script but should be
         dependencies of js code included at the end of the page-->
-    <!--TODO:see if scripts can be included using <?php>!-->
+    <!--TODO:see if scripts can be included using ?php!-->
     <script type="text/javascript" src="js/jquery.2.1.1.min.js"></script>
     <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
     <script type="text/javascript" src="js/payRequest.js"></script>
@@ -44,24 +44,24 @@
                 <h2>Adam Glazer and Auto Obsessions Presents !</h2>
             </div>
          
-            <div id="main">
-               
+            <div id="main">               
                 <h1>Auto-Obsessions</h1>
-				
-                 <div id="login">
-                 <h1> Login In</h1>
-				 <fieldset>
-                 <form method="post" action="Scripts/secret.php">
-				  <p>ENTER USER NAME <input type="text" name="username"></p>
-				  <br>
-				  <br>
-				  <p> ENTER PASSWORD <input type="password" name="pword"></p>
-				  <br>
-				  <br>
-				  <p><input type="submit"  name="submit" value="Log In"></p>
-				  </form>
-				  </fieldset>
+
+                <div id="login">
+                    <h1> Login In</h1>
+                    <fieldset>
+                        <form method="post" action="Scripts/secret.php">
+                            <p>ENTER USER NAME <input type="text" name="username"></p>
+                            <br>
+                            <br>
+                            <p> ENTER PASSWORD <input type="password" name="pword"></p>
+                            <br>
+                            <br>
+                            <p><input type="submit"  name="submit" value="Log In"></p>
+                        </form>
+                    </fieldset>
 				</div>
+                
                 <ul>
                    <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
                    <!--li><a href="javascript:void(0)" class="playGuest">Play as Guest</a></li-->
@@ -76,8 +76,8 @@
                     <button id='forgotPW'>Forgot Password?</button><br>
                 </form>
                 -->
-           
-                </div>
+                
+            </div>
           
             <div id="credits">
             	<!--could just be a link at the bottom of the page-->
@@ -93,6 +93,13 @@
                 </ul>
                 <a href="javascript:void(0)" class="button back">Back</a>
             </div> 
+            <p id='legal'>Auto-Obsessions &copy; 2015, All Rights Reserved.
+                <a href="">Terms</a><!--http:\\ao.com\terms.html-->
+                <a href="">Privacy</a>
+                <a href="">Security</a>
+                <a href="">Contact</a>
+                <!--a href="javascript:void(0)" class="button credits">Credits</a-->
+            </p>
         </div><!--end menu-->
           
        
@@ -105,12 +112,7 @@
         	<!--Root Game Menu, hub for page navigation-->
         	 <h1>My Home</h1>
              <!--HUD ---->
-            <div id='statBar'>             
-                <label id='money'>Money: </label>
-                <label id='tokens'>Tokens:</label>
-                <label id='prestige'>Prestige:</label>
-                <label id='mileMarker'>Mile Markers:</label>
-            </div> 
+            
             <ul>
            
               <!--li><input type="button" id="auction" value="Auction" onmouseover="auctionButton()" onclick="auctionMode()"></li-->
@@ -341,10 +343,10 @@
                 <input type='submit' value='SUBMIT'>
             	</form>
             	-->
-            <fieldset >
-			<legend>Register</legend>
+            <fieldset>
+                <legend>Register</legend>
 
-			<form class="user-form" style="padding:20px;" action="Scripts/submit.php" method="post" autocomplete="on">
+                <form class="user-form" style="padding:20px;" action="Scripts/submit.php" method="post" autocomplete="on">
 		
 		    <div class="field" style="padding: 4px; margin:1px; ">
 		        <label for="firstname" style="display:inline-block; width:120px; margin-left:5px;">First Name:</label>
@@ -383,25 +385,24 @@
 	            </select>
 	   	    </div>                
 	          
-			 <div class="field" style="padding: 4px; margin:1px;">
+			<div class="field" style="padding: 4px; margin:1px;">
 		        <label for="password" style="display:inline-block; width:120px; margin-left:5px;">Enter a Password:</label>
 		        <input type="text" name="lastname"  style="display:inline-block;" size="30" placeholder="Last Name" />
 		    </div>
       
-	        <input type="submit" value="Submit" height="100" width="60" >
-		 </form>
-		 </fieldset>
-	</div>
+                    <input type="submit" value="Submit" height="100" width="60" >
+                </form>
+            </fieldset>
+        </div>
     
-    <div id="sold">
-       	<!--this is the same screen depending on win or lose,
-        behaviour had layout are changed in Auction.sold()-->
-    	Congratulations!<br>You've won at auction for the <label></label><br>Go to the garage to view your prize!<br>
-		<button id='restart'>home</button><br>
-   		<button id='garage'>garage</button>
-        <!--img id='newCarImg'--><!--purchased car, src set in Auction.js-->
-    </div>
-
+        <div id="sold">
+            <!--this is the same screen depending on win or lose,
+            behaviour had layout are changed in Auction.sold()-->
+            Congratulations!<br>You've won at auction for the <label></label><br>Go to the garage to view your prize!<br>
+            <button id='homeBtn'>home</button><br>
+            <button id='garageBtn'>garage</button>
+            <!--img id='newCarImg'--><!--purchased car, src set in Auction.js-->
+        </div>
 	</div><!--end wrapper-->
     
     <script type="text/javascript" src="js/globals.js"></script><!--is parsed first-->

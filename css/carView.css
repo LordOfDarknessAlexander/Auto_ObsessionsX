@@ -1,5 +1,5 @@
 ﻿/*repair page UI stylings*/
-#CarView
+div#CarView
 {	
 	background: url('../images/defaultBG.jpg') no-repeat 0 0;
 	display: none;
