@@ -96,13 +96,14 @@ var Auction =
 		//
 		shuffleArray(enemyBids);
 		shuffleArray(bidders);
-		//shuffleArray(enemyCaps);
+		shuffleArray(enemyCaps);
 		//		
 		context.font = '26px arial, sans-serif';  
 
 		jq.Auction.menu.show();		//$('#Auction').show();
 		
 		this.setBidBtnText();
+		//this.assignEnemyBidCaps();
 		
 		$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
 		$('div#Auction label#carInfo').text(/*'<h1>' + */Auction._car.getFullName() + '-\n    ' + Auction._car.getInfo() );
@@ -178,22 +179,23 @@ var Auction =
 	update : function()
 	{	//main update logic, calle dper frame
 		Auction.bidTimers();
-		Auction.assignEnemyBidCaps();
+		//Auction.assignEnemyBidCaps();
 		Auction.enemyBidding();
 		Auction.currentBidder();
 		Auction.updatePlayer();
 		Auction.going();
 		Auction.playerGoing();
 		Auction.findEndBidder();
+		Auction.sellCarEndAuction();
 		if(enemyWinning)
 	  	{
 	  	    //goingTimer ++;
 	  	    console.log("enemys winning" + goingTimer);
-	  	}/*
+	  	}
 	  	else
 	  	{
 	  		goingTimer = 0;
-	  	}*/
+	  	}
 		console.log("enemys winning" + endBidTimers);
 		
 		if(playerDidBid)
@@ -238,7 +240,7 @@ var Auction =
 		if(restarted)
 		{
 			Auction.render();
-			//this.restart();
+			this.restart();
 		}
 		
 		if(!auctionStop)
@@ -427,12 +429,14 @@ var Auction =
 				}
 			}
 		 }
+		 /*
 		 else
 		 {
 		 	enemyWinning = true;
-		 }
+		 }*/
 		//if the bidders bid is at o or less than the current bid player wins bid
 	},
+	
 	assignEnemyBidCaps : function()
 	{
 		for(var i = 0; i < enemyCaps.length; i++)
@@ -442,7 +446,7 @@ var Auction =
 			if(enemyCanBid)	//global cooldown timer has refreshed, bidding now available
 			{//
 				if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[i]) )
-				{//enemies[i].bidCap)
+				{
 				  if( enemyBids[i]  < 4)
 				  {
 				  	  shuffleArray(enemyCaps);
@@ -508,31 +512,6 @@ var Auction =
 			checkBid(3);
 			setBid(3);
 		}
-		
-		/*DO NOT IMPLIMENT:The bids must be checked with elseif statements,
-        switch will only execute one branch then terminate.
-        using a for loop would be preffered as the code must check each AI's bid
-        to determine a winner and assign the appropriate state.
-		 switch (checkBid()) 
-         {
-            case 1:
-            checkBid(0)
-               setBid(0);
-                break;
-            case 2:
-             checkBid(1)
-               setBid(1);
-                break;
-            case 3:
-             checkBid(2)
-               setBid(2); 
-               break;
-            case 4:
-             checkBid(3)
-               setBid(3);
-                break;             
-        }*/
-
 	},
 	currentBidder : function()
 	{	//determine if player has highest bid
@@ -562,16 +541,23 @@ var Auction =
 			if((currentBid == enemyBids[i]) && (sum >= BID_THRESHOLD))				
 			{	//enemeny is able to place bid
 				//end auction with enemy bidder
+				console.log("Sum "+ sum + "BidThreshold" + BID_THRESHOLD);
 				enemyWinning = true;
-				console.log("Sum "+ sum);
 				//this.going();
-				
+			}
+			else if(sum >= BID_THRESHOLD)
+			{
+				enemyWinning = true;
+
 			}
 						
-			//shuffleArray(enemyCaps);
 		}
 	},
-
+	sellCarEndAuction : function()
+	{
+	//if sale countdown > AuctionThreshold
+	//sell the call to the current Bidder
+	},
 	going : function()
 	{	//begin sale count down after a waiting period if no other bids are offered
 		//Going crowd roars someone is about to win the bid
@@ -642,7 +628,6 @@ var Auction =
 			this.buyOut();
 			context.fillText( "Sold to the Player" ,ENEMY_X + 600 , 310);
 			//alert("Sold to the player");
-			
 		}			
 
 	},
