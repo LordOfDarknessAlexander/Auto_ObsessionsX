@@ -16,12 +16,12 @@
     if($result)
     {
     	//registration success 
-       header('Location: reg-success.html');     
+       header('Location: results.html');     
     }
     else
     {
     	//registration fail 
-       header('Location: reg-fail.html');
+       header('Location: results1.html');
     }
     mysqli_close($link);
     exit;
