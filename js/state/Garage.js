@@ -12,6 +12,11 @@ var userGarage = [
 userGarage.push(xdbCars[0]);
 userGarage.push(xdbCars[1]);
 userGarage.push(xdbCars[3]);
+userGarage.push(xdbCars[1]);
+userGarage.push(xdbCars[0]);
+userGarage.push(xdbCars[1]);
+userGarage.push(xdbCars[3]);
+userGarage.push(xdbCars[1]);
 //copy constructed car, altering currentCar doesn't change usergarage[0],
 //retain the index instead and access directly to mdoify.
 //value of null means no selection
@@ -95,7 +100,7 @@ var Garage = {
 				//"</div>" +			
 				//
 				"<img src=\'" + src + "\'></button>" +
-				"</li>");
+				"</li>"); //+ (i > 0 && i % 4 == 0) ? "<br>" : "");
 				
 				$('#carSelBtn' + i).click({index:i}, this.setSelectCar);	//this.setSelectedCar);
 				//this.setCarBtnText(i);

@@ -1,7 +1,7 @@
 ﻿//Action Select State Object
 var AuctionSelect =
 {	//object representing
-	list : $('ul#auctionCars'),
+	list : $('div#AuctionSelect div#carView ul#auctionCars'),
 	init : function()
 	{	//init buttons base on cars in xml database
 		//appState = GAME_MODE.AUCTION_SElECT;
