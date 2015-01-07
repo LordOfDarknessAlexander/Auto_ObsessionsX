@@ -16,8 +16,7 @@
         </div>
      
         <div id="main">
-	        <!--?php isset($PageTitle) ? $PageTitle : Default page Title!?-->
-            <h1>Auto Obsessions</h1>
+            <h1><?php isset($PageTitle) ? $PageTitle : Default page Title!?></h1>
             
              <div id="login">
                 <form name = "login">
@@ -70,30 +69,30 @@
         <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
     </canvas>
     
-	<?php
-		//php includes the source html files here
-	//function roScript(str){
-	    //require_once($ROOT_DIR.str.".php");	//main menu
-	//}
-	//$scripts = array(
-	    //"phtml/gameMenu",
-    	//"phtml/auction",
-    	//"phtml/funds",
-    	//"phtml/garage",
-		//"phtml/repair",
-		//"phtml/register",
-	//);
-	//for($str in $scripts){
-		//ro($str);
-	//}
-    require_once($ROOT_DIR."phtml/gameMenu.php");	//main menu
-    require_once($ROOT_DIR."phtml/auction.php");
-    require_once($ROOT_DIR."phtml/funds.php");
-    require_once($ROOT_DIR."phtml/garage.php");
-    require_once($ROOT_DIR."phtml/repair.php");
-    require_once($ROOT_DIR."phtml/register.php");
-    //include all javascript containing app functionality,
-    //to be parsed after all other content-->
-    require_once($ROOT_DIR."phtml/js.php");
-    ?>
+<?php
+//php includes the source html files here
+//function roScript(str){
+    //require_once($ROOT_DIR.str.".php");	//main menu
+//}
+//$scripts = array(
+    //"phtml/gameMenu",
+    //"phtml/auction",
+    //"phtml/funds",
+    //"phtml/garage",
+    //"phtml/repair",
+    //"phtml/register",
+//);
+//for($str in $scripts){
+    //ro($str);
+//}
+require_once("gameMenu.php");	//main menu
+require_once("auction.php");
+require_once("funds.php");
+require_once("garage.php");
+require_once("repair.php");
+require_once("register.php");
+//include all javascript containing app functionality,
+//to be parsed after all other content-->
+require_once("js.php");
+?>
 </div><!--end wrapper-->

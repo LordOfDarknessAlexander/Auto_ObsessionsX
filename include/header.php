@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,orientation=portrait">
     <title>Auto Obsessions</title><!--?php isset($PageTitle) ? $PageTitle : Default page Title!?-->
     <?php
-	require_once($ROOT_DIR."include/metaCSS.php");
-	require_once($ROOT_DIR."include/metaJS.php");
+	require_once("metaCSS.php");
+	require_once("metaJS.php");
 	//additional includes/dependancies which must be parsed before anything else
 	?>
 </head>

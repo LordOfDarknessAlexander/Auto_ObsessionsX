@@ -14,7 +14,7 @@ function payRequest(amount, triggerCB)
 		"receiverList":{
 			"receiver":[
 				{'email':recieverEmail,
-				'amount':amount.tostring(),}
+				'amount':amount.toString(),}
 			]
 		},
 		'cancelUrl':cancelURL,
