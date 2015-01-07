@@ -31,6 +31,16 @@
     <script type="text/javascript" src="js/requestAnimationFrame.js"></script>
 </head>
 <body>
+<?php
+  // We can include this file in all our files
+  // this way, every file will contain all our functions and exceptions
+  require_once('data_valid_fns.php'); 
+  require_once('db_fns.php');
+  require_once('user_auth_fns.php');
+  require_once('output_fns.php');
+  require_once('url_fns.php');
+?>
+
 	<div class="wrapper">
     	<div class="sound sound-off"></div>
     
@@ -50,13 +60,9 @@
                 <div id="login">
                     <h1> Login In</h1>
                     <fieldset>
-                        <form method="post" action="Scripts/secret.php">
+                        <form method="post" action="Users/login.php">
                             <p>ENTER USER NAME <input type="text" name="username"></p>
-                            <br>
-                            <br>
                             <p> ENTER PASSWORD <input type="password" name="pword"></p>
-                            <br>
-                            <br>
                             <p><input type="submit"  name="submit" value="Log In"></p>
                         </form>
                     </fieldset>
@@ -349,10 +355,9 @@
             	</form>
             	-->
             <fieldset>
-                <legend>Register</legend>
+            <legend>Register</legend>
 
-                <form class="user-form" style="padding:20px;" action="Scripts/submit.php" method="post" autocomplete="on">
-		
+            <form class="user-form" style="padding:20px;" action="Users/register_new.php" method="post" autocomplete="on">		
 		    <div class="field" style="padding: 4px; margin:1px; ">
 		        <label for="firstname" style="display:inline-block; width:120px; margin-left:5px;">First Name:</label>
 		        <input name="firstname" style="display:inline-block;" type="text" size="30" placeholder="First Name" autofocus />
