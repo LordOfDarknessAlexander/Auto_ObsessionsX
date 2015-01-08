@@ -1,6 +1,7 @@
 <?php
   // include function files for this application
-  require_once('bookmark_fns.php');
+  require_once('AOUsers_include.php');
+
 
   //create short variable names
   $email=$_POST['email'];

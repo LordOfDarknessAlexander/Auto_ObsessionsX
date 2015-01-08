@@ -1,6 +1,6 @@
 <?php
 // include function files for this application
-require_once('bookmark_fns.php');
+require_once('AOUsers_include.php');
 session_start();
 
 // start output html

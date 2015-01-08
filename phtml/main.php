@@ -84,7 +84,7 @@
 //for($str in $scripts){
     //ro($str);
 //}
-require_once("Users/bookmark_fns.php");
+require_once('AOUsers_include.php');
 require_once("gameMenu.php");
 require_once("gameMenu.php");	//main menu
 require_once("auction.php");

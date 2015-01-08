@@ -1,5 +1,6 @@
 <?php
-  require_once('bookmark_fns.php');
+  require_once('AOUsers_include.php');
+
   session_start();
 
   //create short variable names
