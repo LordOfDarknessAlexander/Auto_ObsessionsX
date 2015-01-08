@@ -370,13 +370,13 @@
 		    
 		     <div class="field" style="padding: 4px; margin:1px;">
 		        <label for="username" style="display:inline-block; width:120px; margin-left:5px;">User Name:</label>
-		        <input type="text" name="lastname"  style="display:inline-block;" size="30" placeholder="Last Name" />
+		        <input type="text" name="username"  style="display:inline-block;" size="30" placeholder="User Name" />
 		    </div>
 
 		   
 		    <div class="field" style="padding: 4px; margin:1px;">
 		        <label for="email" style="display:inline-block; width:120px; margin-left:5px;">Email:</label>
-		        <input type="email" name="email"  style="display:inline-block;" size="30" placeholder="you@example.com"  />
+		        <input type="email" name="email"  style="display:inline-block;" size="16" maxlength="16" placeholder="you@example.com"  />
 		    </div>
 		                
 		    <div class="field" style="padding: 4px; margin:1px;">
@@ -385,24 +385,48 @@
 		    </div>
 		    
 		    <div class="field" style="padding: 4px; margin:1px;">
-	        <label for="staying" style="display:inline-block; width:120px; margin-left:-5px;">Car Knowledge:</label>
-	            <select name="staying" >
-	               <option value = "1">Rookie</option>
-	               <option value = "2">Seasoned</option>
-	               <option value = "2">Killer</option>
-	               <option value = "3">Conqueror</option>
-	               <option value = "4">Other</option>
-	            </select>
-	   	    </div>                
+		        <label for="passwd" style="display:inline-block; width:120px; margin-left:5px;">Enter a Password:</label>
+		        <input type="text" name="passwd"  style="display:inline-block;" size="16" maxlength="16" placeholder="Password" />
+		    </div>
+       
 	          
 			<div class="field" style="padding: 4px; margin:1px;">
-		        <label for="password" style="display:inline-block; width:120px; margin-left:5px;">Enter a Password:</label>
-		        <input type="text" name="lastname"  style="display:inline-block;" size="30" placeholder="Last Name" />
+		        <label for="passwd2" style="display:inline-block; width:120px; margin-left:5px;">Re-enter a Password:</label>
+		        <input type="text" name="passwd2"  style="display:inline-block;" size="16" maxlength="16" placeholder="Password" />
 		    </div>
       
-                    <input type="submit" value="Submit" height="100" width="60" >
+                    <input type="submit" value="Register" height="100" width="60" >
                 </form>
-            </fieldset>
+                <!---
+               ////////////////////////////////////////////////////
+                
+                <form method="post" action="Users/register_new.php">
+				 <table bgcolor="#cccccc">
+				   <tr>
+				     <td>Email address:</td>
+				     <td><input type="text" name="email" size="30" maxlength="100"/></td></tr>
+				   <tr>
+				     <td>Preferred username <br />(max 16 chars):</td>
+				     <td valign="top"><input type="text" name="username"
+				         size="16" maxlength="16"/></td></tr>
+				   <tr>
+				     <td>Password <br />(between 6 and 16 chars):</td>
+				     <td valign="top"><input type="password" name="passwd"
+				         size="16" maxlength="16"/></td></tr>
+				   <tr>
+				     <td>Confirm password:</td>
+				     <td><input type="password" name="passwd2" size="16" maxlength="16"/></td></tr>
+				   <tr>
+				     <td colspan=2 align="center">
+				     <input type="submit" value="Register"></td></tr>
+				  
+				    
+				 </table></form>
+				 
+				 -->
+				 
+				
+           </fieldset>
         </div>
     
         <div id="sold">

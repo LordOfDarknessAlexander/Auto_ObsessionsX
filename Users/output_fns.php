@@ -14,9 +14,9 @@ function do_html_header($title) {
     </style>
   </head>
   <body>
-  <img src="bookmark.gif" alt="PHPbookmark logo" border="0"
-       align="left" valign="bottom" height="55" width="57" />
-  <h1>PHPbookmark</h1>
+  <img src="header.png" alt="Auto-Obsessions logo" border="0"
+       align="left" valign="bottom" height="55" width="140" />
+  <h1>Auto-Obsessions</h1>
   <hr />
 <?php
   if($title) {
@@ -50,8 +50,8 @@ function display_site_info() {
   // display some marketing info
 ?>
   <ul>
-  <li>Store your bookmarks online with us!</li>
-  <li>See what other users use!</li>
+  <li>Auto-Obsessions The Game!</li>
+  <li>Live The Experience!</li>
   <li>Share your favorite links with others!</li>
   </ul>
 <?php
