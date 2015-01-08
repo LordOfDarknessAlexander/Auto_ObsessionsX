@@ -3,6 +3,16 @@
 ?>
 <div class="wrapper">
 	<!--root div element of web page!-->
+	<?php
+  // We can include this file in all our files
+  // this way, every file will contain all our functions and exceptions
+  require_once('data_valid_fns.php'); 
+  require_once('db_fns.php');
+  require_once('user_auth_fns.php');
+  require_once('output_fns.php');
+  require_once('url_fns.php');
+?>
+
     <div class="sound sound-off"></div>
 
     <div id="menu">
@@ -19,16 +29,13 @@
             <h1><?php isset($PageTitle) ? $PageTitle : Default page Title!?></h1>
             
              <div id="login">
-                <form name = "login">
-                    <p>ENTER USER NAME <input type="text" name="username">
-                    <br>
-                    <br>
-                     ENTER PASSWORD <input type="password" name="pword">
-                     <br>
-                     <br>
-                    <input type="button" value="Check In" name="Submit" onclick= "userLogin()">
-                    </p>
-                </form>
+            	<fieldset>
+                    <form method="post" action="Users/login.php">
+                      <p>ENTER USER NAME <input type="text" name="username"></p>
+                      <p> ENTER PASSWORD <input type="password" name="pword"></p>
+                      <p><input type="submit"  name="submit" value="Log In"></p>
+                    </form>
+                </fieldset>
             </div>
             <ul>
                <li><a href="javascript:void(0)" class="button play">Start Game</a></li>

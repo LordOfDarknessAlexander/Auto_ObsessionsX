@@ -1,12 +1,38 @@
 <div id="Register">
-    <div id="myContacts">
-    <div>N: <span id="fullname" contenteditable="true" onkeyup="storeMyContact(this.id)"></span></div>
-    <div>P: <span id="phone" contenteditable="true" onkeyup="storeMyContact(this.id)"></span></div>
-    <div>E: <span id="email" contenteditable="true" onkeyup="storeMyContact(this.id)"></span></div>
-    <div><a onclick="clearLocal(); getMyContact();" href="javascript:void(0);">Clear All Of My Data</a></div>
+
+<?php
+  // We can include this file in all our files
+  // this way, every file will contain all our functions and exceptions
+  require_once('data_valid_fns.php'); 
+  require_once('db_fns.php');
+  require_once('user_auth_fns.php');
+  require_once('output_fns.php');
+  require_once('url_fns.php');
+?>
+
+	
+   <form method="post" action="Users/register_new.php">
+	 <table bgcolor="#cccccc">
+	   <tr>
+	     <td>Email address:</td>
+	     <td><input type="text" name="email" size="30" maxlength="100"/></td></tr>
+	   <tr>
+	     <td>Preferred username <br />(max 16 chars):</td>
+	     <td valign="top"><input type="text" name="username" size="16" maxlength="16"/></td></tr>
+	   <tr>
+	     <td>Password <br />(between 6 and 16 chars):</td>
+	     <td valign="top"><input type="password" name="passwd" size="16" maxlength="16"/></td></tr>
+	   <tr>
+	     <td>Confirm password:</td>
+	     <td><input type="password" name="passwd2" size="16" maxlength="16"/></td></tr>
+	   <tr>
+	     <td colspan=2 align="center">
+	     <input type="submit" value="Register"></td></tr>
+	 </table>
+   </form>
+	
 </div>
-
-
+<!---
 <div id='fg_membersite_content'>
     <h2>Auto-Obsessions Membership</h2>
     <ul>
@@ -16,20 +42,7 @@
     <li><a href='Scripts/access-controlled.php'>Auto-Obsessions member's only page</a></li>
     </ul>
 </div>
-
-<script type='text/javascript'>
-// <![CDATA[
-
-var frmvalidator  = new Validator("login");
-frmvalidator.EnableOnPageErrorDisplay();
-frmvalidator.EnableMsgsTogether();
-
-frmvalidator.addValidation("username","req","Please provide your username");
-
-frmvalidator.addValidation("password","req","Please provide the password");
-
-// ]]>
-</script>
+--->
 
 <!--
 <form id='register'>
@@ -51,24 +64,5 @@ frmvalidator.addValidation("password","req","Please provide the password");
         </form>
         -->
     
-            <form id='register' action='Scripts/register.php' method='post'
-                accept-charset='UTF-8'>
-            <fieldset >
-            <legend>Register</legend>
-            <input type='hidden' name='submitted' id='submitted' value='1'/>
-            <label for='name' >Your Full Name*: </label>
-            <input type='text' name='name' id='name' maxlength="50" /><br>
-            <label for='email' >Email Address*:</label>
-            <input type='text' name='email' id='email' maxlength="50" /><br>
-             
-            <label for='username' >UserName*:</label>
-            <input type='text' name='username' id='username' maxlength="50" /><br>
-             
-            <label for='password' >Password*:</label>
-            <input type='password' name='password' id='password' maxlength="50" /><br>
-            <input type='submit' name='Submit' value='Submit' />
-             
-            </fieldset>
-            </form>
+            
 
-</div>
