@@ -1,0 +1,152 @@
+﻿/*garage UI stylings*/
+/*@import("CarView.css")*/
+/*:root{
+	--default-btn-bg: url('../images/defaultBtn.png') no-repeat 0 0;
+}*/
+div#Garage
+{
+	background: url('../images/defaultBG.jpg') no-repeat 0 0;
+	display: none;
+	text-align: center;
+	padding-top: 92px;
+	z-index: 1;
+	width: 900px;
+	height: 600px;
+	position: absolute;
+}
+/*
+div#carListView ul li{
+}
+div#carListView ul li button{
+}
+div#carListView ul li img{
+}
+*/
+div#Garage li 
+{	/*styles all list items of node with id RepairShop*/
+	/*margin: 6% 2%;*/
+	display:inline;
+}
+/*#Garage li img
+{
+	width:40%;
+	height:40%;
+}*/
+div#Garage li button
+{	/*styling for list items*/
+	color: white;
+	margin: 2% 2%;
+	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
+	position: relative;
+	width:80px;
+	height:60px;
+	cursor:pointer;
+}
+div#Garage li button img
+{	position:absolute;
+	/*position element in to left corner of parent*/
+	top:0%;
+	left:0%;
+	width:100%;
+	height:100%;
+}
+/*#Garage li button label
+{	overrides elements with specific id's
+	display:block;
+	color: white;
+	margin: 8px;
+	text-align:left;
+}*/
+div#Garage div#carListView
+{
+	background: url('../images/defaultBG.jpg') no-repeat 0 0;
+	overflow-y:scroll;
+
+	position:absolute;
+	height:65%;
+	bottom:0%;
+    left:20%;
+    width:60%;
+}
+/*current user car stylings*/
+div#Garage div#userCar
+{	/*styling for list items*/
+	/*display:inline;*/
+	color: white;
+	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
+	position:absolute;
+	text-align::left;
+	top:120px;
+	left:2%;
+	width:300px;
+	height:110px;
+	display:inline;
+}
+div#Garage div#selectedCar
+{	/*styling for list items*/
+	/*display:inline;*/
+	color:red;
+	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
+	position:absolute;
+	text-align::left;
+	top:120px;
+	right:2%;
+	width:30%;
+	height:15%;
+	display:inline;
+}
+div#Garage div#userCar img,
+div#Garage div#selectedCar img
+{	position:absolute;
+	/*position element in to left corner of parent*/
+	top:0px;
+	right:0px;
+	width:80px;
+	height:60px;
+}
+div#Garage div#userCar label,
+div#Garage div#selectedCar label
+{	/*overrides elements with specific id's*/
+	display:block;
+	color: white;
+	margin: 8px;
+	text-align:left;
+	font-size:0.75em;	/*12px*/
+}
+/*selected car div stylings*/
+
+/*list item button labels*/
+div#userCar div#progressBars
+{
+	/*text-align:left;
+	font-size:0.75em;*/
+}
+div#Garage li div#progressBars progress
+{	
+	/*display:inline-block;
+	backgorund-color:rgb(127,127,127);*/
+	/*color: white;*/
+	right:0;
+	width:50%;
+}
+div#Garage div#pbLabels label
+{	
+	display:block;
+	color: white;
+	margin: 8px;
+	font-size:0.75em;	/*12px*/
+	right:0;
+	top:0;
+}/*
+#garageBackBtn
+{
+	background:url('../images/backBtn.png') no-repeat 0 0;/*var(--default-btn-bg);
+	color: white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;
+	position:absolute;
+	left: 5em;
+	bottom:2em;
+}*/
