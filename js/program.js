@@ -114,7 +114,7 @@ function setAdBG()
 function loadGarage(){
     if(Storage.local !== null && '_curCarIndex' in Storage.local){
         Garage._curCarIndex = parseInt(JSON.parse(Storage.local._curCarIndex) );
-        alert("current car is at index:" + Garage._curCarIndex.toString() );
+        //alert("current car is at index:" + Garage._curCarIndex.toString() );
     }
 }
 $(document).ready(function()
