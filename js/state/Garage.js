@@ -50,6 +50,7 @@ var Garage = {
 			//for(var i = 0; i < jsonArray.length; i++)
 			//{
 				//userGarage.push(JSON.parse(jsonArray[i]) );
+                //userGarage.push(Vehicle.fromJSON(jsonArray[i]) );
 			//}
 		}
 		var list = $('div#carListView ul#carBtns');
@@ -128,10 +129,6 @@ var Garage = {
 	save : function()
 	{	//saves garage and current car to local storage
 		//
-		//for(var i = 0; i < userGarage.length; i++){
-			//var str = JSON.stringify(userGarage[i]);
-			//save to storage or write to databse/file
-		//}
 		if(Storage.local !== null)
 		{
 			//var array = [];
