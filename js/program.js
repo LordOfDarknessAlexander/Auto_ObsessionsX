@@ -111,6 +111,12 @@ function setAdBG()
 }
 //$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed
+function loadGarage(){
+    if(Storage.local !== null && '_curCarIndex' in Storage.local){
+        Garage._curCarIndex = parseInt(JSON.parse(Storage.local._curCarIndex) );
+        alert("current car is at index:" + Garage._curCarIndex.toString() );
+    }
+}
 $(document).ready(function()
 {	//Declare functions and objects dependant on the html
 	//document being loaded within this callback,
@@ -119,6 +125,8 @@ $(document).ready(function()
 	//Storage.local.clear();
 	
 	loadUser();
+    loadGarage();
+    jq.Game.setHomeImg();
 	//userStats.money = 150;
 	//saveUser();
 	//jq.Game.homeImg.hide();

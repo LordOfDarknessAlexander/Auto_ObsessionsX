@@ -20,13 +20,13 @@ userGarage.push(xdbCars[3]);
 //copy constructed car, altering currentCar doesn't change usergarage[0],
 //retain the index instead and access directly to mdoify.
 //value of null means no selection
-var curCarIndex = null,	//user's currect car index
+var //Garage._curCarIndex = null,	//user's currect car index
 	selCarIndex = null;
 //
 var Garage = {
-	//_curCarIndex : null,
+	_curCarIndex : null,
 	//_selCarIndex : null,	//user's selected car index
-	//toJSON:function(){//serialize curCarIndex},
+	//toJSON:function(){//serialize Garage._curCarIndex},
 	//fromJSON:function(){this._curCarIndex = index;},
 	init : function()
 	{	//called to load assests and initialize private vars
@@ -37,14 +37,17 @@ var Garage = {
 		//var carList = $('#Garage'.children('ul#carBtns');
 		//carList.clear();	//remove previous values, otherwise cars will be repeated
 		//this._selCarIndex = null;
-		//if(curCarIndex === null && userGarage.length != 0){
-			//curCarIndex = 0;
+		//if(Garage._curCarIndex === null && userGarage.length != 0){
+			//Garage._curCarIndex = 0;
 		//}
 		//var btnStr = "<li><button id=\'carSelBtn1\'><label id=\'make\'></label><label id=\'year\'></label><label id=\'name\'></label><img src=\'images/vehicle.jpg\'></button></li>";
+        
+        //if(Storage.local !== null && '_curCarIndex' in Storage.local){
+            //Garage._curCarIndex = parseInt(JSON.parse(Storage.local._curCarIndex) );
+            //alert("current car is at index:" + Garage._curCarIndex.toString() );
+        //}
 		if(Storage.local !== null && 'userGarage' in Storage.local)
 		{
-			//this._curCarIndex = JSON.parse(Storage.local.curCarIndex);
-			//this._userGarage = JSON.parse(Storage.local.userGarage);
 			//var jsonArray = JSON.parse(Storage.local.userGarage);	//returns an array
 			
 			//for(var i = 0; i < jsonArray.length; i++)
@@ -56,10 +59,10 @@ var Garage = {
 		var list = $('div#carListView ul#carBtns');
 		list.empty();	//remove any buttons if there were any previously
 		
-		if(curCarIndex === null)
+		if(Garage._curCarIndex === null)
 			$('div#Garage #userCar').hide();
 		else
-			this.setCurrentCar();
+			Garage.setCurrentCar();
 
 		if(selCarIndex === null)
 			$('div#selectedCar').hide();
@@ -112,7 +115,7 @@ var Garage = {
 	},
 	getCurrentCar : function()
 	{	//returns a vehicle, if one is selected or null
-		return (curCarIndex !== null && userGarage.length != 0) ? userGarage[curCarIndex] : null;
+		return (Garage._curCarIndex !== null && userGarage.length != 0) ? userGarage[Garage._curCarIndex] : null;
 	},
 	exit : function()
 	{	//remove resources, effectivly 'closing' the state
@@ -131,6 +134,9 @@ var Garage = {
 		//
 		if(Storage.local !== null)
 		{
+            if(Garage._curCarIndex !== null){
+                Storage.local['_curCarIndex'] = JSOSN.stringify(Garage._curCarIndex);
+            }
 			//var array = [];
 			//for(var i = 0; i < userGarage.length; i++)
 			//{
@@ -157,7 +163,12 @@ var Garage = {
 			var src = $('#carSelBtn' + i);
 		
 			//show user car stats div
-			curCarIndex = i;	//maintain index, instead of copying a car
+			Garage._curCarIndex = i;	//maintain index, instead of copying a car
+            //save index
+            if(Storage.local !== null){
+                Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
+                //alert("current car is at index:" + Garage._curCarIndex.toString() );
+            }
 			//
 			btn.children('label#carName').text(src.children('label#carName').text() );
 			btn.children('label#carInfo').text(src.children('label#carInfo').text() );
@@ -306,9 +317,8 @@ $('div#Garage button#select').click(function()
 	if(selCarIndex !== null)
 	{
 		Garage.setCurrentCar();
-		
-		var car = Garage.getCurrentCar();
-		
-		jq.Game.setHomeImg(car.getFullPath() );	//set home car image
+
+        jq.Game.setHomeImg();	//set home car image
+
 	}
 });

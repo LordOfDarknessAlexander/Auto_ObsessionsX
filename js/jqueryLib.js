@@ -31,10 +31,13 @@ var jq = {
         //toSearchBtn:$(""),
         //toBuisnessBtn:$(''),
         //toFAQBtn:$(''),
-		setHomeImg : function(src)
+		setHomeImg : function()
 		{
-			this.homeImg.attr('src', src);
-		}
+            var car = Garage.getCurrentCar();
+            if(car !== null){
+                this.homeImg.attr('src', car.getFullPath() );
+            }
+        }
 	},
 	Credits : {
 		//menu:$('#credits'),
