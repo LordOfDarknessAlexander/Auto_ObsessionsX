@@ -2,17 +2,9 @@
 //$ROOT_DIR = $_SERVER["DOCUMENT_ROOT"]."/phtml/";	//root path on server
 ?>
 <div class="wrapper">
-	<!--root div element of web page!-->
-	<?php
-  // We can include this file in all our files
-  // this way, every file will contain all our functions and exceptions
-  require_once('data_valid_fns.php'); 
-  require_once('db_fns.php');
-  require_once('user_auth_fns.php');
-  require_once('output_fns.php');
-  require_once('url_fns.php');
-?>
 
+	<!--root div element of web page!-->
+	
     <div class="sound sound-off"></div>
 
     <div id="menu">
@@ -92,6 +84,8 @@
 //for($str in $scripts){
     //ro($str);
 //}
+require_once("Users/bookmark_fns.php");
+require_once("gameMenu.php");
 require_once("gameMenu.php");	//main menu
 require_once("auction.php");
 require_once("funds.php");
