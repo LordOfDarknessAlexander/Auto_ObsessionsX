@@ -1,0 +1,12 @@
+Technical Design Document(under construction)
+
+This document laysout the technical standards used in the development of AO.
+
+File formats
+	All large image resources, such as backgrounds, car photos assume the JPG format.
+		Logos for advertising are currently 385x85 .png, as they are small images where retention of resolution is important
+			IMPORTANT! Any logos which are registered trademarks much be licensed appropriately before hosting final page, to avoid legal action
+	All audio files are MP3.
+
+Future Consideration
+	Currently considering inegration of php and/or sql for server-side coding.
