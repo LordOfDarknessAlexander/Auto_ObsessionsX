@@ -6,6 +6,7 @@ function do_html_header($title) {
   <html>
   <head>
     <title><?php echo $title;?></title>
+    
     <style>
       body { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
       li, td { font-family: Arial, Helvetica, sans-serif; font-size: 13px }
@@ -14,6 +15,7 @@ function do_html_header($title) {
     </style>
   </head>
   <body>
+  
   <img src="header.png" alt="Auto-Obsessions logo" border="0"
        align="left" valign="bottom" height="55" width="140" />
   <h1>Auto-Obsessions</h1>
@@ -41,6 +43,7 @@ function do_html_heading($heading) {
 
 function do_html_URL($url, $name) {
   // output URL as link and br
+  
 ?>
   <br /><a href="<?php echo $url;?>"><?php echo $name;?></a><br />
 <?php
@@ -84,6 +87,12 @@ function display_registration_form() {
 ?>
  <form method="post" action="register_new.php">
  <table bgcolor="#cccccc">
+  <tr>
+     <td>First Name:</td>
+     <td><input type="text" name="firstname" size="30" maxlength="100"/></td></tr>
+   <tr>
+     <td>Last Name:</td>
+     <td><input type="text" name="lastname" size="30" maxlength="100"/></td></tr>
    <tr>
      <td>Email address:</td>
      <td><input type="text" name="email" size="30" maxlength="100"/></td></tr>

@@ -1,14 +1,14 @@
 vti_encoding:SR|utf8-nl
-vti_timelastmodified:TR|08 Jan 2015 17:43:38 -0000
+vti_timelastmodified:TR|09 Jan 2015 09:58:15 -0000
 vti_extenderversion:SR|12.0.0.0
 vti_author:SR|ALEXS\\TzL
 vti_modifiedby:SR|ALEXS\\TzL
 vti_timecreated:TR|14 Jul 2008 01:10:02 -0000
 vti_title:SR|<?php echo $title;?>
 vti_backlinkinfo:VX|
-vti_nexttolasttimemodified:TW|08 Jan 2015 08:14:02 -0000
-vti_cacheddtm:TX|08 Jan 2015 08:14:02 -0000
-vti_filesize:IR|7057
+vti_nexttolasttimemodified:TW|08 Jan 2015 20:47:10 -0000
+vti_cacheddtm:TX|09 Jan 2015 09:58:15 -0000
+vti_filesize:IR|7308
 vti_cachedtitle:SR|<?php echo $title;?>
 vti_cachedbodystyle:SR|<body>
 vti_cachedlinkinfo:VX|S|header.png H|< H|register_form.php A|member.php H|forgot_form.php A|register_new.php A|delete_bms.php H|member.php H|add_bm_form.php H|change_passwd_form.php H|recommend.php H|logout.php A|add_bms.php A|change_passwd.php A|forgot_passwd.php

@@ -21,7 +21,7 @@ function register($username, $email, $password) {
 
   // if ok, put in db
   $result = $conn->query("insert into user values
-                         ('".$username."', sha1('".$password."'), '".$email."')");
+                         ('".$firstname."', '".$lastname."', '".$username."', sha1('".$password."'), '".$email."')");
   if (!$result) {
     throw new Exception('Could not register you in database - please try again later.');
   }

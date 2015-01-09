@@ -4,6 +4,8 @@
 
 
   //create short variable names
+  $firstname=$_POST['firstname'];
+  $lastname=$_POST['lastname'];
   $email=$_POST['email'];
   $username=$_POST['username'];
   $passwd=$_POST['passwd'];
@@ -36,7 +38,7 @@
 
     // attempt to register
     // this function can also throw an exception
-    register($username, $email, $passwd);
+    register($firstname,$lastname,$username, $email, $passwd);
     // register session variable
     $_SESSION['valid_user'] = $username;
 
