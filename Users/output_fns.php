@@ -9,11 +9,11 @@ function do_html_header($title) {
     
     <style>
       body {background:url('../images/Splash.png') ;font-family: Arial, Helvetica, sans-serif; font-size: 13px;color: red; }
-      li,h1 {color: red;}
+      li,h1 {color: white;}
       td { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color:black; }
       hr { color: #3333cc; width=300; text-align=left}
-      a { color: red; }
-      $title{ color: red; }
+      a { color:darkmagenta; }
+      
     </style>
   </head>
   <body>
