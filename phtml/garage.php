@@ -1,9 +1,34 @@
-<div id="Garage">
-    <h1>Garage</h1>
+<?php function backBtn(){?>
+    <button id='backBtn'>Back</button>
+<?php
+}
+function homeBtn(){?>
+    <button id='homeBtn'>Home</button>
+<?php
+}
+function selectBtn(){?>
     <button id='select'>Select</button>
+<?php
+}
+function carInfoLabel(){?>
+    <label id='carInfo'>Default Info</label>
+<?php
+}
+?>
+ <div id="Garage">
+    <h1>Garage</h1>
+    <?php selectBtn();?>
     <button id='viewCar'>View</button>
-    <input type='button' id='garageBackBtn' value='back'>
+    <?php backBtn();?>
+    
+    <div id='carListView'>
+        <ul id='carBtns'>
+        <!--list contents added dynamically at run time!-->
+        </ul>
+    </div>
+    
     <div id='userCar'>
+        <!--display for currently selected vehicle-->
         <img id='carImg' src='images/vehicle.jpg'>
         <!--label id='curCarName'>m:</label>
         <label id='curCarInfo'>current car info</label-->
@@ -19,6 +44,7 @@
         </div>
     </div>
     <div id='selectedCar'>
+        <!--display vehicle picked by user-->
         <img id='carImg' src='images/vehicle.jpg'>
         <label id='carName'></label>
         <label id='carInfo'></label>
@@ -30,15 +56,14 @@
         </div>
     </div>
 
-    <!--div id='carListView'-->
-        <ul id='carBtns'>
-        <!--list is populated in '../program.js' from '../user.xml'
-        the list items don't have to exist but the root tag must-->
-        </ul>
-    <!--/div-->
+    <!--ul id='carBtns'>
+    <!--list is populated in '../program.js' from '../user.xml'
+    the list items dont have to exist but the root tag must-->
+    </ul-->
 </div>
+
 <div id='CarView'>
-    <!--display vehicle stats and actions-->
+    <!--<selectBtn();>display vehicle stats and actions-->
     <button id='selectCarBtn'>Select</button>
     <button id='sellBtn'>Sell</button>
     <img id='car' src='images\\vehicle.jpg'>
@@ -49,7 +74,9 @@
         <lable>Documents</label>
     </div-->
     <!--div id='carInfoBoxes'></div-->
-    <label id='carInfo'>Default Info</label>
-    <button id='carViewBackBtn'>Back</button>
-    <button id='homeBtn'>Home</button>
+    <?php
+    carInfoLabel();
+    backBtn();
+    homeBtn();
+    ?>
 </div>

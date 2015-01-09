@@ -3,12 +3,7 @@
 ?>
 <div id="RepairShop">
     <h1>Repair Shop</h1>
-    <!--ul>
-      <li><input type="button" id="purchaseButton" onmouseover="purchaseButton()" onclick="purchasePart()"></li>
-   </ul-->
-   <ul>
-      <li><input type="button" id="repairBackButton" onmouseover="repairBackButton()" onclick="startGame()"></li>
-   </ul>
+    <button id='backBtn'>Back</button>
    
    <div id='upgrades'>
         <h2>Upgrades</h2>

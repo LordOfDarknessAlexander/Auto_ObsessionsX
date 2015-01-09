@@ -1,30 +1,39 @@
+<!--?php function paypalBtn($id, $val){
+    //inserts a button into a form implementing the 'PayPal' api
+    <input type='image' id='<echo $id>' value='<echo $val>'><br>
+}?-->
 <div id="AddFunds">
     <h1>AddFunds</h1>
+    <!--<backBtn(); statBar();>-->
     <input type="button" id="addFundsBackButton" onmouseover="addFundsBackButton()" onclick="startGame()">
     <form id='cash'
         action="https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay"
         target="PPDGFrame"
         class="standard">
-    <!--label>Purchase Tokens</label-->
-    <label>Purchase Cash</label><br>
-    <ul>
-        <!--doesn't work if is type='button' Also, stylings no longer work :(-->
-        <li><input type='button' id="addAllowanceBtn" value="Get Credits"></li><br>
-        <li><input type="image" id="addMinorFundsBtn" value="chump change"></li><br>
-        <li><input type="image" id="addMediumFundsBtn" value="stack of bills"></li><br>
-        <li><input type="image" id="addMajorFundsBtn" value="Pile 'o Cash"></li>
-        
-        <!--label for="buy">Buy Now:</label>
-        <input type="image" id="submitBtn" value="Pay with PayPal" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif"-->
-        <input id="type" type="hidden" name="expType" value="light">
-        <!--replace 'insert_pay_key' with Vendor's-->
-        <input id="paykey" type="hidden" name="paykey" value="insert_pay_key">
-    </ul>
+        <!--label>Purchase Tokens</label-->
+        <label>Purchase Cash</label><br>
+        <ul>
+            <!--doesn't work if is type='button' Also, stylings no longer work :(
+            paypalBtn('addAllowance', 'Get Credits');
+            paypalBtn(addMinorFundsBtn', 'chump change');
+            paypalBtn('addMediumFundsBtn', 'stack of bills');
+            paypalBtn('addMajorFundsBtn', "Pile 'o Cash");
+            -->
+            <li><input type='button' id="addAllowanceBtn" value="Get Credits"></li><br>
+            <li><input type="image" id="addMinorFundsBtn" value="chump change"></li><br>
+            <li><input type="image" id="addMediumFundsBtn" value="stack of bills"></li><br>
+            <li><input type="image" id="addMajorFundsBtn" value="Pile 'o Cash"></li>
+            
+            <!--label for="buy">Buy Now:</label>
+            <input type="image" id="submitBtn" value="Pay with PayPal" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif"-->
+            <input id="type" type="hidden" name="expType" value="light">
+            <!--replace 'insert_pay_key' with Vendor's-->
+            <input id="paykey" type="hidden" name="paykey" value="insert_pay_key">
+        </ul>
     </form>
     
     <form id='tokens'>
-    <!--form id='tokens'
-        action="https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay"
+    <!--action="https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay"
         target="PPDGFrame"
         class="standard"-->
         <label>Purchase Tokens</label><br>
