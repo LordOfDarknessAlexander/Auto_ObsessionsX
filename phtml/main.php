@@ -97,17 +97,7 @@ foreach($scripts as $val){
     //require will look in the absolute path, then relative,
     //then finally the local folder which THIS script is located
     require_once($val.'.php');
-}/*
-//require_once("Users/bookmark_fns.php");
-require_once("gameMenu.php");	//main menu
-require_once("auction.php");
-require_once("sold.php");
-require_once("funds.php");
-require_once("garage.php");
-require_once("repair.php");
-require_once("register.php");
-//include all javascript containing app functionality,
-//to be parsed after all other content-->
-require_once("js.php");*/
+}
+//require_once('AOUsers_include.php');
 ?>
 </div><!--end wrapper-->
