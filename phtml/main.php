@@ -94,7 +94,7 @@ $scripts = array(
 foreach($scripts as $val){
     ro($val);
 }*/
-//require_once("Users/bookmark_fns.php");
+//require_once('AOUsers_include.php');
 require_once("gameMenu.php");	//main menu
 require_once("auction.php");
 require_once("funds.php");
