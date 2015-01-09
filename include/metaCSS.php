@@ -1,25 +1,19 @@
+<?php function incCSS($str){
+    //the html within this function will be injected at the call site
+?>
+<link rel='stylesheet' href='<?php echo "css/".$str.".css";?>' type='text/css' media='screen'>
 <?php
-function incCSS($str){
-    echo "<link rel='stylesheet' href='css/".$str.".css' type='text/css' media='screen'>";
 }
+
 $paths = array(
-    "auto",
+    'auto',
     //
-    "gameMenu",
-    "auction",
-    "LoseAuction",
+    'gameMenu',
+    'auction',
+    'LoseAuction',
     //
-    "carView",
-    "register"
+    'carView',
+    'register'
 );
 foreach($paths as $p){incCSS($p);}
 ?>
-<!--link rel='stylesheet' href='css/auto.css' type="text/css" media="screen">
-
-<link rel='stylesheet' href='css/gameMenu.css' type="text/css" media="screen">
-
-<link rel='stylesheet' href='css/auction.css' type="text/css" media="screen">
-<link rel='stylesheet' href='css/LoseAuction.css' type="text/css" media="screen">
-
-<link rel='stylesheet' href='css/carView.css' type="text/css" media="screen">
-<link rel='stylesheet' href='css/register.css' type="text/css" media="screen"-->

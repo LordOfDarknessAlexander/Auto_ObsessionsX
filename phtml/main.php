@@ -1,17 +1,22 @@
 <?php
 //$ROOT_DIR = $_SERVER["DOCUMENT_ROOT"]."/phtml/";	//root path on server
+//array cast to an object, to encapsulate developer names and those who contributed
+//to this project
+//$names = (object)array(
+    //'owner'=>'Adam Glazer',
+    //'TD'=>
+    //'AS'=>
+//);
 $OWNER_NAME = "Adam Glazer";
 $AO_NAME = "Auto Obsessions";
 $TD_NAME = "Tyler Drury";
 $AS_NAME = "Alexander Sanchez";
-$GLOBALS["backBtn"] = "<button id='backBtn'>Back</button>";
-//$HOME_BTN = "<button id='home'>Home</button>";
-//$HOME_CAR_IMG = "<img id="userCar>";
+//function backBtn(){< button id='backBtn'>Back</button> }
+//function homeBtn(){ <button id='home'>Home</button> }
+//function homeCarImg(){ <img id="userCar'> }
 ?>
 <div class="wrapper">
-
-	<!--root div element of web page!-->
-	
+	<!--root div element of web page!-->	
     <div class="sound sound-off"></div>
 
     <div id="menu">
@@ -77,33 +82,32 @@ $GLOBALS["backBtn"] = "<button id='backBtn'>Back</button>";
     
 <?php
 //php includes the source html files here
-/*function ro(src){
-    require_once(src.".php");
-}
-
 $scripts = array(
-    "gameMenu",
-    "auction",
-    "funds",
-    "garage",
-    "repair",
-    "register",
-    "js"
+    'gameMenu',
+    'auction',
+    'sold',
+    'funds',
+    'garage',
+    'repair',
+    'register',
+    'js'
 );
 //scripts will be included in the order declared, ORDER MATTERS!
 foreach($scripts as $val){
-    ro($val);
-}*/
+    //require will look in the absolute path, then relative,
+    //then finally the local folder which THIS script is located
+    require_once($val.'.php');
+}/*
 //require_once("Users/bookmark_fns.php");
 require_once("gameMenu.php");	//main menu
 require_once("auction.php");
+require_once("sold.php");
 require_once("funds.php");
 require_once("garage.php");
 require_once("repair.php");
 require_once("register.php");
-require_once("sold.php");
 //include all javascript containing app functionality,
 //to be parsed after all other content-->
-require_once("js.php");
+require_once("js.php");*/
 ?>
 </div><!--end wrapper-->

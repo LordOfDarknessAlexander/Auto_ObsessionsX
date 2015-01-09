@@ -3,13 +3,17 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,orientation=portrait">
     <?php
-	$CHARSET = "<meta charset='UTF-8'>";
-	//$DOCTYPE = "<!DOCTYPE html>";
-	$PAGE_TITLE = 'Auto Obsessions';
-	echo $CHARSET;
+function charset(){
+    ?>
+<meta charset='UTF-8'>
+    <?php
+}
+    //$DOCTYPE = "<!DOCTYPE html>";
+    $PAGE_TITLE = 'Auto Obsessions';
+    charset();
     echo "<title>".$PAGE_TITLE."</title>";
-	require_once "metaCSS.php";
-	require_once "metaJS.php";
+    require_once("metaCSS.php");
+    require_once("metaJS.php");
     ?>
 </head>
 <body>

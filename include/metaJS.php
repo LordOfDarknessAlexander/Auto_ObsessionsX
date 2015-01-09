@@ -1,23 +1,19 @@
-<!--?php
-//this script generates the <script> tags to be included in the <head> of the page's html document
-function incJS($str){
-	//script generator
-	echo "<script type='text/javascript' src='js/".$str.".js'></script>";
+<?php function incJS($str){
+    //this script generates the <script> tags to be included in the <head> of the page's html document
+?>
+    <script type='text/javascript' src='<?php echo "js/".$str.".js";?>'></script>
+<?php
 }
+
 $paths = array(
-	"jquery.2.1.1.min",
-	"payRequest",
-	"Vector",
-	"GameMode",
-	"Users",
-	"requestAnimationFrame"
+	'jquery.2.1.1.min',
+	'payRequest',
+	'Vector',
+	'GameMode',
+	'Users',
+	'requestAnimationFrame'
 );
 foreach($paths as $p){incJS($p);}
-?-->
+//paypal script is included individually as its from an external link
+?>
 <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
-<script type="text/javascript" src="js/jquery.2.1.1.min.js"></script>
-<script type="text/javascript" src="js/payRequest.js"></script>
-<script type="text/javascript" src="js/Vector.js"></script>
-<script type="text/javascript" src="js/GameMode.js"></script>
-<script type="text/javascript" src="js/Users.js"></script>
-<script type="text/javascript" src="js/requestAnimationFrame.js"></script>
