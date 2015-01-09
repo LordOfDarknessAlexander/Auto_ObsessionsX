@@ -10,7 +10,7 @@ require_once("./include/header.php");
 //include meta-document html header body here!
 //elements declared here will be processed
 //as existing within the html <body> element
-require_once("main.php");
+require_once("./phtml/main.php");
 //end of html document body
 require_once("./include/footer.php");
 ?>

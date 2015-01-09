@@ -1,5 +1,12 @@
 <?php
 //$ROOT_DIR = $_SERVER["DOCUMENT_ROOT"]."/phtml/";	//root path on server
+$OWNER_NAME = "Adam Glazer";
+$AO_NAME = "Auto Obsessions";
+$TD_NAME = "Tyler Drury";
+$AS_NAME = "Alexander Sanchez";
+$GLOBALS["backBtn"] = "<button id='backBtn'>Back</button>";
+//$HOME_BTN = "<button id='home'>Home</button>";
+//$HOME_CAR_IMG = "<img id="userCar>";
 ?>
 <div class="wrapper">
 
@@ -14,11 +21,11 @@
         </div>
       
         <div id="splash">
-            <h2>Adam Glazer and Auto Obsessions Presents !</h2>
+            <h2><?php echo $OWNER_NAME." and ".$AO_NAME." Presents!";?></h2>
         </div>
      
         <div id="main">
-            <h1><?php isset($PageTitle) ? $PageTitle : Default page Title!?></h1>
+            <h1><?php echo $AO_NAME;?></h1>
             
              <div id="login">
             	<fieldset>
@@ -49,14 +56,14 @@
         <div id="credits">
             <!--could just be a link at the bottom of the page-->
             <ul>
-                <li class="artwork">Character design and art: Alexander Sanchez</li>
+                <li class="artwork">Character design and art: <?php echo $AS_NAME;?></li>
             </ul>
             <ul>
-                <li class="artwork">Programming Crew :Alexander Sanchez, Tyler Drury</li>
+                <li class="artwork">Programming Crew: <?php echo $AS_NAME.", ".$TD_NAME;?></li>
             </ul>
              
             <ul>
-              <li class="developer">Developer: Adam Glazer</li>
+              <li class="developer">Developer: <?php echo $OWNER_NAME;?></li>
             </ul>
             <a href="javascript:void(0)" class="button back">Back</a>
         </div> 
@@ -70,28 +77,31 @@
     
 <?php
 //php includes the source html files here
-//function roScript(str){
-    //require_once($ROOT_DIR.str.".php");	//main menu
-//}
-//$scripts = array(
-    //"phtml/gameMenu",
-    //"phtml/auction",
-    //"phtml/funds",
-    //"phtml/garage",
-    //"phtml/repair",
-    //"phtml/register",
-//);
-//for($str in $scripts){
-    //ro($str);
-//}
-require_once('AOUsers_include.php');
-require_once("gameMenu.php");
+/*function ro(src){
+    require_once(src.".php");
+}
+
+$scripts = array(
+    "gameMenu",
+    "auction",
+    "funds",
+    "garage",
+    "repair",
+    "register",
+    "js"
+);
+//scripts will be included in the order declared, ORDER MATTERS!
+foreach($scripts as $val){
+    ro($val);
+}*/
+//require_once("Users/bookmark_fns.php");
 require_once("gameMenu.php");	//main menu
 require_once("auction.php");
 require_once("funds.php");
 require_once("garage.php");
 require_once("repair.php");
 require_once("register.php");
+require_once("sold.php");
 //include all javascript containing app functionality,
 //to be parsed after all other content-->
 require_once("js.php");
