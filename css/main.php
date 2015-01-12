@@ -1,169 +1,103 @@
 <?php
-//main menu.php, uses php to generate CSS
-header("Content-type: text/css; charset: UTF-8");
-//
-//require_once('AuctionSelect.php');
-//require_once('repair.php');
-//require_once('funds.php');
-//require_once('Garage.php');
+//$ROOT_DIR = $_SERVER["DOCUMENT_ROOT"]."/phtml/";	//root path on server
+//array cast to an object, to encapsulate developer names and those who contributed
+//to this project
+//$names = (object)array(
+    //'owner'=>'Adam Glazer',
+    //'TD'=>
+    //'AS'=>
+//);
+$OWNER_NAME = "Adam Glazer";
+$AO_NAME = "Auto Obsessions";
+$TD_NAME = "Tyler Drury";
+$AS_NAME = "Alexander Sanchez";
+//function backBtn(){< button id='backBtn'>Back</button> }
+//function homeBtn(){ <button id='home'>Home</button> }
+//function homeCarImg(){ <img id="userCar'> }
+?>
+<div class="wrapper">
+	<!--root div element of web page!-->	
+    <div class="sound sound-off"></div>
+
+    <div id="menu">
+        <div id="progress">
+            <div id="percent">Downloading: <span id="p"></span></div>
+            <progress id="progress-bar" value="0"></progress>
+        </div>
+      
+        <div id="splash">
+            <h2><?php echo $OWNER_NAME." and ".$AO_NAME." Presents!";?></h2>
+        </div>
+     
+        <div id="main">
+            <h1><?php echo $AO_NAME;?></h1>
+            
+             <div id="login">
+            	<fieldset>
+                    <form method="post" action="Users/login.php">
+                      <p>ENTER USER NAME <input type="text" name="username"></p>
+                      <p> ENTER PASSWORD <input type="password" name="pword"></p>
+                      <p><input type="submit"  name="submit" value="Log In"></p>
+                    </form>
+                </fieldset>
+            </div>
+            <ul>
+               <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
+               <!--li><a href="javascript:void(0)" class="playGuest">Play as Guest</a></li-->
+               <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
+               <li><a href="javascript:void(0)" class="button Register">Sign Up</a></li>
+            </ul>
+            <!--
+            <form id='login'>
+                User ID:	<input id='userID' type='text'><br>
+                <button id='forgotID'>Forgot ID?</button><br>
+                Password:	<input id='userPW' type='text'><br>
+                <button id='forgotPW'>Forgot Password?</button><br>
+            </form>
+            -->
+       
+		</div>
+      
+        <div id="credits">
+            <!--could just be a link at the bottom of the page-->
+            <ul>
+                <li class="artwork">Character design and art: <?php echo $AS_NAME;?></li>
+            </ul>
+            <ul>
+                <li class="artwork">Programming Crew: <?php echo $AS_NAME.", ".$TD_NAME;?></li>
+            </ul>
+             
+            <ul>
+              <li class="developer">Developer: <?php echo $OWNER_NAME;?></li>
+            </ul>
+            <a href="javascript:void(0)" class="button back">Back</a>
+        </div> 
+    </div><!--end menu-->
+      
+   
+    <canvas id="canvas" width="900" height="600">
+        <p>You're browser does not support the required functionality to play this game.</p>
+        <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
+    </canvas>
     
-function divMain(){
-    echo 'div#gameMenu';
-}
-function defaultBG(){
-    echo "background:url('../images/defaultBG.jpg') no-repeat 0 0;";
-}
-function defaultBtnBG(){
-    echo "background:url('../images/defaultBtn.png') no-repeat 0 0;";
-}
-function defaultColor(){
-    echo 'color:red;';
-}
-function fontBold(){
-    echo 'font-weight:bold;';
-}
-function posAbs(){
-    echo 'position:absolute;';
-}
-function cursorPtr(){
-    echo 'cursor:pointer;';
-}
-?>
-@import url("AuctionSelect.css");
-/*@import url("repair.css");*/
-@import url("funds.css");
-@import url("garage.css");
-/*vehicles.css");
-projects.css");
-garage.css");
-partsSupply.css");
-repair.css");
-
-div#gameMenu */
-<?php divMain();?>
-{
 <?php
-    defaultBG();
-    posAbs();
+//php includes the source html files here
+$scripts = array(
+    'gameMenu',
+    'auction',
+    'sold',
+    'funds',
+    'garage',
+    'repair',
+    'register',
+    'js'
+);
+//scripts will be included in the order declared, ORDER MATTERS!
+foreach($scripts as $val){
+    //require will look in the absolute path, then relative,
+    //then finally the local folder which THIS script is located
+    require_once($val.'.php');
+}
+//require_once('AOUsers_include.php');
 ?>
-    display: none;
-	text-align: center;
-	padding-top: 92px;
-	z-index: 1;
-	width: 900px;
-	height: 600px;
-}
-<?php divMain();?> li 
-{
-	padding: 10px 0;
-	display:inline;
-	margin: 8px;
-<?php defaultColor();?>
-	margin-top: 8em;
-	top: 20%;
-}
-<?php divMain();?> div#menuLeft
-{<?php
-    posAbs();
-    defaultColor();
-?>
-	left:5%;
-	top:40%;
-}
-<?php divMain();?> img#homeImg
-{<?php
-    posAbs();
-?>
-	height:50%;
-	width:50%;
-	left:25%;
-	bottom:12%;
-}
-<?php divMain();?> div#menuRight
-{<?php
-    posAbs();
-    defaultColor();
-?>
-	right:5%;
-	top:40%;
-}
-<?php divMain();?> div button
-{<?php
-    defaultBtnBG();
-    defaultColor();
-    fontBold();
-    cursorPtr();
-?>
-	width:150px;
-	height:50px; 
-}
-/* Stat Bar Game HUD */
-
-div#statBar
-{<?php
-    posAbs();
-?>
-	top:30%;
-	left:2%;
-	width:100%;
-	height:5%;
-	/*child elements inherit values, unless otherwise specified*/
-	font-family:"Kozuka Gothic Pro B";
-	text-align:left;
-
-	color:white;
-	/*font-weight: bold;
-	font-size:1.2em;*/
-}
-div#statBar label
-{<?php
-    posAbs();
-?>
-    width:25%;
-}
-div#statBar label#money{left:0%;}
-div#statBar label#tokens{left:25%;}
-div#statBar label#prestige{left:50%;}
-div#statBar label#mileMarker{left:75%;}
-
-/*game menu navigation buttons*/
-#auction
-{
-	background: url('../images/auctionButton.png') no-repeat 0 0;
-	color: white;
-	font-weight: bold;
-	font-size: 1em;
-	width:150px;
-	height:50px; 
-	cursor:pointer;
-	
-}
-#repair
-{
-	background: url('../images/repairButton.png') no-repeat 0 0;
-	color:red;
-	font-weight: bold;
-	width:150px;
-	height:50px;
-	cursor:pointer;
-}
-#addFunds
-{<?php
-	defaultBtnBG();
-    fontBold();
-    cursorPtr();
-?>
-	color:  white;
-	
-	width:150px;
-	height:50px;
-}
-#myCars
-{
-	background: url('../images/inventoryButton.png') no-repeat 0 0;
-	color:  white;
-	font-weight: bold;
-	width:150px;
-	height:50px;
-	cursor:pointer; 
-}
+</div><!--end wrapper-->

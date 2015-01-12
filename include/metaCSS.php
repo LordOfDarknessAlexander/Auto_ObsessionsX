@@ -4,12 +4,19 @@
 <link rel='stylesheet' href='<?php echo "css/".$str.".css";?>' type='text/css' media='screen'>
 <?php
 }
-
+function incPHPCSS($str){?>
+    <link rel='stylesheet' href='<?php echo "css/".$str.".php";?>' type='text/css' media='screen'>
+<?php
+}
+incPHPCSS('auto');
+incPHPCSS('main');
+incPHPCSS('auction');
+incPHPCSS('repair');
 $paths = array(
-    'auto',
+    //'auto',
     //
     //'gameMenu',
-    'auction',
+    //'auction',
     'LoseAuction',
     //
     'carView',
@@ -17,6 +24,3 @@ $paths = array(
 );
 foreach($paths as $p){incCSS($p);}
 ?>
-
-<link rel='stylesheet' href='<?php echo "css/main.php";?>' type='text/css' media='screen'>
-<link rel='stylesheet' href='<?php echo "css/repair.php";?>' type='text/css' media='screen'>
