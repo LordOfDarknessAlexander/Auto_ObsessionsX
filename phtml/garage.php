@@ -1,17 +1,7 @@
-<?php function backBtn(){?>
-    <button id='backBtn'>Back</button>
-<?php
-}
-function homeBtn(){?>
-    <button id='homeBtn'>Home</button>
-<?php
-}
+<?php require_once('AO_UI.php');
+//
 function selectBtn(){?>
     <button id='select'>Select</button>
-<?php
-}
-function carInfoLabel(){?>
-    <label id='carInfo'>Default Info</label>
 <?php
 }
 ?>

@@ -8,7 +8,7 @@
 $paths = array(
     'auto',
     //
-    'gameMenu',
+    //'gameMenu',
     'auction',
     'LoseAuction',
     //
@@ -16,6 +16,7 @@ $paths = array(
     'register'
 );
 foreach($paths as $p){incCSS($p);}
-//<link rel='stylesheet' href='<?php echo "css/".$str.".php";?>' type='text/css' media='screen'>
 ?>
 
+<link rel='stylesheet' href='<?php echo "css/main.php";?>' type='text/css' media='screen'>
+<link rel='stylesheet' href='<?php echo "css/repair.php";?>' type='text/css' media='screen'>
