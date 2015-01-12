@@ -1,5 +1,4 @@
-<?php function addJS($str){
-?>
+<?php function addJS($str){?>
 <script type='text/javascript' src='<?php echo "js/".$str.".js";?>'></script>
 <?php
 }

@@ -9,7 +9,7 @@ garage.css");
 partsSupply.css");
 repair.css");
 */
-#gameMenu 
+div#gameMenu 
 {
 	background: url('../images/defaultBG.jpg') no-repeat 0 0;
 	display: none;
@@ -20,7 +20,7 @@ repair.css");
 	height: 600px;
 	position: absolute;	
 }
-#gameMenu  li 
+div#gameMenu  li 
 {
 	padding: 10px 0;
 	display:inline;
@@ -29,7 +29,7 @@ repair.css");
 	margin-top: 8em;
 	top: 20%;
 }
-#gameMenu div#menuLeft
+div#gameMenu div#menuLeft
 {
 	position:absolute;
 	color:red;
@@ -37,7 +37,7 @@ repair.css");
 	top:40%;
 }
 
-#gameMenu img#homeImg
+div#gameMenu img#homeImg
 {
 	position:absolute;
 	height:50%;
@@ -45,14 +45,14 @@ repair.css");
 	left:25%;
 	bottom:12%;
 }
-#gameMenu div#menuRight
+div#gameMenu div#menuRight
 {
 	position:absolute;
 	color:red;
 	right:5%;
 	top:40%;
 }
-#gameMenu div button
+div#gameMenu div button
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color:red;

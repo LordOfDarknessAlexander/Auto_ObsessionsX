@@ -16,4 +16,6 @@ $paths = array(
     'register'
 );
 foreach($paths as $p){incCSS($p);}
+//<link rel='stylesheet' href='<?php echo "css/".$str.".php";?>' type='text/css' media='screen'>
 ?>
+
