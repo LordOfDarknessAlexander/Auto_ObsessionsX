@@ -5,6 +5,9 @@
 $paths = array(
     'globals',
     'LoadAssets',
+    //jquery bindings
+    'jqueryLib',
+    //
     '2D/SpriteSheet',
     '2D/Animation',
     '2D/Sprite',
@@ -20,8 +23,6 @@ $paths = array(
     'state/Auction',
     'state/AuctionSelect',
     'state/Add_Funds',
-    //jquery bindings
-    'jqueryLib',
     //
     'program'	//main javascript program
 );

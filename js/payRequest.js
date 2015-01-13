@@ -22,9 +22,9 @@ function payRequest(amount, triggerCB)
 		'actionType':'PAY'
 	};
 	//save application state to sessionStorage for when user returns to page
-	var req = PAYPAL.Pay(request);
+	//var req = PAYPAL.Pay(request);
 	//must be set so paypal knows which purchase to process
-	$('#paykey').attr('value').html(req.payKey);
+	//$('#paykey').attr('value').html(req.payKey);
 	//create the payPal flow
-	return new PAYPAL.apps.DGFlow(triggerCB)
+	return;// new PAYPAL.apps.DGFlow(triggerCB)
 }

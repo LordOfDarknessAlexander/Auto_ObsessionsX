@@ -89,8 +89,7 @@ $scripts = array(
     'funds',
     'garage',
     'repair',
-    'register',
-    'js'
+    'register'
 );
 //scripts will be included in the order declared, ORDER MATTERS!
 foreach($scripts as $val){
@@ -101,3 +100,4 @@ foreach($scripts as $val){
 //require_once('AOUsers_include.php');
 ?>
 </div><!--end wrapper-->
+<?php require_once('js.php');?>
