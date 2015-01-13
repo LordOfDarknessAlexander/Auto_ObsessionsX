@@ -12,8 +12,6 @@ $paths = array(
     'Player',
     'Enemy',
     'vehicle',
-    //jquery bindings
-    'jqueryLib',
     //game states
     'state/Garage',
     //Auction and Repair states is dependant upon userGarage in Garage.js
@@ -22,6 +20,8 @@ $paths = array(
     'state/Auction',
     'state/AuctionSelect',
     'state/Add_Funds',
+    //jquery bindings
+    'jqueryLib',
     //
     'program'	//main javascript program
 );

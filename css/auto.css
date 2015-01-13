@@ -149,21 +149,27 @@ p#legal
     left:0%;
 }
 /* visited link */
-#div#main a:visited {
+div#main a:visited {
     color: #00FFFF;
 }
 /* mouse over link */
 div#main a:hover {
     color:purple;
 }
-#main 
+div#main 
 {
-  display: none;
-  height: 60%;
-  /*overflow: auto;*/
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
+    background: url('../images/AbsuMenu.png') no-repeat 0 0;
+    display: none;
+    
+	text-align: center;
+	/*padding-top: 92px;*/
+
+	width: 900px;
+	height: 600px;
+  
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0;
 }
 #main form#login
 {

@@ -6,24 +6,7 @@ header("Content-type: text/css; charset: UTF-8");
 function divRepair(){
     echo 'div#RepairShop';
 }
-function defaultBG(){
-    echo "background:url('../images/defaultBG.jpg') no-repeat 0 0;";
-}
-function defaultBtnBG(){
-    echo "background:url('../images/defaultBtn.png') no-repeat 0 0;";
-}
-function defaultColor(){
-    echo 'color:red;';
-}
-function fontBold(){
-    echo 'font-weight:bold;';
-}
-function posAbs(){
-    echo 'position:absolute;';
-}
-function cursorPtr(){
-    echo 'cursor:pointer;';
-}
+require_once 'ui.php';
 ?>
 /*repair page UI stylings*/
 <?php divRepair();?>

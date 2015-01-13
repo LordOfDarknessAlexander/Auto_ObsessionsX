@@ -151,7 +151,7 @@ assetLoader.progress = function(progress, total)
 //Garage Doors	
 splashImage.onload = function()
 {
-	context.drawImage(splashImage, 0,0);
+	//context.drawImage(splashImage, 0,0);
 	
 
 };
