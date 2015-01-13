@@ -487,6 +487,7 @@ Auction.sold = function()
 //
 $('.play').click(function() 
 {
+    console("stuff");
     $('#menu').hide();
     $('#gameMenu').show();
     //can no longer navigate to credits or the root menus anymore

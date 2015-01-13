@@ -33,10 +33,10 @@ var jq = {
         //toFAQBtn:$(''),
 		setHomeImg : function()
 		{
-            var car = Garage.getCurrentCar();
-            if(car !== null){
-                this.homeImg.attr('src', car.getFullPath() );
-            }
+            //var car = Garage.getCurrentCar();
+            //if(car !== null){
+                //this.homeImg.attr('src', car.getFullPath() );
+            //}
         }
 	},
 	Credits : {
