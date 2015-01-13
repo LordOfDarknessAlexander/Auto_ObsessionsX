@@ -18,4 +18,10 @@ function posAbs(){
 function cursorPtr(){
     echo 'cursor:pointer;';
 }
+function displayNone(){
+    echo 'display:none;';
+}
+function displayInline(){
+    echo 'display:inline;';
+}
 ?>

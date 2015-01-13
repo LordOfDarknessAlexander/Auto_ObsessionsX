@@ -1,5 +1,5 @@
 <?php
-//main menu.php, uses php to generate CSS
+//main menu.php, uses php to generate CSS, previously GameMenu.css
 header("Content-type: text/css; charset: UTF-8");
 //
 //require_once('AuctionSelect.php');

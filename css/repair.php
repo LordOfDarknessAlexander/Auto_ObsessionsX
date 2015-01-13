@@ -20,7 +20,6 @@ require_once 'ui.php';
 	z-index: 1;
 	width: 900px;
 	height: 600px;
-	height: 600px;
 }
 
 <?php divRepair();?> li 

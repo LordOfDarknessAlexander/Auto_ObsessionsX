@@ -1,5 +1,14 @@
-﻿/*Action UI stylings*/
-div#AuctionSelect
+<?php
+//auction state stylings
+header("Content-type: text/css; charset: UTF-8");
+//    
+function divAS(){
+    echo 'div#AuctionSelect';
+}
+require_once 'ui.php';
+?>
+/*Action UI stylings*/
+<?php divAS();?>
 {	/*Auction page stylings*/ 
 	background: url('../images/defaultBG.jpg') no-repeat 0 0; 
 	display: none;
@@ -9,40 +18,39 @@ div#AuctionSelect
 	z-index: 1;
 	width: 900px;
 	height: 600px;
-	position: absolute;
+<?php posAbs();?>
 }
-
-div#AuctionSelect ul
+<?php divAS();?> ul
 {
 	margin:0;
 	padding:0;
 	list-style-type:none;
 }
-div#AuctionSelect li
+<?php divAS();?> li
 {
 	margin:0 0 5% 0;	/*top right bottom left*/
 	/*padding: 50px 50px;
 	display:inline;*/
 }
-div#AuctionSelect li label#infoLabel
+<?php divAS();?> li label#infoLabel
 {
 	background-color:grey;
 	text-align:center;
-	position:absolute;
+<?php posAbs();?>
 	left:20%;
 	width:60%;
 	height:20%;
 }
-div#AuctionSelect li button
+<?php divAS();?> li button
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
-	position:absolute;
+<?php posAbs();?>
 	right: 5%;
 	height:20%;
 	width:15%;
 	color:red;
 }
-div#AuctionSelect li button label
+<?php divAS();?> li button label
 {
 	font-size:1.25em;
 	/*font-family::;
@@ -51,9 +59,9 @@ div#AuctionSelect li button label
 	text-align::center;
 	color:red;
 }
-div#AuctionSelect li img
+<?php divAS();?> li img
 {
-	position:absolute;
+<?php posAbs();?>
 	left:5%;
 	width:15%;
 	height:20%;
@@ -68,10 +76,9 @@ div#AuctionSelect li img
 	height:50px;
 	cursor:pointer;
 }
-
-div#AuctionSelect div#carView
+<?php divAS();?> div#carView
 {
-    position:absolute;
+<?php posAbs();?>
     overflow-y:scroll;
     bottom:0%;
     left:0%;
