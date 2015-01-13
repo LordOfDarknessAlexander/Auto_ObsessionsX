@@ -4,12 +4,12 @@
 
 
   //create short variable names
-  $firstname=$_POST['firstname'];
-  $lastname=$_POST['lastname'];
   $email=$_POST['email'];
   $username=$_POST['username'];
   $passwd=$_POST['passwd'];
   $passwd2=$_POST['passwd2'];
+  $firstname=$_POST['firstname'];
+  $lastname=$_POST['lastname'];
   // start session which may be needed later
   // start it now because it must go before headers
   session_start();
@@ -38,7 +38,7 @@
 
     // attempt to register
     // this function can also throw an exception
-    register($firstname,$lastname,$username, $email, $passwd);
+    register($username, $email, $passwd,$firstname, $lastname);
     // register session variable
     $_SESSION['valid_user'] = $username;
 

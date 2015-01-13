@@ -278,16 +278,17 @@ var CarView = {
 	}
 	//update, ender, exit?
 };
-
+jq.Garage.backBtn.click(function()
+{
+	jq.Garage.toggle();
+	//Garage.exit();
+});
 $('#myCars').click(function()
 {
 	jq.Garage.toggle();
 	Garage.init();
 });
-jq.Garage.backBtn.click(function(){
-	jq.Garage.toggle();
-	//Garage.exit();
-});
+
 jq.CarView.homeBtn.click(function()
 {
 	jq.Game.menu.show();

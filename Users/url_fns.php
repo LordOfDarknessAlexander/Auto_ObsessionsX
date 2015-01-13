@@ -7,7 +7,7 @@ function get_user_urls($username) {
   $conn = db_connect();
   $result = $conn->query("select bm_URL
                           from bookmark
-                          where username = '".$username."'");
+                          where username= '".$username."'");
   if (!$result) {
     return false;
   }

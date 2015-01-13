@@ -2,13 +2,13 @@
 
 require_once('db_fns.php');
 
-function register($username, $email, $password) {
+function register($username, $email, $password,$firstname,$lastname) {
 // register new person with db
 // return true or error message
 
   // connect to db
   $conn = db_connect();
-
+/*
   // check if username is unique
   $result = $conn->query("select * from user where username='".$username."'");
   if (!$result) {
@@ -21,11 +21,11 @@ function register($username, $email, $password) {
 
   // if ok, put in db
   $result = $conn->query("insert into user values
-                         ('".$firstname."', '".$lastname."', '".$username."', sha1('".$password."'), '".$email."')");
+                         ( '".$username."', sha1('".$password."'), '".$email."','".$firstname."', '".$lastname."')");
   if (!$result) {
     throw new Exception('Could not register you in database - please try again later.');
   }
-
+*/
   return true;
 }
 

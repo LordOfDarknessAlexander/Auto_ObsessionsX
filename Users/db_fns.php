@@ -1,10 +1,14 @@
 <?php
 
 function db_connect() {
-   $result = new mysqli('localhost', 'bm_user', 'password', 'bookmarks');
-   if (!$result) {
+	
+   $result = new mysqli('localhost', 'root', 'Dante777', 'members');
+   if (!$result) 
+   {
      throw new Exception('Could not connect to database server');
-   } else {
+   } 
+   else 
+   {
      return $result;
    }
 }

@@ -139,6 +139,7 @@ $('#addFunds').click(function()
 });
 //
 jq.CarView.backBtn.click(jq.CarView.toggle);
+//jq.Garage.backBtn.click(jq.Garage.toggle);
 //
 //Garage State interface
 //
