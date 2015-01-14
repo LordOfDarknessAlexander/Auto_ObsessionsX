@@ -54,8 +54,7 @@ $AS_NAME = "Alexander Sanchez";
                 Password:	<input id='userPW' type='text'><br>
                 <button id='forgotPW'>Forgot Password?</button><br>
             </form>
-            -->
-       
+            -->       
 		</div>
       
         <div id="credits">
@@ -72,24 +71,22 @@ $AS_NAME = "Alexander Sanchez";
             </ul>
             <a href="javascript:void(0)" class="button back">Back</a>
         </div> 
-    </div><!--end menu-->
-      
+    </div><!--end menu-->      
    
     <canvas id="canvas" width="900" height="600">
         <p>You're browser does not support the required functionality to play this game.</p>
         <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
-    </canvas>
-    
+    </canvas>    
 <?php
 //php includes the source html files here
 $scripts = array(
-    //'gameMenu',
-    //'auction',
-    //'sold',
-    //'funds',
-    //'garage',
-    //'repair',
-    //'register'
+    'gameMenu',
+    'auction',
+    'sold',
+    'funds',
+    'garage',
+    'repair',
+    'register'
 );
 //scripts will be included in the order declared, ORDER MATTERS!
 foreach($scripts as $val){
@@ -99,5 +96,5 @@ foreach($scripts as $val){
 }
 //require_once('AOUsers_include.php');
 ?>
-</div><!--end wrapper, include javascript at end of bpdy-->
+</div><!--end wrapper, include javascript at end of body-->
 <?php require_once('js.php');?>

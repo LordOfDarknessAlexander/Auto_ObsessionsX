@@ -12,11 +12,13 @@ var Repair = {
 	init : function()
 	{
 		//appState = GAME_MODE.Repair;
-		if(curCarIndex !== null && userGarage.length != 0)
+		if(Garage._curCarIndex !== null && userGarage.length != 0)
 		{
-			var car = userGarage[curCarIndex];
-			var img = $('div#RepairShop img#userCar');
-			img.attr('src', car.getFullPath() );
+			var car = Garage.getCurrentCar();
+            if(car !== null){
+                var img = $('div#RepairShop img#userCar');
+                //img.attr('src', car.getFullPath() );
+            }
 			
 			this._initButtons();
 

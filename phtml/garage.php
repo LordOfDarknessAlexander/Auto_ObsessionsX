@@ -5,7 +5,7 @@ function selectBtn(){?>
 <?php
 }
 ?>
- <div id="Garage">
+<div id="Garage">
     <h1>Garage</h1>
     <?php selectBtn();?>
     <button id='viewCar'>View</button>
@@ -64,9 +64,9 @@ function selectBtn(){?>
         <lable>Documents</label>
     </div-->
     <!--div id='carInfoBoxes'></div-->
-    <?php
+<?php
     carInfoLabel();
     backBtn();
     homeBtn();
-    ?>
+?>
 </div>
