@@ -8,21 +8,16 @@ function incPHPCSS($str){?>
     <link rel='stylesheet' href='<?php echo "css/".$str.".php";?>' type='text/css' media='screen'>
 <?php
 }
-//incPHPCSS('auto');
 $paths = array(
     'auto',
     //
-    //'gameMenu',
-    //'auction',
-    //'LoseAuction',
+    'main',   //'gameMenu',
+    'auction',
+    'LoseAuction',
     //
-    //'carView',
-    'register'
+    'carView',
+    //'register'
 );
-foreach($paths as $p){incCSS($p);}
-incPHPCSS('main');    //main/home menu
-incPHPCSS('auction');
-incPHPCSS('LoseAuction');
-incPHPCSS('repair');
-incPHPCSS('carView');
+foreach($paths as $p){incPHPCSS($p);}
+incCSS('register');
 ?>

@@ -1,25 +1,22 @@
 <?php
 header("Content-type: text/css; charset: UTF-8");
-//
-//require_once('AO_UI.php');
+//repair page UI stylings
+require_once 'ui.php';
     
 function divRepair(){
     echo 'div#RepairShop';
 }
-require_once 'ui.php';
 ?>
-/*repair page UI stylings*/
 <?php divRepair();?>
 {<?php
     defaultBG();
     posAbs();
+    cssSize('900px', '600px');
 ?>
 	display: none;
 	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
-	width: 900px;
-	height: 600px;
 }
 
 <?php divRepair();?> li 

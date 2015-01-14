@@ -2,6 +2,7 @@
 //main menu.php, uses php to generate CSS, previously GameMenu.css
 header("Content-type: text/css; charset: UTF-8");
 //
+require_once 'ui.php';
 //require_once('AuctionSelect.php');
 //require_once('repair.php');
 //require_once('funds.php');
@@ -10,27 +11,12 @@ header("Content-type: text/css; charset: UTF-8");
 function divMain(){
     echo 'div#gameMenu';
 }
-function defaultBG(){
-    echo "background:url('../images/defaultBG.jpg') no-repeat 0 0;";
-}
-function defaultBtnBG(){
-    echo "background:url('../images/defaultBtn.png') no-repeat 0 0;";
-}
-function defaultColor(){
-    echo 'color:red;';
-}
-function fontBold(){
-    echo 'font-weight:bold;';
-}
-function posAbs(){
-    echo 'position:absolute;';
-}
-function cursorPtr(){
-    echo 'cursor:pointer;';
+function divStatBar(){
+    echo 'div#statBar';
 }
 ?>
 @import url("AuctionSelect.css");
-/*@import url("repair.css");*/
+@import url("repair.css");
 @import url("funds.css");
 @import url("garage.css");
 /*vehicles.css");
@@ -38,27 +24,26 @@ projects.css");
 garage.css");
 partsSupply.css");
 repair.css");
-
-div#gameMenu */
+ */
 <?php divMain();?>
 {
 <?php
     defaultBG();
     posAbs();
+    cssSize('900px', '600px');
 ?>
     display: none;
 	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
-	width: 900px;
-	height: 600px;
 }
 <?php divMain();?> li 
 {
+<?php defaultColor();?>
 	padding: 10px 0;
 	display:inline;
 	margin: 8px;
-<?php defaultColor();?>
+
 	margin-top: 8em;
 	top: 20%;
 }
@@ -73,9 +58,8 @@ div#gameMenu */
 <?php divMain();?> img#homeImg
 {<?php
     posAbs();
+    cssSize('50%', '50%');
 ?>
-	height:50%;
-	width:50%;
 	left:25%;
 	bottom:12%;
 }
@@ -93,20 +77,18 @@ div#gameMenu */
     defaultColor();
     fontBold();
     cursorPtr();
+    cssSize('150px', '50px');
 ?>
-	width:150px;
-	height:50px; 
 }
 /* Stat Bar Game HUD */
-
-div#statBar
+<?php divStatBar();?>
 {<?php
     posAbs();
+    cssSize('100%', '5%');
 ?>
 	top:30%;
 	left:2%;
-	width:100%;
-	height:5%;
+	
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
 	text-align:left;
@@ -115,16 +97,16 @@ div#statBar
 	/*font-weight: bold;
 	font-size:1.2em;*/
 }
-div#statBar label
+<?php divStatBar();?> label
 {<?php
     posAbs();
 ?>
     width:25%;
 }
-div#statBar label#money{left:0%;}
-div#statBar label#tokens{left:25%;}
-div#statBar label#prestige{left:50%;}
-div#statBar label#mileMarker{left:75%;}
+<?php divStatBar();?> label#money{left:0%;}
+<?php divStatBar();?> label#tokens{left:25%;}
+<?php divStatBar();?> label#prestige{left:50%;}
+<?php divStatBar();?> label#mileMarker{left:75%;}
 
 /*game menu navigation buttons*/
 #auction
@@ -152,11 +134,9 @@ div#statBar label#mileMarker{left:75%;}
 	defaultBtnBG();
     fontBold();
     cursorPtr();
+    cssSize('10%', '10%');
 ?>
-	color:  white;
-	
-	width:150px;
-	height:50px;
+	color:white;
 }
 #myCars
 {

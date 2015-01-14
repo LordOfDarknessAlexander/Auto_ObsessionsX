@@ -14,7 +14,6 @@ $ROOT_DIR = $_SERVER["DOCUMENT_ROOT"];	//root path on server
     //static function perl(){<a href='www.php.php'>Perl</a>}
     //static function javascript(){<a href='www.php.php'>JavaScript</a>}
     //static function json(){<a href='www.php.php'>JSON</a>}
-    //static function json(){<a href='<php echo $ROOT_DIR."AutoObsessions.com";>'>Auto Obsessions</a>}
 //};
 require_once("./include/header.php");
 //include meta-document html header body here!

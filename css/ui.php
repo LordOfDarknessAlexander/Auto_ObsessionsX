@@ -6,8 +6,8 @@ function defaultBG(){
 function defaultBtnBG(){
     echo "background:url('../images/defaultBtn.png') no-repeat 0 0;";
 }
-function defaultColor(){
-    echo 'color:red;';
+function defaultColor($color = 'red'){
+    echo 'color:'.$color.';';
 }
 function fontBold(){
     echo 'font-weight:bold;';
@@ -23,5 +23,18 @@ function displayNone(){
 }
 function displayInline(){
     echo 'display:inline;';
+}
+function cssWidth($str){
+    //if( (int)$str > 0){
+    echo 'width:'.$str.';';
+    //}
+    //else throw outOfBounds or not convertable to int
+}
+function cssHeight($str){
+    echo 'height:'.$str.';';
+}
+function cssSize($width = '600px', $height = '900px'){
+    cssWidth($width);
+    cssHeight($height);
 }
 ?>
