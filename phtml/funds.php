@@ -5,7 +5,7 @@
 <div id="AddFunds">
     <h1>AddFunds</h1>
     <!--<backBtn(); statBar();>-->
-    <input type="button" id="addFundsBackButton" onmouseover="addFundsBackButton()" onclick="startGame()">
+    <button id="addFundsBackButton">Back</button>
     <form id='cash'
         action="https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay"
         target="PPDGFrame"

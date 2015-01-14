@@ -135,7 +135,7 @@ var Garage = {
 		if(Storage.local !== null)
 		{
             if(Garage._curCarIndex !== null){
-                Storage.local['_curCarIndex'] = JSOSN.stringify(Garage._curCarIndex);
+                Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
             }
 			//var array = [];
 			//for(var i = 0; i < userGarage.length; i++)

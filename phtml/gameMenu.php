@@ -8,14 +8,9 @@
         <label id='prestige'>Prestige:</label>
         <label id='mileMarker'>Mile Makers:</label>
     </div> 
-    <ul>
    
-      <!--li><input type="button" id="auction" value="Auction" onmouseover="auctionButton()" onclick="auctionMode()"></li-->
-      <li style="margin-top:26em"><input type="button" id="addFunds" value="Add Funds" onmouseover="addFundsButton()" onclick="addFundMode()"></li>
-      <!--li><input type="button" id="repair" value="Repair" onmouseover="repairButton()" onclick="repairState()"></li-->
-      <!--li><input type="button" id="myCars" value="My Cars" onmouseover="inventoryButton()" onclick="inventoryState()"></li-->
-    </ul>
- 
+   <button id='addFunds'>Add Funds</button>
+  
     <img id='homeImg' src='images\\garageEmpty.png'>
     <div id='menuRight'>
         <button id='profile'>My Profile</button><br>

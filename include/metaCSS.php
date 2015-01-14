@@ -12,16 +12,17 @@ function incPHPCSS($str){?>
 $paths = array(
     'auto',
     //
-    'gameMenu',
-    'auction',
-    'LoseAuction',
+    //'gameMenu',
+    //'auction',
+    //'LoseAuction',
     //
-    'carView',
+    //'carView',
     'register'
 );
 foreach($paths as $p){incCSS($p);}
-//incPHPCSS('main');
-//incPHPCSS('auction');
-//incPHPCSS('LoseAuction');
-//incPHPCSS('repair');
+incPHPCSS('main');    //main/home menu
+incPHPCSS('auction');
+incPHPCSS('LoseAuction');
+incPHPCSS('repair');
+incPHPCSS('carView');
 ?>
