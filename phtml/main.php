@@ -83,13 +83,13 @@ $AS_NAME = "Alexander Sanchez";
 <?php
 //php includes the source html files here
 $scripts = array(
-    'gameMenu',
-    'auction',
-    'sold',
-    'funds',
-    'garage',
-    'repair',
-    'register'
+    //'gameMenu',
+    //'auction',
+    //'sold',
+    //'funds',
+    //'garage',
+    //'repair',
+    //'register'
 );
 //scripts will be included in the order declared, ORDER MATTERS!
 foreach($scripts as $val){
@@ -99,5 +99,5 @@ foreach($scripts as $val){
 }
 //require_once('AOUsers_include.php');
 ?>
-</div><!--end wrapper-->
+</div><!--end wrapper, include javascript at end of bpdy-->
 <?php require_once('js.php');?>

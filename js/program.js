@@ -123,7 +123,7 @@ $(document).ready(function()
 	//such as jQuery/ui callback bindings,
 	//loading assets and 'core' game logic
 	//Storage.local.clear();
-	
+	//alert('doc ready!');
 	loadUser();
     loadGarage();
     jq.Game.setHomeImg();
@@ -141,12 +141,12 @@ $(document).ready(function()
 			
 			//delete Register;	//deleting this every frame is bad idea
 			
-			if((timer >= 300.00) && (timer <= 900.00))
-			{
+			//if((timer >= 300.00) && (timer <= 900.00))
+			//{
 				appState = GAME_MODE.MAIN_MENU;
 				mainMenu();
 			  
-			}  
+			//}  
 			timer++;
 			ticker++;
 		}	
@@ -278,8 +278,7 @@ assetLoader.finished = function()
 {
 	$('#splash').removeClass('#Register');
   	$('#Register').hide();
-  	switchStates();
-  
+  	switchStates();  
 }	
 
 //app may only exist in one state at a time
@@ -343,16 +342,13 @@ function Register()
 	auctionStop = true;
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	$('#Register').show();
-	//$('#RegisterForm').show();
 
-	
 	appState = GAME_MODE.NEW_USER;
 	if(appState == GAME_MODE.NEW_USER)
 	{
 		console.log("Register THis");
 	
-	}	
-
+	}
 }
 function userHUD(userName)
 {
@@ -482,8 +478,8 @@ Auction.sold = function()
 	}
 	
 }
-
-//Menu state start game button
+//
+//jQuery UI bindings
 //
 $('.play').click(function() 
 {
@@ -707,7 +703,7 @@ jq.Sold.homeBtn.click(function(){
 	jq.Sold.menu.hide();
 	jq.Game.menu.show();
 	appState = GAME_MODE.MAIN_MENU;
-	delete gameOver;
+	//delete gameOver;
 	auctionEnded = false;
 	endGame = false;
 	auctionMode();

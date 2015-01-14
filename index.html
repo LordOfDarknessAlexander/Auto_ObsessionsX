@@ -31,9 +31,9 @@
     <script type="text/javascript" src="js/requestAnimationFrame.js"></script>
 </head>
 <body>
-<?php
+<!--?php
   require_once('AOUsers_include.php');
-?>
+?-->
 
 	<div class="wrapper">
     	<div class="sound sound-off"></div>
@@ -45,7 +45,7 @@
             </div>
           
             <div id="splash">
-                <h2>Adam Glazer and Auto Obsessions Presents !</h2>
+                <h2>Adam Glazer and Auto Obsessions Presents!</h2>
             </div>
          
             <div id="main">               
@@ -62,12 +62,10 @@
                     </fieldset>
 				</div>
                 
-                <ul>
-                   <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
-                   <!--li><a href="javascript:void(0)" class="playGuest">Play as Guest</a></li-->
-                   <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
-                   <li><a href="javascript:void(0)" class="button Register">Sign Up</a></li>
-                </ul>
+                <a href="javascript:void(0)" class="button play">Start Game</a><br>
+                <!--li><a href="javascript:void(0)" class="playGuest">Play as Guest</a></li-->
+                <a href="javascript:void(0)" class="button credits">Credits</a><br>
+                <a href="javascript:void(0)" class="button Register">Sign Up</a><br>
                 <!--
                 <form id='login'>
                 	User ID:	<input id='userID' type='text'><br>
@@ -75,8 +73,7 @@
                     Password:	<input id='userPW' type='text'><br>
                     <button id='forgotPW'>Forgot Password?</button><br>
                 </form>
-                -->
-                
+                -->                
             </div>
           
             <div id="credits">
@@ -94,7 +91,7 @@
                 <a href="javascript:void(0)" class="button back">Back</a>
             </div> 
             <p id='legal'>Auto-Obsessions &copy; 2015, All Rights Reserved.
-                <a href="">Terms</a><!--http:\\ao.com\terms.html-->
+                <a href="">Terms</a><!--http:\\ao.com\terms.php-->
                 <a href="">Privacy</a>
                 <a href="">Security</a>
                 <a href="">Contact</a>
@@ -158,11 +155,9 @@
         </div>
 		
         <div id="Auction">
-            <h1>Auction</h1>
-            
-             <div style="margin-top:-6em;margin-left:26em">
-               <p>Money<label id='money'>  money</label></p>
-            </div>
+            <h1>Auction</h1>            
+   
+           <p>Money<label id='money'>  money</label></p>
 
             <!--label id='myCash'>money</label>
             <label id='carPrice'>price</label-->
@@ -309,7 +304,6 @@
             <!--ul id='carBtns'>
             <!--list is populated in '../program.js' from '../user.xml'
             the list items dont have to exist but the root tag must-->
-            </ul-->
 		</div>
         <div id='CarView'>
             <!--display vehicle stats and actions-->
@@ -420,7 +414,7 @@
 				 -->
 				 
 				
-           </fieldset>
+            </fieldset>
         </div>
     
         <div id="sold">

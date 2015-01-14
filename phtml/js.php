@@ -16,13 +16,13 @@ $paths = array(
     'Enemy',
     'vehicle',
     //game states
-    'state/Garage',
+    //'state/Garage',
     //Auction and Repair states is dependant upon userGarage in Garage.js
     //to push cars or modify cars in the users garage, so parse first
-    'state/Repair',
-    'state/Auction',
-    'state/AuctionSelect',
-    'state/Add_Funds',
+    //'state/Repair',
+    //'state/Auction',
+    //'state/AuctionSelect',
+    //'state/Add_Funds',
     //
     'program'	//main javascript program
 );
