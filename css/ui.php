@@ -1,5 +1,8 @@
 <?php
 //functions which output common CSS properties
+class css{
+    //static interface to function generating common css fragments
+}
 function defaultBG(){
     echo "background:url('../images/defaultBG.jpg') no-repeat 0 0;";
 }

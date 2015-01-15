@@ -2,18 +2,15 @@
 //$ROOT_DIR = $_SERVER["DOCUMENT_ROOT"]."/phtml/";	//root path on server
 //array cast to an object, to encapsulate developer names and those who contributed
 //to this project
-//$names = (object)array(
-    //'owner'=>'Adam Glazer',
+//class Names{
+    //public const  owner = 'Adam Glazer',
     //'TD'=>
     //'AS'=>
-//);
+//};
 $OWNER_NAME = "Adam Glazer";
 $AO_NAME = "Auto Obsessions";
 $TD_NAME = "Tyler Drury";
 $AS_NAME = "Alexander Sanchez";
-//function backBtn(){< button id='backBtn'>Back</button> }
-//function homeBtn(){ <button id='home'>Home</button> }
-//function homeCarImg(){ <img id="userCar'> }
 ?>
 <div class="wrapper">
 	<!--root div element of web page!-->	
