@@ -3,10 +3,11 @@
 header("Content-type: text/css; charset: UTF-8");
 //
 require_once 'ui.php';
-//require_once('AuctionSelect.php');
-//require_once('repair.php');
-//require_once('funds.php');
-//require_once('Garage.php');
+//using php require should be faster than css @import
+require_once 'AuctionSelect.php';
+require_once 'repair.php';
+require_once 'funds.php';
+require_once 'Garage.php';
     
 function divMain(){
     echo 'div#gameMenu';
@@ -15,16 +16,7 @@ function divStatBar(){
     echo 'div#statBar';
 }
 ?>
-@import url("AuctionSelect.css");
-@import url("repair.css");
-@import url("funds.css");
-@import url("garage.css");
-/*vehicles.css");
-projects.css");
-garage.css");
-partsSupply.css");
-repair.css");
- */
+
 <?php divMain();?>
 {
 <?php

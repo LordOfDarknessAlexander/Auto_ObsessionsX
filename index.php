@@ -18,7 +18,7 @@ require_once './include/html.php';
 //};
 html::header();
 //as existing within the html <body> element
-require_once("./phtml/main.php");
+require_once './phtml/main.php';
 //end of html document body
 html::footer();
 ?>

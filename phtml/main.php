@@ -44,14 +44,11 @@ $AS_NAME = "Alexander Sanchez";
                <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
                <li><a href="javascript:void(0)" class="button Register">Sign Up</a></li>
             </ul>
-            <!--
-            <form id='login'>
-                User ID:	<input id='userID' type='text'><br>
-                <button id='forgotID'>Forgot ID?</button><br>
-                Password:	<input id='userPW' type='text'><br>
-                <button id='forgotPW'>Forgot Password?</button><br>
-            </form>
-            -->       
+            <p id='legal'>Auto-Obsession &copy; 2015, All Right Reserved.
+                <a href=''>Terms</a>
+                <a href=''>Privacy</a>
+                <a href=''>Contact</a>
+            </p>
 		</div>
       
         <div id="credits">
