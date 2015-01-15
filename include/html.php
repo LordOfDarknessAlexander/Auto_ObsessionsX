@@ -42,5 +42,21 @@ class html
 </html>
 <?php
     }
+    public static function incCSS($str){
+        //the html within this function will be injected at the call site
+?>
+<link rel='stylesheet' href='<?php echo "css/".$str.".css";?>' type='text/css' media='screen'>
+<?php
+    }
+    public static function incPHPCSS($str){?>
+<link rel='stylesheet' href='<?php echo "css/".$str.".php";?>' type='text/css' media='screen'>
+<?php
+    }
+    public static function incJS($str){
+    //this script generates the <script> tags to be included in the <head> of the page's html document
+?>
+    <script type='text/javascript' src='<?php echo "js/".$str.".js";?>'></script>
+<?php
+    }
 }
 ?>

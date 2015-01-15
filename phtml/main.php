@@ -47,7 +47,7 @@ $AS_NAME = "Alexander Sanchez";
             <p id='legal'>Auto-Obsession &copy; 2015, All Right Reserved.
                 <a href=''>Terms</a>
                 <a href=''>Privacy</a>
-                 <a href=''>Security</a>
+                <a href=''>Security</a>
                 <a href=''>Contact</a>
                 <!--credits-->
             </p>
