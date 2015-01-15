@@ -30,7 +30,7 @@ repair.css");
 <?php
     defaultBG();
     posAbs();
-    cssSize('900px', '600px');
+    css::size('900px', '600px');
 ?>
     display: none;
 	text-align: center;
@@ -58,7 +58,7 @@ repair.css");
 <?php divMain();?> img#homeImg
 {<?php
     posAbs();
-    cssSize('50%', '50%');
+    css::size('50%', '50%');
 ?>
 	left:25%;
 	bottom:12%;
@@ -77,14 +77,14 @@ repair.css");
     defaultColor();
     fontBold();
     cursorPtr();
-    cssSize('150px', '50px');
+    css::size('150px', '50px');
 ?>
 }
 /* Stat Bar Game HUD */
 <?php divStatBar();?>
 {<?php
     posAbs();
-    cssSize('100%', '5%');
+    css::size('100%', '5%');
 ?>
 	top:30%;
 	left:2%;
@@ -134,7 +134,7 @@ repair.css");
 	defaultBtnBG();
     fontBold();
     cursorPtr();
-    cssSize('10%', '10%');
+    css::size('10%', '10%');
 ?>
 	color:white;
 }

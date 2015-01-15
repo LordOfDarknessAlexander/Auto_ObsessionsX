@@ -1,8 +1,5 @@
 <?php
 //functions which output common CSS properties
-class css{
-    //static interface to function generating common css fragments
-}
 function defaultBG(){
     echo "background:url('../images/defaultBG.jpg') no-repeat 0 0;";
 }
@@ -27,17 +24,25 @@ function displayNone(){
 function displayInline(){
     echo 'display:inline;';
 }
-function cssWidth($str){
-    //if( (int)$str > 0){
-    echo 'width:'.$str.';';
-    //}
-    //else throw outOfBounds or not convertable to int
-}
-function cssHeight($str){
-    echo 'height:'.$str.';';
-}
-function cssSize($width = '600px', $height = '900px'){
-    cssWidth($width);
-    cssHeight($height);
+
+class css{
+    public static function color($color = 'red'){
+        //string representing hex, word(ie red, white, blue), or rbga
+        echo 'color:'.$color.';';
+    }
+    public static function width($str){
+        //if( (int)$str > 0){
+        echo 'width:'.$str.';';
+        //}
+        //else throw outOfBounds or not convertable to int
+    }
+    public static function height($str){
+        echo 'height:'.$str.';';
+    }
+    //static interface to function generating common css fragments
+    public static function size($width = '600px', $height = '900px'){
+        css::width($width);
+        css::height($height);
+    }
 }
 ?>

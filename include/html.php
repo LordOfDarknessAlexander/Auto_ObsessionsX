@@ -25,8 +25,7 @@ class html
     //<meta name'keywords' content='Car, Auction'>
     //html::title($PAGE_TITLE);
     echo "<title>".$PAGE_TITLE."</title>";
-    require_once 'metaCSS.php';
-    require_once 'metaJS.php';
+    require_once 'meta.php';
 ?>
 </head>
 <body>
