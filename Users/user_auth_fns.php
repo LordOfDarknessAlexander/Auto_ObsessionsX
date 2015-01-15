@@ -8,7 +8,7 @@ function register($username, $email, $password,$firstname,$lastname) {
 
   // connect to db
   $conn = db_connect();
-/*
+
   // check if username is unique
   $result = $conn->query("select * from user where username='".$username."'");
   if (!$result) {
@@ -25,7 +25,7 @@ function register($username, $email, $password,$firstname,$lastname) {
   if (!$result) {
     throw new Exception('Could not register you in database - please try again later.');
   }
-*/
+
   return true;
 }
 
