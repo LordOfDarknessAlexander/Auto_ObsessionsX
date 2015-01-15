@@ -16,13 +16,9 @@ require_once './include/html.php';
     //static function javascript(){<a href='www.php.php'>JavaScript</a>}
     //static function json(){<a href='www.php.php'>JSON</a>}
 //};
-//require_once("./include/header.php");
 html::header();
-//include meta-document html header body here!
-//elements declared here will be processed
 //as existing within the html <body> element
 require_once("./phtml/main.php");
 //end of html document body
 html::footer();
-//require_once("./include/footer.php");
 ?>
