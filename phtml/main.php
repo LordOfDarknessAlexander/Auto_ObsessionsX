@@ -82,6 +82,12 @@ $scripts = array(
     'funds',
     'garage',
     'repair',
+    //profile
+    //messages
+    //ranks
+    //search
+    //business
+    //faq
     'register'
 );
 //scripts will be included in the order declared, ORDER MATTERS!
@@ -92,5 +98,23 @@ foreach($scripts as $val){
 }
 //require_once('AOUsers_include.php');
 ?>
+    <div id='profile'>
+        <button id='backBtn'>Back</button>
+    </div>
+    <div id='messages'>
+        <button id='backBtn'>Back</button>
+    </div>
+    <div id='ranks'>
+        <button id='backBtn'>Back</button>
+    </div>
+    <div id='search'>
+        <button id='backBtn'>Back</button>
+    </div>
+    <div id='business'>
+        <button id='backBtn'>Back</button>
+    </div>
+    <div id='faq'>
+        <button id='backBtn'>Back</button>
+    </div>
 </div><!--end wrapper, include javascript at end of body-->
 <?php require_once('js.php');?>

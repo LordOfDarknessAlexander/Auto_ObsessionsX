@@ -297,8 +297,66 @@ div#main
   height: 600px;
   position: absolute;
 }
-
-
+div#profile
+{
+    background: url('../images/AbsuMenu.png') no-repeat 0 0;
+    display: none;
+    text-align: center;
+    width: 900px;
+    height: 600px;
+    position: absolute;
+    top:0%;
+    left:0%;
+    z-index:1;
+}
+div#messages
+{
+    background: url('../images/defaultBG.jpg') no-repeat 0 0;
+    display: none;
+    text-align: center;
+    width: 900px;
+    height: 600px;
+    position: absolute;
+    top:0%;
+    left:0%;
+    z-index:1;
+}
+div#ranks
+{
+    background: url('../images/defaultBG.jpg') no-repeat 0 0;
+    display: none;
+    text-align: center;
+    width: 900px;
+    height: 600px;
+    position: absolute;
+    top:0%;
+    left:0%;
+    z-index:1;
+}
+div#search
+{
+    background: url('../images/defaultBG.jpg') no-repeat 0 0;
+    display: none;
+    text-align: center;
+    width: 900px;
+    height: 600px;
+    position: absolute;
+    top:0%;
+    left:0%;
+    z-index:1;
+}
+div#business
+{
+    background: url('../images/defaultBG.jpg') no-repeat 0 0;
+    display: none;
+    text-align: center;
+    width: 900px;
+    height: 600px;
+    position: absolute;
+    top:0%;
+    left:0%;
+    z-index:1;
+}
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) 
 {

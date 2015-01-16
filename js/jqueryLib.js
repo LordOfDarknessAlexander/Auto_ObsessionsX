@@ -25,11 +25,11 @@ var jq = {
         //toPartsSupply:$(""),
 		repairBtn : $('#buyUpgradesBtn'),
 		//right menu
-		//toProfileBtn:$(''),
-		//toMsgBtn:$(''),
-		//toRankingsBtn:$(''),
-        //toSearchBtn:$(""),
-        //toBuisnessBtn:$(''),
+		toProfileBtn:$('div#gameMenu button#profile'),
+		toMsgBtn:$('div#gameMenu button#messages'),
+		toRankingsBtn:$('div#gameMenu button#rankings'),
+        toSearchBtn:$('div#gameMenu button#search'),
+        toBuisnessBtn:$('div#gameMenu button#buyBusiness'),
         //toFAQBtn:$(''),
 		setHomeImg : function()
 		{
@@ -114,9 +114,52 @@ var jq = {
         menu : $('div#sold'),
         homeBtn:$('div#sold button#homeBtn'),
         garageBtn:$('div#sold button#garageBtn'),
+    },
+    Profile:{
+        menu:$('div#profile'),
+        backBtn:$('div#profile button#backBtn'),
+        toggle : function()
+		{
+			jq.Game.menu.toggle();
+			jq.Profile.menu.toggle();
+		}
+    },
+    Messages:{
+        menu:$('div#messages'),
+        backBtn:$('div#messages button#backBtn'),
+        toggle : function()
+		{
+			jq.Game.menu.toggle();
+			jq.Messages.menu.toggle();
+		}
+    },
+    Ranks:{
+        menu:$('div#ranks'),
+        backBtn:$('div#ranks button#backBtn'),
+        toggle : function()
+		{
+			jq.Game.menu.toggle();
+			jq.Ranks.menu.toggle();
+		}
+    },
+    Search:{
+        menu:$('div#search'),
+        backBtn:$('div#search button#backBtn'),
+        toggle : function()
+		{
+			jq.Game.menu.toggle();
+			jq.Search.menu.toggle();
+		}
+    },
+    Business:{
+        menu:$('div#business'),
+        backBtn:$('div#business button#backBtn'),
+        toggle : function()
+		{
+			jq.Game.menu.toggle();
+			jq.Business.menu.toggle();
+		}        
     }
-	//Projects
-	//Vehicles
 };
 /*
 function jqToggleCredits() 
@@ -139,6 +182,18 @@ $('#addFunds').click(function()
 });
 //
 jq.CarView.backBtn.click(jq.CarView.toggle);
+//
+jq.Game.toProfileBtn.click(jq.Profile.toggle);
+jq.Game.toMsgBtn.click(jq.Messages.toggle);
+jq.Game.toRankingsBtn.click(jq.Ranks.toggle);
+jq.Game.toSearchBtn.click(jq.Search.toggle);
+jq.Game.toBuisnessBtn.click(jq.Business.toggle);
+//
+jq.Profile.backBtn.click(jq.Profile.toggle);
+jq.Ranks.backBtn.click(jq.Ranks.toggle);
+jq.Messages.backBtn.click(jq.Messages.toggle);
+jq.Search.backBtn.click(jq.Search.toggle);
+jq.Business.backBtn.click(jq.Business.toggle);
 //jq.Garage.backBtn.click(jq.Garage.toggle);
 //
 //Garage State interface
