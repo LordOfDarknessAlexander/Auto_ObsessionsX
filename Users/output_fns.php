@@ -57,7 +57,7 @@ function display_site_info() {
   <ul>
   <li>Auto-Obsessions The Game!</li>
   <li>Live The Experience!</li>
-  <li>Share your favorite links with others!</li>
+  <li>Share your favourite links with others!</li>
   </ul>
 <?php
 }
@@ -89,29 +89,37 @@ function display_registration_form() {
 ?>
  <form method="post" action="register_new.php">
  <table bgcolor="#cccccc">
-  <tr>
-     <td>First Name:</td>
-     <td><input type="text" name="firstname" size="30" maxlength="100"/></td></tr>
-   <tr>
-     <td>Last Name:</td>
-     <td><input type="text" name="lastname" size="30" maxlength="100"/></td></tr>
-   <tr>
-     <td>Email address:</td>
-     <td><input type="text" name="email" size="30" maxlength="100"/></td></tr>
+ 
+  
    <tr>
      <td>Preferred username <br />(max 16 chars):</td>
      <td valign="top"><input type="text" name="username"
-         size="16" maxlength="16"/></td></tr>
+         size="16" maxlength="16"/></td>
+   </tr>
+    <tr>
+   <td>Email address:</td>
+     <td><input type="text" name="email" size="30" maxlength="100"/></td>
+   </tr>
    <tr>
+   <tr>
+     <td>First Name:</td>
+     <td><input type="text" name="firstname" size="30" maxlength="30"/></td>
+   </tr>
+   <tr>
+     <td>Last Name:</td>
+     <td><input type="text" name="lastname" size="30" maxlength="30"/></td>
+   </tr>
      <td>Password <br />(between 6 and 16 chars):</td>
      <td valign="top"><input type="password" name="passwd"
-         size="16" maxlength="16"/></td></tr>
+         size="16" maxlength="16"/></td>
+   </tr>
    <tr>
      <td>Confirm password:</td>
      <td><input type="password" name="passwd2" size="16" maxlength="16"/></td></tr>
    <tr>
      <td colspan=2 align="center">
-     <input type="submit" value="Register"></td></tr>
+     <input type="submit" value="Register"></td>
+   </tr>
  </table></form>
 <?php
 

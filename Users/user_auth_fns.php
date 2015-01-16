@@ -2,7 +2,8 @@
 
 require_once('db_fns.php');
 
-function register($username, $email, $password,$firstname,$lastname) {
+function register($username, $email, $password,$firstname,$lastname) 
+{
 // register new person with db
 // return true or error message
 
@@ -10,7 +11,8 @@ function register($username, $email, $password,$firstname,$lastname) {
   $conn = db_connect();
 
   // check if username is unique
-  $result = $conn->query("select * from user where username='".$username."'");
+  
+  $result = $conn->query("select * from user where username = '".$username."'");
   if (!$result) {
     throw new Exception('Could not execute query');
   }
@@ -156,8 +158,8 @@ function notify_password($username, $password) {
     } else {
       $row = $result->fetch_object();
       $email = $row->email;
-      $from = "From: support@phpbookmark \r\n";
-      $mesg = "Your PHPBookmark password has been changed to ".$password."\r\n"
+      $from = "From: support@Auto-Obsessions \r\n";
+      $mesg = "Your Auto-Obsessions password has been changed to ".$password."\r\n"
               ."Please change it next time you log in.\r\n";
 
       if (mail($email, 'PHPBookmark login information', $mesg, $from)) {
