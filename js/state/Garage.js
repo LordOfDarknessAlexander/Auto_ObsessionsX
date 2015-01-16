@@ -46,6 +46,16 @@ var Garage = {
             //Garage._curCarIndex = parseInt(JSON.parse(Storage.local._curCarIndex) );
             //alert("current car is at index:" + Garage._curCarIndex.toString() );
         //}
+//<?php
+    //if(loggedIn){
+        //make server calls(using ajax) to serialize
+        //user vehicles saved to database, so that vehicles
+        //need only be created once, instead of making server calls all the time to update cars
+    //}
+    //else{  //playing locally as guest, make calls in JavaScript
+        //
+    //}
+//?>
 		if(Storage.local !== null && 'userGarage' in Storage.local)
 		{
 			//var jsonArray = JSON.parse(Storage.local.userGarage);	//returns an array
@@ -59,16 +69,18 @@ var Garage = {
 		var list = $('div#carListView ul#carBtns');
 		list.empty();	//remove any buttons if there were any previously
 		
-		if(Garage._curCarIndex === null)
+		if(Garage._curCarIndex === null){
 			$('div#Garage #userCar').hide();
-		else
+        }
+		else{
 			Garage.setCurrentCar();
-
-		if(selCarIndex === null)
+        }
+		if(selCarIndex === null){
 			$('div#selectedCar').hide();
-		else
+        }
+		else{
 			this.setSelectCar({index:selCarIndex});
-				
+        }
 		if(userGarage.length == 0)
 		{	//empty grage so display img instead of buttons
 			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
@@ -132,6 +144,11 @@ var Garage = {
 	save : function()
 	{	//saves garage and current car to local storage
 		//
+//<?php
+//if(loggedIn){
+    //post user garage to php page to save user cars to sql database
+//}
+//else{?> //playing locally as guest
 		if(Storage.local !== null)
 		{
             if(Garage._curCarIndex !== null){
@@ -144,6 +161,8 @@ var Garage = {
 			//}
 			//Storage.local['userGarage'] = JSON.stringify(array);
 		}
+//}
+//?>
 	},
 	//setSelectedCar : function(obj)
 	//{	//sets and displays 

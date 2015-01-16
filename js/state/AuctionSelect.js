@@ -7,6 +7,18 @@ var AuctionSelect =
 		//appState = GAME_MODE.AUCTION_SElECT;
 		this.list.empty();
 		//
+//<?php
+    //if(loggedIn){
+        //auction cars never change, so load only once to
+        //save on calls to server and bandwidth
+        //if(auctionCars not loaded){
+            //
+        //}
+    //}
+    //else{?>
+        //playing locally as guest, call JS
+    //<?php
+    //}?>
 		for(var i = 0; i < /*ao.*/xdbCars.length; i++)
 		{
 			var btnID = "as" + (i).toString(),

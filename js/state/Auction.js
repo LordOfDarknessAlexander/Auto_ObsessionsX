@@ -1,4 +1,5 @@
 ﻿//Global Auction State Object, no caps as object is not const
+//TODO:move vars into Auction, to remove from global scope
 var PLAYER_WAIT = 200;
 var ENEMY_WAIT = 300;
 //AI cooldown timer
@@ -28,7 +29,6 @@ var startPlayerEndBid = false;	//player local
 var playerEndBidTimer = 0;	//player local
 var enemyWinning = false;
 //
-
 function shuffleArray(array) 
 {	//sort array items
     var counter = array.length, temp, index;
@@ -78,8 +78,7 @@ var Auction =
 		var enemy2; 
 		var enemy3; 
 		var enemy4; 
-			
-		
+
 		if(index < xdbCars.length){	//make sure index is within bounds to be safe
 			Auction._car = xdbCars[index];	//copy assigned
 		}
@@ -159,8 +158,7 @@ var Auction =
 		 
 		 this.setup();
 		 this.init();	//init requires a car index, this will break		
-	},
-	
+	},	
 	initAI : function()
 	{	//initislize an array of AI players	
 		//this._enemies = [];
@@ -173,8 +171,7 @@ var Auction =
 		  	
 		  	console.log(i);
 		  	break;
-		}
-	  
+		}	  
 	},	
 	update : function()
 	{	//main update logic, calle dper frame
@@ -209,8 +206,7 @@ var Auction =
 	  	{	//enemy bid cooldown has refreshed
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
-	  	}
-	  	
+	  	}	  	
 	  	
 	  	if(playerWinning)
 	  	{
@@ -225,9 +221,7 @@ var Auction =
 	  	console.log("EnemyCaps2 " + enemyCaps[1]);
 	  	console.log("EnemyCaps3 " + enemyCaps[2]);
 	  	console.log("EnemyCaps4 " + enemyCaps[3]);
-	  	
-	  	
-	  	
+	
 		if(auctionEnded)
 		{
 			this.destroy();		
@@ -256,32 +250,27 @@ var Auction =
 	},
 	render : function()
 	{
-			
-		
 		context.drawImage(backgroundImage, 0,-10);
-		
-		
+
 		player.draw();
 		
 		if(playerDidBid && (playerBid == currentBid) )
 		{
 			player.y = 10;
-			context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X , 90);
+			context.fillText('Player Bid :  ' + '$' + playerBid.toFixed(2)  ,ENEMY_X , 90);
 		}
 		else
 		{
 		  player.y = 150;
-		  context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X , 230);
+		  context.fillText('Player Bid :  ' + '$'+ playerBid.toFixed(2)  ,ENEMY_X , 230);
 		}
 		
 		if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
 		{
 			playerBid != currentBid;
 		}
-		
 		//ENENMY HUD
-		
-				
+	
 		//Enemy 1
 		//draw them depending on current bid
 		if(enemyBids[0] >= currentBid)
@@ -296,37 +285,29 @@ var Auction =
 		if(enemyBids[1] >= currentBid)
 		{
 			enemy2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X , 70);		
-			
 		}
 		else
 		{
 			enemy2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2) ,ENEMY_X, 160);
-			
-			
 		}
 		//Enemy3
 		if( enemyBids[2] >= currentBid )
 		{
 			enemy3 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X , 70);
-			
 		}
 		else
 		{
-			 enemy3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X, 180);
-			 
+			enemy3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2) ,ENEMY_X, 180);
 		}
 		//Enemy4
 		if( enemyBids[3] >= currentBid)
 		{
 			enemy4 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X , 70);
-			
 		}
 		else
 		{
 			enemy4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2) ,ENEMY_X, 200);
-			
-		}
-		
+		}		
 		//call crowd for the player winning
 		this.playerGoing();
 		this.going();
@@ -335,7 +316,6 @@ var Auction =
 		//var gorguts;
 		//gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
 		
-
 		//these could be HTML elements in the Auction div
 		//context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
 		//context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
@@ -362,11 +342,9 @@ var Auction =
 		{
 			if(startEndBids[i] == true){			
 				endBidTimers[i]++;
-								
 			}
 			else{
 				endBidTimers[i] = 0;
-	
 			}
 		}		
 		//Player end bid
@@ -396,15 +374,12 @@ var Auction =
 		if(playerBid <= userStats.money)
 		{
 			playerDidBid = true;
-			
 		}
 		else
 		{
-			 this.sold();
-			 startPlayerEndBid = false;
+            this.sold();
+            startPlayerEndBid = false;
 		}
-
-		
 		//Wins BId
 	},
 	enemyBidding : function()
@@ -435,14 +410,12 @@ var Auction =
 		 	enemyWinning = true;
 		 }*/
 		//if the bidders bid is at o or less than the current bid player wins bid
-	},
-	
+	},	
 	assignEnemyBidCaps : function()
 	{
 		for(var i = 0; i < enemyCaps.length; i++)
 		{						
 			//enemies.price = 1;
-
 			if(enemyCanBid)	//global cooldown timer has refreshed, bidding now available
 			{//
 				if((enemyBids[i] < currentBid) && (enemyBids[i] <  enemyCaps[i]) )
@@ -453,10 +426,8 @@ var Auction =
 				  }
 				  enemyCaps[i] == enemyBids[i];					  					  
 				  break;	//breaks on first available bidder?
-				}
-				
-			}
-			
+				}				
+			}			
 		}
 	},	
 	bidFinder : function()
@@ -495,21 +466,16 @@ var Auction =
 		}		
         //check the bids of each AI to determine the highest bid,
         //then setting the state;
-		if(checkBid(0) )
-		{
+		if(checkBid(0) ){
 			setBid(0);
 		}
-		else if(checkBid(1) )
-		{
+		else if(checkBid(1) ){
 			setBid(1);
 		}
-		else if(checkBid(2) )
-		{
+		else if(checkBid(2) ){
 			setBid(2);
 		}
-		else 
-		{
-			checkBid(3);
+		else if(checkBid(3) ){
 			setBid(3);
 		}
 	},
@@ -523,13 +489,12 @@ var Auction =
 		{
 		   currentBid = playerBid;
 		   startPlayerEndBid = true;
-		   goingTimer = 0;
-		   
+		   goingTimer = 0;		   
 		}
 		//Find the AI who has the highest bid
 		else if((playerBid < enemyBids[0])||(playerBid < enemyBids[1])||(playerBid < enemyBids[2])||(playerBid < enemyBids[3]))
 		{
-		  this.bidFinder();
+            this.bidFinder();
 		}
 	},
 	findEndBidder : function()
@@ -550,7 +515,6 @@ var Auction =
 				enemyWinning = true;
 
 			}
-						
 		}
 	},
 	sellCarEndAuction : function()
@@ -611,16 +575,12 @@ var Auction =
 			//alert("Going Once " );
 			context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
 			assetLoader.sounds.going.play();
-			
-			
 		}
 		else if((pGTimer > 470) && (pGTimer < 600))
 		{
 			//alert("Going Twice " );
 			context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
 			assetLoader.sounds.going.play();
-			
-
 		}
 		else if(pGTimer > 660)
 		{
@@ -628,8 +588,7 @@ var Auction =
 			this.buyOut();
 			context.fillText( "Sold to the Player" ,ENEMY_X + 600 , 310);
 			//alert("Sold to the player");
-		}			
-
+		}
 	},
 	buyOut : function()
 	{	//user 'buys out' the auction, placing the max bid,
