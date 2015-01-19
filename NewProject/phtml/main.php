@@ -96,7 +96,7 @@ foreach($scripts as $val){
     //then finally the local folder which THIS script is located
     require_once($val.'.php');
 }
-//require_once('AOUsers_include.php');
+
 ?>
     <div id='profile'>
         <button id='backBtn'>Back</button>
