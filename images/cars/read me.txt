@@ -1,3 +1,0 @@
-folder structure:
-
-images\cars\manufacturer\year\car name.jpg

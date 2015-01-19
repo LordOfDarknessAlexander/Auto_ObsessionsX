@@ -22,13 +22,19 @@ h3.content { margin-top:0; }
 require ('mysqli_connect.php'); // Connect to the database
 // This code inserts a record into the users table
 // Has the form been submitted?
+
+//function strip($str){
+    //$res = trim($_POST[$str]);
+	//strip HTML and apply escaping
+	//return mysqli_real_escape_string($db.$con, strip_tags($res));
+//}
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 	$errors = array(); // Start an array named errors 
 	// Trim the title
 	$tle = trim($_POST['title']);
 	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($dbcon, strip_tags($tle));
+	$stripped = mysqli_real_escape_string($dbcon, strip_tags($tle));    //strip('title');
 	// Get string lengths
 	$strlen = mb_strlen($stripped, 'utf8');
 	// Check stripped string
