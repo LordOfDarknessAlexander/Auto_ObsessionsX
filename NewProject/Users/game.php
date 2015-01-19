@@ -5,7 +5,7 @@ $PAGE_TITLE = "Auto Obsessions";
 //$AO_OWNER = "Adam glazer";
 $AO_COPYRIGHT = "Auto Obsessions, C 2014, All Rights Reserved";
 $ROOT_DIR = $_SERVER["DOCUMENT_ROOT"];	//root path on server
-require_once './include/html.php';
+require_once '../include/html.php';
 //include code to generate page's html header
 //class a{
     //class representing common html Anchor elements used through out docs
@@ -27,7 +27,7 @@ require_once './include/html.php';
 //};
 html::header();
 //as existing within the html <body> element
-require_once './phtml/main.php';
+require_once '../phtml/main.php';
 //end of html document body
 html::footer();
 ?>
