@@ -1,0 +1,127 @@
+﻿/*Main Game Menu stylings*/
+@import url("AuctionSelect.css");
+@import url("repair.css");
+@import url("funds.css");
+@import url("garage.css");
+/*vehicles.css");
+projects.css");
+garage.css");
+partsSupply.css");
+repair.css");
+*/
+div#gameMenu 
+{
+	background: url('../images/defaultBG.jpg') no-repeat 0 0;
+	display: none;
+	text-align: center;
+	padding-top: 92px;
+	z-index: 1;
+	width: 900px;
+	height: 600px;
+	position: absolute;	
+}
+div#gameMenu  li 
+{
+	padding: 10px 0;
+	display:inline;
+	margin: 8px;
+	color:red;
+	margin-top: 8em;
+	top: 20%;
+}
+div#gameMenu div#menuLeft
+{
+	position:absolute;
+	color:red;
+	left:5%;
+	top:40%;
+}
+
+div#gameMenu img#homeImg
+{
+	position:absolute;
+	height:50%;
+	width:50%;
+	left:25%;
+	bottom:12%;
+}
+div#gameMenu div#menuRight
+{
+	position:absolute;
+	color:red;
+	right:5%;
+	top:40%;
+}
+div#gameMenu div button
+{
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	color:red;
+	font-weight: bold;
+	width:150px;
+	height:50px; 
+	cursor:pointer;
+}
+/* Stat Bar Game HUD */
+
+div#statBar
+{
+	position:absolute;
+	top:30%;
+	left:2%;
+	width:100%;
+	height:5%;
+	/*child elements inherit values, unless otherwise specified*/
+	font-family:"Kozuka Gothic Pro B";
+	text-align:left;
+	color:white;
+	/*font-weight: bold;
+	font-size:1.2em;*/
+}
+div#statBar label{
+    position:absolute;
+    width:25%;
+}
+div#statBar label#money{left:0%;}
+div#statBar label#tokens{left:25%;}
+div#statBar label#prestige{left:50%;}
+div#statBar label#mileMarker{left:75%;}
+
+/*game menu navigation buttons*/
+#auction
+{
+	background: url('../images/auctionButton.png') no-repeat 0 0;
+	color: white;
+	font-weight: bold;
+	font-size: 1em;
+	width:150px;
+	height:50px; 
+	cursor:pointer;
+	
+}
+#repair
+{
+	background: url('../images/repairButton.png') no-repeat 0 0;
+	color:red;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;
+}
+#addFunds
+{
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	color:  white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer;
+}
+#myCars
+{
+	background: url('../images/inventoryButton.png') no-repeat 0 0;
+	color:  white;
+	font-weight: bold;
+	width:150px;
+	height:50px;
+	cursor:pointer; 
+}
