@@ -10,3 +10,5 @@ File formats
 
 Future Consideration
 	Currently considering inegration of php and/or sql for server-side coding.
+
+Users : Interface designed by Webmaster and maintained by a Web Admin 
