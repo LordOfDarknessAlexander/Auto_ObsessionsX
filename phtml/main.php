@@ -40,17 +40,16 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
                 </fieldset>
             </div>
             <ul>
-               <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
-               <!--li><a href="javascript:void(0)" class="playGuest">Play as Guest</a></li-->
+               <li><a href="javascript:void(0)" class="button play">Play as Guest</a></li>
                <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
-               <li><a href="javascript:void(0)" class="button Register">Sign Up</a></li>
+               <li><a href="javascript:void(0)" class="button Register">Register</a></li>
             </ul>
             <p id='legal'>Auto-Obsession &copy; 2015, All Right Reserved.
-                <a href='<?php echo $ROOT_URL.'legal/terms.php';?>'>Terms</a>
-                <a href='<?php echo $ROOT_URL.'legal/privacy.php';?>'>Privacy</a>
-                <a href='<?php echo $ROOT_URL.'legal/security.php';?>'>Security</a>
-                <a href='<?php echo $ROOT_URL.'legal/contact.php';?>'>Contact</a>
-                <!--credits-->
+                <a href='<?php echo $ROOT_URL.'legal.php?page=terms';?>'>Terms</a>
+                <a href='<?php echo $ROOT_URL.'legal.php?page=privacy';?>'>Privacy</a>
+                <a href='<?php echo $ROOT_URL.'legal.php?page=security';?>'>Security</a>
+                <a href='<?php echo $ROOT_URL.'legal.php?page=contact';?>'>Contact</a>
+                <a href=''>Credits</a>
             </p>
 		</div>
       
