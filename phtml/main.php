@@ -11,6 +11,7 @@ $OWNER_NAME = "Adam Glazer";
 $AO_NAME = "Auto Obsessions";
 $TD_NAME = "Tyler Drury";
 $AS_NAME = "Alexander Sanchez";
+$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 ?>
 <div class="wrapper">
 	<!--root div element of web page!-->	
@@ -45,10 +46,10 @@ $AS_NAME = "Alexander Sanchez";
                <li><a href="javascript:void(0)" class="button Register">Sign Up</a></li>
             </ul>
             <p id='legal'>Auto-Obsession &copy; 2015, All Right Reserved.
-                <a href=''>Terms</a>
-                <a href=''>Privacy</a>
-                <a href=''>Security</a>
-                <a href=''>Contact</a>
+                <a href='<?php echo $ROOT_URL.'legal/terms.php';?>'>Terms</a>
+                <a href='<?php echo $ROOT_URL.'legal/privacy.php';?>'>Privacy</a>
+                <a href='<?php echo $ROOT_URL.'legal/security.php';?>'>Security</a>
+                <a href='<?php echo $ROOT_URL.'legal/contact.php';?>'>Contact</a>
                 <!--credits-->
             </p>
 		</div>

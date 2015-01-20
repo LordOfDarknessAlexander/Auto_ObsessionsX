@@ -1,5 +1,7 @@
 <?php
 session_start();
+//require 'secure.php';
+//secureLogin();
 if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 1))
 { header("Location: login.php");
 exit();
@@ -125,24 +127,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				// Debugging message
 			}
 		}
-	else
-	{
-		//The email address is already registered for another user
-		echo '<p class="error">The email address is not acceptable because it is already registered for another member</p>';
-	} 
-}
-else 
-{ 
-	// Display the errors
-	echo '<p class="error">The  following error(s) occurred:<br />';
-	echo '<p class="error">The following error(s) occurred:<br />';
-	foreach ($errors as $msg) 
-	{ 
-		// Echo each error.
-			echo " - $msg<br />\n";
-	}
-	echo '</p><p>Please try again.</p>';
-	} // End of if (empty($errors))section.
+        else
+        {
+            //The email address is already registered for another user
+            echo '<p class="error">The email address is not acceptable because it is already registered for another member</p>';
+        }
+    }
+    else 
+    { 
+        // Display the errors
+        echo '<p class="error">The  following error(s) occurred:<br />';
+        echo '<p class="error">The following error(s) occurred:<br />';
+        foreach ($errors as $msg) 
+        { 
+            // Echo each error.
+                echo " - $msg<br />\n";
+        }
+        echo '</p><p>Please try again.</p>';
+    } // End of if (empty($errors))section.
 } // End of the conditionals
 // Select the user's information:
 $q = "SELECT fname, lname, email, class, paid FROM users WHERE user_id=$id";		

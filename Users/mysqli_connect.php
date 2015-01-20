@@ -21,6 +21,12 @@
         //disconnect from database when this is 'unset()'
         //mysqli_close(self::$con);
     //}
+    //public function strip($postKey){
+        //strip HTML and apply escaping from var passed to page as POST arg
+        //$res = trim($_POST[$postKey]);
+        //return mysqli_real_escape_string($self::$con, strip_tags($res));
+    //}
+    }
 //}
 //$db = dbConnect();
 //

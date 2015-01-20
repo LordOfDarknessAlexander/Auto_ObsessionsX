@@ -10,9 +10,11 @@ class html
 <meta charset='UTF-8'>
 <?php
     }
-    //public static function title($str){
-        //echo "<title>".$str."</title>";
-    //}
+    public static function title($str){
+        //injects html title tag at call site?>
+        <title><?php echo $str;?></title>
+<?php
+    }
     public static function header(){
         //default header for application, can be changed in derived classes
         html::docType();
@@ -23,9 +25,8 @@ class html
 <?php
     html::charset();
     //<meta name'keywords' content='Car, Auction'>
-    //html::title($PAGE_TITLE);
-    echo "<title>".$PAGE_TITLE."</title>";
-    require_once 'meta.php';
+    html::title($PAGE_TITLE);
+    require_once 'meta.php';    //if no CSS, JS or additional scripts are needed leave file empty
 ?>
 </head>
 <body>
@@ -66,6 +67,37 @@ class html
     //this script generates the <script> tags to be included in the <head> of the page's html document?>
     <script type='text/javascript' src='<?php echo "js/".$str.".js";?>'></script>
 <?php
+    }
+    public static function simpleHead($title){
+        //outputs default, non-secure page header
+        html::docType();
+?>
+<html>
+<head>
+<?php
+        html::charset();
+        html::title($title);
+?>
+    <style>
+        body{
+            background:url('../images/Splash.png'); no-repeat 0 0;
+            font-family:Arial, Helvetica, sans-serif;
+            font-size:13px;
+            color: red;
+        }
+        li,h1 {color: white;}
+        td{
+            font-family:Arial, Helvetica, sans-serif;
+            font-size:1em;
+            color:black;
+        }
+        hr{ color:#3333cc; width:300; text-align:left;}
+        a{ color:darkmagenta; }
+    </style>
+</head>
+<body>
+<?php
+        //devs add page content after this call
     }
 }
 ?>

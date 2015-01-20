@@ -7,9 +7,11 @@
 </head>
 <body>
 <div id="container">
-<?php include("includes/login-header.php"); ?>
-<?php include("includes/nav.php"); ?>
-<?php include("includes/info-col.php"); ?>
+<?php
+    include 'includes/login-header.php';
+    include 'includes/nav.php';
+    include 'includes/info-col.php';
+?>
 <div id="content"><!-- Start of the login page content. -->
 <?php 
 // This section processes submissions from the login form.
@@ -78,6 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <br>
 <?php include ('includes/footer.php'); ?>
 </div>
-</div>	
+</div>
 </body>
 </html>

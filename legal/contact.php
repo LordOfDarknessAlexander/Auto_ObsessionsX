@@ -1,8 +1,8 @@
 <?php
-require_once 'html.php';
-
-//html::docType();
-//html::head('Contact');
-//<p>Please contact us at...</p>
-//html::footer();
+require_once '../include/html.php';
+//require_once './secure.php';
+//secureLogin();
+html::simpleHead('Contact');
 ?>
+<p>Please contact us at...</p>
+<?php html::footer();?>
