@@ -273,14 +273,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 } // End of the main Submit conditionals
 ?>
 <div id="midcol">
-<h2>Membership Registration</h2>
-		<h3 class="content">Items marked with an asterisk * are essential</h3>
-			<h3 class="content">When you click the 'Register' button, you will 
-			be switched to a page<br>for paying your membership fee with PayPal or a Credit/Debit 
-			card</h3>
-			<p class="cntr"><b>Membership classes:</b> Standard 1 year: &pound;30, Standard 5years: 
-			&pound;125, Armed Forces 1 year: &pound;5,<br>Under 21 one year: &pound;2,&nbsp; Other: If 
-			you can't afford &pound;30 please give what you can, minimum &pound;15 </p>
+    <h2>Membership Registration</h2>
+    <h3 class="content">Items marked with an asterisk * are essential</h3>
+    <h3 class="content">When you click the 'Register' button, you will 
+    be switched to a page<br>for paying your membership fee with PayPal or a Credit/Debit 
+    card</h3>
+    <p class="cntr"><b>Membership classes:</b> Standard 1 year: &pound;30, Standard 5years: 
+    &pound;125, Armed Forces 1 year: &pound;5,<br>Under 21 one year: &pound;2,&nbsp; Other: If 
+    you can't afford &pound;30 please give what you can, minimum &pound;15 </p>
 	<form action="safer-register-page.php" method="post">
 		<label class="label" for="title">Title*</label><input id="title" type="text" name="title" size="15" maxlength="12" value="<?php if (isset($_POST['title'])) echo $_POST['title']; ?>">
 		<br><label class="label" for="fname">First Name*</label><input id="fname" type="text" name="fname" size="30" maxlength="30" value="<?php if (isset($_POST['fname'])) echo $_POST['fname']; ?>">

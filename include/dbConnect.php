@@ -1,13 +1,12 @@
-<?php 
-// This creates a connection to the logindb database and to MySQL, 
-// It also sets the encoding.
-// Set the access details as constants:
-//TODO:implement reusable sql connection interface
+<?php
+//This creates a connection to the logindb database and to MySQL, 
+//It also sets the encoding.
 //
 class dbConnect
 { 
-	//class constants don't need to be prefixed with '$'!
-    private $_user,
+	//class constants don't need to be prefixed with '$' but vars do
+    private var
+        $_user,
         $_pw,
         $_host,
         $_name;

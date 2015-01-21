@@ -1,4 +1,5 @@
 <?php
+//session_start();
 function secureLogin(){
     //if not already logged in as a registered user, display login page
     if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 1) )

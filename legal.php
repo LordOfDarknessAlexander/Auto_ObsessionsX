@@ -3,8 +3,9 @@
 //displays conditiponally based on argument passed in url
 require_once 'include/html.php';
 //require_once './secure.php';
-//secureLogin();    //this alolows for a single call to secure login across multiple pages!
+//secureLogin();    //this allows for a single call to secure login across multiple pages!
 $AO_NAME = 'Auto Obsessions';
+$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 function subheader($title){
     html::hr();?>
 <h2><?php echo $title;?></h2>
@@ -26,7 +27,7 @@ Please note, accessing any <?php echo $AO_NAME;?> service in your capacity as a 
 If <?php echo $AO_NAME;?> makes material changes to these Terms, you will be notified by email or by posting a notice on our site before the changes are effective. Any new features that augment or enhance the current Service, including the release of new tools and resources, shall be subject to the Terms of Service. Continued use of the Service after any such changes shall constitute your consent to such changes. You can review the most current version of the <a href=''>Terms of Service</a>
 <br>
 Violation of any of the terms below will result in the termination of your Account. While <?php echo $AO_NAME;?> prohibits such conduct and Content on the Service, you understand and agree that <?php echo $AO_NAME;?> cannot be responsible for the Content posted on the Service and you nonetheless may be exposed to such materials. You agree to use the Service at your own risk.
-<?php subheader('A: Account Terms');?>
+<?php subheader('A:Account Terms');?>
 <?php subheader('B:API Terms');?>
 <ul>
 </ul>
@@ -73,11 +74,11 @@ subheader('Data Storage');
 echo $AO_NAME;?> uses third-party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to execute this site. While <?php echo $AO_NAME;?> owns the code, databases, and all rights to the <?php echo $AO_NAME;?> web-page, application and all its derivatives, you retain all rights to your data.
 <?php
 subheader('Disclosure');
-echo $AO_NAME;?> may disclose personally identifiable information under special circumstances, such as to comply with subpoenas or when your actions violate the <a href=''>Terms of Service Agreement</a>.
+echo $AO_NAME;?> may disclose personally identifiable information under special circumstances, such as to comply with subpoenas or when your actions violate the <a href='<?php echo $ROOT_URL.'legal.php?page=terms';?>'>Terms of Service</a>.
 <?php
 subheader('Change');
 echo $AO_NAME;?> may periodically update this policy.<br>
-You shall be notified about significant changes in the treatment of personal information by sending a notice to the primary email address specified in your <?php echo $AO_NAME;?> account.
+<?php echo $AO_NAME;?> shall notify you about significant changes in the treatment of personal information by sending a notice to the primary email address specified in your <?php echo $AO_NAME;?> account.
 <?php subheader('Questions');?>
 Any questions about this Privacy Policy should be addressed to ...
 <?php
@@ -85,13 +86,28 @@ Any questions about this Privacy Policy should be addressed to ...
 else if($page == 'contact'){
     html::simpleHead('Contact');
 ?>
-Please contact us at...
+<h1>Contact <?php echo $AO_NAME;?></h1>
+Questions, Concerns or Comments.
+<form action='' method='post'>
+    Name:<input type='text' name='name' size='16' maxlength='18'/><br>
+    Email:<input type='text' name='email' size='30' maxlength="100"/><br>
+    Subject:<input type='text' name='subject' size='30' maxlength='30'><br>
+    Content:<input type='text' name='content' size='30' maxlength='30'><br>
+    <input type='submit' value='Send'>
+</form>
 <?php
 }
 else if($page == 'security'){
     html::simpleHead('Security');
 ?>
+<h1><?php echo $AO_NAME;?> Security</h1>
 Here's some stuff we do to make the user feel secure!
+<?php subheader('Systems');?>
+<?php subheader('Operations');?>
+<?php subheader('Communications');?>
+<?php subheader('Data Storage');?>
+<?php subheader('Employee Access');?>
+For any additional questions or concerns, please <a href='<?php echo $ROOT_URL.'legal.php?page=contact';?>'>contact us</a>.
 <?php
 }
 else{
