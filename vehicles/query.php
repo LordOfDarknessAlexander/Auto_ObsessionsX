@@ -6,6 +6,8 @@ require_once 'vehicle.php';
 //
 //$CARS = dbConnect();  //global
 //temporary until vehicle DB is setup!
+$car = new Vehicle('Jaguar', '1969', 'E-Type Series II 4.2 Roadster', 'defaultInfo', '25000');
+
 $cars = array(
 	new Vehicle('Jaguar', '1969', 'E-Type Series II 4.2 Roadster', 'defaultInfo', '25000'),
 	new Vehicle('Chevrolet', '1969','Camaro RS-Z28 Sport Coupe', 'info', '18000'),
@@ -31,7 +33,6 @@ $cars = array(
     //else{
         //$info = $stripped;
     //}
-    //NOTE:single quotes must be used, JSON strings are required to be double quoted!
 echo $cars[0]->toJSON(); //serialize to JSON to send over internet
 //}
 ?>

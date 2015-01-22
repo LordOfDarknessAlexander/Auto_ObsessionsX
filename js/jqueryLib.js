@@ -85,12 +85,23 @@ var jq = {
 		sellBtn : $('div#CarView button#sellBtn'),
 		carImg : $('img#car'),
 		carInfo : $('div#CarView label#carInfo'),
-		toggle : function()
+		toggle:function()
 		{	//go from (my cars to car view) || (car view to my cars)
 			//jq.Garage.menu.toggle();
 			//this.menu.toggle();
 			jq.Garage.menu.toggle();
 			$('#CarView').toggle();	//this.menu doesn't work...
+		}
+	},
+    AuctionSell:{
+		menu:$('div#AuctionSell'),
+		backBtn:$('div#AuctionSell button#backBtn'),
+        //homeBtn:$('div#AuctionSell button#homeBtn'),
+		carView:$('div#AuctionSell div#carView'),
+        carList:$('div#AuctionSell ul#auctionCars'),
+        toggle:function(){
+			jq.CarView.menu.toggle();
+			jq.AuctionSell.menu.toggle();
 		}
 	},
 	Funds : {
@@ -195,6 +206,13 @@ jq.Messages.backBtn.click(jq.Messages.toggle);
 jq.Search.backBtn.click(jq.Search.toggle);
 jq.Business.backBtn.click(jq.Business.toggle);
 //jq.Garage.backBtn.click(jq.Garage.toggle);
+
+jq.CarView.sellBtn.click(function(){
+    jq.AuctionSell.toggle();
+});
+jq.AuctionSell.backBtn.click(function(){
+    jq.AuctionSell.toggle();
+});
 //
 //Garage State interface
 //

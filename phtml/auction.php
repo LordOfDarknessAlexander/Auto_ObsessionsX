@@ -33,3 +33,24 @@
     <label id='carInfo'></label>
     <button id='homeBtn'>Home</button>
 </div>
+
+<div id='AuctionSell'>
+    <h1>Auctioned Cars</h1>
+    <!--<backBtn();>select which car to bid for-->
+    <button id='backBtn'>Back</button>
+    <div id='carView'>
+        <ul id='auctionCars'>
+            <li>
+                <img src=''>
+                <label id=''>CarName-CarInfo<br></label>
+                <button id='0'>
+                    <label id='price'>$carPrice</label><br>
+                    Auction expires:<label id='expireTime'></label>
+                </button> 
+            </li>
+            <br>
+            <!--populated by application with format:
+            <img><label></><button></>-->
+        </ul>
+    </div>
+</div>

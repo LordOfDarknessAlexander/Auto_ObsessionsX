@@ -117,4 +117,4 @@ foreach($scripts as $val){
         <button id='backBtn'>Back</button>
     </div>
 </div><!--end wrapper, include javascript at end of body-->
-<?php require_once('js.php');?>
+<?php require_once 'js.php';?>

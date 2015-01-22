@@ -22,6 +22,7 @@ $paths = array(
     'state/Repair',
     'state/Auction',
     'state/AuctionSelect',
+    'state/AuctionSell',
     'state/Add_Funds',
     //
     'program'	//main javascript program

@@ -48,10 +48,11 @@ var Garage = {
         //}
 //<?php
     //if(loggedIn){
+        //TODO:Fix, this worked last commit!
         //make server calls(using ajax) to serialize
         //user vehicles saved to database, so that vehicles
         //need only be created once, instead of making server calls all the time to update cars
-        var dataStr = '';
+        /*var dataStr = '';
         //alert('calling ajax');
         var jqxhr = $.ajax({
             type:'POST',
@@ -68,7 +69,7 @@ var Garage = {
         }).fail(function(jqxhr){
             //call will fail if result is not properly formated JSON!
             alert('ajax call failed! Reason: ' + jqxhr.responseText);
-        });
+        });*/
     //}
     //else{  //playing locally as guest, make calls in JavaScript
         //

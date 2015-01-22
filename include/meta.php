@@ -6,6 +6,7 @@ $paths = array(
     //
     'main',   //'gameMenu',
     'auction',
+    'AuctionSell',
     'LoseAuction',
     //
     'carView',
