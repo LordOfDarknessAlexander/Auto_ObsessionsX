@@ -4,6 +4,7 @@
 // Set the access details as constants:
 //TODO:implement reusable sql connection interface
 //
+/*
 class dbConnect
 { 
 	//class constants don't need to be prefixed with '$'!
@@ -32,3 +33,17 @@ class dbConnect
         return mysqli_real_escape_string($self::$con, strip_tags($res));
     }
 }
+*/
+// This creates a connection to the logindb database and to MySQL, 
+// It also sets the encoding.
+// Set the access details as constants:
+DEFINE ('DB_USER', 'root');
+DEFINE ('DB_PASSWORD', 'Dante777');
+DEFINE ('DB_HOST', 'localhost');
+DEFINE ('DB_NAME', 'finalpost');
+
+// Make the connection:
+$dbcon = @mysqli_connect (DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) OR die ('Could not connect to MySQL: ' . mysqli_connect_error() );
+
+// Set the encoding...
+mysqli_set_charset($dbcon, 'utf8');

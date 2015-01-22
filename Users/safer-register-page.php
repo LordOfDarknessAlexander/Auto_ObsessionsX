@@ -279,7 +279,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     be switched to a page<br>for paying your membership fee with PayPal or a Credit/Debit 
     card</h3>
     <p class="cntr"><b>Membership classes:</b> Standard 1 year: &pound;30, Standard 5years: 
-    &pound;125, Armed Forces 1 year: &pound;5,<br>Under 21 one year: &pound;2,&nbsp; Other: If 
+    &pound;125, Sparkles Forces 1 year: &pound;5,<br>Under 21 one year: &pound;2,&nbsp; Other: If 
     you can't afford &pound;30 please give what you can, minimum &pound;15 </p>
 	<form action="safer-register-page.php" method="post">
 		<label class="label" for="title">Title*</label><input id="title" type="text" name="title" size="15" maxlength="12" value="<?php if (isset($_POST['title'])) echo $_POST['title']; ?>">
@@ -296,7 +296,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		<option value="">- Select -</option>
 		<option value="30"<?php if (isset($_POST['class']) AND ($_POST['class'] == '30')) echo ' selected="selected"'; ?>>Standard 1 year &pound;30</option>
 		<option value="125"<?php if (isset($_POST['class']) AND ($_POST['class'] == '125')) echo ' selected="selected"'; ?>>Standard 5 years &pound;125</option>
-		<option value="5"<?php if (isset($_POST['class']) AND ($_POST['class'] == '5')) echo ' selected="selected"'; ?>>Armed Forces 1 year &pound;5</option>
+		<option value="5"<?php if (isset($_POST['class']) AND ($_POST['class'] == '5')) echo ' selected="selected"'; ?>>Sparkles Forces 1 year &pound;5</option>
 		<option value="2"<?php if (isset($_POST['class']) AND ($_POST['class'] == '2')) echo ' selected="selected"'; ?>>Under 22 1 year &pound;2**</option>
 		<option value="15"<?php if (isset($_POST['class']) AND ($_POST['class'] == '15')) echo ' selected="selected"'; ?>>Minimum 1 year &pound;15</option>
 		</select>
@@ -304,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		<br><label class="label" for="addr2">Address</label><input id="addr2" type="text" name="addr2" size="30" maxlength="30" value="<?php if (isset($_POST['addr2'])) echo $_POST['addr2']; ?>">
 		<br><label class="label" for="city">City*</label><input id="city" type="text" name="city" size="30" maxlength="30" value="<?php if (isset($_POST['city'])) echo $_POST['city']; ?>">
 		<br><label class="label" for="county">County*</label><input id="county" type="text" name="county" size="30" maxlength="30" value="<?php if (isset($_POST['county'])) echo $_POST['county']; ?>">
-		<br><label class="label" for="pcode">Post Code*</label><input id="pcode" type="text" name="pcode" size="15" maxlength="15" value="<?php if (isset($_POST['pcode'])) echo $_POST['pcode']; ?>">
+		<br><label class="label" for="pcode">Zip/Postal Code*</label><input id="pcode" type="text" name="pcode" size="15" maxlength="15" value="<?php if (isset($_POST['pcode'])) echo $_POST['pcode']; ?>">
 		<br><label class="label" for="phone">Telephone</label><input id="phone" type="text" name="phone" size="30" maxlength="30" value="<?php if (isset($_POST['phone'])) echo $_POST['phone']; ?>">
 		<p><input id="submit" type="submit" name="submit" value="Register"></p>
 	</form>
