@@ -1,32 +1,20 @@
-﻿//Global Auction State Object, no caps as object is not const
-//TODO:move vars into Auction, to remove from global scope
-var PLAYER_WAIT = 200;
+﻿//Javascript functionality for manage vehicle sales
 var ENEMY_WAIT = 300;
 //AI cooldown timer
 
 var bidderCooldown = 0;
-var playerCanBid = false;
-
-var playerBid = 0;
 //temp
 var bidAmount = 200;
 var currentBid = vehiclePrice * 0.1;	//_car.getPrice() * 0.1; //bidding interval as a percent of total value
 
 var enemyBids = [0,0,0,0]; 
 var endBidTimers = [0,0,0,0];
-var playerDidBid = false;
 var enemyCanBid = false;
-var playerNextBid = currentBid + (currentBid * 0.1);
-
 //BidTImers Booleans
 var startEndBids = [false,false,false,false];
-var playerWinning = false;
-var playerWon = false;
 //there only needs to be 1 timer to track the closing of the auction
 var goingTimer = 0;
 var pGTimer = 0;
-var startPlayerEndBid = false;	//player local
-var playerEndBidTimer = 0;	//player local
 var enemyWinning = false;
 //
 function shuffleArray(array) 
@@ -47,33 +35,16 @@ function shuffleArray(array)
     return array;
 }
 var AuctionSell =
-{	//manages the state for purchasing cars
+{	//manages the state for selling cars
 	//_ai:[],
-	/*
-	//need to use namsespace to allow private vars we could implement and make all auction vars private
-	_user : {	//object representing the current human player
-		canBid:false,
-		didBid:false,
-		didWin:false,
-		startEndBid:false,
-		endBidTimer:0,
-		bid:0	//current bid
-		//functions
-		nextBid : function(){
-			this.bid += (this.bid * 1.0);
-			return this.bid;
-		}
-	},*/
-	_car : xdbCars[0],	//null;	////current car being sold, private var of Auction
+	_cars : []	//array of vehicles either sold or being sold by the user
 	init:function(index)
 	{	//call to start an auction for car
 		//var i = 1;
-		//endGame = false;
 		//appState = GAME_MODE.AUCTION;
-		auctionStop = false;
-
-		//if(index < xdbCars.length){	//make sure index is within bounds to be safe
-			//Auction._car = xdbCars[index];	//copy assigned
+        //var car = null;
+		//if(index < Garage._cars.length){	//make sure index is within bounds to be safe
+			//car = Garage._cars[index];	//copy assigned
 		//}
 		
 		//if(Auction._car !== null){
@@ -97,19 +68,19 @@ var AuctionSell =
 		
 		this.setup();
 		
-		for(var i = 0; i < /*ao.*/xdbCars.length; i++)
+		//for(var i = 0; i < /*ao.*/soldCars.length; i++)
 		{
 			var btnID = "as" + (i).toString(),
 				liID = "asli" + (i).toString(),
 				labelID = 'infoLabel';
 				
-			var car = xdbCars[i];	//ao.xdbCars[i];
+			var car = xdbCars[i];	//Garage._cars[i];
 			
-			var btnStr = "<li id=\'" + liID + "\'>" + 
-				"<img src=\'" + car.getFullPath()/*car.getFullPath()*/ + "\'>" +
-				"<label id=\'" + labelID + "\'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
-				"<button id=\'" + btnID + "\'>" + 
-					"<label id=\'price\'>$" + (car.getPrice() ).toString() + "</label><br>" +
+			var btnStr = "<li id='" + liID + "'>" + 
+				"<img src='" + car.getFullPath()/*car.getFullPath()*/ + "'>" +
+				"<label id='" + labelID + "'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
+				"<button id='" + btnID + "'>" + 
+					"<label id='price'>$" + (car.getPrice() ).toString() + "</label><br>" +
 					"Bid Now!<br>" +
 					//"<label id=\'expireTime\'>Auction expire time!</label>" +
 				"</button>" +

@@ -24,7 +24,7 @@ div#AuctionSell li
 	/*padding: 50px 50px;
 	display:inline;*/
 }
-div#AuctionSell li label#infoLabel
+div#AuctionSell li label#carInfo
 {
 	background-color:grey;
 	text-align:center;
@@ -64,7 +64,7 @@ div#AuctionSell div#carView
     position:absolute;
     overflow-y:scroll;
     bottom:0%;
-    left:0%;
-    width:100%;
+     left:15%;
+    width:70%;
     height:60%;
 }

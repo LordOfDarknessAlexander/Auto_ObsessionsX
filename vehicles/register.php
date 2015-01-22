@@ -1,7 +1,7 @@
 <?php
 //interface and html page for adding, deleting or modifying entries in the vehicle database on the server
 require_once '../include/html.php';
-require_once 'vehicle.php';
+//require_once 'vehicle.php';
 //require_once '../include/dbConnect.php';  //sql database connection
 //require_once '../include/secure.php';
 //

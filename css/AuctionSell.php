@@ -32,7 +32,7 @@ function divAS(){
 	/*padding: 50px 50px;
 	display:inline;*/
 }
-<?php divAS();?> li label#infoLabel
+<?php divAS();?> li label#carInfo
 {
 	background-color:grey;
 	text-align:center;
@@ -71,7 +71,7 @@ function divAS(){
 <?php posAbs();?>
     overflow-y:scroll;
     bottom:0%;
-    left:0%;
-    width:100%;
+    left:15%;
+    width:70%;
     height:60%;
 }

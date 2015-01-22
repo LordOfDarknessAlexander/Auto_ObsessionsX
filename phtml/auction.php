@@ -42,7 +42,7 @@
         <ul id='auctionCars'>
             <li>
                 <img src=''>
-                <label id=''>CarName-CarInfo<br></label>
+                <label id='carInfo'>CarName-CarInfo<br></label>
                 <button id='0'>
                     <label id='price'>$carPrice</label><br>
                     Auction expires:<label id='expireTime'></label>
