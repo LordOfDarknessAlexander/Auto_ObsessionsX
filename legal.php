@@ -112,7 +112,7 @@ For any additional questions or concerns, please <a href='<?php echo $ROOT_URL.'
 }
 else{
 ?>
-ERROR LOADING PAGE! YOU FAIL.
+ERROR LOADING PAGE!
 <?php
 }
 html::footer();

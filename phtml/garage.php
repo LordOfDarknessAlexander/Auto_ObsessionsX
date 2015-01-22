@@ -13,7 +13,8 @@ function selectBtn(){?>
     
     <div id='carListView'>
         <ul id='carBtns'>
-        <!--list contents added dynamically at run time!-->
+        <!--list contents added dynamically at run time by JS
+        TODO:generate content using PHP instead-->
         </ul>
     </div>
     
