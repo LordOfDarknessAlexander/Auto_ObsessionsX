@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			//The mail address was not already registered therefore register the user in the users table
 			// Make the query:		
-			$q = "INSERT INTO users (user_id, title, fname, lname, email, psword, registration_date, uname, paid) VALUES (' ', '$title', '$fn', '$ln', '$e', SHA1('$p'), NOW(), '$uname',  ' ' )";		
+			$q = "INSERT INTO users (user_id, title, fname, lname, email, psword, registration_date, uname) VALUES (' ', '$title', '$fn', '$ln', '$e', SHA1('$p'), NOW(), '$uname' )";		
 			$result = @mysqli_query ($dbcon, $q); // Run the query
 			if ($result) 
 			{ // If the query ran OK
