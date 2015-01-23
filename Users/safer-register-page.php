@@ -122,107 +122,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	// Check stripped string
 	if( $strlen < 1 ) 
 	{
-		$errors[] = 'You forgot to enter your secret username.';
+		$errors[] = 'You forgot to enter your username.';
 	}
 	else
 	{
 		$uname = $stripped;
 	}
-	// Check for a membership class
-	if (empty($_POST['class'])) 
-	{
-		$errors[] = 'You forgot to choose your membership class.';
-	} 
-	else 
-	{
-		$class = trim($_POST['class']);
-	}
-	// Trim the first address
-	$add1 = trim($_POST['addr1']);
-	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($dbcon, strip_tags($add1));
-	// Get string lengths
-	$strlen = mb_strlen($stripped, 'utf8');
-	// Check stripped string
-	if( $strlen < 1 ) 
-	{
-		$errors[] = 'You forgot to enter your address.';
-	}
-	else
-	{
-		$ad1 = $stripped;
-	}
-	// Trim the second address
-	$ad2 = trim($_POST['addr2']);
-	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($dbcon, strip_tags($ad2));
-	// Get string lengths
-	$strlen = mb_strlen($stripped, 'utf8');
-	// Check stripped string
-	if( $strlen < 1 ) 
-	{
-		$ad2=NULL;
-	}
-	else
-	{
-		$ad2 = $stripped;
-	}
-	// Trim the city
-	$ct = trim($_POST['city']);
-	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($dbcon, strip_tags($ct));
-	// Get string lengths
-	$strlen = mb_strlen($stripped, 'utf8');
-	// Check stripped string
-	if( $strlen < 1 ) 
-	{
-		$errors[] = 'You forgot to enter your city.';
-	}
-	else
-	{
-		$cty = $stripped;
-	}
-	// Trim the county
-	$conty = trim($_POST['county']);
-	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($dbcon, strip_tags($conty));
-	// Get string lengths
-	$strlen = mb_strlen($stripped, 'utf8');
-	// Check stripped string
-	if( $strlen < 1 ) 
-	{
-		$errors[] = 'You forgot to enter your county.';
-	}
-	else
-	{
-		$cnty = $stripped;
-	}
-	// Trim the post code
-	$pcod = trim($_POST['pcode']);
-	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($dbcon, strip_tags($pcod));
-	// Get string lengths
-	$strlen = mb_strlen($stripped, 'utf8');
-	// Check stripped string
-	if( $strlen < 1 ) 
-	{
-		$errors[] = 'You forgot to enter your county.';
-	}
-	else
-	{
-		$pcode = $stripped;
-	}
-	// Has a phone number been entered?	
-	if (empty($_POST['phone']))
-	{
-		$ph=($_POST['phone']);
-	}
-	elseif (!empty($_POST['phone'])) 
-	{			
-		//Strip out everything tha is not a number
-		$phone = preg_replace('/\D+/', '', ($_POST['phone']));
-		$ph=$phone;
-	}
+	
+
 	if (empty($errors)) 
 	{ 
 		// If there were no errors
@@ -233,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			//The mail address was not already registered therefore register the user in the users table
 			// Make the query:		
-			$q = "INSERT INTO users (user_id, title, fname, lname, email, psword, registration_date, uname, class, addr1, addr2, city, county, pcode, phone, paid) VALUES (' ', '$title', '$fn', '$ln', '$e', SHA1('$p'), NOW(), '$uname','$class', '$ad1', '$ad2', '$cty', '$cnty', '$pcode', '$ph', ' ' )";		
+			$q = "INSERT INTO users (user_id, title, fname, lname, email, psword, registration_date, uname, paid) VALUES (' ', '$title', '$fn', '$ln', '$e', SHA1('$p'), NOW(), '$uname',  ' ' )";		
 			$result = @mysqli_query ($dbcon, $q); // Run the query
 			if ($result) 
 			{ // If the query ran OK
@@ -275,12 +182,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <div id="midcol">
     <h2>Membership Registration</h2>
     <h3 class="content">Items marked with an asterisk * are essential</h3>
-    <h3 class="content">When you click the 'Register' button, you will 
-    be switched to a page<br>for paying your membership fee with PayPal or a Credit/Debit 
-    card</h3>
-    <p class="cntr"><b>Membership classes:</b> Standard 1 year: &pound;30, Standard 5years: 
-    &pound;125, Sparkles Forces 1 year: &pound;5,<br>Under 21 one year: &pound;2,&nbsp; Other: If 
-    you can't afford &pound;30 please give what you can, minimum &pound;15 </p>
 	<form action="safer-register-page.php" method="post">
 		<label class="label" for="title">Title*</label><input id="title" type="text" name="title" size="15" maxlength="12" value="<?php if (isset($_POST['title'])) echo $_POST['title']; ?>">
 		<br><label class="label" for="fname">First Name*</label><input id="fname" type="text" name="fname" size="30" maxlength="30" value="<?php if (isset($_POST['fname'])) echo $_POST['fname']; ?>">
@@ -289,23 +190,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		<br><label class="label" for="psword1">Password*</label><input id="psword1" type="password" name="psword1" size="12" maxlength="12" value="<?php if (isset($_POST['psword1'])) echo $_POST['psword1']; ?>" >&nbsp;8 
 		to 12 characters
 		<br><label class="label" for="psword2">Confirm Password*</label><input id="psword2" type="password" name="psword2" size="12" maxlength="12" value="<?php if (isset($_POST['psword2'])) echo $_POST['psword2']; ?>" >
-		<br><label class="label" for="uname">Secret User Name*</label><input id="uname" type="text" name="uname" size="12" maxlength="12" value="<?php if (isset($_POST['uname'])) echo $_POST['uname']; ?>">&nbsp;6 
+		<br><label class="label" for="uname"> User Name*</label><input id="uname" type="text" name="uname" size="12" maxlength="12" value="<?php if (isset($_POST['uname'])) echo $_POST['uname']; ?>">&nbsp;6 
 		to 12 characters
-		<br><label class="label" for="class">Membership Class*</label>
-		<select name="class">
-		<option value="">- Select -</option>
-		<option value="30"<?php if (isset($_POST['class']) AND ($_POST['class'] == '30')) echo ' selected="selected"'; ?>>Standard 1 year &pound;30</option>
-		<option value="125"<?php if (isset($_POST['class']) AND ($_POST['class'] == '125')) echo ' selected="selected"'; ?>>Standard 5 years &pound;125</option>
-		<option value="5"<?php if (isset($_POST['class']) AND ($_POST['class'] == '5')) echo ' selected="selected"'; ?>>Sparkles Forces 1 year &pound;5</option>
-		<option value="2"<?php if (isset($_POST['class']) AND ($_POST['class'] == '2')) echo ' selected="selected"'; ?>>Under 22 1 year &pound;2**</option>
-		<option value="15"<?php if (isset($_POST['class']) AND ($_POST['class'] == '15')) echo ' selected="selected"'; ?>>Minimum 1 year &pound;15</option>
-		</select>
-		<br><label class="label" for="addr1">Address*</label><input id="addr1" type="text" name="addr1" size="30" maxlength="30" value="<?php if (isset($_POST['addr1'])) echo $_POST['addr1']; ?>">
-		<br><label class="label" for="addr2">Address</label><input id="addr2" type="text" name="addr2" size="30" maxlength="30" value="<?php if (isset($_POST['addr2'])) echo $_POST['addr2']; ?>">
-		<br><label class="label" for="city">City*</label><input id="city" type="text" name="city" size="30" maxlength="30" value="<?php if (isset($_POST['city'])) echo $_POST['city']; ?>">
-		<br><label class="label" for="county">County*</label><input id="county" type="text" name="county" size="30" maxlength="30" value="<?php if (isset($_POST['county'])) echo $_POST['county']; ?>">
-		<br><label class="label" for="pcode">Zip/Postal Code*</label><input id="pcode" type="text" name="pcode" size="15" maxlength="15" value="<?php if (isset($_POST['pcode'])) echo $_POST['pcode']; ?>">
-		<br><label class="label" for="phone">Telephone</label><input id="phone" type="text" name="phone" size="30" maxlength="30" value="<?php if (isset($_POST['phone'])) echo $_POST['phone']; ?>">
 		<p><input id="submit" type="submit" name="submit" value="Register"></p>
 	</form>
 </div></div></div>
