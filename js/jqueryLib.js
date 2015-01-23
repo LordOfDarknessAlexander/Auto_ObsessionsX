@@ -96,7 +96,7 @@ var jq = {
     AuctionSell:{
 		menu:$('div#AuctionSell'),
 		backBtn:$('div#AuctionSell button#backBtn'),
-        //homeBtn:$('div#AuctionSell button#homeBtn'),
+        homeBtn:$('div#AuctionSell button#homeBtn'),
 		carView:$('div#AuctionSell div#carView'),
         carList:$('div#AuctionSell ul#auctionCars'),
         toggle:function(){
@@ -208,10 +208,18 @@ jq.Business.backBtn.click(jq.Business.toggle);
 //jq.Garage.backBtn.click(jq.Garage.toggle);
 
 jq.CarView.sellBtn.click(function(){
+    AuctionSell.init(0)
     jq.AuctionSell.toggle();
 });
 jq.AuctionSell.backBtn.click(function(){
     jq.AuctionSell.toggle();
+    //appState = GAME_MODE.CAR_VIEW;
+});
+jq.AuctionSell.homeBtn.click(function(){
+    //AuctionSell.close();
+    jq.AuctionSell.menu.toggle();
+    jq.Game.menu.toggle();
+    //appState = GAME_MODE.MAIN;
 });
 //
 //Garage State interface

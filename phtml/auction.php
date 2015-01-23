@@ -38,6 +38,7 @@
     <h1>Auctioned Cars</h1>
     <!--<backBtn();>select which car to bid for-->
     <button id='backBtn'>Back</button>
+    <button id='homeBtn'>Home</button>
     <div id='carView'>
         <ul id='auctionCars'>
             <li>

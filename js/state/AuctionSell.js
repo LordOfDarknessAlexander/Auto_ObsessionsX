@@ -36,13 +36,16 @@ function shuffleArray(array)
 }
 var AuctionSell =
 {	//manages the state for selling cars
-	//_ai:[],
-	_cars : []	//array of vehicles either sold or being sold by the user
+	_ai:[],
+    _cars:[],	//array of vehicles either sold or being sold by the user
 	init:function(index)
 	{	//call to start an auction for car
-		//var i = 1;
+		var i = 1;
 		//appState = GAME_MODE.AUCTION;
-        //var car = null;
+        var car = null;
+        //if(index < userGarage.length){	//make sure index is within bounds to be safe
+			//car = userGarage[index];	//copy assigned
+		//}
 		//if(index < Garage._cars.length){	//make sure index is within bounds to be safe
 			//car = Garage._cars[index];	//copy assigned
 		//}
@@ -66,26 +69,24 @@ var AuctionSell =
 		//$('div#Auction label#carInfo').text(/*'<h1>' + */Auction._car.getFullName() + '-\n    ' + Auction._car.getInfo() );
 		//$('.sound').show();
 		
-		this.setup();
+		//this.setup();
 		
 		//for(var i = 0; i < /*ao.*/soldCars.length; i++)
 		{
 			var btnID = "as" + (i).toString(),
-				liID = "asli" + (i).toString(),
-				labelID = 'infoLabel';
+				liID = "asli" + (i).toString();
 				
 			var car = xdbCars[i];	//Garage._cars[i];
 			
 			var btnStr = "<li id='" + liID + "'>" + 
-				"<img src='" + car.getFullPath()/*car.getFullPath()*/ + "'>" +
-				"<label id='" + labelID + "'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
+				"<img src='" + car.getFullPath() + "'>" +
+				"<label id='carInfo'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
 				"<button id='" + btnID + "'>" + 
-					"<label id='price'>$" + (car.getPrice() ).toString() + "</label><br>" +
-					"Bid Now!<br>" +
-					//"<label id=\'expireTime\'>Auction expire time!</label>" +
+					"Price: $<label id='price'>" + (car.getPrice() ).toString() + "</label><br>" +
+					"Auction expires: <label id='expireTime'></label>" +
 				"</button>" +
 			"</li><br>";
-			this.list.append(btnStr);
+			jq.AuctionSell.carList.append(btnStr);
 			//
 			var btn = $('#' + btnID);
 			
@@ -100,48 +101,76 @@ var AuctionSell =
 				//}
 			//}
 			
-			if(soldCar)
+			if(soldCar)// || auction.expired())
 			{	//display but disable user from entering auction
 				var li = $('#' + liID);
 				li.css('opacity', '0.45');
 				btn.click(this.denyAuction);
 			}
 			else{
-				//btn.click({index:i}, this.initAuction);
-				//btn.css('background-image', "url(\'..\\images\\vehicle.jpg");	//car.getFullPath());
+                //if(auction.expired() ){
+                    //if(auction.paymentRecieved() ){ //user has recieved their money for this auction event
+                        //btn.click({index:i}, this.denyAuction);
+                        //btn.css('background-image', "url(\'..\\images\\defaultBtn.jpg");
+                    //}else{  //user hasn't recieved their money
+                        //btn.click({index:i}, this.getPayment);
+                        //btn.css('background-image', "url(\'..\\images\\recieveMoney.jpg");
+                    //}
+                //}else{
+                    //btn.click({index:i}, this.cancelAuction);
+                    //btn.css('background-image', "url(\'..\\images\\cancel.jpg");
+                //}
 			}
 		}
 	},
-    denyAuction : function(){
+    close:function(){
+        //safe close this state
+    },
+    denyAuction:function(){
+        //do nothing, play sound
 		//if(assetLoader.sounds.denyAuction is not playing)
 			//play deny auction
 		//visual alert as well to notify user?
 	},
-	initAI : function()
+	initAI:function()
 	{	//initislize an array of AI players	
 		//this._enemies = [];
-		enemies = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
-	},	
+		AuctionSell._ai = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
+	},
+    save:function()
+    {
+        //m save auction sale events
+        //if auction hasn't finished, pause and record time
+    },
+    load:function()
+    {
+        //load saved vehicle list
+        
+        //continue any auctions still in progress
+        //TODO:these could be server processes which execute until completion,
+        //regardles of the user being logged in
+        //for(event in auctions){
+            //if(!event.finished()){
+                //event.resume();
+            //}
+        //}
+    },
 	update : function()
 	{	//main update logic, calle dper frame
-		Auction.bidTimers();
+		AuctionSell.bidTimers();
 		//Auction.assignEnemyBidCaps();
-		Auction.enemyBidding();
-		Auction.currentBidder();
-		Auction.updatePlayer();
-		Auction.going();
-		Auction.playerGoing();
-		Auction.findEndBidder();
-		Auction.sellCarEndAuction();
+		AuctionSell.enemyBidding();
+		AuctionSell.currentBidder();
+		AuctionSell.going();
+		AuctionSell.findEndBidder();
 		
         if(enemyWinning){
-	  	    //goingTimer ++;
+	  	    //goingTimer++;
 	  	    console.log("enemys winning" + goingTimer);
 	  	}
 	  	else{
 	  		goingTimer = 0;
 	  	}
-		console.log("enemys winning" + endBidTimers);
 	  	
 	  	if(bidderCooldown >= ENEMY_WAIT)
 	  	{	//enemy bid cooldown has refreshed
@@ -153,14 +182,9 @@ var AuctionSell =
 	  	//console.log("EnemyCaps2 " + enemyCaps[1]);
 	  	//console.log("EnemyCaps3 " + enemyCaps[2]);
 	  	//console.log("EnemyCaps4 " + enemyCaps[3]);
-	
-		if(auctionEnded)
-		{
-			this.destroy();		
-		}
-		if(endGame)
-		{
-			this.destroy();					
+		
+        if(this._end){
+			this.close();
 		}
 
 		//if(!auctionStop)
@@ -328,8 +352,6 @@ var AuctionSell =
 			{
 				startEndBids[i] = (i == index ? true : false);
 			}
-			
-			startPlayerEndBid = false;	
 		}		
         //check the bids of each AI to determine the highest bid,
         //then setting the state;

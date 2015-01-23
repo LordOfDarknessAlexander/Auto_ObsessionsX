@@ -109,6 +109,14 @@ foreach($scripts as $val){
     </div>
     <div id='search'>
         <button id='backBtn'>Back</button>
+        <!--form action='search.php' method='POST'>
+            <input id='filter'>
+                <option 'vehicle'>
+                <option 'business'>
+                <option 'user'>
+            <input type='text'
+            <input submit>
+        </form>-->
     </div>
     <div id='business'>
         <button id='backBtn'>Back</button>
