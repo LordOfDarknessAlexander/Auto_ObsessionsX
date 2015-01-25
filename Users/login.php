@@ -44,12 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		//if no problems
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
-		$q = "SELECT user_id, fname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') AND paid='Yes')";		
+		$q = "SELECT user_id, fname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
 		$result = mysqli_query ($dbcon, $q); 
 		// Check the result:
 		if (@mysqli_num_rows($result) == 1) 
 		{
-			//The user input matched the database rcoord
+			//The user input matched the database record
 			// Start the session, fetch the record and insert the three values in an array
 			session_start();
 			$_SESSION = mysqli_fetch_array ($result, MYSQLI_ASSOC);
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		} 
 		else 
 		{ // No match was made.
-			echo '<p class="error">The email address and password do not match our records.<br>Perhaps your fee has not yet arrived from PayPal.<br>If you need to register, click the Register button on the header menu</p>';
+			echo '<p class="error">The email address and password do not match our records.If you need to register, click the Register button on the header menu</p>';
 		}
 	} 
 	else 

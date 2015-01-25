@@ -22,12 +22,13 @@ h3.content { margin-top:0; }
 require ('mysqli_connect.php'); // Connect to the database
 // This code inserts a record into the users table
 // Has the form been submitted?
-
-//function strip($str){
-    //$res = trim($_POST[$str]);
-	//strip HTML and apply escaping
-	//return mysqli_real_escape_string($db.$con, strip_tags($res));
-//}
+/*
+function strip($str)
+{
+    $res = trim($_POST[$str]);
+	strip HTML and apply escaping
+	return mysqli_real_escape_string($db.$con, strip_tags($res));
+}*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 	$errors = array(); // Start an array named errors 
@@ -84,9 +85,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		$errors[] = 'You forgot to enter your email address.';
 	}
 	//remove spaces from beginning and end of the email address and validate it	
-	if (filter_var((trim($_POST['email'])), FILTER_VALIDATE_EMAIL)) {	
-	//A valid email address is then registered
-	$e = mysqli_real_escape_string($dbcon, (trim($_POST['email'])));
+	if (filter_var((trim($_POST['email'])), FILTER_VALIDATE_EMAIL)) 
+	{	
+		//A valid email address is then registered
+		$e = mysqli_real_escape_string($dbcon, (trim($_POST['email'])));
 	}
 	else
 	{									

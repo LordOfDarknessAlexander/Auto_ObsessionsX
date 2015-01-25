@@ -18,47 +18,65 @@ p.error { color:red; font-size:105%; font-weight:bold; text-align:center;
 <p><?php 
 // This page lets a user change his password
 // Was the form submitted?
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+{
 	require ('./mysqli_connect.php'); // Connect to the database
 	$errors = array(); // Start an array to contain the error messages
 	// Is the email address present
-	if (empty($_POST['email'])) {
+	if (empty($_POST['email'])) 
+	{
 		$errors[] = 'You forgot to enter your email address.';
-	} else {
+	} 
+	else 
+	{
 		$e = mysqli_real_escape_string($dbcon, trim($_POST['email']));
 	}
 	// Check for the current password:
-	if (empty($_POST['psword'])) {
+	if (empty($_POST['psword'])) 
+	{
 		$errors[] = 'You forgot to enter your current password.';
-	} else {
+	} 
+	else 
+	{
 		$p = mysqli_real_escape_string($dbcon, trim($_POST['psword']));
 	}
 	// Check for a new password and match against the confirmed password:
-	if (!empty($_POST['psword1'])) {
-		if ($_POST['psword1'] != $_POST['psword2']) {
+	if (!empty($_POST['psword1'])) 
+	{
+		if ($_POST['psword1'] != $_POST['psword2']) 
+		{
 			$errors[] = 'Your new password did not match the confirmed password.';
-		} else {
+		} 
+		else 
+		{
 			$np = mysqli_real_escape_string($dbcon, trim($_POST['psword1']));
 		}
-	} else {
+	} 
+	else 
+	{
 		$errors[] = 'You forgot to enter your new password.';
 	}
-	if (empty($errors)) { // If the entries are satisfactory
+	if (empty($errors)) 
+	{ // If the entries are satisfactory
 	// Check whether the user has entered the right email address/password combination:
 		$q = "SELECT user_id FROM users WHERE (email='$e' AND psword=SHA1('$p') )";
 		$result = @mysqli_query($dbcon, $q);
 		$num = @mysqli_num_rows($result);
-		if ($num == 1) { // A match was made.
+		if ($num == 1) 
+		{ // A match was made.
 			// Get the user_id:
 			$row = mysqli_fetch_array($result, MYSQLI_NUM);
 			// Make the UPDATE query:
 			$q = "UPDATE users SET psword=SHA1('$np') WHERE user_id=$row[0]";		
 			$result = @mysqli_query($dbcon, $q);
-			if (mysqli_affected_rows($dbcon) == 1) { // If the query ran
+			if (mysqli_affected_rows($dbcon) == 1) 
+			{ // If the query ran
 				// Echo a message.
 				echo '<h2>Thank you!</h2>
 				<h3>Your password has been updated.</h3>';	
-			} else { // If the query did not run
+			} 
+			else 
+			{ // If the query did not run
 				// Error message:
 				echo '<h2>System Error</h2>
 				<p class="error">Your password was not changed due to a system error. We apologize for any inconvenience.</p>'; 
@@ -69,11 +87,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			// Include the footer and stop the script
 			include ('includes/footer.php'); 
 			exit();
-		} else { // Invalid email address/password combination
+		} 
+		else 
+		{ // Invalid email address/password combination
 			echo '<h2>Error!</h2>
 			<p class="error">The email address and password do not match those on file.</p>';
 		}
-	} else { // Report the errors.
+	} 
+	else 
+	{ // Report the errors.
 		echo '<h2>Error!</h2>
 		<p class="error">The following error(s) occurred:<br />';
 		foreach ($errors as $msg) { // Print each error.
