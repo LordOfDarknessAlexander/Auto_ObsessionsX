@@ -101,8 +101,8 @@ curBidImage.src = 'images/slime2.png';
 //
 //AI
 //Create an empty array of Bidders
-var bidders = ["Bidder 990 ", "Bidder 1090 " ,"Bidder 3490 ", "Bidder 32090 " ,"Bidder 46590 " ,"Bidder 32490 ", "Bidder 32190 " ,"Bidder 7890 ", "Bidder 0090 ","Bidder 66990 ","Bidder 1090 ", "Bidder 12332 ","Bidder 234390 ","Bidder 890 ","Bidder 8720 ","Bidder 8976 ","Bidder 220 ","Bidder 11196 ","Bidder 8976 ",
-"Bidder 6690 ","Bidder 4490 ","Bidder 6790 ","Bidder 8790 ","Bidder 10 ","Bidder 40 ","Bidder 430 ","Bidder 3390 ","Bidder 9 ","Bidder 621 ","Bidder 21430 ","Bidder 23450 ","Bidder 32345","Bidder 46574","Bidder 4597","Bidder 78765","Bidder 8765 ","Bidder 908 ","Sparkles King ","Bidder 7890 "];
+var bidders = ["Bidder_990 ", "Bidder_1090 " ,"Bidder_3490 ", "Bidder_320 " ,"Bidder_465 " ,"Bidder_2490 ", "Bidder_2190 " ,"Bidder_7890 ", "Bidder_90 ","Bidder_66990 ","Bidder_1090 ", "Bidder_2332 ","Bidder_4390 ","Bidder_890 ","Bidder_8720 ","Bidder_8976 ","Bidder_220 ","Bidder_1196 ","Bidder_8976 ",
+"Bidder_6690 ","Bidder_4490 ","Bidder_6790 ","Bidder_8790 ","Bidder_10 ","Bidder_40 ","Bidder_430 ","Bidder_3390 ","Bidder_9 ","Bidder_621 ","Bidder_21430 ","Bidder_23450 ","Bidder_32345 ","Bidder_46574 ","Bidder_4597 ","Bidder_78765 ","Bidder_8765 ","Bidder_608 ","Sparkles King ","Bidder_7890 "];
 
 var vehiclePrice = 20000;
 //static bidding caps results in obvious behaviour,
