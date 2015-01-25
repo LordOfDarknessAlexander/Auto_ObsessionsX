@@ -8,7 +8,7 @@ exit();
 <!doctype html>
 <html lang=en>
 <head>
-<title>View found address page</title>
+<title>View found Users page</title>
 <meta charset=utf-8>
 <link rel="stylesheet" type="text/css" href="includes.css">
 <style type="text/css">
@@ -31,7 +31,7 @@ $fname = mysqli_real_escape_string($dbcon, $fname );
 $fname=$_POST['fname'];
 $lname=$_POST['lname'];
 $lname = mysqli_real_escape_string($dbcon, $lname);
-$q = "SELECT title, lname, fname, addr1, addr2, city, county, pcode, phone, user_id FROM users WHERE lname='$lname' AND fname='$fname' ";		
+$q = "SELECT title, lname, fname, uname,user_id FROM users WHERE lname='$lname' AND fname='$fname' ";		
 $result = @mysqli_query ($dbcon, $q); // Run the query.
 if ($result) 
 { 
@@ -42,12 +42,7 @@ if ($result)
 	<td><b>Title</b></td>
 	<td><b>Last Name</b></td>
 	<td><b>First Name</b></td>
-	<td><b>Addrs1</b></td>
-	<td><b>Addrs2</b></td>
-	<td><b>City</b></td>
-	<td><b>County</b></td>
-	<td><b>Pcode</b></td>
-	<td><b>Phone</b></td>
+	<td><b>User Name</b></td>
 	</tr>';
 	// Fetch and display the records:
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) 
@@ -58,12 +53,7 @@ if ($result)
 		<td>' . $row['title'] . '</td>
 		<td>' . $row['lname'] . '</td>
 		<td>' . $row['fname'] . '</td>
-		<td>' . $row['addr1'] . '</td>
-		<td>' . $row['addr2'] . '</td>
-		<td>' . $row['city'] . '</td>
-		<td>' . $row['county'] . '</td>
-		<td>' . $row['pcode'] . '</td>
-		<td>' . $row['phone'] . '</td>
+		<td>' . $row['uname'] . '</td>
 		</tr>';
 	}
 	echo '</table>'; // Close the table.

@@ -45,7 +45,7 @@ The Members' page content. The Members' page content.<br>The Members' page conte
 The Members' page content.</p></div>
 <div id="mid-right-col">
 <h3>Special offers to Members only.</h3>
-<p><b>T-Shirts &pound;10.00</b></p>
+<p><b>T-Shirts &pound;100.00</b></p>
 <img alt="Polo shirt" title="Polo shirt" height="207" src="images/polo.png" width="280"><br>
 <br>
 </div>

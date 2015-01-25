@@ -14,7 +14,7 @@ h3.red { color:red; font-size:105%; font-weight:bold; text-align:center;}
 <?php include("includes/nav.php"); ?>
 <?php include("includes/info-col.php"); ?>
 	<div id="content"><!-- Start of search address page content. -->
-<h2>Search for an Address or Phone Number</h2>
+<h2>Search for a Username</h2>
 <h3 class="red">Both Names are required items</h3>
 <form action="view_found_address.php" method="post">
 	<p><label class="label" for="fname">First Name:</label><input id="fname" type="text" name="fname" size="30" maxlength="30" value="<?php if (isset($_POST['fname'])) echo $_POST['fname']; ?>"></p>
