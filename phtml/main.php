@@ -33,8 +33,8 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
              <div id="login">
             	<fieldset>
                     <form method="post" action="Users/login.php">
-                      <p>ENTER USER NAME <input type="text" name="username"></p>
-                      <p> ENTER PASSWORD <input type="password" name="pword"></p>
+                      <p> USER NAME <input type="text" name="username"></p>
+                      <p> PASSWORD <input type="password" name="pword"></p>
                       <p><input type="submit"  name="submit" value="Log In"></p>
                     </form>
                 </fieldset>
