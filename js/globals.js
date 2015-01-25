@@ -101,8 +101,8 @@ curBidImage.src = 'images/slime2.png';
 //
 //AI
 //Create an empty array of Bidders
-var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Behemoth ", "Quatarian " ,"Ol G ", "Cindy ","Bobby ","Obama ", "OsamaBinBombin ","Ortega Mammon ","LOD Alexander ","Meatwad ","Candela","Oprah ","Jerry Springer ","Sam Jaxon ",
-"Moody Blue ","Shitake Shroom ","Macabre ","Sancho Pancho ","Quijote ","Leo ","Centurion ","Omega Pepper ","Osiris Moon ","Sass McFrass ","Smiley ","Budapest Guy ","Larry Queen ","Special Head ","Primitivo Montoya ","The Skywalker ","Sam Squirrel ","Dante ","Sparkles King ","Onion Knight "];
+var bidders = ["Bidder 990 ", "Bidder 1090 " ,"Bidder 3490 ", "Bidder 32090 " ,"Bidder 46590 " ,"Bidder 32490 ", "Bidder 32190 " ,"Bidder 7890 ", "Bidder 0090 ","Bidder 66990 ","Bidder 1090 ", "Bidder 12332 ","Bidder 234390 ","Bidder 890 ","Bidder 8720 ","Bidder 8976 ","Bidder 220 ","Bidder 11196 ","Bidder 8976 ",
+"Bidder 6690 ","Bidder 4490 ","Bidder 6790 ","Bidder 8790 ","Bidder 10 ","Bidder 40 ","Bidder 430 ","Bidder 3390 ","Bidder 9 ","Bidder 621 ","Bidder 21430 ","Bidder 23450 ","Bidder 32345","Bidder 46574","Bidder 4597","Bidder 78765","Bidder 8765 ","Bidder 908 ","Sparkles King ","Bidder 7890 "];
 
 var vehiclePrice = 20000;
 //static bidding caps results in obvious behaviour,

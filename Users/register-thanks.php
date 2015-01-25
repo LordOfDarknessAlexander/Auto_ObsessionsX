@@ -24,7 +24,7 @@ input.fl-left { float:left; }
 <h3>To confirm your registration confirm your email for us </h3>
 </div>
 </div></div>
-	<!-- End of the thankyou page content. -->
+	<!-- End of the thank you page content. -->
 <?php include("includes/footer.php"); ?>
 </body>
 </html>

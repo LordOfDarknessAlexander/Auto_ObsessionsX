@@ -37,8 +37,7 @@ echo '</h2>';
 	<h3>You have permission to:</h3><p>&#9632;Edit and delete a record.</p>
 	<p>&#9632;Use the View members button to page through all the members.</p>
 	<p>&#9632;Use the Search button to locate a particular member</p>
-	<p>&#9632;Use the Addresses button to locate a member's Address and Phone 
-	number </p>
+	<p>&#9632;Use the Users button to locate a member's Username </p>
 	<p>&nbsp;</p></div>
 <!-- End of the members page content. -->
 </div></div>	

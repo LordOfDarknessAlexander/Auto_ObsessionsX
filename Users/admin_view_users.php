@@ -38,7 +38,7 @@ table
 require ('mysqli_connect.php'); // Connect to the database.
 //set the number of rows per display page
 $pagerows = 4;
-// Has the total number of pagess already been calculated?
+// Has the total number of pages already been calculated?
 if (isset($_GET['p']) && is_numeric
 ($_GET['p'])) 
 {
