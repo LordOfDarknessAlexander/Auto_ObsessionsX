@@ -47,7 +47,26 @@ if (!isset($file))
 }
 else
 {
-	echo $image = file_get_contents ($_FILES['image' ]['tmp_name']);
+    $image = addslashes(file_get_contents ($_FILES['image' ]['tmp_name']));
+	$image_name = addslashes($_FILES['image' ]['name']);
+	$image_size = getimagesize($_FILES['image' ]['tmp_name']);
+	
+	if(image_size==FALSE)
+	{
+		echo "Gorguts that's not an image";
+	}
+	else
+	{
+		if(!$insert = mysql_query("INSERT INTO description VALUES('','$image_name','$image')"))
+		{
+			echo "Problem uploading image";
+		}
+		else
+		{
+			$lastid = mysql_insert_id();
+			echo "Image uploaded. <p/>Your Image:  <p/><img src=get.php?id=1 >";
+		}
+	}
 }	
 
 ?>
