@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `aoCars` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`car_id`, `make`, year`, `model`, `price`, `info`) VALUES
+INSERT INTO `aoCars` (`car_id`, `make`, year`, `model`, `price`, `info`) VALUES
     (1, 'Jaguar', 1969,'E-Type Series II 4.2 Roadster', 25000, 'default info'),
 	(2, 'Chevrolet', 1969, 'Camaro RS-Z28 Sport Coupe', 18000, 'default info'),
 	(3, 'GMC', 1997, 'Sierra', 12000, 'default info'),
