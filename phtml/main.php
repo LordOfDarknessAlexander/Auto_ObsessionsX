@@ -106,6 +106,10 @@ foreach($scripts as $val){
     </div>
     <div id='ranks'>
         <button id='backBtn'>Back</button>
+        <!--filter-->
+            <!--option money-->
+            <!--option prestige-->
+            <!--option mile Markers-->
     </div>
     <div id='search'>
         <button id='backBtn'>Back</button>

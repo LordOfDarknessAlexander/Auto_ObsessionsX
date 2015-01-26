@@ -80,7 +80,7 @@ class html
 ?>
     <style>
         body{
-            background:url('./images/Splash.png'); no-repeat 0 0;
+            background:url('http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/images/Splash.png'); no-repeat 0 0;
             font-family:Arial, Helvetica, sans-serif;
             font-size:13px;
             color: red;
