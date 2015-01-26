@@ -32,18 +32,18 @@ CREATE TABLE IF NOT EXISTS `aoCars` (
     `year` int NOT NULL,
     `model` varchar(50) NOT NULL,
     `price` int NOT NULL,
-    `info` char(128) NOT NULL,
+    `info` char(128) NOT NULL
 )ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `aoCars` (`car_id`, `make`, year`, `model`, `price`, `info`) VALUES
-    (1, 'Jaguar', 1969,'E-Type Series II 4.2 Roadster', 25000, 'default info'),
-	(2, 'Chevrolet', 1969, 'Camaro RS-Z28 Sport Coupe', 18000, 'default info'),
-	(3, 'GMC', 1997, 'Sierra', 12000, 'default info'),
-    (4, 'Audi', 2013, 'S5 Coupe', 57000, 'default info');
+INSERT INTO `aoCars` (`car_id`, `make`, `year`, `model`, `price`, `info`) VALUES
+(1, 'Jaguar', 1969,'E-Type Series II 4.2 Roadster', 25000, 'default info'),
+(2, 'Chevrolet', 1969, 'Camaro RS-Z28 Sport Coupe', 18000, 'default info'),
+(3, 'GMC', 1997, 'Sierra', 12000, 'default info'),
+(4, 'Audi', 2013, 'S5 Coupe', 57000, 'default info');
 --
 -- Indexes for dumped tables
 --
