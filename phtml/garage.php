@@ -49,7 +49,7 @@ function selectBtn(){?>
 
     <!--ul id='carBtns'>
     <!--list is populated in '../program.js' from '../user.xml'
-    the list items dont have to exist but the root tag must-->
+    the list items dont have to exist but the root tag must>
     </ul-->
 </div>
 

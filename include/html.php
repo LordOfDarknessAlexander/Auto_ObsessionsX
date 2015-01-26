@@ -16,6 +16,7 @@ class html
 <?php
     }
     public static function header(){
+        global $PAGE_TITLE;
         //default header for application, can be changed in derived classes
         html::docType();
 ?>

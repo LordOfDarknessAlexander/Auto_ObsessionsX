@@ -2,13 +2,15 @@
 //This creates a connection to the logindb database and to MySQL, 
 //It also sets the encoding.
 //
+/*
 class dbConnect
 { 
 	//class constants don't need to be prefixed with '$' but vars do
-    private $_user
-    private $_pw;
-    private $_host;
-    private $_name;
+    private
+        $_user,
+        $_pw,
+        $_host,
+        $_name;
         
     public $con;   //database connection;
     public function __construct($user = 'root', $password = 'Dante777', $host = 'localhost', $dbName = 'finalPost')
@@ -29,4 +31,15 @@ class dbConnect
         $res = trim($_POST[$postKey]);
         return mysqli_real_escape_string($this->$con, strip_tags($res));
     }
-}
+}*/
+DEFINE ('DB_USER', 'root');
+DEFINE ('DB_PASSWORD', 'Dante777');
+DEFINE ('DB_HOST', 'localhost');
+DEFINE ('DB_NAME', 'finalpost');
+
+// Make the connection:
+$dbcon = @mysqli_connect (DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) OR die ('Could not connect to MySQL: ' . mysqli_connect_error() );
+
+// Set the encoding...
+mysqli_set_charset($dbcon, 'utf8');
+?>

@@ -2,19 +2,19 @@
 class Vehicle
 {   //class representing a Vehicle on the server
     //private const
-    public $make;
-    //public $year;
-   // public $model;
-    //public $info;
-    //public $price;
+    public $make = '';
+        //$year,
+        //$model,
+        //$info,
+        //$price;
     
-    public function __construct($Make, $Year, $Model, $Info, $Price){
-        $this->$make = $Make;
+    //function Vehicle($Make){ //}, $Year, $Model, $Info, $Price){
+        //$this->$make = '';
         //$this->$year = $Year;
         //$this->$model = $Model;
         //$this->$info = $Info;
         //$this->$price = $Price;
-    }
+    //}
     public function getFullName(){
         //return a human readable name
         //return $this->$make.' '.$this->$year.' '.$this->$name;

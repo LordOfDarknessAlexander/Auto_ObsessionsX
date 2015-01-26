@@ -1,6 +1,8 @@
 <?php
 //interface and html page for adding, deleting or modifying entries in the vehicle database on the server
 require_once '../include/html.php';
+require_once '../include/dbConnect.php';
+//require_once 'vehicle.php';
 
 html::simpleHead('Vehicle Registration');
 ?>
@@ -9,11 +11,12 @@ html::simpleHead('Vehicle Registration');
 function strip($str){
     return $_POST[$str];
 }
+$errors = array(); // Start an array named errors
+
 if($_SERVER['REQUEST_METHOD'] == 'POST') //&& isset($_POST) )
 {
     //form submitted, add entries to server
-    $errors = array(); // Start an array named errors
-
+/*
     //$e = VehicleEntry();
     $stripped = strip('make');
     // Check stripped string
@@ -56,48 +59,51 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') //&& isset($_POST) )
     }
     else{
         $info = $stripped;
-    }
-
-    if(empty($errors)){ 
-        //$q = "SELECT user_id FROM users WHERE email = '$e' ";
-        $result = 0;    //mysqli_query($CARS.$con, $q); //$CARS.query($q);
-        /*TODO:Fix, this block breaks!
-        if($result == 0){//mysqli_num_rows($result) == 0){
-            //The mail address was not already registered therefore register the user in the users table
-            // Make the query:
+    }*/
+}// End of the main Submit conditionals
+ if(empty($errors)){
+    $q = 'SELECT * FROM aoCars WHERE car_id = 1';
+    $result = mysqli_query($dbcon, $q); //$CARS.query($q);
+    
+    if($result)
+    {
+        if(mysqli_num_rows($result) != 0)
+        {
             //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
-            $result = 1;//@mysqli_query($CARS.$con, $q); // Run the query
-            //If the query ran OK
-            if($result){
-                //vehicle entered into database! try again
-                //header('location: register-thanks.php');
-            } 
-            else{ 
-                echo "<h2>System Error</h2>
-                <p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
-                //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
+            $data = $result->fetch_assoc();//@mysqli_query($CARS.$con, $q); // Run the query
+            echo $data['make'];
+            echo $data['year'];
+            echo $data['model'];
+        } 
+        else{ 
+            echo "<h2>System Error</h2>
+            <p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
+            //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
 
-                //the data base will be closed when when the script exits and the server session terminates
-                html::footer();
-                exit();
-            }
-        }
-        else{   //The vehicle is already registered
-            echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
-        }*/
+            //the data base will be closed when when the script exits and the server session terminates
+            mysqli_free_result($result);
+            html::footer();
+            exit();
+        } 
+        mysqli_free_result($result);
     }
-    else{
-        echo "<h2>Error!</h2>
-        <p class='error'>The following error(s) occurred:<br>";
-        foreach ($errors as $msg){
-            echo " - $msg<br>\n";
-        }
-        echo '</p><h3>Please try again.</h3><p><br></p>';
-        
+    else{   //The vehicle is already registered
+        echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
         html::footer();
         exit();
-    }    
-}// End of the main Submit conditionals
+    }
+}
+else{
+    echo "<h2>Error!</h2>
+    <p class='error'>The following error(s) occurred:<br>";
+    foreach ($errors as $msg){
+        echo " - $msg<br>\n";
+    }
+    echo '</p><h3>Please try again.</h3><p><br></p>';
+    
+    html::footer();
+    exit();
+}
 ?>
 <form action='register.php' method='post'>
     <!--link to self, refreshes page-->
@@ -141,6 +147,8 @@ for(; $year <= $thisYear; $year++){ ?>  //; year++, i++){
     <input id='submit' name='submit' type='submit' value='Submit'>
 </form>
 <?php
+//$car = new Vehicle('Jaguar');
+//echo $car->$make;
 //<div id='dbCarView'>
     //iterate over all contents of the vehicle database,
     //outputting an image, which when selected, displays info for an admin to edit
