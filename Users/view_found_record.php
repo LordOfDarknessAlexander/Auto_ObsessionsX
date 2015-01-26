@@ -8,7 +8,7 @@ exit();
 <!doctype html>
 <html lang=en>
 <head>
-<title>View found record page</title>
+<title>Crapper</title>
 <meta charset=utf-8>
 <link rel="stylesheet" type="text/css" href="includes.css">
 <style type="text/css">
@@ -43,8 +43,7 @@ if ($result)
 	<td><b>First Name</b></td>
 	<td><b>Email</b></td>
 	<td><b>Date Registered</b></td>
-	<td><b>Class</b></td>
-	<td><b>Paid</b></td>
+	
 	</tr>';
 	// Fetch and display the records:
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) 
@@ -56,8 +55,7 @@ if ($result)
 		<td>' . $row['fname'] . '</td>
 		<td>' . $row['email'] . '</td>
 		<td>' . $row['regdat'] . '</td>
-		<td>' . $row['class'] . '</td>
-		<td>' . $row['paid'] . '</td>
+		
 		</tr>';
 	}
 	echo '</table>'; // Close the table.

@@ -76,59 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		$ln = mysqli_real_escape_string($dbcon, trim($_POST['lname']));
 	}
-	// Look for the 1st address:
-	if (empty($_POST['addr1'])) 
-	{
-		$errors[] = 'You forgot to enter the first address.';
-	} 
-	else 
-	{
-		$addr1 = mysqli_real_escape_string($dbcon, trim($_POST['addr1']));
-	}
-	// Look for address 2:
-	if (!empty($_POST['addr2'])) 
-	{
-		$addr2 = mysqli_real_escape_string($dbcon, trim($_POST['addr2']));
-	}else
-	{
-		$addr2 = NULL;
-	}	
-	// Look for the city:
-	if (empty($_POST['city'])) 
-	{
-		$errors[] = 'You forgot to change the city.';
-	} 
-	else 
-	{
-		$city = mysqli_real_escape_string($dbcon, trim($_POST['city']));
-	}
-	// Look for the county:
-	if (empty($_POST['county'])) 
-	{
-		$errors[] = 'You forgot to change the county.';
-	} 
-	else 
-	{
-		$county = mysqli_real_escape_string($dbcon, trim($_POST['county']));
-	}
-	// Look for the post code
-	if (empty($_POST['pcode'])) 
-	{
-		$errors[] = 'You forgot to enter the post code.';
-	} 
-	else 
-	{
-		$pcode = mysqli_real_escape_string($dbcon, trim($_POST['pcode']));
-	}
-	// Look for the phone number:
-	if (!empty($_POST['phone'])) 
-	{
-		$phone = mysqli_real_escape_string($dbcon, trim($_POST['phone']));
-	}
-	else
-	{
-		$phone = NULL;	
-	}
+	
 	if (empty($errors)) 
 	{ // If everything's OK.
 		//  make the query

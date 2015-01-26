@@ -1,7 +1,5 @@
 <?php											
 session_start();
-//require 'secure.php';
-//secureLogin();
 if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 1))
 {
 header("Location: login.php");

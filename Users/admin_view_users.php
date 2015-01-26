@@ -136,6 +136,7 @@ if ($pages > 1)
 	}
 	echo '</p>';
 }
+
 ?>
 </div><!-- End of table display content -->
 <?php include("includes/footer.php"); ?>
