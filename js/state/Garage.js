@@ -312,6 +312,9 @@ var CarView = {
 			var car = userGarage[selCarIndex];
 			jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
 			jq.CarView.carInfo.text(car.getFullName() + '-\n    ' + car.getInfo()) ;//xmlCarinfo.getElemById(car.id) );
+			
+			jq.CarView.sellBtn.click({i:selCarIndex}, AuctionSell.init);
+			
 		}
 	}
 	//update, ender, exit?
@@ -332,10 +335,6 @@ jq.CarView.homeBtn.click(function()
 	jq.Game.menu.show();
 	jq.CarView.menu.hide();
 	//appState = GAME_STATE.MAIN;
-});
-jq.CarView.sellBtn.click(function()
-{
-	//send car to auction!
 });
 jq.Garage.selectBtn.click(function()
 {
