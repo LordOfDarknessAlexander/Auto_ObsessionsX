@@ -2,7 +2,7 @@
 //interface and html page for adding, deleting or modifying entries in the vehicle database on the server
 require_once '../include/html.php';
 require_once '../include/dbConnect.php';
-//require_once 'vehicle.php';
+require_once 'vehicle.php';
 
 html::simpleHead('Vehicle Registration');
 ?>
@@ -14,8 +14,7 @@ function strip($str){
 $errors = array(); // Start an array named errors
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') //&& isset($_POST) )
-{
-    //form submitted, add entries to server
+{    //form submitted, add entries to server and display results
 /*
     //$e = VehicleEntry();
     $stripped = strip('make');
@@ -61,19 +60,37 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') //&& isset($_POST) )
         $info = $stripped;
     }*/
 }// End of the main Submit conditionals
- if(empty($errors)){
-    $q = 'SELECT * FROM aoCars WHERE car_id = 1';
-    $result = mysqli_query($dbcon, $q); //$CARS.query($q);
+
+/*function sqlSelectAll($tableName, $callbackStr){
+    //$tableName: string name of the table in the database to query
+    //$callbackStr: string name of a user defined function to be called!
+    //queries the data base, selecting all elements and preforming callback on each
+    $res = $AO_DB->query('SELECT * FROM ' . $tableName);
+    if($res){
+        while($row = mysqli_fetch_array($res) ){
+            call_user_func($callback, $row);
+        }
+    }
+    else{
+        //no result!
+    }
+}
+function carOut($row){
+    echo Vehicle::fromArray($row)->asHtml();
+}*/
+if(empty($errors)){
+    //sqlSelectAll('aoCars', 'carOut');
+    
+    $q = 'SELECT * FROM aoCars WHERE car_id = 1';   //select an individual element
+    
+    $result = $AO_DB->query($q);
     
     if($result)
     {
         if(mysqli_num_rows($result) != 0)
         {
-            //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
             $data = $result->fetch_assoc();//@mysqli_query($CARS.$con, $q); // Run the query
-            echo $data['make'];
-            echo $data['year'];
-            echo $data['model'];
+            $car = Vehicle::fromArray($data);
         } 
         else{ 
             echo "<h2>System Error</h2>

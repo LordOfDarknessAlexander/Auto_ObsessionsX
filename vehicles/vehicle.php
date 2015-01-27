@@ -2,36 +2,65 @@
 class Vehicle
 {   //class representing a Vehicle on the server
     //private const
-    public $make = '';
-        //$year,
-        //$model,
-        //$info,
-        //$price;
+    private
+        $make,
+        $year,  //uint
+        $model,
+        $price, //uint
+        $info;
     
-    //function Vehicle($Make){ //}, $Year, $Model, $Info, $Price){
-        //$this->$make = '';
-        //$this->$year = $Year;
-        //$this->$model = $Model;
-        //$this->$info = $Info;
-        //$this->$price = $Price;
+    public function __construct($make, $year, $model, $info, $price){
+        $this->_make = $make;
+        $this->_year = $year;
+        $this->_model = $model;
+        $this->_info = $info;
+        $this->_price = $price;
+        //echo $this->_make;
+        //echo $this->_year;
+        //echo $this->_model;
+        //echo $this->_info;
+        //echo $this->_price;
+        //echo '<br>';
+    }
+    public static function fromArray($array){
+        return new Vehicle(
+            $array['make'],
+            intval($array['year']),
+            $array['model'],
+            intval($array['price']),
+            $array['info']
+        );
+    }
+    //public static function fromPost(){
+        //return new Vehicle(
+            //$AO_DB.strip($array['make']),
+            //intval($array['year'],
+            //$AO_DB.strip($array['model'],
+            //intval($array['price']),
+            //$array['$info']
+        //);
     //}
     public function getFullName(){
         //return a human readable name
-        //return $this->$make.' '.$this->$year.' '.$this->$name;
+        return $this->_make . ' '. $this->_year . ' ' . $this->_name;
     }
     public function getLocalPath(){
-        //return $this->$make.'/'.$this->$year.'/'.$this->$name;
+        //local path in project
+        return $this->_make . '/' . $this->_year . '/' . $this->_name . '.jpg';
     }
     public function getFullPath(){
         $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/'.'images/cars/';
-        //return $ROOT_URL.$this->getLocalPath().'.jpg';
+        return $ROOT_URL.$this->getLocalPath();
     }
+    //public static function fromPost(){
+        //initialize a single vehicle with values POSTed to the page
+    //}
     public function toJSON(){
         //returns json representation of the vehicle data, for transfer over internet
         //Fix:accessing object values doesn't work!
         return '{"data":"this is data!"}';
         //'{"make": "", "year":"", "name":"", "info":"", "price":""}';
-        //$this->$make;//, "year":"'.$this->$year.'", "name":"'.$this->$name.'", "info":"'.$this->$info.'", "price":"'.$this->$price.'"';
+        //$this->_make;//, "year":"'.$this->_year.'", "name":"'.$this->_name.'", "info":"'.$this->_info.'", "price":"'.$this->_price.'"';
     }
 }
 ?>

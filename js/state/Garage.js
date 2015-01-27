@@ -56,7 +56,7 @@ var Garage = {
         //alert('calling ajax');
         var jqxhr = $.ajax({
             type:'POST',
-            url:"http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/vehicles/query.php",
+            url:'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/vehicles/query.php',    //"http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/vehicles/query.php",
             dataType:'json',
             data:dataStr
         }).done(function(data){
