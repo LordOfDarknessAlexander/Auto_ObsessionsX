@@ -61,23 +61,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') //&& isset($_POST) )
     }*/
 }// End of the main Submit conditionals
 
-/*function sqlSelectAll($tableName, $callbackStr){
-    //$tableName: string name of the table in the database to query
-    //$callbackStr: string name of a user defined function to be called!
-    //queries the data base, selecting all elements and preforming callback on each
-    $res = $AO_DB->query('SELECT * FROM ' . $tableName);
-    if($res){
-        while($row = mysqli_fetch_array($res) ){
-            call_user_func($callback, $row);
-        }
-    }
-    else{
-        //no result!
-    }
-}
-function carOut($row){
-    echo Vehicle::fromArray($row)->asHtml();
-}*/
 if(empty($errors)){
     //sqlSelectAll('aoCars', 'carOut');
     

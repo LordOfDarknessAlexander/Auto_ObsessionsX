@@ -5,7 +5,8 @@ var AuctionSelect =
 	init : function()
 	{	//init buttons base on cars in xml database
 		//appState = GAME_MODE.AUCTION_SElECT;
-		this.list.empty();
+        //if(guest)
+            //this.list.empty();
 		//
 //<?php
     //if(loggedIn){
@@ -27,17 +28,18 @@ var AuctionSelect =
 				
 			var car = xdbCars[i];	//ao.xdbCars[i];
 			
-			var btnStr = "<li id=\'" + liID + "\'>" + 
-				"<img src=\'" + car.getFullPath()/*car.getFullPath()*/ + "\'>" +
-				"<label id=\'" + labelID + "\'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
-				"<button id=\'" + btnID + "\'>" + 
-					"<label id=\'price\'>$" + (car.getPrice() ).toString() + "</label><br>" +
-					"Bid Now!<br>" +
-					//"<label id=\'expireTime\'>Auction expire time!</label>" +
-				"</button>" +
-			"</li><br>";
-			this.list.append(btnStr);
-			//
+            //if(guest){}
+                /*var btnStr = "<li id=\'" + liID + "\'>" + 
+                    "<img src=\'" + car.getFullPath() + "\'>" +
+                    "<label id=\'" + labelID + "\'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
+                    "<button id=\'" + btnID + "\'>" + 
+                        "<label id=\'price\'>$" + (car.getPrice() ).toString() + "</label><br>" +
+                        "Bid Now!<br>" +
+                        //"<label id=\'expireTime\'>Auction expire time!</label>" +
+                    "</button>" +
+                "</li><br>";
+                this.list.append(btnStr);*/
+            //}
 			var btn = $('#' + btnID);
 			
 			var hasCar = false;

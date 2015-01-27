@@ -3,13 +3,13 @@ class Vehicle
 {   //class representing a Vehicle on the server
     //private const
     private
-        $make,
+        $make,  //str
         $year,  //uint
-        $model,
+        $model, //str
         $price, //uint
-        $info;
+        $info;  //str
     
-    public function __construct($make, $year, $model, $info, $price){
+    public function __construct($make, $year, $model, $price, $info){
         $this->_make = $make;
         $this->_year = $year;
         $this->_model = $model;
@@ -42,15 +42,26 @@ class Vehicle
     //}
     public function getFullName(){
         //return a human readable name
-        return $this->_make . ' '. $this->_year . ' ' . $this->_name;
+        return $this->_make . ' '. $this->_year . ' ' . $this->_model;
     }
     public function getLocalPath(){
         //local path in project
-        return $this->_make . '/' . $this->_year . '/' . $this->_name . '.jpg';
+        return $this->_make . '/' . $this->_year . '/' . $this->_model . '.jpg';
     }
     public function getFullPath(){
         $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/'.'images/cars/';
-        return $ROOT_URL.$this->getLocalPath();
+        return $ROOT_URL . $this->getLocalPath();
+    }
+    public function getPrice(){
+        //returns price after accumulating upgrades and repairs
+        $price = $this->_price;
+        //foreach($upgrades as $u){
+            //$price += $u->getPrice();
+        //}
+        return $price;
+    }
+    public function getInfo(){
+        return $this->_info;
     }
     //public static function fromPost(){
         //initialize a single vehicle with values POSTed to the page
