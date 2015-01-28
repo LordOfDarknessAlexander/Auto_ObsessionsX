@@ -3,7 +3,8 @@
 require_once '../../include/dbConnect.php';
 require_once '../../include/secure.php';
 //secure::adminLogin();
-echo 'executing script in directory: ' . __DIR__;?><br>
+echo 'executing script in directory: ' . __DIR__;
+?><br>
 <?php
 function getMakeHash($str){
     //0 is a reserved value and is not used
@@ -25,6 +26,8 @@ function getMakeHash($str){
         return 0x08000000;
     }elseif($str == 'GMC'){
         return 0x09000000;
+    }elseif($str == 'Lamborghini'){
+        return 0x0A000000;
     }
 ?><br><?php
     echo 'invalid value: ' . $str;
@@ -53,8 +56,7 @@ foreach(new DirectoryIterator(__DIR__) as $file){
         $make = $file->getBasename();   //name of trailing dir
         $mHash = getMakeHash($make);
         //$next = __DIR__ . '\\' . $path;
-        echo $path;?><br>
-        <?php
+        //echo $path;
         foreach(new DirectoryIterator($path) as $years){
             //for each year folder
             if($years->isDir() && !$years->isDot()){
@@ -63,8 +65,7 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                 //shift integer so padding for make and model
                 $yHash = (intval($year) - 1908) << 8;    //0x0000FFFF << 8;
                 //$next = __DIR__  . '\\' . $p;
-                echo $p;?><br>
-                <?php
+                //echo $p;
                 $nameHash = 0x00000000;
                 foreach(new DirectoryIterator($p) as $name){
                     //for each car in folder
@@ -76,12 +77,11 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                             }
                             $n = $name->getBasename('.jpg');
                             $model = $n;
-                            echo '    ' . $n;?><br>
-                            <?php
+                            //echo '    ' . $n;
                             if(isset($make) && isset($year) && isset($model) ){
                                 $id = $mHash | $yHash | $nameHash;
                                 $y = intval($year);
-                                echo 'variables set!';
+                                //echo 'variables set!';
                                 $q = "INSERT INTO aoCars 
                                 (`car_id`, `make`, `year`, `model`, `price`, `info`) 
                                 VALUE

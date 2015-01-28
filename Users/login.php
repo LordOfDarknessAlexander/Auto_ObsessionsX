@@ -1,3 +1,7 @@
+<?php
+//require_once '../include/html.php';
+//require_once '../include/dbConnect.php';
+?>
 <!doctype html>
 <html lang=en>
 <head>
@@ -22,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	// Validate the email address:
 	if (!empty($_POST['email'])) 
 	{
-			$e = mysqli_real_escape_string($dbcon, $_POST['email']);
+        $e = mysqli_real_escape_string($dbcon, $_POST['email']);
 	} 
 	else 
 	{
@@ -32,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	// Validate the password:
 	if (!empty($_POST['psword'])) 
 	{
-			$p = mysqli_real_escape_string($dbcon, $_POST['psword']);
+        $p = mysqli_real_escape_string($dbcon, $_POST['psword']);
 	} 
 	else 
 	{

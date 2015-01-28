@@ -19,7 +19,7 @@ class secure
         
         if($accessLevel != $admin){
             echo 'You are not logged in and do not have access to this page!';
-            //header("Location: adminLogin.php");  //redirect to user login.php
+            //header("Location: http://triosdevelopers.com/a.sanchez/Assets/AutoObsessionsGame/Users/login.php");  //redirect to user login.php
             exit(); //exit the executing script, not the function, after dispalying secure login page
         }
         //else, display the page contents following calls to this function
