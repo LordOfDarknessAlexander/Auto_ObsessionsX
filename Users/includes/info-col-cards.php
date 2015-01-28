@@ -1,5 +1,5 @@
 <style type="text/css">
-#info-col { position:absolute; top:20%; margin-left:50%; margin-right: -4%; color:red; width:135px; text-align:center; 
+#info-col { position:absolute; top:40%; margin-left:50%; margin-right: -4%; color:red; width:135px; text-align:center; 
 }
 </style>
 <div id="info-col">

@@ -9,8 +9,7 @@
 <div id="container">
 <?php
     include 'includes/login-header.php';
-    include 'includes/nav.php';
-    include 'includes/info-col.php';
+    
 ?>
 <div id="content"><!-- Start of the login page content. -->
 <?php 

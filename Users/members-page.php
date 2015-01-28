@@ -14,9 +14,9 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 <meta charset=utf-8>
 <link rel="stylesheet" type="text/css" href="includes.css">
 <style type="text/css">
-#mid-right-col { text-align:center; margin:auto;
+#mid-right-col { text-align:center; margin:auto;margin-right: 50%; margin-top: -10%
 }
-#midcol h3 { font-size:130%; margin-top:0; margin-bottom:0;
+#midcol h3 { font-size:130%; margin-top:0; margin-bottom:0; 
 }
 </style>
 </head>
