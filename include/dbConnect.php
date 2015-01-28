@@ -41,5 +41,4 @@ class dbConnect
     }
 }
 $AO_DB = new dbConnect();    //main database connection
-
 ?>

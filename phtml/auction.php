@@ -4,10 +4,10 @@ require_once './include/dbConnect.php';
 require_once './vehicles/vehicle.php';
 
 function sqlSelectAll($tableName, $callbackStr){
-    global $AO_DB;
     //$tableName: string name of the table in the database to query
     //$callbackStr: string name of a user defined function to be called!
     //queries the data base, selecting all elements and preforming callback on each
+    global $AO_DB;
     $res = $AO_DB->query('SELECT * FROM ' . $tableName);
 
     if($res){
@@ -85,15 +85,6 @@ function outputCar($args){
     <button id='homeBtn'>Home</button>
     <div id='carView'>
         <ul id='auctionCars'>
-            <li>
-                <img src=''>
-                <label id='carInfo'>CarName-CarInfo<br></label>
-                <button id='0'>
-                    <label id='price'>$carPrice</label><br>
-                    Auction expires:<label id='expireTime'></label>
-                </button> 
-            </li>
-            <br>
             <!--populated by application with format:
             <img><label></><button></>-->
         </ul>

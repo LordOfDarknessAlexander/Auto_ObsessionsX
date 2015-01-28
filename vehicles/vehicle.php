@@ -3,11 +3,11 @@ class Vehicle
 {   //class representing a Vehicle on the server
     //private const
     private
-        $make,  //str
-        $year,  //uint
-        $model, //str
-        $price, //uint
-        $info;  //str
+        $_make,  //str
+        $_year,  //uint
+        $_model, //str
+        $_price, //uint
+        $_info;  //str
     
     public function __construct($make, $year, $model, $price, $info){
         $this->_make = $make;
@@ -32,6 +32,7 @@ class Vehicle
         );
     }
     //public static function fromPost(){
+        //global $AO_DB;
         //return new Vehicle(
             //$AO_DB.strip($array['make']),
             //intval($array['year'],
@@ -42,7 +43,7 @@ class Vehicle
     //}
     public function getFullName(){
         //return a human readable name
-        return $this->_make . ' '. $this->_year . ' ' . $this->_model;
+        return $this->_make . ' ' . $this->_year . ' ' . $this->_model;
     }
     public function getLocalPath(){
         //local path in project
