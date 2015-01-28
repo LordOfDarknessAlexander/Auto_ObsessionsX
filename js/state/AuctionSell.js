@@ -303,8 +303,8 @@ var AuctionSell =
 	_ai:[],
     _cars:[],	//array of vehicles either sold or being sold by the user
 	init:function(index)
-	{	
-		if(index.i !== null)
+	{
+		if(index !== null && index !== "undefined")
 		{
 			//call to start an auction for car
 			var i = index.data.i;
@@ -320,6 +320,7 @@ var AuctionSell =
 					
 				//var car = xdbCars[i];	//Garage._cars[i];
 				var li = $('li#' + liID);
+				console.log(li);
 				//if(li === null || li === 'undefined')
 				{
 					var btnStr = "<li id='" + liID + "'>" + 
@@ -424,8 +425,6 @@ var AuctionSell =
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
 	  	}
-		
-		console.log("Update");
 	  	
 	  	//console.log("EnemyCaps1 " + enemyCaps[0]);
 	  	//console.log("EnemyCaps2 " + enemyCaps[1]);

@@ -207,10 +207,6 @@ jq.Search.backBtn.click(jq.Search.toggle);
 jq.Business.backBtn.click(jq.Business.toggle);
 //jq.Garage.backBtn.click(jq.Garage.toggle);
 
-jq.CarView.sellBtn.click(function(){
-    AuctionSell.init(0)
-    jq.AuctionSell.toggle();
-});
 jq.AuctionSell.backBtn.click(function(){
     jq.AuctionSell.toggle();
     //appState = GAME_MODE.CAR_VIEW;
