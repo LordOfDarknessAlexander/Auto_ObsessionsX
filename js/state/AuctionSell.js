@@ -69,10 +69,14 @@ function auctionGen()
 		
 		init:function(index)
 		{
-			this._car = xdbCars[index];
-			this._ai = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
-			shuffleArray(this._enemyBids);
-			
+			if(index !== null && index !== "undefined")
+			{
+				this._car = xdbCars[index];
+				
+				this._ai = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
+				shuffleArray(this._enemyBids);
+				this.update();
+			}	
 			//shuffleArray(bidders);
 			//shuffleArray(this._enemyCaps);
 		},
@@ -82,7 +86,7 @@ function auctionGen()
 		},
 		update:function(dt)
 		{
-			if(!this._expired)
+			/*if(!this._expired)
 			{
 				this._curTime += dt;
 				this.bidTimers();
@@ -104,15 +108,21 @@ function auctionGen()
 				{
 					this.destroy();					
 				}*/
+			//}
+			
+			if(this._car !== null && this._car !== "undefined")
+			{
+				console.log(this._car.getFullName() + ", " + this._car._price);
 			}
+			
 		},
 		load:function()
 		{
-			//this._date.end = local.storage[''] !== null ? local.storage[''] : null;
-			//this._date.start = local.storage[''];
+			//this._date.end = Storage.local[''] !== null ? Storage.local[''] : null;
+			//this._date.start = Storage.local[''];
 			//this._expired = this._date.end === null ? false : true;
-			//this._car.id = local.storage[''];
-			//this._curTime = this._date.end === null ? local.storage[''] : 0.0;
+			//this._car.id = Storage.local[''];
+			//this._curTime = this._date.end === null ? Storage.local[''] : 0.0;
 		},
 		save:function()
 		{
@@ -297,10 +307,9 @@ var AuctionSell =
 		if(index.i !== null)
 		{
 			//call to start an auction for car
-			var i = 1;//index.i;
+			var i = index.data.i;
 			AuctionSell._state = auctionGen();
 			AuctionSell._state.init(i);
-			console.log(i);
 			
 			//for(var i = 0; i < /*ao.*/soldCars.length; i++)
 			if(AuctionSell._state._car !== null)
@@ -415,6 +424,8 @@ var AuctionSell =
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
 	  	}
+		
+		console.log("Update");
 	  	
 	  	//console.log("EnemyCaps1 " + enemyCaps[0]);
 	  	//console.log("EnemyCaps2 " + enemyCaps[1]);
