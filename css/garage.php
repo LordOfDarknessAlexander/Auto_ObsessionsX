@@ -116,14 +116,22 @@ function divSelectedCar(){
 /*list item button labels*/
 div#userCar div#progressBars
 {
-	/*text-align:left;
-	font-size:0.75em;*/
+    font-size:0.75em;
+    text-align:left;
+    align:left;
+}
+div#selectedCar div#progressBars
+{
+    font-size:0.75em;
+    text-align:right;
+    align:left;
+    color:white;
 }
 <?php divGarage();?> li div#progressBars progress
 {	
 	/*display:inline-block;
 	backgorund-color:rgb(127,127,127);*/
-	/*color: white;*/
+	/*color:grey;*/
 	right:0;
 	width:50%;
 }

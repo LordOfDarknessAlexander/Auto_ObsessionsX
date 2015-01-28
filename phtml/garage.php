@@ -28,10 +28,10 @@ function selectBtn(){?>
         <!---->
         <div id='progressBars'>
             <!--progress bar 'value' attribute is between 0.0 and 1.0-->
-            driveterrain<progress id='drivetrainPB' value='0.0'></progress><br>
-            body<progress id='bodyPB' value='0.0'></progress><br>
-            interior<progress id='interiorPB' value='0.0\'></progress><br>
-            documents<progress id='docsPB' value='0.0'></progress>
+            driveterrain:<br><progress id='drivetrainPB' value='0.0'></progress><br>
+            body:<br><progress id='bodyPB' value='0.0'></progress><br>
+            interior:<br><progress id='interiorPB' value='0.0\'></progress><br>
+            documents:<br><progress id='docsPB' value='0.0'></progress>
         </div>
     </div>
     <div id='selectedCar'>
@@ -40,10 +40,10 @@ function selectBtn(){?>
         <label id='carName'></label>
         <label id='carInfo'></label>
         <div id='progressBars'>
-            <progress id='drivetrainPB' value='0.0'></progress><br>
-            <progress id='bodyPB' value='0.0'></progress><br>
-            <progress id='interiorPB' value='0.0\'></progress><br>
-            <progress id='docsPB' value='0.0'></progress>
+            driveterrain:<br><progress id='drivetrainPB' value='0.0'></progress><br>
+            body:<br><progress id='bodyPB' value='0.0'></progress><br>
+            interior:<br><progress id='interiorPB' value='0.0\'></progress><br>
+            documents:<br><progress id='docsPB' value='0.0'></progress>
         </div>
     </div>
 
