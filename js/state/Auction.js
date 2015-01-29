@@ -22,6 +22,7 @@ var playerNextBid = currentBid + (currentBid * 0.1);
 var startEndBids = [false,false,false,false];
 var playerWinning = false;
 var playerWon = false;
+var playerBoughtOut = false;
 //there only needs to be 1 timer to track the closing of the auction
 var goingTimer = 0;
 var pGTimer = 0;
@@ -191,6 +192,7 @@ var Auction =
 		startEndBids = [false,false,false,false];
 		playerWinning = false;
 		playerWon = false;
+		playerBoughtOut = false;
 		goingTimer = 0;
 		pGTimer = 0;
 		startPlayerEndBid = false;	//player local
@@ -633,8 +635,8 @@ var Auction =
 		//bidding continues until only 1 bidder remains
 		//
 		//disable buyout button for remainder of auction
-		var btn = $('div#Auction button#buyOut');
-		btn.click(function(){});
+		var btn = $('div#Auction button#buyout');
+		btn.click(function(){playerBoughtOut = true;});
 		btn.css('opacity', '0.65');
 		
 		if(playerWon)
@@ -643,10 +645,21 @@ var Auction =
 			auctionEnded = true;
 			//push vehicle to garage
 			//auctionStop = true;
-			Auction.sold();
+			this.sold();
 			assetLoader.sounds.bidder.pause();
 			assetLoader.sounds.sold.play();
-		}	 
+		}
+		else if(playerBoughtOut)
+		{
+			userStats.money = userStats.money - vehiclePrice;
+			auctionEnded = true;
+			playerWon = true;
+			//push vehicle to garage
+			//auctionStop = true;
+			this.sold();
+			assetLoader.sounds.bidder.pause();
+			assetLoader.sounds.sold.play();
+		}
 	},
 	destroy : function()
 	{

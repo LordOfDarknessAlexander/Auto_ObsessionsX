@@ -432,7 +432,7 @@ Auction.sold = function()
 
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
-	$('#sold').show();
+	jq.Sold.menu.show();
 	
 	
 	//disable user from entering an auction for this car again
@@ -476,7 +476,7 @@ Auction.sold = function()
 	{
 		endGame = true
 	}
-	
+	Auction.close();
 }
 //
 //jQuery UI bindings
@@ -712,10 +712,10 @@ jq.Sold.homeBtn.click(function(){
 	//delete gameOver;
 	auctionEnded = false;
 	endGame = false;
-	auctionMode();
+	//auctionMode();
 	//delete Auction;
 	restarted = true;
-	Auction.setup();	
+	//Auction.setup();	
 });
 
 assetLoader.downloadAll();

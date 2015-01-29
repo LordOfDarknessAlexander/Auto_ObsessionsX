@@ -51,8 +51,23 @@ require_once 'ui.php';
 
 	width:150px;
 	height:50px;
-	left:10%;
+	left:5%;
 	bottom:30%;
+}
+
+<?php divAuction();?> button#buyout
+{<?php
+    defaultBtnBG();
+    posAbs();
+    fontBold();
+    cursorPtr();
+?>
+	color: white;
+
+	width:150px;
+	height:50px;
+	left:5%;
+	bottom:20%;
 }
 <?php divAuction();?> label#carPrice
 {<?php
@@ -64,7 +79,7 @@ require_once 'ui.php';
 	width:150px;
 	height:50px;
 
-	left:10%;
+	left:5%;
 	bottom:40%;
 }
 

@@ -64,6 +64,7 @@ function outputCar($args){
     <label id='carPrice'>price</label-->
     <ul>
       <li><button id="bid">"Bid:money"</button></li>
+	  <li><button id="buyout">"Buyout"</button></li>
     </ul>
     <ul>
     <button id="backBtn">Back</button>

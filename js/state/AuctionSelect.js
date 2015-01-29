@@ -46,7 +46,6 @@ var AuctionSelect =
 			for(var j = 0; j < userGarage.length; j++)
 			{
 				var gc = userGarage[j];
-
 				if(car.getFullName()/*id*/ == gc.getFullName()/*id*/){
 					hasCar = true;
 					break;
@@ -57,7 +56,7 @@ var AuctionSelect =
 			{	//display but disable user from entering auction
 				var li = $('#' + liID);
 				li.css('opacity', '0.45');
-				btn.click(this.denyAuction);
+				btn.off().click(this.denyAuction);
 			}
 			else
 			{	
