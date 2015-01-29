@@ -1,5 +1,10 @@
-<?php function addJS($str){?>
+<?php
+function addJS($str){?>
 <script type='text/javascript' src='<?php echo "js/".$str.".js";?>'></script>
+<?php
+}
+function addPHPJS($str){?>
+<script type='text/javascript' src='<?php echo "js/".$str.".php";?>'></script>
 <?php
 }
 $paths = array(
@@ -28,4 +33,5 @@ $paths = array(
     'program'	//main javascript program
 );
 foreach($paths as $p){addJS($p);}
+//addPHPJS('state/AuctionSelect');
 ?>

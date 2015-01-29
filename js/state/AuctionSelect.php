@@ -1,4 +1,8 @@
-﻿//Action Select State Object
+//Action Select State Object
+<?php header('Content-type: application/javascript; charset: UTF-8');
+require_once '../../include/dbConnect.php';
+//require_once '../../include/dbConnect.php';
+?>
 var AuctionSelect =
 {	//object representing
 	list : $('div#AuctionSelect div#carView ul#auctionCars'),
@@ -8,7 +12,20 @@ var AuctionSelect =
         //if(guest)
             //this.list.empty();
 		//
-//<?php
+<?php
+    $res = $AO_DB->query('SELECT * FROM aoCars');
+
+    if($res){
+        $i = 0;
+        while($row = mysqli_fetch_array($res) ){
+            //call_user_func($callbackStr, array($row, $index) );
+            $i++;
+        }
+        mysqli_free_result($res);
+    }
+    else{
+        //no result!
+    }
     //if(loggedIn){
         //auction cars never change, so load only once to
         //save on calls to server and bandwidth
@@ -16,10 +33,11 @@ var AuctionSelect =
             //
         //}
     //}
-    //else{?>
+    //else{>
         //playing locally as guest, call JS
-    //<?php
-    //}?>
+    //<php
+    //}>
+?>
 		for(var i = 0; i < /*ao.*/xdbCars.length; i++)
 		{
 			var btnID = "as" + (i).toString(),
@@ -60,22 +78,20 @@ var AuctionSelect =
 				btn.click(this.denyAuction);
 			}
 			else
-			{	
-				//clearing the button click handler to avoid multiple button bindings
-				btn.off().click({index:i}, this._initAuction);
-				
+			{
+				btn.click({index:i}, this.initAuction);
 				//btn.css('background-image', "url(\'..\\images\\vehicle.jpg");	//car.getFullPath());
 			}
 		}
 	},
-	_initAuction : function(obj)
+	initAuction : function(obj)
 	{
 		var i = obj.data.index;
-		jq.AuctionSelect.menu.hide();
-		//jq.AuctionSelect.menu.children().toggle();
-		jq.Auction.menu.show();
+		jq.AuctionSelect.menu.toggle();
+		jq.Auction.menu.toggle();
 		//Auction.setup();
 		Auction.init(i);
+		//Auction.setup();
 	},
 	denyAuction : function()
 	{
