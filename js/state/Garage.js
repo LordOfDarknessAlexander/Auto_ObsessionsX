@@ -9,8 +9,8 @@ var userGarage = [
 	//Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969'),
 	//Vehicle('Sierra', 'GMC', '1997')
 ];
-userGarage.push(xdbCars[0]);
-userGarage.push(xdbCars[1]);
+//userGarage.push(xdbCars[0]);
+//userGarage.push(xdbCars[1]);
 userGarage.push(xdbCars[3]);
 //userGarage.push(xdbCars[1]);
 //userGarage.push(xdbCars[0]);

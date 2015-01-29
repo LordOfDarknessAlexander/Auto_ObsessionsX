@@ -2,11 +2,17 @@
 <?php header('Content-type: application/javascript; charset: UTF-8');
 require_once '../../include/dbConnect.php';
 require_once '../../vehicles/vehicle.php';
+function hasCar($id){
+    global $AO_DB;
+    $res = false;//$AO_DB->query('SELECT * FROM userCars WHERE (car_id = $id)';
+    
+    echo $res ? 'true' : 'false';
+}
 ?>
 var AuctionSelect =
 {	//object representing
 	list : $('div#AuctionSelect div#carView ul#auctionCars'),
-    setCarBtn:function(carName, i){
+    setCarBtn:function(carName, i, hasCar){
         var btnID = "as" + (i).toString(),
             liID = "asli" + (i).toString(),
             labelID = 'infoLabel';
@@ -23,17 +29,18 @@ var AuctionSelect =
             this.list.append(btnStr);*/
         //}?>
         var btn = $('#' + btnID);
+         
+        // var hasCar = false;
+        
+        // for(var j = 0; j < userGarage.length; j++)
+        // {
+            // var gc = userGarage[j];
 
-        var hasCar = false;
-        for(var j = 0; j < userGarage.length; j++)
-        {
-            var gc = userGarage[j];
-
-            if(carName/*id*/ == gc.getFullName()/*id*/){
-                hasCar = true;
-                break;
-            }
-        }
+            // if(carName/*id*/ == gc.getFullName()/*id*/){
+                // hasCar = true;
+                // break;
+            // }
+        // }
 
         if(hasCar)
         {	//display but disable user from entering auction
@@ -58,7 +65,7 @@ function setCarBtn($args){
     $i = $args[0];
     $car = Vehicle::fromArray($args[1]);	//ao.xdbCars[i];
 ?>
-    this.setCarBtn('<?php echo $car->getFullName();?>', <?php echo strval($i);?>);
+    this.setCarBtn('<?php echo $car->getFullName();?>', <?php echo strval($i);?>, <?php echo hasCar($car->getID() );?>);
 <?php
 }
 
@@ -74,8 +81,9 @@ if($res){
 }
 else{
     //echo "alert('failed to add entry, error: ' . mysqli_error($AO_DB->con)";
-    //?><br><?php
+    //
 }
+?>
     //if(loggedIn){
         //auction cars never change, so load only once to
         //save on calls to server and bandwidth
@@ -87,7 +95,7 @@ else{
         //playing locally as guest, call JS
     //<php
     //}>
-?>
+
 		//for(var i = 0; i < /*ao.*/xdbCars.length; i++)
 		//{
 			

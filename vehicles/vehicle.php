@@ -3,13 +3,15 @@ class Vehicle
 {   //class representing a Vehicle on the server
     //private const
     private
+        $_id,   //uint
         $_make,  //str
         $_year,  //uint
         $_model, //str
         $_price, //uint
         $_info;  //str
     
-    public function __construct($make, $year, $model, $price, $info){
+    public function __construct($id, $make, $year, $model, $price, $info){
+        $this->_id = $id;
         $this->_make = $make;
         $this->_year = $year;
         $this->_model = $model;
@@ -24,6 +26,7 @@ class Vehicle
     }
     public static function fromArray($array){
         return new Vehicle(
+            intval($array['car_id']),
             $array['make'],
             intval($array['year']),
             $array['model'],
@@ -41,6 +44,10 @@ class Vehicle
             //$array['$info']
         //);
     //}
+    public function getID(){
+        return $this->_id;
+    }
+    //public infoFromID(){}
     public function getFullName(){
         //return a human readable name
         return $this->_make . ' ' . $this->_year . ' ' . $this->_model;
