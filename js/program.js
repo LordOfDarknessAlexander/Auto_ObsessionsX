@@ -508,16 +508,17 @@ jq.AuctionSelect.backBtn.click(function()
 	setStatBar();
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
-	Auction.setup();
+	//Auction.setup();
 	
 	//$('#menu').addClass('auction');
 	//AuctionSelect.init();
 });
 jq.Game.toAuctionBtn.click(function() 
 {
-	jq.Game.menu.hide();
-	jq.AuctionSelect.menu.show();
+	jq.Game.menu.toggle();
+	jq.AuctionSelect.menu.toggle();
 	//$('#menu').addClass('auction');
+	//auctionStop = false;
 	AuctionSelect.init();
 });/*
 jq.Game.toAuctionBtn.click(function() 
@@ -529,13 +530,34 @@ jq.Game.toAuctionBtn.click(function()
 	Auction.init();
 	auctionMode();
 });*/
+jq.Auction.homeBtn.click(function()
+{
+	//Auction.cancel();	//stop the auction, aborting the sale
+	Auction.close();
+	//$('#Auction').hide();
+	jq.Auction.menu.hide();
+	jq.Game.menu.show();
+	//jq.Game.menu.children().toggle();	//hides/showns all child elements
+	
+	setStatBar();
+	setAdBG();
+	
+	var car = Garage.getCurrentCar();
+	
+	if(car !== null){
+		//jq.Game.homeImg.attr('src', car.getFullPath() );
+	}
+	//appState = GAME_STATE.MAIN;
+});
 //Auction State Back Button
 jq.Auction.backBtn.click(function()
 {
 	//resetStates();
-	
-	$('#Auction').hide();
+	Auction.close();
+	//$('#Auction').hide();
+	jq.Auction.menu.hide();
 	jq.AuctionSelect.menu.show();
+	//jq.AuctionSelect.menu.children().toggle();	//hides/showns all child elements
 	
 	//$('#menu').removeClass('Auction');
 	//$('#menu').addClass('gameMenu');
@@ -555,22 +577,7 @@ jq.Sold.garageBtn.click(function()
     //appState = GAME_MODE.GARAGE:
 });
 
-jq.Auction.homeBtn.click(function()
-{
-	//Auction.cancel();	//stop the auction, aborting the sale
-	jq.Auction.menu.hide();
-	jq.Game.menu.show();
-	
-	setStatBar();
-	setAdBG();
-	
-	var car = Garage.getCurrentCar();
-	
-	if(car !== null){
-		//jq.Game.homeImg.attr('src', car.getFullPath() );
-	}
-	//appState = GAME_STATE.MAIN;
-});
+
 
 //Inside Auction Bid Button
 $('#bid').click(function()

@@ -129,7 +129,7 @@ var Auction =
 		 enemy3; 
 		 enemy4;
 
-		 console.log("Restarting Auction snaps");
+		 //console.log("Restarting Auction snaps");
 		 bidderCooldown = 0;
 		 playerCanBid = false;
 		
@@ -159,6 +159,44 @@ var Auction =
 		 this.setup();
 		 this.init();	//init requires a car index, this will break		
 	},	
+	close : function()
+	{
+		auctionStop = true;
+		delete sold;
+		delete buyOut;	
+		
+		enemy1; 
+		enemy2; 
+		enemy3; 
+		enemy4;
+
+		//console.log("Restarting Auction snaps");
+		bidderCooldown = 0;
+		playerCanBid = false;
+		playerBid = 0;
+		
+		//temp
+		bidAmount = 200;
+		currentBid = 0;
+		currentBid = vehiclePrice * 0.1;
+		
+		enemyBids = [0,0,0,0]; 
+		endBidTimers = [0,0,0,0];
+		enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
+		playerDidBid = false;
+		enemyCanBid = false;
+		playerNextBid = currentBid + (currentBid * 0.1);
+		
+		//BidTImers Booleans
+		startEndBids = [false,false,false,false];
+		playerWinning = false;
+		playerWon = false;
+		goingTimer = 0;
+		pGTimer = 0;
+		startPlayerEndBid = false;	//player local
+		playerEndBidTimer = 0;	
+		player.reset();
+	},
 	initAI : function()
 	{	//initislize an array of AI players	
 		//this._enemies = [];
@@ -169,7 +207,7 @@ var Auction =
 		  	//enemies.price() = vehiclePrice;
 		  	//enemies.price == vehiclePrice * 0.2;
 		  	
-		  	console.log(i);
+		  	//console.log(i);
 		  	break;
 		}	  
 	},	
@@ -187,13 +225,13 @@ var Auction =
 		if(enemyWinning)
 	  	{
 	  	    //goingTimer ++;
-	  	    console.log("enemys winning" + goingTimer);
+	  	    //console.log("enemys winning" + goingTimer);
 	  	}
 	  	else
 	  	{
 	  		goingTimer = 0;
 	  	}
-		console.log("enemys winning" + endBidTimers);
+		//console.log("enemys winning" + endBidTimers);
 		
 		if(playerDidBid)
 		{
@@ -217,10 +255,10 @@ var Auction =
 	  		pGTimer = 0;
 	  	}
 	  	
-	  	console.log("EnemyCaps1 " + enemyCaps[0]);
-	  	console.log("EnemyCaps2 " + enemyCaps[1]);
-	  	console.log("EnemyCaps3 " + enemyCaps[2]);
-	  	console.log("EnemyCaps4 " + enemyCaps[3]);
+	  	//console.log("EnemyCaps1 " + enemyCaps[0]);
+	  	//console.log("EnemyCaps2 " + enemyCaps[1]);
+	  	//console.log("EnemyCaps3 " + enemyCaps[2]);
+	  	//console.log("EnemyCaps4 " + enemyCaps[3]);
 	
 		if(auctionEnded)
 		{
@@ -333,7 +371,7 @@ var Auction =
 			this.playerGoing();
 			playerWinning = true;
 			
-			console.log("player Going" + pGTimer);	
+			//console.log("player Going" + pGTimer);	
 		}
 	},
 	bidTimers : function()
@@ -506,7 +544,7 @@ var Auction =
 			if((currentBid == enemyBids[i]) && (sum >= BID_THRESHOLD))				
 			{	//enemeny is able to place bid
 				//end auction with enemy bidder
-				console.log("Sum "+ sum + "BidThreshold" + BID_THRESHOLD);
+				//console.log("Sum "+ sum + "BidThreshold" + BID_THRESHOLD);
 				enemyWinning = true;
 				//this.going();
 			}
@@ -619,11 +657,11 @@ var Auction =
 		delete pGTimer;
 		delete goingTimer;
 		delete endBidTimers;
-		console.log("Destroying Auction snaps");
+		//console.log("Destroying Auction snaps");
 		delete player;
 		endGame = false;
 		playerWon = false;
-		auctionStop = false;
+		auctionStop = true;
 		auctionEnded = false;
 	},
 	setBidBtnText : function()

@@ -60,20 +60,22 @@ var AuctionSelect =
 				btn.click(this.denyAuction);
 			}
 			else
-			{
-				btn.click({index:i}, this.initAuction);
+			{	
+				//clearing the button click handler to avoid multiple button bindings
+				btn.off().click({index:i}, this._initAuction);
+				
 				//btn.css('background-image', "url(\'..\\images\\vehicle.jpg");	//car.getFullPath());
 			}
 		}
 	},
-	initAuction : function(obj)
+	_initAuction : function(obj)
 	{
 		var i = obj.data.index;
-		jq.AuctionSelect.menu.toggle();
-		jq.Auction.menu.toggle();
+		jq.AuctionSelect.menu.hide();
+		//jq.AuctionSelect.menu.children().toggle();
+		jq.Auction.menu.show();
 		//Auction.setup();
 		Auction.init(i);
-		//Auction.setup();
 	},
 	denyAuction : function()
 	{
