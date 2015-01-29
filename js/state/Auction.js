@@ -70,6 +70,7 @@ var Auction =
 	{	//call to start an auction for car
 		//var i = 1;
 		//endGame = false;
+        console.log(index);
 		appState = GAME_MODE.AUCTION;
 		auctionStop = false;
 
@@ -86,31 +87,31 @@ var Auction =
 		
 		if(Auction._car !== null)
 		{
+            console.log(Auction._car.getFullName());
 			vehiclePrice = Auction._car.getPrice();
 			currentBid = vehiclePrice * 0.1;
-		}
-		jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
-		//initAI();
-		//else, no car game breaks...
-		//this.endAuction();
-		//
-		shuffleArray(enemyBids);
-		shuffleArray(bidders);
-		shuffleArray(enemyCaps);
-		//		
-		context.font = '26px arial, sans-serif';  
+            jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
+            //initAI();
+            //else, no car game breaks...
+            //this.endAuction();
+            //
+            shuffleArray(enemyBids);
+            shuffleArray(bidders);
+            shuffleArray(enemyCaps);
+            //		
+            context.font = '26px arial, sans-serif';  
 
-		jq.Auction.menu.show();		//$('#Auction').show();
-		
-		this.setBidBtnText();
-		//this.assignEnemyBidCaps();
-		
-		$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
-		$('div#Auction label#carInfo').text(/*'<h1>' + */Auction._car.getFullName() + '-\n    ' + Auction._car.getInfo() );
-		//$('#menu').removeClass('gameMenu');
-		//$('#menu').addClass('Auction');
-		$('.sound').show();
-		
+            jq.Auction.menu.show();		//$('#Auction').show();
+            
+            this.setBidBtnText();
+            //this.assignEnemyBidCaps();
+            
+            $('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
+            $('div#Auction label#carInfo').text(/*'<h1>' + */Auction._car.getFullName() + '-\n    ' + Auction._car.getInfo() );
+            //$('#menu').removeClass('gameMenu');
+            //$('#menu').addClass('Auction');
+            $('.sound').show();
+        }
 		this.setup();
 		
 		assetLoader.sounds.gameOver.pause();
