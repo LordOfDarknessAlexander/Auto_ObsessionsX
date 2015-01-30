@@ -31,28 +31,27 @@ function update(deltaTime)
 {
     //garageDoor();	//should splash update
     
-   if(auctionOver)
-   {
-   	 restarted = true;
-   }
-   if(restarted)
-   {
-   	 console.log("Chicken Fingers restarting");
-   	 //Auction.restart();
-	
-	 auctionMode();
-	
-   }
-   if(auctionOver)
-   {
-   	 restarted = true;
-   }
-   timer++;
-   if(userLogged)
-   {
-   		userHUD();
-   		console.log("User Screen");
-   }
+	if(auctionOver)
+	{
+		restarted = true;
+	}
+	if(restarted)
+	{
+		console.log("Chicken Fingers restarting");
+		//Auction.restart();
+
+		auctionMode();
+
+	}
+
+	AuctionSell.update(deltaTime);
+
+	timer++;
+	if(userLogged)
+	{
+		userHUD();
+		console.log("User Screen");
+	}
 }
 Auction.setup = function()
 {
@@ -66,6 +65,7 @@ Auction.setup = function()
 		
 	}
 }
+
 function auctionMode(deltaTime)
 {	//in-Auction update, core of game logic
    ticker = 0;
@@ -137,7 +137,7 @@ $(document).ready(function()
 		{
 			requestAnimFrame(init);
 			
-			update();
+			update(0.33);
 			
 			//delete Register;	//deleting this every frame is bad idea
 			
