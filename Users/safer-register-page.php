@@ -1,25 +1,26 @@
+<?php
+//require_once '../include/html.php';
+//require_once '../include/dbConnect.php';
+?>
 <!doctype html>
 <html lang=en>
 <head>
-<title>Safer register page</title>
+<title>The Login page</title>
 <meta charset=utf-8>
 <link rel="stylesheet" type="text/css" href="includes.css">
-<style type="text/css">
-#midcol { width:86%; margin:auto; }
-input, select { margin-bottom:5px; }
-h2 { margin-bottom:0; margin-top:5px; margin-left:-2%;}
-h3.content { margin-top:0;margin-left:-50%; }
-.cntr { text-align:center; }
-</style>
 </head>
 <body>
 <div id="container">
-<?php include("includes/register-header.php"); ?>
-
-<?php include("includes/info-col-cards.php");?>
-<div id="content"><!--Start of the registration page content-->
+<?php
+    include 'includes/login-header.php';
+    
+?>
+<div id="content"><!-- Start of the login page content. -->
 <?php
 require ('mysqli_connect.php'); // Connect to the database
+
+
+
 // This code inserts a record into the users table
 // Has the form been submitted?
 /*
