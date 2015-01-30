@@ -20,7 +20,7 @@ var _vehiclePrice = 20000;
 var _enemyBids = [0,0,0,0];
 var ai = [];
 var currentBid = _vehiclePrice * 0.1;	//_car.getPrice() * 0.1, //bidding interval as a percent of total value
-//
+
 function shuffleArray(array) 
 {	//sort array items
     var counter = array.length, temp, index;
@@ -52,7 +52,7 @@ function auctionGen()
 		_bidderCooldown : 0,
 		//temp
 		_bidAmount : 200,
-		
+		_carIndex : 0,
 		//there only needs to be 1 timer to track the closing of the auction
 		_goingTimer : 0,
 		_pGTimer : 0,
@@ -68,10 +68,10 @@ function auctionGen()
 			if(index !== null && index !== "undefined")
 			{
 				this._car = xdbCars[index];
-				
+				this._carIndex = index;
 				ai = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
 				shuffleArray(_enemyBids);
-				console.log(_enemyBids);
+				//console.log(_enemyBids);
 			}	
 			//shuffleArray(bidders);
 			//shuffleArray(this._enemyCaps);
@@ -86,6 +86,7 @@ function auctionGen()
 		{
 			if(!this._expired)
 			{
+				console.log("Running");
 				this._bidderCooldown += dt;
 				this._curTime += dt;
 				this.bidTimers();
@@ -111,9 +112,39 @@ function auctionGen()
 						}
 					}
 					console.log("Ending auction");
+					this.endAuction();
 					this.close();
 				}
 			}
+		},
+		endAuction:function()
+		{
+			var i = 0;
+			var btnID = "as" + (i).toString(),
+				liID = "asli" + (i).toString();
+			var cleanBtn = $('li#' + liID + ' button#' + btnID);
+			cleanBtn.text("Sold!");
+			cleanBtn.off().click(this.cleanUpAuction());
+		},
+		cleanUpAuction:function()
+		{
+			var i = 0;
+			var liID = "asli" + (i).toString();
+			var carElement = $('li#' + liID);
+			console.log("Removing button");
+			//carElement.remove();
+			/*var btnStr = "<li id='" + liID + "'>" + 
+						"<img src='" + car.getFullPath() + "'>" +
+						"<label id='carInfo'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
+						"<button id='" + btnID + "'>" + 
+							"Price: $<label id='price'>" + (car.getPrice() ).toString() + "</label><br>" +
+							"Auction expires: <label id='expireTime'></label>" +
+						"</button>" +
+					"</li><br>";*/
+			
+			
+			userStats.money += currentBid;
+			currentBid = 0;
 		},
 		load:function()
 		{
@@ -276,7 +307,7 @@ var AuctionSell =
 		{
 			//call to start an auction for car
 			var i = index.data.i;
-			AuctionSell._state = auctionGen();
+			AuctionSell._state = new auctionGen();
 			AuctionSell._state.init(i);
 			
 			//for(var i = 0; i < /*ao.*/soldCars.length; i++)
@@ -299,6 +330,7 @@ var AuctionSell =
 							"Auction expires: <label id='expireTime'></label>" +
 						"</button>" +
 					"</li><br>";
+					
 					jq.AuctionSell.carList.append(btnStr);
 				}
 				//

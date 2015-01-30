@@ -312,7 +312,7 @@ var CarView = {
 			var car = userGarage[selCarIndex];
 			jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
 			jq.CarView.carInfo.text(car.getFullName() + '-\n    ' + car.getInfo()) ;//xmlCarinfo.getElemById(car.id) );
-			jq.CarView.sellBtn.click({i:selCarIndex}, AuctionSell.init);
+			jq.CarView.sellBtn.off().click({i:selCarIndex}, AuctionSell.init);
 		}
 	}
 	//update, ender, exit?
