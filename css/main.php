@@ -69,7 +69,7 @@ function divStatBar(){
     defaultColor();
     fontBold();
     cursorPtr();
-    css::size('150px', '50px');
+    css::size('150px', '150px');
 ?>
 }
 /* Stat Bar Game HUD */
