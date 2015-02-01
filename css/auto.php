@@ -97,7 +97,7 @@ button#homeBtn
 }*/
 .wrapper 
 {
- height:600px;
+  height:600px;
   width: 900px;
   position: absolute;
   top: 5px;
@@ -115,10 +115,10 @@ img#adBar
 
 #Register
 {
-  background-image: url('../images/Splash.png');
+  background-image: url('../images/Splash.png')no-repeat 0 0;
   color: white;
-  height:600px;
-  width: 900px;
+  width: 100%;
+  height: 100%;
   z-index: 20;
   color:red;
 	position:absolute;
@@ -137,9 +137,9 @@ img#adBar
 
 #splash
 {
-  background-image: url('../images/Splash.png');
-  height:600px;
-  width: 900px;
+  background-image: url('../images/Splash.png')no-repeat 0 0;
+  width: 100%;
+  height: 100%;
   z-index: 20;
 
 }
@@ -279,20 +279,20 @@ div#main a:hover {
   margin-top: 20em;
   padding-top: 92px;
   z-index: 1;
-  width: 900px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   position: absolute;
 }
 
 #game-over 
 {
-  background-image: url('../images/logo.png');
+  background-image: url('../images/logo.png')no-repeat 0 0;
   display: none;
   text-align: center;
   padding-top: 92px;
   z-index: 1;
-  width: 900px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   position: absolute;
 }
 div#profile
@@ -300,8 +300,8 @@ div#profile
     background: url('../images//defaultBG.jpg') no-repeat 0 0;
     display: none;
     text-align: center;
-    width: 900px;
-    height: 600px;
+    width: 100%;
+    height: 100%;
     position: absolute;
     top:0%;
     left:0%;
@@ -312,8 +312,8 @@ div#messages
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     display: none;
     text-align: center;
-    width: 900px;
-    height: 600px;
+    width: 100%;
+    height: 100%;
     position: absolute;
     top:0%;
     left:0%;
@@ -324,8 +324,8 @@ div#ranks
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     display: none;
     text-align: center;
-    width: 900px;
-    height: 600px;
+    width: 100%;
+   height: 100%;
     position: absolute;
     top:0%;
     left:0%;
@@ -348,8 +348,8 @@ div#business
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     display: none;
     text-align: center;
-    width: 900px;
-    height: 600px;
+    width: 100%;
+    height: 100%;
     position: absolute;
     top:0%;
     left:0%;

@@ -93,8 +93,8 @@ button#homeBtn
 }*/
 .wrapper 
 {
- height:600px;
-  width: 900px;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 5px;
   left: 5px;
@@ -134,8 +134,8 @@ img#adBar
 #splash
 {
   background-image: url('../images/Splash.png');
-  height:600px;
-  width: 900px;
+  width: 100%;
+  height: 100%;
   z-index: 20;
 
 }
@@ -164,8 +164,8 @@ div#main
 	text-align: center;
 	/*padding-top: 92px;*/
 
-	width: 900px;
-	height: 600px;
+	width: 100%;
+	height: 100%;
   
     margin: auto;
     position: absolute;
@@ -293,8 +293,8 @@ div#main
   text-align: center;
   padding-top: 92px;
   z-index: 1;
-  width: 900px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   position: absolute;
 }
 div#profile
@@ -314,8 +314,8 @@ div#messages
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     display: none;
     text-align: center;
-    width: 900px;
-    height: 600px;
+    width: 100%;
+	height: 100%;
     position: absolute;
     top:0%;
     left:0%;
@@ -326,8 +326,8 @@ div#ranks
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     display: none;
     text-align: center;
-    width: 900px;
-    height: 600px;
+    width: 100%;
+	height: 100%;
     position: absolute;
     top:0%;
     left:0%;
@@ -338,8 +338,8 @@ div#search
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     display: none;
     text-align: center;
-    width: 900px;
-    height: 600px;
+    width: 100%;
+	height: 100%;
     position: absolute;
     top:0%;
     left:0%;
@@ -350,8 +350,8 @@ div#business
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     display: none;
     text-align: center;
-    width: 900px;
-    height: 600px;
+    width: 100%;
+	height: 100%;
     position: absolute;
     top:0%;
     left:0%;

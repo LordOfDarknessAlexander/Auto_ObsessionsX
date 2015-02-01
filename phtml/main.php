@@ -32,13 +32,11 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
             <h1><?php echo $AO_NAME;?></h1>
            
              <div id="login">
-            	<fieldset>
-                    <form method="post" action="Users/login.php">
-                      <p> USER NAME <input type="text" name="username"></p>
-                      <p> PASSWORD <input type="password" name="pword"></p>
-                      <p><input type="submit"  name="submit" value="Log In"></p>
-                    </form>
-                </fieldset>
+				<form method="post" action="Users/login.php">
+				  <p> USER NAME <input type="text" name="username"></p>
+				  <p> PASSWORD <input type="password" name="pword"></p>
+				  <p><input type="submit"  name="submit" value="Log In"></p>
+				</form>
             </div>
             <ul>
                <li><a href="javascript:void(0)" class="button play">Play as Guest</a></li>
@@ -97,7 +95,7 @@ foreach($scripts as $val){
     //then finally the local folder which THIS script is located
     require_once($val.'.php');
 }
-//require_once('AOUsers_include.php');
+
 ?>
     <div id='profile'>
         <button id='backBtn'>Back</button>
