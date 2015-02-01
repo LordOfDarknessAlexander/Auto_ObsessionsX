@@ -1,10 +1,13 @@
 <?php require_once('AO_UI.php');
 //
+
 function selectBtn(){?>
     <button id='select'>Select</button>
 <?php
+
 }
 ?>
+<?php include("include/statBar.php"); ?>
 <div id="Garage">
     <h1>Garage</h1>
     <?php selectBtn();?>

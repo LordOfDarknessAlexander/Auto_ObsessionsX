@@ -40,7 +40,7 @@ class css{
         echo 'height:'.$str.';';
     }
     //static interface to function generating common css fragments
-    public static function size($width = '600px', $height = '900px'){
+    public static function size($width = '100%', $height = '100%'){
         css::width($width);
         css::height($height);
     }

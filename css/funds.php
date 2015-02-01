@@ -20,8 +20,8 @@ require_once 'ui.php';
 	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
-	width: 900px;
-	height: 600px;
+	width: 100%;
+	height: 100%;
 }
 
 <?php divFunds();?>  li 

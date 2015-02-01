@@ -17,8 +17,8 @@ require_once 'ui.php';
 	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
-	width: 900px;
-	height: 600px;
+	width: 100%;
+	height: 100%;
 }
 
 <?php divAuction();?> li 
@@ -49,10 +49,10 @@ require_once 'ui.php';
 ?>
 	color: white;
 
-	width:150px;
-	height:50px;
-	left:5%;
-	bottom:30%;
+	width:12%;
+	height:5%;
+	left:85%;
+	bottom:60%;
 }
 
 <?php divAuction();?> button#buyout
@@ -64,10 +64,10 @@ require_once 'ui.php';
 ?>
 	color: white;
 
-	width:150px;
-	height:50px;
-	left:5%;
-	bottom:20%;
+	width:12%;
+	height:5%;
+	left:85%;
+	bottom:56%;
 }
 <?php divAuction();?> label#carPrice
 {<?php
@@ -76,10 +76,10 @@ require_once 'ui.php';
 	background:black;
 	color:white;
 
-	width:150px;
-	height:50px;
+	width:12%;
+	height:5%;
 
-	left:5%;
+	left:85%;
 	bottom:40%;
 }
 
@@ -91,10 +91,10 @@ require_once 'ui.php';
 ?>
 	background-image:url('../images/checkers.png');
 
-	width:60%;
+	width:100%;
 	height:20%;
 
-	right:20%;
+	left:5%;
 	bottom:0%;
 }
 <?php divAuction();?> img#auctionCar

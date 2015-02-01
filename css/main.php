@@ -22,7 +22,7 @@ function divStatBar(){
 <?php
     defaultBG();
     posAbs();
-    css::size('900px', '600px');
+    css::size('100%', '100%');
 ?>
     display: none;
 	text-align: center;
@@ -101,26 +101,7 @@ function divStatBar(){
 <?php divStatBar();?> label#mileMarker{left:75%;}
 
 /*game menu navigation buttons*/
-#auction
-{
-	background: url('../images/auctionButton.png') no-repeat 0 0;
-	color: white;
-	font-weight: bold;
-	font-size: 1em;
-	width:150px;
-	height:50px; 
-	cursor:pointer;
-	
-}
-#repair
-{
-	background: url('../images/repairButton.png') no-repeat 0 0;
-	color:red;
-	font-weight: bold;
-	width:150px;
-	height:50px;
-	cursor:pointer;
-}
+
 #addFunds
 {<?php
 	defaultBtnBG();

@@ -97,8 +97,8 @@ button#homeBtn
 }*/
 .wrapper 
 {
-  height:600px;
-  width: 900px;
+  height:100%;
+  width: 100%;
   position: absolute;
   top: 5px;
   left: 5px;
@@ -163,7 +163,8 @@ div#main a:hover {
 #main 
 {
   display: none;
-  height: 60%;
+  height: 100%;
+  width: 100%;
   /*overflow: auto;*/
   margin: auto;
   position: absolute;

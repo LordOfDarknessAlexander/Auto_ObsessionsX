@@ -2,12 +2,7 @@
     <!--Root Game Menu, hub for page navigation-->
      <h1>My Home</h1>
      <!--HUD ---->
-    <div id='statBar'>             
-        <label id='money'>Money: </label>
-        <label id='tokens'>Tokens:</label>
-        <label id='prestige'>Prestige:</label>
-        <label id='mileMarker'>Mile Makers:</label>
-    </div> 
+  <?php include("include/statBar.php"); ?>
    
    <button id='addFunds'>Add Funds</button>
   

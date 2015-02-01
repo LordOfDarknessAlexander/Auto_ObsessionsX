@@ -11,7 +11,7 @@ function divRepair(){
 {<?php
     defaultBG();
     posAbs();
-    css::size('900px', '600px');
+    css::size('100%', '100%');
 ?>
 	display: none;
 	text-align: center;
