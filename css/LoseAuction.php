@@ -15,10 +15,10 @@ function divSold(){
 	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
-	width: 900px;
-	height: 600px;
+	width: 100%;
+	height: 100%;
 	position: absolute;
-	top:-60%;
+	top:0%;
 }
 <?php divSold();?> button
 {

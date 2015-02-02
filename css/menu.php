@@ -11,8 +11,8 @@ function divHome(){
 {<?php
     posABs();
 ?>
-  height:600px;
-  width: 900px;
+  height:100%;
+  width: 100%;
   border: 1px solid black;
   z-index: 2;
   text-align: center;
@@ -21,8 +21,8 @@ function divHome(){
 <?php divHome();?>.main 
 {
   background-image:url('../images/AbsuMenu.png');
-  height:600px;
-  width: 900px;
+  height:100%;
+  width: 100%;
 }
 
 <?php divHome();?>.credits 
@@ -37,8 +37,8 @@ function divHome(){
   text-align: center;
   padding-top: 92px;
   z-index: 1;
-  width: 900px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   position: absolute;
 
 }
@@ -48,8 +48,8 @@ function divHome(){
   text-align: center;
   padding-top: 92px;
   z-index: 1;
-  width: 900px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   position: absolute;
 }
 <?php divHome();?>.RepairShop
@@ -58,8 +58,8 @@ function divHome(){
   text-align: center;
   padding-top: 92px;
   z-index: 1;
-  width: 900px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   position: absolute;
 }
 <?php divHome();?>.AddFunds
@@ -69,8 +69,8 @@ function divHome(){
   text-align: center;
   padding-top: 92px;
   z-index: 1;
-  width: 900px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   position: absolute;
 
 }

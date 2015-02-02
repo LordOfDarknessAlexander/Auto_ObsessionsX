@@ -1,9 +1,9 @@
 ﻿#Register
 {
-  background-image: url('../images/Splash.png');
+  background-image: url('../images/Splash.png' );
   color: white;
-  height:600px;
-  width: 900px;
+  height:100%;
+  width: 100%;
   z-index: 20;
   color:red;
   position:absolute;
@@ -14,7 +14,7 @@
 #RegisterForm
 {
 	margin-right : 3em;
-	left : 30%;
+	left : 20%;
 	bottom: 30%;
 	
 }
@@ -37,8 +37,8 @@ fieldset.date legend {
 
 fieldset.date label { 
   position: absolute; 
-  top: -20em; 
-  left: -200em; 
+  top: 0em; 
+  left: -20em; 
 } 
 
 fieldset.date select { 

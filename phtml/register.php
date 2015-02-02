@@ -1,5 +1,5 @@
 <?php
-//require_once('AOUsers_include.php');
+
 function ep($str){
     //echo var at _POST
     if(is_string($str) && isset($_POST[$str]) )

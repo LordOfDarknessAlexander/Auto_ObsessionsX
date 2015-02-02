@@ -57,6 +57,7 @@ button
 {	/*all button elements will hare this background unless otherwise specified*/
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color:red;
+	
 }
 button#backBtn
 {   /*sets properties for all button tags with id backBtn*/
@@ -100,8 +101,8 @@ button#homeBtn
   height:100%;
   width: 100%;
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 0%;
+  left: 0%;
 }
 img#adBar
 {
@@ -121,11 +122,9 @@ img#adBar
   height: 100%;
   z-index: 20;
   color:red;
-	position:absolute;
-	right:5%;
-	top:25%;
-
-
+  position:absolute;
+  right:15%;
+  top:15%;
 }
 #login
 {
@@ -174,7 +173,7 @@ div#main a:hover {
 {
 	color:red;
 	position:absolute;
-	left:5%;
+	left:15%;
 	top:0%;
 }
 #main form#register
@@ -182,7 +181,7 @@ div#main a:hover {
 	color:red;
 	position:absolute;
 	right:5%;
-	top:25%;
+	top:5%;
 }
 
 #progress 
@@ -240,10 +239,9 @@ div#main a:hover {
 .button 
 {
   display: block;
-  width: 150px;
-  height:50px;
+  width: 15%;
+  height:15%;
   margin: 0 auto;
-  height: 30px;
   line-height: 30px;
   border: 1px solid #AA2666;
   color: white;
@@ -277,7 +275,7 @@ div#main a:hover {
  /* background-image: url('../images/logo.png');*/
   display: none;
   text-align: center;
-  margin-top: 20em;
+  margin-top: 0em;
   padding-top: 92px;
   z-index: 1;
   width: 100%;
@@ -337,8 +335,8 @@ div#search
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     display: none;
     text-align: center;
-    width: 900px;
-    height: 600px;
+    width: 100%;
+    height: 100%;
     position: absolute;
     top:0%;
     left:0%;
@@ -361,305 +359,6 @@ div#business
 {
 /* Styles */
 	
-	#auction
-	{
-	  background: url('../images/auctionButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;; 
-	  cursor:pointer;
-	}
-	#repair
-	{
-	  background: url('../images/repairButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;	  
-	  cursor:pointer;
-	
-	  
-	}
-	#repairBackButton
-	{
-	  background: url('../images/repairBackButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;		 
-	  cursor:pointer;
-	
-		
-	}
-	#addFundsBackButton
-	{
-	  background: url('../images/repairBackButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;		  
-	  cursor:pointer;
-	
-		
-	}
-	
-	#auctionBackButton
-	{
-	  background: url('../images/repairBackButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;		  
-	  cursor:pointer;
-	
-		
-	}
-	
-	#addFunds
-	{
-	   background: url('../images/addFundsButton.png') no-repeat 0 0;
-	   color: white;
-	   font-weight: bold;
-	   width:200px;
-	   height:100px;		   
-	   cursor:pointer;
-	}
-	#myCars
-	{
-	   background: url('../images/inventoryButton.png') no-repeat 0 0;
-	   color: white;
-	   font-weight: bold;
-	   width:200px;
-	   height:100px;		   
-	   cursor:pointer;
-	 
-	}
-	
-	#bid
-	{
-	  background: url('../images/bidButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:200px;		  
-	  cursor:pointer;
-	
-	}
-	#purchaseButton
-	{
-	  background: url('../images/bidButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;	
-	  cursor:pointer;
-	
-	}
-	
-	
-	.sound-off 
-	{
-	  background-image: url('../images/soundOff.png');
-	  background-repeat: no-repeat;
-	}
-	
-	#main 
-	{
-	  display: none;
-	  height: 100%;
-	  overflow: auto;
-	  margin: auto;
-	  position: absolute;
-	  top: 0; left: 0; bottom: 0; right: 0;
-	}
-	#menu.gameMenu
-	{
-		
-	  /*background-image: url('../images/logo.png');*/
-	  display:inline-block;
-	  text-align: center;
-	  padding-top: 92px;
-	  z-index: 1;
-	  width: 60%;
-	  height: 100%;
-	  position: absolute;
-	
-	}
-		
-	.button 
-	{
-	  display: block;
-	  width: 200px;
-	  height:200px;
-	  margin: 0 auto;
-	  height: 30px;
-	  line-height: 30px;
-	  border: 1px solid #AA2666;
-	  color: white;
-	  font-weight: bold;
-	  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-	  background-color: #FF0DFF;
-	  background-image: -webkit-linear-gradient(bottom, #990000 0%, #990000 100%);
-	  background-image:         linear-gradient(to bottom, #990000 0%, #B30D5D 100%);
-	  border-radius: 5px;
-	 }
-
-	
-	.button:hover 
-	{
-	  background-color: #990099;
-	  background-image: -webkit-linear-gradient(bottom, #B30D5D 0%, #FB1886 100%);
-	  background-image:         linear-gradient(to bottom, #B30D5D 0%, #FB1886 100%);
-	}
-		
-	#main 
-	{
-	  display: none;
-	  height: 100%;
-	  overflow: auto;
-	  margin: auto;
-	  position: absolute;
-	  top: 0; left: 0; bottom: 0; right: 0;
-	}
-	#menu.gameMenu
-	{
-		
-	  /*background-image: url('../images/logo.png');*/
-	  display:inline-block;
-	  text-align: center;
-	  padding-top: 92px;
-	  z-index: 1;
-	  width: 60%;
-	  height: 100%;
-	  position: absolute;
-	
-	}
-	#money
-	{
-	 color:aqua;
-		
-	}
-	#enemyBid
-	{
-	 color:aqua;
-		
-	}
-	
-	#gameMenu 
-	{
-	
-	  display: none;
-	  text-align: center;
-	  padding-top: 92px;
-	  z-index: 1;
-	  width: 60%;
-	  height: 100%;	  
-	  position: absolute;
-	}
-	#gameMenu  li 
-	{
-	  padding: 10px 0;
-	  display:inline;
-	  margin: 8px;
-	  margin-top: 8em;
-	}
-	
-	#Auction
-	{
-	  
-	  display: none;
-	  text-align: center;
-	  padding-top: 92px;
-	  z-index: 1;
-	  width: 60%;
-	  height: 100%;	  
-	  position: absolute;
-	}
-	
-	#menu.Auction
-	{
-		
-	  display: none;
-	  text-align: center;
-	  padding-top: 92px;
-	  z-index: 1;
-	  width: 60%;
-	  height: 100%;	  
-	  position: absolute;
-	
-	}
-	#Auction  li 
-	{
-	  padding: 5px 0;
-	}
-	
-	#RepairShop
-	{
-	  
-	  display: none;
-	  text-align: center;
-	  padding-top: 92px;
-	  z-index: 1;
-	  width: 60%;
-	  height: 100%;	  
-	  position: absolute;
-	}
-	
-	#menu.RepairShop
-	{
-		
-	 
-	  display: none;
-	  text-align: center;
-	  padding-top: 92px;
-	  z-index: 1;
-	  width: 60%;
-	  height: 100%;	  
-	  position: absolute;
-	
-	}
-	#RepairShop  li 
-	{
-	  padding: 5px 0;
-	}
-	#AddFunds
-	{
-	  background-image: url('../images/logo.png');
-	  display: none;
-	  text-align: center;
-	  padding-top: 92px;
-	  z-index: 1;
-	  width: 60%;
-	  height: 100%;	  
-	  position: absolute;
-	}
-	
-	#menu.AddFunds
-	{
-		
-	 background-image: url('../images/logo.png');
-	  display: none;
-	  text-align: center;
-	  padding-top: 92px;
-	  z-index: 1;
-	  width: 60%;
-	  height: 100%;	
-	  position: absolute;
-	
-	}
-	#AddFunds  li 
-	{
-	  padding: 5px 0;
-	}
-	
-	
-	#main h1 
-	{
-	  color: #AFCAAF;
-	  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-	}
-
 
 }
 
@@ -674,126 +373,7 @@ div#business
 {
 /* Styles */
 	
-	#auction
-	{
-	  background: url('../images/auctionButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px; 
-	  cursor:pointer;
-	}
-	#repair
-	{
-	  background: url('../images/repairButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;
-	  cursor:pointer;
 
-	}
-	#repairBackButton
-	{
-	  background: url('../images/repairBackButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;	  cursor:pointer;
-
-	}
-	#addFundsBackButton
-	{
-	  background: url('../images/repairBackButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;	 
-	  cursor:pointer;
-	
-	}
-	
-	#auctionBackButton
-	{
-	  background: url('../images/repairBackButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;	  
-	  cursor:pointer;
-		
-	}
-	
-	#addFunds
-	{
-	   background: url('../images/addFundsButton.png') no-repeat 0 0;
-	   color: white;
-	   font-weight: bold;
-	   width:200px;
-	   height:100px;	   
-	   cursor:pointer;
-	}
-	#myCars
-	{
-	   background: url('../images/inventoryButton.png') no-repeat 0 0;
-	   color: white;
-	   font-weight: bold;
-	   width:200px;
-	   height:100px;	   
-	   cursor:pointer;
-	 
-	}
-	
-	#bid
-	{
-	  background: url('../images/bidButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;
-	  cursor:pointer;
-	
-	}
-	#purchaseButton
-	{
-	  background: url('../images/bidButton.png') no-repeat 0 0;
-	  color: white;
-	  font-weight: bold;
-	  width:200px;
-	  height:100px;
-	  cursor:pointer;
-	
-	}
-	
-	
-	.sound-off 
-	{
-	  background-image: url('../images/soundOff.png');
-	  background-repeat: no-repeat;
-	}
-	
-	#main 
-	{
-	  display: none;
-	  height: 100%;
-	  overflow: auto;
-	  margin: auto;
-	  position: absolute;
-	  top: 0; left: 0; bottom: 0; right: 0;
-	}
-	#menu.gameMenu
-	{
-		
-	  /*background-image: url('../images/logo.png');*/
-	  display:inline-block;
-	  text-align: center;
-	  padding-top: 92px;
-	  z-index: 1;
-	  width: 140%;
-	  height: 100%;
-	  position: absolute;
-	
-	}
 
 }
 

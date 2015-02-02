@@ -35,7 +35,6 @@ function divStatBar(){
 	padding: 10px 0;
 	display:inline;
 	margin: 8px;
-
 	margin-top: 8em;
 	top: 20%;
 }
@@ -69,7 +68,7 @@ function divStatBar(){
     defaultColor();
     fontBold();
     cursorPtr();
-    css::size('150px', '150px');
+    css::size('15em', '15em');
 ?>
 }
 /* Stat Bar Game HUD */
@@ -78,7 +77,7 @@ function divStatBar(){
     posAbs();
     css::size('100%', '5%');
 ?>
-	top:30%;
+	top:20%;
 	left:2%;
 	
 	/*child elements inherit values, unless otherwise specified*/
