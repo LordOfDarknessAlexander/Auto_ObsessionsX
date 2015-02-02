@@ -124,27 +124,18 @@ function auctionGen()
 				liID = "asli" + (i).toString();
 			var cleanBtn = $('li#' + liID + ' button#' + btnID);
 			cleanBtn.text("Sold!");
-			cleanBtn.off().click(this.cleanUpAuction());
+			cleanBtn.off().click(this.cleanUpAuction);
 		},
 		cleanUpAuction:function()
 		{
+			userStats.money += Math.round(currentBid);
+			currentBid = 0;
+			
 			var i = 0;
 			var liID = "asli" + (i).toString();
 			var carElement = $('li#' + liID);
-			console.log("Removing button");
-			//carElement.remove();
-			/*var btnStr = "<li id='" + liID + "'>" + 
-						"<img src='" + car.getFullPath() + "'>" +
-						"<label id='carInfo'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
-						"<button id='" + btnID + "'>" + 
-							"Price: $<label id='price'>" + (car.getPrice() ).toString() + "</label><br>" +
-							"Auction expires: <label id='expireTime'></label>" +
-						"</button>" +
-					"</li><br>";*/
 			
-			
-			userStats.money += currentBid;
-			currentBid = 0;
+			carElement.remove();
 		},
 		load:function()
 		{
