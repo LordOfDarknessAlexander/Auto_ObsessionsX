@@ -67,8 +67,22 @@ function auctionGen()
 		{
 			if(index !== null && index !== "undefined")
 			{
-				this._car = xdbCars[index];
+				this._car = userGarage[index];
 				this._carIndex = index;
+				
+				//Removing the vehicle here because if we wait until the vehicle sells the player can sell
+				//the vehicle multiple times without collecting the money
+				
+				//Find the vehicle for auction in the player's garage
+				for(var i = 0; i < userGarage.length; ++i)
+				{
+					//Once the vehicle has been found, remove it from the array
+					if(userGarage[i].name === this._car.name)
+					{
+						userGarage.splice(i, 1);
+					}
+				}
+				
 				ai = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
 				shuffleArray(_enemyBids);
 				//console.log(_enemyBids);
@@ -128,13 +142,16 @@ function auctionGen()
 		},
 		cleanUpAuction:function()
 		{
+			//Give the user their money
 			userStats.money += Math.round(currentBid);
 			currentBid = 0;
 			
+			//Find the element that contains the car information/button
 			var i = 0;
 			var liID = "asli" + (i).toString();
 			var carElement = $('li#' + liID);
 			
+			//Remove the element from the page
 			carElement.remove();
 		},
 		load:function()
