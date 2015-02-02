@@ -67,7 +67,7 @@ function auctionGen()
 		{
 			if(index !== null && index !== "undefined")
 			{
-				this._car = xdbCars[index];
+				this._car = userGarage[index];
 				this._carIndex = index;
 				ai = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
 				shuffleArray(_enemyBids);
@@ -124,10 +124,19 @@ function auctionGen()
 				liID = "asli" + (i).toString();
 			var cleanBtn = $('li#' + liID + ' button#' + btnID);
 			cleanBtn.text("Sold!");
-			cleanBtn.off().click(this.cleanUpAuction);
+			cleanBtn.off().click({car:this._car}, this.cleanUpAuction);
 		},
-		cleanUpAuction:function()
+		cleanUpAuction:function(vehicle)
 		{
+			//Find the vehicle for auction in the player's garage
+			for(var i = 0; i < userGarage.length; ++i)
+			{
+				//Once the vehicle has been found, remove it from the array
+				if(userGarage[i].name === vehicle.data.car.name)
+				{
+					userGarage.splice(i, 1);
+				}
+			}
 			userStats.money += Math.round(currentBid);
 			currentBid = 0;
 			
