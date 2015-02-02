@@ -138,9 +138,9 @@ function auctionGen()
 				liID = "asli" + (i).toString();
 			var cleanBtn = $('li#' + liID + ' button#' + btnID);
 			cleanBtn.text("Sold!");
-			cleanBtn.off().click({car:this._car}, this.cleanUpAuction);
+			cleanBtn.off().click(this.cleanUpAuction);
 		},
-		cleanUpAuction:function(vehicle)
+		cleanUpAuction:function()
 		{
 			//Give the user their money
 			userStats.money += Math.round(currentBid);
