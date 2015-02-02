@@ -1,0 +1,27 @@
+﻿/*credits page UI stylings*/
+#credits 
+{
+  display: none;
+  line-height: 30px;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+#credits li 
+{	/*styling for all li(list item) in div element with id credits*/
+  padding: 5px 0;
+}
+
+.artwork, .music, .developer 
+{
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.artwork 
+{
+  color: #fa8526;
+}
+.developer 
+{
+  color: #13eb8a;
+}

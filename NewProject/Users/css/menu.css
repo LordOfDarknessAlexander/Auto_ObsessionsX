@@ -1,0 +1,67 @@
+﻿/*main menu UI stylings*/
+#menu
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  z-index: 2;
+  text-align: center;
+  background-color: black;
+}
+#menu.main 
+{
+  background-image:url('../images/AbsuMenu.png');
+  width: 100%;
+  height: 100%;
+}
+
+#menu.credits 
+{
+  background-image: url('../images/credits-bg.png');
+}
+
+#menu.gameMenu
+{
+  /*background-image: url('../images/logo.png');*/
+  display:inline-block;
+  text-align: center;
+  padding-top: 92px;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+}
+#menu.Auction
+{
+  display: none;
+  text-align: center;
+  padding-top: 92px;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+#menu.RepairShop
+{
+  display: none;
+  text-align: center;
+  padding-top: 92px;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+#menu.AddFunds
+{
+  background-image: url('../images/logo.png');
+  display: none;
+  text-align: center;
+  padding-top: 92px;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+}

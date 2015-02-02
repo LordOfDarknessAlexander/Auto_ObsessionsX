@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--VehicleList id=Vehicles-->
+	<Vehicle
+       	id='0x00DA86B0'
+	    name='Camaro RS/Z28 Sport Coupe'
+        year='1969'
+        make='Chevrolet'>
+        This is stuff about this specific car!
+        <upgrades>
+        	<part>
+            	<id>ventilation</id>
+                <type>interior</type>
+            	<price>16</price>
+                <quality>96</quality>
+                <originality>38</originality>
+            </part>
+           	<part>
+            	<id>name plates</id>
+                <type>trim & Detailiing</type>
+            	<price>32</price>
+                <quality>51</quality>
+                <originality>83</originality>
+            </part>
+           	<part>
+            	<id>hardware</id>
+                <type>trim & detailiing</type>
+            	<price>60</price>
+                <quality>42</quality>
+                <originality>56</originality>
+            </part>
+        </upgrades>
+    </Vehicle>
+    <Vehicle
+       	id='0x00FA78C6'
+	    name='E-Type Series II 4.2 Roadster'
+        year='1969'
+        make='Jaguar'>
+		Vehicle info about important stuff
+        <upgrades>
+        	<part>
+            	<id>ventilation</id>
+                <type>interior</type>
+            	<price>72</price>
+                <quality>51</quality>
+                <originality>72</originality>
+            </part>
+           	<part>
+            	<id>Artifacts</id>
+                <type>Trim & Detailiing</type>
+            	<price>112</price>
+                <quality>66</quality>
+                <originality>36</originality>
+            </part>
+           	<part>
+            	<id>Artifacts</id>
+                <type>Trim & Detailiing</type>
+            	<price>112</price>
+                <quality>66</quality>
+                <originality>36</originality>
+            </part>
+        </upgrades> 
+    </Vehicle>
+<!--/VehicleList-->
