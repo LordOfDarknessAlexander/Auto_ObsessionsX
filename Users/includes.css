@@ -11,8 +11,10 @@ body
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-  background: url('../images/Splash.png') no-repeat 0 0; 
+  background: url('../images/Splash.png') no-repeat 0 0;
   color:white;
+  width:100%;
+  height: 100%;
 }
 canvas 
 {
@@ -35,11 +37,11 @@ h2 { font-size:150%; color:red; text-align:left;
 h3 { font-size:110%; color:white; text-align:center;
 }
 
-ul { position:absolute; top:60%; left:-28%; color:#52005C; width:135px; text-align:center; margin:0;
+ul { position:absolute; top:60%; left:68%; color:#52005C; width:40%; text-align:center; margin:0;
 }
-#container {position:relative; min-width:960px; max-width:1200px; margin:auto; text-align:left;	margin-left: -2%;
+#container {position:relative;  min-width:100%; min-height: 100%;margin:auto; text-align:left;	margin-left: 2%;
 }
-#nav ul { position:absolute; margin-top:50%; left:2%; color:navy; width:135px; text-align:center; margin:0;
+#nav ul { position:absolute; margin-top:50%; left:12%; color:navy; width:40%; text-align:center; margin:0;
 }
 #info-col 
 { 
@@ -63,7 +65,7 @@ li a:hover { display:block; background: #BF0000; border: 4px outset #8abaff; wid
 li a:active { background:#aecbff; border: 4px inset #aecbff;
 }
 #reg-navigation ul { float:right;
-	font-size:medium; width:160px; margin:-10% 15px 0 88%; margin-top: -2%;
+	font-size:medium; width:10%; margin:10% 15px 0 88s%; margin-top: -2%;
 }
 #midcol {width:90%; margin:auto;}
 #mid-left-col { width:46%; float:left; text-align:left;
@@ -76,7 +78,7 @@ table { width:800px; border:1px white solid; border-collapse:collapse; margin-le
 }
 td { border:1px white solid; padding:1px 0 1px 4px; text-align:left;
 }
-form { margin-left:-1%; margin-top: 0%; width:70%;
+form { margin-left:-1%; margin-top: 0%; width:100%;
 }
 #footer { margin:auto; text-align:center; margin-left: -50%;
 }
@@ -196,7 +198,7 @@ li a:hover { display:block; background: #BF0000; border: 4px outset #8abaff; wid
 li a:active { background:#aecbff; border: 4px inset #aecbff;
 }
 #reg-navigation ul { float:right;
-	font-size:medium; width:160px; margin:-10% 15px 0 88%; margin-top: -2%;
+	font-size:medium; width:10%; margin:-10% 15px 0 88%; margin-top: -2%;
 }
 #midcol {width:90%; margin:auto;}
 #mid-left-col { width:46%; float:left; text-align:left;
