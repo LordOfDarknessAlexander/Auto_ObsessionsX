@@ -77,7 +77,7 @@ function auctionGen()
 				for(var i = 0; i < userGarage.length; ++i)
 				{
 					//Once the vehicle has been found, remove it from the array
-					if(userGarage[i].name === vehicle.data.car.name)
+					if(userGarage[i].name === this._car.name)
 					{
 						userGarage.splice(i, 1);
 					}
