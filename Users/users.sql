@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2015 at 01:29 AM
+-- Generation Time: Feb 03, 2015 at 09:04 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `lemon`
+-- Database: `finalpost`
 --
 
 -- --------------------------------------------------------
@@ -27,39 +27,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `Username` text NOT NULL,
-  `Password` text NOT NULL,
-`ID` int(11) NOT NULL,
-  `Name` text NOT NULL,
-  `Salt` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `user_id` mediumint(6) unsigned NOT NULL,
+  `title` char(10) NOT NULL,
+  `fname` varchar(30) NOT NULL,
+  `lname` varchar(40) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `psword` char(40) NOT NULL,
+  `uname` char(12) NOT NULL,
+  `registration_date` datetime NOT NULL,
+  `user_level` tinyint(2) unsigned NOT NULL,
+  `money` int(60) NOT NULL,
+  `mmarker` int(40) NOT NULL,
+  `tokens` int(40) NOT NULL,
+  `prestige` int(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`Username`, `Password`, `ID`, `Name`, `Salt`) VALUES
-('ethan', 'Password', 1, 'ethan bobcat', '');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
- ADD PRIMARY KEY (`ID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
