@@ -31,12 +31,12 @@ $paths = array(
     //'state/Auction/select',
     //'state/Auction/sell',
     'state/Auction',
-    'state/AuctionSelect',
+    //'state/AuctionSelect',
     'state/AuctionSell',
     'state/Add_Funds',
     //
     'program'	//main javascript program
 );
 foreach($paths as $p){addJS($p);}
-//addPHPJS('state/AuctionSelect');
+addPHPJS('state/AuctionSelect');
 ?>

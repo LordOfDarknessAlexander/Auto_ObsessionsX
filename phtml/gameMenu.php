@@ -8,11 +8,11 @@
   
     <img id='homeImg' src='images\\garageEmpty.png'>
     <div id='menuLeft'>
-        <button id='myCars' style="margin-bottom: 6%;">My Garage</button><br>
+        <button id='myCars'>My Garage</button><br>
         <button id='toAuctionBtn'>Go to Auction</button><br>
     </div>
 	 <div id='menuRight'>
-	   <button id='profile'style="margin-bottom: 6%;">My Profile</button><br>
+	   <button id='profile'>My Profile</button><br>
        <button id='buyUpgradesBtn'>Buy Upgrades</button><!--link to another/separate page?-->
          <!-- 
 		<button id='partsSupplyBtn'>Select Parts Supply</button><br>

@@ -1,12 +1,26 @@
-//Action Select State Object
 <?php header('Content-type: application/javascript; charset: UTF-8');
+//Action Select State Object
 require_once '../../include/dbConnect.php';
 require_once '../../vehicles/vehicle.php';
+//
+$userID = 0;
+//if(isset($_SESSION['userID']))
+    //$userID = $_SESSION['userID'];
+//else{
+    //exit();   //not logged in as valid user, quit script!
+//}
+$tableName =  'user' . strval($userID);
+//
 function hasCar($id){
     global $AO_DB;
-    $res = false;//$AO_DB->query('SELECT * FROM userCars WHERE (car_id = $id)';
+    global $aoUsersDB;
+    global $tableName;
     
-    echo $res ? 'true' : 'false';
+    $carRes = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    if($carRes){
+        echo mysqli_num_rows($carRes) != 0 ? 'true' : 'false';
+    }
+    mysqli_free_result($carRes);
 }
 ?>
 var AuctionSelect =
@@ -62,10 +76,11 @@ var AuctionSelect =
 		//
 <?php
 function setCarBtn($args){
-    $i = $args[0];
-    $car = Vehicle::fromArray($args[1]);	//ao.xdbCars[i];
+    $id = $args[0];
+    $i = $args[2];
+    //$car = Vehicle::fromArray($args[1]);	//ao.xdbCars[i];
 ?>
-    this.setCarBtn('<?php echo $car->getFullName();?>', <?php echo strval($i);?>, <?php echo hasCar($car->getID() );?>);
+    this.setCarBtn(<?php echo strval($id);?>, <?php echo $i;?>, <?php echo hasCar($id);?>);
 <?php
 }
 
@@ -74,14 +89,14 @@ $res = $AO_DB->query('SELECT * FROM aoCars');
 if($res){
     $i = 0;
     while($row = mysqli_fetch_array($res) ){
-        call_user_func('setCarBtn', array($i, $row) );
+        $id = $row['car_id'];
+        call_user_func('setCarBtn', array($id, $row, $i) );
         $i++;
     }
     mysqli_free_result($res);
 }
 else{
-    //echo "alert('failed to add entry, error: ' . mysqli_error($AO_DB->con)";
-    //
+    //no valid enry in database
 }
 ?>
     //if(loggedIn){

@@ -77,12 +77,16 @@ function auctionGen()
 				for(var i = 0; i < userGarage.length; ++i)
 				{
 					//Once the vehicle has been found, remove it from the array
-					if(userGarage[i].name === this._car.name)
+                    //vehicles may have the same _name property(eg. there are multiple Corvette Stingrays, but this would have only ever sell the first one it encounters),
+                    //ALWAYS check to see if the FullNames are equivalent,
+                    //as they are unique
+					if(userGarage[i].getFullName() === this._car.getFullName())
 					{
 						userGarage.splice(i, 1);
+                        break;  //exit loop after removing car
 					}
 				}
-				
+				//shouldn't need new as Enemy is a generator function/ctor
 				ai = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
 				shuffleArray(_enemyBids);
 				//console.log(_enemyBids);
@@ -93,7 +97,7 @@ function auctionGen()
 		close:function()
 		{
 			this._expired = true;
-			this._date.end = Date.now() / 1000.0;
+			this._date.end = Date.now() / 1000.0;   //is slow, change to * 0.0001
 			this._curTime = 0.0;
 		},
 		update:function(dt)

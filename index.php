@@ -6,6 +6,10 @@ $PAGE_TITLE = "Auto Obsessions";
 $AO_COPYRIGHT = "Auto Obsessions, C 2014, All Rights Reserved";
 $ROOT_DIR = $_SERVER["DOCUMENT_ROOT"];	//root path on server
 require_once './include/html.php';
+//'session_start();
+//$SESSION['_curCarID'] = null;
+//login, query user database to determine current car ID
+
 //include code to generate page's html header
 //class a{
     //class representing common html Anchor elements used through out docs
