@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	// Validate the password:
 	if(!empty($_POST['psword'])){
         $p = mysqli_real_escape_string($AO_DB->con, $_POST['psword']);
-	} 
+	}
 	else{
 		$p = FALSE;
 		echo "<p class='error'>You forgot to enter your password.</p>";

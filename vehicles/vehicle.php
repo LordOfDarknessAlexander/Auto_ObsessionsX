@@ -1,4 +1,7 @@
 <?php
+//require_once '../include/dbConnect.php';
+require_once 'part.php';
+//
 class Vehicle
 {   //class representing a Vehicle on the server
     //private const
@@ -9,8 +12,10 @@ class Vehicle
         $_model, //str
         $_price, //uint
         $_info;  //str
+        //$_upgrades,
+        //$repairs;
     
-    public function __construct($id, $make, $year, $model, $price, $info){
+    public function __construct($id, $make, $year, $model, $price, $info){  //$upgrades, $repairs
         $this->_id = $id;
         $this->_make = $make;
         $this->_year = $year;
@@ -80,6 +85,35 @@ class Vehicle
         return '{"data":"this is data!"}';
         //'{"make": "", "year":"", "name":"", "info":"", "price":""}';
         //$this->_make;//, "year":"'.$this->_year.'", "name":"'.$this->_name.'", "info":"'.$this->_info.'", "price":"'.$this->_price.'"';
+    }
+    public function applyUpgrades(){
+        //if this vehicle is in the users inventory/garage, apply upgrades
+        //only vehicles the user has have upgrades/repairs
+        //global $aoUserCars;
+        $tableID = 'user' . strval(0);
+        //$res = $aoUserCars->query("SELECT * FROM $tableID WHERE car_id = $id");
+        //if($res){
+            //$a = mysqli_fetch_assoc($res);
+            //vehicle being created is in users inventory/garage
+            $upgrades = 0x00000001; //res['upgrades'];
+            //iterate over first 24 bits, lats 8 bits and ever fourth bit is reserved! values should be 1,2 or 4
+            for($i = 0; $i <= 18; $i++){
+                $val = $upgrades & (1 << $i);  //filter bits
+                if($val){   //vehicle has upgrade
+                    echo $val;
+                    //$this->_upgrades[] = Part($val);
+                }
+            }
+            $repairs = 0x00101042;  //res['repairs'];
+      
+            //for($i = 0; $i <= 18; $i++){
+                //$val = $upgrades & (1 << $i);  //filter bits
+                //if($val){
+                    //$this->_repairs[] = Part($val);
+                //}
+            //}
+        //}
+        //else create new car with no repairs or upgrades
     }
 }
 ?>

@@ -11,7 +11,7 @@ var userGarage = [
 ];
 //userGarage.push(xdbCars[0]);
 //userGarage.push(xdbCars[1]);
-userGarage.push(xdbCars[3]);
+//userGarage.push(xdbCars[3]);
 //userGarage.push(xdbCars[1]);
 //userGarage.push(xdbCars[0]);
 //userGarage.push(xdbCars[1]);
@@ -75,16 +75,8 @@ var Garage = {
         //
     //}
 //?>
-		if(Storage.local !== null && 'userGarage' in Storage.local)
-		{
-			//var jsonArray = JSON.parse(Storage.local.userGarage);	//returns an array
-			
-			//for(var i = 0; i < jsonArray.length; i++)
-			//{
-				//userGarage.push(JSON.parse(jsonArray[i]) );
-                //userGarage.push(Vehicle.fromJSON(jsonArray[i]) );
-			//}
-		}
+		this.load();
+        
 		var list = $('div#carListView ul#carBtns');
 		list.empty();	//remove any buttons if there were any previously
 		
@@ -160,6 +152,16 @@ var Garage = {
 	{
 		//additional rendering
 	},
+    load:function(){
+        if(Storage.local !== null && 'userGarage' in Storage.local){
+            cars = JSON.parse(Storage.local['userGarage']);
+            //load each saved car
+            for(var i = 0; i < cars.length; i++){
+                var car = cars[i];
+                userGarage.push(Vehicle(car.name, car.make, car.year, car.price) );
+            }
+        }
+    },
 	save : function()
 	{	//saves garage and current car to local storage
 		//
@@ -174,11 +176,9 @@ var Garage = {
                 Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
             }
 			//var array = [];
-			//for(var i = 0; i < userGarage.length; i++)
-			//{
-				//array.push(JSON.stringify(userGarage[i]) );
-			//}
-			//Storage.local['userGarage'] = JSON.stringify(array);
+            if(userGarage.length != 0){
+                Storage.local['userGarage'] = JSON.stringify(userGarage); //array);
+            }
 		}
 //}
 //?>
@@ -302,7 +302,7 @@ var Garage = {
 		//btn.children('label#name').text(car.name);
 	}
 };
-
+//Garage.save();
 var CarView = {
 	//carView state object
 	init : function(index)

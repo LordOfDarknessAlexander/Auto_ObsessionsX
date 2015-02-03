@@ -64,7 +64,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') //&& isset($_POST) )
 if(empty($errors)){
     //sqlSelectAll('aoCars', 'carOut');
     
-    $q = 'SELECT * FROM aoCars WHERE car_id = 1';   //select an individual element
+    $q = 'SELECT * FROM aoCars WHERE car_id = 167793153';   //select an individual element
     
     $result = $AO_DB->query($q);
     
@@ -74,6 +74,7 @@ if(empty($errors)){
         {
             $data = $result->fetch_assoc();//@mysqli_query($CARS.$con, $q); // Run the query
             $car = Vehicle::fromArray($data);
+            echo $car->getPrice();
         } 
         else{ 
             echo "<h2>System Error</h2>
