@@ -97,7 +97,7 @@ function auctionGen()
 		close:function()
 		{
 			this._expired = true;
-			this._date.end = Date.now() / 1000.0;   //is slow, change to * 0.0001
+			this._date.end = Date.now() * 0.0001;
 			this._curTime = 0.0;
 		},
 		update:function(dt)
