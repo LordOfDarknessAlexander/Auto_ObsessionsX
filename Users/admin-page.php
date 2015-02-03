@@ -1,28 +1,34 @@
 <?php
-//require_once 'include/html.php';
-//require_once 'include/secure.php';
-//
 session_start();
-//secure::adminLogin();
+//require 'secure.php';
+//secureLogin();
+if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 1))
+{
+   header("Location: login.php");
+   exit();
+}
 ?>
 <!doctype html>
 <html lang=en>
 <head>
+<title>Admin page</title>
 <meta charset=utf-8>
-<title>Administrators Page</title>
-    <link rel="stylesheet" type="text/css" href="includes.css">
+<link rel="stylesheet" type="text/css" href="includes.css">
+<style type="text/css">
+#midcol { width:88%; }
+#midcol p { margin-left:-4%; }
+</style>
 </head>
 <body>
 <div id="container">
-<?php
-include 'includes/header-admin.php';
-include 'includes/nav.php';
-include 'includes/info-col.php';
-?>
+<?php include("includes/header-admin.php"); ?>
+<?php include("includes/nav.php"); ?>
+<?php include("includes/info-col.php"); ?>
 	<div id="content"><!-- Start of the member's page content. -->
 <?php
 echo '<h2>Welcome to the Admin Page ';
-if(isset($_SESSION['fname'])){
+if (isset($_SESSION['fname']))
+{
 	echo "{$_SESSION['fname']}";
 }
 echo '</h2>';
@@ -35,5 +41,8 @@ echo '</h2>';
 	<p>&nbsp;</p></div>
 <!-- End of the members page content. -->
 </div></div>	
+	<div id="footer">
+		<?php include("includes/footer.php"); ?>
+	</div>
 </body>
 </html>
