@@ -25,7 +25,7 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 <?php include("includes/header-members.php"); ?>
 <?php include("includes/nav.php"); ?>
 <?php include("includes/info-col.php"); ?>
-<?php include("includes/index.php"); ?>
+<?php include("includes/statBar.php"); ?>
 
 	<div id="content"><!-- Start of the member's page content. -->
 <?php
