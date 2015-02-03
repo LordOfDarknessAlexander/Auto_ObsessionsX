@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 <meta charset=utf-8>
 <link rel="stylesheet" type="text/css" href="includes.css">
 <style type="text/css">
-#mid-right-col { text-align:center; margin:auto;margin-right: 50%; margin-top: -10%
+#mid-right-col { text-align:center; margin:auto;margin-right: 25%; margin-top: -10%
 }
 #midcol h3 { font-size:130%; margin-top:0; margin-bottom:0; 
 }
@@ -34,15 +34,20 @@ if (isset($_SESSION['fname']))
 {
 	echo "{$_SESSION['fname']}";
 }
+echo '<h2>Hey Man\' Page ';
+if (isset($_SESSION['money']))
+{
+	echo "{$_SESSION['money']}";
+}
 echo '</h2>';
 ?>
 <div id="midcol">
 <div id="mid-left-col">
 <h3>Member's Events</h3>
-<p>The Members' page content. The Members' page content. The Members' page content.
-<br>The Members' page content. The Members' page content. The Members' page content.<br>The Members' page content. 
-The Members' page content. The Members' page content.<br>The Members' page content. The Members' page content. 
-The Members' page content.</p></div>
+<p>Welcome to the members area.
+<br>Browse the many portals here: Play as a guest or log in and save your progress.<br>
+Enter one of our events to win prizes.<br>Get a hold of our Merchandise today! </p>
+</div>
 <div id="mid-right-col">
 <h3>Special offers to Members only.</h3>
 <div id="nav">
