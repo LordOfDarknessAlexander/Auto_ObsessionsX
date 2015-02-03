@@ -54,8 +54,8 @@ function Vehicle(Name, Make, Year, Price)
 		var d = JSON.parse(str);
 		return Vehicle(d.name,d.make,d.year,d._price);
 	}
-	var img = new Image()
-	img.src = 'images/vehicle.jpg';	//ret.getFullPath();
+	//var img = new Image()
+	//img.src = 'images/vehicle.jpg';	//ret.getFullPath();
 	//returns a new vehicle object
 	 //tmpParts = [];
 	//var bfParts = parseInt(carNode.attr('parts') );
@@ -79,8 +79,8 @@ function Vehicle(Name, Make, Year, Price)
 		year : Year,	//parseInt(node.attr('year') ),
 		id : '0',	//node.attr('id'),
 		//_info: node.text(),
-		//_parts : tmpParts,	//only retain currently upgraded parts, array is copied
-		image : img,
+		_parts : [],	//only retain currently upgraded parts, array is copied
+		//image : img,
 		//getters
 		getPrice : function()
 		{	//calculates sale price based on age, condition and completed upgrades
@@ -165,14 +165,15 @@ function Vehicle(Name, Make, Year, Price)
 		toJSON : function()
 		{	//converts a vehicle to a JSON string, to be saved to local storage,
 			//this is called by JSON.stringify and will be serialized
-			return { 
+			return {
+                id : this.id.toString(),
+                make : this.make,
+                year : this.year.toString(),
+                name : this.name,
 				_price : this._price.toString(),
 				condition : this.condition.toString(),
 				originality : this.originality.toString(),
-				name : this.name,
-				make : this.make,
-				year : this.year.toString(),
-				id : this.id.toString()
+                _parts:this._parts
 				//'parts : '
 				//_info: node.text(),
 			};

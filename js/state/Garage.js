@@ -157,7 +157,7 @@ var Garage = {
             cars = JSON.parse(Storage.local['userGarage']);
             //load each saved car
             for(var i = 0; i < cars.length; i++){
-                var car = cars[i];
+                var car = cars[i];  //returns a javascript object!
                 userGarage.push(Vehicle(car.name, car.make, car.year, car.price) );
             }
         }
