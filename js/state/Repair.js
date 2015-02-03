@@ -33,29 +33,60 @@ var Repair = {
 	},
 	_initButtons : function()
 	{
-		//var car = userGarage[curCarIndex];
-		//var upgradeNode = xmlDB.getElementById(car.id).getElementById('upgrades');
+		var car = Garage.getCurrentCar();
+       
+        if(car !== null){
+            //var parts = car._parts
 
-		//for each node in upgradeNode
-		/*{
-			$("#Repair#upgrades").clear();
-			var btnStr = "<button>" +
-				"<lable id=\'name\'></label>" +
-				"<lable id=\'type\'></label>" +
-				"</button>";
-			$("#Repair#parts").append(btnStr);
-			$("#Repair#parts label#name").text(node.getElementById('name').text() );
-			$("#Repair#parts label#type").text(node.getElementById('type').text() );
-			$("label#" + name).click({index:i}, addUpgrade);
-		}*/
-		//repairs
+            //for each upgrade, buttons must be refreshed each time, as the cars or upgrades may change
+            var ul = $('div#RepairShop div#upgrades'),
+                rl = $('div#RepairShop div#repairs');
+            var i = 1;
+            /*for(child in ul.children() ){
+                //ul.clear();
+               // var btnStr = "<button id =''>" +
+                    ///"<lable id='name'>partName</label>" +
+                    //"<lable id='type'>partType</label>" +
+                    //"<lable id='price'>$150</label>" +
+                    //"<img id='icon' src=''>" +
+                //"</button><br>";
+               // $("#Repair#parts").append(btnStr);
+               //
+                //$("#Repair#parts label#name").text(node.getElementById('name').text() );
+                //$("#Repair#parts label#type").text(node.getElementById('type').text() );
+                $('button#" + name).off().click({index:i}, addUpgrade);
+            }*/
+            //repairs
+            if(car._parts.length != 0){
+                for(var i = 0; i < car._parts.length; i++){
+                    //car already repaired, disable btn
+                    var part = car._parts[i];
+                    if(part._repaired){
+                        //btn.off().css('opacity:0.45');
+                    }
+                    else{
+                        //btn.off().click(part.repair);
+                    }
+                }
+            }
+        }
 	}
 };
 
-function addUpgrade(index)
+function addUpgrade(obj)
 {	//adds part to user's current car, increasing originality and value
-	//var car = userGarage[curCarIndex];
-	//car.addPart(index.data.index);
+	var car = Garage.getCurrentCar();
+    if(car !== null){
+        //car.upgradePart(obj.data.index);
+        
+        //if(part._stage != 3){     //is not upgraded to max)
+            //increment upgraded part and rebind id
+        //else{
+            //var li = $('#' + liID);
+            //li.css('opacity', '0.45');
+            //btn.off();  //remove all event handlers, effectively disabling the button!
+        //}
+    }
 }
 function repairPart(index)
 {	//repairs a component of the vehicle, increasing condition and value

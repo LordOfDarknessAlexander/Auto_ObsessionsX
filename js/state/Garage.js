@@ -144,14 +144,25 @@ var Garage = {
 	{	//remove resources, effectivly 'closing' the state
 		//appState = GAME_MODE.MAIN;
 	},
-	update : function()
-	{
+	update : function(){
 		stop = true;
 	},
-	render : function()
-	{
+	render : function(){
 		//additional rendering
 	},
+    clear:function(){
+        //NOTE:for development only!
+        //clears the users garage and any save data associated with it
+        //if(Storage.local !== null){
+            //if('userGarage' in Storage.local){
+                //Storage.local.removeItem('userGarage');
+            //}
+       
+            //if('curCarIndex' in Storage.local){
+                //Storage.local.removeItem('curCarIndex');
+            //}
+        //}
+    },
     load:function(){
         if(Storage.local !== null && 'userGarage' in Storage.local){
             cars = JSON.parse(Storage.local['userGarage']);
