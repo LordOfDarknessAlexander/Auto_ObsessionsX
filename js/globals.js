@@ -147,10 +147,4 @@ var userScore;
 function resetStates()
 {
 	appState = GAME_MODE.RUNNING;
-	//stop = false;
-	//auctionStop = false;
-	//endGame = false;
-	//playerWon = false;
-	//startGame();	
-
 }

@@ -25,7 +25,7 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 <?php include("includes/header-members.php"); ?>
 <?php include("includes/nav.php"); ?>
 <?php include("includes/info-col.php"); ?>
-<?php include("playerData.php"); ?>
+
 
 	<div id="content"><!-- Start of the member's page content. -->
 <?php
@@ -36,6 +36,36 @@ if (isset($_SESSION['fname']))
 }
 
 echo '</h2>';
+?>
+<?php
+
+//Query the database
+require ('mysqli_connect.php');
+
+$q = "SELECT * FROM users WHERE money = 0" ;		
+$result = mysqli_query ($dbcon, $q);
+
+//Count the returned rows
+if( mysqli_num_rows($result) != 0)
+{
+	//Turn the results in to an array
+	while($rows = $result->fetch_assoc())
+	{
+		$fname = $rows['fname'];
+		$money = $rows['money'];
+		$m_marker = $rows['mmarker'];
+		$tokens = $rows['tokens'];
+		$prestige = $rows['prestige'];
+		
+		echo "<div id ='playerData'> <p>Player: $fname <br> Money: $money <br> Mile Markers: $m_marker <br> Tokens: $tokens<br> Prestige: $prestige</p></div>";
+	}
+}
+else
+{
+	echo "No Results";
+	exit();
+}
+
 ?>
 <div id="midcol">
 <div id="mid-left-col">
