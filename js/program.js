@@ -612,6 +612,7 @@ jq.RepairShop.backBtn.click(function()
 	setStatBar();
 	setAdBG();
 	jq.Game.menu.show();
+    Garage.save();
 	//resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });

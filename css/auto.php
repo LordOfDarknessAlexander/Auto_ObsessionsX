@@ -57,7 +57,7 @@ button
 {	/*all button elements will hare this background unless otherwise specified*/
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color:red;
-	
+    cursor:pointer;	
 }
 button#backBtn
 {   /*sets properties for all button tags with id backBtn*/

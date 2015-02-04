@@ -35,27 +35,13 @@ function carStats()
 }*/
 function carPart(price, partType){   //partType
     //emulating an enum representing the various kinds of upgradable part
-    this.type = {
-        interior:1,
-        engine:2,
-        decals:3,
-        windows:4,
-        tires:5,
-        exhaust:6
-    };
-    this.stage = {
-        sport:1,    //0001
-        racing:2,         //0010
-        pro:4       //0100
-    };
-
 	return {
-		_iconPath : 'images/defaultPart.png',
+		//_iconPath : 'images/defaultPart.png',
         _price:150, //price,   //value added to the owning vehicle
-        _type:carPart.interior, //type
 		//_cond : condition,
 		//_orig : originality,
         _stage : carPart.stage.sport, //1, 2 or 3
+        _type:partType, //type
 		_repaired:false,    //has this been fixed?
 		//getFullPath() : function()
 		//{	//return file path of image resource for this icon
@@ -65,32 +51,17 @@ function carPart(price, partType){   //partType
             //price the user pays for this upgrade
             return this._price * 1.25;
         },
-        getLocalPath:function(){
-            var path = 'images\\upgrades\\';
-            switch(this._type){
-                case carPart.type.interior:
-                    path += 'interior';
-                break;
-                case carPart.type.engine:
-                    path += 'engine';
-                break;
-                case carPart.type.decals:
-                    path += 'decals';
-                break;
-                case carPart.type.windows:
-                    path += 'windows';
-                break;
-                case carPart.type.tires:
-                    path += 'tires';
-                break;
-                case carPart.type.exhaust:
-                    path += 'exhaust';
-                break;
-            }
-            //upgrade stage, 1, 2 or 3
-            path += '.png';
-            return path;
+        getRepairPrice:function(){
+            //price the user pays for repairs
+            return this._price * 2.75;
         },
+        getLocalPath:function(){
+            return 'images\\upgrades\\' + stringFromPartType(this._type) + '.png'
+            //upgrade stage, 1, 2 or 3
+        },
+        //getFullPath:function(){
+            //return ROOT_DIR + this.getLocalPath();
+        //},
         getPrice:function(){
             //returns the price of this part, based on repairs and the tier
             return this._price * (this._repaired ? 1.75 : 1) * this._stage;
@@ -101,14 +72,67 @@ function carPart(price, partType){   //partType
             }
         },
         upgrade:function(){
-            if(this._stage != carpart.stage.pro){
+            if(this._stage != carPart.stage.pro){
                 this._stage = this._stage << 1;
+                console.log('upgrading part with type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() );
                 //increase other vars
             }
+            //else part is max level do nothing,
+            //button in repair needs to be rebound
         }
+        /*toJSON:function(){
+            return {
+                _type:this._type, //type
+                _price:this._price, //price,   //value added to the owning vehicle
+                //_cond : condition,
+                //_orig : originality,
+                _stage : this._stage, //1, 2 or 3
+                _repaired:this._repaired,    //has this been fixed?  
+            };
+        }*/
 	};
 }
-
+carPart.type = {
+    interior:1,
+    engine:2,
+    decals:3,
+    windows:4,
+    tires:5,
+    exhaust:6
+};
+carPart.stage = {
+    sport:1,    //0001
+    racing:2,         //0010
+    pro:4       //0100
+};
+function stringFromPartType(type){
+    //returns a string identifier from a carPart's type
+    var ret = '';
+    switch(type){
+        case carPart.type.interior:
+            ret = 'interior';
+        break;
+        case carPart.type.engine:
+            ret = 'engine';
+        break;
+        case carPart.type.decals:
+            ret = 'decals';
+        break;
+        case carPart.type.windows:
+            ret = 'windows';
+        break;
+        case carPart.type.tires:
+            ret = 'tires';
+        break;
+        case carPart.type.exhaust:
+            ret = 'exhaust';
+        break;
+        default:
+            console.log('calling stringFromPartType, unexpected type passed:' + type.toString() );
+        break;
+    }
+    return ret;
+}
 function Vehicle(Name, Make, Year, Price)
 {
 	this.fromJSON = function(str)
@@ -150,7 +174,7 @@ function Vehicle(Name, Make, Year, Price)
 			//var upgradeCost = 0;
 			//for(var i = 0; i < parts.length; i++)
 			//{
-				//upgradeCost += parts[i].getPrice();
+				//upgradeCost += this._parts[i].getPrice();
 			//}
 			return this._price; // + upgradeCost;
 		},
@@ -204,6 +228,11 @@ function Vehicle(Name, Make, Year, Price)
 		{	//returns a string representing the 'proper' car name
 			return this.make + ' ' + this.year + ' ' + this.name;
 		},
+        //getLocalPath : function()
+		//{	//returns the relative path for the image path of this car on the server
+			//return 'images\\cars\\' + this.make + '\\' + this.year + '\\' + this.name + '.jpg';
+			//return '';
+		//},
 		getFullPath : function()
 		{	//returns the absolute url for the image path of this car on the server
 			return /*baseURL +*/ 'images\\cars\\' + this.make + '\\' + this.year + '\\' + this.name + '.jpg';
@@ -233,12 +262,11 @@ function Vehicle(Name, Make, Year, Price)
                 make : this.make,
                 year : this.year.toString(),
                 name : this.name,
-				_price : this._price.toString(),
-				condition : this.condition.toString(),
-				originality : this.originality.toString(),
+				_price : this._price,
+				//condition : this.condition.toString(),
+				//originality : this.originality.toString(),
                 _parts:this._parts
-				//'parts : '
-				//_info: node.text(),
+				//_info: this.getIno(),
 			};
 		},
         hasPart:function(partType){
@@ -260,31 +288,30 @@ function Vehicle(Name, Make, Year, Price)
             //determine if this vehicle has previously recieved an upgrade of type 'partType'
             var len = this._parts.length;
             if(len == 0){
+                console.log('car has no parts bought')
                 return null;    //no parts for you
             }
             for(var i = 0; i < len; i++){
                 if(partType == this._parts[i]._type){
+                    console.log('car returning part of type: ' + stringFromPartType(this._parts[i]._type) );
                     return this._parts[i];
                 }
                 //else continue with loop
             }
             //if function gets here, no parts have matched
+            console.log('car has no part of type: ' + stringFromPartType(partType) );
             return null;
         },
-        upgradePart:function(){
-            var type = carpart.type.interior;
-            
+        upgradePart:function(type){
             var part = this.getPart(type);
-            //if(part === null){
-                //this._parts.push(carPart(type) );
-            //}
-            //else{
-                //if(part._stage != 3){
-                    //upgrade current part
-                    //part.upgrade();
-                //}
-                //else  part is max level do nothing, button and callback need to be rebound
-            //}
+            if(part === null){
+                console.log('buying new part of type: ' + stringFromPartType(type) );
+                this._parts.push(carPart(150, type) );  //get price from DB
+                console.log(JSON.stringify(this._parts) );
+            }
+            else{
+                part.upgrade();
+            }
         }
 	};
 }

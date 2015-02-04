@@ -167,9 +167,13 @@ var Garage = {
         if(Storage.local !== null && 'userGarage' in Storage.local){
             cars = JSON.parse(Storage.local['userGarage']);
             //load each saved car
-            for(var i = 0; i < cars.length; i++){
-                var car = cars[i];  //returns a javascript object!
-                userGarage.push(Vehicle(car.name, car.make, car.year, car.price) );
+            if(cars.length != 0){
+                userGarage = [];    //clear any previous entries from garage
+                
+                for(var i = 0; i < cars.length; i++){
+                    var car = cars[i];  //returns a javascript object!
+                    userGarage.push(Vehicle(car.name, car.make, car.year, car.price) );
+                }
             }
         }
     },

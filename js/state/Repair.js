@@ -41,22 +41,34 @@ var Repair = {
             //for each upgrade, buttons must be refreshed each time, as the cars or upgrades may change
             var ul = $('div#RepairShop div#upgrades'),
                 rl = $('div#RepairShop div#repairs');
-            var i = 1;
-            /*for(child in ul.children() ){
-                //ul.clear();
-               // var btnStr = "<button id =''>" +
-                    ///"<lable id='name'>partName</label>" +
-                    //"<lable id='type'>partType</label>" +
-                    //"<lable id='price'>$150</label>" +
+
+            ul.empty();
+            ul.append('<h2>Upgrades</h2>');
+            for(var i = carPart.type.interior; i <= carPart.type.exhaust; i++){
+                var btnStr = "<button id ='" + i.toString() + "'>" +
+                    "<lable id='name'>partName</label><br>" +
+                    "<lable id='type'>" + stringFromPartType(i) + "</label><br>" +
+                    "$<lable id='price'>150</label><br>" +
                     //"<img id='icon' src=''>" +
-                //"</button><br>";
-               // $("#Repair#parts").append(btnStr);
-               //
-                //$("#Repair#parts label#name").text(node.getElementById('name').text() );
-                //$("#Repair#parts label#type").text(node.getElementById('type').text() );
-                $('button#" + name).off().click({index:i}, addUpgrade);
-            }*/
+                "</button><br>";
+                ul.append(btnStr);
+                //
+                var btnID = 'div#RepairShop div#upgrades button#' + i.toString(),
+                    btn = $(btnID);
+                
+                btn.off().click({type:i}, addUpgrade);
+                
+                var part = car.getPart(i);
+                
+                if(part !== null){
+                    if(part._stage == carPart.stage.pro){
+                        //part has been previously upgraded to max, remove all event handlers, effectively disabling the button!
+                        btn.css({'opacity':'0.45', 'cursor':'default'}).off();
+                    }
+                }
+            }
             //repairs
+            //for(var child in rl.children() )
             if(car._parts.length != 0){
                 for(var i = 0; i < car._parts.length; i++){
                     //car already repaired, disable btn
@@ -77,19 +89,24 @@ function addUpgrade(obj)
 {	//adds part to user's current car, increasing originality and value
 	var car = Garage.getCurrentCar();
     if(car !== null){
-        //car.upgradePart(obj.data.index);
+        var type = obj.data.type;
+        console.log('upgrading part of type: ' + stringFromPartType(type) );
+        car.upgradePart(type);
         
-        //if(part._stage != 3){     //is not upgraded to max)
-            //increment upgraded part and rebind id
-        //else{
-            //var li = $('#' + liID);
-            //li.css('opacity', '0.45');
+        var part = car.getPart(type);
+        //if part is upgraded to max, unbind and make unclickable
+        if(part._stage == carPart.stage.pro){
+            var btnID = 'div#RepairShop div#upgrades button#' + part._type.toString();
+            var btn = $(btnID);
+            btn.css({'opacity':'0.45', 'cursor':'default'}).off();//.css();
             //btn.off();  //remove all event handlers, effectively disabling the button!
-        //}
+        }
     }
 }
 function repairPart(index)
 {	//repairs a component of the vehicle, increasing condition and value
-	//var car = userGarage[curCarIndex];
-	//car.repairPart(index.data.index);
+	//var car = Garage.getCurrentCar();
+    //if(car !== null){
+        //car.repairPart(index.data.index);
+    //}
 }

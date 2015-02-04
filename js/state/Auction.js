@@ -597,7 +597,7 @@ var Auction =
 	},
 	findEndBidder : function()
 	{	//determine who holds the bid, incrementing timer
-		for (var i = 0, sum = 0; i < ai.length; sum += ai[i++]);
+		for (var i = 0, sum = 0; i < ai.length; sum += ai[i++]);    //ai is not an array of ints! fix this bug
 		for(var i = 0; i < ai.length; i++)
 		{
 			//if((currentBid == enemyBids[i]) && (_endBidTimers[i] >= BID_THRESHOLD))
