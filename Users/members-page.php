@@ -25,7 +25,7 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 <?php include("includes/header-members.php"); ?>
 <?php include("includes/nav.php"); ?>
 <?php include("includes/info-col.php"); ?>
-<?php include("includes/statBar.php"); ?>
+<?php include("playerData.php"); ?>
 
 	<div id="content"><!-- Start of the member's page content. -->
 <?php
@@ -34,11 +34,7 @@ if (isset($_SESSION['fname']))
 {
 	echo "{$_SESSION['fname']}";
 }
-echo '<h2>Hey Man\' Page ';
-if (isset($_SESSION['money']))
-{
-	echo "{$_SESSION['money']}";
-}
+
 echo '</h2>';
 ?>
 <div id="midcol">

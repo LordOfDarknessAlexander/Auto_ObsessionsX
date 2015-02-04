@@ -47,6 +47,10 @@ ul { position:absolute; top:60%; left:68%; color:#52005C; width:40%; text-align:
 { 
 	position:absolute; top:180%; right:27%; color:navy; width:135px; text-align:center; margin:5px 5px 0 0;
 }
+#playerData
+{
+	position:absolute; top:0%; right:17%; color:magenta; width:20%; text-align:center; margin:5px 5px 0 0;
+}
 
 /* set general side button styles */
 li { width:100px; list-style-type :none; margin-bottom: 3px; text-align: center;
