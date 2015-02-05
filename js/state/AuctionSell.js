@@ -77,9 +77,6 @@ function auctionGen()
 				for(var i = 0; i < userGarage.length; ++i)
 				{
 					//Once the vehicle has been found, remove it from the array
-                    //vehicles may have the same _name property(eg. there are multiple Corvette Stingrays, but this would have only ever sell the first one it encounters),
-                    //ALWAYS check to see if the FullNames are equivalent,
-                    //as they are unique
 					if(userGarage[i].getFullName() === this._car.getFullName())
 					{
 						userGarage.splice(i, 1);
@@ -87,18 +84,16 @@ function auctionGen()
 					}
 				}
 				//shouldn't need new as Enemy is a generator function/ctor
-				ai = [new Enemy(price(1.2)),new Enemy(price(0.6)), new Enemy(price(0.8)),new Enemy(price(0.2))];
-				shuffleArray(_enemyBids);
-				//console.log(_enemyBids);
-			}	
-			//shuffleArray(bidders);
-			//shuffleArray(this._enemyCaps);
+				ai = [Enemy(price(1.2)), Enemy(price(0.6)), Enemy(price(0.8)), Enemy(price(0.2))];
+			}
 		},
 		close:function()
 		{
 			this._expired = true;
 			this._date.end = Date.now() * 0.0001;
 			this._curTime = 0.0;
+			this._bidderCooldown = 0;
+			while(ai.length) { ai.pop(); }
 		},
 		update:function(dt)
 		{
@@ -137,24 +132,25 @@ function auctionGen()
 		},
 		endAuction:function()
 		{
-			var i = 0;
+			var i = this._carIndex;
 			var btnID = "as" + (i).toString(),
 				liID = "asli" + (i).toString();
 			var cleanBtn = $('li#' + liID + ' button#' + btnID);
 			cleanBtn.text("Sold!");
-			cleanBtn.off().click(this.cleanUpAuction);
+			cleanBtn.off().click({i:this._carIndex}, this.cleanUpAuction);
+			Garage.save();
 		},
-		cleanUpAuction:function()
+		cleanUpAuction:function(index)
 		{
 			//Give the user their money
 			userStats.money += Math.round(currentBid);
-			currentBid = 0;
+			currentBid = _vehiclePrice * 0.1;
 			
 			//Find the element that contains the car information/button
-			var i = 0;
+			var i = index.data.i;
 			var liID = "asli" + (i).toString();
 			var carElement = $('li#' + liID);
-			
+
 			//Remove the element from the page
 			carElement.remove();
 		},

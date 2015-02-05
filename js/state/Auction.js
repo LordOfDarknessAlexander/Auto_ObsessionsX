@@ -136,10 +136,10 @@ var Auction =
 		 bidderCooldown = 0;
 		 playerCanBid = false;
 		 
-		 enemy1;
-		 enemy2;
-		 enemy3;
-		 enemy4;
+		 enemy1 = null;
+		 enemy2 = null;
+		 enemy3 = null;
+		 enemy4 = null;
 		
 		 playerBid = 0;
 		//temp
@@ -166,13 +166,15 @@ var Auction =
 	close : function()
 	{
 		auctionStop = true;
+		auctionEnded = false;
+		endGame = false;
 		//delete sold;
 		//delete buyOut;	
 		
-		enemy1;
-		 enemy2;
-		 enemy3;
-		 enemy4;
+		enemy1 = null;
+		enemy2 = null;
+		enemy3 = null;
+		enemy4 = null;
 
 		//console.log("Restarting Auction snaps");
 		bidderCooldown = 0;
@@ -258,11 +260,11 @@ var Auction =
 	
 		if(auctionEnded)
 		{
-			this.destroy();		
+			this.close();		
 		}
 		if(endGame)
 		{
-			this.destroy();					
+			this.close();					
 		}
 
 		if(restarted)
