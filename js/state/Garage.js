@@ -172,7 +172,7 @@ var Garage = {
                 
                 for(var i = 0; i < cars.length; i++){
                     var car = cars[i];  //returns a javascript object!
-                    userGarage.push(Vehicle(car.name, car.make, car.year, car.price) );
+                    userGarage.push(Vehicle(car.name, car.make, car.year, car._price) );
                 }
             }
         }
