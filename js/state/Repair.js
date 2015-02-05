@@ -42,8 +42,10 @@ var Repair = {
             var ul = $('div#RepairShop div#upgrades'),
                 rl = $('div#RepairShop div#repairs');
 
-            ul.empty();
-            ul.append('<h2>Upgrades</h2>');
+            ul.empty().append('<h2>Upgrades</h2>');
+            
+            rl.empty().append('<h2>Repairs</h2>');
+            
             for(var i = carPart.type.interior; i <= carPart.type.exhaust; i++){
                 var btnStr = "<button id ='" + i.toString() + "'>" +
                     "<lable id='name'>partName</label><br>" +
@@ -66,19 +68,28 @@ var Repair = {
                         btn.css({'opacity':'0.45', 'cursor':'default'}).off();
                     }
                 }
-            }
-            //repairs
-            //for(var child in rl.children() )
-            if(car._parts.length != 0){
-                for(var i = 0; i < car._parts.length; i++){
-                    //car already repaired, disable btn
-                    var part = car._parts[i];
+                var rBtnStr = "<button id ='" + i.toString() + "'>" +
+                    "<lable id='name'>partName</label><br>" +
+                    "<lable id='type'>" + stringFromPartType(i) + "</label><br>" +
+                    "$<lable id='price'>150</label><br>" +
+                    //"<img id='icon' src=''>" +
+                "</button><br>";
+                rl.append(rBtnStr);
+                //add repair buttons
+                var rBtnID = 'div#RepairShop div#repairs button#' + i.toString(),
+                    rBtn = $(rBtnID);    //repair button
+                
+                if(part !== null){
                     if(part._repaired){
-                        //btn.off().css('opacity:0.45');
+                        rBtn.off().css({'opacity':'0.45', 'cursor':'default'});
                     }
                     else{
-                        //btn.off().click(part.repair);
+                        rBtn.off().click({type:i}, repairPart);
                     }
+                }
+                else{
+                    //car does not have part, can not upgrade
+                    rBtn.off().css({'opacity':'0.45', 'cursor':'default'});
                 }
             }
         }
@@ -95,18 +106,38 @@ function addUpgrade(obj)
         
         var part = car.getPart(type);
         //if part is upgraded to max, unbind and make unclickable
-        if(part._stage == carPart.stage.pro){
-            var btnID = 'div#RepairShop div#upgrades button#' + part._type.toString();
-            var btn = $(btnID);
-            btn.css({'opacity':'0.45', 'cursor':'default'}).off();//.css();
-            //btn.off();  //remove all event handlers, effectively disabling the button!
+        if(part !== null){
+            if(part._stage == carPart.stage.pro){
+                var btnID = 'div#RepairShop div#upgrades button#' + part._type.toString();
+                var btn = $(btnID);
+                btn.css({'opacity':'0.45', 'cursor':'default'}).off();//.css();
+                //btn.off();  //remove all event handlers, effectively disabling the button!
+            }
+            if(!part._repaired){
+                //added part so enable upgrade button 
+                var rBtnID = 'div#RepairShop div#repairs button#' + type.toString(),
+                    rBtn = $(rBtnID);    //repair button
+                
+                //rBtn.off().click({type:type}, repairPart);
+            }
         }
     }
 }
-function repairPart(index)
+function repairPart(obj)
 {	//repairs a component of the vehicle, increasing condition and value
-	//var car = Garage.getCurrentCar();
-    //if(car !== null){
-        //car.repairPart(index.data.index);
-    //}
+    var car = Garage.getCurrentCar();
+    
+    if(car !== null){
+        console.log('repairing part!');
+        var type = obj.data.type;
+        if(car.repairPart(type) ){
+            //part has been repaired, disable button
+            var part = car.getPart(type),
+                btnID = 'div#RepairShop div#repairs button#' + part._type.toString(),
+                btn = $(btnID);
+                //remove all event handlers, effectively disabling the button!
+                btn.css({'opacity':'0.45', 'cursor':'default'}).off();
+        }
+    }
+    //else no car selected
 }

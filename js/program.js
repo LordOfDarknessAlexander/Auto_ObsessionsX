@@ -125,8 +125,16 @@ $(document).ready(function()
 	//Storage.local.clear();
 	//alert('doc ready!');
 	loadUser();
-    loadGarage();
-    jq.Game.setHomeImg();
+    Garage.load();
+    //jq.Game.setHomeImg();
+function setHomeImg(){
+    var car = Garage.getCurrentCar();
+    if(car !== null){
+        var homeImg = $('div#gameMenu img#homeImg');
+        homeImg.attr('src', car.getFullPath() );
+    }
+}
+    setHomeImg();
 	//userStats.money = 150;
 	//saveUser();
 	//jq.Game.homeImg.hide();

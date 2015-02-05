@@ -40,7 +40,7 @@ function carPart(price, partType){   //partType
         _price:150, //price,   //value added to the owning vehicle
 		//_cond : condition,
 		//_orig : originality,
-        _stage : carPart.stage.sport, //1, 2 or 3
+        _stage:carPart.stage.sport, //1, 2 or 3
         _type:partType, //type
 		_repaired:false,    //has this been fixed?
 		//getFullPath() : function()
@@ -53,7 +53,7 @@ function carPart(price, partType){   //partType
         },
         getRepairPrice:function(){
             //price the user pays for repairs
-            return this._price * 2.75;
+            return this._price * 0.75;
         },
         getLocalPath:function(){
             return 'images\\upgrades\\' + stringFromPartType(this._type) + '.png'
@@ -303,6 +303,7 @@ function Vehicle(Name, Make, Year, Price)
             return null;
         },
         upgradePart:function(type){
+            //adds part to vehicle if not already, otherwise upgrade the part
             var part = this.getPart(type);
             if(part === null){
                 console.log('buying new part of type: ' + stringFromPartType(type) );
@@ -312,6 +313,30 @@ function Vehicle(Name, Make, Year, Price)
             else{
                 part.upgrade();
             }
+        },
+        repairPart:function(type){
+            var len = this._parts.length;
+            
+            if(len == 0){
+                return false; //no parts, no repair
+            }
+            for(var i = 0; i < len; i++){
+                if(this._parts[i]._type == type && !this._parts[i]._repaired){
+                    //if(user.money >= this._parts[i].getRepairPrice() ){
+                        //this car has upgrade of type, so repair it
+                        console.log('car returning part of type: ' + stringFromPartType(this._parts[i]._type) );
+                        this._parts[i]._repaired = true;
+                        return true;
+                        //user.money -= this._parts[i].getRepairPrice();
+                    //}
+                }
+                //else continue with loop
+            }
+            //else{
+                //vehicle does not have this part to upgrade
+            //}
+            console.log(JSON.stringify(this._parts) );
+            return false;
         }
 	};
 }

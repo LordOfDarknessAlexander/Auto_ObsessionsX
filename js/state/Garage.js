@@ -164,16 +164,22 @@ var Garage = {
         //}
     },
     load:function(){
-        if(Storage.local !== null && 'userGarage' in Storage.local){
-            cars = JSON.parse(Storage.local['userGarage']);
-            //load each saved car
-            if(cars.length != 0){
-                userGarage = [];    //clear any previous entries from garage
-                
-                for(var i = 0; i < cars.length; i++){
-                    var car = cars[i];  //returns a javascript object!
-                    userGarage.push(Vehicle(car.name, car.make, car.year, car.price) );
+        if(Storage.local !== null){
+            if('userGarage' in Storage.local){
+                cars = JSON.parse(Storage.local['userGarage']);
+                //load each saved car
+                if(cars.length != 0){
+                    userGarage = [];    //clear any previous entries from garage
+                    
+                    for(var i = 0; i < cars.length; i++){
+                        var car = cars[i];  //returns a javascript object!
+                        userGarage.push(Vehicle(car.name, car.make, car.year, car.price) );
+                    }
                 }
+            }
+            if('_curCarIndex' in Storage.local){
+                Garage._curCarIndex = parseInt(JSON.parse(Storage.local._curCarIndex) );
+                console.log('current car is at index:' + Garage._curCarIndex.toString() );
             }
         }
     },
