@@ -128,14 +128,8 @@ $(document).ready(function()
 	loadUser();
     Garage.load();
     //jq.Game.setHomeImg();
-function setHomeImg(){
-    var car = Garage.getCurrentCar();
-    if(car !== null){
-        var homeImg = $('div#gameMenu img#homeImg');
-        homeImg.attr('src', car.getFullPath() );
-    }
-}
-    setHomeImg();
+
+    setHomeImg();   //in Garage.js
 	//userStats.money = 150;
 	//saveUser();
 	//jq.Game.homeImg.hide();

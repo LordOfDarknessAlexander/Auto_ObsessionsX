@@ -338,10 +338,18 @@ var CarView = {
 	}
 	//update, ender, exit?
 };
+function setHomeImg(){
+    var car = Garage.getCurrentCar();
+    if(car !== null){
+        var homeImg = $('div#gameMenu img#homeImg');
+        homeImg.attr('src', car.getFullPath() );
+    }
+}
 jq.Garage.backBtn.click(function()
 {
 	jq.Garage.toggle();
-	//Garage.exit();
+	Garage.save();
+    setHomeImg();
 });
 $('#myCars').click(function()
 {
