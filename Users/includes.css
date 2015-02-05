@@ -49,7 +49,7 @@ ul { position:absolute; top:60%; left:68%; color:#52005C; width:40%; text-align:
 }
 #playerData
 {
-	position:absolute; top:0%; right:17%; color:magenta; width:20%; text-align:center; margin:5px 5px 0 0;
+	position:absolute; top:0%; right:17%; color:magenta; width:20%; text-align:center; display: in-line;margin:5px 5px 0 0;
 }
 
 /* set general side button styles */

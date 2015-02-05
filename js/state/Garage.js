@@ -164,6 +164,7 @@ var Garage = {
         //}
     },
     load:function(){
+<<<<<<< HEAD
         if(Storage.local !== null){
             if('userGarage' in Storage.local){
                 cars = JSON.parse(Storage.local['userGarage']);

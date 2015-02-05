@@ -35,6 +35,7 @@ function update(deltaTime)
 	{
 		restarted = true;
 	}
+	/*
 	if(restarted)
 	{
 		console.log("Chicken Fingers restarting");
@@ -43,7 +44,7 @@ function update(deltaTime)
 		auctionMode();
 
 	}
-
+*/
 	AuctionSell.update(deltaTime);
 
 	timer++;
@@ -234,6 +235,49 @@ function loadXMLDoc(url)
 	loadCars(doc);
 	return true;
 }
+
+//Parse ajax functions to send data from within js to ph
+function ajax(Id,userId,str,post)
+{
+    var ajax;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            document.getElementById(Id).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",userId +str,true);
+        ajax.send(null);
+    }
+    else
+    {
+        ajax.open("POST",userId,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+}
+
 /*
 //LOAD Vehicle XML, this was working, now can't find source file!
 var vehiclePath = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/vehicles.xml';	//should be the location of file on server
@@ -467,6 +511,7 @@ Auction.sold = function()
 		}
 		//userSave();
 		Garage.save();
+	
 		
 	}
 	assetLoader.sounds.bg.pause();
@@ -555,7 +600,7 @@ jq.Auction.homeBtn.click(function()
 	if(car !== null){
 		//jq.Game.homeImg.attr('src', car.getFullPath() );
 	}
-	//appState = GAME_STATE.MAIN;
+	
 });
 //Auction State Back Button
 jq.Auction.backBtn.click(function()
@@ -566,9 +611,6 @@ jq.Auction.backBtn.click(function()
 	jq.Auction.menu.hide();
 	jq.AuctionSelect.menu.show();
 	//jq.AuctionSelect.menu.children().toggle();	//hides/showns all child elements
-	
-	//$('#menu').removeClass('Auction');
-	//$('#menu').addClass('gameMenu');
 	
 });
 /*
@@ -620,7 +662,6 @@ jq.RepairShop.backBtn.click(function()
 	setStatBar();
 	setAdBG();
 	jq.Game.menu.show();
-    Garage.save();
 	//resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });
