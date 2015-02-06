@@ -67,8 +67,18 @@ else
 }
 
 ?>
+<?php  require_once('userInfo.php');  ?>
 <div id="midcol">
 <div id="mid-left-col">
+ <div id='sub'>
+	<form id='userForm' action="" method='post'>
+	Money: <input type="text" name="money" /><br />
+	Mile Markers: <input type="text" name="mileMarker" /><br />
+	Tokens: <input type="text" name="tokens" /><br />
+	Prestige: <input type="text" name="prestige" /><br />
+	<button id='sub'>Save</button>
+	</form>
+</div>
 <h3>Member's Events</h3>
 <p>Welcome to the members area.
 <br>Browse the many portals here: Play as a guest or log in and save your progress.<br>
