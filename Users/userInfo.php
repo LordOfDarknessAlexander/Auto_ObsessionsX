@@ -1,9 +1,7 @@
 <?php
-
-include_once('Users/mysqli_connect.php');
-
+include_once('mysqli_connect.php');
 $money = $_POST['money'];
-$m_marker = $_POST['mmarker'];
+$m_marker = $_POST['m_marker'];
 $tokens = $_POST['tokens'];
 $prestige = $_POST['prestige'];
 

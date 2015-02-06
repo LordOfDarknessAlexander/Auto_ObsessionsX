@@ -22,7 +22,7 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 </head>
 <body>
 <div id="container">
-<?php include("includes/header-members.php"); ?>
+
 <?php include("includes/nav.php"); ?>
 <?php include("includes/info-col.php"); ?>
 
@@ -37,48 +37,19 @@ if (isset($_SESSION['fname']))
 
 echo '</h2>';
 ?>
-<?php
 
-//Query the database
-require ('mysqli_connect.php');
-
-$q = "SELECT * FROM users WHERE money = 0" ;		
-$result = mysqli_query ($dbcon, $q);
-
-//Count the returned rows
-if( mysqli_num_rows($result) != 0)
-{
-	//Turn the results in to an array
-	while($rows = $result->fetch_assoc())
-	{
-		$fname = $rows['fname'];
-		$money = $rows['money'];
-		$m_marker = $rows['mmarker'];
-		$tokens = $rows['tokens'];
-		$prestige = $rows['prestige'];
-		
-		echo "<div id ='playerData'> <p>Player: $fname <br> Money: $money <br> Mile Markers: $m_marker <br> Tokens: $tokens<br> Prestige: $prestige</p></div>";
-	}
-}
-else
-{
-	echo "No Results";
-	exit();
-}
-
-?>
 <?php  require_once('userInfo.php');  ?>
 <div id="midcol">
 <div id="mid-left-col">
  <div id='sub'>
-	<form id='userForm' action="" method='post'>
+	<form id='userForm' action="userInfo.php" method='post'>
 	Money: <input type="text" name="money" /><br />
-	Mile Markers: <input type="text" name="mileMarker" /><br />
+	Mile Markers: <input type="text" name="milemarker" /><br />
 	Tokens: <input type="text" name="tokens" /><br />
 	Prestige: <input type="text" name="prestige" /><br />
 	<button id='sub'>Save</button>
 	</form>
-</div>
+	<span id='result'></span>
 <h3>Member's Events</h3>
 <p>Welcome to the members area.
 <br>Browse the many portals here: Play as a guest or log in and save your progress.<br>
