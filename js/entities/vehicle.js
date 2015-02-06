@@ -33,106 +33,6 @@ function carStats()
 		carDocs:carDocs(),
 	};
 }*/
-function carPart(price, partType){   //partType
-    //emulating an enum representing the various kinds of upgradable part
-	return {
-		//_iconPath : 'images/defaultPart.png',
-        _price:150, //price,   //value added to the owning vehicle
-		//_cond : condition,
-		//_orig : originality,
-        _stage:carPart.stage.sport, //1, 2 or 3
-        _type:partType, //type
-		_repaired:false,    //has this been fixed?
-		//getFullPath() : function()
-		//{	//return file path of image resource for this icon
-		//}
-		//getCondition:function(){return repaired ? this.condition + 25 : this.condition;
-        getSalePrice:function(){
-            //price the user pays for this upgrade
-            return this._price * 1.25;
-        },
-        getRepairPrice:function(){
-            //price the user pays for repairs
-            return this._price * 0.75;
-        },
-        getLocalPath:function(){
-            return 'images\\upgrades\\' + stringFromPartType(this._type) + '.png'
-            //upgrade stage, 1, 2 or 3
-        },
-        //getFullPath:function(){
-            //return ROOT_DIR + this.getLocalPath();
-        //},
-        getPrice:function(){
-            //returns the price of this part, based on repairs and the tier
-            return this._price * (this._repaired ? 1.75 : 1) * this._stage;
-        },
-        repair:function(){
-            if(!this._repaired){
-                this._repaired = true;
-            }
-        },
-        upgrade:function(){
-            if(this._stage != carPart.stage.pro){
-                this._stage = this._stage << 1;
-                console.log('upgrading part with type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() );
-                //increase other vars
-            }
-            //else part is max level do nothing,
-            //button in repair needs to be rebound
-        }
-        /*toJSON:function(){
-            return {
-                _type:this._type, //type
-                _price:this._price, //price,   //value added to the owning vehicle
-                //_cond : condition,
-                //_orig : originality,
-                _stage : this._stage, //1, 2 or 3
-                _repaired:this._repaired,    //has this been fixed?  
-            };
-        }*/
-	};
-}
-carPart.type = {
-    interior:1,
-    engine:2,
-    decals:3,
-    windows:4,
-    tires:5,
-    exhaust:6
-};
-carPart.stage = {
-    sport:1,    //0001
-    racing:2,         //0010
-    pro:4       //0100
-};
-function stringFromPartType(type){
-    //returns a string identifier from a carPart's type
-    var ret = '';
-    switch(type){
-        case carPart.type.interior:
-            ret = 'interior';
-        break;
-        case carPart.type.engine:
-            ret = 'engine';
-        break;
-        case carPart.type.decals:
-            ret = 'decals';
-        break;
-        case carPart.type.windows:
-            ret = 'windows';
-        break;
-        case carPart.type.tires:
-            ret = 'tires';
-        break;
-        case carPart.type.exhaust:
-            ret = 'exhaust';
-        break;
-        default:
-            console.log('calling stringFromPartType, unexpected type passed:' + type.toString() );
-        break;
-    }
-    return ret;
-}
 function Vehicle(Name, Make, Year, Price)
 {
 	this.fromJSON = function(str)
@@ -159,6 +59,7 @@ function Vehicle(Name, Make, Year, Price)
 	return {
 		//pos:new Vector(VEHICLE_XPOS, VEHICLE_YPOS,0,0)
 		_price:Price,	//original sale price on year made, does not change
+        _repairs:0, //bitfield representing which upgrades have been repaired
 		condition:0,
 		originality:0,
 		name : Name,	////node.attr('name'),
@@ -215,14 +116,16 @@ function Vehicle(Name, Make, Year, Price)
 			return ret;
 		},
 		getCondition : function(){
-			var ret = this.condition;
-			/*for(var i = 0; i < MAX_PARTS; i++){
-				var val = bfParts & (1 << i);
+            var MAX_PARTS = 16.0;
+                INV_MAX_PARTS = 1.0 / MAX_PARTS;
+			var ret = this.condition;   //base condition
+			/*for(var i = 0; i <= MAX_PARTS; i++){
+				var val = this._repairs & (1 << i);
 				if(val != 0){	//user's car has upgrades part
-				//ret += parts[i].condition;
+                    //ret += parts[i].condition;
 				}
 			}*/
-			return ret;
+			return (int)(ret * 100); //drop decimal, conver from [0.0-1.0] to [0-100]
 		},
 		getFullName : function()
 		{	//returns a string representing the 'proper' car name
@@ -301,6 +204,17 @@ function Vehicle(Name, Make, Year, Price)
             //if function gets here, no parts have matched
             console.log('car has no part of type: ' + stringFromPartType(partType) );
             return null;
+        },
+        isRepairedAtIndex:function(i){
+            var MAX_PARTS = 16;
+            if(i <= MAX_PARTS){
+                var val = this._repairs & (1 << i);
+                if(val != 0){
+                    return true;
+                }
+            }
+            //else index out of bounds!
+            return false;
         },
         upgradePart:function(type){
             //adds part to vehicle if not already, otherwise upgrade the part

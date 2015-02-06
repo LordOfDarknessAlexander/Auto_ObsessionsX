@@ -19,6 +19,7 @@ $paths = array(
     //game entities
     'entities/player',
     'entities/enemy',
+    'entities/part',
     'entities/vehicle',
     //game states
     'state/Garage',
