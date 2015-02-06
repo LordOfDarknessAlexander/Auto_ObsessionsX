@@ -568,16 +568,7 @@ jq.Game.toAuctionBtn.click(function()
 	//$('#menu').addClass('auction');
 	//auctionStop = false;
 	AuctionSelect.init();
-});/*
-jq.Game.toAuctionBtn.click(function() 
-{
-	$('#auction').show();
-	//$('#gameMenu').hide();
-	jq.Game.menu.hide();
-	//$('#menu').addClass('auction');
-	Auction.init();
-	auctionMode();
-});*/
+});
 jq.Auction.homeBtn.click(function()
 {
 	//Auction.cancel();	//stop the auction, aborting the sale
@@ -601,19 +592,10 @@ jq.Auction.homeBtn.click(function()
 //Auction State Back Button
 jq.Auction.backBtn.click(function()
 {
-	//resetStates();
 	Auction.close();
-	//$('#Auction').hide();
 	jq.Auction.menu.hide();
-	jq.AuctionSelect.menu.show();
-	//jq.AuctionSelect.menu.children().toggle();	//hides/showns all child elements
-	
+	jq.AuctionSelect.menu.show();	
 });
-/*
-jq.Auction.buyOutBtn.click(function()
-{	
-	Auction.buyOut();
-});*/
 jq.Sold.garageBtn.click(function()
 {
 	//jq.Sold.menu.

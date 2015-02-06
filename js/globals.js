@@ -110,16 +110,8 @@ var vehiclePrice = 20000;
 
 //new array for every new auction? preferably in the auction button qjuery callback
 
-var enemyCap = 1.25 * vehiclePrice;
-var enemyCap2 = 0.8 * vehiclePrice;
-var enemyCap3 = 0.7 * vehiclePrice;
-var enemyCap4 = 0.9 * vehiclePrice;
-var enemyCap5 = 0.6 * vehiclePrice;
-var enemyCap6 = 0.2 * vehiclePrice;
 var playerWon = false;
 
-
-var enemyCaps = [enemyCap,enemyCap2,enemyCap3,enemyCap4,enemyCap5,enemyCap6];
 //Global frame timer
 var timer = 0;
 var previousTime = Date.now();
