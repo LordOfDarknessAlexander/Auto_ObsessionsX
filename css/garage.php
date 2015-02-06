@@ -8,6 +8,7 @@ function divGarage(){
     echo 'div#Garage';
 }
 function scrollY(){
+    //enable y scrolling
     echo 'overflow-y:scroll;';
 }
 function divCarListView(){

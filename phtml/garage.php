@@ -1,10 +1,9 @@
-<?php require_once('AO_UI.php');
+<?php
+require_once 'AO_UI.php';
 //
-
 function selectBtn(){?>
     <button id='select'>Select</button>
 <?php
-
 }
 ?>
 <?php include("include/statBar.php"); ?>
@@ -31,7 +30,7 @@ function selectBtn(){?>
         <!---->
         <div id='progressBars'>
             <!--progress bar 'value' attribute is between 0.0 and 1.0-->
-            driveterrain:<br><progress id='drivetrainPB' value='0.0'></progress><br>
+            drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress><br>
             body:<br><progress id='bodyPB' value='0.0'></progress><br>
             interior:<br><progress id='interiorPB' value='0.0\'></progress><br>
             documents:<br><progress id='docsPB' value='0.0'></progress>
@@ -43,7 +42,7 @@ function selectBtn(){?>
         <label id='carName'></label>
         <label id='carInfo'></label>
         <div id='progressBars'>
-            driveterrain:<br><progress id='drivetrainPB' value='0.0'></progress><br>
+            drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress><br>
             body:<br><progress id='bodyPB' value='0.0'></progress><br>
             interior:<br><progress id='interiorPB' value='0.0\'></progress><br>
             documents:<br><progress id='docsPB' value='0.0'></progress>

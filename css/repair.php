@@ -24,30 +24,6 @@ function divRepair(){
 	padding: 5px 0;
 }
 
-#purchaseButton
-{<?php
-    fontBold();
-    cursorPtr();
-?>
-	background: url('../images/bidButton.png') no-repeat 0 0;
-	color: white;
-	width:150px;
-	height:50px;
-}
-#repairBackButton
-{
-<?php
-    posAbs();
-    fontBold();
-    cursorPtr();
-?>
-	background: url('../images/repairBackButton.png') no-repeat 0 0;
-	color: white;
-	width:150px;
-	height:50px;
-	left:5%;
-	bottom:0%;	
-}
 <?php divRepair();?> div#upgrades
 {
 <?php
@@ -73,8 +49,48 @@ function divRepair(){
 <?php
     posAbs();
 ?>
-	width: 40%;
-	height: 40%;
-	left:30%;
+	width: 50%;
+	height: 50%;
+	left:25%;
 	top:40%;
+}
+<?php divRepair();?> div#drivetrain
+{
+<?php
+    posAbs();
+?>
+	width:20%;
+	top:30%;
+	height:35%;
+	left:5%;
+}
+<?php divRepair();?> div#body
+{
+<?php
+    posAbs();
+?>
+	width:20%;
+	top:65%;
+	height:35%;
+	left:5%;
+}
+<?php divRepair();?> div#interior
+{
+<?php
+    posAbs();
+?>
+	width:20%;
+	top:30%;
+	height:35%;
+	right:5%;
+}
+<?php divRepair();?> div#docs
+{
+<?php
+    posAbs();
+?>
+	width:20%;
+	top:65%;
+	height:35%;
+	right:5%;
 }

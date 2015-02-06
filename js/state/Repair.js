@@ -47,10 +47,11 @@ var Repair = {
             rl.empty().append('<h2>Repairs</h2>');
             
             for(var i = carPart.type.interior; i <= carPart.type.exhaust; i++){
+                //var price = //get from database
                 var btnStr = "<button id ='" + i.toString() + "'>" +
-                    "<lable id='name'>partName</label><br>" +
-                    "<lable id='type'>" + stringFromPartType(i) + "</label><br>" +
-                    "$<lable id='price'>150</label><br>" +
+                    "<label id='name'>partName</label><br>" +
+                    "<label id='type'>" + stringFromPartType(i) + "</label><br>" +
+                    "$<label id='price'>150</label><br>" +
                     //"<img id='icon' src=''>" +
                 "</button><br>";
                 ul.append(btnStr);
@@ -69,9 +70,9 @@ var Repair = {
                     }
                 }
                 var rBtnStr = "<button id ='" + i.toString() + "'>" +
-                    "<lable id='name'>partName</label><br>" +
-                    "<lable id='type'>" + stringFromPartType(i) + "</label><br>" +
-                    "$<lable id='price'>150</label><br>" +
+                    "<label id='name'>partName</label><br>" +
+                    "<label id='type'>" + stringFromPartType(i) + "</label><br>" +
+                    "$<label id='price'>150</label><br>" +
                     //"<img id='icon' src=''>" +
                 "</button><br>";
                 rl.append(rBtnStr);
@@ -79,18 +80,21 @@ var Repair = {
                 var rBtnID = 'div#RepairShop div#repairs button#' + i.toString(),
                     rBtn = $(rBtnID);    //repair button
                 
-                if(part !== null){
+                rBtn.click({type:i}, repairPart);
+                /*if(part !== null){
+                    console.log('car has part: ' + stringFromPartType(i) );
                     if(part._repaired){
-                        rBtn.off().css({'opacity':'0.45', 'cursor':'default'});
+                        rBtn.css({'opacity':'0.45', 'cursor':'default'});
                     }
                     else{
-                        rBtn.off().click({type:i}, repairPart);
+                        rBtn.click({type:i}, repairPart);
                     }
                 }
                 else{
+                    console.log('car DOES NOT have part: ' + stringFromPartType(i) );
                     //car does not have part, can not upgrade
-                    rBtn.off().css({'opacity':'0.45', 'cursor':'default'});
-                }
+                    rBtn.css({'opacity':'0.45', 'cursor':'default'});
+                }*/
             }
         }
 	}
@@ -130,6 +134,7 @@ function repairPart(obj)
     if(car !== null){
         console.log('repairing part!');
         var type = obj.data.type;
+        
         if(car.repairPart(type) ){
             //part has been repaired, disable button
             var part = car.getPart(type),
