@@ -524,6 +524,7 @@ Auction.sold = function()
 		endGame = true
 	}
 	Auction.close();
+	init();
 }
 //
 //jQuery UI bindings
