@@ -1,6 +1,8 @@
 <?php
 //auction state stylings
 header("Content-type: text/css; charset: UTF-8");
+//require_once 'menu.php';
+//require_once 'credits.php';
 ?>
 /*imports relative to this document, or an absolute url.
 makes maintainability easier, allowing structured includes of css sheets
@@ -56,6 +58,7 @@ a
 button
 {	/*all button elements will hare this background unless otherwise specified*/
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
+    background-size:100% 100%;
 	color:red;
     cursor:pointer;	
 }

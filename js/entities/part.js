@@ -40,9 +40,9 @@ function carPart(price, partType){   //partType
         _price:150, //price,   //value added to the owning vehicle
 		//_cond : condition,
 		//_orig : originality,
-        _stage:carPart.stage.stock, //1, 2 or 3
+        _stage:carPart.stage.stock, //1-4 stages
         _type:partType, //type
-		_repaired:false,    //has this been fixed?
+		_repaired:false,    //has this been fixed?, moved to Vehicle.js as bitfield
 		//getFullPath() : function()
 		//{	//return file path of image resource for this icon
 		//}
@@ -133,4 +133,102 @@ function stringFromPartType(type){
         break;
     }
     return ret;
+}
+function Drivetrain(carPrice){
+    //default ctor
+    var carPrice = 25000;
+    var dt = {
+        engine:,
+        trans:,
+        axel:,
+        exhaust:,
+        fuel:
+    };
+    return {
+        _engine:carPart(carPrice * 0.32 dt.engine),
+        _trans:carPart(carPrice * 0.23, dt.trans),
+        _axel:carPart(carPrice * 0.29, dt.axel),
+        _exhaust:carPart(carPrice * 0.12, dtt.exhaust),
+        _fuel:carPart(carPrice * 0.12, dt.fuel),
+        //
+        asBits:function(){
+            //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
+        },
+        getCompletePercent:function(){
+            //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
+        }
+    };
+}
+function Body(carPrice){
+    //default ctor
+    var  bd = {
+        chasis:,
+        panels:,
+        paint:,
+        ph0:,
+        ph1:
+    };
+    return {
+        _chasis:carPart(carPrice * 0.32 bd.chasis),
+        _panels:carPart(carPrice * 0.23, bd.panels),
+        _paint:carPart(carPrice * 0.29, bd.paint),
+        _ph0:carPart(carPrice * 0.12, bd.ph0),
+        _ph1:carPart(carPrice * 0.12, bd.ph1),
+        //
+        asBits:function(){
+            //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
+        },
+        getCompletePercent:function(){
+            //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
+        }
+    };
+}
+function Interior(carPrice){
+    //default ctor
+    var carPrice = 25000;
+    var  i = {
+        chasis:,
+        panels:,
+        paint:,
+        ph0:,
+        ph1:
+    };
+    return {
+        /*_chasis:carPart(carPrice * 0.32 bd.chasis),
+        _panels:carPart(carPrice * 0.23, bd.panels),
+        _paint:carPart(carPrice * 0.29, bd.paint),
+        _ph0:carPart(carPrice * 0.12, bd.ph0),
+        _ph1:carPart(carPrice * 0.12, bd.ph1),
+        //
+        asBits:function(){
+            //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
+        },
+        getCompletePercent:function(){
+            //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
+        }*/
+    };
+}
+function Docs(carPrice)){
+    //default ctor
+    var  bd = {
+        chasis:,
+        panels:,
+        paint:,
+        ph0:,
+        ph1:
+    };
+    return {
+        /*_owner:carPart(carPrice * 0.32 bd.chasis),
+        _build:carPart(carPrice * 0.23, bd.panels),
+        _history:carPart(carPrice * 0.29, bd.paint),
+        _ph0:carPart(carPrice * 0.12, bd.ph0),
+        _ph1:carPart(carPrice * 0.12, bd.ph1),
+        //
+        asBits:function(){
+            //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
+        },
+        getCompletePercent:function(){
+            //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
+        }*/
+    };
 }

@@ -26,54 +26,118 @@
     </div-->
     <h2 id='dt'>Drivetrain</h2>
     <div id='drivetrain'>
-        Engine:<br>
-        <button id='upEngine'></button><button id='rbEngine'></button><br>
-        Transmission:<br>
-        <button id='ubTrans'></button><button id='rbTrans'></button><br>
-        Drive Axel:<br>
-        <button id='ubAxel'></button><button id='rbAxel'></button><br>
-        Exhaust:<br>
-        <button id='ubExhaust'></button><button id='rbExhaust'></button><br>
-        Fuel System:<br>
-        <button id='ubFuel'></button><button id='rbFuel'></button><br>
+        Engine:
+        <button id='upEngine' class='ub'></button>
+        <button id='rbEngine' class='rb'></button>
+        <br>
+        <progress id='pbEngine' value='0.0'></progress><br>
+        Transmission:
+        <button id='ubTrans' class='ub'></button>
+        <button id='rbTrans' class='rb'></button>
+        <br>
+        <progress id='pTrans' value='0.0'></progress>
+        <br>
+        Drive Axel:
+        <button id='ubAxel' class='ub'></button>
+        <button id='rbAxel' class='rb'></button>
+        <br>
+        <progress id='pbAxel' value='0.0'></progress>
+        <br>
+        Exhaust:
+        <button id='ubExhaust' class='ub'></button>
+        <button id='rbExhaust' class='rb'></button>
+        <br>
+        <progress id='pbExhaust' value='0.0'></progress>
+        <br>
+        Fuel System:
+        <button id='ubFuel' class='ub'></button>
+        <button id='rbFuel' class='rb'></button>
+        <br>
+        <progress id='pbFuel' value='0.0'></progress>
+        <br>
     </div>
     <h2 id='body'>Body</h2>
     <div id='body'>
-        Chasis:<br>
-        <button id='ubChasis'></button><button id='rbChasis'></button><br>
-        Body Panels:<br>
-        <button id='ubPanels'></button><button id='rbPanels'></button><br>
-        Paint:<br>
-        <button id='ubPaint'></button><button id='rbPaint'></button><br>
-        PLACEHOLDER:<br>
-        <button id='ubBtn3'></button><button id='rb3'></button><br>
-        PLACEHOLDER:<br>
-        <button id='ubBtn4'></button><button id='rb4'></button><br>
+        Chasis:
+        <button id='ubChasis' class='ub'></button>
+        <button id='rbChasis' class='rb'></button>
+        <br>
+        <progress id='pbChasis' value='0.0'></progress>
+        <br>
+        Body Panels:
+        <button id='ubPanels' class='ub'></button>
+        <button id='rbPanels' class='rb'></button>
+        <br>
+        <progress id='pbPanels' value='0.0'></progress>
+        <br>
+        Paint:
+        <button id='ubPaint' class='ub'></button>
+        <button id='rbPain't class='rb'></button>
+        <br>
+        <progress id='pbPaint' value='0.0'></progress>
+        <br>
+        PLACEHOLDER:
+        <button id='ubBtn3' class='ub'></button>
+        <button id='rb3' class='rb'></button>
+        <br>
+        <progress id='pb3' value='0.0'></progress>
+        <br>
+        PLACEHOLDER:
+        <button id='ubBtn4' class='ub'></button>
+        <button id='rb4' class='rb'></button>
+        <br>
+        <progress id='pb4' value='0.0'></progress>
+        <br>
     </div>
     <h2 id='interior'>Interior</h2>
     <div id='interior'>
-        Seats:<br>
-        <button id='ubSeats'></button><button id='rbSeats'></button><br>
-        Carpet:<br>
-        <button id='ubCarpet'></button><button id='rbCarpet'></button><br>
-        Dash:<br>
-        <button id='ubDash'></button><button id='rbDash'></button><br>
-        Door Panels:<br>
-        <button id='ubPanels'></button><button id='rbPanels'></button><br>
-        PLACEHOLDER:<br>
-        <button id='ubBtn4'></button><button id='rb'></button><br>
+        Seats:
+        <button id='ubSeats' class='ub'></button>
+        <button id='rbSeats' class='rb'></button>
+        <br>
+        <progress id='pbSeats' value='0.0'></progress>
+        <br>
+        Carpet:
+        <button id='ubCarpet' class='ub'></button>
+        <button id='rbCarpet' class='rb'></button>
+        <br>
+        <progress id='pbCarpet' value='0.0'></progress>
+        <br>
+        Dash:
+        <button id='ubDash' class='ub'></button>
+        <button id='rbDash' class='rb'></button>
+        <br>
+        <progress id='pbDash' value='0.0'></progress>
+        <br>
+        Door Panels:
+        <button id='ubPanels' class='ub'></button>
+        <button id='rbPanels' class='rb'></button>
+        <br>
+        <progress id='pbPanels' value='0.0'></progress>
+        <br>
+        PLACEHOLDER:
+        <button id='ubBtn4' class='ub'></button>
+        <button id='rb' class='rb'></button>
+        <br>
+        <progress id='pb4' value='0.0'></progress>
+        <br>
     </div>
     <h2 id='docs'>Documentation</h2>
     <div id='docs'>
-        Ownership:<br>
-        <button id='ubOwner'></button><br>
-        Build Sheet:<br>
-        <button id='ubBuild'></button><br>
-        History:<br>
-        <button id='ubHistory'></button><br>
-        PLACEHOLDER:<br>
-        <button id='ubBtn3'></button><br>
-        PLACEHOLDER:<br>
-        <button id='ubBtn4'></button><br>
+        Ownership:<button id='ubOwner' class='ub'></button><br>
+        <progress id='pbOwner' value='0.0'></progress>
+        <br>
+        Build Sheet:<button id='ubBuild' class='ub'></button><br>
+        <progress id='pbBuild' value='0.0'></progress>
+        <br>
+        History:<button id='ubHistory' class='ub'></button><br>
+        <progress id='pbHistory' value='0.0'></progress>
+        <br>
+        PLACEHOLDER:<button id='ubBtn3' class='ub'></button><br>
+        <progress id='pb3' value='0.0'></progress>
+        <br>
+        PLACEHOLDER:<button id='ubBtn4' class='ub'></button><br>
+        <progress id='pb4' value='0.0'></progress>
+        <br>
     </div>
 </div>

@@ -12,6 +12,7 @@ function divRepair(){
     defaultBG();
     posAbs();
     css::size('100%', '100%');
+    defaultColor();
 ?>
 	display: none;
 	text-align: center;
@@ -28,10 +29,10 @@ function divRepair(){
 <?php
     posAbs();
 ?>
-	width:20%;
+	width:15%;
 	height:5%;
     font-size:1.25rem;
-    font-weight: bold;
+    font-weight:bold;
 }
 <?php divRepair();?> div button
 {
@@ -40,6 +41,16 @@ function divRepair(){
 ?>
     width:10%;
     height:10%;
+}
+<?php divRepair();?> div button.ub
+{
+    background:url('../images/upgrade.png') no-repeat 0 0;
+    background-size:100% 100%;
+}
+<?php divRepair();?> div button.rb
+{
+    background:url('../images/repair.jpg') no-repeat 0 0;
+    background-size:100% 100%;
 }
 /*
 <?php divRepair();?> div#upgrades
@@ -63,19 +74,19 @@ function divRepair(){
 	right:5%;
 }*/
 <?php divRepair();?> img#userCar
-{
-<?php
+{<?php
     posAbs();
+    css::size('50%', '50%');
 ?>
-	width: 50%;
-	height: 50%;
 	left:25%;
-	top:25%;
+	bottom:12%;
 }
 
 <?php divRepair();?> div progress
-{
-    width:80%;
+{<?php
+    //posAbs();
+?>
+    width:100%;
     height:10%;
 }
 <?php divRepair();?> div#drivetrain
@@ -87,7 +98,7 @@ function divRepair(){
     font-size:1rem;
     text-align:left;
     
-	width:20%;
+	width:15%;
 	top:25%;
 	height:30%;
 	left:5%;
@@ -101,7 +112,7 @@ function divRepair(){
     font-size:1rem;
     text-align:left;
     
-	width:20%;
+	width:15%;
 	top:60%;
 	height:30%;
 	left:5%;
@@ -115,7 +126,7 @@ function divRepair(){
     text-align:left;
     font-size:1rem;
     
-	width:20%;
+	width:15%;
 	top:25%;
 	height:30%;
 	right:5%;
@@ -129,7 +140,7 @@ function divRepair(){
     text-align:left;
     font-size:1rem;
     
-	width:20%;
+	width:15%;
 	top:60%;
 	height:30%;
 	right:5%;
@@ -140,9 +151,7 @@ function divRepair(){
 <?php
     posAbs();
 ?>
-	width:20%;
 	top:20%;
-	height:5%;
 	left:5%;
 }
 <?php divRepair();?> h2#body
@@ -150,9 +159,7 @@ function divRepair(){
 <?php
     posAbs();
 ?>
-	width:20%;
 	top:55%;
-	height:5%;
 	left:5%;
 }
 <?php divRepair();?> h2#interior
@@ -160,9 +167,7 @@ function divRepair(){
 <?php
     posAbs();
 ?>
-	width:20%;
 	top:20%;
-	height:5%;
 	right:5%;
 }
 <?php divRepair();?> h2#docs
@@ -170,8 +175,6 @@ function divRepair(){
 <?php
     posAbs();
 ?>
-	width:20%;
 	top:55%;
-	height:5%;
 	right:5%;
 }

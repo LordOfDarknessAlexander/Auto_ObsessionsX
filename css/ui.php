@@ -2,9 +2,11 @@
 //functions which output common CSS properties
 function defaultBG(){
     echo "background:url('../images/defaultBG.jpg') no-repeat 0 0;";
+    echo "background-size:100% 100%;";
 }
 function defaultBtnBG(){
     echo "background:url('../images/defaultBtn.png') no-repeat 0 0;";
+    echo "background-size:100% 100%;";
 }
 function defaultColor($color = 'red'){
     echo 'color:'.$color.';';

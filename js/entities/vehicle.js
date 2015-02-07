@@ -68,6 +68,10 @@ function Vehicle(Name, Make, Year, Price)
 		id : 0x00000000,	//node.attr('id'),
 		//_info: node.text(),
 		_parts : [],	//only retain currently upgraded parts, array is copied
+        _dt:null,
+        _body:null,
+        _interior:null,
+        _docs:null,        
 		//image : img,
 		//getters
 		getPrice : function()

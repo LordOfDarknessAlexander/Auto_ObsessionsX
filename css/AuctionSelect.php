@@ -10,15 +10,16 @@ require_once 'ui.php';
 /*Action UI stylings*/
 <?php divAS();?>
 {	/*Auction page stylings*/ 
-	background: url('../images/defaultBG.jpg') no-repeat 0 0; 
+<?php
+    posAbs();
+    defaultBG();
+    css::size();
+?>
 	display: none;
 	/*overflow:scroll;*/
 	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
-	width: 100%;
-	height: 100%;
-<?php posAbs();?>
 }
 <?php divAS();?> ul
 {

@@ -2,7 +2,7 @@
 header("Content-type: text/css; charset: UTF-8");
 //garage UI stylings as php commands
 require_once 'ui.php';
-//require CarView.php;
+require_once 'carView.php';
     
 function divGarage(){
     echo 'div#Garage';
@@ -24,14 +24,15 @@ function divSelectedCar(){
 /*@import("CarView.css")*/
 <?php divGarage();?>
 {
-	background: url('../images/defaultBG.jpg') no-repeat 0 0;
+<?php
+    posAbs();
+    defaultBG();
+    css::size();
+?>
 	display: none;
 	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
-	width: 100%;
-	height: 100%;
-<?php posAbs();?>
 }
 <?php divGarage();?> li 
 {	/*styles all list items of node with id RepairShop*/
