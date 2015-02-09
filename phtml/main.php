@@ -76,11 +76,12 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 //php includes the source html files here
 $scripts = array(
     'gameMenu',
+	'repair',
     'auction',
     'sold',
     'funds',
     'garage',
-    'repair',
+    
     //profile
     //messages
     //ranks

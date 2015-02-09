@@ -4,7 +4,7 @@
      <h1>My Home</h1>
      <!--HUD ---->
   <?php include("include/statBar.php"); ?>
-    
+  
    
    
   

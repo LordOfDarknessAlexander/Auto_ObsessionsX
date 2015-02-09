@@ -12,6 +12,7 @@ $paths = array(
     'LoadAssets',
     //jquery bindings
     'jqueryLib',
+	'Users',
     //
     '2D/SpriteSheet',
     '2D/Animation',
