@@ -84,6 +84,7 @@ function getMakeHash($str){
         return 0x25000000;
     }elseif($str == 'White'){
         return 0x26000000;
+    }
 ?><br><?php
     echo 'invalid value: ' . $str;
 ?><br><?php
