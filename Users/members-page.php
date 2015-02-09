@@ -16,6 +16,8 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 <link rel="stylesheet" type="text/css" href="includes.css">
 <script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Include JS File Here -->
+
 <style type="text/css">
 #mid-right-col { text-align:center; margin:auto;margin-right: 25%; margin-top: -10%
 }
@@ -28,7 +30,7 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 
 <?php include("includes/nav.php"); ?>
 <?php include("includes/info-col.php"); ?>
-
+<?php include("my_parse_file.php"); ?>
 
 
 	<div id="content"><!-- Start of the member's page content. -->
@@ -75,6 +77,37 @@ else
 ?>
 
 <div id="mid-left-col">
+<script>
+function ajax_post(){
+    // Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    // Create some variables we need to send to our PHP file
+    var url = "my_parse_file.php";
+    var fn = document.getElementById("fname").value;
+    var ln = document.getElementById("lname").value;
+    var vars = "fname="+fn+"&lname="+ln;
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+	    if(hr.readyState == 4 && hr.status == 200) {
+		    var return_data = hr.responseText;
+			document.getElementById("status").innerHTML = return_data;
+	    }
+    }
+    // Send the data to PHP now... and wait for response to update the status div
+    hr.send(vars); // Actually execute the request
+    document.getElementById("status").innerHTML = "processing...";
+}
+</script>
+
+<h2>Ajax Post to PHP and Get Return Data</h2>
+First Name: <input id="fname" name="fname" type="text">  <br><br>
+Last Name: <input id="lname" name="lname" type="text"> <br><br>
+<input name="myBtn" type="submit" value="Submit Data" onclick="ajax_post();"> <br><br>
+<div id="status"></div>
+</body>
 <!---
  <div id='sub'>
 	<form id='userForm' action="userInfo.php" method='post'>
