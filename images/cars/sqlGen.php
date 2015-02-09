@@ -8,45 +8,86 @@ echo 'executing script in directory: ' . __DIR__;
 <?php
 function getMakeHash($str){
     //0 is a reserved value and is not used
-    if($str == 'Audi'){
+    if($str == 'Acura'){
         return 0x01000000;
-    }elseif($str == 'Bentley'){
+    }elseif($str == 'AMC'){
         return 0x02000000;
-    }elseif($str == 'BMW'){
+    }elseif($str == 'American'){
         return 0x03000000;
-    }elseif($str == 'Buick'){
+    }elseif($str == 'Amphicar'){
         return 0x04000000;
-    }elseif($str == 'Chevrolet'){
+    }elseif($str == 'Aston-Matrin'){
         return 0x05000000;
-    }elseif($str == 'Ferrari'){
+    }elseif($str == 'Auburn'){
         return 0x06000000;
-    }elseif($str == 'Ford'){
+    }elseif($str == 'Bentley'){
         return 0x07000000;
-    }elseif($str == 'Jaguar'){
+    }elseif($str == 'BMW'){
         return 0x08000000;
-    }elseif($str == 'GMC'){
+    }elseif($str == 'Buick'){
         return 0x09000000;
-    }elseif($str == 'Lamborghini'){
+    }elseif($str == 'Cadillac'){
         return 0x0A000000;
-    }
+    }elseif($str == 'Chevrolet'){
+        return 0x0B000000;
+    }elseif($str == 'Chrysler'){
+        return 0x0C000000;
+    }elseif($str == 'Delorean'){
+        return 0x0D000000;
+    }elseif($str == 'Devin'){
+        return 0x0E000000;
+    }elseif($str == 'Dodge'){
+        return 0x0F000000;
+    }elseif($str == 'Duesenberg'){
+        return 0x10000000;
+    }elseif($str == 'Dunbar'){
+        return 0x11000000;
+    }elseif($str == 'Excalibur'){
+        return 0x12000000;
+    }elseif($str == 'Ferrari'){
+        return 0x13000000;
+    }elseif($str == 'Ford'){
+        return 0x14000000;
+    }elseif($str == 'Hotchkiss'){
+        return 0x15000000;
+    }elseif($str == 'Hudson'){
+        return 0x16000000;
+    }elseif($str == 'Jaguar'){
+        return 0x17000000;
+    }elseif($str == 'Kaiser-Darrin'){
+        return 0x18000000;
+    }elseif($str == 'Lamborghini'){
+        return 0x19000000;
+    }elseif($str == 'Mercedes-Benz'){
+        return 0x1A000000;
+    }elseif($str == 'Mercury'){
+        return 0x1B000000;
+    }elseif($str == 'MG'){
+        return 0x1C000000;
+    }elseif($str == 'Packard'){
+        return 0x1D000000;
+    }elseif($str == 'Plymouth'){
+        return 0x1E000000;
+    }elseif($str == 'Pontiac'){
+        return 0x1F000000;
+    }elseif($str == 'Porsche'){
+        return 0x20000000;
+    }elseif($str == 'Roamer'){
+        return 0x21000000;
+    }elseif($str == 'Rolls Royce'){
+        return 0x22000000;
+    }elseif($str == 'Shelby'){
+        return 0x23000000;
+    }elseif($str == 'Studebaker'){
+        return 0x24000000;
+    }elseif($str == 'Triumph'){
+        return 0x25000000;
+    }elseif($str == 'White'){
+        return 0x26000000;
 ?><br><?php
     echo 'invalid value: ' . $str;
 ?><br><?php
-    //exit(); //kill the script if wrong value, don't want 
-    /*
-07-
-08-
-09-Lamborghini
-0A-Porsche
-0B-Shelby
-0C-
-0D-
-0E-
-0F-
-//
-10-
-11-
-12-*/
+    //exit(); //kill the script if invalid value
 }
 foreach(new DirectoryIterator(__DIR__) as $file){
     $id = 0;
@@ -63,7 +104,8 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                 $p = $years->getPathname();
                 $year = $years->getBasename();
                 //shift integer so padding for make and model
-                $yHash = (intval($year) - 1908) << 8;    //0x0000FFFF << 8;
+                //1906, earliest vehicle in database
+                $yHash = (intval($year) - 1906) << 8;    //0x0000FFFF << 8;
                 //$next = __DIR__  . '\\' . $p;
                 //echo $p;
                 $nameHash = 0x00000000;
