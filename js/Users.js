@@ -13,8 +13,8 @@ $("userForm").submit(function()
 	return false;
 });
 */
-
-S(document).ready(function()
+/*
+$(document).ready(function()
 {
 
 	//var associative array
@@ -33,7 +33,7 @@ S(document).ready(function()
 	
 
 });
-
+*/
 //pass any javascript object and get object in php by
 //json_decode(stripslashes($_POST['theReturnOfThis']))
 //an array is considered an object
