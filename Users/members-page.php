@@ -4,6 +4,7 @@ session_start();
 //secureLogin();
 if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 {  header("Location: login.php");
+
    exit();
 }
 ?>
@@ -13,6 +14,8 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 <title>Members' page</title>
 <meta charset=utf-8>
 <link rel="stylesheet" type="text/css" href="includes.css">
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <style type="text/css">
 #mid-right-col { text-align:center; margin:auto;margin-right: 25%; margin-top: -10%
 }
@@ -27,6 +30,7 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 <?php include("includes/info-col.php"); ?>
 
 
+
 	<div id="content"><!-- Start of the member's page content. -->
 <?php
 echo '<h2>Welcome to the Members\' Page ';
@@ -38,9 +42,40 @@ if (isset($_SESSION['fname']))
 echo '</h2>';
 ?>
 
-<?php  require_once('userInfo.php');  ?>
+
 <div id="midcol">
+<?php
+
+//Query the database
+//Query the database
+require ('mysqli_connect.php');
+$q = "SELECT * FROM users WHERE money = 0" ;		
+$result = mysqli_query ($dbcon, $q);
+
+//Count the returned rows
+if( mysqli_num_rows($result) != 0)
+{
+	//Turn the results in to an array
+	while($rows = $result->fetch_assoc())
+	{
+		$fname = $rows['fname'];
+		$money = $rows['money'];
+		$m_marker = $rows['m_marker'];
+		$tokens = $rows['tokens'];
+		$prestige = $rows['prestige'];
+		
+		echo "<div id ='playerData'> <p>Player: $fname <br> Money: $money <br> Mile Markers: $m_marker <br> Tokens: $tokens<br> Prestige: $prestige</p></div>";
+	}
+}
+else
+{
+	echo "No Results";
+	//exit();
+}
+?>
+
 <div id="mid-left-col">
+<!---
  <div id='sub'>
 	<form id='userForm' action="userInfo.php" method='post'>
 	Money: <input type="text" name="money" /><br />
@@ -49,7 +84,7 @@ echo '</h2>';
 	Prestige: <input type="text" name="prestige" /><br />
 	<button id='sub'>Save</button>
 	</form>
-	<span id='result'></span>
+	<span id='result'></span> -->
 <h3>Member's Events</h3>
 <p>Welcome to the members area.
 <br>Browse the many portals here: Play as a guest or log in and save your progress.<br>

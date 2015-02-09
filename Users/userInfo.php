@@ -1,5 +1,6 @@
 <?php
 include_once('mysqli_connect.php');
+
 $money = $_POST['money'];
 $m_marker = $_POST['m_marker'];
 $tokens = $_POST['tokens'];
@@ -13,6 +14,5 @@ else
 {
 	echo "Insertion failed";
 }
-
 
 ?>

@@ -1,10 +1,12 @@
 <div id="gameMenu">
     <!--Root Game Menu, hub for page navigation-->
+
      <h1>My Home</h1>
      <!--HUD ---->
   <?php include("include/statBar.php"); ?>
+    
    
-   <button id='addFunds'>Add Funds</button>
+   
   
     <img id='homeImg' src='images\\garageEmpty.png'>
     <div id='menuLeft'>

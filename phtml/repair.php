@@ -24,6 +24,7 @@
         <button id='fixBtn4'></button><br>
         <button id='fixBtn5'></button>
     </div-->
+	<button id='addFunds'>Add Funds</button>
     <h2 id='dt'>Drivetrain</h2>
     <div id='drivetrain'>
         Engine:

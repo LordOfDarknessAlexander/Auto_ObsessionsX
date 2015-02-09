@@ -14,7 +14,7 @@ if( mysqli_num_rows($result) != 0)
 	{
 		$fname = $rows['fname'];
 		$money = $rows['money'];
-		$m_marker = $rows['mmarker'];
+		$m_marker = $rows['m_marker'];
 		$tokens = $rows['tokens'];
 		$prestige = $rows['prestige'];
 		

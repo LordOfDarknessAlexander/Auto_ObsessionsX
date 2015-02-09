@@ -24,7 +24,7 @@ var logos = [
 	'napa'
 ];
 var userStats = {
-	money:0,
+	money:0 ,
 	tokens:2,
 	prestige:0,
 	markers:0
