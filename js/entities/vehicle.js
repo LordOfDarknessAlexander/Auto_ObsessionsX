@@ -69,10 +69,10 @@ function Vehicle(Name, Make, Year, Price)
 		//_info: node.text(),
 		_parts : [],	//only retain currently upgraded parts, array is copied
         //_parts:{
-        _dt:null,   //Drivetrain.make(Price)
-        _body:null,
-        _interior:null,
-        _docs:null,        
+        _dt:Drivetrain.make(Price),
+        _body:null, //Body.make(Price),
+        _interior:null, //Interior.make(Price),
+        _docs:null, //Documents.make(Price)
         //}
 		//image : img,
 		//getters

@@ -1,4 +1,39 @@
-﻿
+﻿//pass any javascript object and get object in php by
+//json_decode(stripslashes($_POST['theReturnOfThis']))
+//an array is considered an object
+//if the array is non-associative, it will be an array in php
+//else if the array is associative, then it will be in object in php
+function jsObj2phpObj(object)
+{
+	var json = "{";
+	for(property in object)
+	{
+		var value = object[property];
+		if(typeof(value) == "string")
+		{
+			json += '"' + property + '":' + jsObj2phpObj(value) + ',';
+		}
+		else
+		{
+			//if its an associative array
+			if(!value[0])
+			{
+				json += '"' + property + '":' + jsObj2phpObj(value) + ',';
+				
+			}
+			else
+			{
+				json += '"' + property + '":[';
+				for(prop in value) json += '"' + value[prop] + '",';
+				json = json.substr(0,json.length - 1) + "],";
+			}
+		}
+		return json.substr(0,json.length - 1) + "}";
+	}
+}
+
+
+
 /*
 $("#sub").click(function()
 {
@@ -34,37 +69,3 @@ $(document).ready(function()
 
 });
 */
-//pass any javascript object and get object in php by
-//json_decode(stripslashes($_POST['theReturnOfThis']))
-//an array is considered an object
-//if the array is non-associative, it will be an array in php
-//else if the array is associative, then it will be in object in php
-function jsObj2phpObj(object)
-{
-	var json = "{";
-	for(property in object)
-	{
-		var value = object[property];
-		if(typeof(value) == "string")
-		{
-			json += '"' + property + '":' + jsObj2phpObj(value) + ',';
-		}
-		else
-		{
-			//if its an associative array
-			if(!value[0])
-			{
-				json += '"' + property + '":' + jsObj2phpObj(value) + ',';
-				
-			}
-			else
-			{
-				json += '"' + property + '":[';
-				for(prop in value) json += '"' + value[prop] + '",';
-				json = json.substr(0,json.length - 1) + "],";
-			}
-		}
-		return json.substr(0,json.length - 1) + "}";
-	}
-
-

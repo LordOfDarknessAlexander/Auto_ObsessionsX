@@ -36,7 +36,7 @@
         <button id='ubTransmission' class='ub'></button>
         <button id='rbTransmission' class='rb'></button>
         <br>
-        <progress id='pTransmission' value='0.0'></progress>
+        <progress id='pbTransmission' value='0.0'></progress>
         <br>
         Drive Axel:
         <button id='ubAxel' class='ub'></button>
@@ -50,12 +50,12 @@
         <br>
         <progress id='pbExhaust' value='0.0'></progress>
         <br>
-        Fuel System:
+        <!--Fuel System:
         <button id='ubFuel' class='ub'></button>
         <button id='rbFuel' class='rb'></button>
         <br>
         <progress id='pbFuel' value='0.0'></progress>
-        <br>
+        <br-->
     </div>
     <h2 id='body'>Body</h2>
     <div id='body'>
@@ -83,12 +83,12 @@
         <br>
         <progress id='pb3' value='0.0'></progress>
         <br>
-        PLACEHOLDER:
+        <!--PLACEHOLDER:
         <button id='ubBtn4' class='ub'></button>
         <button id='rb4' class='rb'></button>
         <br>
         <progress id='pb4' value='0.0'></progress>
-        <br>
+        <br-->
     </div>
     <h2 id='interior'>Interior</h2>
     <div id='interior'>
@@ -116,12 +116,12 @@
         <br>
         <progress id='pbPanels' value='0.0'></progress>
         <br>
-        PLACEHOLDER:
+        <!--PLACEHOLDER:
         <button id='ubBtn4' class='ub'></button>
         <button id='rb' class='rb'></button>
         <br>
         <progress id='pb4' value='0.0'></progress>
-        <br>
+        <br-->
     </div>
     <h2 id='docs'>Documentation</h2>
     <div id='docs'>
@@ -137,8 +137,8 @@
         PLACEHOLDER:<button id='ubBtn3' class='ub'></button><br>
         <progress id='pb3' value='0.0'></progress>
         <br>
-        PLACEHOLDER:<button id='ubBtn4' class='ub'></button><br>
+        <!--PLACEHOLDER:<button id='ubBtn4' class='ub'></button><br>
         <progress id='pb4' value='0.0'></progress>
-        <br>
+        <br-->
     </div>
 </div>

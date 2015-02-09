@@ -33,27 +33,39 @@ function carStats()
 		carDocs:carDocs(),
 	};
 }*/
-function carPart(price, partType){   //partType
+function carPart(carPrice, partType){   //partType
     //emulating an enum representing the various kinds of upgradable part
+    //console.log(carPrice);
 	return {
 		//_iconPath : 'images/defaultPart.png',
-        _price:150, //price,   //value added to the owning vehicle
+        _price:carPrice,   //value added to the owning vehicle
 		//_cond : condition,
 		//_orig : originality,
-        _stage:carPart.stage.stock, //1-4 stages
+        _stage:carPart.STAGE.stock, //1-4 stages
         _type:partType, //type
 		_repaired:false,    //has this been fixed?, moved to Vehicle.js as bitfield
 		//getFullPath() : function()
 		//{	//return file path of image resource for this icon
 		//}
 		//getCondition:function(){return repaired ? this.condition + 25 : this.condition;
+        getPrice:function(){
+            //returns the price of this part, based on repairs and the tier
+            var ret = this._price * (this._repaired ? 1.75 : 1) * this._stage;
+            console.log(ret);
+            return ret;
+        },
+        //getInstallPrice:function(){
+            //price the first time 
+        //}
         getSalePrice:function(){
             //price the user pays for this upgrade
             return this._price * 1.25;
         },
         getRepairPrice:function(){
             //price the user pays for repairs
-            return this._price * 0.75;
+            var ret = this._price * 0.75;
+            console.log(ret);
+            return ret;
         },
         getLocalPath:function(){
             return 'images\\upgrades\\' + stringFromPartType(this._type) + '.png'
@@ -62,26 +74,44 @@ function carPart(price, partType){   //partType
         //getFullPath:function(){
             //return ROOT_DIR + this.getLocalPath();
         //},
-        getPrice:function(){
-            //returns the price of this part, based on repairs and the tier
-            return this._price * (this._repaired ? 1.75 : 1) * this._stage;
-        },
-        //getInstallPrice:function(){
-            //price the first time 
-        //}
         repair:function(){
             if(!this._repaired){
                 this._repaired = true;
             }
+            return this._repaired;
         },
         upgrade:function(){
-            if(this._stage != carPart.stage.pro){
-                this._stage = this._stage << 1;
-                console.log('upgrading part with type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() );
-                //increase other vars
+            //var p = this.getPrice()
+            //if(userStats.money >= p){
+                if(this._stage != carPart.STAGE.pro){
+                    this._stage = this._stage << 1;
+                    console.log('upgrading part with type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() );
+                    //increase other vars
+                }
+                //else part is max level do nothing,
+                //button in repair needs to be rebound
+                //userStats.money -= p;
+            //}
+        },
+        getPercent:function(){
+            var INV_MAX = 1.0 / 5.0,
+                ret = 0.0;
+            
+            if(this._stage == carPart.STAGE.stock){
+                ret = 1.0;
+            }else if(this._stage == carPart.STAGE.sport){
+                ret = 2.0;
+            }else if(this._stage == carPart.STAGE.racing){
+                ret = 3.0;
+            }else if(this._stage == carPart.STAGE.pro){
+                ret += 4.0;
             }
-            //else part is max level do nothing,
-            //button in repair needs to be rebound
+            if(this._repaired){
+                ret += 1.0;
+            }
+            ret *= INV_MAX;
+            console.log(ret);
+            return ret;
         }
         /*toJSON:function(){
             return {
@@ -103,7 +133,7 @@ carPart.type = {
     tires:5,
     exhaust:6
 };
-carPart.stage = {
+carPart.STAGE = {
     stock:0x1,      //0001
     sport:0x2,    //0010
     racing:0x4,         //0100
@@ -147,6 +177,7 @@ var Drivetrain = {
         //fuel:
     },
     make:function(carPrice){
+        //creates a new car part of type Drivetrain
         return {
             _engine:carPart(carPrice * 0.32, this.TYPE.engine),
             _trans:carPart(carPrice * 0.23, this.TYPE.trans),
@@ -157,10 +188,10 @@ var Drivetrain = {
             asBitfield:function(){
                 //stores this vehicles upgrades as a 4 byte int
                 //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
-                var ret = (this._engine.stage << 12) |
-                (this._trans.stage << 8) |
-                (this._axel.stage << 4) |
-                (this._exhaust.stage << 0);
+                var ret = (this._engine._stage << 12) |
+                (this._trans._stage << 8) |
+                (this._axel._stage << 4) |
+                (this._exhaust._stage << 0);
                 //this._fuel.stage << 0
                 console.log(ret);
                 return ret;
@@ -169,30 +200,95 @@ var Drivetrain = {
             //},
             getPercentAvg:function(){
                 //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
-                //4 stages of upgrades and 1 repair
-                function perc(part){
-                    //returns a percent in range 0.0-1.0
-                    var INV_MAX = 1.0 / 5.0;
-                    var stage = part._stage;
-                    var val = (stage == carPart.stage.stock)?
-                        1:
-                        (stage == carPart.stage.sport)?
-                        2:
-                        (stage == carPart.stage.racing)?
-                        3:
-                        (stage == carPart.stage.pro)?
-                        4:0;
-                        if(part._repaired){
-                            val += 1;
-                        }
-                        return val * INV_MAX;
-                }
                 return (
-                    perc(this._engine) +
-                    perc(this._trans) +
-                    perc(this._axel) +
-                    perc(this._exhaust)
+                    this._engine.getPercent() +
+                    this._trans.getPercent() +
+                    this._axel.getPercent() +
+                    this._exhaust.getPercent()
                 ) * 0.25;   //average of all parts
+            },
+            getPartType:function(type){
+                //returns a copy of the object
+                switch(type){
+                    case(Drivetrain.TYPE.engine):
+                        return this._engine;
+                    break;
+                    case(Drivetrain.TYPE.trans):
+                        return this._trans;
+                    break;
+                    case(Drivetrain.TYPE.axel):
+                        return this._axel;
+                    break;
+                    case(Drivetrain.TYPE.exhaust):
+                        return this._exhaust;
+                    break;
+                    //fuel:
+                    default:
+                        console.log('unknow type: ' + type.toString() );
+                        return null;
+                    break;
+                }
+            },
+            upgradePart:function(type){
+                console.log('upgradeing part of type:');
+                switch(type){
+                    case(Drivetrain.TYPE.engine):
+                        this._engine.upgrade();
+                    break;
+                    case(Drivetrain.TYPE.trans):
+                        this._trans.upgrade();
+                    break;
+                    case(Drivetrain.TYPE.axel):
+                        this._axel.upgrade();
+                    break;
+                    case(Drivetrain.TYPE.exhaust):
+                        this._exhaust.upgrade();
+                    break;
+                    //fuel:
+                    default:
+                        console.log('unknow type: ' + type.toString() );
+                    break;
+                }
+            },
+            repairPart:function(type){
+                switch(type){
+                    case(Drivetrain.TYPE.engine):
+                        this._engine.repair();
+                    break;
+                    case(Drivetrain.TYPE.trans):
+                        this._trans.repair();
+                    break;
+                    case(Divetrain.TYPE.axel):
+                        this._axel.repair();
+                    break;
+                    case(Drivetrain.TYPE.exhaust):
+                        this._exhaust.repair();
+                    break;
+                    //fuel:
+                    default:
+                        console.log('unknow type: ' + type.toString() );
+                    break;
+                }
+            },
+            getCondition:function(){
+                //returns the condition as a value butween 0.0-1.0
+                var ret = 0;
+                ret += this._engine._repaired ? 1 : 0;
+                ret += this._trans._repaired ? 1 : 0;
+                ret += this._axel._repaired ? 1 : 0;
+                ret += this._exhaust._repaired ? 1 : 0;
+                    //console.log('val: ' + ret.tooString() );
+                return ret * 0.25;
+            },
+            getCondBF:function(){
+                //returns the state of each part as a bitfield
+                var ret = 0;
+                ret = (this._engine._repaired ? 0x8 : 0) |
+                    (this._trans._repaired ? 0x4 : 0) |
+                    (this._axel._repaired ? 0x2 : 0) |
+                    (this._exhaust._repaired ? 0x1 : 0);
+                    //console.log('val: ' + ret.tooString() );
+                return ret;
             }
         };
     },

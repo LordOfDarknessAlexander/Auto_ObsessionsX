@@ -31,16 +31,18 @@ function divRepair(){
 ?>
 	width:15%;
 	height:5%;
-    font-size:1.25rem;
+    font-size:1.5rem;
     font-weight:bold;
+    background-color:white;
 }
 <?php divRepair();?> div button
 {
 <?php
     //posAbs();
 ?>
-    width:10%;
-    height:10%;
+    width:20%;
+    height:15%;
+    font-size:0.65rem;
 }
 <?php divRepair();?> div button.ub
 {
