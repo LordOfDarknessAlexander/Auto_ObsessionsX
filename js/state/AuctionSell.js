@@ -1,6 +1,5 @@
 ﻿var _vehiclePrice = 20000;
-var ai = [];
-var currentBid = _vehiclePrice * 0.1;	//_car.getPrice() * 0.1, //bidding interval as a percent of total value
+var auctions = [];
 
 /*function shuffleArray(array) 
 {	//sort array items
@@ -27,7 +26,7 @@ function auctionGen()
 		//_vehiclePrice : 20000,
 		//Javascript functionality for manage vehicle sales
 		BID_COOLDOWN : 10,
-		MAX_AUCTION_TIME : 600,
+		MAX_AUCTION_TIME : 1000,
 		//AI cooldown timer
 		_car:null,
 		_bidderCooldown : 0,
@@ -37,6 +36,8 @@ function auctionGen()
 		//there only needs to be 1 timer to track the closing of the auction
 		_goingTimer : 0,
 		_pGTimer : 0,
+		_currentBid : _vehiclePrice * 0.1,
+		_ai : [],
 		_date:{
 			start:Date.now() * 0.0001,
 			end:null
@@ -51,6 +52,11 @@ function auctionGen()
 				this._car = userGarage[index];
 				this._carIndex = index;
 				
+				if(this._car != null)
+				{
+					console.log(this._car._price);
+					this._currentBid = this._car._price * 0.1;
+				}
 				//Removing the vehicle here because if we wait until the vehicle sells the player can sell
 				//the vehicle multiple times without collecting the money
 				
@@ -64,7 +70,7 @@ function auctionGen()
                         break;  //exit loop after removing car
 					}
 				}
-				ai = [Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5)))];
+				this._ai = [Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5)))];
 			}
 		},
 		close:function()
@@ -73,13 +79,14 @@ function auctionGen()
 			this._date.end = Date.now() * 0.0001;
 			this._curTime = 0.0;
 			this._bidderCooldown = 0;
-			while(ai.length) { ai.pop(); }
+			while(this._ai.length) { this._ai.pop(); }
 		},
 		update:function(dt)
 		{
 			if(!this._expired)
 			{
-				console.log("Running");
+				//console.log("Running");
+				//console.log("CurrBid for " + this._car.getFullName() + " is " + this._currentBid);
 				this._bidderCooldown += dt;
 				this._curTime += dt;
 				this.bidTimers();
@@ -96,11 +103,11 @@ function auctionGen()
 				
 				if(this._curTime >= this.MAX_AUCTION_TIME)
 				{
-					for(var i = 0; i < ai.length; ++i)
+					for(var i = 0; i < this._ai.length; ++i)
 					{
-						if(ai[i].winningBid)
+						if(this._ai[i].winningBid)
 						{
-							console.log("AI " + i + " has won the bid");
+							console.log("AI " + i + " has won the bid for " + Math.round(this._ai[i].currBid));
 						}
 					}
 					console.log("Ending auction");
@@ -116,14 +123,17 @@ function auctionGen()
 				liID = "asli" + (i).toString();
 			var cleanBtn = $('li#' + liID + ' button#' + btnID);
 			cleanBtn.text("Sold!");
-			cleanBtn.off().click({i:this._carIndex}, this.cleanUpAuction);
+			cleanBtn.off().click({i:this._carIndex, amt:this._currentBid}, this.cleanUpAuction);
+			this._currentBid = _vehiclePrice * 0.1;
 			Garage.save();
 		},
 		cleanUpAuction:function(index)
 		{
+			var cash = index.data.amt;
 			//Give the user their money
-			userStats.money += Math.round(currentBid);
-			currentBid = _vehiclePrice * 0.1;
+			userStats.money += Math.round(cash);
+			console.log("Adding " + Math.round(cash));
+			
 			
 			//Find the element that contains the car information/button
 			var i = index.data.i;
@@ -152,77 +162,77 @@ function auctionGen()
 		enemyBidding : function()
 		{	//determine 
 			//upPercentage of vehicle for next bid
-			var upPerc =  0.18 * currentBid;
+			var upPerc =  0.18 * this._currentBid;
 			var startBid = this._vehiclePrice * 0.02;
-			for(var i = 0; i < ai.length; i++)
+			for(var i = 0; i < this._ai.length; i++)
 			{						
-				if(ai[i].canBid)	//global cooldown timer has refreshed, bidding now available
+				if(this._ai[i].canBid)	//global cooldown timer has refreshed, bidding now avthis._ailable
 				{
-					if((ai[i].currBid < currentBid) && (ai[i].currBid < ai[i].bidCap))
+					if((this._ai[i].currBid < this._currentBid) && (this._ai[i].currBid < this._ai[i].bidCap))
 					{
-						ai[i].currBid = currentBid + upPerc;
+						this._ai[i].currBid = this._currentBid + upPerc;
 						assetLoader.sounds.bidder.play();
-						break;	//breaks on first available bidder?
+						break;	//breaks on first avthis._ailable bidder?
 					}
 				}
 			}
 			//if the bidders bid is at o or less than the current bid player wins bid
 		},	
 		bidTimers : function()
-		{	//updates AI bidding timers	
-			for(var i = 0; i < ai.length; ++i)
+		{	//updates this._ai bidding timers	
+			for(var i = 0; i < this._ai.length; ++i)
 			{
-				if(!ai[i].leftAuction)
+				if(!this._ai[i].leftAuction)
 				{
-					ai[i].update();
+					this._ai[i].update();
 				}
 			}
 		},
 		bidFinder : function()
 		{	//determine bidder
-			function checkBid(index)
-			{	//check if the enemy at the current index has a higher bid than the other AI's
-				var ret = true;
-				for(var i = 0; i < ai.length; i++)
-				{
-					if(index != i)
-					{
-						if(ai[index].currBid > ai[i].currBid)
-						{
-							continue;
-						}
-						else
-						{
-							ret = false;
-							break;
-						}
-					}
-				}
-				return ret;
-			}
-			function setBid(index)
-			{
-				if(!ai[index].winningBid)
-				{
-					currentBid = ai[index].currBid;
-				}
-				//iterate over AI, assigning the bidder at index as the current bidder,
-				//assigning all others to false
-				for(var i = 0; i < ai.length; i++)
-				{
-					ai[i].canBid = (i == index ? true : false);
-				}
-			}		
-			//check the bids of each AI to determine the highest bid,
+			//check the bids of each this._ai to determine the highest bid,
 			//then setting the state;
-			for(var i = 0; i < ai.length; ++i)
+			for(var i = 0; i < this._ai.length; ++i)
 			{
-				if(checkBid(i))
+				if(this.checkBid(i))
 				{
-					setBid(i);
+					this.setBid(i);
 				}
 			}
 		},
+		checkBid : function(index)
+		{	//check if the enemy at the current index has a higher bid than the other this._ai's
+			var ret = true;
+			for(var i = 0; i < this._ai.length; i++)
+			{
+				if(index != i)
+				{
+					if(this._ai[index].currBid > this._ai[i].currBid)
+					{
+						continue;
+					}
+					else
+					{
+						ret = false;
+						break;
+					}
+				}
+			}
+			return ret;
+		},
+		setBid : function(index)
+		{
+			if(!this._ai[index].winningBid)
+			{
+				this._currentBid = this._ai[index].currBid;
+			}
+			//iterate over this._ai, assigning the bidder at index as the current bidder,
+			//assigning all others to false
+			for(var i = 0; i < this._ai.length; i++)
+			{
+				this._ai[i].canBid = (i == index ? true : false);
+			}
+		},	
 		currentBidder : function()
 		{	
 			this.bidFinder();
@@ -230,17 +240,17 @@ function auctionGen()
 		},
 		checkCurrentWinner : function()
 		{
-			for(var i = 0; i < ai.length; ++i)
+			for(var i = 0; i < this._ai.length; ++i)
 			{
-				ai[i].winningBid = (ai[i].currBid === currentBid ? true : false);
+				this._ai[i].winningBid = (this._ai[i].currBid === this._currentBid ? true : false);
 			}
 		},
 		findEndBidder : function()
 		{	//determine who holds the bid, incrementing timer
-			for (var i = 0, sum = 0; i < ai.length; sum += ai[i++]);
-			for(var i = 0; i < ai.length; i++)
+			for (var i = 0, sum = 0; i < this._ai.length; sum += this._ai[i++]);
+			for(var i = 0; i < this._ai.length; i++)
 			{
-				if((currentBid == ai[i].currBid) && (sum >= BID_THRESHOLD))				
+				if((this._currentBid == this._ai[i].currBid) && (sum >= BID_THRESHOLD))				
 				{	//enemeny is able to place bid
 					//end auction with enemy bidder
 					console.log("Sum "+ sum + "BidThreshold" + BID_THRESHOLD);
@@ -267,6 +277,12 @@ var AuctionSell =
 			var i = index.data.i;
 			AuctionSell._state = new auctionGen();
 			AuctionSell._state.init(i);
+			auctions.push(AuctionSell._state);
+			if(auctions.length > 1)
+			{
+				console.log(auctions[0]._currentBid);
+				console.log(auctions[1]._currentBid);
+			}
 			
 			if(AuctionSell._state._car !== null)
 			{
@@ -293,10 +309,23 @@ var AuctionSell =
 		jq.AuctionSell.toggle();
 	},
 	update : function(dt)
-	{	//main update logic, calle dper frame
-		if(this._state !== null && this._state !== 'undefined')
+	{
+		var i;
+		if(auctions.length > 0)
 		{
-			this._state.update(dt);
+			i = 0;
+			while(i < auctions.length)
+			{
+				if(!auctions[i]._expired)
+				{
+					auctions[i].update(dt);
+					++i;
+				}
+				else
+				{
+					auctions.splice(i, 1);
+				}
+			}
 		}
 	},
 };

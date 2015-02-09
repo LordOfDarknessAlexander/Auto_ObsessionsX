@@ -22,7 +22,6 @@
 		{
 			if(this.currBid >= this.bidCap)
 			{
-				//console.log("Enemy left auction");
 				this.leftAuction = true;
 			}
 			

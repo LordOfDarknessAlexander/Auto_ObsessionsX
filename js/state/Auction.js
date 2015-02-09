@@ -200,12 +200,6 @@ var Auction =
 		{
 			this.close();					
 		}
-
-		if(restarted)
-		{
-			Auction.render();
-			this.restart();
-		}
 		
 		if(!auctionStop)
 		{
@@ -243,25 +237,6 @@ var Auction =
 				playerBid != currentBid;
 			}
 		}
-		/*if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
-		{
-			playerBid != currentBid;
-		}*/
-		//ENENMY HUD
-	
-		//Enemy 1
-		//draw them depending on current bid
-		/*for(var i = 0; i < ai.length; ++i)
-		{
-			if(ai[i].currentBid >= currentBid)
-			{
-				ai[i] = context.drawImage(curBidImage, this.imgX, this.winningImgY) + context.fillText(ai[i] + '$' + ai[i].currBid.toFixed(2), ENEMY_X, 70);
-			}
-			else
-			{
-				//ai[i] = context.drawImage(curBidImage, this.imgX, this.winningImgY) + context.fillText(ai[i] + '$' + ai[i].toFixed(2), ENEMY_X, 70);
-			}
-		}*/
 		
 		if(ai[0].currBid >= currentBid)
 		{
