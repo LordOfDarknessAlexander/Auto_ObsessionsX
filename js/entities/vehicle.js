@@ -68,10 +68,12 @@ function Vehicle(Name, Make, Year, Price)
 		id : 0x00000000,	//node.attr('id'),
 		//_info: node.text(),
 		_parts : [],	//only retain currently upgraded parts, array is copied
-        _dt:null,
+        //_parts:{
+        _dt:null,   //Drivetrain.make(Price)
         _body:null,
         _interior:null,
         _docs:null,        
+        //}
 		//image : img,
 		//getters
 		getPrice : function()
@@ -92,7 +94,7 @@ function Vehicle(Name, Make, Year, Price)
 		{	//returns a constant object representing completion of upgreades,
 			//values in range [0.0,1.0]
 			return {
-				_driveterrain:0.15,	//this._dt.completion()
+				_driveterrain:0.15,	//this._dt.getPercentAvg(),
 				_body:0.23,			//this._body.completion()
 				_interior:0.62,
 				_docs:0.73

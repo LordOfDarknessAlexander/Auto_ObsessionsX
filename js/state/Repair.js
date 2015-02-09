@@ -39,48 +39,61 @@ var Repair = {
             //var parts = car._parts
 
             //for each upgrade, buttons must be refreshed each time, as the cars or upgrades may change
-            var ul = $('div#RepairShop div#upgrades'),
-                rl = $('div#RepairShop div#repairs');
+            //var ul = $('div#RepairShop div#upgrades'),
+                //rl = $('div#RepairShop div#repairs');
 
-            ul.empty().append('<h2>Upgrades</h2>');
+            //ul.empty().append('<h2>Upgrades</h2>');
             
-            rl.empty().append('<h2>Repairs</h2>');
-            
+            //rl.empty().append('<h2>Repairs</h2>');
+            //upgrade button
+            var btnTag = 'div#RepairShop div#drivetrain button#';
+            for(var i = Drivetrain.TYPE.engine; i <= Drivetrain.TYPE.exhaust; i++){ 
+                var str = Drivetrain.strFromType(i);
+                $(btnTag + 'ub' + str).off().click(
+                    {type:i}, upgradeDT
+                );
+                //repair button
+                $(btnTag + 'rb' + str).off().click(
+                    {type:i}, repairDT
+                );
+            }
+           
             for(var i = carPart.type.interior; i <= carPart.type.exhaust; i++){
                 //var price = //get from database
-                var btnStr = "<button id ='" + i.toString() + "'>" +
+                /*var btnStr = "<button id ='" + i.toString() + "'>" +
                     "<label id='name'>partName</label><br>" +
                     "<label id='type'>" + stringFromPartType(i) + "</label><br>" +
                     "$<label id='price'>150</label><br>" +
                     //"<img id='icon' src=''>" +
                 "</button><br>";
-                ul.append(btnStr);
+                ul.append(btnStr);*/
                 //
-                var btnID = 'div#RepairShop div#upgrades button#' + i.toString(),
-                    btn = $(btnID);
+                //var btnID = 'div#RepairShop div#upgrades button#' + i.toString(),
+                    //btn = $(btnID);
                 
-                btn.off().click({type:i}, addUpgrade);
+                //btn.off().click({type:i}, addUpgrade);
                 
-                var part = car.getPart(i);
+               // var part = car.getPart(i);
                 
-                if(part !== null){
-                    if(part._stage == carPart.stage.pro){
+                //if(part !== null){
+                    //if(part._stage == carPart.stage.pro){
                         //part has been previously upgraded to max, remove all event handlers, effectively disabling the button!
-                        btn.css({'opacity':'0.45', 'cursor':'default'}).off();
-                    }
-                }
+                        //btn.css({'opacity':'0.45', 'cursor':'default'}).off();
+                    //}
+               // }
+                /*
                 var rBtnStr = "<button id ='" + i.toString() + "'>" +
                     "<label id='name'>partName</label><br>" +
                     "<label id='type'>" + stringFromPartType(i) + "</label><br>" +
                     "$<label id='price'>150</label><br>" +
                     //"<img id='icon' src=''>" +
                 "</button><br>";
-                rl.append(rBtnStr);
+                rl.append(rBtnStr);*/
                 //add repair buttons
-                var rBtnID = 'div#RepairShop div#repairs button#' + i.toString(),
-                    rBtn = $(rBtnID);    //repair button
+                //var rBtnID = 'div#RepairShop div#repairs button#' + i.toString(),
+                    //rBtn = $(rBtnID);    //repair button
                 
-                rBtn.click({type:i}, repairPart);
+                //rBtn.click({type:i}, repairPart);
                 /*if(part !== null){
                     console.log('car has part: ' + stringFromPartType(i) );
                     if(part._repaired){
@@ -145,4 +158,40 @@ function repairPart(obj)
         }
     }
     //else no car selected
+}
+function upgradeDT(obj){
+    console.log('upgrade part!');
+    var type = obj.data.type;
+    
+    var car = Garage.getCurrentCar();
+    
+    if(car !== null){
+        //if(car._dt === null){
+            //car._dt = Drivetrain.make(car.getPrice());
+            //return;
+        //}
+        //else{
+            //car._dt.upgrade(type);
+        //}
+        //Garage.save();
+    }
+}
+function repairDT(obj){
+    console.log('repair part!');
+    var type = obj.data.type;
+    
+    var car = Garage.getCurrentCar();
+    
+    if(car !== null){
+        //var part = car._dt.getPart(type);
+        //if(!part._repaired){
+            //part._repaired = true;
+            //var pb = $('div#RepairShop div#drivetrain progress#' + Drivetrain.strFromType(type));
+            //pb.setValue(part.getPercent() );
+            //dtPB.value = car._dt.getPercent();
+            
+            //repairBtn.css({'opacity:0.45, 'cusor:default});   //disable button
+        //}
+        //Garage.save();
+    }
 }

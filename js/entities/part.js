@@ -66,6 +66,9 @@ function carPart(price, partType){   //partType
             //returns the price of this part, based on repairs and the tier
             return this._price * (this._repaired ? 1.75 : 1) * this._stage;
         },
+        //getInstallPrice:function(){
+            //price the first time 
+        //}
         repair:function(){
             if(!this._repaired){
                 this._repaired = true;
@@ -134,46 +137,96 @@ function stringFromPartType(type){
     }
     return ret;
 }
-function Drivetrain(carPrice){
+var Drivetrain = {
     //default ctor
-    var carPrice = 25000;
-    var dt = {
-        engine:,
-        trans:,
-        axel:,
-        exhaust:,
-        fuel:
-    };
-    return {
-        _engine:carPart(carPrice * 0.32 dt.engine),
-        _trans:carPart(carPrice * 0.23, dt.trans),
-        _axel:carPart(carPrice * 0.29, dt.axel),
-        _exhaust:carPart(carPrice * 0.12, dtt.exhaust),
-        _fuel:carPart(carPrice * 0.12, dt.fuel),
-        //
-        asBits:function(){
-            //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
-        },
-        getCompletePercent:function(){
-            //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
+    TYPE:{
+        engine:0,
+        trans:1,
+        axel:2,
+        exhaust:3,
+        //fuel:
+    },
+    make:function(carPrice){
+        return {
+            _engine:carPart(carPrice * 0.32, this.TYPE.engine),
+            _trans:carPart(carPrice * 0.23, this.TYPE.trans),
+            _axel:carPart(carPrice * 0.29, this.TYPE.axel),
+            _exhaust:carPart(carPrice * 0.12, this.TYPE.exhaust),
+            //_fuel:carPart(carPrice * 0.12, dt.fuel),
+            //
+            asBitfield:function(){
+                //stores this vehicles upgrades as a 4 byte int
+                //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
+                var ret = (this._engine.stage << 12) |
+                (this._trans.stage << 8) |
+                (this._axel.stage << 4) |
+                (this._exhaust.stage << 0);
+                //this._fuel.stage << 0
+                console.log(ret);
+                return ret;
+            },
+            //fromBitfield(int){
+            //},
+            getPercentAvg:function(){
+                //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
+                //4 stages of upgrades and 1 repair
+                function perc(part){
+                    //returns a percent in range 0.0-1.0
+                    var INV_MAX = 1.0 / 5.0;
+                    var stage = part._stage;
+                    var val = (stage == carPart.stage.stock)?
+                        1:
+                        (stage == carPart.stage.sport)?
+                        2:
+                        (stage == carPart.stage.racing)?
+                        3:
+                        (stage == carPart.stage.pro)?
+                        4:0;
+                        if(part._repaired){
+                            val += 1;
+                        }
+                        return val * INV_MAX;
+                }
+                return (
+                    perc(this._engine) +
+                    perc(this._trans) +
+                    perc(this._axel) +
+                    perc(this._exhaust)
+                ) * 0.25;   //average of all parts
+            }
+        };
+    },
+    strFromType:function(type){
+        if(type == Drivetrain.TYPE.engine)
+            return 'Engine';
+        else if(type == Drivetrain.TYPE.trans)
+            return 'Transmission';
+        else if(type == Drivetrain.TYPE.axel)
+            return 'Axel';
+        else if(type == Drivetrain.TYPE.exhaust)
+            return 'Exhaust';
+        //fuel:
+        else{
+            console.log('unknown value: ' + type);
+            return '';
         }
-    };
+    }
 }
 function Body(carPrice){
     //default ctor
-    var  bd = {
-        chasis:,
-        panels:,
-        paint:,
-        ph0:,
-        ph1:
+    var type = {
+        chasis:0x1,
+        panels:0x2,
+        paint:0x3,
+        ph0:0x4,
+        //ph1:
     };
     return {
-        _chasis:carPart(carPrice * 0.32 bd.chasis),
-        _panels:carPart(carPrice * 0.23, bd.panels),
-        _paint:carPart(carPrice * 0.29, bd.paint),
-        _ph0:carPart(carPrice * 0.12, bd.ph0),
-        _ph1:carPart(carPrice * 0.12, bd.ph1),
+        _chasis:carPart(carPrice * 0.32, type.chasis),
+        _panels:carPart(carPrice * 0.23, type.panels),
+        _paint:carPart(carPrice * 0.29, type.paint),
+        _ph0:carPart(carPrice * 0.12, type.ph0),
+        //_ph1:carPart(carPrice * 0.12, bd.ph1),
         //
         asBits:function(){
             //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
@@ -186,49 +239,49 @@ function Body(carPrice){
 function Interior(carPrice){
     //default ctor
     var carPrice = 25000;
-    var  i = {
-        chasis:,
-        panels:,
-        paint:,
-        ph0:,
-        ph1:
+    var type = {
+        seats:1,
+        carpet:2,
+        dash:3,
+        panels:4,
+        //ph1:
     };
     return {
-        /*_chasis:carPart(carPrice * 0.32 bd.chasis),
-        _panels:carPart(carPrice * 0.23, bd.panels),
-        _paint:carPart(carPrice * 0.29, bd.paint),
-        _ph0:carPart(carPrice * 0.12, bd.ph0),
-        _ph1:carPart(carPrice * 0.12, bd.ph1),
+        _seats:carPart(carPrice * 0.32, type.seats),
+        _carpet:carPart(carPrice * 0.23,type.carpets),
+        _dash:carPart(carPrice * 0.29, type.panels),
+        _panels:carPart(carPrice * 0.12, bd.ph0),
+        //_ph0:carPart(carPrice * 0.12, bd.ph1),
         //
         asBits:function(){
             //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
         },
         getCompletePercent:function(){
             //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
-        }*/
+        }
     };
 }
-function Docs(carPrice)){
+function Docs(carPrice){
     //default ctor
-    var  bd = {
-        chasis:,
-        panels:,
-        paint:,
-        ph0:,
-        ph1:
+    var type = {
+        ownership:1,
+        build:2,
+        history:3,
+        ph0:4,
+        //ph1:
     };
     return {
-        /*_owner:carPart(carPrice * 0.32 bd.chasis),
-        _build:carPart(carPrice * 0.23, bd.panels),
-        _history:carPart(carPrice * 0.29, bd.paint),
-        _ph0:carPart(carPrice * 0.12, bd.ph0),
-        _ph1:carPart(carPrice * 0.12, bd.ph1),
+        _owner:carPart(carPrice * 0.32, type.ownership),
+        _build:carPart(carPrice * 0.23, type.build),
+        _history:carPart(carPrice * 0.29, type.history),
+        _ph0:carPart(carPrice * 0.12, type.ph0),
+        //_ph1:carPart(carPrice * 0.12, bd.ph1),
         //
         asBits:function(){
             //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
         },
         getCompletePercent:function(){
             //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
-        }*/
+        }
     };
 }

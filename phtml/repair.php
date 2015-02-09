@@ -28,15 +28,15 @@
     <h2 id='dt'>Drivetrain</h2>
     <div id='drivetrain'>
         Engine:
-        <button id='upEngine' class='ub'></button>
+        <button id='ubEngine' class='ub'></button>
         <button id='rbEngine' class='rb'></button>
         <br>
         <progress id='pbEngine' value='0.0'></progress><br>
         Transmission:
-        <button id='ubTrans' class='ub'></button>
-        <button id='rbTrans' class='rb'></button>
+        <button id='ubTransmission' class='ub'></button>
+        <button id='rbTransmission' class='rb'></button>
         <br>
-        <progress id='pTrans' value='0.0'></progress>
+        <progress id='pTransmission' value='0.0'></progress>
         <br>
         Drive Axel:
         <button id='ubAxel' class='ub'></button>
