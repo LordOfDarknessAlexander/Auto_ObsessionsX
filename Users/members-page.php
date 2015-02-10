@@ -2,7 +2,7 @@
 session_start();
 //require 'secure.php';
 //secureLogin();
-if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
+if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 {  header("Location: login.php");
 
    exit();
@@ -80,6 +80,36 @@ else
 <script>
 function ajax_post(){
     // Create our XMLHttpRequest object
+    /*var dataStr = ''; //args to pass to script
+    //alert('calling ajax');
+    //var jqxhr = $.post({
+        //url:LOCAL_HOST + 'vehicles/query.php',
+        //dataType:'json',
+        //data:dataStr
+    //}
+    var jqxhr = $.ajax({
+        type:'POST',
+        url:getHostPath() + 'users/my_parse_file.php',
+        dataType:'json',
+        data:dataStr
+    }).done(function(data){
+        //the response string is converted by jquery into a Javascript object!
+        if(data === null){
+            alert('Error:ajax response returned null!');
+            return;
+        }
+        alert('ajax response recieved:' + JSON.stringify(data) );
+        //access and set values in the document's html page
+        //$('div#statBar label#money').text(data.money);
+        //$('div#statBar label#toekns').text(data.tokens);
+        //$('div#statBar label#presteige').text(data.prestiege);
+        //$('div#statBar label#m_marker').text(data.m_marker);
+    }).fail(function(jqxhr){
+        //call will fail if result is not properly formated JSON!
+        alert('ajax call failed! Reason: ' + jqxhr.responseText);
+        //throw exception, game can't work without user stats
+    });*/
+    //using XMLHTTPRequest in old and inferior interface, use jquery, ajax, get and post methods instead!
     var hr = new XMLHttpRequest();
     // Create some variables we need to send to our PHP file
     var url = "my_parse_file.php";
