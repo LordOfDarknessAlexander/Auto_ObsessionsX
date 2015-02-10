@@ -30,7 +30,6 @@ function getUserCarFromID($carID){
     $res = $aoUsersDB->query(
         "SELECT * FROM user0 WHERE car_id = $carID"
     );
-
     if($res){
         if(mysqli_num_rows($res) != 0){
             //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
@@ -58,7 +57,6 @@ function getCarFromID($carID){
     $res = $AO_DB->query(
         "SELECT * FROM aoCars WHERE car_id = $carID"
     );
-
     if($res){
         if(mysqli_num_rows($res) != 0){
             //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
@@ -79,9 +77,7 @@ function getCarFromID($carID){
         echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
     }
 }
-
 $q = '';
-
 if(isset($_POST) && !empty($_POST) ){
     $carID = $_POST['carID'];
     //validate value
@@ -97,7 +93,6 @@ else{
 }
 /*
 $result = $AO_DB->query($q);
-
 if($result){
     if(mysqli_num_rows($result) != 0){
         //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
@@ -124,7 +119,6 @@ function getUserCars(){
     //$result = $aoUsersDB->query(
         //"SELECT * FROM user$userID"
     //);
-
     //if($result){
         //$ret = array();
         
