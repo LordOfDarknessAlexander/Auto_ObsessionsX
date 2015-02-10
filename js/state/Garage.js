@@ -23,6 +23,11 @@ var userGarage = [
 var //Garage._curCarIndex = null,	//user's currect car index
 	selCarIndex = null;
 //
+function getHostPath(){
+    var localExecution = true;
+    return localExecution == true ? 'http://localhost/Auto_ObsessionsX/'
+            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+}
 var Garage = {
 	_curCarIndex : null,
 	//_selCarIndex : null,	//user's selected car index
@@ -52,11 +57,16 @@ var Garage = {
         //make server calls(using ajax) to serialize
         //user vehicles saved to database, so that vehicles
         //need only be created once, instead of making server calls all the time to update cars
-        /*var dataStr = '';
+        var dataStr = '';
         //alert('calling ajax');
+        //var jqxhr = $.post({
+            //url:LOCAL_HOST + 'vehicles/query.php',
+            //dataType:'json',
+            //data:dataStr
+        //}
         var jqxhr = $.ajax({
             type:'POST',
-            url:'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/vehicles/query.php',    //"http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/vehicles/query.php",
+            url:getHostPath() + 'vehicles/query.php',
             dataType:'json',
             data:dataStr
         }).done(function(data){
@@ -69,7 +79,7 @@ var Garage = {
         }).fail(function(jqxhr){
             //call will fail if result is not properly formated JSON!
             alert('ajax call failed! Reason: ' + jqxhr.responseText);
-        });*/
+        });
     //}
     //else{  //playing locally as guest, make calls in JavaScript
         //

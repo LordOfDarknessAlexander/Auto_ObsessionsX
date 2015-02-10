@@ -24,7 +24,7 @@ require_once '../include/dbConnect.php';  //sql database connection
     //}
 //echo $cars->toJSON(); //serialize to JSON to send over internet
 //}
-$q = 'SELECT * FROM aoCars WHERE car_id = 1';   //select an individual element
+$q = 'SELECT * FROM aoCars WHERE car_id = 24577';   //select an individual element
 //$q = 'SELECT * FROM aoCars';   //select all elements
 $result = $AO_DB->query($q);
 
