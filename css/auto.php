@@ -285,7 +285,7 @@ div#main a:hover {
   height: 100%;
   position: absolute;
 }
-
+/*
 #game-over 
 {
   background-image: url('../images/logo.png')no-repeat 0 0;
@@ -296,7 +296,7 @@ div#main a:hover {
   width: 100%;
   height: 100%;
   position: absolute;
-}
+}*/
 div#profile
 {
     background: url('../images//defaultBG.jpg') no-repeat 0 0;
@@ -357,6 +357,11 @@ div#business
     left:0%;
     z-index:1;
 }
+/*
+require_once 'phone.php';   //mobile phone, iPhone, Android, WIndows, BB, etc
+require_once 'tablet.php';  //tablets, iPads, etc
+require_once 'laptop.php';  //laptop and other large mobile devices
+*/
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) 
 {

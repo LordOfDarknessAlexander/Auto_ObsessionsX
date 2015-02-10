@@ -65,6 +65,7 @@ div#gameMenu div button
 
 div#statBar
 {
+    /*background-color:red;*/
 	position:absolute;
 	top:30%;
 	left:2%;

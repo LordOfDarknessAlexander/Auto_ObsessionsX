@@ -268,9 +268,19 @@ function upgradeDT(obj){
         var type = obj.data.type;
         console.log('upgrading part of type: ' + Drivetrain.strFromType(type) );
         //if(car._dt == null){
+            //var bp = Drivetrain.getInstallPrice(car.getBasePrice();
+            //if(usreStats.moeny >= bp) ){
                 //install part
+                //car._dt = Drivetrain.make(bp)
+                //userStats.money -= bp;
+                //return;
+            //}
+            //else{
+                //play purchase denied sound
+                //return;
+            //}
         //}
-        //else{/    /upgrade existing part
+        //else{    //upgrade existing part
         car._dt.upgradePart(type);
         
         var part = car._dt.getPartType(type);
@@ -294,26 +304,27 @@ function upgradeDT(obj){
             $('div#RepairShop div#drivetrain progress#' + 'pb' + str).attr('value', part.getPercent() );
         }
         //]
-        //Garage.save();
+        //Garage.save();    //save updates to user vehicles
     }
 }
 function repairDT(obj){
-    console.log('repair part!');
+//    console.log('repair part!');
     var type = obj.data.type;
     
     var car = Garage.getCurrentCar();
     
     if(car !== null){
-        console.log('repairing part!');
-        
-        //car._dt.repair(type);
-        //var part = car._dt.getPart(type);
         if(car._dt.repairPart(type) ){
+            console.log('repaired part!');
             //part has been repaired, disable button
-            //part = car.getPart(type),
-            //var btnID = 'div#RepairShop div#drivetrain button#rb' + Drivetrain.strFromType(type),
-                //$(btnID).css({'opacity':'0.45', 'cursor':'default'}).off();
-            //$('div#RepairShop div#drivetrain progress#' + 'pb' + str).attr('value', part.getPercent() );
+            var part = car._dt.getPartType(type);
+            
+            if(part !== null){
+                var btnID = 'div#RepairShop div#drivetrain button#rb' + Drivetrain.strFromType(type);
+                
+                $(btnID).css({'opacity':'0.45', 'cursor':'default'}).off();                
+                $('div#RepairShop div#drivetrain progress#pb' + str).attr('value', part.getPercent() );
+            }
         }
         //Garage.save();
     }

@@ -37,14 +37,27 @@ function divStatBar(){
 	margin: 8px;
 	margin-top: 8em;
 	top: 20%;
-}
+}/*
+< divMain();?> div
+{php
+    //rule for all div elements inide Main
+    posAbs();
+    defaultColor();
+?>
+    background-color:grey;
+	top:40%;
+    width:
+}*/
 <?php divMain();?> div#menuLeft
 {<?php
     posAbs();
     defaultColor();
 ?>
+    background-color:grey;
 	left:5%;
 	top:40%;
+    width:20%;
+    height:50%;
 }
 <?php divMain();?> img#homeImg
 {<?php
@@ -59,8 +72,11 @@ function divStatBar(){
     posAbs();
     defaultColor();
 ?>
+    background-color:grey;
 	right:5%;
 	top:40%;
+    width:20%;
+    height:50%;
 }
 <?php divMain();?> div button
 {<?php
@@ -68,15 +84,16 @@ function divStatBar(){
     defaultColor();
     fontBold();
     cursorPtr();
-    css::size('15em', '15em');
+    css::size('100%', '50%');
 ?>
 }
 /* Stat Bar Game HUD */
 <?php divStatBar();?>
 {<?php
     posAbs();
-    css::size('100%', '5%');
+    css::size('96%', '20px');   //height needs to be hard coded, or funky effects happen with the text
 ?>
+    background-color:red;
 	top:20%;
 	left:2%;
 	
@@ -86,13 +103,14 @@ function divStatBar(){
 
 	color:white;
 	/*font-weight: bold;
-	font-size:1.2em;*/
+	font-size:1rem;*/
 }
 <?php divStatBar();?> label
 {<?php
     posAbs();
 ?>
     width:25%;
+    font-size:1em;
 }
 <?php divStatBar();?> label#money{left:0%;}
 <?php divStatBar();?> label#tokens{left:25%;}

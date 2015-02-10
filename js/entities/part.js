@@ -51,7 +51,7 @@ function carPart(carPrice, partType){   //partType
         getPrice:function(){
             //returns the price of this part, based on repairs and the tier
             var ret = this._price * (this._repaired ? 1.75 : 1) * this._stage;
-            console.log(ret);
+            //console.log(ret);
             return ret;
         },
         //getInstallPrice:function(){
@@ -64,7 +64,7 @@ function carPart(carPrice, partType){   //partType
         getRepairPrice:function(){
             //price the user pays for repairs
             var ret = this._price * 0.75;
-            console.log(ret);
+            //console.log(ret);
             return ret;
         },
         getLocalPath:function(){
@@ -75,8 +75,13 @@ function carPart(carPrice, partType){   //partType
             //return ROOT_DIR + this.getLocalPath();
         //},
         repair:function(){
+            console.log('repair part!');
             if(!this._repaired){
-                this._repaired = true;
+                var p = this.getRepairPrice();
+                //if(userstats.moeny >= p){
+                    this._repaired = true;
+                    //userStats.moeny -= p;
+                //}
             }
             return this._repaired;
         },
@@ -230,7 +235,8 @@ var Drivetrain = {
                 }
             },
             upgradePart:function(type){
-                console.log('upgradeing part of type:');
+                //returns the stage of the part being upgraded
+                //console.log('upgradeing part of type:');
                 switch(type){
                     case(Drivetrain.TYPE.engine):
                         this._engine.upgrade();
@@ -246,23 +252,24 @@ var Drivetrain = {
                     break;
                     //fuel:
                     default:
-                        console.log('unknow type: ' + type.toString() );
+                        console.log('attempting to upgrade unknown type: ' + type.toString() );
                     break;
                 }
+                return false;
             },
             repairPart:function(type){
                 switch(type){
                     case(Drivetrain.TYPE.engine):
-                        this._engine.repair();
+                        return this._engine.repair();
                     break;
                     case(Drivetrain.TYPE.trans):
-                        this._trans.repair();
+                        return this._trans.repair();
                     break;
                     case(Divetrain.TYPE.axel):
-                        this._axel.repair();
+                        return this._axel.repair();
                     break;
                     case(Drivetrain.TYPE.exhaust):
-                        this._exhaust.repair();
+                        return this._exhaust.repair();
                     break;
                     //fuel:
                     default:
@@ -271,23 +278,24 @@ var Drivetrain = {
                 }
             },
             getCondition:function(){
-                //returns the condition as a value butween 0.0-1.0
+                //returns the condition as a value between 0.0-1.0
                 var ret = 0;
                 ret += this._engine._repaired ? 1 : 0;
                 ret += this._trans._repaired ? 1 : 0;
                 ret += this._axel._repaired ? 1 : 0;
                 ret += this._exhaust._repaired ? 1 : 0;
-                    //console.log('val: ' + ret.tooString() );
+                //console.log('val: ' + ret.tooString() );
                 return ret * 0.25;
             },
             getCondBF:function(){
-                //returns the state of each part as a bitfield
+                //returns the state of each part as a bitfield,
+                //used for save vehicles data
                 var ret = 0;
                 ret = (this._engine._repaired ? 0x8 : 0) |
                     (this._trans._repaired ? 0x4 : 0) |
                     (this._axel._repaired ? 0x2 : 0) |
                     (this._exhaust._repaired ? 0x1 : 0);
-                    //console.log('val: ' + ret.tooString() );
+                //console.log('val: ' + ret.tooString() );
                 return ret;
             }
         };
