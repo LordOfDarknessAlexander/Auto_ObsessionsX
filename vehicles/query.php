@@ -27,8 +27,9 @@ require_once '../include/dbConnect.php';  //sql database connection
 function getUserCarFromID($carID){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
+    $userID = 'user' . strval(0);    //$_SESSION['userID'];
     $res = $aoUsersDB->query(
-        "SELECT * FROM user0 WHERE car_id = $carID"
+        "SELECT * FROM $userID WHERE car_id = $carID"
     );
     if($res){
         if(mysqli_num_rows($res) != 0){
@@ -77,7 +78,35 @@ function getCarFromID($carID){
         echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
     }
 }
+function getUserCars(){
+    //selects all vehicles the user owns, returning it as a JSON array
+    global $aoUsersDB;
+    $userID = 'user' . strval(0);   //$_SESSION['userID'];
+    //$res = $aoUsersDB->query(
+        //"SELECT * FROM $userID"
+    //);
+    //if($res){
+        //$ret = array();
+        
+        //while($row = mysqli_fetch_array($res) ){
+            //$car = Vehicle::fromArray($row);
+            //$ret[] = $car->toJSON();
+        //}
+        //else{ 
+            //echo "<h2>System Error</h2>
+            //<p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
+            //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
+        //}
+        //echo json_encode($ret);
+        //mysqli_free_result($res);
+    //}
+    //else{   //The vehicle is already registered
+        //echo "<p class='error'>User: has no entries in database</p>";
+    //}
+}
+
 $q = '';
+
 if(isset($_POST) && !empty($_POST) ){
     $carID = $_POST['carID'];
     //validate value
@@ -113,30 +142,4 @@ else{   //The vehicle is already registered
     echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
 }
 */
-function getUserCars(){
-    //selects all vehicles the user owns, returning it as a JSON array
-    global $aoUsersDB;
-    //$result = $aoUsersDB->query(
-        //"SELECT * FROM user$userID"
-    //);
-    //if($result){
-        //$ret = array();
-        
-        //if(mysqli_num_rows($result) != 0){
-            //$data = $result->fetch_assoc();//@mysqli_query($CARS.$con, $q); // Run the query
-            //$car = Vehicle::fromArray($data);
-            //$ret[] = echo $car->toJSON();
-        //}
-        //else{ 
-            //echo "<h2>System Error</h2>
-            //<p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
-            //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
-        //}
-        //echo json_encode($ret);
-        //mysqli_free_result($result);
-    //}
-    //else{   //The vehicle is already registered
-        //echo "<p class='error'>User: has no entries in database</p>";
-    //}
-}
 ?>
