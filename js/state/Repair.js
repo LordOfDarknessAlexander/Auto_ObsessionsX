@@ -303,8 +303,8 @@ function upgradeDT(obj){
             }
             $('div#RepairShop div#drivetrain progress#' + 'pb' + str).attr('value', part.getPercent() );
         }
-        //]
-        //Garage.save();    //save updates to user vehicles
+        //
+        Garage.save();    //save updates to user vehicles
     }
 }
 function repairDT(obj){
@@ -320,12 +320,13 @@ function repairDT(obj){
             var part = car._dt.getPartType(type);
             
             if(part !== null){
-                var btnID = 'div#RepairShop div#drivetrain button#rb' + Drivetrain.strFromType(type);
+                var str = Drivetrain.strFromType(type);
+                var btnID = 'div#RepairShop div#drivetrain button#rb' + str;
                 
                 $(btnID).css({'opacity':'0.45', 'cursor':'default'}).off();                
                 $('div#RepairShop div#drivetrain progress#pb' + str).attr('value', part.getPercent() );
             }
         }
-        //Garage.save();
+        Garage.save();
     }
 }

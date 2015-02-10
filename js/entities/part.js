@@ -190,7 +190,7 @@ var Drivetrain = {
             _exhaust:carPart(carPrice * 0.12, this.TYPE.exhaust),
             //_fuel:carPart(carPrice * 0.12, dt.fuel),
             //
-            asBitfield:function(){
+            getBits:function(){
                 //stores this vehicles upgrades as a 4 byte int
                 //0x0000 0000 {r,r,r,F}{Ex,DA,T,E}
                 var ret = (this._engine._stage << 12) |
@@ -265,7 +265,7 @@ var Drivetrain = {
                     case(Drivetrain.TYPE.trans):
                         return this._trans.repair();
                     break;
-                    case(Divetrain.TYPE.axel):
+                    case(Drivetrain.TYPE.axel):
                         return this._axel.repair();
                     break;
                     case(Drivetrain.TYPE.exhaust):
@@ -287,7 +287,7 @@ var Drivetrain = {
                 //console.log('val: ' + ret.tooString() );
                 return ret * 0.25;
             },
-            getCondBF:function(){
+            getRepairBits:function(){
                 //returns the state of each part as a bitfield,
                 //used for save vehicles data
                 var ret = 0;

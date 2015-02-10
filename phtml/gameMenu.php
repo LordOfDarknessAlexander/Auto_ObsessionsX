@@ -1,13 +1,8 @@
-<div id="gameMenu">
+<div id='gameMenu'>
     <!--Root Game Menu, hub for page navigation-->
-
-     <h1>My Home</h1>
-     <!--HUD ---->
-  <?php include("include/statBar.php"); ?>
-  
-   
-   
-  
+    <h1>My Home</h1>
+    <!--HUD ---->
+<?php include 'include/statBar.php';?>  
     <img id='homeImg' src='images\\garageEmpty.png'>
     <div id='menuLeft'>
         <button id='myCars'>My Garage</button><br>

@@ -94,10 +94,10 @@ function Vehicle(Name, Make, Year, Price)
 		{	//returns a constant object representing completion of upgreades,
 			//values in range [0.0,1.0]
 			return {
-				_driveterrain:0.15,	//this._dt.getPercentAvg(),
-				_body:0.23,			//this._body.completion()
-				_interior:0.62,
-				_docs:0.73
+				_driveterrain:this._dt !== null ? this._dt.getPercentAvg() : 0.0,
+				_body:this._body !== null ? this._body.getPercentAvg() : 0.23,			//this._body.completion()
+				_interior:this._interior !== null ? this._interior.getPercentAvg() : 0.62,
+				_docs:this._docs !== null ? this._docs.getPercentAvg() : 0.73
 			};
 		},
 		displayInfo : function(){
@@ -174,10 +174,23 @@ function Vehicle(Name, Make, Year, Price)
 				_price : this._price,
 				//condition : this.condition.toString(),
 				//originality : this.originality.toString(),
-                _parts:this._parts
+                _parts:this._parts,
+                _dt:this._dt !== null ? this._dt.getBits() : 0,
+                _body:this._body !== null ? this._body.getBits() : 0,
+                _interior:this._interior !== null ? this._interior.getBits() : 0,
+                _docs:this._docs !== null ? this._docs.getBits() : 0,
+                _repairs:this.getRepairBitfield()
 				//_info: this.getIno(),
 			};
 		},
+        getRepairBitfield:function(){
+            var ret = ( (this._dt !== null ? this._dt.getRepairBits() : 0) << 12) |
+            ( (this._body !== null ? this._body.getRepairBits() : 0) << 8) |
+            ( (this._interior !== null ? this._interior.getRepairBits() : 0) << 4) |
+            ( (this._docs !== null ? this._docs.getRepairBits() : 0) << 0);
+            //console.log(ret.toString());
+            return ret;
+        },
         hasPart:function(partType){
             //determine if this vehicle has previously recieved an upgrade of type 'partType'
             var len = this._parts.length;
