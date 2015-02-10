@@ -57,18 +57,13 @@ var Garage = {
         //make server calls(using ajax) to serialize
         //user vehicles saved to database, so that vehicles
         //need only be created once, instead of making server calls all the time to update cars
-        /*var dataStr = '';
+        /*var dataStr = JSON.stringify({carID:24577});
         //alert('calling ajax');
-        //var jqxhr = $.post({
-            //url:LOCAL_HOST + 'vehicles/query.php',
-            //dataType:'json',
-            //data:dataStr
-        //}
         var jqxhr = $.ajax({
             type:'POST',
             url:getHostPath() + 'vehicles/query.php',
             dataType:'json',
-            data:dataStr
+            data:{carID:24577}
         }).done(function(data){
             //the response string is converted by jquery into a Javascript object!
             if(data === null){

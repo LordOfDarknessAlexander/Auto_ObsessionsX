@@ -82,9 +82,9 @@ class Vehicle
     public function toJSON(){
         //returns json representation of the vehicle data, for transfer over internet
         //Fix:accessing object values doesn't work!
-        return '{"data":"this is data!"}';
+        //return '{"data":"this is data!"}';
         //'{"make": "", "year":"", "name":"", "info":"", "price":""}';
-        //$this->_make;//, "year":"'.$this->_year.'", "name":"'.$this->_name.'", "info":"'.$this->_info.'", "price":"'.$this->_price.'"';
+        return '{"id":' . strval($this->_id) . ', "make":"' . $this->_make . '", "year":' . strval($this->_year) . ', "name":"' . $this->_model . '", "info":"' . $this->_info . '", "price":' . strval($this->_price) . '}';
     }
     public function applyUpgrades(){
         //if this vehicle is in the users inventory/garage, apply upgrades
