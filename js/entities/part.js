@@ -273,7 +273,7 @@ var Drivetrain = {
                     break;
                     //fuel:
                     default:
-                        console.log('unknow type: ' + type.toString() );
+                        console.log('unknown type: ' + type.toString() );
                     break;
                 }
             },

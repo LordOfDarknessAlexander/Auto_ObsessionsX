@@ -22,11 +22,15 @@ SET time_zone = "+00:00";
 --
 CREATE TABLE IF NOT EXISTS `user0` (
     `car_id` int unsigned NOT NULL PRIMARY KEY,
-    `upgrades` int unsigned
+    `drivetrain` int unsigned,
+    `body` int unsigned,
+    `interior` int unsigned,
+    `docs` int unsigned,
+    `repairs` int unsigned
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
 -- Dumping data for table `user0`
 --
-INSERT INTO `user0` (`car_id`, `upgrades`) VALUES
-(16804097, 0),
-(167793153, 0);
+INSERT INTO `user0` (`car_id`, `drivetrain`, `body`, `interior`, `docs`, `repairs`) VALUES
+(24577, 0,0,0,0,0),
+(16798977, 0,0,0,0,0);
