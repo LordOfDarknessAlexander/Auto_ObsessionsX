@@ -19,8 +19,6 @@
 <?php
 require ('config.php'); // Connect to the database
 
-
-
 // This code inserts a record into the users table
 // Has the form been submitted?
 /*
