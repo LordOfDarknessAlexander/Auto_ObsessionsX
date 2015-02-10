@@ -20,7 +20,8 @@ $logged = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 	//connect to database
-	require ('mysqli_connect.php');
+	//require ('mysqli_connect.php');
+	require ('config.php');
 	// Validate the email address:
 	if (!empty($_POST['email'])) 
 	{

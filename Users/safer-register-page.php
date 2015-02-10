@@ -17,7 +17,7 @@
 ?>
 <div id="content"><!-- Start of the login page content. -->
 <?php
-require ('mysqli_connect.php'); // Connect to the database
+require ('config.php'); // Connect to the database
 
 
 

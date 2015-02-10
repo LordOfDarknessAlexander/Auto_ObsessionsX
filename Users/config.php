@@ -1,16 +1,13 @@
 <?php
 //Configuration info
-
 //Database information
 //DB Name
-define('DB_NAME', 'finalpost');
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpass = 'Dante777';
+$db = 'finalpost';
 
-//DB username
-define('DB_USER','root');
-//DB password
-define('DB_PASS','Dante777');
-//DB Host
-define('DB_HOST','localhost');
-
-
+$dbcon = mysqli_connect($dbhost,$dbuser,$dbpass,$db) or die("Could not connect to server");
+mysqli_set_charset($dbcon, 'utf8');
+//mysql_select_db($db);
 ?>

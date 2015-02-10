@@ -50,8 +50,8 @@ echo '</h2>';
 
 //Query the database
 //Query the database
-require ('mysqli_connect.php');
-$q = "SELECT * FROM users WHERE money = 0" ;		
+require ('config.php');
+$q = "SELECT * FROM users WHERE user_id = 1" ;		
 $result = mysqli_query ($dbcon, $q);
 
 //Count the returned rows
