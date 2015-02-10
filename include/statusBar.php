@@ -8,7 +8,7 @@ class StatusBar
         $prestige,  //uint
         $markers; //uint
     
-    public function __construct($moeny, $tokens, $prestige, $markers){  //$upgrades, $repairs
+    public function __construct($money, $tokens, $prestige, $markers){  //$upgrades, $repairs
         $this->money = $money;
         $this->tokens = $tokens;
         $this->prestige = $prestige;
