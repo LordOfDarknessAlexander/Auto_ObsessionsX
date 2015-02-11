@@ -46,17 +46,21 @@ function VehicleFromDB(obj){
             //finished = true;
             return;
         }
-        //finished = true;
-        //ret = Vehicle(data.)
-        //ret = data; //vehicleID;
+//<php
+    //if(DEBUG){?>
+        //log vars for debugging
         //alert('VehicleFromDB():ajax response recieved: ' + JSON.stringify(obj) + ' ' + JSON.stringify(data) );
-        var car = Vehicle(data.name,data.make,data.year,data.price, data.id, data.info);
-        console.log('creating car from database: ' + JSON.stringify(car) );
-        //car.upgrade(userCar.parts);
-        //car.repair(userCar.repairs);//.fromDB(data, obj);
+        //var car = Vehicle(data.name,data.make,data.year,data.price, data.id, data.info);
+        //console.log('creating car from database: ' + JSON.stringify(car) );
+        //car.upgrade(obj.parts);
+        //car.repair(obj.repairs);
         //alert('VehicleFromDB():ajax response recieved, adding vehicle to garage: ' + JSON.stringify(car) );
-        userGarage.push(car);
-        //add element to html
+//<php
+//}
+//else{
+        userGarage.push(Vehicle(data.name,data.make,data.year,data.price, data.id, data.info) );
+//}
+//>
     }).fail(function(jqxhr){
         //call will fail if result is not properly formated JSON!
         alert('ajax call failed! Reason: ' + jqxhr.responseText);

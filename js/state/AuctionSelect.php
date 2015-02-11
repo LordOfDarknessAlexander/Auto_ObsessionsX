@@ -74,30 +74,63 @@ var AuctionSelect =
         //if(guest)
             //this.list.empty();
 		//
+        $.ajax({
+            type:'POST',
+            url:getHostPath() + 'vehicles/query.php?op=asc',
+            dataType:'json',
+            data:'',    //{carID:obj.carID}
+        }).done(function(data){
+            //the response string is converted by jquery into a Javascript object!
+            if(data === null){
+                alert('Error:ajax response returned null!');
+                //finished = true;
+                return;
+            }
+            alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
+            //do stuff
+            var len = data.length;
+            
+            if(len == 0){
+                console.log('AuctionSelect::init(), something went wrong, should have 1 entry per car in database')
+                return;
+            }
+            
+            for(var i = 0; i < len; i++){
+                var carID = data[i].carID,
+                    hasCar = data[i].hasCar;
+                    
+                AuctionSelect.setCarBtn(carID, i, hasCar);
+            }
+        }).fail(function(jqxhr){
+            //call will fail if result is not properly formated JSON!
+            alert('ajax call failed! Reason: ' + jqxhr.responseText);
+            console.log('loading game resources failed, abort!');
+            //finished = true;
+        });
 <?php
 function setCarBtn($args){
     $id = $args[0];
     $i = $args[2];
     //$car = Vehicle::fromArray($args[1]);	//ao.xdbCars[i];
 ?>
-    this.setCarBtn(<?php echo strval($id);?>, <?php echo $i;?>, <?php echo hasCar($id);?>);
+    //this.setCarBtn(<?php echo strval($id);?>, <?php echo $i;?>, <?php echo hasCar($id);?>);
 <?php
 }
 
-$res = $AO_DB->query('SELECT * FROM aoCars');
+//$res = $AO_DB->query('SELECT * FROM aoCars');
 
-if($res){
-    $i = 0;
-    while($row = mysqli_fetch_array($res) ){
-        $id = $row['car_id'];
-        call_user_func('setCarBtn', array($id, $row, $i) );
-        $i++;
-    }
-    mysqli_free_result($res);
-}
-else{
+//if($res){
+    //$i = 0;
+    //while($row = mysqli_fetch_array($res) ){
+        //$id = $row['car_id'];
+        //call_user_func('setCarBtn', array($id, $row, $i) );
+        //$i++;
+    //}
+    //mysqli_free_result($res);
+//}
+//else{
     //no valid enry in database
-}
+//}
 ?>
     //if(loggedIn){
         //auction cars never change, so load only once to

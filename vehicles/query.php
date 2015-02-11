@@ -42,6 +42,37 @@ function hasCar($id){
     
     return $ret;
 }
+function getAuctionCars(){
+    //selects all vehicles the user owns, returning it as a JSON array
+    global $AO_DB;
+    
+    $res = $AO_DB->query(
+        "SELECT * FROM aoCars"
+    );
+    
+    if($res){
+        $cars = array();
+        
+        while($row = mysqli_fetch_array($res) ){
+            $carID = intval($row['car_id']);
+            $cars[] = array(
+                'carID' => $carID,
+                'make' => $row['make'],
+                'year' => intval($row['year']),
+                'model' => $row['model'],
+                'price' => intval($row['price']),
+                'info' => $row['info'],
+                'hasCar' => hasCar($carID)   //does user have this car?
+            );
+        }
+        mysqli_free_result($res);
+        echo json_encode($cars);    //JSON_FORCE_OBJECT);
+    }
+    else{   //The vehicle is already registered
+        //echo "<p class='error'>User: has no entries in database</p>";
+        echo '{"cars":[]}';
+    }
+}
 function getUserCarFromID($carID){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
@@ -129,25 +160,34 @@ function echoUserCars(){
 }
 
 $q = '';
-
-if(isset($_POST) && !empty($_POST) ){
-    $carID = $_POST['carID'];
-    //validate value
-    //echo json_encode($carID);
-    //echo '{"data":' . strval($carID) . '}';
-       //select an individual element with car_id $carID
-    //$q = "SELECT * FROM aoCars WHERE car_id = $carID";
-    $car = getCarFromID($carID);
-    
-    if($car != null){
-        echo $car->toJSON();
-    }
-    else{
-        echo '{}';  //return emtpy object
+if(isset($_GET) && !empty($_GET) ){
+    //args being passed vai the url
+    if(isset($_GET['op']) && $_GET['op'] == 'asc'){
+        getAuctionCars();
+        exit();
     }
 }
+if(isset($_POST) && !empty($_POST) ){
+    if(isset($_POST['carID'])){
+        $carID = $_POST['carID'];
+        //validate value
+        //echo json_encode($carID);
+        //echo '{"data":' . strval($carID) . '}';
+           //select an individual element with car_id $carID
+        //$q = "SELECT * FROM aoCars WHERE car_id = $carID";
+        $car = getCarFromID($carID);
+        
+        if($car != null){
+            echo $car->toJSON();
+        }
+        else{
+            echo '{}';  //return emtpy object
+        }
+    }
+    //other post vars
+}
 else{
-    //no passing any values/filter, return all cars
+    //no passing any values via POST, return all cars
     echoUserCars();
 }
 ?>
