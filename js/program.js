@@ -110,6 +110,44 @@ function setAdBG()
 	jq.adBar.attr('src', src);
 	jq.adBar.show();
 }
+	
+function getHostPath(){
+    var localExecution = true;
+    return localExecution == true ? 'http://localhost/A/'
+            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+}
+function ajax_post(){
+    // Create our XMLHttpRequest object
+    //var dataStr = ''; //args to pass to script
+	 var fn = document.getElementById("fname").value;
+     var ln = document.getElementById("lname").value;
+    //}
+    var jqxhr = $.ajax({
+        type:'POST',
+        url:getHostPath() + 'Users/my_parse_file.php',
+        dataType:'json',
+        data:{fname:fn,lname:ln}
+    }).done(function(data){
+        //the response string is converted by jquery into a Javascript object!
+        if(data === null){
+            alert('Error:ajax response returned null!');
+            return;
+        }
+        alert('ajax response received:' + JSON.stringify(data) );
+        //access and set values in the document's html page
+		/*
+        $('div#statBar label#money').text(data.money);
+        $('div#statBar label#tokens').text(data.tokens);
+        $('div#statBar label#prestige').text(data.prestige);
+        $('div#statBar label#m_marker').text(data.m_marker);*/
+    }).fail(function(jqxhr){
+        //call will fail if result is not properly formatted JSON!
+        alert('ajax call failed! Reason: ' + jqxhr.responseText);
+        //throw exception, game can't work without user stats
+    });
+    
+}
+
 //$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed
 //function loadGarage(){
@@ -505,7 +543,7 @@ Auction.sold = function()
 		}
 		//userSave();
 		Garage.save();
-	
+		ajax_post();
 		
 	}
 	assetLoader.sounds.bg.pause();
