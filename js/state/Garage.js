@@ -28,6 +28,43 @@ function getHostPath(){
     return localExecution == true ? 'http://localhost/Auto_ObsessionsX/'
             : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 }
+function VehicleFromDB(obj){
+    //creates an unupgraded/repaired car from the database
+    //var finished = false;
+    //var ret = null;
+    
+    var jqxhr = $.ajax({
+        type:'POST',
+        //async:false,
+        url:getHostPath() + 'vehicles/query.php',
+        dataType:'json',
+        data:{carID:obj.carID}
+    }).done(function(data){
+        //the response string is converted by jquery into a Javascript object!
+        if(data === null){
+            alert('Error:ajax response returned null!');
+            //finished = true;
+            return;
+        }
+        //finished = true;
+        //ret = Vehicle(data.)
+        //ret = data; //vehicleID;
+        alert('VehicleFromDB():ajax response recieved: ' + JSON.stringify(obj) + ' ' + JSON.stringify(data) );
+        var car = Vehicle.fromDB(data, obj);
+        //alert('VehicleFromDB():ajax response recieved: ' + car.toJSON() );
+        //userGarage.push(Vehicle.fromDB(data, obj) );
+    }).fail(function(jqxhr){
+        //call will fail if result is not properly formated JSON!
+        alert('ajax call failed! Reason: ' + jqxhr.responseText);
+        //finished = true;
+    });
+    
+    //while(!finished){
+        //wait for ajax call to complete
+    //}
+    //alert(JSON.stringify(ret) );
+    //return ret;
+}
 var Garage = {
 	_curCarIndex : null,
 	//_selCarIndex : null,	//user's selected car index
@@ -57,13 +94,15 @@ var Garage = {
         //make server calls(using ajax) to serialize
         //user vehicles saved to database, so that vehicles
         //need only be created once, instead of making server calls all the time to update cars
-        /*var dataStr = JSON.stringify({carID:24577});
+        //var dataStr = JSON.stringify({carID:24577});
         //alert('calling ajax');
+        
+        //userGarage.clear();
         var jqxhr = $.ajax({
             type:'POST',
             url:getHostPath() + 'vehicles/query.php',
             dataType:'json',
-            data:{carID:24577}
+            data:'' //{carID:24577}
         }).done(function(data){
             //the response string is converted by jquery into a Javascript object!
             if(data === null){
@@ -71,10 +110,14 @@ var Garage = {
                 return;
             }
             alert('ajax response recieved:' + JSON.stringify(data) );
+            for(var i = 0; i < data.length; i++){
+                var obj = data[i];
+                VehicleFromDB(obj);
+            }
         }).fail(function(jqxhr){
             //call will fail if result is not properly formated JSON!
             alert('ajax call failed! Reason: ' + jqxhr.responseText);
-        });*/
+        });
     //}
     //else{  //playing locally as guest, make calls in JavaScript
         //
