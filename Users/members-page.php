@@ -78,38 +78,43 @@ else
 
 <div id="mid-left-col">
 <script>
+function getHostPath(){
+    var localExecution = true;
+    return localExecution == true ? 'http://localhost/A/'
+            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+}
 function ajax_post(){
     // Create our XMLHttpRequest object
-    /*var dataStr = ''; //args to pass to script
-    //alert('calling ajax');
-    //var jqxhr = $.post({
-        //url:LOCAL_HOST + 'vehicles/query.php',
-        //dataType:'json',
-        //data:dataStr
+    //var dataStr = ''; //args to pass to script
+	 var fn = document.getElementById("fname").value;
+     var ln = document.getElementById("lname").value;
     //}
     var jqxhr = $.ajax({
         type:'POST',
-        url:getHostPath() + 'users/my_parse_file.php',
+        url:getHostPath() + 'Users/my_parse_file.php',
         dataType:'json',
-        data:dataStr
+        data:{fname:fn,lname:ln}
     }).done(function(data){
         //the response string is converted by jquery into a Javascript object!
         if(data === null){
             alert('Error:ajax response returned null!');
             return;
         }
-        alert('ajax response recieved:' + JSON.stringify(data) );
+        alert('ajax response received:' + JSON.stringify(data) );
         //access and set values in the document's html page
-        //$('div#statBar label#money').text(data.money);
-        //$('div#statBar label#toekns').text(data.tokens);
-        //$('div#statBar label#presteige').text(data.prestiege);
-        //$('div#statBar label#m_marker').text(data.m_marker);
+		/*
+        $('div#statBar label#money').text(data.money);
+        $('div#statBar label#tokens').text(data.tokens);
+        $('div#statBar label#prestige').text(data.prestige);
+        $('div#statBar label#m_marker').text(data.m_marker);*/
     }).fail(function(jqxhr){
-        //call will fail if result is not properly formated JSON!
+        //call will fail if result is not properly formatted JSON!
         alert('ajax call failed! Reason: ' + jqxhr.responseText);
         //throw exception, game can't work without user stats
-    });*/
+    });
     //using XMLHTTPRequest in old and inferior interface, use jquery, ajax, get and post methods instead!
+	
+	/*
     var hr = new XMLHttpRequest();
     // Create some variables we need to send to our PHP file
     var url = "my_parse_file.php";
@@ -128,7 +133,7 @@ function ajax_post(){
     }
     // Send the data to PHP now... and wait for response to update the status div
     hr.send(vars); // Actually execute the request
-    document.getElementById("status").innerHTML = "processing...";
+    document.getElementById("status").innerHTML = "processing...";    */
 }
 </script>
 
