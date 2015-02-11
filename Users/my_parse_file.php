@@ -12,12 +12,14 @@ require ('config.php');
 //if($_POST["fname"] && $_POST["lname"] )/
 if( isset( $_POST) )
 {
-	if (!empty($_POST['fname']) && !empty($_POST['lname']))
+	if (!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['money']) && !empty($_POST['tokens']))
 	{
 		$fname = $_POST["fname"];
 		$lname = $_POST["lname"];
+		$money = $_POST["money"];
+		$tokens = $_POST["tokens"];
 		//$q = 'UPDATE users SET fname="Learning JAVA" WHERE user_id=1';
-		$q = "UPDATE users SET fname='$fname', lname='$lname' WHERE user_id=1";
+		$q = "UPDATE users SET fname='$fname', lname='$lname', money='$money', tokens='$tokens' WHERE user_id=1";
 		//echo ' selected="selected"';
 	//	echo 'Thank you '. $_POST['fname'] . ' ' . $_POST['lname'] . ', says the PHP file';
 		
@@ -30,13 +32,12 @@ if( isset( $_POST) )
 		else
 		{
 		  echo '{"fname":"' . $fname . '", "lname":"' . $lname . '"}';
-		 // $q = "UPDATE users SET fname=$fname WHERE user_id=1";
-		  // $q = "UPDATE users SET fname=$fname VALUES ('$fname') WHERE user_id=1";
-		 // $q = 'UPDATE FROM users SET fname=$fname VALUES ('$fname')';
+	
 		}
 		mysqli_close($dbcon);	
 		
 	}
+
 }
 else
 {
