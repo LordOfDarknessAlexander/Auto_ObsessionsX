@@ -23,11 +23,6 @@ var userGarage = [
 var //Garage._curCarIndex = null,	//user's currect car index
 	selCarIndex = null;
 //
-function getHostPath(){
-    var localExecution = true;
-    return localExecution == true ? 'http://localhost/Auto_ObsessionsX/'
-            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-}
 function VehicleFromDB(obj){
     //creates an unupgraded/repaired car from the database
     //var finished = false;

@@ -80,7 +80,7 @@ else
 <script>
 function getHostPath(){
     var localExecution = true;
-    return localExecution == true ? 'http://localhost/A/'
+    return localExecution == true ? 'http://localhost/Auto_ObsessionsX/'
             : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 }
 function ajax_post(){

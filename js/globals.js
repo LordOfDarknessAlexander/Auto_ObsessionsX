@@ -180,3 +180,8 @@ function resetStates()
 {
 	appState = GAME_MODE.RUNNING;
 }
+function getHostPath(){
+    var localExecution = true;
+    return localExecution == true ? 'http://localhost/Auto_ObsessionsX/'
+            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+}
