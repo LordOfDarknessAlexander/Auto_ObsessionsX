@@ -31,9 +31,9 @@ function getHostPath(){
 function VehicleFromDB(obj){
     //creates an unupgraded/repaired car from the database
     //var finished = false;
-    //var ret = null;
-    
-    var jqxhr = $.ajax({
+    //var ret = null;    
+    //var jqxhr = 
+    return $.ajax({
         type:'POST',
         //async:false,
         url:getHostPath() + 'vehicles/query.php',
@@ -49,13 +49,18 @@ function VehicleFromDB(obj){
         //finished = true;
         //ret = Vehicle(data.)
         //ret = data; //vehicleID;
-        alert('VehicleFromDB():ajax response recieved: ' + JSON.stringify(obj) + ' ' + JSON.stringify(data) );
-        var car = Vehicle.fromDB(data, obj);
-        //alert('VehicleFromDB():ajax response recieved: ' + car.toJSON() );
-        //userGarage.push(Vehicle.fromDB(data, obj) );
+        //alert('VehicleFromDB():ajax response recieved: ' + JSON.stringify(obj) + ' ' + JSON.stringify(data) );
+        var car = Vehicle(data.name,data.make,data.year,data.price, data.id, data.info);
+        console.log('creating car from database: ' + JSON.stringify(car) );
+        //car.upgrade(userCar.parts);
+        //car.repair(userCar.repairs);//.fromDB(data, obj);
+        //alert('VehicleFromDB():ajax response recieved, adding vehicle to garage: ' + JSON.stringify(car) );
+        userGarage.push(car);
+        //add element to html
     }).fail(function(jqxhr){
         //call will fail if result is not properly formated JSON!
         alert('ajax call failed! Reason: ' + jqxhr.responseText);
+        console.log('loading game resources failed, abort!');
         //finished = true;
     });
     
@@ -67,6 +72,7 @@ function VehicleFromDB(obj){
 }
 var Garage = {
 	_curCarIndex : null,
+    _carViewList: $('div#carListView ul#carBtns'),
 	//_selCarIndex : null,	//user's selected car index
 	//toJSON:function(){//serialize Garage._curCarIndex},
 	//fromJSON:function(){this._curCarIndex = index;},
@@ -74,6 +80,10 @@ var Garage = {
 	{	//called to load assests and initialize private vars
 		//delete userGarage;
 		selCarIndex = null;
+        
+        //var list = $('div#carListView ul#carBtns');
+		Garage._carViewList.empty();	//remove any buttons if there were any previously
+		
 		//init cars from local storage, or parsed from database on server
 		//add buttons for each car avaiable in garage
 		//var carList = $('#Garage'.children('ul#carBtns');
@@ -88,47 +98,15 @@ var Garage = {
             //Garage._curCarIndex = parseInt(JSON.parse(Storage.local._curCarIndex) );
             //alert("current car is at index:" + Garage._curCarIndex.toString() );
         //}
-//<?php
-    //if(loggedIn){
-        //TODO:Fix, this worked last commit!
-        //make server calls(using ajax) to serialize
-        //user vehicles saved to database, so that vehicles
-        //need only be created once, instead of making server calls all the time to update cars
-        //var dataStr = JSON.stringify({carID:24577});
-        //alert('calling ajax');
-        
-        //userGarage.clear();
-        var jqxhr = $.ajax({
-            type:'POST',
-            url:getHostPath() + 'vehicles/query.php',
-            dataType:'json',
-            data:'' //{carID:24577}
-        }).done(function(data){
-            //the response string is converted by jquery into a Javascript object!
-            if(data === null){
-                alert('Error:ajax response returned null!');
-                return;
-            }
-            alert('ajax response recieved:' + JSON.stringify(data) );
-            for(var i = 0; i < data.length; i++){
-                var obj = data[i];
-                VehicleFromDB(obj);
-            }
-        }).fail(function(jqxhr){
-            //call will fail if result is not properly formated JSON!
-            alert('ajax call failed! Reason: ' + jqxhr.responseText);
-        });
-    //}
-    //else{  //playing locally as guest, make calls in JavaScript
-        //
-    //}
-//?>
 		this.load();
         
-		var list = $('div#carListView ul#carBtns');
-		list.empty();	//remove any buttons if there were any previously
-		
-		if(Garage._curCarIndex === null){
+		//this.initUI();
+		//appState = GAME_MODE.GARAGE;
+	},
+    initUI:function(){
+        //init user interface elements, current and selected cars and the car buttons
+        console.log('calling initUI()');
+        if(Garage._curCarIndex === null){
 			$('div#Garage #userCar').hide();
         }
 		else{
@@ -140,50 +118,8 @@ var Garage = {
 		else{
 			this.setSelectCar({index:selCarIndex});
         }
-		if(userGarage.length == 0)
-		{	//empty grage so display img instead of buttons
-			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
-			list.append(src);
-	
-			$('div#Garage #select').hide();
-			$('div#Garage #viewCar').hide();
-		}
-		else
-		{
-			//$('div#Garage #userCar').show();
-			//$('div#selectedCar').show();
-			$('div#Garage #select').show();
-			$('div#Garage #viewCar').show();
-						
-			for(var i = 0; i < userGarage.length; i++)
-			{	//add buttons to list
-				var car = userGarage[i];
-				src = car.getFullPath();	//"\'images/vehicle.jpg\'";
-				list.append("<li>" +	//id = \'" + i "\'>"
-				"<button id=\'carSelBtn" + i + "\'>" +
-				//"<label id=\'carName\'>" + car.getFullName() + "</label>" +
-				//"<label id=\'year\'></label>" +
-				//"<label id=\'name\'></label>" +
-//				"<label id=\'carInfo\'>" + car.getInfo() + "</label>" +
-				//progress bar max default is 1.0
-				//
-				//"<div id=\'pbLabels'>" +
-					//"<label id=\'dt\'>drivetrain</label>" +
-					//"<label id=\'body\'>body</label>" +
-					//"<label id=\'interior\'>interior</label>" +
-					//"<label id=\'docs\'>documentation</label>" +
-				//"</div>" +			
-				//
-				"<img src=\'" + src + "\'></button>" +
-				"</li>"); //+ (i > 0 && i % 4 == 0) ? "<br>" : "");
-				
-				$('#carSelBtn' + i).click({index:i}, this.setSelectCar);	//this.setSelectedCar);
-				//this.setCarBtnText(i);
-			}
-		}
-		//load interface
-		//appState = GAME_MODE.GARAGE;
-	},
+        this.initCarView();
+    },
 	getCurrentCar : function()
 	{	//returns a vehicle, if one is selected or null
 		return (Garage._curCarIndex !== null && userGarage.length != 0) ? userGarage[Garage._curCarIndex] : null;
@@ -212,7 +148,57 @@ var Garage = {
         //}
     },
     load:function(){
-        if(Storage.local !== null){
+        //loads user's car data, from database onserver, or local storage if playing locally
+//<?php
+    //if(loggedIn){
+        //make server calls(using ajax) to serialize
+        //user vehicles saved to database, so that vehicles
+        //need only be created once, instead of making server calls all the time to update cars
+        //var dataStr = JSON.stringify({carID:24577});
+        //alert('calling ajax');
+        
+        userGarage = [];    //clear previous entries
+        
+        var jqxhr = $.ajax({
+            type:'POST',
+            url:getHostPath() + 'vehicles/query.php',
+            dataType:'json',
+            data:'' //{carID:24577}
+        }).done(function(data){
+            //the response string is converted by jquery into a Javascript object!
+            if(data === null){
+                alert('Error:ajax response returned null!');
+                return;
+            }
+            alert('ajax response recieved:' + JSON.stringify(data) );
+            
+            if(data.length == 0){
+                //exit early is user has no cars
+                console.log('user has no cars!, Buy some, right now!');
+                return;
+            }
+            var args = [];
+            
+            for(var i = 0; i < data.length; i++){
+                var obj = data[i];
+                args.push(VehicleFromDB(obj) );
+            }
+            $.when.apply($, args).done(function(){
+                //the UI is dependant on the users garage being loaded,
+                //so init ui after all ajax calls have completed
+                Garage.initUI();
+            }).fail(function(){
+                console.log('loading game resources failed, abort!');
+            });
+        }).fail(function(jqxhr){
+            //call will fail if result is not properly formated JSON!
+            alert('ajax call failed! Reason: ' + jqxhr.responseText);
+            console.log('loading game resources failed, abort!');
+        });
+//<php
+//}
+//else{  //playing locally as guest, make calls in JavaScript
+        /*if(Storage.local !== null){
             if('userGarage' in Storage.local){
                 cars = JSON.parse(Storage.local['userGarage']);
                 //load each saved car
@@ -229,7 +215,9 @@ var Garage = {
                 Garage._curCarIndex = parseInt(JSON.parse(Storage.local._curCarIndex) );
                 console.log('current car is at index:' + Garage._curCarIndex.toString() );
             }
-        }
+        }*/
+//}
+//>
     },
 	save : function()
 	{	//saves garage and current car to local storage
@@ -369,7 +357,50 @@ var Garage = {
 		//btn.children('label#make').text(car.make);
 		//btn.children('label#year').text(car.year);
 		//btn.children('label#name').text(car.name);
-	}
+	},
+    initCarView:function(){
+        //displays cars in the users garage 
+        if(userGarage.length == 0)
+		{	//empty grage so display img instead of buttons
+			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
+			list.append(src);
+	
+			$('div#Garage #select').hide();
+			$('div#Garage #viewCar').hide();
+		}
+		else
+        {	//$('div#Garage #userCar').show();
+			//$('div#selectedCar').show();
+			$('div#Garage #select').show();
+			$('div#Garage #viewCar').show();
+						
+			for(var i = 0; i < userGarage.length; i++)
+			{	//add buttons to list
+				var car = userGarage[i];
+				src = car.getFullPath();	//"\'images/vehicle.jpg\'";
+				this._carViewList.append("<li>" +	//id = \'" + i "\'>"
+				"<button id=\'carSelBtn" + i + "\'>" +
+				//"<label id=\'carName\'>" + car.getFullName() + "</label>" +
+				//"<label id=\'year\'></label>" +
+				//"<label id=\'name\'></label>" +
+//				"<label id=\'carInfo\'>" + car.getInfo() + "</label>" +
+				//progress bar max default is 1.0
+				//
+				//"<div id=\'pbLabels'>" +
+					//"<label id=\'dt\'>drivetrain</label>" +
+					//"<label id=\'body\'>body</label>" +
+					//"<label id=\'interior\'>interior</label>" +
+					//"<label id=\'docs\'>documentation</label>" +
+				//"</div>" +			
+				//
+				"<img src=\'" + src + "\'></button>" +
+				"</li>"); //+ (i > 0 && i % 4 == 0) ? "<br>" : "");
+				
+                //$(Garrage._carViewList, 'li#' + i.toString() + ' button').click({index:i}, this.setSelectCar);	//this.setSelectedCar);
+				$('#carSelBtn' + i).click({index:i}, this.setSelectCar);	//this.setSelectedCar);
+			}
+		}
+    }
 };
 //Garage.save();
 var CarView = {

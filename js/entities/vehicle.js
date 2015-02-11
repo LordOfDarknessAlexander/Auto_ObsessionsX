@@ -33,8 +33,13 @@ function carStats()
 		carDocs:carDocs(),
 	};
 }*/
-function Vehicle(Name, Make, Year, Price)
+function Vehicle(Name, Make, Year, Price, carID, carInfo)
 {
+    if(carID === null || carID === 'undefined')
+        carID = 0x0;
+    if(carInfo === null || carInfo === 'undefined')
+        carInfo = '';
+    
 	this.fromJSON = function(str)
 	{	//'static' method returning a Vehicle serialized from a JSON string
 		//data object containing the essential struct of a vehicle
@@ -65,7 +70,7 @@ function Vehicle(Name, Make, Year, Price)
 		name : Name,	////node.attr('name'),
 		make : Make,	//node.attr('make'),
 		year : Year,	//parseInt(node.attr('year') ),
-		id : 0x00000000,	//node.attr('id'),
+		id : carID,	//node.attr('id'),
 		//_info: node.text(),
 		_parts : [],	//only retain currently upgraded parts, array is copied
         //_parts:{
@@ -272,6 +277,16 @@ function Vehicle(Name, Make, Year, Price)
             return false;
         }
 	};
+}
+Vehicle.fromDB = function(dbCar, userCar)
+{
+    //console.log('creating car from database');
+    var ret = Vehicle(dbCar.name,dbCar.make,dbCar.year,dbCar.price, dbCar.id, dbCar.info);
+    console.log('creating car from database: ' + JSON.stringify(ret) );
+    //ret.upgrade(userCar.parts);
+    //ret.repair(userCar.repairs);
+    
+    return ret;
 }
 //TEMPORARY
 //xml data base of cars, loaded from server!
