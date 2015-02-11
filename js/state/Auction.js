@@ -79,6 +79,34 @@ var Auction =
 		//endGame = false;
 		
         console.log(index);
+        /*$.ajax({
+            type:'POST',
+            url:getHostPath() + 'vehicles/query.php',
+            dataType:'json',
+            data:{carID:obj.carID}
+        }).done(function(data){
+            //the response string is converted by jquery into a Javascript object!
+            if(data === null){
+                alert('Error:ajax response returned null!');
+                //finished = true;
+                return;
+            }
+            //alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
+            //do stuff
+            var len = data.length;
+            
+            if(len == 0){
+                console.log('AuctionSelect::init(), something went wrong, should have 1 entry per car in database')
+                return;
+            }
+            
+            //Auction._car = Vehicle();
+        }).fail(function(jqxhr){
+            //call will fail if result is not properly formated JSON!
+            alert('ajax call failed! Reason: ' + jqxhr.responseText);
+            console.log('loading game resources failed, abort!');
+            //finished = true;
+        });*/
 		appState = GAME_MODE.AUCTION;
 		auctionStop = false;
 

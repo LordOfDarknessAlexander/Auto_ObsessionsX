@@ -57,11 +57,11 @@ function getAuctionCars(){
             $carID = intval($row['car_id']);
             $cars[] = array(
                 'carID' => $carID,
-                'make' => $row['make'],
-                'year' => intval($row['year']),
-                'model' => $row['model'],
-                'price' => intval($row['price']),
-                'info' => $row['info'],
+                //'make' => $row['make'],
+                //'year' => intval($row['year']),
+                //'model' => $row['model'],
+                //'price' => intval($row['price']),
+                //'info' => $row['info'],
                 'hasCar' => hasCar($carID)   //does user have this car?
             );
         }

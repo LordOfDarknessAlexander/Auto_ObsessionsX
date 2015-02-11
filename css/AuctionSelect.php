@@ -68,14 +68,17 @@ require_once 'ui.php';
 	height:20%;
 }
 
-#asBackButton
+button#asBackBtn
 {
 	background: url('../images/backBtn.png') no-repeat 0 0;
-	color: white;
+    background-size:100% 100%;
 	font-weight: bold;
-	width:150px;
-	height:50px;
+    position:absolute;
+	width:16%;
+	height:8%;
 	cursor:pointer;
+    left:42%;
+    bottom:60%;
 }
 <?php divAS();?> div#carView
 {

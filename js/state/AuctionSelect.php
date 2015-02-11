@@ -27,9 +27,12 @@ var AuctionSelect =
 {	//object representing
 	list : $('div#AuctionSelect div#carView ul#auctionCars'),
     setCarBtn:function(carName, i, hasCar){
-        var btnID = "as" + (i).toString(),
-            liID = "asli" + (i).toString(),
-            labelID = 'infoLabel';
+        var liID = "asli" + (i).toString(),
+            //btnID = "as" + (i).toString(),
+            labelID = 'infoLabel',
+            liName = 'div#AuctionSelect div#carView ul#auctionCars li#' + liID,
+            li = $(liName),
+            btn = $(liName + ' button');
         //<php if(guest){}
             /*var btnStr = "<li id=\'" + liID + "\'>" + 
                 "<img src=\'" + car.getFullPath() + "\'>" +
@@ -42,7 +45,7 @@ var AuctionSelect =
             "</li><br>";
             this.list.append(btnStr);*/
         //}?>
-        var btn = $('#' + btnID);
+        //var btn = $('#' + btnID);
          
         // var hasCar = false;
         
@@ -58,12 +61,13 @@ var AuctionSelect =
 
         if(hasCar)
         {	//display but disable user from entering auction
-            var li = $('#' + liID);
+            //var li = $('#' + liID);
             li.css('opacity', '0.45');
-            btn.off().click(this.denyAuction);
+            btn.off().click(this.denyAuction).css('cursor', 'default');
         }
         else
         {
+            //var carID = btn.attr('id');
             btn.off().click({index:i}, this.initAuction);
             //btn.css('background-image', "url(\'..\\images\\vehicle.jpg");	//car.getFullPath());
         }
@@ -71,11 +75,11 @@ var AuctionSelect =
 	init : function()
 	{	//init buttons base on cars in xml database
 		//appState = GAME_MODE.AUCTION_SElECT;
-        //if(guest)
+        //if(loggedIn)
             //this.list.empty();
 		//
         $.ajax({
-            type:'POST',
+            type:'GET',
             url:getHostPath() + 'vehicles/query.php?op=asc',
             dataType:'json',
             data:'',    //{carID:obj.carID}
@@ -86,7 +90,7 @@ var AuctionSelect =
                 //finished = true;
                 return;
             }
-            alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
+            //alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
             //do stuff
             var len = data.length;
             
@@ -156,7 +160,7 @@ function setCarBtn($args){
 		jq.AuctionSelect.menu.toggle();
 		jq.Auction.menu.toggle();
 		//Auction.setup();
-		Auction.init(i);
+		Auction.init(i);    //id);
 		//Auction.setup();
 	},
 	denyAuction : function()
