@@ -487,7 +487,7 @@ function startGame()
 	
 	setStatBar();
 	setAdBG();
-	
+	ajax_post();
 	switchStates();
 	
 	if(appState == GAME_MODE.RUNNING)
@@ -618,7 +618,7 @@ jq.Auction.homeBtn.click(function()
 	
 	setStatBar();
 	setAdBG();
-	
+	ajax_post();
     setHomeImg();
 	//var car = Garage.getCurrentCar();
 	
