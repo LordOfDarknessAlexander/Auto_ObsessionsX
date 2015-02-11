@@ -25,22 +25,27 @@
 				this.leftAuction = true;
 			}
 			
+			//If the enemy can bid and is still active in the auction increment the bid timer
 			if(!this.canBid && !this.leftAuction)
 			{
 				this.bidTimer++;
-				//console.log(this.bidTimer);
+				//Once the bidTimer has reached the timer cap, allow the enemy to bid again and reset the bid timer
 				if(this.bidTimer >= this.BID_TIMER_CAP)
 				{
 					this.canBid = true;
 					this.bidTimer = 0;
-					//console.log(this.bidTimer);
 				}
 			}
-			//console.log(this.canBid);
 		}
 	};
 }
-function price(bias)
+
+function price(vehiclePrice)
+{
+	//console.log(vehiclePrice * (Math.random() * (1.5 - 0.8)) + 0.8)
+	return vehiclePrice * Math.random() * (1.5 - 0.8 + 0.5) + 0.8;
+}
+/*function price(bias, vehiclePrice)
 {
 	var b = (typeof(bias) == 'undefined' ? 0 : bias);
 	function lerp(Min, Max, t){
@@ -51,5 +56,5 @@ function price(bias)
 		}
 		return Min + (Max - Min) * t;
 	};
-  	return vehiclePrice * lerp(Math.random(0.4, 1.25), bias, Math.random(0.0,1.0) );
-}
+  	return vehiclePrice * lerp(Math.random(0.8, 1.5), bias, Math.random(0.0,1.0));
+}*/

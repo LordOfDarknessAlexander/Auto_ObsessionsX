@@ -345,7 +345,6 @@ var Auction =
 	{	//determine 
 		//upPercentage of vehicle for next bid
 		var upPerc =  0.18 * currentBid;
-		var startBid = vehiclePrice * 0.02;
 		
 		if(!playerWon)
 		{	
@@ -463,7 +462,6 @@ var Auction =
 		//breaks out of the while loop and enemyWinning becomes false
 		while((this.playerWinning) || (this.enemyWinning) && (goingTimer < 660))
 		{
-			console.log(goingTimer);
 			goingTimer++;
 			if((goingTimer > 0) && (goingTimer < 360))
 			{

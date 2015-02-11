@@ -1,23 +1,4 @@
-﻿var _vehiclePrice = 20000;
-var auctions = [];
-
-/*function shuffleArray(array) 
-{	//sort array items
-    var counter = array.length, temp, index;
-    // While there are elements in the array
-    while (counter > 0) 
-    {   // Pick a random index
-        index = Math.floor(Math.random() * counter);
-        // Decrease counter by 1
-        counter--;
-        // And swap the last element with it
-        temp = array[counter];
-        array[counter] = array[index];
-        array[index] = temp;
-       
-    }
-    return array;
-}*/
+﻿var auctions = [];
 
 function auctionGen()
 {
@@ -25,18 +6,11 @@ function auctionGen()
 		
 		//_vehiclePrice : 20000,
 		//Javascript functionality for manage vehicle sales
-		BID_COOLDOWN : 10,
 		MAX_AUCTION_TIME : 1000,
 		//AI cooldown timer
 		_car:null,
-		_bidderCooldown : 0,
-		//temp
-		_bidAmount : 200,
 		_carIndex : 0,
-		//there only needs to be 1 timer to track the closing of the auction
-		_goingTimer : 0,
-		_pGTimer : 0,
-		_currentBid : _vehiclePrice * 0.1,
+		_currentBid : 0,
 		_ai : [],
 		_date:{
 			start:Date.now() * 0.0001,
@@ -51,26 +25,17 @@ function auctionGen()
 			{
 				this._car = userGarage[index];
 				this._carIndex = index;
+				this._currentBid = this._car._price * 0.1;
 				
-				if(this._car != null)
-				{
-					console.log(this._car._price);
-					this._currentBid = this._car._price * 0.1;
-				}
 				//Removing the vehicle here because if we wait until the vehicle sells the player can sell
 				//the vehicle multiple times without collecting the money
 				
-				//Find the vehicle for auction in the player's garage
-				for(var i = 0; i < userGarage.length; ++i)
+				
+				this._ai = [Enemy(price(this._car._price)), Enemy(price(this._car._price)), Enemy(price(this._car._price)), Enemy(price(this._car._price))];
+				for(var i = 0; i < this._ai.length; ++i)
 				{
-					//Once the vehicle has been found, remove it from the array
-					if(userGarage[i].getFullName() === this._car.getFullName())
-					{
-						userGarage.splice(i, 1);
-                        break;  //exit loop after removing car
-					}
+					console.log(i + " bid cap = " + this._ai[i].bidCap);
 				}
-				this._ai = [Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5)))];
 			}
 		},
 		close:function()
@@ -78,7 +43,6 @@ function auctionGen()
 			this._expired = true;
 			this._date.end = Date.now() * 0.0001;
 			this._curTime = 0.0;
-			this._bidderCooldown = 0;
 			while(this._ai.length) { this._ai.pop(); }
 		},
 		update:function(dt)
@@ -86,20 +50,12 @@ function auctionGen()
 			if(!this._expired)
 			{
 				//console.log("Running");
-				//console.log("CurrBid for " + this._car.getFullName() + " is " + this._currentBid);
-				this._bidderCooldown += dt;
+				//console.log(this._currentBid);
 				this._curTime += dt;
 				this.bidTimers();
 				this.enemyBidding();
 				this.currentBidder();
-				this.findEndBidder();
 				this.checkCurrentWinner();
-				
-				if(this._bidderCooldown >= this.BID_COOLDOWN)
-				{	//enemy bid cooldown has refreshed
-					this._enemyCanBid = true;
-					this._bidderCooldown = 0;
-				}
 				
 				if(this._curTime >= this.MAX_AUCTION_TIME)
 				{
@@ -107,7 +63,7 @@ function auctionGen()
 					{
 						if(this._ai[i].winningBid)
 						{
-							console.log("AI " + i + " has won the bid for " + Math.round(this._ai[i].currBid));
+							console.log("AI " + i + " has won the bid for " + Math.round(this._ai[i].currBid) + " Original Price: " + this._car._price);
 						}
 					}
 					console.log("Ending auction");
@@ -124,7 +80,7 @@ function auctionGen()
 			var cleanBtn = $('li#' + liID + ' button#' + btnID);
 			cleanBtn.text("Sold!");
 			cleanBtn.off().click({i:this._carIndex, amt:this._currentBid}, this.cleanUpAuction);
-			this._currentBid = _vehiclePrice * 0.1;
+			this._currentBid = 0;
 			Garage.save();
 		},
 		cleanUpAuction:function(index)
@@ -134,12 +90,12 @@ function auctionGen()
 			userStats.money += Math.round(cash);
 			console.log("Adding " + Math.round(cash));
 			
-			
 			//Find the element that contains the car information/button
 			var i = index.data.i;
 			var liID = "asli" + (i).toString();
 			var carElement = $('li#' + liID);
 
+			userGarage.splice(i, 1);
 			//Remove the element from the page
 			carElement.remove();
 		},
@@ -163,16 +119,15 @@ function auctionGen()
 		{	//determine 
 			//upPercentage of vehicle for next bid
 			var upPerc =  0.18 * this._currentBid;
-			var startBid = this._vehiclePrice * 0.02;
 			for(var i = 0; i < this._ai.length; i++)
 			{						
-				if(this._ai[i].canBid)	//global cooldown timer has refreshed, bidding now avthis._ailable
+				if(this._ai[i].canBid && !this._ai[i].winningBid)	//global cooldown timer has refreshed, bidding now avthis._ailable
 				{
-					if((this._ai[i].currBid < this._currentBid) && (this._ai[i].currBid < this._ai[i].bidCap))
+					if((this._ai[i].currBid < this._currentBid) && (!this._ai[i].leftAuction))
 					{
 						this._ai[i].currBid = this._currentBid + upPerc;
-						assetLoader.sounds.bidder.play();
-						break;	//breaks on first avthis._ailable bidder?
+						this._ai[i].winningBid = true;
+						break;
 					}
 				}
 			}
@@ -222,15 +177,20 @@ function auctionGen()
 		},
 		setBid : function(index)
 		{
-			if(!this._ai[index].winningBid)
+			if(!this._ai[index].leftAuction)
 			{
-				this._currentBid = this._ai[index].currBid;
-			}
-			//iterate over this._ai, assigning the bidder at index as the current bidder,
-			//assigning all others to false
-			for(var i = 0; i < this._ai.length; i++)
-			{
-				this._ai[i].canBid = (i == index ? true : false);
+				if(!this._ai[index].winningBid)
+				{
+					this._currentBid = this._ai[index].currBid;
+					//console.log(this._currentBid);
+				}
+			
+				//iterate over this._ai, assigning the bidder at index as the current bidder,
+				//assigning all others to false
+				for(var i = 0; i < this._ai.length; i++)
+				{
+					this._ai[i].canBid = (i == index ? true : false);
+				}
 			}
 		},	
 		currentBidder : function()
@@ -245,23 +205,6 @@ function auctionGen()
 				this._ai[i].winningBid = (this._ai[i].currBid === this._currentBid ? true : false);
 			}
 		},
-		findEndBidder : function()
-		{	//determine who holds the bid, incrementing timer
-			for (var i = 0, sum = 0; i < this._ai.length; sum += this._ai[i++]);
-			for(var i = 0; i < this._ai.length; i++)
-			{
-				if((this._currentBid == this._ai[i].currBid) && (sum >= BID_THRESHOLD))				
-				{	//enemeny is able to place bid
-					//end auction with enemy bidder
-					console.log("Sum "+ sum + "BidThreshold" + BID_THRESHOLD);
-					enemyWinning = true;
-				}
-				else if(sum >= BID_THRESHOLD)
-				{
-					enemyWinning = true;
-				}
-			}
-		}
 	};
 }
 var AuctionSell =
@@ -278,11 +221,6 @@ var AuctionSell =
 			AuctionSell._state = new auctionGen();
 			AuctionSell._state.init(i);
 			auctions.push(AuctionSell._state);
-			if(auctions.length > 1)
-			{
-				console.log(auctions[0]._currentBid);
-				console.log(auctions[1]._currentBid);
-			}
 			
 			if(AuctionSell._state._car !== null)
 			{
