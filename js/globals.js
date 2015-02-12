@@ -50,6 +50,10 @@ function saveUser()
 }
 function loadUser()
 {	//serialize user stats from local storage, if played previously
+//<php if(loggedIn){>
+    //make ajax call to server
+//}
+//else{
 	if(Storage.local !== null){
 		if('_stats' in Storage.local){
 			userStats = JSON.parse(Storage.local._stats);
@@ -63,6 +67,7 @@ function loadUser()
 			};
 		}
 	}
+//}
 }
 
 function jsObj2phpObj(object)
@@ -181,6 +186,10 @@ function resetStates()
 	appState = GAME_MODE.RUNNING;
 }
 function getHostPath(){
+    //gloablly accessable function, the local path maybe diffrent,
+    //DON'T CHANGE THE PATH, instead rename/relocate your project folder,
+    //so devs don't have a commit war, having to change this function
+    //for each of their projects each time they commit!
     var localExecution = true;
     return localExecution == true ? 'http://localhost/Auto_ObsessionsX/'
             : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';

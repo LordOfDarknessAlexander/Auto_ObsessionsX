@@ -101,12 +101,7 @@ function setAdBG()
 	jq.adBar.attr('src', src);
 	jq.adBar.show();
 }
-	
-function getHostPath(){
-    var localExecution = true;
-    return localExecution == true ? 'http://localhost/B/'
-            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-}
+
 //user Stats
 var money = userStats.money;
 var tokens = userStats.tokens;
