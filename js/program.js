@@ -7,7 +7,7 @@ var AutoObessesions = {};
 	//{
 		//if('_lastAllowanceTime' in Storage.local)
 		//{
-			//return parseInt(Storage.locla._lastAllowanceTime);
+			//return parseInt(Storage.local._lastAllowanceTime);
 		//}
 	//}
 //}
@@ -29,7 +29,7 @@ function garageDoor()
 }
 function update(deltaTime)
 {
-    //garageDoor();	//should splash update
+    	//should splash update
     
 	if(auctionOver)
 	{
@@ -71,19 +71,19 @@ function auctionMode(deltaTime)
 //js.StatBar = {
 function setMoney()
 {
-	$('div#statBar label#money').text('Money: ' + money.toString() );
+	$('div#statBar label#money').text('Money: ' + userStats.money.toString() );
 }
 function setTokens()
 {
-	$('div#statBar label#tokens').text('Tokens: ' + tokens.toString() );
+	$('div#statBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
 }
 function setPrestige()
 {
-	$('div#statBar label#prestige').text('Prestige: ' + prestige.toString() );
+	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
 }
 function setMarkers()
 {	//updates html lable element, within context of the Game menu only
-	$('label#mileMarker', jq.Game.menu).text('Mile Markers: ' + markers.toString() );
+	$('label#mileMarker', jq.Game.menu).text('Mile Markers: ' + userStats.markers.toString() );
 }
 function setStatBar()
 {
@@ -108,11 +108,17 @@ function getHostPath(){
             : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 }
 //user Stats
-//var money = userStats.money;
-//var tokens = userStats.tokens;
-//var prestige = userStats.prestige;
-//var markers = userStats.markers;
-function ajax_post(money,tokens){
+var money = userStats.money;
+var tokens = userStats.tokens;
+var prestige = userStats.prestige;
+var markers = userStats.markers;
+
+var amoney = money;
+var atokens = tokens;
+var aprestige = prestige;
+var amarkers = markers;
+function ajax_post(amoney,atokens,aprestige,amarkers)
+{
     // Create our XMLHttpRequest object
     //var dataStr = ''; //args to pass to script
 	
@@ -123,6 +129,9 @@ function ajax_post(money,tokens){
 	var atokens = userStats.tokens;
 	var aprestige = userStats.prestige;
 	var amarkers = userStats.markers;
+	
+	
+	
 	 //var amoney = document.getElementById("money").value;
      //var atokens = document.getElementById("tokens").value; 
 	// var aprestige = prestige;
@@ -131,10 +140,10 @@ function ajax_post(money,tokens){
     //}
     var jqxhr = $.ajax({
         type:'POST',
-        url:getHostPath() + 'Users/my_parse_file.php',
+        url:getHostPath() + 'my_parse_file.php',
         dataType:'json',
         //data:{money:amoney,tokens:atokens}
-		 data:{fname:fn,money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
+		 data:{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
     }).done(function(data){
         //the response string is converted by jquery into a Javascript object!
         if(data === null){
@@ -143,11 +152,11 @@ function ajax_post(money,tokens){
         }
         alert('ajax response received:' + JSON.stringify(data) );
         //access and set values in the document's html page
-		/*
+		
         $('div#statBar label#money').text(data.money);
         $('div#statBar label#tokens').text(data.tokens);
         $('div#statBar label#prestige').text(data.prestige);
-        $('div#statBar label#m_marker').text(data.m_marker);*/
+        $('div#statBar label#m_marker').text(data.m_marker);
     }).fail(function(jqxhr){
         //call will fail if result is not properly formatted JSON!
         alert('ajax call failed! Reason: ' + jqxhr.responseText);
@@ -174,7 +183,6 @@ $(document).ready(function()
 	loadUser();
     Garage.load();
     //jq.Game.setHomeImg();
-
     setHomeImg();   //in Garage.js
 	//userStats.money = 150;
 	//saveUser();
@@ -190,12 +198,12 @@ $(document).ready(function()
 			
 			//delete Register;	//deleting this every frame is bad idea
 			
-			//if((timer >= 300.00) && (timer <= 900.00))
-			//{
+			if((timer >= 300.00) && (timer <= 900.00))
+			{
 				appState = GAME_MODE.MAIN_MENU;
 				mainMenu();
 			  
-			//}  
+			}  
 			timer++;
 			ticker++;
 		}	
@@ -380,6 +388,7 @@ function switchStates( GAME_MODE)
 	{
 		case SPLASH:
 			splash();
+			garageDoor();
 		break;
 		
 		case MAIN_MENU:
@@ -482,7 +491,6 @@ function startGame()
 	auctionStop = true;
 	restarted = false;
 	playerBid = 0;
-	
 	context.font = '26px arial, sans-serif';
 	// Create gradient
 	var gradient=context.createLinearGradient(36,40,600,1);
@@ -491,7 +499,6 @@ function startGame()
 	gradient.addColorStop("1.0","green");
 	// Fill with gradient
 	context.fillStyle = gradient;
-	//appState = GAME_MODE.RUNNING;
 	
 	setStatBar();
 	setAdBG();
@@ -526,9 +533,7 @@ Auction.sold = function()
 	//jq.Auction.menu.children().hide();
 	jq.Sold.menu.show();
 	
-	
 	//disable user from entering an auction for this car again
-	
 	//in case of unintended bugs, make sure user doesn't already own car
 	if(playerWon && Auction._car !== null)
 	{
@@ -651,8 +656,6 @@ jq.Sold.garageBtn.click(function()
     //appState = GAME_MODE.GARAGE:
 });
 
-
-
 //Inside Auction Bid Button
 $('#bid').click(function()
 {
@@ -734,7 +737,7 @@ jq.Funds.backBtn.click(function()
 	
 //}
 function initUser(userName, pw)
-{	//load a registered user after comfirmation from server
+{	//load a registered user after confirmation from server
 }
 function initGuest()
 {	//loads guest profile, if one does not exist it is created
@@ -784,13 +787,9 @@ jq.Sold.homeBtn.click(function(){
 	jq.Sold.menu.hide();
 	jq.Game.menu.show();
 	appState = GAME_MODE.MAIN_MENU;
-	//delete gameOver;
 	auctionEnded = false;
 	endGame = false;
-	//auctionMode();
-	//delete Auction;
-	restarted = true;
-	//Auction.setup();	
+	restarted = true;	
 });
 
 assetLoader.downloadAll();
