@@ -19,6 +19,44 @@ var AutoObessesions = {};
 		//Storage.local._lastAllowance = time.toString();
 	//}
 //}
+var sql = {
+    //namespace encapsulating AJAX requests calling SQL commands via a php page
+    insertCar:function(vehicleID){
+        $.ajax({
+            type:'POST',
+            url:getHostPath() + 'vehicles/update.php?op=insert',
+            dataType:'json',
+            data:{carID:vehicleID}
+        }).done(function(data){
+            //the response string is converted by jquery into a Javascript object!
+            if(data === null){
+                alert('sql::insertCar(), Error:ajax response returned null!');
+                //finished = true;
+                return;
+            }
+            alert('sql::insertCar(), Inserting Car into user database! ajax response success!' + JSON.stringify(data) );
+            //car added remove from Auction
+            Auction._car = null;
+            //userGarage.push(Auction._car);
+            //Garage.save();    //not needed as data in maintained by DB
+            ajax_post();    //get user info from server
+            Auction.close();
+            init();
+        }).fail(function(jqxhr){
+            //call will fail if result is not properly formated JSON!
+            alert('sql::insertCar(), ajax call failed! Reason: ' + jqxhr.responseText);
+            //console.log('loading game resources failed, abort!');
+            //finished = true;
+            Auction._car = null;
+            ajax_post();    //get user info from server
+            Auction.close();
+            init();
+        });
+    }
+    //pushCar:function(carID){
+        //pushes a car from finalpost[aoCarsDB] to aoUsersDB[userTable]
+    //}
+}
 function garageDoor()
 {
 	backgroundY -= speed;
@@ -135,7 +173,7 @@ function ajax_post(amoney,atokens,aprestige,amarkers)
     //}
     var jqxhr = $.ajax({
         type:'POST',
-        url:getHostPath() + 'my_parse_file.php',
+        url:getHostPath() + 'Users/my_parse_file.php',
         dataType:'json',
         //data:{money:amoney,tokens:atokens}
 		 data:{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
@@ -280,6 +318,9 @@ function loadXMLDoc(url)
 }
 
 //Parse ajax functions to send data from within js to ph
+//REMOVE THIS, it is outdated and obsolete,
+//XMLHTTPResuests are encapsulated under jQuery Ajax call and their objects
+//Use that instead of this old and bloated api
 function ajax(Id,userId,str,post)
 {
     var ajax;
@@ -528,33 +569,7 @@ Auction.sold = function()
 	//jq.Auction.menu.children().hide();
 	jq.Sold.menu.show();
 	
-	//disable user from entering an auction for this car again
-	//in case of unintended bugs, make sure user doesn't already own car
-	if(playerWon && Auction._car !== null)
-	{
-		//Auction._car is not the right object!?
-		$('div#sold label').text(Auction._car.getFullName() );
-		var hasCar = false;
-		
-		for(var i = 0; i < userGarage.length; i++)
-		{
-			if(Auction._car.name/*id*/ == userGarage[i].name/*id*/)
-			{
-				hasCar = true;
-				break;
-			}
-		}
-		if(!hasCar){
-			userGarage.push(Auction._car);	//creates a copy of car, giving it to user
-			Auction._car = null;	//no more car to sell
-			
-		}
-		//userSave();
-		Garage.save();
-		ajax_post();
-		
-	}
-	assetLoader.sounds.bg.pause();
+    assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
 	assetLoader.sounds.gameOver.play();
 	assetLoader.sounds.bidder.pause();
@@ -569,8 +584,42 @@ Auction.sold = function()
 	{
 		endGame = true
 	}
-	Auction.close();
-	init();
+    
+	//disable user from entering an auction for this car again
+	//in case of unintended bugs, make sure user doesn't already own car
+	if(playerWon && Auction._car !== null)
+	{
+		//Auction._car is not the right object!?
+		$('div#sold label').text(Auction._car.getFullName() );
+//<php
+//if(loggedIn){>
+        sql.insertCar(Auction._car.id);
+//<php
+//}
+//else{?>
+		//var hasCar = false;
+		
+		//for(var i = 0; i < userGarage.length; i++)
+		//{
+			//if(Auction._car.name/*id*/ == userGarage[i].name/*id*/)
+			//{
+				//hasCar = true;
+				//break;
+			//}
+		//}
+		//if(!hasCar){
+			//userGarage.push(Auction._car);	//creates a copy of car, giving it to user
+			//Auction._car = null;	//no more car to sell
+		//}
+		//userSave();
+		//Garage.save();
+//<php
+//}
+//?>
+		//ajax_post();    //get user info from server
+	}
+	//Auction.close();
+	//init();
 }
 //
 //jQuery UI bindings

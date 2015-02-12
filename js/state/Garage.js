@@ -24,9 +24,7 @@ var //Garage._curCarIndex = null,	//user's currect car index
 	selCarIndex = null;
 //
 function VehicleFromDB(obj){
-    //creates an unupgraded/repaired car from the database
-    //var finished = false;
-    //var ret = null;    
+    //creates an unupgraded/repaired car from the database  
     //var jqxhr = 
     return $.ajax({
         type:'POST',
@@ -169,7 +167,7 @@ var Garage = {
                 alert('Error:ajax response returned null!');
                 return;
             }
-            alert('ajax response recieved:' + JSON.stringify(data) );
+            //alert('ajax response recieved:' + JSON.stringify(data) );
             
             if(data.length == 0){
                 //exit early is user has no cars
@@ -180,7 +178,7 @@ var Garage = {
             
             for(var i = 0; i < data.length; i++){
                 var obj = data[i];
-                args.push(VehicleFromDB(obj) );
+                args.push(VehicleFromDB(obj) ); //adds ajax request object to array
             }
             $.when.apply($, args).done(function(){
                 //the UI is dependant on the users garage being loaded,

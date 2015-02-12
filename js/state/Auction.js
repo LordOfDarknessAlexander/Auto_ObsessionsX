@@ -100,7 +100,7 @@ var Auction =
                     //finished = true;
                     return;
                 }
-                alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
+                //alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
                 //do stuff                
                 Auction._car = Vehicle(data.name, data.make, data.year, data.price, data.id, data.info);
                 ai = [Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5)))];
@@ -135,6 +135,7 @@ var Auction =
             Auction.setup();
         }).fail(function(){
             alert('Auction::init(), calling $.when failed! Reason: ' + jqxhr.responseText);    
+            console.log('loading game resources failed, abort!');
         });
 		
         appState = GAME_MODE.AUCTION;
@@ -267,7 +268,7 @@ var Auction =
 		{
 			if(playerBid == ai[i].currentBid)
 			{
-				playerBid != currentBid;
+				playerBid != currentBid;    //this does nothing!?
 			}
 		}
 		
@@ -468,8 +469,11 @@ var Auction =
 	},
 	findEndBidder : function()
 	{	//determine who holds the bid, incrementing timer
-		for (var i = 0, sum = 0; i < ai.length; sum += ai[i++]);    //ai is not an array of ints! fix this bug
-		for(var i = 0; i < ai.length; i++)
+    
+        //ai is not an array of ints! FIX this bug
+		for (var i = 0, sum = 0; i < ai.length; sum += ai[i++]);
+		
+        for(var i = 0; i < ai.length; i++)
 		{
 			if((currentBid == ai[i].currBid) && (sum >= BID_THRESHOLD))				
 			{	//enemeny is able to place bid
@@ -496,7 +500,8 @@ var Auction =
 		while((this.playerWinning) || (this.enemyWinning) && (goingTimer < 660))
 		{
 			goingTimer++;
-			if((goingTimer > 0) && (goingTimer < 360))
+			
+            if((goingTimer > 0) && (goingTimer < 360))
 			{
 				goingTimer ++
 				context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
@@ -519,7 +524,8 @@ var Auction =
 					//lock-out car from further sale
 				endGame = true;
 				goingTimer = 0;
-				if(this.playerWinning)
+				
+                if(this.playerWinning)
 				{
 					console.log("Player won");
 					context.fillText( "Sold to player!" ,ENEMY_X + 600 , 310);

@@ -1,6 +1,5 @@
 <?php
-//this script ONLY queries the vehicle database returning the results,
-//database values are not set by this script, only read and returned!
+//this script INSERTs or UPDATEs Database values with sql
 //used by javascript ajax requests
 require_once 'vehicle.php';
 require_once '../include/dbConnect.php';  //sql database connection
@@ -26,7 +25,7 @@ function hasCar($id){
     
     return $ret;
 }
-function getAuctionCars(){
+/*function getAuctionCars(){
     //selects all vehicles the user owns, returning it as a JSON array
     global $AO_DB;
     
@@ -83,7 +82,7 @@ function getUserCarFromID($carID){
     else{   //The vehicle is already registered
         echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
     }
-}
+}*/
 function getCarFromID($carID){
     //selects a vehicle from the car database,
     //returning it as a JSON object string
@@ -112,7 +111,7 @@ function getCarFromID($carID){
     }
     return null;
 }
-function echoUserCars(){
+/*function echoUserCars(){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
     
@@ -142,45 +141,59 @@ function echoUserCars(){
         echo '{"cars":[]}';
     }
 }
-
+*/
 $q = '';
 
-if(isset($_GET) && !empty($_GET) ){
+/*if(isset($_GET) && !empty($_GET) ){
     //args being passed vai the url
     if(isset($_GET['op']) && $_GET['op'] == 'asc'){
         getAuctionCars();
         exit();
     }
-}
+}*/
 if(isset($_POST) && !empty($_POST) ){
     if(isset($_POST['carID'])){
         $carID = $_POST['carID'];
         //validate value, must be an int!
         //echo json_encode($carID);
-        
+
         //switch the operation besed on value passed in url
         if(isset($_GET) && !empty($_GET) ){
-        //args being passed via the url
+            //args being passed via the url
             if(isset($_GET['op']) ){
-                if($_GET['op'] == 'hasCar'){
+                if($_GET['op'] == 'insert'){
                     //echo '{"hasCar": ' . strval(false) . '}';
-                    exit();
+                    $hasCar = hasCar($carID);
+                    
+                    if($hasCar){
+                        //user has already bought this car, error!
+                    }
+                    else{
+                        $tableName = 'user' . strval(0);    //$_SESSION['userID'];
+                        $res = $aoUsersDB->query(
+                            "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
+                            //if entry exists
+                        );
+                        
+                        echo json_encode($res);
+                    }
                 }
                 //else switch to other calls
+                exit();
             }
         }
         //else no GET args, simply return data of car with id
         
         //echo '{"data":' . strval($carID) . '}';
         //select an individual element with car_id $carID
-        $car = getCarFromID($carID);
+        //$car = getCarFromID($carID);
         
-        if($car != null){
-            echo $car->toJSON();
-        }
-        else{
-            echo '{}';  //return emtpy object
-        }
+        //if($car != null){
+            //echo $car->toJSON();
+        //}
+        //else{
+            //echo '{}';  //return emtpy object
+        //}
     }
     //other post vars
 }
