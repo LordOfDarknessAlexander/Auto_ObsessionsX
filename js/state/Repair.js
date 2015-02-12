@@ -211,7 +211,50 @@ var Repair = {
                     $(btnTag + 'rb' + str).off();   //.css('opacity':'0.45','cursor':'default'});
             }
         }
-	}
+	},
+    save:function(){
+        //saves each upgrade/repair when the user repairs
+        var funcName = 'Repair::save()';
+//<php
+//if(loggedIn){?>
+        //sends the car data to the server
+        var car = Garage.getCurrentCar();
+        
+        $.ajax({
+            type:'POST',
+            url:getHostPath() + 'vehicles/update.php?op=update',
+            dataType:'json',
+            data:{
+                carID:car.id,
+                dt:car._dt !== null ? car._dt.getBits() : 0,
+                //body:car._body !== null ? car._body.getBits() : 0,
+                //inter:car._interior !== null ? car._interior.getBits() : 0,
+                //docs:car._docs !== null ? car._docs.getBits() : 0,
+                //rep:car.getRepairBitfield()
+            }
+        }).done(function(data){
+            //the response string is converted by jquery into a Javascript object!
+            if(data === null){
+                alert(funcName + ', Error:ajax response returned null!');
+                return;
+            }
+            alert(funcName + ', ajax response success! ' + JSON.stringify(data) );
+            //do stuff
+            Garage.save();    //save updates to user cars in local storage
+        }).fail(function(jqxhr){
+            //call will fail if result is not properly formated JSON!
+            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+            console.log('failed to save vehicle upgrades to database!');
+        });
+//<php//
+//}
+//else{?>
+        //save to userGarage in local storage
+        //temporary, vehicles are loaded from database when navigating to it
+        //Garage.save();    //save updates to user vehicles
+//<php
+//}
+    }
 };
 
 function addUpgrade(obj)
@@ -303,8 +346,7 @@ function upgradeDT(obj){
             }
             $('div#RepairShop div#drivetrain progress#' + 'pb' + str).attr('value', part.getPercent() );
         }
-        //
-        Garage.save();    //save updates to user vehicles
+        Repair.save();
     }
 }
 function repairDT(obj){
@@ -327,6 +369,6 @@ function repairDT(obj){
                 $('div#RepairShop div#drivetrain progress#pb' + str).attr('value', part.getPercent() );
             }
         }
-        Garage.save();
+        Repair.save();
     }
 }

@@ -8,6 +8,7 @@ require_once '../include/dbConnect.php';  //sql database connection
 //secure::loggin();
 //
 function hasCar($id){
+    //does the user's table in aoUsersDB already have an entry with car_id '$id'
     global $aoUsersDB;
     
     $ret = false;
@@ -162,7 +163,8 @@ if(isset($_POST) && !empty($_POST) ){
             //args being passed via the url
             if(isset($_GET['op']) ){
                 if($_GET['op'] == 'insert'){
-                    //echo '{"hasCar": ' . strval(false) . '}';
+                    //inserts a car with carID from the vehicle database into the
+                    //logged in user's table in aoUsersDB
                     $hasCar = hasCar($carID);
                     
                     if($hasCar){
@@ -177,6 +179,31 @@ if(isset($_POST) && !empty($_POST) ){
                         
                         echo json_encode($res);
                     }
+                }
+                elseif($_GET['op'] == 'update'){
+                    //inserts a car with carID from the vehicle database into the
+                    //logged in user's table in aoUsersDB
+                    $dt = intval($_POST['dt']);
+                    $body = 0x0000008;    //intval($_POST['body']);
+                    $inter = 0x00000002;    //intval($_POST['interior']);
+                    $docs = 0x0;    //intval($_POST['docs']);
+                    
+                    $rep = 0x0000000F;    //intval($_POST['repairs']);
+                    
+                    //$hasCar = hasCar($carID);
+                    
+                    //if($hasCar){
+                        //user has already bought this car, error!
+                    //}
+                    //else{
+                    $tableName = 'user' . strval(0);    //$_SESSION['userID'];
+                    $res = $aoUsersDB->query(
+                        "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter,docs=$docs, repairs=$rep WHERE car_id = $carID"
+                        //if entry exists
+                    );
+                    
+                    echo json_encode($res);
+                    //}
                 }
                 //else switch to other calls
                 exit();
@@ -199,6 +226,6 @@ if(isset($_POST) && !empty($_POST) ){
 }
 else{
     //no passing any values via POST, return all cars
-    echoUserCars();
+    //echoUserCars();
 }
 ?>
