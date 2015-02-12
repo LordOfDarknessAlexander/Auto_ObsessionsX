@@ -188,7 +188,7 @@ if(isset($_POST) && !empty($_POST) ){
                     $inter = 0x00000002;    //intval($_POST['interior']);
                     $docs = 0x0;    //intval($_POST['docs']);
                     
-                    $rep = 0x0000000F;    //intval($_POST['repairs']);
+                    $rep = intval($_POST['repairs']);
                     
                     //$hasCar = hasCar($carID);
                     

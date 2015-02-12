@@ -74,6 +74,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo)
 		//_info: node.text(),
 		_parts : [],	//only retain currently upgraded parts, array is copied
         //_parts:{
+            //parts with value null, mean user hasn't purchase/installed part
         _dt:Drivetrain.make(Price),
         _body:null, //Body.make(Price),
         _interior:null, //Interior.make(Price),

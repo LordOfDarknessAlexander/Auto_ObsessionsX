@@ -227,10 +227,10 @@ var Repair = {
             data:{
                 carID:car.id,
                 dt:car._dt !== null ? car._dt.getBits() : 0,
-                //body:car._body !== null ? car._body.getBits() : 0,
-                //inter:car._interior !== null ? car._interior.getBits() : 0,
-                //docs:car._docs !== null ? car._docs.getBits() : 0,
-                //rep:car.getRepairBitfield()
+                body:car._body !== null ? car._body.getBits() : 0,
+                inter:car._interior !== null ? car._interior.getBits() : 0,
+                docs:car._docs !== null ? car._docs.getBits() : 0,
+                repairs:car.getRepairBitfield()
             }
         }).done(function(data){
             //the response string is converted by jquery into a Javascript object!
