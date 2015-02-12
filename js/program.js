@@ -35,16 +35,7 @@ function update(deltaTime)
 	{
 		restarted = true;
 	}
-	/*
-	if(restarted)
-	{
-		console.log("Chicken Fingers restarting");
-		//Auction.restart();
 
-		auctionMode();
-
-	}
-*/
 	AuctionSell.update(deltaTime);
 
 	timer++;
@@ -80,19 +71,19 @@ function auctionMode(deltaTime)
 //js.StatBar = {
 function setMoney()
 {
-	$('div#statBar label#money').text('Money: ' + userStats.money.toString() );
+	$('div#statBar label#money').text('Money: ' + money.toString() );
 }
 function setTokens()
 {
-	$('div#statBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
+	$('div#statBar label#tokens').text('Tokens: ' + tokens.toString() );
 }
 function setPrestige()
 {
-	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
+	$('div#statBar label#prestige').text('Prestige: ' + prestige.toString() );
 }
 function setMarkers()
 {	//updates html lable element, within context of the Game menu only
-	$('label#mileMarker', jq.Game.menu).text('Mile Markers: ' + userStats.markers.toString() );
+	$('label#mileMarker', jq.Game.menu).text('Mile Markers: ' + markers.toString() );
 }
 function setStatBar()
 {
@@ -110,18 +101,40 @@ function setAdBG()
 	jq.adBar.attr('src', src);
 	jq.adBar.show();
 }
-
-function ajax_post(){
+	
+function getHostPath(){
+    var localExecution = true;
+    return localExecution == true ? 'http://localhost/B/'
+            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+}
+//user Stats
+//var money = userStats.money;
+//var tokens = userStats.tokens;
+//var prestige = userStats.prestige;
+//var markers = userStats.markers;
+function ajax_post(money,tokens){
     // Create our XMLHttpRequest object
     //var dataStr = ''; //args to pass to script
-	 var fn = document.getElementById("fname").value;
-     var ln = document.getElementById("lname").value;
+	
+   // var amoney = this.money.value;
+	//var atokens = this.tokens
+	
+	var amoney = userStats.money;
+	var atokens = userStats.tokens;
+	var aprestige = userStats.prestige;
+	var amarkers = userStats.markers;
+	 //var amoney = document.getElementById("money").value;
+     //var atokens = document.getElementById("tokens").value; 
+	// var aprestige = prestige;
+	// var amarkers = markers;
+	// var ln = userStats.mileMarker;
     //}
     var jqxhr = $.ajax({
         type:'POST',
         url:getHostPath() + 'Users/my_parse_file.php',
         dataType:'json',
-        data:{fname:fn,lname:ln}
+        //data:{money:amoney,tokens:atokens}
+		 data:{fname:fn,money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
     }).done(function(data){
         //the response string is converted by jquery into a Javascript object!
         if(data === null){
@@ -728,6 +741,7 @@ function initGuest()
 	if('guest' in Storage.local){
 		//returns an object of format {money:number, garage:[]}
 		//player = JSON.parse(Storage.local.guest);
+		ajax_post();
 	}
 	else{
 		//create new guest account, to be stored in browser
