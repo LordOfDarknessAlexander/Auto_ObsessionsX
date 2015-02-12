@@ -155,12 +155,19 @@ function setCarBtn($args){
 	},
 	initAuction : function(obj)
 	{
-		var i = obj.data.index;
+		var i = obj.data.index,
+            liID = 'asli' + (i).toString(),
+            liName = 'div#AuctionSelect div#carView ul#auctionCars li#' + liID,
+            li = $(liName),
+            btn = $(liName + ' button'),
+            carID = parseInt(btn.attr('id') );
+            
         console.log(i);
+        console.log(carID);
 		jq.AuctionSelect.menu.toggle();
 		jq.Auction.menu.toggle();
 		//Auction.setup();
-		Auction.init(i);    //id);
+		Auction.init(carID);    //id);
 		//Auction.setup();
 	},
 	denyAuction : function()

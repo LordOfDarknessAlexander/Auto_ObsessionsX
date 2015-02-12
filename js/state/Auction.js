@@ -74,78 +74,83 @@ var Auction =
 	playerWinning : false,
 	
 	init:function(index)
-	{	//call to start an auction for car
-		//var i = 1;
-		//endGame = false;
-		
+	{	//call to start an auction for car		
         console.log(index);
-        /*$.ajax({
-            type:'POST',
-            url:getHostPath() + 'vehicles/query.php',
-            dataType:'json',
-            data:{carID:obj.carID}
-        }).done(function(data){
-            //the response string is converted by jquery into a Javascript object!
-            if(data === null){
-                alert('Error:ajax response returned null!');
-                //finished = true;
-                return;
-            }
-            //alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
-            //do stuff
-            var len = data.length;
-            
-            if(len == 0){
-                console.log('AuctionSelect::init(), something went wrong, should have 1 entry per car in database')
-                return;
-            }
-            
-            //Auction._car = Vehicle();
-        }).fail(function(jqxhr){
-            //call will fail if result is not properly formated JSON!
-            alert('ajax call failed! Reason: ' + jqxhr.responseText);
-            console.log('loading game resources failed, abort!');
-            //finished = true;
-        });*/
-		appState = GAME_MODE.AUCTION;
-		auctionStop = false;
-
+        //disable/enable sounds before ajax call
+        assetLoader.sounds.gameOver.pause();
+        assetLoader.sounds.going.pause();
+        assetLoader.sounds.sold.pause();
+        assetLoader.sounds.bg.currentTime = 0;
+        assetLoader.sounds.bg.loop = true;
+        assetLoader.sounds.bg.play();
+        
+        auctionStop = false;
 		playerBid = 0;
+        
+        $.when(
+            $.ajax({
+                type:'POST',
+                url:getHostPath() + 'vehicles/query.php',
+                dataType:'json',
+                data:{carID:index}
+            }).done(function(data){
+                //the response string is converted by jquery into a Javascript object!
+                if(data === null){
+                    alert('Auction::init(), Error:ajax response returned null!');
+                    //finished = true;
+                    return;
+                }
+                alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
+                //do stuff                
+                Auction._car = Vehicle(data.name, data.make, data.year, data.price, data.id, data.info);
+                ai = [Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5)))];
 
-		if(index < xdbCars.length){	//make sure index is within bounds to be safe
-			Auction._car = xdbCars[index];	//copy assigned
-		}
-		
-		if(Auction._car !== null)
-		{
-            console.log(Auction._car.getFullName());
-			vehiclePrice = Auction._car.getPrice();
-			currentBid = vehiclePrice * 0.1;
-            jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
-	
-            context.font = '26px arial, sans-serif';  
+                if(Auction._car !== null)
+                {
+                    console.log(Auction._car.getFullName());
+                    vehiclePrice = Auction._car.getPrice();
+                    currentBid = vehiclePrice * 0.1;
+                    jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
+            
+                    context.font = '26px arial, sans-serif';  
 
-            jq.Auction.menu.show();		//$('#Auction').show();
-            
-            this.setBidBtnText();
-            
-            $('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
-            $('div#Auction label#carInfo').text(/*'<h1>' + */Auction._car.getFullName() + '-\n    ' + Auction._car.getInfo() );
-            //$('#menu').removeClass('gameMenu');
-            //$('#menu').addClass('Auction');
-            $('.sound').show();
-        }
+                    jq.Auction.menu.show();		//$('#Auction').show();
+                    
+                    Auction.setBidBtnText();
+                    
+                    $('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
+                    $('div#Auction label#carInfo').text(/*'<h1>' + */Auction._car.getFullName() + '-\n    ' + Auction._car.getInfo() );
+                    //$('#menu').removeClass('gameMenu');
+                    //$('#menu').addClass('Auction');
+                    $('.sound').show();
+                }
+            }).fail(function(jqxhr){
+                //call will fail if result is not properly formated JSON!
+                alert('Auction::init(), ajax call failed! Reason: ' + jqxhr.responseText);
+                console.log('loading game resources failed, abort!');
+                //finished = true;
+            })
+        ).done(function(){
+            //init visuals and display page after state has loaded
+            Auction.setup();
+        }).fail(function(){
+            alert('Auction::init(), calling $.when failed! Reason: ' + jqxhr.responseText);    
+        });
 		
-		ai = [Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5)))];
+        appState = GAME_MODE.AUCTION;
+        
+		//if(index < xdbCars.length){	//make sure index is within bounds to be safe
+			//Auction._car = xdbCars[index];	//copy assigned
+		//}
 		
-		this.setup();
+		//this.setup();
 		
-		assetLoader.sounds.gameOver.pause();
-		assetLoader.sounds.going.pause();
-		assetLoader.sounds.sold.pause();
-		assetLoader.sounds.bg.currentTime = 0;
-		assetLoader.sounds.bg.loop = true;
-		assetLoader.sounds.bg.play();
+		//assetLoader.sounds.gameOver.pause();
+		//assetLoader.sounds.going.pause();
+		//assetLoader.sounds.sold.pause();
+		//assetLoader.sounds.bg.currentTime = 0;
+		//assetLoader.sounds.bg.loop = true;
+		//assetLoader.sounds.bg.play();
 	},
 	close : function()
 	{

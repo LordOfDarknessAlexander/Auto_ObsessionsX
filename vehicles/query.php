@@ -160,6 +160,7 @@ function echoUserCars(){
 }
 
 $q = '';
+
 if(isset($_GET) && !empty($_GET) ){
     //args being passed vai the url
     if(isset($_GET['op']) && $_GET['op'] == 'asc'){
