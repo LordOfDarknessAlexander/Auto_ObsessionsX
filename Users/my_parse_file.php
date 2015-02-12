@@ -12,14 +12,15 @@ require ('config.php');
 //if($_POST["fname"] && $_POST["lname"] )/
 if( isset( $_POST) )
 {
-	if (!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['money']) && !empty($_POST['tokens']))
+	if (!empty($_POST['fname'])  && !empty($_POST['money']) && !empty($_POST['tokens']) &&!empty($_POST['prestige']) && !empty($_POST['m_marker']))
 	{
 		$fname = $_POST["fname"];
-		$lname = $_POST["lname"];
 		$money = $_POST["money"];
 		$tokens = $_POST["tokens"];
+		$prestige = $_POST["prestige"];
+		$markers = $_POST["m_marker"];
 		//$q = 'UPDATE users SET fname="Learning JAVA" WHERE user_id=1';
-		$q = "UPDATE users SET fname='$fname', lname='$lname', money='$money', tokens='$tokens' WHERE user_id=1";
+		$q = "UPDATE users SET fname='$fname', money='$money', tokens='$tokens' ,prestige='$prestige', m_marker='$markers' WHERE user_id=user_id";
 		//echo ' selected="selected"';
 	//	echo 'Thank you '. $_POST['fname'] . ' ' . $_POST['lname'] . ', says the PHP file';
 		
@@ -31,7 +32,7 @@ if( isset( $_POST) )
 		}
 		else
 		{
-		  echo '{"fname":"' . $fname . '", "lname":"' . $lname . '"}';
+		  echo '{"fname":"' . $fname . '", "lname":"' . $money . '"}';
 	
 		}
 		mysqli_close($dbcon);	
@@ -42,7 +43,7 @@ if( isset( $_POST) )
 else
 {
 	$fname = $_POST[" "];
-	$lname = $_POST[" "];
+	//$lname = $_POST[" "];
 	echo "Goody try";
 }
 

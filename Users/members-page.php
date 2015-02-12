@@ -80,23 +80,23 @@ else
 <script>
 function getHostPath(){
     var localExecution = true;
-
-    return localExecution == true ? 'http://localhost/Auto_ObsessionsX/'
-        : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+    return localExecution == true ? 'http://localhost/B/'
+            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 }
 function ajax_post(){
     // Create our XMLHttpRequest object
     //var dataStr = ''; //args to pass to script
 	 var fn = document.getElementById("fname").value;
-     var ln = document.getElementById("lname").value;
 	 var amoney = document.getElementById("money").value;
      var atokens = document.getElementById("tokens").value;
+	 var aprestige = document.getElementById("prestige").value;
+	 var amarkers = document.getElementById("m_marker").value;
     //}
     var jqxhr = $.ajax({
         type:'POST',
         url:getHostPath() + 'Users/my_parse_file.php',
         dataType:'json',
-        data:{fname:fn,lname:ln,money:amoney, tokens:atokens}
+        data:{fname:fn,money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
     }).done(function(data){
         //the response string is converted by jquery into a Javascript object!
         if(data === null){
@@ -123,23 +123,14 @@ function ajax_post(){
 
 <h2>Ajax Post to PHP and Get Return Data</h2>
 First Name: <input id="fname" name="fname" type="text">  <br><br>
-Last Name: <input id="lname" name="lname" type="text"> <br><br>
 Money: <input id="money" name="money" type="text">  <br><br>
-tokens: <input id="tokens" name="tokens" type="text"> <br><br>
+Tokens: <input id="tokens" name="tokens" type="text"> <br><br>
+Prestige: <input id="prestige" name="prestige" type="text"> <br><br>
+Mile Markers: <input id="m_marker" name="m_marker" type="text"> <br><br>
 
 <input name="myBtn" type="submit" value="Submit Data" onclick="ajax_post();"> <br><br>
 <div id="status"></div>
 </body>
-<!---
- <div id='sub'>
-	<form id='userForm' action="userInfo.php" method='post'>
-	Money: <input type="text" name="money" /><br />
-	Mile Markers: <input type="text" name="milemarker" /><br />
-	Tokens: <input type="text" name="tokens" /><br />
-	Prestige: <input type="text" name="prestige" /><br />
-	<button id='sub'>Save</button>
-	</form>
-	<span id='result'></span> -->
 <h3>Member's Events</h3>
 <p>Welcome to the members area.
 <br>Browse the many portals here: Play as a guest or log in and save your progress.<br>
