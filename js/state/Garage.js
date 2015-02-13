@@ -29,7 +29,7 @@ function VehicleFromDB(obj){
     return $.ajax({
         type:'POST',
         //async:false,
-        url:getHostPath() + 'vehicles/query.php',
+        url:getHostPath() + 'pas/query.php',
         dataType:'json',
         data:{carID:obj.carID}
     }).done(function(data){
@@ -158,7 +158,7 @@ var Garage = {
         
         var jqxhr = $.ajax({
             type:'POST',
-            url:getHostPath() + 'vehicles/query.php',
+            url:getHostPath() + 'pas/query.php',
             dataType:'json',
             data:'' //{carID:24577}
         }).done(function(data){

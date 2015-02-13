@@ -68,9 +68,9 @@ button#backBtn
     cursor:pointer;
 	position:absolute;
 	left:5%;
-	bottom:0%;
-	width:10%;
-	height:10%;
+	bottom:2%;
+    width:16%;
+	height:8%;
 }
 button#homeBtn
 {
@@ -84,17 +84,8 @@ button#homeBtn
 	height:10%;
 	
 	right:5%;
-	bottom:5%;
+	bottom:2%;
 }
-/*button#homekBtn
-{   sets properties for all button tags with id homeBtn
-	background: url('../images/backBtn.png') no-repeat 0 0;
-	
-	left:5%;
-	bottom:0%;
-	width:10%;
-	height:10%;
-}*/
 /*button:hover
 {	alters all button appearences when being moused over
 	background-color:red;
@@ -285,18 +276,7 @@ div#main a:hover {
   height: 100%;
   position: absolute;
 }
-/*
-#game-over 
-{
-  background-image: url('../images/logo.png')no-repeat 0 0;
-  display: none;
-  text-align: center;
-  padding-top: 92px;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}*/
+
 div#profile
 {
     background: url('../images//defaultBG.jpg') no-repeat 0 0;
@@ -358,9 +338,11 @@ div#business
     z-index:1;
 }
 /*
+?php
 require_once 'phone.php';   //mobile phone, iPhone, Android, WIndows, BB, etc
 require_once 'tablet.php';  //tablets, iPads, etc
 require_once 'laptop.php';  //laptop and other large mobile devices
+?>
 */
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) 

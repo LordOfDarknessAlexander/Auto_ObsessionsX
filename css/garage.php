@@ -34,6 +34,20 @@ function divSelectedCar(){
 	padding-top: 92px;
 	z-index: 1;
 }
+<?php divGarage();?> button#viewCar
+{<?php
+    posAbs();
+?>
+    bottom:67%;
+    right:42%;
+}
+<?php divGarage();?> button#select
+{<?php
+    posAbs();
+?>
+    bottom:67%;
+    left:42%;
+}
 <?php divGarage();?> li 
 {	/*styles all list items of node with id RepairShop*/
 	/*margin: 6% 2%;*/
@@ -64,8 +78,8 @@ function divSelectedCar(){
 <?php posAbs();?>
 	height:65%;
 	bottom:0%;
-    left:20%;
-    width:60%;
+    left:22.5%;
+    width:55%;
 }
 /*current user car stylings*/
 <?php divUserCar();?>
@@ -145,19 +159,7 @@ div#selectedCar div#progressBars
 	font-size:0.75em;	/*12px*/
 	right:0;
 	top:0;
-}/*
-#garageBackBtn
-{
-	background:url('../images/backBtn.png') no-repeat 0 0;/*var(--default-btn-bg);
-	color: white;
-	font-weight: bold;
-	width:150px;
-	height:50px;
-	cursor:pointer;
-	position:absolute;
-	left: 5em;
-	bottom:2em;
-}*/
+}
 /*
 div#carListView ul li{
 }

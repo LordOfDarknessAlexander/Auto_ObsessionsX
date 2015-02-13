@@ -19,22 +19,27 @@ var AutoObessesions = {};
 		//Storage.local._lastAllowance = time.toString();
 	//}
 //}
-var sql = {
-    //namespace encapsulating AJAX requests calling SQL commands via a php page
+var pas = {
+    //namespace encapsulating AJAX requests for php pages which execute SQL commands,
+    //which return/echo JSON strings
     insertCar:function(vehicleID){
+        //inserts vehicle with id vehicleID  into user's table in aoUserDB, unmodified
+        //after user wins an auction
+        var funcName = 'pas::insertCar(vehicleID)';
+        
         $.ajax({
             type:'POST',
-            url:getHostPath() + 'vehicles/update.php?op=insert',
+            url:getHostPath() + 'pas/update.php?op=insert',
             dataType:'json',
             data:{carID:vehicleID}
         }).done(function(data){
             //the response string is converted by jquery into a Javascript object!
             if(data === null){
-                alert('sql::insertCar(), Error:ajax response returned null!');
+                alert(funcName + ', Error:ajax response returned null!');
                 //finished = true;
                 return;
             }
-            alert('sql::insertCar(), Inserting Car into user database! ajax response success!' + JSON.stringify(data) );
+            alert(funcName + ', Inserting Car into user database! ajax response success!' + JSON.stringify(data) );
             //car added remove from Auction
             Auction._car = null;
             //userGarage.push(Auction._car);
@@ -44,7 +49,7 @@ var sql = {
             init();
         }).fail(function(jqxhr){
             //call will fail if result is not properly formated JSON!
-            alert('sql::insertCar(), ajax call failed! Reason: ' + jqxhr.responseText);
+            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
             //console.log('loading game resources failed, abort!');
             //finished = true;
             Auction._car = null;
@@ -546,7 +551,7 @@ Auction.sold = function()
 		$('div#sold label').text(Auction._car.getFullName() );
 //<php
 //if(loggedIn){>
-        sql.insertCar(Auction._car.id);
+        pas.insertCar(Auction._car.id);
 //<php
 //}
 //else{?>

@@ -203,13 +203,13 @@ var Repair = {
         
         $.ajax({
             type:'POST',
-            url:getHostPath() + 'vehicles/update.php?op=update',
+            url:getHostPath() + 'pas/update.php?op=update',
             dataType:'json',
             data:{
                 carID:car.id,
                 dt:car._dt !== null ? car._dt.getBits() : 0,
                 body:car._body !== null ? car._body.getBits() : 0,
-                inter:car._interior !== null ? car._interior.getBits() : 0,
+                interior:car._interior !== null ? car._interior.getBits() : 0,
                 docs:car._docs !== null ? car._docs.getBits() : 0,
                 repairs:car.getRepairBitfield()
             }
