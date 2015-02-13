@@ -106,6 +106,10 @@ function auctionMode(deltaTime)
   
 }
 
+
+
+
+
 //js.StatBar = {
 function setMoney()
 {
@@ -141,62 +145,9 @@ function setAdBG()
 }
 
 //user Stats
-var money = userStats.money;
-var tokens = userStats.tokens;
-var prestige = userStats.prestige;
-var markers = userStats.markers;
 
-var amoney = money;
-var atokens = tokens;
-var aprestige = prestige;
-var amarkers = markers;
-function ajax_post(amoney,atokens,aprestige,amarkers)
-{
-    // Create our XMLHttpRequest object
-    //var dataStr = ''; //args to pass to script
-	
-   // var amoney = this.money.value;
-	//var atokens = this.tokens
-	
-	var amoney = userStats.money;
-	var atokens = userStats.tokens;
-	var aprestige = userStats.prestige;
-	var amarkers = userStats.markers;
-	
-	
-	
-	 //var amoney = document.getElementById("money").value;
-     //var atokens = document.getElementById("tokens").value; 
-	// var aprestige = prestige;
-	// var amarkers = markers;
-	// var ln = userStats.mileMarker;
-    //}
-    var jqxhr = $.ajax({
-        type:'POST',
-        url:getHostPath() + 'Users/my_parse_file.php',
-        dataType:'json',
-        //data:{money:amoney,tokens:atokens}
-		 data:{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
-    }).done(function(data){
-        //the response string is converted by jquery into a Javascript object!
-        if(data === null){
-            alert('Error:ajax response returned null!');
-            return;
-        }
-        alert('ajax response received:' + JSON.stringify(data) );
-        //access and set values in the document's html page
-		
-        $('div#statBar label#money').text(data.money);
-        $('div#statBar label#tokens').text(data.tokens);
-        $('div#statBar label#prestige').text(data.prestige);
-        $('div#statBar label#m_marker').text(data.m_marker);
-    }).fail(function(jqxhr){
-        //call will fail if result is not properly formatted JSON!
-        alert('ajax call failed! Reason: ' + jqxhr.responseText);
-        //throw exception, game can't work without user stats
-    });
-    
-}
+
+
 
 //$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed

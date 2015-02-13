@@ -24,30 +24,74 @@ var logos = [
 	'napa'
 ];
 var userStats = {
+	fn:'Larry',
 	money:0 ,
 	tokens:2,
 	prestige:0,
-	markers:0
+	m_marker:0
 };
-//var associative array
-var person = new Array();
-person['name'] = "Sean";
-//person['money] = "100";
-//person['mmarkers'] = "45";
-//person['tokens'] = "54";
-//person['prestige'] = "1";
 
-//Object
-obj = new Object;
-obj.car = "honda";
-obj.animal = ["Cat","Dog","Lizard"];
 function saveUser()
 {	//saves user stats as a JSON string to the browsers local storage
 	if(Storage.local !== null){
 		Storage.local._stats = JSON.stringify(userStats);
+		ajax_post();
 	}
 	//else local storage not available
 }
+
+var amoney;
+var atokens;
+var aprestige;
+var amarkers;
+var fn = "Jerry";
+function ajax_post()
+{
+    // Create our XMLHttpRequest object
+    //var dataStr = ''; //args to pass to script
+
+	
+	/*
+     var amoney = getElementById("money").value;
+     var atokens = getElementById("tokens").value;
+	 var aprestige = getElementById("prestige").value;
+	 var amarkers = getElementById("m_marker").value;
+	*/
+	
+	fn = "Jim";
+	amoney = userStats.money;
+	atokens = userStats.tokens;
+	aprestige = userStats.prestige;
+	amarkers = userStats.m_markers;
+
+    var jqxhr = $.ajax({
+        type:'POST',
+        url:getHostPath() + 'Users/my_parse_file.php',
+        dataType:'json',
+        //data:{money:amoney,tokens:atokens}
+		 data:{fname:fn,money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
+    }).done(function(data){
+        //the response string is converted by jquery into a Javascript object!
+        if(data === null){
+            alert('Error:ajax response returned null!');
+            return;
+        }
+        alert('ajax response received:' + JSON.stringify(data) );
+        //access and set values in the document's html page
+	/*	
+        $('div#statBar label#money').text(data.money);
+        $('div#statBar label#tokens').text(data.tokens);
+        $('div#statBar label#prestige').text(data.prestige);
+        $('div#statBar label#m_marker').text(data.m_marker);*/
+    }).fail(function(jqxhr){
+        //call will fail if result is not properly formatted JSON!
+        alert('ajax call failed! Reason: ' + jqxhr.responseText);
+        //throw exception, game can't work without user stats
+    });
+    
+}
+
+
 function loadUser()
 {	//serialize user stats from local storage, if played previously
 //<php if(loggedIn){>
@@ -56,48 +100,22 @@ function loadUser()
 //else{
 	if(Storage.local !== null){
 		if('_stats' in Storage.local){
-			userStats = JSON.parse(Storage.local._stats);
+			//userStats = JSON.parse(Storage.local._stats);
+			
 		}
 		else{	//no previous save data
 			userStats = {
+				fn:'Gary',
 				money:50000,
 				tokens:2,
 				prestige:1,
-				markers:0
+				m_marker:0
 			};
 		}
 	}
 //}
 }
 
-function jsObj2phpObj(object)
-{
-	var json = "{";
-	for(property in object)
-	{
-		var value = object[property];
-		if(typeof(value) == "string")
-		{
-			json += '"' + property + '":' + jsObj2phpObj(value) + ',';
-		}
-		else
-		{
-			//if its an associative array
-			if(!value[0])
-			{
-				json += '"' + property + '":' + jsObj2phpObj(value) + ',';
-				
-			}
-			else
-			{
-				json += '"' + property + '":[';
-				for(prop in value) json += '"' + value[prop] + '",';
-				json = json.substr(0,json.length - 1) + "],";
-			}
-		}
-		return json.substr(0,json.length - 1) + "}";
-	}
-}	
 //States
 var REPAIR;
 var ADD_FUNDS;
@@ -175,11 +193,6 @@ var appState = GAME_MODE.SPLASH;
 
 var userLogged = false;
 
-//user HUD
-var userText = "";
-var currentUser;
-var userCash;
-var userScore;
 
 function resetStates()
 {

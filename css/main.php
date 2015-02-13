@@ -8,6 +8,7 @@ require_once 'AuctionSelect.php';
 require_once 'repair.php';
 require_once 'funds.php';
 require_once 'Garage.php';
+
     
 function divMain(){
     echo 'div#gameMenu';
@@ -113,10 +114,10 @@ function divStatBar(){
     font-size:1em;
 }
 <?php divStatBar();?> label#money{left:0%;}
-<?php divStatBar();?> label#tokens{left:25%;}
-<?php divStatBar();?> label#prestige{left:50%;}
-<?php divStatBar();?> label#mileMarker{left:75%;}
-
+<?php divStatBar();?> label#tokens{left:20%;}
+<?php divStatBar();?> label#prestige{left:40%;}
+<?php divStatBar();?> label#m_marker{left:60%;}
+<?php divStatBar();?> label#fname{left:80%;}
 /*game menu navigation buttons*/
 
 #addFunds
