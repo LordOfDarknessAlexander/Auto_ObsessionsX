@@ -56,7 +56,7 @@ function divStatBar(){
 ?>
     background-color:grey;
 	left:5%;
-	top:40%;
+	bottom:12%;
     width:20%;
     height:50%;
 }
@@ -75,7 +75,8 @@ function divStatBar(){
 ?>
     background-color:grey;
 	right:5%;
-	top:40%;
+	/*top:40%;*/
+    bottom:12%;
     width:20%;
     height:50%;
 }

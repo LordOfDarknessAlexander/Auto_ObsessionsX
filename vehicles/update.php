@@ -184,9 +184,9 @@ if(isset($_POST) && !empty($_POST) ){
                     //inserts a car with carID from the vehicle database into the
                     //logged in user's table in aoUsersDB
                     $dt = intval($_POST['dt']);
-                    $body = 0x0000008;    //intval($_POST['body']);
-                    $inter = 0x00000002;    //intval($_POST['interior']);
-                    $docs = 0x0;    //intval($_POST['docs']);
+                    $body = intval($_POST['body']);
+                    $inter = intval($_POST['interior']);
+                    $docs = intval($_POST['docs']);
                     
                     $rep = intval($_POST['repairs']);
                     
