@@ -24,74 +24,20 @@ var logos = [
 	'napa'
 ];
 var userStats = {
-	fn:'Larry',
+	fn:'',
 	money:0 ,
 	tokens:2,
 	prestige:0,
-	m_marker:0
+	marker:0
 };
 
 function saveUser()
 {	//saves user stats as a JSON string to the browsers local storage
 	if(Storage.local !== null){
 		Storage.local._stats = JSON.stringify(userStats);
-		ajax_post();
 	}
 	//else local storage not available
 }
-
-var amoney;
-var atokens;
-var aprestige;
-var amarkers;
-var fn = "Jerry";
-function ajax_post()
-{
-    // Create our XMLHttpRequest object
-    //var dataStr = ''; //args to pass to script
-
-	
-	/*
-     var amoney = getElementById("money").value;
-     var atokens = getElementById("tokens").value;
-	 var aprestige = getElementById("prestige").value;
-	 var amarkers = getElementById("m_marker").value;
-	*/
-	
-	fn = "Jim";
-	amoney = userStats.money;
-	atokens = userStats.tokens;
-	aprestige = userStats.prestige;
-	amarkers = userStats.m_markers;
-
-    var jqxhr = $.ajax({
-        type:'POST',
-        url:getHostPath() + 'Users/my_parse_file.php',
-        dataType:'json',
-        //data:{money:amoney,tokens:atokens}
-		 data:{fname:fn,money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
-    }).done(function(data){
-        //the response string is converted by jquery into a Javascript object!
-        if(data === null){
-            alert('Error:ajax response returned null!');
-            return;
-        }
-        alert('ajax response received:' + JSON.stringify(data) );
-        //access and set values in the document's html page
-	/*	
-        $('div#statBar label#money').text(data.money);
-        $('div#statBar label#tokens').text(data.tokens);
-        $('div#statBar label#prestige').text(data.prestige);
-        $('div#statBar label#m_marker').text(data.m_marker);*/
-    }).fail(function(jqxhr){
-        //call will fail if result is not properly formatted JSON!
-        alert('ajax call failed! Reason: ' + jqxhr.responseText);
-        //throw exception, game can't work without user stats
-    });
-    
-}
-
-
 function loadUser()
 {	//serialize user stats from local storage, if played previously
 //<php if(loggedIn){>
@@ -100,7 +46,7 @@ function loadUser()
 //else{
 	if(Storage.local !== null){
 		if('_stats' in Storage.local){
-			//userStats = JSON.parse(Storage.local._stats);
+			userStats = JSON.parse(Storage.local._stats);
 			
 		}
 		else{	//no previous save data
@@ -109,13 +55,58 @@ function loadUser()
 				money:50000,
 				tokens:2,
 				prestige:1,
-				m_marker:0
+				marker:0
 			};
 		}
 	}
 //}
 }
 
+var amoney;
+var atokens;
+var aprestige;
+var amarkers;
+//var fn;
+function ajax_post()
+{
+    // Create our XMLHttpRequest object
+    //var dataStr = ''; //args to pass to script
+
+
+	
+	
+	fn = "Jim";
+	amoney = userStats.money;
+	atokens = userStats.tokens;
+	aprestige = userStats.prestige;
+	amarkers = userStats.marker;
+
+    var jqxhr = $.ajax({
+        type:'POST',
+        url:getHostPath() + 'my_parse_file.php',
+        dataType:'json',
+        //data:{money:amoney,tokens:atokens}
+		 data:{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
+    }).done(function(data){
+        //the response string is converted by jquery into a Javascript object!
+        if(data === null){
+            alert('Error:ajax response returned null!');
+            return;
+        }
+        alert('ajax response received:' + JSON.stringify(data) );
+        //access and set values in the document's html page
+		$('div#statBar label#fname').text(data.fname);
+        $('div#statBar label#money').text(data.money);
+        $('div#statBar label#tokens').text(data.tokens);
+        $('div#statBar label#prestige').text(data.prestige);
+        $('div#statBar label#m_marker').text(data.m_marker);
+    }).fail(function(jqxhr){
+        //call will fail if result is not properly formatted JSON!
+        alert('ajax call failed! Reason: ' + jqxhr.responseText);
+        //throw exception, game can't work without user stats
+    });
+    
+}
 //States
 var REPAIR;
 var ADD_FUNDS;

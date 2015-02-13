@@ -1,7 +1,7 @@
 <?php
 
 //Query the database
-require ('mysqli_connect.php');
+require ('config.php');
 
 $q = "SELECT * FROM users WHERE money = 0" ;		
 $result = mysqli_query ($dbcon, $q);

@@ -1,6 +1,6 @@
 <?php
 //main menu.php, uses php to generate CSS, previously GameMenu.css
-header("Content-type: text/css; charset: UTF-8");
+//header("Content-type: text/css; charset: UTF-8");
 //
 require_once 'ui.php';
 //using php require should be faster than css @import

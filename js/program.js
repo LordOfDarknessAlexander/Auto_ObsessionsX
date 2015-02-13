@@ -106,11 +106,12 @@ function auctionMode(deltaTime)
   
 }
 
-
-
-
-
 //js.StatBar = {
+	
+function setName()
+{
+	//$('div#statBar label#fname').text('User: ' + userStats.fn.toString() );
+}	
 function setMoney()
 {
 	$('div#statBar label#money').text('Money: ' + userStats.money.toString() );
@@ -125,11 +126,12 @@ function setPrestige()
 }
 function setMarkers()
 {	//updates html lable element, within context of the Game menu only
-	$('label#mileMarker', jq.Game.menu).text('Mile Markers: ' + userStats.markers.toString() );
+	$('label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
 }
 function setStatBar()
 {
     jq.statBar.show();
+	setName();
 	setMoney();
 	setTokens();
 	setPrestige();
@@ -375,7 +377,7 @@ function switchStates( GAME_MODE)
 	{
 		case SPLASH:
 			splash();
-			garageDoor();
+			
 		break;
 		
 		case MAIN_MENU:
@@ -417,7 +419,7 @@ function switchStates( GAME_MODE)
 function splash() 
 {
   init();
-  
+  garageDoor();
   $('#progress').hide();
   $('#splash').show();
   $('.sound').show();  
@@ -489,7 +491,7 @@ function startGame()
 	
 	setStatBar();
 	setAdBG();
-	ajax_post();
+	//ajax_post();
 	switchStates();
 	
 	if(appState == GAME_MODE.RUNNING)
