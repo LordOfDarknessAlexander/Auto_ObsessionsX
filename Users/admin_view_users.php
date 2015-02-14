@@ -35,7 +35,7 @@ table
 <p>
 <?php 
 // This script retrieves all the records from the users table.
-require ('mysqli_connect.php'); // Connect to the database.
+require ('config.php'); // Connect to the database.
 //set the number of rows per display page
 $pagerows = 4;
 // Has the total number of pages already been calculated?

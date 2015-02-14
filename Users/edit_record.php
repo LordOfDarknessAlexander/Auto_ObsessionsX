@@ -46,7 +46,7 @@ else
 	include ('footer.php'); 
 	exit();
 }
-require ('mysqli_connect.php'); 
+require ('config.php'); 
 // Has the form been submitted?
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {

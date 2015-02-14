@@ -24,7 +24,7 @@ p { text-align:center; }
 <h2>Search Result</h2>
 <?php 
 // This code retrieves records from the users table.
-require ('mysqli_connect.php'); // Connect to the db.
+require ('config.php'); // Connect to the db.
 echo '<p>If no record is shown, this is because you had an incorrect or missing entry in the search form.<br>Click the back button on the browser and try again</p>';
 $fname=$_POST['fname'];
 $fname = mysqli_real_escape_string($dbcon, $fname);

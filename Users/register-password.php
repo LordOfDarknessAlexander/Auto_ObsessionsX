@@ -20,7 +20,7 @@ p.error { color:red; font-size:105%; font-weight:bold; text-align:center;
 // Was the form submitted?
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
-	require ('./mysqli_connect.php'); // Connect to the database
+	require ('./config.php'); // Connect to the database
 	$errors = array(); // Start an array to contain the error messages
 	// Is the email address present
 	if (empty($_POST['email'])) 
