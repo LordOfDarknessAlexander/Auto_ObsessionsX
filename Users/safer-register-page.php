@@ -12,12 +12,12 @@
 <body>
 <div id="container">
 <?php
-    include 'includes/login-header.php';
+    require 'includes/login-header.php';
     
 ?>
 <div id="content"><!-- Start of the login page content. -->
 <?php
-require ('config.php'); // Connect to the database
+require ('./config.php'); // Connect to the database
 
 // This code inserts a record into the users table
 // Has the form been submitted?

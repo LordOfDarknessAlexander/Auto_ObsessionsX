@@ -25,7 +25,7 @@ table, tr { width:850px; }
 <h2>Search Result</h2>
 <?php 
 // This script fetches selected records from the users table.
-require ('config.php'); // Connect to the database.
+require ('./config.php'); // Connect to the database.
 echo '<p>If no record is shown, this is because you had an incorrect or missing entry in the search form.<br>Please click the Search button and try again</p>';
 $fname = mysqli_real_escape_string($dbcon, $fname );
 $fname=$_POST['fname'];
