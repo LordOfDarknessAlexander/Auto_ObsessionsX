@@ -72,8 +72,11 @@ if( mysqli_num_rows($result) != 0)
 else
 {
 	echo "No Results";
+	// If there was a problem.
+		echo '<p class="error">Please try again.</p>';
 	//exit();
 }
+//mysqli_close($dbcon);
 ?>
 
 <div id="mid-left-col">

@@ -5,14 +5,14 @@
 <!doctype html>
 <html lang=en>
 <head>
-<title>The Login page</title>
+<title>Register</title>
 <meta charset=utf-8>
 <link rel="stylesheet" type="text/css" href="includes.css">
 </head>
 <body>
 <div id="container">
 <?php
-    require 'includes/login-header.php';
+    require 'includes/register-header.php';
     
 ?>
 <div id="content"><!-- Start of the login page content. -->
@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	}// End of if (empty($errors))
 } // End of the main Submit conditionals
 ?>
-<div id="midcol">
+<div id="midcol2">
     <h2>Membership Registration</h2>
     <h3 class="content">Items marked with an asterisk * are essential</h3>
 	<form action="safer-register-page.php" method="post">
