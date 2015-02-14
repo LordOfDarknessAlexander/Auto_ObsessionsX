@@ -31,18 +31,18 @@ canvas
  h1 
 {
   color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;margin-left: 10%; position: relative;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;margin-left: 10%; position: relative; 
 }
-h2 { font-size:150%; color:red; text-align:left; position: relative;
+h2 { font-size:150%; color:red; text-align:left ;top : 20%; margin-top : -18%;
 }
 h3 { font-size:110%; color:white; text-align:center; position: relative;
 }
 
-ul { position:relative; top:60%; left:58%; color:#52005C; width:60%; text-align:center; margin:0;
+ul { position:relative; top:40%; left:58%; color:#52005C; width:60%; text-align:center; margin:0;
 }
-#container { position:relative;  width:100%; height: 100%;margin:auto; text-align:left;	margin-left: 0%;
+#container { position:relative;  width:100%; height: 100%;margin:auto; text-align:left;	margin-left: 0%; 
 }
-#nav ul { position:relative; margin-top:50%; left:2%; color:navy; width:80%; text-align:center; margin:0;
+#nav ul { position:relative; top: 20%; left:2%; color:navy; width:80%; text-align:center; margin:0;
 }
 #info-col 
 { 
@@ -69,16 +69,16 @@ li a:hover { display:block;  background: url('../images/defaultBtn2.png') no-rep
 /* onmousedown */
 li a:active { background:#aecbff; border: 4px inset #aecbff;position: relative;
 }
-#reg-navigation ul { margin-right: 50%;
-	font-size:medium; width:10%; margin:10% 15px 0 88s%; margin-top: 2%;position: relative;
+#reg-navigation ul { margin-right: 60%;
+	font-size:medium; width:10%; margin:10% 15px 0 88s%; bottom: 50%;position: relative;
 }
-#midcol {width:80%; margin:auto;position: relative;}
+#midcol {width:80%; margin:auto;position: abosolute;top: 0%;  margin-top: -40%;}
 #midcol2 {width:80%; margin:auto;position: relative; top: -22%;}
 #mid-left-col { width:36%; float:left; text-align:left; position: relative;
 }
 #mid-right-col {width:36%; float:right; text-align:left; position: relative;
 }
-#content { 	margin-left:25%; margin-right:25%; margin-top : -5%; position: relative;
+#content { 	margin-left:25%; margin-right:25%; top : 15%; position: abosolute;
 }
 table { width:800px; border:1px white solid; border-collapse:collapse; margin-left: -5%; margin-top: 5%;position: relative;
 }
@@ -86,7 +86,7 @@ td { border:1px white solid; padding:1px 0 1px 4px; text-align:left;position: re
 }
 form { margin-left:-1%; margin-top: 0%; width:100%;position: relative;
 }
-#footer { margin:auto; text-align:center; margin-left: 10%;position: relative; bottom : 10%;
+#footer { margin:auto; text-align:center; margin-left: 10%;position: relative; bottom : 2%;
 }
 p.error { color:red; font-size:100%; font-weight:bold; text-align:left; margin-top: -6%;position: relative;
 }
