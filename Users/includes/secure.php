@@ -9,5 +9,7 @@ function secureLogin()
         exit(); //exit the executing script, not the function, after displaying secure login page
     }
     //else, display the page contents following calls to this function
+	
+	//require ('playerData.php');
 }
 ?>

@@ -20,7 +20,7 @@ if( isset( $_POST) )
 		}
 		else
 		{
-		  echo '{"money":"' . $money . '", "tokens":"' . $tokens . '"}';
+		  echo '{"money":"' . $money . '", "tokens":"' . $tokens . '","prestige":"' . $prestige . ',"m_marker":"' . $marker . '"}';
 	
 		}
 		mysqli_close($dbcon);	
@@ -42,7 +42,7 @@ if( isset( $_POST) )
 		}
 		else
 		{
-		  echo '{"money":"' . $money . '", "tokens":"' . $tokens . '"}';
+		  echo '{"money":"' . $money . '", "tokens":"' . $tokens . '","prestige":"' . $prestige . ',"m_marker":"' . $marker . '"}';
 	
 		}
 		mysqli_close($dbcon);	

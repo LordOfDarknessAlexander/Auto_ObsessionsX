@@ -1,7 +1,7 @@
 <?php
 
 //Query the database
-require ('config.php');
+require ('Users/config.php');
 
 $q = "SELECT * FROM users WHERE money = 0" ;		
 $result = mysqli_query ($dbcon, $q);
@@ -19,6 +19,8 @@ if( mysqli_num_rows($result) != 0)
 		$prestige = $rows['prestige'];
 		
 		echo "<div id ='playerData'> <p>Player: $fname <br> Money: $money <br> Mile Markers: $m_marker <br> Tokens: $tokens<br> Prestige: $prestige</p></div>";
+		//echo "<div id ='playerData'> <p>Player: $fname </div>";
+
 	}
 }
 else
