@@ -526,7 +526,7 @@ Auction.sold = function()
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
 	
-	jq.Loss.menu.show();
+	jq.Sold.menu.show();
 	
     assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
@@ -542,7 +542,7 @@ Auction.sold = function()
 	else
 	{
 		endGame = true;
-	    $('div#loss label').text(Auction._car.getFullName() );
+	 //   $('div#loss label').text(Auction._car.getFullName() );
 
 		
 	}
@@ -583,7 +583,8 @@ Auction.sold = function()
 	}
 	else
 	{
-		$('div#loss label').show();
+		//$('div#loss label').show();
+		$('div#sold label').text(Auction._car.getFullName() );
 	}
 	//Auction.close();
 	//init();
