@@ -46,7 +46,8 @@ var Drivetrain = {
                 ) * 0.25;   //average of all parts
             },
             getPartType:function(type){
-                //returns a copy of the object
+                //returns a copy of the object,
+                //returning from a switch does not require break statements
                 switch(type){
                     case(Drivetrain.TYPE.engine):
                         return this._engine;
@@ -56,10 +57,10 @@ var Drivetrain = {
                     break;
                     case(Drivetrain.TYPE.axel):
                         return this._axel;
-                    break;
+                    
                     case(Drivetrain.TYPE.exhaust):
                         return this._exhaust;
-                    break;
+                    
                     //fuel:
                     default:
                         console.log('unknow type: ' + type.toString() );

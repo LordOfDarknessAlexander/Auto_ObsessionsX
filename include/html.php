@@ -10,6 +10,11 @@ class html
 <meta charset='UTF-8'>
 <?php
     }
+    public static function keywords($str){
+        //injects keywords meta-tag at call site?>
+        <meta name='keywords' content='<?php echo $str;?>'>
+<?php
+    }
     public static function title($str){
         //injects html title tag at call site?>
         <title><?php echo $str;?></title>
@@ -25,7 +30,7 @@ class html
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,orientation=portrait">
 <?php
     html::charset();
-    //<meta name'keywords' content='Car, Auction'>
+    //html::keywords('Car, Auction, upgrades, hotrods, muscle cars');
     html::title($PAGE_TITLE);
     require_once 'meta.php';    //if no CSS, JS or additional scripts are needed leave file empty
 ?>

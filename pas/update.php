@@ -191,11 +191,26 @@ if(isset($_POST) && !empty($_POST) ){
                     $rep = intval($_POST['repairs']);
                     
                     $tableName = 'user' . strval(0);    //$_SESSION['userID'];
-                    $res = $aoUsersDB->query(
-                        "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
-                    );
                     
-                    echo json_encode($res);
+                    static $stmnt = $aoUsersDB->prepare(
+                        "UPDATE ? SET drivetrain=?, body=?, interior=?, docs=?, repairs=? WHERE car_id = ?"
+                    );
+                    if($stmnt){
+                        if($stmnt->bind_param('siiiiii', $tableName, $dt, $body, $inter, $docs $rep, $carID) ){
+                            $res = stmnt->execute();
+                    
+                            //if(!$res){
+                                //output sql error as json
+                            //}
+                            echo json_encode($res);
+                            //}
+                        }
+                    }
+                    //$res = $aoUsersDB->query(
+                        //"UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
+                    //);
+                    
+                    //echo json_encode($res);
                     //}
                 }
                 //else switch to other calls

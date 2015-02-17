@@ -43,6 +43,10 @@ function auctionGen()
 			this._expired = true;
 			this._date.end = Date.now() * 0.0001;
 			this._curTime = 0.0;
+            //while loops are bad practice, prone to misuse and infinite loops.
+            //using array.pop() method is bad, is slow as the array must be
+            //reallocated when the array is resized and can cause memory fragmentation issues!
+            //use _ai = [], or delete _ai to reset or delete the memory, respectfully
 			while(this._ai.length) { this._ai.pop(); }
 		},
 		update:function(dt)
@@ -106,6 +110,16 @@ function auctionGen()
 			//this._expired = this._date.end === null ? false : true;
 			//this._car.id = Storage.local[''];
 			//this._curTime = this._date.end === null ? Storage.local[''] : 0.0;
+//<php
+//if(loggedin){>
+            //load stored auctions from sql database, using pas
+//<php
+//}
+//else{ //playing as guest>
+            //load from local storage
+//<php
+//}
+//>
 		},
 		save:function()
 		{
@@ -114,6 +128,16 @@ function auctionGen()
 			//this._expired;
 			//this._car.id;
 			//this._curTime;
+//<php
+//if(loggedin){>
+            //save all previous and active auctions to sql database, using pas
+//<php
+//}
+//else{ //playing as guest>
+            //save all previous and active auctions to local storage
+//<php
+//}
+//>
 		},
 		enemyBidding : function()
 		{	//determine 

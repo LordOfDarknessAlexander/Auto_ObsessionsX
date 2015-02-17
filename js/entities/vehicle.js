@@ -76,9 +76,9 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo)
         //_parts:{
             //parts with value null, mean user hasn't purchase/installed part
         _dt:Drivetrain.make(Price),
-        _body:null, //Body.make(Price),
-        _interior:null, //Interior.make(Price),
-        _docs:null, //Documents.make(Price)
+        _body:Body.make(Price),  //null,
+        _interior:Interior.make(Price), //null,
+        _docs:Documents.make(Price), //null
         //}
 		//image : img,
 		//getters
