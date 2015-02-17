@@ -80,7 +80,7 @@ var AuctionSelect =
 		//
         $.ajax({
             type:'GET',
-            url:getHostPath() + 'pas/query.php?op=asc',
+            url:getHostPath() + 'vehicles/query.php?op=asc',
             dataType:'json',
             data:'',    //{carID:obj.carID}
         }).done(function(data){

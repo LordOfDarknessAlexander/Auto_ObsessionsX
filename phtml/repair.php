@@ -73,15 +73,15 @@
         <br>
         Paint:
         <button id='ubPaint' class='ub'></button>
-        <button id='rbPaint' class='rb'></button>
+        <button id='rbPain't class='rb'></button>
         <br>
         <progress id='pbPaint' value='0.0'></progress>
         <br>
         PLACEHOLDER:
-        <button id='ubPH0' class='ub'></button>
-        <button id='rbPH0' class='rb'></button>
+        <button id='ubBtn3' class='ub'></button>
+        <button id='rb3' class='rb'></button>
         <br>
-        <progress id='pbPH0' value='0.0'></progress>
+        <progress id='pb3' value='0.0'></progress>
         <br>
         <!--PLACEHOLDER:
         <button id='ubBtn4' class='ub'></button>

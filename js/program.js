@@ -19,27 +19,22 @@ var AutoObessesions = {};
 		//Storage.local._lastAllowance = time.toString();
 	//}
 //}
-var pas = {
-    //namespace encapsulating AJAX requests for php pages which execute SQL commands,
-    //which return/echo JSON strings
+var sql = {
+    //namespace encapsulating AJAX requests calling SQL commands via a php page
     insertCar:function(vehicleID){
-        //inserts vehicle with id vehicleID  into user's table in aoUserDB, unmodified
-        //after user wins an auction
-        var funcName = 'pas::insertCar(vehicleID)';
-        
         $.ajax({
             type:'POST',
-            url:getHostPath() + 'pas/update.php?op=insert',
+            url:getHostPath() + 'vehicles/update.php?op=insert',
             dataType:'json',
             data:{carID:vehicleID}
         }).done(function(data){
             //the response string is converted by jquery into a Javascript object!
             if(data === null){
-                alert(funcName + ', Error:ajax response returned null!');
+                alert('sql::insertCar(), Error:ajax response returned null!');
                 //finished = true;
                 return;
             }
-            alert(funcName + ', Inserting Car into user database! ajax response success!' + JSON.stringify(data) );
+            alert('sql::insertCar(), Inserting Car into user database! ajax response success!' + JSON.stringify(data) );
             //car added remove from Auction
             Auction._car = null;
             //userGarage.push(Auction._car);
@@ -49,7 +44,7 @@ var pas = {
             init();
         }).fail(function(jqxhr){
             //call will fail if result is not properly formated JSON!
-            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+            alert('sql::insertCar(), ajax call failed! Reason: ' + jqxhr.responseText);
             //console.log('loading game resources failed, abort!');
             //finished = true;
             Auction._car = null;
@@ -115,7 +110,7 @@ function auctionMode(deltaTime)
 	
 function setName()
 {
-	//$('div#statBar label#fname').text('User: ' + userStats.fn.toString() );
+	$('div#statBar label#fname').text('User: ' + userStats.fn.toString() );
 }	
 function setMoney()
 {
@@ -551,7 +546,7 @@ Auction.sold = function()
 		$('div#sold label').text(Auction._car.getFullName() );
 //<php
 //if(loggedIn){>
-        pas.insertCar(Auction._car.id);
+        sql.insertCar(Auction._car.id);
 //<php
 //}
 //else{?>

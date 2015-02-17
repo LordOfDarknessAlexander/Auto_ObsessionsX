@@ -13,7 +13,8 @@ $TD_NAME = "Tyler Drury";
 $AS_NAME = "Alexander Sanchez";
 $AB_NAME = "Andrew Best";
 $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-?>
+
+?>	
 <div class="wrapper">
 	<!--root div element of web page!-->	
     <div class="sound sound-off"></div>
@@ -27,19 +28,19 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         <div id="splash">
             <h2><?php echo $OWNER_NAME." and ".$AO_NAME." Presents!";?></h2>
         </div>
-     
         <div id="main">
             <h1><?php echo $AO_NAME;?></h1>
            
              <div id="login">
-				<form method="post" action="Users/login.php">
+				<form  action="Users/login.php" method="post">
 				  <p> USER NAME <input type="text" name="username"></p>
 				  <p> PASSWORD <input type="password" name="pword"></p>
-				  <p><input type="submit"  name="submit" value="Log In"></p>
+				  <p><input type="submit" name="submit" value="Log in"></p>
 				</form>
+					
             </div>
             <ul>
-               <li><a href="javascript:void(0)" class="button play">Play as Guest</a></li>
+               <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
                <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
                <li><a href="javascript:void(0)" class="button Register">Register</a></li>
             </ul>
