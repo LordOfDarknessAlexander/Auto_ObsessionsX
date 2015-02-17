@@ -50,7 +50,7 @@ function carPart(carPrice, partType){   //partType
             console.log('repair part!');
             if(!this._repaired){
                 var p = this.getRepairPrice();
-                //if(userstats.moeny >= p){
+                //if(userStats.money >= p){
                     this._repaired = true;
                     //userStats.moeny -= p;
                 //}

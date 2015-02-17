@@ -254,7 +254,7 @@ var Repair = {
                 alert(funcName + ', Error:ajax response returned null!');
                 return;
             }
-            alert(funcName + ', ajax response success! ' + JSON.stringify(data) );
+            //alert(funcName + ', ajax response success! ' + JSON.stringify(data) );
             //do stuff
             Garage.save();    //save updates to user cars in local storage
         }).fail(function(jqxhr){

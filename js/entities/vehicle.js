@@ -4,7 +4,7 @@
 //values are between 00 and FF, allowing for 255x255x255 unique vehicles
 //ID's can be procedurally generated!
 //namespace AO
-function Vehicle(Name, Make, Year, Price, carID, carInfo, parts)
+function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 {
     if(carID === null || carID === undefined){
         carID = 0x0;
@@ -14,6 +14,9 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts)
     }
     if(parts === null || parts === undefined){
         parts = null;
+    }
+    if(repairs === null || repairs === undefined){
+        repairs = 0x0;
     }
     
 	this.fromJSON = function(str)
@@ -29,10 +32,40 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts)
 	//var bfParts = parseInt(carNode.attr('parts') );
 	//var carNode
 	
-	var dt = null;
+	var dt = null,
+        body = null,
+        inter = null,
+        docs = null;
     
     if(parts !== null){
-        dt = Drivetrain.make(Price, parts.drivetrain);
+        if(parts.drivetrain){
+            dt = Drivetrain.make(Price, parts.drivetrain);
+        }
+        if(parts.body){
+            //body = Body.make(Price, parts.body);
+        }
+        if(parts.interior){
+            //inter = Interior.make(Price, parts.interior);
+        }
+        if(parts.docs){
+            //docs = Documents.make(Price, parts.docs);
+        }
+        
+        if(repairs){
+            if(dt !== null){
+                //dt.setRepairs( (repairs >> 12) & 0xF);
+            }
+            if(body !== null){
+                //body.setRepairs( (repairs >> 8) & 0xF);
+            }
+            if(inter !== null){
+                //inter.setRepairs( (repairs >> 4) & 0xF);
+            }
+            if(docs !== null){
+                //docs.setRepairs( (repairs >> 0) & 0xF);
+            }
+            //console.log(ret.toString());
+        }
     }
 
 	return {
@@ -75,9 +108,9 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts)
 			//values in range [0.0,1.0]
 			return {
 				_driveterrain:this._dt !== null ? this._dt.getPercentAvg() : 0.0,
-				_body:this._body !== null ? this._body.getPercentAvg() : 0.23,			//this._body.completion()
-				_interior:this._interior !== null ? this._interior.getPercentAvg() : 0.62,
-				_docs:this._docs !== null ? this._docs.getPercentAvg() : 0.73
+				_body:this._body !== null ? this._body.getPercentAvg() : 0.0,			//this._body.completion()
+				_interior:this._interior !== null ? this._interior.getPercentAvg() : 0.0,
+				_docs:this._docs !== null ? this._docs.getPercentAvg() : 0.0
 			};
 		},
 		displayInfo : function(){

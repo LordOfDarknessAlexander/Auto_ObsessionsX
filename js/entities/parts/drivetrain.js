@@ -17,7 +17,7 @@ var Drivetrain = {
     make:function(carPrice, parts, repairs){
         //creates a new car part of type Drivetrain
         var bits = 0x0000,
-            rb = 0x0000;
+            rb = 0x0;
         
         if(parts === null || parts === undefined){
             bits = 0x0000;
@@ -27,7 +27,7 @@ var Drivetrain = {
         }
         
         if(repairs === null || repairs === undefined){
-            rb = 0x0000;
+            rb = 0x0;
         }
         else{
             rb = repairs;
@@ -60,6 +60,25 @@ var Drivetrain = {
             }
         }
         //else bits === 0, no upgrades so skip
+        if(repairs){
+            var enb = (repairs & 0x8) ? true : false;
+                tb = (repairs & 0x4) ? true : false;
+                ab = (repairs & 0x2) ? true : false;
+                exb = (repairs & 0x1) ? true : false;
+            
+            if(enb){
+                engine._repaired = true;
+            }
+            if(tb){
+                trans._repaired = true;
+            }
+            if(ab){
+                axel._repaired = true;
+            }
+            if(exb){
+                exhaust._repaired = true;
+            }
+        }
         
         return {
             _engine:eng,
@@ -158,6 +177,7 @@ var Drivetrain = {
                     break;
                 }
             },
+            //setRepairs(repairs)
             getCondition:function(){
                 //returns the condition as a value between 0.0-1.0
                 var ret = 0;

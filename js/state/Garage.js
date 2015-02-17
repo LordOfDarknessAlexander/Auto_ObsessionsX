@@ -110,6 +110,7 @@ var Garage = {
 		else{
 			Garage.setCurrentCar();
         }
+        
 		if(selCarIndex === null){
 			$('div#selectedCar').hide();
         }
@@ -244,58 +245,79 @@ var Garage = {
 		//if(obj !== null && !== 'undefined')
 			//selCarIndex = obj.data.index;
 	//},
+    setCurrentCarStats:function(){
+        if(this._curCarIndex !== null){
+            var car = userGarage[this._curCarIndex],
+                stats = car.getStats();
+            
+            $('div#userCar img#carImg').attr('src', car.getFullPath() );
+            $('div#userCar label#carName').text(car.getFullName() );;
+            $('div#userCar label#carInfo').text(car.getInfo() );
+            
+            function set(jqo, value)
+            {
+                if(value <= 0.3){
+                    jqo.css('background', '#ff0000');
+                }
+                else if(value > 0.3 && value <= 0.6){
+                    jqo.css('background', '#ffff00');
+                }
+                else if(value > 0.6 && value <= 1.0){
+                    jqo.css('background', '#00ff00');
+                }
+                    
+                jqo.attr('value', value.toString());
+            }
+            //set progress bar
+            set($('progress#drivetrainPB'), stats._driveterrain);
+            set($('progress#bodyPB'), stats._body);
+            set($('progress#interiorPB'), stats._interior);
+            set($('progress#docsPB'), stats._docs);
+        }
+    },
+    setCurrentIndex:function(){
+        if(selCarIndex === null){
+			return;	//no selected car, do nothing
+        }
+		if(selCarIndex < userGarage.length){
+            Garage._curCarIndex = selCarIndex;	//maintain index, instead of copying a car
+        }
+    },
 	setCurrentCar : function()
 	{
-		if(selCarIndex === null)
-			return;	//no selected car, do nothing
-	
-		if(selCarIndex < userGarage.length)
-		{
-			var i = selCarIndex;
-			var btn = $('#userCar');
-			var src = $('#carSelBtn' + i);
-		
-			//show user car stats div
-			Garage._curCarIndex = i;	//maintain index, instead of copying a car
-            //save index
+        this.setCurrentIndex();
+        
+		if(this._curCarIndex !== null){
+            var i = this._curCarIndex,
+                btn = $('#userCar'),
+                src = $('#carSelBtn' + i);
+//<php
+//if(loggedIn){>
+            //save to car ID to final post using ajax
+//<php
+//}
+//else{>
+            //playing as guest, save to local storage
             if(Storage.local !== null){
                 Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
                 //alert("current car is at index:" + Garage._curCarIndex.toString() );
             }
+//<php
+//}
+//>
 			//
 			btn.children('label#carName').text(src.children('label#carName').text() );
 			btn.children('label#carInfo').text(src.children('label#carInfo').text() );
 			//btn.children('label#name').text(src.children('label#name').text() );
 			
-			var car = userGarage[i],
-				stats = car.getStats();
-			
-			$('div#userCar img#carImg').attr('src', car.getFullPath() );
-			$('div#userCar label#carName').text(car.getFullName() );;
-			$('div#userCar label#carInfo').text(car.getInfo() );
-			
-			function set(jqo, value)
-			{
-				if(value <= 0.3){
-					jqo.css('background', '#ff0000');
-				}
-				else if(value > 0.3 && value <= 0.6){
-					jqo.css('background', '#ffff00');
-				}
-				else if(value > 0.6 && value <= 1.0){
-					jqo.css('background', '#00ff00');
-				}
-					
-				jqo.attr('value', value.toString());
-			}
-			//set progress bar
-			set($('progress#drivetrainPB'), stats._driveterrain);
-			set($('progress#bodyPB'), stats._body);
-			set($('progress#interiorPB'), stats._interior);
-			set($('progress#docsPB'), stats._docs);
+			this.setCurrentCarStats();
 			
 			$('div#Garage #userCar').show();
 		}
+        else{
+            //no current car
+            $('div#Garage #userCar').hide();
+        }
 	},
 	setSelectCar : function(index)
 	{
