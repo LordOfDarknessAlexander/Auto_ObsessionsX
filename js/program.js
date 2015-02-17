@@ -534,18 +534,10 @@ Auction.sold = function()
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
 	
-	if(playerWon)
-	{
-		auctionEnded = true;
-		auctionOver = true;
-	}
-	else
-	{
-		endGame = true;
+	auctionEnded = true;
+	auctionOver = true;
+	endGame = true;
 	 //   $('div#loss label').text(Auction._car.getFullName() );
-
-		
-	}
     
 	//disable user from entering an auction for this car again
 	//in case of unintended bugs, make sure user doesn't already own car
@@ -553,7 +545,7 @@ Auction.sold = function()
 	{
  //not the right object!?
 		jq.Sold.menu.show();
-		$('div#sold label').text(Auction._car.getFullName() );
+		$('div#sold label').text('Congratulations!\nYou won the auction for the ' + Auction._car.getFullName() + '\nGo to the garage to view your prize!\n');
 //<php
 //if(loggedIn){>
         sql.insertCar(Auction._car.id);
@@ -583,8 +575,7 @@ Auction.sold = function()
 	}
 	else
 	{
-		//$('div#loss label').show();
-		$('div#sold label').text(Auction._car.getFullName() );
+		$('div#sold label').text('Unfortunately you have lost the auction for the ' + Auction._car.getFullName() + '\nBetter luck next time!\n');
 	}
 	//Auction.close();
 	//init();

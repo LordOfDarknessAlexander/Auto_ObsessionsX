@@ -69,7 +69,7 @@ var Auction =
 	winningImgY : 34,
 	_car : xdbCars[0],	//null;	////current car being sold, private var of Auction
 	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
-	winningTimerCap : 25.0, //Max amount of time the winningTimer will run for before activating the going timer
+	winningTimerCap : 100.0, //Max amount of time the winningTimer will run for before activating the going timer
 	enemyWinning : false,
 	playerWinning : false,
 	
@@ -109,6 +109,7 @@ var Auction =
                 {
                     console.log(Auction._car.getFullName());
                     vehiclePrice = Auction._car.getPrice();
+					console.log(vehiclePrice);
                     currentBid = vehiclePrice * 0.1;
                     jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
             
@@ -186,7 +187,7 @@ var Auction =
 		playerWon = false;
 		playerBoughtOut = false;
 		goingTimer = 0;
-		winningTimer = 0;
+		this.winningTimer = 0;
 		pGTimer = 0;
 		startPlayerEndBid = false;	//player local
 		playerEndBidTimer = 0;	
@@ -222,7 +223,7 @@ var Auction =
 		{
 			if(this.playerWinning || ai[i].winningBid)
 			{
-				goingTimer++;
+				this.winningTimer++;
 			}
 		}
 	
@@ -309,7 +310,7 @@ var Auction =
 		}
 		//call crowd for the player winning
 		//this.playerGoing();
-		this.going();
+		
 		
 		//current bid HUD
 		//var gorguts;
@@ -323,11 +324,7 @@ var Auction =
 	{
 		player.update();
 		
-		if(playerDidBid &&
-			(playerBid > ai[0]) &&
-			(playerBid > ai[1]) &&
-			(playerBid > ai[2]) &&
-			(playerBid > ai[3]) && (playerEndBidTimer >= ENEMY_WAIT + 100) )
+		if(playerDidBid && (playerBid > ai[0]) && (playerBid > ai[1]) && (playerBid > ai[2]) && (playerBid > ai[3]) && (playerEndBidTimer >= ENEMY_WAIT + 100) )
 		{
 			this.playerGoing();
 			this.playerWinning = true;
@@ -389,8 +386,9 @@ var Auction =
 					if((ai[i].currBid < currentBid) && (ai[i].currBid < ai[i].bidCap))
 					{
 						ai[i].currBid = currentBid + upPerc;
-						winningTimer = 0;
+						this.winningTimer = 0;
 						this.enemyWinning = true;
+						this.playerWinning = false;
 						assetLoader.sounds.bidder.play();
 						break;	//breaks on first available bidder?
 					}
@@ -421,7 +419,7 @@ var Auction =
 			return ret;
 		}
 		function setBid(index)
-		{	//
+		{
 			currentBid = ai[index].currBid;	
 			ai[index].winningBid = true;
 			goingTimer = 0;
@@ -435,15 +433,27 @@ var Auction =
         //check the bids of each AI to determine the highest bid,
         //then setting the state;
 		if(checkBid(0) ){
+			this.winningTimer = 0;
+			this.playerWinning = false;
+			this.enemyWinning = true;
 			setBid(0);
 		}
 		else if(checkBid(1) ){
+			this.winningTimer = 0;
+			this.playerWinning = false;
+			this.enemyWinning = true;
 			setBid(1);
 		}
 		else if(checkBid(2) ){
+			this.winningTimer = 0;
+			this.playerWinning = false;
+			this.enemyWinning = true;
 			setBid(2);
 		}
 		else if(checkBid(3) ){
+			this.winningTimer = 0;
+			this.playerWinning = false;
+			this.enemyWinning = true;
 			setBid(3);
 		}
 	},
@@ -456,6 +466,8 @@ var Auction =
 			{
 				currentBid = playerBid;
 				startPlayerEndBid = true;
+				this.playerWinning = true;
+				this.enemyWinning = false;
 				goingTimer = 0;
 			}
 			else if(playerBid < ai[i].currBid)
@@ -497,55 +509,61 @@ var Auction =
 		//Going crowd roars someone is about to win the bid
 		//break out of while if someone outbids current bidder or if player does,
 		//breaks out of the while loop and enemyWinning becomes false
-		while((this.playerWinning) || (this.enemyWinning) && (goingTimer < 660))
+		if(this.winningTimer >= this.winningTimerCap)
 		{
-			goingTimer++;
-			
-            if((goingTimer > 0) && (goingTimer < 360))
+			while((this.playerWinning || this.enemyWinning) && (goingTimer < 660) && (!auctionStop))
 			{
-				goingTimer ++
-				context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
-				assetLoader.sounds.going.play();
-				break;
-				
-			}
-			else if((goingTimer > 370) && (goingTimer < 650))
-			{
-				context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
-				assetLoader.sounds.going.play();
-				break;
-	
-			}
-			else if(goingTimer >= 660)
-			{
-				//if(playerWon)
-					//sell car
-				//else
-					//lock-out car from further sale
-				endGame = true;
-				goingTimer = 0;
-				
-                if(this.playerWinning)
+				goingTimer++;
+				if((goingTimer > 0) && (goingTimer < 360))
 				{
-					console.log("Player won");
-					context.fillText( "Sold to player!" ,ENEMY_X + 600 , 310);
+					goingTimer++
+					console.log("Going once");
+					context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
+					assetLoader.sounds.going.play();
+					break;
+					
 				}
-				else if(this.enemyWinning)
+				else if((goingTimer > 370) && (goingTimer < 650))
 				{
-					for(var i = 0; i < ai.length; ++i)
+					console.log("Going twice");
+					context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
+					assetLoader.sounds.going.play();
+					break;
+		
+				}
+				else if(goingTimer >= 660)
+				{
+					//if(playerWon)
+						//sell car
+					//else
+						//lock-out car from further sale
+					endGame = true;
+					goingTimer = 0;
+					
+					if(this.playerWinning)
 					{
-						if(ai[i].winningBid)
+						playerWon = true;
+						console.log("Player won");
+						context.fillText( "Sold to player!" ,ENEMY_X + 600 , 310);
+					}
+					else if(this.enemyWinning)
+					{
+						this.playerWinning = false;
+						playerWon = false;
+						for(var i = 0; i < ai.length; ++i)
 						{
-							console.log("AI won");
-							this.sold();
-							context.fillText("Sold to " + ai[i], ENEMY_X + 600, 310);
-							//$('div#loss label').text(Auction._car.getFullName() );
-
+							if(ai[i].winningBid)
+							{
+								console.log("AI won");
+								context.fillText("Sold to " + ai[i], ENEMY_X + 600, 310);
+								
+							}
 						}
 					}
+					this.sold();
+					//$('div#loss label').text(Auction._car.getFullName() );
+					break;
 				}
-				this.sold();
-				break;
 			}
 		}
 	},	
