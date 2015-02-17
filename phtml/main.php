@@ -80,6 +80,7 @@ $scripts = array(
 	'repair',
     'auction',
     'sold',
+	'loss',
     'funds',
     'garage',
     

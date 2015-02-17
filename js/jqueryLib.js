@@ -126,6 +126,11 @@ var jq = {
         homeBtn:$('div#sold button#homeBtn'),
         garageBtn:$('div#sold button#garageBtn'),
     },
+	 Loss : {
+        menu : $('div#loss'),
+        homeBtn:$('div#loss button#homeBtn'),
+       
+    },
     Profile:{
         menu:$('div#profile'),
         backBtn:$('div#profile button#backBtn'),
