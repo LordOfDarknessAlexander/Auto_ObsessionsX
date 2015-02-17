@@ -68,7 +68,7 @@ function garageDoor()
 function update(deltaTime)
 {
     	//should splash update
-    
+    //userLogged = true;
 	if(auctionOver)
 	{
 		restarted = true;
@@ -82,6 +82,7 @@ function update(deltaTime)
 		userHUD();
 		console.log("User Screen");
 	}
+	userHUD();
 }
 Auction.setup = function()
 {
@@ -125,7 +126,7 @@ function setPrestige()
 	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
 }
 function setMarkers()
-{	//updates html lable element, within context of the Game menu only
+{	//updates html label element, within context of the Game menu only
 	$('label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
 }
 function setStatBar()
@@ -145,7 +146,12 @@ function setAdBG()
 	jq.adBar.attr('src', src);
 	jq.adBar.show();
 }
+function userHUD(fn)
+{
+//context.fillText( "Welcome" +  userStats.fn.toString() , 600 , 270);
 
+	$('label#fname').text('User: ' + userStats.fn.toString() );
+}
 //user Stats
 
 
@@ -440,10 +446,7 @@ function Register()
 	
 	}
 }
-function userHUD(userName)
-{
-	context.fillText( "Welcome" + userText,ENEMY_X + 600 , 270);
-}
+
  
 //Main Menu  
 function mainMenu() 
@@ -492,7 +495,9 @@ function startGame()
 	setStatBar();
 	setAdBG();
 	//ajax_post();
+	
 	switchStates();
+	userHUD();
 	
 	if(appState == GAME_MODE.RUNNING)
 	{
@@ -520,7 +525,8 @@ Auction.sold = function()
 
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
-	jq.Sold.menu.show();
+	
+	jq.Loss.menu.show();
 	
     assetLoader.sounds.bg.pause();
 	assetLoader.sounds.gameOver.currentTime = 0;
@@ -530,19 +536,23 @@ Auction.sold = function()
 	
 	if(playerWon)
 	{
-		auctionEnded = true
+		auctionEnded = true;
 		auctionOver = true;
 	}
 	else
 	{
-		endGame = true
+		endGame = true;
+	    $('div#loss label').text(Auction._car.getFullName() );
+
+		
 	}
     
 	//disable user from entering an auction for this car again
 	//in case of unintended bugs, make sure user doesn't already own car
 	if(playerWon && Auction._car !== null)
 	{
-		//Auction._car is not the right object!?
+ //not the right object!?
+		jq.Sold.menu.show();
 		$('div#sold label').text(Auction._car.getFullName() );
 //<php
 //if(loggedIn){>
@@ -569,7 +579,11 @@ Auction.sold = function()
 //<php
 //}
 //?>
-		//ajax_post();    //get user info from server
+		ajax_post();    //get user info from server
+	}
+	else
+	{
+		$('div#loss label').show();
 	}
 	//Auction.close();
 	//init();
@@ -601,6 +615,7 @@ $('.Register').click(function()
 jq.AuctionSelect.backBtn.click(function() 
 { 	
 	setAdBG();
+	userHUD();
 	setStatBar();
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
@@ -630,6 +645,7 @@ jq.Auction.homeBtn.click(function()
 	setAdBG();
 	ajax_post();
     setHomeImg();
+	userHUD();
 	//var car = Garage.getCurrentCar();
 	
 	//if(car !== null){

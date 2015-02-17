@@ -537,7 +537,10 @@ var Auction =
 						if(ai[i].winningBid)
 						{
 							console.log("AI won");
+							this.sold();
 							context.fillText("Sold to " + ai[i], ENEMY_X + 600, 310);
+							//$('div#loss label').text(Auction._car.getFullName() );
+
 						}
 					}
 				}
