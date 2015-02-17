@@ -78,10 +78,10 @@
         <progress id='pbPaint' value='0.0'></progress>
         <br>
         PLACEHOLDER:
-        <button id='ubBtn3' class='ub'></button>
-        <button id='rb3' class='rb'></button>
+        <button id='ubPH0' class='ub'></button>
+        <button id='rbPH0' class='rb'></button>
         <br>
-        <progress id='pb3' value='0.0'></progress>
+        <progress id='pbPH0' value='0.0'></progress>
         <br>
         <!--PLACEHOLDER:
         <button id='ubBtn4' class='ub'></button>
@@ -125,17 +125,17 @@
     </div>
     <h2 id='docs'>Documentation</h2>
     <div id='docs'>
-        Ownership:<button id='ubOwner' class='ub'></button><br>
-        <progress id='pbOwner' value='0.0'></progress>
+        Ownership:<button id='ubOwnership' class='ub'></button><br>
+        <progress id='pbOwnership' value='0.0'></progress>
         <br>
-        Build Sheet:<button id='ubBuild' class='ub'></button><br>
-        <progress id='pbBuild' value='0.0'></progress>
+        Build Sheet:<button id='ubBuildSheet' class='ub'></button><br>
+        <progress id='pbBuildSheet' value='0.0'></progress>
         <br>
         History:<button id='ubHistory' class='ub'></button><br>
         <progress id='pbHistory' value='0.0'></progress>
         <br>
-        PLACEHOLDER:<button id='ubBtn3' class='ub'></button><br>
-        <progress id='pb3' value='0.0'></progress>
+        PLACEHOLDER:<button id='ubPH0' class='ub'></button><br>
+        <progress id='pbPH0' value='0.0'></progress>
         <br>
         <!--PLACEHOLDER:<button id='ubBtn4' class='ub'></button><br>
         <progress id='pb4' value='0.0'></progress>
