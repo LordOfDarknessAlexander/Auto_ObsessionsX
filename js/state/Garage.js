@@ -1,5 +1,5 @@
-﻿//
-//Repair State interface
+//
+//Garage State interface
 //
 //test, user ca select between 3 cars
 //var currentCar = null;
