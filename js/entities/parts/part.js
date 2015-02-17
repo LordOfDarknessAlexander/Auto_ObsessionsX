@@ -57,6 +57,15 @@ function carPart(carPrice, partType){   //partType
             }
             return this._repaired;
         },
+        setStage:function(stage){
+            stage &= 0x0000000F; //filter all but last 4 bits of 32-bit int
+            if(stage <= carPart.STAGE.pro && this._stage != carPart.STAGE.pro){
+                if(stage > this._stage){
+                    this._stage = stage;
+                    console.log('upgrading part with type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() );
+                }
+            }
+        },
         upgrade:function(){
             //var p = this.getPrice()
             //if(userStats.money >= p){

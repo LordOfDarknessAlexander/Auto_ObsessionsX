@@ -2,43 +2,19 @@
 //the vehicle ID property is a string representation of a bitfield with the sturcture:
 //	0x{DA, 0086, 0A}:{make, year, model}
 //values are between 00 and FF, allowing for 255x255x255 unique vehicles
-//ID's can be prceedurally generated!
+//ID's can be procedurally generated!
 //namespace AO
-/*
-function Driveterain(e,t,da,e,fs)
-{	//return object representing a vehicle's driveterain
-	this.MAX = {
-	//substruct representing static maximum for vehicle upgrades
-	//ENGINE:6,
-	//TRANSMISSION:6,
-	//DRIVE_AXEL:6,
-	//EXHAUST:6,
-	//FUEL_SYSTEM:6
-	};
-	return {
-		//substruct representing surrent upgrades done to a car
-		//ENGINE:e,
-		//TRANSMISSION:t,
-		//DRIVE_AXEL:da,
-		//EXHAUST:e,
-		//FUEL_SYSTEM:fs
-	};
-}
-function carStats()
+function Vehicle(Name, Make, Year, Price, carID, carInfo, parts)
 {
-	return {
-		drivetrain:Drivetrain(),
-		body:carBody(),
-		interior:carInterior(),
-		carDocs:carDocs(),
-	};
-}*/
-function Vehicle(Name, Make, Year, Price, carID, carInfo)
-{
-    if(carID === null || carID === 'undefined')
+    if(carID === null || carID === undefined){
         carID = 0x0;
-    if(carInfo === null || carInfo === 'undefined')
+    }
+    if(carInfo === null || carInfo === undefined){
         carInfo = '';
+    }
+    if(parts === null || parts === undefined){
+        parts = null;
+    }
     
 	this.fromJSON = function(str)
 	{	//'static' method returning a Vehicle serialized from a JSON string
@@ -53,13 +29,11 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo)
 	//var bfParts = parseInt(carNode.attr('parts') );
 	//var carNode
 	
-	//for(var i = 0; i < MAX_PARTS; i++)
-	//{
-		//var index = bfParts & (1 << i);
-		//if(index){
-			//tmpParts.append(carPart(
-		//}
-	//}
+	var dt = null;
+    
+    if(parts !== null){
+        dt = Drivetrain.make(Price, parts.drivetrain);
+    }
 
 	return {
 		//pos:new Vector(VEHICLE_XPOS, VEHICLE_YPOS,0,0)
@@ -75,7 +49,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo)
 		_parts : [],	//only retain currently upgraded parts, array is copied
         //_parts:{
             //parts with value null, mean user hasn't purchase/installed part
-        _dt:Drivetrain.make(Price),
+        _dt:dt,
         _body:Body.make(Price),  //null,
         _interior:Interior.make(Price), //null,
         _docs:Documents.make(Price), //null
@@ -241,6 +215,11 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo)
             //else index out of bounds!
             return false;
         },
+        setUpgrades:function(data){
+            if(data.drivetrain){
+                this._dt = Drivetrain.make(this._price, data.drivetrain);
+            }
+        },
         upgradePart:function(type){
             //adds part to vehicle if not already, otherwise upgrade the part
             var part = this.getPart(type);
@@ -282,7 +261,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo)
 Vehicle.fromDB = function(dbCar, userCar)
 {
     //console.log('creating car from database');
-    var ret = Vehicle(dbCar.name,dbCar.make,dbCar.year,dbCar.price, dbCar.id, dbCar.info);
+    var ret = Vehicle(dbCar.name,dbCar.make,dbCar.year,dbCar.price, dbCar.id, dbCar.info, userCar);
     console.log('creating car from database: ' + JSON.stringify(ret) );
     //ret.upgrade(userCar.parts);
     //ret.repair(userCar.repairs);

@@ -9,20 +9,34 @@ require_once '../include/dbConnect.php';  //sql database connection
 //secure::loggin();
 //
 function hasCar($id){
+    //does the user's table in aoUsersDB already have an entry with car_id '$id'
     global $aoUsersDB;
     
     $ret = false;
-    $tableName = 'user' . strval(0);    //$_SESSION['userID'];
-    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    $tableName = 'user' . strval(0);    //'user' . strval($_SESSION['userID']);
+    //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    static $_hasCar = $aoUsersDB->prepare("SELECT * FROM ? WHERE car_id = ?");
     
-    if($res){
-        //user has car
-        $ret = mysqli_num_rows($res) != 0 ? true : false;
+    if($_hasCar){
+        if($_hasCar->bind_param('si', $tableName, $id) ){
+            $ret = $_hasCar->execute();
+        }
+        else{
+            //failed sending params to server for binding
+        }
     }
-    //else{
-        //query failed, user has no entry in database
-    //}
-    mysqli_free_result($res);
+    else{
+        //attempt normal, slow, less secure sql calls
+        //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+        //if($res){
+            //user has car
+            //$ret = mysqli_num_rows($res) != 0 ? true : false;
+        //}
+        //else{
+            //query failed, user has no entry in database
+        //}
+        //mysqli_free_result($res);
+    }
     
     return $ret;
 }
@@ -88,6 +102,18 @@ function getCarFromID($carID){
     //selects a vehicle from the car database,
     //returning it as a JSON object string
     global $AO_DB;
+    //using prepared statements
+    /*static $_getCarFromID = $AO_DB->prepare(
+        "SELECT * FROM aoCars WHERE car_id = ?"
+    );
+    if($_getCarFromID){
+        if($_getCarFromID->bind_params('i', $carID)){
+            if($_getCarFromID->execute() ){
+                $res = $_getCarFromID->get_result();
+            }
+        }
+    }
+    */    
     $res = $AO_DB->query(
         "SELECT * FROM aoCars WHERE car_id = $carID"
     );

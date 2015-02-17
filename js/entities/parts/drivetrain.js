@@ -14,13 +14,58 @@ var Drivetrain = {
         exhaust:3,
         //fuel:
     },
-    make:function(carPrice){
+    make:function(carPrice, parts, repairs){
         //creates a new car part of type Drivetrain
+        var bits = 0x0000,
+            rb = 0x0000;
+        
+        if(parts === null || parts === undefined){
+            bits = 0x0000;
+        }
+        else{
+            bits = parts;
+        }
+        
+        if(repairs === null || repairs === undefined){
+            rb = 0x0000;
+        }
+        else{
+            rb = repairs;
+        }
+        
+        var eng = carPart(carPrice * 0.32, this.TYPE.engine),
+            trans = carPart(carPrice * 0.23, this.TYPE.trans),
+            axel = carPart(carPrice * 0.29, this.TYPE.axel),
+            exhaust = carPart(carPrice * 0.12, this.TYPE.exhaust);
+            
+        if(bits){
+            var engBF = (bits & 0xF000) >> 12,
+                transBF = (bits & 0x0F00) >> 8,
+                axelBF = (bits & 0x00F0) >>  4,
+                exhaustBF = (bits & 0x000F) >> 0;
+            
+            
+            if(engBF){
+                //field is not zero, so upgrade
+                eng.setStage(engBF);
+            }
+            if(transBF){
+                trans.setStage(transBF);
+            }
+            if(axelBF){
+                axel.setStage(axelBF);
+            }
+            if(exhaustBF){
+                exhaust.upgrade(exhaustBF);
+            }
+        }
+        //else bits === 0, no upgrades so skip
+        
         return {
-            _engine:carPart(carPrice * 0.32, this.TYPE.engine),
-            _trans:carPart(carPrice * 0.23, this.TYPE.trans),
-            _axel:carPart(carPrice * 0.29, this.TYPE.axel),
-            _exhaust:carPart(carPrice * 0.12, this.TYPE.exhaust),
+            _engine:eng,
+            _trans:trans,
+            _axel:axel,
+            _exhaust:exhaust,
             //_fuel:carPart(carPrice * 0.12, dt.fuel),
             //
             getBits:function(){
@@ -38,12 +83,14 @@ var Drivetrain = {
             //},
             getPercentAvg:function(){
                 //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
-                return (
+                var ret = (
                     this._engine.getPercent() +
                     this._trans.getPercent() +
                     this._axel.getPercent() +
                     this._exhaust.getPercent()
-                ) * 0.25;   //average of all parts
+                ) * 0.25;
+                
+                return ret;
             },
             getPartType:function(type){
                 //returns a copy of the object,

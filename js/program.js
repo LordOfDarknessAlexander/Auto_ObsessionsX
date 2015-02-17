@@ -19,9 +19,11 @@ var AutoObessesions = {};
 		//Storage.local._lastAllowance = time.toString();
 	//}
 //}
-var sql = {
+var pas = {
     //namespace encapsulating AJAX requests calling SQL commands via a php page
     insertCar:function(vehicleID){
+        var funcName = 'pas::insertCar(vehicleID)';
+        
         $.ajax({
             type:'POST',
             url:getHostPath() + 'vehicles/update.php?op=insert',
@@ -30,11 +32,11 @@ var sql = {
         }).done(function(data){
             //the response string is converted by jquery into a Javascript object!
             if(data === null){
-                alert('sql::insertCar(), Error:ajax response returned null!');
+                alert(funcName + ', Error:ajax response returned null!');
                 //finished = true;
                 return;
             }
-            alert('sql::insertCar(), Inserting Car into user database! ajax response success!' + JSON.stringify(data) );
+            alert(funcName + ', Inserting Car into user database! ajax response success!' + JSON.stringify(data) );
             //car added remove from Auction
             Auction._car = null;
             //userGarage.push(Auction._car);
@@ -44,7 +46,7 @@ var sql = {
             init();
         }).fail(function(jqxhr){
             //call will fail if result is not properly formated JSON!
-            alert('sql::insertCar(), ajax call failed! Reason: ' + jqxhr.responseText);
+            alert(funcname + ', ajax call failed! Reason: ' + jqxhr.responseText);
             //console.log('loading game resources failed, abort!');
             //finished = true;
             Auction._car = null;
@@ -548,7 +550,7 @@ Auction.sold = function()
 		$('div#sold label').text('Congratulations!\nYou won the auction for the ' + Auction._car.getFullName() + '\nGo to the garage to view your prize!\n');
 //<php
 //if(loggedIn){>
-        sql.insertCar(Auction._car.id);
+        pas.insertCar(Auction._car.id);
 //<php
 //}
 //else{?>

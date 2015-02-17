@@ -43,7 +43,8 @@ function VehicleFromDB(obj){
     //if(DEBUG){?>
         //log vars for debugging
         //alert('VehicleFromDB():ajax response recieved: ' + JSON.stringify(obj) + ' ' + JSON.stringify(data) );
-        //var car = Vehicle(data.name,data.make,data.year,data.price, data.id, data.info);
+        //var car = Vehicle.fromDB(data.name,data.make,data.year,data.price, data.id, data.info);
+        var car = Vehicle.fromDB(data, obj);
         //console.log('creating car from database: ' + JSON.stringify(car) );
         //car.upgrade(obj.parts);
         //car.repair(obj.repairs);
@@ -51,7 +52,7 @@ function VehicleFromDB(obj){
 //<php
 //}
 //else{
-        userGarage.push(Vehicle(data.name,data.make,data.year,data.price, data.id, data.info) );
+        userGarage.push(car);//Vehicle.fromDB(data, obj);
 //}
 //>
     }).fail(function(jqxhr){

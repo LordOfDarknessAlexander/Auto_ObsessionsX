@@ -13,16 +13,29 @@ function hasCar($id){
     
     $ret = false;
     $tableName = 'user' . strval(0);    //$_SESSION['userID'];
-    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    static $_hasCar = $aoUsersDB->prepare("SELECT * FROM ? WHERE car_id = ?");
     
-    if($res){
-        //user has car
-        $ret = mysqli_num_rows($res) != 0 ? true : false;
+    if($_hasCar){
+        if($_hasCar->bind_param('si', $tableName, $id) ){
+            $ret = $_hasCar->execute();
+        }
+        else{
+            //failed sending params to server for binding
+        }
     }
-    //else{
-        //query failed, user has no entry in database
-    //}
-    mysqli_free_result($res);
+    else{
+        //attempt normal, slow, less secure sql calls
+        //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+        //if($res){
+            //user has car
+            //$ret = mysqli_num_rows($res) != 0 ? true : false;
+        //}
+        //else{
+            //query failed, user has no entry in database
+        //}
+        //mysqli_free_result($res);
+    }
     
     return $ret;
 }
@@ -169,16 +182,33 @@ if(isset($_POST) && !empty($_POST) ){
                     
                     if($hasCar){
                         //user has already bought this car, error!
+                        //echo json_encode(false);
                     }
                     else{
                         $tableName = 'user' . strval(0);    //$_SESSION['userID'];
-                        $res = $aoUsersDB->query(
-                            "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
-                            //if entry exists
+                        $res = false;
+                        //prepare statement for adding the defaults values for a new car into the user's table
+                        static $addCar = $aoUsersDB->prepare(
+                            "INSERT INTO ? (car_id, drivetrain, body, interior, docs, repairs) VALUES (?, 0,0,0,0,0)"
                         );
-                        
+                        if($addCar){
+                            if($addCar->bind_param('si', $tableName, $carID) ){
+                                $res = $addCar->execute();
+                            }
+                            else{
+                                //output error
+                            }
+                        }
+                        else{
+                            //prepare didn't work, attempt execution of regular query
+                            //$res = $aoUsersDB->query(
+                                //"INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
+                                //IF entry EXISTS do nothing
+                            //);
+                        }
                         echo json_encode($res);
                     }
+                    exit();
                 }
                 elseif($_GET['op'] == 'update'){
                     //inserts a car with carID from the vehicle database into the
@@ -192,11 +222,11 @@ if(isset($_POST) && !empty($_POST) ){
                     
                     $tableName = 'user' . strval(0);    //$_SESSION['userID'];
                     
-                    static $stmnt = $aoUsersDB->prepare(
+                    static $updateCar = $aoUsersDB->prepare(
                         "UPDATE ? SET drivetrain=?, body=?, interior=?, docs=?, repairs=? WHERE car_id = ?"
                     );
-                    if($stmnt){
-                        if($stmnt->bind_param('siiiiii', $tableName, $dt, $body, $inter, $docs $rep, $carID) ){
+                    if($updateCar){
+                        if($updateCar->bind_param('siiiiii', $tableName, $dt, $body, $inter, $docs $rep, $carID) ){
                             $res = stmnt->execute();
                     
                             //if(!$res){
