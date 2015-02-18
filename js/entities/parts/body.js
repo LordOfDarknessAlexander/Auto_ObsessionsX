@@ -28,12 +28,75 @@ var Body = {
             return '';
         }
     },
-    make:function(carPrice){
+    make:function(carPrice, parts, repairs){
+        var bits = 0x0000,  //upgrade/parts bits, as a 16 bit short int
+            rb = 0x00;   //repair bits, as an 8 bit byte
+        
+        if(parts === null || parts === undefined){
+            bits = 0x0000;
+        }
+        else{
+            bits = parts;
+        }
+        
+        if(repairs === null || repairs === undefined){
+            rb = 0x0;
+        }
+        else{
+            rb = repairs;
+        }
+        
+        var chasis = carPart(carPrice * 0.32, Body.TYPE.chasis),
+            panels = carPart(carPrice * 0.23, Body.TYPE.panels),
+            paint = carPart(carPrice * 0.29, Body.TYPE.paint),
+            ph0 = carPart(carPrice * 0.12, Body.TYPE.ph0);
+            
+        if(bits){
+            var chasBF = (bits & 0xF000) >> 12,
+                panelsBF = (bits & 0x0F00) >> 8,
+                paintBF = (bits & 0x00F0) >>  4,
+                ph0BF = (bits & 0x000F) >> 0;
+            
+            
+            if(chasBF){
+                //field is not zero, so upgrade
+                chasis.setStage(chasBF);
+            }
+            if(panelsBF){
+                panels.setStage(panelsBF);
+            }
+            if(paintBF){
+                paint.setStage(paintBF);
+            }
+            if(ph0BF){
+                ph0.setStage(ph0BF);
+            }
+        }
+        //else bits === 0, no upgrades so skip
+        if(repairs){
+            var chb = (repairs & 0x8) ? true : false;
+                pnlb = (repairs & 0x4) ? true : false;
+                pntb = (repairs & 0x2) ? true : false;
+                ph0b = (repairs & 0x1) ? true : false;
+            
+            if(chb){
+                chasis._repaired = true;
+            }
+            if(pnlb){
+                panels._repaired = true;
+            }
+            if(pntb){
+                paint._repaired = true;
+            }
+            if(ph0b){
+                ph0._repaired = true;
+            }
+        }
         return {
-            _chasis:carPart(carPrice * 0.32, Body.TYPE.chasis),
-            _panels:carPart(carPrice * 0.23, Body.TYPE.panels),
-            _paint:carPart(carPrice * 0.29, Body.TYPE.paint),
-            _ph0:carPart(carPrice * 0.12, Body.TYPE.ph0),
+            _chasis:chasis, //carPart(carPrice * 0.32, Body.TYPE.chasis),
+            _panels:panels, //carPart(carPrice * 0.23, Body.TYPE.panels),
+            _paint:paint,   //carPart(carPrice * 0.29, Body.TYPE.paint),
+            _ph0:ph0,    //carPart(carPrice * 0.12, Body.TYPE.ph0),
             //_ph1:carPart(carPrice * 0.12, bd.ph1),
             //
             getBits:function(){
@@ -60,68 +123,55 @@ var Body = {
             },
             getPartType:function(type){
                 //returns a copy of the object
-                switch(type){
-                    case(Body.TYPE.chasis):
-                        return this._chasis;
-                    break;
-                    case(Body.TYPE.panels):
-                        return this._panels;
-                    break;
-                    case(Body.TYPE.paint):
-                        return this._paint;
-                    break;
-                    case(Body.TYPE.ph0):
-                        return this._ph0;
-                    break;
-                    //fuel:
-                    default:
-                        console.log('unknow type: ' + type.toString() );
-                        return null;
-                    break;
+                if(type == Body.TYPE.chasis){
+                    return this._chasis;
                 }
+                else if(type == Body.TYPE.panels){
+                    return this._panels;
+                }
+                else if(type == Body.TYPE.paint){
+                    return this._paint;
+                }
+                else if(type == Body.TYPE.ph0){
+                    return this._ph0;
+                }
+                //else
+                console.log('unknow type: ' + type.toString() );
+                return null;
             },
             upgradePart:function(type){
                 //returns the stage of the part being upgraded
                 //console.log('upgradeing part of type:');
-                switch(type){
-                    case(Body.TYPE.chasis):
-                        this._chasis.upgrade();
-                    break;
-                    case(Body.TYPE.panels):
-                        this._panels.upgrade();
-                    break;
-                    case(Body.TYPE.paint):
-                        this._paint.upgrade();
-                    break;
-                    case(Body.TYPE.ph0):
-                        this._ph0.upgrade();
-                    break;
-                    //fuel:
-                    default:
-                        console.log('attempting to upgrade unknown type: ' + type.toString() );
-                    break;
+                if(type == Body.TYPE.chasis){
+                    return this._chasis.upgrade();
                 }
+                else if(type == Body.TYPE.panels){
+                    return this._panels.upgrade();
+                }
+                else if(type == Body.TYPE.paint){
+                    return this._paint.upgrade();
+                }
+                else if(type == Body.TYPE.ph0){
+                    return this._ph0.upgrade();
+                }
+                console.log('attempting to upgrade unknown type: ' + type.toString() );
                 return false;
             },
             repairPart:function(type){
-                switch(type){
-                    case(Body.TYPE.chasis):
-                        return this._chasis.repair();
-                    break;
-                    case(Body.TYPE.panels):
-                        return this._panels.repair();
-                    break;
-                    case(Body.TYPE.paint):
-                        return this._paint.repair();
-                    break;
-                    case(Body.TYPE.ph0):
-                        return this._ph0.repair();
-                    break;
-                    //fuel:
-                    default:
-                        console.log('unknown type: ' + type.toString() );
-                    break;
+                if(type == Body.TYPE.chasis){
+                    return this._chasis.repair();
                 }
+                else if(type == Body.TYPE.panels){
+                    return this._panels.repair();
+                }
+                else if(type == Body.TYPE.paint){
+                    return this._paint.repair();
+                }
+                else if(type == Body.TYPE.ph0){
+                    return this._ph0.repair();
+                }
+                console.log('unknown type: ' + type.toString() );
+                return false;
             },
             getCondition:function(){
                 //returns the condition as a value between 0.0-1.0

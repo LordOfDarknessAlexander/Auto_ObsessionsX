@@ -15,10 +15,10 @@ function hasCar($id){
     $ret = false;
     $tableName = 'user' . strval(0);    //'user' . strval($_SESSION['userID']);
     //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-    static $_hasCar = $aoUsersDB->prepare("SELECT * FROM ? WHERE car_id = ?");
+    $_hasCar = $aoUsersDB->com->prepare("SELECT * FROM ? WHERE car_id = ?");
     
     if($_hasCar){
-        if($_hasCar->bind_param('si', $tableName, $id) ){
+        if($_hasCar->bind_params('si', $tableName, $id) ){
             $ret = $_hasCar->execute();
         }
         else{
@@ -79,7 +79,7 @@ function getUserCarFromID($carID){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
     $userID = 'user' . strval(0);    //$_SESSION['userID'];
-    //static $_getUserCar = $aoUsersDB->prepare(
+    //$_getUserCar = $aoUsersDB->con->prepare(
         //"SELECT * FROM ? WHERE car_id = ?"
     //);
     /*if($_getUserCar){
@@ -127,7 +127,7 @@ function getCarFromID($carID){
     global $AO_DB;
     //$aoCarsTable = 'aoCars';    //name of table containing all cars in the AO_DB
     //using prepared statements
-    /*static $_getCarFromID = $AO_DB->prepare(
+    /*$_getCarFromID = $AO_DB->prepare(
         "SELECT * FROM $aoCarsTable WHERE car_id = ?"
     );
     if($_getCarFromID){

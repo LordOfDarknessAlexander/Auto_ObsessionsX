@@ -61,45 +61,37 @@ var Documents = {
             },
             getPartType:function(type){
                 //returns a copy of the object
-                switch(type){
-                    case(Documents.TYPE.ownership):
-                        return this._owner;
-
-                    case(Documents.TYPE.build):
-                        return this._build;
-                        
-                    case(Documents.TYPE.history):
-                        return this._history;
-
-                    case(Documents.TYPE.ph0):
-                        return this._ph0;
-
-                    default:
-                        console.log('unknow type: ' + type.toString() );
-                        return null;
+                if(type == Documents.TYPE.ownership){
+                    return this._owner;
                 }
+                else if(type == Documents.TYPE.build){
+                    return this._build;
+                }
+                else if(type == Documents.TYPE.history){
+                    return this._history;
+                }
+                else if(type == Documents.TYPE.ph0){
+                    return this._ph0;
+                }
+                console.log('unknow type: ' + type.toString() );
+                return null;
             },
             upgradePart:function(type){
                 //returns the stage of the part being upgraded
                 //console.log('upgradeing part of type:');
-                switch(type){
-                    case(Documents.TYPE.ownership):
-                        this._owner.upgrade();
-
-                    case(Documents.TYPE.build):
-                        this._build.upgrade();
-
-                    case(Documents.TYPE.history):
-                        this._history.upgrade();
-
-                    case(Documents.TYPE.ph0):
-                        this._ph0.upgrade();
-
-                    //fuel:
-                    default:
-                        console.log('attempting to upgrade unknown type: ' + type.toString() );
-                        return;
+                if(type == Documents.TYPE.ownership){
+                    return this._owner.upgrade();
                 }
+                else if(type == Documents.TYPE.build){
+                    return this._build.upgrade();
+                }
+                else if(type == Documents.TYPE.history){
+                    return this._history.upgrade();
+                }
+                else if(type == Documents.TYPE.ph0){
+                    return this._ph0.upgrade();
+                }          
+                console.log('attempting to upgrade unknown type: ' + type.toString() );
                 return false;
             },
             /*repairPart:function(type){
@@ -133,8 +125,7 @@ var Documents = {
                 return ret * 0.25;
             },
             getRepairBits:function(){
-                //returns the state of each part as a bitfield,
-                //used for save vehicles data
+                //documents can't be repaired, so return 0
                 var ret = 0;
                 //ret = (this._seats._repaired ? 0x8 : 0) |
                     //(this._carpet._repaired ? 0x4 : 0) |

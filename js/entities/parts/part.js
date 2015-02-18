@@ -47,14 +47,18 @@ function carPart(carPrice, partType){   //partType
             //return ROOT_DIR + this.getLocalPath();
         //},
         repair:function(){
-            console.log('repair part!');
+            //returns true if this part has not been upgraded
+            //console.log('repair part!');
             if(!this._repaired){
                 var p = this.getRepairPrice();
-                //if(userStats.money >= p){
-                    this._repaired = true;
-                    //userStats.moeny -= p;
-                //}
+                
+                if(userStats.money >= p){
+                    userStats.money -= p;   //take money first
+                    this._repaired = true;  //then repair, 'cause we're like that
+                    console.log('purchasing repairs for part of type: ' + this._type.toString() + ', for: $' + p.toString() );
+                }
             }
+            //else already repaired, do nothing
             return this._repaired;
         },
         setStage:function(stage){
@@ -67,17 +71,20 @@ function carPart(carPrice, partType){   //partType
             }
         },
         upgrade:function(){
-            //var p = this.getPrice()
-            //if(userStats.money >= p){
+            var p = this.getPrice()
+            
+            if(userStats.money >= p){
                 if(this._stage != carPart.STAGE.pro){
+                    userStats.money -= p;
                     this._stage = this._stage << 1;
-                    console.log('upgrading part with type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() );
+                    console.log('purchasing upgrade for part of type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() + ', for: $' + p.toString() );
                     //increase other vars
+                    return true;
                 }
-                //else part is max level do nothing,
-                //button in repair needs to be rebound
-                //userStats.money -= p;
-            //}
+                //else part is max level do nothing
+            }
+            //part is more expensive that user has money
+            return false;
         },
         getPercent:function(){
             var INV_MAX = 1.0 / 5.0,

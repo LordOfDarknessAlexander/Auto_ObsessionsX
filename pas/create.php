@@ -14,7 +14,7 @@ function createUserEntry($userID){
     //get validated and sanitized form data
     //$userTableName = 'user';
     
-    /*static $stmnt = $AO_DB->prepare(
+    /*$stmnt = $AO_DB->prepare(
        "INSERT INTO $userTableName (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     );
@@ -49,7 +49,7 @@ function createUserTable($userID){
     $defaultCharset = 'DEFAULT CHARSET = latin1';
     $defaultEngine = 'ENGINE = InnoDB';
     //make this a static var, should only be executed once!
-    static $stmnt = $aoUsersDB->prepare(
+    $stmnt = $aoUsersDB->prepare(
        "CREATE TABLE IF NOT EXISTS $tableName(
             car_id $uint NOT NULL PRIMARY KEY,
             drivetrain $uint,

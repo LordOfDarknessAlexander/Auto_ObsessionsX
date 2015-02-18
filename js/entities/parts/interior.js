@@ -28,13 +28,73 @@ var Interior = {
             return '';
         }
     },
-    make:function(carPrice){
-        //default ctor
+    make:function(carPrice, parts, repairs){
+        var bits = 0x0000,  //upgrade/parts bits, as a 16 bit short int
+            rb = 0x00;   //repair bits, as an 8 bit byte
+        
+        if(parts === null || parts === undefined){
+            bits = 0x0000;
+        }
+        else{
+            bits = parts;
+        }
+        
+        if(repairs === null || repairs === undefined){
+            rb = 0x0;
+        }
+        else{
+            rb = repairs;
+        }
+        
+        var seats = carPart(carPrice * 0.32, Interior.TYPE.seats),
+            carpet = carPart(carPrice * 0.23, Interior.TYPE.carpet),
+            dash = carPart(carPrice * 0.29, Interior.TYPE.dash),
+            panels = carPart(carPrice * 0.12, Interior.TYPE.panels);
+            
+        if(bits){
+            var seatsBF = (bits & 0xF000) >> 12,
+                carpetBF = (bits & 0x0F00) >> 8,
+                dashBF = (bits & 0x00F0) >>  4,
+                panelsBF = (bits & 0x000F) >> 0;
+            
+            if(seatsBF){
+                seats.setStage(seatsBF);
+            }
+            if(carpetBF){
+                carpet.setStage(carpetBF);
+            }
+            if(dashBF){
+                dash.setStage(dashBF);
+            }
+            if(panelsBF){
+                panels.setStage(panelsBF);
+            }
+        }
+        //else bits === 0, no upgrades so skip
+        if(repairs){
+            var seatb = (repairs & 0x8) ? true : false;
+                crpb = (repairs & 0x4) ? true : false;
+                dashb = (repairs & 0x2) ? true : false;
+                pnlb = (repairs & 0x1) ? true : false;
+            
+            if(seatb){
+                seats._repaired = true;
+            }
+            if(crpb){
+                carpet._repaired = true;
+            }
+            if(dashb){
+                dash._repaired = true;
+            }
+            if(pnlb){
+                panels._repaired = true;
+            }
+        }
         return {
-            _seats:carPart(carPrice * 0.32, Interior.TYPE.seats),
-            _carpet:carPart(carPrice * 0.23,Interior.TYPE.carpet),
-            _dash:carPart(carPrice * 0.29, Interior.TYPE.dash),
-            _panels:carPart(carPrice * 0.12, Interior.TYPE.panels),
+            _seats:seats, //carPart(carPrice * 0.32, Interior.TYPE.seats),
+            _carpet:carpet ,   //carPart(carPrice * 0.23,Interior.TYPE.carpet),
+            _dash:dash,  //carPart(carPrice * 0.29, Interior.TYPE.dash),
+            _panels:panels,    //carPart(carPrice * 0.12, Interior.TYPE.panels),
             //_ph0:carPart(carPrice * 0.12, bd.ph1),
             //
             getBits:function(){
@@ -61,68 +121,54 @@ var Interior = {
             },
             getPartType:function(type){
                 //returns a copy of the object
-                switch(type){
-                    case(Interior.TYPE.seats):
-                        return this._seats;
-                    break;
-                    case(Interior.TYPE.carpet):
-                        return this._carpet;
-                    break;
-                    case(Interior.TYPE.dash):
-                        return this._dash;
-                    break;
-                    case(Interior.TYPE.panels):
-                        return this._panels;
-                    break;
-                    //fuel:
-                    default:
-                        console.log('unknow type: ' + type.toString() );
-                        return null;
-                    break;
+                if(type == Interior.TYPE.seats){
+                    return this._seats;
                 }
+                else if(type == Interior.TYPE.carpet){
+                    return this._carpet;
+                }
+                else if(type == Interior.TYPE.dash){
+                    return this._dash;
+                }
+                else if(type == Interior.TYPE.panels){
+                    return this._panels;
+                }
+                console.log('unknow type: ' + type.toString() );
+                return null;
             },
             upgradePart:function(type){
                 //returns the stage of the part being upgraded
                 //console.log('upgradeing part of type:');
-                switch(type){
-                    case(Interior.TYPE.seats):
-                        this._seats.upgrade();
-                    break;
-                    case(Interior.TYPE.carpet):
-                        this._carpet.upgrade();
-                    break;
-                    case(Interior.TYPE.dash):
-                        this._dash.upgrade();
-                    break;
-                    case(Interior.TYPE.panels):
-                        this._panels.upgrade();
-                    break;
-                    //fuel:
-                    default:
-                        console.log('attempting to upgrade unknown type: ' + type.toString() );
-                    break;
+                if(type == Interior.TYPE.seats){
+                    this._seats.upgrade();
                 }
+                else if(type == Interior.TYPE.carpet){
+                    this._carpet.upgrade();
+                }
+                else if(type == Interior.TYPE.dash){
+                    this._dash.upgrade();
+                }
+                else if(type == Interior.TYPE.panels){
+                    this._panels.upgrade();
+                }
+                console.log('attempting to upgrade unknown type: ' + type.toString() );
                 return false;
             },
             repairPart:function(type){
-                switch(type){
-                    case(Interior.TYPE.seats):
-                        return this._seats.repair();
-                    break;
-                    case(Interior.TYPE.carpet):
-                        return this._carpet.repair();
-                    break;
-                    case(Interior.TYPE.dash):
-                        return this._dash.repair();
-                    break;
-                    case(Interior.TYPE.panels):
-                        return this._panels.repair();
-                    break;
-                    //fuel:
-                    default:
-                        console.log('unknown type: ' + type.toString() );
-                    break;
+                if(type == Interior.TYPE.seats){
+                    return this._seats.repair();
                 }
+                else if(type == Interior.TYPE.carpet){
+                    return this._carpet.repair();
+                }
+                else if(type == Interior.TYPE.dash){
+                    return this._dash.repair();
+                }
+                else if(type == Interior.TYPE.panels){
+                    return this._panels.repair();
+                }
+                console.log('unknown type: ' + type.toString() );
+                return false;
             },
             getCondition:function(){
                 //returns the condition as a value between 0.0-1.0

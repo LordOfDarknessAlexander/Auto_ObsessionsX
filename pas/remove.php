@@ -28,6 +28,9 @@ function removeUserCar($carID){
     global $aoUsersDB;
     
     $userTable = 'user' . strval(0);
+    $_remove = $aoUSersDB->prepare(
+        "DELETE * FROM ? WHERE car_id=?"
+    );
     
     return $aoUSersDB->query(
         "DELETE * FROM $userTable WHERE car_id=$carID"

@@ -251,7 +251,7 @@ var Repair = {
         
         $.ajax({
             type:'POST',
-            url:getHostPath() + 'vehicles/update.php?op=update',
+            url:getHostPath() + 'pas/update.php?op=update',
             dataType:'json',
             data:{
                 carID:car.id,
@@ -267,7 +267,7 @@ var Repair = {
                 alert(funcName + ', Error:ajax response returned null!');
                 return;
             }
-            //alert(funcName + ', ajax response success! ' + JSON.stringify(data) );
+            alert(funcName + ', ajax response success! ' + JSON.stringify(data) );
             //do stuff
             Garage.save();    //save updates to user cars in local storage
         }).fail(function(jqxhr){
@@ -285,7 +285,7 @@ var Repair = {
 //}
     }
 };
-
+/*
 function addUpgrade(obj)
 {	//adds part to user's current car, increasing originality and value
 	var car = Garage.getCurrentCar();
@@ -331,7 +331,7 @@ function repairPart(obj)
         }
     }
     //else no car, do nothing
-}
+}*/
 function upgradeDT(obj){
     //
     var car = Garage.getCurrentCar();
@@ -355,25 +355,25 @@ function upgradeDT(obj){
             //}
         }
         else{    //upgrade existing part
-            car._dt.upgradePart(type);
-            
-            var part = car._dt.getPartType(type);
-            //if part is upgraded to max, unbind and make unclickable
-            if(part !== null){            
-                if(part._stage == carPart.STAGE.pro){
-                    var btnID = 'div#RepairShop div#drivetrain button#ub' + str;
-                    var btn = $(btnID);
-                    btn.css({'opacity':'0.45', 'cursor':'default'}).off();//.css();
-                    //btn.off();  //remove all event handlers, effectively disabling the button!
+            if(car._dt.upgradePart(type) ){
+                var part = car._dt.getPartType(type);
+                //if part is upgraded to max, unbind and make unclickable
+                if(part !== null){            
+                    if(part._stage == carPart.STAGE.pro){
+                        var btnID = 'div#RepairShop div#drivetrain button#ub' + str;
+                        var btn = $(btnID);
+                        btn.css({'opacity':'0.45', 'cursor':'default'}).off();//.css();
+                        //btn.off();  //remove all event handlers, effectively disabling the button!
+                    }
+                    if(!part._repaired){
+                        //added part so enable upgrade button 
+                        //var rBtnID = 'div#RepairShop div#repairs button#' + type.toString(),
+                            //rBtn = $(rBtnID);    //repair button
+                        
+                        //rBtn.off().click({type:type}, repairPart);
+                    }
+                    $('div#RepairShop div#drivetrain progress#' + 'pb' + str).attr('value', part.getPercent() );
                 }
-                if(!part._repaired){
-                    //added part so enable upgrade button 
-                    //var rBtnID = 'div#RepairShop div#repairs button#' + type.toString(),
-                        //rBtn = $(rBtnID);    //repair button
-                    
-                    //rBtn.off().click({type:type}, repairPart);
-                }
-                $('div#RepairShop div#drivetrain progress#' + 'pb' + str).attr('value', part.getPercent() );
             }
         }
         Repair.save();

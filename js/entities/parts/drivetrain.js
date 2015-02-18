@@ -16,8 +16,8 @@ var Drivetrain = {
     },
     make:function(carPrice, parts, repairs){
         //creates a new car part of type Drivetrain
-        var bits = 0x0000,
-            rb = 0x0;
+        var bits = 0x0000,  //upgrade/parts bits, as a 16 bit short int
+            rb = 0x00;   //repair bits, as an 8 bit byte
         
         if(parts === null || parts === undefined){
             bits = 0x0000;
@@ -56,7 +56,7 @@ var Drivetrain = {
                 axel.setStage(axelBF);
             }
             if(exhaustBF){
-                exhaust.upgrade(exhaustBF);
+                exhaust.setStage(exhaustBF);
             }
         }
         //else bits === 0, no upgrades so skip
@@ -67,7 +67,7 @@ var Drivetrain = {
                 exb = (repairs & 0x1) ? true : false;
             
             if(enb){
-                engine._repaired = true;
+                eng._repaired = true;
             }
             if(tb){
                 trans._repaired = true;
@@ -137,23 +137,20 @@ var Drivetrain = {
             upgradePart:function(type){
                 //returns the stage of the part being upgraded
                 //console.log('upgradeing part of type:');
-                switch(type){
-                    case(Drivetrain.TYPE.engine):
-                        this._engine.upgrade();
-                    break;
-                    case(Drivetrain.TYPE.trans):
-                        this._trans.upgrade();
-                    break;
-                    case(Drivetrain.TYPE.axel):
-                        this._axel.upgrade();
-                    break;
-                    case(Drivetrain.TYPE.exhaust):
-                        this._exhaust.upgrade();
-                    break;
-                    //fuel:
-                    default:
-                        console.log('attempting to upgrade unknown type: ' + type.toString() );
-                    break;
+                if(type == Drivetrain.TYPE.engine){
+                    return this._engine.upgrade();
+                }
+                else if(type == Drivetrain.TYPE.trans){
+                    return this._trans.upgrade();
+                }
+                else if(type == Drivetrain.TYPE.axel){
+                    return this._axel.upgrade();
+                }
+                else if(type == Drivetrain.TYPE.exhaust){
+                    return this._exhaust.upgrade();
+                }
+                else{
+                    console.log('attempting to upgrade unknown type: ' + type.toString() );
                 }
                 return false;
             },

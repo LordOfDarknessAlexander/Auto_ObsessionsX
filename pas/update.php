@@ -14,10 +14,10 @@ function hasCar($id){
     $ret = false;
     $tableName = 'user' . strval(0);    //$_SESSION['userID'];
     //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-    static $_hasCar = $aoUsersDB->prepare("SELECT * FROM ? WHERE car_id = ?");
+    $_hasCar = $aoUsersDB->con->prepare("SELECT * FROM ? WHERE car_id = ?");
     
     if($_hasCar){
-        if($_hasCar->bind_param('si', $tableName, $id) ){
+        if($_hasCar->bind_params('si', $tableName, $id) ){
             $ret = $_hasCar->execute();
         }
         else{
@@ -188,11 +188,11 @@ if(isset($_POST) && !empty($_POST) ){
                         $tableName = 'user' . strval(0);    //$_SESSION['userID'];
                         $res = false;
                         //prepare statement for adding the defaults values for a new car into the user's table
-                        static $addCar = $aoUsersDB->prepare(
+                        $addCar = $aoUsersDB->prepare(
                             "INSERT INTO ? (car_id, drivetrain, body, interior, docs, repairs) VALUES (?,0,0,0,0,0)"
                         );
                         if($addCar){
-                            if($addCar->bind_param('si', $tableName, $carID) ){
+                            if($addCar->bind_params('si', $tableName, $carID) ){
                                 $res = $addCar->execute();
                             }
                             else{
@@ -222,12 +222,12 @@ if(isset($_POST) && !empty($_POST) ){
                     
                     $tableName = 'user' . strval(0);    //$_SESSION['userID'];
                     
-                    static $updateCar = $aoUsersDB->prepare(
-                        "UPDATE ? SET drivetrain=?, body=?, interior=?, docs=?, repairs=? WHERE car_id = ?"
+                    /*$updateCar = $aoUsersDB->con->prepare(
+                        "UPDATE ? SET drivetrain = ?, body = ?, interior = ?, docs = ?, repairs = ? WHERE car_id = ?"
                     );
                     if($updateCar){
-                        if($updateCar->bind_param('siiiiii', $tableName, $dt, $body, $inter, $docs $rep, $carID) ){
-                            $res = stmnt->execute();
+                        if($updateCar->bind_params('siiiiii', $tableName, $dt, $body, $inter, $docs, $rep, $carID) ){
+                            $res = $updateCar->execute();
                     
                             //if(!$res){
                                 //output sql error as json
@@ -235,12 +235,20 @@ if(isset($_POST) && !empty($_POST) ){
                             echo json_encode($res);
                             //}
                         }
+                        echo json_encode(false);
+                        exit();
                     }
-                    //$res = $aoUsersDB->query(
-                        //"UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
-                    //);
+                    else{
+                        $erno = $aoUsersDB->con->errno;
+                        $err = $aoUsersDB->con->error;
+                        echo json_encode("Error($erno) occurred, reason: $err. Could not update car");
+                        exit();
+                    }*/
+                    $res = $aoUsersDB->query(
+                        "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
+                    );
                     
-                    //echo json_encode($res);
+                    echo json_encode($res);
                     //}
                 }
                 //else switch to other calls

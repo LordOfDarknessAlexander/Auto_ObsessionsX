@@ -38,33 +38,18 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         docs = null;
     
     if(parts !== null){
+          
         if(parts.drivetrain){
-            dt = Drivetrain.make(Price, parts.drivetrain);
+            dt = Drivetrain.make(Price, parts.drivetrain, (parts.repairs >> 12) & 0x000F);
         }
         if(parts.body){
-            //body = Body.make(Price, parts.body);
+            body = Body.make(Price, parts.body, (parts.repairs >> 8) & 0x000F);
         }
         if(parts.interior){
-            //inter = Interior.make(Price, parts.interior);
+            inter = Interior.make(Price, parts.interior, (parts.repairs >> 4) & 0x000F);
         }
         if(parts.docs){
-            //docs = Documents.make(Price, parts.docs);
-        }
-        
-        if(repairs){
-            if(dt !== null){
-                //dt.setRepairs( (repairs >> 12) & 0xF);
-            }
-            if(body !== null){
-                //body.setRepairs( (repairs >> 8) & 0xF);
-            }
-            if(inter !== null){
-                //inter.setRepairs( (repairs >> 4) & 0xF);
-            }
-            if(docs !== null){
-                //docs.setRepairs( (repairs >> 0) & 0xF);
-            }
-            //console.log(ret.toString());
+            docs = Documents.make(Price, parts.docs);
         }
     }
 
@@ -83,8 +68,8 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         //_parts:{
             //parts with value null, mean user hasn't purchase/installed part
         _dt:dt,
-        _body:Body.make(Price),  //null,
-        _interior:Interior.make(Price), //null,
+        _body:body,  //null,
+        _interior:inter, //null,
         _docs:Documents.make(Price), //null
         //}
 		//image : img,
@@ -204,6 +189,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
             //console.log(ret.toString());
             return ret;
         },
+        //OBSOLETE
         hasPart:function(partType){
             //determine if this vehicle has previously recieved an upgrade of type 'partType'
             var len = this._parts.length;
@@ -248,17 +234,32 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
             //else index out of bounds!
             return false;
         },
+        //END OBSOLETE
         setUpgrades:function(data){
-            if(data.drivetrain){
+            //sets the upgrade fields from a generic js object
+            //when loading from a database, so the value can be set directly
+            //instead of having to be repurchased by the user when the car is created
+            if(data.drivetrain){    //'drivetrain' in data)
                 this._dt = Drivetrain.make(this._price, data.drivetrain);
             }
+            //else does not have entry, leave null
+            /*if(data.body){
+                this._body = Body.make(this._price, data.body);
+            }
+            if(data.interior){
+                this._interior = Interior.make(this._price, data.interior);
+            }
+            if(data.docs){
+                this._docs = Docs.make(this._price, data.docs);
+            }*/
         },
         upgradePart:function(type){
             //adds part to vehicle if not already, otherwise upgrade the part
             var part = this.getPart(type);
             if(part === null){
                 console.log('buying new part of type: ' + stringFromPartType(type) );
-                this._parts.push(carPart(150, type) );  //get price from DB
+                //this._parts.push(carPart(150, type) );  //get price from DB
+                
                 console.log(JSON.stringify(this._parts) );
             }
             else{
@@ -295,10 +296,7 @@ Vehicle.fromDB = function(dbCar, userCar)
 {
     //console.log('creating car from database');
     var ret = Vehicle(dbCar.name,dbCar.make,dbCar.year,dbCar.price, dbCar.id, dbCar.info, userCar);
-    console.log('creating car from database: ' + JSON.stringify(ret) );
-    //ret.upgrade(userCar.parts);
-    //ret.repair(userCar.repairs);
-    
+    //console.log('creating car from database: ' + JSON.stringify(ret) );    
     return ret;
 }
 //TEMPORARY
