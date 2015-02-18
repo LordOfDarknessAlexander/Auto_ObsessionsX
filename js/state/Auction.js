@@ -13,6 +13,7 @@ var bidAmount = 200;
 
 var playerDidBid = false;
 var enemyCanBid = false;
+var currentBid = vehiclePrice * 0.1;
 var playerNextBid = currentBid + (currentBid * 0.1);
 
 var enemy1, enemy2, enemy3, enemy4;
@@ -28,7 +29,7 @@ var playerEndBidTimer = 0;	//player local
 
 var ai = [];
 var imgPosY = [100, 130, 160, 190];
-var currentBid = vehiclePrice * 0.1;	//_car.getPrice() * 0.1, //bidding interval as a percent of total value
+	//_car.getPrice() * 0.1, //bidding interval as a percent of total value
 //
 function shuffleArray(array) 
 {	//sort array items
@@ -206,6 +207,7 @@ var Auction =
 		Auction.findEndBidder();
 		Auction.sellCarEndAuction();
 		
+		console.log(playerBid);
 		if(playerDidBid)
 		{
 			bidderCooldown ++;
@@ -353,9 +355,11 @@ var Auction =
 	playerBidding : function() 
 	{	//if CD timer has refreshed
 		//player Cooldown button
+		console.log(bidderCooldown);
 		if(bidderCooldown >= PLAYER_WAIT)
 		{
 			playerBid = currentBid + playerNextBid;
+			console.log(playerBid);
 			playerCanBid = true;
 			bidderCooldown = 0;
 			startPlayerEndBid = true;						
@@ -365,11 +369,11 @@ var Auction =
 		{
 			playerDidBid = true;
 		}
-		else
+		/*else
 		{
             this.sold();
             startPlayerEndBid = false;
-		}
+		}*/
 		//Wins BId
 	},
 	enemyBidding : function()

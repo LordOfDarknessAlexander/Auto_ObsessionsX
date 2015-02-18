@@ -43,7 +43,7 @@
 function price(vehiclePrice)
 {
 	//console.log(vehiclePrice * (Math.random() * (1.5 - 0.8)) + 0.8)
-	return vehiclePrice * Math.random() * (1.5 - 0.8 + 0.5) + 0.8;
+	return vehiclePrice * (Math.random() * (1.5 - 0.8 + 0.5)) + 0.8;
 }
 /*function price(bias, vehiclePrice)
 {

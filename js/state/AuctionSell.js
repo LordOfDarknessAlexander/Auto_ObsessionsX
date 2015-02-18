@@ -145,7 +145,7 @@ function auctionGen()
 			var upPerc =  0.18 * this._currentBid;
 			for(var i = 0; i < this._ai.length; i++)
 			{						
-				if(this._ai[i].canBid && !this._ai[i].winningBid)	//global cooldown timer has refreshed, bidding now avthis._ailable
+				if(this._ai[i].canBid && !this._ai[i].winningBid)	//global cooldown timer has refreshed, bidding now available
 				{
 					if((this._ai[i].currBid < this._currentBid) && (!this._ai[i].leftAuction))
 					{
