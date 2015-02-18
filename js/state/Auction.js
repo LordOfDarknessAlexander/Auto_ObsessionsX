@@ -311,7 +311,7 @@ var Auction =
 		//call crowd for the player winning
 		//this.playerGoing();
 		
-		
+		this.going();
 		//current bid HUD
 		//var gorguts;
 		//gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
