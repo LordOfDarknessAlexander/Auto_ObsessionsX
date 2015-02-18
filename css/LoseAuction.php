@@ -11,6 +11,7 @@ function divSold(){
 <?php divSold();?>
 {	/*Auction page stylings*/ 
 	background: url('../images/inventoryMenu.png') no-repeat 0 0;
+	background-size : 100% 100%;
 	display: none;
 	text-align: center;
 	padding-top: 92px;
