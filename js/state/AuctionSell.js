@@ -25,13 +25,12 @@ function auctionGen()
 			{
 				this._car = userGarage[index];
 				this._carIndex = index;
-				this._currentBid = this._car._price * 0.1;
+				this._currentBid = this._car.getPrice() * 0.1;
 				
 				//Removing the vehicle here because if we wait until the vehicle sells the player can sell
 				//the vehicle multiple times without collecting the money
 				
-				
-				this._ai = [Enemy(price(this._car._price)), Enemy(price(this._car._price)), Enemy(price(this._car._price)), Enemy(price(this._car._price))];
+				this._ai = [Enemy(price(this._car.getPrice())), Enemy(price(this._car.getPrice())), Enemy(price(this._car.getPrice())), Enemy(price(this._car.getPrice()))];
 				for(var i = 0; i < this._ai.length; ++i)
 				{
 					console.log(i + " bid cap = " + this._ai[i].bidCap);
@@ -67,7 +66,7 @@ function auctionGen()
 					{
 						if(this._ai[i].winningBid)
 						{
-							console.log("AI " + i + " has won the bid for " + Math.round(this._ai[i].currBid) + " Original Price: " + this._car._price);
+							console.log("AI " + i + " has won the bid for " + Math.round(this._ai[i].currBid) + " Original Price: " + this._car.getPrice());
 						}
 					}
 					console.log("Ending auction");

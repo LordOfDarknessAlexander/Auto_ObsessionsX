@@ -104,7 +104,7 @@ var Auction =
                 //alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
                 //do stuff                
                 Auction._car = Vehicle(data.name, data.make, data.year, data.price, data.id, data.info);
-                ai = [Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5))), Enemy(price(Math.random(0.8, 1.5)))];
+                ai = [Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice()))];
 
                 if(Auction._car !== null)
                 {
@@ -207,7 +207,6 @@ var Auction =
 		Auction.findEndBidder();
 		Auction.sellCarEndAuction();
 		
-		console.log(playerBid);
 		if(playerDidBid)
 		{
 			bidderCooldown ++;
@@ -355,11 +354,9 @@ var Auction =
 	playerBidding : function() 
 	{	//if CD timer has refreshed
 		//player Cooldown button
-		console.log(bidderCooldown);
 		if(bidderCooldown >= PLAYER_WAIT)
 		{
 			playerBid = currentBid + playerNextBid;
-			console.log(playerBid);
 			playerCanBid = true;
 			bidderCooldown = 0;
 			startPlayerEndBid = true;						
@@ -390,6 +387,7 @@ var Auction =
 					if((ai[i].currBid < currentBid) && (ai[i].currBid < ai[i].bidCap))
 					{
 						ai[i].currBid = currentBid + upPerc;
+						console.log("AI " + i + " bidding " + ai[i].currBid + " and cap is " + ai[i].bidCap);
 						this.winningTimer = 0;
 						this.enemyWinning = true;
 						this.playerWinning = false;
