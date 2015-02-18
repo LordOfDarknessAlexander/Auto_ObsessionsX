@@ -192,7 +192,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         //OBSOLETE
         hasPart:function(partType){
             //determine if this vehicle has previously recieved an upgrade of type 'partType'
-            var len = this._parts.length;
+            /*var len = this._parts.length;
             if(len == 0){
                 return false;   //no parts at all
             }
@@ -201,13 +201,13 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
                     return true;
                 }
                 //else continue with loop
-            }
+            }*/
             //if function gets here, no parts have matched
             return false;
         },
         getPart:function(partType){
             //determine if this vehicle has previously recieved an upgrade of type 'partType'
-            var len = this._parts.length;
+            /*var len = this._parts.length;
             if(len == 0){
                 console.log('car has no parts bought')
                 return null;    //no parts for you
@@ -220,17 +220,17 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
                 //else continue with loop
             }
             //if function gets here, no parts have matched
-            console.log('car has no part of type: ' + stringFromPartType(partType) );
+            console.log('car has no part of type: ' + stringFromPartType(partType) );*/
             return null;
         },
         isRepairedAtIndex:function(i){
-            var MAX_PARTS = 16;
+            /*var MAX_PARTS = 16;
             if(i <= MAX_PARTS){
                 var val = this._repairs & (1 << i);
                 if(val != 0){
                     return true;
                 }
-            }
+            }*/
             //else index out of bounds!
             return false;
         },
@@ -255,7 +255,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         },
         upgradePart:function(type){
             //adds part to vehicle if not already, otherwise upgrade the part
-            var part = this.getPart(type);
+            /*var part = this.getPart(type);
             if(part === null){
                 console.log('buying new part of type: ' + stringFromPartType(type) );
                 //this._parts.push(carPart(150, type) );  //get price from DB
@@ -264,10 +264,10 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
             }
             else{
                 part.upgrade();
-            }
+            }*/
         },
         repairPart:function(type){
-            var len = this._parts.length;
+            /*var len = this._parts.length;
             
             if(len == 0){
                 return false; //no parts, no repair
@@ -288,7 +288,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
                 //vehicle does not have this part to upgrade
             //}
             console.log(JSON.stringify(this._parts) );
-            return false;
+            return false;*/
         }
 	};
 }

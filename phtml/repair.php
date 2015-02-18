@@ -73,7 +73,7 @@
         <br>
         Paint:
         <button id='ubPaint' class='ub'></button>
-        <button id='rbPain't class='rb'></button>
+        <button id='rbPaint' class='rb'></button>
         <br>
         <progress id='pbPaint' value='0.0'></progress>
         <br>

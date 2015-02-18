@@ -285,53 +285,7 @@ var Repair = {
 //}
     }
 };
-/*
-function addUpgrade(obj)
-{	//adds part to user's current car, increasing originality and value
-	var car = Garage.getCurrentCar();
-    if(car !== null){
-        var type = obj.data.type;
-        console.log('upgrading part of type: ' + stringFromPartType(type) );
-        car.upgradePart(type);
-        
-        var part = car.getPart(type);
-        //if part is upgraded to max, unbind and make unclickable
-        if(part !== null){
-            if(part._stage == carPart.STAGE.pro){
-                var btnID = 'div#RepairShop div#upgrades button#' + part._type.toString();
-                var btn = $(btnID);
-                btn.css({'opacity':'0.45', 'cursor':'default'}).off();//.css();
-                //btn.off();  //remove all event handlers, effectively disabling the button!
-            }
-            if(!part._repaired){
-                //added part so enable upgrade button 
-                var rBtnID = 'div#RepairShop div#repairs button#' + type.toString(),
-                    rBtn = $(rBtnID);    //repair button
-                
-                //rBtn.off().click({type:type}, repairPart);
-            }
-        }
-    }
-}
-function repairPart(obj)
-{	//repairs a component of the vehicle, increasing condition and value
-    var car = Garage.getCurrentCar();
-    
-    if(car !== null){
-        console.log('repairing part!');
-        var type = obj.data.type;
-        
-        if(car.repairPart(type) ){
-            //part has been repaired, disable button
-            var part = car.getPart(type),
-                btnID = 'div#RepairShop div#repairs button#' + part._type.toString(),
-                btn = $(btnID);
-                //remove all event handlers, effectively disabling the button!
-                btn.css({'opacity':'0.45', 'cursor':'default'}).off();
-        }
-    }
-    //else no car, do nothing
-}*/
+
 function upgradeDT(obj){
     //
     var car = Garage.getCurrentCar();
@@ -341,7 +295,7 @@ function upgradeDT(obj){
             str = Drivetrain.strFromType(type);
         console.log('upgrading part of type: ' + str);
         
-        if(car._dt == null){
+        if(car._dt === null){
             //var bp = Drivetrain.getInstallPrice(car.getBasePrice();
             //if(usreStats.moeny >= bp) ){
                 //install part
@@ -387,7 +341,7 @@ function repairDT(obj){
     if(car !== null){
         var type = obj.data.type,
             str = Drivetrain.strFromType(type);
-            
+        
         if(car._dt.repairPart(type) ){
             console.log('repaired part!');
             //part has been repaired, disable button

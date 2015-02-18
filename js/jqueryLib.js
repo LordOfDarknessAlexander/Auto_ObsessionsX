@@ -6,7 +6,7 @@ var jq = {
 	//canvas:$('#canvas'),
 	adBar:$('img#adBar'),
     statBar:$('div#statBar'),
-	userCash:$("label#userCash"),
+	userCash:$('label#userCash'),
 	setCash : function(val)
 	{	//set the html for the userCash label, to be displayed in browser
 		this.userCash.html(val.toString());

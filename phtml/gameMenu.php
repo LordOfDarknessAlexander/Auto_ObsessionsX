@@ -5,7 +5,7 @@
     <h1>My Home</h1>
     <!--HUD ---->
 <!--	<div id="fname" ></div>-->
-<?php include 'include/statBar.php';?>  
+<?php require_once 'include/statBar.php';?>  
 
 
     <img id='homeImg' src='images\\garageEmpty.png'>

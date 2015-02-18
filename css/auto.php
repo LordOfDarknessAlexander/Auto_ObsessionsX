@@ -1,13 +1,19 @@
 <?php
-//auction state stylings
+//core ui element stylings
 header("Content-type: text/css; charset: UTF-8");
+//
+require_once 'ui.php';
 //require_once 'menu.php';
 //require_once 'credits.php';
+//
+//imports relative to this document, or an absolute url.
+//makes maintainability easier, allowing structured includes of css sheets
+//but prevents asynchronous parsing of files, as if they were included as
+//<linl> tags in the html source
+//function divStatBar(){
+    //echo 'div#statBar';
+//}
 ?>
-/*imports relative to this document, or an absolute url.
-makes maintainability easier, allowing structured includes of css sheets
-but prevents asynchronous parsing of files, as if they were included as
-<linl> tags in the html source*/
 @import url("menu.css");
 @import url("credits.css");
 
@@ -56,7 +62,7 @@ a
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 button
-{	/*all button elements will hare this background unless otherwise specified*/
+{	/*all button elements will share this background (and other properties) unless otherwise specified*/
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
     background-size:100% 100%;
 	color:red;
@@ -337,13 +343,13 @@ div#business
     left:0%;
     z-index:1;
 }
-/*
-?php
-require_once 'phone.php';   //mobile phone, iPhone, Android, WIndows, BB, etc
-require_once 'tablet.php';  //tablets, iPads, etc
-require_once 'laptop.php';  //laptop and other large mobile devices
+<?php
+//require_once 'main.php';    //main game menu stylings, must be added at end, else bugs
+//require_once 'phone.php';   //mobile phone, iPhone, Android, WIndows, BB, etc
+//require_once 'tablet.php';  //tablets, iPads, etc
+//require_once 'laptop.php';  //laptop and other large mobile devices
 ?>
-*/
+
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) 
 {

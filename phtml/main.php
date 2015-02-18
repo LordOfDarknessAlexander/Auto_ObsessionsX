@@ -18,7 +18,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 <div class="wrapper">
 	<!--root div element of web page!-->	
     <div class="sound sound-off"></div>
-
+<?php //require_once 'include/statBar.php';?>  
     <div id="menu">
         <div id="progress">
             <div id="percent">Downloading: <span id="p"></span></div>

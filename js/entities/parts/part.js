@@ -40,7 +40,7 @@ function carPart(carPrice, partType){   //partType
             return ret;
         },
         getLocalPath:function(){
-            return 'images\\upgrades\\' + stringFromPartType(this._type) + '.png'
+            return '';//'images\\upgrades\\' + stringFromPartType(this._type) + '.png';
             //upgrade stage, 1, 2 or 3
         },
         //getFullPath:function(){
@@ -132,6 +132,7 @@ carPart.STAGE = {
     racing:0x4,         //0100
     pro:0x8       //1000
 };
+/*
 function stringFromPartType(type){
     //returns a string identifier from a carPart's type
     var ret = '';
@@ -159,4 +160,4 @@ function stringFromPartType(type){
         break;
     }
     return ret;
-}
+}*/

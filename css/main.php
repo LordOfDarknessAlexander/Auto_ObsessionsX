@@ -6,10 +6,9 @@ require_once 'ui.php';
 //using php require should be faster than css @import
 require_once 'AuctionSelect.php';
 require_once 'repair.php';
-require_once 'funds.php';
-require_once 'Garage.php';
-
-    
+require_once 'funds.php';   //move to repair
+require_once 'garage.php';
+//    
 function divMain(){
     echo 'div#gameMenu';
 }
