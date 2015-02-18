@@ -8,7 +8,8 @@
 <body>
 <div id="container">
 <?php
-    include 'includes/login-header.php';
+    require 'includes/login-header.php';
+	require 'includes/nav.php';
     
 ?>
 <div id="content"><!-- Start of the login page content. -->

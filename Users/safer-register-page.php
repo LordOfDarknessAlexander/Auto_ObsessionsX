@@ -13,6 +13,7 @@
 <div id="container">
 <?php
     require 'includes/register-header.php';
+	require 'includes/nav.php';
     
 ?>
 <div id="content"><!-- Start of the login page content. -->

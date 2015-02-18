@@ -27,6 +27,7 @@ canvas
   z-index: 1;
   width: 100%;
   height: 100%;
+  background-size : 100% 100%;
 }
 /*default element stylings for the entire page*/
  h1 
@@ -34,7 +35,7 @@ canvas
   color: white;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;margin-left: 10%; position: relative; 
 }
-h2 { font-size:150%; color:red; text-align:left ;top : 20%; margin-top : -18%;
+h2 { font-size:150%; color:red; text-align:left ;top :40%; position: relative;
 }
 h3 { font-size:110%; color:white; text-align:center; position: relative;
 }
@@ -58,7 +59,7 @@ ul { position:relative; top:40%; left:58%; color:#52005C; width:60%; text-align:
 li { width:200px; height:60px; list-style-type :none; margin-bottom: 1px; text-align: center;position: relative;
 }
 /* set general anchor styles */
-li a { display: block; width:200px; height:60px;color: white; font-weight: bold; text-decoration: none;text-align: center;
+li a { display: block; width:200px; height:60px;color: white; font-weight: bold; text-decoration: none;text-align: center; position: relative;
 }
 /* specify state styles. Could add images but for now simple*/
 /* mouseout (default) */
@@ -68,18 +69,18 @@ li a { background: url('../images/defaultBtn.png') no-repeat 0 0; ; border: 4px 
 li a:hover { display:block;  background: url('../images/defaultBtn2.png') no-repeat 0 0; background: #BF0000; border: 4px outset #8abaff; width:200px;height:60px;position: relative;
 }
 /* onmousedown */
-li a:active { background:#aecbff; border: 4px inset #aecbff;position: relative;
+li a:active { background:#aecbff; border: 4px inset #aecbff; position: relative;
 }
 #reg-navigation ul { margin-right: 60%;
 	font-size:medium; width:10%; margin:10% 15px 0 88s%; bottom: 50%;position: relative;
 }
-#midcol {width:80%; margin:auto;position: abosolute;top: 0%;  margin-top: -40%;}
-#midcol2 {width:80%; margin:auto;position: relative; top: -22%;}
+#midcol {width:80%; margin:auto;position: abosolute;top: 0%;  margin-top: 40%;}
+#midcol2 {width:80%; margin:auto;position: relative; top: 0%;}
 #mid-left-col { width:36%; float:left; text-align:left; position: relative;
 }
 #mid-right-col {width:36%; float:right; text-align:left; position: relative;
 }
-#content { 	margin-left:25%; margin-right:25%; top : 15%; position: abosolute;
+#content { 	margin-left:25%; margin-right:25%; top : 15%; position: relative;
 }
 table { width:800px; border:1px white solid; border-collapse:collapse; margin-left: -5%; margin-top: 5%;position: relative;
 }
