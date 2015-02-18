@@ -209,7 +209,7 @@ var Auction =
 		
 		if(playerDidBid)
 		{
-			bidderCooldown ++;
+			bidderCooldown++;
 			enemyCanBid = false;
 			this.enemyWinning = false;			
 		}
@@ -356,10 +356,12 @@ var Auction =
 		//player Cooldown button
 		if(bidderCooldown >= PLAYER_WAIT)
 		{
+			this.playerWinning = true;
+			this.enemyWinning = false;
 			playerBid = currentBid + playerNextBid;
 			playerCanBid = true;
 			bidderCooldown = 0;
-			startPlayerEndBid = true;						
+			startPlayerEndBid = true;					
 		}
 		
 		if(playerBid <= userStats.money)
@@ -470,7 +472,6 @@ var Auction =
 				startPlayerEndBid = true;
 				this.playerWinning = true;
 				this.enemyWinning = false;
-				goingTimer = 0;
 			}
 			else if(playerBid < ai[i].currBid)
 			{
