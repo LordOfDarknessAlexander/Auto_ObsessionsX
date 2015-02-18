@@ -2,6 +2,7 @@
 //TODO:move vars into Auction, to remove from global scope
 var PLAYER_WAIT = 200;
 var ENEMY_WAIT = 300;
+var BID_COOLDOWN = 150;
 //AI cooldown timer
 
 var bidderCooldown = 0;
@@ -204,7 +205,7 @@ var Auction =
 		Auction.updatePlayer();
 		Auction.going();
 		//Auction.playerGoing();
-		Auction.findEndBidder();
+		//Auction.findEndBidder();
 		Auction.sellCarEndAuction();
 		
 		if(playerDidBid)
@@ -212,13 +213,7 @@ var Auction =
 			bidderCooldown++;
 			enemyCanBid = false;
 			this.enemyWinning = false;			
-		}
-	  	
-	  	if(bidderCooldown >= ENEMY_WAIT)
-	  	{	//enemy bid cooldown has refreshed
-	  		enemyCanBid = true;
-	  		bidderCooldown = 0;
-	  	}	  	
+		}	
 	  	
 		for(var i = 0; i < ai.length; ++i)
 		{
@@ -325,9 +320,9 @@ var Auction =
 	{
 		player.update();
 		
-		if(playerDidBid && (playerBid > ai[0]) && (playerBid > ai[1]) && (playerBid > ai[2]) && (playerBid > ai[3]) && (playerEndBidTimer >= ENEMY_WAIT + 100) )
+		if(playerDidBid && (playerBid > ai[0].currBid) && (playerBid > ai[1].currBid) && (playerBid > ai[2].currBid) && (playerBid > ai[3].currBid))
 		{
-			this.playerGoing();
+			//this.playerGoing();
 			this.playerWinning = true;
 			
 			//console.log("player Going" + pGTimer);	
@@ -354,13 +349,14 @@ var Auction =
 	playerBidding : function() 
 	{	//if CD timer has refreshed
 		//player Cooldown button
-		if(bidderCooldown >= PLAYER_WAIT)
+		if(!this.playerWinning)
 		{
 			this.playerWinning = true;
 			this.enemyWinning = false;
+			playerNextBid = 0.18 * currentBid;
 			playerBid = currentBid + playerNextBid;
 			playerCanBid = true;
-			bidderCooldown = 0;
+			//bidderCooldown = 0;
 			startPlayerEndBid = true;					
 		}
 		
@@ -434,31 +430,16 @@ var Auction =
 				ai[i].canBid = (i == index ? true : false);
 			}
 		}		
-        //check the bids of each AI to determine the highest bid,
-        //then setting the state;
-		if(checkBid(0) ){
-			this.winningTimer = 0;
-			this.playerWinning = false;
-			this.enemyWinning = true;
-			setBid(0);
-		}
-		else if(checkBid(1) ){
-			this.winningTimer = 0;
-			this.playerWinning = false;
-			this.enemyWinning = true;
-			setBid(1);
-		}
-		else if(checkBid(2) ){
-			this.winningTimer = 0;
-			this.playerWinning = false;
-			this.enemyWinning = true;
-			setBid(2);
-		}
-		else if(checkBid(3) ){
-			this.winningTimer = 0;
-			this.playerWinning = false;
-			this.enemyWinning = true;
-			setBid(3);
+		
+		for(var i = 0; i < ai.length; ++i)
+		{
+			if(checkBid(i))
+			{
+				this.winningTimer = 0;
+				this.playerWinning = false;
+				this.enemyWinning = true;
+				setBid(i);
+			}
 		}
 	},
 	currentBidder : function()
