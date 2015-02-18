@@ -41,9 +41,13 @@ function hasCar($id){
     return $ret;
 }
 function getAuctionCars(){
-    //selects all vehicles the user owns, returning it as a JSON array
+    //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
+    //returning them as a JSON array
     global $AO_DB;
-    
+    //$aoCarsTable = 'aoCars';
+    //static $getCar = $AO_DB->prepare(
+        //"SELECT * FROM $aoCarsTable"
+    //);
     $res = $AO_DB->query(
         "SELECT * FROM aoCars"
     );
@@ -75,6 +79,25 @@ function getUserCarFromID($carID){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
     $userID = 'user' . strval(0);    //$_SESSION['userID'];
+    //static $_getUserCar = $aoUsersDB->prepare(
+        //"SELECT * FROM ? WHERE car_id = ?"
+    //);
+    /*if($_getUserCar){
+        if($_getUserCar->bind_params('si', $userID, $carID)){
+            if($_getUserCar->execute() ){
+                $res = $_getUserCar->get_result();
+            }
+            else{
+                //execute failed   
+            }
+        }
+        else{
+            //bind params failed
+        }
+    }
+    else{
+        //prepare statement failed, fall back to regular query
+    }*/
     $res = $aoUsersDB->query(
         "SELECT * FROM $userID WHERE car_id = $carID"
     );
@@ -102,9 +125,10 @@ function getCarFromID($carID){
     //selects a vehicle from the car database,
     //returning it as a JSON object string
     global $AO_DB;
+    //$aoCarsTable = 'aoCars';    //name of table containing all cars in the AO_DB
     //using prepared statements
     /*static $_getCarFromID = $AO_DB->prepare(
-        "SELECT * FROM aoCars WHERE car_id = ?"
+        "SELECT * FROM $aoCarsTable WHERE car_id = ?"
     );
     if($_getCarFromID){
         if($_getCarFromID->bind_params('i', $carID)){
@@ -143,6 +167,39 @@ function echoUserCars(){
     global $aoUsersDB;
     
     $userID = 'user' . strval(0);   //$_SESSION['userID'];
+    //static $_getUserCars = $aoUsersDB->prepare(
+        //"SELECT * FROM ?" //select all fields from table
+    //);
+    /*if($_getUserCar){
+        if($_getUserCars->bind_params('s', $userID) ){
+            if($_getUserCars->execute() ){
+                //$res = $_getUserCars->get_result(;)
+                if($res){
+                    $cars = array();
+                    //fetch each row of the result until no more rows are left
+                    while($row = mysqli_fetch_array($res) ){
+                        $cars[] = array(
+                            'carID' => intval($row['car_id']),
+                            'drivetrain' => intval($row['drivetrain']),
+                            'body' => intval($row['body']),
+                            'interior' => intval($row['interior']),
+                            'docs' => intval($row['docs']),
+                            'repairs' => intval($row['repairs'])
+                        );
+                    }
+                    mysqli_free_result($res);
+                    echo json_encode($cars);
+                }
+                else{   //The vehicle is already registered
+                    //echo "<p class='error'>User: has no entries in database</p>";
+                    echo '{"cars":[]}';
+                }
+            }
+            //failed to execute
+        }
+        //failed to set params
+    }*/
+    //binding prepared statement didn't work, attempt regulat query as fall back
     $res = $aoUsersDB->query(
         "SELECT * FROM $userID"
     );

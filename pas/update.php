@@ -189,7 +189,7 @@ if(isset($_POST) && !empty($_POST) ){
                         $res = false;
                         //prepare statement for adding the defaults values for a new car into the user's table
                         static $addCar = $aoUsersDB->prepare(
-                            "INSERT INTO ? (car_id, drivetrain, body, interior, docs, repairs) VALUES (?, 0,0,0,0,0)"
+                            "INSERT INTO ? (car_id, drivetrain, body, interior, docs, repairs) VALUES (?,0,0,0,0,0)"
                         );
                         if($addCar){
                             if($addCar->bind_param('si', $tableName, $carID) ){

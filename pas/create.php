@@ -12,12 +12,21 @@ function createUserEntry($userID){
     global $AO_DB;
     $tableName = 'user' . strval(0);    //userID;
     //get validated and sanitized form data
-    /*$stmnt = $AO_DB->prepare(
-       "INSERT INTO user (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
+    //$userTableName = 'user';
+    
+    /*static $stmnt = $AO_DB->prepare(
+       "INSERT INTO $userTableName (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     );
+    
     $stmnt->bind_args('issssiiiiii), '', $title, $fname, $lname, $email, $pw, $uname, NOW(), 0, 0, 0, 0, 0, 0";
-    $stmt->execute();
+    
+    if($stmt->execute() ){
+        //$res = $stmt->
+    }
+    else{
+        //sql error!
+    }
     
     if($res){
         if(mysqli_num_rows($res) != 0){
@@ -33,23 +42,26 @@ function createUserEntry($userID){
     return null;
 }
 function createUserTable($userID){
-    //creates an empty table upon user registration
+    //creates an empty table in aoUsersDB upon user registration
     global $aoUsersDB;
     $tableName = 'user' . strval(0);    //userID;
+    $uint = 'int unsigned';
+    $defaultCharset = 'DEFAULT CHARSET = latin1';
+    $defaultEngine = 'ENGINE = InnoDB';
     //make this a static var, should only be executed once!
-    $stmnt = $aoUsersDB->prepare(
+    static $stmnt = $aoUsersDB->prepare(
        "CREATE TABLE IF NOT EXISTS $tableName(
-            car_id int unsigned NOT NULL PRIMARY KEY,
-            drivetrain int unsigned,
-            body int unsigned,
-            interior int unsigned,
-            docs int unsigned,
-            repairs int unsigned
-        )ENGINE=InnoDB DEFAULT CHARSET=latin1"
+            car_id $uint NOT NULL PRIMARY KEY,
+            drivetrain $uint,
+            body $uint,
+            interior $uint,
+            docs $uint,
+            repairs $uint
+        )$defaultEngine $defaultCharset"
     );
     
     if(!$stmt){
-        $erno =$aoUsersDB->errno;
+        $erno = $aoUsersDB->errno;
         $err = $aoUsersDB->error;
         echo "createUserTable($userID), prepare failed:($erno), reason: $err";
         return false;
@@ -59,7 +71,7 @@ function createUserTable($userID){
         return true;
     }
     //else false, output error
-    $erno =$aoUsersDB->errno;
+    $erno = $aoUsersDB->errno;
     $err = $aoUsersDB->error;
     echo "createUserTable($userID), prepare failed:($erno), reason: $err";
     
