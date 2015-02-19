@@ -286,6 +286,7 @@ div#main a:hover {
 div#profile
 {
     background: url('../images//defaultBG.jpg') no-repeat 0 0;
+	background-size : 100% 100%;
     display: none;
     text-align: center;
     width: 100%;
