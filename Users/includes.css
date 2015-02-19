@@ -63,10 +63,10 @@ li a { display: block; width:200px; height:60px;color: white; font-weight: bold;
 }
 /* specify state styles. Could add images but for now simple*/
 /* mouseout (default) */
-li a { background: url('../images/defaultBtn.png') no-repeat 0 0; ; border: 4px outset #aabaff;position: relative;
+li a { background: url('../images/defaultBtn.png') no-repeat 0 0; ; position: relative;
 }
 /* mouseover */
-li a:hover { display:block;  background: url('../images/defaultBtn2.png') no-repeat 0 0; background: #BF0000; border: 4px outset #8abaff; width:200px;height:60px;position: relative;
+li a:hover { display:block;  background: url('../images/defaultBtn2.png') no-repeat 0 0; background: #BF0000; width:200px;height:60px;position: relative;
 }
 /* onmousedown */
 li a:active { background:#aecbff; border: 4px inset #aecbff; position: relative;
