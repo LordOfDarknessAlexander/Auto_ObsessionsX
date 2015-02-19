@@ -218,14 +218,6 @@ var Auction =
 		  context.fillText('Player Bid :  ' + '$'+ this.playerBid.toFixed(2)  ,ENEMY_X , 230);
 		}
 		
-		for(var i = 0; i < this.ai.length; ++i)
-		{
-			if(this.playerBid == this.ai[i].currBid)
-			{
-				this.playerBid != this.currentBid;    //this does nothing!?
-			}
-		}
-		
 		if(this.ai[0].currBid >= this.currentBid)
 		{
 			enemy1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2) ,ENEMY_X , 70);
