@@ -34,19 +34,32 @@ function divSelectedCar(){
 	padding-top: 92px;
 	z-index: 1;
 }
+<?php divGarage();?> button#backBtn
+{<?php
+    posAbs();
+?>
+    bottom:70%;
+    left:10%;
+    width:5%;
+    height:5%;
+}
 <?php divGarage();?> button#viewCar
 {<?php
     posAbs();
 ?>
-    bottom:67%;
-    right:42%;
+    bottom:70%;
+    left:30%;
+    width:5%;
+    height:5%;
 }
 <?php divGarage();?> button#select
 {<?php
     posAbs();
 ?>
-    bottom:67%;
-    left:42%;
+    bottom:70%;
+    left:20%;
+    width:5%;
+    height:5%;
 }
 <?php divGarage();?> li 
 {	/*styles all list items of node with id RepairShop*/
@@ -76,10 +89,10 @@ function divSelectedCar(){
 	background: url('../images/defaultBG.jpg') no-repeat 0 0;
 	overflow-y:scroll;
 <?php posAbs();?>
-	height:65%;
-	bottom:0%;
-    left:22.5%;
-    width:55%;
+	height:70%;
+	top:30%;
+    left:5%;
+    width:35%;
 }
 /*current user car stylings*/
 <?php divUserCar();?>
@@ -89,10 +102,10 @@ function divSelectedCar(){
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 <?php posAbs();?>
 	text-align::left;
-	top:120px;
-	left:2%;
-	width:300px;
-	height:110px;
+	top:30%;
+	left:42%;/*2%;*/
+	width:25%;
+	height:60%;
 	display:inline;
 }
 <?php divSelectedCar();?>
@@ -102,21 +115,17 @@ function divSelectedCar(){
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 <?php posAbs();?>
 	text-align::left;
-	top:120px;
+	top:30%;
 	right:2%;
-	width:30%;
-	height:15%;
+	width:25%;
+	height:60%;
 	display:inline;
 }
 <?php divUserCar();?> img,
 <?php divSelectedCar();?> img
 {
-<?php posAbs();?>
-	/*position element in to left corner of parent*/
-	top:0px;
-	right:0px;
-	width:80px;
-	height:60px;
+	width:100%;
+	height:50%;
 }
 <?php divUserCar();?> label,
 <?php divSelectedCar();?> label
