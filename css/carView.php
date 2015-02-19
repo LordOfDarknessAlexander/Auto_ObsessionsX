@@ -48,7 +48,7 @@ function divCarView(){
 <?php divCarView();?> button#sellBtn
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
-
+	background-size: 100% 100%;
 	left:5%;
 	top:35%;
 	width:15%;
