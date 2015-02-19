@@ -6,11 +6,12 @@ function selectBtn(){?>
 <?php
 }
 ?>
-<?php include("include/statBar.php"); ?>
-<div id="Garage">
+<div id='Garage'>
+<?php //include("include/statBar.php"); ?>
     <h1>Garage</h1>
     <?php selectBtn();?>
     <button id='viewCar'>View</button>
+    <!--button id='sellCar'>Sell</button-->
     <?php backBtn();?>
     
     <div id='carListView'>
@@ -23,11 +24,13 @@ function selectBtn(){?>
     <div id='userCar'>
         <!--display for currently selected vehicle-->
         <img id='carImg' src='images/vehicle.jpg'>
+        <br>
         <!--label id='curCarName'>m:</label>
         <label id='curCarInfo'>current car info</label-->
-        <label id='carName'>name</label>-
+        <label id='carName'>name</label>
+        <br>
         <label id='carInfo'>info</label>
-        <!---->
+        <br>
         <div id='progressBars'>
             <!--progress bar 'value' attribute is between 0.0 and 1.0-->
             drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress><br>
@@ -39,8 +42,11 @@ function selectBtn(){?>
     <div id='selectedCar'>
         <!--display vehicle picked by user-->
         <img id='carImg' src='images/vehicle.jpg'>
+        <br>
         <label id='carName'></label>
+        <br>
         <label id='carInfo'></label>
+        <br>
         <div id='progressBars'>
             drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress><br>
             body:<br><progress id='bodyPB' value='0.0'></progress><br>

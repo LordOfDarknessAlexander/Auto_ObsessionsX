@@ -44,6 +44,25 @@ function hasCar($id){
     
     return $ret;
 }
+function getCurrentCar(){
+    //returns the user's currently selected vehicle
+    /*$id = strval(0);    //$SESSION['userID'];
+    $users = 'users';
+    
+    $res = $AO_DB->query("SELECT curCarID FROM $users WHERE user_id = $id");
+    
+    if($res){
+        //user has car
+        //$ret = mysqli_num_rows($res) != 0 ? true : false;
+    }
+    else{
+        //query failed, user has no entry in database
+        ret = 0;
+    }
+    mysqli_free_result($res);
+    
+    return $ret;*/
+}
 function getAuctionCars(){
     //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
     //returning them as a JSON array

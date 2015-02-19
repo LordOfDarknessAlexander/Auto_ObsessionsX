@@ -29,7 +29,7 @@ function divRepair(){
 <?php
     posAbs();
 ?>
-	width:15%;
+	width:20%;
 	height:5%;
     font-size:1.5rem;
     font-weight:bold;
@@ -100,7 +100,7 @@ function divRepair(){
     font-size:1rem;
     text-align:left;
     
-	width:15%;
+	width:20%;
 	top:25%;
 	height:30%;
 	left:5%;
@@ -114,7 +114,7 @@ function divRepair(){
     font-size:1rem;
     text-align:left;
     
-	width:15%;
+	width:20%;
 	top:60%;
 	height:30%;
 	left:5%;
@@ -128,7 +128,7 @@ function divRepair(){
     text-align:left;
     font-size:1rem;
     
-	width:15%;
+	width:20%;
 	top:25%;
 	height:30%;
 	right:5%;
@@ -142,7 +142,7 @@ function divRepair(){
     text-align:left;
     font-size:1rem;
     
-	width:15%;
+	width:20%;
 	top:60%;
 	height:30%;
 	right:5%;
