@@ -3,31 +3,30 @@ require ('Users/config.php');
 
 if( isset( $_POST) )
 {
-if ( !empty($_POST['money']) || !empty($_POST['tokens']) || !empty($_POST['prestige']) || !empty($_POST['m_marker']) || !empty($_POST['uname']))
+	if ( !empty($_POST['money']) || !empty($_POST['tokens']) || !empty($_POST['prestige']) || !empty($_POST['m_marker']) || !empty($_POST['uname']))
 	{
+			
+			$money = $_POST["money"];
+			$tokens = $_POST["tokens"];
+			$prestige = $_POST["prestige"];
+			$marker = $_POST["m_marker"];
+			$uname = $_POST["uname"];
+
+			$q = "UPDATE users SET money='$money', tokens='$tokens' ,prestige='$prestige', m_marker='$marker', uname='$uname' WHERE  user_id = 1";
+			echo "Shits awesome";
+			$result = mysqli_query ($dbcon, $q);
+			if(!$result )
+			{
+			  die('Could not update data: ' . mysql_error());
+			}
+			else
+			{
+			  echo '{"money":"' . $money . '", "tokens":"' . $tokens . '","prestige":"' . $prestige . ',"m_marker":"' . $marker . ',"uname":"' . $uname . '"}';
 		
-		$money = $_POST["money"];
-		$tokens = $_POST["tokens"];
-		$prestige = $_POST["prestige"];
-		$marker = $_POST["m_marker"];
-		$uname = $_POST["uname"];
-		
-		
-		$q = "UPDATE users SET money='$money', tokens='$tokens' ,prestige='$prestige', m_marker='$marker', uname='$uname' WHERE user_id = 4";
-		echo "Shits awesome";
-		$result = mysqli_query ($dbcon, $q);
-		if(!$result )
-		{
-		  die('Could not update data: ' . mysql_error());
-		}
-		else
-		{
-		  echo '{"money":"' . $money . '", "tokens":"' . $tokens . '","prestige":"' . $prestige . ',"m_marker":"' . $marker . ',"uname":"' . $uname . '"}';
-	
-		}
-		mysqli_close($dbcon);	
-		
-	}
+			}
+			mysqli_close($dbcon);	
+			
+	}/*
 	else if( empty($_POST['money']) || empty($_POST['tokens']) || empty($_POST['prestige']) || empty($_POST['m_marker']) || !empty($_POST['uname']))
 	{
 		$money = $_POST["money"];
@@ -48,13 +47,11 @@ if ( !empty($_POST['money']) || !empty($_POST['tokens']) || !empty($_POST['prest
 	
 		}
 		mysqli_close($dbcon);	
-	}
+	}*/
 
 }
 else
 {
-	$fname = $_POST[" "];
-	//$lname = $_POST[" "];
 	echo "Goody try";
 }
 
