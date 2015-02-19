@@ -6,7 +6,16 @@
     <!--HUD ---->
 <!--	<div id="fname" ></div>-->
 <?php require_once 'include/statBar.php';?>  
-
+<?php require_once 'secure.php';?>
+<?php
+session_start();
+echo '<h2>Welcome to Auto-Obsessions\' Page ';
+if (isset($_SESSION['fname']))
+{
+	echo "{$_SESSION['fname']}";
+}
+echo '</h2>';
+?>
 
     <img id='homeImg' src='images\\garageEmpty.png'>
     <div id='menuLeft'>
