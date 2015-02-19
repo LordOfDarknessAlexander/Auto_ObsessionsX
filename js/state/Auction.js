@@ -1,6 +1,5 @@
 ﻿var enemy1, enemy2, enemy3, enemy4;
 
-//BidTImers Booleans
 var playerBoughtOut = false; //temporary for our dev button "buyout"
 
 /*function shuffleArray(array) 
@@ -46,8 +45,11 @@ var Auction =
 	playerBid : 0,
 	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
 	winningTimerCap : 100.0, //Max amount of time the winningTimer will run for before activating the going timer
-	goingTimer : 0.0, //Timer for going once, going twice, sold
+	goingTimer: 0.0, //Timer for going once, going twice, sold
+	bidTimer: 0.0, //Slight delay after the player bids to prevent the AI and player from bidding at the same time
+    bidTimerCap: 10, //Max time the bidTimer can go to
 	enemyWinning : false,
+	canBid : false, //Boolean determining whether anyone can bid again or not
 	playerWinning : false,
 	playerWon : false, //Whether or not the player won the auction
 	raisePerc : 0, //How much the AI and player will raise each bid by
@@ -164,14 +166,14 @@ var Auction =
 	},
 	update : function()
 	{	//main update logic, called per frame
-		Auction.bidTimers();
-		Auction.enemyBidding();
-		Auction.currentBidder();
-		Auction.updatePlayer();
-		Auction.going();
+		this.bidTimers();
+		this.enemyBidding();
+		this.currentBidder();
+		this.updatePlayer();
+		this.going();
 		
 		this.raisePerc = this.currentBid * 0.18;
-	  	
+
 		for(var i = 0; i < this.ai.length; ++i)
 		{
 			if(this.playerWinning || this.ai[i].winningBid)
@@ -187,6 +189,15 @@ var Auction =
 		if(endGame)
 		{
 			this.close();					
+		}
+
+		if (this.bidTimer < this.bidTimerCap)
+		{
+		    this.bidTimer++
+		}
+		else if (this.bidTimer >= this.bidTimerCap)
+		{
+		    this.canBid = true;
 		}
 		
 		if(!auctionStop)
@@ -207,17 +218,18 @@ var Auction =
 
 		player.draw();
 		
-		if(this.playerBid == this.currentBid)
+		if(this.playerWinning)
 		{
 			player.y = 10;
-			context.fillText('Player Bid :  ' + '$' + this.playerBid.toFixed(2)  ,ENEMY_X , 90);
+			context.fillText('Player Bid :  ' + '$' + this.currentBid.toFixed(2), ENEMY_X, 90);
 		}
 		else
 		{
 		  player.y = 150;
-		  context.fillText('Player Bid :  ' + '$'+ this.playerBid.toFixed(2)  ,ENEMY_X , 230);
+		  context.fillText('Player Bid :  ' + '$' + this.playerBid.toFixed(2), ENEMY_X, 230);
 		}
-		
+
+        //The block below can be cleaned up, thinking of how to do it
 		if(this.ai[0].currBid >= this.currentBid)
 		{
 			enemy1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2) ,ENEMY_X , 70);
@@ -286,32 +298,40 @@ var Auction =
 		}
 	},
 	playerBidding : function() 
-	{	//if CD timer has refreshed
-		//player Cooldown button
-		if(!this.playerWinning)
+	{
+		if(!this.playerWinning && this.canBid)
 		{
 			this.playerWinning = true;
 			this.enemyWinning = false;
-			this.playerBid = this.currentBid + this.raisePerc;	
+			this.bidTimer = 0;
+			this.goingTimer = 0;
+		    //Setting the enemy's ability to bid to false so that as soon as the player bids the enemy is unable to
+			this.canBid = false;
+			this.playerBid = this.currentBid + this.raisePerc;
+			this.currentBid = this.playerBid;
 		}
 	},
 	enemyBidding : function()
 	{
-		if(!this.playerWon)
+	    if (!this.playerWon && this.canBid)
 		{	
 			for(var i = 0; i < this.ai.length; i++)
 			{						
-				if(this.ai[i].canBid)	//global cooldown timer has refreshed, bidding now avthis.ailable
+				if(this.ai[i].canBid && !this.ai[i].leftAuction)
 				{
-					if((this.ai[i].currBid < this.currentBid) && (this.ai[i].currBid < this.ai[i].bidCap))
+					if(this.ai[i].currBid < this.currentBid)
 					{
-						this.ai[i].currBid = this.currentBid + this.raisePerc;
+					    this.ai[i].currBid = this.currentBid + this.raisePerc;
+					    console.log(this.currentBid);
 						console.log("this.ai " + i + " bidding " + this.ai[i].currBid + " and cap is " + this.ai[i].bidCap);
 						this.winningTimer = 0;
+						this.canBid = false;
+						this.bidTimer = 0;
+						this.goingTimer = 0;
 						this.enemyWinning = true;
 						this.playerWinning = false;
 						assetLoader.sounds.bidder.play();
-						break;	//breaks on first avthis.ailable bidder?
+						break;
 					}
 				}
 			}
@@ -330,13 +350,13 @@ var Auction =
 		}
 	},
 	checkBid : function(index)
-	{	//check if the enemy at the current index has a higher bid than the other this.ai's
+	{	//check if the enemy at the current index has a higher bid than the other ai's or player
 		var ret = true;
 		for(var i = 0; i < this.ai.length; i++)
 		{
 			if(index != i)
 			{
-				if(this.ai[index].currBid > this.ai[i].currBid)
+				if(this.ai[index].currBid > this.ai[i].currBid || this.ai[index].currBid > this.playerBid)
 				{
 					continue;
 				}
@@ -355,7 +375,9 @@ var Auction =
 		{
 			if(!this.ai[index].winningBid)
 			{
-				this.currentBid = this.ai[index].currBid;
+			    this.currentBid = this.ai[index].currBid;
+			    this.playerWinning = false;
+			    this.goingTimer = 0;
 			}
 		
 			//iterate over this.ai, assigning the bidder at index as the current bidder,
@@ -374,17 +396,18 @@ var Auction =
 		{
 			if(this.playerBid > this.ai[i].currBid)
 			{
-				this.currentBid = this.playerBid;
+			    this.currentBid = this.playerBid;
 				this.playerWinning = true;
 				this.enemyWinning = false;
+				this.ai[i].winningBid = false;
 			}
-			else if(this.playerBid < this.ai[i].currBid)
-			{
+			//else if(this.playerBid < this.ai[i].currBid)
+			//{
 				if(!this.ai[i].leftAuction)
 				{
 					this.bidFinder();
 				}
-			}
+			//}
 		}
 	},
 	going : function()
@@ -400,7 +423,7 @@ var Auction =
 				if((this.goingTimer > 0) && (this.goingTimer < 360))
 				{
 					this.goingTimer++
-					console.log("Going once");
+					//console.log("Going once");
 					context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
 					assetLoader.sounds.going.play();
 					break;
@@ -408,7 +431,7 @@ var Auction =
 				}
 				else if((this.goingTimer > 370) && (this.goingTimer < 650))
 				{
-					console.log("Going twice");
+					//console.log("Going twice");
 					context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
 					assetLoader.sounds.going.play();
 					break;
