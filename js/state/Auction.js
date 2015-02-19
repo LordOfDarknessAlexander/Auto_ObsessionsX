@@ -46,10 +46,12 @@ var Auction =
 	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
 	winningTimerCap : 100.0, //Max amount of time the winningTimer will run for before activating the going timer
 	goingTimer: 0.0, //Timer for going once, going twice, sold
-	bidTimer: 0.0, //Slight delay after the player bids to prevent the AI and player from bidding at the same time
-    bidTimerCap: 10, //Max time the bidTimer can go to
+	enemyBidTimer: 0.0, //Slight delay after the player bids to prevent the AI from spam bidding
+    playerBidTimer: 0.0, //Slight delay after the player bids to prevent the player from spam bidding
+    bidTimerCap: 50, //Max time the bidTimer can go to
 	enemyWinning : false,
-	canBid : false, //Boolean determining whether anyone can bid again or not
+	enemyCanBid: true, //Boolean determining whether anyone can bid again or not
+    playerCanBid: true,
 	playerWinning : false,
 	playerWon : false, //Whether or not the player won the auction
 	raisePerc : 0, //How much the AI and player will raise each bid by
@@ -168,7 +170,7 @@ var Auction =
 	{	//main update logic, called per frame
 		this.bidTimers();
 		this.enemyBidding();
-		this.currentBidder();
+		//this.currentBidder();
 		this.updatePlayer();
 		this.going();
 		
@@ -191,13 +193,28 @@ var Auction =
 			this.close();					
 		}
 
-		if (this.bidTimer < this.bidTimerCap)
+		if (!this.playerCanBid)
 		{
-		    this.bidTimer++
+		    if(this.playerBidTimer < this.bidTimerCap)
+		    {
+		        this.playerBidTimer++;
+		    }
+		    else if(this.playerBidTimer >= this.bidTimerCap)
+		    {
+		        this.playerCanBid = true;
+		    }
 		}
-		else if (this.bidTimer >= this.bidTimerCap)
+
+		if (!this.enemyCanBid)
 		{
-		    this.canBid = true;
+		    if(this.enemyBidTimer < this.bidTimerCap)
+		    {
+		        this.enemyBidTimer++;
+		    }
+		    else if(this.enemyBidTimer >= this.bidTimerCap)
+		    {
+		        this.enemyCanBid = true;
+		    }
 		}
 		
 		if(!auctionStop)
@@ -279,8 +296,7 @@ var Auction =
 	},
 	updatePlayer : function() 
 	{
-		player.update();
-		
+	    player.update();
 		if((this.playerBid > this.ai[0].currBid) && (this.playerBid > this.ai[1].currBid) && (this.playerBid > this.ai[2].currBid) && (this.playerBid > this.ai[3].currBid))
 		{
 			//this.playerGoing();
@@ -299,21 +315,22 @@ var Auction =
 	},
 	playerBidding : function() 
 	{
-		if(!this.playerWinning && this.canBid)
+	    if (!this.playerWinning && this.playerCanBid)
 		{
 			this.playerWinning = true;
 			this.enemyWinning = false;
-			this.bidTimer = 0;
+			this.playerBidTimer = 0;
 			this.goingTimer = 0;
 		    //Setting the enemy's ability to bid to false so that as soon as the player bids the enemy is unable to
-			this.canBid = false;
+			this.playerCanBid = false;
 			this.playerBid = this.currentBid + this.raisePerc;
 			this.currentBid = this.playerBid;
+			console.log("Player bidding " + this.playerBid + " currBid now " + this.currentBid);
 		}
 	},
 	enemyBidding : function()
 	{
-	    if (!this.playerWon && this.canBid)
+	    if (!this.playerWon && this.enemyCanBid)
 		{	
 			for(var i = 0; i < this.ai.length; i++)
 			{						
@@ -322,11 +339,18 @@ var Auction =
 					if(this.ai[i].currBid < this.currentBid)
 					{
 					    this.ai[i].currBid = this.currentBid + this.raisePerc;
-					    console.log(this.currentBid);
-						console.log("this.ai " + i + " bidding " + this.ai[i].currBid + " and cap is " + this.ai[i].bidCap);
+					    if (this.ai[i].currBid == this.currentBid)
+					    {
+					        break;
+					    }
+					    this.ai[i].winningBid = true;
+					    this.ai[i].canBid = false;
+					    this.currentBid = this.ai[i].currBid;
+					    
+						console.log("ai " + i + " bidding " + this.ai[i].currBid + " and cap is " + this.ai[i].bidCap);
 						this.winningTimer = 0;
-						this.canBid = false;
-						this.bidTimer = 0;
+						this.enemyCanBid = false;
+						this.enemyBidTimer = 0;
 						this.goingTimer = 0;
 						this.enemyWinning = true;
 						this.playerWinning = false;
@@ -337,7 +361,7 @@ var Auction =
 			}
 		 }
 	},
-	bidFinder : function()
+	/*bidFinder : function()
 	{	//determine bidder
 		//check the bids of each this.ai to determine the highest bid,
 		//then setting the state;
@@ -356,7 +380,7 @@ var Auction =
 		{
 			if(index != i)
 			{
-				if(this.ai[index].currBid > this.ai[i].currBid || this.ai[index].currBid > this.playerBid)
+				if(this.ai[index].currBid > this.ai[i].currBid)
 				{
 					continue;
 				}
@@ -376,6 +400,7 @@ var Auction =
 			if(!this.ai[index].winningBid)
 			{
 			    this.currentBid = this.ai[index].currBid;
+			    console.log("Setting currentBid to AI " + index + "'s bid of " + this.ai[index].currBid);
 			    this.playerWinning = false;
 			    this.goingTimer = 0;
 			}
@@ -388,8 +413,8 @@ var Auction =
 				this.ai[i].canBid = (i == index ? true : false);
 			}
 		}
-	},	
-	currentBidder : function()
+	},	*/
+	/*currentBidder : function()
 	{	//determine if player has highest bid
 		//Player has the current bid
 		for(var i = 0; i < this.ai.length; ++i)
@@ -403,13 +428,13 @@ var Auction =
 			}
 			//else if(this.playerBid < this.ai[i].currBid)
 			//{
-				if(!this.ai[i].leftAuction)
+				/*if(!this.ai[i].leftAuction)
 				{
 					this.bidFinder();
 				}
 			//}
 		}
-	},
+	},*/
 	going : function()
 	{	//begin sale count down after a wthis.aiting period if no other bids are offered
 		//Going crowd roars someone is about to win the bid
@@ -463,7 +488,7 @@ var Auction =
 							}
 						}
 					}
-					this.sold();
+					//this.sold();
 					//$('div#loss label').text(Auction._car.getFullName() );
 					break;
 				}
