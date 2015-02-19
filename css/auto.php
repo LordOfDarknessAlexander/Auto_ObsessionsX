@@ -71,6 +71,7 @@ button
 button#backBtn
 {   /*sets properties for all button tags with id backBtn*/
 	background: url('../images/backBtn.png') no-repeat 0 0;
+	background-size : 100% 100%;
     cursor:pointer;
 	position:absolute;
 	left:5%;
@@ -250,7 +251,7 @@ div#main a:hover {
   background-color: #FF0DFF;
   background-image: -webkit-linear-gradient(bottom, #990000 0%, #990000 100%);
   background-image:         linear-gradient(to bottom, #990000 0%, #B30D5D 100%);
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 .button:hover 
