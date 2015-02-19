@@ -29,12 +29,46 @@ var Documents = {
             return '';
         }
     },
-    make:function(carPrice){
+    make:function(carPrice, parts){
+        var bits = 0x0000,  //upgrade/parts bits, as a 16 bit short int
+            rb = 0x00;   //repair bits, as an 8 bit byte
+        
+        if(parts === null || parts === undefined){
+            bits = 0x0000;
+        }
+        else{
+            bits = parts;
+        }
+        
+        var owner = carPart(carPrice * 0.08, Interior.TYPE.seats),
+            build = carPart(carPrice * 0.06, Interior.TYPE.carpet),
+            history = carPart(carPrice * 0.04, Interior.TYPE.dash),
+            ph0 = carPart(carPrice * 0.11, Interior.TYPE.panels);
+        
+        if(bits){
+            var ownerBF = (bits & 0xF000) >> 12,
+                buildBF = (bits & 0x0F00) >> 8,
+                historyBF = (bits & 0x00F0) >>  4,
+                ph0BF = (bits & 0x000F) >> 0;
+            
+            if(ownerBF){
+                owner.setStage(ownerBF);
+            }
+            if(buildBF){
+                build.setStage(buildBF);
+            }
+            if(historyBF){
+                history.setStage(historyBF);
+            }
+            if(ph0BF){
+                ph0.setStage(ph0BF);
+            }
+        }
         return {
-            _owner:carPart(carPrice * 0.32, Documents.TYPE.ownership),
-            _build:carPart(carPrice * 0.23, Documents.TYPE.build),
-            _history:carPart(carPrice * 0.29, Documents.TYPE.history),
-            _ph0:carPart(carPrice * 0.12, Documents.TYPE.ph0),
+            _owner:owner,
+            _build:build,
+            _history:history,
+            _ph0:ph0,
             //_ph1:carPart(carPrice * 0.12, bd.ph1),
             //
             getBits:function(){
@@ -52,12 +86,15 @@ var Documents = {
             //},
             getPercentAvg:function(){
                 //returns precent this part has been upgraded/repaired, as a float [0.0-1.0](for progress bar)
-                return (
-                    this._owner.getPercent() +
-                    this._build.getPercent() +
-                    this._history.getPercent() +
-                    this._ph0.getPercent()
-                ) * 0.25;   //average of all parts
+                var OLD_MAX = 5,  //1.0 / 5.0;
+                    INV_MAX = 0.25, //1.0/4.0-1
+                    ret = (
+                        this._owner.getPercent() +
+                        this._build.getPercent() +
+                        this._history.getPercent() +
+                        this._ph0.getPercent()
+                    ) * 0.25;   //average of all parts
+                return ret;
             },
             getPartType:function(type){
                 //returns a copy of the object

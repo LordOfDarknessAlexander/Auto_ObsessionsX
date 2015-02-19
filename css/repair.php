@@ -180,3 +180,12 @@ function divRepair(){
 	top:55%;
 	right:5%;
 }
+<?php divRepair();?> button#addFunds
+{
+<?php
+    posAbs();
+    css::size('10%', '10%');
+?>
+    left:45%;
+    bottom:62%;
+}

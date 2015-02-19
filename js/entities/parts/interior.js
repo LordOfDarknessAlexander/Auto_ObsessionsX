@@ -46,10 +46,10 @@ var Interior = {
             rb = repairs;
         }
         
-        var seats = carPart(carPrice * 0.32, Interior.TYPE.seats),
-            carpet = carPart(carPrice * 0.23, Interior.TYPE.carpet),
-            dash = carPart(carPrice * 0.29, Interior.TYPE.dash),
-            panels = carPart(carPrice * 0.12, Interior.TYPE.panels);
+        var seats = carPart(carPrice * 0.22, Interior.TYPE.seats),
+            carpet = carPart(carPrice * 0.12, Interior.TYPE.carpet),
+            dash = carPart(carPrice * 0.08, Interior.TYPE.dash),
+            panels = carPart(carPrice * 0.14, Interior.TYPE.panels);
             
         if(bits){
             var seatsBF = (bits & 0xF000) >> 12,

@@ -22,10 +22,14 @@ function hasCar($id){
         }
         else{
             //failed sending params to server for binding
+            $erno = $aoUsersDB->con->errno;
+            $err = $aoUsersDB->con->error;
+            echo "hasCar($id), bind_params failed:($erno), reason: $err";
+            exit();
         }
     }
     else{
-        //attempt normal, slow, less secure sql calls
+        //fallback to normal, slow, less secure sql calls
         //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
         //if($res){
             //user has car
@@ -101,8 +105,9 @@ function getCarFromID($carID){
     //selects a vehicle from the car database,
     //returning it as a JSON object string
     global $AO_DB;
+    $aoCars = 'aoCars';
     $res = $AO_DB->query(
-        "SELECT * FROM aoCars WHERE car_id = $carID"
+        "SELECT * FROM $aoCars WHERE car_id = $carID"
     );
     if($res){
         if(mysqli_num_rows($res) != 0){
@@ -178,17 +183,20 @@ if(isset($_POST) && !empty($_POST) ){
                 if($_GET['op'] == 'insert'){
                     //inserts a car with carID from the vehicle database into the
                     //logged in user's table in aoUsersDB
+                    //returns true if the INSERTion is successful,
+                    //false if user has the vehicle already or any other reason the vehicle could not be added
                     $hasCar = hasCar($carID);
                     
                     if($hasCar){
-                        //user has already bought this car, error!
+                        //user has already bought this car, exit with false!
                         //echo json_encode(false);
+                        exit();
                     }
                     else{
                         $tableName = 'user' . strval(0);    //$_SESSION['userID'];
                         $res = false;
                         //prepare statement for adding the defaults values for a new car into the user's table
-                        $addCar = $aoUsersDB->prepare(
+                        /*$addCar = $aoUsersDB->con->prepare(
                             "INSERT INTO ? (car_id, drivetrain, body, interior, docs, repairs) VALUES (?,0,0,0,0,0)"
                         );
                         if($addCar){
@@ -197,15 +205,23 @@ if(isset($_POST) && !empty($_POST) ){
                             }
                             else{
                                 //output error
+                                $erno = $aoUsersDB->con->errno;
+                                $err = $aoUsersDB->con->error;
+                                echo "addCar($carID), bind_params failed:($erno), reason: $err";
+                                exit();
                             }
                         }
-                        else{
+                        else{*/
+                            //$erno = $aoUsersDB->con->errno;
+                            //$err = $aoUsersDB->con->error;
+                            //echo "insertCar($carID), prepare failed:($erno), reason: $err";
+                            //exit();
                             //prepare didn't work, attempt execution of regular query
-                            //$res = $aoUsersDB->query(
-                                //"INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
+                            $res = $aoUsersDB->query(
+                                "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
                                 //IF entry EXISTS do nothing
-                            //);
-                        }
+                            );
+                        //}
                         echo json_encode($res);
                     }
                     exit();

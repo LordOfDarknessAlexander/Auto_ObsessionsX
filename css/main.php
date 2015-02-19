@@ -7,7 +7,7 @@ require_once 'ui.php';
 require_once 'AuctionSelect.php';
 require_once 'repair.php';
 require_once 'funds.php';   //move to repair
-require_once 'garage.php';
+//require_once 'garage.php';
 //    
 function divMain(){
     echo 'div#gameMenu';

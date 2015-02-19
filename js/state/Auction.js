@@ -71,7 +71,7 @@ var Auction =
         $.when(
             $.ajax({
                 type:'POST',
-                url:getHostPath() + 'vehicles/query.php',
+                url:getHostPath() + 'pas/query.php',
                 dataType:'json',
                 data:{carID:index}
             }).done(function(data){

@@ -46,10 +46,10 @@ var Body = {
             rb = repairs;
         }
         
-        var chasis = carPart(carPrice * 0.32, Body.TYPE.chasis),
-            panels = carPart(carPrice * 0.23, Body.TYPE.panels),
-            paint = carPart(carPrice * 0.29, Body.TYPE.paint),
-            ph0 = carPart(carPrice * 0.12, Body.TYPE.ph0);
+        var chasis = carPart(carPrice * 0.23, Body.TYPE.chasis),
+            panels = carPart(carPrice * 0.16, Body.TYPE.panels),
+            paint = carPart(carPrice * 0.14, Body.TYPE.paint),
+            ph0 = carPart(carPrice * 0.08, Body.TYPE.ph0);
             
         if(bits){
             var chasBF = (bits & 0xF000) >> 12,

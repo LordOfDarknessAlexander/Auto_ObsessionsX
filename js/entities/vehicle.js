@@ -32,12 +32,23 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 	//var bfParts = parseInt(carNode.attr('parts') );
 	//var carNode
 	
-	var dt = null,
-        body = null,
-        inter = null,
-        docs = null;
-    
-    if(parts !== null){
+	var dt = (parts !== null && parts.drivetrain)?
+            Drivetrain.make(Price, parts.drivetrain, (parts.repairs >> 12) & 0x000F)
+            :
+            Drivetrain.make(Price),    
+        body = (parts !== null && parts.body)?
+            Body.make(Price, parts.body, (parts.repairs >> 8) & 0x000F)
+            :
+            Body.make(Price),
+        inter = (parts !== null && parts.interior)?
+            Interior.make(Price, parts.interior, (parts.repairs >> 4) & 0x000F)
+            :
+            Interior.make(Price),    
+        docs = (parts !== null && parts.interior)?
+            Documents.make(Price, parts.docs)
+            :
+            Documents.make(Price);
+    /*if(parts !== null){
           
         if(parts.drivetrain){
             dt = Drivetrain.make(Price, parts.drivetrain, (parts.repairs >> 12) & 0x000F);
@@ -51,7 +62,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         if(parts.docs){
             docs = Documents.make(Price, parts.docs);
         }
-    }
+    }*/
 
 	return {
 		//pos:new Vector(VEHICLE_XPOS, VEHICLE_YPOS,0,0)
@@ -70,7 +81,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         _dt:dt,
         _body:body,  //null,
         _interior:inter, //null,
-        _docs:Documents.make(Price), //null
+        _docs:docs,  //Documents.make(Price), //null
         //}
 		//image : img,
 		//getters

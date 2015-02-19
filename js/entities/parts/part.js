@@ -22,7 +22,7 @@ function carPart(carPrice, partType){   //partType
 		//getCondition:function(){return repaired ? this.condition + 25 : this.condition;
         getPrice:function(){
             //returns the price of this part, based on repairs and the tier
-            var ret = this._price * (this._repaired ? 1.75 : 1) * this._stage;
+            var ret = this._price * (this._repaired ? 1.75 : 1) * (this._stage + 1);
             //console.log(ret);
             return ret;
         },
@@ -76,7 +76,13 @@ function carPart(carPrice, partType){   //partType
             if(userStats.money >= p){
                 if(this._stage != carPart.STAGE.pro){
                     userStats.money -= p;
-                    this._stage = this._stage << 1;
+                    
+                    if(this._stage == carPart.STAGE.stock){
+                        this._stage = carPart.STAGE.amateur;
+                    }
+                    else{
+                        this._stage = this._stage << 1;
+                    }
                     console.log('purchasing upgrade for part of type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() + ', for: $' + p.toString() );
                     //increase other vars
                     return true;
@@ -87,22 +93,24 @@ function carPart(carPrice, partType){   //partType
             return false;
         },
         getPercent:function(){
-            var INV_MAX = 1.0 / 5.0,
+            var INV_MAX = 0.2;  //1.0 / 5.0,
                 ret = 0.0;
             
             if(this._stage == carPart.STAGE.stock){
+                ret = 0.0;
+            }else if(this._stage == carPart.STAGE.amateur){
                 ret = 1.0;
             }else if(this._stage == carPart.STAGE.sport){
                 ret = 2.0;
             }else if(this._stage == carPart.STAGE.racing){
                 ret = 3.0;
             }else if(this._stage == carPart.STAGE.pro){
-                ret += 4.0;
+                ret = 4.0;
             }
             if(this._repaired){
                 ret += 1.0;
             }
-            ret *= INV_MAX;
+            ret *= INV_MAX; //pro tip: dividing is slower than multiplying by the value's inverse!
             console.log(ret);
             return ret;
         }
@@ -127,10 +135,11 @@ carPart.type = {
     exhaust:6
 };
 carPart.STAGE = {
-    stock:0x1,      //0001
-    sport:0x2,    //0010
-    racing:0x4,         //0100
-    pro:0x8       //1000
+    stock:0x0,      //0000
+    amateur:0x1,  //0001
+    sport:0x2,      //0010
+    racing:0x4,     //0100
+    pro:0x8         //1000
 };
 /*
 function stringFromPartType(type){

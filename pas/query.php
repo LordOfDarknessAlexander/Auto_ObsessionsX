@@ -13,9 +13,9 @@ function hasCar($id){
     global $aoUsersDB;
     
     $ret = false;
-    $tableName = 'user' . strval(0);    //'user' . strval($_SESSION['userID']);
+    $tableName = 'user' . strval(0);    //$_SESSION['userID'];
     //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-    $_hasCar = $aoUsersDB->com->prepare("SELECT * FROM ? WHERE car_id = ?");
+    /*$_hasCar = $aoUsersDB->con->prepare("SELECT * FROM ? WHERE car_id = ?");
     
     if($_hasCar){
         if($_hasCar->bind_params('si', $tableName, $id) ){
@@ -23,20 +23,24 @@ function hasCar($id){
         }
         else{
             //failed sending params to server for binding
+            $erno = $aoUsersDB->con->errno;
+            $err = $aoUsersDB->con->error;
+            echo "hasCar($id), bind_params failed:($erno), reason: $err";
+            exit();
         }
     }
-    else{
-        //attempt normal, slow, less secure sql calls
-        //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-        //if($res){
+    else{*/
+        //fallback to normal, slow, less secure sql calls
+        $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+        if($res){
             //user has car
-            //$ret = mysqli_num_rows($res) != 0 ? true : false;
-        //}
-        //else{
+            $ret = mysqli_num_rows($res) != 0 ? true : false;
+        }
+        else{
             //query failed, user has no entry in database
-        //}
-        //mysqli_free_result($res);
-    }
+        }
+        mysqli_free_result($res);
+    //}
     
     return $ret;
 }

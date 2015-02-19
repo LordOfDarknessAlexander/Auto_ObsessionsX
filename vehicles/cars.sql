@@ -6,6 +6,11 @@
 -- Generation Time: Jan 25, 2015 at 02:56 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
+--
+--first, drops the table for the Auto Obsession's vehicle database, if it exists
+--then, creates a new table with the added property entries
+--developer must then navigate to images\\cars\\sqlGen.php to fill the table with values
+--
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -15,9 +20,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 --
 -- Database: `finalpost`
---
 -- --------------------------------------------------------
---
 -- Table structure for table `aoCars`
 --
 CREATE TABLE IF NOT EXISTS `aoCars` (

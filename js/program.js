@@ -26,7 +26,7 @@ var pas = {
         
         $.ajax({
             type:'POST',
-            url:getHostPath() + 'vehicles/update.php?op=insert',
+            url:getHostPath() + 'pas/update.php?op=insert',
             dataType:'json',
             data:{carID:vehicleID}
         }).done(function(data){
@@ -43,16 +43,16 @@ var pas = {
             //Garage.save();    //not needed as data in maintained by DB
             ajax_post();    //get user info from server
             Auction.close();
-            init();
+            init(); //this exists only within the scope of document.ready()
         }).fail(function(jqxhr){
             //call will fail if result is not properly formated JSON!
-            alert(funcname + ', ajax call failed! Reason: ' + jqxhr.responseText);
+            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
             //console.log('loading game resources failed, abort!');
             //finished = true;
             Auction._car = null;
             ajax_post();    //get user info from server
             Auction.close();
-            init();
+            init(); //this exists only within the scope of document.ready()
         });
     }
     //pushCar:function(carID){

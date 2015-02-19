@@ -6,6 +6,10 @@
 -- Generation Time: Jan 25, 2015 at 02:56 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
+--
+--This will be a php function, as this table needs to be generated
+--for each user registered to the site
+--
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -15,9 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 --
 -- Database: `aoUsersDB`
---
 -- --------------------------------------------------------
---
 -- Table structure for table `user0`
 --
 CREATE TABLE IF NOT EXISTS `user0` (
