@@ -36,6 +36,7 @@ div#AuctionSell li label#carInfo
 div#AuctionSell li button
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	background-size: 100% 100%;
 	position:absolute;
 	right: 5%;
 	height:20%;

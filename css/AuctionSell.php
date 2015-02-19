@@ -45,6 +45,7 @@ function divAS(){
 <?php divAS();?> li button
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	background-size : 100% 100%;
 <?php posAbs();?>
 	right: 5%;
 	height:20%;
@@ -54,6 +55,7 @@ function divAS(){
 <?php divAS();?> li button label
 {
 	font-size:1.25em;
+	background-size: 100% 100%;
 	/*font-family::;
 	display:inline;
 	position:absolute;*/

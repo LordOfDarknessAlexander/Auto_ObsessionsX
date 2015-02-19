@@ -21,6 +21,7 @@ function divHome(){
 <?php divHome();?>.main 
 {
   background-image:url('../images/AbsuMenu.png');
+  background-size: 100% 100%;
   height:100%;
   width: 100%;
 }

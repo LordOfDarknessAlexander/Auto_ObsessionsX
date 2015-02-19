@@ -70,6 +70,7 @@ function divSelectedCar(){
 {	/*styling for list items*/
 	color: white;
 	margin: 2% 2%;
+	background-size: 100% 100%;
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 	position: relative;
 	width:80px;
