@@ -11,6 +11,7 @@ function divAS(){
 <?php divAS();?>
 {
 	background: url('../images/defaultBG.jpg') no-repeat 0 0; 
+	background-size : 100% 100%;
 	display: none;
 	/*overflow:scroll;*/
 	text-align: center;
