@@ -543,7 +543,7 @@ Auction.sold = function()
     
 	//disable user from entering an auction for this car again
 	//in case of unintended bugs, make sure user doesn't already own car
-	if(playerWon && Auction._car !== null)
+	if(Auction.playerWon && Auction._car !== null)
 	{
  //not the right object!?
 		jq.Sold.menu.show();
