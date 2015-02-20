@@ -84,7 +84,7 @@ function divStatBar(){
     css::defaultBG('../images/garageBtn.png');
     css::bgSize('100%', '100%');
     //garageBtnBG();
-    //defaultColor();
+    defaultColor();
     fontBold();
     //cursorPtr();
     css::size('100%', '50%');
