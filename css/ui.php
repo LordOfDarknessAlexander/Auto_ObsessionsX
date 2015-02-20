@@ -8,6 +8,22 @@ function defaultBtnBG(){
     echo "background:url('../images/defaultBtn.png') no-repeat 0 0;";
     echo "background-size:100% 100%;";
 }
+function garageBtnBG(){
+    echo "background:url('../images/garageBtn.png') no-repeat 0 0;";
+    echo "background-size:100% 100%;";
+}
+function auctionBtnBG(){
+    echo "background:url('../images/auctionBtn.png') no-repeat 0 0;";
+    echo "background-size:100% 100%;";
+}
+function profileBtnBG(){
+    echo "background:url('../images/profileBtn.png') no-repeat 0 0;";
+    echo "background-size:100% 100%;";
+}
+function repairBtnBG(){
+    echo "background:url('../images/repairBtn.png') no-repeat 0 0;";
+    echo "background-size:100% 100%;";
+}
 function defaultColor($color = 'red'){
     echo 'color:'.$color.';';
 }

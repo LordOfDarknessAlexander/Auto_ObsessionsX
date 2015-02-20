@@ -79,9 +79,36 @@ function divStatBar(){
     width:20%;
     height:50%;
 }
-<?php divMain();?> div button
+<?php divMain();?> div button#myCars
 {<?php
-    defaultBtnBG();
+    garageBtnBG();
+    defaultColor();
+    fontBold();
+    cursorPtr();
+    css::size('100%', '50%');
+?>
+}
+<?php divMain();?> div button#toAuctionBtn
+{<?php
+    auctionBtnBG();
+    defaultColor();
+    fontBold();
+    cursorPtr();
+    css::size('100%', '50%');
+?>
+}
+<?php divMain();?> div button#profile
+{<?php
+    profileBtnBG();
+    defaultColor();
+    fontBold();
+    cursorPtr();
+    css::size('100%', '50%');
+?>
+}
+<?php divMain();?> div button#buyUpgradesBtn
+{<?php
+    repairBtnBG();
     defaultColor();
     fontBold();
     cursorPtr();
