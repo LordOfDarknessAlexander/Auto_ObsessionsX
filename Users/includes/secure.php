@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 function secureLogin()
 {
     //if not already logged in as a registered user, display login page
@@ -10,6 +10,6 @@ function secureLogin()
     }
     //else, display the page contents following calls to this function
 	
-	//require ('playerData.php');
+	require ('playerData.php');
 }
 ?>

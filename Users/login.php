@@ -10,7 +10,7 @@
 <?php
     require 'includes/login-header.php';
 	require 'includes/nav.php';
-    
+    include 'includes/info-col.php';
 ?>
 <div id="content"><!-- Start of the login page content. -->
 <?php 
