@@ -76,7 +76,7 @@ else
 		echo '<p class="error">Please try again.</p>';
 	//exit();
 }
-//mysqli_close($dbcon);
+mysqli_close($dbcon);
 ?>
 
 <div id="mid-left-col">
@@ -123,7 +123,7 @@ function ajax_post(){
 	
 }
 </script>
-
+<!--
 <h2>Ajax Post to PHP and Get Return Data</h2>
 First Name: <input id="fname" name="fname" type="text">  <br><br>
 Money: <input id="money" name="money" type="text">  <br><br>
@@ -133,6 +133,7 @@ Mile Markers: <input id="m_marker" name="m_marker" type="text"> <br><br>
 
 <input name="myBtn" type="submit" value="Submit Data" onclick="ajax_post();"> <br><br>
 <div id="status"></div>
+-->
 </body>
 <h3>Member's Events</h3>
 <p>Welcome to the members area.
