@@ -1,29 +1,16 @@
 <?php
 //functions which output common CSS properties
 function defaultBG(){
-    echo "background:url('../images/defaultBG.jpg') no-repeat 0 0;";
-    echo "background-size:100% 100%;";
+    css::defaultBG('../images/defaultBG.jpg');
+    //echo "background-size:100% 100%;";
+    css::bgSize('100%', '100%');
 }
 function defaultBtnBG(){
-    echo "background:url('../images/defaultBtn.png') no-repeat 0 0;";
-    echo "background-size:100% 100%;";
+    css::defaultBG('../images/defaultBtn.png');
+    //echo "background-size:100% 100%;";
+    css::bgSize('100%', '100%');
 }
-function garageBtnBG(){
-    echo "background:url('../images/garageBtn.png') no-repeat 0 0;";
-    echo "background-size:100% 100%;";
-}
-function auctionBtnBG(){
-    echo "background:url('../images/auctionBtn.png') no-repeat 0 0;";
-    echo "background-size:100% 100%;";
-}
-function profileBtnBG(){
-    echo "background:url('../images/profileBtn.png') no-repeat 0 0;";
-    echo "background-size:100% 100%;";
-}
-function repairBtnBG(){
-    echo "background:url('../images/repairBtn.png') no-repeat 0 0;";
-    echo "background-size:100% 100%;";
-}
+
 function defaultColor($color = 'red'){
     echo 'color:'.$color.';';
 }
@@ -61,6 +48,16 @@ class css{
     public static function size($width = '100%', $height = '100%'){
         css::width($width);
         css::height($height);
+    }
+    public static function defaultBG($url){
+        //default background image css fragment
+        //image does not repeat and is positioned at (0,0)?>
+        background:url('<?php echo $url;?>') no-repeat 0 0;
+    <?php
+    }
+    public static function bgSize($width, $height){?>
+        background-size:<?php echo $width;?> <?php echo $height;?>;
+    <?php
     }
 }
 ?>

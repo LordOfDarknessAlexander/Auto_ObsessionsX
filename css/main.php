@@ -81,37 +81,46 @@ function divStatBar(){
 }
 <?php divMain();?> div button#myCars
 {<?php
-    garageBtnBG();
-    defaultColor();
+    css::defaultBG('../images/garageBtn.png');
+    css::bgSize('100%', '100%');
+    //garageBtnBG();
+    //defaultColor();
     fontBold();
-    cursorPtr();
+    //cursorPtr();
     css::size('100%', '50%');
 ?>
 }
 <?php divMain();?> div button#toAuctionBtn
 {<?php
-    auctionBtnBG();
-    defaultColor();
+    //auctionBtnBG();
+    css::defaultBG('../images/auctionBtn.png');
+    css::bgSize('100%', '100%');
+    
+    //defaultColor();
     fontBold();
-    cursorPtr();
+    //cursorPtr();
     css::size('100%', '50%');
 ?>
 }
 <?php divMain();?> div button#profile
 {<?php
-    profileBtnBG();
-    defaultColor();
+    css::defaultBG('../images/profileBtn.png');
+    css::bgSize('100%', '100%');
+    //profileBtnBG();
+    //defaultColor();
     fontBold();
-    cursorPtr();
+    //cursorPtr();
     css::size('100%', '50%');
 ?>
 }
 <?php divMain();?> div button#buyUpgradesBtn
 {<?php
-    repairBtnBG();
+    css::defaultBG('../images/repairBtn.png');
+    css::bgSize('100%', '100%');
+    //repairBtnBG();
     defaultColor();
     fontBold();
-    cursorPtr();
+    //cursorPtr();
     css::size('100%', '50%');
 ?>
 }
