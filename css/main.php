@@ -122,7 +122,7 @@ function divStatBar(){
     css::size('96%', '20px');   //height needs to be hard coded, or funky effects happen with the text
 ?>
     background-color:red;
-	top:25%;
+	top:20%;
 	left:2%;
 	
 	/*child elements inherit values, unless otherwise specified*/
