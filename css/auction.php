@@ -102,8 +102,8 @@ require_once 'ui.php';
 <?php
     posAbs();
 ?>
-	width:40%;
-	height:40%;
-	top:30%;
-	left:30%;
+	width:50%;
+	height:50%;
+	top:25%;
+	left:25%;
 }

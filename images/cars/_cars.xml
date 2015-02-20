@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE aoCars [
+<!ELEMENT aoCars (car)*>
+<!ELEMENT car ANY>
+<!ATTLIST car id ID #REQUIRED>
+<!ATTLIST car price CDATA #REQUIRED>
+]>
+<aoCars>
+  <car id="_16798977" price="32000">This is an Acura, info set from XML!</car>
+  <car id="_33570817" price="10000">Default Car Info</car>
+  <car id="_50331649" price="10000">Default Car Info</car>
+  <car id="_67124481" price="10000">Default Car Info</car>
+  <car id="_83910657" price="10000">Default Car Info</car>
+  <car id="_100670977" price="10000">Default Car Info</car>
+  <car id="_117464577" price="10000">Default Car Info</car>
+  <car id="_134230529" price="10000">Default Car Info</car>
+  <car id="_134242049" price="10000">Default Car Info</car>
+  <car id="_151005953" price="10000">Default Car Info</car>
+  <car id="_151011841" price="10000">Default Car Info</car>
+  <car id="_151015681" price="10000">Default Car Info</car>
+  <car id="_167784961" price="10000">Default Car Info</car>
+  <car id="_167785217" price="10000">Default Car Info</car>
+  <car id="_184561665" price="10000">Default Car Info</car>
+  <car id="_184561921" price="10000">Default Car Info</car>
+  <car id="_184561922" price="10000">Default Car Info</car>
+  <car id="_184561923" price="10000">Default Car Info</car>
+  <car id="_184561924" price="10000">Default Car Info</car>
+  <car id="_184562177" price="10000">Default Car Info</car>
+  <car id="_184562689" price="10000">Default Car Info</car>
+  <car id="_184562945" price="10000">Default Car Info</car>
+  <car id="_184562946" price="10000">Default Car Info</car>
+  <car id="_184563713" price="10000">Default Car Info</car>
+  <car id="_184563714" price="10000">Default Car Info</car>
+  <car id="_184563715" price="10000">Default Car Info</car>
+  <car id="_184563969" price="10000">Default Car Info</car>
+  <car id="_184564225" price="10000">Default Car Info</car>
+  <car id="_184564737" price="10000">Default Car Info</car>
+  <car id="_184564738" price="10000">Default Car Info</car>
+  <car id="_184564993" price="10000">Default Car Info</car>
+  <car id="_184564994" price="10000">Default Car Info</car>
+  <car id="_184565505" price="10000">Default Car Info</car>
+  <car id="_184565506" price="10000">Default Car Info</car>
+  <car id="_184565507" price="10000">Default Car Info</car>
+  <car id="_184565508" price="10000">Default Car Info</car>
+  <car id="_184565509" price="10000">Default Car Info</car>
+  <car id="_184565761" price="10000">Default Car Info</car>
+  <car id="_184570881" price="10000">Default Car Info</car>
+  <car id="_201339393" price="10000">Default Car Info</car>
+  <car id="_218123265" price="10000">Default Car Info</car>
+  <car id="_234894337" price="10000">Default Car Info</car>
+  <car id="_251671041" price="10000">Default Car Info</car>
+  <car id="_251674369" price="10000">Default Car Info</car>
+  <car id="_251674625" price="10000">Default Car Info</car>
+  <car id="_251676673" price="10000">Default Car Info</car>
+  <car id="_285214209" price="10000">Default Car Info</car>
+  <car id="_302008833" price="10000">Default Car Info</car>
+  <car id="_318784257" price="10000">Default Car Info</car>
+  <car id="_318788353" price="10000">Default Car Info</car>
+  <car id="_318791425" price="10000">Default Car Info</car>
+  <car id="_335550465" price="10000">Default Car Info</car>
+  <car id="_335551233" price="10000">Default Car Info</car>
+  <car id="_335551234" price="10000">Default Car Info</car>
+  <car id="_335552001" price="10000">Default Car Info</car>
+  <car id="_335552257" price="10000">Default Car Info</car>
+  <car id="_335552513" price="10000">Default Car Info</car>
+  <car id="_335556097" price="10000">Default Car Info</car>
+  <car id="_335556865" price="10000">Default Car Info</car>
+  <car id="_335559681" price="10000">Default Car Info</car>
+  <car id="_335559937" price="10000">Default Car Info</car>
+  <car id="_335560449" price="10000">Default Car Info</car>
+  <car id="_335560705" price="10000">Default Car Info</car>
+  <car id="_335560706" price="10000">Default Car Info</car>
+  <car id="_335560961" price="10000">Default Car Info</car>
+  <car id="_352335873" price="10000">Default Car Info</car>
+  <car id="_369106177" price="10000">Default Car Info</car>
+  <car id="_385892097" price="10000">Default Car Info</car>
+  <car id="_385892098" price="10000">Default Car Info</car>
+  <car id="_402665473" price="10000">Default Car Info</car>
+  <car id="_419452161" price="10000">Default Car Info</car>
+  <car id="_436221441" price="10000">Default Car Info</car>
+  <car id="_452997121" price="10000">Default Car Info</car>
+  <car id="_469776385" price="10000">Default Car Info</car>
+  <car id="_469779457" price="10000">Default Car Info</car>
+  <car id="_486547713" price="10000">Default Car Info</car>
+  <car id="_503331841" price="10000">Default Car Info</car>
+  <car id="_503332353" price="10000">Default Car Info</car>
+  <car id="_503332609" price="10000">Default Car Info</car>
+  <car id="_503332610" price="10000">Default Car Info</car>
+  <car id="_503332865" price="10000">Default Car Info</car>
+  <car id="_503332866" price="10000">Default Car Info</car>
+  <car id="_520104961" price="10000">Default Car Info</car>
+  <car id="_520109825" price="10000">Default Car Info</car>
+  <car id="_520110081" price="10000">Default Car Info</car>
+  <car id="_536891649" price="10000">Default Car Info</car>
+  <car id="_553650177" price="10000">Default Car Info</car>
+  <car id="_570440449" price="10000">Default Car Info</car>
+  <car id="_587217153" price="10000">Default Car Info</car>
+  <car id="_587217665" price="10000">Default Car Info</car>
+  <car id="_587218177" price="10000">Default Car Info</car>
+  <car id="_587218178" price="10000">Default Car Info</car>
+  <car id="_587218433" price="10000">Default Car Info</car>
+  <car id="_587218434" price="10000">Default Car Info</car>
+  <car id="_587218945" price="10000">Default Car Info</car>
+  <car id="_587229697" price="10000">Default Car Info</car>
+  <car id="_603991809" price="10000">Default Car Info</car>
+  <car id="_620764673" price="10000">Default Car Info</car>
+  <car id="_637543681" price="10000">Default Car Info</car>
+</aoCars>

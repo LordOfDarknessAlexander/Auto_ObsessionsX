@@ -1,7 +1,9 @@
 <?php
 //This script generates entries into the vehicle sql database table aoCars!
 require_once '../../include/dbConnect.php';
-require_once '../../include/secure.php';
+require_once '../../secure.php';
+//require_once 'DOMDocument.php';
+//this page is only accessible only by a logged in developer
 //secure::adminLogin();
 echo 'executing script in directory: ' . __DIR__;
 ?><br>
@@ -16,7 +18,7 @@ function getMakeHash($str){
         return 0x03000000;
     }elseif($str == 'Amphicar'){
         return 0x04000000;
-    }elseif($str == 'Aston-Matrin'){
+    }elseif($str == 'Aston-Martin'){
         return 0x05000000;
     }elseif($str == 'Auburn'){
         return 0x06000000;
@@ -90,6 +92,53 @@ function getMakeHash($str){
 ?><br><?php
     //exit(); //kill the script if invalid value
 }
+//generate xml with default nodes
+//creates an xml document, populating it with default entries,
+
+//echo $root->tagName;
+
+//$id = '_' . strval(4);  //NOTE:XML ID attribute cannot start with a digit, so prefix with underscore :(
+//$el = $doc->getElementById($id);
+
+//if($el === null){
+    //entry does not exist in xml, add new default entry
+    //echo "does not have element with id: $id";
+    //$node = $doc->createElement('car', 'Default Car Info');
+    //$node->setIdAttribute('id', true);
+    //$node->setAttribute('id', $id);
+    //$node->setAttribute('price', '0');
+    
+    //$root->appendChild($node);
+//}
+//else{
+    //already exists, do nothing and preserve data
+    //echo "entry exists with id:$id";
+//}
+//$cars = $root->getElementsByTagName('car');
+
+//if(!hasElementWithID $id){
+
+//$doc->save($xmlPath);
+
+//foreach($cars as $c){
+    //echo $c->textContent;
+    //echo '<br>';
+//}
+//echo $root->getElementById('24577')->textContent;
+//
+//if(false){
+$xmlPath = __DIR__ . '/_cars.xml';
+//open xml document containing additional properties
+$doc = new DOMDocument();
+//must be set before calling load!
+$doc->formatOutput = true;
+$doc->preserveWhiteSpace = false;
+$doc->validateOnParse = true;   //must be enabled to use getElementByID
+$doc->load($xmlPath);
+$doc->validate();
+//
+$root = $doc->documentElement;
+
 foreach(new DirectoryIterator(__DIR__) as $file){
     $id = 0;
     //foreach manufacturer
@@ -110,6 +159,7 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                 //$next = __DIR__  . '\\' . $p;
                 //echo $p;
                 $nameHash = 0x00000000;
+                
                 foreach(new DirectoryIterator($p) as $name){
                     //for each car in folder
                     if($name->isFile() ){
@@ -123,20 +173,54 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                             //echo '    ' . $n;
                             if(isset($make) && isset($year) && isset($model) ){
                                 $id = $mHash | $yHash | $nameHash;
+                                $node = $doc->getElementById('_' . strval($id) );
+                                $price = 10000;
+                                $info = 'Default info';
+                                
+                                if($node === null){
+                                    echo "no entry with id: _$id, in source xml document $xmlPath, adding entry!<br>";
+                                    echo 'setting default values for price and info, please change these entries manually!<br>';
+                                    
+                                    $node = $doc->createElement('car', 'Default Car Info');
+                                    $node->setAttribute('id', '_' . strval($id) );
+                                    $node->setAttribute('price', strval($price) );
+                                    $node->setIdAttribute('id', true);
+                                    
+                                    $root->appendChild($node);
+                                }
+                                else{
+                                    //trim() values from xml, to remove whitespace from string values,
+                                    //as a safety precaution in case someone is daft enough to add whitespace to the source text,
+                                    //or evil enough to attempt to hack our database
+                                    $price = floatval(filter_var(trim($node->attributes->getNamedItem('price')->nodeValue), FILTER_SANITIZE_NUMBER_FLOAT) );
+                                    $info = filter_var(trim($node->textContent), FILTER_SANITIZE_STRING);
+                                    //$info can only be a certain length(128 chars),
+                                    //so make sure it is by removing any values outside the bounds
+                                    //$info = 
+                                }
+                                
                                 $y = intval($year);
                                 //echo 'variables set!';
-                                $q = "INSERT INTO aoCars 
-                                (`car_id`, `make`, `year`, `model`, `price`, `info`) 
-                                VALUE
-                                ($id, '$make', $y, '$n', 5000, 'default info');";
-                                // ON DUPLICATE KEY UPDATE VALUES();";
+                                //$AO_DB->con->prepare(
+                                    //"INSERT INTO aoCars 
+                                    ///(`car_id`, `make`, `year`, `model`, `price`, `info`) 
+                                    //VALUE
+                                    //(?, ?, ?, ?, ?, ?)
+                                    //ON DUPLICATE KEY UPDATE price = $price, info = '$info'";
+                                //);
+                                $aoCars = 'aoCars';
+                                $q = "INSERT INTO $aoCars 
+                                    (`car_id`, `make`, `year`, `model`, `price`, `info`) 
+                                    VALUES
+                                    ($id, '$make', $y, '$n', $price, '$info')
+                                    ON DUPLICATE KEY UPDATE price = $price, info = '$info'";
 ?><br><?php
 echo $q;
 ?><br><?php
                                 if($AO_DB->query($q) == TRUE){
-                                    echo 'add element worked!';
+                                    echo "added element with id: $id, to database!";?><br><?php
                                 }else{
-                                    echo 'failed to add entry, error: ' . mysqli_error($AO_DB->con);
+                                    echo "failed to add entry with id: $id, error: " . mysqli_error($AO_DB->con);
                                     ?><br><?php
                                 }                           
                             }
@@ -154,11 +238,14 @@ echo $q;
     }
 }
 
+$doc->save($xmlPath); //save if changes made
+
 //$q = "INSERT INTO aoCars (`car_id`, `make`, `year`, `model`, `price`, `info`) VALUE ($id, '$m', $y, '$n', 5000, 'default info');"// ON DUPLICATE KEY UPDATE VALUES();";
 
 //if($AO_DB->query($q) == TRUE){
     //echo 'add element worked!';
 //}else{
     //echo 'Failed to add element, error occurred: ' . mysqli_error($AO_DB->con);
+//}
 //}
 ?>
