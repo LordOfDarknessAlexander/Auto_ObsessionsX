@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		//if no problems
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
-		$q = "SELECT user_id, fname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
+		$q = "SELECT user_id, fname, uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
 		$result = mysqli_query ($dbcon, $q); 
 		// Check the result:
 		if (@mysqli_num_rows($result) == 1) 

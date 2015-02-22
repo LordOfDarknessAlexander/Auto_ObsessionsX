@@ -113,7 +113,7 @@ function auctionMode(deltaTime)
 	
 function setName()
 {
-	$('div#statBar label#fname').text('User: ' + userStats.fn.toString() );
+	//$('div#statBar label#fname').text('User: ' + userStats.fn.toString() );
 }	
 function setMoney()
 {
@@ -152,7 +152,7 @@ function userHUD(fn)
 {
 //context.fillText( "Welcome" +  userStats.fn.toString() , 600 , 270);
 
-	$('label#fname').text('User: ' + userStats.fn.toString() );
+	//$('label#fname').text('User: ' + userStats.fn.toString() );
 }
 //user Stats
 

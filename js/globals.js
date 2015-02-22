@@ -51,7 +51,7 @@ function loadUser()
 		}
 		else{	//no previous save data
 			userStats = {
-				fn:'Gary',
+				//fn:(data.uname),
 				money:50000,
 				tokens:2,
 				prestige:1,
@@ -71,7 +71,7 @@ function ajax_post()
 {
     // Create our XMLHttpRequest object
     //var dataStr = ''; //args to pass to script
-	afn = userStats.fn;
+	//afn = userStats.fn;
 	amoney = userStats.money;
 	atokens = userStats.tokens;
 	aprestige = userStats.prestige;
@@ -82,7 +82,7 @@ function ajax_post()
         url:getHostPath() + 'my_parse_file.php',
         dataType:'json',
         //data:{money:amoney,tokens:atokens}
-		 data:{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers,uname:afn}
+		 data:{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
     }).done(function(data){
         //the response string is converted by jquery into a Javascript object!
         if(data === null){
@@ -91,7 +91,7 @@ function ajax_post()
         }
         alert('ajax response received:' + JSON.stringify(data) );
         //access and set values in the document's html page
-		$('div#statBar label#fname').text(data.uname);
+		//$('div#statBar label#fname').text(data.uname);
         $('div#statBar label#money').text(data.money);
         $('div#statBar label#tokens').text(data.tokens);
         $('div#statBar label#prestige').text(data.prestige);

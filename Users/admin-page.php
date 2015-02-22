@@ -29,7 +29,13 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 1))
 echo '<h2>Welcome to the Admin Page ';
 if (isset($_SESSION['fname']))
 {
-	echo "{$_SESSION['fname']}";
+	//echo "{$_SESSION['fname']}";
+}
+if (isset($_SESSION['uname']))
+{
+	echo "{$_SESSION['uname']}";
+	//$sname = $_SESSION['uname'];
+	//$sname = $_SESSION['fname'];
 }
 echo '</h2>';
 ?>
