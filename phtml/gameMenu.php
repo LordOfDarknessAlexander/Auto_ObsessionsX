@@ -10,9 +10,9 @@
 <?php
 session_start();
 echo '<h2>Welcome to Auto-Obsessions\' Page ';
-if (isset($_SESSION['fname']))
+if (isset($_SESSION['uname']))
 {
-	echo "{$_SESSION['fname']}";
+	echo "{$_SESSION['uname']}";
 }
 echo '</h2>';
 ?>
