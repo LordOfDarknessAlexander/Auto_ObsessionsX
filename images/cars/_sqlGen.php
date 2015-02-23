@@ -1,15 +1,15 @@
 <?php
 //This script generates entries into the vehicle sql database table aoCars!
+//This page is PRIVATE, not accessible on the server, FOR DEV USE ONLY
 require_once '../../include/dbConnect.php';
 require_once '../../secure.php';
-//require_once 'DOMDocument.php';
-//this page is only accessible only by a logged in developer
 //secure::adminLogin();
 echo 'executing script in directory: ' . __DIR__;
 ?><br>
 <?php
 function getMakeHash($str){
     //0 is a reserved value and is not used
+    //returns an integer value based on the in-game manufactures(those with folders is images/cars/)
     if($str == 'Acura'){
         return 0x01000000;
     }elseif($str == 'AMC'){

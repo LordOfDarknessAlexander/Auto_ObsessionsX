@@ -49,7 +49,7 @@ if(isset($_SESSION['uname']))
             <p>&#9632;Use the Users button to locate a member's Username </p>
             <p>&nbsp;</p>
         </div>
-            <!-- End of the members page content. -->
+        <!-- End of the members page content. -->
     </div>
 </div>	
 <div id='footer'>

@@ -2,6 +2,10 @@
 //this script ONLY queries the vehicle database returning the results,
 //database values are not set by this script, only read and returned!
 //used by javascript ajax requests
+//
+//allow access to this file via file in the document's root directory
+header('Access-Control-Allow-Origin: *');
+//
 require_once '../vehicles/vehicle.php';
 require_once '../include/dbConnect.php';  //sql database connection
 //require_once '../include/secure.php';

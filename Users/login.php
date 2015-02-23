@@ -1,5 +1,6 @@
 <?php
 require_once '../include/html.php';
+require_once '../include/dbConnect.php';
 html::doctype();
 ?>
 <html lang=en>
@@ -23,29 +24,29 @@ require 'includes/info-col.php';
 // Check if the form has been submitted:
 $logged = false;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+if($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 	//connect to database
 	require 'config.php';
 	// Validate the email address:
 	if(!empty($_POST['email'])) 
 	{
-        $e = mysqli_real_escape_string($dbcon, $_POST['email']);
+        $e = mysqli_real_escape_string($AO_DB->con, $_POST['email']);
 	} 
 	else 
 	{
 		$e = FALSE;
-		echo "<p class='error'>You forgot to enter your email address.</p>";
+		echo "<p class='error'>You forgot to enter your email address.</p><br>";
 	}
 	// Validate the password:
 	if(!empty($_POST['psword'])) 
 	{
-        $p = mysqli_real_escape_string($dbcon, $_POST['psword']);
+        $p = mysqli_real_escape_string($AO_DB->con, $_POST['psword']);
 	} 
 	else 
 	{
 		$p = FALSE;
-		echo "<p class='error'>You forgot to enter your password.</p>";
+		echo "<p class='error'>You forgot to enter your password.</p><br>";
 	}
     
 	if($e && $p)
@@ -53,9 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		//if no problems
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
 		$q = "SELECT user_id, fname, uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
-		$result = mysqli_query ($dbcon, $q); 
-		// Check the result:
-		if(@mysqli_num_rows($result) == 1) 
+		$result = $AO_DB->query($q);
+		
+        if(mysqli_num_rows($result) == 1) 
 		{
 			//The user input matched the database record
 			// Start the session, fetch the record and insert the three values in an array
@@ -67,22 +68,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
             //$_SESSION['userID'] = (int)$_SESSION['userID']; //store to make sql quires later!
 			$url = ($_SESSION['user_level'] === 1) ? 'admin-page.php' : 'members-page.php'; // Ternary operation to set the URL
-			header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
-			exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;
-				mysqli_free_result($result);
-				mysqli_close($dbcon);
-				ob_end_clean(); // Delete the buffer.
+            mysqli_free_result($result);
+			header("Location: $url"); // Makes the actual page jump. Keep in mind that $url is a relative path.
+            exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;
+                //mysqli_close($dbcon);
+                ob_end_clean(); // Delete the buffer.
 		} 
 		else 
 		{ // No match was made.
-			echo "<p class='error'>The email address and password do not match our records.If you need to register, click the Register button on the header menu</p>";
+			echo "<p class='error'>The email address ($e) and password do not match our records.<br>To register, click the button on the header menu.</p><br>";
 		}
 	} 
 	else 
 	{ // If there was a problem.
-		echo "<p class='error'>Please try again.</p>";
+		echo "<p class='error'>Please try again.</p><br>";
 	}
-	mysqli_close($dbcon);
+	//mysqli_close($dbcon);
 } // End of SUBMIT conditional.
 ?>
 <!-- Display the form fields-->

@@ -2,6 +2,18 @@
 //This creates a connection to the logindb database and to MySQL, 
 //It also sets the encoding.
 //
+/*class sqlError
+{
+    public
+        $num,   //mysqli error number
+        $info;  //mysqli error information
+        
+    public function __construct($dbCon){
+        //dbCon shoulw be of type dbConnect
+        $this->num = $dbCon->con->errno;
+        $this->info = $dbCon->con->error;
+    }
+}*/
 class dbConnect
 { 
 	//class constants and vars don't need to be prefixed with '$' when accessed!
@@ -24,7 +36,7 @@ class dbConnect
         //echo $this->_host;
         //echo $this->_name;
         
-        $this->con = @mysqli_connect($this->_host, $this->_user, $this->_pw, $this->_name) OR die ('Could not connect to MySQL: ' . mysqli_connect_error() );
+        $this->con = @mysqli_connect($this->_host, $this->_user, $this->_pw, $this->_name) OR die ('dbConnect::__construct(), Could not connect to MySQL: ' . mysqli_connect_error() );
         mysqli_set_charset($this->con, 'utf8');
     }
     public function __destruct()
@@ -36,8 +48,12 @@ class dbConnect
     }
     public function strip($postKey)
 	{   //strip HTML and apply escaping from var passed to page as POST arg
-        $res = trim($_POST[$postKey]);
-        return mysqli_real_escape_string($this->con, strip_tags($res));
+        if(isset($_POST[$postKey])){
+            $res = trim($_POST[$postKey]);
+            return mysqli_real_escape_string($this->con, strip_tags($res));
+        }
+        //echo value not set at key
+        return '';
     }
 }
 $AO_DB = new dbConnect();    //main database connection

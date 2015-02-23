@@ -132,8 +132,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	else
 	{
 		$uname = $stripped;
-	}
-	
+	}	
 
 	if(empty($errors)) 
 	{ 
@@ -148,8 +147,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			// Make the query:		
 			$q = "INSERT INTO users (user_id, title, fname, lname, email, psword, registration_date, uname) VALUES (' ', '$title', '$fn', '$ln', '$e', SHA1('$p'), NOW(), '$uname' )";		
 			$result = @mysqli_query ($dbcon, $q); // Run the query
-			if($result) 
+			
+            if($result) 
 			{ // If the query ran OK
+                //sucess! send email from no-reply@851entertainment.com for user to confirm
 				header("location: register-thanks.php"); 
 				exit();
 			} 

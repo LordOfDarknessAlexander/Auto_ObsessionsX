@@ -22,6 +22,7 @@ function hasCar($id){
         }
         else{
             //failed sending params to server for binding
+            //$er = sqlError($aoUsersDB);
             $erno = $aoUsersDB->con->errno;
             $err = $aoUsersDB->con->error;
             echo "hasCar($id), bind_params failed:($erno), reason: $err";
@@ -119,6 +120,7 @@ function getCarFromID($carID){
             //echo Vehicle::fromArray($result->fetch_assoc() )->toJSON();
         } 
         else{
+            //$er = sqlError($AO_DB);
             //echo "<h2>System Error</h2>
             //<p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
             //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
@@ -172,7 +174,7 @@ $q = '';
 }*/
 if(isset($_POST) && !empty($_POST) ){
     if(isset($_POST['carID'])){
-        $carID = $_POST['carID'];
+        $carID = $_POST['carID'];   //intval(trim($_POST['carID']));
         //validate value, must be an int!
         //echo json_encode($carID);
 

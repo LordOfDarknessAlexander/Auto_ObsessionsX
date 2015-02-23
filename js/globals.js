@@ -81,7 +81,7 @@ function ajax_post()
         type:'POST',
         url:getHostPath() + 'my_parse_file.php',
         dataType:'json',
-        //data:{money:amoney,tokens:atokens}
+        //data:userStats
 		 data:{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
     }).done(function(data){
         //the response string is converted by jquery into a Javascript object!
@@ -191,6 +191,6 @@ function getHostPath(){
     //so devs don't have a commit war, having to change this function
     //for each of their projects each time they commit!
     var localExecution = true;
-    return localExecution == true ? 'http://localhost/Auto_ObsessionsX/'
+    return localExecution ? 'http://localhost/Auto_ObsessionsX/'
             : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 }

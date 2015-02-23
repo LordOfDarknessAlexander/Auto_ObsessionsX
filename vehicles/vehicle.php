@@ -62,6 +62,13 @@ class Vehicle
         return $this->_make . '/' . $this->_year . '/' . $this->_model . '.jpg';
     }
     public function getFullPath(){
+        //$localExecution = true;
+        
+        //static $ROOT_URL = ($localExecution ?
+            //'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/'
+        //:
+            //'http://851entertainment.com/Auto_ObsessionsX/') . 'images/cars/';
+        //$ROOT_URL .=  . $this->getLocalPath();
         $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/'.'images/cars/';
         return $ROOT_URL . $this->getLocalPath();
     }
