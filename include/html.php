@@ -11,7 +11,8 @@ class html
 <?php
     }
     public static function keywords($str){
-        //injects keywords meta-tag at call site?>
+        //injects keywords meta-tag at call site,
+        //pass in a comma separated list of keywords as a string?>
         <meta name='keywords' content='<?php echo $str;?>'>
 <?php
     }
@@ -27,7 +28,7 @@ class html
 ?>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no,orientation=portrait">
+    <meta name='viewport' content='width=device-width, initial-scale=1,user-scalable=no,orientation=portrait'>
 <?php
     html::charset();
     //html::keywords('Car, Auction, upgrades, hotrods, muscle cars');
