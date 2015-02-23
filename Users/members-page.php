@@ -59,7 +59,7 @@ echo '</h2>';
 //Query the database
 //Query the database
 require ('config.php');
-$q = "SELECT * FROM users WHERE user_id = 1" ;		
+$q = "SELECT * FROM users WHERE uname = '$_SESSION[uname]'";		
 $result = mysqli_query ($dbcon, $q);
 
 //Count the returned rows
@@ -88,60 +88,7 @@ mysqli_close($dbcon);
 ?>
 
 <div id="mid-left-col">
-<script>
-function getHostPath(){
-    var localExecution = true;
-    return localExecution == true ? 'http://localhost/B/'
-            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-}
-function ajax_post(){
-    // Create our XMLHttpRequest object
-    //var dataStr = ''; //args to pass to script
-	 var fn = document.getElementById("fname").value;
-	 var amoney = document.getElementById("money").value;
-     var atokens = document.getElementById("tokens").value;
-	 var aprestige = document.getElementById("prestige").value;
-	 var amarkers = document.getElementById("m_marker").value;
-    //}
-    var jqxhr = $.ajax({
-        type:'POST',
-        url:getHostPath() + 'Users/my_parse_file.php',
-        dataType:'json',
-        data:{fname:fn,money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
-    }).done(function(data){
-        //the response string is converted by jquery into a Javascript object!
-        if(data === null){
-            alert('Error:ajax response returned null!');
-            return;
-        }
-        alert('ajax response received:' + JSON.stringify(data) );
-        //access and set values in the document's html page
-		/*
-        $('div#statBar label#money').text(data.money);
-        $('div#statBar label#tokens').text(data.tokens);
-        $('div#statBar label#prestige').text(data.prestige);
-        $('div#statBar label#m_marker').text(data.m_marker);*/
-    }).fail(function(jqxhr){
-        //call will fail if result is not properly formatted JSON!
-        alert('ajax call failed! Reason: ' + jqxhr.responseText);
-        //throw exception, game can't work without user stats
-    });
-    
-	
-	
-}
-</script>
-<!--
-<h2>Ajax Post to PHP and Get Return Data</h2>
-First Name: <input id="fname" name="fname" type="text">  <br><br>
-Money: <input id="money" name="money" type="text">  <br><br>
-Tokens: <input id="tokens" name="tokens" type="text"> <br><br>
-Prestige: <input id="prestige" name="prestige" type="text"> <br><br>
-Mile Markers: <input id="m_marker" name="m_marker" type="text"> <br><br>
 
-<input name="myBtn" type="submit" value="Submit Data" onclick="ajax_post();"> <br><br>
-<div id="status"></div>
--->
 </body>
 <h3>Member's Events</h3>
 <p>Welcome to the members area.
