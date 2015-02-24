@@ -1,6 +1,7 @@
 <?php
 require_once '../include/html.php';
-//require_once '../include/dbConnect.php';
+require_once '../include/dbConnect.php';
+require_once '../pas/create.php';
 html::doctype();
 ?>
 <html lang=en>
@@ -139,19 +140,38 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		// If there were no errors
 		//Determine whether the email address has already been registered	
 		$q = "SELECT user_id FROM users WHERE email = '$e' ";
-		$result = mysqli_query ($dbcon, $q) ; 	
+		$result = mysqli_query($dbcon, $q) ; 	
 		
         if(mysqli_num_rows($result) == 0)
 		{
 			//The mail address was not already registered therefore register the user in the users table
-			// Make the query:		
+			//pasCreate::userAccount($userInfo);
 			$q = "INSERT INTO users (user_id, title, fname, lname, email, psword, registration_date, uname) VALUES (' ', '$title', '$fn', '$ln', '$e', SHA1('$p'), NOW(), '$uname' )";		
-			$result = @mysqli_query ($dbcon, $q); // Run the query
+			$result = @mysqli_query($dbcon, $q); // Run the query
 			
             if($result) 
 			{ // If the query ran OK
+                //user successfully registered, create other database tables
+                $res = mysqli_query($dbcon, "SELECT user_id FROM users WHERE (email ='$e' AND uname = '$uname')");
+                if($res){
+                    $uid = $res->fetch_assoc()['user_id'];    //return type is string
+                    //echo "registered user with id:$uid<br> type:" . gettype($uid);
+                    if(pasCreate::userTable($uid) ){
+                        //if(!createCarSaleTable($uid) ){
+                            //could not create car sale table
+                        //}
+                        //else code succeded
+                    }
+                    else{
+                        echo "could not create additional tables for user with id:$uid<br>";
+                    }
+                }
+                else{
+                    //echo "user has no id";"
+                }
+                $res->close();
                 //sucess! send email from no-reply@851entertainment.com for user to confirm
-				header("location: register-thanks.php"); 
+				//header("location: register-thanks.php"); 
 				exit();
 			} 
 			else 

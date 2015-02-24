@@ -58,4 +58,5 @@ class dbConnect
 }
 $AO_DB = new dbConnect();    //main database connection
 $aoUsersDB = new dbConnect('aoUsersDB');    //main database connection
+//$aoCarSalesDB = new dbConnect('aoCarSalesDB');    //main database connection
 ?>

@@ -67,9 +67,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			$logged = true;
 			$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
             //$_SESSION['userID'] = (int)$_SESSION['userID']; //store to make sql quires later!
-			$url = ($_SESSION['user_level'] === 1) ? 'admin-page.php' : 'members-page.php'; // Ternary operation to set the URL
+			
+            $url = ($_SESSION['user_level'] === 1) ? 'admin-page.php' : 'members-page.php'; // Ternary operation to set the URL
             mysqli_free_result($result);
             //make the actual page jump. Keep in mind that $url is a relative path.
+            //echo "navigating to $url";
 			header("Location: $url");
             exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;
                 //mysqli_close($dbcon);
