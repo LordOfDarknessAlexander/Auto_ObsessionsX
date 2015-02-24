@@ -25,14 +25,14 @@ table, tr { width:850px; }
 <h2>Search Result</h2>
 <?php 
 // This script fetches selected records from the users table.
-require ('./config.php'); // Connect to the database.
+require_once '../include/dbConnect.php';// Connect to the database.
 echo '<p>If no record is shown, this is because you had an incorrect or missing entry in the search form.<br>Please click the Search button and try again</p>';
-$fname = mysqli_real_escape_string($dbcon, $fname );
+$fname = mysqli_real_escape_string($AO_DB->con, $fname );
 $fname=$_POST['fname'];
 $lname=$_POST['lname'];
-$lname = mysqli_real_escape_string($dbcon, $lname);
+$lname = mysqli_real_escape_string($AO_DB->con, $lname);
 $q = "SELECT title, lname, fname, uname,user_id FROM users WHERE lname='$lname' AND fname='$fname' ";		
-$result = @mysqli_query ($dbcon, $q); // Run the query.
+$result = @mysqli_query ($AO_DB->con, $q); // Run the query.
 if ($result) 
 { 
 	// If it ran, display the records.
@@ -64,13 +64,13 @@ else
 	// Error message:
 		echo '<p class="error">The current users could not be retrieved. We apologize for any inconvenience.</p>';
 		// Debugging message:
-		echo '<p>' . mysqli_error($dbcon) . '<br><br>Query: ' . $q . '</p>';
+		echo '<p>' . mysqli_error($AO_DB->con) . '<br><br>Query: ' . $q . '</p>';
 } // End of if ($result). Now display the total number of records/members.
 $q = "SELECT COUNT(user_id) FROM users";
-$result = @mysqli_query ($dbcon, $q);
+$result = @mysqli_query ($AO_DB->con, $q);
 $row = @mysqli_fetch_array ($result, MYSQLI_NUM);
 $members = $row[0];
-mysqli_close($dbcon); //Close the database connection.
+mysqli_close($AO_DB->con); //Close the database connection.
 echo "<p>Total membership: $members</p>";
 ?>
 </div><!--End of view found address content-->

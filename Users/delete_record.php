@@ -1,6 +1,7 @@
 <?php											
 session_start();
 //require 'secure.php';
+
 //secureLogin();
 if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 1))
 {
@@ -50,7 +51,8 @@ else
 	include ('includes/footer.php'); 
 	exit();
 }
-require ('config.php');
+//require ('config.php');
+require_once '../include/dbConnect.php';
 // Check if the form has been submitted:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -58,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{ // Delete the record.
 		// Make the query:
 		$q = "DELETE FROM users WHERE user_id=$id LIMIT 1";		
-		$result = @mysqli_query ($dbcon , $q);
-		if (mysqli_affected_rows($dbcon ) == 1) 
+		$result = @mysqli_query ($AO_DB->con , $q);
+		if (mysqli_affected_rows($AO_DB->con ) == 1) 
 		{ 
 			// If it ran OK.
 			// Print a message:
@@ -68,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		else 
 		{ // If the query did not run OK.
 			echo '<p class="error">The record could not be deleted.<br>Probably because it does not exist or due to a system error.</p>'; // Public message.
-			echo '<p>' . mysqli_error($dbcon ) . '<br />Query: ' . $q . '</p>'; // Debugging message.
+			echo '<p>' . mysqli_error($AO_DB->con ) . '<br />Query: ' . $q . '</p>'; // Debugging message.
 		}
 	} 
 	else 
@@ -80,7 +82,7 @@ else
 { // Show the form.
 	// Retrieve the user's information:
 	$q = "SELECT CONCAT(fname, ' ', lname) FROM users WHERE user_id=$id";
-	$result = @mysqli_query ($dbcon , $q);
+	$result = @mysqli_query ($AO_DB->con , $q);
 	if (mysqli_num_rows($result) == 1) 
 	{ 
 		// Valid user ID, show the form.
@@ -102,7 +104,7 @@ else
 		echo '<p>&nbsp;</p>';
 	}
 } // End of the main submission conditional.
-mysqli_close($dbcon );
+mysqli_close($AO_DB->con );
 		echo '<p>&nbsp;</p>';
 include ('includes/footer.php');
 ?>

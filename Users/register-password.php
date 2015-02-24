@@ -20,7 +20,7 @@ p.error { color:red; font-size:105%; font-weight:bold; text-align:center;
 // Was the form submitted?
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
-	require ('./config.php'); // Connect to the database
+	require_once '../include/dbConnect.php'; // Connect to the database
 	$errors = array(); // Start an array to contain the error messages
 	// Is the email address present
 	if (empty($_POST['email'])) 
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	} 
 	else 
 	{
-		$e = mysqli_real_escape_string($dbcon, trim($_POST['email']));
+		$e = mysqli_real_escape_string($AO_DB->con, trim($_POST['email']));
 	}
 	// Check for the current password:
 	if (empty($_POST['psword'])) 
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	} 
 	else 
 	{
-		$p = mysqli_real_escape_string($dbcon, trim($_POST['psword']));
+		$p = mysqli_real_escape_string($AO_DB->con, trim($_POST['psword']));
 	}
 	// Check for a new password and match against the confirmed password:
 	if (!empty($_POST['psword1'])) 
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		} 
 		else 
 		{
-			$np = mysqli_real_escape_string($dbcon, trim($_POST['psword1']));
+			$np = mysqli_real_escape_string($AO_DB->con, trim($_POST['psword1']));
 		}
 	} 
 	else 
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{ // If the entries are satisfactory
 	// Check whether the user has entered the right email address/password combination:
 		$q = "SELECT user_id FROM users WHERE (email='$e' AND psword=SHA1('$p') )";
-		$result = @mysqli_query($dbcon, $q);
+		$result = @mysqli_query($AO_DB->con, $q);
 		$num = @mysqli_num_rows($result);
 		if ($num == 1) 
 		{ // A match was made.
@@ -68,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			$row = mysqli_fetch_array($result, MYSQLI_NUM);
 			// Make the UPDATE query:
 			$q = "UPDATE users SET psword=SHA1('$np') WHERE user_id=$row[0]";		
-			$result = @mysqli_query($dbcon, $q);
-			if (mysqli_affected_rows($dbcon) == 1) 
+			$result = @mysqli_query($AO_DB->con, $q);
+			if (mysqli_affected_rows($AO_DB->con) == 1) 
 			{ // If the query ran
 				// Echo a message.
 				echo '<h2>Thank you!</h2>
@@ -81,9 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				echo '<h2>System Error</h2>
 				<p class="error">Your password was not changed due to a system error. We apologize for any inconvenience.</p>'; 
 				// Debugging message:
-				echo '<p>' . mysqli_error($dbcon) . '<br /><br />Query: ' . $q . '</p>';
+				echo '<p>' . mysqli_error($AO_DB->con) . '<br /><br />Query: ' . $q . '</p>';
 			}
-			mysqli_close($dbcon); // Close the database connection.
+			mysqli_close($AO_DB->con); // Close the database connection.
 			// Include the footer and stop the script
 			include ('includes/footer.php'); 
 			exit();
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		}
 		echo '</p><p class="error">Please try again.</p><p><br /></p>';
 	} // End of if (empty($errors))
-	mysqli_close($dbcon); // Close the database connection.
+	mysqli_close($AO_DB->con); // Close the database connection.
 } // End of the submit conditional
 ?>
 <h2>Change Your Password</h2>

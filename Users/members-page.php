@@ -1,6 +1,6 @@
 <?php
 require '../include/html.php';
-//require '../include/dbConnect.php';
+require '../include/dbConnect.php';
 session_start();
 require 'includes/secure.php';
 //secureLogin();
@@ -56,9 +56,10 @@ if(isset($_SESSION['uname']))
         <div id='midcol'>
 <?php
 //Query the database
-require 'config.php';
+//require 'config.php';/*
+/*
 $q = "SELECT * FROM users WHERE uname = '$_SESSION[uname]'";		
-$result = mysqli_query ($dbcon, $q);
+$result = mysqli_query ($AO_DB->con, $q);
 
 //Count the returned rows
 if(mysqli_num_rows($result) != 0)
@@ -82,7 +83,7 @@ else
     echo "<p class='error'>Please try again.</p>";
 	//exit();
 }
-mysqli_close($dbcon);
+mysqli_close($AO_DB->con);*/
 ?>
             <div id='mid-left-col'>
 </body>
