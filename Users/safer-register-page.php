@@ -1,6 +1,6 @@
 <?php
 require_once '../include/html.php';
-//require_once '../include/dbConnect.php';
+require_once '../include/dbConnect.php';
 html::doctype();
 ?>
 <html lang=en>
@@ -19,7 +19,7 @@ require 'includes/nav.php';
 ?>
 <div id='content'><!-- Start of the login page content. -->
 <?php
-require './config.php'; // Connect to the database
+//require './config.php'; // Connect to the database
 
 // This code inserts a record into the users table
 // Has the form been submitted?
@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	// Trim the title
 	$tle = trim($_POST['title']);
 	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($dbcon, strip_tags($tle));    //strip('title');
+	$stripped = mysqli_real_escape_string($AO_DB->con, strip_tags($tle));    //strip('title');
 	// Get string lengths
 	$strlen = mb_strlen($stripped, 'utf8');
 	// Check stripped string
@@ -52,7 +52,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	// Trim the first name
 	$name = trim($_POST['fname']);
 	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($dbcon, strip_tags($name));
+	$stripped = mysqli_real_escape_string($AO_DB->con, strip_tags($name));
 	// Get string lengths
 	$strlen = mb_strlen($stripped, 'utf8');
 	// Check stripped string
@@ -67,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	// Trim the last name
 	$lnme = trim($_POST['lname']);
 	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($dbcon, strip_tags($lnme));
+	$stripped = mysqli_real_escape_string($AO_DB->con, strip_tags($lnme));
 	// Get string lengths
 	$strlen = mb_strlen($stripped, 'utf8');
 	// Check stripped string
@@ -90,7 +90,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	if(filter_var((trim($_POST['email'])), FILTER_VALIDATE_EMAIL)) 
 	{	
 		//A valid email address is then registered
-		$e = mysqli_real_escape_string($dbcon, (trim($_POST['email'])));
+		$e = mysqli_real_escape_string($AO_DB->con, (trim($_POST['email'])));
 	}
 	else
 	{									
@@ -112,7 +112,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	}
 	if($_POST['psword1'] == $_POST['psword2']) 
 	{
-		$p = mysqli_real_escape_string($dbcon, trim($psword1));
+		$p = mysqli_real_escape_string($AO_DB->con, trim($psword1));
 	}
 	else
 	{
@@ -121,7 +121,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	// Trim the username
 	$unme = trim($_POST['uname']);
 	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($dbcon, strip_tags($unme));
+	$stripped = mysqli_real_escape_string($AO_DB->con, strip_tags($unme));
 	// Get string lengths
 	$strlen = mb_strlen($stripped, 'utf8');
 	// Check stripped string
@@ -139,14 +139,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		// If there were no errors
 		//Determine whether the email address has already been registered	
 		$q = "SELECT user_id FROM users WHERE email = '$e' ";
-		$result = mysqli_query ($dbcon, $q) ; 	
+		$result = mysqli_query ($AO_DB->con, $q) ; 	
 		
         if(mysqli_num_rows($result) == 0)
 		{
 			//The mail address was not already registered therefore register the user in the users table
 			// Make the query:		
 			$q = "INSERT INTO users (user_id, title, fname, lname, email, psword, registration_date, uname) VALUES (' ', '$title', '$fn', '$ln', '$e', SHA1('$p'), NOW(), '$uname' )";		
-			$result = @mysqli_query ($dbcon, $q); // Run the query
+			$result = @mysqli_query ($AO_DB->con, $q); // Run the query
 			
             if($result) 
 			{ // If the query ran OK
@@ -161,9 +161,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 				echo "<h2>System Error</h2>
 				<p class='error'>You could not be registered due to a system error. We apologize for the inconvenience.</p>"; 
 				// Debugging message:
-				echo '<p>' . mysqli_error($dbcon) . '<br><br>Query: ' . $q . '</p>';
+				echo '<p>' . mysqli_error($AO_DB->con) . '<br><br>Query: ' . $q . '</p>';
 			} // End of if ($result)
-			mysqli_close($dbcon); // Close the database connection
+			mysqli_close($AO_DB->con); // Close the database connection
 			// Include the footer and stop the script
 			include 'includes/footer.php'; 
 			exit();
