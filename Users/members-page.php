@@ -1,5 +1,6 @@
 <?php
-//require ../include/html.php';
+require '../include/html.php';
+//require '../include/dbConnect.php';
 session_start();
 require 'includes/secure.php';
 //secureLogin();
@@ -8,8 +9,8 @@ if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 
    exit();
 }
+html::doctype();
 ?>
-<!doctype html>
 <html lang=en>
 <head>
     <title>Members' page</title>
@@ -103,6 +104,7 @@ mysqli_close($dbcon);
         </div><!--end mid-col-->
     </div><!-- End of the Members' page content. -->
 </div><!--end container-->
-<?php require 'includes/footer.php';?>
-</body>
-</html>
+<?php
+require '../phtml/legal.php';
+html::footer();
+?>

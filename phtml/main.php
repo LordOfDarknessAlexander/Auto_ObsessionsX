@@ -44,13 +44,14 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
                <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
                <li><a href="javascript:void(0)" class="button Register">Register</a></li>
             </ul>
-            <p id='legal'>Auto-Obsession &copy; 2015, All Right Reserved.
-                <a href='<?php echo $ROOT_URL.'legal.php?page=terms';?>'>Terms</a>
-                <a href='<?php echo $ROOT_URL.'legal.php?page=privacy';?>'>Privacy</a>
-                <a href='<?php echo $ROOT_URL.'legal.php?page=security';?>'>Security</a>
-                <a href='<?php echo $ROOT_URL.'legal.php?page=contact';?>'>Contact</a>
+            <?php require 'phtml/legal.php';?>
+            <!--p id='legal'>Auto-Obsession &copy; 2015, All Right Reserved.
+                <a href='<php echo $ROOT_URL.'legal.php?page=terms';?>'>Terms</a>
+                <a href='<php echo $ROOT_URL.'legal.php?page=privacy';?>'>Privacy</a>
+                <a href='<php echo $ROOT_URL.'legal.php?page=security';?>'>Security</a>
+                <a href='<php echo $ROOT_URL.'legal.php?page=contact';?>'>Contact</a>
                 <a href=''>Credits</a>
-            </p>
+            </p-->
 		</div>
       
         <div id="credits">

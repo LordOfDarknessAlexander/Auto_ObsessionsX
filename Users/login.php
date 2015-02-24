@@ -101,7 +101,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     </form><br>
 </div>
 <br>
-<?php include 'includes/footer.php'; ?>
+<?php require '../phtml/legal.php'; ?>
 </div><!--end content-->
 </div><!--end container-->
 <?php html::footer();?>

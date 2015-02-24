@@ -4,14 +4,13 @@
 session_start();//access the current session.
 // If no first_name session variable exists, redirect the user:
 //if no session variable then redirect the user
-if (!isset($_SESSION['user_id'])) 
-{
+if(!isset($_SESSION['user_id'])){
+    //user not logged in, redirect to loggin
 	header("location:index.php");
 	exit();
 }
-else
-{ 
-	//cancel the session
+else{ 
+	//log user out, canceling the session
 	$_SESSION = array(); // Destroy the variables.
 	session_destroy(); // Destroy the session itself.
 	setcookie (session_name(), '', time()-3600); // Destroy the cookie.

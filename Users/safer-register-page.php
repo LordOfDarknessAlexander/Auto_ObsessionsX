@@ -231,8 +231,10 @@ function ep($str){
 		to 12 characters
 		<p><input id='submit' type='submit' name='submit' value='Register'></p>
 	</form>
-</div></div></div>
+</div>
+</div><!--content-->
+</div><!--container-->
 <?php
-require 'includes/footer.php';
+require '../phtml/legal.php';
 html::footer();
 ?>
