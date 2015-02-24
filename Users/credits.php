@@ -18,12 +18,13 @@ require 'includes/nav.php';
 require 'includes/info-col.php';
 ?>
 	<div id='content'><!-- Start of the page-specific content. -->
-<h2>Credits</h2>
-<p>The page four content. The page four content. The page four content.<br>The page 
-four content. The page four content. The page four content.<br>The page four content. The page 
-four content. The page four content.<br>The page four content. The page four content. The page 
-four content.</p>
-	<!-- End of the page 4 content. --></div>
+        <h2>Credits</h2>
+        <p>The page four content. The page four content. The page four content.<br>The page 
+        four content. The page four content. The page four content.<br>The page four content. The page 
+        four content. The page four content.<br>The page four content. The page four content. The page 
+        four content.</p>
+	<!-- End of the page 4 content. -->
+    </div>
 </div>	
 <?php
 require '../phtml/legal.php';
