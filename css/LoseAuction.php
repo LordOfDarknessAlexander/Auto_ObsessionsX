@@ -24,9 +24,6 @@ function divSold(){
 <?php divSold();?> button
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
-	color: white;
-	font-weight: bold;
 	width:150px;
 	height:50px;
-	cursor:pointer;
 }

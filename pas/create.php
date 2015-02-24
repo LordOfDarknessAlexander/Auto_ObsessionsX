@@ -1,6 +1,7 @@
 <?php
 //this script CREATE's Database tables with sql
 //used by javascript ajax requests
+header('Access-Control-Allow-Origin: *');
 //require_once '../vehicles/vehicle.php';
 require_once '../include/dbConnect.php';  //sql database connection
 //require_once '../include/secure.php';
@@ -10,7 +11,7 @@ require_once '../include/dbConnect.php';  //sql database connection
 function createUserEntry($userID){
     //creates an empty table upon user registration
     global $AO_DB;
-    $tableName = 'user' . strval(0);    //userID;
+    $tableName = 'user' . strval(0);    //strval($_SESSION['userID']);
     //get validated and sanitized form data
     //$userTableName = 'user';
     

@@ -30,8 +30,6 @@ require_once 'ui.php';
 {<?php
     posAbs();
     fontBold();
-    cursorPtr();
-    defaultColor();
     defaultBtnBG();
 ?>
 	width:150px;
@@ -45,10 +43,8 @@ require_once 'ui.php';
     defaultBtnBG();
     posAbs();
     fontBold();
-    cursorPtr();
+    //css::size('12%', '5%');
 ?>
-	color: white;
-
 	width:12%;
 	height:5%;
 	left:85%;
@@ -60,10 +56,7 @@ require_once 'ui.php';
     defaultBtnBG();
     posAbs();
     fontBold();
-    cursorPtr();
 ?>
-	color: white;
-
 	width:12%;
 	height:5%;
 	left:85%;

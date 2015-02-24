@@ -7,9 +7,8 @@
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 --
---first, drops the table for the Auto Obsession's vehicle database, if it exists
---then, creates a new table with the added property entries
---developer must then navigate to images\\cars\\sqlGen.php to fill the table with values
+--Creates a table for a user, to maintain their vehicle sale history,
+--each user gets a table in the database
 --
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,19 +18,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 --
--- Database: `finalpost`
+-- Database: `aoCarSales`
 -- --------------------------------------------------------
--- Table structure for table `aoCars`
 --
-CREATE TABLE IF NOT EXISTS `aoCars` (
+CREATE TABLE IF NOT EXISTS `user0`(
     `car_id` int unsigned NOT NULL,
-    `make` varchar(30) NOT NULL,
-    `year` int NOT NULL,
-    `model` varchar(50) NOT NULL,
-    `price` int unsigned NOT NULL,
-    `info` char(128) NOT NULL,
+    `price` float NOT NULL,
     PRIMARY KEY (`car_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
---
--- Data is added dynamically through php script!
---

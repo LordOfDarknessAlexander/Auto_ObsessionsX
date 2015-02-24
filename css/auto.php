@@ -68,6 +68,14 @@ button
 	color:red;
     cursor:pointer;	
 }
+button:hover {
+    /*mouse over*/
+    color:green;
+}
+button:active {
+    /*mouse pressed*/
+    color:blue;
+}
 button#backBtn
 {   /*sets properties for all button tags with id backBtn*/
 	background: url('../images/backBtn.png') no-repeat 0 0;
@@ -82,8 +90,6 @@ button#backBtn
 button#homeBtn
 {
 	background: url('../images/homeBtn.png') no-repeat 0 0;
-    cursor:pointer;
-	color:red;
 	font-weight: bold;
     
 	position:absolute;
@@ -93,10 +99,7 @@ button#homeBtn
 	right:5%;
 	bottom:2%;
 }
-/*button:hover
-{	alters all button appearences when being moused over
-	background-color:red;
-}*/
+
 .wrapper 
 {
   height:100%;
