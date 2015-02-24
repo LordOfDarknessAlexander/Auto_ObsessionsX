@@ -495,7 +495,7 @@ function startGame()
 	context.fillStyle = gradient;
 	
 	setStatBar();
-	setAdBG();
+	//setAdBG();
 	//ajax_post();
 	
 	switchStates();
@@ -608,7 +608,7 @@ $('.Register').click(function()
 //auction Button
 jq.AuctionSelect.backBtn.click(function() 
 { 	
-	setAdBG();
+	//setAdBG();
 	userHUD();
 	setStatBar();
 	jq.Game.menu.toggle();
@@ -636,7 +636,7 @@ jq.Auction.homeBtn.click(function()
 	//jq.Game.menu.children().toggle();	//hides/showns all child elements
 	
 	setStatBar();
-	setAdBG();
+	//setAdBG();
 	ajax_post();
     setHomeImg();
 	userHUD();
@@ -694,7 +694,7 @@ jq.RepairShop.backBtn.click(function()
   	jq.RepairShop.menu.hide();
  	//$('#gameMenu')
 	setStatBar();
-	setAdBG();
+//	setAdBG();
 	jq.Game.menu.show();
 	//resetStates();
 	//appState = GAME_MODE.Main_Menu;
@@ -703,7 +703,7 @@ jq.Funds.backBtn.click(function()
 {
 	jq.Funds.toggle();
 	setStatBar();
-	setAdBG();
+//	setAdBG();
 	saveUser();
 });
 //function rotateBtns(index)
