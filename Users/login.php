@@ -94,12 +94,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         <label class='label' for='email'>Email Address:</label><br>
         <input id='email' type='text' name='email' size='30' maxlength='60' value='<?php if (isset($_POST['email'])) echo $_POST['email'];?>'><br>
         <label class='label' for='psword'>Password:</label><br>
-        <input id='psword' type='password' name='psword' size='12' maxlength='12' value='<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>'>&nbsp;Between 8 and 12 characters<br>
+        <input id='psword' type='password' name='psword' size='12' maxlength='12' value='<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>'>&nbsp;Between 8 and 12 characters
         <input id='submit' type='submit' name='submit' value='Login'>
     </form><br>
 </div>
 <br>
-</div><!--end content-->
 <?php require '../phtml/legal.php'; ?>
+</div><!--end content-->
 </div><!--end container-->
 <?php html::footer();?>

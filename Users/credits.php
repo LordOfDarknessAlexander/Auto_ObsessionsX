@@ -1,23 +1,16 @@
-<?php
-require_once '../include/html.php';
-html::doctype();
-?>
-<html lang='en'>
+<!doctype html>
+<html lang="en">
 <head>
-<?php
-html::title('Registration thank you page');
-html::charset();
-?>
-<link rel='stylesheet' type='text/css' href='includes.css'>
+<title>Register page2</title>
+<meta charset=utf-8>
+<link rel="stylesheet" type="text/css" href="includes.css">
 </head>
 <body>
-<div id='container'>
-<?php
-require 'includes/header.php';
-require 'includes/nav.php';
-require 'includes/info-col-cards.php';
-?>
-	<div id='content'><!-- Start of the page-specific content. -->
+<div id="container">
+<?php include("includes/header.php"); ?>
+<?php include("includes/nav.php"); ?>
+<?php include("includes/info-col.php"); ?>
+	<div id="content"><!-- Start of the page-specific content. -->
 <h2>Credits</h2>
 <p>The page four content. The page four content. The page four content.<br>The page 
 four content. The page four content. The page four content.<br>The page four content. The page 
@@ -25,7 +18,5 @@ four content. The page four content.<br>The page four content. The page four con
 four content.</p>
 	<!-- End of the page 4 content. --></div>
 </div>	
-<?php
-require '../phtml/legal.php';
-html::footer();
-?>
+	<?php include("includes/footer.php"); ?></body>
+</html>
