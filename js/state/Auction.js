@@ -488,7 +488,7 @@ var Auction =
 							}
 						}
 					}
-					//this.sold();
+					this.sold();
 					//$('div#loss label').text(Auction._car.getFullName() );
 					break;
 				}
