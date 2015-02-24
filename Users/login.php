@@ -84,7 +84,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{ // If there was a problem.
 		echo "<p class='error'>Please try again.</p><br>";
 	}
-	//mysqli_close($dbcon);
+	//mysqli_close($AO_DB->con);
 } // End of SUBMIT conditional.
 ?>
 <!-- Display the form fields-->
