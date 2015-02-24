@@ -13,7 +13,6 @@ function createUserEntry($userID){
     global $AO_DB;
     $tableName = 'user' . strval(0);    //strval($_SESSION['userID']);
     //get validated and sanitized form data
-    //$userTableName = 'user';
     
     /*$stmnt = $AO_DB->prepare(
        "INSERT INTO $userTableName (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
@@ -42,48 +41,78 @@ function createUserEntry($userID){
     }*/
     return null;
 }
-function createUserTable($userID){
-    //creates an empty table in aoUsersDB upon user registration
-    global $aoUsersDB;
-    $tableName = 'user' . strval(0);    //userID;
-    $uint = 'int unsigned';
-    $defaultCharset = 'DEFAULT CHARSET = latin1';
-    $defaultEngine = 'ENGINE = InnoDB';
-    //make this a static var, should only be executed once!
-    $stmnt = $aoUsersDB->prepare(
-       "CREATE TABLE IF NOT EXISTS $tableName(
-            car_id $uint NOT NULL PRIMARY KEY,
-            drivetrain $uint,
-            body $uint,
-            interior $uint,
-            docs $uint,
-            repairs $uint
-        )$defaultEngine $defaultCharset"
-    );
-    
-    if(!$stmt){
-        $erno = $aoUsersDB->errno;
-        $err = $aoUsersDB->error;
-        echo "createUserTable($userID), prepare failed:($erno), reason: $err";
-        return false;
-    }
-    
-    if($stmnt->execute() ){   //returns true if execute preformed successfully, false on failure
+class pasCreate
+{
+    public static function userTable($userID){
+        //creates an empty table in aoUsersDB upon user registration,
+        //user id should be 
+        global $aoUsersDB;
+        //escape and sanitize input string, incase someone tries an sql injection attack
+        
+        $tableName = "user$userID";  // . strval(0);    //$_SESSION['user_level']
+        $uint = 'int unsigned';
+        $defaultCharset = 'DEFAULT CHARSET = latin1';
+        $defaultEngine = 'ENGINE = InnoDB';
+        //table names can not be used as variables(?) in prepared statements,
+        //so must use reqular queries
+        $res = $aoUsersDB->query(
+           "CREATE TABLE IF NOT EXISTS $tableName(
+                car_id $uint NOT NULL PRIMARY KEY,
+                drivetrain $uint,
+                body $uint,
+                interior $uint,
+                docs $uint,
+                repairs $uint
+            )$defaultEngine $defaultCharset"
+        );
+        
+        if(!$res){
+            $erno = $aoUsersDB->con->errno;
+            $err = $aoUsersDB->con->error;
+            echo "createUserTable($userID), prepare failed:($erno), reason: $err<br>";
+            return false;
+        }
         return true;
     }
-    //else false, output error
-    $erno = $aoUsersDB->errno;
-    $err = $aoUsersDB->error;
-    echo "createUserTable($userID), prepare failed:($erno), reason: $err";
-    
-    return false;
-}
-
-function createUserAccount(){
-    //create entry in finalpost
-    //createUserEntry();
-    //get userID from final post for the 
-    //creatUserTable($userID);
+    /*public static function carSaleTable($userID){
+        //creates an empty table in aoUsersDB upon user registration
+        global $aoCarSalesDB;
+        $tableName = 'user$userID';    //$_SESSION['userID'];
+        $uint = 'int unsigned';
+        $defaultCharset = 'DEFAULT CHARSET = latin1';
+        $defaultEngine = 'ENGINE = InnoDB';
+        //make this a static var, should only be executed once!
+        $stmnt = $aoCarSalesDB->prepare(
+           "CREATE TABLE IF NOT EXISTS $tableName(
+                car_id $uint NOT NULL PRIMARY KEY,
+                price float
+            )$defaultEngine $defaultCharset"
+        );
+        
+        if(!$stmt){
+            $erno = $aoCarSalesDB->errno;
+            $err = $aoCarSalesDB->error;
+            echo "createCarSaleTable($userID), prepare failed:($erno), reason: $err";
+            return false;
+        }
+        
+        if($stmnt->execute() ){   //returns true if execute preformed successfully, false on failure
+            return true;
+        }
+        //else false, output error
+        $erno = $aoUsersDB->errno;
+        $err = $aoUsersDB->error;
+        echo "createCarSalesTable($userID), prepare failed:($erno), reason: $err";
+        
+        return false;
+    }*/
+    function userAccount(){
+        //create entry in finalpost
+        //pasCreate::userEntry($userID);
+        //get userID from final post for the 
+        //pasCreae::userTable($userID);
+        //pasCreate::userSalesTable($userID);
+    }
 }
 
 $q = '';

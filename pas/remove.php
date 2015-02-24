@@ -9,56 +9,77 @@ require_once '../include/dbConnect.php';  //sql database connection
 //
 //secure::loggin();
 //
-/*function removeUserCars(){
-    //removes all car entries the user owns,
-    //returning true upon success and false on failure,
-    //such as the user's table does not exist or a car entry
-    //attempting to be removed does not exist
-    global $aoUsersDB;
-    
-    $userTable = 'user' . strval(0);
-    
-    $res = $aoUSersDB->query(
-        "DELETE * FROM $userTable"
-    );
-    
-    echo json_encode($res);
+class pasRemove
+{
+    public static function userAccount($userID){
+        //removes all user data, across all databases
+        //call this when a user deletes their account,
+        //or an admin removes them for violating terms of service, etc
+        
+        //remove from finalpost users
+        //pasRemove::dropUser($userID);
+        //remove table from aoUsersDB
+        //pasRemove::userGarageTable($userID);
+        //remove table from aoCarSales
+        //pasRemove::userSalesTable($userID);
+    }
+    public static function dropUser($userID){
+        //drops the table of user with id userIDfrom aoUsersDB
+        //returning true upon success and false on failure,
+        global $AO_DB;
+        
+        //return $AO_DB->query(
+            //"DELETE * FROM users WHERE user_id=$userID"
+        //);
+    }
+    public static function userGarageTable($userID){
+        //drops the table of user with id userIDfrom aoUsersDB
+        //returning true upon success and false on failure,
+        global $aoUsersDB;
+        
+        //return $aoUsersDB->query(
+            //"DROP TABLE user$userID"
+        //);
+    }
+    public static function userSalesTable($userID){
+        //drops the table of user with id userIDfrom aoUsersDB
+        //returning true upon success and false on failure,
+        //global $aoCarSalesDB;
+        
+        //$tableName = "user$userID";
+        
+        //returns true if user was dropped, false on error
+        //return $aoUsersDB->query(
+            //"DROP TABLE $tableName"
+        //);
+    }
+    public static function allUserCars($userID){
+        //removes all car entries the user owns,
+        //returning true upon success and false on failure,
+        //such as the user's table does not exist or a car entry
+        //attempting to be removed does not exist
+        global $aoUsersDB;
+        
+        $ret = $aoUSersDB->query(
+            "DELETE * FROM user$userID"
+        );
+        if(!$ret){
+            //query failed, output error
+            return false;
+        }
+        return $ret;
+    }
+    public static function userCar($userID, $carID){
+        //removes a singe car with ID from the user's garage,
+        //returning true upon success and false on failure,
+        global $aoUsersDB;
+        
+        return $aoUSersDB->query(
+            "DELETE * FROM user$userID WHERE car_id = $carID"
+        );
+    }
 }
-function removeUserCar($carID){
-    //removes user's car with ID,
-    //returning true upon success and false on failure,
-    global $aoUsersDB;
-    
-    $userTable = 'user' . strval(0);
-    $_remove = $aoUSersDB->prepare(
-        "DELETE * FROM ? WHERE car_id=?"
-    );
-    
-    return $aoUSersDB->query(
-        "DELETE * FROM $userTable WHERE car_id=$carID"
-    );
-}
-function dropUser($userID){
-    //drops the table of user with id userIDfrom aoUsersDB
-    //returning true upon success and false on failure,
-    global $aoUsersDB;
-    
-    return $aoUsersDB->query(
-        "DELETE * FROM users WHERE user_id=$userID"
-    );
-}
-function removeUserTable($userID){
-    //drops the table of user with id userIDfrom aoUsersDB
-    //returning true upon success and false on failure,
-    global $aoUsersDB;
-    
-    $tableName = 'user' . strval(userID);
-    
-    return $aoUsersDB->query(
-        "DROP TABLE $tableName"
-    );
-}
-*/
+
 $q = '';
 
 if(isset($_POST) && !empty($_POST) ){
