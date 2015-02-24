@@ -54,6 +54,12 @@ function divRepair(){
     background:url('../images/repair.jpg') no-repeat 0 0;
     background-size:100% 100%;
 }
+button#addFunds
+{<?php
+	defaultBtnBG();
+    css::size('10%', '10%');
+?>
+}
 /*
 <?php divRepair();?> div#upgrades
 {

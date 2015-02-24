@@ -1,6 +1,8 @@
 <?php
 //this script INSERTs or UPDATEs Database values with sql
 //used by javascript ajax requests
+header('Access-Control-Allow-Origin: *');
+//
 require_once '../vehicles/vehicle.php';
 require_once '../include/dbConnect.php';  //sql database connection
 //require_once '../include/secure.php';

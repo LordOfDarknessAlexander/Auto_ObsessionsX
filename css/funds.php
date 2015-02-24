@@ -42,19 +42,9 @@ require_once 'ui.php';
 	height:2em;
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 }
-<?php divFunds();?> button
-{
-	background: url('../images/backBtn.png') no-repeat 0 0;
-<?php
-    defaultColor();
-	fontBold();
-	cursorPtr();
-?>	
-}
 <?php divFunds();?> #addFundsBackButton
 {
 	background: url('../images/backBtn.png') no-repeat 0 0;
-	color: white;
 	width:150px;
 	height:50px;
 }
@@ -62,28 +52,24 @@ require_once 'ui.php';
 <?php divFunds();?> #addMinorFundsBtn
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
-	color: white;
 	width:150px;
 	height:50px;
 }
 <?php divFunds();?> #addMediumFundsBtn
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
-	color: white;
 	width:150px;
 	height:50px;
 }
 <?php divFunds();?> #addMajorFundsBtn
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
-	color: white;
 	width:150px;
 	height:50px;
 }
 <?php divFunds();?> #addAllowanceBtn
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
-	color: white;
 	width:150px;
 	height:50px;	
 }

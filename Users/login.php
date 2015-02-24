@@ -53,6 +53,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
 		//if no problems
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
+        //$users = 'users'; //'users' table in AO_DB, contain all the registered users, and data specific to their profile
+        //$getUserInfo = $AO_DB->con->prepare("SELECT user_id, fname, uname, user_level FROM $users WHERE (email='?' AND psword=SHA1('?') )";		
 		$q = "SELECT user_id, fname, uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
 		$result = $AO_DB->query($q);
 		
@@ -69,7 +71,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             //$_SESSION['userID'] = (int)$_SESSION['userID']; //store to make sql quires later!
 			$url = ($_SESSION['user_level'] === 1) ? 'admin-page.php' : 'members-page.php'; // Ternary operation to set the URL
             mysqli_free_result($result);
-			header("Location: $url"); // Makes the actual page jump. Keep in mind that $url is a relative path.
+            //make the actual page jump. Keep in mind that $url is a relative path.
+			header("Location: $url");
             exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;
                 //mysqli_close($dbcon);
                 ob_end_clean(); // Delete the buffer.
@@ -88,17 +91,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 ?>
 <!-- Display the form fields-->
 <div id='loginfields'>
-<h2>Login</h2>
-<form action='login.php' method='post'>
-	<label class='label' for='email'>Email Address:</label><br>
-	<input id='email' type='text' name='email' size='30' maxlength='60' value='<?php if (isset($_POST['email'])) echo $_POST['email'];?>'><br>
-	<label class='label' for='psword'>Password:</label><br>
-	<input id='psword' type='password' name='psword' size='12' maxlength='12' value='<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>'>&nbsp;Between 8 and 12 characters
-	<input id='submit' type='submit' name='submit' value='Login'>
-</form><br>
+    <h2>Login</h2>
+    <form action='login.php' method='post'>
+        <label class='label' for='email'>Email Address:</label><br>
+        <input id='email' type='text' name='email' size='30' maxlength='60' value='<?php if (isset($_POST['email'])) echo $_POST['email'];?>'><br>
+        <label class='label' for='psword'>Password:</label><br>
+        <input id='psword' type='password' name='psword' size='12' maxlength='12' value='<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>'>&nbsp;Between 8 and 12 characters
+        <input id='submit' type='submit' name='submit' value='Login'>
+    </form><br>
 </div>
 <br>
 <?php include 'includes/footer.php'; ?>
-</div>
-</div>
+</div><!--end content-->
+</div><!--end container-->
 <?php html::footer();?>

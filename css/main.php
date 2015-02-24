@@ -79,12 +79,12 @@ function divStatBar(){
     width:20%;
     height:50%;
 }
-<?php divMain();?> div button#myCars
+<?php divMain();?> button#myCars
 {<?php
     css::defaultBG('../images/garageBtn.png');
     css::bgSize('100%', '100%');
     //garageBtnBG();
-    defaultColor();
+    //defaultColor();
     fontBold();
     //cursorPtr();
     css::size('100%', '50%');
@@ -118,7 +118,7 @@ function divStatBar(){
     css::defaultBG('../images/repairBtn.png');
     css::bgSize('100%', '100%');
     //repairBtnBG();
-    defaultColor();
+    //defaultColor();
     fontBold();
     //cursorPtr();
     css::size('100%', '50%');
@@ -154,23 +154,3 @@ function divStatBar(){
 <?php divStatBar();?> label#prestige{left:40%;}
 <?php divStatBar();?> label#m_marker{left:60%;}
 <?php divStatBar();?> label#fname{left:80%;}
-/*game menu navigation buttons*/
-
-#addFunds
-{<?php
-	defaultBtnBG();
-    fontBold();
-    cursorPtr();
-    css::size('10%', '10%');
-?>
-	color:white;
-}
-#myCars
-{
-	background: url('../images/inventoryButton.png') no-repeat 0 0;
-	color:  white;
-	font-weight: bold;
-	width:150px;
-	height:50px;
-	cursor:pointer; 
-}

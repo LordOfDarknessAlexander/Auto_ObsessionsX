@@ -10,11 +10,11 @@ function subheader($title){
     html::hr();?>
 <h2><?php echo $title;?></h2>
 <?php
-}
+}//match against regex, should only contain lowercase letters
 $page = $_GET['page'];
 //this conditional means only passing specific params to the url
 //will display a functional page
-if(is_string($page) && $page == 'terms' ){
+if(is_string($page) && $page == 'terms'){
     html::simpleHead('Terms of Service');
 ?>
 <h1><?php echo $AO_NAME;?> Terms of Service</h1>
