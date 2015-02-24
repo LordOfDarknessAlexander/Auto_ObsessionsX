@@ -155,7 +155,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             if($result) 
 			{ // If the query ran OK
                 //user successfully registered, create other database tables
-                $res = mysqli_query($dbcon, "SELECT user_id FROM users WHERE (email ='$e' AND uname = '$uname')");
+                $res = $AO_DB->query("SELECT user_id FROM users WHERE (email ='$e' AND uname = '$uname')");
                 if($res){
                     $uid = $res->fetch_assoc()['user_id'];    //return type is string
                     //echo "registered user with id:$uid<br> type:" . gettype($uid);
@@ -168,11 +168,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                     else{
                         echo "could not create additional tables for user with id:$uid<br>";
                     }
+                    $res->close();
                 }
                 else{
                     //echo "user has no id";"
                 }
-                $res->close();
+                //$result->close();
                 //sucess! send email from no-reply@851entertainment.com for user to confirm
 				//header("location: register-thanks.php"); 
 				exit();
@@ -186,7 +187,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 				// Debugging message:
 				echo '<p>' . mysqli_error($AO_DB->con) . '<br><br>Query: ' . $q . '</p>';
 			} // End of if ($result)
-			mysqli_close($AO_DB->con); // Close the database connection
 			// Include the footer and stop the script
 			include 'includes/footer.php'; 
 			exit();

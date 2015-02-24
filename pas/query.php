@@ -18,33 +18,17 @@ function hasCar($id){
     
     $ret = false;
     $tableName = 'user' . strval(0);    //$_SESSION['userID'];
-    //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-    /*$_hasCar = $aoUsersDB->con->prepare("SELECT * FROM ? WHERE car_id = ?");
+   
+    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
     
-    if($_hasCar){
-        if($_hasCar->bind_params('si', $tableName, $id) ){
-            $ret = $_hasCar->execute();
-        }
-        else{
-            //failed sending params to server for binding
-            $erno = $aoUsersDB->con->errno;
-            $err = $aoUsersDB->con->error;
-            echo "hasCar($id), bind_params failed:($erno), reason: $err";
-            exit();
-        }
+    if($res){
+        //user has car
+        $ret = mysqli_num_rows($res) != 0 ? true : false;
     }
-    else{*/
-        //fallback to normal, slow, less secure sql calls
-        $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-        if($res){
-            //user has car
-            $ret = mysqli_num_rows($res) != 0 ? true : false;
-        }
-        else{
-            //query failed, user has no entry in database
-        }
-        mysqli_free_result($res);
-    //}
+    else{
+        //query failed, user has no entry in database
+    }
+    mysqli_free_result($res);
     
     return $ret;
 }
@@ -71,17 +55,16 @@ function getAuctionCars(){
     //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
     //returning them as a JSON array
     global $AO_DB;
-    //$aoCarsTable = 'aoCars';
+    $aoCars = 'aoCars';
+    $cars = array();
     //static $getCar = $AO_DB->prepare(
         //"SELECT * FROM $aoCarsTable"
     //);
     $res = $AO_DB->query(
-        "SELECT * FROM aoCars"
+        "SELECT * FROM $aoCars"
     );
     
-    if($res){
-        $cars = array();
-        
+    if($res){        
         while($row = mysqli_fetch_array($res) ){
             $carID = intval($row['car_id']);
             $cars[] = array(
@@ -95,12 +78,11 @@ function getAuctionCars(){
             );
         }
         mysqli_free_result($res);
-        echo json_encode($cars);    //JSON_FORCE_OBJECT);
     }
     else{   //The vehicle is already registered
         //echo "<p class='error'>User: has no entries in database</p>";
-        echo '{"cars":[]}';
     }
+    echo json_encode($cars);
 }
 function getUserCarFromID($carID){
     //selects all vehicles the user owns, returning it as a JSON array
@@ -164,9 +146,12 @@ function getCarFromID($carID){
             }
         }
     }
-    */    
+    */
+    $aoCars = 'aoCars';   
+    //make into prepared statement!
+    //->prepare("SELECT * FROM $aoCars WHERE car_id = ?")
     $res = $AO_DB->query(
-        "SELECT * FROM aoCars WHERE car_id = $carID"
+        "SELECT * FROM $aoCars WHERE car_id = $carID"
     );
     if($res){
         if(mysqli_num_rows($res) != 0){
@@ -193,48 +178,23 @@ function echoUserCars(){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
     
-    $userID = 'user' . strval(0);   //$_SESSION['userID'];
-    //static $_getUserCars = $aoUsersDB->prepare(
-        //"SELECT * FROM ?" //select all fields from table
-    //);
-    /*if($_getUserCar){
-        if($_getUserCars->bind_params('s', $userID) ){
-            if($_getUserCars->execute() ){
-                //$res = $_getUserCars->get_result(;)
-                if($res){
-                    $cars = array();
-                    //fetch each row of the result until no more rows are left
-                    while($row = mysqli_fetch_array($res) ){
-                        $cars[] = array(
-                            'carID' => intval($row['car_id']),
-                            'drivetrain' => intval($row['drivetrain']),
-                            'body' => intval($row['body']),
-                            'interior' => intval($row['interior']),
-                            'docs' => intval($row['docs']),
-                            'repairs' => intval($row['repairs'])
-                        );
-                    }
-                    mysqli_free_result($res);
-                    echo json_encode($cars);
-                }
-                else{   //The vehicle is already registered
-                    //echo "<p class='error'>User: has no entries in database</p>";
-                    echo '{"cars":[]}';
-                }
-            }
-            //failed to execute
-        }
-        //failed to set params
-    }*/
-    //binding prepared statement didn't work, attempt regulat query as fall back
+    $cars = array();
+    $userID = '';
+    
+    if(isset($_SESSION) AND isset($_SESSION['user_id']) ){
+        $userID = 'user' . $_SESSION['user_id'];
+    }
+    else{
+        $userID = 'user' . strval(0);   //$_SESSION['userID'];
+    }
+    
     $res = $aoUsersDB->query(
         "SELECT * FROM $userID"
     );
     
     if($res){
-        $cars = array();
-        
         while($row = mysqli_fetch_array($res) ){
+            //insert an new array repressenting a car at the end of $cars
             $cars[] = array(
                 'carID' => intval($row['car_id']),
                 'drivetrain' => intval($row['drivetrain']),
@@ -245,12 +205,12 @@ function echoUserCars(){
             );
         }
         mysqli_free_result($res);
-        echo json_encode($cars);
+        //echo json_encode($cars);
     }
     else{   //The vehicle is already registered
         //echo "<p class='error'>User: has no entries in database</p>";
-        echo '{"cars":[]}';
     }
+    echo json_encode($cars);
 }
 
 $q = '';
