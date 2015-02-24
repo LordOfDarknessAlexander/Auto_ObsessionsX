@@ -181,12 +181,12 @@ function echoUserCars(){
     $cars = array();
     $userID = '';
     
-    if(isset($_SESSION) AND isset($_SESSION['user_id']) ){
-        $userID = 'user' . $_SESSION['user_id'];
-    }
-    else{
+    //if(isset($_SESSION) AND isset($_SESSION['user_id']) ){
+        //$userID = 'user' . $_SESSION['user_id'];
+    //}
+    //else{
         $userID = 'user' . strval(0);   //$_SESSION['userID'];
-    }
+    //}
     
     $res = $aoUsersDB->query(
         "SELECT * FROM $userID"

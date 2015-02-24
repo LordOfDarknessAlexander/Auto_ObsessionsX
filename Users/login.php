@@ -72,6 +72,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             mysqli_free_result($result);
             //make the actual page jump. Keep in mind that $url is a relative path.
             //echo "navigating to $url";
+            //issue is here, php does not want to navigate to the members/admin page!
 			header("Location: $url");
             exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;
                 //mysqli_close($dbcon);
@@ -96,7 +97,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         <label class='label' for='email'>Email Address:</label><br>
         <input id='email' type='text' name='email' size='30' maxlength='60' value='<?php if (isset($_POST['email'])) echo $_POST['email'];?>'><br>
         <label class='label' for='psword'>Password:</label><br>
-        <input id='psword' type='password' name='psword' size='12' maxlength='12' value='<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>'>&nbsp;Between 8 and 12 characters
+        <input id='psword' type='password' name='psword' size='12' maxlength='12' value='<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>'>&nbsp;Between 8 and 12 characters<br>
         <input id='submit' type='submit' name='submit' value='Login'>
     </form><br>
 </div>
