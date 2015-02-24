@@ -1,39 +1,37 @@
 <?php 
-require ('config.php');
+require_once 'include/dbConnect.php';
+session_start();
 
-
-if( isset( $_POST) )
+if (isset($_SESSION['uname']))
 {
-	if (!empty($_POST['fname'])  && !empty($_POST['money']) && !empty($_POST['tokens']) &&!empty($_POST['prestige']) && !empty($_POST['m_marker']))
+	echo "{$_SESSION['uname']}";
+	if( isset( $_POST) )
 	{
-		$fname = $_POST["fname"];
-		$money = $_POST["money"];
-		$tokens = $_POST["tokens"];
-		$prestige = $_POST["prestige"];
-		$markers = $_POST["m_marker"];
-		//$q = 'UPDATE users SET fname="Learning JAVA" WHERE user_id=1';
-		$q = "UPDATE users SET fname='$fname', money='$money', tokens='$tokens' ,prestige='$prestige', m_marker='$markers' WHERE user_id=user_id";
-		
-		$result = mysqli_query ($dbcon, $q);
-		if(!$result )
+		if ( !empty($_POST['money']) || !empty($_POST['tokens']) || !empty($_POST['prestige']) || !empty($_POST['m_marker']))
 		{
-		  die('Could not update data: ' . mysql_error());
+				$money = $_POST["money"];
+				$tokens = $_POST["tokens"];
+				$prestige = $_POST["prestige"];
+				$marker = $_POST["m_marker"];
+				$q = "UPDATE users SET money='$money', tokens='$tokens' ,prestige='$prestige', m_marker='$marker' WHERE   uname = '$_SESSION[uname]'";
+				echo "Awesome";
+				$result = mysqli_query ($AO_DB->con, $q);
+				if(!$result )
+				{
+				  die('Could not update data: ' . mysql_error());
+				}
+				else
+				{
+				  echo '{"money":"' . $money . '", "tokens":"' . $tokens . '","prestige":"' . $prestige . ',"m_marker":"' . $marker . '"}';
+				}
+				mysli_close($AO_DB->con);
 		}
-		else
-		{
-		  echo '{"fname":"' . $fname . '", "lname":"' . $money . '"}';
-	
-		}
-		mysqli_close($dbcon);	
 		
 	}
-
-}
-else
-{
-	$fname = $_POST[" "];
-	//$lname = $_POST[" "];
-	echo "Goody try";
+	else
+	{
+		echo "Goody try";
+	}
 }
 
 ?>
