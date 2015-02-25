@@ -1,7 +1,7 @@
 <?php
 require '../include/html.php';
 session_start();
-//require 'secure.php';
+require 'includes/secure.php';
 //secureLogin();
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 1))
 {

@@ -1,10 +1,10 @@
 <?php
 
 //Query the database
-require ('Users/config.php');
+require_once '../include/dbConnect.php';
 
 $q = "SELECT * FROM users WHERE money = 0" ;		
-$result = mysqli_query ($dbcon, $q);
+$result = mysqli_query ($AO_DB->con, $q);
 
 //Count the returned rows
 if( mysqli_num_rows($result) != 0)
@@ -22,6 +22,7 @@ if( mysqli_num_rows($result) != 0)
 		//echo "<div id ='playerData'> <p>Player: $fname </div>";
 
 	}
+	mysqli_close($AO_DB->con);
 }
 else
 {

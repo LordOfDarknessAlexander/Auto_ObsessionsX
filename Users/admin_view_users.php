@@ -35,7 +35,7 @@ table
 <p>
 <?php 
 // This script retrieves all the records from the users table.
-require ('config.php'); // Connect to the database.
+require_once '../include/dbConnect.php'; // Connect to the database.
 //set the number of rows per display page
 $pagerows = 4;
 // Has the total number of pages already been calculated?
@@ -50,7 +50,7 @@ else
 	//use the next block of code to calculate the number of pages
 	//First, check for the total number of records
 	$q = "SELECT COUNT(user_id) FROM users";
-	$result = @mysqli_query ($dbcon, $q);
+	$result = @mysqli_query ($AO_DB->con, $q);
 	$row = @mysqli_fetch_array ($result, MYSQLI_NUM);
 	$records = $row[0];
 	//Now calculate the number of pages
@@ -76,7 +76,7 @@ else
 }
 // Make the query:
 $q = "SELECT lname, fname, email, DATE_FORMAT(registration_date, '%M %d, %Y') AS regdat, user_id FROM users ORDER BY registration_date ASC LIMIT $start, $pagerows";		
-$result = @mysqli_query ($dbcon, $q); // Run the query.
+$result = @mysqli_query ($AO_DB->con, $q); // Run the query.
 $members = mysqli_num_rows($result);
 if ($result) 
 { 
@@ -111,13 +111,13 @@ else
 	// Public message:
 	echo '<p class="error">The current record could not be retrieved. We apologize for any inconvenience.</p>';
 	// Debugging message:
-	echo '<p>' . mysqli_error($dbcon) . '<br><br>Query: ' . $q . '</p>';
+	echo '<p>' . mysqli_error($AO_DB->con) . '<br><br>Query: ' . $q . '</p>';
 } // End of if ($result). Now display the total number of records/members.
 $q = "SELECT COUNT(user_id) FROM users";
-$result = @mysqli_query ($dbcon, $q);
+$result = @mysqli_query ($AO_DB->con, $q);
 $row = @mysqli_fetch_array ($result, MYSQLI_NUM);
 $members = $row[0];
-mysqli_close($dbcon); // Close the database connection.
+mysqli_close($AO_DB->con); // Close the database connection.
 echo "<p>Total membership: $members</p>";
 if ($pages > 1) 
 {
