@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	} 
 	else 
 	{
-		$title = mysqli_real_escape_string($dbcon, trim($_POST['title']));
+		$title = mysqli_real_escape_string($AO_DB->con, trim($_POST['title']));
 	}
 	// Look for the first name:
 	if (empty($_POST['fname'])) 
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	} 
 	else 
 	{
-		$fn = mysqli_real_escape_string($dbcon, trim($_POST['fname']));
+		$fn = mysqli_real_escape_string($AO_DB->con, trim($_POST['fname']));
 	}
 	// Look for the last name:
 	if (empty($_POST['lname'])) 
@@ -74,20 +74,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	} 
 	else 
 	{
-		$ln = mysqli_real_escape_string($dbcon, trim($_POST['lname']));
+		$ln = mysqli_real_escape_string($AO_DB->con, trim($_POST['lname']));
 	}
 	
 	if (empty($errors)) 
 	{ // If everything's OK.
 		//  make the query
 				$q = "SELECT user_id FROM users WHERE lname='$ln' AND user_id != $id";
-		$result = @mysqli_query($dbcon, $q);
+		$result = @mysqli_query($AO_DB->con, $q);
 		if (mysqli_num_rows($result) == 0) 
 		{
 			// Make the update query:
 			$q = "UPDATE users SET title='$title', fname='$fn', lname='$ln', addr1='$addr1', addr2='$addr2', city='$city', county='$county', pcode='$pcode', phone='$phone' WHERE user_id=$id LIMIT 1";
-			$result = @mysqli_query ($dbcon, $q);
-			if (mysqli_affected_rows($dbcon) == 1) 
+			$result = @mysqli_query ($AO_DB->con, $q);
+			if (mysqli_affected_rows($AO_DB->con) == 1) 
 			{ 
 				// If it ran OK.
 				// Echo a message if the edit was satisfactory:
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			else 
 			{ // Echo a message if the query failed.
 				echo '<p class="error">The user could not be edited due to a system error. We apologize for any inconvenience.</p>'; // Public message.
-				echo '<p>' . mysqli_error($dbcon) . '<br />Query: ' . $q . '</p>'; // Debugging message.
+				echo '<p>' . mysqli_error($AO_DB->con) . '<br />Query: ' . $q . '</p>'; // Debugging message.
 			}
 			//} else { // Already registered.
 			//echo '<p class="error">The email address has already been registered.</p>';
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 } // End of the conditionals
 // Select the user's information:
 $q = "SELECT title, fname, lname, addr1, addr2, city, county, pcode, phone FROM users WHERE user_id=$id";		
-$result = @mysqli_query ($dbcon, $q);
+$result = @mysqli_query ($AO_DB->con, $q);
 if (mysqli_num_rows($result) == 1) 
 { 
 	// Valid user ID, display the form.
@@ -140,7 +140,7 @@ else
 { // The user could not be validated
 	echo '<p class="error">This page has been accessed in error.</p>';
 }
-mysqli_close($dbcon);
+mysqli_close($AO_DB->con);
 include ('includes/footer.php');
 ?>
 </div>

@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 1))
 	header("Location: login.php");
 	exit();
 }
+
 ?>
 <!doctype html>
 <html lang=en>

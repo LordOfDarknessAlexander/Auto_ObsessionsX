@@ -23,10 +23,10 @@ exit();
 <p>
 <?php 
 // This script retrieves all the records from the users table.
-require ('mysqli_connect.php'); // Connect to the database.
+require_once '../include/dbConnect.php'; // Connect to the database.
 // Make the query:
 $q = "SELECT lname, fname, email, DATE_FORMAT(registration_date, '%M %d, %Y') AS regdat, user_id FROM users ORDER BY registration_date ASC";		
-$result = @mysqli_query ($dbcon, $q); // Run the query.
+$result = @mysqli_query ($AO_DB->con, $q); // Run the query.
 if ($result) 
 { 
 	// If it ran OK, display the records.
@@ -60,9 +60,9 @@ else
 	// Public message:
 	echo '<p class="error">The current users could not be retrieved. We apologize for any inconvenience.</p>';
 	// Debugging message:
-	echo '<p>' . mysqli_error($dbcon) . '<br><br />Query: ' . $q . '</p>';
+	echo '<p>' . mysqli_error($AO_DB->con) . '<br><br />Query: ' . $q . '</p>';
 } // End of if ($r) IF.
-mysqli_close($dbcon); // Close the database connection.
+mysqli_close($AO_DB->con); // Close the database connection.
 ?>
 </p>
 </div><!-- End of the view users page content. -->

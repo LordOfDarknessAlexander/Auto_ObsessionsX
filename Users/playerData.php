@@ -28,7 +28,7 @@ else
 {
 	echo "No Results";
 }
-
+html::doctype();
 ?>
 <!doctype html>
 <html lang=en>

@@ -6,10 +6,9 @@ session_start();
 //secureLogin();
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 {
-    //tmp, until session vars issues are resolved
+    //tmp, untill session vars issues are resolved
     //session vars are not persistsing from login.php,
     //one fix could says to change session.path entry in php.ini
-    //echo 'session ID:' . SID;
     echo 'session vars:<br>';
     echo json_encode($_SESSION);
     echo 'not logged in, navigating to login page';
@@ -62,8 +61,6 @@ if(isset($_SESSION['uname']))
         <div id='midcol'>
 <?php
 //Query the database
-//require 'config.php';/*
-
 $q = "SELECT * FROM users WHERE uname = '$_SESSION[uname]'";		
 $result = mysqli_query ($AO_DB->con, $q);
 
@@ -89,9 +86,7 @@ else
     echo "<p class='error'>Please try again.</p>";
 	//exit();
 }
-//close is called in the destructor for the dbCOnnect class,
-//you never have to eplicitly call it!
-//mysqli_close($AO_DB->con);
+mysqli_close($AO_DB->con);
 ?>
             <div id='mid-left-col'>
 </body>

@@ -1,6 +1,6 @@
 <?php
 // This is the logout page for the site.
-//require ('config.inc.php'); 
+require ('config.inc.php'); 
 session_start();//access the current session.
 // If no first_name session variable exists, redirect the user:
 //if no session variable then redirect the user

@@ -46,7 +46,7 @@ else
 	include ('footer.php'); 
 	exit();
 }
-require ('config.php'); 
+require_once '../include/dbConnect.php';
 // Has the form been submitted?
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	} 
 	else 
 	{
-		$fn = mysqli_real_escape_string($dbcon, trim($_POST['fname']));
+		$fn = mysqli_real_escape_string($AO_DB->con, trim($_POST['fname']));
 	}
 	// Look for the last name:
 	if (empty($_POST['lname'])) 
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	} 
 	else 
 	{
-		$ln = mysqli_real_escape_string($dbcon, trim($_POST['lname']));
+		$ln = mysqli_real_escape_string($AO_DB->con, trim($_POST['lname']));
 	}
 	// Look for the email address:
 	if (empty($_POST['email'])) 
@@ -76,12 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	} 
 	else 
 	{
-		$e = mysqli_real_escape_string($dbcon, trim($_POST['email']));
+		$e = mysqli_real_escape_string($AO_DB->con, trim($_POST['email']));
 	}
 	// Look for the class of membership:
 	if (!empty($_POST['class'])) 
 	{
-		$class = mysqli_real_escape_string($dbcon, trim($_POST['class']));
+		$class = mysqli_real_escape_string($AO_DB->con, trim($_POST['class']));
 	}
 	else
 	{
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	// Look for the payment confirmation:
 	if (!empty($_POST['paid'])) 
 	{
-		$paid = mysqli_real_escape_string($dbcon, trim($_POST['paid']));
+		$paid = mysqli_real_escape_string($AO_DB->con, trim($_POST['paid']));
 	}
 	else
 	{
@@ -103,15 +103,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		//but ignore the email address of the user being updated, he may wish to keep his
 		//current email address
 		$q = "SELECT user_id FROM users WHERE email = '$e' AND user_id != $id";
-		$result = @mysqli_query($dbcon, $q);
+		$result = @mysqli_query($AO_DB->con, $q);
 		if (mysqli_num_rows($result) == 0)
 		{
 			//The email address is not already registered or it
 			//belongs to the user being updated, therefore, update the users table
 			$q = "UPDATE users SET fname='$fn', lname='$ln', email='$e', class='$class', 
 			paid='$paid' WHERE user_id=$id LIMIT 1";
-			$result = @mysqli_query ($dbcon, $q);
-			if (mysqli_affected_rows($dbcon) == 1) 
+			$result = @mysqli_query ($AO_DB->con, $q);
+			if (mysqli_affected_rows($AO_DB->con) == 1) 
 			{ 
 				// If it ran OK
 				// Echo a message confirming that the edit was satisfactory
@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				echo '<p class="error">The user was not edited due to a system error.
 				We apologize for any inconvenience.</p>'; 
 				// Error message
-				echo '<p>' . mysqli_error($dbcon) . '<br />Query: ' . $q . '</p>'; 
+				echo '<p>' . mysqli_error($AO_DB->con) . '<br />Query: ' . $q . '</p>'; 
 				// Debugging message
 			}
 		}
@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 } // End of the conditionals
 // Select the user's information:
 $q = "SELECT fname, lname, email, class, paid FROM users WHERE user_id=$id";		
-$result = @mysqli_query ($dbcon, $q);
+$result = @mysqli_query ($AO_DB->con, $q);
 if (mysqli_num_rows($result) == 1) 
 { // Valid user ID, display the form.
 	// Get the user's information:
@@ -168,7 +168,7 @@ else
 { // The user could not be validated
 	echo '<p class="error">This page has been accessed by an unauthorized person.</p>';
 }
-mysqli_close($dbcon);
+mysqli_close($AO_DB->con);
 include ('includes/footer.php');
 ?>
 </div>
