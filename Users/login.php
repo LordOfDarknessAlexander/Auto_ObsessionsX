@@ -70,9 +70,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			//echo json_encode($_SESSION);
             $url = ($_SESSION['user_level'] === 1) ? 'admin-page.php' : 'members-page.php'; // Ternary operation to set the URL
             
-            //mysqli_free_result($result);
+            mysqli_free_result($result);
             //make the actual page jump. Keep in mind that $url is a relative path.
-            echo "navigating to $url";
+            //echo json_encode($_SESSION);  //session is being initialized properly here!
+            //echo "navigating to $url";
             //issue is here, php does not want to navigate to the members/admin page!
 			header("Location: $url");
             //exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;

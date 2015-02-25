@@ -6,9 +6,10 @@ session_start();
 //secureLogin();
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 {
-    //tmp, untill session vars issues are resolved
+    //tmp, until session vars issues are resolved
     //session vars are not persistsing from login.php,
     //one fix could says to change session.path entry in php.ini
+    //echo 'session ID:' . SID;
     echo 'session vars:<br>';
     echo json_encode($_SESSION);
     echo 'not logged in, navigating to login page';
