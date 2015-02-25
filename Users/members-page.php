@@ -1,7 +1,7 @@
 <?php
 require '../include/html.php';
 require '../include/dbConnect.php';
-require 'includes/secure.php';
+//require 'includes/secure.php';
 session_start();
 //secureLogin();
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
@@ -61,6 +61,7 @@ if(isset($_SESSION['uname']))
         <div id='midcol'>
 <?php
 //Query the database
+
 $q = "SELECT * FROM users WHERE uname = '$_SESSION[uname]'";		
 $result = mysqli_query ($AO_DB->con, $q);
 
