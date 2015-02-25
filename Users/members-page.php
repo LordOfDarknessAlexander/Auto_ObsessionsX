@@ -62,7 +62,7 @@ if(isset($_SESSION['uname']))
 <?php
 //Query the database
 //require 'config.php';/*
-/*
+
 $q = "SELECT * FROM users WHERE uname = '$_SESSION[uname]'";		
 $result = mysqli_query ($AO_DB->con, $q);
 
@@ -88,7 +88,7 @@ else
     echo "<p class='error'>Please try again.</p>";
 	//exit();
 }
-mysqli_close($AO_DB->con);*/
+mysqli_close($AO_DB->con);
 ?>
             <div id='mid-left-col'>
 </body>
