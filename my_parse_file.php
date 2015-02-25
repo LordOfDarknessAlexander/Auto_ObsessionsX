@@ -24,7 +24,7 @@ if (isset($_SESSION['uname']))
 				{
 				  echo '{"money":"' . $money . '", "tokens":"' . $tokens . '","prestige":"' . $prestige . ',"m_marker":"' . $marker . '"}';
 				}
-				mysli_close($AO_DB->con);
+				//mysli_close($AO_DB->con);
 		}
 		
 	}
