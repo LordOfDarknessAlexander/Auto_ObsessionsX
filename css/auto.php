@@ -83,21 +83,22 @@ button#backBtn
     cursor:pointer;
 	position:absolute;
 	left:5%;
-	bottom:2%;
-    width:16%;
+	bottom:5%;
+    width:8%;
 	height:8%;
 }
 button#homeBtn
 {
 	background: url('../images/homeBtn.png') no-repeat 0 0;
 	font-weight: bold;
+    background-size : 100% 100%;
     
 	position:absolute;
-    width:10%;
-	height:10%;
+    width:8%;
+	height:8%;
 	
 	right:5%;
-	bottom:2%;
+	bottom:5%;
 }
 
 .wrapper 

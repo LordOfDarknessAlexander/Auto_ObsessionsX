@@ -78,4 +78,52 @@ function selectBtn(){?>
     backBtn();
     homeBtn();
 ?>
+<h2 id='dt'>Drivetrain</h2>
+    <div id='drivetrain'>
+        Engine:<br>
+        <progress id='pbEngine' value='0.0'></progress>
+        <br>Transmission:<br>
+        <progress id='pbTransmission' value='0.0'></progress>
+        <br>Drive Axel:<br>
+        <progress id='pbAxel' value='0.0'></progress>
+        <br>Exhaust:<br>
+        <progress id='pbExhaust' value='0.0'></progress>
+        <br>
+    </div>
+    <h2 id='body'>Body</h2>
+    <div id='body'>
+        Chasis:<br>
+        <progress id='pbChasis' value='0.0'></progress>
+        <br>Body Panels:<br>
+        <progress id='pbPanels' value='0.0'></progress>
+        <br>Paint:<br>
+        <progress id='pbPaint' value='0.0'></progress>
+        <br>PLACEHOLDER:<br>
+        <progress id='pbPH0' value='0.0'></progress>
+        <br>
+    </div>
+    <h2 id='interior'>Interior</h2>
+    <div id='interior'>
+        Seats:<br>
+        <progress id='pbSeats' value='0.0'></progress>
+        <br>Carpet:<br>
+        <progress id='pbCarpet' value='0.0'></progress>
+        <br>Dash:<br>
+        <progress id='pbDash' value='0.0'></progress>
+        <br>Door Panels:<br>
+        <progress id='pbPanels' value='0.0'></progress>
+        <br>
+    </div>
+    <h2 id='docs'>Documentation</h2>
+    <div id='docs'>
+        Ownership:<br>
+        <progress id='pbOwnership' value='0.0'></progress>
+        <br>Build Sheet:<br>
+        <progress id='pbBuildSheet' value='0.0'></progress>
+        <br>History:<br>
+        <progress id='pbHistory' value='0.0'></progress>
+        <br>PLACEHOLDER:<br>
+        <progress id='pbPH0' value='0.0'></progress>
+        <br>
+    </div>
 </div>

@@ -33,30 +33,32 @@ function divCarView(){
 <?php divCarView();?> img#car
 {
 	position:absolute;
-	width:40%;
-	height:40%;
+	width:50%;
+	height:50%;
 	bottom:20%;
-	left:30%;
+	left:25%;
 }
 
 <?php divCarView();?> button#selectCarBtn
 {
-	top:34%;
-	left:45%;
+	top:24%;
+	left:40%;
 	height:5%;
+    width:10%;
+    font-size:2vw;
 }
 <?php divCarView();?> button#sellBtn
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	background-size: 100% 100%;
-	left:5%;
-	top:35%;
-	width:15%;
-	height:10%;
+	left:50%;
+	top:24%;
+	height:5%;
+    width:10%;
+    font-size:2vw;
 }
 /*
-div#CarView button#carViewBackBtn
-{
+div#CarView button#carViewBackBtn{
 	background: url('../images/backBtn.png') no-repeat 0 0;
 	
 	left:5%;
@@ -74,8 +76,7 @@ div#CarView button#homeBtn
 	width:10%;
 	height:10%;
 }*/
-<?php divCarView();?> label#carInfo
-{
+<?php divCarView();?> label#carInfo{
 	color:black;
 	background-color:grey;
 	text-align:left;
@@ -84,4 +85,68 @@ div#CarView button#homeBtn
 	bottom:0;
 	width:50%;
 	height:15%;
+}
+<?php divCarView();?> h2{
+<?php
+    posAbs();
+?>
+	width:20%;
+	height:5%;
+    font-size:2vw;/*size element relative to viewport width!*/
+    font-weight:bold;
+    background-color:white;
+    /*background:url('../headerBG.jpg');*/
+    margin:0%;
+    
+}
+<?php divCarView();?> div{
+<?php
+    posAbs();
+?>
+    overflow-y:scroll;
+    background-color:grey;
+    width:20%;
+	height:30%;
+    font-size:1.5vw;
+    text-align:left;
+}
+<?php divCarView();?> div#drivetrain{
+	top:20%;
+	left:5%;
+}
+<?php divCarView();?> div#body{    
+	top:55%;
+	left:5%;
+}
+<?php divCarView();?> div#interior{    
+	top:20%;
+	right:5%;
+}
+<?php divCarView();?> div#docs{    
+	top:55%;
+	right:5%;
+}
+
+<?php divCarView();?> h2#dt{
+	top:15%;
+	left:5%;
+}
+<?php divCarView();?> h2#body{
+	top:50%;
+	left:5%;
+}
+<?php divCarView();?> h2#interior{
+	top:15%;
+	right:5%;
+}
+<?php divCarView();?> h2#docs{
+	top:50%;
+	right:5%;
+}
+<?php divCarView();?> div progress
+{<?php
+    //posAbs();
+?>
+    width:100%;
+    height:10%;
 }
