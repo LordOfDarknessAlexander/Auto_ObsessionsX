@@ -1,13 +1,15 @@
+<?php
+require_once 'secure.php';
+?>
 <div id='gameMenu'>
-<script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!--script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script-->
     <!--Root Game Menu, hub for page navigation-->
     <h1>My Home</h1>
     <!--HUD ---->
 <!--	<div id="fname" ></div>-->
-<?php require_once 'include/statBar.php';?>  
-<?php require_once 'secure.php';?>
 <?php
+require_once 'include/statBar.php';
 session_start();
 echo '<h2>Welcome to Auto-Obsessions\' Page ';
 if (isset($_SESSION['uname']))

@@ -23,7 +23,7 @@ function selectBtn(){?>
     
     <div id='userCar'>
         <!--display for currently selected vehicle-->
-        <img id='carImg' src='images/vehicle.jpg'>
+        <img id='carImg'> <!--src='images/vehicle.jpg'-->
         <br>
         <!--label id='curCarName'>m:</label>
         <label id='curCarInfo'>current car info</label-->
@@ -41,7 +41,7 @@ function selectBtn(){?>
     </div>
     <div id='selectedCar'>
         <!--display vehicle picked by user-->
-        <img id='carImg' src='images/vehicle.jpg'>
+        <img id='carImg'> <!--src='images/vehicle.jpg'-->
         <br>
         <label id='carName'></label>
         <br>
@@ -65,7 +65,7 @@ function selectBtn(){?>
     <!--<selectBtn();>display vehicle stats and actions-->
     <button id='selectCarBtn'>Select</button>
     <button id='sellBtn'>Sell</button>
-    <img id='car' src='images\\vehicle.jpg'>
+    <img id='car'> <!--src='images\\vehicle.jpg'-->
     <!--div id='statLabels'>
         <lable>Drivetrain</label>
         <lable>Body</label>

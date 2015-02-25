@@ -3,7 +3,7 @@
 //	0x{DA, 0086, 0A}:{make, year, model}
 //values are between 00 and FF, allowing for 255x255x255 unique vehicles
 //ID's can be procedurally generated!
-//namespace AO
+//ao.car.create =
 function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 {
     if(carID === null || carID === undefined){
@@ -92,6 +92,10 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			//{
 				//upgradeCost += this._parts[i].getPrice();
 			//}
+            //price += _dt.getPrie();
+            //price += _body.getPrice();
+            //price += this._interior.getPrice();
+            //price += this._docs.getPrice();
 			return this._price; // + upgradeCost;
 		},
 		getInfo : function()

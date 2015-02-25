@@ -1,4 +1,5 @@
 ﻿//Action Select State Object
+//ao.state.AuctionSelect =
 var AuctionSelect =
 {	//object representing
 	list : $('div#AuctionSelect div#carView ul#auctionCars'),

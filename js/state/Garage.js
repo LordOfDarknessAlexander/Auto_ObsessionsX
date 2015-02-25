@@ -68,6 +68,7 @@ function VehicleFromDB(obj){
     //alert(JSON.stringify(ret) );
     //return ret;
 }
+//ao.state.Garage =
 var Garage = {
 	_curCarIndex : null,
     _carViewList: $('div#carListView ul#carBtns'),

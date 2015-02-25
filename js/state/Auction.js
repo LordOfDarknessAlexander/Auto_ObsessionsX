@@ -19,6 +19,7 @@ var playerBoughtOut = false; //temporary for our dev button "buyout"
     }
     return array;
 }*/
+//ao.state.Auction =
 var Auction =
 {	//manages the state for purchasing cars
 	//_enemies:[],

@@ -1,4 +1,5 @@
-<?php   //this php script commands the server to generate meta includes(CSS and JS) of the application
+<?php
+//this php script commands the server to generate meta includes(CSS and JS) of the application
 require_once 'html.php';
 
 $paths = array(

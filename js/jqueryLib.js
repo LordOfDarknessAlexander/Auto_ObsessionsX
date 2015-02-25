@@ -193,8 +193,9 @@ $('.back').click(jq.Credits.toggle);
 $('#addFunds').click(function() 
 {
 	jq.Funds.toggle();
-    $('#menu').addClass('AddFunds');
-	addFundsMode();	//is ok to call external functions, as long as they are defined in program.js
+    //jq.RepairShop.toggle();
+    //$('#menu').addClass('AddFunds');
+	//addFundsMode();	//is ok to call external functions, as long as they are defined in program.js
 });
 //
 jq.CarView.backBtn.click(jq.CarView.toggle);

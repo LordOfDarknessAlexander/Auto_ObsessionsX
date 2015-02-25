@@ -89,7 +89,9 @@ else
     echo "<p class='error'>Please try again.</p>";
 	//exit();
 }
-mysqli_close($AO_DB->con);
+//close is called in the destructor for the dbCOnnect class,
+//you never have to eplicitly call it!
+//mysqli_close($AO_DB->con);
 ?>
             <div id='mid-left-col'>
 </body>

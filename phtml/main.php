@@ -7,42 +7,42 @@
     //'TD'=>
     //'AS'=>
 //};
-$OWNER_NAME = "Adam Glazer";
-$AO_NAME = "Auto Obsessions";
-$TD_NAME = "Tyler Drury";
-$AS_NAME = "Alexander Sanchez";
-$AB_NAME = "Andrew Best";
+$OWNER_NAME = 'Adam Glazer';
+$AO_NAME = 'Auto Obsessions';
+$TD_NAME = 'Tyler Drury';
+$AS_NAME = 'Alexander Sanchez';
+$AB_NAME = 'Andrew Best';
 $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 
 ?>	
-<div class="wrapper">
+<div class='wrapper'>
 	<!--root div element of web page!-->	
-    <div class="sound sound-off"></div>
+    <div class='sound sound-off'></div>
 <?php //require_once 'include/statBar.php';?>  
-    <div id="menu">
-        <div id="progress">
-            <div id="percent">Downloading: <span id="p"></span></div>
-            <progress id="progress-bar" value="0"></progress>
+    <div id='menu'>
+        <div id='progress'>
+            <div id='percent'>Downloading: <span id='p'></span></div>
+            <progress id='progress-bar' value='0'></progress>
         </div>
       
-        <div id="splash">
-            <h2><?php echo $OWNER_NAME." and ".$AO_NAME." Presents!";?></h2>
+        <div id='splash'>
+            <h2><?php echo $OWNER_NAME.' and '.$AO_NAME.' Presents!';?></h2>
         </div>
-        <div id="main">
+        <div id='main'>
             <h1><?php echo $AO_NAME;?></h1>
            
-             <div id="login">
-				<form  action="Users/login.php" method="post">
-				  <p> USER NAME <input type="text" name="username"></p>
-				  <p> PASSWORD <input type="password" name="pword"></p>
-				  <p><input type="submit" name="submit" value="Log in"></p>
+             <div id='login'>
+				<form  action='Users/login.php' method='post'>
+				  <p> USER NAME <input type='text' name='username'></p>
+				  <p> PASSWORD <input type='password' name='pword'></p>
+				  <p><input type='submit' name='submit' value='Log in'></p>
 				</form>
 					
             </div>
             <ul>
-               <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
-               <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
-               <li><a href="javascript:void(0)" class="button Register">Register</a></li>
+               <li><a href='javascript:void(0)' class='button play'>Start Game</a></li>
+               <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
+               <li><a href='javascript:void(0)' class='button Register'>Register</a></li>
             </ul>
             <?php require 'phtml/legal.php';?>
             <!--p id='legal'>Auto-Obsession &copy; 2015, All Right Reserved.
@@ -54,25 +54,25 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
             </p-->
 		</div>
       
-        <div id="credits">
+        <div id='credits'>
             <!--could just be a link at the bottom of the page-->
             <ul>
-                <li class="artwork">Character design and art: <?php echo $AS_NAME;?></li>
+                <li class='artwork'>Character design and art: <?php echo $AS_NAME;?></li>
             </ul>
             <ul>
-                <li class="artwork">Programming Crew: <?php echo $AS_NAME.", ".$TD_NAME;?></li>
+                <li class='artwork'>Programming Crew: <?php echo $AS_NAME.', '.$TD_NAME;?></li>
             </ul>
              
             <ul>
-              <li class="developer">Developer: <?php echo $OWNER_NAME;?></li>
+              <li class='developer'>Developer: <?php echo $OWNER_NAME;?></li>
             </ul>
-            <a href="javascript:void(0)" class="button back">Back</a>
+            <a href='javascript:void(0)' class='button back'>Back</a>
         </div> 
     </div><!--end menu-->      
    
-    <canvas id="canvas" width="900" height="600">
+    <canvas id='canvas' width='900' height='600'>
         <p>You're browser does not support the required functionality to play this game.</p>
-        <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
+        <p>Please update to a modern browser such as <a href='www.google.com/chrome/‎'>Google Chrome</a> to play.</p>
     </canvas>    
 <?php
 //php includes the source html files here
@@ -98,7 +98,6 @@ foreach($scripts as $val){
     //then finally the local folder which THIS script is located
     require_once($val.'.php');
 }
-
 ?>
     <div id='profile'>
         <button id='backBtn'>Back</button>

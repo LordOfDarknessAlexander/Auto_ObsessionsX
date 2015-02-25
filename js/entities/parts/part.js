@@ -5,6 +5,7 @@
 //ID's can be prceedurally generated!
 //namespace AO
 //
+//ao.car.part = 
 function carPart(carPrice, partType){   //partType
     //emulating an enum representing the various kinds of upgradable part
     //console.log(carPrice);
@@ -55,7 +56,7 @@ function carPart(carPrice, partType){   //partType
                 if(userStats.money >= p){
                     userStats.money -= p;   //take money first
                     this._repaired = true;  //then repair, 'cause we're like that
-                    console.log('purchasing repairs for part of type: ' + this._type.toString() + ', for: $' + p.toString() );
+                    //console.log('purchasing repairs for part of type: ' + this._type.toString() + ', for: $' + p.toString() );
                 }
             }
             //else already repaired, do nothing
@@ -66,7 +67,7 @@ function carPart(carPrice, partType){   //partType
             if(stage <= carPart.STAGE.pro && this._stage != carPart.STAGE.pro){
                 if(stage > this._stage){
                     this._stage = stage;
-                    console.log('upgrading part with type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() );
+                    //console.log('upgrading part with type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() );
                 }
             }
         },
@@ -83,7 +84,7 @@ function carPart(carPrice, partType){   //partType
                     else{
                         this._stage = this._stage << 1;
                     }
-                    console.log('purchasing upgrade for part of type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() + ', for: $' + p.toString() );
+                    //console.log('purchasing upgrade for part of type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() + ', for: $' + p.toString() );
                     //increase other vars
                     return true;
                 }

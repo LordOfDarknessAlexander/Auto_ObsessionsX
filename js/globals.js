@@ -185,12 +185,3 @@ function resetStates()
 {
 	appState = GAME_MODE.RUNNING;
 }
-function getHostPath(){
-    //gloablly accessable function, the local path maybe diffrent,
-    //DON'T CHANGE THE PATH, instead rename/relocate your project folder,
-    //so devs don't have a commit war, having to change this function
-    //for each of their projects each time they commit!
-    var localExecution = true;
-    return localExecution ? 'http://localhost/Auto_ObsessionsX/'
-            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-}

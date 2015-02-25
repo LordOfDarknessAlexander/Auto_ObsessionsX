@@ -25,6 +25,7 @@
         <button id='fixBtn5'></button>
     </div-->
 	<button id='addFunds'>Add Funds</button>
+    <!--a id='addFunds' href='<php echo rootURL() . 'state/funds.php';?>'>Add Funds</a-->
     <h2 id='dt'>Drivetrain</h2>
     <div id='drivetrain'>
         Engine:
