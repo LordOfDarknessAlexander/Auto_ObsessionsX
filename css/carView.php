@@ -143,10 +143,29 @@ div#CarView button#homeBtn
 	top:50%;
 	right:5%;
 }
-<?php divCarView();?> div progress
+<?php divCarView();?> progress
 {<?php
     //posAbs();
 ?>
     width:100%;
     height:10%;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
 }
+<?php
+//google/safari pb stylings?>
+<?php divCarView();?> progress::-webkit-progress-bar{
+    background:black;
+}
+<?php divCarView();?> progress::-webkit-progress-value{
+    background-color:red;
+}
+<?php divCarView();?> progress.high::-webkit-progress-value{
+    background-color:green;
+}
+<?php divCarView();?> progress.med::-webkit-progress-value{
+    background-color:yellow;
+}
+<?php
+//EI pb stylings?>

@@ -437,31 +437,74 @@ var CarView = {
             //set dt progress bars
             for(var i = Drivetrain.TYPE.engine; i <= Drivetrain.TYPE.exhaust; i++){ 
                 var part = car._dt.getPartType(i),
-                    str = 'div#CarView div#drivetrain progress#pb' + Drivetrain.strFromType(i);
+                    str = 'div#CarView div#drivetrain progress#pb' + Drivetrain.strFromType(i),
+                    p = part.getPercent();
                 
-                $(str).attr('value', part.getPercent() );
+                $(str).attr('value', p);
+                //jqo.css('background-color', 'red');
+                
+                if(p >= 0.66 && p <= 1.0){
+                    $(str).attr('class', 'high');
+                }
+                else if(p >= 0.33 && p < 0.66){
+                    $(str).attr('class', 'med');
+                }
+                else{
+                    $(str).attr('class', '');
+                }
             }
             //set interior progress bars
             for(var i = Interior.TYPE.seats; i <= Interior.TYPE.panels; i++){ 
                 var part = car._interior.getPartType(i),
-                    str = 'div#CarView div#interior progress#pb' + Interior.strFromType(i);
+                    str = 'div#CarView div#interior progress#pb' + Interior.strFromType(i),
+                    p = part.getPercent();
                 
-                $(str).attr('value', part.getPercent() );
+                $(str).attr('value', p);
+                
+                if(p >= 0.66 && p <= 1.0){
+                    $(str).attr('class', 'high');
+                }
+                else if(p >= 0.33 && p < 0.66){
+                    $(str).attr('class', 'med');
+                }
+                else{
+                    $(str).attr('class', '');
+                }
             }
             //set body progress bars
             for(var i = Body.TYPE.chasis; i <= Body.TYPE.ph0; i++){ 
                 var part = car._body.getPartType(i),
-                    str = 'div#CarView div#body progress#pb' + Body.strFromType(i);
+                    str = 'div#CarView div#body progress#pb' + Body.strFromType(i),
+                    p = part.getPercent();
 
-                $(str).attr('value', part.getPercent() );
+                $(str).attr('value', p);
+                
+                if(p >= 0.66 && p <= 1.0){
+                    $(str).attr('class', 'high');
+                }
+                else if(p >= 0.33 && p < 0.66){
+                    $(str).attr('class', 'med');
+                }
+                else{
+                    $(str).attr('class', '');
+                }
             }
             //set docs progress bars
             for(var i = Documents.TYPE.ownership; i <= Documents.TYPE.ph0; i++){ 
                 var part = car._docs.getPartType(i),                    
-                    str = 'div#CarView div#docs progress#pb' + Documents.strFromType(i);
+                    str = 'div#CarView div#docs progress#pb' + Documents.strFromType(i),
+                    p = part.getPercent();
                 
                 //docs don't have repair buttons
-                $(str).attr('value', part.getPercent() );
+                if(p >= 0.66 && p <= 1.0){
+                    $(str).attr('class', 'high');
+                }
+                else if(p >= 0.33 && p < 0.66){
+                    $(str).attr('class', 'med');
+                }
+                else{
+                    $(str).attr('class', '');
+                }
             }
 		}
 	}
