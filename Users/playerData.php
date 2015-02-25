@@ -4,7 +4,7 @@
 require_once '../include/dbConnect.php';
 
 $q = "SELECT * FROM users WHERE money = 0" ;		
-$result = mysqli_query ($AO_DB->con, $q);
+$result = $AO_DB->query($q);
 
 //Count the returned rows
 if( mysqli_num_rows($result) != 0)
@@ -22,7 +22,10 @@ if( mysqli_num_rows($result) != 0)
 		//echo "<div id ='playerData'> <p>Player: $fname </div>";
 
 	}
-	mysqli_close($AO_DB->con);
+    //Don't close any dbCOnnect Object,
+    //their connection is maintained until the object is deallocated,
+    //php does it for you
+	//mysqli_close($AO_DB->con);
 }
 else
 {

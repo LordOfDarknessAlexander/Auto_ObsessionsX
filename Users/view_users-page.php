@@ -62,7 +62,6 @@ else
 	// Debugging message:
 	echo '<p>' . mysqli_error($AO_DB->con) . '<br><br />Query: ' . $q . '</p>';
 } // End of if ($r) IF.
-mysqli_close($AO_DB->con); // Close the database connection.
 ?>
 </p>
 </div><!-- End of the view users page content. -->

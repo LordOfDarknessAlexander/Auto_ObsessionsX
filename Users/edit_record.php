@@ -168,7 +168,6 @@ else
 { // The user could not be validated
 	echo '<p class="error">This page has been accessed by an unauthorized person.</p>';
 }
-mysqli_close($AO_DB->con);
 include ('includes/footer.php');
 ?>
 </div>
