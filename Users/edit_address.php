@@ -140,7 +140,7 @@ else
 { // The user could not be validated
 	echo '<p class="error">This page has been accessed in error.</p>';
 }
-mysqli_close($AO_DB->con);
+//mysqli_close($AO_DB->con);
 include ('includes/footer.php');
 ?>
 </div>

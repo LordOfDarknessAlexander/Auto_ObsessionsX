@@ -118,7 +118,7 @@ $q = "SELECT COUNT(user_id) FROM users";
 $result = @mysqli_query ($AO_DB->con, $q);
 $row = @mysqli_fetch_array ($result, MYSQLI_NUM);
 $members = $row[0];
-mysqli_close($AO_DB->con); // Close the database connection.
+//mysqli_close($AO_DB->con); // Close the database connection.
 echo "<p>Total membership: $members</p>";
 if ($pages > 1) 
 {

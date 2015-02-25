@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		}
 		echo '</p><p class="error">Please try again.</p><p><br /></p>';
 	} // End of if (empty($errors))
-	mysqli_close($AO_DB->con); // Close the database connection.
+	//mysqli_close($AO_DB->con); // Close the database connection.
 } // End of the submit conditional
 ?>
 <h2>Change Your Password</h2>
