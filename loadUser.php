@@ -1,5 +1,5 @@
 <?php 
-require ('Users/config.php');
+require_once 'include/dbConnect.php';
 //$uname = $_SESSION[uname];
 
 session_start();
@@ -9,7 +9,7 @@ if( isset( $_POST) )
 	if (isset($_SESSION['uname']))
 	{
 		$q = "SELECT * FROM users WHERE uname = '$_SESSION[uname]'";	
-		$result = mysqli_query ($dbcon, $q);
+		$result = mysqli_query ($AO_DB->con, $q);
 		//Count the returned rows
 		if( mysqli_num_rows($result) != 0)
 		{
@@ -37,7 +37,7 @@ if( isset( $_POST) )
 				echo '<p class="error">Please try again.</p>';
 			//exit();
 		}
-		mysqli_close($dbcon);
+		//mysqli_close($dbcon);
 	}
 }
 ?>

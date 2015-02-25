@@ -103,6 +103,41 @@ function ajax_post()
     });
     
 }
+
+function ajax_loadUser()
+{
+   /*
+	amoney = userStats.money;
+	atokens = userStats.tokens;
+	aprestige = userStats.prestige;
+	amarkers = userStats.marker;*/
+
+    var jqxhr = $.ajax({
+        type:'POST',
+        url:getHostPath() + 'loadUser.php',
+        dataType:'json',
+        //data:userStats
+		 data:{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
+    }).done(function(data){
+        //the response string is converted by jquery into a Javascript object!
+        if(data === null){
+            alert('Error:ajax response returned null!');
+            return;
+        }
+        alert('ajax response received:' + JSON.stringify(data) );
+        //access and set values in the document's html page
+		//$('div#statBar label#fname').text(data.uname);
+        $('div#statBar label#money').text(data.money);
+        $('div#statBar label#tokens').text(data.tokens);
+        $('div#statBar label#prestige').text(data.prestige);
+        $('div#statBar label#m_marker').text(data.m_marker);
+    }).fail(function(jqxhr){
+        //call will fail if result is not properly formatted JSON!
+        alert('ajax call failed! Reason: ' + jqxhr.responseText);
+        //throw exception, game can't work without user stats
+    });
+    
+}
 //States
 var REPAIR;
 var ADD_FUNDS;
@@ -184,4 +219,13 @@ var userLogged = false;
 function resetStates()
 {
 	appState = GAME_MODE.RUNNING;
+}
+function getHostPath(){
+    //gloablly accessable function, the local path maybe diffrent,
+    //DON'T CHANGE THE PATH, instead rename/relocate your project folder,
+    //so devs don't have a commit war, having to change this function
+    //for each of their projects each time they commit!
+    var localExecution = true;
+    return localExecution ? 'http://localhost/Auto_ObsessionsX/'
+            : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 }

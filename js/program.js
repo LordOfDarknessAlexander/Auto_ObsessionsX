@@ -50,6 +50,7 @@ var pas = {
             //console.log('loading game resources failed, abort!');
             //finished = true;
             Auction._car = null;
+			ajax_loadUser();
             ajax_post();    //get user info from server
             Auction.close();
             init(); //this exists only within the scope of document.ready()
@@ -79,12 +80,13 @@ function update(deltaTime)
 	AuctionSell.update(deltaTime);
 
 	timer++;
+	/*
 	if(userLogged)
 	{
 		userHUD();
 		console.log("User Screen");
 	}
-	userHUD();
+	userHUD();*/
 }
 Auction.setup = function()
 {
@@ -148,16 +150,6 @@ function setAdBG()
 	jq.adBar.attr('src', src);
 	jq.adBar.show();
 }
-function userHUD(fn)
-{
-//context.fillText( "Welcome" +  userStats.fn.toString() , 600 , 270);
-
-	//$('label#fname').text('User: ' + userStats.fn.toString() );
-}
-//user Stats
-
-
-
 
 //$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed
@@ -174,6 +166,7 @@ $(document).ready(function()
 	//loading assets and 'core' game logic
 	//Storage.local.clear();
 	//alert('doc ready!');
+	ajax_loadUser();
 	loadUser();
     Garage.load();
     //jq.Game.setHomeImg();
@@ -493,13 +486,12 @@ function startGame()
 	gradient.addColorStop("1.0","green");
 	// Fill with gradient
 	context.fillStyle = gradient;
-	
+	ajax_loadUser();
 	setStatBar();
 	//setAdBG();
 	//ajax_post();
 	
 	switchStates();
-	userHUD();
 	
 	if(appState == GAME_MODE.RUNNING)
 	{
@@ -609,7 +601,7 @@ $('.Register').click(function()
 jq.AuctionSelect.backBtn.click(function() 
 { 	
 	//setAdBG();
-	userHUD();
+	//userHUD();
 	setStatBar();
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
@@ -639,7 +631,7 @@ jq.Auction.homeBtn.click(function()
 	//setAdBG();
 	ajax_post();
     setHomeImg();
-	userHUD();
+	//userHUD();
 	//var car = Garage.getCurrentCar();
 	
 	//if(car !== null){
@@ -750,12 +742,12 @@ function initGuest()
 {	//loads guest profile, if one does not exist it is created
 	if('guest' in Storage.local){
 		//returns an object of format {money:number, garage:[]}
-		//player = JSON.parse(Storage.local.guest);
-		ajax_post();
+		player = JSON.parse(Storage.local.guest);
+	//	ajax_post();
 	}
 	else{
 		//create new guest account, to be stored in browser
-		//Storage.local.guest = JSON.stringify({money:50000, garage:[]});
+		Storage.local.guest = JSON.stringify({money:50000, garage:[]});
 	}
 }
 
