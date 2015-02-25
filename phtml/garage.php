@@ -78,7 +78,7 @@ function selectBtn(){?>
     backBtn();
     homeBtn();
 ?>
-<h2 id='dt'>Drivetrain</h2>
+    <h2 id='dt'>Drivetrain</h2>
     <div id='drivetrain'>
         Engine:<br>
         <progress id='pbEngine' value='0.0'></progress>

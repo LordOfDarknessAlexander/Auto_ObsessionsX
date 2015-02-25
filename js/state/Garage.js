@@ -434,6 +434,35 @@ var CarView = {
 			jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
 			jq.CarView.carInfo.text(car.getFullName() + '-\n    ' + car.getInfo()) ;//xmlCarinfo.getElemById(car.id) );
 			jq.CarView.sellBtn.off().click({i:selCarIndex}, AuctionSell.init);
+            //set dt progress bars
+            for(var i = Drivetrain.TYPE.engine; i <= Drivetrain.TYPE.exhaust; i++){ 
+                var part = car._dt.getPartType(i),
+                    str = 'div#CarView div#drivetrain progress#pb' + Drivetrain.strFromType(i);
+                
+                $(str).attr('value', part.getPercent() );
+            }
+            //set interior progress bars
+            for(var i = Interior.TYPE.seats; i <= Interior.TYPE.panels; i++){ 
+                var part = car._interior.getPartType(i),
+                    str = 'div#CarView div#interior progress#pb' + Interior.strFromType(i);
+                
+                $(str).attr('value', part.getPercent() );
+            }
+            //set body progress bars
+            for(var i = Body.TYPE.chasis; i <= Body.TYPE.ph0; i++){ 
+                var part = car._body.getPartType(i),
+                    str = 'div#CarView div#body progress#pb' + Body.strFromType(i);
+
+                $(str).attr('value', part.getPercent() );
+            }
+            //set docs progress bars
+            for(var i = Documents.TYPE.ownership; i <= Documents.TYPE.ph0; i++){ 
+                var part = car._docs.getPartType(i),                    
+                    str = 'div#CarView div#docs progress#pb' + Documents.strFromType(i);
+                
+                //docs don't have repair buttons
+                $(str).attr('value', part.getPercent() );
+            }
 		}
 	}
 	//update, ender, exit?
@@ -484,6 +513,5 @@ $('div#Garage button#select').click(function()
 		Garage.setCurrentCar();
 
         jq.Game.setHomeImg();	//set home car image
-
 	}
 });
