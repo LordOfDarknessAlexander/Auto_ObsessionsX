@@ -27,6 +27,14 @@ var Repair = {
 			$('div#RepairShop div#body').show();
             $('div#RepairShop div#interior').show();
             $('div#RepairShop div#docs').show();
+            
+            $('div#RepairShop h2#drivetrain').show();
+			$('div#RepairShop h2#body').show();
+            $('div#RepairShop h2#interior').show();
+            $('div#RepairShop h2#docs').show();
+            
+            $('div#RepairShop p#error').text('');
+            //$('div#RepairShop p#error').hide();
 		}
 		else
 		{
@@ -40,6 +48,14 @@ var Repair = {
 			$('div#RepairShop div#body').hide();
             $('div#RepairShop div#interior').hide();
             $('div#RepairShop div#docs').hide();
+            
+            $('div#RepairShop h2#dt').hide();
+			$('div#RepairShop h2#body').hide();
+            $('div#RepairShop h2#interior').hide();
+            $('div#RepairShop h2#docs').hide();
+            
+            $('div#RepairShop p#error').text('No vehicle currently selected, visit the Garage to select one!');
+            $('div#RepairShop p#error').show();
 		}
 	},
 	_initButtons : function()

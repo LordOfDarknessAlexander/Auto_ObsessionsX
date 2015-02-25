@@ -5,6 +5,7 @@
     <h1>Repair Shop</h1>
     <button id='backBtn'>Back</button>
     <img id='userCar'>
+    <p id='error'></p>
     <!--div id='upgrades'>
         <h2>Upgrades</h2>
         <button id='ugBtn0'></button><br>

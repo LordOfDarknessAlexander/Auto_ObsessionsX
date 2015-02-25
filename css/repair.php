@@ -31,9 +31,24 @@ function divRepair(){
 ?>
 	width:20%;
 	height:5%;
-    font-size:1.5rem;
+    font-size:2vw;/*size element relative to viewport width!*/
     font-weight:bold;
     background-color:white;
+    /*background:url('../headerBG.jpg');*/
+    margin:0%;
+    
+}
+<?php divRepair();?> div
+{
+<?php
+    posAbs();
+?>
+    overflow-y:scroll;
+    background-color:grey;
+    width:20%;
+	height:30%;
+    font-size:1.5vw;
+    text-align:left;
 }
 <?php divRepair();?> div button
 {
@@ -99,91 +114,43 @@ button#addFunds
 }
 <?php divRepair();?> div#drivetrain
 {
-<?php
-    posAbs();
-?>
-    background-color:grey;
-    font-size:1rem;
-    text-align:left;
-    
-	width:20%;
-	top:25%;
-	height:30%;
+	top:20%;
 	left:5%;
 }
 <?php divRepair();?> div#body
-{
-<?php
-    posAbs();
-?>
-    background-color:grey;
-    font-size:1rem;
-    text-align:left;
-    
-	width:20%;
-	top:60%;
-	height:30%;
+{    
+	top:55%;
 	left:5%;
 }
 <?php divRepair();?> div#interior
-{
-<?php
-    posAbs();
-?>
-    background-color:grey;
-    text-align:left;
-    font-size:1rem;
-    
-	width:20%;
-	top:25%;
-	height:30%;
+{    
+	top:20%;
 	right:5%;
 }
 <?php divRepair();?> div#docs
-{
-<?php
-    posAbs();
-?>
-    background-color:grey;
-    text-align:left;
-    font-size:1rem;
-    
-	width:20%;
-	top:60%;
-	height:30%;
+{    
+	top:55%;
 	right:5%;
 }
 
 <?php divRepair();?> h2#dt
 {
-<?php
-    posAbs();
-?>
-	top:20%;
+	top:15%;
 	left:5%;
 }
 <?php divRepair();?> h2#body
 {
-<?php
-    posAbs();
-?>
-	top:55%;
+	top:50%;
 	left:5%;
 }
 <?php divRepair();?> h2#interior
 {
-<?php
-    posAbs();
-?>
-	top:20%;
+	top:15%;
 	right:5%;
 }
 <?php divRepair();?> h2#docs
 {
-<?php
-    posAbs();
-?>
-	top:55%;
+	top:50%;
 	right:5%;
 }
 <?php divRepair();?> button#addFunds
@@ -194,4 +161,12 @@ button#addFunds
 ?>
     left:45%;
     bottom:62%;
+}
+<?php divRepair();?> p#error{
+<?php
+    posAbs();
+    css::size('100%', '20%');
+?>
+    left:0%;
+    top:0%;
 }
