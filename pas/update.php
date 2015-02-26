@@ -16,34 +16,39 @@ function hasCar($id){
     $ret = false;
     $tableName = 'user' . strval(0);    //$_SESSION['userID'];
     //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-    $_hasCar = $aoUsersDB->con->prepare("SELECT * FROM ? WHERE car_id = ?");
+    //$_hasCar = $aoUsersDB->con->prepare("SELECT * FROM ? WHERE car_id = ?");
     
-    if($_hasCar){
-        if($_hasCar->bind_params('si', $tableName, $id) ){
-            $ret = $_hasCar->execute();
-        }
-        else{
-            //failed sending params to server for binding
-            //$er = sqlError($aoUsersDB);
-            $erno = $aoUsersDB->con->errno;
-            $err = $aoUsersDB->con->error;
-            echo "hasCar($id), bind_params failed:($erno), reason: $err";
-            exit();
-        }
-    }
-    else{
-        //fallback to normal, slow, less secure sql calls
-        //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-        //if($res){
-            //user has car
-            //$ret = mysqli_num_rows($res) != 0 ? true : false;
+    //if($_hasCar){
+        //if($_hasCar->bind_params('si', $tableName, $id) ){
+            //$ret = $_hasCar->execute();
         //}
         //else{
-            //query failed, user has no entry in database
-        //}
-        //mysqli_free_result($res);
-    }
+            //failed sending params to server for binding
+            //$er = sqlError($aoUsersDB);
+            //$erno = $aoUsersDB->con->errno;
+            //$err = $aoUsersDB->con->error;
+            //echo "hasCar($id), bind_params failed:($erno), reason: $err";
+            //exit();
+       //}
+    //}
+    //else{
+        //fallback to normal, slow, less secure sql calls
+    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
     
+    if($res){
+        //user has car
+        $ret = mysqli_num_rows($res) != 0 ? true : false;
+    }
+    else{
+        //query failed, user has no entry in database
+        //$er = sqlError($aoUsersDB);
+        //$erno = $aoUsersDB->con->errno;
+        //$err = $aoUsersDB->con->error;
+        //echo "hasCar($id), bind_params failed:($erno), reason: $err";
+        //exit();
+    }
+    mysqli_free_result($res);
+    //}    
     return $ret;
 }
 /*function getAuctionCars(){
@@ -133,6 +138,19 @@ function getCarFromID($carID){
         //return null; //echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
     }
     return null;
+}
+function setUserCar($carID){
+    global $AO_DB;
+    
+    if($carID == 0){
+        //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
+        //return json_encode($res ? true : false);
+    }elseif(hasCar($carID)){
+        //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
+        //return json_encode($res ? $carID : false);
+    }
+    //else not valid car ID, do nothing
+    //return json_encode(false);
 }
 /*function echoUserCars(){
     //selects all vehicles the user owns, returning it as a JSON array

@@ -44,7 +44,8 @@ function divRepair(){
     posAbs();
 ?>
     overflow-y:scroll;
-    background-color:grey;
+    background:url('../images/defaultBG.jpg') no-repeat 0 0;
+    /*background-color:grey;*/
     width:20%;
 	height:30%;
     font-size:1.5vw;

@@ -1,5 +1,6 @@
 <?php
-//core ui element stylings
+//core/meta ui element stylings,
+//which apply to all elements across the page
 header("Content-type: text/css; charset: UTF-8");
 //
 require_once 'ui.php';
@@ -43,23 +44,81 @@ canvas
   width: 100%;
   height: 100%;
 }
-/*default element stylings for the entire page*/
-ul 
-{
-  list-style: none;
-  padding: 0;
-  margin: 0
+<?php //default element stylings for the entire page?>
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
-li 
-{
-  padding: 10px 0;
+li{
+    padding: 10px 0;
 }
 
-a 
-{	/*styling for all anchor elements on page*/
-  text-decoration: none;
-  color:blue;
+a{
+    <?php //styling for all anchor elements on page?>
+    text-decoration: none;
+    color:blue;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+p#legal
+{
+    font-size:0.65em;
+    color:white;
+    
+    position:absolute;
+    bottom:0%;
+    left:0%;
+}
+progress
+{
+    /*display:none;
+    appearance:none;*/
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}
+<?php
+//google/safari/opera pb stylings?>
+progress::-webkit-progress-bar{
+    background:grey;
+}
+progress::-webkit-progress-value{
+    background-color:red;
+}
+progress.high::-webkit-progress-value{
+    background-color:green;
+}
+progress.med::-webkit-progress-value{
+    background-color:yellow;
+}
+<?php //Firefox pb stylings?>
+progress::-moz-progress-bar{
+    background-color:red;
+}
+progress.high::-moz-progress-bar{
+    background-color:green;
+}
+progress.med::-moz-progress-bar{
+    background-color:yellow;
+}
+<?php //EI pb stylings?>
+
+
+#progress 
+{
+  height: 12%;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+#percent 
+{
+  color: white;
+  font-weight: bold;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+#progress-bar 
+{
+  width: 200px;
 }
 button
 {	/*all button elements will share this background (and other properties) unless otherwise specified*/
@@ -103,11 +162,11 @@ button#homeBtn
 
 .wrapper 
 {
-  height:100%;
-  width: 100%;
-  position: absolute;
-  top: 0%;
-  left: 0%;
+    height:100%;
+    width: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
 }
 img#adBar
 {
@@ -118,7 +177,7 @@ img#adBar
 	left:25%;
 	bottom:2%;
 }
-
+<?php //Game Screen/State stylings?>
 #Register
 {
   background-image: url('../images/Splash.png')no-repeat 0 0;
@@ -147,15 +206,6 @@ img#adBar
   height: 100%;
   z-index: 20;
 
-}
-p#legal
-{
-    font-size:0.65em;
-    color:white;
-    
-    position:absolute;
-    bottom:0%;
-    left:0%;
 }
 /* visited link */
 #div#main a:visited {
@@ -188,24 +238,6 @@ div#main a:hover {
 	position:absolute;
 	right:5%;
 	top:5%;
-}
-
-#progress 
-{
-  height: 12%;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-}
-#percent 
-{
-  color: white;
-  font-weight: bold;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-}
-#progress-bar 
-{
-  width: 200px;
 }
 
 .sound 

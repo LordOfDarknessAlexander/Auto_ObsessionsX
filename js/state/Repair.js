@@ -28,7 +28,7 @@ var Repair = {
             $('div#RepairShop div#interior').show();
             $('div#RepairShop div#docs').show();
             
-            $('div#RepairShop h2#drivetrain').show();
+            $('div#RepairShop h2#dt').show();
 			$('div#RepairShop h2#body').show();
             $('div#RepairShop h2#interior').show();
             $('div#RepairShop h2#docs').show();
@@ -106,7 +106,7 @@ var Repair = {
                         ).text('$0.00');
                     }
                     
-                    $('div#RepairShop div#drivetrain progress#pb' + str).attr('value', part.getPercent() );
+                    pbSetColor($('div#RepairShop div#drivetrain progress#pb' + str), part.getPercent() );
                 }
             }
             else{
@@ -155,7 +155,7 @@ var Repair = {
                         ).text('$0.00');
                     }
                     
-                    $('div#RepairShop div#interior progress#pb' + str).attr('value', part.getPercent() );
+                    pbSetColor($('div#RepairShop div#interior progress#pb' + str), part.getPercent() );
                 }
             }
             else{
@@ -194,7 +194,7 @@ var Repair = {
                         ).text('$0.00');
                     }
                     
-                    $('div#RepairShop div#body progress#pb' + str).attr('value', part.getPercent() );
+                    pbSetColor($('div#RepairShop div#body progress#pb' + str), part.getPercent() );
                 }
             }
             else{
@@ -220,7 +220,7 @@ var Repair = {
                         ).text('$0.00');
                     }
                     //docs don't have repair buttons
-                    $('div#RepairShop div#docs progress#pb' + str).attr('value', part.getPercent() );
+                    pbSetColor($('div#RepairShop div#docs progress#pb' + str), part.getPercent() );
                 }
             }
             else{
@@ -374,7 +374,7 @@ function upgradeDT(obj){
                         
                         //rBtn.off().click({type:type}, repairPart);
                     }
-                    $('div#RepairShop div#drivetrain progress#' + 'pb' + str).attr('value', part.getPercent() );
+                    pbSetColor($('div#RepairShop div#drivetrain progress#' + 'pb' + str), part.getPercent() );
                 }
             }
         }
@@ -401,7 +401,7 @@ function repairDT(obj){
                 $(btnID).off().css(
                     {'opacity':'0.45', 'cursor':'default'}
                 ).text('$0.00');                
-                $('div#RepairShop div#drivetrain progress#pb' + str).attr('value', part.getPercent() );
+                pbSetColor($('div#RepairShop div#drivetrain progress#pb' + str), part.getPercent() );
             }
         }
         Repair.save();
@@ -455,7 +455,7 @@ function upgradeBody(obj){
                     
                     //rBtn.off().click({type:type}, repairPart);
                 }
-                $('div#RepairShop div#body progress#' + 'pb' + str).attr('value', part.getPercent() );
+                pbSetColor($('div#RepairShop div#body progress#' + 'pb' + str), part.getPercent() );
             }
         }
         Repair.save();
@@ -485,7 +485,7 @@ function repairBody(obj){
                     $(btnID).off().css(
                         {'opacity':'0.45', 'cursor':'default'}
                     ).text('$0.00');                
-                    $('div#RepairShop div#body progress#pb' + str).attr('value', part.getPercent() );
+                    pbSetColor($('div#RepairShop div#body progress#pb' + str), part.getPercent() );
                 }
             }
         }
@@ -540,7 +540,7 @@ function upgradeInterior(obj){
                     
                     //rBtn.off().click({type:type}, repairPart);
                 }
-                $('div#RepairShop div#interior progress#' + 'pb' + str).attr('value', part.getPercent() );
+                pbSetColor($('div#RepairShop div#interior progress#' + 'pb' + str), part.getPercent() );
             }
         }
         Repair.save();
@@ -570,7 +570,7 @@ function repairInterior(obj){
                     $(btnID).off().css(
                         {'opacity':'0.45', 'cursor':'default'}
                     ).text('$0.00');                
-                    $('div#RepairShop div#interior progress#pb' + str).attr('value', part.getPercent() );
+                    pbSetColor($('div#RepairShop div#interior progress#pb' + str), part.getPercent() );
                 }
             }
         }
@@ -617,7 +617,7 @@ function upgradeDocs(obj){
                 else{
                     btn.text('$' + part.getPrice().toString() );
                 }
-                $('div#RepairShop div#docs progress#' + 'pb' + str).attr('value', part.getPercent() );
+                pbSetColor($('div#RepairShop div#docs progress#' + 'pb' + str), part.getPercent() );
             }
             Repair.save();
         }
