@@ -145,7 +145,8 @@ function setUserCar($carID){
     if($carID == 0){
         //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
         //return json_encode($res ? true : false);
-    }elseif(hasCar($carID)){
+    }
+    elseif(hasCar($carID)){
         //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
         //return json_encode($res ? $carID : false);
     }

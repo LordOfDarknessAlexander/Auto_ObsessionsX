@@ -117,7 +117,7 @@ function ajax_loadUser()
         url:getHostPath() + 'loadUser.php',
         dataType:'json',
         //data:userStats
-		 data:{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
+		data:''//{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
     }).done(function(data){
         //the response string is converted by jquery into a Javascript object!
         if(data === null){
@@ -133,7 +133,7 @@ function ajax_loadUser()
         $('div#statBar label#m_marker').text(data.m_marker);
     }).fail(function(jqxhr){
         //call will fail if result is not properly formatted JSON!
-        alert('ajax call failed! Reason: ' + jqxhr.responseText);
+        alert('ajax_loadUser(), call failed! Reason: ' + jqxhr.responseText);
         //throw exception, game can't work without user stats
     });
     
