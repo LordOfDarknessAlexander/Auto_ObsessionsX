@@ -229,3 +229,16 @@ function getHostPath(){
     return localExecution ? 'http://localhost/Auto_ObsessionsX/'
             : 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 }
+function pbSetColor(jqPB, value){
+    //sets the value and color of an html progress bar, using jQuery
+    if(value >= 0.66 && value <= 1.0){
+        jqPB.attr('class', 'high');
+    }
+    else if(value >= 0.33 && value < 0.66){
+        jqPB.attr('class', 'med');
+    }
+    else{
+        jqPB.attr('class', '');
+    }
+    jqPB.attr('value', value);
+}

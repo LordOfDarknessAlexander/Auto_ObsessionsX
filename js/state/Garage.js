@@ -255,25 +255,11 @@ var Garage = {
             $('div#userCar label#carName').text(car.getFullName() );;
             $('div#userCar label#carInfo').text(car.getInfo() );
             
-            function set(jqo, value)
-            {
-                if(value <= 0.3){
-                    jqo.css('background', '#ff0000');
-                }
-                else if(value > 0.3 && value <= 0.6){
-                    jqo.css('background', '#ffff00');
-                }
-                else if(value > 0.6 && value <= 1.0){
-                    jqo.css('background', '#00ff00');
-                }
-                    
-                jqo.attr('value', value.toString());
-            }
             //set progress bar
-            set($('progress#drivetrainPB'), stats._driveterrain);
-            set($('progress#bodyPB'), stats._body);
-            set($('progress#interiorPB'), stats._interior);
-            set($('progress#docsPB'), stats._docs);
+            pbSetColor($('progress#drivetrainPB'), stats._driveterrain);
+            pbSetColor($('progress#bodyPB'), stats._body);
+            pbSetColor($('progress#interiorPB'), stats._interior);
+            pbSetColor($('progress#docsPB'), stats._docs);
         }
     },
     setCurrentIndex:function(){
@@ -346,24 +332,10 @@ var Garage = {
 			$('div#selectedCar label#carName').text(car.getFullName() );
 			$('div#selectedCar label#carInfo').text(car.getInfo() );
 			
-			function set(jqo, value)
-			{
-				/*if(value <= 0.3){
-					jqo.css('background', '#ff0000');
-				}
-				else if(value > 0.3 && value <= 0.6){
-					jqo.css('background', '#ffff00');
-				}
-				else if(value > 0.6 && value <= 1.0){
-					jqo.css('background', '#00ff00');
-				}*/
-					
-				jqo.attr('value', value.toString());
-			}
-			set($('div#selectedCar progress#drivetrainPB'), stats._driveterrain);
-			set($('div#selectedCar progress#bodyPB'), stats._body);
-			set($('div#selectedCar progress#interiorPB'), stats._interior);
-			set($('div#selectedCar progress#docsPB'), stats._docs);
+			pbSetColor($('div#selectedCar progress#drivetrainPB'), stats._driveterrain);
+			pbSetColor($('div#selectedCar progress#bodyPB'), stats._body);
+			pbSetColor($('div#selectedCar progress#interiorPB'), stats._interior);
+			pbSetColor($('div#selectedCar progress#docsPB'), stats._docs);
 			
 			$('div#selectedCar').show();
 		}
@@ -438,73 +410,37 @@ var CarView = {
             for(var i = Drivetrain.TYPE.engine; i <= Drivetrain.TYPE.exhaust; i++){ 
                 var part = car._dt.getPartType(i),
                     str = 'div#CarView div#drivetrain progress#pb' + Drivetrain.strFromType(i),
-                    p = part.getPercent();
+                    p = part.getPercent(),
+                    pb = $(str);    //progress bar
                 
-                $(str).attr('value', p);
-                //jqo.css('background-color', 'red');
-                
-                if(p >= 0.66 && p <= 1.0){
-                    $(str).attr('class', 'high');
-                }
-                else if(p >= 0.33 && p < 0.66){
-                    $(str).attr('class', 'med');
-                }
-                else{
-                    $(str).attr('class', '');
-                }
+                pbSetColor(pb, p);
             }
             //set interior progress bars
             for(var i = Interior.TYPE.seats; i <= Interior.TYPE.panels; i++){ 
                 var part = car._interior.getPartType(i),
                     str = 'div#CarView div#interior progress#pb' + Interior.strFromType(i),
-                    p = part.getPercent();
+                    p = part.getPercent(),
+                    pb = $(str);
                 
-                $(str).attr('value', p);
-                
-                if(p >= 0.66 && p <= 1.0){
-                    $(str).attr('class', 'high');
-                }
-                else if(p >= 0.33 && p < 0.66){
-                    $(str).attr('class', 'med');
-                }
-                else{
-                    $(str).attr('class', '');
-                }
+                pbSetColor(pb, p);
             }
             //set body progress bars
             for(var i = Body.TYPE.chasis; i <= Body.TYPE.ph0; i++){ 
                 var part = car._body.getPartType(i),
                     str = 'div#CarView div#body progress#pb' + Body.strFromType(i),
-                    p = part.getPercent();
+                    p = part.getPercent(),
+                    pb = $(str);
 
-                $(str).attr('value', p);
-                
-                if(p >= 0.66 && p <= 1.0){
-                    $(str).attr('class', 'high');
-                }
-                else if(p >= 0.33 && p < 0.66){
-                    $(str).attr('class', 'med');
-                }
-                else{
-                    $(str).attr('class', '');
-                }
+                pbSetColor(pb, p);
             }
             //set docs progress bars
             for(var i = Documents.TYPE.ownership; i <= Documents.TYPE.ph0; i++){ 
                 var part = car._docs.getPartType(i),                    
                     str = 'div#CarView div#docs progress#pb' + Documents.strFromType(i),
-                    p = part.getPercent();
-                
-                //docs don't have repair buttons
-                if(p >= 0.66 && p <= 1.0){
-                    $(str).attr('class', 'high');
-                }
-                else if(p >= 0.33 && p < 0.66){
-                    $(str).attr('class', 'med');
-                }
-                else{
-                    $(str).attr('class', '');
-                }
+                    p = part.getPercent(),
+                    pb = $(str);    //progress bar
+                    
+                pbSetColor(pb, p);
             }
 		}
 	}
