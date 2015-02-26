@@ -8,15 +8,15 @@ session_start();
 //post doesn't matter
 //if(isset($_POST) )
 //{
-//if(isset($_SESSION['uname']))
-//{
-    //$uid = $_SESSION['user_id']; 
+if(isset($_SESSION['user_id']))
+{
+    $uid = $_SESSION['user_id']; 
     //Quick edit to squish some bugs, Cheers and good luck with the rest!
     //user ID's are unique, making a select query will only returns
     //the fields for a single match, where as user names are not unique and my return multiple sets of fields
     //TODO: make user names unique(only 1 user should match a signle user name in the sql)
-    //$q = "SELECT * FROM users WHERE user_id = $uid";	
-    $q = "SELECT * FROM users WHERE uname = 'Dante'";	
+    $q = "SELECT * FROM users WHERE user_id = $uid";	
+  //  $q = "SELECT * FROM users WHERE uname = 'Dante'";	
     $result = $AO_DB->query($q);
     //Count the returned rows
     if($result) //mysqli_num_rows($result) != 0)
@@ -53,7 +53,7 @@ session_start();
         //exit();
     }
     //mysqli_close($dbcon);
-//}
+}
 //else{
     //echo 'user name not set';
 //}
