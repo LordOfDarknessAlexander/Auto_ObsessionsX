@@ -104,7 +104,7 @@ else
 		echo '<p>&nbsp;</p>';
 	}
 } // End of the main submission conditional.
-mysqli_close($AO_DB->con );
+//mysqli_close($AO_DB->con );
 		echo '<p>&nbsp;</p>';
 include ('includes/footer.php');
 ?>
