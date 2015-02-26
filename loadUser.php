@@ -8,8 +8,8 @@ session_start();
 //post doesn't matter
 //if(isset($_POST) )
 //{
-if(isset($_SESSION['user_id']))
-{
+//if(isset($_SESSION['user_id']))
+//{
     $uid = $_SESSION['user_id']; 
     //Quick edit to squish some bugs, Cheers and good luck with the rest!
     //user ID's are unique, making a select query will only returns
@@ -53,7 +53,7 @@ if(isset($_SESSION['user_id']))
         //exit();
     }
     //mysqli_close($dbcon);
-}
+//}
 //else{
     //echo 'user name not set';
 //}
