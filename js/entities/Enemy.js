@@ -40,21 +40,20 @@
 	};
 }
 
-function price(vehiclePrice)
+function price(vehiclePrice, bias)
 {
-	//console.log(vehiclePrice * (Math.random() * (1.5 - 0.8)) + 0.8)
-	return vehiclePrice * (Math.random() * (1.5 - 0.8 + 0.5)) + 0.8;
-}
-/*function price(bias, vehiclePrice)
-{
-	var b = (typeof(bias) == 'undefined' ? 0 : bias);
+	var b = (typeof(bias) === 'undefined' || bias === null ? 1.0 : bias);
 	function lerp(Min, Max, t){
 		if(Min > Max){
 			var tmp = Min;
 			Min = Max;
 			Max = tmp;
 		}
+        //var ret = Min + (Max - Min) * t;
+        //console.log(ret);
 		return Min + (Max - Min) * t;
 	};
-  	return vehiclePrice * lerp(Math.random(0.8, 1.5), bias, Math.random(0.0,1.0));
-}*/
+    var l = lerp(Math.random(0.8, 1.5), b, Math.random(0.0,1.0));
+    //console.log('lerp:' + l.toString() );
+  	return vehiclePrice * l;
+}

@@ -119,7 +119,7 @@ function setName()
 }	
 function setMoney()
 {
-	$('div#statBar label#money').text('Money: ' + userStats.money.toString() );
+	$('div#statBar label#money').text('Money: ' + userStats.money.toFixed(2) );
 }
 function setTokens()
 {
@@ -159,6 +159,38 @@ function setAdBG()
         //alert("current car is at index:" + Garage._curCarIndex.toString() );
     //}
 //}
+function ajax_loadUser()
+{
+    //loads userStats from php file accessing sql database
+    var jqxhr = $.ajax({
+        type:'POST',
+        url:getHostPath() + 'loadUser.php',
+        dataType:'json',
+        //data:userStats
+		data:''//{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
+    }).done(function(data){
+        //the response string is converted by jquery into a Javascript object!
+        if(data === null){
+            alert('Error:ajax response returned null!');
+            return;
+        }
+        //alert('ajax response received:' + JSON.stringify(data) );
+        //access and set values in the document's html page
+		//$('div#statBar label#fname').text(data.uname);
+        userStats = {
+            money:data.money,
+            tokens:data.tokens,
+            prestige:data.prestige,
+            marker:data.m_marker
+        };
+        setStatBar();
+    }).fail(function(jqxhr){
+        //call will fail if result is not properly formatted JSON!
+        alert('ajax_loadUser(), call failed! Reason: ' + jqxhr.responseText);
+        //throw exception, game can't work without user stats
+    });
+}
+
 $(document).ready(function()
 {	//Declare functions and objects dependant on the html
 	//document being loaded within this callback,

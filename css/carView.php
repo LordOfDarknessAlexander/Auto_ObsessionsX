@@ -21,6 +21,10 @@ function divCarView(){
 	width: 100%;
 	height: 100%;
 }
+<?php divCarView();?> progress
+{
+    width:100%;
+}
 <?php divCarView();?> button
 {<?php
 	//rule for all button in CarView div

@@ -23,11 +23,12 @@ session_start();
     {
         $rows = $result->fetch_assoc();
         //json_encode will implicitly convert the array to an object
+        //NOTE:sql retrives data as strings, so must conver to numeric type before sending(strings are bulky)
         echo json_encode(array(
-            'money' => $rows['money'],
-            'tokens' => $rows['tokens'],
-            'prestige' => $rows['prestige'],
-            'm_marker' => $rows['m_marker']
+            'money' => floatval($rows['money']),
+            'tokens' => intval($rows['tokens']),
+            'prestige' => intval($rows['prestige']),
+            'm_marker' => intval($rows['m_marker'])
         ));
         //Turn the results in to an array
         /*while($rows = $result->fetch_assoc())

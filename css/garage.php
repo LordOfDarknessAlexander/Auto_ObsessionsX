@@ -33,33 +33,37 @@ function divSelectedCar(){
 	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
+    color:red;
 }
 <?php divGarage();?> button#backBtn
 {<?php
     posAbs();
 ?>
-    bottom:70%;
+    bottom:80%;
     left:10%;
     width:5%;
     height:5%;
+    font-size:1.25vw;
 }
 <?php divGarage();?> button#viewCar
 {<?php
     posAbs();
 ?>
-    bottom:70%;
+    bottom:80%;
     left:30%;
     width:5%;
     height:5%;
+    font-size:1.25vw;
 }
 <?php divGarage();?> button#select
 {<?php
     posAbs();
 ?>
-    bottom:70%;
+    bottom:80%;
     left:20%;
     width:5%;
     height:5%;
+    font-size:1.25vw;
 }
 <?php divGarage();?> li 
 {	/*styles all list items of node with id RepairShop*/
@@ -90,8 +94,8 @@ function divSelectedCar(){
 	background: url('../images/defaultBG.jpg') no-repeat 0 0;
 	overflow-y:scroll;
 <?php posAbs();?>
-	height:70%;
-	top:30%;
+	height:80%;
+	top:20%;
     left:5%;
     width:35%;
 }
@@ -99,43 +103,52 @@ function divSelectedCar(){
 <?php divUserCar();?>
 {	/*styling for list items*/
 	/*display:inline;*/
-	color: white;
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 <?php posAbs();?>
 	text-align::left;
-	top:30%;
+	top:20%;
 	left:42%;/*2%;*/
 	width:25%;
-	height:60%;
+	height:80%;
 	display:inline;
 }
 <?php divSelectedCar();?>
 {	/*styling for list items*/
 	/*display:inline;*/
-	color:red;
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 <?php posAbs();?>
 	text-align::left;
-	top:30%;
+	top:20%;
 	right:2%;
 	width:25%;
-	height:60%;
+	height:80%;
 	display:inline;
 }
 <?php divUserCar();?> img,
 <?php divSelectedCar();?> img
 {
 	width:100%;
-	height:50%;
+	height:25%;
 }
 <?php divUserCar();?> label,
 <?php divSelectedCar();?> label
 {	/*overrides elements with specific id's*/
 	display:block;
-	color: white;
-	margin: 8px;
 	text-align:left;
-	font-size:0.75em;	/*12px*/
+}
+<?php divUserCar();?> label#carName,
+<?php divSelectedCar();?> label#carName
+{	/*overrides elements with specific id's*/
+	margin:2%;
+	font-size:0.85em;	/*12px*/
+    text-align:center;
+}
+<?php divUserCar();?> label#carInfo,
+<?php divSelectedCar();?> label#carInfo
+{	/*overrides elements with specific id's*/
+	margin:0%;
+	font-size:0.6em;	/*12px*/
+    height:35%;
 }
 /*selected car div stylings*/
 
@@ -156,7 +169,6 @@ div#selectedCar div#progressBars
     font-size:0.75em;
     text-align:right;
     align:left;
-    color:white;
 }
 <?php divGarage();?> div#progressBars progress
 {	
