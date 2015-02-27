@@ -8,13 +8,14 @@ function selectBtn(){?>
 ?>
 
 <div id='Garage'>
-<?php include("include/statBar.php"); ?>
+
     <h1>Garage</h1>
+	<?php include("include/statBar.php"); ?>
     <?php selectBtn();?>
     <button id='viewCar'>View</button>
     <!--button id='sellCar'>Sell</button-->
     <?php backBtn();?>
-    
+  
     <div id='carListView'>
         <ul id='carBtns'>
         <!--list contents added dynamically at run time by JS
@@ -63,9 +64,11 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
 </div>
 
 <div id='CarView'>
+	
     <!--<selectBtn();>display vehicle stats and actions-->
     <button id='selectCarBtn'>Select</button>
     <button id='sellBtn'>Sell</button>
+	
     <img id='car'> <!--src='images\\vehicle.jpg'-->
     <!--div id='statLabels'>
         <lable>Drivetrain</label>
@@ -75,12 +78,16 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
     </div-->
     <!--div id='carInfoBoxes'></div-->
 <?php
+ include("include/statBar.php"); 
     carInfoLabel();
     backBtn();
     homeBtn();
 ?>
+	
     <h2 id='dt'>Drivetrain</h2>
+	
     <div id='drivetrain'>
+	
         Engine:<br>
         <progress id='pbEngine' value='0.0'></progress>
         <br>Transmission:<br>

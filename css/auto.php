@@ -411,6 +411,7 @@ div#statBar label#tokens{left:25%;top:75%;}
 div#statBar label#prestige{left:50%;top:75%;}
 div#statBar label#m_marker{left:75%;top:75%;}
 }
+
 <?php
 //require_once 'main.php';    //main game menu stylings, must be added at end, else bugs
 //require_once 'phone.php';   //mobile phone, iPhone, Android, WIndows, BB, etc

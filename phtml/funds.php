@@ -2,10 +2,14 @@
     //inserts a button into a form implementing the 'PayPal' api
     <input type='image' id='<echo $id>' value='<echo $val>'><br>
 }?-->
+
 <div id='AddFunds'>
+
     <h1>AddFunds</h1>
     <!--<backBtn(); statBar();>-->
+	<?php  include("include/statBar.php");  ?>
     <button id='addFundsBackButton'>Back</button>
+	
     <form id='cash'
         action='https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'
         target='PPDGFrame'
@@ -61,4 +65,5 @@
     </script>
     
     <label id='userCash'><!--display user's currency--></label>
+	
 </div>

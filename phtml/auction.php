@@ -56,7 +56,7 @@ function outputCar($args){
 </div>
 
 <div id="Auction">
-
+<?php require_once 'include/statBar.php';?>
     <h1>Auction</h1>
     
      <div style="margin-top:-6em;margin-left:26em">
@@ -82,9 +82,9 @@ function outputCar($args){
     <label id='carInfo'></label>
     <button id='homeBtn'>Home</button>
 </div>
-<?php require_once 'include/statBar.php';?>
-<div id='AuctionSell'>
 
+<div id='AuctionSell'>
+<?php require_once 'include/statBar.php';?>
     <h1>Auctioned Cars</h1>
     <!--<backBtn();>select which car to bid for-->
     <button id='backBtn'>Back</button>
