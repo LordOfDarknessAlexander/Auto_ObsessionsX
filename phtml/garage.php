@@ -6,6 +6,7 @@ function selectBtn(){?>
 <?php
 }
 ?>
+
 <div id='Garage'>
 <?php //include("include/statBar.php"); ?>
     <h1>Garage</h1>

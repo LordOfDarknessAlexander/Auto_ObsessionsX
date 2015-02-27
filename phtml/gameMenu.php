@@ -9,14 +9,15 @@ require_once 'secure.php';
     <!--HUD ---->
 <!--	<div id="fname" ></div>-->
 <?php
-require_once 'include/statBar.php';
+/*
 session_start();
 echo '<h2>Welcome to Auto-Obsessions\' Page ';
 if (isset($_SESSION['uname']))
 {
 	echo "{$_SESSION['uname']}";
 }
-echo '</h2>';
+echo '</h2>';*/
+require_once 'include/statBar.php';
 ?>
 
     <img id='homeImg' src='images\\garageEmpty.png'>

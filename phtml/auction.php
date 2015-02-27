@@ -41,6 +41,7 @@ function outputCar($args){
 }
 ?>
 <div id='AuctionSelect'>
+<?php require_once 'include/statBar.php';?> 
     <h1>Auction Select</h1>
     <!--<backBtn();>select which car to bid for-->
     <button id='asBackBtn'>Back</button>
@@ -54,10 +55,12 @@ function outputCar($args){
 </div>
 
 <div id="Auction">
+
     <h1>Auction</h1>
     
      <div style="margin-top:-6em;margin-left:26em">
        <p>Money<label id='money'>  money</label></p>
+	   <?php require_once 'include/statBar.php';?> 
     </div>
 
     <!--label id='myCash'>money</label>
@@ -80,6 +83,7 @@ function outputCar($args){
 </div>
 
 <div id='AuctionSell'>
+
     <h1>Auctioned Cars</h1>
     <!--<backBtn();>select which car to bid for-->
     <button id='backBtn'>Back</button>

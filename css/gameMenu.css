@@ -66,11 +66,12 @@ div#gameMenu div button
 div#statBar
 {
     /*background-color:red;*/
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	position:absolute;
 	top:30%;
 	left:2%;
 	width:100%;
-	height:5%;
+	height:45%;
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
 	text-align:left;

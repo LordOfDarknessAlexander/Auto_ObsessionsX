@@ -388,7 +388,33 @@ div#business
 //require_once 'tablet.php';  //tablets, iPads, etc
 //require_once 'laptop.php';  //laptop and other large mobile devices
 ?>
+/* Stat Bar Game HUD */
 
+div#statBar
+{
+    /*background-color:red;*/
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	position:absolute;
+	top:30%;
+	left:2%;
+	width:100%;
+	height:45%;
+	/*child elements inherit values, unless otherwise specified*/
+	font-family:"Kozuka Gothic Pro B";
+	text-align:left;
+	color:white;
+	/*font-weight: bold;
+	font-size:1.2em;*/
+}
+div#statBar label{
+    position:absolute;
+    width:25%;
+}
+div#statBar label#money{left:0%;}
+div#statBar label#tokens{left:25%;}
+div#statBar label#prestige{left:50%;}
+div#statBar label#m_marker{left:75%;}
+}
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) 
 {

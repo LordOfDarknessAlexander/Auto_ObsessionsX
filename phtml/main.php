@@ -18,7 +18,8 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 <div class='wrapper'>
 	<!--root div element of web page!-->	
     <div class='sound sound-off'></div>
-<?php //require_once 'include/statBar.php';?>  
+	
+<div id="status"></div>
     <div id='menu'>
         <div id='progress'>
             <div id='percent'>Downloading: <span id='p'></span></div>
@@ -44,6 +45,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
                <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
                <li><a href='javascript:void(0)' class='button Register'>Register</a></li>
             </ul>
+			
             <?php require 'phtml/legal.php';?>
             <!--p id='legal'>Auto-Obsession &copy; 2015, All Right Reserved.
                 <a href='<php echo $ROOT_URL.'legal.php?page=terms';?>'>Terms</a>
@@ -74,6 +76,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         <p>You're browser does not support the required functionality to play this game.</p>
         <p>Please update to a modern browser such as <a href='www.google.com/chrome/‎'>Google Chrome</a> to play.</p>
     </canvas>    
+	
 <?php
 //php includes the source html files here
 $scripts = array(
@@ -99,6 +102,7 @@ foreach($scripts as $val){
     require_once($val.'.php');
 }
 ?>
+<?php require_once 'include/statBar.php';?> 
     <div id='profile'>
         <button id='backBtn'>Back</button>
     </div>
@@ -129,5 +133,6 @@ foreach($scripts as $val){
     <div id='faq'>
         <button id='backBtn'>Back</button>
     </div>
+	
 </div><!--end wrapper, include javascript at end of body-->
 <?php require_once 'js.php';?>

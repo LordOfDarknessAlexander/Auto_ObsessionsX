@@ -128,11 +128,13 @@ function divStatBar(){
 <?php divStatBar();?>
 {<?php
     posAbs();
-    css::size('96%', '20px');   //height needs to be hard coded, or funky effects happen with the text
+    css::size('96%', '25%');   //height needs to be hard coded, or funky effects happen with the text
 ?>
     background-color:red;
-	top:20%;
+	//background: url('../images/defaultBtn.png') no-repeat 0 0;
+	top:8%;
 	left:2%;
+	marging-bottom: 2%;
 	
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
@@ -147,10 +149,10 @@ function divStatBar(){
     posAbs();
 ?>
     width:25%;
+	height:45%;
     font-size:1em;
 }
 <?php divStatBar();?> label#money{left:0%;}
-<?php divStatBar();?> label#tokens{left:20%;}
-<?php divStatBar();?> label#prestige{left:40%;}
-<?php divStatBar();?> label#m_marker{left:60%;}
-<?php divStatBar();?> label#fname{left:80%;}
+<?php divStatBar();?> label#tokens{left:25%;}
+<?php divStatBar();?> label#prestige{left:50%;}
+<?php divStatBar();?> label#m_marker{left:75%;}
