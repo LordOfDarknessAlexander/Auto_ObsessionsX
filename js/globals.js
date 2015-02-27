@@ -89,7 +89,7 @@ function ajax_post()
             alert('Error:ajax response returned null!');
             return;
         }
-        alert('ajax response received:' + JSON.stringify(data) );
+     //   alert('ajax response received:' + JSON.stringify(data) );
         //access and set values in the document's html page
 		//$('div#statBar label#fname').text(data.uname);
         $('div#statBar label#money').text(data.money);

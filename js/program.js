@@ -597,7 +597,8 @@ Auction.sold = function()
 //<php
 //}
 //?>
-		ajax_post();    //get user info from server
+		//ajax_post();    //get user info from server
+		setStatBar();
 	}
 	else
 	{
