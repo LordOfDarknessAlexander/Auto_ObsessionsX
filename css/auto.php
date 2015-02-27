@@ -394,12 +394,12 @@ div#statBar
 {
     /*background-color:red;*/
 	background: url('../images/StatBar.png') no-repeat 0 0;
-	background-size : 100%,30%;
+	background-size : 100%,40%;
 	position:absolute;
 	top:30%;
 	left:6%;
 	width:90%;
-	height:45%;
+	height:35%;
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
 	text-align:left;
