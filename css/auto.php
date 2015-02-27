@@ -393,11 +393,12 @@ div#business
 div#statBar
 {
     /*background-color:red;*/
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	background: url('../images/StatBar.png') no-repeat 0 0;
+	background-size : 100%,30%;
 	position:absolute;
 	top:30%;
-	left:2%;
-	width:100%;
+	left:6%;
+	width:90%;
 	height:45%;
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
@@ -410,10 +411,10 @@ div#statBar label{
     position:absolute;
     width:25%;
 }
-div#statBar label#money{left:0%;}
-div#statBar label#tokens{left:25%;}
-div#statBar label#prestige{left:50%;}
-div#statBar label#m_marker{left:75%;}
+div#statBar label#money{left:0%;top:75%;}
+div#statBar label#tokens{left:25%;top:75%;}
+div#statBar label#prestige{left:50%;top:75%;}
+div#statBar label#m_marker{left:75%;top:75%;}
 }
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) 
