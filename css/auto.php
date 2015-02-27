@@ -382,12 +382,6 @@ div#business
     left:0%;
     z-index:1;
 }
-<?php
-//require_once 'main.php';    //main game menu stylings, must be added at end, else bugs
-//require_once 'phone.php';   //mobile phone, iPhone, Android, WIndows, BB, etc
-//require_once 'tablet.php';  //tablets, iPads, etc
-//require_once 'laptop.php';  //laptop and other large mobile devices
-?>
 /* Stat Bar Game HUD */
 
 div#statBar
@@ -405,6 +399,7 @@ div#statBar
 	text-align:left;
 	color:white;
 	/*font-weight: bold;
+	z-index : 6;
 	font-size:1.2em;*/
 }
 div#statBar label{
@@ -416,6 +411,13 @@ div#statBar label#tokens{left:25%;top:75%;}
 div#statBar label#prestige{left:50%;top:75%;}
 div#statBar label#m_marker{left:75%;top:75%;}
 }
+<?php
+//require_once 'main.php';    //main game menu stylings, must be added at end, else bugs
+//require_once 'phone.php';   //mobile phone, iPhone, Android, WIndows, BB, etc
+//require_once 'tablet.php';  //tablets, iPads, etc
+//require_once 'laptop.php';  //laptop and other large mobile devices
+?>
+
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) 
 {

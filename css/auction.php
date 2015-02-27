@@ -2,6 +2,7 @@
 //auction state stylings
 header("Content-type: text/css; charset: UTF-8");
 //    
+
 function divAuction(){
     echo 'div#Auction';
 }
@@ -12,6 +13,7 @@ require_once 'ui.php';
 	/*background: url('../images/defaultBG.jpg') no-repeat 0 0;*/
 <?php
     posAbs();
+	
 ?>
 	display: none;
 	text-align: center;

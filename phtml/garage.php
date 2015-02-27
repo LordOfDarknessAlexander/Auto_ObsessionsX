@@ -8,7 +8,7 @@ function selectBtn(){?>
 ?>
 
 <div id='Garage'>
-<?php //include("include/statBar.php"); ?>
+<?php include("include/statBar.php"); ?>
     <h1>Garage</h1>
     <?php selectBtn();?>
     <button id='viewCar'>View</button>

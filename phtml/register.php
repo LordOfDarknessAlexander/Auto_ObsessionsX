@@ -6,6 +6,7 @@ function ep($str){
         echo $_POST[$str];
 }
 ?>	
+
 <div id="Register">
     <h2>Membership Registration</h2>
 		<h3 class="content">Items marked with an asterisk * are essential</h3>

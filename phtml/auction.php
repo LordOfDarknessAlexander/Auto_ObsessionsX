@@ -49,6 +49,7 @@ function outputCar($args){
         <ul id='auctionCars'>
 <?php
     sqlSelectAll('aoCars', 'outputCar');
+	//require_once 'include/statBar.php';
 ?>
         </ul>
     </div>
@@ -81,7 +82,7 @@ function outputCar($args){
     <label id='carInfo'></label>
     <button id='homeBtn'>Home</button>
 </div>
-
+<?php require_once 'include/statBar.php';?>
 <div id='AuctionSell'>
 
     <h1>Auctioned Cars</h1>
