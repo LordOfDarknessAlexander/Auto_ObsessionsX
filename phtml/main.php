@@ -30,6 +30,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
             <h2><?php echo $OWNER_NAME.' and '.$AO_NAME.' Presents!';?></h2>
         </div>
         <div id='main'>
+		
             <h1><?php echo $AO_NAME;?></h1>
            
              <div id='login'>
@@ -102,7 +103,7 @@ foreach($scripts as $val){
     require_once($val.'.php');
 }
 ?>
-<?php require_once 'include/statBar.php';?> 
+
     <div id='profile'>
         <button id='backBtn'>Back</button>
     </div>

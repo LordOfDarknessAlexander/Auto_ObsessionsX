@@ -100,7 +100,7 @@
 	left:5%;
 	top:30%;
 }
-div#statBar
+#AddFundsdiv#statBar
 {
     /*background-color:red;*/
 	background: url('../images/StatBar.png') no-repeat 0 0;
@@ -118,7 +118,7 @@ div#statBar
 	z-index : 6;
 	font-size:1.2em;*/
 }
-div#statBar label{
+#AddFunds div#statBar label{
     position:absolute;
     width:25%;
 }

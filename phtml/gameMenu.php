@@ -1,5 +1,5 @@
 <?php
-require_once 'secure.php';
+//require_once 'secure.php';
 ?>
 <div id='gameMenu'>
 <!--script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.min.js"></script>
@@ -9,14 +9,6 @@ require_once 'secure.php';
     <!--HUD ---->
 <!--	<div id="fname" ></div>-->
 <?php
-/*
-session_start();
-echo '<h2>Welcome to Auto-Obsessions\' Page ';
-if (isset($_SESSION['uname']))
-{
-	echo "{$_SESSION['uname']}";
-}
-echo '</h2>';*/
 require_once 'include/statBar.php';
 ?>
 

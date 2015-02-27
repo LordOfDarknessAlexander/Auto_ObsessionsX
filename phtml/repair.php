@@ -1,8 +1,11 @@
 <?php
 //$ROOT_DIR = $_SERVER["DOCUMENT_ROOT"]."/phtml/";	//root path on server
 ?>
+
 <div id='RepairShop'>
+
     <h1>Repair Shop</h1>
+	
     <button id='backBtn'>Back</button>
     <img id='userCar'>
     <p id='error'></p>
@@ -25,9 +28,11 @@
         <button id='fixBtn4'></button><br>
         <button id='fixBtn5'></button>
     </div-->
+	<?php  include("include/statBar.php");  ?>
 	<button id='addFunds'>Add Funds</button>
     <!--a id='addFunds' href='<php echo rootURL() . 'state/funds.php';?>'>Add Funds</a-->
     <h2 id='dt'>Drivetrain</h2>
+	
     <div id='drivetrain'>
         Engine:
         <button id='ubEngine' class='ub'></button>
@@ -143,4 +148,5 @@
         <progress id='pb4' value='0.0'></progress>
         <br-->
     </div>
+	
 </div>
