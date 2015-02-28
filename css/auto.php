@@ -390,7 +390,7 @@ div#statBar
 	background: url('../images/StatBar.png') no-repeat 0 0;
 	background-size : 100%,40%;
 	position:absolute;
-	top:30%;
+	top:20%;
 	left:6%;
 	width:90%;
 	height:35%;
@@ -398,9 +398,9 @@ div#statBar
 	font-family:"Kozuka Gothic Pro B";
 	text-align:left;
 	color:white;
-	/*font-weight: bold;
-	z-index : 6;
-	font-size:1.2em;*/
+	font-weight: bold;
+	z-index : -16;
+	font-size:1.2em;
 }
 div#statBar label{
     position:absolute;
@@ -411,6 +411,34 @@ div#statBar label#tokens{left:25%;top:75%;}
 div#statBar label#prestige{left:50%;top:75%;}
 div#statBar label#m_marker{left:75%;top:75%;}
 }
+div#auctionStatBar
+{
+    /*background-color:red;*/
+	background: url('../images/StatBar.png') no-repeat 0 0;
+	background-size : 100%,5%;
+	position:absolute;
+	top:20%;
+	left:6%;
+	width:90%;
+	height:5%;
+	/*child elements inherit values, unless otherwise specified*/
+	font-family:"Kozuka Gothic Pro B";
+	text-align:left;
+	color:white;
+	font-weight: bold;
+	z-index : -16;
+	font-size:1.2em;
+}
+div#statBar label{
+    position:absolute;
+    width:25%;
+}
+div#statBar label#money{left:0%;top:75%;}
+div#statBar label#tokens{left:25%;top:75%;}
+div#statBar label#prestige{left:50%;top:75%;}
+div#statBar label#m_marker{left:75%;top:75%;}
+}
+
 
 <?php
 //require_once 'main.php';    //main game menu stylings, must be added at end, else bugs

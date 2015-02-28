@@ -96,6 +96,11 @@ function ajax_post()
         $('div#statBar label#tokens').text(data.tokens);
         $('div#statBar label#prestige').text(data.prestige);
         $('div#statBar label#m_marker').text(data.m_marker);
+		
+		$('div#auctionStatBar label#money').text(data.money);
+        $('div#auctionStatBar label#tokens').text(data.tokens);
+        $('div#auctionStatBar label#prestige').text(data.prestige);
+        $('div#auctionStatBar label#m_marker').text(data.m_marker);
     }).fail(function(jqxhr){
         //call will fail if result is not properly formatted JSON!
         alert('ajax call failed! Reason: ' + jqxhr.responseText);

@@ -357,7 +357,8 @@ div#business
     top:0%;
     left:0%;
     z-index:1;
-}div#statBar
+}
+div#statBar
 {
     /*background-color:red;*/
 	background: url('../images/StatBar.png') no-repeat 0 0;

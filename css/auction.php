@@ -18,7 +18,7 @@ require_once 'ui.php';
 	display: none;
 	text-align: center;
 	padding-top: 92px;
-	z-index: 1;
+	z-index: 10;
 	width: 100%;
 	height: 100%;
 }
@@ -104,21 +104,21 @@ require_once 'ui.php';
 }
 <?php divAuction();?> div#statBar{
 {
-    /*background-color:red;*/
-	background: url('../images/StatBar.png') no-repeat 0 0;
-	background-size : 100%,40%;
+    
+
+	background-size : 100%,10%;
 	position:absolute;
-	top:30%;
+	top:0%;
 	left:6%;
 	width:90%;
-	height:35%;
-	/*child elements inherit values, unless otherwise specified*/
+	height:10%;
+	
 	font-family:"Kozuka Gothic Pro B";
 	text-align:left;
 	color:white;
-	/*font-weight: bold;
-	z-index : 6;
-	font-size:1.2em;*/
+	font-weight: bold;
+	z-index : -6;
+	font-size:1.2em;
 }
 div#statBar label{
     position:absolute;

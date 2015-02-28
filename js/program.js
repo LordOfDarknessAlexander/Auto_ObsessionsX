@@ -120,18 +120,22 @@ function setName()
 function setMoney()
 {
 	$('div#statBar label#money').text('Money: ' + userStats.money.toFixed(2) );
+	$('div#auctionStatBar label#money').text('Money: ' + userStats.money.toFixed(2) );
 }
 function setTokens()
 {
 	$('div#statBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
+	$('div#auctionStatBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
 }
 function setPrestige()
 {
 	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
+	$('div#auctionStatBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
 }
 function setMarkers()
 {	//updates html label element, within context of the Game menu only
 	$('label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
+	$('div#auctionStatBar label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
 }
 function setStatBar()
 {
@@ -419,10 +423,12 @@ function switchStates( GAME_MODE)
 		//do not need auction select
 		case AUCTION:
 			Auction.update();
+			setStatBar();
 		break;
 		        
 		case REPAIR:
 			Repair.update();
+			setStatBar();
 		break;
 		
 		case ADD_FUNDS:

@@ -2,7 +2,7 @@
 //require_once '../include/security.php'
 require_once './include/dbConnect.php';
 require_once './vehicles/vehicle.php';
-require_once 'include/statBar.php';
+
 function sqlSelectAll($tableName, $callbackStr){
     //$tableName: string name of the table in the database to query
     //$callbackStr: string name of a user defined function to be called!
@@ -41,7 +41,7 @@ function outputCar($args){
 }
 ?>
 <div id='AuctionSelect'>
-<?php require_once 'include/statBar.php';?> 
+<?php include 'include/statBar.php'; ?>
     <h1>Auction Select</h1>
     <!--<backBtn();>select which car to bid for-->
     <button id='asBackBtn'>Back</button>
@@ -56,11 +56,17 @@ function outputCar($args){
 </div>
 
 <div id="Auction">
+<div id='auctionStatBar'>    
+         
+	<label id='money'>Money: </label>
+	<label id='tokens'>Tokens:</label>
+	<label id='prestige'>Prestige:</label>
+	<label id='m_marker'>Mile Markers:</label> 
+	</div>
 
     <h1>Auction</h1>
     
      <div style="margin-top:-6em;margin-left:26em">
-       <p>Money<label id='money'>  money</label></p>
 	   
     </div>
  
@@ -82,10 +88,11 @@ function outputCar($args){
     <label id='carPrice'></label>
     <label id='carInfo'></label>
     <button id='homeBtn'>Home</button>
+	
 </div>
 
 <div id='AuctionSell'>
-
+<?php include 'include/statBar.php'; ?>
     <h1>Auctioned Cars</h1>
     <!--<backBtn();>select which car to bid for-->
     <button id='backBtn'>Back</button>

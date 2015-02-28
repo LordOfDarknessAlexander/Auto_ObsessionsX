@@ -3,7 +3,7 @@
 ?>
 
 <div id='RepairShop'>
-
+<?php include 'include/statBar.php'; ?>
     <h1>Repair Shop</h1>
 	
     <button id='backBtn'>Back</button>
@@ -28,7 +28,7 @@
         <button id='fixBtn4'></button><br>
         <button id='fixBtn5'></button>
     </div-->
-	<?php  include("include/statBar.php");  ?>
+	
 	<button id='addFunds'>Add Funds</button>
     <!--a id='addFunds' href='<php echo rootURL() . 'state/funds.php';?>'>Add Funds</a-->
     <h2 id='dt'>Drivetrain</h2>
