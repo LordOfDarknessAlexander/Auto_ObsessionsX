@@ -172,9 +172,9 @@ img#adBar
 {
 	/*background:url('../images/logos/AutoZone.png') no-repeat 0 0;*/
 	position:absolute;
-	width:50%;
+	width:56%;
 	height:8%;
-	left:25%;
+	left:22%;
 	bottom:2%;
 }
 <?php //Game Screen/State stylings?>
