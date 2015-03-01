@@ -420,7 +420,7 @@ div#repairStatBar
 	top:0%;
 	left:16%;
 	width:90%;
-	height:35%;
+	height:25%;
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
 	text-align:left;
