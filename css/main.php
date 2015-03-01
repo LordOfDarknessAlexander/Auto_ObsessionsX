@@ -46,25 +46,27 @@ function divStatBar(){
 ?>
     background-color:grey;
 	top:40%;
-    width:
+    width:50%;
+	margin-bottom: 2%;
 }*/
 <?php divMain();?> div#menuLeft
 {<?php
     posAbs();
     defaultColor();
 ?>
-    background-color:grey;
-	left:5%;
+    //background-color:grey;
+	left:2%;
 	bottom:12%;
     width:20%;
     height:50%;
+	
 }
 <?php divMain();?> img#homeImg
 {<?php
     posAbs();
-    css::size('50%', '50%');
+    css::size('55%', '52%');
 ?>
-	left:25%;
+	left:22%;
 	bottom:12%;
 }
 <?php divMain();?> div#menuRight
@@ -72,8 +74,8 @@ function divStatBar(){
     posAbs();
     defaultColor();
 ?>
-    background-color:grey;
-	right:5%;
+    //background-color:grey;
+	right:2%;
 	/*top:40%;*/
     bottom:12%;
     width:20%;
@@ -87,7 +89,7 @@ function divStatBar(){
     //defaultColor();
     fontBold();
     //cursorPtr();
-    css::size('100%', '50%');
+    css::size('75%', '50%');
 ?>
 }
 <?php divMain();?> div button#toAuctionBtn
@@ -99,7 +101,7 @@ function divStatBar(){
     //defaultColor();
     fontBold();
     //cursorPtr();
-    css::size('100%', '50%');
+    css::size('75%', '50%');
 ?>
 }
 <?php divMain();?> div button#profile
@@ -110,7 +112,7 @@ function divStatBar(){
     //defaultColor();
     fontBold();
     //cursorPtr();
-    css::size('100%', '50%');
+    css::size('75%', '50%');
 ?>
 }
 <?php divMain();?> div button#buyUpgradesBtn
@@ -121,7 +123,7 @@ function divStatBar(){
     //defaultColor();
     fontBold();
     //cursorPtr();
-    css::size('100%', '50%');
+    css::size('75%', '50%');
 ?>
 }
 /* Stat Bar Game HUD */
@@ -139,7 +141,6 @@ function divStatBar(){
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
 	text-align:left;
-
 	color:white;
 	/*font-weight: bold;
 	font-size:1rem;*/

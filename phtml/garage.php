@@ -64,7 +64,12 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
 </div>
 
 <div id='CarView'>
-	
+	<div id='repairStatBar'>             
+	<label id='money'>Money: </label>
+	<label id='tokens'>Tokens:</label>
+	<label id='prestige'>Prestige:</label>
+	<label id='m_marker'>Mile Markers:</label> 
+	</div>
     <!--<selectBtn();>display vehicle stats and actions-->
     <button id='selectCarBtn'>Select</button>
     <button id='sellBtn'>Sell</button>
@@ -78,7 +83,7 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
     </div-->
     <!--div id='carInfoBoxes'></div-->
 <?php
- include("include/statBar.php"); 
+  
     carInfoLabel();
     backBtn();
     homeBtn();

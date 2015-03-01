@@ -388,6 +388,7 @@ div#statBar label#m_marker{left:75%;top:75%;}
 div#repairStatBar
 {
     /*background-color:red;*/
+	 overflow-y:none;
 	background: url('../images/StatBar.png') no-repeat 0 0;
 	background-size : 100%,40%;
 	position:absolute;
@@ -399,9 +400,9 @@ div#repairStatBar
 	font-family:"Kozuka Gothic Pro B";
 	text-align:left;
 	color:white;
-	/*font-weight: bold;
+	font-weight: bold;
 	z-index : 6;
-	font-size:1.2em;*/
+	font-size:1.2em;
 }
 div#statBar label{
     position:absolute;
