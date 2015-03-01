@@ -64,7 +64,7 @@ function divStatBar(){
 <?php divMain();?> img#homeImg
 {<?php
     posAbs();
-    css::size('55%', '52%');
+    css::size('56%', '52%');
 ?>
 	left:22%;
 	bottom:12%;
@@ -74,7 +74,7 @@ function divStatBar(){
     posAbs();
     defaultColor();
 ?>
-    //background-color:grey;
+   // background-color:grey;
 	right:2%;
 	/*top:40%;*/
     bottom:12%;
@@ -91,6 +91,8 @@ function divStatBar(){
     //cursorPtr();
     css::size('75%', '50%');
 ?>
+	margin-top : -2%;
+	margin-bottom : 4%;
 }
 <?php divMain();?> div button#toAuctionBtn
 {<?php
@@ -114,6 +116,8 @@ function divStatBar(){
     //cursorPtr();
     css::size('75%', '50%');
 ?>
+	margin-top : -2%;
+	margin-bottom : 4%;
 }
 <?php divMain();?> div button#buyUpgradesBtn
 {<?php
@@ -153,7 +157,7 @@ function divStatBar(){
 	height:45%;
     font-size:1em;
 }
-<?php divStatBar();?> label#money{left:0%;}
-<?php divStatBar();?> label#tokens{left:25%;}
-<?php divStatBar();?> label#prestige{left:50%;}
-<?php divStatBar();?> label#m_marker{left:75%;}
+<?php divStatBar();?> label#money{left:0%;top:75%;}
+<?php divStatBar();?> label#tokens{left:25%;top:75%;}
+<?php divStatBar();?> label#prestige{left:50%;top:75%;}
+<?php divStatBar();?> label#m_marker{left:75%;top:75%;}
