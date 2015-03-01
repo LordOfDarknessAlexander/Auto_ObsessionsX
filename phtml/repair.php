@@ -3,7 +3,13 @@
 ?>
 
 <div id='RepairShop'>
-<?php include 'include/statBar.php'; ?>
+
+<div id='repairStatBar'>             
+	<label id='money'>Money: </label>
+	<label id='tokens'>Tokens:</label>
+	<label id='prestige'>Prestige:</label>
+	<label id='m_marker'>Mile Markers:</label>  
+</div>
     <h1>Repair Shop</h1>
 	
     <button id='backBtn'>Back</button>

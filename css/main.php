@@ -130,7 +130,7 @@ function divStatBar(){
     posAbs();
     css::size('96%', '25%');   //height needs to be hard coded, or funky effects happen with the text
 ?>
-    background-color:red;
+    background-color:black;
 	//background: url('../images/defaultBtn.png') no-repeat 0 0;
 	top:8%;
 	left:2%;

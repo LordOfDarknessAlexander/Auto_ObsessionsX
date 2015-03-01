@@ -411,9 +411,36 @@ div#statBar label#tokens{left:25%;top:75%;}
 div#statBar label#prestige{left:50%;top:75%;}
 div#statBar label#m_marker{left:75%;top:75%;}
 }
-div#auctionStatBar
+div#repairStatBar
 {
     /*background-color:red;*/
+	background: url('../images/StatBar.png') no-repeat 0 0;
+	background-size : 100%,40%;
+	position:absolute;
+	top:0%;
+	left:16%;
+	width:90%;
+	height:35%;
+	/*child elements inherit values, unless otherwise specified*/
+	font-family:"Kozuka Gothic Pro B";
+	text-align:left;
+	color:white;
+	font-weight: bold;
+	z-index : 46;
+	font-size:1.2em;
+}
+div#statBar label{
+    position:absolute;
+    width:25%;
+}
+div#statBar label#money{left:0%;top:75%;}
+div#statBar label#tokens{left:25%;top:75%;}
+div#statBar label#prestige{left:50%;top:75%;}
+div#statBar label#m_marker{left:75%;top:75%;}
+}
+div#auctionStatBar
+{
+    //background-color:red;
 	background: url('../images/StatBar.png') no-repeat 0 0;
 	background-size : 100%,5%;
 	position:absolute;
@@ -441,7 +468,7 @@ div#statBar label#m_marker{left:75%;top:75%;}
 
 
 <?php
-//require_once 'main.php';    //main game menu stylings, must be added at end, else bugs
+require_once 'main.php';    //main game menu stylings, must be added at end, else bugs
 //require_once 'phone.php';   //mobile phone, iPhone, Android, WIndows, BB, etc
 //require_once 'tablet.php';  //tablets, iPads, etc
 //require_once 'laptop.php';  //laptop and other large mobile devices
