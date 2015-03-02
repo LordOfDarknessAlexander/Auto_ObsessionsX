@@ -45,8 +45,24 @@ var userStats = {
 function saveUser()
 {	//saves user stats as a JSON string to the browsers local storage
 //<php if(loggedIn){?>
-        //make ajax call to pas/update
-        //$.ajax({});
+    var funcName = 'pas::saveUser()';
+    /*$.ajax({{
+        type:'POST',
+        url:getHostPath() + 'pas/update.php',
+        dataType:'json',
+        data:userStats
+    }).done(function(data){
+        if(data === null){
+            alert(funcName + ', Error:ajax response returned null!');
+            return;
+        }
+        alert(funcName + ', ajax response received:' + JSON.stringify(data) );
+        //data saved to database!
+    }).fail(function(jqxhr){
+        //call will fail if result is not properly formatted JSON!
+        alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+        //throw exception, game can't work without user stats
+    });*/
 //<php else{?>
 	if(Storage.local !== null){
 		Storage.local._stats = JSON.stringify(userStats);
@@ -58,8 +74,24 @@ function saveUser()
 function loadUser()
 {	//serialize user stats from local storage, if played previously
 //<php if(loggedIn){?>
-    //make ajax call to server
-    //$.ajax({});
+   var funcName = 'pas::loadUser()';
+    /*$.ajax({{
+        type:'POST',
+        url:getHostPath() + 'pas/query.php',
+        dataType:'json'
+    }).done(function(data){
+        if(data === null){
+            alert(funcName + ', Error:ajax response returned null!');
+            return;
+        }
+        alert(funcName + ', ajax response received:' + JSON.stringify(data) );
+        //do stuff!
+        //userStats = data;
+    }).fail(function(jqxhr){
+        //call will fail if result is not properly formatted JSON!
+        alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+        //throw exception, game can't work without user stats
+    });*/
 //<php
 //}
 //else{?>

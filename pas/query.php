@@ -144,6 +144,42 @@ function echoUserCars(){
     echo json_encode($cars);
 }
 
+function getUserSoldCars(){
+    //selects all vehicles sold by the currently logged-in user
+    //returning them as a JSON array
+    //global $aoCarSalesDB;
+    //$user = 'user0';
+    $cars = array();
+
+    //$res = $aoCarSalesDB->query(
+        //"SELECT * FROM $user"
+    //);
+    
+    //if($res){        
+        //while($row = mysqli_fetch_array($res) ){
+            //$carID = intval($row['carID']);
+            //$cars[] = array(
+                //'carID' => $carID,
+                //'drivetrain' => intval($row['drivetrain']),
+                //'body' => intval($row['body']),
+                //'interior' => intval($row['interior']),
+                //'docs' => intval($row['docs']),
+                //'repairs' => intval($row['repairs']),
+                //'price' => hasCar($carID)   //does user have this car?
+                //'date=>array(
+                    //'start'=>$row['start'],
+                    //'end'=>$row['end']
+                //)
+           //);
+        //}
+        //mysqli_free_result($res);
+    //}
+    //else{   //The vehicle is already registered
+        //echo "<p class='error'>User: has no entries in database</p>";
+    //}
+    echo json_encode($cars);
+}
+
 $q = '';
 
 if(isset($_GET) && !empty($_GET) ){

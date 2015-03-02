@@ -18,7 +18,7 @@ class pasCreate
         
         /*$res = $AO_DB->query(
            "INSERT INTO $aoUsers (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
-            ($title, $fname, $lname, $email, $pw, $uname, NOW(), 0, 50000, 0, 0, 0, 0, 0)"
+            ($title, $fname, $lname, $email, $pw, $uname, NOW(), 0, 50000.00, 0, 0, 0, 0, 0)"
         );
         
         if($res){
