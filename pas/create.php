@@ -62,18 +62,18 @@ class pasCreate
         }
         return true;
     }
-    public static function carSaleTable($userID){
+    public static function carSaleTable(){
         //creates an empty table in aoUsersDB upon user registration
-        //global $aoCarSalesDB;
-        //$tableName = "user$userID";    //$_SESSION['userID'];
-        //$uint = 'int unsigned';
-        //$defaultCharset = 'DEFAULT CHARSET = latin1';
-        //$defaultEngine = 'ENGINE = InnoDB';
-        //make this a static var, should only be executed once!
+        global $aoCarSalesDB;
+        //$uid = $_SESSION['userID'];
+        $uint = 'int unsigned';
+        $defaultCharset = 'DEFAULT CHARSET = latin1';
+        $defaultEngine = 'ENGINE = InnoDB';
+        
         /*$res = $aoCarSalesDB->query(
-           "CREATE TABLE IF NOT EXISTS $tableName(
+           "CREATE TABLE IF NOT EXISTS user$tableName(
                 car_id $uint NOT NULL PRIMARY KEY,
-                price float,
+                price float,    //0 if the auction has not completed, else the total sale price of the car
                 drivetrain $uint,
                 body $uint,
                 interior $uint,
@@ -90,7 +90,7 @@ class pasCreate
         //$err = $aoCarSalesDB->error;
         //echo "pasCreate::carSalesTable($userID), failed:($erno), reason: $err";
         
-        //return false;
+        return false;
     }
     function userAccount(){
         //create entry in finalpost
