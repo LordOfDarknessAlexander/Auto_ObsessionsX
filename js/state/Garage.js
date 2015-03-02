@@ -26,6 +26,7 @@ var //Garage._curCarIndex = null,	//user's currect car index
 function VehicleFromDB(obj){
     //creates an unupgraded/repaired car from the database  
     //var jqxhr = 
+    var funcName = 'pas::VehicleFromDB()';
     return $.ajax({
         type:'POST',
         //async:false,
@@ -35,7 +36,7 @@ function VehicleFromDB(obj){
     }).done(function(data){
         //the response string is converted by jquery into a Javascript object!
         if(data === null){
-            alert('Error:ajax response returned null!');
+            alert(funcName + ',Error:ajax response returned null!');
             //finished = true;
             return;
         }
@@ -57,8 +58,8 @@ function VehicleFromDB(obj){
 //>
     }).fail(function(jqxhr){
         //call will fail if result is not properly formated JSON!
-        alert('ajax call failed! Reason: ' + jqxhr.responseText);
-        console.log('loading game resources failed, abort!');
+        alert(funcName + ' ajax call failed! Reason: ' + jqxhr.responseText);
+        console.log(funcName + ', loading game resources failed, abort!');
         //finished = true;
     });
     
@@ -159,6 +160,8 @@ var Garage = {
         
         userGarage = [];    //clear previous entries
         
+        var funcName = 'Garage::load()';
+        
         var jqxhr = $.ajax({
             type:'POST',
             url:getHostPath() + 'pas/query.php',
@@ -167,14 +170,14 @@ var Garage = {
         }).done(function(data){
             //the response string is converted by jquery into a Javascript object!
             if(data === null){
-                alert('Error:ajax response returned null!');
+                alert(funcName + ', Error:ajax response returned null!');
                 return;
             }
             //alert('ajax response recieved:' + JSON.stringify(data) );
             
             if(data.length == 0){
                 //exit early is user has no cars
-                console.log('user has no cars!, Buy some, right now!');
+                console.log(funcName + ',user has no cars!, Buy some, right now!');
                 return;
             }
             var args = [];
@@ -188,12 +191,12 @@ var Garage = {
                 //so init ui after all ajax calls have completed
                 Garage.initUI();
             }).fail(function(){
-                console.log('loading game resources failed, abort!');
+                console.log(funcName + ', loading game resources failed, abort!');
             });
         }).fail(function(jqxhr){
             //call will fail if result is not properly formated JSON!
-            alert('ajax call failed! Reason: ' + jqxhr.responseText);
-            console.log('loading game resources failed, abort!');
+            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+            console.log(funcName + ', loading game resources failed, abort!');
         });
 //<php
 //}
@@ -224,7 +227,7 @@ var Garage = {
 		//
 //<?php
 //if(loggedIn){
-    //post user garage to php page to save user cars to sql database
+        //post user garage to php page to save user cars to sql database
 //}
 //else{?> //playing locally as guest
 		if(Storage.local !== null)

@@ -51,6 +51,27 @@ function hasCar($id){
     //}    
     return $ret;
 }
+/*function hasSoldCar($carID){
+    //does the user's table in aoSOldCarsDB already have an entry with car_id '$id'
+    global $aoSoldCarsDB;
+    
+    $tableName = 'user' . strval(0);    //$_SESSION['userID'];
+    $ret = false;
+    
+    $res = $aoSoldCarsDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    
+    if($res){
+        //user has sold car, valid entry in db
+        $ret = mysqli_num_rows($res) != 0 ? true : false;
+    }
+    else{
+        //user still owns can, no entry in db
+    }
+    mysqli_free_result($res);
+    
+    return $ret;
+}*/
+
 /*function getAuctionCars(){
     //selects all vehicles the user owns, returning it as a JSON array
     global $AO_DB;
@@ -141,13 +162,22 @@ function getCarFromID($carID){
 }
 function setUserCar($carID){
     global $AO_DB;
-    
+    //$aoUsers = 'aoUSers';
     if($carID == 0){
         //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
         //return json_encode($res ? true : false);
     }
     elseif(hasCar($carID)){
-        //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
+        //$res = $AO_DB->con->prepare("UPDATE car_id FROM $aoUsers WHERE user_id = ?");
+        //if($res){
+            //if($res->bind_params('i', $uid)){
+                //$res->execute()
+                //return json_encode();
+            //}
+        //}
+        //else{
+            //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
+        //}
         //return json_encode($res ? $carID : false);
     }
     //else not valid car ID, do nothing

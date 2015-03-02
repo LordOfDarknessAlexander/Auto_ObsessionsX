@@ -51,7 +51,7 @@ ul{
     margin: 0;
 }
 li{
-    padding: 10px 0;
+    /*padding: 10px 0;*/
 }
 
 a{

@@ -29,7 +29,7 @@ require_once 'ui.php';
 }
 <?php divAS();?> li
 {
-	margin:0 0 5% 0;	/*top right bottom left*/
+	/*margin:0 0 5% 0;	/*top right bottom left*/
 	/*padding: 50px 50px;
 	display:inline;*/
 }

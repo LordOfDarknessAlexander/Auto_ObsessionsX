@@ -58,7 +58,7 @@ function getAuctionCars(){
     $aoCars = 'aoCars';
     $cars = array();
     //static $getCar = $AO_DB->prepare(
-        //"SELECT * FROM $aoCarsTable"
+        //"SELECT * FROM $aoCars"
     //);
     $res = $AO_DB->query(
         "SELECT * FROM $aoCars"
@@ -232,12 +232,16 @@ if(isset($_POST) && !empty($_POST) ){
         if(isset($_GET) && !empty($_GET) ){
         //args being passed via the url
             if(isset($_GET['op']) ){
+                //match $op against RE containing one or more letters, only. No whitespace or numbers
+                //$op = preg_match('[:alpha;]+', $_GET['op']);
                 if($_GET['op'] == 'hasCar'){
                     //echo '{"hasCar": ' . strval(false) . '}';
                     exit();
                 }
                 //else switch to other calls
             }
+            //echo "operation: $_GET['op'] not supported, script exiting()";
+            exit();
         }
         //else no GET args, simply return data of car with id
         
