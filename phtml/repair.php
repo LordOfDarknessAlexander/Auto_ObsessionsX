@@ -1,17 +1,8 @@
 <?php
 //$ROOT_DIR = $_SERVER["DOCUMENT_ROOT"]."/phtml/";	//root path on server
 ?>
-
 <div id='RepairShop'>
-
-<!--div id='repairStatBar'>             
-	<label id='money'>Money: </label>
-	<label id='tokens'>Tokens:</label>
-	<label id='prestige'>Prestige:</label>
-	<label id='m_marker'>Mile Markers:</label>  
-</div-->
-    <h1>Repair Shop</h1>
-	
+    <h1>Repair Shop</h1>	
     <button id='backBtn'>Back</button>
     <img id='userCar'>
     <p id='error'></p>
@@ -33,12 +24,10 @@
         <button id='fixBtn3'></button><br>
         <button id='fixBtn4'></button><br>
         <button id='fixBtn5'></button>
-    </div-->
-	
+    </div-->	
 	<button id='addFunds'>Add Funds</button>
     <!--a id='addFunds' href='<php echo rootURL() . 'state/funds.php';?>'>Add Funds</a-->
-    <h2 id='dt'>Drivetrain</h2>
-	
+    <h2 id='dt'>Drivetrain</h2>	
     <div id='drivetrain'>
         Engine:
         <button id='ubEngine' class='ub'></button>
@@ -154,5 +143,4 @@
         <progress id='pb4' value='0.0'></progress>
         <br-->
     </div>
-	
 </div>

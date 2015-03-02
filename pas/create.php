@@ -8,41 +8,29 @@ require_once '../include/dbConnect.php';  //sql database connection
 //
 //secure::loggin();
 //
-function createUserEntry($userID){
-    //creates an empty table upon user registration
-    global $AO_DB;
-    $tableName = 'user' . strval(0);    //strval($_SESSION['userID']);
-    //get validated and sanitized form data
-    
-    /*$stmnt = $AO_DB->prepare(
-       "INSERT INTO $userTableName (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    );
-    
-    $stmnt->bind_args('issssiiiiii), '', $title, $fname, $lname, $email, $pw, $uname, NOW(), 0, 0, 0, 0, 0, 0";
-    
-    if($stmt->execute() ){
-        //$res = $stmt->
-    }
-    else{
-        //sql error!
-    }
-    
-    if($res){
-        if(mysqli_num_rows($res) != 0){
-        } 
-        else{
-        } 
-        mysqli_free_result($res);
-    }
-    else{
-        //The vehicle is already registered
-        //return null; //echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
-    }*/
-    return null;
-}
 class pasCreate
 {
+    function userEntry($userID){
+        //creates an empty table upon user registration
+        global $AO_DB;
+        $aoUsers = 'users';    //strval($_SESSION['userID']);
+        //get validated and sanitized form data
+        
+        /*$res = $AO_DB->query(
+           "INSERT INTO $aoUsers (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
+            ($title, $fname, $lname, $email, $pw, $uname, NOW(), 0, 50000, 0, 0, 0, 0, 0)"
+        );
+        
+        if($res){
+            //
+        }
+        else{
+            //sql error!
+            //The vehicle is already registered
+            //echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
+        }*/
+        return null;
+    }
     public static function userTable($userID){
         //creates an empty table in aoUsersDB upon user registration,
         //user id should be 
@@ -74,38 +62,36 @@ class pasCreate
         }
         return true;
     }
-    /*public static function carSaleTable($userID){
+    public static function carSaleTable($userID){
         //creates an empty table in aoUsersDB upon user registration
-        global $aoCarSalesDB;
-        $tableName = 'user$userID';    //$_SESSION['userID'];
-        $uint = 'int unsigned';
-        $defaultCharset = 'DEFAULT CHARSET = latin1';
-        $defaultEngine = 'ENGINE = InnoDB';
+        //global $aoCarSalesDB;
+        //$tableName = "user$userID";    //$_SESSION['userID'];
+        //$uint = 'int unsigned';
+        //$defaultCharset = 'DEFAULT CHARSET = latin1';
+        //$defaultEngine = 'ENGINE = InnoDB';
         //make this a static var, should only be executed once!
-        $stmnt = $aoCarSalesDB->prepare(
+        /*$res = $aoCarSalesDB->query(
            "CREATE TABLE IF NOT EXISTS $tableName(
                 car_id $uint NOT NULL PRIMARY KEY,
-                price float
+                price float,
+                drivetrain $uint,
+                body $uint,
+                interior $uint,
+                docs $uint,
+                repairs $uint
             )$defaultEngine $defaultCharset"
-        );
-        
-        if(!$stmt){
-            $erno = $aoCarSalesDB->errno;
-            $err = $aoCarSalesDB->error;
-            echo "createCarSaleTable($userID), prepare failed:($erno), reason: $err";
-            return false;
-        }
-        
-        if($stmnt->execute() ){   //returns true if execute preformed successfully, false on failure
-            return true;
-        }
+        );*/
+         
+        //if($res){   //returns true if execute preformed successfully, false on failure
+            //return true;
+        //}
         //else false, output error
-        $erno = $aoUsersDB->errno;
-        $err = $aoUsersDB->error;
-        echo "createCarSalesTable($userID), prepare failed:($erno), reason: $err";
+        //$erno = $aoCarSalesDB->errno;
+        //$err = $aoCarSalesDB->error;
+        //echo "pasCreate::carSalesTable($userID), failed:($erno), reason: $err";
         
-        return false;
-    }*/
+        //return false;
+    }
     function userAccount(){
         //create entry in finalpost
         //pasCreate::userEntry($userID);

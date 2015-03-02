@@ -134,4 +134,3 @@ function divStatBar(){
 ?>
 	margin-left: 6%;
 }
-/* Stat Bar Game HUD */

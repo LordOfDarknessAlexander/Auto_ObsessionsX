@@ -12,14 +12,14 @@ $AO_NAME = 'Auto Obsessions';
 $TD_NAME = 'Tyler Drury';
 $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
-$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-
+//$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 ?>	
 <div class='wrapper'>
 	<!--root div element of web page!-->	
     <div class='sound sound-off'></div>
 	
-    <div id='statBar'>             
+    <div id='statBar'>  
+        <!--this stat bar will be visable across all pages/divs-->
         <label id='money'>Money: </label>
         <label id='tokens'>Tokens:</label>
         <label id='prestige'>Prestige:</label>
@@ -34,8 +34,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         <div id='splash'>
             <h2><?php echo $OWNER_NAME.' and '.$AO_NAME.' Presents!';?></h2>
         </div>
-        <div id='main'>
-		
+        <div id='main'>		
             <h1><?php echo $AO_NAME;?></h1>
            
              <div id='login'>
@@ -51,15 +50,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
                <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
                <li><a href='javascript:void(0)' class='button Register'>Register</a></li>
             </ul>
-			
             <?php require 'phtml/legal.php';?>
-            <!--p id='legal'>Auto-Obsession &copy; 2015, All Right Reserved.
-                <a href='<php echo $ROOT_URL.'legal.php?page=terms';?>'>Terms</a>
-                <a href='<php echo $ROOT_URL.'legal.php?page=privacy';?>'>Privacy</a>
-                <a href='<php echo $ROOT_URL.'legal.php?page=security';?>'>Security</a>
-                <a href='<php echo $ROOT_URL.'legal.php?page=contact';?>'>Contact</a>
-                <a href=''>Credits</a>
-            </p-->
 		</div>
       
         <div id='credits'>
@@ -108,7 +99,6 @@ foreach($scripts as $val){
     require_once($val.'.php');
 }
 ?>
-
     <div id='profile'>
         <button id='backBtn'>Back</button>
     </div>
@@ -139,6 +129,6 @@ foreach($scripts as $val){
     <div id='faq'>
         <button id='backBtn'>Back</button>
     </div>
-	
+	<!--placing adBar here should allow it to be visable across all pages
 </div><!--end wrapper, include javascript at end of body-->
 <?php require_once 'js.php';?>

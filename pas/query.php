@@ -4,34 +4,8 @@
 //used by javascript ajax requests
 //
 //allow access to this file via file in the document's root directory
-header('Access-Control-Allow-Origin: *');
+require_once 'meta.php';  //sql database connection
 //
-require_once '../vehicles/vehicle.php';
-require_once '../include/dbConnect.php';  //sql database connection
-//require_once '../include/secure.php';
-//
-//secure::loggin();
-//
-function hasCar($id){
-    //does the user's table in aoUsersDB already have an entry with car_id '$id'
-    global $aoUsersDB;
-    
-    $ret = false;
-    $tableName = 'user' . strval(0);    //$_SESSION['userID'];
-   
-    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-    
-    if($res){
-        //user has car
-        $ret = mysqli_num_rows($res) != 0 ? true : false;
-    }
-    else{
-        //query failed, user has no entry in database
-    }
-    mysqli_free_result($res);
-    
-    return $ret;
-}
 function getCurrentCar(){
     //returns the user's currently selected vehicle
     /*$id = strval(0);    //$SESSION['userID'];
@@ -130,50 +104,7 @@ function getUserCarFromID($carID){
         echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
     }
 }
-function getCarFromID($carID){
-    //selects a vehicle from the car database,
-    //returning it as a JSON object string
-    global $AO_DB;
-    //$aoCarsTable = 'aoCars';    //name of table containing all cars in the AO_DB
-    //using prepared statements
-    /*$_getCarFromID = $AO_DB->prepare(
-        "SELECT * FROM $aoCarsTable WHERE car_id = ?"
-    );
-    if($_getCarFromID){
-        if($_getCarFromID->bind_params('i', $carID)){
-            if($_getCarFromID->execute() ){
-                $res = $_getCarFromID->get_result();
-            }
-        }
-    }
-    */
-    $aoCars = 'aoCars';   
-    //make into prepared statement!
-    //->prepare("SELECT * FROM $aoCars WHERE car_id = ?")
-    $res = $AO_DB->query(
-        "SELECT * FROM $aoCars WHERE car_id = $carID"
-    );
-    if($res){
-        if(mysqli_num_rows($res) != 0){
-            //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
-            $data = $res->fetch_assoc();//@mysqli_query($CARS.$con, $q); // Run the query
-            $car = Vehicle::fromArray($data);
-            //echo '{"data":"this is data!"}';
-            return $car;
-            //echo Vehicle::fromArray($result->fetch_assoc() )->toJSON();
-        } 
-        else{
-            //echo "<h2>System Error</h2>
-            //<p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
-            //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
-        } 
-        mysqli_free_result($res);
-    }
-    else{   //The vehicle is already registered
-        //return null; //echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
-    }
-    return null;
-}
+
 function echoUserCars(){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;

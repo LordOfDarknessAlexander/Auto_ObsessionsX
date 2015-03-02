@@ -41,7 +41,6 @@ function outputCar($args){
 }
 ?>
 <div id='AuctionSelect'>
-<?php include 'include/statBar.php'; ?>
     <h1>Auction Select</h1>
     <!--<backBtn();>select which car to bid for-->
     <button id='asBackBtn'>Back</button>
@@ -54,30 +53,15 @@ function outputCar($args){
     </div>
 </div>
 
-<div id="Auction">
-<!--div id='auctionStatBar'>    
-         
-	<label id='money'>Money: </label>
-	<label id='tokens'>Tokens:</label>
-	<label id='prestige'>Prestige:</label>
-	<label id='m_marker'>Mile Markers:</label> 
-	</div-->
-
-    <h1>Auction</h1>
-    
-     <div style="margin-top:-6em;margin-left:26em">
-	   
-    </div>
- 
+<div id='Auction'>
+    <h1>Auction</h1>    
+    <div style="margin-top:-6em;margin-left:26em">	   
+    </div> 
     <!--label id='myCash'>money</label>
     <label id='carPrice'>price</label-->
-    <ul>
-      <li><button id="bid">"Bid:money"</button></li>
-	  <li><button id="buyout">"Buyout"</button></li>
-    </ul>
-    <ul>
-    <button id="backBtn">Back</button>
-    </ul>
+    <button id='bid'>"Bid:money"</button>
+	<button id='buyout'>"Buyout"</button>
+    <button id='backBtn'>Back</button>
     <!--<
     backBtn();
     carInfoLabel();
@@ -86,12 +70,10 @@ function outputCar($args){
 	
     <label id='carPrice'></label>
     <label id='carInfo'></label>
-    <button id='homeBtn'>Home</button>
-	
+    <button id='homeBtn'>Home</button>	
 </div>
 
 <div id='AuctionSell'>
-<?php include 'include/statBar.php'; ?>
     <h1>Auctioned Cars</h1>
     <!--<backBtn();>select which car to bid for-->
     <button id='backBtn'>Back</button>

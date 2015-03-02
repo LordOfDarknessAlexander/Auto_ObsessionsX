@@ -62,6 +62,5 @@
     var majorFundsPPFlow = payRequest(9.99, {trigger:'addMajorFundsBtn'});
     </script>
     
-    <label id='userCash'><!--display user's currency--></label>
-	
+    <label id='userCash'><!--display user's currency--></label>	
 </div>

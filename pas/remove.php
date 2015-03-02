@@ -38,6 +38,7 @@ class pasRemove
         global $aoUsersDB;
         
         //return $aoUsersDB->query(
+            //"IF EXISTS $tableName
             //"DROP TABLE user$userID"
         //);
     }
@@ -49,8 +50,21 @@ class pasRemove
         //$tableName = "user$userID";
         
         //returns true if user was dropped, false on error
-        //return $aoUsersDB->query(
+        //return $aoCarSalesDB->query(
+            //"IF EXISTS $tableName
             //"DROP TABLE $tableName"
+        //);
+    }
+    public static function userSales($userID){
+        //removes all entries from user's sale history,
+        //does not remove the table
+        //global $aoCarSalesDB;
+        
+        //$tableName = "user$userID";
+        
+        //returns true if user was dropped, false on error
+        //return $aoCarSalesDB->query(
+            //"DELETE * FROM $tableName"
         //);
     }
     public static function allUserCars($userID){
@@ -69,10 +83,11 @@ class pasRemove
         }
         return $ret;
     }
-    public static function userCar($userID, $carID){
+    public static function userCar($carID){
         //removes a singe car with ID from the user's garage,
         //returning true upon success and false on failure,
         global $aoUsersDB;
+        $userID = strval(0);    //$_SESSION['user_id'];
         
         return $aoUSersDB->query(
             "DELETE * FROM user$userID WHERE car_id = $carID"

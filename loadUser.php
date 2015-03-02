@@ -50,7 +50,7 @@ session_start();
     else{
         //echo "No Results";
         // If there was a problem.
-            echo '<p class="error">Please try again.</p>';
+            echo "<p class='error'>Query failed, Please try again.</p>";
         //exit();
     }
     //mysqli_close($dbcon);

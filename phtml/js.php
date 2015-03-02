@@ -44,6 +44,7 @@ $paths = array(
     //
     'program'	//main javascript program
 );
+//addPHPJS('globals');
 foreach($paths as $p){addJS($p);}
 addPHPJS('state/AuctionSelect');
 ?>

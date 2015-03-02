@@ -1,5 +1,6 @@
 <?php
 //require_once '../include/dbConnect.php';
+//require_once '../ao.php';
 require_once 'part.php';
 //
 class Vehicle
@@ -63,14 +64,7 @@ class Vehicle
     }
     public function getFullPath(){
         //$localExecution = true;
-        
-        //static $ROOT_URL = ($localExecution ?
-            //'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/'
-        //:
-            //'http://851entertainment.com/Auto_ObsessionsX/') . 'images/cars/';
-        //$ROOT_URL .=  . $this->getLocalPath();
-        $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/'.'images/cars/';
-        return $ROOT_URL . $this->getLocalPath();
+        return rootURL() . 'images/cars/' . $this->getLocalPath();
     }
     public function getPrice(){
         //returns price after accumulating upgrades and repairs

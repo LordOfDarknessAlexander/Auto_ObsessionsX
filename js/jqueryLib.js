@@ -1,5 +1,8 @@
 ﻿//This file contains jQuery functions for manipulation of the application's 'index.html'
 //functions and objects are visable to any file linking this document
+//<php function divGame(){return 'div#gameMenu'}?>
+//<php function divGarage(){return 'div#garage'}?>
+//<php function divGarage(){return 'div#garage'}?>
 var jq = {
 	//namespace containing application bindings for jquery,
 	//preforms qjery call one then stores the result as an object

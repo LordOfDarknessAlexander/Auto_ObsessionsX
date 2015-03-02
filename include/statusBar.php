@@ -16,7 +16,7 @@ class StatusBar
     }
     public static function fromArray($array){
         return new StatBar(
-            intval($array['_money']),
+            floatval($array['_money']),
             intval($array['_tokens']),
             intval($array['_prestige']),
             intval($array['_markers'])
@@ -25,6 +25,13 @@ class StatusBar
     public function toJSON(){
         //returns json representation of the vehicle data, for transfer over internet
         return '{"money":' . strval($this->money) . ', "tokens":' . strval($this->tokens) . ', "prestige":' . strval($this->prestige) . ', "markers":' . strval($this->markers) . '}';
+        /*return json_encode(array(
+                'money'=>$this->money,
+                'tokens'=>$this->tokens,
+                'prestige'=>$this->prestige,
+                'markers'=>$this->markers
+                )
+            );*/
     }
 }
 ?>

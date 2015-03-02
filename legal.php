@@ -2,10 +2,11 @@
 //meta php file containing several web-pages,
 //displays conditiponally based on argument passed in url
 require_once 'include/html.php';
+require 'ao.php';
 //require_once './secure.php';
 //secureLogin();    //this allows for a single call to secure login across multiple pages!
 $AO_NAME = 'Auto Obsessions';
-$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+
 function subheader($title){
     html::hr();?>
 <h2><?php echo $title;?></h2>
@@ -74,7 +75,7 @@ subheader('Data Storage');
 echo $AO_NAME;?> uses third-party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to execute this site. While <?php echo $AO_NAME;?> owns the code, databases, and all rights to the <?php echo $AO_NAME;?> web-page, application and all its derivatives, you retain all rights to your data.
 <?php
 subheader('Disclosure');
-echo $AO_NAME;?> may disclose personally identifiable information under special circumstances, such as to comply with subpoenas or when your actions violate the <a href='<?php echo $ROOT_URL.'legal.php?page=terms';?>'>Terms of Service</a>.
+echo $AO_NAME;?> may disclose personally identifiable information under special circumstances, such as to comply with subpoenas or when your actions violate the <a href='<?php echo rootURL() . 'legal.php?page=terms';?>'>Terms of Service</a>.
 <?php
 subheader('Change');
 echo $AO_NAME;?> may periodically update this policy.<br>
@@ -107,7 +108,7 @@ Here's some stuff we do to make the user feel secure!
 <?php subheader('Communications');?>
 <?php subheader('Data Storage');?>
 <?php subheader('Employee Access');?>
-For any additional questions or concerns, please <a href='<?php echo $ROOT_URL.'legal.php?page=contact';?>'>contact us</a>.
+For any additional questions or concerns, please <a href='<?php echo rootURL() . 'legal.php?page=contact';?>'>contact us</a>.
 <?php
 }
 else{

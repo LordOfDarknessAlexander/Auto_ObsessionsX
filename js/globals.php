@@ -1,4 +1,8 @@
-﻿// define variables
+<?php
+//header('Content-type: application/javascript; charset: UTF-8');
+//require_once '../ao.php';
+?>
+// define variables
 var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
 //var canUseSessionStorage = 'sessionStorage' in code && code.sessionStorage !== null;
 //
@@ -53,7 +57,7 @@ function saveUser()
 }
 function loadUser()
 {	//serialize user stats from local storage, if played previously
-//<php if(loggedIn){?>
+//<?php if(loggedIn){?>
     //make ajax call to server
     //$.ajax({});
 //<php
@@ -174,14 +178,11 @@ curBidImage.src = 'images/slime2.png';
 //
 //AI
 //Create an empty array of Bidders
+//php funtions/generators can be used create user names
 var bidders = ["Bidder_990 ", "Bidder_1090 " ,"Bidder_3490 ", "Bidder_320 " ,"Bidder_465 " ,"Bidder_2490 ", "Bidder_2190 " ,"Bidder_7890 ", "Bidder_90 ","Bidder_66990 ","Bidder_1090 ", "Bidder_2332 ","Bidder_4390 ","Bidder_890 ","Bidder_8720 ","Bidder_8976 ","Bidder_220 ","Bidder_1196 ","Bidder_8976 ",
 "Bidder_6690 ","Bidder_4490 ","Bidder_6790 ","Bidder_8790 ","Bidder_10 ","Bidder_40 ","Bidder_430 ","Bidder_3390 ","Bidder_9 ","Bidder_621 ","Bidder_21430 ","Bidder_23450 ","Bidder_32345 ","Bidder_46574 ","Bidder_4597 ","Bidder_78765 ","Bidder_8765 ","Bidder_608 ","Sparkles King ","Bidder_7890 "];
 
 var vehiclePrice = 20000;
-//static bidding caps results in obvious behaviour,
-//ie. starting an auction with more than 1.25 of vehicle price will always win
-
-//new array for every new auction? preferably in the auction button qjuery callback
 
 var playerWon = false;
 
@@ -198,6 +199,7 @@ var auctionEnded = false;
 var restarted = false;
 var auctionOver = false;
 var restartTimer = 0;
+
 var appState = GAME_MODE.SPLASH;	
 //Users login counts
 
@@ -209,15 +211,9 @@ function resetStates()
 	appState = GAME_MODE.RUNNING;
 }
 function getHostPath(){
-    //gloablly accessable function, the local path maybe diffrent,
-    //DON'T CHANGE THE PATH, instead rename/relocate your project folder,
-    //so devs don't have a commit war, having to change this function
-    //for each of their projects each time they commit!
-    var localExecution = true;
-    return localExecution?
-        'http://localhost/Auto_ObsessionsX/'
-        :
-        'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+    //javascript function for returning path of project/site,
+    //created from php
+    return <?php echo rootURL();?>;
 }
 function pbSetColor(jqPB, value){
     //sets the value and color of an html progress bar, using jQuery
