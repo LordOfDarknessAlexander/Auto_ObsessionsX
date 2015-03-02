@@ -39,17 +39,18 @@ function divSelectedCar(){
 {<?php
     posAbs();
 ?>
-    bottom:80%;
+    bottom:10%;
     left:10%;
     width:5%;
     height:5%;
     font-size:1.25vw;
+	z-index : 56%;
 }
 <?php divGarage();?> button#viewCar
 {<?php
     posAbs();
 ?>
-    bottom:80%;
+    bottom:60%;
     left:30%;
     width:5%;
     height:5%;
@@ -59,7 +60,7 @@ function divSelectedCar(){
 {<?php
     posAbs();
 ?>
-    bottom:80%;
+    bottom:60%;
     left:20%;
     width:5%;
     height:5%;
@@ -94,8 +95,8 @@ function divSelectedCar(){
 	background: url('../images/defaultBG.jpg') no-repeat 0 0;
 	overflow-y:scroll;
 <?php posAbs();?>
-	height:80%;
-	top:20%;
+	height:60%;
+	top:40%;
     left:5%;
     width:35%;
 }
@@ -106,10 +107,10 @@ function divSelectedCar(){
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 <?php posAbs();?>
 	text-align::left;
-	top:20%;
+	top:40%;
 	left:42%;/*2%;*/
 	width:25%;
-	height:80%;
+	height:60%;
 	display:inline;
 }
 <?php divSelectedCar();?>
@@ -118,10 +119,10 @@ function divSelectedCar(){
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 <?php posAbs();?>
 	text-align::left;
-	top:20%;
+	top:40%;
 	right:2%;
 	width:25%;
-	height:80%;
+	height:60%;
 	display:inline;
 }
 <?php divUserCar();?> img,

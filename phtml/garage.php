@@ -14,7 +14,7 @@ function selectBtn(){?>
     <?php selectBtn();?>
     <button id='viewCar'>View</button>
     <!--button id='sellCar'>Sell</button-->
-    <?php backBtn();?>
+    
   
     <div id='carListView'>
         <ul id='carBtns'>
@@ -22,7 +22,7 @@ function selectBtn(){?>
         TODO:generate content using PHP instead-->
         </ul>
     </div>
-    
+    <?php backBtn();?>
     <div id='userCar'>
         <!--display for currently selected vehicle-->
         <img id='carImg'> <!--src='images/vehicle.jpg'-->
