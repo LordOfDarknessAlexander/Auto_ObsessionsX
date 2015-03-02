@@ -43,7 +43,9 @@ function divCarView(){
 	width:50%;
 	height:50%;
 	bottom:20%;
-	left:25%;
+	margin-right:10%;
+	margin-left: 5%;
+	left:20%;
 }
 
 <?php divCarView();?> button#selectCarBtn
@@ -89,16 +91,16 @@ div#CarView button#homeBtn
 	text-align:left;
 	position:absolute;
 	left:25%;
-	bottom:0;
+	bottom:2%;
 	width:50%;
-	height:15%;
+	height:14%;
 }
 <?php divCarView();?> h2{
 <?php
     posAbs();
 ?>
-	width:20%;
-	height:5%;
+	width:18%;
+	height:4%;
     font-size:2vw;/*size element relative to viewport width!*/
     font-weight:bold;
     background-color:white;
@@ -114,43 +116,46 @@ div#CarView button#homeBtn
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/
     
-    width:20%;
-	height:30%;
+    width:16%;
+	height:22%;
     
     font-size:1.5vw;
     text-align:left;
 }
 <?php divCarView();?> div#drivetrain{
-	top:20%;
+	top:30%;
 	left:5%;
+	
 }
 <?php divCarView();?> div#body{    
-	top:55%;
+	top:65%;
 	left:5%;
+	
 }
 <?php divCarView();?> div#interior{    
-	top:20%;
+	top:30%;
 	right:5%;
 }
 <?php divCarView();?> div#docs{    
-	top:55%;
+	top:65%;
 	right:5%;
 }
 
 <?php divCarView();?> h2#dt{
-	top:15%;
+	top:25%;
 	left:5%;
 }
 <?php divCarView();?> h2#body{
-	top:50%;
+	top:60%;
 	left:5%;
 }
 <?php divCarView();?> h2#interior{
-	top:15%;
+	top:25%;
 	right:5%;
 }
 <?php divCarView();?> h2#docs{
-	top:50%;
+	top:60%;
+	
 	right:5%;
 }
 

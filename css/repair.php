@@ -46,8 +46,8 @@ function divRepair(){
     overflow-y:scroll;
     background:url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/
-    width:20%;
-	height:30%;
+    width:16%;
+	height:28%;
     font-size:1.5vw;
     text-align:left;
 }
@@ -75,6 +75,7 @@ button#addFunds
 	defaultBtnBG();
     css::size('10%', '10%');
 ?>
+//bottom: 10%;
 }
 /*
 <?php divRepair();?> div#upgrades
@@ -92,8 +93,8 @@ button#addFunds
 <?php
     posAbs();
 ?>
-	width:15%;
-	height:40%;
+	width:16%;
+	height:22%;
 	top:30%;
 	right:5%;
 }*/
@@ -115,43 +116,43 @@ button#addFunds
 }
 <?php divRepair();?> div#drivetrain
 {
-	top:20%;
+	top:30%;
 	left:5%;
 }
 <?php divRepair();?> div#body
 {    
-	top:55%;
+	top:65%;
 	left:5%;
 }
 <?php divRepair();?> div#interior
 {    
-	top:20%;
+	top:30%;
 	right:5%;
 }
 <?php divRepair();?> div#docs
 {    
-	top:55%;
+	top:65%;
 	right:5%;
 }
 
 <?php divRepair();?> h2#dt
 {
-	top:15%;
+	top:25%;
 	left:5%;
 }
 <?php divRepair();?> h2#body
 {
-	top:50%;
+	top:60%;
 	left:5%;
 }
 <?php divRepair();?> h2#interior
 {
-	top:15%;
+	top:25%;
 	right:5%;
 }
 <?php divRepair();?> h2#docs
 {
-	top:50%;
+	top:60%;
 	right:5%;
 }
 <?php divRepair();?> button#addFunds
@@ -161,7 +162,7 @@ button#addFunds
     css::size('10%', '10%');
 ?>
     left:45%;
-    bottom:62%;
+    bottom:12%;
 }
 <?php divRepair();?> p#error{
 <?php
