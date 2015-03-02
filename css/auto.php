@@ -391,7 +391,7 @@ div#statBar
 	background: url('../images/StatBar.png') no-repeat 0 0;
 	background-size : 100%,40%;
 	position:absolute;
-	top:5%;
+	top:0%;
 	left:5%;
 	width:90%;
 	height:20%;

@@ -8,11 +8,10 @@ function addPHPJS($str){?>
 <?php
 }
 $paths = array(
-    'globals',
+    //'globals',
     'LoadAssets',
     //jquery bindings
-    'jqueryLib',
-	
+    'jqueryLib',	
     //
     '2D/SpriteSheet',
     '2D/Animation',
@@ -44,7 +43,8 @@ $paths = array(
     //
     'program'	//main javascript program
 );
-//addPHPJS('globals');
+addPHPJS('globals');
+//addPHPJS('jqLib');
 foreach($paths as $p){addJS($p);}
 addPHPJS('state/AuctionSelect');
 ?>

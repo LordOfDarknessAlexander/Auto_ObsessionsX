@@ -1,6 +1,6 @@
 <?php
-//header('Content-type: application/javascript; charset: UTF-8');
-//require_once '../ao.php';
+header('Content-type: application/javascript; charset: UTF-8');
+require_once '../ao.php';
 ?>
 // define variables
 var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
@@ -57,7 +57,7 @@ function saveUser()
 }
 function loadUser()
 {	//serialize user stats from local storage, if played previously
-//<?php if(loggedIn){?>
+//<php if(loggedIn){?>
     //make ajax call to server
     //$.ajax({});
 //<php
@@ -213,7 +213,7 @@ function resetStates()
 function getHostPath(){
     //javascript function for returning path of project/site,
     //created from php
-    return <?php echo rootURL();?>;
+    return '<?php echo rootURL();?>';
 }
 function pbSetColor(jqPB, value){
     //sets the value and color of an html progress bar, using jQuery
