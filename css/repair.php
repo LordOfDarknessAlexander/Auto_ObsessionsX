@@ -47,7 +47,7 @@ function divRepair(){
     background:url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/
     width:16%;
-	height:28%;
+	height:22%;
     font-size:1.5vw;
     text-align:left;
 }
@@ -84,7 +84,7 @@ button#addFunds
     posAbs();
 ?>
 	width:15%;
-	top:30%;
+	top:22%;
 	height:60%;
 	left:5%;
 }
@@ -162,7 +162,7 @@ button#addFunds
     css::size('10%', '10%');
 ?>
     left:45%;
-    bottom:12%;
+    bottom:62%;
 }
 <?php divRepair();?> p#error{
 <?php
