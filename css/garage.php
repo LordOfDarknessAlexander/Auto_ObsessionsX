@@ -50,7 +50,7 @@ function divSelectedCar(){
 {<?php
     posAbs();
 ?>
-    bottom:60%;
+    bottom:62%;
     left:30%;
     width:5%;
     height:5%;
@@ -60,7 +60,7 @@ function divSelectedCar(){
 {<?php
     posAbs();
 ?>
-    bottom:60%;
+    bottom:62%;
     left:20%;
     width:5%;
     height:5%;

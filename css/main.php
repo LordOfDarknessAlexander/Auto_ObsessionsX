@@ -64,7 +64,7 @@ function divStatBar(){
 <?php divMain();?> img#homeImg
 {<?php
     posAbs();
-    css::size('56%', '52%');
+    css::size('56%', '54%');
 ?>
 	left:22%;
 	bottom:12%;
@@ -91,8 +91,9 @@ function divStatBar(){
     //cursorPtr();
     css::size('75%', '50%');
 ?>
-	margin-top : -2%;
-	margin-bottom : 4%;
+	margin-top : -6%;
+	margin-bottom : 6%;
+	margin-left: -6%;
 }
 <?php divMain();?> div button#toAuctionBtn
 {<?php
@@ -105,6 +106,7 @@ function divStatBar(){
     //cursorPtr();
     css::size('75%', '50%');
 ?>
+	margin-left: -6%;
 }
 <?php divMain();?> div button#profile
 {<?php
@@ -116,8 +118,9 @@ function divStatBar(){
     //cursorPtr();
     css::size('75%', '50%');
 ?>
-	margin-top : -2%;
-	margin-bottom : 4%;
+	margin-top : -6%;
+	margin-bottom : 6%;
+	margin-left: 6%;
 }
 <?php divMain();?> div button#buyUpgradesBtn
 {<?php
@@ -129,6 +132,7 @@ function divStatBar(){
     //cursorPtr();
     css::size('75%', '50%');
 ?>
+	margin-left: 6%;
 }
 /* Stat Bar Game HUD */
 <?php divStatBar();?>

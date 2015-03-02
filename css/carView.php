@@ -3,10 +3,13 @@
 header("Content-type: text/css; charset: UTF-8");
 
 require_once 'ui.php';
-
+function divStatBar(){
+    echo 'div#statBar';
+}
 function divCarView(){
     echo 'div#CarView';
 }
+
 ?>
 
 <?php divCarView();?>

@@ -277,15 +277,16 @@ div#main a:hover {
 .button 
 {
   display: block;
-  width: 15%;
-  height:15%;
+  width: 6%;
+  height:6%;
   margin: 0 auto;
   line-height: 30px;
   border: 1px solid #AA2666;
   color: white;
   font-weight: bold;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  background-color: #FF0DFF;
+ // background-color: #FF0DFF;
+  background: url('../images/defaultBtn.png') no-repeat 0 0;
   background-image: -webkit-linear-gradient(bottom, #990000 0%, #990000 100%);
   background-image:         linear-gradient(to bottom, #990000 0%, #B30D5D 100%);
   border-radius: 3px;
@@ -390,8 +391,9 @@ div#statBar
 	background: url('../images/StatBar.png') no-repeat 0 0;
 	background-size : 100%,40%;
 	position:absolute;
-	top:20%;
+	top:14%;
 	left:6%;
+	margin-top : -2%;
 	width:90%;
 	height:35%;
 	/*child elements inherit values, unless otherwise specified*/
