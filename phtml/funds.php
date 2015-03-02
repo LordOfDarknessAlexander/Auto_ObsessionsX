@@ -4,10 +4,8 @@
 }?-->
 
 <div id='AddFunds'>
-
     <h1>AddFunds</h1>
     <!--<backBtn(); statBar();>-->
-	<?php  include("include/statBar.php");  ?>
     <button id='addFundsBackButton'>Back</button>
 	
     <form id='cash'

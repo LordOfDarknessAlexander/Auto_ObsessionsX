@@ -135,33 +135,3 @@ function divStatBar(){
 	margin-left: 6%;
 }
 /* Stat Bar Game HUD */
-<?php divStatBar();?>
-{<?php
-    posAbs();
-    css::size('96%', '25%');   //height needs to be hard coded, or funky effects happen with the text
-?>
-    background-color:black;
-	//background: url('../images/defaultBtn.png') no-repeat 0 0;
-	top:8%;
-	left:2%;
-	marging-bottom: 2%;
-	
-	/*child elements inherit values, unless otherwise specified*/
-	font-family:"Kozuka Gothic Pro B";
-	text-align:left;
-	color:white;
-	/*font-weight: bold;
-	font-size:1rem;*/
-}
-<?php divStatBar();?> label
-{<?php
-    posAbs();
-?>
-    width:25%;
-	height:45%;
-    font-size:1em;
-}
-<?php divStatBar();?> label#money{left:0%;top:75%;}
-<?php divStatBar();?> label#tokens{left:25%;top:75%;}
-<?php divStatBar();?> label#prestige{left:50%;top:75%;}
-<?php divStatBar();?> label#m_marker{left:75%;top:75%;}

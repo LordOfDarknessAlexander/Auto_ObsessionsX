@@ -19,7 +19,12 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 	<!--root div element of web page!-->	
     <div class='sound sound-off'></div>
 	
-<div id="status"></div>
+    <div id='statBar'>             
+        <label id='money'>Money: </label>
+        <label id='tokens'>Tokens:</label>
+        <label id='prestige'>Prestige:</label>
+        <label id='m_marker'>Mile Markers:</label>
+    </div>
     <div id='menu'>
         <div id='progress'>
             <div id='percent'>Downloading: <span id='p'></span></div>

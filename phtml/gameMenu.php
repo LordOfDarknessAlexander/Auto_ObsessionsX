@@ -8,10 +8,6 @@
     <h1>My Home</h1>
     <!--HUD ---->
 <!--	<div id="fname" ></div>-->
-<?php
-require_once 'include/statBar.php';
-?>
-
     <img id='homeImg' src='images\\garageEmpty.png'>
     <div id='menuLeft'>
       <button id ='myCars'>My Garage</button><br/>

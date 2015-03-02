@@ -49,20 +49,19 @@ function outputCar($args){
         <ul id='auctionCars'>
 <?php
     sqlSelectAll('aoCars', 'outputCar');
-	//require_once 'include/statBar.php';
 ?>
         </ul>
     </div>
 </div>
 
 <div id="Auction">
-<div id='auctionStatBar'>    
+<!--div id='auctionStatBar'>    
          
 	<label id='money'>Money: </label>
 	<label id='tokens'>Tokens:</label>
 	<label id='prestige'>Prestige:</label>
 	<label id='m_marker'>Mile Markers:</label> 
-	</div>
+	</div-->
 
     <h1>Auction</h1>
     

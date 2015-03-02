@@ -39,12 +39,11 @@ function divSelectedCar(){
 {<?php
     posAbs();
 ?>
-    bottom:10%;
+    bottom:62%;
     left:10%;
     width:5%;
     height:5%;
     font-size:1.25vw;
-	z-index : 56%;
 }
 <?php divGarage();?> button#viewCar
 {<?php

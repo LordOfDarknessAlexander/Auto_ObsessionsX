@@ -1,4 +1,4 @@
-<div id="sold">
+<div id='sold'>
     <!--this is the same screen depending on win or lose,
     behaviour had layout are changed in Auction.sold()-->
     <pre><label></label><br></pre>
