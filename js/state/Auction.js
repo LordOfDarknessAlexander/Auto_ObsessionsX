@@ -256,7 +256,7 @@ var Auction =
 		}
 		else
 		{
-			enemy1 = context.drawImage(slimer,10,204) + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2) ,ENEMY_X, 210);
+			enemy1 = context.drawImage(slimer,10,200) + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2) ,ENEMY_X, 220);
 		}
 		//Enemy 2
 		if(this.ai[1].currBid >= this.currentBid)
@@ -265,7 +265,7 @@ var Auction =
 		}
 		else
 		{
-			enemy2 = context.drawImage(slimer,10,224) + context.fillText(bidders[1] + '$'+ this.ai[1].currBid.toFixed(2) ,ENEMY_X, 240);
+			enemy2 = context.drawImage(slimer,10,220) + context.fillText(bidders[1] + '$'+ this.ai[1].currBid.toFixed(2) ,ENEMY_X, 240);
 		}
 		//Enemy3
 		if( this.ai[2].currBid >= this.currentBid )
@@ -274,7 +274,7 @@ var Auction =
 		}
 		else
 		{
-			enemy3 = context.drawImage(slimer,10,244) + context.fillText(bidders[2] + '$'+ this.ai[2].currBid.toFixed(2) ,ENEMY_X, 260);
+			enemy3 = context.drawImage(slimer,10,240) + context.fillText(bidders[2] + '$'+ this.ai[2].currBid.toFixed(2) ,ENEMY_X, 260);
 		}
 		//Enemy4
 		if( this.ai[3].currBid >= this.currentBid)
@@ -283,7 +283,7 @@ var Auction =
 		}
 		else
 		{
-			enemy4 =  context.drawImage(slimer,10,264) + context.fillText(bidders[3] + '$'+ this.ai[3].currBid.toFixed(2) ,ENEMY_X, 280);
+			enemy4 =  context.drawImage(slimer,10,260) + context.fillText(bidders[3] + '$'+ this.ai[3].currBid.toFixed(2) ,ENEMY_X, 280);
 		}
 		//call crowd for the player winning
 		//this.playerGoing();
