@@ -213,11 +213,20 @@ function getHostPath(){
     //DON'T CHANGE THE PATH, instead rename/relocate your project folder,
     //so devs don't have a commit war, having to change this function
     //for each of their projects each time they commit!
+	//Local 
+	
     var localExecution = true;
     return localExecution?
         'http://localhost/Auto_ObsessionsX/'
         :
-        'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+        'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';  
+	//Site
+	/*
+	var localExecution = false;
+    return localExecution ? 'http://localhost/Auto_ObsessionsX/'
+            : 'http://851entertainment.com/Auto_ObsessionsX/';
+		*/
+		
 }
 function pbSetColor(jqPB, value){
     //sets the value and color of an html progress bar, using jQuery
