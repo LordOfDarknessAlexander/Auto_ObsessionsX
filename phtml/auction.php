@@ -41,12 +41,14 @@ function outputCar($args){
 }
 ?>
 <div id='AuctionSelect'>
+    <!--view all available auctions-->
     <h1>Auction Select</h1>
-    <!--<backBtn();>select which car to bid for-->
+    <!--<php backBtn();>select which car to bid for-->
     <button id='asBackBtn'>Back</button>
     <div id='carView'>
         <ul id='auctionCars'>
 <?php
+    //selects all elements from aoCars, then preforms outputCar on each of its elements
     sqlSelectAll('aoCars', 'outputCar');
 ?>
         </ul>
@@ -54,28 +56,35 @@ function outputCar($args){
 </div>
 
 <div id='Auction'>
+    <!--User and AI bid on a car-->
     <h1>Auction</h1>    
     <div style="margin-top:-6em;margin-left:26em">	   
     </div> 
+<?php
+    //backBtn();
+    //homeBtn();
+?>
     <!--label id='myCash'>money</label>
     <label id='carPrice'>price</label-->
     <button id='bid'>"Bid:money"</button>
 	<button id='buyout'>"Buyout"</button>
     <button id='backBtn'>Back</button>
-    <!--<
-    backBtn();
-    carInfoLabel();
-    homeBtn();>-->
+    <!--auctionCar will be <img id=userCar'>.
+    The code can be streamlined with jQuery in JS-->
     <img id='auctionCar'>
 	
     <label id='carPrice'></label>
     <label id='carInfo'></label>
+<?php //carInfo();?>
     <button id='homeBtn'>Home</button>	
 </div>
 
 <div id='AuctionSell'>
+    <!--user sells one of their cars, biding open only to AI-->
     <h1>Auctioned Cars</h1>
-    <!--<backBtn();>select which car to bid for-->
+    <!--<php
+    backBtn();
+    homeBtn();>select which car to bid for-->
     <button id='backBtn'>Back</button>
     <button id='homeBtn'>Home</button>
     <div id='carView'>

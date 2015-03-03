@@ -451,8 +451,9 @@ var CarView = {
 };
 function setHomeImg(){
     var car = Garage.getCurrentCar();
+    
     if(car !== null){
-        var homeImg = $('div#gameMenu img#homeImg');
+        var homeImg = jq.carImg;    //$('//div#gameMenu img#homeImg');
         homeImg.attr('src', car.getFullPath() );
     }
 }
@@ -460,11 +461,13 @@ jq.Garage.backBtn.click(function()
 {
 	jq.Garage.toggle();
 	Garage.save();
+    jq.carImg.show();
     setHomeImg();
 });
 $('#myCars').click(function()
 {
 	jq.Garage.toggle();
+    jq.carImg.hide();
 	Garage.init();
 });
 
@@ -474,11 +477,11 @@ jq.CarView.homeBtn.click(function()
 	jq.CarView.menu.hide();
 	//appState = GAME_STATE.MAIN;
 });
-jq.Garage.selectBtn.click(function()
+/*jq.Garage.selectBtn.click(function()
 {
 	if(selCarIndex !== null)
 		Garage.setCurrentCar(selCarIndex);
-});
+});*/
 jq.Garage.viewBtn.click(function()
 {
 	if(selCarIndex !== null)
@@ -488,7 +491,7 @@ jq.Garage.viewBtn.click(function()
 	}
 	//else, do nothing, user has not clicked on a car
 });
-$('div#Garage button#select').click(function()
+jq.Garage.selectBtn.click(function()
 {
 	if(selCarIndex !== null)
 	{

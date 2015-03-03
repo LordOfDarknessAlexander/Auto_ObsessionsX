@@ -120,22 +120,22 @@ function setName()
 function setMoney()
 {
 	$('div#statBar label#money').text('Money: ' + userStats.money.toFixed(2) );
-	$('div#auctionStatBar label#money').text('Money: ' + userStats.money.toFixed(2) );
+	//$('div#auctionStatBar label#money').text('Money: ' + userStats.money.toFixed(2) );
 }
 function setTokens()
 {
 	$('div#statBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
-	$('div#auctionStatBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
+	//$('div#auctionStatBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
 }
 function setPrestige()
 {
 	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
-	$('div#auctionStatBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
+	//$('div#auctionStatBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
 }
 function setMarkers()
 {	//updates html label element, within context of the Game menu only
 	$('label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
-	$('div#auctionStatBar label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
+	//$('div#auctionStatBar label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
 }
 function setStatBar()
 {
@@ -645,7 +645,7 @@ jq.AuctionSelect.backBtn.click(function()
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
 	//Auction.setup();
-	
+	jq.carImg.show();
 	//$('#menu').addClass('auction');
 	//AuctionSelect.init();
 });
@@ -653,6 +653,7 @@ jq.Game.toAuctionBtn.click(function()
 {
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
+    jq.carImg.hide();
 	//$('#menu').addClass('auction');
 	//auctionStop = false;
 	AuctionSelect.init();
@@ -664,6 +665,7 @@ jq.Auction.homeBtn.click(function()
 	//$('#Auction').hide();
 	jq.Auction.menu.hide();
 	jq.Game.menu.show();
+    jq.carImg.show();
 	//jq.Game.menu.children().toggle();	//hides/showns all child elements
 	
 	setStatBar();
@@ -683,7 +685,8 @@ jq.Auction.backBtn.click(function()
 {
 	Auction.close();
 	jq.Auction.menu.hide();
-	jq.AuctionSelect.menu.show();	
+	jq.AuctionSelect.menu.show();
+    jq.carImg.hide();	
 });
 jq.Sold.garageBtn.click(function()
 {
@@ -691,6 +694,7 @@ jq.Sold.garageBtn.click(function()
     jq.Sold.menu.hide();
 	jq.Garage.menu.show();
     Garage.init();
+    jq.carImg.hide();
     //appState = GAME_MODE.GARAGE:
 });
 
@@ -715,7 +719,7 @@ jq.Game.repairBtn.click(function()
 	jq.Game.menu.hide();
 	jq.RepairShop.menu.show();
 	Repair.init();
-
+    jq.carImg.show();
 	//saveUser();	//save user stats after purchasing
 });
 //RepairMenu Back Button 
@@ -727,6 +731,7 @@ jq.RepairShop.backBtn.click(function()
 	setStatBar();
 //	setAdBG();
 	jq.Game.menu.show();
+    jq.carImg.show();
 	//resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });
@@ -736,6 +741,7 @@ jq.Funds.backBtn.click(function()
 	setStatBar();
 //	setAdBG();
 	saveUser();
+    jq.carImg.show();
 });
 //function rotateBtns(index)
 //{		
@@ -824,6 +830,7 @@ $('.sound').click(function()
 jq.Sold.homeBtn.click(function(){
 	jq.Sold.menu.hide();
 	jq.Game.menu.show();
+    jq.carImg.show();
 	appState = GAME_MODE.MAIN_MENU;
 	auctionEnded = false;
 	endGame = false;

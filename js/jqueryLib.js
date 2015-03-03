@@ -10,6 +10,8 @@ var jq = {
 	adBar:$('img#adBar'),
     statBar:$('div#statBar'),
 	userCash:$('label#userCash'),
+    //msg:$('p#msg'),   //a label for sending messages to the user
+    carImg:$('img#mainCar'),   //a label for sending messages to the user
 	setCash : function(val)
 	{	//set the html for the userCash label, to be displayed in browser
 		this.userCash.html(val.toString());
@@ -19,7 +21,7 @@ var jq = {
 	},
 	Game : {	//rename to something less vague
 		menu : $('#gameMenu'),
-		homeImg : $('img#homeImg'),
+		homeImg : $('img#mainCar'),
 		//left menu
 		toCarsBtn : $('div#gameMenu button#myCars'),
 		//toProjBtn : $(''),
@@ -206,6 +208,7 @@ $('.back').click(jq.Credits.toggle);
 $('#addFunds').click(function() 
 {
 	jq.Funds.toggle();
+    jq.carImg.hide();
     //jq.RepairShop.toggle();
     //$('#menu').addClass('AddFunds');
 	//addFundsMode();	//is ok to call external functions, as long as they are defined in program.js

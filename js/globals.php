@@ -13,7 +13,7 @@ var width = canvas.getAttribute('width'),
 	height = canvas.getAttribute('height');
 /*var canvas = {
     jqo : document.getElementById('canvas'),	//$("#canvas")?
-    context:canvas.getContext('2d'),
+    context:this.jqo.getContext('2d'),
     //aspect ratio
     width:canvas.getAttribute('width'),
 	height:canvas.getAttribute('height')

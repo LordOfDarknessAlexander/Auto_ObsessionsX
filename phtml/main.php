@@ -25,6 +25,7 @@ $AB_NAME = 'Andrew Best';
         <label id='prestige'>Prestige:</label>
         <label id='m_marker'>Mile Markers:</label>
     </div>
+    <img id='mainCar' src='images\\garageEmpty.png'>
     <div id='menu'>
         <div id='progress'>
             <div id='percent'>Downloading: <span id='p'></span></div>
