@@ -71,7 +71,7 @@ function outputCar($args){
     <button id='backBtn'>Back</button>
     <!--auctionCar will be <img id=userCar'>.
     The code can be streamlined with jQuery in JS-->
-    <img id='auctionCar'>
+    <!--img id='auctionCar'-->
 	
     <label id='carPrice'></label>
     <label id='carInfo'></label>

@@ -102,30 +102,3 @@ require_once 'ui.php';
 	top:25%;
 	left:25%;
 }
-<?php divAuction();?> div#statBar{
-{
-    
-
-	background-size : 100%,10%;
-	position:absolute;
-	top:0%;
-	left:6%;
-	width:90%;
-	height:10%;
-	
-	font-family:"Kozuka Gothic Pro B";
-	text-align:left;
-	color:white;
-	font-weight: bold;
-	z-index : -6;
-	font-size:1.2em;
-}
-div#statBar label{
-    position:absolute;
-    width:25%;
-}
-div#statBar label#money{left:0%;top:75%;}
-div#statBar label#tokens{left:25%;top:75%;}
-div#statBar label#prestige{left:50%;top:75%;}
-div#statBar label#m_marker{left:75%;top:75%;}
-}

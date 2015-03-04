@@ -1,13 +1,14 @@
 <?php
 //header('Content-type: application/javascript; charset: UTF-8');
 //require_once '../ao.php';
-//function divGame(){return 'div#gameMenu'}
-//function divGarage(){return 'div#garage'}
-//function divAuction(){return 'div#auction'}
-//function divAuctionSell(){return 'div#auctionSell'}
-//function divCarView(){return 'div#carView'}
-//function divRepairShop(){return 'div#repairShop'}
-//function divFunds(){return 'div#funds'}
+//function dGame(){>'div#gameMenu'<php;}
+//function dGarage(){return 'div#garage';}
+//function dAuction(){return 'div#auction';}
+//function dASelect(){return 'div#auctionSelect';}
+//function dASell(){return 'div#auctionSell';}
+//function dCV(){return 'div#carView';}
+//function dRS(){return 'div#repairShop;}
+//function dFunds(){return 'div#funds';}
 ?>
 var jq = {
 	//namespace containing application bindings for jquery,
@@ -27,6 +28,13 @@ var jq = {
 		menu : $('#gameMenu'),
 		homeImg : $('img#homeImg'),
 		//left menu
+<?php
+function jqBind($objName, $tag){
+    //echo $objName;?> : $('<?php echo dGM() . ' ' . $tag;?>')<?php
+}?>
+        //jqBind('toCarsBtn', 'button#myCars')?>,
+		//<?php jqBind('toAuctionBtn', '#toAuctionBtn');?>,
+		//<?php jqBind('repairBtn', '#buyUpgradesBtn');?>,
 		toCarsBtn : $('div#gameMenu button#myCars'),
 		//toProjBtn : $(''),
 		//toGarageBtn : $(''),

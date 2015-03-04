@@ -101,10 +101,12 @@ var Auction =
                     context.font = '26px arial, sans-serif';  
 
                     jq.Auction.menu.show();		//$('#Auction').show();
+                    jq.carImg.show();
+                    setHomeImg(Auction._car.getFullPath() );
                     
                     Auction.setBidBtnText();
                     
-                    $('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
+                    //$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
                     $('div#Auction label#carInfo').text(/*'<h1>' + */Auction._car.getFullName() + '-\n    ' + Auction._car.getInfo() );
                     //$('#menu').removeClass('gameMenu');
                     //$('#menu').addClass('Auction');
@@ -166,6 +168,8 @@ var Auction =
 		this.winningTimer = 0;
 		player.reset();
 		stop = false;
+        
+        jq.carImg.hide();
 	},
 	update : function()
 	{	//main update logic, called per frame

@@ -39,14 +39,14 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         <div id='main'>		
             <h1><?php echo $AO_NAME;?></h1>
            
-             <div id='login'>
+             <!--div id='login'>
 				<form  action='Users/login.php' method='post'>
 				  <p> USER NAME <input type='text' name='username'></p>
 				  <p> PASSWORD <input type='password' name='pword'></p>
 				  <p><input type='submit' name='submit' value='Log in'></p>
 				</form>
 					
-            </div>
+            </div-->
             <ul>
                <li><a href='javascript:void(0)' class='button play'>Start Game</a></li>
                <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
@@ -86,7 +86,7 @@ $scripts = array(
     'funds',
     'garage',
     
-    //profile
+    'profile',
     //messages
     //ranks
     //search
@@ -101,9 +101,6 @@ foreach($scripts as $val){
     require_once($val.'.php');
 }
 ?>
-    <div id='profile'>
-        <button id='backBtn'>Back</button>
-    </div>
     <div id='messages'>
         <button id='backBtn'>Back</button>
     </div>

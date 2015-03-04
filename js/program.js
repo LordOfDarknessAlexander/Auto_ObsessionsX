@@ -231,6 +231,9 @@ $(document).ready(function()
 			ticker++;
 		}	
 	}
+    //Pro tip:Don't bother opening html/xml files in javascript,
+    //do it it PHP instead! not data transfer as php opens the file locally on the server,
+    //then echo out the code bits you want to access the file's data!
 function openDoc(url, reader)
 {	//parse xml document in xml DOM object
 	reader.open("GET",url,true);    //breaks if set to false; ASync is good anyways, we want this
@@ -368,36 +371,7 @@ for(var carNode in vehicles.childNodes)
 {
 	var newCar = Vehicle(car);
 	//instantiate js object or retain html node 'car' for read only access
-}
-
-
-function initGarage()
-{	//initilize user's garage will available cars,
-	//accessed from user.xml, referenced from database vehicle.xml
-	//parse user xml
-	//get user with ID
-	var userNode = getElementById('');
-	for(child in userNode)
-	{
-		var carID = child.getAttributeById('id');
-		userGarage.push(VehicleXML.getElementById(carID) );
-	}
-	return;
-}
-function addCar(car)
-{	//call after user wins auction, adding car to garage and user.xml
-	var garage = userNode.getElementById('garage');
-	if(node with id exists)
-	{
-		alert('already own car with id:' + car.id);
-	}
-	else
-	{
-		garage.addNode('<ch>' + car.id + '</ch>');
-		//commit changes to server
-	}
-}
-*/
+}*/
 
 //Load the splash screen first
 assetLoader.finished = function() 
@@ -609,6 +583,7 @@ Auction.sold = function()
 	else
 	{
 		$('div#sold label').text('Unfortunately you have lost the auction for the ' + Auction._car.getFullName() + '\nBetter luck next time!\n');
+        setHomeImg();
 	}
 	//Auction.close();
 	//init();
@@ -642,6 +617,7 @@ jq.AuctionSelect.backBtn.click(function()
 	//setAdBG();
 	//userHUD();
 	setStatBar();
+    setHomeImg();
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
 	//Auction.setup();
@@ -668,10 +644,12 @@ jq.Auction.homeBtn.click(function()
     jq.carImg.show();
 	//jq.Game.menu.children().toggle();	//hides/showns all child elements
 	
-	setStatBar();
-	//setAdBG();
 	ajax_post();
+    
+    setStatBar();
+	//setAdBG();
     setHomeImg();
+    
 	//userHUD();
 	//var car = Garage.getCurrentCar();
 	
@@ -830,6 +808,7 @@ $('.sound').click(function()
 jq.Sold.homeBtn.click(function(){
 	jq.Sold.menu.hide();
 	jq.Game.menu.show();
+    setHomeImg();
     jq.carImg.show();
 	appState = GAME_MODE.MAIN_MENU;
 	auctionEnded = false;

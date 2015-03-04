@@ -449,12 +449,25 @@ var CarView = {
 	}
 	//update, ender, exit?
 };
-function setHomeImg(){
+function setHomeImg(path){
     var car = Garage.getCurrentCar();
+    var homeImg = jq.carImg;
     
-    if(car !== null){
-        var homeImg = jq.carImg;    //$('//div#gameMenu img#homeImg');
-        homeImg.attr('src', car.getFullPath() );
+    if(path === null || path === undefined){
+        //no param 'path' passed to function, empty args
+        if(car !== null){
+            homeImg.attr('src', car.getFullPath() );
+        }
+        else{   //set to empty garage!
+            homeImg.attr('src', getHostPath() + "images/garageEmpty.png");
+        }
+    }
+    else{
+        //for use by carView and Auction, etc to set custom image,
+        //that isn't the current vehicle
+        //TODO;regex match to check string is valid filepath!
+        //
+        homeImg.attr('src', path);
     }
 }
 jq.Garage.backBtn.click(function()

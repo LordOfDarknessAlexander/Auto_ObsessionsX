@@ -10,6 +10,7 @@ $paths = array(
     'AuctionSell',
     'LoseAuction',
     'garage',
+    'profile',
     //'register'
 );
 foreach($paths as $p){html::incPHPCSS($p);}
