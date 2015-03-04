@@ -1,5 +1,6 @@
 <?php
-require_once '..\ao.php';
+//causing issues
+require_once 'ao.php';
 $SITE_NAME = 'Auto-Obsessions';
 ?>
 <p id='legal'><?php echo $SITE_NAME;?> &copy; 2015, All Rights Reserved.
