@@ -58,6 +58,34 @@ function getAuctionCars(){
     }
     echo json_encode($cars);
 }
+function getAuctionCarsCount(){
+    //returns the number of entries in vehicle database
+    global $AO_DB;
+    $aoCars = 'aoCars';
+    //$count is initialized when this is called for the first time
+    static $count = 0;
+    //static $getCars = $AO_DB->prepare(
+        //"SELECT * FROM $aoCars"
+    //);
+    if($count == 0){
+        //this should only execute once
+        $res = $AO_DB->query(
+            "SELECT * FROM $aoCars"
+        );
+        
+        if($res){    
+            //fetch each entry until there are no more
+            while($row = mysqli_fetch_array($res) ){
+                $count += 1;
+            }
+            mysqli_free_result($res);
+        }
+        else{   //The vehicle is already registered
+            //echo "<p class='error'>User: has no entries in database</p>";
+        }
+    }
+    return $count;
+}
 function getUserCarFromID($carID){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
@@ -104,7 +132,78 @@ function getUserCarFromID($carID){
         echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
     }
 }
-
+function getUserCarCount(){
+    //returns the number of entries in user's database(garage)
+    global $aoUsersDB;
+    $uid = 'user' . strval(0);  //$SESSION['userID'];
+    //$count is initialized when this is called for the first time
+    $count = 0;
+    //this should only execute once
+    $res = $aoUsersDB->query(
+        "SELECT * FROM $uid"
+    );
+    
+    if($res){    
+        //fetch each entry until there are no more
+        while($row = mysqli_fetch_array($res) ){
+            $count += 1;
+        }
+        mysqli_free_result($res);
+    }
+    //else{query failed, no entries in table}
+    return $count;
+}
+//function getAuctionWins(){
+    //returns how many auctions the user has won
+//}
+//function getAuctionLosses(){
+    //returns how many auctions the user has lost
+//}
+//function getAuctionAvg(){
+    //returns aver ratio of wins/losses
+    //return getAuctionWins()
+//}
+function getUserSalesCount(){
+    //returns the number cars sold by the user
+    global $aoCarSalesDB;
+    $uid = 'user' . strval(0);  //$SESSION['userID'];
+    //$count is initialized when this is called for the first time
+    $count = 0;
+    /*
+    $res = $aoCarSalesDB->query(
+        "SELECT * FROM $uid"
+    );
+    
+    if($res){    
+        //fetch each entry until there are no more
+        while($row = mysqli_fetch_array($res) ){
+            $count += 1;
+        }
+        mysqli_free_result($res);
+    }
+    //else{user has no entries in table, count is 0;}
+    */
+    return $count;
+}
+//function getRemainingCars(){
+    //returns an array of cars the user still has to purchase
+//}
+function getTotalUserCarCount(){
+    //total cars ever purchased by the user
+    return getUserCarCount() + getUserSalesCount();
+}
+function getRemainingCarCount(){
+    //returns the number of cars the user still has to purchase
+    //$ret = getAuctionCars() - (getUserCarCount() + getUserSalesCount() );
+    //echo $ret
+    return getAuctionCars() - getTotalUserCarCount();
+}
+function getGameCompletion(){
+    //percentage of cars bought and sold by the user
+    $acCount = getAuctionCarsCount();
+    
+    return $acCount != 0 ? getTotalUserCarCount() / $acCount : 0.0;
+}
 function echoUserCars(){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;

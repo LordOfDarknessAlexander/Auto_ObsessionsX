@@ -406,7 +406,9 @@ var CarView = {
 		if(selCarIndex !== null && userGarage.length != 0)
 		{
 			var car = userGarage[selCarIndex];
-			jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
+            setHomeImg(car.getFullPath() );
+            jq.carImg.show();
+			//jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
 			jq.CarView.carInfo.text(car.getFullName() + '-\n    ' + car.getInfo()) ;//xmlCarinfo.getElemById(car.id) );
 			jq.CarView.sellBtn.off().click({i:selCarIndex}, AuctionSell.init);
             //set dt progress bars
@@ -488,6 +490,7 @@ jq.CarView.homeBtn.click(function()
 {
 	jq.Game.menu.show();
 	jq.CarView.menu.hide();
+    setHomeImg();
 	//appState = GAME_STATE.MAIN;
 });
 /*jq.Garage.selectBtn.click(function()

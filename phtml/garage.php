@@ -66,7 +66,7 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
     <button id='selectCarBtn'>Select</button>
     <button id='sellBtn'>Sell</button>
 	
-    <img id='car'> <!--src='images\\vehicle.jpg'-->
+    <!--img id='car'> <src='images\\vehicle.jpg'-->
     <!--div id='statLabels'>
         <lable>Drivetrain</label>
         <lable>Body</label>
@@ -74,8 +74,7 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
         <lable>Documents</label>
     </div-->
     <!--div id='carInfoBoxes'></div-->
-<?php
-  
+<?php  
     carInfoLabel();
     backBtn();
     homeBtn();

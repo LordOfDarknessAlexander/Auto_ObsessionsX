@@ -2,6 +2,7 @@
 //require_once '../include/security.php'
 require_once './include/dbConnect.php';
 require_once './vehicles/vehicle.php';
+require_once 'AO_UI.php';
 
 function sqlSelectAll($tableName, $callbackStr){
     //$tableName: string name of the table in the database to query
@@ -61,14 +62,14 @@ function outputCar($args){
     <div style="margin-top:-6em;margin-left:26em">	   
     </div> 
 <?php
-    //backBtn();
-    //homeBtn();
+    backBtn();
+    homeBtn();
 ?>
     <!--label id='myCash'>money</label>
     <label id='carPrice'>price</label-->
     <button id='bid'>"Bid:money"</button>
 	<button id='buyout'>"Buyout"</button>
-    <button id='backBtn'>Back</button>
+
     <!--auctionCar will be <img id=userCar'>.
     The code can be streamlined with jQuery in JS-->
     <!--img id='auctionCar'-->
@@ -76,7 +77,6 @@ function outputCar($args){
     <label id='carPrice'></label>
     <label id='carInfo'></label>
 <?php //carInfo();?>
-    <button id='homeBtn'>Home</button>	
 </div>
 
 <div id='AuctionSell'>
@@ -85,12 +85,14 @@ function outputCar($args){
     <!--<php
     backBtn();
     homeBtn();>select which car to bid for-->
-    <button id='backBtn'>Back</button>
-    <button id='homeBtn'>Home</button>
+<?php
+    backBtn();
+    homeBtn();
+?>
     <div id='carView'>
-        <ul id='auctionCars'>
+        <!--ul id='auctionCars'>
             <!--populated by application with format:
-            <img><label></><button></>-->
-        </ul>
+            <img><label></><button></>>
+        </ul-->
     </div>
 </div>

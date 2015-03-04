@@ -15,7 +15,7 @@ function divAS(){
 	display: none;
 	/*overflow:scroll;*/
 	text-align: center;
-	padding-top: 92px;
+	/*padding-top: 92px;*/
 	z-index: 1;
 	width: 100%;
 	height: 100%;
@@ -27,32 +27,45 @@ function divAS(){
 	padding:0;
 	list-style-type:none;
 }
-<?php divAS();?> li
+<?php divAS();?> div
 {
-	margin:0 0 5% 0;	/*top right bottom left*/
+	margin:0 0 0% 0;	/*top right bottom left*/
 	/*padding: 50px 50px;
 	display:inline;*/
+    height:15%;
 }
-<?php divAS();?> li label#carInfo
+<?php divAS();?> div label#carInfo
 {
 	background-color:grey;
 	text-align:center;
 <?php posAbs();?>
 	left:20%;
-	width:60%;
-	height:20%;
+	width:50%;
+	height:15%;
 }
-<?php divAS();?> li button
+<?php divAS();?> div button
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	background-size : 100% 100%;
 <?php posAbs();?>
-	right: 5%;
-	height:20%;
-	width:15%;
+	height:15%;
+	width:10%;
 	color:red;
+    right:20%;
 }
-<?php divAS();?> li button label
+<?php divAS();?> div button#view
+{
+    background: url('../images/view.png') no-repeat 0 0;
+    background-size:100% 100%;
+    right:10%;
+}
+<?php divAS();?> div button#cc
+{
+    background: url('../images/cancel.jpg') no-repeat 0 0;
+    background-size:100% 100%;
+    right:0%;
+}
+<?php divAS();?> div button label
 {
 	font-size:1.25em;
 	background-size: 100% 100%;
@@ -62,19 +75,19 @@ function divAS(){
 	text-align::center;
 	color:red;
 }
-<?php divAS();?> li img
+<?php divAS();?> div img
 {
 <?php posAbs();?>
-	left:5%;
-	width:15%;
-	height:20%;
+	left:0%;
+	width:20%;
+	height:15%;
 }
 <?php divAS();?> div#carView
 {
 <?php posAbs();?>
     overflow-y:scroll;
     bottom:0%;
-    left:15%;
-    width:70%;
-    height:60%;
+    left:10%;
+    width:80%;
+    height:70%;
 }

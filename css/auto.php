@@ -142,9 +142,9 @@ button#backBtn
     cursor:pointer;
 	position:absolute;
 	left:5%;
-	bottom:5%;
-    width:8%;
-	height:8%;
+	bottom:6%;
+    width:4%;
+	height:6%;
 }
 button#homeBtn
 {
@@ -153,13 +153,21 @@ button#homeBtn
     background-size : 100% 100%;
     
 	position:absolute;
-    width:8%;
-	height:8%;
+    width:4%;
+	height:6%;
 	
 	right:5%;
-	bottom:5%;
+	bottom:6%;
+    margin:0%;
 }
-
+label#info{
+    position:absolute;
+    height:10%;
+    width:60%;
+    bottom:72%;
+    left:20%;
+    font-size:1vw;
+}
 .wrapper 
 {
     height:100%;
@@ -267,7 +275,13 @@ div#main a:hover {
 {
  color:aqua;	
 }
-
+/*h1{
+    position:absolute;
+    top:10%;
+    left:10%;
+    width:80%;
+    height:5%;
+}*/
 #main h1 
 {
   color: #AFCAAF;

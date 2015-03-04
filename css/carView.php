@@ -23,6 +23,7 @@ function divCarView(){
 	z-index: 1;
 	width: 100%;
 	height: 100%;
+    color:red;
 }
 <?php divCarView();?> progress
 {
@@ -37,20 +38,10 @@ function divCarView(){
     posAbs();
 ?>
 }
-<?php divCarView();?> img#car
-{
-	position:absolute;
-	width:50%;
-	height:50%;
-	bottom:20%;
-	margin-right:10%;
-	margin-left: 5%;
-	left:20%;
-}
 
 <?php divCarView();?> button#selectCarBtn
 {
-	top:24%;
+	bottom:72%;
 	left:40%;
 	height:5%;
     width:10%;
@@ -61,49 +52,32 @@ function divCarView(){
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	background-size: 100% 100%;
 	left:50%;
-	top:24%;
+	bottom:72%;
 	height:5%;
     width:10%;
     font-size:2vw;
 }
-/*
-div#CarView button#carViewBackBtn{
-	background: url('../images/backBtn.png') no-repeat 0 0;
-	
-	left:5%;
-	bottom:0%;
-	width:10%;
-	height:10%;
-}*/
-/*
-div#CarView button#homeBtn
-{
-	background: url('../images/homeBtn.png') no-repeat 0 0;
 
-	right:5%;
-	bottom:0%;
-	width:10%;
-	height:10%;
-}*/
 <?php divCarView();?> label#carInfo{
 	color:black;
 	background-color:grey;
 	text-align:left;
 	position:absolute;
-	left:25%;
+	left:20%;
 	bottom:2%;
-	width:50%;
-	height:14%;
+	width:60%;
+	height:10%;
+    font-size:1.0vw;
 }
 <?php divCarView();?> h2{
 <?php
     posAbs();
 ?>
-	width:18%;
-	height:4%;
+	width:14%;
+	height:5%;
     font-size:2vw;/*size element relative to viewport width!*/
     font-weight:bold;
-    background-color:white;
+    background-color:grey;
     /*background:url('../headerBG.jpg');*/
     margin:0%;
     
@@ -116,41 +90,40 @@ div#CarView button#homeBtn
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/
     
-    width:16%;
-	height:22%;
+    width:14%;
+	height:23%;
     
     font-size:1.5vw;
     text-align:left;
 }
+<?php divCarView();?> h2#dt{
+	top:28%;
+	left:5%;
+}
 <?php divCarView();?> div#drivetrain{
-	top:30%;
+	top:33%;
 	left:5%;
 	
+}
+<?php divCarView();?> h2#body{
+	top:60%;
+	left:5%;
 }
 <?php divCarView();?> div#body{    
 	top:65%;
 	left:5%;
 	
 }
+<?php divCarView();?> h2#interior{
+	top:28%;
+	right:5%;
+}
 <?php divCarView();?> div#interior{    
-	top:30%;
+	top:33%;
 	right:5%;
 }
 <?php divCarView();?> div#docs{    
 	top:65%;
-	right:5%;
-}
-
-<?php divCarView();?> h2#dt{
-	top:25%;
-	left:5%;
-}
-<?php divCarView();?> h2#body{
-	top:60%;
-	left:5%;
-}
-<?php divCarView();?> h2#interior{
-	top:25%;
 	right:5%;
 }
 <?php divCarView();?> h2#docs{
@@ -158,7 +131,3 @@ div#CarView button#homeBtn
 	
 	right:5%;
 }
-
-
-
-

@@ -12,9 +12,6 @@ require_once 'funds.php';   //move to repair
 function divMain(){
     echo 'div#gameMenu';
 }
-function divStatBar(){
-    echo 'div#statBar';
-}
 ?>
 
 <?php divMain();?>
@@ -54,49 +51,39 @@ function divStatBar(){
     posAbs();
     defaultColor();
 ?>
-    //background-color:grey;
-	left:2%;
+	left:5%;
 	bottom:12%;
-    width:20%;
-    height:50%;
+    width:15%;
+    height:60%;
 	
-}
-<?php divMain();?> img#homeImg
-{<?php
-    posAbs();
-    css::size('56%', '54%');
-?>
-	left:22%;
-	bottom:12%;
 }
 <?php divMain();?> div#menuRight
 {<?php
     posAbs();
     defaultColor();
 ?>
-   // background-color:grey;
-	right:2%;
-	/*top:40%;*/
+	right:5%;
     bottom:12%;
-    width:20%;
-    height:50%;
+    width:15%;
+    height:60%;
 }
 <?php divMain();?> button#myCars
 {<?php
+    posAbs();
     css::defaultBG('../images/garageBtn.png');
     css::bgSize('100%', '100%');
     //garageBtnBG();
     //defaultColor();
     fontBold();
     //cursorPtr();
-    css::size('75%', '50%');
+    css::size('95%', '48%');
 ?>
-	margin-top : -6%;
-	margin-bottom : 6%;
-	margin-left: -6%;
+    top:0%;
+    left:0%;
 }
 <?php divMain();?> div button#toAuctionBtn
 {<?php
+    posAbs();
     //auctionBtnBG();
     css::defaultBG('../images/auctionBtn.png');
     css::bgSize('100%', '100%');
@@ -104,33 +91,36 @@ function divStatBar(){
     //defaultColor();
     fontBold();
     //cursorPtr();
-    css::size('75%', '50%');
+    css::size('95%', '48%');
 ?>
-	margin-left: -6%;
+    top:52%;
+    left:0%;
 }
 <?php divMain();?> div button#profile
 {<?php
+    posAbs();
     css::defaultBG('../images/profileBtn.png');
     css::bgSize('100%', '100%');
     //profileBtnBG();
     //defaultColor();
     fontBold();
     //cursorPtr();
-    css::size('75%', '50%');
+    css::size('95%', '48%');
 ?>
-	margin-top : -6%;
-	margin-bottom : 6%;
-	margin-left: 6%;
+    top:0%;
+    right:0%;
 }
 <?php divMain();?> div button#buyUpgradesBtn
 {<?php
+    posAbs();
     css::defaultBG('../images/repairBtn.png');
     css::bgSize('100%', '100%');
     //repairBtnBG();
     //defaultColor();
     fontBold();
     //cursorPtr();
-    css::size('75%', '50%');
+    css::size('95%', '48%');
 ?>
-	margin-left: 6%;
+	top:52%;
+    right:0%;
 }

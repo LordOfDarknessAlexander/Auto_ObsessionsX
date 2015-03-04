@@ -88,7 +88,7 @@ var jq = {
 		backBtn : $('div#CarView button#backBtn'),
 		homeBtn : $('div#CarView button#homeBtn'),	//$('button#homeBtn', jq.CarView.menu),
 		sellBtn : $('div#CarView button#sellBtn'),
-		carImg : $('img#car'),
+		//carImg : $('img#car'),
 		carInfo : $('div#CarView label#carInfo'),
 		toggle:function()
 		{	//go from (my cars to car view) || (car view to my cars)
@@ -103,7 +103,7 @@ var jq = {
 		backBtn:$('div#AuctionSell button#backBtn'),
         homeBtn:$('div#AuctionSell button#homeBtn'),
 		carView:$('div#AuctionSell div#carView'),
-        carList:$('div#AuctionSell ul#auctionCars'),
+        //carList:$('div#AuctionSell ul#auctionCars'),
         toggle:function(){
 			jq.CarView.menu.toggle();
 			jq.AuctionSell.menu.toggle();
@@ -214,7 +214,10 @@ $('#addFunds').click(function()
 	//addFundsMode();	//is ok to call external functions, as long as they are defined in program.js
 });
 //
-jq.CarView.backBtn.click(jq.CarView.toggle);
+jq.CarView.backBtn.click(function(){
+    jq.CarView.toggle();
+    jq.carImg.hide();
+});
 //
 jq.Game.toProfileBtn.click(jq.Profile.toggle);
 jq.Game.toMsgBtn.click(jq.Messages.toggle);
@@ -231,12 +234,15 @@ jq.Business.backBtn.click(jq.Business.toggle);
 
 jq.AuctionSell.backBtn.click(function(){
     jq.AuctionSell.toggle();
+    jq.carImg.show();
     //appState = GAME_MODE.CAR_VIEW;
 });
 jq.AuctionSell.homeBtn.click(function(){
     //AuctionSell.close();
     jq.AuctionSell.menu.toggle();
     jq.Game.menu.toggle();
+    setHomeImg();
+    js.carImg.show();
     //appState = GAME_MODE.MAIN;
 });
 //

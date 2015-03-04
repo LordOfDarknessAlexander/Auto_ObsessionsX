@@ -37,7 +37,7 @@ require_once 'ui.php';
     
 	width:18%;
 	height:60%;
-    top:25%;
+    top:28%;
     left:2%;
     
     font-size:1.25vw;
@@ -53,7 +53,7 @@ require_once 'ui.php';
     
 	width: 18%;
 	height: 60%;
-    top:25%;
+    top:28%;
     right:2%;
     
     font-size:1.25vw;

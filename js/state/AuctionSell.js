@@ -248,20 +248,23 @@ var AuctionSell =
 				var li = $('li#' + liID);
 				//if(li === null || li === 'undefined')
 				{
-					var btnStr = "<li id='" + liID + "'>" + 
+					var btnStr = "<div id='" + liID + "'>" + 
 						"<img src='" + car.getFullPath() + "'>" +
-						"<label id='carInfo'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
-						"<button id='" + btnID + "'>" + 
+						"<label id='carInfo'>" + car.getFullName() + "</label>" +
+						"<button id='view'>View</button>" +
+                        "<button id='" + btnID + "'>" + 
 							"Price: $<label id='price'>" + (car.getPrice() ).toString() + "</label><br>" +
 							"Auction expires: <label id='expireTime'></label>" +
 						"</button>" +
-					"</li><br>";
+                        "<button id='cc'></button>" +
+					"</div><br>";
 					
-					jq.AuctionSell.carList.append(btnStr);
+					jq.AuctionSell.carView.append(btnStr);
 				}
 			}
 		}
 		jq.AuctionSell.toggle();
+        jq.carImg.hide();
         AuctionSell.save();
 	},
 	update : function(dt)

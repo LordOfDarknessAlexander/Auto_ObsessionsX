@@ -29,11 +29,11 @@ function divRepair(){
 <?php
     posAbs();
 ?>
-	width:20%;
+	width:14%;
 	height:5%;
-    font-size:2vw;/*size element relative to viewport width!*/
+    font-size:1.8vw;/*size element relative to viewport width!*/
     font-weight:bold;
-    background-color:white;
+    background-color:grey;
     /*background:url('../headerBG.jpg');*/
     margin:0%;
     
@@ -46,9 +46,10 @@ function divRepair(){
     overflow-y:scroll;
     background:url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/
-    width:16%;
-	height:22%;
-    font-size:1.5vw;
+    width:14%;
+	height:23%;
+    
+    font-size:1.25vw;
     text-align:left;
 }
 <?php divRepair();?> div button
@@ -77,27 +78,7 @@ button#addFunds
 ?>
 //bottom: 10%;
 }
-/*
-<?php divRepair();?> div#upgrades
-{
-<?php
-    posAbs();
-?>
-	width:15%;
-	top:22%;
-	height:60%;
-	left:5%;
-}
-<?php divRepair();?> div#repairs
-{
-<?php
-    posAbs();
-?>
-	width:16%;
-	height:22%;
-	top:30%;
-	right:5%;
-}*/
+
 <?php divRepair();?> img#userCar
 {<?php
     posAbs();
@@ -116,7 +97,7 @@ button#addFunds
 }
 <?php divRepair();?> div#drivetrain
 {
-	top:30%;
+	top:33%;
 	left:5%;
 }
 <?php divRepair();?> div#body
@@ -126,7 +107,7 @@ button#addFunds
 }
 <?php divRepair();?> div#interior
 {    
-	top:30%;
+	top:33%;
 	right:5%;
 }
 <?php divRepair();?> div#docs
@@ -137,7 +118,7 @@ button#addFunds
 
 <?php divRepair();?> h2#dt
 {
-	top:25%;
+	top:28%;
 	left:5%;
 }
 <?php divRepair();?> h2#body
@@ -147,7 +128,7 @@ button#addFunds
 }
 <?php divRepair();?> h2#interior
 {
-	top:25%;
+	top:28%;
 	right:5%;
 }
 <?php divRepair();?> h2#docs
