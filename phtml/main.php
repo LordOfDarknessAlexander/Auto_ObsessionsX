@@ -13,13 +13,14 @@ $TD_NAME = 'Tyler Drury';
 $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
 //$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+//$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
 ?>	
 <div class='wrapper'>
 	<!--root div element of web page!-->	
     <div class='sound sound-off'></div>
 	
     <div id='statBar'>  
-        <!--this stat bar will be visable across all pages/divs-->
+        <!--this stat bar will be visible across all pages/divs-->
         <label id='money'>Money: </label>
         <label id='tokens'>Tokens:</label>
         <label id='prestige'>Prestige:</label>
