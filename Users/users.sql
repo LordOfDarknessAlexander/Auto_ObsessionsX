@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `psword` char(40) NOT NULL,
   `uname` char(12) NOT NULL,
   `registration_date` datetime NOT NULL,
-  `user_level` tinyint(2) unsigned,
-  `money` float(2,2) NOT NULL,
+  `user_level` tinyint(2) unsigned NOT NULL,
+  `money` float(20,2) NOT NULL,
   `m_marker` int(40) NOT NULL,
   `tokens` int(40) NOT NULL,
   `prestige` int(40) NOT NULL
@@ -71,6 +71,4 @@ ALTER TABLE `users`
 --
 ALTER TABLE `users`
 MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
