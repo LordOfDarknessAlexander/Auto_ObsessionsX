@@ -231,7 +231,7 @@ var Auction =
 			context.clearRect(0, 0, canvas.width, canvas.height);
 		}
 			
-	  	Auction.buyOut();
+	  //	Auction.buyOut();
 	},
 	render : function()
 	{
@@ -447,6 +447,7 @@ var Auction =
 		//Going crowd roars someone is about to win the bid
 		//break out of while if someone outbids current bidder or if player does,
 		//breaks out of the while loop and enemyWinning becomes false
+		context.font = '20px arial, sans-serif';
 		if(this.winningTimer >= this.winningTimerCap)
 		{
 			while((this.playerWinning || this.enemyWinning) && (this.goingTimer < 660) && (!auctionStop))
@@ -456,7 +457,7 @@ var Auction =
 				{
 					this.goingTimer++
 					//console.log("Going once");
-					context.fillText( "Going Once" ,ENEMY_X + 600 , 270);
+					context.fillText( "Going Once" ,ENEMY_X + 660 , 270);
 					assetLoader.sounds.going.play();
 					break;
 					
@@ -464,7 +465,7 @@ var Auction =
 				else if((this.goingTimer > 370) && (this.goingTimer < 650))
 				{
 					//console.log("Going twice");
-					context.fillText( "Going Twice" ,ENEMY_X + 600 , 290);
+					context.fillText( "Going Twice" ,ENEMY_X + 660 , 290);
 					assetLoader.sounds.going.play();
 					break;
 		
@@ -479,7 +480,7 @@ var Auction =
 						this.playerWon = true;
 						this.buyOut();
 						console.log("Player won");
-						context.fillText( "Sold to player!" ,ENEMY_X + 600 , 310);
+						context.fillText( "Sold to player!" ,ENEMY_X + 660 , 310);
 					}
 					else if(this.enemyWinning)
 					{
@@ -490,7 +491,7 @@ var Auction =
 							if(this.ai[i].winningBid)
 							{
 								console.log("AI won");
-								context.fillText("Sold to " + this.ai[i], ENEMY_X + 600, 310);
+								context.fillText("Sold to " + this.ai[i], ENEMY_X + 660, 310);
 								
 							}
 						}

@@ -68,7 +68,7 @@ function outputCar($args){
     <!--label id='myCash'>money</label>
     <label id='carPrice'>price</label-->
     <button id='bid'>"Bid:money"</button>
-	<button id='buyout'>"Buyout"</button>
+<!---	<button id='buyout'>"Buyout"</button> -->
 
     <!--auctionCar will be <img id=userCar'>.
     The code can be streamlined with jQuery in JS-->
