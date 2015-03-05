@@ -242,13 +242,13 @@ var Auction =
 		
 		if(this.playerWinning)
 		{
-			player.y = 160;
+			player.y = 187;
 			context.fillText('Player Bid :  ' + '$' + this.currentBid.toFixed(2), ENEMY_X, 200);
 		}
 		else
 		{
-		  player.y = 300;
-		  context.fillText('Player Bid :  ' + '$' + this.playerBid.toFixed(2), ENEMY_X, 340);
+		  player.y = 287;
+		  context.fillText('Player Bid :  ' + '$' + this.playerBid.toFixed(2), ENEMY_X, 300);
 		}
 
         //The block below can be cleaned up, thinking of how to do it
