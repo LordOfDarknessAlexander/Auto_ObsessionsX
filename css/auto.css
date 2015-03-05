@@ -27,7 +27,7 @@ canvas
   top: 0;
   left: 0;
   border: 1px solid black;
-  z-index: 1;
+  z-index: 30%;
   width: 100%;
   height: 100%;
 }
@@ -242,19 +242,14 @@ div#main
 
 .button 
 {
-  display: block;
-  width: 20%;
-  height:15%;
-  margin: 0 auto;
-  line-height: 30px;
-  border: 1px solid #AA2666;
-  color: white;
-  font-weight: bold;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  background-color: #FF0DFF;
-  background-image: -webkit-linear-gradient(bottom, #990000 0%, #990000 100%);
-  background-image:         linear-gradient(to bottom, #990000 0%, #B30D5D 100%);
-  border-radius: 5px;
+  	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	color:red;
+    cursor:pointer;
+	background-size: 100% 100%;
+	height:20%;
+	width:46%;
+	color:red;
+	
 }
 
 .button:hover 
@@ -386,34 +381,7 @@ div#statBar label#tokens{left:25%;top:75%;}
 div#statBar label#prestige{left:50%;top:75%;}
 div#statBar label#m_marker{left:75%;top:75%;}
 }
-div#repairStatBar
-{
-    /*background-color:red;*/
-	 overflow-y:none;
-	background: url('../images/StatBar.png') no-repeat 0 0;
-	background-size : 100%,40%;
-	position:absolute;
-	top:30%;
-	left:6%;
-	width:90%;
-	height:25%;
-	/*child elements inherit values, unless otherwise specified*/
-	font-family:"Kozuka Gothic Pro B";
-	text-align:left;
-	color:white;
-	font-weight: bold;
-	z-index : 6;
-	font-size:1.2em;
-}
-div#statBar label{
-    position:absolute;
-    width:25%;
-}
-div#statBar label#money{left:0%;top:75%;}
-div#statBar label#tokens{left:25%;top:75%;}
-div#statBar label#prestige{left:50%;top:75%;}
-div#statBar label#m_marker{left:75%;top:75%;}
-}
+
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) 
 {

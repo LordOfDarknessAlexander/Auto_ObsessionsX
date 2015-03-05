@@ -290,20 +290,21 @@ div#main a:hover {
 
 .button 
 {
-  display: block;
-  width: 6%;
-  height:6%;
-  margin: 0 auto;
-  line-height: 30px;
-  border: 1px solid #AA2666;
-  color: white;
-  font-weight: bold;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
- // background-color: #FF0DFF;
-  background: url('../images/defaultBtn.png') no-repeat 0 0;
-  background-image: -webkit-linear-gradient(bottom, #990000 0%, #990000 100%);
-  background-image:         linear-gradient(to bottom, #990000 0%, #B30D5D 100%);
-  border-radius: 3px;
+  	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	color:red;
+    cursor:pointer;
+	background-size: 100% 100%;
+	height:6%;
+	width:36%;
+	color:red;
+	position :relative;
+	padding: -3%;
+
+    line-height: 30px;
+    border: 1px solid #AA2666;
+    font-weight: bold;
+   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+   border-radius: 3px;
 }
 
 .button:hover 
