@@ -1,37 +1,6 @@
 //Application main
 var AutoObessesions = {};
 
-/*function ajax_loadUser()
-{
-    //loads userStats from php file accessing sql database
-    var jqxhr = $.ajax({
-        type:'POST',
-        url:getHostPath() + 'loadUser.php',
-        dataType:'json',
-        //data:userStats
-		data:''//{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
-    }).done(function(data){
-        //the response string is converted by jquery into a Javascript object!
-        if(data === null){
-            alert('Error:ajax response returned null!');
-            return;
-        }
-        //alert('ajax response received:' + JSON.stringify(data) );
-        //access and set values in the document's html page
-		//$('div#statBar label#fname').text(data.uname);
-        userStats = {
-            money:data.money,
-            tokens:data.tokens,
-            prestige:data.prestige,
-            marker:data.m_marker
-        };
-        setStatBar();
-    }).fail(function(jqxhr){
-        //call will fail if result is not properly formatted JSON!
-        alert('ajax_loadUser(), call failed! Reason: ' + jqxhr.responseText);
-        //throw exception, game can't work without user stats
-    });
-}*/
 function getLastAllowanceTime()
 {
 	if(Storage.local !== null)
@@ -85,7 +54,6 @@ Auction.setup = function()
 		
 	}
 }
-
 function auctionMode(deltaTime)
 {	//in-Auction update, core of game logic
    ticker = 0;
@@ -95,9 +63,7 @@ function auctionMode(deltaTime)
     Auction.setup();//auctionInit();
   
 }
-
 //js.StatBar = {
-	
 function setName()
 {
 	//$('div#statBar label#fname').text('User: ' + userStats.fn.toString() );
@@ -193,38 +159,7 @@ $(document).ready(function()
 			ticker++;
 		}	
 	}
-    //Pro tip:Don't bother opening html/xml files in javascript,
-    //do it it PHP instead! not data transfer as php opens the file locally on the server,
-    //then echo out the code bits you want to access the file's data!
-function openDoc(url, reader)
-{	//parse xml document in xml DOM object
-	reader.open("GET",url,true);    //breaks if set to false; ASync is good anyways, we want this
-	reader.send();  //this is where the current issue is!
-    
-	var doc = reader.responseXML;	//access DOM object tree
-    alert(doc);
-	return doc;
-}
-function createReader()
-{   //creates an xml http request
-    // code for IE7+, Firefox, Chrome, Opera, Safari
-	if(window.XMLHttpRequest)
-	{
-		return new XMLHttpRequest();
-	}
-	else{
-		return new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	if(xmlhttp){
-		
-	}//open warning page, error loading data
-	else{	
-	  window.open("/pdf/2014Schedule.pdf", "_blank");
-	}
-	
-	return xmlhttp;
-}
+   
 function loadCars(doc){
 	//carNodes = doc.getElementsByTagName('Vehicle');
 	//carsLength = carNodes.length;
@@ -256,20 +191,6 @@ function loadCars(doc){
 	//for(var i = 0; i < list.length; i++){
 		//userGarage.push(Vehicle(list[i]) )
 //	}
-}
-
-function loadXMLDoc(url)
-{
-	reader = createReader();
-    var doc = openDoc(url, reader);
-	
-	if(typeof doc === 'undefined' || doc === null)
-	{
-        alert('could not parse xml from server');
-		return false;
-	}
-	loadCars(doc);
-	return true;
 }
 
 //Parse ajax functions to send data from within js to ph
@@ -373,7 +294,6 @@ function Register()
 	}
 }
 
- 
 //Main Menu  
 function mainMenu() 
 { 
@@ -417,11 +337,7 @@ function startGame()
 	gradient.addColorStop("1.0","green");
 	// Fill with gradient
 	context.fillStyle = gradient;
-	//ajax_loadUser();
 	setStatBar();
-	//setAdBG();
-	//ajax_post();
-	
 	switchStates();
 	
 	if(appState == GAME_MODE.RUNNING)
@@ -447,7 +363,6 @@ Auction.sold = function()
 	endBidTimers = [0,0,0,0];
 	//pGTimer = 0;
 	//player.restart();
-
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
 	
@@ -458,7 +373,6 @@ Auction.sold = function()
 	assetLoader.sounds.gameOver.play();
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
-	
 	auctionEnded = true;
 	auctionOver = true;
 	endGame = true;
@@ -534,7 +448,6 @@ $('.Register').click(function()
 jq.AuctionSelect.backBtn.click(function() 
 { 	
 	//setAdBG();
-	//userHUD();
 	setStatBar();
     setHomeImg();
 	jq.Game.menu.toggle();
@@ -562,14 +475,10 @@ jq.Auction.homeBtn.click(function()
 	jq.Game.menu.show();
     jq.carImg.show();
 	//jq.Game.menu.children().toggle();	//hides/showns all child elements
-	
 	ajax_post();
-    
     setStatBar();
 	//setAdBG();
     setHomeImg();
-    
-	//userHUD();
 	//var car = Garage.getCurrentCar();
 	
 	//if(car !== null){
@@ -677,9 +586,7 @@ jq.Funds.backBtn.click(function()
 	//}
 	
 //}
-function initUser(userName, pw)
-{	//load a registered user after confirmation from server
-}
+
 function initGuest()
 {	//loads guest profile, if one does not exist it is created
 	if('guest' in Storage.local){
