@@ -306,7 +306,8 @@ var Auction =
 	{
 	    if(!this.playerWinning && this.playerCanBid)
 		{
-            if(userStats.money >= (this.currentBid + this.raisePerc){
+            if(userStats.money >= (this.currentBid + this.raisePerc))
+			{
                 this.playerWinning = true;
                 this.enemyWinning = false;
                 this.playerBidTimer = 0;
