@@ -71,6 +71,8 @@ var Auction =
         auctionStop = false;
 		this.playerBid = 0;
         
+        var funcName = 'Auction.js, Auction::init()';
+        
         $.when(
             $.ajax({
                 type:'POST',
@@ -80,7 +82,7 @@ var Auction =
             }).done(function(data){
                 //the response string is converted by jquery into a Javascript object!
                 if(data === null){
-                    alert('Auction::init(), Error:ajax response returned null!');
+                    alert(funcName + ', Error:ajax response returned null!');
                     //finished = true;
                     return;
                 }
@@ -114,7 +116,7 @@ var Auction =
                 }
             }).fail(function(jqxhr){
                 //call will fthis.ail if result is not properly formated JSON!
-                alert('Auction::init(), ajax call failed! Reason: ' + jqxhr.responseText);
+                alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
                 console.log('loading game resources failed, abort!');
                 //finished = true;
             })
@@ -122,7 +124,7 @@ var Auction =
             //init visuals and display page after state has loaded
             Auction.setup();
         }).fail(function(){
-            alert('Auction::init(), calling $.when failed! Reason: ' + jqxhr.responseText);    
+            alert(funcName + ', calling $.when failed! Reason: ' + jqxhr.responseText);    
             console.log('loading game resources failed, abort!');
         });
 		
@@ -181,53 +183,42 @@ var Auction =
 		
 		this.raisePerc = this.currentBid * 0.18;
 
-		for(var i = 0; i < this.ai.length; ++i)
-		{
-			if(this.playerWinning || this.ai[i].winningBid)
-			{
+		for(var i = 0; i < this.ai.length; ++i){
+			if(this.playerWinning || this.ai[i].winningBid){
 				this.winningTimer++;
 			}
 		}
 	
-		if(auctionEnded)
-		{
+		if(auctionEnded){
 			this.close();		
 		}
-		if(endGame)
-		{
+		if(endGame){
 			this.close();					
 		}
 
-		if (!this.playerCanBid)
-		{
-		    if(this.playerBidTimer < this.bidTimerCap)
-		    {
+		if(!this.playerCanBid){
+		    if(this.playerBidTimer < this.bidTimerCap){
 		        this.playerBidTimer++;
 		    }
-		    else if(this.playerBidTimer >= this.bidTimerCap)
-		    {
+		    else if(this.playerBidTimer >= this.bidTimerCap){
 		        this.playerCanBid = true;
 		    }
 		}
 
-		if (!this.enemyCanBid)
-		{
-		    if(this.enemyBidTimer < this.bidTimerCap)
-		    {
+		if(!this.enemyCanBid){
+		    if(this.enemyBidTimer < this.bidTimerCap){
 		        this.enemyBidTimer++;
 		    }
-		    else if(this.enemyBidTimer >= this.bidTimerCap)
-		    {
+		    else if(this.enemyBidTimer >= this.bidTimerCap){
 		        this.enemyCanBid = true;
 		    }
 		}
 		
-		if(!auctionStop)
-		{
+		if(!auctionStop){
 		  	Auction.render();
 		}
-		else
-		{	//clear drawing when auction stops
+		else{
+			//clear drawing when auction stops
 			context.clearRect(0, 0, canvas.width, canvas.height);
 		}
 			
@@ -240,13 +231,11 @@ var Auction =
 		context.font = '14px arial, sans-serif';
 		player.draw();
 		
-		if(this.playerWinning)
-		{
+		if(this.playerWinning){
 			player.y = 177;
 			context.fillText('Player Bid :  ' + '$' + this.currentBid.toFixed(2), ENEMY_X, 200);
 		}
-		else
-		{
+		else{
 		  player.y = 284;
 		  context.fillText('Player Bid :  ' + '$' + this.playerBid.toFixed(2), ENEMY_X, 300);
 		}
@@ -254,39 +243,31 @@ var Auction =
         //The block below can be cleaned up, thinking of how to do it
 		var ewinPos = 174;
 		//var aL1 = ;
-		if(this.ai[0].currBid >= this.currentBid)
-		{
+		if(this.ai[0].currBid >= this.currentBid){
 			enemy1 = context.drawImage(curBidImage,10,ewinPos) + '/n' + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2) ,ENEMY_X + 12 , 190);
 		}
-		else
-		{
+		else{
 			enemy1 = context.drawImage(slimer,10,202) + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2) ,ENEMY_X + 12, 220);
 		}
 		//Enemy 2
-		if(this.ai[1].currBid >= this.currentBid)
-		{
+		if(this.ai[1].currBid >= this.currentBid){
 			enemy2 = context.drawImage(curBidImage,10,ewinPos) + context.fillText( bidders[1] + '$'+ this.ai[1].currBid.toFixed(2) ,ENEMY_X + 12, 190);		
 		}
-		else
-		{
+		else{
 			enemy2 = context.drawImage(slimer,10,222) + context.fillText(bidders[1] + '$'+ this.ai[1].currBid.toFixed(2) ,ENEMY_X + 12, 240);
 		}
 		//Enemy3
-		if( this.ai[2].currBid >= this.currentBid )
-		{
+		if(this.ai[2].currBid >= this.currentBid){
 			enemy3 = context.drawImage(curBidImage,10,ewinPos) + context.fillText( bidders[2] + '$'+ this.ai[2].currBid.toFixed(2) ,ENEMY_X + 12, 190);
 		}
-		else
-		{
+		else{
 			enemy3 = context.drawImage(slimer,10,242) + context.fillText(bidders[2] + '$'+ this.ai[2].currBid.toFixed(2) ,ENEMY_X + 12, 260);
 		}
 		//Enemy4
-		if( this.ai[3].currBid >= this.currentBid)
-		{
+		if(this.ai[3].currBid >= this.currentBid){
 			enemy4 = context.drawImage(curBidImage,10,ewinPos) + context.fillText( bidders[3] + '$'+ this.ai[3].currBid.toFixed(2) ,ENEMY_X + 12, 190);
 		}
-		else
-		{
+		else{
 			enemy4 =  context.drawImage(slimer,10,262) + context.fillText(bidders[3] + '$'+ this.ai[3].currBid.toFixed(2) ,ENEMY_X + 12, 280);
 		}
 		//call crowd for the player winning
@@ -304,40 +285,46 @@ var Auction =
 	updatePlayer : function() 
 	{
 	    player.update();
-		if((this.playerBid > this.ai[0].currBid) && (this.playerBid > this.ai[1].currBid) && (this.playerBid > this.ai[2].currBid) && (this.playerBid > this.ai[3].currBid))
-		{
+		
+        if((this.playerBid > this.ai[0].currBid) &&
+            (this.playerBid > this.ai[1].currBid) &&
+            (this.playerBid > this.ai[2].currBid) &&
+            (this.playerBid > this.ai[3].currBid)){
 			//this.playerGoing();
 			this.playerWinning = true;
 		}
 	},
 	bidTimers : function()
 	{	//updates this.ai bidding timers	
-		for(var i = 0; i < this.ai.length; ++i)
-		{
-			if(!this.ai[i].leftAuction)
-			{
+		for(var i = 0; i < this.ai.length; ++i){
+			if(!this.ai[i].leftAuction){
 				this.ai[i].update();
 			}
 		}
 	},
 	playerBidding : function() 
 	{
-	    if (!this.playerWinning && this.playerCanBid)
+	    if(!this.playerWinning && this.playerCanBid)
 		{
-			this.playerWinning = true;
-			this.enemyWinning = false;
-			this.playerBidTimer = 0;
-			this.goingTimer = 0;
-		    //Setting the enemy's ability to bid to false so that as soon as the player bids the enemy is unable to
-			this.playerCanBid = false;
-			this.playerBid = this.currentBid + this.raisePerc;
-			this.currentBid = this.playerBid;
-			console.log("Player bidding " + this.playerBid + " currBid now " + this.currentBid);
+            if(userStats.money >= (this.currentBid + this.raisePerc){
+                this.playerWinning = true;
+                this.enemyWinning = false;
+                this.playerBidTimer = 0;
+                this.goingTimer = 0;
+                //Setting the enemy's ability to bid to false so that as soon as the player bids the enemy is unable to
+                this.playerCanBid = false;
+                this.playerBid = this.currentBid + this.raisePerc;
+                this.currentBid = this.playerBid;
+                console.log("Player bidding " + this.playerBid + " currBid now " + this.currentBid);
+            }
+            else{
+                //else user can't bid
+            }
 		}
 	},
 	enemyBidding : function()
 	{
-	    if (!this.playerWon && this.enemyCanBid)
+	    if(!this.playerWon && this.enemyCanBid)
 		{	
 			for(var i = 0; i < this.ai.length; i++)
 			{						
@@ -346,8 +333,8 @@ var Auction =
 					if(this.ai[i].currBid < this.currentBid)
 					{
 					    this.ai[i].currBid = this.currentBid + this.raisePerc;
-					    if (this.ai[i].currBid == this.currentBid)
-					    {
+					    
+                        if(this.ai[i].currBid == this.currentBid){
 					        break;
 					    }
 					    this.ai[i].winningBid = true;
@@ -448,12 +435,14 @@ var Auction =
 		//break out of while if someone outbids current bidder or if player does,
 		//breaks out of the while loop and enemyWinning becomes false
 		context.font = '20px arial, sans-serif';
-		if(this.winningTimer >= this.winningTimerCap)
+		
+        if(this.winningTimer >= this.winningTimerCap)
 		{
 			while((this.playerWinning || this.enemyWinning) && (this.goingTimer < 660) && (!auctionStop))
 			{
 				this.goingTimer++;
-				if((this.goingTimer > 0) && (this.goingTimer < 360))
+				
+                if((this.goingTimer > 0) && (this.goingTimer < 360))
 				{
 					this.goingTimer++
 					//console.log("Going once");
@@ -486,7 +475,8 @@ var Auction =
 					{
 						this.playerWinning = false;
 						this.playerWon = false;
-						for(var i = 0; i < this.ai.length; ++i)
+						
+                        for(var i = 0; i < this.ai.length; ++i)
 						{
 							if(this.ai[i].winningBid)
 							{
@@ -536,8 +526,7 @@ var Auction =
 			assetLoader.sounds.sold.play();
 		}
 	},
-	setBidBtnText : function()
-	{
+	setBidBtnText : function(){
 		$('#bid').text("Bid: $" + this.currentBid.toFixed(2) );
 	}
 };
