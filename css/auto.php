@@ -375,7 +375,17 @@ div#main a:hover {
   height: 100%;
   position: absolute;
 }
-
+#sold label
+{
+  top: 40%;
+  left: 0%;
+  text-align: center;
+  //padding-top: 92px;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
 div#profile
 {
     background: url('../images//defaultBG.jpg') no-repeat 0 0;
