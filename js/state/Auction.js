@@ -237,7 +237,7 @@ var Auction =
 	{
 		var imgOffset = 20;
 		context.drawImage(backgroundImage, 0,-10);
-
+		context.font = '10px arial, sans-serif';
 		player.draw();
 		
 		if(this.playerWinning)
@@ -256,7 +256,7 @@ var Auction =
 		//var aL1 = ;
 		if(this.ai[0].currBid >= this.currentBid)
 		{
-			enemy1 = context.drawImage(curBidImage,10,ewinPos) + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2) ,ENEMY_X , 190);
+			enemy1 = context.drawImage(curBidImage,10,ewinPos) + '/n' + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2) ,ENEMY_X , 190);
 		}
 		else
 		{
