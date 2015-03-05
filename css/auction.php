@@ -86,10 +86,10 @@ require_once 'ui.php';
 ?>
 	background-image:url('../images/checkers.png');
 
-	width:100%;
+	width:60%;
 	height:20%;
 
-	left:5%;
+	left:20%;
 	bottom:0%;
 }
 <?php divAuction();?> img#auctionCar
