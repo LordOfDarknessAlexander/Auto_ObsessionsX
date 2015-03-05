@@ -237,7 +237,7 @@ var Auction =
 	{
 		var imgOffset = 20;
 		context.drawImage(backgroundImage, 0,-10);
-		context.font = '10px arial, sans-serif';
+		context.font = '12px arial, sans-serif';
 		player.draw();
 		
 		if(this.playerWinning)
@@ -457,7 +457,7 @@ var Auction =
 				{
 					this.goingTimer++
 					//console.log("Going once");
-					context.fillText( "Going Once" ,ENEMY_X + 660 , 270);
+					context.fillText( "Going Once" ,ENEMY_X + 680 , 270);
 					assetLoader.sounds.going.play();
 					break;
 					
@@ -465,7 +465,7 @@ var Auction =
 				else if((this.goingTimer > 370) && (this.goingTimer < 650))
 				{
 					//console.log("Going twice");
-					context.fillText( "Going Twice" ,ENEMY_X + 660 , 290);
+					context.fillText( "Going Twice" ,ENEMY_X + 680 , 290);
 					assetLoader.sounds.going.play();
 					break;
 		
@@ -480,7 +480,7 @@ var Auction =
 						this.playerWon = true;
 						this.buyOut();
 						console.log("Player won");
-						context.fillText( "Sold to player!" ,ENEMY_X + 660 , 310);
+						context.fillText( "Sold to player!" ,ENEMY_X + 680 , 310);
 					}
 					else if(this.enemyWinning)
 					{
@@ -491,7 +491,7 @@ var Auction =
 							if(this.ai[i].winningBid)
 							{
 								console.log("AI won");
-								context.fillText("Sold to " + this.ai[i], ENEMY_X + 660, 310);
+								context.fillText("Sold to " + this.ai[i], ENEMY_X + 680, 310);
 								
 							}
 						}
