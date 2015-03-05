@@ -215,6 +215,44 @@ img#adBar
   z-index: 20;
 
 }
+/* Stat Bar Game HUD */
+
+div#statBar
+{
+    /*background-color:red;*/
+	background: url('../images/StatBar.png') no-repeat 0 0;
+	background-size : 100%,40%;
+	position:absolute;
+	top:0%;
+	left:5%;
+	width:90%;
+	height:20%;
+	/*child elements inherit values, unless otherwise specified*/
+	font-family:"Kozuka Gothic Pro B";
+	text-align:left;
+	color:red;
+	font-weight: bold;
+	z-index : 2;
+	font-size:1.2em;
+}
+div#statBar label{
+    position:absolute;
+    width:25%;
+}
+div#statBar label#money{left:0%;top:75%;}
+div#statBar label#tokens{left:25%;top:75%;}
+div#statBar label#prestige{left:50%;top:75%;}
+div#statBar label#m_marker{left:75%;top:75%;}
+
+img#mainCar
+{
+	position:absolute;
+	height:60%;
+	width:60%;
+	left:20%;
+	bottom:12%;
+    z-index:2;
+}
 /* visited link */
 #div#main a:visited {
     color: #00FFFF;
@@ -250,14 +288,15 @@ div#main a:hover {
 
 .sound 
 {
-  display: none;
-  position: absolute;
-  bottom: 5em;
-  left: 3em;
-  width: 30px;
-  height: 25px;
-  cursor: pointer;
-  z-index: 3;
+    background-size:100% 100%;
+    display: none;
+    position: absolute;
+    bottom:6%;
+    left:2%;
+    width: 4%;
+    height:6%;
+    cursor: pointer;
+    z-index: 3;
 }
 .sound-on 
 {
@@ -397,44 +436,6 @@ div#business
     top:0%;
     left:0%;
     z-index:1;
-}
-/* Stat Bar Game HUD */
-
-div#statBar
-{
-    /*background-color:red;*/
-	background: url('../images/StatBar.png') no-repeat 0 0;
-	background-size : 100%,40%;
-	position:absolute;
-	top:0%;
-	left:5%;
-	width:90%;
-	height:20%;
-	/*child elements inherit values, unless otherwise specified*/
-	font-family:"Kozuka Gothic Pro B";
-	text-align:left;
-	color:red;
-	font-weight: bold;
-	z-index : 2;
-	font-size:1.2em;
-}
-div#statBar label{
-    position:absolute;
-    width:25%;
-}
-div#statBar label#money{left:0%;top:75%;}
-div#statBar label#tokens{left:25%;top:75%;}
-div#statBar label#prestige{left:50%;top:75%;}
-div#statBar label#m_marker{left:75%;top:75%;}
-
-img#mainCar
-{
-	position:absolute;
-	height:60%;
-	width:60%;
-	left:20%;
-	bottom:12%;
-    z-index:2;
 }
 <?php
 require_once 'main.php';    //main game menu stylings, must be added at end, else bugs

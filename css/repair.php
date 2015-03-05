@@ -57,8 +57,8 @@ function divRepair(){
 <?php
     //posAbs();
 ?>
-    width:20%;
-    height:15%;
+    width:30%;
+    height:20%;
     font-size:0.65rem;
 }
 <?php divRepair();?> div button.ub
@@ -95,30 +95,15 @@ button#addFunds
     width:100%;
     height:10%;
 }
-<?php divRepair();?> div#drivetrain
-{
-	top:33%;
-	left:5%;
-}
-<?php divRepair();?> div#body
-{    
-	top:65%;
-	left:5%;
-}
-<?php divRepair();?> div#interior
-{    
-	top:33%;
-	right:5%;
-}
-<?php divRepair();?> div#docs
-{    
-	top:65%;
-	right:5%;
-}
-
+<?php //left div?>
 <?php divRepair();?> h2#dt
 {
 	top:28%;
+	left:5%;
+}
+<?php divRepair();?> div#drivetrain
+{
+	top:33%;
 	left:5%;
 }
 <?php divRepair();?> h2#body
@@ -126,14 +111,30 @@ button#addFunds
 	top:60%;
 	left:5%;
 }
+<?php divRepair();?> div#body
+{    
+	top:65%;
+	left:5%;
+}
+<?php //right div?>
 <?php divRepair();?> h2#interior
 {
 	top:28%;
 	right:5%;
 }
+<?php divRepair();?> div#interior
+{    
+	top:33%;
+	right:5%;
+}
 <?php divRepair();?> h2#docs
 {
 	top:60%;
+	right:5%;
+}
+<?php divRepair();?> div#docs
+{    
+	top:65%;
 	right:5%;
 }
 <?php divRepair();?> button#addFunds

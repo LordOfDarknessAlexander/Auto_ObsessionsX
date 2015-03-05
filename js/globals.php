@@ -45,7 +45,7 @@ var userStats = {
 function saveUser()
 {	//saves user stats as a JSON string to the browsers local storage
 //<php if(loggedIn){?>
-    var funcName = 'pas::saveUser()';
+    var funcName = 'gloabals.js pas::saveUser()';
     /*$.ajax({{
         type:'POST',
         url:getHostPath() + 'pas/update.php',
@@ -74,7 +74,7 @@ function saveUser()
 function loadUser()
 {	//serialize user stats from local storage, if played previously
 //<php if(loggedIn){?>
-   var funcName = 'pas::loadUser()';
+   var funcName = 'globals.js pas::loadUser()';
     /*$.ajax({{
         type:'POST',
         url:getHostPath() + 'pas/query.php',

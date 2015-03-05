@@ -18,4 +18,14 @@ function pb($id){
     <progress id='<?php echo $id;?>' value='0.0'></progress>
 <?php
 }
+function br(){
+    //outputs a line break?>
+<br>
+<?php
+}
+function hr(){
+    //outputs a line break?>
+<hr>
+<?php
+}
 ?>

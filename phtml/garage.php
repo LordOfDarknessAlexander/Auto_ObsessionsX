@@ -5,6 +5,11 @@ function selectBtn(){?>
     <button id='select'>Select</button>
 <?php
 }
+
+function cvStatBar($id){
+    echo $id . ':';
+    br(); pb("pb$id"); br(); hr();
+}
 ?>
 <div id='Garage'>
     <h1>Garage</h1>
@@ -33,6 +38,12 @@ function selectBtn(){?>
         <br>
         <div id='progressBars'>
             <!--progress bar 'value' attribute is between 0.0 and 1.0-->
+<?php
+//cvStatBar('Drivetrain');
+//cvStatBar('Body');
+//cvStatBar('Interior');
+//cvStatBar('Documents');
+?>
 drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
 <br>body:<br><progress id='bodyPB' value='0.0'></progress>
 <br>interior:<br><progress id='interiorPB' value='0.0'></progress>
@@ -48,6 +59,12 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
         <label id='carInfo'></label>
         <br>
         <div id='progressBars'>
+<?php
+//cvStatBar('Drivetrain');
+//cvStatBar('Body');
+//cvStatBar('Interior');
+//cvStatBar('Documents');
+?>
 drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
 <br>body:<br><progress id='bodyPB' value='0.0'></progress>
 <br>interior:<br><progress id='interiorPB' value='0.0'></progress>
@@ -81,49 +98,46 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
 ?>	
     <h2 id='dt'>Drivetrain</h2>	
     <div id='drivetrain'>	
-Engine:<br>
-<progress id='pbEngine' value='0.0'></progress>
-<br>Transmission:<br>
-<progress id='pbTransmission' value='0.0'></progress>
-<br>Drive Axel:<br>
+<?php
+cvStatBar('Engine');
+cvStatBar('Transmission');
+?>
+Drive Axel:<br>
 <progress id='pbAxel' value='0.0'></progress>
-<br>Exhaust:<br>
-<progress id='pbExhaust' value='0.0'></progress>
-<br>
+<br><?php cvStatBar('Exhaust');?>
     </div>
     <h2 id='body'>Body</h2>
     <div id='body'>
-Chasis:<br>
-<progress id='pbChasis' value='0.0'></progress>
-<br>Body Panels:<br>
+<?php
+cvStatBar('Chasis');
+?>
+Body Panels:<br>
 <progress id='pbPanels' value='0.0'></progress>
-<br>Paint:<br>
-<progress id='pbPaint' value='0.0'></progress>
-<br>PLACEHOLDER:<br>
+<br><?php cvStatBar('Paint');?>
+Chrome:<br>
 <progress id='pbPH0' value='0.0'></progress>
 <br>
     </div>
     <h2 id='interior'>Interior</h2>
     <div id='interior'>
-Seats:<br>
-<progress id='pbSeats' value='0.0'></progress>
-<br>Carpet:<br>
-<progress id='pbCarpet' value='0.0'></progress>
-<br>Dash:<br>
-<progress id='pbDash' value='0.0'></progress>
-<br>Door Panels:<br>
+<?php
+cvStatBar('Seats');
+cvStatBar('Carpet');
+cvStatBar('Dash');
+?>
+Door Panels:<br>
 <progress id='pbPanels' value='0.0'></progress>
 <br>
     </div>
     <h2 id='docs'>Documentation</h2>
     <div id='docs'>
-Ownership:<br>
-<progress id='pbOwnership' value='0.0'></progress>
-<br>Build Sheet:<br>
+<?php
+cvStatBar('Ownership');
+?>
+Build Sheet:<br>
 <progress id='pbBuildSheet' value='0.0'></progress>
-<br>History:<br>
-<progress id='pbHistory' value='0.0'></progress>
-<br>PLACEHOLDER:<br>
+<?php cvStatBar('History');?>
+Restoration:<br>
 <progress id='pbPH0' value='0.0'></progress>
 <br>
     </div>

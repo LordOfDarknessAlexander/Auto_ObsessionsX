@@ -96,6 +96,7 @@ function divCarView(){
     font-size:1.5vw;
     text-align:left;
 }
+<?php //left div?>
 <?php divCarView();?> h2#dt{
 	top:28%;
 	left:5%;
@@ -112,8 +113,8 @@ function divCarView(){
 <?php divCarView();?> div#body{    
 	top:65%;
 	left:5%;
-	
 }
+<?php //right div?>
 <?php divCarView();?> h2#interior{
 	top:28%;
 	right:5%;
