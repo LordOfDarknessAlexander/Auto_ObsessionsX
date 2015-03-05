@@ -504,26 +504,36 @@ var Auction =
 		
 		if(this.playerWon)
 		{
-			userStats.money = userStats.money - this.currentBid;
-			auctionEnded = true;
-			//push vehicle to garage
-			//auctionStop = true;
-			this.sold();
-			assetLoader.sounds.bidder.pause();
-			assetLoader.sounds.sold.play();
+            if(userStats.money >= this.currentBid){
+                userStats.money = userStats.money - this.currentBid;
+                auctionEnded = true;
+                //push vehicle to garage
+                //auctionStop = true;
+                this.sold();
+                assetLoader.sounds.bidder.pause();
+                assetLoader.sounds.sold.play();
+            }
+            else{
+                //user does not have enough money!
+            }
 		}
 		else if(playerBoughtOut)
 		{
-			console.log("Enemy winning " + this.enemyWinning);
-			userStats.money = userStats.money - vehiclePrice;
-			auctionEnded = true;
-			this.playerWon = true;
-			console.log("Player won " + this.playerWon);
-			//push vehicle to garage
-			//auctionStop = true;
-			this.sold();
-			assetLoader.sounds.bidder.pause();
-			assetLoader.sounds.sold.play();
+            if(userStats.money >= vehiclePrice){
+                console.log("Enemy winning " + this.enemyWinning);
+                userStats.money = vehiclePrice;
+                auctionEnded = true;
+                this.playerWon = true;
+                console.log("Player won " + this.playerWon);
+                //push vehicle to garage
+                //auctionStop = true;
+                this.sold();
+                assetLoader.sounds.bidder.pause();
+                assetLoader.sounds.sold.play();
+            }
+            else{
+                //not enought money, play fail sound
+            }
 		}
 	},
 	setBidBtnText : function(){
