@@ -273,49 +273,6 @@ function loadXMLDoc(url)
 }
 
 //Parse ajax functions to send data from within js to ph
-//REMOVE THIS, it is outdated and obsolete,
-//XMLHTTPResuests are encapsulated under jQuery Ajax call and their objects
-//Use that instead of this old and bloated api
-function ajax(Id,userId,str,post)
-{
-    var ajax;
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    }
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            document.getElementById(Id).innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",userId +str,true);
-        ajax.send(null);
-    }
-    else
-    {
-        ajax.open("POST",userId,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(str);
-    }
-    return ajax;
-}
 
 /*
 //LOAD Vehicle XML, this was working, now can't find source file!
