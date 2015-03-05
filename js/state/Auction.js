@@ -242,12 +242,12 @@ var Auction =
 		
 		if(this.playerWinning)
 		{
-			player.y = 187;
+			player.y = 177;
 			context.fillText('Player Bid :  ' + '$' + this.currentBid.toFixed(2), ENEMY_X, 200);
 		}
 		else
 		{
-		  player.y = 287;
+		  player.y = 284;
 		  context.fillText('Player Bid :  ' + '$' + this.playerBid.toFixed(2), ENEMY_X, 300);
 		}
 
