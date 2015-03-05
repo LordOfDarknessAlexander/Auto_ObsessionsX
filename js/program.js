@@ -1,25 +1,6 @@
 //Application main
 var AutoObessesions = {};
 
-//function getLastAllowanceTime()
-//{
-	//if(Storage.local !== null)
-	//{
-		//if('_lastAllowanceTime' in Storage.local)
-		//{
-			//return parseInt(Storage.local._lastAllowanceTime);
-		//}
-	//}
-//}
-//function setLastAllowanceTime()
-//{
-	//if(Storage.local !== null)
-	//{
-		//var time = Date.now()	//a time of 0
-		//Storage.local._lastAllowance = time.toString();
-	//}
-//}
-
 /*function ajax_loadUser()
 {
     //loads userStats from php file accessing sql database
@@ -51,6 +32,25 @@ var AutoObessesions = {};
         //throw exception, game can't work without user stats
     });
 }*/
+function getLastAllowanceTime()
+{
+	if(Storage.local !== null)
+	{
+		if('_lastAllowanceTime' in Storage.local)
+		{
+			return parseInt(Storage.local._lastAllowanceTime);
+		}
+	}
+}
+function setLastAllowanceTime()
+{
+	if(Storage.local !== null)
+	{
+		var time = Date.now()	//a time of 0
+		Storage.local._lastAllowance = time.toString();
+	}
+}
+
 function garageDoor()
 {
 	backgroundY -= speed;
@@ -71,13 +71,7 @@ function update(deltaTime)
 	AuctionSell.update(deltaTime);
 
 	timer++;
-	/*
-	if(userLogged)
-	{
-		userHUD();
-		console.log("User Screen");
-	}
-	userHUD();*/
+	
 }
 Auction.setup = function()
 {
@@ -111,7 +105,13 @@ function setName()
 function setMoney()
 {
 	$('div#statBar label#money').text('Money: ' + userStats.money.toFixed(2) );
-	//$('div#auctionStatBar label#money').text('Money: ' + userStats.money.toFixed(2) );
+	
+	if(userStats.money <= 0)
+	{
+		//userStats.money = 0;
+		alert("You are out of money Dude!");
+		$('div#statBar label#money').text('Refresh Dough???: ' + userStats.money.toFixed(2) );
+	}
 }
 function setTokens()
 {
@@ -162,7 +162,12 @@ $(document).ready(function()
 	//loading assets and 'core' game logic
 	//Storage.local.clear();
 	//alert('doc ready!');
+<<<<<<< HEAD
 	pas.query.loadUser();
+=======
+	ajax_loadUser();
+	getLastAllowanceTime();
+>>>>>>> origin/master
 	loadUser();
     Garage.load();
     //jq.Game.setHomeImg();
