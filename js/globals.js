@@ -149,8 +149,8 @@ var BID_THRESHOLD = 200;
 //Bidder Pos
 var BIDDER_XPOS = 650;
 var BIDDER_YPOS = 250;
-var ENEMY_X = 80;
-var VEHICLE_XPOS = 660;
+var ENEMY_X = 70;
+var VEHICLE_XPOS = 690;
 var VEHICLE_YPOS = 850;
  
 //background images
