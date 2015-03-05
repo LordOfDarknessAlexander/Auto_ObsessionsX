@@ -68,6 +68,7 @@ function getCarFromID($carID){
     //returning it as a an instance of a php class
     global $AO_DB;
     $aoCars = 'aoCars';
+    //prepare!
     $res = $AO_DB->query(
         "SELECT * FROM $aoCars WHERE car_id = $carID"
     );

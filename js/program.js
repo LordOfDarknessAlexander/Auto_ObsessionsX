@@ -162,12 +162,9 @@ $(document).ready(function()
 	//loading assets and 'core' game logic
 	//Storage.local.clear();
 	//alert('doc ready!');
-<<<<<<< HEAD
 	pas.query.loadUser();
-=======
-	ajax_loadUser();
 	getLastAllowanceTime();
->>>>>>> origin/master
+
 	loadUser();
     Garage.load();
     //jq.Game.setHomeImg();

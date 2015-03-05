@@ -36,7 +36,7 @@ function VehicleFromDB(obj){
     }).done(function(data){
         //the response string is converted by jquery into a Javascript object!
         if(data === null){
-            alert(funcName + ',Error:ajax response returned null!');
+            alert(funcName + ', Error:ajax response returned null!');
             //finished = true;
             return;
         }
@@ -58,7 +58,7 @@ function VehicleFromDB(obj){
 //>
     }).fail(function(jqxhr){
         //call will fail if result is not properly formated JSON!
-        alert(funcName + ' ajax call failed! Reason: ' + jqxhr.responseText);
+        alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
         console.log(funcName + ', loading game resources failed, abort!');
         //finished = true;
     });

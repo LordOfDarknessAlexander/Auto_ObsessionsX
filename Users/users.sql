@@ -38,9 +38,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `registration_date` datetime NOT NULL,
   `user_level` tinyint(2) unsigned NOT NULL,
   `money` float(20,2) NOT NULL,
-  `m_marker` int(40) NOT NULL,
   `tokens` int(40) NOT NULL,
-  `prestige` int(40) NOT NULL
+  `prestige` int(40) NOT NULL,
+  `m_marker` int(40) NOT NULL,
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --

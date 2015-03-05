@@ -222,7 +222,7 @@ function echoUserCars(){
     $res = $aoUsersDB->query(
         "SELECT * FROM $userID"
     );
-    
+
     if($res){
         while($row = mysqli_fetch_array($res) ){
             //insert an new array repressenting a car at the end of $cars
@@ -241,6 +241,8 @@ function echoUserCars(){
     else{   //The vehicle is already registered
         //echo "<p class='error'>User: has no entries in database</p>";
     }
+    //echo 'WIN!';
+    //exit();
     echo json_encode($cars);
 }
 
@@ -284,49 +286,66 @@ $q = '';
 
 if(isset($_GET) && !empty($_GET) ){
     //args being passed vai the url
-    if(isset($_GET['op']) && $_GET['op'] == 'asc'){
+    $op = isset($_GET['op']) ? $_GET['op'] : '';
+    //regex match, must contain no whitespace, numbers or special characters!
+    //preg_match();
+    if($op == 'asc'){
         getAuctionCars();
         exit();
     }
+    //elseif($op == '') preform other operations
+    //else not supported
+    echo "operation:$op, script calling exit()";
+    exit();
 }
+//else no vars passed via GET
+
 if(isset($_POST) && !empty($_POST) ){
+    //echo 'post set';
+    //exit();    
     if(isset($_POST['carID'])){
         $carID = $_POST['carID'];
         //validate value, must be an int!
         //echo json_encode($carID);
-        
         //switch the operation besed on value passed in url
         if(isset($_GET) && !empty($_GET) ){
-        //args being passed via the url
-            if(isset($_GET['op']) ){
-                //match $op against RE containing one or more letters, only. No whitespace or numbers
-                //$op = preg_match('[:alpha;]+', $_GET['op']);
-                if($_GET['op'] == 'hasCar'){
-                    //echo '{"hasCar": ' . strval(false) . '}';
-                    exit();
-                }
-                //else switch to other calls
+            //args being passed via the url
+            $op = isset($_GET['op']) ? $_GET['op'] : '';
+            //match $op against RE containing one or more letters, only. No whitespace or numbers
+            //$op = preg_match('[:alpha;]+', $_GET['op']);
+            if($op == 'hasCar'){
+                //echo '{"hasCar": ' . strval(false) . '}';
+                echo json_encode(hasCar($carID) );
+                exit();
             }
-            //echo "operation: $_GET['op'] not supported, script exiting()";
+            //elseif($op == '') switch to other calls
+            //else not supported
+            echo "usupported operation:$op, script calling exit()";
             exit();
         }
         //else no GET args, simply return data of car with id
-        
-        //echo '{"data":' . strval($carID) . '}';
-        //select an individual element with car_id $carID
         $car = getCarFromID($carID);
-        
+        //echo $car != null?
+            //$car->toJSON()
+            //:
+            //json_encode("no car with id:$carID, found in database");
         if($car != null){
             echo $car->toJSON();
         }
         else{
-            echo '{}';  //return emtpy object
+            echo "no car with id:$carID, found in database";  //return emtpy object
         }
+        exit();
     }
     //other post vars
+    echo 'other post vars' . json_encode($_POST);
+    exit();
 }
 else{
-    //no passing any values via POST, return all cars
+    //no passing any values via POST, return all user's cars
     echoUserCars();
+    exit();
 }
+echo 'WIN';
+exit();
 ?>
