@@ -112,7 +112,7 @@ function carPart(carPrice, partType){   //partType
                 ret += 1.0;
             }
             ret *= INV_MAX; //pro tip: dividing is slower than multiplying by the value's inverse!
-            console.log(ret);
+            //console.log(ret);
             return ret;
         }
         /*toJSON:function(){

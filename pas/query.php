@@ -8,10 +8,11 @@ require_once 'meta.php';  //sql database connection
 //
 function getCurrentCar(){
     //returns the user's currently selected vehicle
-    /*$id = strval(0);    //$SESSION['userID'];
+    //global $AO_DB;
+    /*$id = strval(0);  //$_SESSION['user_id'];
     $users = 'users';
     
-    $res = $AO_DB->query("SELECT curCarID FROM $users WHERE user_id = $id");
+    $res = $AO_DB->query("SELECT curCarID FROM $user WHERE user_id = $id");
     
     if($res){
         //user has car
@@ -53,7 +54,7 @@ function getAuctionCars(){
         }
         mysqli_free_result($res);
     }
-    else{   //The vehicle is already registered
+    else{   //The no entries in table
         //echo "<p class='error'>User: has no entries in database</p>";
     }
     echo json_encode($cars);

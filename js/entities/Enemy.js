@@ -42,7 +42,7 @@
 
 function price(vehiclePrice, bias)
 {
-	var b = (typeof(bias) === 'undefined' || bias === null ? 1.0 : bias);
+	var b = (typeof(bias) === 'undefined' || bias === null) ? 1.0 : bias;
 	function lerp(Min, Max, t){
 		if(Min > Max){
 			var tmp = Min;

@@ -16,50 +16,8 @@ class pasUpdate{
         //echo json_encode($res);
     }
 }
-/*function hasCar($id){
-    //does the user's table in aoUsersDB already have an entry with car_id '$id'
-    global $aoUsersDB;
-    
-    $ret = false;
-    $tableName = 'user' . strval(0);    //$_SESSION['userID'];
-    //$res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-    //$_hasCar = $aoUsersDB->con->prepare("SELECT * FROM ? WHERE car_id = ?");
-    
-    //if($_hasCar){
-        //if($_hasCar->bind_params('si', $tableName, $id) ){
-            //$ret = $_hasCar->execute();
-        //}
-        //else{
-            //failed sending params to server for binding
-            //$er = sqlError($aoUsersDB);
-            //$erno = $aoUsersDB->con->errno;
-            //$err = $aoUsersDB->con->error;
-            //echo "hasCar($id), bind_params failed:($erno), reason: $err";
-            //exit();
-       //}
-    //}
-    //else{
-        //fallback to normal, slow, less secure sql calls
-    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-    
-    if($res){
-        //user has car
-        $ret = mysqli_num_rows($res) != 0 ? true : false;
-    }
-    else{
-        //query failed, user has no entry in database
-        //$er = sqlError($aoUsersDB);
-        //$erno = $aoUsersDB->con->errno;
-        //$err = $aoUsersDB->con->error;
-        //echo "hasCar($id), bind_params failed:($erno), reason: $err";
-        //exit();
-    }
-    mysqli_free_result($res);
-    //}    
-    return $ret;
-}*/
-/*function hasSoldCar($carID){
-    //does the user's table in aoSOldCarsDB already have an entry with car_id '$id'
+/*public static function hasSoldCar($carID){
+    //does the user's table in aoCarSalesDB already have an entry with car_id '$id'
     global $aoSoldCarsDB;
     
     $tableName = 'user' . strval(0);    //$_SESSION['userID'];
@@ -71,73 +29,13 @@ class pasUpdate{
         //user has sold car, valid entry in db
         $ret = mysqli_num_rows($res) != 0 ? true : false;
     }
-    else{
-        //user still owns can, no entry in db
-    }
+    //else{user still owns car, no entry in db}
     mysqli_free_result($res);
     
     return $ret;
 }*/
 
-/*function getAuctionCars(){
-    //selects all vehicles the user owns, returning it as a JSON array
-    global $AO_DB;
-    
-    $res = $AO_DB->query(
-        "SELECT * FROM aoCars"
-    );
-    
-    if($res){
-        $cars = array();
-        
-        while($row = mysqli_fetch_array($res) ){
-            $carID = intval($row['car_id']);
-            $cars[] = array(
-                'carID' => $carID,
-                //'make' => $row['make'],
-                //'year' => intval($row['year']),
-                //'model' => $row['model'],
-                //'price' => intval($row['price']),
-                //'info' => $row['info'],
-                'hasCar' => hasCar($carID)   //does user have this car?
-            );
-        }
-        mysqli_free_result($res);
-        echo json_encode($cars);    //JSON_FORCE_OBJECT);
-    }
-    else{   //The vehicle is already registered
-        //echo "<p class='error'>User: has no entries in database</p>";
-        echo '{"cars":[]}';
-    }
-}
-function getUserCarFromID($carID){
-    //selects all vehicles the user owns, returning it as a JSON array
-    global $aoUsersDB;
-    $userID = 'user' . strval(0);    //$_SESSION['userID'];
-    $res = $aoUsersDB->query(
-        "SELECT * FROM $userID WHERE car_id = $carID"
-    );
-    if($res){
-        if(mysqli_num_rows($res) != 0){
-            //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
-            $data = $res->fetch_assoc();//@mysqli_query($CARS.$con, $q); // Run the query
-            //$car = Vehicle::fromArray($data);
-            //echo '{"data":"this is data!"}';
-            //echo $car->toJSON();
-            //echo Vehicle::fromArray($result->fetch_assoc() )->toJSON();
-        } 
-        else{ 
-            echo "<h2>System Error</h2>
-            <p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
-            //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
-        } 
-        mysqli_free_result($res);
-    }
-    else{   //The vehicle is already registered
-        echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
-    }
-}*/
-/*function getCarFromID($carID){
+/*public static function getCarFromID($carID){
     //selects a vehicle from the car database,
     //returning it as a JSON object string
     global $AO_DB;
@@ -169,58 +67,34 @@ function getUserCarFromID($carID){
 }*/
 function setUserCar($carID){
     global $AO_DB;
-    //$aoUsers = 'aoUSers';
+    //$aoUsers = 'aoUsers';
     if($carID == 0){
-        //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
+        //$res = $AO_DB->query("UPDATE car_id FROM $aoUsers WHERE user_id = '$uid'");
         //return json_encode($res ? true : false);
     }
-    elseif(hasCar($carID)){
-        //$res = $AO_DB->con->prepare("UPDATE car_id FROM $aoUsers WHERE user_id = ?");
-        //if($res){
-            //if($res->bind_params('i', $uid)){
-                //$res->execute()
-                //return json_encode();
-            //}
-        //}
-        //else{
-            //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
-        //}
+    elseif($carID > 0 AND hasCar($carID)){
+        //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
         //return json_encode($res ? $carID : false);
     }
     //else not valid car ID, do nothing
     //return json_encode(false);
 }
-/*function echoUserCars(){
-    //selects all vehicles the user owns, returning it as a JSON array
-    global $aoUsersDB;
-    
-    $userID = 'user' . strval(0);   //$_SESSION['userID'];
-    $res = $aoUsersDB->query(
-        "SELECT * FROM $userID"
+/*function updateSale($sale){
+    gloabal $aoCarSalesDB;
+    $res = $aoCarSalesDB->query(
+        "IF NOT EXISTS entry with saleID
+        INSERT ... ELSE
+        UPDATE existing sale"
     );
-    
-    if($res){
-        $cars = array();
-        
-        while($row = mysqli_fetch_array($res) ){
-            $cars[] = array(
-                'carID' => intval($row['car_id']),
-                'drivetrain' => intval($row['drivetrain']),
-                'body' => intval($row['body']),
-                'interior' => intval($row['interior']),
-                'docs' => intval($row['docs']),
-                'repairs' => intval($row['repairs'])
-            );
-        }
-        mysqli_free_result($res);
-        echo json_encode($cars);
-    }
-    else{   //The vehicle is already registered
-        //echo "<p class='error'>User: has no entries in database</p>";
-        echo '{"cars":[]}';
-    }
+    return $ret;
+}*/
+/*function updateUser(){
+    gloabal $AO_DB;
+    $uid = strval(0);   //$_SESSION['userID'];
+    $res = $AO_DB->query("UPDATE (money, tokens, presteige, markers) SET FROM users WHERE user_id = '$uid'");
+    //return;
 }
-*/
+
 $q = '';
 
 /*if(isset($_GET) && !empty($_GET) ){

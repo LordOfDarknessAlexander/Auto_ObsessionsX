@@ -24,6 +24,11 @@ function hasCar($id){
     }
     else{
         //query failed, user has no entry in database
+        //$er = sqlError($aoUsersDB);
+        //$erno = $aoUsersDB->con->errno;
+        //$err = $aoUsersDB->con->error;
+        //echo "pas/meta.php hasCar($id), sql query failed:($erno), reason: $err";
+        //exit();
     }
     mysqli_free_result($res);
     
