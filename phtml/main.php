@@ -28,6 +28,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
     </div>
     <img id='mainCar' src='images\\garageEmpty.png'>
     <label id='info'></label>
+    
     <div id='menu'>
         <div id='progress'>
             <div id='percent'>Downloading: <span id='p'></span></div>
@@ -93,7 +94,7 @@ $scripts = array(
     //search
     //business
     //faq
-    'register'
+    //'register'
 );
 //scripts will be included in the order declared, ORDER MATTERS!
 foreach($scripts as $val){

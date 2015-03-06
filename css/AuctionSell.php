@@ -7,19 +7,22 @@ require_once 'ui.php';
 function divAS(){
     echo 'div#AuctionSell';
 }
+function dcv(){
+    echo 'div#AuctionSell div#carView';
+}
 ?>
 <?php divAS();?>
 {
+<?php posAbs();?>
 	background: url('../images/defaultBG.jpg') no-repeat 0 0; 
 	background-size : 100% 100%;
 	display: none;
 	/*overflow:scroll;*/
 	text-align: center;
-	/*padding-top: 92px;*/
 	z-index: 1;
 	width: 100%;
 	height: 100%;
-<?php posAbs();?>
+    	color:red;
 }
 <?php divAS();?> ul
 {
@@ -27,43 +30,60 @@ function divAS(){
 	padding:0;
 	list-style-type:none;
 }
-<?php divAS();?> div
+<?php divAS();?> div#carView div
 {
 	margin:0 0 0% 0;	/*top right bottom left*/
 	/*padding: 50px 50px;
 	display:inline;*/
     height:15%;
+    background-color:grey;
+    display:block;
 }
-<?php divAS();?> div label#carInfo
+<?php divAS();?> div#carView div label#carInfo
 {
-	background-color:grey;
+	/*background-color:green;*/
 	text-align:center;
 <?php posAbs();?>
-	left:20%;
+	left:15%;
 	width:50%;
 	height:15%;
+    font-weight:bold;
+    font-size:1.8vw;
 }
-<?php divAS();?> div button
+<?php divAS();?> div#carView div label
 {
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 	background-size : 100% 100%;
+    /*background-color:blue;*/
 <?php posAbs();?>
 	height:15%;
-	width:10%;
-	color:red;
-    right:20%;
+	width:25%;
+    left:65%;
+    text-align:left;
+    font-size:1.5vw;
+    display:block;
 }
-<?php divAS();?> div button#view
+<?php divAS();?> div#carView div button#view
 {
     background: url('../images/view.png') no-repeat 0 0;
     background-size:100% 100%;
-    right:10%;
+    position:absolute;
+    top:5%;
+    right:4%;
+    width:4%;
+    height:8%;
+    padding:0% 0%;
 }
-<?php divAS();?> div button#cc
+<?php divAS();?> div#carView div button#cc
 {
     background: url('../images/cancel.jpg') no-repeat 0 0;
     background-size:100% 100%;
+    position:absolute;
+    top:5%;
     right:0%;
+    width:4%;
+    height:8%;
+    padding:0% 0%;
 }
 <?php divAS();?> div button label
 {
@@ -75,11 +95,11 @@ function divAS(){
 	text-align::center;
 	color:red;
 }
-<?php divAS();?> div img
+<?php divAS();?> div#carView div img
 {
 <?php posAbs();?>
 	left:0%;
-	width:20%;
+	width:15%;
 	height:15%;
 }
 <?php divAS();?> div#carView

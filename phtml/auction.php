@@ -82,9 +82,6 @@ function outputCar($args){
 <div id='AuctionSell'>
     <!--user sells one of their cars, biding open only to AI-->
     <h1>Auctioned Cars</h1>
-    <!--<php
-    backBtn();
-    homeBtn();>select which car to bid for-->
 <?php
     backBtn();
     homeBtn();

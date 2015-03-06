@@ -1,0 +1,8 @@
+All images should be saved as 128x128, non-interlaced PNG'saved
+
+condition.png->background transparent, look edgier.
+upgrade->style to look more appropriate
+repair.jpg->style to look more appropriate, convert to png
+money.jpg->style to look more appropriate, convert to png
+cancel.jpg->style to look more appropriate, convert to png
+view.png->style to look more appropriate

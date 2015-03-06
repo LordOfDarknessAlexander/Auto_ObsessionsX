@@ -32,8 +32,7 @@ function auctionGen()
 				
 				this._ai = [Enemy(price(this._car.getPrice())), Enemy(price(this._car.getPrice())), Enemy(price(this._car.getPrice())), Enemy(price(this._car.getPrice()))];
 				
-                for(var i = 0; i < this._ai.length; ++i)
-				{
+                for(var i = 0; i < this._ai.length; ++i){
 					console.log(i + ' bid cap = ' + this._ai[i].bidCap);
 				}
 			}
@@ -68,8 +67,7 @@ function auctionGen()
 				{
 					for(var i = 0; i < this._ai.length; ++i)
 					{
-						if(this._ai[i].winningBid)
-						{
+						if(this._ai[i].winningBid){
 							console.log('AI ' + i + ' has won the bid for ' + Math.round(this._ai[i].currBid) + ' Original Price: ' + this._car.getPrice());
 						}
 					}
@@ -81,13 +79,15 @@ function auctionGen()
 		},
 		endAuction:function()
 		{
-			var i = this._carIndex;
-			var btnID = 'as' + (i).toString(),
-				liID = 'asd' + (this._car.id).toString();
-			var cleanBtn = $('div#' + liID + ' button#' + btnID);
+			var i = this._carIndex,
+                btnID = 'as' + (i).toString(),
+				liID = 'div#asd' + (this._car.id).toString(),
+                cleanBtn = $(liID + ' button#' + btnID),
+                moneyBtn = $(liID + ' button#cc');
+                
 			cleanBtn.text('Sold!');
-			cleanBtn.off().click({i:this._carIndex, amt:this._currentBid}, this.cleanUpAuction);
-			this._currentBid = 0;
+			//cleanBtn.off().click({i:this._carIndex, amt:this._currentBid}, this.cleanUpAuction);
+            this._currentBid = 0;
 			Garage.save();
 		},
 		cleanUpAuction:function(index)
@@ -156,10 +156,8 @@ function auctionGen()
 		},	
 		bidTimers : function()
 		{	//updates this._ai bidding timers	
-			for(var i = 0; i < this._ai.length; ++i)
-			{
-				if(!this._ai[i].leftAuction)
-				{
+			for(var i = 0; i < this._ai.length; ++i){
+				if(!this._ai[i].leftAuction){
 					this._ai[i].update();
 				}
 			}
@@ -168,10 +166,8 @@ function auctionGen()
 		{	//determine bidder
 			//check the bids of each this._ai to determine the highest bid,
 			//then setting the state;
-			for(var i = 0; i < this._ai.length; ++i)
-			{
-				if(this.checkBid(i))
-				{
+			for(var i = 0; i < this._ai.length; ++i){
+				if(this.checkBid(i)){
 					this.setBid(i);
 				}
 			}
@@ -179,16 +175,13 @@ function auctionGen()
 		checkBid : function(index)
 		{	//check if the enemy at the current index has a higher bid than the other this._ai's
 			var ret = true;
-			for(var i = 0; i < this._ai.length; i++)
-			{
-				if(index != i)
-				{
-					if(this._ai[index].currBid > this._ai[i].currBid)
-					{
+            
+			for(var i = 0; i < this._ai.length; i++){
+				if(index != i){
+					if(this._ai[index].currBid > this._ai[i].currBid){
 						continue;
 					}
-					else
-					{
+					else{
 						ret = false;
 						break;
 					}
@@ -196,42 +189,42 @@ function auctionGen()
 			}
 			return ret;
 		},
-		setBid : function(index)
-		{
-			if(!this._ai[index].leftAuction)
-			{
-				if(!this._ai[index].winningBid)
-				{
+		setBid : function(index){
+			if(!this._ai[index].leftAuction){
+				if(!this._ai[index].winningBid){
 					this._currentBid = this._ai[index].currBid;
 					//console.log(this._currentBid);
 				}
 			
 				//iterate over this._ai, assigning the bidder at index as the current bidder,
 				//assigning all others to false
-				for(var i = 0; i < this._ai.length; i++)
-				{
+				for(var i = 0; i < this._ai.length; i++){
 					this._ai[i].canBid = (i == index ? true : false);
 				}
 			}
 		},	
-		currentBidder : function()
-		{	
+		currentBidder : function(){	
 			this.bidFinder();
 
 		},
-		checkCurrentWinner : function()
-		{
-			for(var i = 0; i < this._ai.length; ++i)
-			{
+		checkCurrentWinner : function(){
+            //determine which ai has the highest bid
+			for(var i = 0; i < this._ai.length; ++i){
 				this._ai[i].winningBid = (this._ai[i].currBid === this._currentBid ? true : false);
 			}
 		},
         toggleCC:function(){
             if(this._car !== null){
                 var divID = 'div#asd' + (this._car.id).toString(),
-                    btnID = divID + ' button#cc';
+                    btnID = divID + ' button#cc',
+                    btn = $(btnID);
                     
-                //$(btnID).attr('src', getHostPath() + 'images\\' + (this._expired ? 'money.jpg' : 'cancel.jpg') );
+                //btn.css({
+                    //'background':'url(..\\images\\' + (this._expired ? 'money.jpg' : 'cancel.jpg' + ')'
+                //});
+                btn.css('background-image', "url('images/" + (this._expired ? 'money.jpg' : 'cancel.jpg') + "')");
+                //btn.off().click({i:this._carIndex, amt:this._currentBid}, this.payUser);
+			
             }
         }
 	};
@@ -301,11 +294,11 @@ var AuctionSell =
 					var btnStr = "<div id='" + liID + "'>" + 
 						"<img src='" + car.getFullPath() + "'>" +
 						"<label id='carInfo'>" + car.getFullName() + "</label>" +
-						"<button id='view'></button>" +
-                        "<button id='" + btnID + "'>" + 
+                        "<label id='" + btnID + "'>" + 
 							"Price: $<label id='price'>" + (car.getPrice() ).toString() + "</label><br>" +
 							"Auction expires: <label id='expireTime'></label>" +
-						"</button>" +
+                        "</label>" +
+                        "<button id='view'></button>" +
                         "<button id='cc'></button>" +
 					"</div><br>";
 					
@@ -360,5 +353,20 @@ var AuctionSell =
             console.log(JSON.stringify(userSales) );
         }
 //}
+    },
+    hasSoldCar:function(carID){
+        //has the user already auctioned a car with carID
+        var len = auctions.length;
+        
+        if(len == 0){
+            return false;
+        }
+        
+        for(var i = 0; i < len; i++){
+            if(auctions[i]._car.id == carID){
+                return true;
+            }
+        }
+        return false;
     }
 };

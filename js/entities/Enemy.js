@@ -54,7 +54,7 @@ function price(vehiclePrice, bias)
         //console.log(ret);
 		return Min + (Max - Min) * t;
 	};
-    var l = lerp(Math.random(0.8, 1.5), b, Math.random(0.0,1.0));
+    var l = lerp(Math.random(0.85, 1.85), b, Math.random(0.0,1.0));
     //console.log('lerp:' + l.toString() );
   	return vehiclePrice * l;
 }

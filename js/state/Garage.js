@@ -9,6 +9,40 @@ var userGarage = [
 	//Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969'),
 	//Vehicle('Sierra', 'GMC', '1997')
 ];
+function hasCar(carID){
+    //quick client side way to see if the user owns a car,
+    //use PAS to get the most to date data
+    var len = userGarage.length;
+        
+    if(len == 0){
+        return false;
+    }
+    
+    for(var i = 0; i < len; i++){
+        if(userGarage[i].id == carID){
+            return true;
+        }
+    }
+    return false;
+}
+function getCar(carID){
+    //quick client side way to get a user's car(with upgrades applied),
+    //that isn't the user's current vehicle
+    //returns null if user does not have car with carID in garage,
+    //else returns an ao.car object
+    var len = userGarage.length;
+        
+    if(len == 0){
+        return null;
+    }
+    
+    for(var i = 0; i < len; i++){
+        if(userGarage[i].id == carID){
+            return userGarage[i];
+        }
+    }
+    return null;
+}
 //userGarage.push(xdbCars[0]);
 //userGarage.push(xdbCars[1]);
 //userGarage.push(xdbCars[3]);
@@ -26,7 +60,7 @@ var //Garage._curCarIndex = null,	//user's currect car index
 function VehicleFromDB(obj){
     //creates an unupgraded/repaired car from the database  
     //var jqxhr = 
-    var funcName = 'pas::VehicleFromDB()';
+    var funcName = 'Garage.js pas::VehicleFromDB()';
     return $.ajax({
         type:'POST',
         //async:false,
@@ -160,7 +194,7 @@ var Garage = {
         
         userGarage = [];    //clear previous entries
         
-        var funcName = 'Garage::load()';
+        var funcName = 'Garage.js Garage::load()';
         
         var jqxhr = $.ajax({
             type:'POST',
