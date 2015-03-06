@@ -89,7 +89,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		{	//calculates sale price based on age, condition and completed upgrades
 			//var p = this._price;  //base price of car
 
-            //p += _dt.getPrie();
+            //p += _dt.getPrice();
             //p += _body.getPrice();
             //p += this._interior.getPrice();
             //p += this._docs.getPrice();

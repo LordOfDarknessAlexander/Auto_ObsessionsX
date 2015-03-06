@@ -3,7 +3,7 @@
 //	0x{DA, 0086, 0A}:{make, year, model}
 //values are between 00 and FF, allowing for 255x255x255 unique vehicles
 //ID's can be prceedurally generated!
-//namespace AO
+//namespace ao
 //
 var Drivetrain = {
     //default ctor
