@@ -124,8 +124,8 @@ function divSelectedCar(){
 	height:60%;
 	display:inline;
 }
-<?php divUserCar();?> img,
-<?php divSelectedCar();?> img
+<?php divUserCar();?> img#carImg,
+<?php divSelectedCar();?> img#carImg
 {
 	width:100%;
 	height:25%;
@@ -158,26 +158,41 @@ div#progressBars{
     font-size:0.75em;
     align:left;
 }*/
-div#userCar div#progressBars
+
+div#userCar div#progressBars,
+div#selectedCar div#progressBars
 {
     font-size:0.75em;
     text-align:left;
     align:left;
-}
-div#selectedCar div#progressBars
-{
-    font-size:0.75em;
-    text-align:right;
-    align:left;
+    position:absolute;
+    bottom:0%;
+    left:0%;
+    width:70%;
 }
 <?php divGarage();?> div#progressBars progress
 {	
-	/*display:inline-block;
-	backgorund-color:rgb(127,127,127);*/
+	/*display:inline-block;*/
 	/*color:grey;*/
-	right:0%;
-	width:50%;
+	left:0%;
+	width:100%;
 }
+<?php divGarage();?> div button#con
+{	
+	background: url('../images/condition.png') no-repeat 0 0;
+	background-size:100% 100%;
+    position:absolute;
+	right:0%;
+	height:25%;
+    width:30%;
+    bottom:0%;
+    text-align:center;
+    font-size:2.5vw;
+    cursor:default;
+    boarder:none;
+}
+<?php divGarage();?> div button#con:hover{}
+<?php divGarage();?> div button#con:active{}
 <?php divGarage();?> div#pbLabels label
 {	
 	display:block;

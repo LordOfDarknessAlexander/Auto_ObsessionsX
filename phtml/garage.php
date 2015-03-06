@@ -36,6 +36,7 @@ function cvStatBar($id){
         <br>
         <label id='carInfo'>info</label>
         <br>
+        <button id='con'>0</button>
         <div id='progressBars'>
             <!--progress bar 'value' attribute is between 0.0 and 1.0-->
 <?php
@@ -58,6 +59,7 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
         <br>
         <label id='carInfo'></label>
         <br>
+        <button id='con'>0</button>
         <div id='progressBars'>
 <?php
 //cvStatBar('Drivetrain');

@@ -263,6 +263,8 @@ var Garage = {
             pbSetColor($('progress#bodyPB'), stats._body);
             pbSetColor($('progress#interiorPB'), stats._interior);
             pbSetColor($('progress#docsPB'), stats._docs);
+            
+            $('div#userCar button#con').text(car.getCondition().toString() );
         }
     },
     setCurrentIndex:function(){
@@ -340,6 +342,8 @@ var Garage = {
 			pbSetColor($('div#selectedCar progress#interiorPB'), stats._interior);
 			pbSetColor($('div#selectedCar progress#docsPB'), stats._docs);
 			
+            $('div#selectedCar button#con').text(car.getCondition().toString() );
+            
 			$('div#selectedCar').show();
 		}
 	},

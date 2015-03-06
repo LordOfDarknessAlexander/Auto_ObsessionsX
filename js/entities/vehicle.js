@@ -135,16 +135,14 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			return ret;
 		},
 		getCondition : function(){
-            var MAX_PARTS = 16.0;
-                INV_MAX_PARTS = 1.0 / MAX_PARTS;
-			var ret = this.condition;   //base condition
-			/*for(var i = 0; i <= MAX_PARTS; i++){
-				var val = this._repairs & (1 << i);
-				if(val != 0){	//user's car has upgrades part
-                    //ret += parts[i].condition;
-				}
-			}*/
-			return (int)(ret * 100); //drop decimal, conver from [0.0-1.0] to [0-100]
+            //returns sum of repairs and upgrades as an integer [0-100]
+            var ret = (
+				(this._dt !== null ? this._dt.getPercentAvg() : 0.0) +
+				(this._body !== null ? this._body.getPercentAvg() : 0.0) +		//this._body.completion()
+				(this._interior !== null ? this._interior.getPercentAvg() : 0.0) +
+				(this._docs !== null ? this._docs.getPercentAvg() : 0.0)
+			) * 0.25;
+			return Math.floor(ret * 100.0); //drop decimal, convert from [0.0-1.0] to [0-100]
 		},
 		getFullName : function()
 		{	//returns a string representing the 'proper' car name
