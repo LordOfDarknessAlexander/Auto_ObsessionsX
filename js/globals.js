@@ -40,25 +40,25 @@ var userStats = {
 
 function saveUser()
 {	//saves user stats as a JSON string to the browsers local storage
-//<php if(loggedIn){?>
+<php if(loggedIn){?>
         //make ajax call to pas/update
-        //$.ajax({});
-//<php else{?>
+        $.ajax({});
+<php else{?>
 	if(Storage.local !== null){
 		Storage.local._stats = JSON.stringify(userStats);
 	}
 	//else local storage not available
-//<php
-//}
+<php
+}
 }
 function loadUser()
 {	//serialize user stats from local storage, if played previously
-//<php if(loggedIn){?>
+'<php if(loggedIn){?>'
     //make ajax call to server
-    //$.ajax({});
-//<php
-//}
-//else{?>
+    $.ajax({});
+<php
+}
+else{?>
 	if(Storage.local !== null){
 		if('_stats' in Storage.local){
 			userStats = JSON.parse(Storage.local._stats);
@@ -74,9 +74,9 @@ function loadUser()
 			};
 		}
 	}
-//<php
-//}
-//?>
+<php
+}
+?>
 }
 
 var amoney;

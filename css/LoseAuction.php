@@ -23,7 +23,9 @@ function divSold(){
 }
 <?php divSold();?> button
 {
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	background: url('../images/homeBtn.png') no-repeat 0 0;
+	background-size : 100% 100%;
 	width:150px;
 	height:50px;
+	top: -40%;
 }

@@ -151,11 +151,9 @@ button#homeBtn
 	background: url('../images/homeBtn.png') no-repeat 0 0;
 	font-weight: bold;
     background-size : 100% 100%;
-    
 	position:absolute;
     width:4%;
 	height:6%;
-	
 	right:5%;
 	bottom:6%;
     margin:0%;
@@ -402,6 +400,7 @@ div#profile
 div#messages
 {
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
+	background-size : 100% 100%;
     display: none;
     text-align: center;
     width: 100%;

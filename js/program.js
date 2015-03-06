@@ -8,6 +8,7 @@ function getLastAllowanceTime()
 		if('_lastAllowanceTime' in Storage.local)
 		{
 			return parseInt(Storage.local._lastAllowanceTime);
+			userStats.money = 225000;
 		}
 	}
 }
@@ -339,7 +340,7 @@ function startGame()
 	// Fill with gradient
 	context.fillStyle = gradient;
 	//temp
-	userStats.money = 50000;
+	userStats.money = 225000;
 	setStatBar();
 	switchStates();
 	
@@ -413,7 +414,7 @@ Auction.sold = function()
 //<php
 //}
 //?>
-		//ajax_post();    //get user info from server
+		ajax_post();    //get user info from server
 		setStatBar();
 	}
 	else
