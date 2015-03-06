@@ -116,7 +116,7 @@ function auctionGen()
                 btnID = 'as' + (i).toString(),
 				liID = 'div#asd' + (this._car.id).toString(),
                 cleanBtn = $(liID + ' button#' + btnID),
-                moneyBtn = $(liID + ' button#cc');
+                moneyBtn = $(liID + ' div#btns button#cc');
                 
 			cleanBtn.text('Sold!');
 			//cleanBtn.off().click({i:this._carIndex, amt:this._currentBid}, this.cleanUpAuction);
@@ -250,15 +250,21 @@ function auctionGen()
             //toggles the cancel/cash button
             if(this._car !== null){
                 var divID = 'div#asd' + (this._car.id).toString(),
-                    btnID = divID + ' button#cc',
+                    btnID = divID + ' div#btns button#cc',
                     btn = $(btnID);
                     
                 if(this._expired){
-                    btn.css('background-image', "url('images/money.jpg')");
+                    btn.css({
+                        'background':"url('images/money.jpg') no-repeat 0 0",
+                        'background-size':"100% 100%",
+                    });
                     //btn.off().click({cid:this._car.id, price:this._currentBid}, this.payUser);
                 }
                 else{
-                    btn.css('background-image', "url('images/cancel.jpg')");
+                    btn.css({
+                        'background':"url('images/cancel.jpg') no-repeat 0 0",
+                        'background-size':"100% 100%",
+                    });
                     //btn.off().click({cid:this._car.id, price:this._currentBid}, this.cancelAuction);
                 }
 			
@@ -272,27 +278,30 @@ function auctionGen()
             //user has decided to not sell car, removing it from userSales
             //user pays a penalty
             //alert('To cancel this auction the House will require a cancelation fee of ...');
+            if(!this.expired){
 //<php if(loggedIn){>
-            //make ajax call to pasRemove
+                //make ajax call to pasRemove
 //<php
 //}
 //else{>
-            console.log('cancel auction!');
-            var len = userSales.length;
-            
-            if(len != 0){
-                var i = 0;
+                console.log('cancel auction!');
+                var len = userSales.length;
                 
-                for(; i < len; i++){
-                    if(userSales[i]._car.id == this._car.id){
-                        break;
+                if(len != 0){
+                    var i = 0;
+                    
+                    for(; i < len; i++){
+                        if(userSales[i]._car.id == this._car.id){
+                            break;
+                        }
                     }
+                    //remove auction[i];
                 }
-                //remove auction[i];
-            }
 //<php
 //}
 //?>
+            }
+            //else, can not cancel auction which the user has been paid
         },
         payUser:function(obj){
             var val = obj.data.price; 
@@ -365,33 +374,34 @@ var AuctionSell =
                 //or setup has failed for another reason
                 console.log('could not set up auction for car at index (' + i.toString() + ')');
             }else{
-                userSales.push(AuctionSell._state);
-                
                 //for(var j = 0; j < userSales.length; j++){
                     //var as = userSales[j];
-                if(AuctionSell._state._car !== null)
-                {
-                    var car = AuctionSell._state._car,
-                        btnID = 'as' + (i).toString(),
-                        liID = 'asd' + (car.id).toString();
-                        
-                    //var li = $('div#' + liID);
-                    //if(li === null || li === 'undefined')
-                    //{
-                    var btnStr = "<div id='" + liID + "'>" + 
-                        "<img src='" + car.getFullPath() + "'>" +
-                        "<label id='carInfo'>" + car.getFullName() + "</label>" +
-                        "<label id='" + btnID + "'>" + 
-                            "Price: $<label id='price'>" + (car.getPrice() ).toString() + "</label><br>" +
-                            "Auction expires: <label id='expireTime'></label>" +
-                        "</label>" +
+
+                var car = AuctionSell._state._car,
+                    btnID = 'as' + (i).toString(),
+                    liID = 'asd' + (car.id).toString();
+                    
+                //var li = $('div#' + liID);
+                //if(li === null || li === 'undefined')
+                //{
+                var btnStr = "<div id='" + liID + "'>" + 
+                    "<img src='" + car.getFullPath() + "'>" +
+                    "<label id='carInfo'>" + car.getFullName() + "</label>" +
+                    "<label id='" + btnID + "'>" + 
+                        "<label id='price'>Price: $" + (car.getPrice() ).toString() + "</label><br>" +
+                        "<label id='expireTime'>Auction expires: </label>" +
+                    "</label>" +
+                    "<div id='btns'>" +
                         "<button id='view'></button>" +
                         "<button id='cc'></button>" +
-                    "</div><br>";
-                    
-                    jq.AuctionSell.carView.append(btnStr);
-                    //}
-                }
+                    "</div>" +
+                "</div><br>";
+                
+                jq.AuctionSell.carView.append(btnStr);
+                
+                AuctionSell._state.toggleCC();
+                
+                userSales.push(AuctionSell._state);
             }
         }
         //entering the state without posting a new car

@@ -22,7 +22,7 @@ function dcv(){
 	z-index: 1;
 	width: 100%;
 	height: 100%;
-    	color:red;
+    color:red;
 }
 <?php divAS();?> ul
 {
@@ -37,6 +37,14 @@ function dcv(){
 	display:inline;*/
     height:15%;
     background-color:grey;
+    display:block;
+}
+<?php divAS();?> div#carView div div#btns
+{
+    position:absolute;
+    width:10%;
+    right:0%;
+    height:15%;
     display:block;
 }
 <?php divAS();?> div#carView div label#carInfo
@@ -63,26 +71,44 @@ function dcv(){
     font-size:1.5vw;
     display:block;
 }
-<?php divAS();?> div#carView div button#view
+<?php divAS();?> div#carView div label#price
+{
+	height:50%;
+	width:100%;
+    left:0%;
+    text-align:left;
+    font-size:1.25vw;
+    display:block;
+}
+<?php divAS();?> div#carView div label#expireTime
+{
+	height:50%;
+	width:100%;
+    left:0%;
+    text-align:left;
+    font-size:1.25vw;
+    display:block;
+}
+<?php divAS();?> div#carView div#btns button#view
 {
     background: url('../images/view.png') no-repeat 0 0;
     background-size:100% 100%;
     position:absolute;
-    top:5%;
-    right:4%;
-    width:4%;
-    height:8%;
+    top:25%;
+    right:50%;
+    width:50%;
+    height:50%;
     padding:0% 0%;
 }
-<?php divAS();?> div#carView div button#cc
+<?php divAS();?> div#carView div#btns button#cc
 {
     background: url('../images/cancel.jpg') no-repeat 0 0;
     background-size:100% 100%;
     position:absolute;
-    top:5%;
+    top:25%;
     right:0%;
-    width:4%;
-    height:8%;
+    width:50%;
+    height:50%;
     padding:0% 0%;
 }
 <?php divAS();?> div button label
