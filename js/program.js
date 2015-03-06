@@ -78,6 +78,7 @@ function setMoney()
 		alert("You are out of money Dude!");
 		$('div#statBar label#money').text('Refresh Dough???: ' + userStats.money.toFixed(2) );
 	}
+	
 }
 function setTokens()
 {
@@ -337,6 +338,8 @@ function startGame()
 	gradient.addColorStop("1.0","green");
 	// Fill with gradient
 	context.fillStyle = gradient;
+	//temp
+	userStats.money = 50000;
 	setStatBar();
 	switchStates();
 	
