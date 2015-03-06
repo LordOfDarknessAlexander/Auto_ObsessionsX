@@ -81,7 +81,7 @@ button#asBackBtn
 	height:8%;
 	cursor:pointer;
     left:42%;
-    bottom:60%;
+    bottom:66%;
 }
 <?php divAS();?> div#carView
 {
