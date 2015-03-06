@@ -121,7 +121,8 @@ function auctionGen()
 			cleanBtn.text('Sold!');
 			//cleanBtn.off().click({i:this._carIndex, amt:this._currentBid}, this.cleanUpAuction);
             this._currentBid = 0;
-			Garage.save();
+			//AucionSell.save();
+            Garage.save();
 		},
 		cleanUpAuction:function(index)
 		{
@@ -302,6 +303,8 @@ function auctionGen()
 //?>
             }
             //else, can not cancel auction which the user has been paid
+            
+            //AucionSell.save();
         },
         payUser:function(obj){
             var val = obj.data.price; 
@@ -316,6 +319,8 @@ function auctionGen()
                 //cc = $(divID + ' button#cc');
             //cc.off();
             //div.css({"opacity":"0.45", "cursor":"default"});
+            
+            //AucionSell.save();
         }
 	};
 }
@@ -361,11 +366,13 @@ var AuctionSell =
 //}
 //else{?>
             //local storage
-            //if(Storage.local != null){
-                //userSales = JSON.parse();
+            //if(Storage.local != null && 'userSales in Storage.local){
+                //userSales = JSON.parse(Storage.local['userSales']);
             //}
 //<php
 //}?>
+            //foreach active auction, updates them
+            
             AuctionSell._state = auctionGen();  //do not user new, function which returns a brand new object for you
 			AuctionSell._state.init(i);
 			
@@ -428,25 +435,61 @@ var AuctionSell =
 	},
     load:function(){
 //<php if(loggedIn){?>
-        //call pas/query.php?
+        //jq.get(
+            //'pas/query.php?op=ucs',
+            //function(data){
+                //if(data === null){
+                    //error
+                //}
+                //alert('success!');
+                //if(typeof(data) == 'array'){
+                    //userSales = data;
+                //}
+            //},
+            //function(jqxhr){
+                //alert(''bad stuff happened!');
+            //}
+        //);
+//<php
 //}
-//else{ //playing as guest, use local storage?>
+//else{> //playing as guest, use local storage?>
         //for now, add code here
         if(Storage.local !== null && 'AuctionSell' in Storage.local){
             //userSales = JSON.parse(Storage.local['AuctionSell']);
         }
+//<php
 //}
+//>
     },
     save:function(){
 //<php if(loggedIn){?>
-        //call pas/update.php?op=usls
+        //jq.post(
+            //'pas/update.php?op=usls',
+            //function(data){
+                //if(data === null){
+                    //error
+                //}
+                //alert('success!' + JSON.stringify(data));
+                //continue with game!
+            //},
+            //function(jqxhr){
+                //alert(''bad stuff happened!');
+            //},
+            //JSON.stringify(userSales)
+        //);
 //}
 //else{ //playing as guest, use local storage?>
         //for now, add code here
         if(Storage.local !== null){
-            //Storage.local['AuctionSell'] = JSON.stringify(userSales);
-            console.log(JSON.stringify(userSales) );
-        }
+//<?php if(DEBUG){>
+            //var jstr = JSON.stringify(userSales);
+            //console.log(jstr);
+            //Storage.local['AuctionSell'] = jstr;
+//<php
 //}
+//else{>
+            Storage.local['AuctionSell'] = JSON.stringify(userSales);
+//}>   
+        }
     }
 };

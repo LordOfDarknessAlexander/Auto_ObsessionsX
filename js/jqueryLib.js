@@ -190,6 +190,25 @@ var jq = {
 			jq.Game.menu.toggle();
 			jq.Business.menu.toggle();
 		}        
+    },
+    get:function(localPath, doneCB, failedCB){
+        //get does not pass arguments to the script,
+        //embed any optional params in localPath!
+        //$.ajax({
+            //type:'GET',
+            //url:getHostPath() + localPath,
+            //dataType:'json',
+            //data:''
+        //}).done(doneCB).failed(failedCB);
+    },
+    post:function(localPath, doneCB, failedCB, args){
+        //args must but be a js object
+        //$.ajax({
+            //type:'POST',
+            //url:getHostPath() + localPath,
+            //dataType:'json',
+            //data:(args === null || args === undefined)?'':args
+        //}).done(doneCB).failed(failedCB);
     }
 };
 /*
