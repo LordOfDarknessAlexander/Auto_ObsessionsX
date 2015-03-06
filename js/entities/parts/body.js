@@ -107,7 +107,7 @@ var Body = {
                 (this._paint._stage << 4) |
                 (this._ph0._stage << 0);
                 //this._fuel.stage << 0
-                console.log(ret);
+                //console.log(ret);
                 return ret;
             },
             //fromBitfield(int){

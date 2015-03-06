@@ -105,7 +105,7 @@ var Interior = {
                 (this._dash._stage << 4) |
                 (this._panels._stage << 0);
                 //this._fuel.stage << 0
-                console.log(ret);
+                //console.log(ret);
                 return ret;
             },
             //fromBitfield(int){
