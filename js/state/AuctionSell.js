@@ -335,44 +335,13 @@ var AuctionSell =
 		{
 			//call to start an auction for car
 			var i = index.data.i;
-			//if(!(auction with car.id in userSales) {
-                //add auction
-            //}
             
-            //AuctionSell.loadAuctions();
+            AuctionSell.load();
+            //foreach active auction in userSales,
+            //start them and begin updates
+            
             //jq.AuctionSell.carView.clear();
-            //userSales = [];
-//<php if(loggedIn){?>
-//<php
-            //$.ajax({
-                //type:'POST',
-                //url:getHostPath() + 'pas/query.php?op=ucsl',
-                //dataType:'json',
-                //data:{carID:i}
-            //}).done(function(data){
-                //
-                //if(data === null){
-                    //alert('Error:ajax response returned null!');
-                    //return;
-                //}
-                //alert(funcName + ', ajax response success!' + JSON.stringify(data) );
-                //do stuff with returned data!
-                //AuctionSelect.();
-            //}).failed(function(){
-                //alert('ajax call failed! Reason: ' + jqxhr.responseText);
-                //console.log('loading game resources failed, abort!');
-            //});
-//<php
-//}
-//else{?>
-            //local storage
-            //if(Storage.local != null && 'userSales in Storage.local){
-                //userSales = JSON.parse(Storage.local['userSales']);
-            //}
-//<php
-//}?>
-            //foreach active auction, updates them
-            
+
             AuctionSell._state = auctionGen();  //do not user new, function which returns a brand new object for you
 			AuctionSell._state.init(i);
 			
@@ -434,9 +403,9 @@ var AuctionSell =
 		}
 	},
     load:function(){
-//<php if(loggedIn){?>
-        //jq.get(
-            //'pas/query.php?op=ucs',
+//<php
+//if(loggedIn){?>
+        //jq.get('pas/query.php?op=ucs',
             //function(data){
                 //if(data === null){
                     //error
@@ -452,14 +421,15 @@ var AuctionSell =
         //);
 //<php
 //}
-//else{> //playing as guest, use local storage?>
+//else{ //playing as guest, use local storage?>
         //for now, add code here
-        if(Storage.local !== null && 'AuctionSell' in Storage.local){
-            //userSales = JSON.parse(Storage.local['AuctionSell']);
+        var k = 'AuctionSell';
+        
+        if(Storage.local !== null && k in Storage.local){
+            userSales = JSON.parse(Storage.local[k]);
         }
 //<php
-//}
-//>
+//}>
     },
     save:function(){
 //<php if(loggedIn){?>

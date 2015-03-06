@@ -1,58 +1,48 @@
 //Application main
 var AutoObessesions = {};
 
-function getLastAllowanceTime()
-{
-	if(Storage.local !== null)
-	{
-		if('_lastAllowanceTime' in Storage.local)
-		{
+function getLastAllowanceTime(){
+    //the last time the user collected their allowance
+	if(Storage.local !== null){
+		if('_lastAllowanceTime' in Storage.local){
 			return parseInt(Storage.local._lastAllowanceTime);
 			userStats.money = 225000;
 		}
 	}
 }
-function setLastAllowanceTime()
-{
-	if(Storage.local !== null)
-	{
+function setLastAllowanceTime(){
+	if(Storage.local !== null){
 		var time = Date.now()	//a time of 0
 		Storage.local._lastAllowance = time.toString();
 	}
 }
 
-function garageDoor()
-{
+function garageDoor(){
 	backgroundY -= speed;
-	if(backgroundY == -1 * height)
-	{
+    
+	if(backgroundY == -1 * height){
 		backgroundY = -1000;
 	}
 }
-function update(deltaTime)
-{
+function update(deltaTime){
     	//should splash update
     //userLogged = true;
-	if(auctionOver)
-	{
+	if(auctionOver){
 		restarted = true;
 	}
 
 	AuctionSell.update(deltaTime);
 
 	timer++;
-	
 }
 Auction.setup = function()
 {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	
-	if(!auctionStop) 
-	{
+	if(!auctionStop){
 		window.requestAnimFrame(Auction.setup);	//recursive call, bad
 		
 		Auction.update();
-		
 	}
 }
 function auctionMode(deltaTime)
@@ -78,26 +68,22 @@ function setMoney()
 		//userStats.money = 0;
 		alert("You are out of money Dude!");
 		$('div#statBar label#money').text('Refresh Dough???: ' + userStats.money.toFixed(2) );
-	}
-	
+	}	
 }
-function setTokens()
-{
+function setTokens(){
 	$('div#statBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
 	//$('div#auctionStatBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
 }
-function setPrestige()
-{
+function setPrestige(){
 	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
 	//$('div#auctionStatBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
 }
-function setMarkers()
-{	//updates html label element, within context of the Game menu only
+function setMarkers(){
+	//updates html label element, within context of the Game menu only
 	$('label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
 	//$('div#auctionStatBar label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
 }
-function setStatBar()
-{
+function setStatBar(){
     jq.statBar.show();
 	setName();
 	setMoney();
@@ -105,8 +91,8 @@ function setStatBar()
 	setPrestige();
 	setMarkers();
 }
-function setAdBG()
-{	//set a random ad
+function setAdBG(){
+	//set a random ad
 	//floor returns an integer, random returns, random returns a float
 	var i = Math.floor(Math.random() * (logos.length - 1) ),	//[0,logos.length-1]
 		src = "images\\logos\\" + logos[i] + ".png";
@@ -130,11 +116,12 @@ $(document).ready(function()
 	//loading assets and 'core' game logic
 	//Storage.local.clear();
 	//alert('doc ready!');
-	pas.query.loadUser();
+	//pas.query.loadUser();   //load user stats!
 	getLastAllowanceTime();
 
 	loadUser();
-    Garage.load();
+    //AuctionSell.load(); //load user sales!
+    Garage.load();  //load user garage!
     //jq.Game.setHomeImg();
     setHomeImg();   //in Garage.js
 	//userStats.money = 150;

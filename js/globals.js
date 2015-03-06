@@ -53,12 +53,12 @@ function saveUser()
 }
 function loadUser()
 {	//serialize user stats from local storage, if played previously
-'<php if(loggedIn){?>'
+//<php if(loggedIn){?>'
     //make ajax call to server
-    $.ajax({});
-<php
-}
-else{?>
+    //$.ajax({});
+//<php
+//}
+//else{?>
 	if(Storage.local !== null){
 		if('_stats' in Storage.local){
 			userStats = JSON.parse(Storage.local._stats);
@@ -74,9 +74,9 @@ else{?>
 			};
 		}
 	}
-<php
-}
-?>
+//<php
+//}
+//?>
 }
 
 var amoney;

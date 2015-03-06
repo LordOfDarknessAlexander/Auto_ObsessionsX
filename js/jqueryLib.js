@@ -194,6 +194,7 @@ var jq = {
     get:function(localPath, doneCB, failedCB){
         //get does not pass arguments to the script,
         //embed any optional params in localPath!
+        //doneCB and failedCB are functions
         //$.ajax({
             //type:'GET',
             //url:getHostPath() + localPath,
@@ -203,6 +204,7 @@ var jq = {
     },
     post:function(localPath, doneCB, failedCB, args){
         //args must but be a js object
+        //doneCB and failedCB are functions
         //$.ajax({
             //type:'POST',
             //url:getHostPath() + localPath,
