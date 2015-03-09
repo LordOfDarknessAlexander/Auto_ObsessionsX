@@ -624,3 +624,15 @@ function upgradeDocs(obj){
     }
     //else no car, do nothing
 }
+jq.RepairShop.backBtn.click(
+function(){
+	//toggleRepair();
+  	jq.RepairShop.menu.hide();
+ 	//$('#gameMenu')
+	setStatBar();
+//	setAdBG();
+	jq.Game.menu.show();
+    jq.carImg.show();
+	//resetStates();
+	//appState = GAME_MODE.Main_Menu;
+});

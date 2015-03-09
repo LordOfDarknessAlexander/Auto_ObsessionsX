@@ -159,6 +159,39 @@ var Garage = {
 	{	//returns a vehicle, if one is selected or null
 		return (Garage._curCarIndex !== null && userGarage.length != 0) ? userGarage[Garage._curCarIndex] : null;
 	},
+    getCarByIndex:function(index)
+	{	//returns a vehicle at a specific index, or null or failure
+		var len = userGarage.length;
+        
+        if(len == 0){
+            return null;
+        }
+        
+        for(var i = 0; i < len; i++){
+            if(index == i){
+                return userGarage[i];;
+            }
+        }
+        
+        return null;
+	},
+    getCarByID:function(id)
+	{	//returns a vehicle with matching id or null
+		var len = userGarage.length;
+        
+        if(len == 0){
+            return null;
+        }
+        
+        for(var i = 0; i < len; i++){
+            var car = userGarage[i];
+            if(id == car.id){
+                return car;
+            }
+        }
+        
+        return null;
+	},
 	exit : function()
 	{	//remove resources, effectivly 'closing' the state
 		//appState = GAME_MODE.MAIN;
@@ -268,6 +301,8 @@ var Garage = {
 		{
             if(Garage._curCarIndex !== null){
                 Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
+                //var car = Garage.getCurrentCar();
+                //Storage.local['_carID'] = JSON.stringify(car === null ? 0 : car.id);
             }
 			//var array = [];
             if(userGarage.length != 0){
@@ -285,20 +320,31 @@ var Garage = {
 	//},
     setCurrentCarStats:function(){
         if(this._curCarIndex !== null){
-            var car = userGarage[this._curCarIndex],
+            var div = $('div#Garage div#userCar'),
+                car = userGarage[this._curCarIndex],
                 stats = car.getStats();
             
-            $('div#userCar img#carImg').attr('src', car.getFullPath() );
-            $('div#userCar label#carName').text(car.getFullName() );;
-            $('div#userCar label#carInfo').text(car.getInfo() );
-            
+            $('img#carImg', div).attr('src', car.getFullPath() );
+            $('label#carName', div).text(car.getFullName() );;
+            $('label#carInfo', div).text(car.getInfo() );
+//<php
+//function pbSetColor($str){
+    //sets the color of an html progress bar (using jQuery) named pb$str based on the property stats._$str;?>
+    //pbSetColor($('progress#pb<?php echo $str;?>', div), stats.<php echo $str;?>);
+//<?php
+//}
+//pbSetColor('Drivetrain');
+//pbSetColor('Body');
+//pbSetColor('Interior');
+//pbSetColor('Docs');
+//?>
             //set progress bar
-            pbSetColor($('progress#drivetrainPB'), stats._driveterrain);
-            pbSetColor($('progress#bodyPB'), stats._body);
-            pbSetColor($('progress#interiorPB'), stats._interior);
-            pbSetColor($('progress#docsPB'), stats._docs);
+            pbSetColor($('progress#drivetrainPB', div), stats._driveterrain);
+            pbSetColor($('progress#bodyPB', div), stats._body);
+            pbSetColor($('progress#interiorPB', div), stats._interior);
+            pbSetColor($('progress#docsPB', div), stats._docs);
             
-            $('div#userCar button#con').text(car.getCondition().toString() );
+            $('button#con', div).text(car.getCondition().toString() );
         }
     },
     setCurrentIndex:function(){
@@ -311,11 +357,13 @@ var Garage = {
     },
 	setCurrentCar : function()
 	{
+        var div = $('div#Garage div#userCar');
+        
         this.setCurrentIndex();
         
 		if(this._curCarIndex !== null){
             var i = this._curCarIndex,
-                btn = $('#userCar'),
+                //btn = $('#userCar'),
                 src = $('#carSelBtn' + i);
 //<php
 //if(loggedIn){>
@@ -332,17 +380,17 @@ var Garage = {
 //}
 //>
 			//
-			btn.children('label#carName').text(src.children('label#carName').text() );
-			btn.children('label#carInfo').text(src.children('label#carInfo').text() );
-			//btn.children('label#name').text(src.children('label#name').text() );
+			div.children('label#carName').text(src.children('label#carName').text() );
+			div.children('label#carInfo').text(src.children('label#carInfo').text() );
+			//div.children('label#name').text(src.children('label#name').text() );
 			
 			this.setCurrentCarStats();
 			
-			$('div#Garage #userCar').show();
+			div.show();
 		}
         else{
             //no current car
-            $('div#Garage #userCar').hide();
+            div.hide();
         }
 	},
 	setSelectCar : function(index)
@@ -351,15 +399,15 @@ var Garage = {
 	
 		if(i < userGarage.length)
 		{
-			var btn = $('div#selectedCar');
+			var div = $('div#Garage div#selectedCar');
 			var src = $('#carSelBtn' + i);
 		
 			//show user car stats div
 			selCarIndex = i;	//maintain index, instead of copying a car
 			//
-			btn.children('label#carName').text(src.children('label#carName').text() );
-			btn.children('label#carInfo').text(src.children('label#carInfo').text() );
-			//btn.children('label#name').text(src.children('label#name').text() );
+			div.children('label#carName').text(src.children('label#carName').text() );
+			div.children('label#carInfo').text(src.children('label#carInfo').text() );
+			//div.children('label#name').text(src.children('label#name').text() );
 			
 			var car = userGarage[i],
 				stats = car.getStats();
@@ -367,18 +415,23 @@ var Garage = {
 			//$('div#userCar img#carImg').attr('src', car.getFullPath() );
 			//$('div#userCar label#carName').text(car.getFullName() );;
 			//$('div#userCar label#carInfo').text(car.getInfo() );
-			$('div#selectedCar img#carImg').attr('src', car.getFullPath() );
-			$('div#selectedCar label#carName').text(car.getFullName() );
-			$('div#selectedCar label#carInfo').text(car.getInfo() );
+			$('img#carImg', div).attr('src', car.getFullPath() );
+			$('label#carName', div).text(car.getFullName() );
+			$('label#carInfo', div).text(car.getInfo() );
+//<php
+//pbSetColor('Drivetrain');
+//pbSetColor('Body');
+//pbSetColor('Interior');
+//pbSetColor('Docs');
+//?>
+			pbSetColor($('progress#drivetrainPB', div), stats._driveterrain);
+			pbSetColor($('progress#bodyPB', div), stats._body);
+			pbSetColor($('progress#interiorPB', div), stats._interior);
+			pbSetColor($('progress#docsPB', div), stats._docs);
 			
-			pbSetColor($('div#selectedCar progress#drivetrainPB'), stats._driveterrain);
-			pbSetColor($('div#selectedCar progress#bodyPB'), stats._body);
-			pbSetColor($('div#selectedCar progress#interiorPB'), stats._interior);
-			pbSetColor($('div#selectedCar progress#docsPB'), stats._docs);
-			
-            $('div#selectedCar button#con').text(car.getCondition().toString() );
+            $('button#con', div).text(car.getCondition().toString() );
             
-			$('div#selectedCar').show();
+			div.show();
 		}
 	},
 	setCarBtnText : function(index)
@@ -489,6 +542,9 @@ var CarView = {
 	}
 	//update, ender, exit?
 };
+//
+//jQuery bindings
+//
 function setHomeImg(path){
     var car = Garage.getCurrentCar();
     var homeImg = jq.carImg;
@@ -510,22 +566,26 @@ function setHomeImg(path){
         homeImg.attr('src', path);
     }
 }
-jq.Garage.backBtn.click(function()
-{
+jq.Garage.backBtn.click(
+function(){
 	jq.Garage.toggle();
 	Garage.save();
     jq.carImg.show();
     setHomeImg();
 });
-$('#myCars').click(function()
-{
+$('#myCars').click(
+function(){
 	jq.Garage.toggle();
     jq.carImg.hide();
 	Garage.init();
 });
-
-jq.CarView.homeBtn.click(function()
-{
+jq.CarView.backBtn.click(
+function(){
+    jq.CarView.toggle();
+    jq.carImg.hide();
+});
+jq.CarView.homeBtn.click(
+function(){
 	jq.Game.menu.show();
 	jq.CarView.menu.hide();
     setHomeImg();
@@ -536,17 +596,18 @@ jq.CarView.homeBtn.click(function()
 	if(selCarIndex !== null)
 		Garage.setCurrentCar(selCarIndex);
 });*/
-jq.Garage.viewBtn.click(function()
-{
-	if(selCarIndex !== null)
-	{
+jq.Garage.viewBtn.click(
+function(){
+    //
+	if(selCarIndex !== null){
 		jq.CarView.toggle();
 		CarView.init();
 	}
 	//else, do nothing, user has not clicked on a car
 });
-jq.Garage.selectBtn.click(function()
-{
+jq.Garage.selectBtn.click(
+function(){
+    //selects the vehicle the user is currently viewing
 	if(selCarIndex !== null)
 	{
 		Garage.setCurrentCar();

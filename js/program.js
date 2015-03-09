@@ -6,7 +6,7 @@ function getLastAllowanceTime(){
 	if(Storage.local !== null){
 		if('_lastAllowanceTime' in Storage.local){
 			return parseInt(Storage.local._lastAllowanceTime);
-			userStats.money = 225000;
+			//userStats.money = 225000;
 		}
 	}
 }
@@ -30,7 +30,7 @@ function update(deltaTime){
 	if(auctionOver){
 		restarted = true;
 	}
-
+    //update active user's auctions
 	AuctionSell.update(deltaTime);
 
 	timer++;
@@ -54,43 +54,6 @@ function auctionMode(deltaTime)
     Auction.setup();//auctionInit();
   
 }
-//js.StatBar = {
-function setName()
-{
-	//$('div#statBar label#fname').text('User: ' + userStats.fn.toString() );
-}	
-function setMoney()
-{
-	$('div#statBar label#money').text('Money: ' + userStats.money.toFixed(2) );
-	
-	if(userStats.money <= 0)
-	{
-		//userStats.money = 0;
-		alert("You are out of money Dude!");
-		$('div#statBar label#money').text('Refresh Dough???: ' + userStats.money.toFixed(2) );
-	}	
-}
-function setTokens(){
-	$('div#statBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
-	//$('div#auctionStatBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
-}
-function setPrestige(){
-	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
-	//$('div#auctionStatBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
-}
-function setMarkers(){
-	//updates html label element, within context of the Game menu only
-	$('label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
-	//$('div#auctionStatBar label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
-}
-function setStatBar(){
-    jq.statBar.show();
-	setName();
-	setMoney();
-	setTokens();
-	setPrestige();
-	setMarkers();
-}
 function setAdBG(){
 	//set a random ad
 	//floor returns an integer, random returns, random returns a float
@@ -102,15 +65,9 @@ function setAdBG(){
 
 //$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed
-//function loadGarage(){
-  // if(Storage.local !== null && '_curCarIndex' in Storage.local){
-    //    Garage._curCarIndex = parseInt(JSON.parse(Storage.local._curCarIndex) );
-        //alert("current car is at index:" + Garage._curCarIndex.toString() );
-    //}
-//}
-
-$(document).ready(function()
-{	//Declare functions and objects dependant on the html
+$(document).ready(
+function(){
+	//Declare functions and objects dependant on the html
 	//document being loaded within this callback,
 	//such as jQuery/ui callback bindings,
 	//loading assets and 'core' game logic
@@ -148,60 +105,6 @@ $(document).ready(function()
 			ticker++;
 		}	
 	}
-   
-function loadCars(doc){
-	//carNodes = doc.getElementsByTagName('Vehicle');
-	//carsLength = carNodes.length;
-	//for(var i = 0; i < carsLength; i++){
-		//var item = carNodes.item(i);
-		//item.getAttribute("name"); 
-		//create new car
-	//}
-	//use jquery?
-    //alert(doc);
-	//var list = doc.childNodes;
-	//var node = list[1];	//acessing nodes work
-//	var v = node.item(i);
-	//var cn = node.childNodes;
-	//var atrs = node.attributes;
-	//TODO:accessing attribute elements breaks...
-	
-//	var parts = node.getElementById('upgrades');
-	//var
-        //name = atrs.getNamedItem('name'),
-        //make = atrs.getNamedItem('make'),
-        //year = atrs.getNamedItem('year');
-    
-    //userGarage.push(Vehicle(name, make, year, 10000) );    //list[i]) )
-//	var n = node.getAttribute('name');
-	//var atrs = node.attributes;
-	//var n = node.getAttribute('year');
-//	var n = node.getAttribute('make');
-	//for(var i = 0; i < list.length; i++){
-		//userGarage.push(Vehicle(list[i]) )
-//	}
-}
-
-//Parse ajax functions to send data from within js to ph
-
-/*
-//LOAD Vehicle XML, this was working, now can't find source file!
-var vehiclePath = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/vehicles.xml';	//should be the location of file on server
-
-if(loadXMLDoc(vehiclePath) == false)
-{	//loading xml resource failed, display warning
-	window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
-}
-
-var vDoc = document.querySelector('link[rel="import"]');	//document Vehicles.html
-var vehicles = document.getElementById('Vehicles');
-var cn = vehicles.firstChild;
-for(var carNode in vehicles.childNodes)
-{
-	var newCar = Vehicle(car);
-	//instantiate js object or retain html node 'car' for read only access
-}*/
-
 //Load the splash screen first
 assetLoader.finished = function() 
 {
@@ -257,15 +160,14 @@ function switchStates( GAME_MODE)
 	}
 }
 
-//Show the splash after loading all assets 
-function splash() 
-{
-  init();
-  garageDoor();
-  $('#progress').hide();
-  $('#splash').show();
-  $('.sound').show();  
-  assetLoader.sounds.engine.play();
+function splash(){
+    //Show the splash after loading all assets 
+    init();
+    garageDoor();
+    $('#progress').hide();
+    $('#splash').show();
+    $('.sound').show();  
+    assetLoader.sounds.engine.play();
 }
 
 function Register()
@@ -276,32 +178,29 @@ function Register()
 	$('#Register').show();
 
 	appState = GAME_MODE.NEW_USER;
-	if(appState == GAME_MODE.NEW_USER)
-	{
+    
+	if(appState == GAME_MODE.NEW_USER){
 		console.log("Register THis");
-	
 	}
 }
 
 //Main Menu  
 function mainMenu() 
 { 
-  for (var sound in assetLoader.sounds) 
-  {
-    if (assetLoader.sounds.hasOwnProperty(sound)) 
-    {
-      assetLoader.sounds[sound].muted = !playSound;
+    for(var sound in assetLoader.sounds){
+        if(assetLoader.sounds.hasOwnProperty(sound)){
+            assetLoader.sounds[sound].muted = !playSound;
+        }
     }
-  }
-  delete splash;
-  
-  $('#progress').hide();
-  $('#splash').hide();
-  $('#Register').hide();
-  $('#menu').removeClass('#Register');
-  $('#main').show();
-  $('#menu').addClass('main');
-  $('.sound').show();
+    delete splash;
+
+    $('#progress').hide();
+    $('#splash').hide();
+    $('#Register').hide();
+    $('#menu').removeClass('#Register');
+    $('#main').show();
+    $('#menu').addClass('main');
+    $('.sound').show();
 }
 
 //money = 50000;
@@ -334,7 +233,6 @@ function startGame()
 	if(appState == GAME_MODE.RUNNING)
 	{
 	  console.log("Run , run squirrel");
-	
 	}	
 	
 	assetLoader.sounds.gameOver.pause();
@@ -344,7 +242,7 @@ function startGame()
 }
 
 Auction.sold = function()
-{	//enemy wins auction, car goes to them
+{	//end of auction, car goes to highest bidder
 	//$('.sold').style.display = 'true';
 	//document.getElementById('sold').style.display = 'true';
 	stop = true;
@@ -415,8 +313,8 @@ Auction.sold = function()
 //
 //jQuery UI bindings
 //
-$('.play').click(function() 
-{
+$('.play').click(
+function(){
     $('#menu').hide();
     $('#gameMenu').show();
     //can no longer navigate to credits or the root menus anymore
@@ -425,8 +323,8 @@ $('.play').click(function()
     //delete menu image, since the game can not navigate back to this screen after clicking
     startGame();
 });
-$('.Register').click(function() 
-{
+$('.Register').click(
+function(){
     $('#menu').hide();
     $('#Register').show();
     Register();
@@ -436,20 +334,8 @@ $('.Register').click(function()
 });
 //InMenuButtons
 //auction Button
-jq.AuctionSelect.backBtn.click(function() 
-{ 	
-	//setAdBG();
-	setStatBar();
-    setHomeImg();
-	jq.Game.menu.toggle();
-	jq.AuctionSelect.menu.toggle();
-	//Auction.setup();
-	jq.carImg.show();
-	//$('#menu').addClass('auction');
-	//AuctionSelect.init();
-});
-jq.Game.toAuctionBtn.click(function() 
-{
+jq.Game.toAuctionBtn.click(
+function(){
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
     jq.carImg.hide();
@@ -457,8 +343,8 @@ jq.Game.toAuctionBtn.click(function()
 	//auctionStop = false;
 	AuctionSelect.init();
 });
-jq.Auction.homeBtn.click(function()
-{
+jq.Auction.homeBtn.click(
+function(){
 	//Auction.cancel();	//stop the auction, aborting the sale
 	Auction.close();
 	//$('#Auction').hide();
@@ -478,15 +364,8 @@ jq.Auction.homeBtn.click(function()
 	//}	
 });
 //Auction State Back Button
-jq.Auction.backBtn.click(function()
-{
-	Auction.close();
-	jq.Auction.menu.hide();
-	jq.AuctionSelect.menu.show();
-    jq.carImg.hide();	
-});
-jq.Sold.garageBtn.click(function()
-{
+jq.Sold.garageBtn.click(
+function(){
 	//jq.Sold.menu.
     jq.Sold.menu.hide();
 	jq.Garage.menu.show();
@@ -494,9 +373,15 @@ jq.Sold.garageBtn.click(function()
     jq.carImg.hide();
     //appState = GAME_MODE.GARAGE:
 });
-
-jq.Game.repairBtn.click(function()
-{
+/*jq.Sold.homeBtn.click(
+function(){
+    jq.Sold.menu.hide();
+	jq.Main.menu.show();
+    jq.carImg.show();
+    //appState = GAME_MODE.HOME:
+});*/
+jq.Game.repairBtn.click(
+function(){
 	//toggleRepair();
 	//$('#gameMenu')
 	jq.Game.menu.hide();
@@ -505,27 +390,56 @@ jq.Game.repairBtn.click(function()
     jq.carImg.show();
 	//saveUser();	//save user stats after purchasing
 });
-//RepairMenu Back Button 
-jq.RepairShop.backBtn.click(function()
-{
-	//toggleRepair();
-  	jq.RepairShop.menu.hide();
- 	//$('#gameMenu')
-	setStatBar();
-//	setAdBG();
+
+function initGuest()
+{	//loads guest profile, if one does not exist it is created
+	if('guest' in Storage.local){
+		//returns an object of format {money:number, garage:[]}
+		player = JSON.parse(Storage.local.guest);
+	//	ajax_post();
+	}
+	else{
+		//create new guest account, to be stored in browser
+		Storage.local.guest = JSON.stringify({money:50000, garage:[]});
+	}
+}
+//Sound Button
+$('.sound').click(
+function(){
+    var $this = $(this);    //references the jq object calling .click, not the function!
+    // sound off
+    if($this.hasClass('sound-on')){
+        $this.removeClass('sound-on').addClass('sound-off');
+        playSound = false;
+    }
+    else{ // sound on
+        $this.removeClass('sound-off').addClass('sound-on');
+        playSound = true;
+    }
+    
+    if(canUseLocalStorage){
+        localStorage.setItem('kandi.playSound', playSound);
+    }
+    // mute or unmute all sounds
+    for(var sound in assetLoader.sounds){
+        if(assetLoader.sounds.hasOwnProperty(sound)){
+            assetLoader.sounds[sound].muted = !playSound;
+        }
+    }
+});
+//restart GameOver /sold button
+jq.Sold.homeBtn.click(function(){
+	jq.Sold.menu.hide();
 	jq.Game.menu.show();
+    setHomeImg();
     jq.carImg.show();
-	//resetStates();
-	//appState = GAME_MODE.Main_Menu;
+	appState = GAME_MODE.MAIN_MENU;
+	auctionEnded = false;
+	endGame = false;
+	restarted = true;	
 });
-jq.Funds.backBtn.click(function()
-{
-	jq.Funds.toggle();
-	setStatBar();
-//	setAdBG();
-	saveUser();
-    jq.carImg.show();
-});
+
+assetLoader.downloadAll();
 //function rotateBtns(index)
 //{		
 	//setCarBtnText(index.data.index, c);
@@ -563,61 +477,59 @@ jq.Funds.backBtn.click(function()
 	//}
 	
 //}
-
-function initGuest()
-{	//loads guest profile, if one does not exist it is created
-	if('guest' in Storage.local){
-		//returns an object of format {money:number, garage:[]}
-		player = JSON.parse(Storage.local.guest);
-	//	ajax_post();
-	}
-	else{
-		//create new guest account, to be stored in browser
-		Storage.local.guest = JSON.stringify({money:50000, garage:[]});
-	}
+//$('#guestPlay').click(initGuest);
+});
+//
+//OBSOLETE
+//
+/*function loadCars(doc){
+	//carNodes = doc.getElementsByTagName('Vehicle');
+	//carsLength = carNodes.length;
+	//for(var i = 0; i < carsLength; i++){
+		//var item = carNodes.item(i);
+		//item.getAttribute("name"); 
+		//create new car
+	//}
+	//use jquery?
+    //alert(doc);
+	//var list = doc.childNodes;
+	//var node = list[1];	//acessing nodes work
+//	var v = node.item(i);
+	//var cn = node.childNodes;
+	//var atrs = node.attributes;
+	//TODO:accessing attribute elements breaks...
+	
+//	var parts = node.getElementById('upgrades');
+	//var
+        //name = atrs.getNamedItem('name'),
+        //make = atrs.getNamedItem('make'),
+        //year = atrs.getNamedItem('year');
+    
+    //userGarage.push(Vehicle(name, make, year, 10000) );    //list[i]) )
+//	var n = node.getAttribute('name');
+	//var atrs = node.attributes;
+	//var n = node.getAttribute('year');
+//	var n = node.getAttribute('make');
+	//for(var i = 0; i < list.length; i++){
+		//userGarage.push(Vehicle(list[i]) )
+//	}
 }
 
-//$('#guestPlay').click(initGuest);
-//Sound Button
-$('.sound').click(function() 
-{
-    var $this = $(this);    //references the jq object calling .click, not the function!
-    // sound off
-    if($this.hasClass('sound-on')) 
-    {
-        $this.removeClass('sound-on').addClass('sound-off');
-        playSound = false;
-    }
-    else // sound on
-    {    
-        $this.removeClass('sound-off').addClass('sound-on');
-        playSound = true;
-    }
-    
-    if(canUseLocalStorage) 
-    {
-        localStorage.setItem('kandi.playSound', playSound);
-    }
-    // mute or unmute all sounds
-    for(var sound in assetLoader.sounds) 
-    {
-        if(assetLoader.sounds.hasOwnProperty(sound)) 
-        {
-            assetLoader.sounds[sound].muted = !playSound;
-        }
-    }
-});
-//restart GameOver /sold button
-jq.Sold.homeBtn.click(function(){
-	jq.Sold.menu.hide();
-	jq.Game.menu.show();
-    setHomeImg();
-    jq.carImg.show();
-	appState = GAME_MODE.MAIN_MENU;
-	auctionEnded = false;
-	endGame = false;
-	restarted = true;	
-});
+//Parse ajax functions to send data from within js to ph
 
-assetLoader.downloadAll();
-});
+//LOAD Vehicle XML, this was working, now can't find source file!
+var vehiclePath = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/vehicles.xml';	//should be the location of file on server
+
+if(loadXMLDoc(vehiclePath) == false)
+{	//loading xml resource failed, display warning
+	window.open("/pdf/2014Schedule.pdf", "_blank");		//display warning page
+}
+
+var vDoc = document.querySelector('link[rel="import"]');	//document Vehicles.html
+var vehicles = document.getElementById('Vehicles');
+var cn = vehicles.firstChild;
+for(var carNode in vehicles.childNodes)
+{
+	var newCar = Vehicle(car);
+	//instantiate js object or retain html node 'car' for read only access
+}*/

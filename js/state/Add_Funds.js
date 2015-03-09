@@ -51,3 +51,12 @@ $('#addMajorFundsBtn').click(function()
 	//transfere game currency to user's account
 	addFunds(50000);
 });
+
+jq.Funds.backBtn.click(
+function(){
+	jq.Funds.toggle();
+	setStatBar();
+//	setAdBG();
+	saveUser();
+    jq.carImg.show();
+});

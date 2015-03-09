@@ -183,3 +183,15 @@ function setCarBtn($args){
 	{	//render additional, not html elements
 	}
 };
+jq.AuctionSelect.backBtn.click(function() 
+{ 	
+	//setAdBG();
+	setStatBar();
+    setHomeImg();
+	jq.Game.menu.toggle();
+	jq.AuctionSelect.menu.toggle();
+	//Auction.setup();
+	jq.carImg.show();
+	//$('#menu').addClass('auction');
+	//AuctionSelect.init();
+});

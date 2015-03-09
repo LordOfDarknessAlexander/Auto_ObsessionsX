@@ -549,3 +549,10 @@ $('#bid').click(function()
 	//$('#bid').text(
 	Auction.setBidBtnText();
 });
+jq.Auction.backBtn.click(
+function(){
+	Auction.close();
+	jq.Auction.menu.hide();
+	jq.AuctionSelect.menu.show();
+    jq.carImg.hide();	
+});

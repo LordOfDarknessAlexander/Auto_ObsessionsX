@@ -44,7 +44,7 @@ function auctionGen()
                     //this car has not been previously sold!
                     this._car = car;
                     this._carIndex = index;
-                    this._currentBid = this._car.getPrice() * 0.1;
+                    this._currentBid = this._car.getPrice() * 0.05;
                     
                     this._initAI();
                 }
@@ -77,7 +77,7 @@ function auctionGen()
             //while loops are bad practice, prone to misuse and infinite loops.
             //using array.pop() method is bad, is slow as the array must be
             //reallocated when the array is resized and can cause memory fragmentation issues!
-            //use _ai = [], or delete _ai to reset or delete the memory, respectfully
+            //use this._ai = [], or delete _ai to reset or delete the memory, respectfully
 			while(this._ai.length) { this._ai.pop(); }
             
             //AuctionSell.save();
@@ -120,7 +120,7 @@ function auctionGen()
                 
 			cleanBtn.text('Sold!');
 			//cleanBtn.off().click({i:this._carIndex, amt:this._currentBid}, this.cleanUpAuction);
-            this._currentBid = 0;
+            //this._currentBid = 0;
 			//AucionSell.save();
             Garage.save();
 		},
@@ -159,6 +159,21 @@ function auctionGen()
 //}
 //>
 		},
+        restart:function(data){
+            //this._car = getUserCar(data.id);
+            //this._currentBid = data.bid;
+            //this._date = data.data;
+            
+            //if(this._data.end === null){
+                //this._expired = false,
+                //_curTime:0.0;
+            //}
+            //else{
+                //this._expired = true;
+                //this._curTime = this._date.end - this._date.start;
+            //}
+            //this._initAI();		
+        },
 		toJSON : function()
 		{	//called by JSON.stringify to conver this object into a json string,
 			//this is called by JSON.stringify and will be serialized
@@ -173,7 +188,7 @@ function auctionGen()
 		{	//determine 
 			//upPercentage of vehicle for next bid
             var cb = this._currentBid;
-                upPerc =  0.18 * cb;
+                upPerc =  0.06 * cb;
 			
             for(var i = 0; i < this._ai.length; i++){					
 				if(this._ai[i].canBid && !this._ai[i].winningBid){	//global cooldown timer has refreshed, bidding now available
@@ -326,15 +341,15 @@ function auctionGen()
 }
 var AuctionSell =
 {	//manages the state for selling cars
-	_state:null,    //array, contains Auctions
-	//ai:[],
-    _cars:[],	//array of vehicles either sold or being sold by the user
+	//_state:null,    //array, contains Auctions
+    //_cars:[],	//array of vehicles either sold or being sold by the user
 	init:function(index)
 	{
 		if(index !== null && index !== undefined)
 		{
 			//call to start an auction for car
 			var i = index.data.i;
+                //Garage.getCarByIndex(i);
             
             AuctionSell.load();
             //foreach active auction in userSales,
@@ -342,10 +357,10 @@ var AuctionSell =
             
             //jq.AuctionSell.carView.clear();
 
-            AuctionSell._state = auctionGen();  //do not user new, function which returns a brand new object for you
-			AuctionSell._state.init(i);
+            var as = auctionGen();  //do not user new, function which returns a brand new object for you
+			as._state.init(i);
 			
-            if(AuctionSell._state._car === null){
+            if(as._car === null){
                 //user has already sold this car,
                 //or setup has failed for another reason
                 console.log('could not set up auction for car at index (' + i.toString() + ')');
@@ -353,7 +368,7 @@ var AuctionSell =
                 //for(var j = 0; j < userSales.length; j++){
                     //var as = userSales[j];
 
-                var car = AuctionSell._state._car,
+                var car = as._car,
                     btnID = 'as' + (i).toString(),
                     liID = 'asd' + (car.id).toString();
                     
@@ -375,15 +390,16 @@ var AuctionSell =
                 
                 jq.AuctionSell.carView.append(btnStr);
                 
-                AuctionSell._state.toggleCC();
+                as.toggleCC();
                 
-                userSales.push(AuctionSell._state);
+                userSales.push(as);
+                
+                AuctionSell.save();
             }
         }
         //entering the state without posting a new car
         jq.AuctionSell.toggle();
         jq.carImg.hide();
-        AuctionSell.save();
 	},
 	update : function(dt){
 		var i;
@@ -426,7 +442,23 @@ var AuctionSell =
         var k = 'AuctionSell';
         
         if(Storage.local !== null && k in Storage.local){
-            userSales = JSON.parse(Storage.local[k]);
+            var sd = JSON.parse(Storage.local[k]);
+            var len = sd.length;
+            
+            if(len != 0){
+                //userSales = [];
+                
+                for(var i = 0; i < len; i++){
+                    var data = sd[i];
+                    //na = auctionGen();
+                    //if(!data._expired){
+                        //na.restart(data);
+                    //}
+                    //else{
+                        //auction is over, leave as is
+                    //}
+                }
+            }
         }
 //<php
 //}>
@@ -450,7 +482,9 @@ var AuctionSell =
 //}
 //else{ //playing as guest, use local storage?>
         //for now, add code here
-        if(Storage.local !== null){
+        var k = 'AuctionSell';
+        
+        if(Storage.local !== null && k in Storage.local){
 //<?php if(DEBUG){>
             //var jstr = JSON.stringify(userSales);
             //console.log(jstr);
@@ -458,7 +492,7 @@ var AuctionSell =
 //<php
 //}
 //else{>
-            Storage.local['AuctionSell'] = JSON.stringify(userSales);
+            Storage.local[k] = JSON.stringify(userSales);
 //}>   
         }
     }

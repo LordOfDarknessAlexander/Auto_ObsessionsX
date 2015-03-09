@@ -9,6 +9,27 @@ var jq = {
 	//canvas:$('#canvas'),
 	adBar:$('img#adBar'),
     statBar:$('div#statBar'),
+    //statBar:{
+        //div:$('div#statBar'),
+        //money:$('div#statBar label#money'),
+        //tokens:$('div#statBar label#tokens'),
+        //prest:,
+        //markers:,
+        //Setters
+        //setMoney()
+        //setTokens(),
+        //setPrestige(),
+        //setMarkers(),
+        //
+        //function setStatBar(){
+            //jq.statBar.show();
+            //jq.statBar.setName();
+            //jq.statBar.setMoney();
+            //jq.statBar.setTokens();
+            //jq.statBar.setPrestige();
+            //jq.statBar.setMarkers();
+        //}
+    //}
 	userCash:$('label#userCash'),
     //msg:$('p#msg'),   //a label for sending messages to the user
     carImg:$('img#mainCar'),   //a label for sending messages to the user
@@ -85,7 +106,7 @@ var jq = {
         //carPrice:$('#carPrice');
 	},
 	CarView : {
-		menu : $('#CarView'),
+		menu : $('div#CarView'),
 		backBtn : $('div#CarView button#backBtn'),
 		homeBtn : $('div#CarView button#homeBtn'),	//$('button#homeBtn', jq.CarView.menu),
 		sellBtn : $('div#CarView button#sellBtn'),
@@ -156,7 +177,7 @@ var jq = {
 			jq.Profile.menu.toggle();
 		}
     },
-    Messages:{
+    /*Messages:{
         menu:$('div#messages'),
         backBtn:$('div#messages button#backBtn'),
         toggle : function()
@@ -191,7 +212,7 @@ var jq = {
 			jq.Game.menu.toggle();
 			jq.Business.menu.toggle();
 		}        
-    },
+    },*/
     get:function(localPath, doneCB, failedCB){
         //get does not pass arguments to the script,
         //embed any optional params in localPath!
@@ -236,22 +257,18 @@ $('#addFunds').click(function()
 	//addFundsMode();	//is ok to call external functions, as long as they are defined in program.js
 });
 //
-jq.CarView.backBtn.click(function(){
-    jq.CarView.toggle();
-    jq.carImg.hide();
-});
 //
-jq.Game.toProfileBtn.click(jq.Profile.toggle);
-jq.Game.toMsgBtn.click(jq.Messages.toggle);
-jq.Game.toRankingsBtn.click(jq.Ranks.toggle);
-jq.Game.toSearchBtn.click(jq.Search.toggle);
-jq.Game.toBuisnessBtn.click(jq.Business.toggle);
+//jq.Game.toProfileBtn.click(jq.Profile.toggle);
+//jq.Game.toMsgBtn.click(jq.Messages.toggle);
+//jq.Game.toRankingsBtn.click(jq.Ranks.toggle);
+//jq.Game.toSearchBtn.click(jq.Search.toggle);
+//jq.Game.toBuisnessBtn.click(jq.Business.toggle);
 //
 jq.Profile.backBtn.click(jq.Profile.toggle);
-jq.Ranks.backBtn.click(jq.Ranks.toggle);
-jq.Messages.backBtn.click(jq.Messages.toggle);
-jq.Search.backBtn.click(jq.Search.toggle);
-jq.Business.backBtn.click(jq.Business.toggle);
+//jq.Ranks.backBtn.click(jq.Ranks.toggle);
+//jq.Messages.backBtn.click(jq.Messages.toggle);
+//jq.Search.backBtn.click(jq.Search.toggle);
+//jq.Business.backBtn.click(jq.Business.toggle);
 //jq.Garage.backBtn.click(jq.Garage.toggle);
 
 jq.AuctionSell.backBtn.click(function(){
@@ -267,6 +284,41 @@ jq.AuctionSell.homeBtn.click(function(){
     js.carImg.show();
     //appState = GAME_MODE.MAIN;
 });
+//
+//User Stat Bar interface!
+//
+function setName()
+{
+	//$('div#statBar label#fname').text('User: ' + userStats.fn.toString() );
+}	
+function setMoney()
+{
+	jq.money.text('Money: ' + userStats.money.toFixed(2) );
+	
+	if(userStats.money <= 0)
+	{
+		//userStats.money = 0;
+		alert("You are out of money Dude!");
+		$('div#statBar label#money').text('Refresh Dough???: ' + userStats.money.toFixed(2) );
+	}	
+}
+function setTokens(){
+	$('div#statBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
+}
+function setPrestige(){
+	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
+}
+function setMarkers(){
+	$('label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
+}
+function setStatBar(){
+    jq.statBar.show();
+	setName();
+	setMoney();
+	setTokens();
+	setPrestige();
+	setMarkers();
+}
 //
 //Garage State interface
 //
