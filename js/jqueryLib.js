@@ -258,7 +258,7 @@ $('#addFunds').click(function()
 });
 //
 //
-//jq.Game.toProfileBtn.click(jq.Profile.toggle);
+jq.Game.toProfileBtn.click(jq.Profile.toggle);
 //jq.Game.toMsgBtn.click(jq.Messages.toggle);
 //jq.Game.toRankingsBtn.click(jq.Ranks.toggle);
 //jq.Game.toSearchBtn.click(jq.Search.toggle);

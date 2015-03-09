@@ -1,5 +1,24 @@
 <?php
 //require_once 'secure.php';
+//$scripts = array(
+	//'garage',
+    //'auction',
+    //'profile',
+    //'repair',
+    
+    //messages
+    //ranks
+    //search
+    //business
+    //faq
+    //'register'
+//);
+//scripts will be included in the order declared, ORDER MATTERS!
+//foreach($scripts as $val){
+    //require will look in the absolute path, then relative,
+    //then finally the local folder which THIS script is located
+    //require_once($val.'.php');
+//}
 ?>
 <div id='gameMenu'>
 <!--script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.min.js"></script>

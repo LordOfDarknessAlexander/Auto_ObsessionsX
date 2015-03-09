@@ -6,8 +6,6 @@ require_once 'ui.php';
 //normally header() should be first line in file, after comments
 css::header();
 //header("Content-type: text/css; charset: UTF-8");
-//require_once 'menu.php';
-//require_once 'credits.php';
 //
 //imports relative to this document, or an absolute url.
 //makes maintainability easier, allowing structured includes of css sheets
@@ -16,10 +14,9 @@ css::header();
 //function divStatBar(){
     //echo 'div#statBar';
 //}
+//@import url("menu.css");
+//@import url("credits.css");
 ?>
-@import url("menu.css");
-@import url("credits.css");
-
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -103,7 +100,6 @@ progress.med::-moz-progress-bar{
     background-color:yellow;
 }
 <?php //EI pb stylings?>
-
 
 #progress 
 {
@@ -198,13 +194,13 @@ img#adBar
   right:15%;
   top:15%;
 }
-#login
+/*#login
 {
 	position: absolute;
 	float: left;
 	top : 20%;
 	
-}
+}*/
 
 #splash
 {
@@ -261,29 +257,46 @@ img#mainCar
 div#main a:hover {
     color:purple;
 }
-#main 
+/*Root site menu*/
+div#menu
 {
-  display: none;
-  height: 100%;
-  width: 100%;
-  /*overflow: auto;*/
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
+    background-image:url('../images/AbsuMenu.png');
+    background-size : 100% 100%;
+    
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    z-index: 2;
+    text-align: center;
+    background-color: black;
 }
-#main form#login
+/*credits page UI stylings*/
+#credits 
 {
-	color:red;
-	position:absolute;
-	left:15%;
-	top:0%;
+    display: none;
+    line-height: 30px;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
 }
-#main form#register
+#credits li 
+{	/*styling for all li(list item) in div element with id credits*/
+    padding: 5px 0;
+}
+
+.artwork, .music, .developer 
 {
-	color:red;
-	position:absolute;
-	right:5%;
-	top:5%;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.artwork 
+{
+    color: #fa8526;
+}
+.developer 
+{
+    color: #13eb8a;
 }
 
 .sound 

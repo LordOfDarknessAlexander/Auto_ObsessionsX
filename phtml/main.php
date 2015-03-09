@@ -2,11 +2,6 @@
 //$ROOT_DIR = $_SERVER["DOCUMENT_ROOT"]."/phtml/";	//root path on server
 //array cast to an object, to encapsulate developer names and those who contributed
 //to this project
-//class Names{
-    //public const  owner = 'Adam Glazer',
-    //'TD'=>
-    //'AS'=>
-//};
 $OWNER_NAME = 'Adam Glazer';
 $AO_NAME = 'Auto Obsessions';
 $TD_NAME = 'Tyler Drury';
@@ -52,7 +47,9 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
             <ul>
                <li><a href='javascript:void(0)' class='button play'>Start Game</a></li>
                <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
+               <!--php if(!loggedIn){-->
                <li><a href='javascript:void(0)' class='button Register'>Register</a></li>
+               <!--php }-->
             </ul>
             <?php require 'phtml/legal.php';?>
 		</div>
@@ -80,6 +77,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 	
 <?php
 //php includes the source html files here
+//require_once 'mainMenu.php';
 $scripts = array(
     'gameMenu',
 	'repair',
