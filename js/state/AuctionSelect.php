@@ -2,6 +2,7 @@
 //Action Select State Object
 require_once '../../include/dbConnect.php';
 require_once '../../vehicles/vehicle.php';
+//require_once '../../pas/pas.php';
 //
 $userID = 0;
 //if(isset($_SESSION['userID']))
@@ -17,6 +18,7 @@ function hasCar($id){
     global $tableName;
     
     $carRes = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    
     if($carRes){
         echo mysqli_num_rows($carRes) != 0 ? 'true' : 'false';
     }
@@ -78,6 +80,35 @@ var AuctionSelect =
         //if(loggedIn)
             //this.list.empty();
 		//
+        var funcName = 'AuctionSelect.php, AuctionSelect::init()';
+        
+        /*jq.get('pas/query.php?op=asc',
+            function(data){
+                if(data === null){
+                    alert(funcName + ', Error:ajax response returned null!');
+                    return;
+                }
+                //alert(funcName + ', ajax response success!' + JSON.stringify(data) );
+                var len = data.length;
+                
+                if(len == 0){
+                    console.log(funcName + ', something went wrong, should have 1 entry per car in database')
+                    return;
+                }
+                
+                for(var i = 0; i < len; i++){
+                    var carID = data[i].carID,
+                        hasCar = data[i].hasCar;
+                        
+                    AuctionSelect.setCarBtn(carID, i, hasCar);
+                }
+            },
+            function(jqxhr){
+                //call will fail if result is not properly formated JSON!
+                alert(funcName + 'ajax call failed! Reason: ' + jqxhr.responseText);
+                console.log(funcName + ', loading game resources failed, abort!');
+            }
+        );*/
         $.ajax({
             type:'GET',
             url:getHostPath() + 'pas/query.php?op=asc',

@@ -28,7 +28,7 @@ var Repair = {
             $('h2#interior', div).show();
             $('h2#docs', div).show();
             
-            $('label#info').text('');
+            //$('label#info').text('');
             //$('div#RepairShop p#error').hide();
 		}
 		else
@@ -50,7 +50,7 @@ var Repair = {
             $('h2#docs', div).hide();
             
             //$('label#info').text('No vehicle currently selected, visit the Garage to select one!');
-            $('label#info').show();
+            //$('label#info').show();
 		}
 	},
 	_initButtons : function()

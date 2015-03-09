@@ -77,8 +77,8 @@ function(){
 	getLastAllowanceTime();
 
 	loadUser();
-    //AuctionSell.load(); //load user sales!
     Garage.load();  //load user garage!
+    //AuctionSell.load(); //load user sales, after garage!
     //jq.Game.setHomeImg();
     setHomeImg();   //in Garage.js
 	//userStats.money = 150;

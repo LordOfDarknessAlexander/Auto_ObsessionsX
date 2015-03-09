@@ -217,17 +217,16 @@ var jq = {
         //get does not pass arguments to the script,
         //embed any optional params in localPath!
         //doneCB and failedCB are functions
-        //$.ajax({
+        //return $.ajax({
             //type:'GET',
             //url:getHostPath() + localPath,
-            //dataType:'json',
-            //data:''
+            //dataType:'json'
         //}).done(doneCB).failed(failedCB);
     },
     post:function(localPath, doneCB, failedCB, args){
         //args must but be a js object
         //doneCB and failedCB are functions
-        //$.ajax({
+        //return $.ajax({
             //type:'POST',
             //url:getHostPath() + localPath,
             //dataType:'json',
@@ -281,7 +280,7 @@ jq.AuctionSell.homeBtn.click(function(){
     jq.AuctionSell.menu.toggle();
     jq.Game.menu.toggle();
     setHomeImg();
-    js.carImg.show();
+    jq.carImg.show();
     //appState = GAME_MODE.MAIN;
 });
 //

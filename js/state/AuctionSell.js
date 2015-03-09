@@ -49,7 +49,7 @@ function auctionGen()
                     this._initAI();
                 }
                 else{
-                    console.log('user has already sold car with id (' + car.id,toString() + ')');
+                    console.log('user has already sold car with id (' + car.id.toString() + ')');
                 }
 			}
             //else entry sell screen without posting an auction
@@ -66,6 +66,32 @@ function auctionGen()
 
             for(var i = 0; i < this._ai.length; ++i){
                 console.log(i + ' bid cap = ' + this._ai[i].bidCap);
+            }
+        },
+        addButton:function(){
+            if(this._car === null){
+                //user has already sold this car,
+                //or setup has failed for another reason
+                console.log('could not set up html button for car');
+            }else{
+                var car = this._car,
+                    btnID = 'as' + (car.id).toString(),
+                    liID = 'asd' + (car.id).toString();
+                    
+                var btnStr = "<div id='" + liID + "'>" + 
+                    "<img src='" + car.getFullPath() + "'>" +
+                    "<label id='carInfo'>" + car.getFullName() + "</label>" +
+                    "<label id='" + btnID + "'>" + 
+                        "<label id='price'>Price: $" + (car.getPrice() ).toString() + "</label><br>" +
+                        "<label id='expireTime'>Auction expires: </label>" +
+                    "</label>" +
+                    "<div id='btns'>" +
+                        "<button id='view'></button>" +
+                        "<button id='cc'></button>" +
+                    "</div>" +
+                "</div><br>";
+                
+                jq.AuctionSell.carView.append(btnStr);
             }
         },
 		close:function()
@@ -160,19 +186,24 @@ function auctionGen()
 //>
 		},
         restart:function(data){
-            //this._car = getUserCar(data.id);
-            //this._currentBid = data.bid;
-            //this._date = data.data;
+            this._car = Garage.getCarByID(data.id);
+            this._currentBid = data.bid;
+            //this._date = data.date;
             
             //if(this._data.end === null){
                 //this._expired = false,
                 //_curTime:0.0;
+                //this._initAI();
             //}
             //else{
-                //this._expired = true;
+                this._expired = true;
                 //this._curTime = this._date.end - this._date.start;
             //}
-            //this._initAI();		
+            this.addButton();
+            
+            if(this._expired){
+                //this.disableButton();
+            }
         },
 		toJSON : function()
 		{	//called by JSON.stringify to conver this object into a json string,
@@ -345,50 +376,23 @@ var AuctionSell =
     //_cars:[],	//array of vehicles either sold or being sold by the user
 	init:function(index)
 	{
+        //AuctionSell.load();
+        //foreach active auction in userSales,
+        //start them and begin updates
+        
 		if(index !== null && index !== undefined)
 		{
 			//call to start an auction for car
 			var i = index.data.i;
                 //Garage.getCarByIndex(i);
             
-            AuctionSell.load();
-            //foreach active auction in userSales,
-            //start them and begin updates
-            
             //jq.AuctionSell.carView.clear();
 
             var as = auctionGen();  //do not user new, function which returns a brand new object for you
-			as._state.init(i);
-			
-            if(as._car === null){
-                //user has already sold this car,
-                //or setup has failed for another reason
-                console.log('could not set up auction for car at index (' + i.toString() + ')');
-            }else{
-                //for(var j = 0; j < userSales.length; j++){
-                    //var as = userSales[j];
-
-                var car = as._car,
-                    btnID = 'as' + (i).toString(),
-                    liID = 'asd' + (car.id).toString();
-                    
-                //var li = $('div#' + liID);
-                //if(li === null || li === 'undefined')
-                //{
-                var btnStr = "<div id='" + liID + "'>" + 
-                    "<img src='" + car.getFullPath() + "'>" +
-                    "<label id='carInfo'>" + car.getFullName() + "</label>" +
-                    "<label id='" + btnID + "'>" + 
-                        "<label id='price'>Price: $" + (car.getPrice() ).toString() + "</label><br>" +
-                        "<label id='expireTime'>Auction expires: </label>" +
-                    "</label>" +
-                    "<div id='btns'>" +
-                        "<button id='view'></button>" +
-                        "<button id='cc'></button>" +
-                    "</div>" +
-                "</div><br>";
-                
-                jq.AuctionSell.carView.append(btnStr);
+			as.init(i);
+            
+			if(as._car !== null){
+                as.addButton();
                 
                 as.toggleCC();
                 
@@ -432,7 +436,7 @@ var AuctionSell =
                 //}
             //},
             //function(jqxhr){
-                //alert(''bad stuff happened!');
+                //alert('bad stuff happened!');
             //}
         //);
 //<php
@@ -442,21 +446,20 @@ var AuctionSell =
         var k = 'AuctionSell';
         
         if(Storage.local !== null && k in Storage.local){
-            var sd = JSON.parse(Storage.local[k]);
-            var len = sd.length;
+            var sd = JSON.parse(Storage.local[k]),
+                len = sd.length;
             
             if(len != 0){
-                //userSales = [];
+                userSales = [];
                 
                 for(var i = 0; i < len; i++){
-                    var data = sd[i];
-                    //na = auctionGen();
-                    //if(!data._expired){
-                        //na.restart(data);
-                    //}
-                    //else{
-                        //auction is over, leave as is
-                    //}
+                    /*var data = sd[i],
+                        na = auctionGen();
+                
+                    na.restart(data); 
+                    na.toggleCC();
+                    
+                    userSales.push(na);*/
                 }
             }
         }

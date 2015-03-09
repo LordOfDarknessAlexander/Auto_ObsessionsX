@@ -22,7 +22,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         <label id='m_marker'>Mile Markers:</label>
     </div>
     <img id='mainCar' src='images\\garageEmpty.png'>
-    <label id='info'></label>
+    <!--label id='info'></label-->
     
     <div id='menu'>
         <div id='progress'>
