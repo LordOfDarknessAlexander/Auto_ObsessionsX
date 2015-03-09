@@ -88,7 +88,7 @@ function divRepair(){
 }
 <?php divRepair();?> div button.rb
 {
-    background:url('../images/repair.jpg') no-repeat 0 0;
+    background:url('../images/repair.png') no-repeat 0 0;
     background-size:100% 100%;
 }
 /*
