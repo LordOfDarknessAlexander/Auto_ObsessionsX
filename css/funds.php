@@ -1,8 +1,10 @@
 <?php
-header("Content-type: text/css; charset: UTF-8");
+//header("Content-type: text/css; charset: UTF-8");
 //
 require_once 'ui.php';
-    
+//
+css::header();
+//
 function divFunds(){
     echo 'div#AddFunds';
 }
@@ -43,16 +45,16 @@ require_once 'ui.php';
 	height:2em;
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 }
-<?php divFunds();?> #addFundsBackButton
+<?php /*divFunds();> #addFundsBackButton
 {
-	<?php
+	<php
     posAbs();
-?>
+>
 	background: url('../images/backBtn.png') no-repeat 0 0;
 	width:150px;
 	height:50px;
 	
-}
+}*/?>
 
 <?php divFunds();?> #addMinorFundsBtn
 {

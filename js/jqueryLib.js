@@ -71,11 +71,12 @@ var jq = {
 		}
 	},
 	AuctionSelect : {
-		menu : $('#AuctionSelect'),
-		backBtn : $('#asBackBtn')
+		menu : $('div#AuctionSelect'),
+		backBtn : $('div#AuctionSelect button#backBtn')
+        //carView : $('div#AuctionSelect div#carView'),
 	},
 	Auction : {
-		menu : $('#Auction'),
+		menu : $('div#Auction'),
 		backBtn : $('div#Auction button#backBtn'),
 		homeBtn : $('div#Auction button#homeBtn'),
 		carPrice : $('div#Auction label#carPrice')
@@ -110,8 +111,8 @@ var jq = {
 		}
 	},
 	Funds : {
-		menu : $('#AddFunds'),
-		backBtn : $('#addFundsBackButton'),
+		menu : $('div#AddFunds'),
+		backBtn : $('div#AddFunds button#backBtn'),
 		toggle : function()
 		{	//from game menu to funds or vice versa
 			//$('#gameMenu').toggle();

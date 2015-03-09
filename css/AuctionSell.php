@@ -1,8 +1,10 @@
 <?php
 //auction sale state stylings
-header("Content-type: text/css; charset: UTF-8");
+//header("Content-type: text/css; charset: UTF-8");
 //    
 require_once 'ui.php';
+//
+css::header();
 //
 function divAS(){
     echo 'div#AuctionSell';
@@ -11,6 +13,7 @@ function dcv(){
     echo 'div#AuctionSell div#carView';
 }
 ?>
+/*Auction Select Screen*/
 <?php divAS();?>
 {
 <?php posAbs();?>
@@ -30,7 +33,17 @@ function dcv(){
 	padding:0;
 	list-style-type:none;
 }
-<?php divAS();?> div#carView div
+/*Auction Select Car View*/
+<?php dcv();?>
+{
+<?php posAbs();?>
+    overflow-y:scroll;
+    bottom:0%;
+    left:10%;
+    width:80%;
+    height:70%;
+}
+<?php dcv();?> div
 {
 	margin:0 0 0% 0;	/*top right bottom left*/
 	/*padding: 50px 50px;
@@ -39,7 +52,7 @@ function dcv(){
     background-color:grey;
     display:block;
 }
-<?php divAS();?> div#carView div div#btns
+<?php dcv();?> div div#btns
 {
     position:absolute;
     width:10%;
@@ -47,7 +60,7 @@ function dcv(){
     height:15%;
     display:block;
 }
-<?php divAS();?> div#carView div label#carInfo
+<?php dcv();?> div label#carInfo
 {
 	/*background-color:green;*/
 	text-align:center;
@@ -58,7 +71,7 @@ function dcv(){
     font-weight:bold;
     font-size:1.8vw;
 }
-<?php divAS();?> div#carView div label
+<?php dcv();?> div label
 {
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 	background-size : 100% 100%;
@@ -71,7 +84,7 @@ function dcv(){
     font-size:1.5vw;
     display:block;
 }
-<?php divAS();?> div#carView div label#price
+<?php dcv();?> div label#price
 {
 	height:50%;
 	width:100%;
@@ -80,7 +93,7 @@ function dcv(){
     font-size:1.25vw;
     display:block;
 }
-<?php divAS();?> div#carView div label#expireTime
+<?php dcv();?> div label#expireTime
 {
 	height:50%;
 	width:100%;
@@ -89,7 +102,7 @@ function dcv(){
     font-size:1.25vw;
     display:block;
 }
-<?php divAS();?> div#carView div#btns button#view
+<?php dcv();?> div#btns button#view
 {
     background: url('../images/view.png') no-repeat 0 0;
     background-size:100% 100%;
@@ -100,7 +113,7 @@ function dcv(){
     height:50%;
     padding:0% 0%;
 }
-<?php divAS();?> div#carView div#btns button#cc
+<?php dcv();?> div#btns button#cc
 {
     background: url('../images/cancel.jpg') no-repeat 0 0;
     background-size:100% 100%;
@@ -121,19 +134,10 @@ function dcv(){
 	text-align::center;
 	color:red;
 }
-<?php divAS();?> div#carView div img
+<?php dcv();?> div img
 {
 <?php posAbs();?>
 	left:0%;
 	width:15%;
 	height:15%;
-}
-<?php divAS();?> div#carView
-{
-<?php posAbs();?>
-    overflow-y:scroll;
-    bottom:0%;
-    left:10%;
-    width:80%;
-    height:70%;
 }

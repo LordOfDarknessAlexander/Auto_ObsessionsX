@@ -1,12 +1,15 @@
-<!--?php function paypalBtn($id, $val){
+<?php 
+require_once 'AO_UI.php';
+    //function paypalBtn($id, $val){
     //inserts a button into a form implementing the 'PayPal' api
-    <input type='image' id='<echo $id>' value='<echo $val>'><br>
-}?-->
+    //<input type='image' id='<echo $id>' value='<echo $val>'><br>
+    //}
+?>
 
 <div id='AddFunds'>
     <h1>AddFunds</h1>
-    <!--<backBtn(); statBar();>-->
-    <button id='addFundsBackButton'>Back</button>
+    <?php backBtn();?>
+    <!--button id='addFundsBackButton'>Back</button-->
 	
     <form id='cash'
         action='https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'
@@ -51,7 +54,6 @@
         <input id='paykey' type='hidden' name='paykey' value='insert_pay_key'>
     </form>
 
-
     <script type='text/javascript' charset='utf-8'>
     var minorFundsPPFlow = payRequest(1.99, {trigger: 'addMinorFundsBtn'});
     </script>
@@ -61,6 +63,4 @@
     <script type='text/javascript' charset='utf-8'>
     var majorFundsPPFlow = payRequest(9.99, {trigger:'addMajorFundsBtn'});
     </script>
-    
-    <label id='userCash'><!--display user's currency--></label>	
 </div>

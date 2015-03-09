@@ -14,7 +14,7 @@ $paths = array(
     //'register'
 );
 foreach($paths as $p){html::incPHPCSS($p);}
-html::incCSS('register');
+//html::incCSS('register');
 //include meta javascripts
 ?>
 <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>

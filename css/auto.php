@@ -1,9 +1,11 @@
 <?php
 //core/meta ui element stylings,
 //which apply to all elements across the page
-header("Content-type: text/css; charset: UTF-8");
-//
 require_once 'ui.php';
+//as long as the required file does not output anything this is fine,
+//normally header() should be first line in file, after comments
+css::header();
+//header("Content-type: text/css; charset: UTF-8");
 //require_once 'menu.php';
 //require_once 'credits.php';
 //
@@ -290,7 +292,7 @@ div#main a:hover {
     display: none;
     position: absolute;
     bottom:6%;
-    left:2%;
+    left:0%;
     width: 4%;
     height:6%;
     cursor: pointer;
@@ -396,7 +398,7 @@ div#profile
     top:0%;
     left:0%;
     z-index:1;
-}
+}/*
 div#messages
 {
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
@@ -445,9 +447,9 @@ div#business
     top:0%;
     left:0%;
     z-index:1;
-}
+}*/
 <?php
-require_once 'main.php';    //main game menu stylings, must be added at end, else bugs
+//require_once 'main.php';    //main game menu stylings, must be added at end, else bugs
 //require_once 'phone.php';   //mobile phone, iPhone, Android, WIndows, BB, etc
 //require_once 'tablet.php';  //tablets, iPads, etc
 //require_once 'laptop.php';  //laptop and other large mobile devices

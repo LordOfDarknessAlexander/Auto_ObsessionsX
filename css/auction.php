@@ -1,13 +1,16 @@
 <?php
 //auction state stylings
-header("Content-type: text/css; charset: UTF-8");
+//header("Content-type: text/css; charset: UTF-8");
 //    
-
+require_once 'ui.php';
+//
+css::header();
+//
 function divAuction(){
     echo 'div#Auction';
 }
-require_once 'ui.php';
 ?>
+/*Auction Screen*/
 <?php divAuction();?>
 {	/*Auction page stylings*/ 
 	/*background: url('../images/defaultBG.jpg') no-repeat 0 0;*/
@@ -40,7 +43,7 @@ require_once 'ui.php';
 	bottom:0%;
 	left:5%;
 }
-<?php divAuction();?> #bid
+<?php divAuction();?> button#bid
 {<?php
     defaultBtnBG();
     posAbs();

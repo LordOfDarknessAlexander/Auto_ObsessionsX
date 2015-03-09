@@ -1,8 +1,12 @@
 <?php
-header("Content-type: text/css; charset: UTF-8");
+//header("Content-type: text/css; charset: UTF-8");
 //repair page UI stylings
 require_once 'ui.php';
-    
+//
+css::header();
+//
+require_once 'funds.php';
+//
 function divRepair(){
     echo 'div#RepairShop';
 }
@@ -19,10 +23,13 @@ function divRepair(){
 	padding-top: 92px;
 	z-index: 1;
 }
-
-<?php divRepair();?> li 
-{	/*styles all list items of node with id RepairShop*/
-	padding: 5px 0;
+<?php divRepair();?> p#error{
+<?php
+    posAbs();
+    css::size('100%', '20%');
+?>
+    left:0%;
+    top:0%;
 }
 <?php divRepair();?> h2
 {
@@ -37,6 +44,19 @@ function divRepair(){
     /*background:url('../headerBG.jpg');*/
     margin:0%;
     
+}
+<?php divRepair();?> button#addFunds
+{
+<?php
+    posAbs();
+    css::size('10%', '10%');
+?>
+    left:45%;
+    bottom:72%;
+}
+<?php divRepair();?> li 
+{	/*styles all list items of node with id RepairShop*/
+	padding: 5px 0;
 }
 <?php divRepair();?> div
 {
@@ -57,7 +77,7 @@ function divRepair(){
 <?php
     //posAbs();
 ?>
-    width:30%;
+    width:45%;
     height:20%;
     font-size:0.65rem;
 }
@@ -71,14 +91,7 @@ function divRepair(){
     background:url('../images/repair.jpg') no-repeat 0 0;
     background-size:100% 100%;
 }
-button#addFunds
-{<?php
-	defaultBtnBG();
-    css::size('10%', '10%');
-?>
-//bottom: 10%;
-}
-
+/*
 <?php divRepair();?> img#userCar
 {<?php
     posAbs();
@@ -87,7 +100,7 @@ button#addFunds
 	left:25%;
 	bottom:12%;
 }
-
+*/
 <?php divRepair();?> div progress
 {<?php
     //posAbs();
@@ -136,21 +149,4 @@ button#addFunds
 {    
 	top:65%;
 	right:5%;
-}
-<?php divRepair();?> button#addFunds
-{
-<?php
-    posAbs();
-    css::size('10%', '10%');
-?>
-    left:45%;
-    bottom:62%;
-}
-<?php divRepair();?> p#error{
-<?php
-    posAbs();
-    css::size('100%', '20%');
-?>
-    left:0%;
-    top:0%;
 }

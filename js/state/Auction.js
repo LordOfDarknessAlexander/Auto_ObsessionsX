@@ -541,3 +541,11 @@ var Auction =
 		$('#bid').text("Bid: $" + this.currentBid.toFixed(2) );
 	}
 };
+//Auction jQuery bindings
+$('#bid').click(function()
+{
+	Auction.playerBidding();
+	playerDidBid = true;
+	//$('#bid').text(
+	Auction.setBidBtnText();
+});

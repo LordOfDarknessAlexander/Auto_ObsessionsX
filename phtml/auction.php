@@ -44,13 +44,13 @@ function outputCar($args){
 <div id='AuctionSelect'>
     <!--view all available auctions-->
     <h1>Auction Select</h1>
-    <!--<php backBtn();>select which car to bid for-->
-    <button id='asBackBtn'>Back</button>
+<?php backBtn();?>
     <div id='carView'>
         <ul id='auctionCars'>
 <?php
-    //selects all elements from aoCars, then preforms outputCar on each of its elements
-    sqlSelectAll('aoCars', 'outputCar');
+//selects all elements from aoCars,
+//then preforms outputCar on each of its elements
+sqlSelectAll('aoCars', 'outputCar');
 ?>
         </ul>
     </div>

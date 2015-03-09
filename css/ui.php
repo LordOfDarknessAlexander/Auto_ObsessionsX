@@ -12,7 +12,7 @@ function defaultBtnBG(){
 }
 
 function defaultColor($color = 'red'){
-    echo 'color:'.$color.';';
+    echo 'color:' . $color . ';';
 }
 function fontBold(){
     echo 'font-weight:bold;';
@@ -28,6 +28,10 @@ function displayNone(){
 }
 function displayInline(){
     echo 'display:inline;';
+}
+function scrollY(){
+    //enable y scrolling
+    echo 'overflow-y:scroll;';
 }
 
 class css{
@@ -58,6 +62,9 @@ class css{
     public static function bgSize($width, $height){?>
         background-size:<?php echo $width;?> <?php echo $height;?>;
     <?php
+    }
+    public static function header(){
+        header("Content-type: text/css; charset: UTF-8");
     }
 }
 ?>

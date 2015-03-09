@@ -83,8 +83,8 @@ function jqBind($objName, $tag){
 		}
 	},
 	AuctionSelect : {
-		menu : $('#AuctionSelect'),
-		backBtn : $('#asBackBtn')
+		menu : $('div#AuctionSelect'),
+		backBtn : $('div#AuctionSelect #backBtn')
 	},
 	Auction : {
 		menu : $('#Auction'),

@@ -1,15 +1,13 @@
 <?php
-header("Content-type: text/css; charset: UTF-8");
+//header("Content-type: text/css; charset: UTF-8");
 //garage UI stylings as php commands
 require_once 'ui.php';
+css::header();
+//
 require_once 'carView.php';
-    
+//  
 function divGarage(){
     echo 'div#Garage';
-}
-function scrollY(){
-    //enable y scrolling
-    echo 'overflow-y:scroll;';
 }
 function divCarListView(){
     echo 'div#Garage div#carListView';
@@ -31,7 +29,6 @@ function divSelectedCar(){
 ?>
 	display: none;
 	text-align: center;
-	padding-top: 92px;
 	z-index: 1;
     color:red;
 }

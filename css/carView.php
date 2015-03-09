@@ -1,17 +1,14 @@
 <?php
 //Car View UI stylings
-header("Content-type: text/css; charset: UTF-8");
-
+//header("Content-type: text/css; charset: UTF-8");
 require_once 'ui.php';
-function divStatBar(){
-    echo 'div#statBar';
-}
+css::header();
+//
 function divCarView(){
     echo 'div#CarView';
 }
-
 ?>
-
+/*Car View Screen*/
 <?php divCarView();?>
 {<?php
     defaultBG();
@@ -38,7 +35,6 @@ function divCarView(){
     posAbs();
 ?>
 }
-
 <?php divCarView();?> button#selectCarBtn
 {
 	bottom:72%;
@@ -57,7 +53,6 @@ function divCarView(){
     width:10%;
     font-size:2vw;
 }
-
 <?php divCarView();?> label#carInfo{
 	color:black;
 	background-color:grey;
@@ -79,14 +74,13 @@ function divCarView(){
     font-weight:bold;
     background-color:grey;
     /*background:url('../headerBG.jpg');*/
-    margin:0%;
-    
+    margin:0%;    
 }
 <?php divCarView();?> div{
 <?php
     posAbs();
+    scrollY();
 ?>
-    overflow-y:scroll;
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/
     
@@ -96,15 +90,14 @@ function divCarView(){
     font-size:1.5vw;
     text-align:left;
 }
-<?php //left div?>
+/*Car View left div*/
 <?php divCarView();?> h2#dt{
 	top:28%;
 	left:5%;
 }
 <?php divCarView();?> div#drivetrain{
 	top:33%;
-	left:5%;
-	
+	left:5%;	
 }
 <?php divCarView();?> h2#body{
 	top:60%;
@@ -114,7 +107,7 @@ function divCarView(){
 	top:65%;
 	left:5%;
 }
-<?php //right div?>
+/*Car View right div*/
 <?php divCarView();?> h2#interior{
 	top:28%;
 	right:5%;
@@ -128,7 +121,6 @@ function divCarView(){
 	right:5%;
 }
 <?php divCarView();?> h2#docs{
-	top:60%;
-	
+	top:60%;	
 	right:5%;
 }

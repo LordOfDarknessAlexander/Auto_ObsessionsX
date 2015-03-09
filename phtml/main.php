@@ -103,33 +103,30 @@ foreach($scripts as $val){
     require_once($val.'.php');
 }
 ?>
-    <div id='messages'>
+    <!--div id='messages'>
         <button id='backBtn'>Back</button>
     </div>
     <div id='ranks'>
         <button id='backBtn'>Back</button>
-        <!--filter-->
-            <!--option money-->
-            <!--option prestige-->
-            <!--option mile Markers-->
+        
     </div>
     <div id='search'>
         <button id='backBtn'>Back</button>
-        <!--form action='search.php' method='POST'>
+        <form action='search.php' method='POST'>
             <input id='filter'>
                 <option 'vehicle'>
                 <option 'business'>
                 <option 'user'>
             <input type='text'
             <input submit>
-        </form>-->
+        </form>
     </div>
     <div id='business'>
         <button id='backBtn'>Back</button>
     </div>
     <div id='faq'>
         <button id='backBtn'>Back</button>
-    </div>
+    </div-->
 	<!--placing adBar here should allow it to be visable across all pages
 </div><!--end wrapper, include javascript at end of body-->
 <?php require_once 'js.php';?>

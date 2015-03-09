@@ -495,20 +495,6 @@ jq.Sold.garageBtn.click(function()
     //appState = GAME_MODE.GARAGE:
 });
 
-//Inside Auction Bid Button
-$('#bid').click(function()
-{
-	Auction.playerBidding();
-	playerDidBid = true;
-	//$('#bid').text(
-	Auction.setBidBtnText();
-});
-//Repair to menu Repair
-/*function toogleRepair(){
-	$('#gameMenu').toggle();
-	$('#RepairShop').toggle();
-    //$('#RepairShop').children().toggle(0();
-}*/
 jq.Game.repairBtn.click(function()
 {
 	//toggleRepair();
