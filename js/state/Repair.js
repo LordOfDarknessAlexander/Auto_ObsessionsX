@@ -2,20 +2,15 @@
 Dependant on state\Garage.js, for userGarage and car index
 and Vehicle.js for Cars and Parts*/
 var Repair = {
-	update : function()
-	{
-	},
-	render : function()
-	{
-		//additional rendering to 2D context
-	},
 	init : function()
 	{   //initializes the state, enabling ui and core logic of this screen
 		//appState = GAME_MODE.Repair;
-		if(userGarage.length != 0 && Garage._curCarIndex !== null)
+        var div = $('div#RepairShop');
+        
+		if(Garage._curCarIndex !== null)
 		{
 			var car = Garage.getCurrentCar();
-            var img = $('div#RepairShop img#userCar');
+                img = $('img#userCar', div),
             img.attr('src', car === null ? 'images\\garageEmpty.png' : car.getFullPath() );
 			
 			this._initButtons();
@@ -23,39 +18,39 @@ var Repair = {
 			//$('div#RepairShop div#upgrades').show();
 			//$('div#RepairShop div#repairs').show();
             
-            $('div#RepairShop div#drivetrain').show();
-			$('div#RepairShop div#body').show();
-            $('div#RepairShop div#interior').show();
-            $('div#RepairShop div#docs').show();
+            $('div#drivetrain', div).show();
+			$('div#body', div).show();
+            $('div#interior', div).show();
+            $('div#docs', div).show();
             
-            $('div#RepairShop h2#dt').show();
-			$('div#RepairShop h2#body').show();
-            $('div#RepairShop h2#interior').show();
-            $('div#RepairShop h2#docs').show();
+            $('h2#dt', div).show();
+			$('h2#body', div).show();
+            $('h2#interior', div).show();
+            $('h2#docs', div).show();
             
-            $('div#RepairShop p#error').text('');
+            $('label#info').text('');
             //$('div#RepairShop p#error').hide();
 		}
 		else
 		{
 			//show empty garage, please purchase a car
-			$('div#RepairShop img#userCar').attr('src', 'images/garageEmpty.png');
+			$('img#userCar', div).attr('src', 'images/garageEmpty.png');
             //TODO:display message in browser saying user must select a vehicle
 			//$('div#RepairShop div#upgrades').hide();
 			//$('div#RepairShop div#repairs').hide();
             
-            $('div#RepairShop div#drivetrain').hide();
-			$('div#RepairShop div#body').hide();
-            $('div#RepairShop div#interior').hide();
-            $('div#RepairShop div#docs').hide();
+            $('div#drivetrain', div).hide();
+			$('div#body', div).hide();
+            $('div#interior', div).hide();
+            $('div#docs', div).hide();
             
-            $('div#RepairShop h2#dt').hide();
-			$('div#RepairShop h2#body').hide();
-            $('div#RepairShop h2#interior').hide();
-            $('div#RepairShop h2#docs').hide();
+            $('h2#dt', div).hide();
+			$('h2#body', div).hide();
+            $('h2#interior', div).hide();
+            $('h2#docs', div).hide();
             
-            $('div#RepairShop p#error').text('No vehicle currently selected, visit the Garage to select one!');
-            $('div#RepairShop p#error').show();
+            //$('label#info').text('No vehicle currently selected, visit the Garage to select one!');
+            $('label#info').show();
 		}
 	},
 	_initButtons : function()
@@ -73,37 +68,49 @@ var Repair = {
             
             //rl.empty().append('<h2>Repairs</h2>');
             //upgrade button
+            function disable(jqo){
+                jqo.css(
+                    {'opacity':'0.45','cursor':'default'}
+                ).text('$0.00');
+            }
             if(car._dt !== null){
                 var btnTag = 'div#RepairShop div#drivetrain button#';
                 
                 for(var i = Drivetrain.TYPE.engine; i <= Drivetrain.TYPE.exhaust; i++){ 
                     var part = car._dt.getPartType(i),
-                        str = Drivetrain.strFromType(i);
+                        str = Drivetrain.strFromType(i),
+                        ub = $(btnTag + 'ub' + str),    //upgrade button
+                        rb = $(btnTag + 'rb' + str); //repair button
    
+                    ub.off();
+                    rb.off();
+                    
                     if(part._stage != carPart.STAGE.pro){
-                        $(btnTag + 'ub' + str).off().click(
+                        ub.click(
                             {type:i}, upgradeDT
                         ).text('$' + part.getPrice()
                         ).css({'opacity':'1.0','cursor':'pointer'});
                     }
                     else{
                         //max upgrade already purchased, disable button
-                        $(btnTag + 'ub' + str).off().css(
-                            {'opacity':'0.45','cursor':'default'}
-                        ).text('$0.00');
+                       disable(ub);
+                       //ub.css(
+                            //{'opacity':'0.45','cursor':'default'}
+                        //).text('$0.00');
                     }
                     //repair button
                     if(!part._repaired){
-                        $(btnTag + 'rb' + str).off().click(
+                        rb.click(
                             {type:i}, repairDT
                         ).css(
                             {'opacity':'1.0','cursor':'pointer'}
                         ).text('$' + part.getRepairPrice() );
                     }
                     else{
-                        $(btnTag + 'rb' + str).off().css(
-                            {'opacity':'0.45','cursor':'default'}
-                        ).text('$0.00');
+                        disable(rb);
+                        //.css(
+                            //{'opacity':'0.45','cursor':'default'}
+                        //).text('$0.00');
                     }
                     
                     pbSetColor($('div#RepairShop div#drivetrain progress#pb' + str), part.getPercent() );
@@ -125,10 +132,15 @@ var Repair = {
                 
                 for(var i = Interior.TYPE.seats; i <= Interior.TYPE.panels; i++){ 
                     var part = car._interior.getPartType(i),
-                        str = Interior.strFromType(i);
+                        str = Interior.strFromType(i),
+                        ub = $(btnTag + 'ub' + str),
+                        rb = $(btnTag + 'rb' + str);
+                        
+                    ub.off();
+                    rb.off();
                     
                     if(part._stage != carPart.STAGE.pro){
-                        $(btnTag + 'ub' + str).off().click(
+                        ub.click(
                             {type:i}, upgradeInterior
                         ).text('$' + part.getPrice()
                         ).css(
@@ -137,22 +149,18 @@ var Repair = {
                     }
                     else{
                         //max upgrade already purchased, disable button
-                        $(btnTag + 'ub' + str).off().css(
-                            {'opacity':'0.45','cursor':'default'}
-                        ).text('$0.00');
+                        disable(ub);
                     }
                     //repair button
                     if(!part._repaired){
-                        $(btnTag + 'rb' + str).off().click(
+                        rb.click(
                             {type:i}, repairInterior
                         ).css(
                             {'opacity':'1.0','cursor':'pointer'}
                         ).text('$' + part.getRepairPrice() );
                     }
                     else{
-                        $(btnTag + 'rb' + str).off().css(
-                            {'opacity':'0.45','cursor':'default'}
-                        ).text('$0.00');
+                        disable(rb);
                     }
                     
                     pbSetColor($('div#RepairShop div#interior progress#pb' + str), part.getPercent() );
@@ -167,31 +175,31 @@ var Repair = {
                 
                 for(var i = Body.TYPE.chasis; i <= Body.TYPE.ph0; i++){ 
                     var part = car._body.getPartType(i),
-                        str = Body.strFromType(i);
+                        str = Body.strFromType(i),
+                        ub = $(btnTag + 'ub' + str),
+                        rb = $(btnTag + 'rb' + str);
+                    
+                    ub.off();
+                    rb.off();
                     
                     if(part._stage != carPart.STAGE.pro){
-                        $(btnTag + 'ub' + str).off().click(
+                        ub.click(
                             {type:i}, upgradeBody
                         ).text('$' + part.getPrice()
                         ).css({'opacity':'1.0','cursor':'pointer'});
                     }else{
-                        //max upgrade already purchased, disable button
-                        $(btnTag + 'ub' + str).off().css(
-                            {'opacity':'0.45','cursor':'default'}
-                        ).text('$0.00');
+                        disable(ub);
                     }
                     //repair button
                     if(!part._repaired){
-                        $(btnTag + 'rb' + str).off().click(
+                        rb.click(
                             {type:i}, repairBody
                         ).css(
                             {'opacity':'1.0','cursor':'pointer'}
                         ).text('$' + part.getRepairPrice() );
                     }
                     else{
-                        $(btnTag + 'rb' + str).off().css(
-                            {'opacity':'0.45','cursor':'default'}
-                        ).text('$0.00');
+                        disable(rb);
                     }
                     
                     pbSetColor($('div#RepairShop div#body progress#pb' + str), part.getPercent() );
@@ -206,18 +214,19 @@ var Repair = {
                 
                 for(var i = Documents.TYPE.ownership; i <= Documents.TYPE.ph0; i++){ 
                     var part = car._docs.getPartType(i),                    
-                        str = Documents.strFromType(i);
+                        str = Documents.strFromType(i),
+                        ub = $(btnTag + 'ub' + str);
+                    
+                    ub.off();
                     
                     if(part._stage != carPart.STAGE.pro){
-                        $(btnTag + 'ub' + str).off().click(
+                        ub.click(
                             {type:i}, upgradeDocs
                         ).text('$' + part.getPrice()
                         ).css({'opacity':'1.0','cursor':'pointer'});
                     }else{
                         //max upgrade already purchased, disable button
-                        $(btnTag + 'ub' + str).off().css(
-                            {'opacity':'0.45','cursor':'default'}
-                        ).text('$0.00');
+                        disable(ub);
                     }
                     //docs don't have repair buttons
                     pbSetColor($('div#RepairShop div#docs progress#pb' + str), part.getPercent() );
@@ -325,7 +334,14 @@ var Repair = {
         //Garage.save();    //save updates to user vehicles
 //<php
 //}
-    }
+    },
+    update : function()
+	{
+	},
+	render : function()
+	{
+		//additional rendering to 2D context
+	},
 };
 
 function upgradeDT(obj){
@@ -335,7 +351,7 @@ function upgradeDT(obj){
     if(car !== null){
         var type = obj.data.type,
             str = Drivetrain.strFromType(type);
-        console.log('upgrading part of type: ' + str);
+        //console.log('upgrading part of type: ' + str);
         
         if(car._dt === null){
             //var bp = Drivetrain.getInstallPrice(car.getBasePrice();

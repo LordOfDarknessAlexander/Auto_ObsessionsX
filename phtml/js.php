@@ -1,23 +1,25 @@
 <?php
 function addJS($str){?>
-<script type='text/javascript' src='<?php echo "js/".$str.".js";?>'></script>
+<script type='text/javascript' src='<?php echo "js/$str.js";?>'></script>
 <?php
 }
 function addPHPJS($str){?>
-<script type='text/javascript' src='<?php echo "js/".$str.".php";?>'></script>
+<script type='text/javascript' src='<?php echo "js/$str.php";?>'></script>
 <?php
 }
 $paths = array(
     //'globals',
     'LoadAssets',
     //jquery bindings
-    'jqueryLib',	
+    'jqueryLib',
     'pas',
     //
+    //'2D/2D',
     '2D/SpriteSheet',
     '2D/Animation',
     '2D/Sprite',
     //game entities
+    //'entities/entities',
     'entities/player',
     'entities/enemy',
     //'entities/part',
@@ -28,6 +30,7 @@ $paths = array(
     'entities/parts/docs',
     'entities/vehicle',
     //game states
+    //'state/state',
     'state/Garage',
     //'state/Garage/main',
     //'state/Garage/carView',

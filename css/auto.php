@@ -157,12 +157,16 @@ button#homeBtn
     margin:0%;
 }
 label#info{
+    /*background-color:grey;*/
+    color:red;
     position:absolute;
     height:10%;
-    width:60%;
+    width:90%;
     bottom:72%;
-    left:20%;
+    left:5%;
     font-size:1vw;
+    text-align:center;
+    z-index:2;
 }
 .wrapper 
 {

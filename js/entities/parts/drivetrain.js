@@ -33,10 +33,10 @@ var Drivetrain = {
             rb = repairs;
         }
         
-        var eng = carPart(carPrice * 0.18, this.TYPE.engine),
-            trans = carPart(carPrice * 0.21, this.TYPE.trans),
-            axel = carPart(carPrice * 0.13, this.TYPE.axel),
-            exhaust = carPart(carPrice * 0.11, this.TYPE.exhaust);
+        var eng = carPart(carPrice * 0.15, this.TYPE.engine),
+            trans = carPart(carPrice * 0.14, this.TYPE.trans),
+            axel = carPart(carPrice * 0.11, this.TYPE.axel),
+            exhaust = carPart(carPrice * 0.06, this.TYPE.exhaust);
             
         if(bits){
             var engBF = (bits & 0xF000) >> 12,

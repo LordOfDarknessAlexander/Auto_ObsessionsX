@@ -58,6 +58,9 @@ function carPart(carPrice, partType){   //partType
                     this._repaired = true;  //then repair, 'cause we're like that
                     //console.log('purchasing repairs for part of type: ' + this._type.toString() + ', for: $' + p.toString() );
                 }
+                else{
+                    console.log('Insufficent funds! Can not purchase repair for part of type: ' + this._type.toString() );
+                }
             }
             //else already repaired, do nothing
             return this._repaired;
@@ -90,7 +93,9 @@ function carPart(carPrice, partType){   //partType
                 }
                 //else part is max level do nothing
             }
-            //part is more expensive that user has money
+            else{
+                console.log('Insufficent funds! Can not purchase upgrade for part of type: ' + this._type.toString() + ' to stage: ' + this._stage.toString() );
+            }
             return false;
         },
         getPercent:function(){
@@ -108,6 +113,7 @@ function carPart(carPrice, partType){   //partType
             }else if(this._stage == carPart.STAGE.pro){
                 ret = 4.0;
             }
+            
             if(this._repaired){
                 ret += 1.0;
             }

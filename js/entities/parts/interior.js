@@ -46,10 +46,10 @@ var Interior = {
             rb = repairs;
         }
         
-        var seats = carPart(carPrice * 0.22, Interior.TYPE.seats),
-            carpet = carPart(carPrice * 0.12, Interior.TYPE.carpet),
-            dash = carPart(carPrice * 0.08, Interior.TYPE.dash),
-            panels = carPart(carPrice * 0.14, Interior.TYPE.panels);
+        var seats = carPart(carPrice * 0.12, Interior.TYPE.seats),
+            carpet = carPart(carPrice * 0.08, Interior.TYPE.carpet),
+            dash = carPart(carPrice * 0.06, Interior.TYPE.dash),
+            panels = carPart(carPrice * 0.085, Interior.TYPE.panels);
             
         if(bits){
             var seatsBF = (bits & 0xF000) >> 12,
@@ -140,16 +140,16 @@ var Interior = {
                 //returns the stage of the part being upgraded
                 //console.log('upgradeing part of type:');
                 if(type == Interior.TYPE.seats){
-                    this._seats.upgrade();
+                    return this._seats.upgrade();
                 }
                 else if(type == Interior.TYPE.carpet){
-                    this._carpet.upgrade();
+                    return this._carpet.upgrade();
                 }
                 else if(type == Interior.TYPE.dash){
-                    this._dash.upgrade();
+                    return this._dash.upgrade();
                 }
                 else if(type == Interior.TYPE.panels){
-                    this._panels.upgrade();
+                    return this._panels.upgrade();
                 }
                 console.log('attempting to upgrade unknown type: ' + type.toString() );
                 return false;

@@ -332,8 +332,9 @@ function(){
     //delete credits
     //delete menu image, since the game can not navigate back to this screen after clicking
 });
-//InMenuButtons
-//auction Button
+//
+//Main Menu button bindings
+//
 jq.Game.toAuctionBtn.click(
 function(){
 	jq.Game.menu.toggle();
@@ -388,6 +389,7 @@ function(){
 	jq.RepairShop.menu.show();
 	Repair.init();
     jq.carImg.show();
+    $('label#info').text('');
 	//saveUser();	//save user stats after purchasing
 });
 

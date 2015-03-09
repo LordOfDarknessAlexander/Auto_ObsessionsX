@@ -293,7 +293,7 @@ function setName()
 }	
 function setMoney()
 {
-	jq.money.text('Money: ' + userStats.money.toFixed(2) );
+	$('div#statBar label#money').text('Money: ' + userStats.money.toFixed(2) );
 	
 	if(userStats.money <= 0)
 	{
