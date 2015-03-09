@@ -321,7 +321,7 @@ function startGame()
 	context.font = '26px arial, sans-serif';
 	// Create gradient
 	var gradient=context.createLinearGradient(36,40,600,1);
-	gradient.addColorStop("0","magenta");
+	gradient.addColorStop("0.7","green");
 	gradient.addColorStop("0.5","blue");
 	gradient.addColorStop("1.0","green");
 	// Fill with gradient
