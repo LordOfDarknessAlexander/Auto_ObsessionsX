@@ -67,7 +67,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 } // End of submit conditional
 ?>
 <!-- Display the form fields-->
-<!-- Display the form fields-->
 <div id="loginfields">
     <h2>Login</h2>
     <form action="login.php" method="post">
