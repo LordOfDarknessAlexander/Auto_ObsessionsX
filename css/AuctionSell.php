@@ -49,7 +49,8 @@ function dcv(){
 	/*padding: 50px 50px;
 	display:inline;*/
     height:15%;
-    background-color:grey;
+   // background-color:grey;
+   background:url('../images/checkers.png');
     display:block;
 }
 <?php dcv();?> div div#btns

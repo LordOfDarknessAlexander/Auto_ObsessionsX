@@ -40,8 +40,8 @@ function divRepair(){
 	height:5%;
     font-size:1.8vw;/*size element relative to viewport width!*/
     font-weight:bold;
-    background-color:grey;
-    /*background:url('../headerBG.jpg');*/
+    //background-color:grey;
+    background:url('../images/checkers.png');
     margin:0%;
     
 }
