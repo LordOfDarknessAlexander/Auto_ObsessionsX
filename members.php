@@ -2,17 +2,21 @@
 session_start();
 //require 'secure.php';
 //secureLogin();
+require 'include/dbConnect.php';
 if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 {  header("Location: login.php");
    exit();
 }
+require 'include/html.php';
+
+
 ?>
 <!doctype html>
 <html lang=en>
 <head>
 <title>Members' page</title>
 <meta charset=utf-8>
-<link rel="stylesheet" type="text/css" href="includes.css">
+<link rel="stylesheet" type="text/css" href="includes/includes.css">
 <style type="text/css">
 #mid-right-col { text-align:center; margin:auto;margin-right: 50%; margin-top: -10%
 }
@@ -25,7 +29,7 @@ if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 <?php include("includes/header-members.php"); ?>
 <?php include("includes/nav.php"); ?>
 <?php include("includes/info-col.php"); ?>
-<?php include("includes/statBar.php"); ?>
+
 
 	<div id="content"><!-- Start of the member's page content. -->
 <?php
@@ -34,9 +38,44 @@ if (isset($_SESSION['fname']))
 {
 	echo "{$_SESSION['fname']}";
 }
+if(isset($_SESSION['uname']))
+{
+	echo "{$_SESSION['uname']}";
+	//$sname = $_SESSION['uname'];
+	//$sname = $_SESSION['fname'];
+}
 echo '</h2>';
 ?>
-<div id="midcol">
+        <div id='midcol'>
+<?php
+//Query the database
+
+$q = "SELECT * FROM users WHERE uname = '$_SESSION[uname]'";		
+$result = mysqli_query ($AO_DB->con, $q);
+
+//Count the returned rows
+if(mysqli_num_rows($result) != 0)
+{
+	//Turn the results in to an array
+	while($rows = $result->fetch_assoc())
+	{
+		$fname = $rows['fname'];
+		$money = $rows['money'];
+		$m_marker = $rows['m_marker'];
+		$tokens = $rows['tokens'];
+		$prestige = $rows['prestige'];
+		
+		echo "<div id ='playerData'> <p>Player: $fname <br> Money: $money <br> Mile Markers: $m_marker <br> Tokens: $tokens<br> Prestige: $prestige</p></div>";
+	}
+}
+else
+{
+	echo 'No Results';
+	//If there was a problem.
+    echo "<p class='error'>Please try again.</p>";
+	//exit();
+}
+?>
 <div id="mid-left-col">
 <h3>Member's Events</h3>
 <p>The Members' page content. The Members' page content. The Members' page content.
@@ -47,7 +86,7 @@ The Members' page content.</p></div>
 <h3>Special offers to Members only.</h3>
 <div id="nav">
 <ul>
-<li><a href="..\index.php" title="Play Game">Play Game</a></li>
+<li><a href="index.php" title="Play Game">Play Game</a></li>
 </ul>
 </div>
 <br>
