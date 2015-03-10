@@ -37,7 +37,7 @@ function divSelectedCar(){
 {<?php
     posAbs();
 ?>
-    bottom:62%;
+    bottom:70%;
     left:10%;
     width:5%;
     height:5%;
@@ -47,7 +47,7 @@ function divSelectedCar(){
 {<?php
     posAbs();
 ?>
-    bottom:62%;
+    bottom:70%;
     left:30%;
     width:5%;
     height:5%;
@@ -57,7 +57,7 @@ function divSelectedCar(){
 {<?php
     posAbs();
 ?>
-    bottom:62%;
+    bottom:70%;
     left:20%;
     width:5%;
     height:5%;
@@ -92,8 +92,8 @@ function divSelectedCar(){
 	background: url('../images/defaultBG.jpg') no-repeat 0 0;
 	overflow-y:scroll;
 <?php posAbs();?>
-	height:60%;
-	top:40%;
+	height:80%;
+	top:36%;
     left:5%;
     width:35%;
 }
@@ -104,10 +104,10 @@ function divSelectedCar(){
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 <?php posAbs();?>
 	text-align::left;
-	top:40%;
+	top:30%;
 	left:42%;/*2%;*/
 	width:25%;
-	height:60%;
+	height:70%;
 	display:inline;
 }
 <?php divSelectedCar();?>
@@ -116,10 +116,10 @@ function divSelectedCar(){
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 <?php posAbs();?>
 	text-align::left;
-	top:40%;
+	top:30%;
 	right:2%;
 	width:25%;
-	height:60%;
+	height:70%;
 	display:inline;
 }
 <?php divUserCar();?> img#carImg,

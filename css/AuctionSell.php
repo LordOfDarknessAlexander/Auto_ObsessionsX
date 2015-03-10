@@ -116,7 +116,7 @@ function dcv(){
 }
 <?php dcv();?> div#btns button#cc
 {
-    background: url('../images/cancel.jpg') no-repeat 0 0;
+    background: url('../images/cancel.png') no-repeat 0 0;
     background-size:100% 100%;
     position:absolute;
     top:25%;

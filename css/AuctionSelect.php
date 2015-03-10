@@ -90,7 +90,6 @@ button#asBackBtn
     background-size:100% 100%;
 	font-weight: bold;
     position:absolute;
-
 	width:16%;
 	height:8%;
 	cursor:pointer;
