@@ -250,8 +250,7 @@ Auction.sold = function()
 	goingTimer = 0;
 	startEndBids = [false,false,false,false];
 	endBidTimers = [0,0,0,0];
-	//pGTimer = 0;
-	//player.restart();
+	
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
 	
