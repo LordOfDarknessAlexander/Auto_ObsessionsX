@@ -124,6 +124,7 @@ function jqBind($objName, $tag){
 	Funds : {
 		menu : $('#AddFunds'),
 		backBtn : $('#addFundsBackButton'),
+		homeBtn : $('#addFunds homeBtn'),
 		toggle : function()
 		{	//from game menu to funds or vice versa
 			//$('#gameMenu').toggle();

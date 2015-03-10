@@ -16,6 +16,7 @@ function cvStatBar($id){
 <?php
     backBtn();
     selectBtn();
+	
 ?>
     <button id='viewCar'>View</button>
     <!--button id='sellCar'>Sell</button-->

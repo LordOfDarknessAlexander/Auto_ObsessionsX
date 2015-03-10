@@ -363,6 +363,22 @@ function(){
     
 	//}	
 });
+/*
+jq.Funds.homeBtn.click(
+function(){
+	//Auction.cancel();	//stop the auction, aborting the sale
+	
+	//$('#Auction').hide();
+	jq.Funds.hide();
+	jq.Game.menu.show();
+  //  jq.carImg.show();
+	//jq.Game.menu.children().toggle();	//hides/showns all child elements
+	ajax_post();
+    setStatBar();
+	//setAdBG();
+    setHomeImg();
+	
+});*/
 //Auction State Back Button
 jq.Sold.garageBtn.click(
 function(){
