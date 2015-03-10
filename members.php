@@ -2,23 +2,13 @@
 session_start();
 //require 'secure.php';
 //secureLogin();
-
-//secureLogin();
-if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
-{
-    //tmp, untill session vars issues are resolved
-    //session vars are not persistsing from login.php,
-    //one fix could says to change session.path entry in php.ini
-    echo 'session vars:<br>';
-    echo json_encode($_SESSION);
-    echo 'not logged in, navigating to login page';
-    //header("Location: login.php");
-
+require 'include/dbConnect.php';
+if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
+{  header("Location: login.php");
    exit();
 }
-html::doctype();
 require 'include/html.php';
-require 'include/dbConnect.php';
+
 
 ?>
 <!doctype html>
@@ -47,6 +37,12 @@ echo '<h2>Welcome to the Members\' Page ';
 if (isset($_SESSION['fname']))
 {
 	echo "{$_SESSION['fname']}";
+}
+if(isset($_SESSION['uname']))
+{
+	echo "{$_SESSION['uname']}";
+	//$sname = $_SESSION['uname'];
+	//$sname = $_SESSION['fname'];
 }
 echo '</h2>';
 ?>

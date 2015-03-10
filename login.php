@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
            
             //mysqli_close($dbcon);
-            ob_end_clean(); // Delete the buffer.
+            //ob_end_clean(); // Delete the buffer.
             exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;
 		} 
 		else 
