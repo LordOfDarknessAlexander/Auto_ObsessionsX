@@ -32,10 +32,10 @@ canvas
 }
 div#content{
     position:absolute;
-    left:20%;
-    top:20%;
-    height:80%;
-    width:60%;
+    left:15%;
+    top:10%;
+    height:90%;
+    width:70%;
 }
 /*default element stylings for the entire page*/
  h1 
@@ -122,27 +122,34 @@ li {
     position: relative;
 }
 /* set general anchor styles */
-li a {
+li a,
+div#nav a,
+div#reg-navigation a{
     display:block;
     width:128px;
     height:32px;
     color: white;
     font-weight: bold;
     text-decoration: none;
+    text-align:center;
 
     background: url('../images/defaultBtn.png') no-repeat 0 0;
     background-size:100% 100%;
     position: relative;
 }
 /* mouseover */
-li a:hover {
+li a:hover,
+div#nav a:hover,
+div#reg-navigation a:hover{
     background: url('../images/defaultBtn2.png') no-repeat 0 0;
     background: #BF0000;
     /*width:200px;
     height:60px;*/
 }
 /* onmousedown */
-li a:active {
+li a:active,
+div#nav a:active,
+div#reg-navigation a:active {
     background:#aecbff;
     border: 4px inset #aecbff;
 }
@@ -153,8 +160,9 @@ div#reg-navigation{
     margin:10% 15px 0 88s%;
     bottom: 50%;*/
     position:absolute;
+    top:5%;
     right:0%;
-    width:20%;
+    width:15%;
     /*background-color:grey;*/
 }
 #reg-navigation ul{
@@ -175,8 +183,9 @@ div#reg-navigation{
 #midcol2{
     width:80%;
     margin:auto;
-    position: relative;
-    top: 0%;
+    position:absolute;
+    top:0%;
+    left:2%;
 }
 #mid-left-col{
     width:36%;
@@ -219,11 +228,15 @@ form {
 }
 p.error {
     color:red;
-    font-size:100%;
+    font-size:75%;
     font-weight:bold;
     text-align:left;
-    margin-top: -6%;
-    position: relative;
+    
+    position:absolute;
+    right:0%;
+    top:30%;
+    height:70%;
+    width:50%;
 }
 .label {
     float:left;

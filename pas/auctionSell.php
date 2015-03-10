@@ -129,33 +129,11 @@ if(isset($_POST) && !empty($_POST) ){
                     else{
                         $tableName = 'user' . strval(0);    //$_SESSION['userID'];
                         $res = false;
-                        //prepare statement for adding the defaults values for a new car into the user's table
-                        /*$addCar = $aoUsersDB->con->prepare(
-                            "INSERT INTO ? (car_id, drivetrain, body, interior, docs, repairs) VALUES (?,0,0,0,0,0)"
+                       
+                        $res = $aoUsersDB->query(
+                            "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
+                            //IF entry EXISTS do nothing
                         );
-                        if($addCar){
-                            if($addCar->bind_params('si', $tableName, $carID) ){
-                                $res = $addCar->execute();
-                            }
-                            else{
-                                //output error
-                                $erno = $aoUsersDB->con->errno;
-                                $err = $aoUsersDB->con->error;
-                                echo "addCar($carID), bind_params failed:($erno), reason: $err";
-                                exit();
-                            }
-                        }
-                        else{*/
-                            //$erno = $aoUsersDB->con->errno;
-                            //$err = $aoUsersDB->con->error;
-                            //echo "insertCar($carID), prepare failed:($erno), reason: $err";
-                            //exit();
-                            //prepare didn't work, attempt execution of regular query
-                            $res = $aoUsersDB->query(
-                                "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
-                                //IF entry EXISTS do nothing
-                            );
-                        //}
                         echo json_encode($res);
                     }
                     exit();
@@ -172,34 +150,10 @@ if(isset($_POST) && !empty($_POST) ){
                     
                     $tableName = 'user' . strval(0);    //$_SESSION['userID'];
                     
-                    /*$updateCar = $aoUsersDB->con->prepare(
-                        "UPDATE ? SET drivetrain = ?, body = ?, interior = ?, docs = ?, repairs = ? WHERE car_id = ?"
-                    );
-                    if($updateCar){
-                        if($updateCar->bind_params('siiiiii', $tableName, $dt, $body, $inter, $docs, $rep, $carID) ){
-                            $res = $updateCar->execute();
-                    
-                            //if(!$res){
-                                //output sql error as json
-                            //}
-                            echo json_encode($res);
-                            //}
-                        }
-                        echo json_encode(false);
-                        exit();
-                    }
-                    else{
-                        $erno = $aoUsersDB->con->errno;
-                        $err = $aoUsersDB->con->error;
-                        echo json_encode("Error($erno) occurred, reason: $err. Could not update car");
-                        exit();
-                    }*/
                     $res = $aoUsersDB->query(
                         "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
                     );
-                    
                     echo json_encode($res);
-                    //}
                 }
                 //else switch to other calls
                 exit();

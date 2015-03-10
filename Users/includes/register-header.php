@@ -1,9 +1,6 @@
 <div id="header">
-<h1>Registration</h1>
-<div id="reg-navigation">
-	<ul>
-		<li><a href="index.php">Cancel</a></li>
-	</ul>
+    <h1>Registration</h1>
+    <div id="reg-navigation">
+        <a href="index.php">Cancel</a><br>
+    </div>
 </div>
-</div>
-

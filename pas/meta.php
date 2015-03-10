@@ -9,6 +9,18 @@ require_once '../include/dbConnect.php';  //sql database connections
 //
 //secure::loggin();
 //
+function getUserTableName(){
+    //returns the name of the table used by the currently logged in user
+    //used to access tables in aoUsersDB and aoCarSalesDB
+    $userID = 'user';
+    //if(isset($_SESSION) AND isset($_SESSION['user_id']) ){
+        //$ret .= $_SESSION['user_id'];
+    //}
+    //else{
+        $userID .= strval(0);   //$_SESSION['userID'];
+    //}
+    return $userID;
+}
 function hasCar($id){
     //does the user's table in aoUsersDB already have an entry with car_id '$id'
     global $aoUsersDB;

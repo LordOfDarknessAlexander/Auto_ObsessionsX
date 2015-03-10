@@ -10,9 +10,9 @@ function getCurrentCar(){
     //returns the user's currently selected vehicle
     //global $AO_DB;
     /*$id = strval(0);  //$_SESSION['user_id'];
-    $users = 'users';
+    $users = getUserTableName();
     
-    $res = $AO_DB->query("SELECT curCarID FROM $user WHERE user_id = $id");
+    $res = $AO_DB->query("SELECT curCarID FROM $users WHERE user_id = $id");
     
     if($res){
         //user has car
@@ -44,12 +44,9 @@ function getAuctionCars(){
             $carID = intval($row['car_id']);
             $cars[] = array(
                 'carID' => $carID,
-                //'make' => $row['make'],
-                //'year' => intval($row['year']),
-                //'model' => $row['model'],
-                //'price' => intval($row['price']),
-                //'info' => $row['info'],
                 'hasCar' => hasCar($carID)   //does user have this car?
+                //'hasLostCar' => hasLostCar($carID)   //did the user lose the auction for this car
+                //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
             );
         }
         mysqli_free_result($res);
@@ -70,6 +67,9 @@ function getAuctionCarsCount(){
     //);
     if($count == 0){
         //this should only execute once
+        //static $getCars = $AO_DB->prepare(
+            //"SELECT * FROM $aoCars"
+        //);
         $res = $AO_DB->query(
             "SELECT * FROM $aoCars"
         );
@@ -90,26 +90,8 @@ function getAuctionCarsCount(){
 function getUserCarFromID($carID){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
-    $userID = 'user' . strval(0);    //$_SESSION['userID'];
-    //$_getUserCar = $aoUsersDB->con->prepare(
-        //"SELECT * FROM ? WHERE car_id = ?"
-    //);
-    /*if($_getUserCar){
-        if($_getUserCar->bind_params('si', $userID, $carID)){
-            if($_getUserCar->execute() ){
-                $res = $_getUserCar->get_result();
-            }
-            else{
-                //execute failed   
-            }
-        }
-        else{
-            //bind params failed
-        }
-    }
-    else{
-        //prepare statement failed, fall back to regular query
-    }*/
+    $userID = getUserTableName();
+    
     $res = $aoUsersDB->query(
         "SELECT * FROM $userID WHERE car_id = $carID"
     );
@@ -117,10 +99,14 @@ function getUserCarFromID($carID){
         if(mysqli_num_rows($res) != 0){
             //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
             $data = $res->fetch_assoc();//@mysqli_query($CARS.$con, $q); // Run the query
-            //$car = Vehicle::fromArray($data);
-            //echo '{"data":"this is data!"}';
-            //echo $car->toJSON();
-            //echo Vehicle::fromArray($result->fetch_assoc() )->toJSON();
+            //if(DEBUG){
+                //$car = Vehicle::fromArray($data);
+                //echo '{"data":"this is data!"}';
+                //echo $car->toJSON();
+            //}
+            //else{
+                //echo Vehicle::fromArray($result->fetch_assoc() )->toJSON();
+            //}
         } 
         else{ 
             echo "<h2>System Error</h2>
@@ -136,7 +122,7 @@ function getUserCarFromID($carID){
 function getUserCarCount(){
     //returns the number of entries in user's database(garage)
     global $aoUsersDB;
-    $uid = 'user' . strval(0);  //$SESSION['userID'];
+    $uid = getUserTableName();
     //$count is initialized when this is called for the first time
     $count = 0;
     //this should only execute once
@@ -162,12 +148,12 @@ function getUserCarCount(){
 //}
 //function getAuctionAvg(){
     //returns aver ratio of wins/losses
-    //return getAuctionWins()
+    //return (getAuctionWins() - getAuctionLosses() ) / getTotalCarCount();
 //}
 function getUserSalesCount(){
     //returns the number cars sold by the user
     global $aoCarSalesDB;
-    $uid = 'user' . strval(0);  //$SESSION['userID'];
+    $uid = getUserTableName();
     //$count is initialized when this is called for the first time
     $count = 0;
     /*
@@ -197,7 +183,7 @@ function getRemainingCarCount(){
     //returns the number of cars the user still has to purchase
     //$ret = getAuctionCars() - (getUserCarCount() + getUserSalesCount() );
     //echo $ret
-    return getAuctionCars() - getTotalUserCarCount();
+    return getAuctionCarsCount() - getTotalUserCarCount();
 }
 function getGameCompletion(){
     //percentage of cars bought and sold by the user
@@ -210,14 +196,7 @@ function echoUserCars(){
     global $aoUsersDB;
     
     $cars = array();
-    $userID = '';
-    
-    //if(isset($_SESSION) AND isset($_SESSION['user_id']) ){
-        //$userID = 'user' . $_SESSION['user_id'];
-    //}
-    //else{
-        $userID = 'user' . strval(0);   //$_SESSION['userID'];
-    //}
+    $userID = getUserTableName();
     
     $res = $aoUsersDB->query(
         "SELECT * FROM $userID"
@@ -281,8 +260,6 @@ function getUserSoldCars(){
     //}
     echo json_encode($cars);
 }
-
-$q = '';
 
 if(isset($_GET) && !empty($_GET) ){
     //args being passed vai the url

@@ -7,6 +7,16 @@ class ao{
         'TD'=>'Tyler Drury',
         'AB'=>'Andrew Best'
     );*/
+    //constant database names
+    //public static
+        //USERS = 'users',  //table containing all registered users
+        //CARS = 'aoCars'   //database containing all core vehicle data
+    
+    //static mysql database connections
+    //public static
+        //db = dbConnect('aoUsersDB'),
+        //usersDB = dbConnect('aoUsersDB'),
+        //carSalesDB = dbConnect('aoCarSalesDB');
 }
 function rootURL(){
     //returns the root url for the executing application

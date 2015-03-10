@@ -21,131 +21,93 @@ require 'includes/nav.php';
 ?>
 <div id='content'><!-- Start of the login page content. -->
 <?php
-//require './config.php'; // Connect to the database
-
 // This code inserts a record into the users table
 // Has the form been submitted?
-/*
-function strip($str)
-{
-    global $AO_DB;
-    $res = trim($_POST[$str]);
-	strip HTML and apply escaping
-	return mysqli_real_escape_string($db.$con, strip_tags($res));
-}*/
 if($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 	$errors = array(); // Start an array named errors 
-	// Trim the title
-	$tle = trim($_POST['title']);
-	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($AO_DB->con, strip_tags($tle));    //strip('title');
-	// Get string lengths
-	$strlen = mb_strlen($stripped, 'utf8');
+
+	$stripped = $AO_DB->strip('title');
 	// Check stripped string
-	if($strlen < 1) 
-	{
+	if(!mb_strlen($stripped, 'utf8') ){
 		$errors[] = 'You forgot to enter your title.';
 	}
-	else
-	{
+	else{
 		$title = $stripped;
 	}
-	// Trim the first name
-	$name = trim($_POST['fname']);
-	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($AO_DB->con, strip_tags($name));
-	// Get string lengths
-	$strlen = mb_strlen($stripped, 'utf8');
-	// Check stripped string
-	if($strlen < 1) 
-	{
+    
+	$stripped = $AO_DB->strip('fname');
+
+	if(!mb_strlen($stripped, 'utf8') ){
 		$errors[] = 'You forgot to enter your first name.';
 	}
-	else
-	{
+	else{
 		$fn = $stripped;
 	}
-	// Trim the last name
-	$lnme = trim($_POST['lname']);
-	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($AO_DB->con, strip_tags($lnme));
-	// Get string lengths
-	$strlen = mb_strlen($stripped, 'utf8');
-	// Check stripped string
-	if($strlen < 1) 
-	{
+
+	$stripped = $AO_DB->strip('lname');
+
+	if(!mb_strlen($stripped, 'utf8') ){
 		$errors[] = 'You forgot to enter your last name.';
 	}
-	else
-	{
+	else{
 		$ln = $stripped;
 	}
 	//Set the email variable to FALSE
 	$e = FALSE;									
 	// Check that an email address has been entered				
-	if(empty($_POST['email'])) 
-	{
+	if(empty($_POST['email'])){
 		$errors[] = 'You forgot to enter your email address.';
 	}
 	//remove spaces from beginning and end of the email address and validate it	
-	if(filter_var((trim($_POST['email'])), FILTER_VALIDATE_EMAIL)) 
-	{	
+	if(filter_var((trim($_POST['email'])), FILTER_VALIDATE_EMAIL)){	
 		//A valid email address is then registered
 		$e = mysqli_real_escape_string($AO_DB->con, (trim($_POST['email'])));
 	}
-	else
-	{									
+	else{									
 		$errors[] = 'Your  email address is invalid or you forgot to enter your email address';
 	}
 	// Check that a password has been entered, if so, does it match the confirmed password
-	if(empty($_POST['psword1']))
-	{
+	if(empty($_POST['psword1'])){
 		$errors[] ='Please enter a valid password';
 	}
     //passwords must be 8-12 characters long, containing only numbers or letters, no special symbols
-	if(!preg_match('/^\w{8,12}$/', $_POST['psword1'])) 
-	{
+	if(!preg_match('/^\w{8,12}$/', $_POST['psword1'])){
 		$errors[] = 'Invalid password, use 8 to 12 characters and no spaces.';
 	}
-	else
-	{
+	else{
 		$psword1 = $_POST['psword1'];
+        $pw2 = $_POST['psword2'];
+        
+        if(!preg_match('/^\w{8,12}$/', $pw2) ){
+            $errors[] = 'Confirmation password invalid, must be 8-12 characters and no spaces.';
+        }
+
+        if($psword1 == $pw2){
+            $p = mysqli_real_escape_string($AO_DB->con, trim($psword1));
+        }
+        else{
+            $errors[] = 'Your two passwords do not match.';
+        }
 	}
-	if($_POST['psword1'] == $_POST['psword2']) 
-	{
-		$p = mysqli_real_escape_string($AO_DB->con, trim($psword1));
-	}
-	else
-	{
-		$errors[] = 'Your two password do not match.';
-	}
-	// Trim the username
-	$unme = trim($_POST['uname']);
-	// Strip HTML and apply escaping
-	$stripped = mysqli_real_escape_string($AO_DB->con, strip_tags($unme));
-	// Get string lengths
-	$strlen = mb_strlen($stripped, 'utf8');
-	// Check stripped string
-	if($strlen < 1) 
-	{
+
+	$stripped = $AO_DB->strip('uname');
+
+	if(!mb_strlen($stripped, 'utf8') ){
 		$errors[] = 'You forgot to enter your username.';
 	}
-	else
-	{
+	else{
 		$uname = $stripped;
 	}	
 
-	if(empty($errors)) 
-	{ 
+	if(empty($errors)){ 
 		// If there were no errors
 		//Determine whether the email address has already been registered	
 		$q = "SELECT user_id FROM users WHERE email = '$e' ";
 
 		$result = $AO_DB->query($q) ; 	
 		
-        if(mysqli_num_rows($result) == 0)
-		{
+        if(mysqli_num_rows($result) == 0){
 			//The mail address was not already registered therefore register the user in the users table
 			//pasCreate::userAccount($userInfo);
 			$q = "INSERT INTO users (user_id, title, fname, lname, email, psword, registration_date, uname) VALUES (' ', '$title', '$fn', '$ln', '$e', SHA1('$p'), NOW(), '$uname' )";		
@@ -178,8 +140,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 				//header("location: register-thanks.php"); 
 				exit();
 			} 
-			else 
-			{ 
+			else{ 
 				// If the query did not run OK
 				// Message
 				echo "<h2>System Error</h2>
@@ -191,19 +152,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			include 'includes/footer.php'; 
 			exit();
 		} 
-		else 
-		{
+		else{
 			//The email address is already registered 
 			echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
 		}
 	}
-	else
-	{ // Display the errors
+	else{
+        // Display the errors
 		echo "<h2>Error!</h2>
 		<p class='error'>The following error(s) occurred:<br>";
-		
-        foreach ($errors as $msg) 
-		{ // Display each error
+        // Display each error
+        foreach ($errors as $msg){
 			echo " - $msg<br>\n";
 		}
 		echo '</p><h3>Please try again.</h3><p><br></p>';
@@ -251,8 +210,8 @@ function ep($str){
 		<br>
         <label class='label' for='uname'>User Name*</label><br>
         <input id='uname' type='text' name='uname' size='12' maxlength='12' value='<?php ep('uname');?>'>&nbsp;6 
-		to 12 characters
-		<p><input id='submit' type='submit' name='submit' value='Register'></p>
+		to 12 characters<br>
+		<input id='submit' type='submit' name='submit' value='Register'>
 	</form>
 </div>
 </div><!--content-->

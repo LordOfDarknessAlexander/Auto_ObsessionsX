@@ -2,6 +2,8 @@
 //this script CREATE's Database tables with sql
 //used by javascript ajax requests
 header('Access-Control-Allow-Origin: *');
+//
+require_once 'meta.php';
 //require_once '../vehicles/vehicle.php';
 require_once '../include/dbConnect.php';  //sql database connection
 //require_once '../include/secure.php';
@@ -11,24 +13,28 @@ require_once '../include/dbConnect.php';  //sql database connection
 class pasCreate
 {
     function userEntry($userID){
-        //creates an empty table upon user registration
+        //creates an empty table upon user registration,
+        //true on success, false on failure
         global $AO_DB;
-        $aoUsers = 'users';    //strval($_SESSION['userID']);
+        $aoUsers = 'users';
         //get validated and sanitized form data
+        //$addUser = $AO_DB->prepare(
+           //"INSERT INTO $aoUsers (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
+            //(?, ?, ?, ?, ?, ?, NOW(), 0, 50000.00, 0, 0, 0, 0, 0)"
+        //);
         
         /*$res = $AO_DB->query(
            "INSERT INTO $aoUsers (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
             ($title, $fname, $lname, $email, $pw, $uname, NOW(), 0, 50000.00, 0, 0, 0, 0, 0)"
         );
         
-        if($res){
-            //
-        }
-        else{
+        if(!$res){
             //sql error!
             //The vehicle is already registered
             //echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
-        }*/
+        }
+        return ret;
+        */
         return null;
     }
     public static function userTable($userID){
@@ -37,7 +43,7 @@ class pasCreate
         global $aoUsersDB;
         //escape and sanitize input string, incase someone tries an sql injection attack
         
-        $tableName = "user$userID";  // . strval(0);    //$_SESSION['user_level']
+        $tableName = "user$userID";  //getUserTableName();
         $uint = 'int unsigned';
         $defaultCharset = 'DEFAULT CHARSET = latin1';
         $defaultEngine = 'ENGINE = InnoDB';
@@ -66,19 +72,24 @@ class pasCreate
         //creates an empty table in aoUsersDB upon user registration
         global $aoCarSalesDB;
         //$uid = $_SESSION['userID'];
+        $tableName = getUserTableName();
         $uint = 'int unsigned';
         $defaultCharset = 'DEFAULT CHARSET = latin1';
         $defaultEngine = 'ENGINE = InnoDB';
         
         /*$res = $aoCarSalesDB->query(
-           "CREATE TABLE IF NOT EXISTS user$tableName(
+           "CREATE TABLE IF NOT EXISTS $tableName(
                 car_id $uint NOT NULL PRIMARY KEY,
                 price float,    //0 if the auction has not completed, else the total sale price of the car
+                bid float,    //the current highest bid until the auction has completed and the user receives the funds, else 0
                 drivetrain $uint,
                 body $uint,
                 interior $uint,
                 docs $uint,
-                repairs $uint
+                repairs $uint,
+                start date NOT NULL,
+                end date,
+                time float  //0 if end date is not null, else the time left on the auction
             )$defaultEngine $defaultCharset"
         );*/
          
@@ -94,10 +105,15 @@ class pasCreate
     }
     function userAccount(){
         //create entry in finalpost
-        //pasCreate::userEntry($userID);
-        //get userID from final post for the 
-        //pasCreae::userTable($userID);
-        //pasCreate::userSalesTable($userID);
+        //if(pasCreate::userEntry($userID) ){
+            //get userID from final post for the 
+            //if(pasCreae::userTable() {
+                //if(pasCreate::userSalesTable() ){
+                    //return true;
+                //}
+            //}
+        //}
+        //return false;
     }
 }
 
