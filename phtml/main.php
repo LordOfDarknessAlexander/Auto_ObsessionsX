@@ -21,6 +21,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         <label id='prestige'>Prestige:</label>
         <label id='m_marker'>Mile Markers:</label>
     </div>
+	
     <img id='mainCar' src='images\\garageEmpty.png'>
     <!--label id='info'></label-->
     
@@ -51,6 +52,9 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
                <li><a href='javascript:void(0)' class='button Register'>Register</a></li>
                <!--php }-->
             </ul>
+			<div id="loginfields">
+				<?php include ('Users/includes/login_page.inc'); ?>
+			</div>
             <?php require 'phtml/legal.php';?>
 		</div>
       
