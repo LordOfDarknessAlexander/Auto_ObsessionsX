@@ -20,49 +20,61 @@ require 'includes/info-col.php';
 <div id='content'><!-- Start of the login page content. -->
 <?php 
 // Determine whether the form been submitted
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-require_once '../include/dbConnect.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+{
+	require_once '../include/dbConnect.php';
 // Was the email address entered?
-	if (!empty($_POST['email'])) {
+	if (!empty($_POST['email'])) 
+	{
 			$e = mysqli_real_escape_string($AO_DB->con, $_POST['email']);
-	} else {
+	}
+	else 
+	{
 	$e = FALSE;
 		echo '<p class="error">You forgot to enter your email address.</p>';
 	}
 // Was the password entered?
-	if (!empty($_POST['psword'])) {
+	if (!empty($_POST['psword'])) 
+	{
 			$p = mysqli_real_escape_string($AO_DB->con, $_POST['psword']);
-	} else {
-	$p = FALSE;
+	} 
+	else 
+	{
+		$p = FALSE;
 		echo '<p class="error">You forgot to enter your password.</p>';
 	}
-	if ($e && $p){//if no problem was encountered
-// Select the user_id, first_name and user_level for that email/password combination	
+	if ($e && $p)
+	{	//if no problem was encountered
+		// Select the user_id, first_name and user_level for that email/password combination	
 		$q = "SELECT user_id, fname, uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";			
 		$result = mysqli_query ($AO_DB->con, $q); 
 		// Check the result
-		if (@mysqli_num_rows($result) == 1) {//The user input matched the database record
-		// Start the session, fetch the record and insert the three values in an array
-		session_start();
-		$_SESSION = mysqli_fetch_array ($result, MYSQLI_ASSOC);
-$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Ensure the user level is an integer
-// The login page redirects the user either to the admin page or the users search page
-// Use a ternary operation to set the URL
-$url = ($_SESSION['user_level'] === 51) ? 'admin_page.php' : 'members-page.php';
-header('Location: ' . $url); // The user is directed to the appropriate page
-exit(); // Cancel the rest of the script
-	mysqli_free_result($result);
-//	mysqli_close($dbcon);
-	} else { // If no match was found
+		if (@mysqli_num_rows($result) == 1) 
+		{//The user input matched the database record
+			// Start the session, fetch the record and insert the three values in an array
+			session_start();
+			$_SESSION = mysqli_fetch_array ($result, MYSQLI_ASSOC);
+			$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Ensure the user level is an integer
+			// The login page redirects the user either to the admin page or the users search page
+			// Use a ternary operation to set the URL
+			$url = ($_SESSION['user_level'] === 51) ? 'admin_page.php' : 'members-page.php';
+			header('Location: ' . $url); // The user is directed to the appropriate page
+			exit(); // Cancel the rest of the script
+			mysqli_free_result($result);
+
+		} 
+		else 
+		{ // If no match was found
 	
-	echo '<p class="error">The email address and password entered do not match our records.<br>Perhaps you need to register, click the Register button on the header menu</p>';
-	}
-	} else { // If there was a problem
+			echo '<p class="error">The email address and password entered do not match our records.<br>Perhaps you need to register, click the Register button on the header menu</p>';
+		}
+	} 
+	else 
+	{ // If there was a problem
 		echo '<p class="error">Please try again.</p>';
 	}
 	//mysqli_close($dbcon);
-	} // End of submit conditional
+} // End of submit conditional
 ?>
 <!-- Display the form fields-->
 <!-- Display the form fields-->
@@ -70,7 +82,6 @@ exit(); // Cancel the rest of the script
 <?php include ('includes/login_page.inc'); ?>
 </div>
 <p>&nbsp;</p>
-<p class="cntr"><a href="forgot.php"><b>Forgotten your password?</b></a></p>
 <br>
 </div><!--end content-->
 <?php require '../phtml/legal.php';?>
