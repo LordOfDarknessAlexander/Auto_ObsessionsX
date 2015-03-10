@@ -23,35 +23,51 @@ require 'includes/nav.php';
 <?php
 // This code inserts a record into the users table
 // Has the form been submitted?
+/*function isAlpha($str){
+    //is a singular word, containing only letters(a-z and/or A-Z),
+    //no special characters, whitespace or symbols
+    //echo $str;
+    return preg_match('/[a-z]/i', $str);
+}
+function isWord($str){
+    //is a singular word, containing only letters,
+    //no special characters, whitespace or symbols
+    return preg_match('/[[:word:]]/', $str);
+}
+function isNumber($str){
+    //is string a continuous series of digits
+    //no special characters, letters, whitespace or symbols
+    return preg_match('/[[:digit:]]/', $str);
+}*/
 if($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
 	$errors = array(); // Start an array named errors 
 
 	$stripped = $AO_DB->strip('title');
 	// Check stripped string
-	if(!mb_strlen($stripped, 'utf8') ){
-		$errors[] = 'You forgot to enter your title.';
+	if(mb_strlen($stripped, 'utf8') ){
+		$title = $stripped;
 	}
 	else{
-		$title = $stripped;
+        $errors[] = 'You forgot to enter your title.';
 	}
     
 	$stripped = $AO_DB->strip('fname');
 
-	if(!mb_strlen($stripped, 'utf8') ){
-		$errors[] = 'You forgot to enter your first name.';
+	if(mb_strlen($stripped, 'utf8') ){
+		$fn = $stripped;
 	}
 	else{
-		$fn = $stripped;
+        $errors[] = 'You forgot to enter your first name.';
 	}
 
 	$stripped = $AO_DB->strip('lname');
 
-	if(!mb_strlen($stripped, 'utf8') ){
-		$errors[] = 'You forgot to enter your last name.';
+	if(mb_strlen($stripped, 'utf8') ){
+        $ln = $stripped;
 	}
 	else{
-		$ln = $stripped;
+        $errors[] = 'You forgot to enter your last name.';
 	}
 	//Set the email variable to FALSE
 	$e = FALSE;									
@@ -93,31 +109,39 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 	$stripped = $AO_DB->strip('uname');
 
-	if(!mb_strlen($stripped, 'utf8') ){
-		$errors[] = 'You forgot to enter your username.';
+	if(mb_strlen($stripped, 'utf8') ){
+        $uname = $stripped;
 	}
 	else{
-		$uname = $stripped;
+        $errors[] = 'You forgot to enter your username.';
 	}	
 
 	if(empty($errors)){ 
 		// If there were no errors
 		//Determine whether the email address has already been registered	
-		$q = "SELECT user_id FROM users WHERE email = '$e' ";
-
-		$result = $AO_DB->query($q) ; 	
+		//$users = 'users';
+        //$getUID = $AO_DB->prepare(
+            //"SELECT user_id FROM $users WHERE email = '$e' "
+        //);
+		$result = $AO_DB->query(
+            "SELECT user_id FROM users WHERE email = '$e' "
+        ); 	
 		
         if(mysqli_num_rows($result) == 0){
 			//The mail address was not already registered therefore register the user in the users table
 			//pasCreate::userAccount($userInfo);
-			$q = "INSERT INTO users (user_id, title, fname, lname, email, psword, registration_date, uname) VALUES (' ', '$title', '$fn', '$ln', '$e', SHA1('$p'), NOW(), '$uname' )";		
-
-			$result = $AO_DB->query($q); // Run the query
+			$result = $AO_DB->query("SELECT user_id FROM users WHERE (email ='$e' AND uname = '$uname')");
+            
+			//$result = $AO_DB->query($q); // Run the query
 			
             if($result) 
 			{ // If the query ran OK
                 //user successfully registered, create other database tables
+                
+                //static $getUID = $AO_DB->prepare("SELECT user_id FROM $users WHERE (email = ? AND uname = ?)");
+                
                 $res = $AO_DB->query("SELECT user_id FROM users WHERE (email ='$e' AND uname = '$uname')");
+                
                 if($res){
                     $uid = $res->fetch_assoc()['user_id'];    //return type is string
                     //echo "registered user with id:$uid<br> type:" . gettype($uid);
@@ -126,6 +150,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                             //could not create car sale table
                         //}
                         //else code succeded
+                        header("location: register-thanks.php");
+                        //exit();
                     }
                     else{
                         echo "could not create additional tables for user with id:$uid<br>";
@@ -133,7 +159,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                     $res->close();
                 }
                 else{
-                    //echo "user has no id";"
+                    echo "query failed for user name ($uname)";
                 }
                 //$result->close();
                 //sucess! send email from no-reply@851entertainment.com for user to confirm
@@ -172,9 +198,27 @@ function ep($str){
     //safely echos the entry in $_POST
     if(isset($_POST[$str])){
         //trim removes access whitespace around start and end of entry,
-        //
         echo trim($_POST[$str]);
     }
+}
+function fl($name, $text){
+    //generates an html form label
+    //name:string identifier for the tag
+    //text:string content of the element?>
+<label class='label' for='<?php echo $name;?>'><?php echo $text;?></label><br>
+<?php
+}
+function itb($name, $size, $maxlength){
+    //generates an html input text box
+    //name:string identifier for the tag
+    //size & maxlength, positive integer values?>
+<input id='<?php echo $name;?>' type='text' name='<?php echo $name;?>' size='<?php echo strval($size);?>' maxlength='<?php echo strval($maxlength);?>' value='<?php ep($name);?>'><br>
+<?php
+}
+function flti($name, $text, $size, $maxlength){
+    //form label text input
+    fl($name, $text);
+    itb($name, $size, $maxlength);
 }
 ?>
 <div id='midcol2'>
@@ -190,28 +234,37 @@ function ep($str){
             <option value='Miss'>Miss</option>
             <option value='Undisclosed'>Undisclosed</option>
         </select-->
-		<label class='label' for='title'>Title*</label><br>
+		<!--label class='label' for='title'>Title*</label><br-->
+        <?php fl('title', 'Title*');?>
         <input id='title' type='text' name='title' size='15' maxlength='12' value='<?php ep('title'); ?>'>
 		<br>
-        <label class='label' for='fname'>First Name*</label><br>
-        <input id='fname' type='text' name='fname' size='30' maxlength='30' value='<?php ep('fname'); ?>'>
-		<br>
-        <label class='label' for='lname'>Last Name*</label><br>
-        <input id='lname' type='text' name='lname' size='30' maxlength='40' value='<?php ep('lname');?>'>
-		<br>
-        <label class='label' for='email'>Email Address*</label><br>
-        <input id='email' type='text' name='email' size='30' maxlength='60' value='<?php ep('email');?>'>
-		<br>
-        <label class='label' for='psword1'>Password*</label><br>
-        <input id='psword1' type='password' name='psword1' size='12' maxlength='12' value='<?php ep('psword1');?>'>&nbsp;8 
-		to 12 characters
-		<br><label class='label' for='psword2'>Confirm Password*</label><br>
+        <?php
+        flti('fname', 'First Name*', 30, 30);
+        flti('lname', 'Last Name*', 30, 30);
+        flti('email', 'Email Address*', 30, 60);        
+        fl('psword1', 'Password*');?>        
+        <input id='psword1' type='password' name='psword1' size='12' maxlength='12' value='<?php ep('psword1');?>'>&nbsp;8 to 12 characters<br>
+        <?php fl('psword2', 'Confirm Password*');?>
         <input id='psword2' type='password' name='psword2' size='12' maxlength='12' value='<?php ep('psword2');?>'>
 		<br>
-        <label class='label' for='uname'>User Name*</label><br>
-        <input id='uname' type='text' name='uname' size='12' maxlength='12' value='<?php ep('uname');?>'>&nbsp;6 
-		to 12 characters<br>
+        <?php flti('uname', 'User Name', 12, 12);?>
 		<input id='submit' type='submit' name='submit' value='Register'>
+        <!--label class='label' for='fname'>First Name*</label><br-->
+        <!--input id='fname' type='text' name='fname' size='30' maxlength='30' value='<php ep('fname'); ?>'>
+		<br-->
+        <!--label class='label' for='lname'>Last Name*</label><br-->
+        <!--input id='lname' type='text' name='lname' size='30' maxlength='40' value='<php ep('lname');?>'>
+		<br>
+        <label class='label' for='email'>Email Address*</label><br-->
+        <!--input id='email' type='text' name='email' size='30' maxlength='60' value='<php ep('email');?>'>
+		<br>
+        <label class='label' for='psword1'>Password*</label><br>
+        <br><label class='label' for='psword2'>Confirm Password*</label><br>
+        <label class='label' for='uname'>User Name*</label><br>
+        
+        <input id='uname' type='text' name='uname' size='12' maxlength='12' value='<php ep('uname');?>'>&nbsp;6 
+		to 12 characters<br>
+        -->
 	</form>
 </div>
 </div><!--content-->

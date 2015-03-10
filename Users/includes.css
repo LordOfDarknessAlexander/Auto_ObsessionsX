@@ -1,49 +1,40 @@
 ﻿<php? 
 header("Content-type: text/css; charset: UTF-8");
 ?>
+/*default html tags*/
 *, *:before, *:after {
   box-sizing: border-box;
 }
-body
-{
-  font-family: arial, sans-serif;
-  font-size: 100%;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: default;
-  color:white;
-  width:100%;
-  height: 100%;
-  position:absolute;
-  margin:0%;
-}
-canvas 
-{
-  position: relative;
-  top: 0;
-  left: 0;
-  border: 1px solid black;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  background-size : 100% 100%;
-}
-div#content{
+body{
+    font-family: arial, sans-serif;
+    font-size: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    color:white;
+    width:100%;
+    height: 100%;
     position:absolute;
-    left:15%;
-    top:10%;
-    height:90%;
-    width:70%;
+    margin:0%;
 }
-/*default element stylings for the entire page*/
- h1 
-{
-  color: white;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  margin-left: 10%;
-  position: relative; 
+canvas {
+    position: relative;
+    top: 0;
+    left: 0;
+    border: 1px solid black;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-size : 100% 100%;
+}
+/*Headers*/
+h1 {
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    margin-left: 10%;
+    position: relative; 
 }
 h2 {
     font-size:150%;
@@ -58,7 +49,26 @@ h3 {
     text-align:center;
     position: relative;
 }
-
+table {
+    width:800px;
+    border:1px white solid;
+    border-collapse:collapse;
+    margin-left: -5%;
+    margin-top: 5%;
+    position: relative;
+}
+td {
+    border:1px white solid;
+    padding:1px 0 1px 4px;
+    text-align:left;
+    position: relative;
+}
+form {
+    margin-left:-1%;
+    margin-top: 0%;
+    width:100%;
+    position: relative;
+}
 /*ul {
     position:relative;
     top:40%;
@@ -68,6 +78,15 @@ h3 {
     text-align:center;
     margin:0;
 }*/
+/* set general side button styles */
+li {
+    width:100%;
+    height:60px;
+    list-style-type :none;
+    /*margin-bottom: 1px;*/
+    text-align: center;
+    position: relative;
+}
 div#container {
     position:absolute; 
     width:100%;
@@ -80,6 +99,25 @@ div#container {
     top:0%;
     left:0%;
 }
+div#nav{
+    position:absolute;
+    top:10%;
+    left:0%;
+    width:20%;
+    /*background-color:grey;*/
+}
+div#reg-navigation{
+    /*margin-right: 60%;
+	font-size:medium;
+    width:10%;
+    margin:10% 15px 0 88s%;
+    bottom: 50%;*/
+    position:absolute;
+    top:10%;
+    right:0%;
+    width:15%;
+    /*background-color:grey;*/
+}
 div#nav ul {
     position:abosolute;
     top:0%;
@@ -89,6 +127,48 @@ div#nav ul {
     text-align:center;
     margin:0;
     /*background-color:navy;*/
+}
+#reg-navigation ul{
+    /*margin-right: 60%;*/
+	font-size:medium;
+    width:10%;
+    /*margin:10% 15px 0 88s%;*/
+    bottom: 50%;
+    position: relative;
+}
+/*Page Content*/
+div#content{
+    position:absolute;
+    left:15%;
+    top:10%;
+    height:90%;
+    width:70%;
+}
+#midcol{
+    width:80%;
+    margin:auto;
+    position: abosolute;
+    top: 0%;
+    margin-top: 40%;
+}
+#midcol2{
+    width:80%;
+    margin:auto;
+    position:absolute;
+    top:0%;
+    left:2%;
+}
+#mid-left-col{
+    width:36%;
+    float:left;
+    text-align:left;
+    position: relative;
+}
+#mid-right-col{
+    width:36%;
+    float:right;
+    text-align:left;
+    position: relative;
 }
 #info-col 
 { 
@@ -111,17 +191,7 @@ div#nav ul {
     margin:5px 5px 0 0;
     position: relative;
 }
-
-/* set general side button styles */
-li {
-    width:100%;
-    height:60px;
-    list-style-type :none;
-    /*margin-bottom: 1px;*/
-    text-align: center;
-    position: relative;
-}
-/* set general anchor styles */
+/* setting anchor styles */
 li a,
 div#nav a,
 div#reg-navigation a{
@@ -153,72 +223,6 @@ div#reg-navigation a:active {
     background:#aecbff;
     border: 4px inset #aecbff;
 }
-div#reg-navigation{
-    /*margin-right: 60%;
-	font-size:medium;
-    width:10%;
-    margin:10% 15px 0 88s%;
-    bottom: 50%;*/
-    position:absolute;
-    top:5%;
-    right:0%;
-    width:15%;
-    /*background-color:grey;*/
-}
-#reg-navigation ul{
-    /*margin-right: 60%;*/
-	font-size:medium;
-    width:10%;
-    /*margin:10% 15px 0 88s%;*/
-    bottom: 50%;
-    position: relative;
-}
-#midcol{
-    width:80%;
-    margin:auto;
-    position: abosolute;
-    top: 0%;
-    margin-top: 40%;
-}
-#midcol2{
-    width:80%;
-    margin:auto;
-    position:absolute;
-    top:0%;
-    left:2%;
-}
-#mid-left-col{
-    width:36%;
-    float:left;
-    text-align:left;
-    position: relative;
-}
-#mid-right-col{
-    width:36%;
-    float:right;
-    text-align:left;
-    position: relative;
-}
-table {
-    width:800px;
-    border:1px white solid;
-    border-collapse:collapse;
-    margin-left: -5%;
-    margin-top: 5%;
-    position: relative;
-}
-td {
-    border:1px white solid;
-    padding:1px 0 1px 4px;
-    text-align:left;
-    position: relative;
-}
-form {
-    margin-left:-1%;
-    margin-top: 0%;
-    width:100%;
-    position: relative;
-}
 #footer {
     margin:auto;
     text-align:center;
@@ -246,25 +250,8 @@ p.error {
     margin-right:5px;
     position: relative;
 }
-#submit {
-    margin-left:215px;
-    text-align:center;
-    position: relative;
-}
 span.left {
 	text-align:left;position: relative;
-}  
-div#loginfields{
-    position:absolute;
-    /*background-color:green;*/
-    left:0%;
-}
-div#nav{
-    position:absolute;
-    top:10%;
-    left:0%;
-    width:20%;
-    /*background-color:grey;*/
 }
 p#legal
 {
