@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         echo "email:$e";?><br><?php
         echo "password:$p";?><br><?php
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
-		$q = "SELECT user_id, fname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
+		$q = "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
 		$result = $AO_DB->query($q); 
 		// Check the result:
         
@@ -52,7 +52,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			session_start();
 			$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
-			$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'members.php'; // Ternary operation to set the URL
+			$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'Users/members-page.php'; // Ternary operation to set the URL
 			
             mysqli_free_result($result);
             
