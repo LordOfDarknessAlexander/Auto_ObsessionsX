@@ -1,6 +1,5 @@
 <?php
 require_once '../include/html.php';
-require_once '../include/dbConnect.php';
 html::doctype();
 ?>
 <html lang=en>
@@ -23,7 +22,7 @@ require 'includes/info-col.php';
 // Determine whether the form been submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-//	require ('dbConnect.php');
+require_once '../include/dbConnect.php';
 // Was the email address entered?
 	if (!empty($_POST['email'])) {
 			$e = mysqli_real_escape_string($AO_DB->con, $_POST['email']);
