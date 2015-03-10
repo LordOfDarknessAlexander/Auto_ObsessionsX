@@ -57,7 +57,7 @@ function divAS(){
 }
 <?php divAS();?> li label#infoLabel
 {
-	background-color:grey;
+	background: url('../images/label.png');
 	text-align:center;
 <?php posAbs();?>
 	left:15%;
