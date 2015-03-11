@@ -6,4 +6,3 @@
         <a href='logout.php'>Logout</a><br>
     </div>
 </div>
-
