@@ -150,9 +150,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         if(mysqli_num_rows($result) == 0){
 			//The mail address was not already registered therefore register the user in the users table
 			//pasCreate::userAccount($userInfo);
-			$result = $AO_DB->query("SELECT user_id FROM users WHERE (email ='$e' AND uname = '$uname')");
-            
-			//$result = $AO_DB->query($q); // Run the query
+            $users = 'users';
+			$result = $AO_DB->query(
+                "INSERT INTO $users
+                (user_id, uname, title, fname, lname, car_id, money, tokens, prestige, m_marker, user_level, email, psword, registration_date, confirm)
+                VALUES
+                ('', '$uname', '$title', '$fn', '$ln', 0, 50000, 0,0,0,0, '$e', SHA1('$p'), NOW(), 0)"
+            );	
 			
             if($result) 
 			{ // If the query ran OK
@@ -160,7 +164,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                 
                 //static $getUID = $AO_DB->prepare("SELECT user_id FROM $users WHERE (email = ? AND uname = ?)");
                 
-                $res = $AO_DB->query("SELECT user_id FROM users WHERE (email ='$e' AND uname = '$uname')");
+                $res = $AO_DB->query(
+                    "SELECT user_id FROM $users WHERE (email ='$e' AND uname = '$uname')"
+                );
                 
                 if($res){
                     $uid = $res->fetch_assoc()['user_id'];    //return type is string
@@ -195,7 +201,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 				echo '<p>' . mysqli_error($AO_DB->con) . '<br><br>Query: ' . $q . '</p>';
 			} // End of if ($result)
 			// Include the footer and stop the script
-			include 'includes/footer.php'; 
+            require '../phtml/legal.php';
+            html::footer();
 			exit();
 		} 
 		else{

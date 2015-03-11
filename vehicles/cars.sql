@@ -24,13 +24,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `aoCars`
 --
 CREATE TABLE IF NOT EXISTS `aoCars` (
-    `car_id` int unsigned NOT NULL,
+    `car_id` int unsigned NOT NULL PRIMARY KEY,
     `make` varchar(30) NOT NULL,
     `year` int NOT NULL,
     `model` varchar(50) NOT NULL,
     `price` int unsigned NOT NULL,
-    `info` char(128) NOT NULL,
-    PRIMARY KEY (`car_id`)
+    `info` char(128) NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
 -- Data is added dynamically through php script!

@@ -130,12 +130,13 @@ function getUserCarCount(){
         "SELECT * FROM $uid"
     );
     
-    if($res){    
+    if($res){  
+        $count = $res->num_rows;
         //fetch each entry until there are no more
-        while($row = mysqli_fetch_array($res) ){
-            $count += 1;
-        }
-        mysqli_free_result($res);
+        //while($row = mysqli_fetch_array($res) ){
+            //$count += 1;
+        //}
+        $res->close();
     }
     //else{query failed, no entries in table}
     return $count;
@@ -145,6 +146,22 @@ function getUserCarCount(){
 //}
 //function getAuctionLosses(){
     //returns how many auctions the user has lost
+    //global aoFailedAuctions;
+    //$uid = getUserTableName();
+    //$count = 0;
+    /*
+    $res = $aoCarSalesDB->query(
+        "SELECT * FROM $uid"
+    );
+    
+    if($res){
+        $count = $res->num_rows;
+        //fetch each entry until there are no more
+        //while($row = mysqli_fetch_array($res) ){
+            //$count += 1;
+        //}
+        $res->close();
+    }*/
 //}
 //function getAuctionAvg(){
     //returns aver ratio of wins/losses
@@ -161,12 +178,13 @@ function getUserSalesCount(){
         "SELECT * FROM $uid"
     );
     
-    if($res){    
+    if($res){
+        $count = $res->num_rows;
         //fetch each entry until there are no more
-        while($row = mysqli_fetch_array($res) ){
-            $count += 1;
-        }
-        mysqli_free_result($res);
+        //while($row = mysqli_fetch_array($res) ){
+            //$count += 1;
+        //}
+        $res->close();
     }
     //else{user has no entries in table, count is 0;}
     */
