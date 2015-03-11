@@ -204,7 +204,6 @@ function mainMenu()
 }
 
 //money = 50000;
-// Start the game - reset all variables and entities, spawn ground and water.
 function startGame() 
 {	//initialize the game state
 	context.clearRect(0, 0, canvas.width, canvas.height);
