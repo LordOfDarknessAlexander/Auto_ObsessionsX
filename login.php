@@ -46,8 +46,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		$result = $AO_DB->query($q); 
 		// Check the result:
         
-		if(@mysqli_num_rows($result) != 0) 
-		{	//The user input matched the database record
+		//if(@mysqli_num_rows($result) != 0) 
+		if (@mysqli_num_rows($result) == 1) 
+		{	
+			/*
+			//The user input matched the database record
 			// Start the session, fetch the record and insert the three values in an array
 			session_start();
 			$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -60,7 +63,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
            
             //mysqli_close($dbcon);
             //ob_end_clean(); // Delete the buffer.
-            exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;
+            exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;       */
+			
+			  // Start the session, fetch the record and insert the three values in an array
+            session_start();
+            $_SESSION = mysqli_fetch_array ($result, MYSQLI_ASSOC);
+            $_SESSION['user_level'] = (int) $_SESSION['user_level']; // Ensure the user level is an integer
+            // The login page redirects the user either to the admin page or the users search page
+            // Use a ternary operation to set the URL
+            $url = ($_SESSION['user_level'] === 51) ? 'admin_page.php' : 'members-page.php';
+            header('Location: ' . $url); // The user is directed to the appropriate page
+            mysqli_free_result($result);
+            exit(); // Cancel the rest of the script
 		} 
 		else 
 		{ // No match was made.

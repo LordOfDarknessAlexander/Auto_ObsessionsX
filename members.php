@@ -4,7 +4,8 @@ session_start();
 //secureLogin();
 require 'include/dbConnect.php';
 if (!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
-{  header("Location: login.php");
+{  
+   header("Location: login.php");
    exit();
 }
 require 'include/html.php';

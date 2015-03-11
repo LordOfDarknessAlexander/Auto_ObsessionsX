@@ -1,6 +1,6 @@
 <?php
-require '../include/html.php';
-require '../include/dbConnect.php';
+require 'include/html.php';
+require 'include/dbConnect.php';
 //require 'includes/secure.php';
 session_start();
 //secureLogin();
@@ -36,9 +36,9 @@ html::doctype();
 <body>
 <div id='container'>
 <?php
-require '.Users/includes/nav.php';
-require '.Users/includes/info-col.php';
-require '.Users/my_parse_file.php';
+require 'Users/includes/nav.php';
+require 'Users/includes/info-col.php';
+require 'Users/my_parse_file.php';
 ?>
 	<div id='content'><!-- Start of the member's page content. -->
         <h2>Welcome to the Members' Page 
@@ -99,7 +99,7 @@ else
                 <h3>Special offers to Members only.</h3>
                 <div id='nav'>
                     <ul>
-                    <li><a href='..\index.php' title='Play Game'>Play Game</a></li>
+                    <li><a href='index.php' title='Play Game'>Play Game</a></li>
                     </ul>
                 </div>
                 <br>
