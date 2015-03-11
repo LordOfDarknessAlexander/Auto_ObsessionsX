@@ -9,7 +9,7 @@ html::docType();
 html::charset();
 html::title('Login Page');
 ?>
-    <link rel="stylesheet" type="text/css" href="includes.css">
+    <link rel="stylesheet" type="text/css" href="includes/includes.css">
 </head>
 <body>
 <div id="container">
@@ -49,7 +49,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		//if(@mysqli_num_rows($result) != 0) 
 		if (@mysqli_num_rows($result) == 1) 
 		{	
-			/*
 			//The user input matched the database record
 			// Start the session, fetch the record and insert the three values in an array
 			session_start();
@@ -63,9 +62,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
            
             //mysqli_close($dbcon);
             //ob_end_clean(); // Delete the buffer.
-            exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;       */
+            exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;       
 			
 			  // Start the session, fetch the record and insert the three values in an array
+			  /*
             session_start();
             $_SESSION = mysqli_fetch_array ($result, MYSQLI_ASSOC);
             $_SESSION['user_level'] = (int) $_SESSION['user_level']; // Ensure the user level is an integer
@@ -74,7 +74,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             $url = ($_SESSION['user_level'] === 51) ? 'admin_page.php' : 'members-page.php';
             header('Location: ' . $url); // The user is directed to the appropriate page
             mysqli_free_result($result);
-            exit(); // Cancel the rest of the script
+            exit(); // Cancel the rest of the script*/
 		} 
 		else 
 		{ // No match was made.
