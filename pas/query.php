@@ -265,13 +265,18 @@ if(isset($_GET) && !empty($_GET) ){
     //args being passed vai the url
     $op = isset($_GET['op']) ? $_GET['op'] : '';
     //regex match, must contain no whitespace, numbers or special characters!
-    //preg_match();
-    if($op == 'asc'){
-        getAuctionCars();
-        exit();
-    }
-    //elseif($op == '') preform other operations
-    //else not supported
+    //if(preg_match('/[[:alpha;]]/', $op) ){
+        if($op == 'asc'){
+            getAuctionCars();
+            exit();
+        }
+        //elseif($op == 'ucs'){
+            //getUserCarSales();
+            //exit();
+        //}
+        //elseif($op == '') preform other operations
+        //else not supported
+    //}
     echo "operation:$op, script calling exit()";
     exit();
 }
@@ -295,9 +300,13 @@ if(isset($_POST) && !empty($_POST) ){
                 echo json_encode(hasCar($carID) );
                 exit();
             }
+            //elseif($op == 'hsc'){
+                //echo json_encode(hasSoldCar($carID) );
+                //exit();
+            //}
             //elseif($op == '') switch to other calls
             //else not supported
-            echo "usupported operation:$op, script calling exit()";
+            echo "unsupported operation:$op, script calling exit()";
             exit();
         }
         //else no GET args, simply return data of car with id

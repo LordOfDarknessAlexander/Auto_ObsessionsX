@@ -23,21 +23,26 @@ require 'includes/nav.php';
 <?php
 // This code inserts a record into the users table
 // Has the form been submitted?
-/*function isAlpha($str){
+function isAlpha($str){
     //is a singular word, containing only letters(a-z and/or A-Z),
     //no special characters, whitespace or symbols
-    //echo $str;
-    return preg_match('/[a-z]/i', $str);
-}
+    //+ matches 0 or more repetitions
+    return preg_match('/^[[:alpha:]]+$/', $str);
+}/*
 function isWord($str){
     //is a singular word, containing only letters,
     //no special characters, whitespace or symbols
-    return preg_match('/[[:word:]]/', $str);
+    return preg_match('/^[[:word:]]+$/', $str);
 }
 function isNumber($str){
     //is string a continuous series of digits
     //no special characters, letters, whitespace or symbols
-    return preg_match('/[[:digit:]]/', $str);
+    return preg_match('/^[[:digit:]]+/$', $str);
+}
+function isPassword($str){
+    //validates a series of {8-12} characters of digits and/or letters
+    //no special characters, whitespace or symbols
+    return preg_match(''/^\w{8,12}$/', $str);
 }*/
 if($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -54,21 +59,31 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     
 	$stripped = $AO_DB->strip('fname');
 
-	if(mb_strlen($stripped, 'utf8') ){
-		$fn = $stripped;
-	}
-	else{
-        $errors[] = 'You forgot to enter your first name.';
-	}
+    if(isAlpha($stripped) ){
+        if(mb_strlen($stripped, 'utf8') ){
+            $fn = $stripped;
+        }
+        else{
+            $errors[] = 'You forgot to enter your first name.';
+        }
+    }
+    else{
+        $errors[] = 'First Name must not contain numbers, whitespace or special characters.';
+    }
 
 	$stripped = $AO_DB->strip('lname');
 
-	if(mb_strlen($stripped, 'utf8') ){
-        $ln = $stripped;
-	}
-	else{
-        $errors[] = 'You forgot to enter your last name.';
-	}
+    if(isAlpha($stripped) ){
+        if(mb_strlen($stripped, 'utf8') ){
+            $ln = $stripped;
+        }
+        else{
+            $errors[] = 'You forgot to enter your last name.';
+        }
+    }
+    else{
+        $errors[] = 'Last Name must not contain numbers, whitespace or special characters.';
+    }
 	//Set the email variable to FALSE
 	$e = FALSE;									
 	// Check that an email address has been entered				
@@ -109,12 +124,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 	$stripped = $AO_DB->strip('uname');
 
-	if(mb_strlen($stripped, 'utf8') ){
-        $uname = $stripped;
-	}
-	else{
-        $errors[] = 'You forgot to enter your username.';
-	}	
+    if(isAlpha($stripped) ){
+        if(mb_strlen($stripped, 'utf8') ){
+            $uname = $stripped;
+        }
+        else{
+            $errors[] = 'Invalid username.';
+        }
+    }
+    else{
+        $errors[] = 'User Name must not contain numbers, whitespace or special characters.';
+    }
 
 	if(empty($errors)){ 
 		// If there were no errors

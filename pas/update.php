@@ -134,6 +134,9 @@ if(isset($_POST) && !empty($_POST) ){
         if(isset($_GET) && !empty($_GET) ){
             //args being passed via the url
             if(isset($_GET['op']) ){
+                //$op = $_GET['op'];
+                
+                //if(preg_match('/[[:alpha;]]/', $op)){
                 if($_GET['op'] == 'insert'){
                     //inserts a car with carID from the vehicle database into the
                     //logged in user's table in aoUsersDB
