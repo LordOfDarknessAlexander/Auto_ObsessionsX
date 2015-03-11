@@ -226,7 +226,7 @@ function startGame()
 	// Fill with gradient
 	context.fillStyle = gradient;
 	//temp
-	userStats.money += 225000;
+	//userStats.money += 225000;
 	setStatBar();
 	switchStates();
 	
