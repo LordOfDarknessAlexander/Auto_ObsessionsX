@@ -11,34 +11,42 @@ require_once 'meta.php';
 class pasGet{
     private static
         $_allCars,
-		 $_login,
+		// $_login,
         //$_allCarData,
-        $_allAuctionsCID;
+        $_allAuctionsCID,
         //$_allUsers ,
         //$_allUIDs,
-  /*  public class user{
+		
+    /*public class user{
         private static
-            $_curCar = 'car_id',
-            $_cash = 'money',
-            $_tokens = 'tokens',
-            $_prest = 'prestige',
-            $_markers = 'm_marker',
+            $_curCar,
+            $_cash,
+            $_tokens,
+            $_prest,
+            $_markers,
             $_info,
             $_stats,
-            $_login;
+            $_login,
         public static init(){}
-    }*/
-		public static function userLogin(){
+    }
+		*/
+	}/*
+	public static function init ()
+	{
 		global $finalPost;
-			//$finalPost users
+		
 		$finalPost = 'finalPost';	
 		$e = 'email';
 		$p = 'psword';
+		
+		
+			//$finalPost users
+		
 		self::$_login =  $AO_DB->con->prepare(
             "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
         );
 	}
-	
+	*/
     public static function init(){
         global $AO_DB;
         
@@ -363,6 +371,8 @@ class pasGet{
         
         return $acCount != 0 ? getTotalUserCarCount() / $acCount : 0.0;
     }
+	
+	
 }
 pasGet::init();
 ?>
