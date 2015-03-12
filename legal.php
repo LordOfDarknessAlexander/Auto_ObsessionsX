@@ -3,6 +3,7 @@
 //displays conditiponally based on argument passed in url
 require_once 'include/html.php';
 require 'ao.php';
+require_once 're.php';
 //require_once './secure.php';
 //secureLogin();    //this allows for a single call to secure login across multiple pages!
 $AO_NAME = 'Auto Obsessions';
@@ -12,10 +13,10 @@ function subheader($title){
 <h2><?php echo $title;?></h2>
 <?php
 }//match against regex, should only contain lowercase letters
-$page = $_GET['page'];
+$page = (isset($_GET['page']) && isAlpha($_GET['page']) ) ? $_GET['page'] : '';
 //this conditional means only passing specific params to the url
 //will display a functional page
-if(is_string($page) && $page == 'terms'){
+if($page == 'terms'){
     html::simpleHead('Terms of Service');
 ?>
 <h1><?php echo $AO_NAME;?> Terms of Service</h1>

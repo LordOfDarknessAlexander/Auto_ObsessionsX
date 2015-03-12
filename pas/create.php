@@ -4,6 +4,7 @@
 header('Access-Control-Allow-Origin: *');
 //
 require_once 'meta.php';
+//require_once '../re.php';
 //require_once '../vehicles/vehicle.php';
 require_once '../include/dbConnect.php';  //sql database connection
 //require_once '../include/secure.php';
@@ -88,8 +89,8 @@ class pasCreate
                 interior $uint,
                 docs $uint,
                 repairs $uint,
-                start date NOT NULL,
-                end date,
+                start datetime NOT NULL,
+                end datetime,
                 time float  //0 if end date is not null, else the time left on the auction
             )$defaultEngine $defaultCharset"
         );*/
@@ -113,7 +114,7 @@ class pasCreate
         $defaultCharset = 'DEFAULT CHARSET = latin1';
         $defaultEngine = 'ENGINE = InnoDB';
         
-        /*$res = $aoAUctionLossDB->query(
+        /*$res = $aoAuctionLossDB->query(
            "CREATE TABLE IF NOT EXISTS $tableName(
                 car_id $uint NOT NULL PRIMARY KEY
             )$defaultEngine $defaultCharset"
@@ -149,7 +150,8 @@ $q = '';
 
 /*if(isset($_GET) && !empty($_GET) ){
     //args being passed vai the url
-    if(isset($_GET['op']) && $_GET['op'] == 'asc'){
+    $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
+    if($op == 'asc'){
         getAuctionCars();
         exit();
     }
@@ -163,6 +165,7 @@ if(isset($_POST) && !empty($_POST) ){
         //switch the operation besed on value passed in url
         if(isset($_GET) && !empty($_GET) ){
             //args being passed via the url
+            //$op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
             if(isset($_GET['op']) ){
                 /*if($_GET['op'] == 'insert'){
                     //inserts a car with carID from the vehicle database into the

@@ -10,32 +10,44 @@ require_once 'meta.php';
 //
 class pasGet{
     private static
-        //$_allCars,
+        $_allCars,
         //$_allCarData,
         $_allAuctionsCID;
         //$_allUsers ,
         //$_allUIDs,
-        //$_userCar,
-        //$_userCash,
-        //$_userInfo,
-        //$_userStats,
-        //$_userLogin,
+    //public class user{
+        //private static
+            //$_curCar,
+            //$_cash,
+            //$_tokens,
+            //$_prest,
+            //$_markers,
+            //$_info,
+            //$_stats,
+            //$_login;
+        //public static init(){}
+    //}
     public static function init(){
         global $AO_DB;
         
         $aoCars = 'aoCars';
-        //$UID = 'user_id',
+        $UID = 'user_id';
         $CID = 'car_id';
-
-        //self::$_allCars = $AO_DB->con->prepare(
-            //"SELECT * FROM $aoCars"
-        //);
+        //
+        //AO_DB aoCars
+        //
+        self::$_allCars = $AO_DB->con->prepare(
+            "SELECT * FROM $aoCars" //select all data, from all rows
+        );
         //self::$_allCarData = $AO_DB->con->prepare(
             //"SELECT $CID, price FROM $aoCars"
         //);
         self::$_allAuctionsCID = $AO_DB->con->prepare(
-            "SELECT $CID FROM $aoCars"
+            "SELECT $CID FROM $aoCars"  //select the car id from each row
         );
+        //
+        //$AO_DB users
+        //
         //self::$_allUsers = $AO_DB->con->prepare(
             //"SELECT * FROM $users"    //returns an array of all user data
         //);
@@ -43,44 +55,67 @@ class pasGet{
             //"SELECT $UID FROM $users"  //returns an array of all user id's
         //);
         //self::$_userCar = $AO_DB->con->prepare(
-            //"SELECT $CID FROM $users WHERE user_id = ?"     //returns an array of all user id's
+            //"SELECT $CID FROM $users WHERE $UID = ?"     //returns an array of all user id's
         //);
         //self::$_userCash = $AO_DB->con->prepare(
-            //"SELECT money FROM $users WHERE user_id = ?"
+            //"SELECT money FROM $users WHERE $UID = ?"
+        //);
+        //self::$_userCash = $AO_DB->con->prepare(
+            //"SELECT tokens FROM $users WHERE $UID = ?"
+        //);
+        //self::$_userCash = $AO_DB->con->prepare(
+            //"SELECT prestige FROM $users WHERE $UID = ?"
+        //);
+        //self::$_userCash = $AO_DB->con->prepare(
+            //"SELECT m_marker FROM $users WHERE $UID = ?"
         //);
         //self::$_userInfo = $AO_DB->con->prepare(
-            //"SELECT fname, lname, uname, user_level FROM $users WHERE user_id = ?"
+            //"SELECT fname, lname, uname, user_level FROM $users WHERE $UID = ?"
         //);
         //self::$_userStats = $AO_DB->con->prepare(
-            //"SELECT money, tokens, prestige, m_marker FROM $users WHERE user_id = ?"
+            //"SELECT money, tokens, prestige, m_marker FROM $users WHERE $UID = ?"
         //);   
         //self::$_userLogin = $AO_DB->con->prepare(
             //"SELECT $UID, user_level FROM $users WHERE (email ='?' AND uname = '?')"
         //);
     }
     public static function allCarIDs(){
-        if(self::$_allAuctionsCID){
-            //if(pasGet::allAuctionsCID->execute() ){
-                //$res = pasGet::allAuctionsCID->get_result();
-                //if(!$res){
-                    //echo error! no result
-                    //exit();
+        global $AO_DB;
+        /*if(self::$_allAuctionsCID){
+            if(pasGet::$_allAuctionsCID->execute() ){
+                $res = pasGet::$_allAuctionsCID->get_result();  //only available when using mysqlnd in the site's webspace
+                //pasGet::$_allAuctionsCID->bind_result($res);
+                //pasGet::$_allAuctionsCID->fetch();
+                
+                if(!$res){
+                    echo 'error! no result!';
+                    return array();
+                }
+                //$ret = array();
+                //while($row = $res->fetch();){
+                    //$ret[] = $row;
                 //}
-                //$ret = $res->fetch_all(MYSQLI_ASSOC); //returns all rows(and their columns) as an associative array
-                //$res->close();
-                //return $ret;
-            //}
-            //echo error! execute failed
+                $ret = $res->fetch_all(MYSQLI_ASSOC); //returns all rows(and their columns) as an associative array
+                $res->close();
+                return $ret;
+            }
+            echo 'error! execute failed';
             return array();
-        }
+        }*/
         //else bind failed,
         //default to regular query
-        //$res = $aoUsersDB->query(
-            //"SELECT car_id FROM $userID"
-        //);
-        //if($res){
-            //$res->close();
-        //}
+        $aoCars = 'aoCars';
+        $res = $AO_DB->query(
+            "SELECT car_id FROM $aoCars"
+        );
+        if($res){
+            $ret = array();
+            while($row = $res->fetch_assoc()){
+                $ret[] = $row;
+            }            
+            $res->close();
+            return $ret;
+        }
         return array();
     }
     public static function currentCar(){
@@ -125,22 +160,26 @@ class pasGet{
         //returning them as a JSON array
         global $AO_DB;
         $aoCars = 'aoCars';
+        $CID = 'car_id';
         $cars = array();
+       
+        $res = pasGet::AllCarIDs(); //returns an array, containing an array for each row/car entry
         
-        $res = $AO_DB->query(
-            "SELECT * FROM $aoCars"
-        );
-        //$res = pasGet::AllCarIDs();
-        //if(!empty($res)){
-            //foreach($res as $cid){
-                //$cars[] = array(
-                    //'carID' => $carID,
-                    //'hasCar' => hasCar($carID)   //does user have this car?
+        if(!empty($res)){
+            foreach($res as $row){
+                $cid = $row[$CID];
+                $cars[] = array(
+                    'carID' => $cid,
+                    'hasCar' => hasCar($cid)   //does user have this car?
                     //'hasLostCar' => hasLostCar($carID)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
-                //);
-            //}
-        //}
+                );
+            }
+        }
+        /*$res = $AO_DB->query(
+            "SELECT * FROM $aoCars"
+        );
+        
         if($res){        
             while($row = mysqli_fetch_array($res) ){
                 $carID = intval($row['car_id']);
@@ -155,7 +194,7 @@ class pasGet{
         }
         else{   //The no entries in table
             //echo "<p class='error'>User: has no entries in database</p>";
-        }
+        }*/
         echo json_encode($cars);
     }
     public static function auctionCarsCount(){

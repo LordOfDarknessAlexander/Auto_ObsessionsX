@@ -5,6 +5,7 @@
 //used by javascript ajax requests
 //
 require_once 'get.php';
+require_once '../re.php';
 //
 function echoUserCars(){
     //selects all vehicles the user owns, returning it as a JSON array
@@ -19,7 +20,7 @@ function echoUserCars(){
 
     if($res){
         while($row = mysqli_fetch_array($res) ){
-            //insert an new array repressenting a car at the end of $cars
+            //insert an new array representing a car at the end of $cars
             $cars[] = array(
                 'carID' => intval($row['car_id']),
                 'drivetrain' => intval($row['drivetrain']),
@@ -79,20 +80,19 @@ function getUserSoldCars(){
 //exit();
 if(isset($_GET) && !empty($_GET) ){
     //args being passed vai the url
-    $op = isset($_GET['op']) ? $_GET['op'] : '';
     //regex match, must contain no whitespace, numbers or special characters!
-    //if(preg_match('/[[:alpha;]]/', $op) ){
-        if($op == 'asc'){
-            pasGet::auctionCars();
-            exit();
-        }
-        //elseif($op == 'ucs'){
-            //pasGet::userCarSales();
-            //exit();
-        //}
-        //elseif($op == '') preform other operations
-        //else not supported
+    $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
+    
+    if($op == 'asc'){
+        pasGet::auctionCars();
+        exit();
+    }
+    //elseif($op == 'ucs'){
+        //pasGet::userCarSales();
+        //exit();
     //}
+    //elseif($op == '') preform other operations
+    //else not supported
     echo "operation:$op, script calling exit()";
     exit();
 }
@@ -100,18 +100,21 @@ if(isset($_GET) && !empty($_GET) ){
 //echo '_GET not set, checking $_POST';
 //exit();
 if(isset($_POST) && !empty($_POST) ){
-    //echo 'post set';
+    //echo 'post set!';
+    //echo json_encode($_POST);
     //exit();    
     if(isset($_POST['carID'])){
         $carID = $_POST['carID'];
         //validate value, must be an int!
         //echo json_encode($carID);
+        //access other post vars!
+        //
         //switch the operation besed on value passed in url
+        //
         if(isset($_GET) && !empty($_GET) ){
             //args being passed via the url
-            $op = isset($_GET['op']) ? $_GET['op'] : '';
-            //match $op against RE containing one or more letters, only. No whitespace or numbers
-            //$op = preg_match('[:alpha;]+', $_GET['op']);
+            $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
+
             if($op == 'hasCar'){
                 //echo '{"hasCar": ' . strval(false) . '}';
                 echo json_encode(hasCar($carID) );
@@ -141,7 +144,7 @@ if(isset($_POST) && !empty($_POST) ){
         exit();
     }
     //other post vars
-    echo 'other post vars' . json_encode($_POST);
+    echo 'other post vars';// . json_encode($_POST);
     exit();
 }
 else{
@@ -150,6 +153,6 @@ else{
     echoUserCars();
     exit();
 }
-echo 'WIN';
+echo 'fail';
 exit();
 ?>

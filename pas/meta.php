@@ -26,7 +26,7 @@ function hasCar($id){
     global $aoUsersDB;
     
     $ret = false;
-    $tableName = 'user' . strval(0);    //$_SESSION['userID'];
+    $tableName = getUserTableName();
    
     $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
     
@@ -52,7 +52,7 @@ function sellCar($cid, $price){
     //global $aoCarSalesDB;
     
     $ret = false;
-    $tableName = 'user' . strval(0);    //$_SESSION['userID'];
+    $tableName = getUserTableName();
    
     $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $cid");
     
@@ -81,6 +81,7 @@ function getCarFromID($carID){
     global $AO_DB;
     $aoCars = 'aoCars';
     //prepare!
+    //$res = pasGet::allCarIDs();
     $res = $AO_DB->query(
         "SELECT * FROM $aoCars WHERE car_id = $carID"
     );

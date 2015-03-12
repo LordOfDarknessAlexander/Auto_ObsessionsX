@@ -131,7 +131,10 @@ class pasRemove
         return ret;
     }
 }
-
+/*if(isset($_GET) && !empty($_GET) ){
+    //args being passed via the url
+    //$op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
+//}
 if(isset($_POST) && !empty($_POST) ){
     if(isset($_POST['carID'])){
         $carID = $_POST['carID'];
@@ -141,46 +144,45 @@ if(isset($_POST) && !empty($_POST) ){
         //switch the operation besed on value passed in url
         /*if(isset($_GET) && !empty($_GET) ){
             //args being passed via the url
-            if(isset($_GET['op']) ){
-                if($_GET['op'] == 'insert'){
-                    //inserts a car with carID from the vehicle database into the
-                    //logged in user's table in aoUsersDB
-                    $hasCar = hasCar($carID);
-                    
-                    if($hasCar){
-                        //user has already bought this car, error!
-                    }
-                    else{
-                        $tableName = 'user' . strval(0);    //$_SESSION['userID'];
-                        $res = $aoUsersDB->query(
-                            "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
-                            //if entry exists
-                        );
-                        
-                        echo json_encode($res);
-                    }
+            $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
+            if($op == 'insert'){
+                //inserts a car with carID from the vehicle database into the
+                //logged in user's table in aoUsersDB
+                $hasCar = hasCar($carID);
+                
+                if($hasCar){
+                    //user has already bought this car, error!
                 }
-                elseif($_GET['op'] == 'update'){
-                    //inserts a car with carID from the vehicle database into the
-                    //logged in user's table in aoUsersDB
-                    $dt = intval($_POST['dt']);
-                    $body = intval($_POST['body']);
-                    $inter = intval($_POST['interior']);
-                    $docs = intval($_POST['docs']);
-                    
-                    $rep = intval($_POST['repairs']);
-                    
+                else{
                     $tableName = 'user' . strval(0);    //$_SESSION['userID'];
                     $res = $aoUsersDB->query(
-                        "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
+                        "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
+                        //if entry exists
                     );
                     
                     echo json_encode($res);
-                    //}
                 }
-                //else switch to other calls
-                exit();
             }
+            elseif($_GET['op'] == 'update'){
+                //inserts a car with carID from the vehicle database into the
+                //logged in user's table in aoUsersDB
+                $dt = intval($_POST['dt']);
+                $body = intval($_POST['body']);
+                $inter = intval($_POST['interior']);
+                $docs = intval($_POST['docs']);
+                
+                $rep = intval($_POST['repairs']);
+                
+                $tableName = 'user' . strval(0);    //$_SESSION['userID'];
+                $res = $aoUsersDB->query(
+                    "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
+                );
+                
+                echo json_encode($res);
+                //}
+            }
+            //else switch to other calls
+            exit();
         }
         //else no GET args, simply return data of car with id
         */
