@@ -28,6 +28,17 @@ class pasGet{
             $_login;
         public static init(){}
     }*/
+		public static function userLogin(){
+		global $finalPost;
+			//$finalPost users
+		$finalPost = 'finalPost';	
+		$e = 'email';
+		$p = 'psword';
+		self::$_login =  $AO_DB->con->prepare(
+            "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
+        );
+	}
+	
     public static function init(){
         global $AO_DB;
         
@@ -84,15 +95,7 @@ class pasGet{
         //);
     }
 	
-	public static function userLogin(){
-		global $finalPost;
-			//$finalPost users
-		$e = 'email';
-		$p = 'psword';
-		self::$_login =  $AO_DB->con->prepare(
-            "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
-        );
-	}
+
     public static function allCarIDs(){
         global $AO_DB;
         /*if(self::$_allAuctionsCID){
