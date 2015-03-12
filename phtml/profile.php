@@ -1,15 +1,18 @@
+<?php
+//require_once '../pas/get.php';
+?>
 <div id='profile'>
     <button id='backBtn'>Back</button>
     <!---->
     <div id='userStats'>
 <h2>Purchasing</h2>
 <hr>
-cars currently owned:<label></label><br>
-total cars purcahsed:<label></label><br>
-total upgrades purcahsed:<label></label><br>
+cars currently owned:<p><?php //echo pasGet::userCarCount();?></p><br>
+total cars purchased:<label></label><br>
+total upgrades purchased:<label></label><br>
 <h2>Sales</h2>
 <hr>
-total cars sold:<label></label><br>
+total cars sold:<label><?php //echo pasGet::userSaleCount();?></label><br>
 <h2>Auctions</h2>
 <hr>
 Auction wins:<label id='aWins'></label><br>

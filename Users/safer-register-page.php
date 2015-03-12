@@ -42,7 +42,7 @@ function isNumber($str){
 function isPassword($str){
     //validates a series of {8-12} characters of digits and/or letters
     //no special characters, whitespace or symbols
-    return preg_match(''/^\w{8,12}$/', $str);
+    return preg_match('/^\w{8,12}$/', $str);
 }*/
 if($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -151,6 +151,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			//The mail address was not already registered therefore register the user in the users table
 			//pasCreate::userAccount($userInfo);
             $users = 'users';
+            //$addNewUser = $AO_DB->con->prepare();
 			$result = $AO_DB->query(
                 "INSERT INTO $users
                 (user_id, uname, title, fname, lname, car_id, money, tokens, prestige, m_marker, user_level, email, psword, registration_date, confirm)
@@ -162,7 +163,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			{ // If the query ran OK
                 //user successfully registered, create other database tables
                 
-                //static $getUID = $AO_DB->prepare("SELECT user_id FROM $users WHERE (email = ? AND uname = ?)");
+                //res = pasGet::userLogin($e, $uname);
                 
                 $res = $AO_DB->query(
                     "SELECT user_id FROM $users WHERE (email ='$e' AND uname = '$uname')"

@@ -23,6 +23,7 @@ html::title('Login Page');
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {	// Validate the email address:
 	if(!empty($_POST['email'])){
+        //isEmail()
         $e = mysqli_real_escape_string($AO_DB->con, $_POST['email']);
 	} 
 	else{
@@ -31,6 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	}
 	// Validate the password:
 	if(!empty($_POST['psword'])){
+        //isPassword
         $p = mysqli_real_escape_string($AO_DB->con, $_POST['psword']);
 	}
 	else{
@@ -43,7 +45,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         echo "password:$p";?><br><?php
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
 		$q = "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
-		$result = $AO_DB->query($q); 
+        //$res = pasGet::userLogin($e, $uname);
+        //if(!empty($res)){
+            //$_SESSION = $res;
+        //}
+		$result = $AO_DB->query($q);
 		// Check the result:
         
 		//if(@mysqli_num_rows($result) != 0) 

@@ -44,9 +44,11 @@ class pasRemove
             //else bind param failed
         //}
         //else preform regular query fallback
-        //return $AO_DB->query(
+        //$ret = $AO_DB->query(
             //"DELETE * FROM $users WHERE user_id=$userID"
         //);
+        ////ret->close()?
+        //return ($AO_DB->con->affected_rows != 0) ? true : false;
     }
     public static function userGarageTable($userID){
         //drops the table of user with id userIDfrom aoUsersDB
