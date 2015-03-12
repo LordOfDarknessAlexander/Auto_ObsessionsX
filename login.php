@@ -65,7 +65,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			session_start();
 			$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
-			$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'Users/members-page.php'; // Ternary operation to set the URL
+			//$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'Users/members-page.php'; // Ternary operation to set the URL
+			$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'index.php' ; 
 			
             mysqli_free_result($result);
             
