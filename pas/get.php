@@ -15,24 +15,32 @@ class pasGet{
         $_allAuctionsCID;
         //$_allUsers ,
         //$_allUIDs,
-    //public class user{
-        //private static
-            //$_curCar,
-            //$_cash,
-            //$_tokens,
-            //$_prest,
-            //$_markers,
-            //$_info,
-            //$_stats,
-            //$_login;
-        //public static init(){}
-    //}
+  /*  public class user{
+        private static
+            $_curCar = 'car_id',
+            $_cash = 'money',
+            $_tokens = 'tokens',
+            $_prest = 'prestige',
+            $_markers = 'm_marker',
+            $_info,
+            $_stats,
+            $_login;
+        public static init(){}
+    }*/
     public static function init(){
         global $AO_DB;
         
         $aoCars = 'aoCars';
         $UID = 'user_id';
         $CID = 'car_id';
+		$e = 'email';
+		$p = 'psword';
+		
+		//$finalPost users
+		
+		self::$_login =  $AO_DB->con->prepare(
+            "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
+        );
         //
         //AO_DB aoCars
         //

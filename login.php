@@ -1,6 +1,7 @@
 <?php
 require_once 'include/html.php';
 require_once 'include/dbConnect.php';
+require_once 'pas/get.php';
 html::docType();
 ?>
 <html lang=en>
@@ -44,12 +45,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         echo "email:$e";?><br><?php
         echo "password:$p";?><br><?php
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
-		$q = "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
-        //$res = pasGet::userLogin($e, $uname);
-        //if(!empty($res)){
-            //$_SESSION = $res;
-        //}
-		$result = $AO_DB->query($q);
+		//$q = "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
+        $res = pasGet::userLogin($e, $uname);
+        if(!empty($res))
+		{
+            $_SESSION = $res;
+        }
+		//$result = $AO_DB->query($q);
 		// Check the result:
         
 		//if(@mysqli_num_rows($result) != 0) 
