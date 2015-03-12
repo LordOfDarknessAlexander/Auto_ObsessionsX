@@ -57,6 +57,7 @@ class dbConnect
     }
 }
 $AO_DB = new dbConnect();    //main database connection
-$aoUsersDB = new dbConnect('aoUsersDB');    //main database connection
-$aoCarSalesDB = new dbConnect('aoCarSalesDB');
+$aoUsersDB = new dbConnect('aoUsersDB');    //user database
+$aoCarSalesDB = new dbConnect('aoCarSalesDB');  //user sales
+//$aoAuctionLossDB = new dbConnect('aoAuctionLossDB');  //auctions the user lost
 ?>

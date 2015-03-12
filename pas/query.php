@@ -9,22 +9,36 @@ require_once 'meta.php';  //sql database connection
 function getCurrentCar(){
     //returns the user's currently selected vehicle
     //global $AO_DB;
+    //global $aoUsersDB;
     /*$id = strval(0);  //$_SESSION['user_id'];
-    $users = getUserTableName();
+    $users = 'users';
     
-    $res = $AO_DB->query("SELECT curCarID FROM $users WHERE user_id = $id");
+    $result = $AO_DB->query("SELECT car_id FROM $users WHERE user_id = $id");
     
-    if($res){
+    if($result){
         //user has car
-        //$ret = mysqli_num_rows($res) != 0 ? true : false;
+        $cid = intval($res->fetch_assoc()['car_id']);
+        
+        if($cid != 0){
+            $tableName = getUserTableName();
+            $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $cid");
+            if($res){
+                $ret = Vehicle::fromArray($res->fetch_assoc() );
+                $res->close();
+                return $ret;
+            }        
+            $result->close();
+        }
+        else{   //user does not have a car selected
+            return null;
+        }
     }
     else{
         //query failed, user has no entry in database
-        ret = 0;
+        //echo sql error
+        return null;
     }
-    mysqli_free_result($res);
-    
-    return $ret;*/
+    return null;
 }
 function getAuctionCars(){
     //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
@@ -74,12 +88,13 @@ function getAuctionCarsCount(){
             "SELECT * FROM $aoCars"
         );
         
-        if($res){    
+        if($res){
             //fetch each entry until there are no more
-            while($row = mysqli_fetch_array($res) ){
-                $count += 1;
-            }
-            mysqli_free_result($res);
+            $count = $res->num_rows;
+            //while($row = mysqli_fetch_array($res) ){
+                //$count += 1;
+            //}
+            $res->close();
         }
         else{   //The vehicle is already registered
             //echo "<p class='error'>User: has no entries in database</p>";

@@ -19,7 +19,8 @@ class pasCreate
         $aoUsers = 'users';
         //get validated and sanitized form data
         //$addUser = $AO_DB->prepare(
-           //"INSERT INTO $aoUsers (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
+           //"INSERT INTO $aoUsers
+           //(user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
             //(?, ?, ?, ?, ?, ?, NOW(), 0, 50000.00, 0, 0, 0, 0, 0)"
         //);
         
@@ -103,13 +104,40 @@ class pasCreate
         
         return false;
     }
+    public static function auctionLossTable(){
+        //creates an empty table in aoAuctionLossDB
+        //global $aoAuctionLossDB;
+        //$uid = $_SESSION['userID'];
+        $tableName = getUserTableName();
+        $uint = 'int unsigned';
+        $defaultCharset = 'DEFAULT CHARSET = latin1';
+        $defaultEngine = 'ENGINE = InnoDB';
+        
+        /*$res = $aoAUctionLossDB->query(
+           "CREATE TABLE IF NOT EXISTS $tableName(
+                car_id $uint NOT NULL PRIMARY KEY
+            )$defaultEngine $defaultCharset"
+        );*/
+         
+        //if($res){   //returns true if execute preformed successfully, false on failure
+            //return true;
+        //}
+        //else false, output error
+        //$erno = $aoAuctionLossDB->errno;
+        //$err = $aoCarSalesDB->error;
+        //echo "pasCreate::carSalesTable($userID), failed:($erno), reason: $err";
+        
+        return false;
+    }
     function userAccount(){
         //create entry in finalpost
         //if(pasCreate::userEntry($userID) ){
             //get userID from final post for the 
             //if(pasCreae::userTable() {
                 //if(pasCreate::userSalesTable() ){
-                    //return true;
+                    //if(pasCreate::auctionLossTable() ){
+                        //return true;
+                    //}
                 //}
             //}
         //}
