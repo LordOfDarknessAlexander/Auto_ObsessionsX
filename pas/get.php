@@ -11,6 +11,7 @@ require_once 'meta.php';
 class pasGet{
     private static
         $_allCars,
+		 $_login,
         //$_allCarData,
         $_allAuctionsCID;
         //$_allUsers ,
@@ -33,14 +34,9 @@ class pasGet{
         $aoCars = 'aoCars';
         $UID = 'user_id';
         $CID = 'car_id';
-		$e = 'email';
-		$p = 'psword';
 		
-		//$finalPost users
 		
-		self::$_login =  $AO_DB->con->prepare(
-            "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
-        );
+	
         //
         //AO_DB aoCars
         //
@@ -87,6 +83,16 @@ class pasGet{
             //"SELECT $UID, user_level FROM $users WHERE (email ='?' AND uname = '?')"
         //);
     }
+	
+	public static function userLogin(){
+		global $finalPost;
+			//$finalPost users
+		$e = 'email';
+		$p = 'psword';
+		self::$_login =  $AO_DB->con->prepare(
+            "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
+        );
+	}
     public static function allCarIDs(){
         global $AO_DB;
         /*if(self::$_allAuctionsCID){
