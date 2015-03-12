@@ -13,7 +13,7 @@ class pasGet{
         $_allCars,
 		// $_login,
         //$_allCarData,
-        $_allAuctionsCID,
+        $_allAuctionsCID;
         //$_allUsers ,
         //$_allUIDs,
 		
@@ -30,7 +30,7 @@ class pasGet{
         public static init(){}
     }
 		*/
-	}/*
+	/*
 	public static function init ()
 	{
 		global $finalPost;
