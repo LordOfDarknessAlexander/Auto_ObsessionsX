@@ -16,8 +16,8 @@ class pasGet{
         $_allAuctionsCID;
         //$_allUsers ,
         //$_allUIDs,
-		
-    /*public class user{
+		/*
+    public class user{
         private static
             $_curCar,
             $_cash,
@@ -27,11 +27,11 @@ class pasGet{
             $_info,
             $_stats,
             $_login,
-        public static init(){}
+        public static userInit(){}
     }
-		*/
-	/*
-	public static function init ()
+		
+	
+	public static function userInit ()
 	{
 		global $finalPost;
 		
@@ -45,8 +45,8 @@ class pasGet{
 		self::$_login =  $AO_DB->con->prepare(
             "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
         );
-	}
-	*/
+	}*/
+	
     public static function init(){
         global $AO_DB;
         
@@ -375,4 +375,5 @@ class pasGet{
 	
 }
 pasGet::init();
+//pasGet::userInit();
 ?>
