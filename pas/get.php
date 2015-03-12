@@ -39,12 +39,37 @@ class pasGet{
 		$e = 'email';
 		$p = 'psword';
 		
-		
+		$UID = 'user_id';
+        $CID = 'car_id';
 			//$finalPost users
 		
 		self::$_login =  $AO_DB->con->prepare(
             "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
         );
+		//self::$_allUsers = $AO_DB->con->prepare(
+         //"SELECT * FROM $users"    //returns an array of all user data
+        //);
+      
+        //self::$_userCar = $AO_DB->con->prepare(
+            //"SELECT car_id FROM $users WHERE $UID = ?"     //returns an array of all user id's
+        //);
+        //self::$_userCash = $AO_DB->con->prepare(
+            //"SELECT money FROM $users WHERE $UID = ?"
+        //);
+        //self::$_userCash = $AO_DB->con->prepare(
+            //"SELECT tokens FROM $users WHERE $UID = ?"
+        //);
+        //self::$_userCash = $AO_DB->con->prepare(
+            //"SELECT prestige FROM $users WHERE $UID = ?"
+        //);
+        //self::$_userCash = $AO_DB->con->prepare(
+            //"SELECT m_marker FROM $users WHERE $UID = ?"
+        //);
+        //self::$_userInfo = $AO_DB->con->prepare(
+            //"SELECT fname, lname, uname, user_level FROM $users WHERE $UID = ?"
+        //);
+        //self::$_userStats = $AO_DB->con->prepare(
+            //"SELECT money, tokens, prestige, m_marker FROM $users WHERE $UID = ?"
 	}*/
 	
     public static function init(){
