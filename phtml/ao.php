@@ -13,7 +13,7 @@ function rootURL(){
     //change to false for execution on server
     static $localExecution = true;
     return $localExecution?
-        'http://localhost/Auto_ObsessionsX/'    //clone your loccal copy from Git into C:/xampp/htdocs/
+        'http://localhost/Auto_ObsessionsX/'    //clone your local copy from Git into C:/xampp/htdocs/
         :
         'http://851entertainment.com/Auto_ObsessionsX/';
         //'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/'

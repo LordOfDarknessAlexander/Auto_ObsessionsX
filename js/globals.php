@@ -101,7 +101,7 @@ var amoney;
 var atokens;
 var aprestige;
 var amarkers;
-//var fn;
+
 function ajax_post()
 {
     // Create our XMLHttpRequest object
