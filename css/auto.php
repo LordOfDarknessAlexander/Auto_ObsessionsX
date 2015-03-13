@@ -43,6 +43,7 @@ canvas
   width: 100%;
   height: 100%;
 }
+
 <?php //default element stylings for the entire page?>
 ul{
     list-style: none;
@@ -100,7 +101,15 @@ progress.med::-moz-progress-bar{
     background-color:yellow;
 }
 <?php //EI pb stylings?>
-
+#loginfields
+{
+	font-size:0.75em;
+    color:white;
+    position:relative;
+    bottom:70%;
+    right:20%;
+	margin-left :10%;
+}
 #progress 
 {
   height: 12%;

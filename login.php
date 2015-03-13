@@ -9,15 +9,16 @@ html::docType();
 <?php
 html::charset();
 html::title('Login Page');
+
 ?>
     <link rel="stylesheet" type="text/css" href="includes/includes.css">
 </head>
 <body>
+
 <div id="container">
-<?php
-    //include 'includes/login-header.php';
-?>
+
 <div id="content"><!-- Start of the login page content. -->
+
 <?php 
 // This section processes submissions from the login form.
 // Check if the form has been submitted:
@@ -44,6 +45,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		//if no problems
         echo "email:$e";?><br><?php
         echo "password:$p";?><br><?php
+		
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
 		$q = "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
 		/*
@@ -65,17 +67,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			session_start();
 			$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
-			//$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'Users/members-page.php'; // Ternary operation to set the URL
+			//$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : './members-page.php'; // Ternary operation to set the URL
 			$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'index.php' ; 
-			
             mysqli_free_result($result);
-            
             header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
-           
-            //mysqli_close($dbcon);
             //ob_end_clean(); // Delete the buffer.
             exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;       
-			
 			
 		} 
 		else 
@@ -99,15 +96,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         <input id="email" type="text" name="email" size="30" maxlength="60" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" > </p>
         <p><label class="label" for="psword">Password:</label>
         <input id="psword" type="password" name="psword" size="12" maxlength="12" value="<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>" ></p>
-        <br><br><p><input id="submit" type="submit" name="submit" value="Login"></p>
+        <p><input id="submit" type="submit" name="submit" value="Login"></p>
     </form>
 </div>
-<p>&nbsp;</p>
-<br>
+
 </div><!--end content-->
 
 </div>
-<?php //include ('includes/footer.php'); ?>
+
 </div>
 </div>
 <?php html::footer();?>
