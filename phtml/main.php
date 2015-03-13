@@ -37,14 +37,6 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         <div id='main'>		
             <h1><?php echo $AO_NAME;?></h1>
            
-             <!--div id='login'>
-				<form  action='Users/login.php' method='post'>
-				  <p> USER NAME <input type='text' name='username'></p>
-				  <p> PASSWORD <input type='password' name='pword'></p>
-				  <p><input type='submit' name='submit' value='Log in'></p>
-				</form>
-					
-            </div-->
             <ul>
                <li><a href='javascript:void(0)' class='button play'>Start Game</a></li>
                <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
@@ -56,7 +48,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 				<h2>Login</h2>
 				<form action="login.php" method="post">
 					<p><label class="label" for="email">Email Address:</label>
-					<input id="email" type="text" name="email" size="30" maxlength="60" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" > </p>
+					<input id="email" type="text" name="email" size="30" maxlength="50" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" > </p>
 					<p><label class="label" for="psword">Password:</label>
 					<input id="psword" type="password" name="psword" size="12" maxlength="12" value="<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>" ></p>
 					<p><input id="submit" type="submit" name="submit" value="Login"></p>
