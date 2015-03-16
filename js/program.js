@@ -274,10 +274,8 @@ function startGame()
 	assetLoader.sounds.bg.play();
 }
 
-Auction.sold = function()
-{	//end of auction, car goes to highest bidder
-	//$('.sold').style.display = 'true';
-	//document.getElementById('sold').style.display = 'true';
+Auction.sold = function(){
+    //end of auction, car goes to highest bidder
 	stop = true;
 	auctionStop = true;
 	goingTimer = 0;
@@ -294,51 +292,60 @@ Auction.sold = function()
 	assetLoader.sounds.gameOver.play();
 	assetLoader.sounds.bidder.pause();
 	assetLoader.sounds.sold.play();
+    
 	auctionEnded = true;
 	auctionOver = true;
 	endGame = true;
-	 //   $('div#loss label').text(Auction._car.getFullName() );
+	//   $('div#loss label').text(Auction._car.getFullName() );
     
 	//disable user from entering an auction for this car again
 	//in case of unintended bugs, make sure user doesn't already own car
-	if(Auction.playerWon && Auction._car !== null)
-	{
- //not the right object!?
-		jq.Sold.menu.show();
-		$('div#sold label').text('Congratulations!\nYou won the auction for the ' + Auction._car.getFullName() + '\nGo to the garage to view your prize!\n');
-//<php
-//if(loggedIn){>
-        pas.insertCar(Auction._car.id);
+    if(Auction._car !== null){
+        if(Auction.playerWon){
+     //not the right object!?
+            jq.Sold.menu.show();
+            $('div#sold label').html('Congratulations!<br>You won the auction for the ' + Auction._car.getFullName() + '<br>Go to the garage to view your prize!');
+//<php if(loggedIn){>
+            pas.insertCar(Auction._car.id);
 //<php
 //}
 //else{?>
-		//var hasCar = false;
-		
-		//for(var i = 0; i < userGarage.length; i++)
-		//{
-			//if(Auction._car.name/*id*/ == userGarage[i].name/*id*/)
-			//{
-				//hasCar = true;
-				//break;
-			//}
-		//}
-		//if(!hasCar){
-			//userGarage.push(Auction._car);	//creates a copy of car, giving it to user
-			//Auction._car = null;	//no more car to sell
-		//}
-		//userSave();
-		//Garage.save();
+            //var hasCar = false;
+            
+            //for(var i = 0; i < userGarage.length; i++)
+            //{
+                //if(Auction._car.name/*id*/ == userGarage[i].name/*id*/)
+                //{
+                    //hasCar = true;
+                    //break;
+                //}
+            //}
+            //if(!hasCar){
+                //userGarage.push(Auction._car);	//creates a copy of car, giving it to user
+                //Auction._car = null;	//no more car to sell
+            //}
+            //userSave();
+            //Garage.save();
+//<php
+//}?>
+            ajax_post();    //get user info from server
+            setStatBar();
+        }
+        else{
+            //jq.Sold.menu.show();
+            //setHomeImg();
+            $('div#sold label').html('Unfortunately,<br> you lost the auction for the ' + Auction._car.getFullName() + '<br>Better luck next time!');
+//<php if(loggedIn){>
+            pas.insertLoss(Auction._car.id);
 //<php
 //}
-//?>
-		ajax_post();    //get user info from server
-		setStatBar();
-	}
-	else
-	{
-		$('div#sold label').text('Unfortunately you have lost the auction for the ' + Auction._car.getFullName() + '\nBetter luck next time!\n');
-        setHomeImg();
-	}
+//else{?>
+            //playing as guest, use local storage
+//<?php
+//}?>
+        }
+    }
+    //else auction has no car, should not happen!
 	//Auction.close();
 	//init();
 }

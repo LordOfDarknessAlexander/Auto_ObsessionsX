@@ -526,7 +526,8 @@ var CarView = {
             setHomeImg(car.getFullPath() );
             jq.carImg.show();
 			//jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
-			jq.CarView.carInfo.text(car.getFullName() + '-\n    ' + car.getInfo()) ;//xmlCarinfo.getElemById(car.id) );
+            jq.CarView.carName.text(car.getFullName() );
+			jq.CarView.carInfo.text(car.getInfo() ) ;
 			jq.CarView.sellBtn.off().click({i:selCarIndex}, AuctionSell.init);
             //set dt progress bars
             for(var i = Drivetrain.TYPE.engine; i <= Drivetrain.TYPE.exhaust; i++){ 

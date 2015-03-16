@@ -57,8 +57,32 @@ var pas = {
 			ajax_loadUser();
             ajax_post();    //get user info from server
             Auction.close();
-            init(); //this exists only within the scope of document.ready()
+            //init(); //this exists only within the scope of document.ready()
         });
+    },
+    insertLoss:function(vehicleID){
+        //user losses an auction, make a record of it
+        var funcName = 'js\pas.js, pas::insertLoss(vehicleID)';
+        
+        jq.post('pas/update.php?op=iul',
+            function(data){
+                //the response string is converted by jquery into a Javascript object!
+                if(data === null){
+                    alert(funcName + ', Error:ajax response returned null!');
+                    //finished = true;
+                    return;
+                }
+                //alert(funcName + ', User lost auction! Ajax response success!' + JSON.stringify(data) );
+                
+                Auction.close();
+                //init(); //this exists only within the scope of document.ready()
+            },
+            function(jqxhr){
+                //call will fail if result is not properly formated JSON!
+                alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+            },
+            {carID:vehicleID}
+        );
     },
     //pushCar:function(carID){
         //pushes a car from finalpost[aoCarsDB] to aoUsersDB[userTable]

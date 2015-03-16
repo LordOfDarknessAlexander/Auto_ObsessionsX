@@ -37,32 +37,51 @@ function divCarView(){
 }
 <?php divCarView();?> button#selectCarBtn
 {
-	bottom:72%;
-	left:40%;
+    position:absolute;
+	bottom:5%;
+	left:10%;
 	height:5%;
     width:10%;
-    font-size:2vw;
+    font-size:1.5vw;
 }
 <?php divCarView();?> button#sellBtn
 {
+    position:absolute;
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	background-size: 100% 100%;
-	left:50%;
-	bottom:72%;
+	right:10%;
+	bottom:5%;
 	height:5%;
     width:10%;
+    font-size:1.5vw;
+}
+<?php divCarView();?> label
+{<?php
+    defaultColor();
+    posAbs();
+?>
+    background-color:grey;
+	/*background-image:url('../images/checkers.png');*/
+
+	width:60%;
+	height:10%;
+
+	left:20%;
+}
+<?php divCarView();?> label#carName
+{<?php
+    fontBold();
+?>
+	background-image:url('../images/checkers.png');
+
+	top:20%;
+    
     font-size:2vw;
 }
 <?php divCarView();?> label#carInfo{
-	color:black;
-	background-color:grey;
 	text-align:left;
-	position:absolute;
-	left:20%;
 	bottom:2%;
-	width:60%;
-	height:10%;
-    font-size:1.0vw;
+    font-size:1.5vw;
 }
 <?php divCarView();?> h2{
 <?php

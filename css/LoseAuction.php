@@ -21,11 +21,25 @@ function divSold(){
 	position: absolute;
 	top:0%;
 }
-<?php divSold();?> button
+<?php divSold();?> button#garageBtn
 {
+    position:absolute;
 	background: url('../images/homeBtn.png') no-repeat 0 0;
 	background-size : 100% 100%;
-	width:150px;
-	height:50px;
-	top: -40%;
+	width:5%;
+	height:5%;
+	bottom:5%;
+    left:5%;
+}
+<?php divSold();?> label#info
+{
+	/*background: url('../images/homeBtn.png') no-repeat 0 0;
+	background-size : 100% 100%;*/
+    position:absolute;
+    left:10%;
+	width:80%;
+	height:20%;
+	top: 30%;
+    font-size:2vw;
+    text-align:center;
 }

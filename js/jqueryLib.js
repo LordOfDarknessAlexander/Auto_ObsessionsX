@@ -111,6 +111,7 @@ var jq = {
 		homeBtn : $('div#CarView button#homeBtn'),	//$('button#homeBtn', jq.CarView.menu),
 		sellBtn : $('div#CarView button#sellBtn'),
 		//carImg : $('img#car'),
+        carName : $('div#CarView label#carName'),
 		carInfo : $('div#CarView label#carInfo'),
 		toggle:function()
 		{	//go from (my cars to car view) || (car view to my cars)
@@ -217,21 +218,21 @@ var jq = {
         //get does not pass arguments to the script,
         //embed any optional params in localPath!
         //doneCB and failedCB are functions
-        //return $.ajax({
-            //type:'GET',
-            //url:getHostPath() + localPath,
-            //dataType:'json'
-        //}).done(doneCB).failed(failedCB);
+        return $.ajax({
+            type:'GET',
+            url:getHostPath() + localPath,
+            dataType:'json'
+        }).done(doneCB).fail(failedCB);
     },
     post:function(localPath, doneCB, failedCB, args){
         //args must but be a js object
         //doneCB and failedCB are functions
-        //return $.ajax({
-            //type:'POST',
-            //url:getHostPath() + localPath,
-            //dataType:'json',
-            //data:(args === null || args === undefined)?'':args
-        //}).done(doneCB).failed(failedCB);
+        return $.ajax({
+            type:'POST',
+            url:getHostPath() + localPath,
+            dataType:'json',
+            data:(args === null || args === undefined)?'':args
+        }).done(doneCB).fail(failedCB);
     }
 };
 /*

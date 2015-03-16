@@ -90,10 +90,25 @@ function divAuction(){
 	background-image:url('../images/checkers.png');
 
 	width:60%;
-	height:20%;
+	height:12%;
 
 	left:20%;
 	bottom:0%;
+}
+<?php divAuction();?> label#carName
+{<?php
+    fontBold();
+    defaultColor();
+    posAbs();
+?>
+	background-image:url('../images/checkers.png');
+
+	width:60%;
+	height:10%;
+
+	left:20%;
+	top:20%;
+    font-size:2vw;
 }
 <?php divAuction();?> img#auctionCar
 {

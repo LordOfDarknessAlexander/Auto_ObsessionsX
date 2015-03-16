@@ -46,6 +46,28 @@ function hasCar($id){
     
     return $ret;
 }
+function hasLostCar($id){
+    //does the user's table in aoAuctionLossDB already have an entry with car_id '$id'
+    global $aoAuctionLossDB;
+    
+    $ret = false;
+    $tableName = getUserTableName();
+
+    $res = $aoAuctionLossDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    
+    if($res){
+        //user has car
+        $ret = mysqli_num_rows($res) != 0 ? true : false;
+        $res->close();
+    }
+    else{
+        //query failed, user has no entry in database
+        //$er = sqlError($aoUsersDB);
+        //echo "pas/meta.php hasLostCar($id), sql query failed:($er->no), reason: $er->info";
+    }
+    
+    return $ret;
+}
 function sellCar($cid, $price){
     //does the user's table in aoUsersDB already have an entry with car_id '$id'
     global $aoUsersDB;

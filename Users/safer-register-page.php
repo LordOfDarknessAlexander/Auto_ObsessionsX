@@ -151,11 +151,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                 if($res){
                     $uid = $res->fetch_assoc()['user_id'];    //return type is string
                     //echo "registered user with id:$uid<br> type:" . gettype($uid);
-                    if(pasCreate::userTable($uid) ){
-                        //if(!pasCreate::carSaleTable($uid) ){
-                            //could not create car sale table
+                    if(pasCreate::userTable($uid) ){    //cars the user owns
+                        //if(pasCreate::auctionLossTable($uid){     //table for maintaining the user's losses
+                            //if(pasCreate::carSaleTable($uid) ){        //vehicles the user has sold                       
+                                //header("location: reg-confirm.php");
+                            //}
+                            //else code succeded
                         //}
-                        //else code succeded
+                        //could not create car sale table
                         header("location: register-thanks.php");
                         //exit();
                     }

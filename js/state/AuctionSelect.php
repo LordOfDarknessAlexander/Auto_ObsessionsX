@@ -28,8 +28,11 @@ function hasCar($id){
 var AuctionSelect =
 {	//object representing
 	list : $('div#AuctionSelect div#carView ul#auctionCars'),
-    setCarBtn:function(carName, i, hasCar){
-        var liID = "asli" + (i).toString(),
+    setCarBtn:function(i, data){
+        var carID = data.carID,
+            hasCar = data.hasCar,
+            hasLostCar = data.hasLostCar,
+            liID = "asli" + (i).toString(),
             //btnID = "as" + (i).toString(),
             labelID = 'infoLabel',
             liName = 'div#AuctionSelect div#carView ul#auctionCars li#' + liID,
@@ -67,8 +70,13 @@ var AuctionSelect =
             li.css('opacity', '0.45');
             btn.off().click(this.denyAuction).css('cursor', 'default');
         }
-        else
-        {
+        else if(hasLostCar)
+        {	//user has previously loss, fade and highlight red!
+            li.css('opacity', '0.45');
+            //li.css('background-color', 'red');
+            btn.off().click(this.denyAuction).css('cursor', 'default');
+        }
+        else{
             //var carID = btn.attr('id');
             btn.off().click({index:i}, this.initAuction);
             //btn.css('background-image', "url(\'..\\images\\vehicle.jpg");	//car.getFullPath());
@@ -80,7 +88,7 @@ var AuctionSelect =
         //if(loggedIn)
             //this.list.empty();
 		//
-        var funcName = 'AuctionSelect.php, AuctionSelect::init()';
+        var funcName = 'js/state/AuctionSelect.php, AuctionSelect::init()';
         
         /*jq.get('pas/query.php?op=asc',
             function(data){
@@ -95,12 +103,13 @@ var AuctionSelect =
                     console.log(funcName + ', something went wrong, should have 1 entry per car in database')
                     return;
                 }
-                
+                //iterate over each vehicle data entry
                 for(var i = 0; i < len; i++){
-                    var carID = data[i].carID,
-                        hasCar = data[i].hasCar;
+                    //var carID = data[i].carID,
+                        //hasCar = data[i].hasCar;
                         
-                    AuctionSelect.setCarBtn(carID, i, hasCar);
+                    AuctionSelect.setCarBtn(i, data[i]);  
+                    //AuctionSelect.setCarBtn(carID, i, hasCar);
                 }
             },
             function(jqxhr){
@@ -131,10 +140,10 @@ var AuctionSelect =
             }
             
             for(var i = 0; i < len; i++){
-                var carID = data[i].carID,
-                    hasCar = data[i].hasCar;
-                    
-                AuctionSelect.setCarBtn(carID, i, hasCar);
+                //var carID = data[i].carID,
+                    //hasCar = data[i].hasCar;
+                AuctionSelect.setCarBtn( i, data[i]);
+                //AuctionSelect.setCarBtn(carID, i, hasCar);
             }
         }).fail(function(jqxhr){
             //call will fail if result is not properly formated JSON!

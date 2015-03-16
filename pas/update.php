@@ -16,6 +16,21 @@ class pasUpdate{
         
         //echo json_encode($res);
     }
+    public static function userLoss($carID){
+        global $aoAuctionLossDB;
+        $table = getUserTableName();
+        $ret = false;
+        
+        $res = $aoAuctionLossDB->query(
+            //if entry does not exist add it, else update
+            "INSERT INTO $table (car_id) VALUES ($carID)"
+        );
+        
+        if($res){
+            $ret = true;
+        }
+        return $ret;
+    }
 }
 /*public static function hasSoldCar($carID){
     //does the user's table in aoCarSalesDB already have an entry with car_id '$id'
@@ -177,6 +192,13 @@ if(isset($_POST) && !empty($_POST) ){
                 $res = $aoUsersDB->query(
                     "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
                 );
+                
+                echo json_encode($res);
+                exit();
+            }
+            elseif($op == 'iul'){
+                //insert user loss for carID
+                $res = pasUpdate::userLoss($carID);
                 
                 echo json_encode($res);
                 exit();

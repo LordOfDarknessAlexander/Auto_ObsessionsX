@@ -104,7 +104,7 @@ class pasCreate
         
         return false;
     }
-    public static function auctionLossTable(){
+    public static function auctionLossTable($uid){
         //creates an empty table in aoAuctionLossDB
         //global $aoAuctionLossDB;
         //$uid = $_SESSION['userID'];

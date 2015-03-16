@@ -84,6 +84,7 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
 
 <div id='CarView'>
     <!--<selectBtn();>display vehicle stats and actions-->
+    <label id='carName'>--Name--</label>
     <button id='selectCarBtn'>Select</button>
     <button id='sellBtn'>Sell</button>
 	

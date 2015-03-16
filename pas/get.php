@@ -79,9 +79,6 @@ class pasGet{
         $aoCars = 'users';
         $UID = 'user_id';
         $CID = 'car_id';
-		
-		
-	
         //
         //AO_DB aoCars
         //
@@ -128,7 +125,6 @@ class pasGet{
             //"SELECT $UID, user_level FROM $users WHERE (email ='?' AND uname = '?')"
         //);
     }
-	
 
     public static function allCarIDs(){
         global $AO_DB;
@@ -221,8 +217,8 @@ class pasGet{
                 $cid = $row[$CID];
                 $cars[] = array(
                     'carID' => $cid,
-                    'hasCar' => hasCar($cid)   //does user have this car?
-                    //'hasLostCar' => hasLostCar($carID)   //did the user lose the auction for this car
+                    'hasCar' => hasCar($cid),   //does user have this car?
+                    'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
                 );
             }

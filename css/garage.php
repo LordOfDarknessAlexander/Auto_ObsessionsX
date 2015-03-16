@@ -6,7 +6,11 @@ require_once 'ui.php';
 css::header();
 //
 require_once 'carView.php';
-//  
+// 
+//function dug(){
+    //user's garage div
+    //echo 'div#Garage';
+//}
 function divGarage(){
     echo 'div#Garage';
 }

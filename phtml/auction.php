@@ -58,25 +58,18 @@ sqlSelectAll('aoCars', 'outputCar');
 
 <div id='Auction'>
     <!--User and AI bid on a car-->
-    <h1>Auction</h1>    
-    <div style="margin-top:-6em;margin-left:26em">	   
-    </div> 
+    <h1>Auction</h1>  
+    <label id='carName'>--Name--</label>
 <?php
     backBtn();
     homeBtn();
 ?>
-    <!--label id='myCash'>money</label>
-    <label id='carPrice'>price</label-->
     <button id='bid'>"Bid:money"</button>
-<!---	<button id='buyout'>"Buyout"</button> -->
-
+    <!--button id='buyout'>Buyout</button-->
     <!--auctionCar will be <img id=userCar'>.
-    The code can be streamlined with jQuery in JS-->
-    <!--img id='auctionCar'-->
-	
+    The code can be streamlined with jQuery in JS-->	
     <label id='carPrice'></label>
     <label id='carInfo'></label>
-<?php //carInfo();?>
 </div>
 
 <div id='AuctionSell'>

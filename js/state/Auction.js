@@ -109,7 +109,8 @@ var Auction =
                     Auction.setBidBtnText();
                     
                     //$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
-                    $('div#Auction label#carInfo').text(/*'<h1>' + */Auction._car.getFullName() + '-\n    ' + Auction._car.getInfo() );
+                    $('div#Auction label#carName').text(Auction._car.getFullName() );
+                    $('div#Auction label#carInfo').text(Auction._car.getInfo() );
                     //$('#menu').removeClass('gameMenu');
                     //$('#menu').addClass('Auction');
                     $('.sound').show();
