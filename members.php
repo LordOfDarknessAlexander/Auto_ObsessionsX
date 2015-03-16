@@ -32,7 +32,7 @@ require 'includes/nav.php';
 require 'includes/info-col.php';
 //require 'includes/metaHeader.php';
 //require 'includes/header-members.php';
-//require 'my_parse_file.php';
+require 'my_parse_file.php';
 ?>
 	<div id='content'><!-- Start of the member's page content. -->
         <h2>Welcome to the Members' Page 

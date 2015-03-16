@@ -72,6 +72,7 @@ if(mysqli_num_rows($result) != 0)
 	while($rows = $result->fetch_assoc())
 	{
 		$fname = $rows['fname'];
+		$uname = $rows['uname'];
 		$money = $rows['money'];
 		$m_marker = $rows['m_marker'];
 		$tokens = $rows['tokens'];
