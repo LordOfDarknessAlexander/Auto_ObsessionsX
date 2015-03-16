@@ -92,6 +92,7 @@ else
 	//exit();
 }
 ?>
+
             <div id='mid-left-col'>
 </body>
                 <h3>Member's Events</h3>
@@ -101,12 +102,15 @@ else
             </div><!--end mid-left-col-->
             <div id='mid-right-col'>
                 <h3>Special offers to Members only.</h3>
-                <!--div id='nav'>
+              <!--  <div id='nav'>
                     <a href='index.php' title='Play Game'>Play Game</a>
-                </div>
-                <br-->
+                </div>-->
+               
                 <p><b>T-Shirts &pound;100.00</b></p>
                 <img alt='Polo shirt' title='Polo shirt' height='207' src='Users/images/polo.png' width='280'><br>
+				<div id='nav'>
+				 <a href='index.php' title='Play Game'>Play Game</a>
+				 </div>
                 <br>
             </div><!--end  mid-rid-col-->
         </div><!--end mid-col-->

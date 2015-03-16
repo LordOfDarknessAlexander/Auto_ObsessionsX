@@ -40,9 +40,9 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
             <ul>
                <li><a href='javascript:void(0)' class='button play'>Start Game</a></li>
                <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
-               <!--php if(!loggedIn){-->
+               <php if(!loggedIn){
                <li><a href='javascript:void(0)' class='button Register'>Register</a></li>
-               <!--php }-->
+               <php }
             </ul>
 			<div id="loginfields">
 				<h2>Login</h2>
