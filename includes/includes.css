@@ -1,7 +1,4 @@
-﻿<php? 
-header("Content-type: text/css; charset: UTF-8");
-?>
-/*default html tags*/
+﻿/*default html tags*/
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -29,7 +26,6 @@ canvas {
     height: 100%;
     background-size : 100% 100%;
 }
-
 /*Headers*/
 h1 {
     color: white;
@@ -104,7 +100,7 @@ div#nav{
     position:absolute;
     top:10%;
     left:0%;
-    width:20%;
+    width:15%;
     /*background-color:grey;*/
 }
 div#reg-navigation{
@@ -145,6 +141,11 @@ div#content{
     height:90%;
     width:70%;
 }
+div#content h2{
+    position:absolute:
+    left:0%;
+    top:0%;
+}
 #midcol{
     width:80%;
     margin:auto;
@@ -163,13 +164,17 @@ div#content{
     width:36%;
     float:left;
     text-align:left;
-    position: relative;
+    position:absolute;
+    top:20%;
+    left:0%;
 }
 #mid-right-col{
-    width:36%;
+    width:16%;
     float:right;
     text-align:left;
-    position: relative;
+    position:absolute;
+    right:0%;
+    top:20%;
 }
 #info-col 
 { 
@@ -181,16 +186,35 @@ div#content{
     text-align:center;
     margin:5px 5px 0 0;
 }
-#playerData
+div#playerData
 {
 	top:0%;
-    left:77%;
-    color:magenta;
-    width:20%;
-    text-align:center;
-    display: in-line;
-    margin:5px 5px 0 0;
-    position: relative;
+    left:10%;
+    color:red;
+    width:90%;
+    height:10%;
+    text-align:left;
+    position:absolute;
+}
+label#cash{
+    position:abosolute;
+    width:25%;
+    left:0%;
+}
+label#tokens{
+    position:abosolute;
+    width:25%;
+    left:25%;
+}
+label#prest{
+    position:abosolute;
+    width:25%;
+    left:50%;
+}
+label#markser{
+    position:abosolute;
+    width:25%;
+    left:75%;
 }
 /* setting anchor styles */
 li a,

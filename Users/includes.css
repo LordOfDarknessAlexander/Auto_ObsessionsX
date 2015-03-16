@@ -1,7 +1,4 @@
-﻿<php? 
-header("Content-type: text/css; charset: UTF-8");
-?>
-/*default html tags*/
+﻿/*default html tags*/
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -103,7 +100,7 @@ div#nav{
     position:absolute;
     top:10%;
     left:0%;
-    width:20%;
+    width:15%;
     /*background-color:grey;*/
 }
 div#reg-navigation{

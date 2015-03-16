@@ -13,8 +13,9 @@ function getUserTableName(){
     //returns the name of the table used by the currently logged in user
     //used to access tables in aoUsersDB and aoCarSalesDB
     $userID = 'user';
+    
     //if(isset($_SESSION) AND isset($_SESSION['user_id']) ){
-        //$ret .= $_SESSION['user_id'];
+        //$userID .= strval($_SESSION['user_id']);
     //}
     //else{
         $userID .= strval(0);   //$_SESSION['userID'];

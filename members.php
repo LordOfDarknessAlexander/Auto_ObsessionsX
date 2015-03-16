@@ -1,7 +1,7 @@
 <?php
 require 'include/html.php';
 require 'include/dbConnect.php';
-//require 'includes/secure.php';
+//require 'secure.php';
 session_start();
 //secureLogin();
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
@@ -24,19 +24,15 @@ html::doctype();
     <meta charset=utf-8>
     <link rel='stylesheet' type='text/css' href='Users/includes.css'>
     <!-- Include JS File Here -->
-    <style type='text/css'>
-#mid-right-col { text-align:center; margin:auto;margin-right: 25%; margin-top: -10%
-}
-#midcol h3 { font-size:130%; margin-top:0; margin-bottom:0; 
-}
-    </style>
 </head>
 <body>
 <div id='container'>
 <?php
-require 'Users/includes/nav.php';
-require 'Users/includes/info-col.php';
-require 'my_parse_file.php';
+require 'includes/nav.php';
+require 'includes/info-col.php';
+//require 'includes/metaHeader.php';
+//require 'includes/header-members.php';
+//require 'my_parse_file.php';
 ?>
 	<div id='content'><!-- Start of the member's page content. -->
         <h2>Welcome to the Members' Page 
@@ -74,13 +70,13 @@ if(mysqli_num_rows($result) != 0)
 		$money = $rows['money'];
 		$m_marker = $rows['m_marker'];
 		$tokens = $rows['tokens'];
-		$prestige = $rows['prestige'];
+		$prest = $rows['prestige'];
 		
 		echo "<div id ='playerData'>
             <label>Player: $uname</label>
             <label id='cash'>Money: $money</label>
             <label id='tokens'>Tokens: $tokens</label>
-            <label id='prest'>Prestige: $prestige</label>
+            <label id='prest'>Prestige: $prest</label>
             <label id='markers'>Mile Markers: $m_marker</label>
             </div>";
 	}
