@@ -106,7 +106,7 @@ else
                 </div>
                 <br-->
                 <p><b>T-Shirts &pound;100.00</b></p>
-                <img alt='Polo shirt' title='Polo shirt' height='207' src='images/polo.png' width='280'><br>
+                <img alt='Polo shirt' title='Polo shirt' height='207' src='Users/images/polo.png' width='280'><br>
                 <br>
             </div><!--end  mid-rid-col-->
         </div><!--end mid-col-->
