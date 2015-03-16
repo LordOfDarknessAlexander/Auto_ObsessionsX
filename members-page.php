@@ -71,7 +71,6 @@ if(mysqli_num_rows($result) != 0)
 	//Turn the results in to an array
 	while($rows = $result->fetch_assoc())
 	{
-		$fname = $rows['fname'];
 		$uname = $rows['uname'];
 		$money = $rows['money'];
 		$m_marker = $rows['m_marker'];
