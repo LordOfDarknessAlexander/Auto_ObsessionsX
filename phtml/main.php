@@ -9,7 +9,7 @@ $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
 $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 //$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
-$loggedIn = false;
+
 ?>	
 <div class='wrapper'>
 	<!--root div element of web page!-->	
@@ -37,40 +37,34 @@ $loggedIn = false;
         </div>
         <div id='main'>		
             <h1><?php echo $AO_NAME;?></h1>
-           <?php 
-		   if(!$loggedIn)
-		   { 
-				echo
-				'
-				<ul>
-				   <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
-				   <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
-				   
-				   <li><a href="javascript:void(0)" class="button Register">Register</a></li> 
-				 </ul> 
-				 
-				 <div id="loginfields">
+           
+            <ul>
+		<!--	<php if(!loggedIn){ --->
+               <li><a href='javascript:void(0)' class='button play'>Start Game</a></li>
+               <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
+               
+               <li><a href='javascript:void(0)' class='button Register'>Register</a></li>
+             <!--  <php }  --->
+            </ul>
+		<!--	<php if(!loggedIn){ -->
+			<div id="loginfields">
 				<h2>Login</h2>
 				<form action="login.php" method="post">
 					<p><label class="label" for="email">Email Address:</label>
-					<input id="email" type="text" name="email" size="30" maxlength="50" value="<?php if (isset($_POST["email"])) echo $_POST["email"]; ?> > </p>
+					<input id="email" type="text" name="email" size="30" maxlength="50" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" > </p>
 					<p><label class="label" for="psword">Password:</label>
-					<input id="psword" type="password" name="psword" size="12" maxlength="12" value="<?php if (isset($_POST["psword"])) echo $_POST["psword"]; ?>" ></p>
+					<input id="psword" type="password" name="psword" size="12" maxlength="12" value="<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>" ></p>
 					<p><input id="submit" type="submit" name="submit" value="Login"></p>
 				</form>
 			</div>
-				 
-				 ';
-			}
-			else if($loggedIn)
+		<!--	<php } else if(loggedIn)
 			{
-				 echo '
-					<div id="loginfields">
-					<h2>Hi</h2>
-					</div> ';
+				<div id="loginfields">
+				<h2>Hi</h2>
+				</div>
 			}
-		?> 
-       <?php require 'phtml/legal.php';?>
+			?> --->
+            <?php require 'phtml/legal.php';?>
 		</div>
       
         <div id='credits'>
