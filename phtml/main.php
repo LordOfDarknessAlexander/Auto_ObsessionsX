@@ -9,6 +9,7 @@ $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
 $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 //$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
+
 ?>	
 <div class='wrapper'>
 	<!--root div element of web page!-->	
@@ -38,12 +39,14 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
             <h1><?php echo $AO_NAME;?></h1>
            
             <ul>
+		<!--	<php if(!loggedIn){ --->
                <li><a href='javascript:void(0)' class='button play'>Start Game</a></li>
                <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
-               <php if(!loggedIn){
+               
                <li><a href='javascript:void(0)' class='button Register'>Register</a></li>
-               <php }
+             <!--  <php }  --->
             </ul>
+		<!--	<php if(!loggedIn){ -->
 			<div id="loginfields">
 				<h2>Login</h2>
 				<form action="login.php" method="post">
@@ -54,6 +57,13 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 					<p><input id="submit" type="submit" name="submit" value="Login"></p>
 				</form>
 			</div>
+		<!--	<php } else if(loggedIn)
+			{
+				<div id="loginfields">
+				<h2>Hi</h2>
+				</div>
+			}
+			?> --->
             <?php require 'phtml/legal.php';?>
 		</div>
       

@@ -47,6 +47,7 @@ require 'my_parse_file.php';
 	//$sname = $_SESSION['uname'];
 	//$sname = $_SESSION['fname'];
 //}
+
 if(isset($_SESSION['uname']))
 {
 	echo $_SESSION['uname'];
@@ -62,7 +63,7 @@ if(isset($_SESSION['uname']))
 
 $q = "SELECT * FROM users WHERE uname = '$_SESSION[uname]'";		
 $result = mysqli_query ($AO_DB->con, $q);
-
+$loggedIn = true;
 //Count the returned rows
 if(mysqli_num_rows($result) != 0)
 {
