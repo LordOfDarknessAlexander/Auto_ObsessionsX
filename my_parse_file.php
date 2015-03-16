@@ -2,8 +2,8 @@
 require_once 'include/dbConnect.php';
 //session_start();
 
-//if(isset($_SESSION['uname']))
-//{
+if(isset($_SESSION['uname']))
+{
 	//echo $_SESSION['uname'];
 	if( isset( $_POST) )
 	{
@@ -33,6 +33,6 @@ require_once 'include/dbConnect.php';
 	{
 		echo "Goody try";
 	}
-//}
+}
 
 ?>
