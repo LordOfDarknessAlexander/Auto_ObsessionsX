@@ -49,7 +49,6 @@ if(isset($_SESSION['uname']))
 	echo $_SESSION['uname'];
 	//$sname = $_SESSION['uname'];
 	//$sname = $_SESSION['fname'];
-	$loggedIn = true;
 }
 ?>
         </h2>
