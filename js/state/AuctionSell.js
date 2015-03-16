@@ -190,7 +190,7 @@ function auctionGen()
             this._currentBid = data.bid;
             //this._date = data.date;
             
-            //if(this._data.end === null){
+            //if(this._date.end === null){
                 //this._expired = false,
                 //_curTime:0.0;
                 //this._initAI();
@@ -357,8 +357,15 @@ function auctionGen()
             console.log('won auction! user gets (' + val.toFixed(2) + ') funds!');
             
             if( (userStats.money + val) <= Number.MAX_VALUE){
-                userStats.money += val;
+//<php if(loggedIn){>
                 //call pasUpdate!
+//<php
+//}
+//else{>
+                userStats.money += val;
+                //save user!
+//<php
+//}>
             }
             //var divID = 'div#asd' + this._car.id.toString(),
                 //div = $(divID),
@@ -379,6 +386,7 @@ var AuctionSell =
         //AuctionSell.load();
         //foreach active auction in userSales,
         //start them and begin updates
+        jq.carImg.hide();
         
 		if(index !== null && index !== undefined)
 		{
@@ -400,10 +408,11 @@ var AuctionSell =
                 
                 AuctionSell.save();
             }
+            jq.AuctionSell.toggle();
+            return;
         }
         //entering the state without posting a new car
-        jq.AuctionSell.toggle();
-        jq.carImg.hide();
+        jq.AuctionSell.menu.toggle();
 	},
 	update : function(dt){
 		var i;
@@ -453,13 +462,13 @@ var AuctionSell =
                 userSales = [];
                 
                 for(var i = 0; i < len; i++){
-                    /*var data = sd[i],
+                    var data = sd[i],
                         na = auctionGen();
                 
                     na.restart(data); 
                     na.toggleCC();
                     
-                    userSales.push(na);*/
+                    userSales.push(na);
                 }
             }
         }

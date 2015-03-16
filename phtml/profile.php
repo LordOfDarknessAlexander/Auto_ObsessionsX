@@ -1,5 +1,5 @@
 <?php
-//require_once '../pas/get.php';
+//require_once '../pas/get.php';    //this is causing game to break :(
 ?>
 <div id='profile'>
     <button id='backBtn'>Back</button>

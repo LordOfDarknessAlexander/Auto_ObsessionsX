@@ -79,6 +79,40 @@ function(){
 	loadUser();
     Garage.load();  //load user garage!
     //AuctionSell.load(); //load user sales, after garage!
+    /*var jqxhr = $.ajax({
+            type:'POST',
+            url:getHostPath() + 'pas/query.php',
+            dataType:'json',
+            data:'' //{carID:24577}
+        }).done(function(data){
+            //the response string is converted by jquery into a Javascript object!
+            if(data === null){
+                alert(funcName + ', Error:ajax response returned null!');
+                return;
+            }
+            //alert('ajax response recieved:' + JSON.stringify(data) );
+            
+            if(data.length == 0){
+                //exit early is user has no cars
+                console.log(funcName + ',user has no cars!, Buy some, right now!');
+                return;
+            }
+            var args = [];
+            
+            for(var i = 0; i < data.length; i++){
+                var obj = data[i];
+                args.push(VehicleFromDB(obj) ); //adds ajax request object to array
+            }
+            $.when.apply($, args).done(function(){
+                AuctionSell.load();
+            }).fail(function(){
+                console.log(funcName + ', loading game resources failed, abort!');
+            });
+        }).fail(function(jqxhr){
+            //call will fail if result is not properly formated JSON!
+            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+            console.log(funcName + ', loading game resources failed, abort!');
+        });*/
     //jq.Game.setHomeImg();
     setHomeImg();   //in Garage.js
 	//userStats.money = 150;

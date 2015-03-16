@@ -592,6 +592,18 @@ function setHomeImg(path){
         homeImg.attr('src', path);
     }
 }
+//jq.Garage.shopBtn.click(
+//function(){
+	//jq.Garage.toggle();
+	//jq.RepairShop.toggle();
+    //setHomeImg();
+    //show home img
+//});
+/*$('div#Garage button#sales').click(
+function(){
+	jq.Garage.toggle();
+    AuctionSell.init();
+});*/
 jq.Garage.backBtn.click(
 function(){
 	jq.Garage.toggle();
@@ -604,18 +616,6 @@ function(){
 	jq.Garage.toggle();
     jq.carImg.hide();
 	Garage.init();
-});
-jq.CarView.backBtn.click(
-function(){
-    jq.CarView.toggle();
-    jq.carImg.hide();
-});
-jq.CarView.homeBtn.click(
-function(){
-	jq.Game.menu.show();
-	jq.CarView.menu.hide();
-    setHomeImg();
-	//appState = GAME_STATE.MAIN;
 });
 /*jq.Garage.selectBtn.click(function()
 {
@@ -634,10 +634,24 @@ function(){
 jq.Garage.selectBtn.click(
 function(){
     //selects the vehicle the user is currently viewing
-	if(selCarIndex !== null)
-	{
+	if(selCarIndex !== null){
 		Garage.setCurrentCar();
 
         jq.Game.setHomeImg();	//set home car image
 	}
+});
+//
+//Car view jq bindings
+//
+jq.CarView.backBtn.click(
+function(){
+    jq.CarView.toggle();
+    jq.carImg.hide();
+});
+jq.CarView.homeBtn.click(
+function(){
+	jq.Game.menu.show();
+	jq.CarView.menu.hide();
+    setHomeImg();
+	//appState = GAME_STATE.MAIN;
 });

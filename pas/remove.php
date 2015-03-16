@@ -1,6 +1,6 @@
 <?php
 //this script REMOVEs Database values with sql
-//used by javascript ajax requests
+//this file contains function/class definitions ONLY, no functionality
 header('Access-Control-Allow-Origin: *');
 //
 require_once 'meta.php';
@@ -23,7 +23,9 @@ class pasRemove
             if(pasRemove::userGarageTable($userID) ){
                 //remove table from aoCarSales
                 if(pasRemove::userSalesTable($userID) ){
-                    return true;
+                    //if(pasRemove::userLossTable($userID) ){
+                        return true;
+                    //}
                 }
             }
         }
@@ -47,7 +49,7 @@ class pasRemove
         //$ret = $AO_DB->query(
             //"DELETE * FROM $users WHERE user_id=$userID"
         //);
-        ////ret->close()?
+        ////if($ret){$ret->close()};?
         //return ($AO_DB->con->affected_rows != 0) ? true : false;
     }
     public static function userGarageTable($userID){
@@ -60,7 +62,10 @@ class pasRemove
             //"DROP TABLE IF EXISTS $tableName
         //);
         
-        //if(!$ret){    //AND DEBUG){
+         //if($ret){
+            //$ret->close();
+        //}
+        //else{
             //output mysqli error!
         //}
         //return ret;
@@ -74,10 +79,12 @@ class pasRemove
         
         //returns true if user was dropped, false on error
         //$ret = $aoCarSalesDB->query(
-            //"IF EXISTS $tableName
-            //"DROP TABLE $tableName"
+            //"DROP TABLE IF EXISTS $tableName
         //);
-        //if(!$ret){    //AND DEBUG){
+         //if($ret){    //AND DEBUG){
+            //$ret->close();
+        //}
+        //else{
             //output mysqli error!
         //}
         //return ret;
@@ -85,15 +92,18 @@ class pasRemove
     public static function userSales($userID){
         //removes all entries from user's sale history,
         //does not remove the table
-        //global $aoCarSalesDB;
+        global $aoCarSalesDB;
         
         $tableName = getUserTableName();
         
         //returns true if user was dropped, false on error
-        //return $aoCarSalesDB->query(
+        //$ret $aoCarSalesDB->query(
             //"DELETE * FROM $tableName"
         //);
-        //if(!$ret){    //AND DEBUG){
+        //if($ret){    //AND DEBUG){
+            //$ret->close();
+        //}
+        //else{
             //output mysqli error!
         //}
         //return ret;
@@ -119,7 +129,7 @@ class pasRemove
         //returning true upon success and false on failure
         global $aoUsersDB;
         
-        $userID = getUserTableName();    //$_SESSION['user_id'];
+        $uid = getUserTableName();    //$_SESSION['user_id'];
         
         $ret = $aoUSersDB->query(
             "DELETE * FROM $uid WHERE car_id = $carID"
@@ -130,77 +140,5 @@ class pasRemove
         }
         return ret;
     }
-}
-/*if(isset($_GET) && !empty($_GET) ){
-    //args being passed via the url
-    //$op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
-//}
-if(isset($_POST) && !empty($_POST) ){
-    if(isset($_POST['carID'])){
-        $carID = $_POST['carID'];
-        //validate value, must be an int!
-        //echo json_encode($carID);
-
-        //switch the operation besed on value passed in url
-        /*if(isset($_GET) && !empty($_GET) ){
-            //args being passed via the url
-            $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
-            if($op == 'insert'){
-                //inserts a car with carID from the vehicle database into the
-                //logged in user's table in aoUsersDB
-                $hasCar = hasCar($carID);
-                
-                if($hasCar){
-                    //user has already bought this car, error!
-                }
-                else{
-                    $tableName = 'user' . strval(0);    //$_SESSION['userID'];
-                    $res = $aoUsersDB->query(
-                        "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
-                        //if entry exists
-                    );
-                    
-                    echo json_encode($res);
-                }
-            }
-            elseif($_GET['op'] == 'update'){
-                //inserts a car with carID from the vehicle database into the
-                //logged in user's table in aoUsersDB
-                $dt = intval($_POST['dt']);
-                $body = intval($_POST['body']);
-                $inter = intval($_POST['interior']);
-                $docs = intval($_POST['docs']);
-                
-                $rep = intval($_POST['repairs']);
-                
-                $tableName = 'user' . strval(0);    //$_SESSION['userID'];
-                $res = $aoUsersDB->query(
-                    "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
-                );
-                
-                echo json_encode($res);
-                //}
-            }
-            //else switch to other calls
-            exit();
-        }
-        //else no GET args, simply return data of car with id
-        */
-        //echo '{"data":' . strval($carID) . '}';
-        //select an individual element with car_id $carID
-        //$car = getCarFromID($carID);
-        
-        //if($car != null){
-            //echo $car->toJSON();
-        //}
-        //else{
-            //echo '{}';  //return emtpy object
-        //}
-    }
-    //other post vars
-}
-else{
-    //no passing any values via POST, return all cars
-    //echoUserCars();
 }
 ?>

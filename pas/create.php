@@ -70,10 +70,9 @@ class pasCreate
         }
         return true;
     }
-    public static function carSaleTable(){
+    public static function carSaleTable($uid){
         //creates an empty table in aoUsersDB upon user registration
         global $aoCarSalesDB;
-        //$uid = $_SESSION['userID'];
         $tableName = getUserTableName();
         $uint = 'int unsigned';
         $defaultCharset = 'DEFAULT CHARSET = latin1';

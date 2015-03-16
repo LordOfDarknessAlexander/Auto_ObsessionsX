@@ -24,7 +24,7 @@ $paths = array(
 	'payRequest',
 	'Vector',
 	'GameMode',
-	'Users',
+	//'Users',
 	'requestAnimationFrame'
 );
 foreach($paths as $p){html::incJS($p);}

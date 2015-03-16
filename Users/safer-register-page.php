@@ -152,7 +152,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                     $uid = $res->fetch_assoc()['user_id'];    //return type is string
                     //echo "registered user with id:$uid<br> type:" . gettype($uid);
                     if(pasCreate::userTable($uid) ){
-                        //if(!createCarSaleTable($uid) ){
+                        //if(!pasCreate::carSaleTable($uid) ){
                             //could not create car sale table
                         //}
                         //else code succeded

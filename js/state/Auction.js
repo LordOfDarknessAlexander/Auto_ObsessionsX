@@ -241,34 +241,103 @@ var Auction =
 		}
 
         //The block below can be cleaned up, thinking of how to do it
-		var ewinPos = 174;
+		var ewinPos = 174,
+            tx = ENEMY_X + 12,
+            left = 10;  //left offset to draw the image from
+            
+        /*var highestBid = this.currentBid,
+            bids = [],
+            hi = 0; //highest index
+        
+        for(var i = 0; i < this.ai.length; i++){
+            var bid = this.ai[i].currBid;
+            if(bid > highestBid){
+                highestBid = bid;
+                hi = i;
+            }
+        }
+        bids.push({bid:highestBid, index:hi});
+        //set second highest bidder
+        var sb = 0, //second highest bid
+            si = 0; //second highest index
+        
+        for(var i = 0; i < this.ai.length; i++){
+            if(i != hi){
+                var bid = this.ai[i].currBid;
+                if(bid < highestBid && bid > sb){
+                    sb = bid;
+                    si = i;
+                }
+            }
+        }
+        bids.push({bid:sb, index:si});
+        //set third highest
+        var tb = 0, //second highest bid
+            ti = 0; //second highest index
+        
+        for(var i = 0; i < this.ai.length; i++){
+            if(i != hi && i != si){
+                var bid = this.ai[i].currBid;
+                if(bid < sb && bid > tb){
+                    tb = bid;
+                    ti = i;
+                }
+            }
+        }
+        bids.push({bid:tb, index:ti});
+        
+        var lb = 0,
+            li = 0;
+            
+        for(var i = 0; i < this.ai.length; i++){
+            if(i != hi && i != si && i != ti){
+                lb = this.ai[i].currBid;
+                li = i;
+                break;
+            }
+        }
+        bids.push({bid:lb, index:li});
+
+        var top = 190;
+        for(var i = 0; i < bids.length; i++){
+            var index = bids[i].index,
+                e = this.ai[index];
+                
+            if(e.currBid >= highestBid){
+                context.drawImage(curBidImage,left,ewinPos) + '/n' + context.fillText( bidders[index] + '$'+ e.currBid.toFixed(2), tx, top);
+            }
+            else{
+                context.drawImage(slimer,left, 202 + (20 * i) ) + context.fillText(bidders[index] + '$' + e.currBid.toFixed(2), tx, top + 30 + (20 * i) );
+            }
+        }
+        */
 		//var aL1 = ;
 		if(this.ai[0].currBid >= this.currentBid){
-			enemy1 = context.drawImage(curBidImage,10,ewinPos) + '/n' + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2) ,ENEMY_X + 12 , 190);
+			enemy1 = context.drawImage(curBidImage,left,ewinPos) + '/n' + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2), tx, 190);
 		}
 		else{
-			enemy1 = context.drawImage(slimer,10,202) + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2) ,ENEMY_X + 12, 220);
+			enemy1 = context.drawImage(slimer,left,202) + context.fillText( bidders[0] + '$'+ this.ai[0].currBid.toFixed(2), tx, 220);
 		}
 		//Enemy 2
 		if(this.ai[1].currBid >= this.currentBid){
-			enemy2 = context.drawImage(curBidImage,10,ewinPos) + context.fillText( bidders[1] + '$'+ this.ai[1].currBid.toFixed(2) ,ENEMY_X + 12, 190);		
+			enemy2 = context.drawImage(curBidImage,left,ewinPos) + context.fillText( bidders[1] + '$'+ this.ai[1].currBid.toFixed(2), tx, 190);		
 		}
 		else{
-			enemy2 = context.drawImage(slimer,10,222) + context.fillText(bidders[1] + '$'+ this.ai[1].currBid.toFixed(2) ,ENEMY_X + 12, 240);
+			enemy2 = context.drawImage(slimer,left,222) + context.fillText(bidders[1] + '$'+ this.ai[1].currBid.toFixed(2), tx, 240);
 		}
 		//Enemy3
 		if(this.ai[2].currBid >= this.currentBid){
-			enemy3 = context.drawImage(curBidImage,10,ewinPos) + context.fillText( bidders[2] + '$'+ this.ai[2].currBid.toFixed(2) ,ENEMY_X + 12, 190);
+			enemy3 = context.drawImage(curBidImage,left,ewinPos) + context.fillText( bidders[2] + '$'+ this.ai[2].currBid.toFixed(2), tx, 190);
 		}
 		else{
-			enemy3 = context.drawImage(slimer,10,242) + context.fillText(bidders[2] + '$'+ this.ai[2].currBid.toFixed(2) ,ENEMY_X + 12, 260);
+			enemy3 = context.drawImage(slimer,left,242) + context.fillText(bidders[2] + '$'+ this.ai[2].currBid.toFixed(2), tx, 260);
 		}
 		//Enemy4
 		if(this.ai[3].currBid >= this.currentBid){
-			enemy4 = context.drawImage(curBidImage,10,ewinPos) + context.fillText( bidders[3] + '$'+ this.ai[3].currBid.toFixed(2) ,ENEMY_X + 12, 190);
+			enemy4 = context.drawImage(curBidImage,left,ewinPos) + context.fillText( bidders[3] + '$'+ this.ai[3].currBid.toFixed(2), tx, 190);
 		}
 		else{
-			enemy4 =  context.drawImage(slimer,10,262) + context.fillText(bidders[3] + '$'+ this.ai[3].currBid.toFixed(2) ,ENEMY_X + 12, 280);
+			enemy4 =  context.drawImage(slimer,left,262) + context.fillText(bidders[3] + '$'+ this.ai[3].currBid.toFixed(2), tx, 280);
 		}
 		//call crowd for the player winning
 		//this.playerGoing();

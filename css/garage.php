@@ -20,7 +20,7 @@ function divSelectedCar(){
     echo 'div#Garage div#selectedCar';
 }
 ?>
-/*@import("CarView.css")*/
+/*User Garage div Stylings*/
 <?php divGarage();?>
 {
 <?php
@@ -33,21 +33,21 @@ function divSelectedCar(){
 	z-index: 1;
     color:red;
 }
-<?php divGarage();?> button#backBtn
-{<?php
+/*<php divGarage();?> button#backBtn
+{<php
     posAbs();
-?>
+>
     bottom:70%;
     left:10%;
     width:5%;
     height:5%;
     font-size:1.25vw;
-}
+}*/
 <?php divGarage();?> button#viewCar
 {<?php
     posAbs();
 ?>
-    bottom:70%;
+    bottom:5%;
     left:30%;
     width:5%;
     height:5%;
@@ -57,8 +57,28 @@ function divSelectedCar(){
 {<?php
     posAbs();
 ?>
-    bottom:70%;
+    bottom:5%;
     left:20%;
+    width:5%;
+    height:5%;
+    font-size:1.25vw;
+}
+<?php divGarage();?> button#sales
+{<?php
+    posAbs();
+?>
+    bottom:5%;
+    left:35%;
+    width:5%;
+    height:5%;
+    font-size:1.25vw;
+}
+<?php divGarage();?> button#shop
+{<?php
+    posAbs();
+?>
+    bottom:5%;
+    left:10%;
     width:5%;
     height:5%;
     font-size:1.25vw;
@@ -92,8 +112,8 @@ function divSelectedCar(){
 	background: url('../images/defaultBG.jpg') no-repeat 0 0;
 	overflow-y:scroll;
 <?php posAbs();?>
-	height:80%;
-	top:36%;
+	height:60%;
+	top:30%;
     left:5%;
     width:35%;
 }

@@ -149,9 +149,9 @@ button#backBtn
     cursor:pointer;
 	position:absolute;
 	left:5%;
-	bottom:6%;
-    width:4%;
-	height:6%;
+	bottom:5%;
+    width:5%;
+	height:5%;
 }
 button#homeBtn
 {
@@ -159,10 +159,10 @@ button#homeBtn
 	font-weight: bold;
     background-size : 100% 100%;
 	position:absolute;
-    width:4%;
-	height:6%;
+    width:5%;
+	height:5%;
 	right:5%;
-	bottom:6%;
+	bottom:5%;
     margin:0%;
 }
 label#info{
@@ -317,10 +317,10 @@ div#menu
     background-size:100% 100%;
     display: none;
     position: absolute;
-    bottom:6%;
+    bottom:5%;
     left:0%;
-    width: 4%;
-    height:6%;
+    width: 5%;
+    height:5%;
     cursor: pointer;
     z-index: 3;
 }
