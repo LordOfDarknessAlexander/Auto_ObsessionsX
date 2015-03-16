@@ -1,7 +1,7 @@
 <?php
 //this script contains the api for retrieving stats about the user and associated databases,
 //if this script is executed nothing will happen, as it only contains function definitions
-header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Origin: *');
 //
 require_once 'meta.php';
 //require_once '../include/secure.php';
@@ -76,6 +76,7 @@ class pasGet{
         global $AO_DB;
         
         $aoCars = 'aoCars';
+        $aoCars = 'users';
         $UID = 'user_id';
         $CID = 'car_id';
 		
@@ -170,8 +171,8 @@ class pasGet{
     }
     public static function currentCar(){
         //returns the user's currently selected vehicle
-        //global $AO_DB;
-        //global $aoUsersDB;
+        global $AO_DB;
+        global $aoUsersDB;
         //$id = strval(0);  //$_SESSION['user_id'];
         $users = 'users';
         
