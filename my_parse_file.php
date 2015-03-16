@@ -4,7 +4,7 @@ require_once 'include/dbConnect.php';
 
 if(isset($_SESSION['uname']))
 {
-	//echo $_SESSION['uname'];
+	echo $_SESSION['uname'];
 	if( isset( $_POST) )
 	{
 		if ( !empty($_POST['money']) || !empty($_POST['tokens']) || !empty($_POST['prestige']) || !empty($_POST['m_marker']))
