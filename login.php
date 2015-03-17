@@ -48,7 +48,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         echo "password:$p";?><br><?php
 		
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
-		$q = "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";		
+		$q = "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";	
+$_SESSION = $loggedIn;		
 		/*
         $res = pasGet::userLogin($e, $uname);
         if(!empty($res))
