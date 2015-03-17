@@ -22,6 +22,7 @@ html::title('Login Page');
 <?php 
 // This section processes submissions from the login form.
 // Check if the form has been submitted:
+$loggedIn = false;
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {	// Validate the email address:
 	if(!empty($_POST['email'])){
@@ -55,7 +56,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             $_SESSION = $res;
         }
 		*/
-		
+		$loggedIn = true;
 		$result = $AO_DB->query($q);
 		// Check the result:
         
@@ -69,6 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
 			//$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : './members-page.php'; // Ternary operation to set the URL
 			$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'members.php' ; 
+			
             mysqli_free_result($result);
             header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
             //ob_end_clean(); // Delete the buffer.
