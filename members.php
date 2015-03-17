@@ -40,6 +40,7 @@ require 'includes/info-col.php';
         </h2>
 
         <div id='midcol'>
+		
 <?php
 //Query the database
 
@@ -65,6 +66,7 @@ if(mysqli_num_rows($result) != 0)
             <label id='prest'>Prestige: $prest</label>
             <label id='markers'>Mile Markers: $m_marker</label>
             </div>";
+		$loggedIn = true;
 	}
 }
 else
