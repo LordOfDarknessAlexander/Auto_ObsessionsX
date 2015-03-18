@@ -60,6 +60,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 			 <?php 
 		   if(isset($_SESSION['uname']) )
 			{
+				echo "{$_SESSION['uname']}";
 				$loggedIn = true;
 			}
 			else

@@ -49,7 +49,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
 		$q = "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";	
-$_SESSION = $loggedIn;		
+		
 		/*
         $res = pasGet::userLogin($e, $uname);
         if(!empty($res))
@@ -57,7 +57,7 @@ $_SESSION = $loggedIn;
             $_SESSION = $res;
         }
 		*/
-		$loggedIn = true;
+		
 		$result = $AO_DB->query($q);
 		// Check the result:
         
@@ -71,7 +71,7 @@ $_SESSION = $loggedIn;
 			$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
 			//$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : './members-page.php'; // Ternary operation to set the URL
 			$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'members.php' ; 
-			
+			$loggedIn = true;
             mysqli_free_result($result);
             header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
             //ob_end_clean(); // Delete the buffer.
