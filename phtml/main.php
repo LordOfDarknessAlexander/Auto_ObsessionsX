@@ -58,17 +58,19 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 				</form>
 			</div> ---->
 			 <?php 
-		  
-			
-			//if($_SESSION['uname'] == $uname)
-			if(isset($_SESSION['uname']))
+			session_start();
+			$uname = $_SESSION['uname'] ;
+			//$uname = $_SESSION['guest'] ;
+			if($_SESSION['uname'] == $uname)
+			//if(isset($_SESSION['uname']))
 			{
-				//echo "{$_SESSION['uname']}";
+				echo "Welcome {$_SESSION['uname']}";
 				$loggedIn = true;
 			}
 			else
 			{
 				$loggedIn = false;
+				$uname = 'guest';
 			}
 		   if(!$loggedIn)
 		   { 
@@ -99,7 +101,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 				
 				 echo '
 					<div id="loginfields">
-					<h2>Hi</h2>
+					
 					<ul>
 				   <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
 				 
