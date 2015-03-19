@@ -29,7 +29,7 @@ class pasRemove
         if($res->num_rows){
             $uid = $res->fetch_assoc()['user_id'];
             //
-            echo "removing user account with ID:$uid<br>";
+            //echo "removing user account with ID:$uid<br>";
             //remove from finalpost users
             if(pasRemove::dropUser($uid) ){
                 //remove table from aoUsersDB
@@ -47,7 +47,7 @@ class pasRemove
         else{
             //$erno = $AO_DB->con->errno;
             //$err = $AO_DB->con->error;
-            echo "<p class='error'>remove userAccount() failed,<br> no entry in database</p><br>";
+            echo "<p class='error'>remove userAccount() failed, no entry in database</p><br>";
         }
         return false;
     }

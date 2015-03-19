@@ -33,7 +33,11 @@ html::title('Account Disband Page');
 <body>
 
 <div id='container'>
-<h1>User Account Disband</h1>
+<h1>Disband User Account</h1>
+<?php require 'includes/nav.php';?>
+    <div id='reg-navigation'>
+        <a href='members.php'>Cancel</a><br>
+    </div>
     <div id='content'><!--Start of page content-->
 <?php
 // This section processes submissions from the login form.
@@ -67,7 +71,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         
         if(!$res){
             echo "<p class='error'>Error Removing account!</p><br>";
-            //header('location:index.php?page=disband');   //redirect to AO home web-page
+            //header('location:index.php');   //redirect to AO home web-page
             //exit();
         }
         //else user removed account, sign out and close session!
@@ -96,5 +100,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     </form>
 </div>
     </div><!--end content-->
+<?php require 'phtml/legal.php';?>
 </div><!--root div-->
 <?php html::footer();?>
