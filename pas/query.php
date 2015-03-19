@@ -88,7 +88,11 @@ if(isset($_GET) && !empty($_GET) ){
         exit();
     }
     if($op == 'gucc'){
-        //pasGet::currentCar();
+        //echo json_encode(pasGet::currentCar() );
+        exit();
+    }
+    if($op == 'gcid'){
+        echo json_encode(pasGet::currentCarID() );
         exit();
     }
     //elseif($op == 'ucs'){

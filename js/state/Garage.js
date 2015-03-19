@@ -133,8 +133,12 @@ var Garage = {
     initUI:function(){
         //init user interface elements, current and selected cars and the car buttons
         console.log('calling initUI()');
+        var funcName = 'Garage.js Garage::initUI()';
+//<php if(loggedIn()){
         //$.when(pas.query.userCar() ).done(
         //function(data){
+//<php}>
+        //pas.query.userCar();
             if(Garage._curCarIndex === null){
                 $('div#Garage #userCar').hide();
             }
@@ -149,9 +153,12 @@ var Garage = {
                 this.setSelectCar({index:selCarIndex});
             }
             this.initCarView();
+            //setHomeImg();
+//<php if(loggedIn()){
         //}).fail(function(jqxhr){
             //alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
         //});
+//<php}>
     },
 	getCurrentCar : function()
 	{	//returns a vehicle, if one is selected or null
@@ -275,7 +282,7 @@ var Garage = {
             
             if(data.length == 0){
                 //exit early is user has no cars
-                console.log(funcName + ',user has no cars!, Buy some, right now!');
+                console.log(funcName + ', user has no cars!, Buy some, right now!');
                 return;
             }
             var args = [];
@@ -335,6 +342,8 @@ var Garage = {
                 //var car = Garage.getCurrentCar();
                 //Storage.local['_carID'] = JSON.stringify(car === null ? 0 : car.id);
             }
+            //var car = Garage.getCurrentCar();
+            //Storage.local['_carID'] = JSON.stringify(car === null ? 0 : car.id);
 			//var array = [];
             if(userGarage.length != 0){
                 Storage.local['userGarage'] = JSON.stringify(userGarage); //array);
@@ -384,6 +393,11 @@ var Garage = {
         }
 		if(selCarIndex < userGarage.length){
             Garage._curCarIndex = selCarIndex;	//maintain index, instead of copying a car
+            var car = Garage.getCurrentCar();
+            _curCarID = (car === null) ? 0 : car.id;
+//<php if(loggedIn() ){>
+            pas.set.userCar(_curCarID);
+//<php}>
         }
     },
 	setCurrentCar : function()
@@ -486,7 +500,7 @@ var Garage = {
 			//$('div#selectedCar').show();
 			$('div#Garage #select').show();
 			$('div#Garage #viewCar').show();
-						
+
 			for(var i = 0; i < userGarage.length; i++)
 			{	//add buttons to list
 				var car = userGarage[i];

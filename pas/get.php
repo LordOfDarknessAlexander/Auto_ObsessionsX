@@ -165,11 +165,33 @@ class pasGet{
         }
         return array();
     }
+    public static function currentCarID(){
+        //returns the user's currently selected vehicle
+        global $AO_DB;
+        $id = 2;  //$_SESSION['user_id'];
+        $users = 'users';
+        
+        $res = $AO_DB->query(
+            "SELECT car_id FROM $users WHERE user_id = $id"
+        );
+        
+        if($res){
+            //user has car
+            $ret = intval($res->fetch_assoc()['car_id']);
+            $res->close();
+            return $ret;
+        }
+        else{
+            //query failed, user has no entry in database
+            //echo sql error
+        }
+        return 0;
+    }
     public static function currentCar(){
         //returns the user's currently selected vehicle
         global $AO_DB;
         global $aoUsersDB;
-        //$id = strval(2);  //$_SESSION['user_id'];
+        //$id = 2;  //$_SESSION['user_id'];
         $users = 'users';
         
         /*$result = $AO_DB->query(

@@ -19,6 +19,8 @@ var width = canvas.getAttribute('width'),
 	height:canvas.getAttribute('height')
 };*/
 
+var _curCarID = 0;
+    
 var player, stop, ticker;
 
 var Storage = {

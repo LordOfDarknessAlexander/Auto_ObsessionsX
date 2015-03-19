@@ -101,6 +101,7 @@ var pas = {
                         return;
                     }
                     //alert(funcName + ', User lost auction! Ajax response success!' + JSON.stringify(data) );
+                    _curCarID = data;
                 },
                 function(jqxhr){
                     //call will fail if result is not properly formated JSON!
@@ -113,19 +114,18 @@ var pas = {
     query:{
         userCar:function(){
             //get user's current car ID
-            var funcName = 'js\pas.js, pas::query::curUserCar(vehicleID)';
+            var funcName = 'js\pas.js, pas::query::userCar(vehicleID)';
             
-            return jq.get('pas/query.php?op=gucc',
+            return jq.get('pas/query.php?op=gcid',
                 function(data){
                     //the response string is converted by jquery into a Javascript object!
                     if(data === null){
                         alert(funcName + ', Error:ajax response returned null!');
-                        //finished = true;
                         return;
                     }
                     //alert(funcName + ', User lost auction! Ajax response success!' + JSON.stringify(data) );
-                    //_curCarID = data;
-                    //setHomeImg();
+                    _curCarID = data;
+                    setHomeImg();
                 },
                 function(jqxhr){
                     //call will fail if result is not properly formated JSON!

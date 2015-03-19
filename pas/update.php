@@ -34,10 +34,10 @@ class pasUpdate{
     public static function userCurrentCar($carID){
         global $AO_DB;
         $users = 'users';
-        //$uid = 2; //getUserTableName();
-        //return $AO_DB>query(
-            //"UPDATE $users SET car_id=$carID WHERE user_id = $uid"
-        //) ? $carID : 0;
+        $uid = 2; //$_SESSION['user_id'];
+        return hasCar($carID) ? ($AO_DB->query(
+            "UPDATE $users SET car_id=$carID WHERE user_id = $uid"
+        ) ? $carID : 0) : 0;
     }
 }
 /*public static function hasSoldCar($carID){
