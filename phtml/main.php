@@ -58,9 +58,12 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 				</form>
 			</div> ---->
 			 <?php 
-		   if(isset($_SESSION['uname']) )
+		  
+			
+			//if($_SESSION['uname'] == $uname)
+			if(isset($_SESSION['uname']))
 			{
-				echo "{$_SESSION['uname']}";
+				//echo "{$_SESSION['uname']}";
 				$loggedIn = true;
 			}
 			else
