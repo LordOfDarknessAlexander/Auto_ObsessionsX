@@ -60,8 +60,10 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 			 <?php 
 			session_start();
 			$uname = $_SESSION['uname'] ;
+			$userId = $_SESSION['user_id'] ;
 			//$uname = $_SESSION['guest'] ;
-			if($_SESSION['uname'] == $uname)
+			//if(!isset($_SESSION) || !isset($_SESSION['user_id']) )
+			if(isset($_SESSION) && $_SESSION['uname']  )
 			//if(isset($_SESSION['uname']))
 			{
 				echo "Welcome {$_SESSION['uname']}";
