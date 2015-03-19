@@ -79,7 +79,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 				echo
 				'
 				<ul>
-				   <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
+				   <li><a href="javascript:void(0)" class="button play">Play as Guest</a></li>
 				   <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
 				   
 				   <li><a href="javascript:void(0)" class="button Register">Register</a></li> 
