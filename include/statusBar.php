@@ -3,7 +3,7 @@ class StatusBar
 {   //class representing a Vehicle on the server
     //private const
     public
-        $money,   //uint
+        $money,   //float
         $tokens,  //uint
         $prestige,  //uint
         $markers; //uint
@@ -32,6 +32,19 @@ class StatusBar
                 'markers'=>$this->markers
                 )
             );*/
+    }
+    //update(){
+        //sql query user's stats
+    //}
+    public function html(){?>
+<!--div id ='statBar'>
+    <label>User: <php echo $this->uname;?></label>
+    <label id='cash'>Money: <php echo $this->money;?></label>
+    <label id='tokens'>Tokens: <php echo $this->tokens;?></label>
+    <label id='prest'>Prestige: <php echo $this->prest;?></label>
+    <label id='markers'>Mile Markers: <php echo $this->markers;?></label>
+</div-->
+<?php
     }
 }
 ?>

@@ -1,12 +1,12 @@
 <?php
-// This is the logout page for the site.
-//require ('config.inc.php'); 
+//
+//
+//
 session_start();//access the current session.
-// If no first_name session variable exists, redirect the user:
-//if no session variable then redirect the user
-if(!isset($_SESSION['user_id'])){
+//Must logged in to logout, else redirect to login
+if(!isset($_SESSION['user_id']) ){
     //user not logged in, redirect to loggin
-	header("location:index.php");
+	header("location:login.php");
 	exit();
 }
 else{ 

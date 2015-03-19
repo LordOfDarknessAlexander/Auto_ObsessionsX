@@ -3,7 +3,7 @@
 //used by javascript ajax requests
 header('Access-Control-Allow-Origin: *');
 //
-require_once 'meta.php';
+require_once '../pasMeta.php';
 require_once 'update.php';
 require_once 'query.php';
 require_once 'remove.php';

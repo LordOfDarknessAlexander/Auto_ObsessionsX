@@ -186,6 +186,11 @@ div#content h2{
     text-align:center;
     margin:5px 5px 0 0;
 }
+div#confirmFields{
+    position:absolute;
+    top:0%;
+    width:50%;
+}
 div#playerData
 {
 	top:0%;
@@ -263,8 +268,6 @@ p.error {
     
     position:absolute;
     right:0%;
-    top:30%;
-    height:70%;
     width:50%;
 }
 .label {

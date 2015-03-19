@@ -2,6 +2,7 @@
 require_once '../include/html.php';
 require_once '../include/dbConnect.php';
 require_once '../pas/create.php';
+require_once '../re.php';
 
 html::doctype();
 ?>
@@ -23,7 +24,7 @@ require 'includes/nav.php';
 <?php
 // This code inserts a record into the users table
 // Has the form been submitted?
-if($_SERVER['REQUEST_METHOD'] == 'POST') 
+if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 	$errors = array(); // Start an array named errors 
 
@@ -152,15 +153,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                     $uid = $res->fetch_assoc()['user_id'];    //return type is string
                     //echo "registered user with id:$uid<br> type:" . gettype($uid);
                     if(pasCreate::userTable($uid) ){    //cars the user owns
-                        //if(pasCreate::auctionLossTable($uid){     //table for maintaining the user's losses
-                            //if(pasCreate::carSaleTable($uid) ){        //vehicles the user has sold                       
+                        if(pasCreate::auctionLossTable($uid) ){     //table for maintaining the user's losses
+                            if(pasCreate::carSaleTable($uid) ){        //vehicles the user has sold                       
                                 //header("location: reg-confirm.php");
-                            //}
+                            }
                             //else code succeded
-                        //}
+                        }
                         //could not create car sale table
                         header("location: register-thanks.php");
-                        //exit();
                     }
                     else{
                         echo "could not create additional tables for user with id:$uid<br>";

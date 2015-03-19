@@ -15,10 +15,10 @@ function isNumber($str){
     //is string a continuous series of digits
     //no special characters, letters, whitespace or symbols
     return preg_match('/^[[:digit:]]+/$', $str);
-}
+}*/
 function isPassword($str){
     //validates a series of {8-12} characters of digits and/or letters
     //no special characters, whitespace or symbols
     return preg_match('/^\w{8,12}$/', $str);
-}*/
+}
 ?>	

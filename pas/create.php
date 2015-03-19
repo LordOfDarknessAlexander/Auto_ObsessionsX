@@ -3,7 +3,7 @@
 //used by javascript ajax requests
 header('Access-Control-Allow-Origin: *');
 //
-require_once 'meta.php';
+require_once '../pasMeta.php';
 //require_once '../re.php';
 //require_once '../vehicles/vehicle.php';
 require_once '../include/dbConnect.php';  //sql database connection
@@ -20,14 +20,35 @@ class pasCreate
         $aoUsers = 'users';
         //get validated and sanitized form data
         //$addUser = $AO_DB->prepare(
-           //"INSERT INTO $aoUsers
-           //(user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
-            //(?, ?, ?, ?, ?, ?, NOW(), 0, 50000.00, 0, 0, 0, 0, 0)"
+           //"INSERT INTO $aoUsers(
+                //user_id, uname, title, fname, lname,
+                //curCarID, money, m_marker, tokens, prestige, user_level,
+                //email, psword,
+                //registration_date,
+                //confirm
+            //)VALUES(
+                //?, ?, ?, ?,
+                //?, ?,
+                //?, NOW(), 0, 
+                //50000.00, 0, 0, 0,
+                //0
+            //)"
         //);
         
         /*$res = $AO_DB->query(
-           "INSERT INTO $aoUsers (user_id, title, fname, lname, email, psword, uname, registration_date, user_level, money, m_marker, tokens, prestige, curCarID) VALUES
-            ($title, $fname, $lname, $email, $pw, $uname, NOW(), 0, 50000.00, 0, 0, 0, 0, 0)"
+           "INSERT INTO $aoUsers(
+                user_id, uname, title, fname, lname,
+                curCarID, money, m_marker, tokens, prestige, user_level,
+                email, psword,
+                registration_date,
+                confirm
+            )VALUES(
+                $uid, $uname, $title, $fname, $lname,
+                0, 50000.00, 0, 0, 0, 0,
+                $email, $pw,
+                NOW(),
+                0
+            )"
         );
         
         if(!$res){
@@ -37,14 +58,13 @@ class pasCreate
         }
         return ret;
         */
-        return null;
+        return false;
     }
     public static function userTable($userID){
         //creates an empty table in aoUsersDB upon user registration,
         //user id should be 
         global $aoUsersDB;
         //escape and sanitize input string, incase someone tries an sql injection attack
-        
         $tableName = "user$userID";  //getUserTableName();
         $uint = 'int unsigned';
         $defaultCharset = 'DEFAULT CHARSET = latin1';
@@ -73,12 +93,12 @@ class pasCreate
     public static function carSaleTable($uid){
         //creates an empty table in aoUsersDB upon user registration
         global $aoCarSalesDB;
-        $tableName = getUserTableName();
+        $tableName = "user$uid";    //getUserTableName();
         $uint = 'int unsigned';
         $defaultCharset = 'DEFAULT CHARSET = latin1';
         $defaultEngine = 'ENGINE = InnoDB';
         
-        /*$res = $aoCarSalesDB->query(
+        $res = true;    /*$aoCarSalesDB->query(
            "CREATE TABLE IF NOT EXISTS $tableName(
                 car_id $uint NOT NULL PRIMARY KEY,
                 price float,    //0 if the auction has not completed, else the total sale price of the car
@@ -94,9 +114,9 @@ class pasCreate
             )$defaultEngine $defaultCharset"
         );*/
          
-        //if($res){   //returns true if execute preformed successfully, false on failure
-            //return true;
-        //}
+        if($res){   //returns true if execute preformed successfully, false on failure
+            return true;
+        }
         //else false, output error
         //$erno = $aoCarSalesDB->errno;
         //$err = $aoCarSalesDB->error;
@@ -106,40 +126,43 @@ class pasCreate
     }
     public static function auctionLossTable($uid){
         //creates an empty table in aoAuctionLossDB
-        //global $aoAuctionLossDB;
+        global $aoAuctionLossDB;
         //$uid = $_SESSION['userID'];
-        $tableName = getUserTableName();
+        $tableName = "user$uid";    //getUserTableName();
         $uint = 'int unsigned';
         $defaultCharset = 'DEFAULT CHARSET = latin1';
         $defaultEngine = 'ENGINE = InnoDB';
         
-        /*$res = $aoAuctionLossDB->query(
+        $res = $aoAuctionLossDB->query(
            "CREATE TABLE IF NOT EXISTS $tableName(
                 car_id $uint NOT NULL PRIMARY KEY
             )$defaultEngine $defaultCharset"
-        );*/
+        );
          
-        //if($res){   //returns true if execute preformed successfully, false on failure
-            //return true;
-        //}
+        if($res){   //returns true if execute preformed successfully, false on failure
+            return true;
+        }
         //else false, output error
-        //$erno = $aoAuctionLossDB->errno;
-        //$err = $aoCarSalesDB->error;
-        //echo "pasCreate::carSalesTable($userID), failed:($erno), reason: $err";
+        $erno = $aoAuctionLossDB->con->errno;
+        $err = $aoCarSalesDB->con->error;
+        echo "pasCreate::carSalesTable($uid), failed:($erno), reason: $err. <br> Could not create account.";
         
         return false;
     }
-    function userAccount(){
+    function userAccount($uid){
         //create entry in finalpost
-        //if(pasCreate::userEntry($userID) ){
+        //if(pasCreate::userEntry($uid) ){
             //get userID from final post for the 
-            //if(pasCreae::userTable() {
-                //if(pasCreate::userSalesTable() ){
-                    //if(pasCreate::auctionLossTable() ){
+            //if(pasCreae::userTable($uid) {
+                //if(pasCreate::userSalesTable($uid) ){
+                    //if(pasCreate::auctionLossTable($uid) ){
                         //return true;
                     //}
+                    //echo '';
                 //}
+                //echo '';
             //}
+            //echo '';
         //}
         //return false;
     }
