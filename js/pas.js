@@ -87,7 +87,54 @@ var pas = {
     //pushCar:function(carID){
         //pushes a car from finalpost[aoCarsDB] to aoUsersDB[userTable]
     //}
+    set:{
+        userCar:function(vehicleID){
+        //set user's current car ID
+            var funcName = 'js\pas.js, pas::set::userCar(vehicleID)';
+
+            jq.post('pas/update.php?op=succ',
+                function(data){
+                    //the response string is converted by jquery into a Javascript object!
+                    if(data === null){
+                        alert(funcName + ', Error:ajax response returned null!');
+                        //finished = true;
+                        return;
+                    }
+                    //alert(funcName + ', User lost auction! Ajax response success!' + JSON.stringify(data) );
+                },
+                function(jqxhr){
+                    //call will fail if result is not properly formated JSON!
+                    alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+                },
+                {carID:vehicleID}
+            )
+        }
+    },
     query:{
+        userCar:function(){
+            //get user's current car ID
+            var funcName = 'js\pas.js, pas::query::curUserCar(vehicleID)';
+            
+            return jq.get('pas/query.php?op=gucc',
+                function(data){
+                    //the response string is converted by jquery into a Javascript object!
+                    if(data === null){
+                        alert(funcName + ', Error:ajax response returned null!');
+                        //finished = true;
+                        return;
+                    }
+                    //alert(funcName + ', User lost auction! Ajax response success!' + JSON.stringify(data) );
+                    //_curCarID = data;
+                    //setHomeImg();
+                },
+                function(jqxhr){
+                    //call will fail if result is not properly formated JSON!
+                    alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+                    //_curCarID = 0;    //no car
+                    //setHomeImg();
+                }
+            );
+        },
         loadUser:function()
         {
             var funcName = 'pas::query::loadUser()';

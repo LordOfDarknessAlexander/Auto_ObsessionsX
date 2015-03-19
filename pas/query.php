@@ -87,6 +87,10 @@ if(isset($_GET) && !empty($_GET) ){
         pasGet::auctionCars();
         exit();
     }
+    if($op == 'gucc'){
+        //pasGet::currentCar();
+        exit();
+    }
     //elseif($op == 'ucs'){
         //pasGet::userCarSales();
         //exit();

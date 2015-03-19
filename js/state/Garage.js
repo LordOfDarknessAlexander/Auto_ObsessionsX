@@ -133,20 +133,25 @@ var Garage = {
     initUI:function(){
         //init user interface elements, current and selected cars and the car buttons
         console.log('calling initUI()');
-        if(Garage._curCarIndex === null){
-			$('div#Garage #userCar').hide();
-        }
-		else{
-			Garage.setCurrentCar();
-        }
-        
-		if(selCarIndex === null){
-			$('div#selectedCar').hide();
-        }
-		else{
-			this.setSelectCar({index:selCarIndex});
-        }
-        this.initCarView();
+        //$.when(pas.query.userCar() ).done(
+        //function(data){
+            if(Garage._curCarIndex === null){
+                $('div#Garage #userCar').hide();
+            }
+            else{
+                Garage.setCurrentCar();
+            }
+            
+            if(selCarIndex === null){
+                $('div#selectedCar').hide();
+            }
+            else{
+                this.setSelectCar({index:selCarIndex});
+            }
+            this.initCarView();
+        //}).fail(function(jqxhr){
+            //alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+        //});
     },
 	getCurrentCar : function()
 	{	//returns a vehicle, if one is selected or null
@@ -391,20 +396,15 @@ var Garage = {
             var i = this._curCarIndex,
                 //btn = $('#userCar'),
                 src = $('#carSelBtn' + i);
-//<php
-//if(loggedIn){>
-            //save to car ID to final post using ajax
-//<php
-//}
-//else{>
+
             //playing as guest, save to local storage
             if(Storage.local !== null){
                 Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
-                //alert("current car is at index:" + Garage._curCarIndex.toString() );
+                //alert("current car is at index:" + Garage._curCarIndex.toString() 
+                //var car = Garage.getCurrentCar();
+                
+                //Storage.local['_carID'] = JSON.stringify(car !== null car.id : 0););
             }
-//<php
-//}
-//>
 			//
 			div.children('label#carName').text(src.children('label#carName').text() );
 			div.children('label#carInfo').text(src.children('label#carInfo').text() );

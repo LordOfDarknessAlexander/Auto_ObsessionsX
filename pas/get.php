@@ -169,10 +169,12 @@ class pasGet{
         //returns the user's currently selected vehicle
         global $AO_DB;
         global $aoUsersDB;
-        //$id = strval(0);  //$_SESSION['user_id'];
+        //$id = strval(2);  //$_SESSION['user_id'];
         $users = 'users';
         
-        /*$result = $AO_DB->query("SELECT car_id FROM $users WHERE user_id = $id");
+        /*$result = $AO_DB->query(
+            //"SELECT car_id FROM $users WHERE user_id = $id"
+        //);
         
         if($result){
             //user has car

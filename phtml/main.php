@@ -59,21 +59,20 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 			</div> ---->
 			 <?php 
 			session_start();
-			$uname = $_SESSION['uname'] ;
+			
 			//$uname = $_SESSION['guest'] ;
-			if($_SESSION['uname'] == $uname)
-			//if(isset($_SESSION['uname']))
-			{
-				echo "Welcome {$_SESSION['uname']}";
+			if(isset($_SESSION) AND isset($_SESSION['uname']) ){
+                $uname = $_SESSION['uname'];
 				$loggedIn = true;
 			}
-			else
-			{
+			else{
 				$loggedIn = false;
 				$uname = 'guest';
 			}
-		   if(!$loggedIn)
-		   { 
+            echo "Welcome $uname";
+            
+            if(!$loggedIn)
+            { 
 				echo
 				'
 				<ul>

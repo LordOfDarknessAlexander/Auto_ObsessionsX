@@ -31,6 +31,14 @@ class pasUpdate{
         }
         return $ret;
     }
+    public static function userCurrentCar($carID){
+        global $AO_DB;
+        $users = 'users';
+        //$uid = 2; //getUserTableName();
+        //return $AO_DB>query(
+            //"UPDATE $users SET car_id=$carID WHERE user_id = $uid"
+        //) ? $carID : 0;
+    }
 }
 /*public static function hasSoldCar($carID){
     //does the user's table in aoCarSalesDB already have an entry with car_id '$id'
@@ -90,28 +98,6 @@ class pasUpdate{
     }
     return null;
 }*/
-function setUserCar($carID){
-    global $AO_DB;
-    //$aoUsers = 'aoUsers';
-    //$uid = $_SESSION['user_id'];
-    //static $setCar = $AO_DB->prepare("UPDATE $aoUsers SET car_id = ? WHERE user_id = ?");
-    //if($setCar){
-        //if($AO_DB->con->bind_paramas('ii', $cid, $uid)){
-            //if(setCar->execute() ){
-                //echo json_encode($carID);
-            //}
-        //}
-    //}
-    if($carID == 0){
-        //return json_encode($res ? true : false);
-    }
-    elseif($carID > 0 AND hasCar($carID)){
-        //$res = $AO_DB->query("UPDATE car_id FROM aousers WHERE user_id = '$uid'");
-        //return json_encode($res ? $carID : false);
-    }
-    //else not valid car ID, do nothing
-    //return json_encode(false);
-}
 /*function updateSale($sale){
     gloabal $aoCarSalesDB;
     $res = $aoCarSalesDB->query(
@@ -199,6 +185,13 @@ if(isset($_POST) && !empty($_POST) ){
             elseif($op == 'iul'){
                 //insert user loss for carID
                 $res = pasUpdate::userLoss($carID);
+                
+                echo json_encode($res);
+                exit();
+            }
+            elseif($op == 'succ'){
+                //set user current car
+                $res = pasUpdate::userCurrentCar($carID);
                 
                 echo json_encode($res);
                 exit();
