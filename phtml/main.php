@@ -59,8 +59,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 			</div> ---->
 			 <?php 
 			session_start();
-			
-			//$uname = $_SESSION['guest'] ;
+
 			if(isset($_SESSION) AND isset($_SESSION['uname']) ){
                 $uname = $_SESSION['uname'];
 				$loggedIn = true;
@@ -76,7 +75,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 				echo
 				'
 				<ul>
-				   <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
+				   <li><a href="javascript:void(0)" class="button play">Play as Guest</a></li>
 				   <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
 				   
 				   <li><a href="javascript:void(0)" class="button Register">Register</a></li> 
