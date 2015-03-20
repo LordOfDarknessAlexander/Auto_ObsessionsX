@@ -61,7 +61,6 @@ if(isset($_SESSION['uname']))
         <div id='midcol'>
 <?php
 //Query the database
-
 $q = "SELECT * FROM users WHERE uname = '$_SESSION[uname]'";		
 $result = mysqli_query ($AO_DB->con, $q);
 
@@ -75,9 +74,16 @@ if(mysqli_num_rows($result) != 0)
 		$money = $rows['money'];
 		$m_marker = $rows['m_marker'];
 		$tokens = $rows['tokens'];
-		$prestige = $rows['prestige'];
+		$prest = $rows['prestige'];
 		
-		echo "<div id ='playerData'> <p>Player: $fname <br> Money: $money <br> Mile Markers: $m_marker <br> Tokens: $tokens<br> Prestige: $prestige</p></div>";
+		echo "<div id ='playerData'>
+            <label>Player: $uname</label>
+            <label id='cash'>Money: $money</label>
+            <label id='tokens'>Tokens: $tokens</label>
+            <label id='prest'>Prestige: $prest</label>
+            <label id='markers'>Mile Markers: $m_marker</label>
+            </div>";
+		$loggedIn = true;
 	}
 }
 else
