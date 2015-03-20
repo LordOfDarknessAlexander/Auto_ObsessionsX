@@ -1,15 +1,13 @@
 <?php 
 require_once 'include/dbConnect.php';
-//$uname = $_SESSION[uname];
-
+//
 session_start();
-
+//
 //since no vars need to be passed to this script for it to work,
 //post doesn't matter
-//if(isset($_POST) )
+//if(isset($_SESSION) AND isset($_SESSION['user_id']))
 //{
-//if(isset($_SESSION['user_id']))
-//{
+    //$uname = $_SESSION['uname'];
     $uid = $_SESSION['user_id']; 
     //Quick edit to squish some bugs, Cheers and good luck with the rest!
     //user ID's are unique, making a select query will only returns
@@ -28,24 +26,9 @@ session_start();
             'money' => floatval($rows['money']),
             'tokens' => intval($rows['tokens']),
             'prestige' => intval($rows['prestige']),
-            'm_marker' => intval($rows['m_marker'])
+            'm_marker' => intval($rows['m_marker']),
+            'cid'=>intval($rows['car_id'])
         ));
-        //Turn the results in to an array
-        /*while($rows = $result->fetch_assoc())
-        {
-            $money = $rows['money'];
-            $m_marker = $rows['m_marker'];
-            $tokens = $rows['tokens'];
-            $prestige = $rows['prestige'];
-            $varma = array("$money","$tokens","$prestige","$m_marker"); 
-            //header( 'Content-Type: application/json' );
-            //echo '{"money":"' . $money . '", "tokens":"' . $tokens . '","prestige":"' . $prestige . ',"m_marker":"' . $m_marker . '"}';
-            //echo '{"money": . $money ", "tokens":"' . $tokens . '","prestige":"' . $prestige . ',"m_marker":"' . $m_marker . '"}';
-            //print json_encode( $varma );
-            echo json_encode($varma,JSON_FORCE_OBJECT); //this makes multiple echo's
-            //$varma2 = $_GET['$varma'];
-            //print json_encode( $varma2 );
-        }*/
     }
     else{
         //echo "No Results";
@@ -53,13 +36,8 @@ session_start();
             echo "<p class='error'>Query failed, Please try again.</p>";
         //exit();
     }
-    //mysqli_close($dbcon);
 //}
 //else{
     //echo 'user name not set';
-//}
-//}
-//else{
-    //echo 'post not set';
 //}
 ?>

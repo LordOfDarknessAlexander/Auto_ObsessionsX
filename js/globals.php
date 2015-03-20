@@ -1,6 +1,10 @@
 <?php
 header('Content-type: application/javascript; charset: UTF-8');
 require_once '../ao.php';
+function loggedIn(){
+    //return isset($_SESSION) ? true : false;
+    return true;
+}
 ?>
 // define variables
 var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
@@ -17,6 +21,9 @@ var width = canvas.getAttribute('width'),
     //aspect ratio
     width:canvas.getAttribute('width'),
 	height:canvas.getAttribute('height')
+    getAspect:function(){
+        return (height == 0) ? 0 : width / height;
+    }
 };*/
 
 var _curCarID = 0;
@@ -46,7 +53,7 @@ var userStats = {
 
 function saveUser()
 {	//saves user stats as a JSON string to the browsers local storage
-//<php if(loggedIn){?>
+<?php if(loggedIn() ){?>
     var funcName = 'gloabals.js pas::saveUser()';
     /*jq.post('pas/update.php',
         function(data){
@@ -62,27 +69,40 @@ function saveUser()
             alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
             //throw exception, game can't work without user stats
         },
-        userStats
+        {stats:userStats, carID: _curCarID}
     );*/
-//<php else{?>
+<?php
+}
+//else{
+?>
 	if(Storage.local !== null){
 		Storage.local._stats = JSON.stringify(userStats);
+        //Storage.local._carID = JSON.stringify(_curCarID);
 	}
 	//else local storage not available
-//<php
+<?php
 //}
+?>
 }
 function loadUser()
 {	//serialize user stats from local storage, if played previously
-//<php if(loggedIn){?>
+<?php if(loggedIn() ){?>
     pas.query.loadUser();
-//<php
-//}
-//else{?>
+<?php
+}
+//else{
+?>
 	/*if(Storage.local !== null){
+        if('_carID' in Storage.local){
+			_curCarID = (int)JSON.parse(Storage.local._carID);
+			
+		}
+		else{	//no previous save data
+			_curCarID = 0;
+		}
+        
 		if('_stats' in Storage.local){
 			userStats = JSON.parse(Storage.local._stats);
-			
 		}
 		else{	//no previous save data
 			userStats = {
@@ -94,9 +114,9 @@ function loadUser()
 			};
 		}
 	}*/
-//<php
+<?php
 //}
-//?>
+?>
 }
 
 var amoney;

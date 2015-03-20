@@ -182,6 +182,8 @@ var pas = {
                     prestige:data.prestige,
                     marker:data.m_marker
                 };
+                _curCarID = data.cid;
+                console.log('cur car id:' + _curCarID.toString() );
                 setStatBar();
             }).fail(function(jqxhr){
                 //call will fail if result is not properly formatted JSON!
