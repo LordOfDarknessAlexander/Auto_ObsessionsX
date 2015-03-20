@@ -48,6 +48,7 @@ if(isset($_SESSION['uname']))
             <p>&#9632;Use the Search button to locate a particular member</p>
             <p>&#9632;Use the Users button to locate a member's Username </p>
             <p>&nbsp;</p>
+			<li><a href='..\index.php' title='Play Game'>Play Game</a></li>
         </div>
         <!-- End of the members page content. -->
     </div>
