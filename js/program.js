@@ -75,7 +75,7 @@ function(){
 	//alert('doc ready!');
 	//pas.query.loadUser();   //load user stats!
 	getLastAllowanceTime();
-
+	//setStatBar();
 	loadUser();
     Garage.load();  //load user garage!
     //AuctionSell.load(); //load user sales, after garage!
