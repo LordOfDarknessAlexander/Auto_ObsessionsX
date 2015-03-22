@@ -19,4 +19,4 @@ $address = $to;
 $mail->AddAddress($address, $to);
 $mail->Send(); 
 }
-?>
+?>s
