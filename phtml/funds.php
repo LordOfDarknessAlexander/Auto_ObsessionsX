@@ -28,7 +28,7 @@ require_once 'AO_UI.php';
             <li><input type='button' id='addAllowanceBtn' value='Get Credits'></li><br>
             <li><input type='image' id='addMinorFundsBtn' value='chump change'></li><br>
             <li><input type='image' id='addMediumFundsBtn' value='stack of bills'></li><br>
-            <li><input type='image' id='addMajorFundsBtn' value='Pile 'o Cash'></li>
+            <li><input type='image' id='addMajorFundsBtn' value='Pile of Cash'></li>
             
             <!--label for='buy'>Buy Now:</label>
             <input type='image' id='submitBtn' value='Pay with PayPal' src='https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif'-->

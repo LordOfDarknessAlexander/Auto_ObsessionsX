@@ -129,6 +129,50 @@ class pasUpdate{
         exit();
     }
 }*/
+class purchase{
+    //private
+    //$failed = 'Could not complete purchase!';
+    static public function funds($funds){
+        if(is_float($funds) AND $funds > 0){
+            $f = round($funds, 2);  //round to 2 decimal places
+            //$uid = //getUID();
+            $user = 'users';
+            //$res = $AO_DB->query(
+                //"UPDATE $users SET money=$f WHERE user_id = $uid"
+            //);
+        }
+        else{
+            //$f = json_encode($funds);
+            //echo "purchase::funds(), invalid value $funds, purchase::failed";
+        }
+    }
+    static public function tokens($val){
+        //adds $val number of tokens to user's account,
+        //$val must be an unsigned int greater than 0
+        if(is_int($val) AND $val > 0){
+            //$uid = //getUID();
+            $user = 'users';
+            //$res = $AO_DB->query(
+                //"UPDATE $users SET tokens=$val WHERE user_id = $uid"
+            //);
+        }
+        else{
+            //$t = json_encode($funds);
+            //echo "purchase::tokens(), invalid value $t, purchase::failed";
+        }
+    }
+}
+class purchaseTokens{
+    static public function small(){
+        //adds 1 token to user's account
+    }
+    static public function medium(){
+        //adds 3 token to user's account
+    }
+    static public function large(){
+        //adds 5 token to user's account
+    }
+}
 if(isset($_POST) && !empty($_POST) ){
     if(isset($_POST['carID'])){
         $carID = $_POST['carID'];   //intval(trim($_POST['carID']));
