@@ -2,19 +2,14 @@
 require_once 'include/dbConnect.php';
 //
 session_start();
-//
-//since no vars need to be passed to this script for it to work,
-//post doesn't matter
-//if(isset($_SESSION) AND isset($_SESSION['user_id']))
-//{
-    //$uname = $_SESSION['uname'];
+
     $uid = $_SESSION['user_id']; 
     //Quick edit to squish some bugs, Cheers and good luck with the rest!
     //user ID's are unique, making a select query will only returns
     //the fields for a single match, where as user names are not unique and my return multiple sets of fields
     //TODO: make user names unique(only 1 user should match a signle user name in the sql)
-    //$q = "SELECT * FROM users WHERE user_id = $uid";	
-    $q = "SELECT * FROM users WHERE uname = 'Dante'";	
+    $q = "SELECT * FROM users WHERE user_id = $uid";	
+   // $q = "SELECT * FROM users WHERE uname = 'Dante'";	
     $result = $AO_DB->query($q);
     //Count the returned rows
     if($result) //mysqli_num_rows($result) != 0)
@@ -36,8 +31,5 @@ session_start();
             echo "<p class='error'>Query failed, Please try again.</p>";
         //exit();
     }
-//}
-//else{
-    //echo 'user name not set';
-//}
+
 ?>
