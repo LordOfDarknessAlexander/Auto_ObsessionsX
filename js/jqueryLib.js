@@ -291,8 +291,12 @@ function setName()
 {
 	//$('div#statBar label#fname').text('User: ' + userStats.fn.toString() );
 }	
-function setMoney()
+function setMoney(val)
 {
+    if(val !== null && val !== undefined){
+        userStats.money = val;  //if an argument is passed, assign value to money
+    }
+    //assign value to html element
 	$('div#statBar label#money').text('Money: ' + userStats.money.toFixed(2) );
 	
 	if(userStats.money <= 0)
@@ -302,10 +306,28 @@ function setMoney()
 		$('div#statBar label#money').text('Refresh Dough???: ' + userStats.money.toFixed(2) );
 	}	
 }
-function setTokens(){
+function setTokens(val){
+    if(val !== null &&
+        val !== undefined &&
+        val >= 0 &&
+        val != userStats.tokens
+    ){
+        userStats.tokens = val;  //if an argument is passed, assign value to money
+    }
 	$('div#statBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
+    
+    if(userStats.tokens == 0){
+        //jq.Msg('No more tokens, go to the store to purchase more!')
+    }
 }
-function setPrestige(){
+function setPrestige(val){
+    if(val !== null &&
+        val !== undefined &&
+        val >= 0 &&
+        val != userStats.prestige
+    ){
+        userStats.prestige = val;  //if an argument is passed, assign value to money
+    }
 	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
 }
 function setMarkers(){

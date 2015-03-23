@@ -242,7 +242,7 @@ div#statBar
 	color:red;
 	font-weight: bold;
 	z-index : 2;
-	font-size:1.2em;
+	font-size:2.0vw;
 }
 div#statBar label{
     position:absolute;

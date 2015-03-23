@@ -129,120 +129,232 @@ class pasUpdate{
         exit();
     }
 }*/
+function getUID(){
+    //returns the currently logged in user's ID
+    if(isset($_SESSION) && isset($_SESSION['user_id'])){
+        //return $_SESSION['user_id'];
+    }
+    return 3;
+}
 class purchase{
     //private
-    //$failed = 'Could not complete purchase!';
+    //const FAILED = 'Could not complete purchase!';
     static public function funds($funds){
-        if(is_float($funds) AND $funds > 0){
-            $f = round($funds, 2);  //round to 2 decimal places
-            //$uid = //getUID();
-            $user = 'users';
-            //$res = $AO_DB->query(
-                //"UPDATE $users SET money=$f WHERE user_id = $uid"
-            //);
+        global $AO_DB;
+        $MAX_FUNDS = PHP_INT_MAX;
+        
+        if(is_float($funds) && $funds > 0.0){
+            $f = round($funds, 2);  //round currency to 2 decimal places
+            $uid = strval(getUID() );
+            $users = 'users';
+            $m = 'money';
+            $rm = $AO_DB->query(
+                "SELECT $m FROM $users WHERE user_id = $uid"
+            );
+            
+            if($rm){
+                $uf = floatval($rm->fetch_assoc()[$m]);  //user funds
+                $nf = $uf + $f;   //new funds
+                
+                if($nf < $MAX_FUNDS){
+                    $res = $AO_DB->query(
+                        "UPDATE $users SET $m = $nf WHERE user_id = $uid"
+                    );
+                    if($res){
+                        echo json_encode($nf);
+                        return;
+                    }
+                    //else
+                    //output sql errors
+                }
+                //else
+                echo 'Operation failed, could not purchase more funds, cap reached!';
+                $rm->close();
+                echo json_encode($nf);
+            }
+            //else
+            //echo 'sql error, select query failed!';
+            //return;
         }
-        else{
-            //$f = json_encode($funds);
-            //echo "purchase::funds(), invalid value $funds, purchase::failed";
-        }
+        //$f = json_encode($funds);
+        //echo "purchase::funds(), invalid value $f, purchase::failed";
     }
     static public function tokens($val){
         //adds $val number of tokens to user's account,
         //$val must be an unsigned int greater than 0
-        if(is_int($val) AND $val > 0){
-            //$uid = //getUID();
-            $user = 'users';
-            //$res = $AO_DB->query(
-                //"UPDATE $users SET tokens=$val WHERE user_id = $uid"
-            //);
+        global $AO_DB;
+        $MAX_TOKENS = PHP_INT_MAX;
+        
+        if(is_int($val) && $val > 0){
+            $uid = strval(getUID() );
+            $users = 'users';
+            $t = 'tokens';
+            $rt = $AO_DB->query(
+                "SELECT $t FROM $users WHERE user_id = $uid"
+            );
+            
+            if($rt){
+                $ut = intval($rt->fetch_assoc()[$t]);   //user's current tokens
+                $nt = $ut + $val;    //new tokens
+                
+                if($nt < $MAX_TOKENS){
+                    $res = $AO_DB->query(
+                        "UPDATE $users SET $t=$nt WHERE user_id = $uid"
+                    );
+                    
+                    if($res){
+                        echo json_encode($nt);
+                        return;
+                    }
+                    //else
+                    //echo json_encode($ut);
+                    //output sql errors
+                    return;
+                }
+                //else
+                echo 'Operation failed, could not purchase more tokens, cap reached!';
+                $rt->close();
+                echo json_encode($ut);
+                return;
+            }
+            //else
+            //echo 'sql error, select query failed!';
+            //return;
         }
-        else{
-            //$t = json_encode($funds);
-            //echo "purchase::tokens(), invalid value $t, purchase::failed";
-        }
+        //$f = json_encode($funds);
+        //echo "purchase::funds(), invalid value $f, purchase::failed";
     }
 }
-class purchaseTokens{
-    static public function small(){
-        //adds 1 token to user's account
+function addPrestige($val){
+    //$val must be an unsigned int greater than 0
+    global $AO_DB;
+    
+    if(is_int($val) AND $val > 0){
+        //$uid = //getUID();
+        $user = 'users';
+        //$p = 'prestige';
+        //$rp = $AO_DB->query(
+            //"SELECT prestige FROM $users WHERE user_id = $uid"
+        //)
+        //if($rp){
+            //$np = intval($rt->fetch_assoc()['tokens']) + $val;    //new prestige
+            //if(t < $MAX_PRESTIGE){
+                //$res = $AO_DB->query(
+                    //"UPDATE $users SET prestige=$t WHERE user_id = $uid"
+                //);
+            //}
+            //else{
+                //'Operation failed, could not grant more prestige, cap reached!';
+            //}
+        //}
     }
-    static public function medium(){
-        //adds 3 token to user's account
-    }
-    static public function large(){
-        //adds 5 token to user's account
+    else{
+        //$t = json_encode($funds);
+        //echo "purchase::tokens(), invalid value $t, purchase::failed";
     }
 }
+function  addMarkers($val){
+    //$val must be an unsigned int greater than 0
+    global $AO_DB;
+    
+    if(is_int($val) AND $val > 0){
+        //$uid = //getUID();
+        $user = 'users';
+        //$m = 'm_markers';
+        //$res = $AO_DB->query(
+            //"UPDATE $users SET tokens=$val WHERE user_id = $uid"
+        //);
+    }
+    else{
+        //$t = json_encode($funds);
+        //echo "purchase::tokens(), invalid value $t, purchase::failed";
+    }
+}
+//if(isset($_GET) ){
+    //if(isset($_GET['op']) ){
+        //$op = isAlpha($_GET['op']) ? $_GET['op'] : '';
+    //}
+    //elseif($_GET['']){
+        //preform other operations!
+    //}
+    //else no valid get args!
+    //exit();
+//}
 if(isset($_POST) && !empty($_POST) ){
     if(isset($_POST['carID'])){
-        $carID = $_POST['carID'];   //intval(trim($_POST['carID']));
+        //
+        $carID = $_POST['carID'];   //is_int($_POST['carID']) ? $_POST['carID'] : ;
         //validate value, must be an int!
         //echo json_encode($carID);
 
         //switch the operation besed on value passed in url
         if(isset($_GET) && !empty($_GET) ){
             //args being passed via the url
-            $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
-                
-            if($op == 'insert'){
-                //inserts a car with carID from the vehicle database into the
-                //logged in user's table in aoUsersDB
-                //returns true if the INSERTion is successful,
-                //false if user has the vehicle already or any other reason the vehicle could not be added
-                $hasCar = hasCar($carID);
-                
-                if($hasCar){
-                    //user has already bought this car, exit with false!
-                    //echo json_encode(false);
+            if(isset($_GET['op']) ){
+                $op = isAlpha($_GET['op']) ? $_GET['op'] : '';
+                    
+                if($op == 'insert'){
+                    //inserts a car with carID from the vehicle database into the
+                    //logged in user's table in aoUsersDB
+                    //returns true if the INSERTion is successful,
+                    //false if user has the vehicle already or any other reason the vehicle could not be added
+                    $hasCar = hasCar($carID);
+                    
+                    if($hasCar){
+                        //user has already bought this car, exit with false!
+                        //echo json_encode(false);
+                        exit();
+                    }
+                    else{
+                        $tableName = getUserTableName();   //$_SESSION['userID'];
+                        
+                        $res = $aoUsersDB->query(
+                            "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
+                            //IF entry EXISTS do nothing
+                        );
+                        echo json_encode($res);
+                    }
                     exit();
                 }
-                else{
-                    $tableName = getUserTableName();   //$_SESSION['userID'];
+                elseif($op == 'update'){
+                    //inserts a car with carID from the vehicle database into the
+                    //logged in user's table in aoUsersDB
+                    $dt = intval($_POST['dt']);
+                    $body = intval($_POST['body']);
+                    $inter = intval($_POST['interior']);
+                    $docs = intval($_POST['docs']);
                     
-                    $res = $aoUsersDB->query(
-                        "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
-                        //IF entry EXISTS do nothing
-                    );
-                    echo json_encode($res);
-                }
-                exit();
-            }
-            elseif($op == 'update'){
-                //inserts a car with carID from the vehicle database into the
-                //logged in user's table in aoUsersDB
-                $dt = intval($_POST['dt']);
-                $body = intval($_POST['body']);
-                $inter = intval($_POST['interior']);
-                $docs = intval($_POST['docs']);
-                
-                $rep = intval($_POST['repairs']);
-                
-                $tableName = getUserTableName();    //$_SESSION['userID'];
+                    $rep = intval($_POST['repairs']);
+                    
+                    $tableName = getUserTableName();    //$_SESSION['userID'];
 
-                $res = $aoUsersDB->query(
-                    "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
-                );
-                
-                echo json_encode($res);
+                    $res = $aoUsersDB->query(
+                        "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
+                    );
+                    
+                    echo json_encode($res);
+                    exit();
+                }
+                elseif($op == 'iul'){
+                    //insert user loss for carID
+                    $res = pasUpdate::userLoss($carID);
+                    
+                    echo json_encode($res);
+                    exit();
+                }
+                elseif($op == 'succ'){
+                    //set user current car
+                    $res = pasUpdate::userCurrentCar($carID);
+                    
+                    echo json_encode($res);
+                    exit();
+                }
+                //else switch to other calls
+                echo 'invalid operation ($op) selected, error loading page';
                 exit();
             }
-            elseif($op == 'iul'){
-                //insert user loss for carID
-                $res = pasUpdate::userLoss($carID);
-                
-                echo json_encode($res);
-                exit();
-            }
-            elseif($op == 'succ'){
-                //set user current car
-                $res = pasUpdate::userCurrentCar($carID);
-                
-                echo json_encode($res);
-                exit();
-            }
-            //else switch to other calls
-            echo 'invalid operation ($op) selected, error loading page';
-            exit();
+            //elseif other GET args
+            //else no supported operation!
         }
         //else no GET args, simply return data of car with id
         
@@ -257,7 +369,49 @@ if(isset($_POST) && !empty($_POST) ){
             //echo '{}';  //return emtpy object
         //}
     }
-    //other post vars
+    elseif(isset($_POST['udv'])){
+        //user data value, for updating the user's stats
+        if(is_numeric($_POST['udv']) ){
+            if(isset($_GET) && !empty($_GET) ){
+                //args being passed via the url
+                if(isset($_GET['op']) ){
+                    $op = isAlpha($_GET['op']) ? $_GET['op'] : '';
+                    //echo json_encode(gettype($_POST['udv'])); //returns a string
+                    //exit();
+                    if($op == 'puf'){
+                        purchase::funds(floatval($_POST['udv']) );
+                        exit();
+                    }
+                    if($op == 'put'){
+                        purchase::tokens(intval($_POST['udv']) );
+                        exit();
+                    }
+                    if($op == 'aup'){
+                        //addPrestige(intval($_POST['udv']));
+                        exit();
+                    }
+                    if($op == 'aum'){
+                        //addMarkers(intval($_POST['udv'])) ;
+                        exit();
+                    }
+                    //else
+                    //invalid operation;
+                }
+                //elseif other $_GET vars
+                //else
+                //invalid operation;
+            }
+            //else
+            //no vars set with $_GET, no operation preformed
+        }
+        else{
+            //echo 'invalid $_POST entry';
+        }
+    }
+    //elseif other $_POST entries
+    //
+    echo 'no valid post entries, executing script did nothing';
+    exit();
 }
 else{
     //no passing any values via POST, return all cars

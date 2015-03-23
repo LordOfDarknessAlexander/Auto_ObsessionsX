@@ -16,7 +16,6 @@ require_once 'AO_UI.php';
         action='https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'
         target='PPDGFrame'
         class='standard'>
-        <!--label>Purchase Tokens</label-->
         <label>Purchase Cash</label><br>
         <ul>
             <!--doesn't work if is type='button' Also, stylings no longer work :(
@@ -39,11 +38,11 @@ require_once 'AO_UI.php';
     </form>
     
     <form id='tokens'>
-    <!--action='https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'
+    <action='https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'
         target='PPDGFrame'
-        class='standard'-->
+        class='standard'>
         <label>Purchase Tokens</label><br>
-        <input type='image' id='add3TokenBtn' value='3 Tokens: $1.19'><br>
+        <input type='image' id='add3TokensBtn' value='3 Tokens: $1.19'><br>
         <input type='image' id='add5TokensBtn' value='5 tokens $1.99'><br>
         <input type='image' id='add10TokensBtn' value='10 tokens $2.49'><br>
         <input type='image' id='add20TokensBtn' value='20 tokens $3.99'><br>
@@ -64,4 +63,17 @@ require_once 'AO_UI.php';
     <script type='text/javascript' charset='utf-8'>
     var majorFundsPPFlow = payRequest(9.99, {trigger:'addMajorFundsBtn'});
     </script>
+    <!---->
+    <!--script type='text/javascript' charset='utf-8'>
+    var flowTokens3 = payRequest(1.19, {trigger: 'add3TokensBtn'});
+    </script>
+    <script type='text/javascript' charset='utf-8'>
+    var flowTokens5 = payRequest(2.99, {trigger:'add5TokensBtn'});
+    </script>
+    <script type='text/javascript' charset='utf-8'>
+    var flowTokens10 = payRequest(2.49, {trigger:'add10TokensBtn'});
+    </script>
+    <script type='text/javascript' charset='utf-8'>
+    var flowTokens20 = payRequest(3.99, {trigger:'add20TokensBtn'});
+    </script-->
 </div>
