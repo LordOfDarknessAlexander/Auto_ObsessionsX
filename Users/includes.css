@@ -65,8 +65,8 @@ form {
     margin-top: 0%;
     width:100%;
     position: relative;
-}
-/*ul {
+}/*
+ul {
     position:relative;
     top:40%;
     left:58%;
@@ -104,11 +104,7 @@ div#nav{
     /*background-color:grey;*/
 }
 div#reg-navigation{
-    /*margin-right: 60%;
-	font-size:medium;
-    width:10%;
-    margin:10% 15px 0 88s%;
-    bottom: 50%;*/
+ 
     position:absolute;
     top:10%;
     right:0%;
@@ -223,11 +219,11 @@ div#reg-navigation a{
     display:block;
     width:128px;
     height:32px;
-    color: white;
+    color: red;
     font-weight: bold;
     text-decoration: none;
     text-align:center;
-
+	padding : 2%;
     background: url('../images/defaultBtn.png') no-repeat 0 0;
     background-size:100% 100%;
     position: relative;
@@ -237,9 +233,9 @@ li a:hover,
 div#nav a:hover,
 div#reg-navigation a:hover{
     background: url('../images/defaultBtn2.png') no-repeat 0 0;
-    background: #BF0000;
-    /*width:200px;
-    height:60px;*/
+	background-size:100% 100%;
+	color:green;
+	padding : 2%;
 }
 /* onmousedown */
 li a:active,
@@ -247,6 +243,8 @@ div#nav a:active,
 div#reg-navigation a:active {
     background:#aecbff;
     border: 4px inset #aecbff;
+	padding : 2%;
+	color: blue;
 }
 #footer {
     margin:auto;
