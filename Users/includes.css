@@ -17,7 +17,7 @@ body{
     margin:0%;
 }
 canvas {
-    position: relative;
+    position: absolute;
     top: 0;
     left: 0;
     border: 1px solid black;
@@ -99,8 +99,9 @@ div#container {
 div#nav{
     position:absolute;
     top:10%;
-    left:0%;
+    left:2%;
     width:15%;
+	padding : 2%;
     /*background-color:grey;*/
 }
 div#reg-navigation{
@@ -128,6 +129,7 @@ div#nav ul {
     /*margin:10% 15px 0 88s%;*/
     bottom: 50%;
     position: relative;
+	padding : 2%;
 }
 /*Page Content*/
 div#content{
@@ -155,6 +157,7 @@ div#content h2{
     position:absolute;
     top:0%;
     left:2%;
+	padding : 2%;
 }
 #mid-left-col{
     width:36%;
@@ -163,6 +166,7 @@ div#content h2{
     position:absolute;
     top:20%;
     left:0%;
+	padding : 2%;
 }
 #mid-right-col{
     width:16%;
@@ -171,6 +175,7 @@ div#content h2{
     position:absolute;
     right:0%;
     top:20%;
+	padding : 2%;
 }
 #info-col 
 { 

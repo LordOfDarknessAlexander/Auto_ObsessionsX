@@ -1,7 +1,7 @@
 <?php 
 require_once 'include/dbConnect.php';
 //
-session_start();
+//session_start();
 
     $uid = $_SESSION['user_id']; 
     //Quick edit to squish some bugs, Cheers and good luck with the rest!
@@ -22,7 +22,7 @@ session_start();
             'tokens' => intval($rows['tokens']),
             'prestige' => intval($rows['prestige']),
             'm_marker' => intval($rows['m_marker']),
-            'cid'=>intval($rows['car_id'])
+            'cid' =>intval($rows['car_id'])
         ));
     }
     else{

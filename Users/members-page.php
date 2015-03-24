@@ -27,9 +27,11 @@ html::doctype();
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     <!-- Include JS File Here -->
     <style type='text/css'>
-#mid-right-col { text-align:center; margin:auto;margin-right: 25%; margin-top: -10%
+#mid-right-col 
+{ 
+	text-align:center; margin:auto;margin-right: 15%; margin-bottom: 20%; margin-top: 5%; margin-right: 40%; position:absolute;
 }
-#midcol h3 { font-size:130%; margin-top:0; margin-bottom:0; 
+#midcol h3 { font-size:100%; margin-top:0; margin-bottom:0; 
 }
     </style>
 </head>
@@ -94,8 +96,9 @@ else
 	//exit();
 }
 ?>
-            <div id='mid-left-col'>
-</body>
+ </body>          
+		   <div id='mid-left-col'>
+
                 <h3>Member's Events</h3>
                 <p>Welcome to the members area.<br>
                 <br>Browse the many portals here: Play as a guest or log in and save your progress.<br>
@@ -109,8 +112,8 @@ else
                     </ul>
                 </div>
                 <br>
-                <p><b>T-Shirts &pound;100.00</b></p>
-                <img alt='Polo shirt' title='Polo shirt' height='207' src='images/polo.png' width='280'><br>
+              <!--   <p><b>T-Shirts &pound;100.00</b></p>
+               <img alt='Polo shirt' title='Polo shirt' height='207' src='images/polo.png' width='280'><br> --->
                 <br>
             </div><!--end  mid-rid-col-->
         </div><!--end mid-col-->
