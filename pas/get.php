@@ -158,7 +158,7 @@ class pasGet{
         if($res){
             $ret = array();
             while($row = $res->fetch_assoc()){
-                $ret[] = $row;
+                $ret[] = $row;  //[$cid];
             }            
             $res->close();
             return $ret;

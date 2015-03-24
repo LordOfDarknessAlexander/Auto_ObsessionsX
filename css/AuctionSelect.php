@@ -8,6 +8,10 @@ css::header();
 function divAS(){
     echo 'div#AuctionSelect';
 }
+function lih(){?>
+    height:64px;
+<?php
+}
 //function dasCV(){
     //echo 'div#AuctionSelect div#carView';
 //}
@@ -28,6 +32,9 @@ function divAS(){
 }
 <?php divAS();?> ul
 {
+    /*position:absolute;
+    top:0%;
+    left:0%;*/
 	margin:0;
 	padding:0;
 	list-style-type:none;
@@ -43,26 +50,27 @@ function divAS(){
 }
 <?php divAS();?> li
 {
-	margin:0 0 5% 0;	
+	/*margin:70px 0% 5% 0;	*/
 	top right bottom left
 	/*padding: 50px 50px;*/
 	display:inline;
+<?php lih();?>
 }
 <?php divAS();?> li img
 {
 <?php posAbs();?>
 	left:0%;
-	width:15%;
-	height:20%;
+	width:128px;
+<?php lih();?>
 }
 <?php divAS();?> li label#infoLabel
 {
 	background: url('../images/label.png');
 	text-align:center;
 <?php posAbs();?>
-	left:15%;
+	left:128px;
 	width:70%;
-	height:20%;
+<?php lih();?>
 }
 <?php divAS();?> li button
 {
@@ -70,7 +78,7 @@ function divAS(){
 	background-size : 100% 100%;
 <?php posAbs();?>
 	right:0%;
-	height:20%;
+<?php lih();?>
 	width:15%;
 	color:red;
 }

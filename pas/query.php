@@ -6,7 +6,11 @@
 //
 require_once 'get.php';
 require_once '../re.php';
-//
+//php namespaces require v5 or greater, but server only runs v4
+//use \pas\get as pg;
+//use pas\get\user as pgu;
+//use pas\get\auction as pga;
+//use pa1s\get\sales as pgs;
 function echoUserCars(){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;

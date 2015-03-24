@@ -32,7 +32,7 @@ function outputCar($args){
 ?>
 <li id='<?php echo $liID;?>'> 
     <img src='<?php echo $car->getFullPath();?>'>
-    <label id='infoLabel'><?php echo $car->getFullName();?>-<br><?php echo $car->getInfo();?></label>
+    <label id='infoLabel'><?php echo $car->getFullName();?><!---<br><php echo $car->getInfo();?--></label>
     <button id='<?php echo $car->getID();?>'>
         <label id='price'>$<?php echo $car->getPrice();?></label><br>
         Bid Now!<br>
