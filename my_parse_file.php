@@ -1,6 +1,6 @@
 <?php 
 require_once 'include/dbConnect.php';
-session_start();
+//session_start();
 
 if(isset($_SESSION['uname']))
 {
