@@ -631,9 +631,11 @@ function(){
 	Garage.save();
     jq.carImg.show();
     setHomeImg();
+    setAdBG();
 });
 $('#myCars').click(
 function(){
+    jq.adBar.hide();
 	jq.Garage.toggle();
     jq.carImg.hide();
 	Garage.init();

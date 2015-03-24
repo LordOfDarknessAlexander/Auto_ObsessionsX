@@ -54,15 +54,6 @@ function auctionMode(deltaTime)
     Auction.setup();//auctionInit();
   
 }
-function setAdBG(){
-	//set a random ad
-	//floor returns an integer, random returns, random returns a float
-	var i = Math.floor(Math.random() * (logos.length - 1) ),	//[0,logos.length-1]
-		src = "images\\logos\\" + logos[i] + ".png";
-	jq.adBar.attr('src', src);
-	jq.adBar.show();
-}
-
 //$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed
 $(document).ready(
@@ -115,6 +106,8 @@ function(){
         });*/
     //jq.Game.setHomeImg();
     setHomeImg();   //in Garage.js
+    setAdBG();
+    jq.adBar.hide();
 	//userStats.money = 150;
 	//saveUser();
 	//jq.Game.homeImg.hide();
@@ -235,14 +228,16 @@ function mainMenu()
     $('#main').show();
     $('#menu').addClass('main');
     $('.sound').show();
+    //jq.adBar.show();
 }
 
 //money = 50000;
 function startGame() 
 {	//initialize the game state
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	document.getElementById('gameMenu').style.display = 'true';  
+	//document.getElementById('gameMenu').style.display = 'true';  
 	//$('#money').html(money);
+    jq.adBar.show();
 	appState = GAME_MODE.RUNNING;
 	player.reset();
 	ticker = 0;
@@ -382,6 +377,7 @@ function(){
 	//$('#menu').addClass('auction');
 	//auctionStop = false;
 	AuctionSelect.init();
+    jq.adBar.hide();
 });
 jq.Auction.homeBtn.click(
 function(){
@@ -394,7 +390,7 @@ function(){
 	//jq.Game.menu.children().toggle();	//hides/showns all child elements
 	ajax_post();
     setStatBar();
-	//setAdBG();
+	setAdBG();
     setHomeImg();
 	//var car = Garage.getCurrentCar();
 	
@@ -445,6 +441,7 @@ function(){
 	Repair.init();
     jq.carImg.show();
     $('label#info').text('');
+    setAdBG();
 	//saveUser();	//save user stats after purchasing
 });
 
@@ -494,6 +491,7 @@ jq.Sold.homeBtn.click(function(){
 	auctionEnded = false;
 	endGame = false;
 	restarted = true;	
+    setAdBG();
 });
 
 assetLoader.downloadAll();

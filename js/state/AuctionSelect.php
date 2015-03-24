@@ -225,7 +225,7 @@ function setCarBtn($args){
 };
 jq.AuctionSelect.backBtn.click(function() 
 { 	
-	//setAdBG();
+	setAdBG();
 	setStatBar();
     setHomeImg();
 	jq.Game.menu.toggle();

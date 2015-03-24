@@ -25,7 +25,7 @@ $ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
 	
     <img id='mainCar' src='images\\garageEmpty.png'>
     <!--label id='info'></label-->
-    
+    <img id='adBar'>
     <div id='menu'>
         <div id='progress'>
             <div id='percent'>Downloading: <span id='p'></span></div>
@@ -53,26 +53,24 @@ $ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
             if(!$loggedIn)
             { 
 				echo
-				'
+				"
 				<ul>
-				   <li><a href="javascript:void(0)" class="button play">Play as Guest</a></li>
-				   <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
+				   <li><a href='javascript:void(0)' class='button play'>Play as Guest</a></li>
+				   <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
 				   
-				   <li><a href="javascript:void(0)" class="button Register">Register</a></li> 
-				 </ul> 
+				   <li><a href='javascript:void(0)' class='button Register'>Register</a></li> 
+				</ul> 
 				 
-				 <div id="loginfields">
+				<div id='loginfields'>
  				<h2>Login</h2>
- 				<form action="login.php" method="post">
- 					<p><label class="label" for="email">Email Address:</label>
-					<input id="email" type="text" name="email" size="30" maxlength="50" value="email" > </p>
- 					<p><label class="label" for="psword">Password:</label>
-					<input id="psword" type="password" name="psword" size="12" maxlength="12" value="password" ></p>
- 					<p><input id="submit" type="submit" name="submit" value="Login"></p>
+ 				<form action='login.php' method='post'>
+ 					<p><label class='label' for='email'>Email Address:</label>
+					<input id='email' type='text' name='email' size='30' maxlength='50' value='email' > </p>
+ 					<p><label class='label' for='psword'>Password:</label>
+					<input id='psword' type='password' name='psword' size='12' maxlength='12' value='password' ></p>
+ 					<p><input id='submit' type='submit' name='submit' value='Login'></p>
  				</form>
- 		</div> 
-				 
-				 ';
+ 		</div>";
 			}
 			else if($loggedIn)
  			{

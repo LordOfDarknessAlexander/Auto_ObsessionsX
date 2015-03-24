@@ -44,5 +44,5 @@
 		<button id='FAQ/Tutorial'>FAQ/Tutorial</button><!--link to another/separate page?-->
     <!--    <button id='buyBusiness'>Buy Business</button><br>--->
     </div>
-    <img id='adBar'>
+    <!--img id='adBar'-->
 </div><!--end Game Menu-->

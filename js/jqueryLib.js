@@ -243,6 +243,14 @@ function jqToggleCredits()
 	$('#menu').toggleClass('credits');	//adds class else removes if already added
 	$('#credits').toggle();	//shows if hidden
 }*/
+function setAdBG(){
+	//set a random ad
+	//floor returns an integer, random returns, random returns a float
+	var i = Math.floor(Math.random() * (logos.length - 1) ),	//[0,logos.length-1]
+		src = "images\\logos\\" + logos[i] + ".png";
+	jq.adBar.attr('src', src);
+	jq.adBar.show();
+}
 $('.credits').click(jq.Credits.toggle);
 $('.back').click(jq.Credits.toggle);
 //

@@ -189,10 +189,11 @@ img#adBar
 {
 	/*background:url('../images/logos/AutoZone.png') no-repeat 0 0;*/
 	position:absolute;
-	width:56%;
+	width:60%;
 	height:8%;
-	left:22%;
+	left:20%;
 	bottom:2%;
+    z-index:3;
 }
 <?php //Game Screen/State stylings?>
 #Register
