@@ -2,7 +2,7 @@
 require '../include/html.php';
 require '../include/dbConnect.php';
 //require 'includes/secure.php';
-session_start();
+//session_start();
 //secureLogin();
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 {
@@ -96,9 +96,9 @@ else
 	//exit();
 }
 ?>
- </body>          
+          
 		   <div id='mid-left-col'>
-
+</body> 
                 <h3>Member's Events</h3>
                 <p>Welcome to the members area.<br>
                 <br>Browse the many portals here: Play as a guest or log in and save your progress.<br>
@@ -109,6 +109,7 @@ else
                 <div id='nav'>
                     <ul>
                     <li><a href='..\index.php' title='Play Game'>Play Game</a></li>
+					
                     </ul>
                 </div>
                 <br>
