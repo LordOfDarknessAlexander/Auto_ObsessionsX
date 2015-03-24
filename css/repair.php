@@ -13,9 +13,10 @@ function divRepair(){
 ?>
 <?php divRepair();?>
 {<?php
-    defaultBG();
     posAbs();
+    //defaultBG();
     css::size('100%', '100%');
+    css::defaultTileBG();
     defaultColor();
 ?>
 	display: none;

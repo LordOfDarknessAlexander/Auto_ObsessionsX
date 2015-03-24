@@ -235,7 +235,7 @@ div#statBar
 	top:0%;
 	left:0%;
 	width:100%;
-	height:20%;
+	height:15%;
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
 	text-align:left;
@@ -412,7 +412,7 @@ div#menu
   height: 100%;
   position: absolute;
 }
-div#profile
+/*div#profile
 {
     background: url('../images//defaultBG.jpg') no-repeat 0 0;
 	background-size : 100% 100%;
@@ -424,7 +424,8 @@ div#profile
     top:0%;
     left:0%;
     z-index:1;
-}/*
+}*/
+/*
 div#messages
 {
     background: url('../images/defaultBG.jpg') no-repeat 0 0;

@@ -18,9 +18,10 @@ function dgm(){
 
 <?php dgm();?>{
 <?php
-    defaultBG();
     posAbs();
     css::size('100%', '100%');
+    css::defaultTileBG();
+    //background:#000000 url('../images/bgTile.png') repeat 0 0;
 ?>
     display: none;
 	text-align: center;

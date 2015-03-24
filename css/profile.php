@@ -11,7 +11,9 @@ require_once 'ui.php';
 <?php divPro();?>
 {
 <?php
-    posAbs();	
+    posAbs();
+    css::size('100%', '100%');
+    css::defaultTileBG();
 ?>
 	display: none;
 	text-align: center;

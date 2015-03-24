@@ -15,10 +15,11 @@ require_once 'ui.php';
 {
 <?php
     posAbs();
+    css::size('100%', '100%');
+    css::defaultTileBG();
+    //background: url('../images/defaultBG.jpg') no-repeat 0 0; 
+	//background-size : 100% 100%;
 ?>
-	background: url('../images/defaultBG.jpg') no-repeat 0 0;
-	/*background-image: url('../images/logo.png');*/
-    background-size:100% 100%;
 	display: none;
 	text-align: center;
 	padding-top: 92px;

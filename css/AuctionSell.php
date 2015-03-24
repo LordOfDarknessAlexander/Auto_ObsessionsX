@@ -16,9 +16,13 @@ function dcv(){
 /*Auction Select Screen*/
 <?php divAS();?>
 {
-<?php posAbs();?>
-	background: url('../images/defaultBG.jpg') no-repeat 0 0; 
-	background-size : 100% 100%;
+<?php
+    posAbs();
+    css::size('100%', '100%');
+    css::defaultTileBG();
+    //background: url('../images/defaultBG.jpg') no-repeat 0 0; 
+	//background-size : 100% 100%;
+?>
 	display: none;
 	/*overflow:scroll;*/
 	text-align: center;

@@ -29,8 +29,12 @@ function divSelectedCar(){
 {
 <?php
     posAbs();
-    defaultBG();
+    //defaultBG();
     css::size();
+    css::size('100%', '100%');
+    css::defaultTileBG();
+    //background: url('../images/defaultBG.jpg') no-repeat 0 0; 
+	//background-size : 100% 100%;
 ?>
 	display: none;
 	text-align: center;

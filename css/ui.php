@@ -63,6 +63,14 @@ class css{
         background-size:<?php echo $width;?> <?php echo $height;?>;
     <?php
     }
+    public static function defaultTileBG(){
+        //CSS shorthand for the site's default tiled BG
+        //image tile image, set background to black and 
+        //position at (0,0)
+        //css::bgSize('100%', '100%');?>
+        background:#000000 url('../images/bgTile.png') repeat 0 0;
+    <?php
+    }
     public static function header(){
         header("Content-type: text/css; charset: UTF-8");
     }

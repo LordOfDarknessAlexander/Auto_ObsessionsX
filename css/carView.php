@@ -11,7 +11,9 @@ function divCarView(){
 /*Car View Screen*/
 <?php divCarView();?>
 {<?php
-    defaultBG();
+    //defaultBG();
+    css::size('100%', '100%');
+    css::defaultTileBG();
     posAbs();
 ?>
 	display: none;
