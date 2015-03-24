@@ -7,15 +7,15 @@ require_once 'ui.php';
 css::header();
 //using php require should be faster than css @import
 require_once 'AuctionSelect.php';
+require_once 'profile.php';
 require_once 'repair.php';
-//require_once 'profile.php';
 //require_once 'garage.php';
+//require_once 'carView.php';
 //    
 function dgm(){
     echo 'div#gameMenu';
 }
 ?>
-
 <?php dgm();?>{
 <?php
     posAbs();

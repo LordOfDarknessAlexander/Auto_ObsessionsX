@@ -1,12 +1,12 @@
 <?php
 //auction state stylings
-header("Content-type: text/css; charset: UTF-8");
+require_once 'ui.php';
+//
+css::header();
 //    
-
 function divPro(){
     echo 'div#profile';
 }
-require_once 'ui.php';
 ?>
 <?php divPro();?>
 {
@@ -28,24 +28,7 @@ require_once 'ui.php';
     font-size:1.5vw;
     font-weight:bold;
 }
-<?php divPro();?> div#userStats
-{
-<?php
-    posAbs();	
-?>
-    display:block;
-	text-align:left;
-    overflow-y:scroll;
-    
-	width:18%;
-	height:60%;
-    top:28%;
-    left:2%;
-    
-    font-size:1.25vw;
-}
-<?php divPro();?> div#salesInfo
-{
+<?php divPro();?> div{
 <?php
     posAbs();	
 ?>
@@ -56,7 +39,13 @@ require_once 'ui.php';
 	width: 18%;
 	height: 60%;
     top:28%;
-    right:2%;
     
     font-size:1.25vw;
+}
+<?php divPro();?> div#userStats{
+    left:2%;
+}
+<?php divPro();?> div#salesInfo
+{
+    right:2%;
 }

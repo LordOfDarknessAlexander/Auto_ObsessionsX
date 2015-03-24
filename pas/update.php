@@ -129,13 +129,6 @@ class pasUpdate{
         exit();
     }
 }*/
-function getUID(){
-    //returns the currently logged in user's ID
-    if(isset($_SESSION) && isset($_SESSION['user_id'])){
-        //return $_SESSION['user_id'];
-    }
-    return 3;
-}
 class purchase{
     //private
     //const FAILED = 'Could not complete purchase!';

@@ -50,10 +50,12 @@ function divRepair(){
 {
 <?php
     posAbs();
-    css::size('10%', '10%');
+    css::size('12%', '4%');
 ?>
     left:45%;
     bottom:72%;
+    font-size:1.5vw;
+    font-weight:bold;
 }
 <?php divRepair();?> li 
 {	/*styles all list items of node with id RepairShop*/

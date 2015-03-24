@@ -18,30 +18,30 @@ css::header();
 //@import url("credits.css");
 ?>
 *, *:before, *:after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body 
 {
-  font-family: arial, sans-serif;
-  font-size: 18px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: default;
-  color: #751ec3;
+    font-family: arial, sans-serif;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    color: #751ec3;
 }
 
 canvas 
 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border: 1px solid black;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid black;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
 }
 
 <?php //default element stylings for the entire page?>
@@ -224,8 +224,7 @@ img#adBar
   z-index: 20;
 
 }
-/* Stat Bar Game HUD */
-
+<?php //Stat Bar Game HUD?>
 div#statBar
 {
     /*background-color:red;*/
