@@ -38,7 +38,7 @@ $ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
         <div id='main'>		
             <h1><?php echo $AO_NAME;?></h1>
 			 <?php 
-			session_start();
+			//session_start();
 
 			if(isset($_SESSION) AND isset($_SESSION['uname']) ){
                 $uname = $_SESSION['uname'];
