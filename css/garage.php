@@ -23,6 +23,9 @@ function divUserCar(){
 function divSelectedCar(){
     echo 'div#Garage div#selectedCar';
 }
+function btnW(){
+    echo '8.75%';
+}
 ?>
 /*User Garage div Stylings*/
 <?php divGarage();?>
@@ -48,48 +51,52 @@ function divSelectedCar(){
     bottom:70%;
     left:10%;
     width:5%;
-    height:5%;
+    height:7.5%;
     font-size:1.25vw;
 }*/
 <?php divGarage();?> button#viewCar
 {<?php
     posAbs();
 ?>
-    bottom:5%;
-    left:30%;
-    width:5%;
-    height:5%;
-    font-size:1.25vw;
+    bottom:2%;
+    left:27.5%;
+    width:8.75%;
+    height:7.5%;
+    font-size:1.5vw;
+    font-weight:bold;
 }
 <?php divGarage();?> button#select
 {<?php
     posAbs();
 ?>
-    bottom:5%;
-    left:20%;
-    width:5%;
-    height:5%;
-    font-size:1.25vw;
+    bottom:2%;
+    left:18.75%;
+    width:8.75%;
+    height:7.5%;
+    font-size:1.5vw;
+    font-weight:bold;
 }
 <?php divGarage();?> button#sales
 {<?php
     posAbs();
 ?>
-    bottom:5%;
-    left:35%;
-    width:5%;
-    height:5%;
-    font-size:1.25vw;
+    bottom:2%;
+    left:36.25%;
+    width:8.75%;
+    height:7.5%;
+    font-size:1.5vw;
+    font-weight:bold;
 }
 <?php divGarage();?> button#shop
 {<?php
     posAbs();
 ?>
-    bottom:5%;
+    bottom:2%;
     left:10%;
-    width:5%;
-    height:5%;
-    font-size:1.25vw;
+    width:8.75%;
+    height:7.5%;
+    font-size:1.5vw;
+    font-weight:bold;
 }
 <?php divGarage();?> li 
 {	/*styles all list items of node with id RepairShop*/
@@ -120,9 +127,9 @@ function divSelectedCar(){
 	background: url('../images/defaultBG.jpg') no-repeat 0 0;
 	overflow-y:scroll;
 <?php posAbs();?>
-	height:60%;
+	height:60.5%;
 	top:30%;
-    left:5%;
+    left:10%;
     width:35%;
 }
 /*current user car stylings*/
@@ -133,9 +140,9 @@ function divSelectedCar(){
 <?php posAbs();?>
 	text-align::left;
 	top:30%;
-	left:42%;/*2%;*/
+	left:45%;/*2%;*/
 	width:25%;
-	height:70%;
+	height:68%;
 	display:inline;
 }
 <?php divSelectedCar();?>
@@ -147,7 +154,7 @@ function divSelectedCar(){
 	top:30%;
 	right:2%;
 	width:25%;
-	height:70%;
+	height:68%;
 	display:inline;
 }
 <?php divUserCar();?> img#carImg,

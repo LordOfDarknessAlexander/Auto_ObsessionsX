@@ -90,17 +90,5 @@ function lih(){?>
 	position:absolute;*/
 	text-align::center;
 	color:red;
+    cursor:pointer;
 }
-/*
-button#asBackBtn
-{
-	background: url('../images/backBtn.png') no-repeat 0 0;
-    background-size:100% 100%;
-	font-weight: bold;
-    position:absolute;
-	width:16%;
-	height:8%;
-	cursor:pointer;
-    left:42%;
-    bottom:66%;
-}*/

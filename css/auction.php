@@ -107,7 +107,7 @@ function divAuction(){
 	height:10%;
 
 	left:20%;
-	top:20%;
+	top:18%;
     font-size:2vw;
 }
 <?php divAuction();?> img#auctionCar

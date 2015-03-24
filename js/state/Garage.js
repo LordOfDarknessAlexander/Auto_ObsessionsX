@@ -397,7 +397,13 @@ var Garage = {
             _curCarID = (car === null) ? 0 : car.id;
 //<php if(loggedIn() ){>
             pas.set.userCar(_curCarID);
-//<php}>
+//<?php
+//}
+//else{
+            //local storage
+//<?php  
+//}
+//?>
         }
     },
 	setCurrentCar : function()

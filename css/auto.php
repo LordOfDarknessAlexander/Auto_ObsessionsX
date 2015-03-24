@@ -149,9 +149,9 @@ button#backBtn
     cursor:pointer;
 	position:absolute;
 	left:5%;
-	bottom:5%;
+	bottom:2%;
     width:5%;
-	height:5%;
+	height:7.5%;
 }
 button#homeBtn
 {
@@ -160,9 +160,9 @@ button#homeBtn
     background-size : 100% 100%;
 	position:absolute;
     width:5%;
-	height:5%;
+	height:7.5%;
 	right:5%;
-	bottom:5%;
+	bottom:2%;
     margin:0%;
 }
 label#info{

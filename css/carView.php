@@ -40,9 +40,9 @@ function divCarView(){
 <?php divCarView();?> button#selectCarBtn
 {
     position:absolute;
-	bottom:5%;
+	bottom:2%;
 	left:10%;
-	height:5%;
+	height:7.5%;
     width:10%;
     font-size:1.5vw;
 }
@@ -52,8 +52,8 @@ function divCarView(){
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	background-size: 100% 100%;
 	right:10%;
-	bottom:5%;
-	height:5%;
+	bottom:2%;
+	height:7.5%;
     width:10%;
     font-size:1.5vw;
 }
