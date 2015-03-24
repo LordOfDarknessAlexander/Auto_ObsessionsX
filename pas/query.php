@@ -160,8 +160,13 @@ if(isset($_POST) && !empty($_POST) ){
     exit();
 }
 else{
-    //no passing any values via POST, return all user's cars
+    //no passing any values via POST, return all user data
     //echo json_encode(true);
+    //echo json_encode(array(
+        //'stats'=>getUserStats(),
+        //'garage'=>pasGet::userCars(),
+        //'sales'=>pasGet::userSales()
+    //));
     echoUserCars();
     exit();
 }

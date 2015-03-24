@@ -9,18 +9,21 @@ require_once 'include/dbConnect.php';  //sql database connections
 //
 //secure::loggin();
 //
+function getUID(){
+    //returns the user if logged in, else echo error and force user to redirect to login
+    $uid = 'user_id';
+    if(isset($_SESSION) && isset($_SESSION[$uid]) ){
+        return intval($_SESSION[$uid]);
+    }
+    //echo "<p class='error'>User not logged in, could not access user session, Please try again.</p>";
+    //header('location: login.php');
+    return 3;   //for testing
+}
 function getUserTableName(){
     //returns the name of the table used by the currently logged in user
     //used to access tables in aoUsersDB and aoCarSalesDB
-    $userID = 'user';
-    
-    //if(isset($_SESSION) AND isset($_SESSION['user_id']) ){
-        //$userID .= strval($_SESSION['user_id']);
-    //}
-    //else{
-        $userID .= strval(0);   //$_SESSION['userID'];
-    //}
-    return $userID;
+    $id = strval(getUID() );
+    return "user$id";
 }
 function hasCar($id){
     //does the user's table in aoUsersDB already have an entry with car_id '$id'

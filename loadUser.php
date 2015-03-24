@@ -1,16 +1,9 @@
 <?php 
 require_once 'include/dbConnect.php';
+require_once 'pasMeta.php';
 //
 //session_start();
-function getUID(){
-    $uid = 'user_id';
-    if(isset($_SESSION) && isset($_SESSION[$uid]) ){
-        return intval($_SESSION[$uid]);
-    }
-    //echo "<p class='error'>User not logged in, could not access user session, Please try again.</p>";
-    return 3;
-}
-
+//
     $uid = getUID();
     //Quick edit to squish some bugs, Cheers and good luck with the rest!
     //user ID's are unique, making a select query will only returns
