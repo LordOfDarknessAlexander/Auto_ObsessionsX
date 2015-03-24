@@ -233,8 +233,8 @@ div#statBar
 	background-size : 100%,40%;
 	position:absolute;
 	top:0%;
-	left:5%;
-	width:90%;
+	left:0%;
+	width:100%;
 	height:20%;
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";

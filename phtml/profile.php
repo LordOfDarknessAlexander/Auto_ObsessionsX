@@ -2,7 +2,7 @@
 //require_once '../pas/get.php';    //this is causing game to break :(
 ?>
 <div id='profile'>
-    <button id='backBtn'>Back</button>
+    <button id='backBtn'></button>
     <!---->
     <div id='userStats'>
 <h2>Purchasing</h2>

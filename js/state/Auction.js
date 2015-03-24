@@ -98,7 +98,7 @@ var Auction =
 					Auction.ai = [Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice()))];
 					
                     Auction.currentBid = vehiclePrice * 0.1;
-                    jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
+                    //jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
             
                     context.font = '26px arial, sans-serif';  
 
@@ -109,7 +109,7 @@ var Auction =
                     Auction.setBidBtnText();
                     
                     //$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
-                    $('div#Auction label#carName').text(Auction._car.getFullName() );
+                    $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:$' + (Auction._car.getPrice() ).toString() );
                     $('div#Auction label#carInfo').text(Auction._car.getInfo() );
                     //$('#menu').removeClass('gameMenu');
                     //$('#menu').addClass('Auction');

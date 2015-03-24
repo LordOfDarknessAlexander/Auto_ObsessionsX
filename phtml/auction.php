@@ -58,7 +58,7 @@ sqlSelectAll('aoCars', 'outputCar');
 
 <div id='Auction'>
     <!--User and AI bid on a car-->
-    <h1>Auction</h1>  
+    <!--h1>Auction</h1-->
     <label id='carName'>--Name--</label>
 <?php
     backBtn();
@@ -68,7 +68,7 @@ sqlSelectAll('aoCars', 'outputCar');
     <!--button id='buyout'>Buyout</button-->
     <!--auctionCar will be <img id=userCar'>.
     The code can be streamlined with jQuery in JS-->	
-    <label id='carPrice'></label>
+    <!--label id='carPrice'></label-->
     <label id='carInfo'></label>
 </div>
 

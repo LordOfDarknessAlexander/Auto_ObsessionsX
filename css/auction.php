@@ -50,10 +50,10 @@ function divAuction(){
     fontBold();
     //css::size('12%', '5%');
 ?>
-	width:12%;
+	width:19%;
 	height:5%;
-	left:85%;
-	bottom:60%;
+	left:1%;
+	bottom:30%;
 }
 
 <?php divAuction();?> button#buyout
@@ -64,22 +64,22 @@ function divAuction(){
 ?>
 	width:12%;
 	height:5%;
-	left:85%;
+	left:5%;
 	bottom:56%;
 }
-<?php divAuction();?> label#carPrice
-{<?php
+/*<php divAuction();> label#carPrice
+{<php
     posAbs();
-?>
+>
 	background:black;
 	color:white;
 
-	width:12%;
+	width:20%;
 	height:5%;
 
-	left:85%;
-	bottom:40%;
-}
+	left:0%;
+	top:20%;
+}*/
 
 <?php divAuction();?> label#carInfo
 {<?php
