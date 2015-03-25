@@ -37,6 +37,7 @@ function hasCar($id){
     if($res){
         //user has car
         $ret = mysqli_num_rows($res) != 0 ? true : false;
+		 mysqli_free_result($res);
     }
     else{
         //query failed, user has no entry in database
@@ -46,7 +47,7 @@ function hasCar($id){
         //echo "pas/meta.php hasCar($id), sql query failed:($erno), reason: $err";
         //exit();
     }
-    mysqli_free_result($res);
+  //  mysqli_free_result($res);
     
     return $ret;
 }
