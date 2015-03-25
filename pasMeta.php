@@ -9,6 +9,7 @@ require_once 'include/dbConnect.php';  //sql database connections
 //
 //secure::loggin();
 //
+
 function getUID(){
     //returns the user if logged in, else echo error and force user to redirect to login
     $uid = 'user_id';
@@ -16,7 +17,7 @@ function getUID(){
         return intval($_SESSION[$uid]);
     }
     //echo "<p class='error'>User not logged in, could not access user session, Please try again.</p>";
-    //header('location: login.php');
+    header('location: login.php');
     return 3;   //for testing
 }
 function getUserTableName(){
