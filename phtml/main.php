@@ -96,7 +96,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
                 <li class='artwork'>Character design and art: <?php echo $AS_NAME;?></li>
             </ul>
             <ul>
-                <li class='artwork'>Programming Crew: <?php echo $AS_NAME.', '.$TD_NAME;?></li>
+                <li class='artwork'>Programming Crew: <?php echo $AS_NAME.', '.$TD_NAME.', '.$AB_NAME;?></li>
             </ul>
              
             <ul>
