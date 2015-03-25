@@ -44,6 +44,42 @@ function echoUserCars(){
     //exit();
     echo json_encode($cars);
 }
+function eLoadUser(){
+    //loads all the user's data from a single ajax call!
+    global $aoUsersDB;
+    
+    $cars = array();
+    $userID = getUserTableName();
+    
+    $res = $aoUsersDB->query(
+        "SELECT * FROM $userID"
+    );
+
+    if($res){
+        while($row = mysqli_fetch_array($res) ){
+            //insert an new array representing a car at the end of $cars
+            $cars[] = array(
+                'carID' => intval($row['car_id']),
+                'drivetrain' => intval($row['drivetrain']),
+                'body' => intval($row['body']),
+                'interior' => intval($row['interior']),
+                'docs' => intval($row['docs']),
+                'repairs' => intval($row['repairs'])
+                //info=>$row['info']
+            );
+        }
+        mysqli_free_result($res);
+        //echo json_encode($cars);
+    }
+    else{
+        echo "<p class='error'>Query failed, Table: $userID, in aoUsersDB has no entries</p>";
+    }
+    echo json_encode(array(
+        'stats'=>pasGet::userStats(),
+        'garage'=>$cars,
+        //'sales'=>pasGet::userSales()
+    ));
+}
 
 function getUserSoldCars(){
     //selects all vehicles sold by the currently logged-in user
@@ -162,12 +198,8 @@ if(isset($_POST) && !empty($_POST) ){
 else{
     //no passing any values via POST, return all user data
     //echo json_encode(true);
-    //echo json_encode(array(
-        //'stats'=>getUserStats(),
-        //'garage'=>pasGet::userCars(),
-        //'sales'=>pasGet::userSales()
-    //));
     echoUserCars();
+    //eLoadUser();
     exit();
 }
 echo 'fail';

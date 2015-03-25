@@ -83,6 +83,7 @@ function divRepair(){
     width:45%;
     height:20%;
     font-size:0.65rem;
+    font-weight:bold;
 }
 <?php divRepair();?> div button.ub
 {

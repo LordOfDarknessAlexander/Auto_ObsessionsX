@@ -31,8 +31,7 @@ var Repair = {
             //$('label#info').text('');
             //$('div#RepairShop p#error').hide();
 		}
-		else
-		{
+		else{
 			//show empty garage, please purchase a car
 			$('img#userCar', div).attr('src', 'images/garageEmpty.png');
             //TODO:display message in browser saying user must select a vehicle
@@ -88,7 +87,7 @@ var Repair = {
                     if(part._stage != carPart.STAGE.pro){
                         ub.click(
                             {type:i}, upgradeDT
-                        ).text('$' + part.getPrice()
+                        ).text('$' + (part.getPrice() ).toFixed(2)
                         ).css({'opacity':'1.0','cursor':'pointer'});
                     }
                     else{
@@ -104,7 +103,7 @@ var Repair = {
                             {type:i}, repairDT
                         ).css(
                             {'opacity':'1.0','cursor':'pointer'}
-                        ).text('$' + part.getRepairPrice() );
+                        ).text('$' + (part.getRepairPrice() ).toFixed(2) );
                     }
                     else{
                         disable(rb);
@@ -142,7 +141,7 @@ var Repair = {
                     if(part._stage != carPart.STAGE.pro){
                         ub.click(
                             {type:i}, upgradeInterior
-                        ).text('$' + part.getPrice()
+                        ).text('$' + (part.getPrice() ).toFixed(2)
                         ).css(
                             {'opacity':'1.0','cursor':'pointer'}
                         );
@@ -157,7 +156,7 @@ var Repair = {
                             {type:i}, repairInterior
                         ).css(
                             {'opacity':'1.0','cursor':'pointer'}
-                        ).text('$' + part.getRepairPrice() );
+                        ).text('$' + (part.getRepairPrice() ).toFixed(2) )
                     }
                     else{
                         disable(rb);
@@ -185,7 +184,7 @@ var Repair = {
                     if(part._stage != carPart.STAGE.pro){
                         ub.click(
                             {type:i}, upgradeBody
-                        ).text('$' + part.getPrice()
+                        ).text('$' + (part.getPrice()  ).toFixed(2)
                         ).css({'opacity':'1.0','cursor':'pointer'});
                     }else{
                         disable(ub);
@@ -196,7 +195,7 @@ var Repair = {
                             {type:i}, repairBody
                         ).css(
                             {'opacity':'1.0','cursor':'pointer'}
-                        ).text('$' + part.getRepairPrice() );
+                        ).text('$' + (part.getRepairPrice() ).toFixed(2) );
                     }
                     else{
                         disable(rb);
@@ -222,7 +221,7 @@ var Repair = {
                     if(part._stage != carPart.STAGE.pro){
                         ub.click(
                             {type:i}, upgradeDocs
-                        ).text('$' + part.getPrice()
+                        ).text('$' + (part.getPrice() ).toFixed(2)
                         ).css({'opacity':'1.0','cursor':'pointer'});
                     }else{
                         //max upgrade already purchased, disable button

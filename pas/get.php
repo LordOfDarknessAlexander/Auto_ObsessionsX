@@ -332,6 +332,38 @@ class pasGet{
             echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
         }
     }*/
+    public static function userStats(){
+        //returns the user's stats from SQL database as an assossiative array
+        global $AO_DB;
+        
+        $id = getUID();
+        $UID = 'user_id';
+        $users = 'users';
+        $res = $AO_DB->query(
+            "SELECT * FROM $users WHERE $UID = $id"
+        );
+        //Count the returned rows
+        if($res){
+            $rows = $res->fetch_assoc();
+            //NOTE:sql retrives data as strings, so must conver to numeric type before sending(strings are bulky)
+            $ret = array(
+                'money'=>floatval($rows['money']),
+                'tokens'=>intval($rows['tokens']),
+                'prestige'=>intval($rows['prestige']),
+                'm_marker'=>intval($rows['m_marker']),
+                'cid'=>intval($rows['car_id'])
+            );
+            $res->close();
+            return $ret;
+        }
+        else{
+            //echo "No Results";
+            // If there was a problem.
+            echo "<p class='error'>Query failed, Please try again.</p>";
+            //exit();
+        }
+        return array();
+    }
     public static function userCarCount(){
         //returns the number of entries in user's database(garage)
         global $aoUsersDB;
@@ -416,9 +448,7 @@ class pasGet{
         $acCount = getAuctionCarsCount();
         
         return $acCount != 0 ? getTotalUserCarCount() / $acCount : 0.0;
-    }
-	
-	
+    }	
 }
 pasGet::init();
 //pasGet::userInit();

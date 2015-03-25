@@ -496,7 +496,7 @@ var Garage = {
         if(userGarage.length == 0)
 		{	//empty grage so display img instead of buttons
 			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
-			list.append(src);
+			Garage._carViewList.empty();
 	
 			$('div#Garage #select').hide();
 			$('div#Garage #viewCar').hide();

@@ -54,6 +54,69 @@ function auctionMode(deltaTime)
     Auction.setup();//auctionInit();
   
 }
+function load(){
+//<?php if(loggedIn() ){
+    var funcName = 'js/program.js load()';
+    
+    jq.post('pas/query.php',
+        function(data){
+            //the response string is converted by jquery into a Javascript object!
+            if(data === null){
+                alert(funcName + ', Error:ajax response returned null!');
+                return;
+            }
+            //alert('ajax response recieved:' + JSON.stringify(data) );
+            //
+            //set user data
+            //
+            userStats = {
+                money:data.stats.money,
+                tokens:data.stats.tokens,
+                prestige:data.stats.prestige,
+                marker:data.stats.m_marker
+            };
+            _curCarID = data.stats.cid;
+            //console.log('cur car id:' + _curCarID.toString() );
+            setStatBar();
+            //
+            //set user garage
+            //
+            var len = data.garage.length;
+            
+            if(len == 0){
+                //exit early is user has no cars
+                console.log(funcName + ', user has no cars!, Buy some, right now!');
+                return;
+            }
+            var args = [];
+            
+            for(var i = 0; i < len; i++){
+                var obj = data.garage[i];
+                args.push(VehicleFromDB(obj) ); //adds ajax request object to array
+            }
+            $.when.apply($, args).done(function(){
+                //the UI is dependant on the users garage being loaded,
+                //so init ui after all ajax calls have completed
+                Garage.initUI();
+                //AuctionSell.load(data.sales);
+                setHomeImg();
+            }).fail(function(){
+                console.log(funcName + ', loading game resources failed, abort!');
+            });
+        },
+        function(jqxhr){
+            //call will fail if result is not properly formated JSON!
+            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+            console.log(funcName + ', loading game resources failed, abort!');
+        }
+    );
+//<?php
+//}
+//else{
+    //use local storage!
+//}
+//?>
+}
 //$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed
 $(document).ready(
@@ -67,6 +130,7 @@ function(){
 	//pas.query.loadUser();   //load user stats!
 	getLastAllowanceTime();
 	//setStatBar();
+    //load();
 	loadUser();
     Garage.load();  //load user garage!
     //AuctionSell.load(); //load user sales, after garage!

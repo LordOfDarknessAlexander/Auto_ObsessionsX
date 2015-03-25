@@ -185,6 +185,7 @@ var pas = {
                 _curCarID = data.cid;
                 console.log('cur car id:' + _curCarID.toString() );
                 setStatBar();
+                setHomeImg();
             }).fail(function(jqxhr){
                 //call will fail if result is not properly formatted JSON!
                 alert(funcName + ', call failed! Reason: ' + jqxhr.responseText);

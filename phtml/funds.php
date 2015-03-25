@@ -37,8 +37,8 @@ require_once 'AO_UI.php';
         </ul>
     </form>
     
-    <form id='tokens'>
-    <action='https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'
+    <form id='tokens'
+        action='https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'
         target='PPDGFrame'
         class='standard'>
         <label>Purchase Tokens</label><br>
