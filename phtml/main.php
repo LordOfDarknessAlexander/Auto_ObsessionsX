@@ -38,7 +38,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         <div id='main'>		
             <h1><?php echo $AO_NAME;?></h1>
 			 <?php 
-			//session_start();
+			session_start();
 
 			if(isset($_SESSION) AND isset($_SESSION['uname']) ){
                 $uname = $_SESSION['uname'];
@@ -81,6 +81,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 					<ul>
 				   <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
 				   <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
+				   
 				 
 				 </ul> 
 					</div> ';
