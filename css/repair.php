@@ -83,7 +83,7 @@ function divRepair(){
     width:45%;
     height:20%;
     font-size:0.65rem;
-    font-weight:bold;
+    /*font-weight:bold;*/
 }
 <?php divRepair();?> div button.ub
 {
@@ -95,16 +95,6 @@ function divRepair(){
     background:url('../images/repair.png') no-repeat 0 0;
     background-size:100% 100%;
 }
-/*
-<?php divRepair();?> img#userCar
-{<?php
-    posAbs();
-    css::size('50%', '50%');
-?>
-	left:25%;
-	bottom:12%;
-}
-*/
 <?php divRepair();?> div progress
 {<?php
     //posAbs();
@@ -154,3 +144,13 @@ function divRepair(){
 	top:65%;
 	right:5%;
 }
+/*
+<php divRepair();> img#userCar
+{<php
+    posAbs();
+    css::size('50%', '50%');
+>
+	left:25%;
+	bottom:12%;
+}
+*/
