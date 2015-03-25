@@ -14,6 +14,7 @@ var jq = {
 	//namespace containing application bindings for jquery,
 	//preforms qjery call one then stores the result as an object
 	//canvas:$('#canvas'),
+	
 	adBar:$('img#adBar'),
     statBar:$('div#statBar'),
 	userCash:$('label#userCash'),
