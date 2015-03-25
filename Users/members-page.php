@@ -29,7 +29,7 @@ html::doctype();
     <style type='text/css'>
 #mid-right-col 
 { 
-	text-align:center; margin:auto;margin-right: 15%; margin-bottom: 20%; margin-top: 5%; margin-right: 40%; position:absolute;
+	text-align:center; margin:auto;margin-right: 25%; margin-bottom: 20%; margin-top: 5%; margin-right: 40%; position:absolute;
 }
 #midcol h3 { font-size:100%; margin-top:0; margin-bottom:0; 
 }
