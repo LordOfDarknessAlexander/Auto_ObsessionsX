@@ -59,9 +59,10 @@ function btnW(){
     posAbs();
 ?>
     bottom:2%;
-    left:27.5%;
+    left:18.75%;
     width:8.75%;
     height:7.5%;
+    
     font-size:1.5vw;
     font-weight:bold;
 }
@@ -70,9 +71,10 @@ function btnW(){
     posAbs();
 ?>
     bottom:2%;
-    left:18.75%;
+    left:10%;
     width:8.75%;
     height:7.5%;
+    
     font-size:1.5vw;
     font-weight:bold;
 }
@@ -84,6 +86,7 @@ function btnW(){
     left:36.25%;
     width:8.75%;
     height:7.5%;
+    
     font-size:1.5vw;
     font-weight:bold;
 }
@@ -92,9 +95,10 @@ function btnW(){
     posAbs();
 ?>
     bottom:2%;
-    left:10%;
+    left:27.5%;
     width:8.75%;
     height:7.5%;
+    
     font-size:1.5vw;
     font-weight:bold;
 }

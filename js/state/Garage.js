@@ -596,11 +596,19 @@ function setHomeImg(path){
     //setHomeImg();
     //show home img
 //});
-/*$('div#Garage button#sales').click(
+$('div#Garage button#sales').click(
 function(){
-	jq.Garage.toggle();
-    AuctionSell.init();
-});*/
+	jq.Garage.menu.hide();
+    //AuctionSell.init();
+    jq.AuctionSell.menu.show();
+    
+    jq.AuctionSell.backBtn.off().click(
+        function(){
+            jq.Garage.menu.show();
+            //jq.AuctionSell.toggle();
+        }
+    );
+});
 jq.Garage.backBtn.click(
 function(){
 	jq.Garage.toggle();
@@ -625,8 +633,14 @@ jq.Garage.viewBtn.click(
 function(){
     //
 	if(selCarIndex !== null){
+        jq.AuctionSell.backBtn.off().click(
+        function(){
+            jq.AuctionSell.toggle();
+            jq.carImg.show();
+            //appState = GAME_MODE.CAR_VIEW;
+        });
 		jq.CarView.toggle();
-		CarView.init();
+		CarView.init();        
 	}
 	//else, do nothing, user has not clicked on a car
 });

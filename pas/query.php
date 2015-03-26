@@ -77,7 +77,7 @@ function eLoadUser(){
     echo json_encode(array(
         'stats'=>pasGet::userStats(),
         'garage'=>$cars,
-        //'sales'=>pasGet::userSales()
+        'sales'=>pasGet::userSales()
     ));
 }
 

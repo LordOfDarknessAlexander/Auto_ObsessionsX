@@ -9,7 +9,6 @@ require_once 'include/dbConnect.php';  //sql database connections
 //
 //secure::loggin();
 //
-
 function getUID(){
     //returns the user if logged in, else echo error and force user to redirect to login
     $uid = 'user_id';

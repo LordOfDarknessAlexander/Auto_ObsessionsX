@@ -53,6 +53,7 @@ function auctionGen()
                 }
 			}
             //else entry sell screen without posting an auction
+            //jq.AuctionSell.show();
 		},
         _initAI:function(){
             var p = this._car.getPrice();
@@ -431,49 +432,48 @@ var AuctionSell =
 			}
 		}
 	},
-    load:function(){
-//<php
-//if(loggedIn){?>
-        //jq.get('pas/query.php?op=ucs',
-            //function(data){
-                //if(data === null){
-                    //error
-                //}
-                //alert('success!');
-                //if(typeof(data) == 'array'){
-                    //userSales = data;
-                //}
-            //},
-            //function(jqxhr){
-                //alert('bad stuff happened!');
-            //}
-        //);
-//<php
-//}
-//else{ //playing as guest, use local storage?>
-        //for now, add code here
-        var k = 'AuctionSell';
-        
-        if(Storage.local !== null && k in Storage.local){
-            var sd = JSON.parse(Storage.local[k]),
-                len = sd.length;
+    load:function(data){
+        if(data === null || data === undefined){
+            //playing as guest, use local storage?>
+            //for now, add code here
+            var k = 'AuctionSell';
+            
+            if(Storage.local !== null && k in Storage.local){
+                var sd = JSON.parse(Storage.local[k]),
+                    len = sd.length;
+                
+                if(len != 0){
+                    userSales = [];
+                    
+                    for(var i = 0; i < len; i++){
+                        var data = sd[i],
+                            na = auctionGen();
+                    
+                        //na.restart(data); 
+                        na.toggleCC();
+                        
+                        userSales.push(na);
+                    }
+                }
+            }
+        }
+        else{
+            var len = data.length;
             
             if(len != 0){
                 userSales = [];
                 
                 for(var i = 0; i < len; i++){
-                    var data = sd[i],
-                        na = auctionGen();
+                    var ad = data[i],   //auction data
+                        na = auctionGen();  //new auction
                 
-                    na.restart(data); 
+                    //na.restart(ad); 
                     na.toggleCC();
                     
-                    userSales.push(na);
+                    //userSales.push(na);
                 }
             }
         }
-//<php
-//}>
     },
     save:function(){
 //<php if(loggedIn){?>
@@ -509,3 +509,12 @@ var AuctionSell =
         }
     }
 };
+jq.AuctionSell.homeBtn.click(
+function(){
+    //AuctionSell.close();
+    jq.AuctionSell.menu.toggle();
+    jq.Game.menu.toggle();
+    setHomeImg();
+    jq.carImg.show();
+    //appState = GAME_MODE.MAIN;
+});

@@ -19,8 +19,8 @@ function cvStatBar($id){
 	
 ?>
     <button id='viewCar'>View</button>
-    <button id='sales'>Sales</button>
     <button id='shop'>Upgrades</button>
+    <button id='sales'>Sales</button>
   
     <div id='carListView'>
         <ul id='carBtns'>

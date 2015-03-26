@@ -7,6 +7,18 @@ require_once '../re.php';
 //
 //secure::loggin();
 //
+/*class sql{
+    public static function insert($table, $valStr){
+        //check using regex that $valStr contains a
+        //comma seperated list of identifiers
+        return "INSERT INTO $table ($rowStr) VALUES ($valStr)"
+    }
+    public static function insert($table, $rowStr, $valStr){
+        //check using regex that $rowStr and $valStr contain
+        //comma seperated list of identifiers
+        return "INSERT INTO $table ($valStr)"
+    }
+}*/
 class pasUpdate{
     public static function soldCar($carID, $price){
         //$res = $aoUsersDB->query(
@@ -20,10 +32,12 @@ class pasUpdate{
         global $aoAuctionLossDB;
         $table = getUserTableName();
         $ret = false;
+        $CID = 'car_id';
         
         $res = $aoAuctionLossDB->query(
             //if entry does not exist add it, else update
-            "INSERT INTO $table (car_id) VALUES ($carID)"
+            //sql::insert($table, "$CID", "$carID");
+            "INSERT INTO $table ($CID) VALUES ($carID)"
         );
         
         if($res){

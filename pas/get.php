@@ -413,6 +413,32 @@ class pasGet{
         //returns aver ratio of wins/losses
         //return (getAuctionWins() - getAuctionLosses() ) / getTotalCarCount();
     //}
+    public static function userSales(){
+        //returns the user's total active and expired actions
+        global $aoCarSalesDB;
+        $uid = getUserTableName();
+        $sales = array();
+        //$count is initialized when this is called for the first time
+        $res = $aoCarSalesDB->query(
+            "SELECT * FROM $uid"
+        );
+        
+        if($res){
+            $CID = 'car_id';
+            while($row = $res->fetch_assoc() ){
+                //mysqli retuns values as strings, so convert them
+                //to proper types, for faster transfer back to server!
+                $sales[] = array(
+                    'id'=>intval($row[$CID])
+                    //'bid'=>floatval($row['bid']),
+                    //'time'=>
+                );
+            }
+            $res->close();
+        }
+        //else{user has no entries in table, count is 0;}
+        return $sales;
+    }
     public static function userSalesCount(){
         //returns the number cars sold by the user
         global $aoCarSalesDB;

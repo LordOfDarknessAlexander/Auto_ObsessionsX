@@ -278,20 +278,6 @@ jq.Profile.backBtn.click(jq.Profile.toggle);
 //jq.Search.backBtn.click(jq.Search.toggle);
 //jq.Business.backBtn.click(jq.Business.toggle);
 //jq.Garage.backBtn.click(jq.Garage.toggle);
-
-jq.AuctionSell.backBtn.click(function(){
-    jq.AuctionSell.toggle();
-    jq.carImg.show();
-    //appState = GAME_MODE.CAR_VIEW;
-});
-jq.AuctionSell.homeBtn.click(function(){
-    //AuctionSell.close();
-    jq.AuctionSell.menu.toggle();
-    jq.Game.menu.toggle();
-    setHomeImg();
-    jq.carImg.show();
-    //appState = GAME_MODE.MAIN;
-});
 //
 //User Stat Bar interface!
 //
