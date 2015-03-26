@@ -139,7 +139,7 @@ var Garage = {
         //function(data){
 //<php}>
         //pas.query.userCar();
-            if(Garage._curCarIndex === null){
+            if(_curCarID == 0){
                 $('div#Garage #userCar').hide();
             }
             else{
@@ -162,10 +162,13 @@ var Garage = {
     },
 	getCurrentCar : function()
 	{	//returns a vehicle, if one is selected or null
-		return (Garage._curCarIndex !== null && userGarage.length != 0) ? userGarage[Garage._curCarIndex] : null;
+		//return (Garage._curCarIndex !== null && userGarage.length != 0) ? userGarage[Garage._curCarIndex] : null;
+        return _curCarID != 0 ? Garage.getCarByID(_curCarID) : null;
 	},
     getCarByIndex:function(index)
 	{	//returns a vehicle at a specific index, or null or failure
+        //this can potetially be a diffrent car when called,
+        //as when using $.ajax to initialize the car list, they may be out of order
 		var len = userGarage.length;
         
         if(len == 0){
@@ -181,7 +184,8 @@ var Garage = {
         return null;
 	},
     getCarByID:function(id)
-	{	//returns a vehicle with matching id or null
+	{   //id is an int > 0
+        //returns a vehicle with matching id or null
 		var len = userGarage.length;
         
         if(len == 0){
@@ -234,13 +238,15 @@ var Garage = {
         
         var funcName = 'Garage.js Garage::load()';
         
-        /*jq.get('pas/query.php',
+        jq.get('pas/query.php?op=gug',
             function(data){
+                //the response string is converted by jquery into a Javascript object!
                 if(data === null){
                     alert(funcName + ', Error:ajax response returned null!');
                     return;
                 }
-                //alert('ajax response recieved:' + JSON.stringify(data) );                
+                //alert('ajax response recieved:' + JSON.stringify(data) );
+                
                 if(data.length == 0){
                     //exit early is user has no cars
                     console.log(funcName + ', user has no cars!, Buy some, right now!');
@@ -252,57 +258,24 @@ var Garage = {
                     var obj = data[i];
                     args.push(VehicleFromDB(obj) ); //adds ajax request object to array
                 }
-                
-                $.when.apply($, args).done(function(){
-                    //the UI is dependant on the users garage being loaded,
-                    //so init ui after all ajax calls have completed
-                    Garage.initUI();
-                }).fail(function(){
-                    console.log(funcName + ', loading game resources failed, abort!');
-                });
+                $.when.apply($, args).done(
+                    function(){
+                        //the UI is dependant on the users garage being loaded,
+                        //so init ui after all ajax calls have completed
+                        Garage.initUI();
+                    }
+                ).fail(
+                    function(){
+                        console.log(funcName + ', loading game resources failed, abort!');
+                    }
+                );
             },
             function(jqxhr){
                 //call will fail if result is not properly formated JSON!
                 alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
                 console.log(funcName + ', loading game resources failed, abort!');
             }
-        );*/
-        var jqxhr = $.ajax({
-            type:'POST',
-            url:getHostPath() + 'pas/query.php',
-            dataType:'json',
-            data:'' //{carID:24577}
-        }).done(function(data){
-            //the response string is converted by jquery into a Javascript object!
-            if(data === null){
-                alert(funcName + ', Error:ajax response returned null!');
-                return;
-            }
-            //alert('ajax response recieved:' + JSON.stringify(data) );
-            
-            if(data.length == 0){
-                //exit early is user has no cars
-                console.log(funcName + ', user has no cars!, Buy some, right now!');
-                return;
-            }
-            var args = [];
-            
-            for(var i = 0; i < data.length; i++){
-                var obj = data[i];
-                args.push(VehicleFromDB(obj) ); //adds ajax request object to array
-            }
-            $.when.apply($, args).done(function(){
-                //the UI is dependant on the users garage being loaded,
-                //so init ui after all ajax calls have completed
-                Garage.initUI();
-            }).fail(function(){
-                console.log(funcName + ', loading game resources failed, abort!');
-            });
-        }).fail(function(jqxhr){
-            //call will fail if result is not properly formated JSON!
-            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
-            console.log(funcName + ', loading game resources failed, abort!');
-        });
+        );
 //<php
 //}
 //else{  //playing locally as guest, make calls in JavaScript
@@ -327,6 +300,9 @@ var Garage = {
 //}
 //>
     },
+    //toJSON:function(){
+        //{Garage:"_curCarID":0, "cars":[]}
+    //}
 	save : function()
 	{	//saves garage and current car to local storage
 		//
@@ -359,9 +335,9 @@ var Garage = {
 			//selCarIndex = obj.data.index;
 	//},
     setCurrentCarStats:function(){
-        if(this._curCarIndex !== null){
+        if(_curCarID !== 0){
             var div = $('div#Garage div#userCar'),
-                car = userGarage[this._curCarIndex],
+                car = Garage.getCurrentCar(); //userGarage[this._curCarIndex],
                 stats = car.getStats();
             
             $('img#carImg', div).attr('src', car.getFullPath() );
@@ -393,7 +369,7 @@ var Garage = {
         }
 		if(selCarIndex < userGarage.length){
             Garage._curCarIndex = selCarIndex;	//maintain index, instead of copying a car
-            var car = Garage.getCurrentCar();
+            var car = Garage.getCarByIndex(selCarIndex);
             _curCarID = (car === null) ? 0 : car.id;
 //<php if(loggedIn() ){>
             pas.set.userCar(_curCarID);

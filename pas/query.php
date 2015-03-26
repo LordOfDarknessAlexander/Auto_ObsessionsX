@@ -135,6 +135,11 @@ if(isset($_GET) && !empty($_GET) ){
         echo json_encode(pasGet::currentCarID() );
         exit();
     }
+    elseif($op == 'gug'){
+        //get user garage
+        echoUserCars();
+        exit();
+    }
     //elseif($op == 'ucs'){
         //pasGet::userCarSales();
         //exit();
@@ -198,8 +203,8 @@ if(isset($_POST) && !empty($_POST) ){
 else{
     //no passing any values via POST, return all user data
     //echo json_encode(true);
-    echoUserCars();
-    //eLoadUser();
+    //echoUserCars();
+    eLoadUser();
     exit();
 }
 echo 'fail';

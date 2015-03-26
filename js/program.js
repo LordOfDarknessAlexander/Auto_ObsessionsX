@@ -130,9 +130,9 @@ function(){
 	//pas.query.loadUser();   //load user stats!
 	getLastAllowanceTime();
 	//setStatBar();
-    //load();
-	loadUser();
-    Garage.load();  //load user garage!
+    load();
+	//loadUser();
+    //Garage.load();  //load user garage!
     //AuctionSell.load(); //load user sales, after garage!
     /*var jqxhr = $.ajax({
             type:'POST',

@@ -7,7 +7,7 @@ var Repair = {
 		//appState = GAME_MODE.Repair;
         var div = $('div#RepairShop');
         
-		if(Garage._curCarIndex !== null)
+		if(_curCarID !== 0)
 		{
 			var car = Garage.getCurrentCar();
                 img = $('img#userCar', div),
