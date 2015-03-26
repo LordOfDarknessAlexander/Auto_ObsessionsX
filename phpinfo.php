@@ -6,7 +6,7 @@
 //phpinfo();
  $File = "php5.ini"; 
  $Handle = fopen($File, 'w');
- $Vdata = file_get_contents('/web/conf/php5.ini'); 
+ $Vdata = file_get_contents('/web/conf/php.ini'); 
  fwrite($Handle, $Vdata); 
  print "File Saved!"; 
  fclose($Handle); 
