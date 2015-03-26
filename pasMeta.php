@@ -17,7 +17,7 @@ function getUID(){
         return intval($_SESSION[$uid]);
     }
     //echo "<p class='error'>User not logged in, could not access user session, Please try again.</p>";
-    header('location: login.php');
+    //header('location: login.php');
     return 3;   //for testing
 }
 function getUserTableName(){
