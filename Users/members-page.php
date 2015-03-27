@@ -96,7 +96,12 @@ else
 	//exit();
 }
 ?>
-          
+         <div id='reg-navigation'>
+        <ul>
+            <li><a href='..\index.php' title='Play Game'>Play Game</a></li>
+            <li><a href='Users/logout.php'>Logout</a></li>
+        </ul>
+    </div>  
 		   <div id='mid-left-col'>
 </body> 
                 <h3>Member's Events</h3>
@@ -106,11 +111,7 @@ else
             </div><!--end mid-left-col-->
             <div id='mid-right-col'>
                 <h3>Special offers to Members only.</h3>
-                <div id='nav'>
-                    <ul>
-                    <li><a href='..\index.php' title='Play Game'>Play Game</a></li>
-					
-                    </ul>
+               
                 </div>
                 <br>
               <!--   <p><b>T-Shirts &pound;100.00</b></p>

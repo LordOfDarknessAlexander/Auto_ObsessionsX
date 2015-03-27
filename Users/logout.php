@@ -5,6 +5,7 @@ session_start();//access the current session.
 //if no session variable then redirect the user
 if (!isset($_SESSION['user_id'])) {
 header("location:index.php");
+
 exit();
 }else{ //cancel the session
 	$_SESSION = array(); // Destroy the variables

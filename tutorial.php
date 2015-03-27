@@ -1,6 +1,6 @@
 <?php
-require_once '../include/html.php';
-require_once '../include/dbConnect.php';
+require_once 'include/html.php';
+require_once 'include/dbConnect.php';
 html::doctype();
 ?>
 <html lang=en>
@@ -9,14 +9,14 @@ html::doctype();
 html::title('Login Page');
 html::charset();
 ?>
-<link rel='stylesheet' type='text/css' href='includes.css'>
+<link rel='stylesheet' type='text/css' href='Users/includes.css'>
 </head>
 <body>
 <div id='container'>
 <?php
-require 'includes/header.php';
-require 'includes/nav.php';
-require 'includes/info-col.php';
+require 'include/header.php';
+require 'include/nav.php';
+require 'Users/includes/info-col.php';
 ?>
 	<div id='content'><!-- Start of the page-specific content. -->
         <h2>Tutorial</h2>
