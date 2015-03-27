@@ -69,6 +69,14 @@ function dgm(){
     top:0%;
     left:0%;
 }
+<?php dgm();?>div#reg-navigation{
+ 
+    position:absolute;
+    top:10%;
+    right:0%;
+    width:15%;
+    /*background-color:grey;*/
+}
 <?php dgm();?> div button#toAuctionBtn
 {<?php
     css::defaultBG('../images/auctionBtn.png');

@@ -28,6 +28,12 @@
     <!--HUD ---->
 <!--	<div id="fname" ></div>-->
     <!--img id='homeImg' src='images\\garageEmpty.png'-->
+	 <div id='reg-navigation'>
+        <ul>
+            <li><a href='members-page.php' title='Members'>Members</a></li>
+            <li><a href='Users/logout.php' title='Logout'>Logout</a></li>
+        </ul>
+    </div>
     <div id='menuLeft'>
         <button id ='myCars'>My Garage</button><br/>
         <button id='toAuctionBtn'>Go to Auction</button><br/>
