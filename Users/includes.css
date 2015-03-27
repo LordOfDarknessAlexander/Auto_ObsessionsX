@@ -65,7 +65,7 @@ form {
     margin-top: 0%;
     width:100%;
     position: relative;
-}/*
+}
 ul {
     position:relative;
     top:40%;
@@ -74,7 +74,7 @@ ul {
     width:60%;
     text-align:center;
     margin:0;
-}*/
+}
 /* set general side button styles */
 li {
     width:100%;
@@ -198,6 +198,15 @@ div#playerData
     text-align:left;
     position:absolute;
 }
+div#imog 
+{
+    background: url('../images/polo.png') no-repeat 0 0;
+	background-size:100% 100%;
+	width : 280px;
+	height : 207px;
+
+	position : abosolute;
+}
 label#cash{
     position:abosolute;
     width:25%;
@@ -252,6 +261,7 @@ div#reg-navigation a:active {
 	padding : 2%;
 	color: blue;
 }
+
 #footer {
     margin:auto;
     text-align:center;
