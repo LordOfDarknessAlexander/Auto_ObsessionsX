@@ -605,7 +605,7 @@ function(){
     jq.AuctionSell.backBtn.off().click(
         function(){
             jq.Garage.menu.show();
-            //jq.AuctionSell.toggle();
+            jq.AuctionSell.menu.hide();
         }
     );
 });
@@ -635,11 +635,13 @@ function(){
 	if(selCarIndex !== null){
         jq.AuctionSell.backBtn.off().click(
         function(){
-            jq.AuctionSell.toggle();
+            jq.AuctionSell.menu.hide();
+            jq.CarView.menu.show();
             jq.carImg.show();
             //appState = GAME_MODE.CAR_VIEW;
         });
-		jq.CarView.toggle();
+		jq.CarView.menu.toggle();
+        jq.Garage.menu.hide();
 		CarView.init();        
 	}
 	//else, do nothing, user has not clicked on a car
@@ -658,7 +660,8 @@ function(){
 //
 jq.CarView.backBtn.click(
 function(){
-    jq.CarView.toggle();
+    jq.CarView.menu.hide();//toggle();
+    jq.Garage.menu.show();
     jq.carImg.hide();
 });
 jq.CarView.homeBtn.click(
@@ -666,5 +669,6 @@ function(){
 	jq.Game.menu.show();
 	jq.CarView.menu.hide();
     setHomeImg();
+    setAdBG();
 	//appState = GAME_STATE.MAIN;
 });
