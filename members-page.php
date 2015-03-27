@@ -36,7 +36,7 @@ html::doctype();
 <body>
 <div id='container'>
 <?php
-require 'Users/includes/nav.php';
+require 'include/nav.php';
 require 'Users/includes/info-col.php';
 require 'Users/my_parse_file.php';
 ?>
