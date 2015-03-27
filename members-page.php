@@ -85,6 +85,12 @@ else
 	//exit();
 }
 ?>
+ <div id='reg-navigation'>
+        <ul>
+            <li><a href='index.php' title='Play Game'>Play Game</a></li>
+            <li><a href='Users/logout.php'>Logout</a></li>
+        </ul>
+    </div>
      <div id='mid-left-col'>
 </body>
                 <h3>Member's Events</h3>
@@ -98,11 +104,7 @@ else
 				<div id='imog'>
 			   <p>Auto-Obsessions</p>
 			   </div>
-                <div id='nav'>
-                    <ul>
-                    <li><a href='index.php' title='Play Game'>Play Game</a></li>
-                    </ul>
-                </div>
+              
                 <br>
                 <p><b>T-Shirts &pound;100.00</b></p>
                <!-- <img alt='Polo shirt' title='Polo shirt' height='207' src='Users/images/polo.png' width='280'><br>-->
