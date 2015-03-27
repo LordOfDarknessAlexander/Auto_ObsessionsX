@@ -70,12 +70,38 @@ function dgm(){
     left:0%;
 }
 <?php dgm();?>div#reg-navigation{
- 
+ <?php
+    defaultBtnBG();
+    css::bgSize('100%', '100%');
+?>
     position:absolute;
     top:10%;
     right:0%;
-    width:15%;
-    /*background-color:grey;*/
+}
+<?php dgm();?>div#reg-navigation a{
+<?php
+    defaultBtnBG();
+    css::bgSize('100%', '100%');
+?>
+    display:block;
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+    text-align:center;
+	padding : 2%;
+    position: relative;
+}
+/* mouseover */
+<?php dgm();?>li a:hover,
+<?php dgm();?>div#nav a:hover,
+<?php dgm();?>div#reg-navigation a:hover{
+	 <?php
+    css::defaultBG('../images/defaultBtn2.png');
+    css::bgSize('100%', '100%');
+?>
+  
+	color:green;
+	padding : 2%;
 }
 <?php dgm();?> div button#toAuctionBtn
 {<?php
