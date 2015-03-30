@@ -408,4 +408,10 @@ aoUsersDB: contains a table for each user to maintain their car collection(garag
 aoCarSalesDB: contains all data regarding the user's vehicle sales(existing, pending and expired).
 aoAuctionLossDB: tracks the id's of the vehicles a user has lost and may no longer bid on.
 </pre>
+<h2 id='aodb'>GameFlow UML</h2><hr>
+<pre>
+<img alt='UML' title='Auto-Obsession UML' height='650' src='AOUML.jpg' width='960'><br>
+
+</pre>
+
 <?php html::footer()?>
