@@ -160,22 +160,22 @@ else be subjected to gruesome torture.
     <h3 id='fileFormats'>File formats:</h3><hr>
     <pre></pre>
     <h4 id='text'>Text</h4><hr>
-<pre>    In web development there are several layers of various languages, each has its own (independant) standard and specific purpose.
+<pre>    In web development there are several layers of various languages, each has its own (independent) standard and specific purpose.
 This can quickly become confusing and overwhelming when switching between 3 or more in a large project,
 so consistency in style across all file types is important for the readability and maintainability of code.
 <!--All files should be UTF-8 encoded, without BOM.</pre><br>--></pre>
 <?php a::html5();?>: for expression of raw (strucutred) data, extension (.html), pages should be embedded within PHP, as it is more powerful and flexible than html on its own<br>
 <?php a::xml();?>: XML, extension (.xml), is purely a markup language (with no functionality),
 intended for the expression of an application's data.
-As xml closely adheres to html(with subtly yet important diffrences) xml files should follow the same stylings as html pages.<br>
+As xml closely adheres to html(with subtly yet important differences) xml files should follow the same stylings as html pages.<br>
 <?php a::javascript();?>: for local browser functionality, MIME type application/javascript, extension (.js), may be embeded within a php page.<br>
 <?php a::css();?>: for data display/styling. MIME type text/css, extension (.css), may be embeded within a php page.<br>
 <?php a::php();?>: Sever-side scripting language and database interface.<br>
 </pre>
-    Keeping coherent style should reduce to the lowest common denominator of all languages involed.
+    Keeping coherent style should reduce to the lowest common denominator of all languages involved.
 </pre>
-<h5 id='dfn'>Directoy structure and file name</h5><hr>
-<pre>   Directoies and files are camelCased, like so
+<h5 id='dfn'>Directory structure and file name</h5><hr>
+<pre>   Directories and files are camelCased, like so
 root\
     images\
         defaultBtn.png
@@ -192,8 +192,8 @@ Functions and variables that are private or protected(or for languages like JS w
 js:<code><p class='good'>
 //declares a function, which returns an object
 function makeStuff(args){
-    //doc string, about this class ctor/generater
-    //Static constants are owned by this generater,
+    //doc string, about this class ctor/generator
+    //Static constants are owned by this generator,
     //as they should only be assign once and only one 
     this.PUB_VAR = 0;
     this._VAR = 0;
@@ -215,7 +215,7 @@ function makeStuff(args){
 php:<code><p class='good'>
 class Stuff{
     //doc string, about this class
-    //data allways comes first in class declarations!
+    //data always comes first in class declarations!
     public pub;
     protected _prot;
     private _priv;
@@ -242,18 +242,18 @@ Logos for advertising are currently 385x85 .png, as they are small images where 
 Most useful for small to medium sized images where data integrity and resolution must be maintained.</pre>
 <h4 id='jpg'><?php a::jpg();?></h4><hr>
 <pre>JPEG/JPG (Joint Photographic Experts Group) is a lossy compression compression method for images.
-Should be used with large images(where maintaining detail/resoultion/integrity is not important.
+Should be used with large images(where maintaining detail/resolution/integrity is not important.
 Good for maintaining collections of large images with relatively low memory overhead.</pre>
 </pre>
     <h4 id='audio'>Audio</h4><hr>
-<pre>    All audio files adopt the MP3 format.</pre>
+<pre>    All audio files adopt the MP3 format.</pre>s
 
 <h3 id='#strStyles'>String Formatting</h3><hr>
 <pre>    Html/xml makes extensive use of quotes and double quotes for the
 declaration of strings.<br>
 As html is often embedded inside other strings it quickly
 become difficult to read
-ALWAYS USE SINGLE QUOTES IN HTML, unless absolutely necessary(then the use of an html entity would be preffered)
+ALWAYS USE SINGLE QUOTES IN HTML, unless absolutely necessary(then the use of an html entity would be preferred)
 </pre>
 <h3 id='jsH'><?php a::javascript();?></h3><hr>
 <pre>   use single quoted string. json</pre>
@@ -268,7 +268,7 @@ This method can clearly distinguish the embedded quotes when expressed as a stri
 <code>
 <p class='good'>var htmlStr = "&lt;button id='" + id + "'&gt;text&lt;/button&gt;";</p>
 </code>
-Oppossed to using double quote inside double quotes:
+Opposed to using double quote inside double quotes:
 <code>
 <p class='bad'>var htmlStr = "&lt;button id=\"" + id + "\"&gt;text&lt;/button&gt;";</p>
 </code>
@@ -287,15 +287,15 @@ and do not require the substitution of variables.</pre>
 and support the direct substitution of variables.
 <code>
 <p class='bad'>$str = "simple string";  //double quote for 'complex strings', nothing special here</p>
-<p class='good'>$str = "this ' doesn't need escapin'!";</p><br>
+<p class='good'>$str = "this ' doesn't need escaping'!";</p><br>
 </code>
-When embedding dynamic variables into a string this format is preffered
+When embedding dynamic variables into a string this format is preferred
 <code>
 <p class='good'>
 &lt;?php<br>
 $str = 'guid'; //simple string<br>
-echo "&lt;button id='$str'&gt;This can't be real&lt;/button&gt;";   //embeded string in a button<br>
-$str = "SELECT $str FROM table";   //embeded string as an sql statement, $str will be replaced by the literal value(not including the qutoes)<br>
+echo "&lt;button id='$str'&gt;This can't be real&lt;/button&gt;";   //embedded string in a button<br>
+$str = "SELECT $str FROM table";   //embedded string as an sql statement, $str will be replaced by the literal value(not including the quotes)<br>
 ?&gt;</p>
 </code>
 While this is acceptable, in PHP, html elements should rarely be expressed as strings then echo'ed out to the browser(as this is slow and overly complex),
@@ -326,7 +326,7 @@ This makes for rather cumbersome syntax which is less flexible.
     In php and javascript, use json_encode() or JSON.stringify() to convert complex data objects into valid JSON strings
 </p>
 <hr><h2>Game Mechanics</h2><hr>
-<pre>   Auto-Obsessions impliments several high level API to simulate the experience of owning, moding and auctioning cars.
+<pre>   Auto-Obsessions implements several high level API to simulate the experience of owning, moding and auctioning cars.
 </pre>
 <h3 id='carLC'>Vehicle Life Cycle</h3><hr>
 <pre>    The user's experience consists of engaging in auctions, repairing/moding car then ultimately selling them for a profit.</pre>
@@ -345,7 +345,7 @@ View a car does not change any.
 </pre>
 <h3>Repairs and upgrades</h3><hr>
 <pre>    Vehicle upgrades and repairs are represented by bitfields,
-minimizing bandwidth from sql queries and sending data with php/ajax by overlaying complex abstractions atop collections of bits(more specificly chars, shorts and ints) 
+minimizing bandwidth from sql queries and sending data with php/ajax by overlaying complex abstractions atop collections of bits(more specifically chars, shorts and ints) 
     <br>
     Each field is represented by 4(8-bit) bytes taking the form {XXXX,FFFF}.
     Each group of 4 bits represents a single part of the car.
@@ -393,15 +393,15 @@ one repair for each part in each field. It takes on the structure:
         repairs uint(4)
 </pre>
     <h3 id='ai'>AI</h3><hr>
-<pre>   The AI drives the user's bidding experienece.
+<pre>   The AI drives the user's bidding experience.
 To bypass the complexity of interacting peer to peer, randomized AI are implimented to simulate an engaging user experience.
 </pre>
     <h3 id='store'>Store</h3><hr>
-<pre>    The Auto-Obsessions' store processes user transations via <a href=''>PayPal javescript API</a>.
+<pre>    The Auto-Obsessions' store processes user transitions via <a href=''>PayPal javescript API</a>.
 Upon completion of the transaction, the user is updated.
 </pre>
 <h2 id='aodb'>Databases</h2><hr>
-<pre>   Auto-Obsession impliments several databases (with mySQLi) for maintaining user and application data.
+<pre>   Auto-Obsession implements several databases (with mySQLi) for maintaining user and application data.
 
 finalpost:contains the static vehicle table, aoCars, and the dynamic user's table, aoUsers, which contains all relevant registered user data (TODO:rename finalpost).
 aoUsersDB: contains a table for each user to maintain their car collection(garage), which has an entry for each car.
