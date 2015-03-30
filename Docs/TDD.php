@@ -411,7 +411,8 @@ aoAuctionLossDB: tracks the id's of the vehicles a user has lost and may no long
 <h2 id='aodb'>GameFlow UML</h2><hr>
 <pre>
 <img alt='UML' title='Auto-Obsession UML' height='650' src='AOUML.jpg' width='960'><br>
-
+UML Diagram depicts the transitions that exist in the game. Auto-Obsession is a User based website and game and the following is intended to help guide the programmers of 
+the game to understand the screen transitional flow that should live in the totality of the project.
 </pre>
 
 <?php html::footer()?>
