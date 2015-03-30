@@ -246,7 +246,7 @@ Should be used with large images(where maintaining detail/resolution/integrity i
 Good for maintaining collections of large images with relatively low memory overhead.</pre>
 </pre>
     <h4 id='audio'>Audio</h4><hr>
-<pre>    All audio files adopt the MP3 format.</pre>s
+<pre>    All audio files adopt the MP3 format.</pre>
 
 <h3 id='#strStyles'>String Formatting</h3><hr>
 <pre>    Html/xml makes extensive use of quotes and double quotes for the
@@ -394,7 +394,7 @@ one repair for each part in each field. It takes on the structure:
 </pre>
     <h3 id='ai'>AI</h3><hr>
 <pre>   The AI drives the user's bidding experience.
-To bypass the complexity of interacting peer to peer, randomized AI are implimented to simulate an engaging user experience.
+To bypass the complexity of interacting peer to peer, randomized AI are implemented to simulate an engaging user experience.
 </pre>
     <h3 id='store'>Store</h3><hr>
 <pre>    The Auto-Obsessions' store processes user transitions via <a href=''>PayPal javescript API</a>.
