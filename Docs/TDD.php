@@ -13,7 +13,7 @@ class a{
     //websites
     //public static function google(){<a href='www.google.ca'>Google</a>}
     public static function php(){?>
-<a href='www.php.php'>PHP</a>
+<a href='http://php.net/'>PHP</a>
 <?php
     }
     //public static function python(){<a href=''>Python</a>}
@@ -160,16 +160,79 @@ else be subjected to gruesome torture.
     <h3 id='fileFormats'>File formats:</h3><hr>
     <pre></pre>
     <h4 id='text'>Text</h4><hr>
-<!--pre>In web development there are several layers of various files,
-each with its own language standard. This can quickly become confusing and overwhelming when switching between 3 or more diffrent file types,
+<pre>    In web development there are several layers of various languages, each has its own (independant) standard and specific purpose.
+This can quickly become confusing and overwhelming when switching between 3 or more in a large project,
 so consistency in style across all file types is important for the readability and maintainability of code.
-Style should reduce to the lowest common denominator of all
-All files should be UTF-8 encoded.</pre><br>-->
-<?php a::php();?>:<br>
-<?php a::html5();?>: pages should be embedded within PHP, as it is more powerful and flexible than html on its own<br>
-<?php a::xml();?>: XML is purely a markup language (with no functionality), intended for the expression of an application's data. As xml closely adheres to html(with subtly yet important diffrences) xml files should follow the same stylings as html pages<br>
-<?php a::javascript();?>MIME type application/javascript, may be embeded within a php page<br>
-<?php a::css();?>: MIME type text/css, may be embeded within a php page<br>
+<!--All files should be UTF-8 encoded, without BOM.</pre><br>--></pre>
+<?php a::html5();?>: for expression of raw (strucutred) data, extension (.html), pages should be embedded within PHP, as it is more powerful and flexible than html on its own<br>
+<?php a::xml();?>: XML, extension (.xml), is purely a markup language (with no functionality),
+intended for the expression of an application's data.
+As xml closely adheres to html(with subtly yet important diffrences) xml files should follow the same stylings as html pages.<br>
+<?php a::javascript();?>: for local browser functionality, MIME type application/javascript, extension (.js), may be embeded within a php page.<br>
+<?php a::css();?>: for data display/styling. MIME type text/css, extension (.css), may be embeded within a php page.<br>
+<?php a::php();?>: Sever-side scripting language and database interface.<br>
+</pre>
+    Keeping coherent style should reduce to the lowest common denominator of all languages involed.
+</pre>
+<h5 id='dfn'>Directoy structure and file name</h5><hr>
+<pre>   Directoies and files are camelCased, like so
+root\
+    images\
+        defaultBtn.png
+        someBackground.png
+        randomLargeImage.jpg
+    audio\
+        
+    index.php
+</pre>
+<h5 id='cfn'>Classes, functions and variables</h5><hr>
+<pre>   All classes are (unless prefixed with a namespace, eg: ao, pas).
+Functions and variables that are private or protected(or for languages like JS which have no protection, those with the intent of being used as such)
+
+js:<code><p class='good'>
+//declares a function, which returns an object
+function makeStuff(args){
+    //doc string, about this class ctor/generater
+    //Static constants are owned by this generater,
+    //as they should only be assign once and only one 
+    this.PUB_VAR = 0;
+    this._VAR = 0;
+    //
+    return {
+        pub:args[0],
+        _prot:'protected',
+        _priv:'private',
+        //
+        getProt:function(){
+            return this._prot;
+        }
+        _getPriv:function(){
+            return this._priv;
+        }
+    };
+}</p>
+</code>
+php:<code><p class='good'>
+class Stuff{
+    //doc string, about this class
+    //data allways comes first in class declarations!
+    public pub;
+    protected _prot;
+    private _priv;
+    //
+    public static CONST PUB_VAR = 0;
+    protected static CONST _VAR = 0;
+    //
+    //then declare functionality after
+    //
+    public function getProt(){
+        return $self->_prot;
+    }
+    protected function getPriv(){
+        return $self->_priv;
+    }
+}</p></pre>
+</code>
     <h4 id='imgs'>Images</h4><hr>
 <pre>	All large image resources, such as backgrounds, car photos assume the JPG format.
 Logos for advertising are currently 385x85 .png, as they are small images where retention of resolution is important.
@@ -183,7 +246,7 @@ Should be used with large images(where maintaining detail/resoultion/integrity i
 Good for maintaining collections of large images with relatively low memory overhead.</pre>
 </pre>
     <h4 id='audio'>Audio</h4><hr>
-<pre>    All audio files are MP3.</pre>
+<pre>    All audio files adopt the MP3 format.</pre>
 
 <h3 id='#strStyles'>String Formatting</h3><hr>
 <pre>    Html/xml makes extensive use of quotes and double quotes for the
@@ -235,7 +298,7 @@ echo "&lt;button id='$str'&gt;This can't be real&lt;/button&gt;";   //embeded st
 $str = "SELECT $str FROM table";   //embeded string as an sql statement, $str will be replaced by the literal value(not including the qutoes)<br>
 ?&gt;</p>
 </code>
-While this is aceptable, in PHP html elements should rarely be expressed as strings then echo'ed out to the browser(as this is slow and overly complex),
+While this is acceptable, in PHP, html elements should rarely be expressed as strings then echo'ed out to the browser(as this is slow and overly complex),
 rather, it's preferred to inject the html directly as the site like so.
 <code>
 <p class='good'>
@@ -266,15 +329,19 @@ This makes for rather cumbersome syntax which is less flexible.
 <pre>   Auto-Obsessions impliments several high level API to simulate the experience of owning, moding and auctioning cars.
 </pre>
 <h3 id='carLC'>Vehicle Life Cycle</h3><hr>
-<pre>    The user's experience consists of.</pre>
-<h4 id='buying'>Auction<h4><hr>
-<pre>    Here, the users bids against randomized AI to compete in a bidding war for a car
+<pre>    The user's experience consists of engaging in auctions, repairing/moding car then ultimately selling them for a profit.</pre>
+<h4 id='buying'>Auction</h4><hr>
+<pre>    Here, the users bids against randomized AI to compete in a bidding war for a car.
+A static table(aoCars) exists in the core database(finalpost),
+purchasing a car copies the data from aoCars(entries are never removed from aoCars), into the user's table, where they may freely mod their new ride.
 </pre>
 <h4 id='owning'>Garage-life</h4><hr>
 <pre>   At this point users may View, Upgrade, or Sell vehicles they have previously purchased.
+View a car does not change any.
 </pre>
 <h4 id='selling'>Making money</h4><hr>
-<pre>
+<pre>   An Ajax POST request is made to the server (from js),
+, with the script returning their new funds.
 </pre>
 <h3>Repairs and upgrades</h3><hr>
 <pre>    Vehicle upgrades and repairs are represented by bitfields,
@@ -327,12 +394,18 @@ one repair for each part in each field. It takes on the structure:
 </pre>
     <h3 id='ai'>AI</h3><hr>
 <pre>   The AI drives the user's bidding experienece.
-To bypass the complexity of interacting peer to peer, randomized AI are implimented to simulate and engaging user experience.</pre>
+To bypass the complexity of interacting peer to peer, randomized AI are implimented to simulate an engaging user experience.
+</pre>
     <h3 id='store'>Store</h3><hr>
 <pre>    The Auto-Obsessions' store processes user transations via <a href=''>PayPal javescript API</a>.
 Upon completion of the transaction, the user is updated.
 </pre>
 <h2 id='aodb'>Databases</h2><hr>
 <pre>   Auto-Obsession impliments several databases (with mySQLi) for maintaining user and application data.
+
+finalpost:contains the static vehicle table, aoCars, and the dynamic user's table, aoUsers, which contains all relevant registered user data (TODO:rename finalpost).
+aoUsersDB: contains a table for each user to maintain their car collection(garage), which has an entry for each car.
+aoCarSalesDB: contains all data regarding the user's vehicle sales(existing, pending and expired).
+aoAuctionLossDB: tracks the id's of the vehicles a user has lost and may no longer bid on.
 </pre>
 <?php html::footer()?>
