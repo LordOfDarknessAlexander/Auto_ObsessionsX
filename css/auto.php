@@ -200,13 +200,10 @@ img#adBar
 {
   background-image: url('../images/Splash.png')no-repeat 0 0;
   color: white;
+  background-size : 100% 100%;
   width: 100%;
   height: 100%;
   z-index: 20;
-  color:red;
-  position:absolute;
-  right:15%;
-  top:15%;
 }
 /*#login
 {

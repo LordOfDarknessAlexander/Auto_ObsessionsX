@@ -266,7 +266,7 @@ function Register()
 	stop = true;
 	auctionStop = true;
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	$('#Register').show();
+    	$('#Register').show(); 
 
 	appState = GAME_MODE.NEW_USER;
     

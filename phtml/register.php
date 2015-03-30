@@ -5,8 +5,15 @@ function ep($str){
     if(is_string($str) && isset($_POST[$str]) )
         echo $_POST[$str];
 }
-?>	
 
+
+?>	
+<html lang=en>
+<head>
+
+    <link rel="stylesheet" type="text/css" href="Users/includes.css">
+</head>
+<body>
 <div id="Register">
     <h2>Membership Registration</h2>
 		<h3 class="content">Items marked with an asterisk * are essential</h3>
@@ -25,3 +32,4 @@ function ep($str){
 	</form>
 </fieldset>
 </div>
+</body>

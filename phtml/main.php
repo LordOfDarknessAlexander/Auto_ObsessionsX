@@ -58,7 +58,8 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 				   <li><a href='javascript:void(0)' class='button play'>Play as Guest</a></li>
 				   <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
 				   
-				   <li><a href='javascript:void(0)' class='button Register'>Register</a></li> 
+				 <!--  <li><a href='javascript:void(0)' class='button Register'>Register</a></li> -->
+				 <li><a href='Users/safer-register-page.php' class='button Register'>Register</a></li> 
 				</ul> 
 				 
 				<div id='loginfields'>
@@ -104,6 +105,9 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
             </ul>
             <a href='javascript:void(0)' class='button back'>Back</a>
         </div> 
+		<div id='Register'>
+		
+		</div>
     </div><!--end menu-->      
 
     <canvas id='canvas' width='900' height='600'>
