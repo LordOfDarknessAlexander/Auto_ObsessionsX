@@ -6,17 +6,18 @@ require_once 'ui.php';
 //
 css::header();
 //
-function divAuction(){
-    echo 'div#Auction';
+function divAuction(){?>div#Auction<?php
 }
 ?>
-/*Auction Screen*/
+/*
+Auction Screen
+*/
 <?php divAuction();?>
 {	/*Auction page stylings*/ 
 	/*background: url('../images/defaultBG.jpg') no-repeat 0 0;*/
 <?php
     posAbs();
-	
+    //css::size('100%, '100%');
 ?>
 	display: none;
 	text-align: center;
@@ -49,6 +50,8 @@ function divAuction(){
     posAbs();
     fontBold();
     //css::size('12%', '5%');
+    //css::left();
+    //css::bottom();
 ?>
 	width:19%;
 	height:5%;
@@ -61,6 +64,9 @@ function divAuction(){
     defaultBtnBG();
     posAbs();
     fontBold();
+    //css::size();
+    //css::left();
+    //css::bottom();
 ?>
 	width:12%;
 	height:5%;
@@ -86,6 +92,7 @@ function divAuction(){
     fontBold();
     defaultColor();
     posAbs();
+    //css::size();
 ?>
 	background-image:url('../images/checkers.png');
 
@@ -100,6 +107,7 @@ function divAuction(){
     fontBold();
     defaultColor();
     posAbs();
+    //css::size();
 ?>
 	background-image:url('../images/checkers.png');
 
@@ -109,14 +117,4 @@ function divAuction(){
 	left:20%;
 	top:18%;
     font-size:2vw;
-}
-<?php divAuction();?> img#auctionCar
-{
-<?php
-    posAbs();
-?>
-	width:50%;
-	height:50%;
-	top:25%;
-	left:25%;
 }

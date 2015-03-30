@@ -11,23 +11,21 @@ require_once 'carView.php';
     //user's garage div
     //echo 'div#Garage';
 //}
-function divGarage(){
-    echo 'div#Garage';
+function divGarage(){?>div#Garage<?php
 }
-function divCarListView(){
-    echo 'div#Garage div#carListView';
+function divCarListView(){divGarage();?> div#carListView<?php
 }
-function divUserCar(){
-    echo 'div#Garage div#userCar';
+function divUserCar(){divGarage();?> div#userCar<?php
 }
-function divSelectedCar(){
-    echo 'div#Garage div#selectedCar';
+function divSelectedCar(){divGarage();?> div#selectedCar<?php
 }
 function btnW(){
     echo '8.75%';
 }
 ?>
-/*User Garage div Stylings*/
+/*
+User Garage div Stylings
+*/
 <?php divGarage();?>
 {
 <?php
@@ -44,16 +42,6 @@ function btnW(){
 	z-index: 1;
     color:red;
 }
-/*<php divGarage();?> button#backBtn
-{<php
-    posAbs();
->
-    bottom:70%;
-    left:10%;
-    width:5%;
-    height:7.5%;
-    font-size:1.25vw;
-}*/
 <?php divGarage();?> button#viewCar
 {<?php
     posAbs();
@@ -136,7 +124,9 @@ function btnW(){
     left:10%;
     width:35%;
 }
-/*current user car stylings*/
+/*
+current user car stylings
+*/
 <?php divUserCar();?>
 {	/*styling for list items*/
 	/*display:inline;*/
@@ -187,7 +177,6 @@ function btnW(){
 	font-size:0.6em;	/*12px*/
     height:35%;
 }
-/*selected car div stylings*/
 
 /*list item button labels*/
 /*
