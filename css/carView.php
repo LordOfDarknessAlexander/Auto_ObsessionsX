@@ -4,8 +4,7 @@
 require_once 'ui.php';
 css::header();
 //
-function divCarView(){
-    echo 'div#CarView';
+function divCarView(){?>div#CarView<?php
 }
 ?>
 /*Car View Screen*/
@@ -28,8 +27,7 @@ function divCarView(){
 {
     width:100%;
 }
-<?php divCarView();?> button
-{<?php
+<?php divCarView();?> button{<?php
 	//rule for all button in CarView div
 	defaultColor();
     fontBold();
@@ -61,6 +59,7 @@ function divCarView(){
 {<?php
     defaultColor();
     posAbs();
+    //css::size('60%', '10%');
 ?>
     background-color:grey;
 	/*background-image:url('../images/checkers.png');*/
@@ -88,6 +87,7 @@ function divCarView(){
 <?php divCarView();?> h2{
 <?php
     posAbs();
+    //css::size('14%', '5%');
 ?>
 	width:14%;
 	height:5%;
@@ -101,6 +101,7 @@ function divCarView(){
 <?php
     posAbs();
     scrollY();
+    //css::size('14%', '23%');
 ?>
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/
@@ -111,7 +112,9 @@ function divCarView(){
     font-size:1.5vw;
     text-align:left;
 }
-/*Car View left div*/
+/*
+Car View left div
+*/
 <?php divCarView();?> h2#dt{
 	top:28%;
 	left:5%;
@@ -128,7 +131,9 @@ function divCarView(){
 	top:65%;
 	left:5%;
 }
-/*Car View right div*/
+/*
+Car View right div
+*/
 <?php divCarView();?> h2#interior{
 	top:28%;
 	right:5%;

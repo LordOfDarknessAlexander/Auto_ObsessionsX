@@ -5,12 +5,14 @@ require_once 'ui.php';
 //
 css::header();
 //
-function divFunds(){
-    echo 'div#AddFunds';
+function divFunds(){?>
+div#AddFunds<?php
 }
 require_once 'ui.php';
 ?>
-/*funds page UI stylings*/
+/*
+funds page styles
+*/
 <?php divFunds();?>
 {
 <?php
@@ -24,27 +26,25 @@ require_once 'ui.php';
 	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
-	width: 100%;
-	height: 100%;
 }
 
-<?php divFunds();?>  li 
+<?php divFunds();?> li 
 {
 	padding: 10px 0;
 	display:inline;
 	margin: 8px;
 	margin-top: 8em;
 }
-<?php divFunds();?> label#userCash
-{
+<?php divFunds();?> label#userCash{<?php
+    posAbs();
+    defaultBtnBG();
+?>
 	color:white;
 	text-align:center;
-	position:absolute;
 	bottom:0px;
 	left:0px;
 	width: 150px;
 	height:2em;
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
 }
 <?php /*divFunds();> #addFundsBackButton
 {
@@ -57,32 +57,36 @@ require_once 'ui.php';
 	
 }*/?>
 
-<?php divFunds();?> #addMinorFundsBtn
-{
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
+<?php divFunds();?> #addMinorFundsBtn{<?php
+    defaultBtnBG();
+?>
 	width:150px;
 	height:50px;
 }
-<?php divFunds();?> #addMediumFundsBtn
-{
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
+<?php divFunds();?> #addMediumFundsBtn{<?php
+    defaultBtnBG();
+?>
 	width:150px;
 	height:50px;
 }
-<?php divFunds();?> #addMajorFundsBtn
-{
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
+<?php divFunds();?> #addMajorFundsBtn{<?php
+    defaultBtnBG();
+?>
 	width:150px;
 	height:50px;
 }
-<?php divFunds();?> #addAllowanceBtn
-{
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
+<?php divFunds();?> #addAllowanceBtn{<?php
+    defaultBtnBG();
+?>
 	width:150px;
 	height:50px;	
 }
-<?php divFunds();?> form input
-{
+<?php divFunds();?> form{
+	position:absolute;
+	color:red;
+	top:30%;
+}
+<?php divFunds();?> form input{
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color: red;
 	width:150px;
@@ -92,17 +96,9 @@ require_once 'ui.php';
     fontBold();
 ?>
 }
-<?php divFunds();?> form#tokens
-{
-	position:absolute;
-	color:red;
+<?php divFunds();?> form#tokens{
 	right:5%;
-	top:30%;
 }
-<?php divFunds();?> form#cash
-{
-	position:absolute;
-	color:red;
+<?php divFunds();?> form#cash{
 	left:5%;
-	top:30%;
 }

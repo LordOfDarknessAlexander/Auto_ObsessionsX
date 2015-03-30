@@ -12,10 +12,53 @@ require_once 'repair.php';
 //require_once 'garage.php';
 //require_once 'carView.php';
 //    
-function dgm(){
-    echo 'div#gameMenu';
+function dgm(){?>div#gameMenu<?php
 }
+function dml(){dgm();?> div#menuLeft<?php
+}
+function dmr(){dgm();?> div#menuRight<?php
+}
+function top($str){?>
+top:<?php echo $str;?>;
+<?php
+}
+function right($str){?>
+right:<?php echo $str;?>;
+<?php
+}
+function left($str){?>
+left:<?php echo $str;?>;
+<?php
+}
+function bottom($str){?>
+bottom:<?php echo $str;?>;
+<?php
+}
+//function tz(){
+    //top('0%');
+//}
+//function btm(){
+    //bottom('2%');
+//}
+//function btm(){
+    //bottom('12%');
+//}
+/*function rz(){
+    right('0%');
+}
+function lz(){
+    left('0%');
+}
+function rm(){  //right margin
+    right('5%');
+}
+function lm(){  //left margin
+    left('5%');
+}*/
 ?>
+/*
+Main Game Menu Styles
+*/
 <?php dgm();?>{
 <?php
     posAbs();
@@ -45,23 +88,23 @@ function dgm(){
     width:15%;
     height:60%;
 }
-<?php dgm();?> div#menuLeft{
+<?php dml();?>{
 	left:5%;
 	bottom:12%;
 }
-<?php dgm();?> div#menuRight{
+<?php dmr();?>{
 	right:5%;
     bottom:12%;
-
 }
-<?php dgm();?> div#menuLeft button,
-<?php dgm();?> div#menuRight button{
+<?php dml();?> button,
+<?php dmr();?> button{
 <?php
     posAbs();
     css::size('95%', '48%');
+    //css::bgSize('100%', '100%');
 ?>
 }
-<?php dgm();?> div button#myCars{
+<?php dml();?> button#myCars{
 <?php
     css::defaultBG('../images/garageBtn.png');
     css::bgSize('100%', '100%');
@@ -69,19 +112,44 @@ function dgm(){
     top:0%;
     left:0%;
 }
-<?php dgm();?>div#reg-navigation{
+<?php dml();?> button#toAuctionBtn
+{<?php
+    css::defaultBG('../images/auctionBtn.png');
+    css::bgSize('100%', '100%');
+?>
+    top:52%;
+    left:0%;
+}
+<?php dmr();?> button#profile
+{<?php
+    css::defaultBG('../images/profileBtn.png');
+    css::bgSize('100%', '100%');
+?>
+    top:0%;
+    right:0%;
+}
+<?php dmr();?> button#buyUpgradesBtn
+{<?php
+    css::defaultBG('../images/repairBtn.png');
+    css::bgSize('100%', '100%');
+?>
+	top:52%;
+    right:0%;
+}
+/*nav bar*/
+<?php dgm();?> div#reg-navigation{
  <?php
     defaultBtnBG();
-    css::bgSize('100%', '100%');
+    //css::bgSize('100%', '100%');
 ?>
     position:absolute;
     top:10%;
     right:0%;
 }
-<?php dgm();?>div#reg-navigation a{
+<?php dgm();?> div#reg-navigation a{
 <?php
     defaultBtnBG();
-    css::bgSize('100%', '100%');
+    //css::bgSize('100%', '100%');
 ?>
     display:block;
     color: red;
@@ -92,38 +160,13 @@ function dgm(){
     position: relative;
 }
 /* mouseover */
-<?php dgm();?>li a:hover,
-<?php dgm();?>div#nav a:hover,
-<?php dgm();?>div#reg-navigation a:hover{
+<?php dgm();?> li a:hover,
+<?php dgm();?> div#nav a:hover,
+<?php dgm();?> div#reg-navigation a:hover{
 	 <?php
     css::defaultBG('../images/defaultBtn2.png');
     css::bgSize('100%', '100%');
-?>
-  
+?>  
 	color:green;
 	padding : 2%;
-}
-<?php dgm();?> div button#toAuctionBtn
-{<?php
-    css::defaultBG('../images/auctionBtn.png');
-    css::bgSize('100%', '100%');
-?>
-    top:52%;
-    left:0%;
-}
-<?php dgm();?> div button#profile
-{<?php
-    css::defaultBG('../images/profileBtn.png');
-    css::bgSize('100%', '100%');
-?>
-    top:0%;
-    right:0%;
-}
-<?php dgm();?> div button#buyUpgradesBtn
-{<?php
-    css::defaultBG('../images/repairBtn.png');
-    css::bgSize('100%', '100%');
-?>
-	top:52%;
-    right:0%;
 }
