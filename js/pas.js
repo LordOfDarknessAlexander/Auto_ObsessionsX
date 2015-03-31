@@ -1,4 +1,11 @@
 ﻿//defines JavaScript Ajax interface for common API calls for site
+/*function isValid(data){
+    if(data === null || data === undefined){
+        jq.setErr(funcName, 'Ajax response returned null!\n Could not add vehicle with (ID:) into database.');
+        return false;
+    }
+    return true;
+}*/
 var pas = {
     //namespace encapsulating AJAX requests calling SQL commands via a php page
     insertCar:function(vehicleID){
@@ -23,7 +30,6 @@ var pas = {
             function(jqxhr){
                 //call will fail if result is not properly formated JSON!
                 jq.setErr(funcName, 'ajax call failed!\nReason: ' + jqxhr.responseText);
-                //console.log('loading game resources failed, abort!');
                 //finished = true;
                 Auction._car = null;
                 ajax_loadUser();

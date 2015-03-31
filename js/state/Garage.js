@@ -601,11 +601,13 @@ function(){
 	jq.Garage.menu.hide();
     //AuctionSell.init();
     jq.AuctionSell.menu.show();
+    jq.setErr();    //clear error when changing pages
     
     jq.AuctionSell.backBtn.off().click(
         function(){
             jq.Garage.menu.show();
             jq.AuctionSell.menu.hide();
+            jq.setErr();    //clear error when changing pages
         }
     );
 });
@@ -616,6 +618,7 @@ function(){
     jq.carImg.show();
     setHomeImg();
     setAdBG();
+    jq.setErr();    //clear error when changing pages
 });
 $('#myCars').click(
 function(){
@@ -623,6 +626,7 @@ function(){
 	jq.Garage.toggle();
     jq.carImg.hide();
 	Garage.init();
+    jq.setErr();    //clear error when changing pages
 });
 /*jq.Garage.selectBtn.click(function()
 {
@@ -638,11 +642,13 @@ function(){
             jq.AuctionSell.menu.hide();
             jq.CarView.menu.show();
             jq.carImg.show();
+            jq.setErr();    //clear error when changing pages
             //appState = GAME_MODE.CAR_VIEW;
         });
 		jq.CarView.menu.toggle();
         jq.Garage.menu.hide();
-		CarView.init();        
+		CarView.init(); 
+        jq.setErr();    //clear error when changing pages        
 	}
 	//else, do nothing, user has not clicked on a car
 });
@@ -663,6 +669,7 @@ function(){
     jq.CarView.menu.hide();//toggle();
     jq.Garage.menu.show();
     jq.carImg.hide();
+    jq.setErr();    //clear error when changing pages
 });
 jq.CarView.homeBtn.click(
 function(){
@@ -671,4 +678,5 @@ function(){
     setHomeImg();
     setAdBG();
 	//appState = GAME_STATE.MAIN;
+    jq.setErr();    //clear error when changing pages
 });

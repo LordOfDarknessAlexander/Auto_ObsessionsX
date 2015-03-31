@@ -624,5 +624,6 @@ function(){
 	Auction.close();
 	jq.Auction.menu.hide();
 	jq.AuctionSelect.menu.show();
-    jq.carImg.hide();	
+    jq.carImg.hide();
+    jq.setErr();    //clear error when changing pages	
 });

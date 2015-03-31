@@ -171,4 +171,5 @@ function(){
 //	setAdBG();
 	saveUser();
     jq.carImg.show();
+    jq.setErr();    //clear error when changing pages
 });

@@ -516,5 +516,6 @@ function(){
     jq.Game.menu.toggle();
     setHomeImg();
     jq.carImg.show();
+    jq.setErr();    //clear error when changing pages
     //appState = GAME_MODE.MAIN;
 });

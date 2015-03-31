@@ -232,6 +232,7 @@ jq.AuctionSelect.backBtn.click(function()
 	jq.AuctionSelect.menu.toggle();
 	//Auction.setup();
 	jq.carImg.show();
+    jq.setErr();    //clear error when changing pages
 	//$('#menu').addClass('auction');
 	//AuctionSelect.init();
 });

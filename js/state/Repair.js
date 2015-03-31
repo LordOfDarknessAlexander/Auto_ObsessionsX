@@ -648,6 +648,7 @@ function(){
 //	setAdBG();
 	jq.Game.menu.show();
     jq.carImg.show();
+    jq.setErr();    //clear error when changing pages
 	//resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });
