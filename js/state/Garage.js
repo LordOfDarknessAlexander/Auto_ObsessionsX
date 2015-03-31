@@ -3,7 +3,11 @@
 //
 //test, user ca select between 3 cars
 //var currentCar = null;
-
+//<php
+//function loggedIn(){
+    //return true;
+//}
+//?>
 var userGarage = [
 	//Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969'),
 	//Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969'),
@@ -618,14 +622,6 @@ function(){
     jq.carImg.show();
     setHomeImg();
     setAdBG();
-    jq.setErr();    //clear error when changing pages
-});
-$('#myCars').click(
-function(){
-    jq.adBar.hide();
-	jq.Garage.toggle();
-    jq.carImg.hide();
-	Garage.init();
     jq.setErr();    //clear error when changing pages
 });
 /*jq.Garage.selectBtn.click(function()

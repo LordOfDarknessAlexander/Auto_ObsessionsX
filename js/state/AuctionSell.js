@@ -1,4 +1,10 @@
-﻿var userSales = [];
+﻿//<php
+//js::header();
+//function loggedIn(){
+    //return true;
+//}
+//?>
+var userSales = [];
 
 function hasSoldCar(carID){
     //has the user already auctioned a car with carID
@@ -176,7 +182,7 @@ function auctionGen()
 			//this._car.id = Storage.local[''];
 			//this._curTime = this._date.end === null ? Storage.local[''] : 0.0;
 //<php
-//if(loggedin){>
+//if(loggedIn() ){>
             //load stored userSales from sql database, using pas
 //<php
 //}
@@ -327,7 +333,7 @@ function auctionGen()
             //user pays a penalty
             //alert('To cancel this auction the House will require a cancelation fee of ...');
             if(!this.expired){
-//<php if(loggedIn){>
+//<php if(loggedIn() ){>
                 //make ajax call to pasRemove
 //<php
 //}
@@ -358,7 +364,7 @@ function auctionGen()
             console.log('won auction! user gets (' + val.toFixed(2) + ') funds!');
             
             if( (userStats.money + val) <= Number.MAX_VALUE){
-//<php if(loggedIn){>
+//<php if(loggedIn() ){>
                 //call pasUpdate!
 //<php
 //}
@@ -389,8 +395,7 @@ var AuctionSell =
         //start them and begin updates
         jq.carImg.hide();
         
-		if(index !== null && index !== undefined)
-		{
+		if(index !== null && index !== undefined){
 			//call to start an auction for car
 			var i = index.data.i;
                 //Garage.getCarByIndex(i);
@@ -476,7 +481,7 @@ var AuctionSell =
         }
     },
     save:function(){
-//<php if(loggedIn){?>
+//<php if(loggedIn() ){?>
         //jq.post(
             //'pas/update.php?op=usls',
             //function(data){
@@ -491,21 +496,24 @@ var AuctionSell =
             //},
             //JSON.stringify(userSales)
         //);
+//<php
 //}
-//else{ //playing as guest, use local storage?>
+//else{
+    //playing as guest, use local storage?>
         //for now, add code here
         var k = 'AuctionSell';
         
         if(Storage.local !== null && k in Storage.local){
-//<?php if(DEBUG){>
+//<php if(DEBUG){?>
             //var jstr = JSON.stringify(userSales);
             //console.log(jstr);
             //Storage.local['AuctionSell'] = jstr;
 //<php
 //}
-//else{>
+//else{?>
             Storage.local[k] = JSON.stringify(userSales);
-//}>   
+//}
+//?>   
         }
     }
 };

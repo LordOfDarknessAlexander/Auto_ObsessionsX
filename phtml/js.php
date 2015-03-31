@@ -30,7 +30,6 @@ $paths = array(
     'entities/parts/docs',
     'entities/vehicle',
     //game states
-    //'state/state',
     'state/Garage',
     //'state/Garage/main',
     //'state/Garage/carView',
@@ -50,5 +49,5 @@ $paths = array(
 addPHPJS('globals');
 //addPHPJS('jqLib');
 foreach($paths as $p){addJS($p);}
-addPHPJS('state/AuctionSelect');
+addPHPJS('state/state');
 ?>

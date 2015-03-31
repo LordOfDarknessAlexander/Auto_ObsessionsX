@@ -6,7 +6,8 @@ var Store = {
 	{
 		stop = true;
 		appState = GAME_MODE.ADD_FUNDS;
-		if(appState == GAME_MODE.ADD_FUNDS)
+		
+        if(appState == GAME_MODE.ADD_FUNDS)
 		{
 			console.log("save your money u cants save the world");
 		}

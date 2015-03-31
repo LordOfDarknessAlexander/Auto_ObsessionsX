@@ -177,18 +177,12 @@ function(){
 	//saveUser();
 	//jq.Game.homeImg.hide();
 	
-	function init()
-	{
-		if(!stop) 
-		{
-			requestAnimFrame(init);
-			
+	function init(){
+		if(!stop){
+			requestAnimFrame(init);			
 			update(0.33);
 			
-			//delete Register;	//deleting this every frame is bad idea
-			
-			if((timer >= 300.00) && (timer <= 900.00))
-			{
+			if((timer >= 300.00) && (timer <= 900.00)){
 				appState = GAME_MODE.MAIN_MENU;
 				mainMenu();
 			  
@@ -198,8 +192,8 @@ function(){
 		}	
 	}
 //Load the splash screen first
-assetLoader.finished = function() 
-{
+assetLoader.finished = function(){
+    //executed when assetLoader finalizes resource creation
 	$('#splash').removeClass('#Register');
   	$('#Register').hide();
   	switchStates();  
@@ -327,15 +321,15 @@ function startGame()
 	setStatBar();
 	switchStates();
 	
-	if(appState == GAME_MODE.RUNNING)
-	{
-	  console.log("Run , run squirrel");
-	}	
-	
-	assetLoader.sounds.gameOver.pause();
-	assetLoader.sounds.bg.currentTime = 0;
-	assetLoader.sounds.bg.loop = true;
-	assetLoader.sounds.bg.play();
+	//if(appState == GAME_MODE.RUNNING){
+	  //console.log("Run , run squirrel");
+	//}
+	//if(audioEnabled() ){
+        assetLoader.sounds.gameOver.pause();
+        assetLoader.sounds.bg.currentTime = 0;
+        assetLoader.sounds.bg.loop = true;
+        assetLoader.sounds.bg.play();
+    //}
 }
 
 Auction.sold = function(){
@@ -350,12 +344,13 @@ Auction.sold = function(){
 	//jq.Auction.menu.children().hide();
 	
 	jq.Sold.menu.show();
-	
-    assetLoader.sounds.bg.pause();
-	assetLoader.sounds.gameOver.currentTime = 0;
-	assetLoader.sounds.gameOver.play();
-	assetLoader.sounds.bidder.pause();
-	assetLoader.sounds.sold.play();
+	//if(audioEnabled() ){
+        assetLoader.sounds.bg.pause();
+        assetLoader.sounds.gameOver.currentTime = 0;
+        assetLoader.sounds.gameOver.play();
+        assetLoader.sounds.bidder.pause();
+        assetLoader.sounds.sold.play();
+    //}
     
 	auctionEnded = true;
 	auctionOver = true;
@@ -438,6 +433,14 @@ function(){
 //
 //Main Menu button bindings
 //
+jq.Game.toGarageBtn.click(
+function(){
+    jq.adBar.hide();
+	jq.Garage.toggle();
+    jq.carImg.hide();
+	Garage.init();
+    jq.setErr();    //clear error when changing pages
+});
 jq.Game.toAuctionBtn.click(
 function(){
 	jq.Game.menu.toggle();
@@ -449,6 +452,36 @@ function(){
     jq.adBar.hide();
     jq.setErr();    //clear error when changing pages
 });
+//
+//Main, right menu
+//
+jq.Game.toProfileBtn.click(jq.Profile.toggle);
+jq.Game.repairBtn.click(
+function(){
+	//toggleRepair();
+	//$('#gameMenu')
+	jq.Game.menu.hide();
+	jq.RepairShop.menu.show();
+	Repair.init();
+    jq.carImg.show();
+    //$('label#info').text('');
+    setAdBG();
+    jq.setErr();    //clear error when changing pages
+	//saveUser();	//save user stats after purchasing
+});
+
+function initGuest()
+{	//loads guest profile, if one does not exist it is created
+	if('guest' in Storage.local){
+		//returns an object of format {money:number, garage:[]}
+		player = JSON.parse(Storage.local.guest);
+	//	ajax_post();
+	}
+	else{
+		//create new guest account, to be stored in browser
+		Storage.local.guest = JSON.stringify({money:50000, garage:[]});
+	}
+}
 jq.Auction.homeBtn.click(
 function(){
 	//Auction.cancel();	//stop the auction, aborting the sale
@@ -470,26 +503,10 @@ function(){
     
 	//}	
 });
-/*
-jq.Funds.homeBtn.click(
-function(){
-	//Auction.cancel();	//stop the auction, aborting the sale
-	
-	//$('#Auction').hide();
-	jq.Funds.hide();
-	jq.Game.menu.show();
-  //  jq.carImg.show();
-	//jq.Game.menu.children().toggle();	//hides/showns all child elements
-	ajax_post();
-    setStatBar();
-	//setAdBG();
-    setHomeImg();
-	
-});*/
-//Auction State Back Button
+
+//restart GameOver /sold button
 jq.Sold.garageBtn.click(
 function(){
-	//jq.Sold.menu.
     jq.Sold.menu.hide();
 	jq.Garage.menu.show();
     Garage.init();
@@ -497,39 +514,21 @@ function(){
     jq.setErr();    //clear error when changing pages
     //appState = GAME_MODE.GARAGE:
 });
-/*jq.Sold.homeBtn.click(
+jq.Sold.homeBtn.click(
 function(){
-    jq.Sold.menu.hide();
-	jq.Main.menu.show();
+	jq.Sold.menu.hide();
+	jq.Game.menu.show();
+    setHomeImg();
     jq.carImg.show();
-    //appState = GAME_MODE.HOME:
-});*/
-jq.Game.repairBtn.click(
-function(){
-	//toggleRepair();
-	//$('#gameMenu')
-	jq.Game.menu.hide();
-	jq.RepairShop.menu.show();
-	Repair.init();
-    jq.carImg.show();
-    $('label#info').text('');
+	
+	auctionEnded = false;
+	endGame = false;
+	restarted = true;	
     setAdBG();
     jq.setErr();    //clear error when changing pages
-	//saveUser();	//save user stats after purchasing
+    
+    appState = GAME_MODE.MAIN_MENU;
 });
-
-function initGuest()
-{	//loads guest profile, if one does not exist it is created
-	if('guest' in Storage.local){
-		//returns an object of format {money:number, garage:[]}
-		player = JSON.parse(Storage.local.guest);
-	//	ajax_post();
-	}
-	else{
-		//create new guest account, to be stored in browser
-		Storage.local.guest = JSON.stringify({money:50000, garage:[]});
-	}
-}
 //Sound Button
 $('.sound').click(
 function(){
@@ -554,21 +553,33 @@ function(){
         }
     }
 });
-//restart GameOver /sold button
-jq.Sold.homeBtn.click(function(){
-	jq.Sold.menu.hide();
-	jq.Game.menu.show();
-    setHomeImg();
-    jq.carImg.show();
-	appState = GAME_MODE.MAIN_MENU;
-	auctionEnded = false;
-	endGame = false;
-	restarted = true;	
-    setAdBG();
-    jq.setErr();    //clear error when changing pages
-});
 
 assetLoader.downloadAll();
+/*
+jq.Funds.homeBtn.click(
+function(){
+	//Auction.cancel();	//stop the auction, aborting the sale
+	
+	//$('#Auction').hide();
+	jq.Funds.hide();
+	jq.Game.menu.show();
+  //  jq.carImg.show();
+	//jq.Game.menu.children().toggle();	//hides/showns all child elements
+	ajax_post();
+    setStatBar();
+	//setAdBG();
+    setHomeImg();
+	
+});*/
+//Auction State Back Button
+
+/*jq.Sold.homeBtn.click(
+function(){
+    jq.Sold.menu.hide();
+	jq.Main.menu.show();
+    jq.carImg.show();
+    //appState = GAME_MODE.HOME:
+});*/
 //function rotateBtns(index)
 //{		
 	//setCarBtnText(index.data.index, c);

@@ -62,7 +62,7 @@ var jq = {
 		menu : $('#gameMenu'),
 		homeImg : $('img#mainCar'),
 		//left menu
-		toCarsBtn : $('div#gameMenu button#myCars'),
+		toGarageBtn : $('div#gameMenu button#myCars'),
 		//toProjBtn : $(''),
 		//toGarageBtn : $(''),
 		toAuctionBtn : $('#toAuctionBtn'),
@@ -292,7 +292,6 @@ $('#addFunds').click(function()
 });
 //
 //
-jq.Game.toProfileBtn.click(jq.Profile.toggle);
 //jq.Game.toMsgBtn.click(jq.Messages.toggle);
 //jq.Game.toRankingsBtn.click(jq.Ranks.toggle);
 //jq.Game.toSearchBtn.click(jq.Search.toggle);
