@@ -233,7 +233,7 @@ div#reg-navigation a{
     text-decoration: none;
     text-align:center;
 
-    background: url('../images/defaultBtn.png') no-repeat 0 0;
+    background: url('images/defaultBtn.png') no-repeat 0 0;
     background-size:100% 100%;
     position: relative;
 }
@@ -241,7 +241,7 @@ div#reg-navigation a{
 li a:hover,
 div#nav a:hover,
 div#reg-navigation a:hover{
-    background: url('../images/defaultBtn2.png') no-repeat 0 0;
+    background: url('images/defaultBtn2.png') no-repeat 0 0;
     background: #BF0000;
     /*width:200px;
     height:60px;*/
