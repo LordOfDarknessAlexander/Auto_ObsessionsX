@@ -33,7 +33,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         </div>
       
         <div id='splash'>
-            <h2><?php echo $OWNER_NAME.' and '.$AO_NAME.' Presents!';?></h2>
+            <h2><?php echo $AO_NAME.' Presents!';?></h2>
         </div>
         <div id='main'>		
             <h1><?php echo $AO_NAME;?></h1>

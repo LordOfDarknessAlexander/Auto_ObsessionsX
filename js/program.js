@@ -211,7 +211,7 @@ function switchStates( GAME_MODE)
 	{
 		case SPLASH:
 			splash();
-			
+			garageDoor();
 		break;
 		
 		case MAIN_MENU:
