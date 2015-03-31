@@ -43,12 +43,12 @@ else{
     <a id='home' href='<?php echo rootURL() . 'Users/index.php';?>'>Home</a></li>
 <?php
 if($loggedIn){?>
-    <a href='members-page.php' id='mem'>Members</a>
-    <a href='logout.php' id='logout'>Logout</a>
+    <a id='mem' href='members-page.php'>Members</a>
+    <a id='logout' href='logout.php'>Logout</a>
 <?php
 }
 else{?>
-    <a href='<?php echo rootURL() . 'Users/registerUser.php';?>' id='reg'>Register</a>
+    <a id='reg' href='<?php echo rootURL() . 'Users/registerUser.php';?>'>Register</a>
 <?php
 }
 ?>
@@ -86,7 +86,7 @@ if($loggedIn){?>
 }
 else{?>
                 <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
-               <li><a href='Users/registerUser.php' class='button Register'>Register</a></li> 
+                <li><a href='Users/registerUser.php' class='button Register'>Register</a></li> 
             </ul> 
             
             <div id='loginfields'>

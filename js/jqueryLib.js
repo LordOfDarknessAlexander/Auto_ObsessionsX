@@ -9,6 +9,7 @@ var jq = {
 	//canvas:$('#canvas'),
 	adBar:$('img#adBar'),
     statBar:$('div#statBar'),
+    error:$('pre#info'),
     nav:$('div#reg-navigation'),
     //statBar:{
         //div:$('div#statBar'),
@@ -38,6 +39,22 @@ var jq = {
 	{	//set the html for the userCash label, to be displayed in browser
 		this.userCash.html(val.toString());
 	},
+    setErr:function(funcName, info){
+        //clear error            
+        if(funcName === null || funcName === undefined){
+            jq.error.text('');
+            jq.error.hide();
+            return;
+        }
+        else if(info === null || info === undefined){
+            jq.error.text('');
+            jq.error.hide();
+            return;
+        }
+        alert(funcName + ',\nError: ' + info);
+        jq.error.text(funcName + ',\nError:' + info);
+        jq.error.show();
+    },
 	Main : {
 		menu:$('#main')
 	},
@@ -78,6 +95,7 @@ var jq = {
 
 			$('#menu').toggleClass('credits');	//adds class else removes if already added
 			$('#credits').toggle();	//shows if hidden
+            jq.setErr();    //clear error when changing pages
 		}
 	},
 	Garage : {
@@ -89,6 +107,7 @@ var jq = {
 		{	//from game menu to garage, or vice versa
 			$('#gameMenu').toggle();
 			this.menu.toggle();	//this refers to jq.Garage
+            jq.setErr();    //clear error when changing pages
 			//$('#Garage').toggle();
 		}
 	},
@@ -120,6 +139,7 @@ var jq = {
 			//this.menu.toggle();
 			jq.Garage.menu.toggle();
 			$('#CarView').toggle();	//this.menu doesn't work...
+            jq.setErr();    //clear error when changing pages
 		}
 	},
     AuctionSell:{
@@ -131,6 +151,7 @@ var jq = {
         toggle:function(){
 			jq.CarView.menu.toggle();
 			jq.AuctionSell.menu.toggle();
+            jq.setErr();    //clear error when changing pages
 		}
 	},
 	Funds : {
@@ -143,6 +164,7 @@ var jq = {
 			this.menu.toggle();
 			//this.menu.toggle();
 			jq.setCash(userStats.money);
+            jq.setErr();    //clear error when changing pages
 		}
 	},
 	RepairShop : {
@@ -158,6 +180,7 @@ var jq = {
 		{	//from game menu to funds or vice versa
 			jq.Funds.menu.toggle();
 			this.menu.toggle();
+            jq.setErr();    //clear error when changing pages
 		}
 	},
     Sold : {
@@ -165,7 +188,7 @@ var jq = {
         homeBtn:$('div#sold button#homeBtn'),
         garageBtn:$('div#sold button#garageBtn'),
     },
-	 Loss : {
+	Loss : {
         menu : $('div#loss'),
         homeBtn:$('div#loss button#homeBtn'),
        
@@ -177,6 +200,7 @@ var jq = {
 		{
 			jq.Game.menu.toggle();
 			jq.Profile.menu.toggle();
+            jq.setErr();    //clear error when changing pages
 		}
     },
     /*Messages:{

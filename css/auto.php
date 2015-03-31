@@ -170,9 +170,10 @@ button#homeBtn{
     /*font-weight: bold;*/
 }
 pre#info{
-<?php //rm();?>
+<?php //lm();
+    //css:size('90%', '10%');
+?>
     background-color:grey;
-    color:red;
     position:absolute;
     height:10%;
     width:90%;
@@ -181,6 +182,7 @@ pre#info{
     font-size:1vw;
     text-align:center;
     z-index:2;
+    opacity:50%;
 }
 .wrapper 
 {
@@ -189,6 +191,8 @@ pre#info{
     position: absolute;
     top: 0%;
     left: 0%;
+    /*z-index:1;*/
+    color:red;
 }
 img#adBar
 {

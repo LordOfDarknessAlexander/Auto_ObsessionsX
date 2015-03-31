@@ -40,7 +40,6 @@ User Garage div Stylings
 	display: none;
 	text-align: center;
 	z-index: 1;
-    color:red;
 }
 <?php divGarage();?> button#viewCar
 {<?php

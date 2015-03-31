@@ -3,13 +3,12 @@ var pas = {
     //namespace encapsulating AJAX requests calling SQL commands via a php page
     insertCar:function(vehicleID){
         var funcName = 'pas::insertCar(vehicleID)';
-        /*jq.post(
-            'pas/update.php?op=insert',
+        
+        jq.post('pas/update.php?op=insert',
             function(data){
                 //the response string is converted by jquery into a Javascript object!
-                if(data === null){
-                    alert(funcName + ', Error:ajax response returned null!');
-                    //finished = true;
+                if(data === null || data === undefined){
+                    jq.setErr(funcName, 'Ajax response returned null!\n Could not add vehicle with (ID:) into database.');
                     return;
                 }
                 alert(funcName + ', Inserting Car into user database! ajax response success!' + JSON.stringify(data) );
@@ -23,12 +22,18 @@ var pas = {
             },
             function(jqxhr){
                 //call will fail if result is not properly formated JSON!
-                alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+                jq.setErr(funcName, 'ajax call failed!\nReason: ' + jqxhr.responseText);
                 //console.log('loading game resources failed, abort!');
+                //finished = true;
+                Auction._car = null;
+                ajax_loadUser();
+                ajax_post();    //get user info from server
+                Auction.close();
+                //init(); //this exists only within the scope of document.ready()
             },
             {carID:vehicleID}
-        );*/        
-        $.ajax({
+        );      
+        /*$.ajax({
             type:'POST',
             url:getHostPath() + 'pas/update.php?op=insert',
             dataType:'json',
@@ -36,7 +41,8 @@ var pas = {
         }).done(function(data){
             //the response string is converted by jquery into a Javascript object!
             if(data === null){
-                alert(funcName + ', Error:ajax response returned null!');
+                //alert(funcName + ', Error:ajax response returned null!\n Could not add vehicle with (ID:) into database.';
+                jq.setErr(funcName, 'Ajax response returned null!\n Could not add vehicle with (ID:) into database.');
                 //finished = true;
                 return;
             }
@@ -50,7 +56,7 @@ var pas = {
             init(); //this exists only within the scope of document.ready()
         }).fail(function(jqxhr){
             //call will fail if result is not properly formated JSON!
-            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+            jq.setErr(funcName, 'ajax call failed!\nReason: ' + jqxhr.responseText);
             //console.log('loading game resources failed, abort!');
             //finished = true;
             Auction._car = null;
@@ -58,7 +64,7 @@ var pas = {
             ajax_post();    //get user info from server
             Auction.close();
             //init(); //this exists only within the scope of document.ready()
-        });
+        });*/
     },
     insertLoss:function(vehicleID){
         //user losses an auction, make a record of it
@@ -67,9 +73,9 @@ var pas = {
         jq.post('pas/update.php?op=iul',
             function(data){
                 //the response string is converted by jquery into a Javascript object!
-                if(data === null){
-                    alert(funcName + ', Error:ajax response returned null!');
-                    //finished = true;
+                if(data === null || data === undefined){
+                    //alert(funcName + ', Error:ajax response returned null!');
+                    jq.setErr(funcName, 'Ajax response returned null!\n Auction loss could not be added to database');
                     return;
                 }
                 //alert(funcName + ', User lost auction! Ajax response success!' + JSON.stringify(data) );
@@ -79,7 +85,7 @@ var pas = {
             },
             function(jqxhr){
                 //call will fail if result is not properly formated JSON!
-                alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+                jq.setErr(funcName, 'ajax call failed!\nReason: ' + jqxhr.responseText);
             },
             {carID:vehicleID}
         );
@@ -95,9 +101,8 @@ var pas = {
             jq.post('pas/update.php?op=succ',
                 function(data){
                     //the response string is converted by jquery into a Javascript object!
-                    if(data === null){
-                        alert(funcName + ', Error:ajax response returned null!');
-                        //finished = true;
+                    if(data === null || data === undefined){
+                        jq.setErr(funcName, 'Ajax response returned null!\nCurrent vehicle could not be selected.'); 
                         return;
                     }
                     //alert(funcName + ', User lost auction! Ajax response success!' + JSON.stringify(data) );
@@ -105,7 +110,7 @@ var pas = {
                 },
                 function(jqxhr){
                     //call will fail if result is not properly formated JSON!
-                    alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+                    jq.setErr(funcName, 'ajax call failed!\nReason: ' + jqxhr.responseText);
                 },
                 {carID:vehicleID}
             )
@@ -119,8 +124,8 @@ var pas = {
             return jq.get('pas/query.php?op=gcid',
                 function(data){
                     //the response string is converted by jquery into a Javascript object!
-                    if(data === null){
-                        alert(funcName + ', Error:ajax response returned null!');
+                    if(data === null || data === undefined){
+                        jq.setErr(funcName, "Ajax response returned null!\nCould't retrive user's current vehicle."); 
                         return;
                     }
                     //alert(funcName + ', User lost auction! Ajax response success!' + JSON.stringify(data) );
@@ -129,48 +134,54 @@ var pas = {
                 },
                 function(jqxhr){
                     //call will fail if result is not properly formated JSON!
-                    alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
+                    jq.setErr(funcName, 'ajax call failed!\nReason: ' + jqxhr.responseText);
                     //_curCarID = 0;    //no car
                     //setHomeImg();
                 }
             );
         },
-        loadUser:function()
-        {
-            var funcName = 'pas::query::loadUser()';
+        loadUser:function(){
             //loads userStats from php file accessing sql database
-            //jq.get('loadUser.php',
-                //function(data){
+            var funcName = 'pas::query::loadUser()';
+            
+            jq.post('loadUser.php',
+                function(data){
                     //the response string is converted by jquery into a Javascript object!
-                    //if(data === null){
+                    if(data === null || data === undefined){
                         //alert(funcName + ', Error:ajax response returned null!');
-                        //return;
-                    //}
+                        jq.setErr(funcName, "Ajax response returned null!\nCould't retrive user's stats.");
+                        return;
+                    }
                     //alert('ajax response received:' + JSON.stringify(data) );
+                    //access and set values in the document's html page
                     //$('div#statBar label#fname').text(data.uname);
-                    //userStats = {
-                        //money:data.money,
-                        //tokens:data.tokens,
-                        //prestige:data.prestige,
-                        //marker:data.m_marker
-                    //};
-                    //setStatBar();
-                //},
-                //function(jqxhr){
+                    userStats = {
+                        money:data.money,
+                        tokens:data.tokens,
+                        prestige:data.prestige,
+                        marker:data.m_marker
+                    };
+                    _curCarID = data.cid;
+                    console.log('cur car id:' + _curCarID.toString() );
+                    setStatBar();
+                    setHomeImg();
+                },
+                function(jqxhr){
                     //call will fail if result is not properly formatted JSON!
-                    //alert(funcName + ', call failed! Reason: ' + jqxhr.responseText);
+                    jq.setErr(funcName, 'ajax call failed!\nReason: ' + jqxhr.responseText);
                     //throw exception, game can't work without user stats
-                //}
-            //);
-            var jqxhr = $.ajax({
+                }
+            );
+            /*var jqxhr = $.ajax({
                 type:'POST',
                 url:getHostPath() + 'loadUser.php',
                 dataType:'json',
                 data:''
             }).done(function(data){
                 //the response string is converted by jquery into a Javascript object!
-                if(data === null){
-                    alert(funcName + ', Error:ajax response returned null!');
+                if(data === null || data === undefined){
+                    //alert(funcName + ', Error:ajax response returned null!');
+                    jq.setErr(funcName, 'Ajax response returned null!\nCould not retrive user's stats.');
                     return;
                 }
                 //alert('ajax response received:' + JSON.stringify(data) );
@@ -188,9 +199,9 @@ var pas = {
                 setHomeImg();
             }).fail(function(jqxhr){
                 //call will fail if result is not properly formatted JSON!
-                alert(funcName + ', call failed! Reason: ' + jqxhr.responseText);
+                jq.setErr(funcName, 'ajax call failed!\nReason: ' + jqxhr.responseText);
                 //throw exception, game can't work without user stats
-            });
+            });*/
         }
     }
 }

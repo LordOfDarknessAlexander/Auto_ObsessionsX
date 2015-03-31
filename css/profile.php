@@ -4,8 +4,7 @@ require_once 'ui.php';
 //
 css::header();
 //    
-function divPro(){
-    echo 'div#profile';
+function divPro(){?>div#profile<?php
 }
 ?>
 <?php divPro();?>
@@ -16,12 +15,8 @@ function divPro(){
     css::defaultTileBG();
 ?>
 	display: none;
-	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
-	width: 100%;
-	height: 100%;
-    color:red;
 }
 <?php divPro();?> h2{
     text-align:center;
@@ -31,13 +26,12 @@ function divPro(){
 <?php divPro();?> div{
 <?php
     posAbs();	
+    css::size('18%', '60%');
+    scrollY();
 ?>
     display:block;
 	text-align:left;
-    overflow-y:scroll;
-    
-	width: 18%;
-	height: 60%;
+
     top:28%;
     
     font-size:1.25vw;

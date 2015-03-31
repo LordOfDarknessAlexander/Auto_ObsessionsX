@@ -47,9 +47,6 @@ Car View Screen
 	text-align: center;
 /*	padding-top: 92px;*/
 	z-index: 1;
-	width: 100%;
-	height: 100%;
-    color:red;
 }
 <?php divCarView();?> progress
 {

@@ -19,7 +19,6 @@ Repair Screen Styles
     //defaultBG();
     css::size('100%', '100%');
     css::defaultTileBG();
-    defaultColor();
 ?>
 	display: none;
 	text-align: center;

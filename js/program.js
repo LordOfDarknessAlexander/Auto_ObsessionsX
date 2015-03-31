@@ -305,6 +305,8 @@ function startGame()
     jq.adBar.show();
     jq.nav.show();
     
+    jq.setErr();
+    
 	appState = GAME_MODE.RUNNING;
 	player.reset();
 	ticker = 0;
@@ -445,6 +447,7 @@ function(){
 	//auctionStop = false;
 	AuctionSelect.init();
     jq.adBar.hide();
+    jq.setErr();    //clear error when changing pages
 });
 jq.Auction.homeBtn.click(
 function(){
@@ -459,6 +462,7 @@ function(){
     setStatBar();
 	setAdBG();
     setHomeImg();
+    jq.setErr();    //clear error when changing pages
 	//var car = Garage.getCurrentCar();
 	
 	//if(car !== null){
@@ -490,6 +494,7 @@ function(){
 	jq.Garage.menu.show();
     Garage.init();
     jq.carImg.hide();
+    jq.setErr();    //clear error when changing pages
     //appState = GAME_MODE.GARAGE:
 });
 /*jq.Sold.homeBtn.click(
@@ -509,6 +514,7 @@ function(){
     jq.carImg.show();
     $('label#info').text('');
     setAdBG();
+    jq.setErr();    //clear error when changing pages
 	//saveUser();	//save user stats after purchasing
 });
 
@@ -559,6 +565,7 @@ jq.Sold.homeBtn.click(function(){
 	endGame = false;
 	restarted = true;	
     setAdBG();
+    jq.setErr();    //clear error when changing pages
 });
 
 assetLoader.downloadAll();
