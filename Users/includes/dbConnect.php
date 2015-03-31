@@ -12,7 +12,7 @@ class dbConnect
         $_name;
         
     public $con;   //database connection;
-    public function __construct($dbName = 'finalPost', $user = 'root', $password = 'Dante777', $host = 'localhost')
+    public function __construct($dbName = 'aoMembersDB', $user = 'root', $password = 'Dante777', $host = 'localhost')
     { //unsuccessful creation of this object suppresses any exception thrown and kills the executing program
         $this->_user = $user;
         $this->_pw = $password;
