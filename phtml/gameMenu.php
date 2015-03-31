@@ -28,12 +28,41 @@
     <!--HUD ---->
 <!--	<div id="fname" ></div>-->
     <!--img id='homeImg' src='images\\garageEmpty.png'-->
-	 <div id='reg-navigation'>
-        <ul>
-            <li><a href='members-page.php' title='Members'>Members</a></li>
-            <li><a href='logout.php' title='Logout'>Logout</a></li>
-        </ul>
-    </div>
+	<?php //session_start();
+
+			if(isset($_SESSION) AND isset($_SESSION['uname']) ){
+                $uname = $_SESSION['uname'];
+				$loggedIn = true;
+			}
+			else{
+				$loggedIn = false;
+				$uname = 'guest';
+			}
+            echo "Player $uname";
+			if($loggedIn)
+			{
+				echo
+				"
+				<div id='reg-navigation'>
+					<ul>
+						<li><a href='members-page.php' title='Members'>Members</a></li>
+						<li><a href='logout.php' title='Logout'>Logout</a></li>
+					</ul>
+				</div>";
+			}
+			else
+			{
+				echo
+				"
+				<div id='reg-navigation'>
+					<ul>
+						<li><a href='login.php' title='Logout'>Login</a></li>
+					</ul>
+				</div>";
+				
+			}
+	 
+	?>
     <div id='menuLeft'>
         <button id ='myCars'>My Garage</button><br/>
         <button id='toAuctionBtn'>Go to Auction</button><br/>

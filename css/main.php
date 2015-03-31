@@ -139,11 +139,11 @@ Main Game Menu Styles
 /*nav bar*/
 <?php dgm();?> div#reg-navigation{
  <?php
-    defaultBtnBG();
+    //defaultBtnBG('../images/condition.png');
     //css::bgSize('100%', '100%');
 ?>
     position:absolute;
-    top:10%;
+    top:14%;
     right:0%;
 }
 <?php dgm();?> div#reg-navigation a{
@@ -163,7 +163,7 @@ Main Game Menu Styles
 <?php dgm();?> li a:hover,
 <?php dgm();?> div#nav a:hover,
 <?php dgm();?> div#reg-navigation a:hover{
-	 <?php
+<?php
     css::defaultBG('../images/defaultBtn2.png');
     css::bgSize('100%', '100%');
 ?>  
