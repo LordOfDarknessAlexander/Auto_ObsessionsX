@@ -56,7 +56,7 @@
 				"
 				<div id='reg-navigation'>
 					<ul>
-						<li><a href='login.php' title='Logout'>Login</a></li>
+						<li><a href='Users/registerUser.php' title='Register'>Register</a></li>
 					</ul>
 				</div>";
 				
