@@ -59,7 +59,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 				   <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
 				   
 				 <!--  <li><a href='javascript:void(0)' class='button Register'>Register</a></li> -->
-				 <li><a href='Users/safer-register-page.php' class='button Register'>Register</a></li> 
+				 <li><a href='Users/registerUser.php' class='button Register'>Register</a></li> 
 				</ul> 
 				 
 				<div id='loginfields'>

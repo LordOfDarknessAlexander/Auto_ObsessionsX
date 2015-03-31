@@ -234,7 +234,7 @@ function flti($name, $text, $size, $maxlength){
 <div id='midcol2'>
     <h2>Membership Registration</h2>
     <h3 class='content'>Items marked with an asterisk * are essential</h3>
-	<form action='safer-register-page.php' method='post'>
+	<form action='registerUser.php' method='post'>
 <?php
 //there are only so many title options, have the user select from list, instead of add text, which has to be validated
 ?>
