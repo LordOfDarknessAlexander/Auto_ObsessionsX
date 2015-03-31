@@ -2,6 +2,8 @@
 //$ROOT_DIR = $_SERVER["DOCUMENT_ROOT"]."/phtml/";	//root path on server
 //array cast to an object, to encapsulate developer names and those who contributed
 //to this project
+require_once 'ao.php';
+//
 $OWNER_NAME = 'Adam Glazer';
 $AO_NAME = 'Auto Obsessions';
 $TD_NAME = 'Tyler Drury';
@@ -9,7 +11,6 @@ $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
 $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 //$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
-
 ?>	
 <div class='wrapper'>
 	<!--root div element of web page!-->	
@@ -26,6 +27,32 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
     <img id='mainCar' src='images\\garageEmpty.png'>
     <pre id='info'></pre>
     <img id='adBar'>
+<?php
+//session_start();
+if(isset($_SESSION) AND isset($_SESSION['uname']) ){
+    $uname = $_SESSION['uname'];
+    $loggedIn = true;
+}
+else{
+    $loggedIn = false;
+    $uname = 'guest';
+}
+//echo "Player $uname";
+?>
+<div id='reg-navigation'>
+    <a id='home' href='<?php echo rootURL() . 'Users/index.php';?>'>Home</a></li>
+<?php
+if($loggedIn){?>
+    <a href='members-page.php' id='mem'>Members</a>
+    <a href='logout.php' id='logout'>Logout</a>
+<?php
+}
+else{?>
+    <a href='<?php echo rootURL() . 'Users/registerUser.php';?>' id='reg'>Register</a>
+<?php
+}
+?>
+</div>
     <div id='menu'>
         <div id='progress'>
             <div id='percent'>Downloading: <span id='p'></span></div>
@@ -37,49 +64,44 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         </div>
         <div id='main'>		
             <h1><?php echo $AO_NAME;?></h1>
-			 <?php session_start();
+<?php session_start();
 
-			if(isset($_SESSION) AND isset($_SESSION['uname']) ){
-                $uname = $_SESSION['uname'];
-				$loggedIn = true;
-			}
-			else{
-				$loggedIn = false;
-				$uname = 'guest';
-			}
-            echo "Welcome $uname";
+if(isset($_SESSION) AND isset($_SESSION['uname']) ){
+    $uname = $_SESSION['uname'];
+    $loggedIn = true;
+}
+else{
+    $loggedIn = false;
+    $uname = 'guest';
+}
+echo "Welcome $uname";
+?>
+            <ul>
+               <li><a href="javascript:void(0)" class="button play">Play<?php if(!$loggedIn){ echo ' as Guest';}?></a></li>
+<?php
+if($loggedIn){?>
+               <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
+            </ul>
+<?php
+}
+else{?>
+                <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
+               <li><a href='Users/registerUser.php' class='button Register'>Register</a></li> 
+            </ul> 
             
-            if(!$loggedIn)
-            { 
-				echo
-				"
-				<ul>
-				   <li><a href='javascript:void(0)' class='button play'>Play as Guest</a></li>
-				   <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
-				   <li><a href='Users/registerUser.php' class='button Register'>Register</a></li> 
-				</ul> 
-				
-				<div id='loginfields'>
-					<h2>Login</h2>
-					<form action='login.php' method='post'>
-						<p><label class='label' for='email'>Email Address:</label>
-						<input id='email' type='text' name='email' size='30' maxlength='50' value='' > </p>
-						<p><label class='label' for='psword'>Password:</label>
-						<input id='psword' type='password' name='psword' size='12' maxlength='12' value='' ></p>
-						<p><input id='submit' type='submit' name='submit' value='Login'></p>
-					</form>
-				</div>";
-			}
-			else if($loggedIn)
- 			{
-				 echo '
-						<ul>
-						   <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
-						   <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
-						 </ul> ';
-					
- 			}
-			?> 
+            <div id='loginfields'>
+                <h2>Login</h2>
+                <form action='login.php' method='post'>
+                    <p><label class='label' for='email'>Email Address:</label>
+                    <input id='email' type='text' name='email' size='30' maxlength='50' value='' > </p>
+                    <p><label class='label' for='psword'>Password:</label>
+                    <input id='psword' type='password' name='psword' size='12' maxlength='12' value='' ></p>
+                    <p><input id='submit' type='submit' name='submit' value='Login'></p>
+                </form>
+            </div>
+<?php
+}
+?> 
             <?php require 'phtml/legal.php';?>
 		</div>
       

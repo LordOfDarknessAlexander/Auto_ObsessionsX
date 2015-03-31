@@ -9,6 +9,7 @@ var jq = {
 	//canvas:$('#canvas'),
 	adBar:$('img#adBar'),
     statBar:$('div#statBar'),
+    nav:$('div#reg-navigation'),
     //statBar:{
         //div:$('div#statBar'),
         //money:$('div#statBar label#money'),
@@ -251,6 +252,7 @@ function setAdBG(){
 	jq.adBar.attr('src', src);
 	jq.adBar.show();
 }
+
 $('.credits').click(jq.Credits.toggle);
 $('.back').click(jq.Credits.toggle);
 //

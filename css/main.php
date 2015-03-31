@@ -142,36 +142,3 @@ Main Game Menu Styles
 ?>
 	top:52%;
 }
-/*nav bar*/
-<?php dgm();?> div#reg-navigation{
- <?php
-    posAbs();
-    defaultBtnBG();
-?>
-    top:10%;
-    right:0%;
-}
-<?php dgm();?> div#reg-navigation a{
-<?php
-    defaultBtnBG();
-    //css::bgSize('100%', '100%');
-?>
-    display:block;
-    color: red;
-    font-weight: bold;
-    text-decoration: none;
-    text-align:center;
-	padding : 2%;
-    position: relative;
-}
-/* mouseover */
-<?php dgm();?> li a:hover,
-<?php dgm();?> div#nav a:hover,
-<?php dgm();?> div#reg-navigation a:hover{
-<?php
-    css::defaultBG('../images/defaultBtn2.png');
-    css::bgSize('100%', '100%');
-?>  
-	color:green;
-	padding : 2%;
-}

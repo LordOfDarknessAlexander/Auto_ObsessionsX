@@ -172,6 +172,7 @@ function(){
     setHomeImg();   //in Garage.js
     setAdBG();
     jq.adBar.hide();
+    jq.nav.hide();
 	//userStats.money = 150;
 	//saveUser();
 	//jq.Game.homeImg.hide();
@@ -302,6 +303,8 @@ function startGame()
 	//document.getElementById('gameMenu').style.display = 'true';  
 	//$('#money').html(money);
     jq.adBar.show();
+    jq.nav.show();
+    
 	appState = GAME_MODE.RUNNING;
 	player.reset();
 	ticker = 0;

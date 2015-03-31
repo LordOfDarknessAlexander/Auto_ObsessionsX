@@ -265,6 +265,39 @@ img#mainCar{
 	bottom:12%;
     z-index:2;
 }
+/*
+nav bar
+*/
+div#reg-navigation{
+<?php
+    posAbs();
+    defaultBtnBG();
+?>
+    top:0%;
+    right:0%;
+    z-index:3;
+
+}
+div#reg-navigation a{
+<?php
+    defaultBtnBG();
+    //css::bgSize('100%', '100%');
+?>
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+    text-align:center;
+	padding : 2%;
+}
+div#reg-navigation a:hover{
+<?php
+    //mouse over
+    css::defaultBG('../images/defaultBtn2.png');
+    css::bgSize('100%', '100%');
+?>  
+	color:green;
+	padding : 2%;
+}
 /* visited link */
 #div#main a:visited {
     color: #00FFFF;
