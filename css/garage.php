@@ -45,11 +45,10 @@ User Garage div Stylings
 <?php divGarage();?> button#viewCar
 {<?php
     posAbs();
+    css::size('8.75%', '7.5%');
 ?>
     bottom:2%;
     left:18.75%;
-    width:8.75%;
-    height:7.5%;
     
     font-size:1.5vw;
     font-weight:bold;
@@ -57,11 +56,10 @@ User Garage div Stylings
 <?php divGarage();?> button#select
 {<?php
     posAbs();
+    css::size('8.75%', '7.5%');
 ?>
     bottom:2%;
     left:10%;
-    width:8.75%;
-    height:7.5%;
     
     font-size:1.5vw;
     font-weight:bold;
@@ -69,11 +67,10 @@ User Garage div Stylings
 <?php divGarage();?> button#sales
 {<?php
     posAbs();
+    css::size('8.75%', '7.5%');
 ?>
     bottom:2%;
     left:36.25%;
-    width:8.75%;
-    height:7.5%;
     
     font-size:1.5vw;
     font-weight:bold;
@@ -81,11 +78,10 @@ User Garage div Stylings
 <?php divGarage();?> button#shop
 {<?php
     posAbs();
+    css::size('8.75%', '7.5%');
 ?>
     bottom:2%;
     left:27.5%;
-    width:8.75%;
-    height:7.5%;
     
     font-size:1.5vw;
     font-weight:bold;
@@ -106,13 +102,14 @@ User Garage div Stylings
 	height:60px;
 	cursor:pointer;
 }
-<?php divGarage();?> li button img
-{	position:absolute;
+<?php divGarage();?> li button img{
+<?php
+    posAbs();
+    css::size('100%', '100%');
+?>
 	/*position element in to left corner of parent*/
 	top:0%;
 	left:0%;
-	width:100%;
-	height:100%;
 }
 <?php divCarListView();?>
 {
@@ -127,35 +124,39 @@ User Garage div Stylings
 /*
 current user car stylings
 */
-<?php divUserCar();?>
-{	/*styling for list items*/
+<?php divUserCar();?>{
 	/*display:inline;*/
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
-<?php posAbs();?>
+<?php
+    posAbs();
+    css::top('30%');
+    css::size('25%', '68%');
+?>
 	text-align::left;
-	top:30%;
+
 	left:45%;/*2%;*/
-	width:25%;
-	height:68%;
+
 	display:inline;
 }
-<?php divSelectedCar();?>
-{	/*styling for list items*/
+<?php divSelectedCar();?>{
 	/*display:inline;*/
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
-<?php posAbs();?>
+<?php
+    posAbs();
+    css::top('30%');
+    css::size('25%', '68%');
+?>
 	text-align::left;
-	top:30%;
+
 	right:2%;
-	width:25%;
-	height:68%;
+
 	display:inline;
 }
 <?php divUserCar();?> img#carImg,
-<?php divSelectedCar();?> img#carImg
-{
-	width:100%;
-	height:25%;
+<?php divSelectedCar();?> img#carImg{
+<?php
+    css::size('100%', '25%');
+?>
 }
 <?php divUserCar();?> label,
 <?php divSelectedCar();?> label
@@ -186,12 +187,12 @@ div#progressBars{
 }*/
 
 div#userCar div#progressBars,
-div#selectedCar div#progressBars
-{
+div#selectedCar div#progressBars{
+<?php
+?>
     font-size:0.75em;
     text-align:left;
     align:left;
-    position:absolute;
     bottom:0%;
     left:0%;
     width:70%;
@@ -207,20 +208,23 @@ div#selectedCar div#progressBars
 {	
 	background: url('../images/condition.png') no-repeat 0 0;
 	background-size:100% 100%;
-    position:absolute;
+<?php
+    posAbs();
+    css::size('30%', '25%');
+?>
 	right:0%;
-	height:25%;
-    width:30%;
     bottom:0%;
+    
     text-align:center;
     font-size:2.5vw;
+    
     cursor:default;
     boarder:none;
 }
 <?php divGarage();?> div button#con:hover{}
 <?php divGarage();?> div button#con:active{}
-<?php divGarage();?> div#pbLabels label
-{	
+
+<?php divGarage();?> div#pbLabels label{	
 	display:block;
 	color: white;
 	margin: 8px;

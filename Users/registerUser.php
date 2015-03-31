@@ -157,7 +157,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                             if(pasCreate::carSaleTable($uid) ){        //vehicles the user has sold                       
                                 //header("location: reg-confirm.php");
                             }
-                            //else code succeded
+                            //else code succeeded
                         }
                         //could not create car sale table
                         header("location: register-thanks.php");
@@ -234,7 +234,7 @@ function flti($name, $text, $size, $maxlength){
 <div id='midcol2'>
     <h2>Membership Registration</h2>
     <h3 class='content'>Items marked with an asterisk * are essential</h3>
-	<form action='safer-register-page.php' method='post'>
+	<form action='registerUser.php' method='post'>
 <?php
 //there are only so many title options, have the user select from list, instead of add text, which has to be validated
 ?>
@@ -259,22 +259,7 @@ function flti($name, $text, $size, $maxlength){
 		<br>
         <?php flti('uname', 'User Name', 12, 12);?>
 		<input id='submit' type='submit' name='submit' value='Register'>
-        <!--label class='label' for='fname'>First Name*</label><br-->
-        <!--input id='fname' type='text' name='fname' size='30' maxlength='30' value='<php ep('fname'); ?>'>
-		<br-->
-        <!--label class='label' for='lname'>Last Name*</label><br-->
-        <!--input id='lname' type='text' name='lname' size='30' maxlength='40' value='<php ep('lname');?>'>
-		<br>
-        <label class='label' for='email'>Email Address*</label><br-->
-        <!--input id='email' type='text' name='email' size='30' maxlength='60' value='<php ep('email');?>'>
-		<br>
-        <label class='label' for='psword1'>Password*</label><br>
-        <br><label class='label' for='psword2'>Confirm Password*</label><br>
-        <label class='label' for='uname'>User Name*</label><br>
-        
-        <input id='uname' type='text' name='uname' size='12' maxlength='12' value='<php ep('uname');?>'>&nbsp;6 
-		to 12 characters<br>
-        -->
+
 	</form>
 </div>
 </div><!--content-->

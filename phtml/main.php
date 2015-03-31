@@ -33,12 +33,11 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
         </div>
       
         <div id='splash'>
-            <h2><?php echo $OWNER_NAME.' and '.$AO_NAME.' Presents!';?></h2>
+            <h2><?php echo $AO_NAME.' Presents!';?></h2>
         </div>
         <div id='main'>		
             <h1><?php echo $AO_NAME;?></h1>
-			 <?php 
-			session_start();
+			 <?php session_start();
 
 			if(isset($_SESSION) AND isset($_SESSION['uname']) ){
                 $uname = $_SESSION['uname'];
@@ -57,34 +56,28 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
 				<ul>
 				   <li><a href='javascript:void(0)' class='button play'>Play as Guest</a></li>
 				   <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
-				   
-				   <li><a href='javascript:void(0)' class='button Register'>Register</a></li> 
+				   <li><a href='Users/registerUser.php' class='button Register'>Register</a></li> 
 				</ul> 
-				 
+				
 				<div id='loginfields'>
- 				<h2>Login</h2>
- 				<form action='login.php' method='post'>
- 					<p><label class='label' for='email'>Email Address:</label>
-					<input id='email' type='text' name='email' size='30' maxlength='50' value='email' > </p>
- 					<p><label class='label' for='psword'>Password:</label>
-					<input id='psword' type='password' name='psword' size='12' maxlength='12' value='password' ></p>
- 					<p><input id='submit' type='submit' name='submit' value='Login'></p>
- 				</form>
- 		</div>";
+					<h2>Login</h2>
+					<form action='login.php' method='post'>
+						<p><label class='label' for='email'>Email Address:</label>
+						<input id='email' type='text' name='email' size='30' maxlength='50' value='' > </p>
+						<p><label class='label' for='psword'>Password:</label>
+						<input id='psword' type='password' name='psword' size='12' maxlength='12' value='' ></p>
+						<p><input id='submit' type='submit' name='submit' value='Login'></p>
+					</form>
+				</div>";
 			}
 			else if($loggedIn)
  			{
-				
 				 echo '
-					<div id="loginfields">
+						<ul>
+						   <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
+						   <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
+						 </ul> ';
 					
-					<ul>
-				   <li><a href="javascript:void(0)" class="button play">Start Game</a></li>
-				   <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
-				   
-				 
-				 </ul> 
-					</div> ';
  			}
 			?> 
             <?php require 'phtml/legal.php';?>
@@ -104,6 +97,9 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
             </ul>
             <a href='javascript:void(0)' class='button back'>Back</a>
         </div> 
+		<div id='Register'>
+		
+		</div>
     </div><!--end menu-->      
 
     <canvas id='canvas' width='900' height='600'>

@@ -147,10 +147,9 @@ Main Game Menu Styles
  <?php
     posAbs();
     defaultBtnBG();
-    //css::bgSize('100%', '100%');
-    rz();
 ?>
     top:10%;
+    right:0%;
 }
 <?php dgm();?> div#reg-navigation a{
 <?php

@@ -105,8 +105,8 @@ progress.med::-moz-progress-bar{
 	font-size:0.75em;
     color:white;
     position:relative;
-    bottom:70%;
-    right:20%;
+    bottom:40%;
+    right:30%;
 	margin-left :10%;
 }
 #progress 
@@ -205,13 +205,10 @@ img#adBar
 {
   background-image: url('../images/Splash.png')no-repeat 0 0;
   color: white;
+  background-size : 100% 100%;
   width: 100%;
   height: 100%;
   z-index: 20;
-  color:red;
-  position:absolute;
-  right:15%;
-  top:15%;
 }
 /*#login
 {
@@ -281,7 +278,6 @@ div#menu
 {
     background-image:url('../images/AbsuMenu.png');
     background-size : 100% 100%;
-    
     position: absolute;
     width: 100%;
     height: 100%;
@@ -361,13 +357,13 @@ credits page UI stylings
 	color:red;
     cursor:pointer;
 	background-size: 100% 100%;
-	height:6%;
-	width:36%;
-	color:red;
+	height:4%;
+	width:46%;
 	position :relative;
-	padding: -3%;
-
-    line-height: 30px;
+	padding: 0.5%;
+	margin-top : 1%;
+	margin-bottom : 1%;
+    line-height: 40px;
     border: 1px solid #AA2666;
     font-weight: bold;
    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -376,9 +372,21 @@ credits page UI stylings
 
 .button:hover 
 {
-  background-color: #990099;
-  background-image: -webkit-linear-gradient(bottom, #B30D5D 0%, #FB1886 100%);
-  background-image:         linear-gradient(to bottom, #B30D5D 0%, #FB1886 100%);
+	background: url('../images/defaultBtn2.png') no-repeat 0 0;
+    color:green;
+    cursor:pointer;
+	background-size: 100% 100%;
+	height:4%;
+	width:46%;
+	margin-top : 1%;
+	margin-bottom : 1%;
+	position :relative;
+	padding: 0.5%;
+    line-height: 40px;
+    border: 1px solid #AA2666;
+    font-weight: bold;
+   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+   border-radius: 3px;;
 }
 
 .music 
