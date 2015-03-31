@@ -24,7 +24,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
     </div>
 	
     <img id='mainCar' src='images\\garageEmpty.png'>
-    <!--label id='info'></label-->
+    <pre id='info'></pre>
     <img id='adBar'>
     <div id='menu'>
         <div id='progress'>

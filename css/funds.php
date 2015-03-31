@@ -5,10 +5,8 @@ require_once 'ui.php';
 //
 css::header();
 //
-function divFunds(){?>
-div#AddFunds<?php
+function divFunds(){?>div#AddFunds<?php
 }
-require_once 'ui.php';
 ?>
 /*
 funds page styles

@@ -90,7 +90,8 @@ Repair Screen Styles
     background:url('../images/repair.png') no-repeat 0 0;
     background-size:100% 100%;
 }
-<?php divRepair();?> div progress{<?php
+<?php divRepair();?> div progress{
+<?php
     //posAbs();
 ?>
     width:100%;
@@ -99,22 +100,30 @@ Repair Screen Styles
 /*
 left div
 */
-<?php divRepair();?> h2#dt{<?php
+<?php
+    //lStatView('dt', '28%', '33%');
+    //lStatView('body', '60%', '65%');
+?>
+<?php divRepair();?> h2#dt{
+    <?php
     css::lm();
     css::top('28%');
 ?>
 }
-<?php divRepair();?> div#drivetrain{<?php
+<?php divRepair();?> div#drivetrain{
+<?php
     css::lm();
     css::top('33%');
 ?>
 }
-<?php divRepair();?> h2#body{<?php
+<?php divRepair();?> h2#body{
+    <?php
     css::lm();
     css::top('60%');
 ?>
 }
-<?php divRepair();?> div#body{<?php
+<?php divRepair();?> div#body{
+<?php
     css::lm();
     css::top('65%');
 ?>
@@ -122,22 +131,30 @@ left div
 /*
 right div
 */
-<?php divRepair();?> h2#interior{<?php
+<?php
+    //rStatView('interior', '28%', '33%');
+    //rStatView('docs', '60%', '65%');
+?>
+<?php divRepair();?> h2#interior{
+<?php
     css::rm();
     css::top('28%');
 ?>
 }
-<?php divRepair();?> div#interior{<?php
+<?php divRepair();?> div#interior{
+<?php
     css::rm();
     css::top('33%');
 ?>
 }
-<?php divRepair();?> h2#docs{<?php
+<?php divRepair();?> h2#docs{
+<?php
     css::rm();
     css::top('60%');
 ?>
 }
-<?php divRepair();?> div#docs{<?php
+<?php divRepair();?> div#docs{
+<?php
     css::rm();
     css::top('65%');
 ?>

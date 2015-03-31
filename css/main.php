@@ -34,6 +34,12 @@ function bottom($str){?>
 bottom:<?php echo $str;?>;
 <?php
 }
+function lz(){
+    css::left('0%');
+}
+function rz(){
+    css::right('0%');
+}
 //function tz(){
     //top('0%');
 //}
@@ -45,9 +51,6 @@ bottom:<?php echo $str;?>;
 //}
 /*function rz(){
     right('0%');
-}
-function lz(){
-    left('0%');
 }
 function rm(){  //right margin
     right('5%');
@@ -71,8 +74,7 @@ Main Game Menu Styles
 	padding-top: 92px;
 	z-index: 1;
 }
-<?php dgm();?> li 
-{
+<?php dgm();?> li{
 <?php defaultColor();?>
 	padding: 10px 0;
 	display:inline;
@@ -81,20 +83,24 @@ Main Game Menu Styles
 	top: 20%;
 }
 <?php dgm();?> div{
-<?php //rule for all div elements inide Main
+<?php
+    //rule for all div elements inside Main
     posAbs();
     defaultColor();
+    css::size('15%', '60%');
 ?>
-    width:15%;
-    height:60%;
 }
 <?php dml();?>{
-	left:5%;
-	bottom:12%;
+<?php
+    css::lm();
+    css::bottom('12%');
+?>
 }
 <?php dmr();?>{
-	right:5%;
-    bottom:12%;
+<?php
+    css::rm();
+    css::bottom('12%');
+?>
 }
 <?php dml();?> button,
 <?php dmr();?> button{
@@ -108,43 +114,43 @@ Main Game Menu Styles
 <?php
     css::defaultBG('../images/garageBtn.png');
     css::bgSize('100%', '100%');
+    lz();
 ?>
     top:0%;
-    left:0%;
 }
-<?php dml();?> button#toAuctionBtn
-{<?php
+<?php dml();?> button#toAuctionBtn{
+<?php
     css::defaultBG('../images/auctionBtn.png');
     css::bgSize('100%', '100%');
+    lz();
 ?>
     top:52%;
-    left:0%;
 }
-<?php dmr();?> button#profile
-{<?php
+<?php dmr();?> button#profile{
+<?php
     css::defaultBG('../images/profileBtn.png');
     css::bgSize('100%', '100%');
+    rz();
 ?>
     top:0%;
-    right:0%;
 }
 <?php dmr();?> button#buyUpgradesBtn
 {<?php
     css::defaultBG('../images/repairBtn.png');
     css::bgSize('100%', '100%');
+    rz();
 ?>
 	top:52%;
-    right:0%;
 }
 /*nav bar*/
 <?php dgm();?> div#reg-navigation{
  <?php
+    posAbs();
     defaultBtnBG();
     //css::bgSize('100%', '100%');
+    rz();
 ?>
-    position:absolute;
     top:10%;
-    right:0%;
 }
 <?php dgm();?> div#reg-navigation a{
 <?php
@@ -163,7 +169,7 @@ Main Game Menu Styles
 <?php dgm();?> li a:hover,
 <?php dgm();?> div#nav a:hover,
 <?php dgm();?> div#reg-navigation a:hover{
-	 <?php
+<?php
     css::defaultBG('../images/defaultBtn2.png');
     css::bgSize('100%', '100%');
 ?>  

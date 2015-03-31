@@ -1,12 +1,11 @@
 <?php
 //auction state stylings
-//header("Content-type: text/css; charset: UTF-8");
 require_once 'ui.php';
 //
 css::header();
 //    
-function divAS(){
-    echo 'div#AuctionSelect';
+function divAS(){?>div#AuctionSelect
+<?php
 }
 function lih(){?>
     height:64px;
@@ -16,7 +15,9 @@ function lih(){?>
     //echo 'div#AuctionSelect div#carView';
 //}
 ?>
-/*Action UI stylings*/
+/*
+Action Select UI stylings
+*/
 <?php divAS();?>
 {	/*Auction page stylings*/ 
 <?php
@@ -39,14 +40,14 @@ function lih(){?>
 	padding:0;
 	list-style-type:none;
 }
-<?php divAS();?> div#carView
-{
-<?php posAbs();?>
-    overflow-y:scroll;
+<?php divAS();?> div#carView{
+<?php
+    posAbs();
+    css::size('90%', '70%');
+    scrollY();
+?>
     bottom:0%;
     left:10%;
-    width:90%;
-    height:70%;
 }
 <?php divAS();?> li
 {
@@ -76,7 +77,10 @@ function lih(){?>
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	background-size : 100% 100%;
-<?php posAbs();?>
+<?php
+    posAbs();
+    //rz();
+?>
 	right:0%;
 <?php lih();?>
 	width:15%;

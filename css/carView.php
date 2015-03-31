@@ -6,8 +6,36 @@ css::header();
 //
 function divCarView(){?>div#CarView<?php
 }
+function rStatView($id, $hTop, $dTop){
+    divCarView(); echo "h2#$id";?>{<?php
+    css::rm();
+    css::top($hTop);
 ?>
-/*Car View Screen*/
+}
+<?php
+    divCarView(); echo "div#$id";?>{<?php
+    css::rm();
+    css::top($dTop);
+?>
+}<?php
+}
+function lStatView($id, $hTop, $dTop){
+    divCarView(); echo "h2#$id";?>{<?php
+    css::lm();
+    css::top($hTop);
+?>
+}
+<?php
+    divCarView(); echo "div#$id";?>{<?php
+    css::rm();
+    css::top($dTop);
+?>
+}<?php
+}
+?>
+/*
+Car View Screen
+*/
 <?php divCarView();?>
 {<?php
     //defaultBG();
@@ -72,6 +100,7 @@ function divCarView(){?>div#CarView<?php
 <?php divCarView();?> label#carName
 {<?php
     fontBold();
+    //css::top('20%');
 ?>
 	background-image:url('../images/checkers.png');
 
@@ -87,12 +116,9 @@ function divCarView(){?>div#CarView<?php
 <?php divCarView();?> h2{
 <?php
     posAbs();
-    //css::size('14%', '5%');
+    css::size('14%', '5%');
 ?>
-	width:14%;
-	height:5%;
     font-size:2vw;/*size element relative to viewport width!*/
-    font-weight:bold;
     background-color:grey;
     /*background:url('../headerBG.jpg');*/
     margin:0%;    
@@ -101,13 +127,10 @@ function divCarView(){?>div#CarView<?php
 <?php
     posAbs();
     scrollY();
-    //css::size('14%', '23%');
+    css::size('14%', '23%');
 ?>
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/
-    
-    width:14%;
-	height:23%;
     
     font-size:1.5vw;
     text-align:left;
@@ -115,38 +138,53 @@ function divCarView(){?>div#CarView<?php
 /*
 Car View left div
 */
-<?php divCarView();?> h2#dt{
-	top:28%;
-	left:5%;
+<?php
+    //lStatView('dt', '28%', '33%');
+    //lStatView('body', '60%', '65%');
+    //
+    //rStatView('interior', '28%', '33%');
+    //rStatView('docs', '60%', '65%');
+?>
+<?php divCarView();?> h2#dt{<?php
+    css::lm();
+    css::top('28%');
+?>
 }
-<?php divCarView();?> div#drivetrain{
-	top:33%;
-	left:5%;	
+<?php divCarView();?> div#drivetrain{<?php
+    css::lm();
+    css::top('33%');
+?>	
 }
-<?php divCarView();?> h2#body{
-	top:60%;
-	left:5%;
+<?php divCarView();?> h2#body{<?php
+    css::lm();
+    css::top('60%');
+?>
 }
-<?php divCarView();?> div#body{    
-	top:65%;
-	left:5%;
+<?php divCarView();?> div#body{<?php
+    css::lm();
+    css::top('65%');
+?>
 }
 /*
 Car View right div
 */
-<?php divCarView();?> h2#interior{
-	top:28%;
-	right:5%;
+<?php divCarView();?> h2#interior{<?php
+    css::rm();
+    css::top('28%');
+?>
 }
-<?php divCarView();?> div#interior{    
-	top:33%;
-	right:5%;
+<?php divCarView();?> div#interior{<?php
+    css::rm();
+    css::top('33%');
+?>
 }
-<?php divCarView();?> div#docs{    
-	top:65%;
-	right:5%;
+<?php divCarView();?> h2#docs{<?php
+    css::rm();
+    css::top('60%');
+?>;
 }
-<?php divCarView();?> h2#docs{
-	top:60%;	
-	right:5%;
+<?php divCarView();?> div#docs{<?php
+    css::rm();
+    css::top('65%');
+?>
 }

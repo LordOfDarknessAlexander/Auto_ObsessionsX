@@ -117,12 +117,12 @@ User Garage div Stylings
 <?php divCarListView();?>
 {
 	background: url('../images/defaultBG.jpg') no-repeat 0 0;
-	overflow-y:scroll;
-<?php posAbs();?>
-	height:60.5%;
+<?php posAbs();
+    scrollY();
+    css::size('35%', '60.5%');
+?>
 	top:30%;
     left:10%;
-    width:35%;
 }
 /*
 current user car stylings

@@ -6,16 +6,15 @@ require_once 'ui.php';
 //
 css::header();
 //
-function divAS(){
-    echo 'div#AuctionSell';
+function divAS(){?>div#AuctionSell<?php
 }
-function dcv(){
-    echo 'div#AuctionSell div#carView';
+function dcv(){divAS();?> div#carView<?php
 }
 ?>
-/*Auction Select Screen*/
-<?php divAS();?>
-{
+/*
+Auction Select Screen
+*/
+<?php divAS();?>{
 <?php
     posAbs();
     css::size('100%', '100%');
@@ -37,7 +36,9 @@ function dcv(){
 	padding:0;
 	list-style-type:none;
 }
-/*Auction Select Car View*/
+/*
+Auction Select Car View
+*/
 <?php dcv();?>
 {
 <?php posAbs();?>
@@ -69,7 +70,10 @@ function dcv(){
 {
 	/*background-color:green;*/
 	text-align:center;
-<?php posAbs();?>
+<?php
+    posAbs();
+    css::size();
+?>
 	left:15%;
 	width:50%;
 	height:15%;

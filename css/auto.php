@@ -5,7 +5,6 @@ require_once 'ui.php';
 //as long as the required file does not output anything this is fine,
 //normally header() should be first line in file, after comments
 css::header();
-//header("Content-type: text/css; charset: UTF-8");
 //
 //imports relative to this document, or an absolute url.
 //makes maintainability easier, allowing structured includes of css sheets
@@ -144,29 +143,35 @@ button:active {
 }
 button#backBtn
 {   /*sets properties for all button tags with id backBtn*/
+<?php
+    posAbs();
+    css::size('5%', '7.5%');
+    //lm();
+?>
 	background: url('../images/backBtn.png') no-repeat 0 0;
 	background-size : 100% 100%;
-    cursor:pointer;
-	position:absolute;
+
 	left:5%;
 	bottom:2%;
-    width:5%;
-	height:7.5%;
 }
-button#homeBtn
-{
+button#homeBtn{
+<?php
+    posAbs();
+    css::size('5%', '7.5%');
+    //rm();
+?>
 	background: url('../images/homeBtn.png') no-repeat 0 0;
-	font-weight: bold;
     background-size : 100% 100%;
-	position:absolute;
-    width:5%;
-	height:7.5%;
+    
 	right:5%;
 	bottom:2%;
     margin:0%;
+    
+    /*font-weight: bold;*/
 }
-label#info{
-    /*background-color:grey;*/
+pre#info{
+<?php //rm();?>
+    background-color:grey;
     color:red;
     position:absolute;
     height:10%;
@@ -226,16 +231,17 @@ img#adBar
 
 }
 <?php //Stat Bar Game HUD?>
-div#statBar
-{
+div#statBar{
+<?php
+    posAbs();
+    css::size('100%', '15%');
+?>
     /*background-color:red;*/
 	background: url('../images/StatBar.png') no-repeat 0 0;
 	background-size : 100%,40%;
-	position:absolute;
 	top:0%;
 	left:0%;
-	width:100%;
-	height:15%;
+	
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
 	text-align:left;
@@ -253,11 +259,11 @@ div#statBar label#tokens{left:25%;top:75%;}
 div#statBar label#prestige{left:50%;top:75%;}
 div#statBar label#m_marker{left:75%;top:75%;}
 
-img#mainCar
-{
-	position:absolute;
-	height:60%;
-	width:60%;
+img#mainCar{
+<?php
+    posAbs();
+    css::size('60%', '60%');
+?>
 	left:20%;
 	bottom:12%;
     z-index:2;
@@ -284,7 +290,9 @@ div#menu
     text-align: center;
     background-color: black;
 }
-/*credits page UI stylings*/
+/*
+credits page UI stylings
+*/
 #credits 
 {
     display: none;
@@ -340,13 +348,7 @@ div#menu
 {
  color:aqua;	
 }
-/*h1{
-    position:absolute;
-    top:10%;
-    left:10%;
-    width:80%;
-    height:5%;
-}*/
+
 #main h1 
 {
   color: #AFCAAF;

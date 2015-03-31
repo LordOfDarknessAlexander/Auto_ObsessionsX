@@ -182,7 +182,11 @@ root\
         someBackground.png
         randomLargeImage.jpg
     audio\
-        
+        ambient.mp3
+    css\
+        main.css
+    js\
+        main.js
     index.php
 </pre>
 <h5 id='cfn'>Classes, functions and variables</h5><hr>
