@@ -2,7 +2,7 @@
 //Action Select State Object
 require_once '../../include/dbConnect.php';
 require_once '../../vehicles/vehicle.php';
-//require_once '../../pas/pas.php';
+require_once '../../pasMeta.php';
 //
 $userID = 0;
 //if(isset($_SESSION['userID']))
@@ -12,7 +12,11 @@ $userID = 0;
 //}
 $tableName =  'user' . strval($userID);
 //
-function hasCar($id){
+function das(){?>div#AuctionSelect<?php
+}
+function asCarView(){das();?> div#carView<?php
+}
+/*function hasCar($id){
     global $AO_DB;
     global $aoUsersDB;
     global $tableName;
@@ -23,11 +27,11 @@ function hasCar($id){
         echo mysqli_num_rows($carRes) != 0 ? 'true' : 'false';
     }
     mysqli_free_result($carRes);
-}
+}*/
 ?>
 var AuctionSelect =
 {	//object representing
-	list : $('div#AuctionSelect div#carView ul#auctionCars'),
+	list : $('<?php asCarView();?> ul#auctionCars'),
     setCarBtn:function(i, data){
         var carID = data.carID,
             hasCar = data.hasCar,
@@ -35,7 +39,7 @@ var AuctionSelect =
             liID = 'asli' + (i).toString(),
             //btnID = "as" + (i).toString(),
             labelID = 'infoLabel',
-            liName = 'div#AuctionSelect div#carView ul#auctionCars li#' + liID,
+            liName = '<?php asCarView();?> ul#auctionCars li#' + liID,
             li = $(liName),
             btn = $(liName + ' button');
         //<php if(guest){}
@@ -64,14 +68,14 @@ var AuctionSelect =
             // }
         // }
 
-        if(hasCar)
-        {	//display but disable user from entering auction
+        if(hasCar){
+        	//display but disable user from entering auction
             //var li = $('#' + liID);
             li.css('opacity', '0.45');
             btn.off().click(this.denyAuction).css('cursor', 'default');
         }
-        else if(hasLostCar)
-        {	//user has previously loss, fade and highlight red!
+        else if(hasLostCar){
+        	//user has previously loss, fade and highlight red!
             li.css('opacity', '0.45');
             //li.css('background-color', 'red');
             btn.off().click(this.denyAuction).css('cursor', 'default');
@@ -84,23 +88,25 @@ var AuctionSelect =
     },
 	init : function()
 	{	//init buttons base on cars in xml database
+<?php
+$funcName = 'js/state/AuctionSelect.php, AuctionSelect::init()';
+?>
 		//appState = GAME_MODE.AUCTION_SElECT;
         //if(loggedIn)
             //this.list.empty();
 		//
-        var funcName = 'js/state/AuctionSelect.php, AuctionSelect::init()';
-        
-        /*jq.get('pas/query.php?op=asc',
+        //var funcName = 'js/state/AuctionSelect.php, AuctionSelect::init()';
+        jq.get('pas/query.php?op=asc',
             function(data){
-                if(data === null){
-                    alert(funcName + ', Error:ajax response returned null!');
+                if(data === null || data === undefined){
+                    alert('<?php echo "$funcName, Error:ajax response returned null!";?>');
                     return;
                 }
                 //alert(funcName + ', ajax response success!' + JSON.stringify(data) );
                 var len = data.length;
                 
                 if(len == 0){
-                    console.log(funcName + ', something went wrong, should have 1 entry per car in database')
+                    console.log('<?php echo "$funcName, no entries in database, should have 1 entry per car in database";?>');
                     return;
                 }
                 //iterate over each vehicle data entry
@@ -114,11 +120,11 @@ var AuctionSelect =
             },
             function(jqxhr){
                 //call will fail if result is not properly formated JSON!
-                alert(funcName + 'ajax call failed! Reason: ' + jqxhr.responseText);
-                console.log(funcName + ', loading game resources failed, abort!');
+                alert('<?php echo "$funcName, ajax call failed! Reason: ";?>' + jqxhr.responseText);
+                //console.log(funcName + ', loading game resources failed, abort!');
             }
-        );*/
-        $.ajax({
+        );
+        /*$.ajax({
             type:'GET',
             url:getHostPath() + 'pas/query.php?op=asc',
             dataType:'json',
@@ -150,7 +156,7 @@ var AuctionSelect =
             alert('ajax call failed! Reason: ' + jqxhr.responseText);
             console.log('loading game resources failed, abort!');
             //finished = true;
-        });
+        });*/
 <?php
 function setCarBtn($args){
     $id = $args[0];
@@ -197,13 +203,13 @@ function setCarBtn($args){
 	{
 		var i = obj.data.index,
             liID = 'asli' + (i).toString(),
-            liName = 'div#AuctionSelect div#carView ul#auctionCars li#' + liID,
+            liName = '<?php asCarView();?> ul#auctionCars li#' + liID,
             li = $(liName),
             btn = $(liName + ' button'),
             carID = parseInt(btn.attr('id') );
             
-        console.log(i);
-        console.log(carID);
+        //console.log(i);
+        //console.log(carID);
 		jq.AuctionSelect.menu.toggle();
 		jq.Auction.menu.toggle();
 		//Auction.setup();
@@ -223,8 +229,8 @@ function setCarBtn($args){
 	{	//render additional, not html elements
 	}
 };
-jq.AuctionSelect.backBtn.click(function() 
-{ 	
+jq.AuctionSelect.backBtn.click(
+function(){ 	
 	setAdBG();
 	setStatBar();
     setHomeImg();

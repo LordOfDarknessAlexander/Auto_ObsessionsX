@@ -8,6 +8,15 @@ require_once '../pasMeta.php';
 //
 //secure::loggin();
 //
+/*class sql{
+    public static function selectAll($tableName){
+        return "SELECT * FROM $tableName";
+    }
+    //public static function selectAll($tableName, $rows){
+        //single identifier, or comma seperated list of identifiers
+        //return "SELECT $rows FROM $tableName";
+    //}
+}*/
 class pasGet{
     private static
         $_allCars,
@@ -152,9 +161,12 @@ class pasGet{
         //else bind failed,
         //default to regular query
         $aoCars = 'aoCars';
+        $CID = 'car_id';
+        
         $res = $AO_DB->query(
-            "SELECT car_id FROM $aoCars"
+            "SELECT $CID FROM $aoCars"
         );
+        
         if($res){
             $ret = array();
             while($row = $res->fetch_assoc()){
@@ -170,14 +182,16 @@ class pasGet{
         global $AO_DB;
         $id = 2;  //$_SESSION['user_id'];
         $users = 'users';
+        $CID = 'car_id';
+        $UID = 'user_id';
         
         $res = $AO_DB->query(
-            "SELECT car_id FROM $users WHERE user_id = $id"
+            "SELECT $CID FROM $users WHERE $UID = $id"
         );
         
         if($res){
             //user has car
-            $ret = intval($res->fetch_assoc()['car_id']);
+            $ret = intval($res->fetch_assoc()[$CID]);
             $res->close();
             return $ret;
         }
@@ -193,18 +207,20 @@ class pasGet{
         global $aoUsersDB;
         //$id = 2;  //$_SESSION['user_id'];
         $users = 'users';
+        $CID = 'car_id';
+        $UID = 'user_id';
         
         /*$result = $AO_DB->query(
-            //"SELECT car_id FROM $users WHERE user_id = $id"
+            //"SELECT $CID FROM $users WHERE $UID = $id"
         //);
         
         if($result){
             //user has car
-            $cid = intval($res->fetch_assoc()['car_id']);
+            $cid = intval($res->fetch_assoc()[$CID]);
             
             if($cid != 0){
                 $tableName = getUserTableName();
-                $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $cid");
+                $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $cid");
                 
                 if($res){
                     $ret = Vehicle::fromArray($res->fetch_assoc() );

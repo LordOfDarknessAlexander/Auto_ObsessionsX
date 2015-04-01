@@ -12,6 +12,7 @@ require_once 'include/dbConnect.php';  //sql database connections
 function getUID(){
     //returns the user if logged in, else echo error and force user to redirect to login
     $uid = 'user_id';
+    
     if(isset($_SESSION) && isset($_SESSION[$uid]) ){
         return intval($_SESSION[$uid]);
     }
@@ -30,14 +31,15 @@ function hasCar($id){
     global $aoUsersDB;
     
     $ret = false;
+    $CID = 'car_id';
     $tableName = getUserTableName();
    
-    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $id");
     
     if($res){
         //user has car
         $ret = mysqli_num_rows($res) != 0 ? true : false;
-		 mysqli_free_result($res);
+		$res->close();
     }
     else{
         //query failed, user has no entry in database
@@ -47,7 +49,6 @@ function hasCar($id){
         //echo "pas/meta.php hasCar($id), sql query failed:($erno), reason: $err";
         //exit();
     }
-  //  mysqli_free_result($res);
     
     return $ret;
 }
@@ -55,10 +56,11 @@ function hasLostCar($id){
     //does the user's table in aoAuctionLossDB already have an entry with car_id '$id'
     global $aoAuctionLossDB;
     
+    $CID = 'car_id';
     $ret = false;
     $tableName = getUserTableName();
 
-    $res = $aoAuctionLossDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    $res = $aoAuctionLossDB->query("SELECT * FROM $tableName WHERE $CID = $id");
     
     if($res){
         //user has car
@@ -77,11 +79,11 @@ function sellCar($cid, $price){
     //does the user's table in aoUsersDB already have an entry with car_id '$id'
     global $aoUsersDB;
     //global $aoCarSalesDB;
-    
+    $CID = 'car_id';
     $ret = false;
     $tableName = getUserTableName();
    
-    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $cid");
+    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $cid");
     
     if($res){
         //user has car
@@ -90,6 +92,7 @@ function sellCar($cid, $price){
             //pasUpdate::soldCar($data, $price);
             //pasRemove::userCar($data['car_id']);
         }
+        $res->close();
     }
     else{
         //query failed, user has no entry in database
@@ -99,7 +102,6 @@ function sellCar($cid, $price){
         //echo "hasCar($id), bind_params failed:($erno), reason: $err";
         //exit();
     }
-    mysqli_free_result($res); 
     return $ret;
 }
 function getCarFromID($carID){
@@ -107,10 +109,11 @@ function getCarFromID($carID){
     //returning it as a an instance of a php class
     global $AO_DB;
     $aoCars = 'aoCars';
+    $CID = 'car_id';
     //prepare!
     //$res = pasGet::allCarIDs();
     $res = $AO_DB->query(
-        "SELECT * FROM $aoCars WHERE car_id = $carID"
+        "SELECT * FROM $aoCars WHERE $CID = $carID"
     );
     if($res){
         if(mysqli_num_rows($res) != 0){
@@ -127,7 +130,7 @@ function getCarFromID($carID){
             //<p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
             //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
         } 
-        mysqli_free_result($res);
+        $res->close();
     }
     else{   //The vehicle is already registered
         //return null; //echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
