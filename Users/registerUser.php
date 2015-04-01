@@ -3,6 +3,7 @@ require_once '../include/html.php';
 require_once '../include/dbConnect.php';
 require_once '../pas/create.php';
 require_once '../re.php';
+require_once '../users.php';
 
 html::doctype();
 ?>
@@ -143,10 +144,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                 ('', '$uname', '$title', '$fn', '$ln', 0, 50000, 0,0,0,0, '$e', '$email_code', SHA1('$p'), NOW(), 0)"
             );	
 			
+			$register_email = '$e';
             if($result) 
 			{ // If the query ran OK
                 //user successfully registered, create other database tables
-                
+                register_User($register_email,$uname,$email_code);
                 //res = pasGet::userLogin($e, $uname);
                 
                 $res = $AO_DB->query(
