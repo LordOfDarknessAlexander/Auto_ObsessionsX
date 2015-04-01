@@ -593,14 +593,29 @@ function setHomeImg(path){
         homeImg.attr('src', path);
     }
 }
-//jq.Garage.shopBtn.click(
-//function(){
-	//jq.Garage.menu.toggle();
-	//jq.RepairShop.menu.toggle();
-    //setHomeImg();
-    //show home img
-    //
-//});
+jq.Garage.shopBtn.click(
+function(){
+    if(_curCarID != 0){
+        //rebind repair back button to return us to this page
+        jq.RepairShop.backBtn.off().click(
+            function(){
+                jq.RepairShop.menu.hide();
+                setStatBar();
+                jq.Garage.menu.show();
+                Garage.init();
+                jq.carImg.hide();
+                jq.adBar.hide();
+                jq.setErr();
+            }
+        );
+        jq.Garage.menu.hide();
+        Repair.init();
+        
+        jq.carImg.show();
+        setAdBG();
+        jq.setErr();    //clear error when changing pages
+    }
+});
 $('div#Garage button#sales').click(
 function(){
 	jq.Garage.menu.hide();
@@ -661,6 +676,13 @@ function(){
 //
 //Car view jq bindings
 //
+jq.CarView.selectBtn.click(
+function(){
+    if(selCarIndex !== null){
+		Garage.setCurrentCar();
+        setHomeImg();	//set home car image
+	}
+});
 jq.CarView.backBtn.click(
 function(){
     jq.CarView.menu.hide();//toggle();

@@ -458,10 +458,20 @@ function(){
 jq.Game.toProfileBtn.click(jq.Profile.toggle);
 jq.Game.repairBtn.click(
 function(){
+    //rebind back button to return us to main menu
+    jq.RepairShop.backBtn.off().click(
+        function(){
+            jq.RepairShop.menu.hide();
+            setStatBar();
+            setAdBG();
+            jq.Game.menu.show();
+            jq.carImg.show();
+            jq.setErr();
+        }
+    );
 	//toggleRepair();
 	//$('#gameMenu')
 	jq.Game.menu.hide();
-	jq.RepairShop.menu.show();
 	Repair.init();
     jq.carImg.show();
     //$('label#info').text('');

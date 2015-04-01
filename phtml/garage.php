@@ -15,8 +15,7 @@ function cvStatBar($id){
     <h1>Garage</h1>
 <?php
     backBtn();
-    selectBtn();
-	
+    selectBtn();	
 ?>
     <button id='viewCar'>View</button>
     <button id='shop'>Upgrades</button>
@@ -85,8 +84,8 @@ drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
 <div id='CarView'>
     <!--<selectBtn();>display vehicle stats and actions-->
     <label id='carName'>--Name--</label>
-    <button id='selectCarBtn'>Select</button>
-    <button id='sellBtn'>Sell</button>
+    <button id='select'>Select</button>
+    <button id='sell'>Sell</button>
 	
     <!--img id='car'> <src='images\\vehicle.jpg'-->
     <!--div id='statLabels'>

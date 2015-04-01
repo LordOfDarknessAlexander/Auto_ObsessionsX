@@ -5,6 +5,8 @@ var Repair = {
 	init : function()
 	{   //initializes the state, enabling ui and core logic of this screen
 		//appState = GAME_MODE.Repair;
+        jq.RepairShop.menu.show();
+        
         var div = $('div#RepairShop');
         
 		if(_curCarID !== 0)

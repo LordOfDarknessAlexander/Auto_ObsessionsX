@@ -60,7 +60,7 @@ Car View Screen
     posAbs();
 ?>
 }
-<?php divCarView();?> button#selectCarBtn
+<?php divCarView();?> button#select
 {
     position:absolute;
 	bottom:2%;
@@ -69,7 +69,7 @@ Car View Screen
     width:10%;
     font-size:1.5vw;
 }
-<?php divCarView();?> button#sellBtn
+<?php divCarView();?> button#sell
 {
     position:absolute;
 	background: url('../images/defaultBtn.png') no-repeat 0 0;

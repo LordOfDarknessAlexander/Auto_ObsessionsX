@@ -73,7 +73,7 @@ function addPrestige(prest){
         //var MAX_PREST = 50000000;
         //var newTotal = userStats.prestige + prest;
         //userStats.prestige = newTotal > MAX_PREST ? MAX_PREST : newTotal;
-        /*jq.post('pas/update.php?op=pup',
+        /*jq.post('pas/update.php?op=aup',
             function(data){
                 //data is the user's new funds after the purchase has been completed
                 //clicked = false;
@@ -97,7 +97,7 @@ function addMarkers(markers){
         //var MAX_MARKERS = 50000000;
         //var newTotal = userStats.markers + markers;
         //userStats.markers = newTotal > MAX_MARKERS ? MAX_MARKERS : newTotal;
-        /*jq.post('pas/update.php?op=pum',
+        /*jq.post('pas/update.php?op=aum',
             function(data){
                 //data is the user's new funds after the purchase has been completed
                 //clicked = false;
@@ -116,7 +116,8 @@ function addMarkers(markers){
     //}
 }
 //jQuery Interface
-$('#addAllowanceBtn').click(function()
+$('#addAllowanceBtn').click(
+function()
 {	//allowance accumulates every few seconds
 	//var
 		//last = getLastAllowanceTime(),
@@ -127,23 +128,27 @@ $('#addAllowanceBtn').click(function()
 	var val = 1;	//(base + carvalue) * delta;
 	addFunds(val);
 });
-$('#addMinorFundsBtn').click(function()
+$('#addMinorFundsBtn').click(
+function()
 {	//open paypal form
 	//transfering game currency to user's account
 	addFunds(10000);
 });
-$('#addMediumFundsBtn').click(function()
+$('#addMediumFundsBtn').click(
+function()
 {	//open paypal form
 	//transfering game currency to user's account
 	addFunds(50000);
 });
-$('#addMajorFundsBtn').click(function()
+$('#addMajorFundsBtn').click(
+function()
 {	//open paypal form
 	//transfer game currency to user's account
 	addFunds(250000);
 });
 
-$('#add3TokensBtn').click(function(){
+$('#add3TokensBtn').click(
+function(){
 	addTokens(3);
 });
 $('#add5TokensBtn').click(
@@ -169,6 +174,16 @@ function(){
 	setStatBar();
 //	setAdBG();
 	saveUser();
+    jq.carImg.show();
+    jq.setErr();    //clear error when changing pages
+});
+jq.Funds.homeBtn.click(
+function(){
+	jq.Funds.menu.hide();
+    jq.Game.menu.show();
+	setStatBar();
+	setAdBG();
+	//saveUser();
     jq.carImg.show();
     jq.setErr();    //clear error when changing pages
 });

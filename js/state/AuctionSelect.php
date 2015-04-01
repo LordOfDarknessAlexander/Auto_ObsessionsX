@@ -7,22 +7,27 @@ require_once '../../pasMeta.php';
 $userID = getUID();
 $tableName =  getUserTableName();
 //
+$fileName = 'js/state/AuctionSelect.php';//__FILE__;
+$funcName = '';
+//
 function das(){?>div#AuctionSelect<?php
 }
 function asCarView(){das();?> div#carView<?php
 }
-/*function hasCar($id){
-    global $AO_DB;
-    global $aoUsersDB;
-    global $tableName;
-    
-    $carRes = $aoUsersDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-    
-    if($carRes){
-        echo mysqli_num_rows($carRes) != 0 ? 'true' : 'false';
-    }
-    mysqli_free_result($carRes);
-}*/
+
+function eFN(){
+    global $funcName;
+    echo $funcName;
+}
+function isValidData(){
+    //determine if an object(data) is valid,
+    //use to check return from ajax call and output an error to the page
+?>if(data === null || data === undefined){
+    jq.setErr("<?php eFN();?>", 'Ajax response returned null!');
+    return;
+}
+<?php
+}
 ?>
 //
 //Auction Select State
@@ -87,7 +92,7 @@ var AuctionSelect =
 	init : function()
 	{	//init buttons base on cars in xml database
 <?php
-$funcName = 'js/state/AuctionSelect.php, AuctionSelect::init()';
+$funcName = "$fileName, AuctionSelect::init()";
 ?>
 		//appState = GAME_MODE.AUCTION_SElECT;
         //if(loggedIn)
@@ -96,10 +101,7 @@ $funcName = 'js/state/AuctionSelect.php, AuctionSelect::init()';
         //var funcName = 'js/state/AuctionSelect.php, AuctionSelect::init()';
         jq.get('pas/query.php?op=asc',
             function(data){
-                if(data === null || data === undefined){
-                    alert('<?php echo "$funcName, Error:ajax response returned null!";?>');
-                    return;
-                }
+                <?php isValidData();?>
                 //alert(funcName + ', ajax response success!' + JSON.stringify(data) );
                 var len = data.length;
                 
@@ -122,39 +124,6 @@ $funcName = 'js/state/AuctionSelect.php, AuctionSelect::init()';
                 //console.log(funcName + ', loading game resources failed, abort!');
             }
         );
-        /*$.ajax({
-            type:'GET',
-            url:getHostPath() + 'pas/query.php?op=asc',
-            dataType:'json',
-            data:'',    //{carID:obj.carID}
-        }).done(function(data){
-            //the response string is converted by jquery into a Javascript object!
-            if(data === null){
-                alert('Error:ajax response returned null!');
-                //finished = true;
-                return;
-            }
-            //alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
-            //do stuff
-            var len = data.length;
-            
-            if(len == 0){
-                console.log('AuctionSelect::init(), something went wrong, should have 1 entry per car in database')
-                return;
-            }
-            
-            for(var i = 0; i < len; i++){
-                //var carID = data[i].carID,
-                    //hasCar = data[i].hasCar;
-                AuctionSelect.setCarBtn( i, data[i]);
-                //AuctionSelect.setCarBtn(carID, i, hasCar);
-            }
-        }).fail(function(jqxhr){
-            //call will fail if result is not properly formated JSON!
-            alert('ajax call failed! Reason: ' + jqxhr.responseText);
-            console.log('loading game resources failed, abort!');
-            //finished = true;
-        });*/
 <?php
 function setCarBtn($args){
     $id = $args[0];
@@ -197,8 +166,10 @@ function setCarBtn($args){
 			
 		//}
 	},
-	initAuction : function(obj)
-	{
+	initAuction : function(obj){
+        //
+        //navigate from select screen to car auction
+        //
 		var i = obj.data.index,
             liID = 'asli' + (i).toString(),
             liName = '<?php asCarView();?> ul#auctionCars li#' + liID,
@@ -214,17 +185,15 @@ function setCarBtn($args){
 		Auction.init(carID);    //id);
 		//Auction.setup();
 	},
-	denyAuction : function()
-	{
+	denyAuction : function(){
 		//if(assetLoader.sounds.denyAuction is not playing)
 			//play deny auction
 		//visual alert as well to notify user?
 	},
-	update : function()
-	{
+	update : function(){
 	},
-	render : function()
-	{	//render additional, not html elements
+	render : function(){
+        //render additional, not html elements
 	}
 };
 jq.AuctionSelect.backBtn.click(

@@ -103,6 +103,7 @@ var jq = {
 		backBtn : $('div#Garage button#backBtn'),
 		selectBtn:$('div#Garage button#select'),
 		viewBtn:$('div#Garage button#viewCar'),
+        shopBtn:$('div#Garage button#shop'),
 		toggle : function()
 		{	//from game menu to garage, or vice versa
 			$('#gameMenu').toggle();
@@ -129,7 +130,8 @@ var jq = {
 		menu : $('div#CarView'),
 		backBtn : $('div#CarView button#backBtn'),
 		homeBtn : $('div#CarView button#homeBtn'),	//$('button#homeBtn', jq.CarView.menu),
-		sellBtn : $('div#CarView button#sellBtn'),
+		sellBtn : $('div#CarView button#sell'),
+        selectBtn : $('div#CarView button#select'),
 		//carImg : $('img#car'),
         carName : $('div#CarView label#carName'),
 		carInfo : $('div#CarView label#carInfo'),
@@ -157,6 +159,7 @@ var jq = {
 	Funds : {
 		menu : $('div#AddFunds'),
 		backBtn : $('div#AddFunds button#backBtn'),
+        homeBtn : $('div#AddFunds button#homeBtn'),
 		toggle : function()
 		{	//from game menu to funds or vice versa
 			//$('#gameMenu').toggle();
