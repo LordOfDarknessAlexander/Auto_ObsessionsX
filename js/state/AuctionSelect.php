@@ -1,16 +1,11 @@
-<?php header('Content-type: application/javascript; charset: UTF-8');
+<?php //header('Content-type: application/javascript; charset: UTF-8');
 //Action Select State Object
 require_once '../../include/dbConnect.php';
 require_once '../../vehicles/vehicle.php';
 require_once '../../pasMeta.php';
 //
-$userID = 0;
-//if(isset($_SESSION['userID']))
-    //$userID = $_SESSION['userID'];
-//else{
-    //exit();   //not logged in as valid user, quit script!
-//}
-$tableName =  'user' . strval($userID);
+$userID = getUID();
+$tableName =  getUserTableName();
 //
 function das(){?>div#AuctionSelect<?php
 }
@@ -29,6 +24,9 @@ function asCarView(){das();?> div#carView<?php
     mysqli_free_result($carRes);
 }*/
 ?>
+//
+//Auction Select State
+//
 var AuctionSelect =
 {	//object representing
 	list : $('<?php asCarView();?> ul#auctionCars'),

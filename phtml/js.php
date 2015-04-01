@@ -12,7 +12,7 @@ $paths = array(
     'LoadAssets',
     //jquery bindings
     'jqueryLib',
-    'pas',
+    //'pas',
     //
     //'2D/2D',
     '2D/SpriteSheet',
@@ -42,11 +42,12 @@ $paths = array(
     'state/Auction',
     //'state/AuctionSelect',
     'state/AuctionSell',
-    'state/Add_Funds',
+    //'state/Add_Funds',
     //
     'program'	//main javascript program
 );
 addPHPJS('globals');
+addPHPJS('pas');
 //addPHPJS('jqLib');
 foreach($paths as $p){addJS($p);}
 addPHPJS('state/state');

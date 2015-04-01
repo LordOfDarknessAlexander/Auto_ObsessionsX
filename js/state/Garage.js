@@ -595,10 +595,11 @@ function setHomeImg(path){
 }
 //jq.Garage.shopBtn.click(
 //function(){
-	//jq.Garage.toggle();
-	//jq.RepairShop.toggle();
+	//jq.Garage.menu.toggle();
+	//jq.RepairShop.menu.toggle();
     //setHomeImg();
     //show home img
+    //
 //});
 $('div#Garage button#sales').click(
 function(){

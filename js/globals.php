@@ -53,9 +53,9 @@ var userStats = {
 
 function saveUser()
 {	//saves user stats as a JSON string to the browsers local storage
-<?php if(loggedIn() ){?>
-    var funcName = 'gloabals.js pas::saveUser()';
-    /*jq.post('pas/update.php',
+<?php if(loggedIn() ){
+    $funcName = 'js/gloabals.php pas::saveUser()';?>
+    /*jq.post('pas/update.php?op=sus',
         function(data){
             if(data === null){
                 alert(funcName + ', Error:ajax response returned null!');
@@ -90,7 +90,7 @@ function loadUser()
     pas.query.loadUser();
 <?php
 }
-//else{
+else{
 ?>
 	/*if(Storage.local !== null){
         if('_carID' in Storage.local){
@@ -115,7 +115,7 @@ function loadUser()
 		}
 	}*/
 <?php
-//}
+}
 ?>
 }
 

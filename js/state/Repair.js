@@ -72,6 +72,7 @@ var Repair = {
                     {'opacity':'0.45','cursor':'default'}
                 ).text('$0.00');
             }
+            
             if(car._dt !== null){
                 var btnTag = 'div#RepairShop div#drivetrain button#';
                 
@@ -293,12 +294,11 @@ var Repair = {
 	},
     save:function(){
         //saves each upgrade/repair when the user repairs
-        var funcName = 'Repair::save()';
-//<php
-//if(loggedIn){?>
-        //sends the car data to the server
         var car = Garage.getCurrentCar();
-        
+//<php
+        var funcName = 'Repair::save()';
+//if(loggedIn() ){?>
+        //sends the car data to the server        
         $.ajax({
             type:'POST',
             url:getHostPath() + 'pas/update.php?op=update',
@@ -334,11 +334,9 @@ var Repair = {
 //<php
 //}
     },
-    update : function()
-	{
+    update : function(){
 	},
-	render : function()
-	{
+	render : function(){
 		//additional rendering to 2D context
 	},
 };
