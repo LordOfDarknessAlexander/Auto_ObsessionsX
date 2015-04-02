@@ -13,7 +13,7 @@ if(!empty($_GET['email']) && isset($_GET['email_code']))
 		$count= mysqli_query($AO_DB->con,"SELECT user_id FROM users WHERE email='$e' AND email_code='$code' AND confirm='0'");
 		if(mysqli_num_rows($count) == 1)
 		{
-			mysqli_query($AO_DB->con,"UPDATE users SET confirm= 1 WHERE email_code='$code'");
+			mysqli_query($AO_DB->con,"UPDATE users SET confirm= '1' WHERE email_code='$code'");
 			$msg="Your account is activated"; 
 		}
 		else
