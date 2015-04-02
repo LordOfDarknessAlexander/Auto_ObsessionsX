@@ -1,19 +1,19 @@
 <?php
-
 require_once 'users.php';
-/*
+require_once 'include/dbConnect.php';
 $msg='';
-if(!empty($_GET['email_code']) && isset($_GET['email_code']))
+if(!empty($_GET['email']) && isset($_GET['email_code']))
 {
 	$code = mysqli_real_escape_string($AO_DB->con,$_GET['email_code']);
-	$c = mysqli_query($connection,"SELECT user_id FROM users WHERE confirm ='$code'");
+	$e =  mysqli_real_escape_string($AO_DB->con,$_GET['email']);
+	$c = mysqli_query($AO_DB->con,"SELECT user_id FROM users WHERE email='$e' AND email_code='$code' ");
 
 	if(mysqli_num_rows($c) > 0)
 	{
-		$count= mysqli_query($AO_DB->con,"SELECT user_id FROM users WHERE email_code='$code' and confirm='0'");
+		$count= mysqli_query($AO_DB->con,"SELECT user_id FROM users WHERE email='$e' AND email_code='$code' AND confirm='0'");
 		if(mysqli_num_rows($count) == 1)
 		{
-			mysqli_query($AO_DB->con,"UPDATE users SET status='1' WHERE email_code='$code'");
+			mysqli_query($AO_DB->con,"UPDATE users SET confirm= 1 WHERE email_code='$code'");
 			$msg="Your account is activated"; 
 		}
 		else
@@ -25,10 +25,10 @@ if(!empty($_GET['email_code']) && isset($_GET['email_code']))
 	{
 	$msg ="Wrong activation code.";
 	}
-}*/
+} /*
 if(isset($_GET['email'],$_GET['email_code'] === true)
 {
-	echo 'set';
+	//echo 'set';
 	$e		 = trim($_GET['email']);
 	$email_code  = trim($_GET['email_code']);
 	
@@ -50,7 +50,7 @@ if(isset($_GET['email'],$_GET['email_code'] === true)
 	}
 	else
 	{
-		header('Location: activate.php?success');
+		header('Location: index.php');
 		exit();
 	}
 	
@@ -60,7 +60,7 @@ else
 	header('Location : index.php');
 	echo 'Crap';
 	exit();
-}
+}*/
 
 ?>
 <?php

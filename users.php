@@ -14,7 +14,7 @@ function activate($e,$email_code)
 	if(mysql_result(mysqli_query("SELECT COUNT('user_id') FROM 'users' WHERE 'email' = '$e' AND 'email_code'= '$email_code' AND 'confirm' = 0 " ),0) ==1)
 	{
 		//mysqli_query("UPDATE 'users',  SET 'confirm' = '1' WHERE 'email' = '$e'");
-		$q = ("UPDATE 'users',  SET 'confirm' = '1' WHERE 'email' = '$e'");	
+		$q = ("UPDATE 'users',  SET 'confirm' = 1 WHERE 'email' = '$e'");	
 		$result = $AO_DB->query($q);
 		return true;
 	}
