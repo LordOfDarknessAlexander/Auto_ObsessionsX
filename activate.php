@@ -1,5 +1,6 @@
 <?php
-include 'include/dbConnect.php';
+
+require_once 'users.php';
 /*
 $msg='';
 if(!empty($_GET['email_code']) && isset($_GET['email_code']))
@@ -28,6 +29,30 @@ if(!empty($_GET['email_code']) && isset($_GET['email_code']))
 if(isset($_GET['email'],$_GET['email_code'] === true)
 {
 	echo 'set';
+	$e		 = trim($_GET['email']);
+	$email_code  = trim($_GET['email_code']);
+	
+	if(email_Exists($e === false))
+	{
+		$errors[] = 'Oops something went wrong we couldn\'t find that email address';
+	}
+	else if(activate($e,$email_code) === false)
+	{
+		$errors[] = 'We had problems activating your account';
+	}
+	if(empty($errors) === false)
+	{
+		?>
+		<h2>Oops...</h2>
+		<?php
+		
+		echo 'snap';
+	}
+	else
+	{
+		header('Location: activate.php?success');
+		exit();
+	}
 	
 }
 else

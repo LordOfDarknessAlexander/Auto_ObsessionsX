@@ -1,11 +1,28 @@
 <?php 
 require_once 'general.php';
-
+require_once 'include/dbConnect.php';
 function logged_In() 
 {
 	return (isset($_SESSION['user_id'])) ? true : false;
 }
 
+function activate($e,$email_code)
+{
+	$e = mysqli_real_escape_string($e);
+	$email_code = mysqli_real_escape_string($email_code);
+	
+	if(mysql_result(mysqli_query("SELECT COUNT('user_id') FROM 'users' WHERE 'email' = '$e' AND 'email_code'= '$email_code' AND 'confirm' = 0 " ),0) ==1)
+	{
+		//mysqli_query("UPDATE 'users',  SET 'confirm' = '1' WHERE 'email' = '$e'");
+		$q = ("UPDATE 'users',  SET 'confirm' = '1' WHERE 'email' = '$e'");	
+		$result = $AO_DB->query($q);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 function user_Exists($uname)
 {
 	$uname = sanitize($uname);
