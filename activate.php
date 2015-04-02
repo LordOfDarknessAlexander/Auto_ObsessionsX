@@ -25,7 +25,17 @@ if(!empty($_GET['email_code']) && isset($_GET['email_code']))
 	$msg ="Wrong activation code.";
 	}
 }*/
-
+if(isset($_GET['email'],$_GET['email_code'] === true)
+{
+	echo 'set';
+	
+}
+else
+{
+	header('Location : index.php');
+	echo 'Crap';
+	exit();
+}
 
 ?>
 <?php
