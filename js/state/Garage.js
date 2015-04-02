@@ -620,7 +620,7 @@ $('div#Garage button#sales').click(
 function(){
 	jq.Garage.menu.hide();
     //AuctionSell.init();
-    jq.AuctionSell.menu.show();
+    AuctionSell.init();
     jq.setErr();    //clear error when changing pages
     
     jq.AuctionSell.backBtn.off().click(

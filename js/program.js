@@ -98,7 +98,7 @@ function load(){
                 //the UI is dependant on the users garage being loaded,
                 //so init ui after all ajax calls have completed
                 Garage.initUI();
-                AuctionSell.load(data.sales);
+                AuctionSell.load();//data.sales);
                 setHomeImg();
             }).fail(function(){
                 console.log(funcName + ', loading game resources failed, abort!');

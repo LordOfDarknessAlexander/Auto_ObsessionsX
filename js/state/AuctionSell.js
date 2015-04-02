@@ -1,5 +1,4 @@
 ﻿//<php
-//js::header();
 //function loggedIn(){
     //return true;
 //}
@@ -22,28 +21,34 @@ function hasSoldCar(carID){
     return false;
 }
 
-function auctionGen()
-{
+function auctionGen(args){
+    //
+    //Javascript functionality to manage vehicle sales
+    //
+    //pass in a valid object (with proper fields),
+    //or leave function call empty for default construction
+    var isValid = (args === null || args === undefined) ? false : true;
+    
+    var car = isValid ? Garage.getCarByID(args.id) : null,
+        bid = isValid ? args.bid : 0;
+        
 	return {
 		//_vehiclePrice : 20000,
-		//Javascript functionality for manage vehicle sales
 		MAX_AUCTION_TIME : 1000,    //how many units of time is thins?
 		//AI cooldown timer
-		_car:null,
+		_car:car,
 		_carIndex : 0,
-		_currentBid : 0,
-		_ai : [],
+		_currentBid:bid,
+		_ai:[],
 		_date:{
 			start:Date.now() * 0.0001,
 			end:null
 		},
 		_expired:false,
 		_curTime:0.0,
-		
-		init:function(index)
-		{
-			if(index !== null && index !== undefined)
-			{
+		//
+		init:function(index){
+			if(index !== null && index !== undefined){
                 var car = userGarage[index];
                 
                 if(car !== null && !hasSoldCar(car.id)){
@@ -76,11 +81,13 @@ function auctionGen()
             }
         },
         addButton:function(){
+            //add this auction entry to the div
             if(this._car === null){
                 //user has already sold this car,
                 //or setup has failed for another reason
                 console.log('could not set up html button for car');
-            }else{
+            }
+            else{
                 var car = this._car,
                     btnID = 'as' + (car.id).toString(),
                     liID = 'asd' + (car.id).toString();
@@ -101,8 +108,8 @@ function auctionGen()
                 jq.AuctionSell.carView.append(btnStr);
             }
         },
-		close:function()
-		{
+		close:function(){
+            //auction end
 			this._expired = true;
             this.toggleCC();
 			this._date.end = Date.now() * 0.0001;
@@ -174,8 +181,7 @@ function auctionGen()
             //carElement.css('opacity','0.45');
             //
 		},
-		load:function()
-		{
+		load:function(){
 			//this._date.end = Storage.local[''] !== null ? Storage.local[''] : null;
 			//this._date.start = Storage.local[''];
 			//this._expired = this._date.end === null ? false : true;
@@ -193,8 +199,9 @@ function auctionGen()
 //>
 		},
         restart:function(data){
-            this._car = Garage.getCarByID(data.id);
-            this._currentBid = data.bid;
+            //continue a previously started auction(which has not already expired);
+            //this._car = Garage.getCarByID(data.id);
+            //this._currentBid = data.bid;
             //this._date = data.date;
             
             //if(this._date.end === null){
@@ -388,8 +395,7 @@ var AuctionSell =
 {	//manages the state for selling cars
 	//_state:null,    //array, contains Auctions
     //_cars:[],	//array of vehicles either sold or being sold by the user
-	init:function(index)
-	{
+	init:function(index){
         //AuctionSell.load();
         //foreach active auction in userSales,
         //start them and begin updates
@@ -411,7 +417,7 @@ var AuctionSell =
                 as.toggleCC();
                 
                 userSales.push(as);
-                
+                //console.log(JSON.stringify(userSales) );
                 AuctionSell.save();
             }
             jq.AuctionSell.toggle();
@@ -451,10 +457,10 @@ var AuctionSell =
                     userSales = [];
                     
                     for(var i = 0; i < len; i++){
-                        var data = sd[i],
-                            na = auctionGen();
+                        var ad = sd[i], //auction data
+                            na = auctionGen(ad);    //new auction
                     
-                        //na.restart(data); 
+                        na.restart(); 
                         na.toggleCC();
                         
                         userSales.push(na);
@@ -470,9 +476,9 @@ var AuctionSell =
                 
                 for(var i = 0; i < len; i++){
                     var ad = data[i],   //auction data
-                        na = auctionGen();  //new auction
+                        na = auctionGen(ad);  //new auction
                 
-                    //na.restart(ad); 
+                    //na.restart(); 
                     na.toggleCC();
                     
                     //userSales.push(na);

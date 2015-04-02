@@ -83,7 +83,7 @@ $funcName = "$fileName, pas::insertLoss(vehicleID)";
     //}
     set:{
         userCar:function(vehicleID){
-        //set user's current car ID
+            //set user's current car ID
 <?php
 $funcName = "$fileName, pas::set::userCar(vehicleID)";
 ?>
