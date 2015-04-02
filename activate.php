@@ -1,22 +1,56 @@
 <?php
 require_once 'users.php';
 require_once 'include/dbConnect.php';
+?>
+
+<?php
+require_once 'include/html.php';
+html::doctype();
+?>
+<html lang="en">
+<head>
+<?php
+html::title('Registration thank you page');
+html::charset();
+?>
+    <link rel="stylesheet" type="text/css" href="Users/includes.css">
+    <style type="text/css">
+    p { text-align:center; }
+    table, tr, td, form { margin:auto;	width:180px; text-align:center; border:0; }
+    form input { margin:auto; }
+    img { border:0; }
+    input.fl-left { float:left; }
+    #submit { float:left; }
+    </style>
+</head>
+<body>
+<div id="container">
+<?php
+require 'Users/includes/header-thanks.php';
+require 'include/nav.php';
+
+?>
+<?php
+session_start();
 $msg='';
+echo 'Crackers';
 if(isset($_GET['email']) && isset($_GET['email_code']))
 {
-	$code = mysqli_real_escape_string($AO_DB->con,$_GET['email_code']);
-	$e =  mysqli_real_escape_string($AO_DB->con,$_GET['email']);
-	//$e = $_GET['email'];
-	//$code = $_GET['email_code'];
+	//$code = mysqli_real_escape_string($AO_DB->con,$_GET['email_code']);
+	//$e =  mysqli_real_escape_string($AO_DB->con,$_GET['email']);
+	$e = $_GET['email'];
+	$code = $_GET['email_code'];
 	$a = '1';
-	//$c = mysqli_query($AO_DB->con,"UPDATE users SET confirm= '1' FROM users WHERE email='$e' AND email_code='$code' ");
+	echo 'Great foods';
 	$q = "SELECT user_id, email,email_code FROM users WHERE email='$e' AND email_code='$code' AND confirm = '0')";	
 	$result = $AO_DB->query($q);
 	
-	if(@mysqli_num_rows($result) == 1)
+	if($result)
 	{
-		mysqli_query($AO_DB->con,"UPDATE users SET confirm = '$a' WHERE email='$e' AND email_code='$code' ");
-		$msg="Your account is activated"; 
+		
+		//mysqli_query($AO_DB->con,"UPDATE users SET confirm = '$a' WHERE email='$e' AND email_code='$code' ");
+		$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		$c = mysqli_query($AO_DB->con,"UPDATE users SET confirm= '1' FROM users WHERE email='$e' AND email_code='$code' ");
 		echo '$code';
 		echo '$e';
 		echo '$a';
@@ -71,33 +105,6 @@ else
 	echo 'Crap';
 	exit();
 }*/
-
-?>
-<?php
-require_once 'include/html.php';
-html::doctype();
-?>
-<html lang="en">
-<head>
-<?php
-html::title('Registration thank you page');
-html::charset();
-?>
-    <link rel="stylesheet" type="text/css" href="Users/includes.css">
-    <style type="text/css">
-    p { text-align:center; }
-    table, tr, td, form { margin:auto;	width:180px; text-align:center; border:0; }
-    form input { margin:auto; }
-    img { border:0; }
-    input.fl-left { float:left; }
-    #submit { float:left; }
-    </style>
-</head>
-<body>
-<div id="container">
-<?php
-require 'Users/includes/header-thanks.php';
-require 'include/nav.php';
 
 ?>
 <div id="content"><!-- Start of the thank you page content. -->
