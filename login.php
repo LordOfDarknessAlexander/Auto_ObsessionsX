@@ -38,7 +38,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         //isPassword
         $p = mysqli_real_escape_string($AO_DB->con, $_POST['psword']);
 	}
+	
 	else{
+		
 		$p = FALSE;
 		echo "<p class='error'>You forgot to enter your password.</p>";
 	}
@@ -48,8 +50,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         echo "password:$p";?><br><?php
 		
 		// Retrieve the user_id, first_name and user_level for that email/password combination:
-		$q = "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )";	
-		
+		$q = "SELECT user_id, fname,uname,confirm,user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') AND confirm = '1')";	
+	
 		/*
         $res = pasGet::userLogin($e, $uname);
         if(!empty($res))
@@ -64,7 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		//if(@mysqli_num_rows($result) != 0) 
 		if (@mysqli_num_rows($result) == 1) 
 		{	
-			//The user input matched the database record
+			 //The user input matched the database record
 			// Start the session, fetch the record and insert the three values in an array
 			session_start();
 			$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -73,11 +75,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			//$url = ($_SESSION['user_level'] === 1) ? 'Users/admin-page.php' : 'Users/members-page.php' ; 
 			$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'members-page.php'; // Ternary operation to set the URL
 			$loggedIn = true;
-            mysqli_free_result($result);
-            header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
-            //ob_end_clean(); // Delete the buffer.
-            exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;       
-			
+			mysqli_free_result($result);
+			header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
+			//ob_end_clean(); // Delete the buffer.
+			exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;       
+		
 		} 
 		else 
 		{ // No match was made.
