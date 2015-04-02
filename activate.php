@@ -2,28 +2,38 @@
 require_once 'users.php';
 require_once 'include/dbConnect.php';
 $msg='';
-if(!empty($_GET['email']) && isset($_GET['email_code']))
+if(isset($_GET['email']) && isset($_GET['email_code']))
 {
 	$code = mysqli_real_escape_string($AO_DB->con,$_GET['email_code']);
 	$e =  mysqli_real_escape_string($AO_DB->con,$_GET['email']);
-	$c = mysqli_query($AO_DB->con,"SELECT user_id FROM users WHERE email='$e' AND email_code='$code' ");
-
-	if(mysqli_num_rows($c) > 0)
+	//$e = $_GET['email'];
+	//$code = $_GET['email_code'];
+	$a = '1';
+	//$c = mysqli_query($AO_DB->con,"UPDATE users SET confirm= '1' FROM users WHERE email='$e' AND email_code='$code' ");
+	$q = "SELECT user_id, email,email_code FROM users WHERE email='$e' AND email_code='$code' AND confirm = '0')";	
+	$result = $AO_DB->query($q);
+	
+	if(@mysqli_num_rows($result) == 1)
 	{
-		$count= mysqli_query($AO_DB->con,"SELECT user_id FROM users WHERE email='$e' AND email_code='$code' AND confirm='0'");
+		mysqli_query($AO_DB->con,"UPDATE users SET confirm = '$a' WHERE email='$e' AND email_code='$code' ");
+		$msg="Your account is activated"; 
+		echo '$code';
+		echo '$e';
+		echo '$a';
+		/*
+		$count= mysqli_query($AO_DB->con,"SELECT confirm FROM users WHERE email='$e' AND email_code='$code' AND confirm='0'");
 		if(mysqli_num_rows($count) == 1)
 		{
-			mysqli_query($AO_DB->con,"UPDATE users SET confirm= '1' WHERE email_code='$code'");
-			$msg="Your account is activated"; 
+			
 		}
 		else
 		{
 			$msg ="Your account is already active, no need to activate again";
-		}
+		}*/
 	}
 	else
 	{
-	$msg ="Wrong activation code.";
+		$msg ="Wrong activation code.";
 	}
 } /*
 if(isset($_GET['email'],$_GET['email_code'] === true)
@@ -88,7 +98,7 @@ html::charset();
 <?php
 require 'Users/includes/header-thanks.php';
 require 'include/nav.php';
-require 'Users/includes/info-col-cards.php';
+
 ?>
 <div id="content"><!-- Start of the thank you page content. -->
     <div id="midcol">

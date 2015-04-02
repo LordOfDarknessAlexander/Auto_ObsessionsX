@@ -151,7 +151,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                 //user successfully registered, create other database tables
                // register_User($register_email,$uname,$email_code);
 			   $subject = 'Auto-Obsessions Registration';
-			   $body = "thanks for registering " .$uname. "click the link below:\n\n http://851entertainment.com/Auto_ObsessionsX/activate.php?email=" .$e. "&email_code= " . $email_code. "\n\n - auto-obsessions;";
+			   $body = "thanks for registering " .$uname. " click the link below:\n\n http://851entertainment.com/Auto_ObsessionsX/activate.php?email=".$e."&email_code= ".$email_code."\n\n - auto-obsessions;";
 			   mail($e, $subject, $body, 'From: lordofdarknesss@851entertainment.com');
                 //res = pasGet::userLogin($e, $uname);
                 
