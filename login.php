@@ -59,7 +59,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             $_SESSION = $res;
         }
 		*/
-		
 		$result = $AO_DB->query($q);
 		// Check the result:
         

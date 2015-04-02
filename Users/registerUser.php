@@ -145,12 +145,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             );	
 			
 			$register_email = '$e';
+			
             if($result) 
 			{ // If the query ran OK
                 //user successfully registered, create other database tables
                // register_User($register_email,$uname,$email_code);
-			   $body = "thanks for registering ".$uname."click the link\n\n\n\n http://Auto_ObsessionsX/activate.php?email" . $register_email. "&email_code= " . $email_code."\n\n - auto-obsessions;";
-			   mail($e, 'Registration', $body, 'From: lordofdarknesss@851entertainment.com');
+			   $subject = 'Auto-Obsessions Registration';
+			   $body = "thanks for registering " .$uname. "click the link\n\n\n\n http://Auto_ObsessionsX/Users/activate.php?email" . $register_email. "&email_code= " . $email_code."\n\n - auto-obsessions;";
+			   mail($e, $subject, $body, 'From: lordofdarknesss@851entertainment.com');
                 //res = pasGet::userLogin($e, $uname);
                 
                 $res = $AO_DB->query(
