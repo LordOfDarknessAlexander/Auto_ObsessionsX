@@ -3,7 +3,7 @@ require_once 'include/html.php';
 require_once 'include/dbConnect.php';
 require_once 'pas/create.php';
 require_once 're.php';
-
+require_once 'users.php';
 html::doctype();
 ?>
 <html lang=en>
@@ -132,11 +132,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			//pasCreate::userAccount($userInfo);
             $users = 'users';
             //$addNewUser = $AO_DB->con->prepare();
+			$email_code = md5($_POST['uname'] + microtime());
 			$result = $AO_DB->query(
                 "INSERT INTO $users
-                (user_id, uname, title, fname, lname, car_id, money, tokens, prestige, m_marker, user_level, email, psword, registration_date, confirm)
+                ($UID, uname, title, fname, lname, $CID, money, tokens, prestige, m_marker, user_level, email, email_code, psword, registration_date, confirm)
                 VALUES
-                ('', '$uname', '$title', '$fn', '$ln', 0, 50000, 0,0,0,0, '$e', SHA1('$p'), NOW(), 0)"
+                ('', '$uname', '$title', '$fn', '$ln', 0, 50000, 0,0,0,0, '$e', '$email_code', SHA1('$p'), NOW(), 0)"
             );	
 			
             if($result) 
@@ -259,22 +260,7 @@ function flti($name, $text, $size, $maxlength){
 		<br>
         <?php flti('uname', 'User Name', 12, 12);?>
 		<input id='submit' type='submit' name='submit' value='Register'>
-        <!--label class='label' for='fname'>First Name*</label><br-->
-        <!--input id='fname' type='text' name='fname' size='30' maxlength='30' value='<php ep('fname'); ?>'>
-		<br-->
-        <!--label class='label' for='lname'>Last Name*</label><br-->
-        <!--input id='lname' type='text' name='lname' size='30' maxlength='40' value='<php ep('lname');?>'>
-		<br>
-        <label class='label' for='email'>Email Address*</label><br-->
-        <!--input id='email' type='text' name='email' size='30' maxlength='60' value='<php ep('email');?>'>
-		<br>
-        <label class='label' for='psword1'>Password*</label><br>
-        <br><label class='label' for='psword2'>Confirm Password*</label><br>
-        <label class='label' for='uname'>User Name*</label><br>
-        
-        <input id='uname' type='text' name='uname' size='12' maxlength='12' value='<php ep('uname');?>'>&nbsp;6 
-		to 12 characters<br>
-        -->
+       
 	</form>
 </div>
 </div><!--content-->

@@ -27,9 +27,7 @@ function register_User($register_email,$uname,$email_code)
 {
 	//website
 	//email($register_email, 'Activate your account', "Hello".$uname .", \n\nYou need to activate your account so use the link below:\n\n\n\n http://Auto_ObsessionsX/activate.php
-	email($register_email, 'Activate your account', "Hello".$uname .", \n\nYou need to activate your account so use the link below:\n\n\n\n http://Auto_ObsessionsX/activate.php?email" . $register_email. "&email_code= " . $email_code."\n\n - auto-obsessions
-	
-	link
+	email($register_email, 'Activate your account', "Hello".$uname .", \n\nYou need to activate your account so use the link below:\n\n\n\n http:localhost//Auto_ObsessionsX/activate.php?email" . $register_email. "&email_code= " . $email_code."\n\n - auto-obsessions;
 	");
 }
 ?>

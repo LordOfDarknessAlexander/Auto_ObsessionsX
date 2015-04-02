@@ -1,7 +1,7 @@
 <?php
 function email()
 {
-	mail($to, $subject, $body, 'From: auto_obsessions@851entertainment.com');
+	mail($to, $subject, $body, 'From: lordofdarkness@851entertainment.com');
 }
 
 function logged_In_Redirect()
