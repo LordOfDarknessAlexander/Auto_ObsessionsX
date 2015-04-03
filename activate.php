@@ -24,34 +24,40 @@ html::charset();
 <?php
 require 'Users/includes/header-thanks.php';
 require 'include/nav.php';
-
+require 'Users/includes/dbConnect.php';
 ?>
 <?php
-require_once 'include/dbConnect.php';
-
+session_start();
 $msg='';
-echo 'Crackers';
+
 if(isset($_GET['email']) && isset($_GET['email_code']))
 {
-	//session_start();
+	
 	echo 'Great foods';
 	//$code = mysqli_real_escape_string($AO_DB->con,$_GET['email_code']);
 	//$e =  mysqli_real_escape_string($AO_DB->con,$_GET['email']);
 	$e = $_GET['email'];
 	$code = $_GET['email_code'];
 	$a = '1';
+	$q = "UPDATE users SET confirm = '$a' WHERE email='$e' AND email_code='$code' ";
+	//$q= (mysql_result(mysqli_query("SELECT COUNT ('user_id') FROM  'users' WHERE 'uname' = '$uname' AND 'confirm'"), 0) == 0);
+	//$q = "SELECT user_id,uname,email,email_code,confirm FROM users WHERE email='$e' AND email_code='$code' )";	
+	  echo "email:$e";?><br><?php
+      echo "email_code:$code";?><br><?php
 	
-	$q = "SELECT user_id, email,email_code FROM users WHERE email='$e' AND email_code='$code' )";	
-	//$q = "UPDATE users SET confirm= '1' FROM users WHERE email='$e' AND email_code='$code' ";
-	$result = $AO_DB->query($q);
-	if(!$result)
+	$result = mysqli_query ($AO_DB->con, $q);
+	if($result)
 	{
-	  die('Could not update data: ' . mysql_error());
+		
+	 //$rows = $result->fetch_assoc();
+	  $q = "UPDATE users SET confirm ='$a' WHERE email='$e' AND email_code='$code' ";
+	  $result = mysqli_query ($AO_DB->con, $q);
+	   echo "Success we have activated your account";
 	}
 	else
 	{
-	  $q = "UPDATE users SET confirm = '1' FROM users WHERE email='$e' AND email_code='$code' ";
-	  $result = $AO_DB->query($q);
+		die('Could not update data: ' . mysql_error());
+	
 	}
 } 
 ?>
