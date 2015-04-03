@@ -24,40 +24,45 @@ html::charset();
 <?php
 require 'Users/includes/header-thanks.php';
 require 'include/nav.php';
-require 'Users/includes/dbConnect.php';
+
 ?>
 <?php
-session_start();
+require 'Users/includes/dbConnect.php';
 $msg='';
 
 if(isset($_GET['email']) && isset($_GET['email_code']))
 {
-	
 	echo 'Great foods';
-	//$code = mysqli_real_escape_string($AO_DB->con,$_GET['email_code']);
-	//$e =  mysqli_real_escape_string($AO_DB->con,$_GET['email']);
-	$e = $_GET['email'];
-	$code = $_GET['email_code'];
-	$a = '1';
-	$q = "UPDATE users SET confirm = '$a' WHERE email='$e' AND email_code='$code' ";
-	//$q= (mysql_result(mysqli_query("SELECT COUNT ('user_id') FROM  'users' WHERE 'uname' = '$uname' AND 'confirm'"), 0) == 0);
+	$code = mysqli_real_escape_string($AO_DB->con,$_GET['email_code']);
+	$e =  mysqli_real_escape_string($AO_DB->con,$_GET['email']);
+	//$e = $_GET['email'];
+	//$code = $_GET['email_code'];
+	$a = mysqli_real_escape_string($AO_DB->con,1);
+	$q = "UPDATE users SET confirm ='$a' WHERE email='$e' AND email_code='$code' ";
 	//$q = "SELECT user_id,uname,email,email_code,confirm FROM users WHERE email='$e' AND email_code='$code' )";	
 	  echo "email:$e";?><br><?php
       echo "email_code:$code";?><br><?php
 	
 	$result = mysqli_query ($AO_DB->con, $q);
-	if($result)
+	if(!$result)
 	{
-		
-	 //$rows = $result->fetch_assoc();
-	  $q = "UPDATE users SET confirm ='$a' WHERE email='$e' AND email_code='$code' ";
-	  $result = mysqli_query ($AO_DB->con, $q);
-	   echo "Success we have activated your account";
+		die('Could not update data: ' . mysql_error());
 	}
 	else
 	{
-		die('Could not update data: ' . mysql_error());
-	
+	    echo "Funk1";
+		//$rows = $result->fetch_assoc();
+	   $ac = "UPDATE users SET confirm ='$a' WHERE email='$e'  ";
+	   $resultB = mysqli_query ($AO_DB->con, $ac);
+	   if($resultB)
+	   {
+		   echo "Success we have activated your account";
+	   }
+	   else
+	   {
+		   echo 'snap u suck';
+	   }
+	   
 	}
 } 
 ?>
