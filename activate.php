@@ -35,13 +35,11 @@ if(isset($_GET['email']) && isset($_GET['email_code']))
 	echo 'Great foods';
 	$code = mysqli_real_escape_string($AO_DB->con,$_GET['email_code']);
 	$e =  mysqli_real_escape_string($AO_DB->con,$_GET['email']);
-	//$e = $_GET['email'];
-	//$code = $_GET['email_code'];
 	$a = mysqli_real_escape_string($AO_DB->con,1);
 	$q = "UPDATE users SET confirm ='$a' WHERE email='$e' AND email_code='$code' ";
-	//$q = "SELECT user_id,uname,email,email_code,confirm FROM users WHERE email='$e' AND email_code='$code' )";	
-	  echo "email:$e";?><br><?php
-      echo "email_code:$code";?><br><?php
+	
+	echo "email:$e";?><br><?php
+    echo "email_code:$code";?><br><?php
 	
 	$result = mysqli_query ($AO_DB->con, $q);
 	if(!$result)
@@ -50,8 +48,6 @@ if(isset($_GET['email']) && isset($_GET['email_code']))
 	}
 	else
 	{
-	    echo "Funk1";
-		//$rows = $result->fetch_assoc();
 	   $ac = "UPDATE users SET confirm ='$a' WHERE email='$e'  ";
 	   $resultB = mysqli_query ($AO_DB->con, $ac);
 	   if($resultB)
@@ -62,7 +58,6 @@ if(isset($_GET['email']) && isset($_GET['email_code']))
 	   {
 		   echo 'snap u suck';
 	   }
-	   
 	}
 } 
 ?>
