@@ -49,7 +49,7 @@ function auctionGen(args){
 		//
 		init:function(index){
 			if(index !== null && index !== undefined){
-                var car = userGarage[index];
+                var car = Garage.getCarByIndex(index);
                 
                 if(car !== null && !hasSoldCar(car.id)){
                     //this car has not been previously sold!
@@ -58,6 +58,7 @@ function auctionGen(args){
                     this._currentBid = this._car.getPrice() * 0.05;
                     
                     this._initAI();
+                    //AuctionSell.save();
                 }
                 else{
                     console.log('user has already sold car with id (' + car.id.toString() + ')');
@@ -107,7 +108,38 @@ function auctionGen(args){
                 "</div><br>";
                 
                 jq.AuctionSell.carView.append(btnStr);
+                
+                //if(this.expired && this.bid == 0){
+                    //this.disable();            
+                //}
             }
+        },
+        disable:function(){
+            //disable the div
+            var car = this._car,
+                cidStr = (car.id).toString(),
+                //btnID = 'as' + cidStr,
+                liID = 'div#asd' + cidStr,
+                div = $(liID, jq.AuctionSell.carView);
+                ccBtn = $('div#btns button#cc', div),
+                viewBtn = $('div#btns button#view', div);
+
+            div.css({'opacity':'0.45'});
+            ccBtn.off().css({'cursor':'default'});
+            viewBtn.off().css({'cursor':'default'});
+//if(loggedIn() ){>
+            //jq.post('pas/sales.php?op=rus',
+                //function(){},
+                //function(){},
+                //{cid:car.id, price:}
+            //);
+//<php
+//}
+//else{>
+            //AuctionSell.save();
+//<php
+//}
+//>
         },
 		close:function(){
             //auction end
@@ -121,7 +153,19 @@ function auctionGen(args){
             //use this._ai = [], or delete _ai to reset or delete the memory, respectfully
 			while(this._ai.length) { this._ai.pop(); }
             
-            //AuctionSell.save();
+//if(loggedIn() ){>
+            //jq.post('pas/sales.php?op=sua',
+                //function(){},
+                //function(){},
+                //{}
+            //);
+//<php
+//}
+//else{>
+            AuctionSell.save();
+//<php
+//}
+//>
 		},
 		update:function(dt)
 		{
@@ -138,7 +182,7 @@ function auctionGen(args){
                     //continue to update until time runs out
 					for(var i = 0; i < this._ai.length; ++i){
 						if(this._ai[i].winningBid){
-							console.log('AI ' + i + ' has won the bid for ' + Math.round(this._ai[i].currBid) + ' Original Price: ' + this._car.getPrice());
+							console.log('AI ' + i + ' has won the bid for the ' + this._car.getFullName() + ' for (' + Math.round(this._ai[i].currBid) + '), Original Price (' + this._car.getPrice() + ')');
 						}
 					}
 					console.log('Ending auction');
@@ -216,8 +260,8 @@ function auctionGen(args){
             //}
             this.addButton();
             
-            if(this._expired){
-                //this.disableButton();
+            if(this._expired){  // && this.bid == 0){
+                //this.disable();
             }
         },
 		toJSON : function()
@@ -347,7 +391,7 @@ function auctionGen(args){
             }
         },
         viewAuction:function(carID){
-            //view an auction while it is active!
+            //view an auction while it is still active!
             //Auction.init(carID);
         },
         cancelAuction:function(obj){
@@ -358,8 +402,8 @@ function auctionGen(args){
                 //id = obj.cid, //car id
                 //p = obj.price;    //sale price of car
             if(!t.expired){
-//<php if(loggedIn() ){>
-                //make ajax call to pasRemove
+//<php if(loggedIn() ){
+                //make ajax call to pasRemove>
                 /*
                 jq.post('pas/remove.php?op=ucs',    //user cancel sale
                     function(data){
@@ -384,12 +428,24 @@ function auctionGen(args){
                 var i = 0;
                 
                 for(; i < len; i++){
-                    if( (userSales[i]._car !== null) && (userSales[i]._car.id == t._car.id) ){
+                    var sCar = userSales[i]._car;
+                    
+                    if( (sCar !== null) && (sCar.id == t._car.id) ){
+                        console.log('cancel auction!');
+                        
+                        var cidStr = (sCar.id).toString(),
+                            liID = 'div#asd' + cidStr,
+                            div = $(liID, jq.AuctionSell.carView);
+                            
+                        div.remove();   //from element from DOM
+                        //remove car from array
+                        //remove sales;
+                        //var rm = userSales.splice(i, 1);  //returns items removed from array
+                        //place car back in user garage!
+                        //userGarage.push(car(rm));
                         break;
                     }
                 }
-                console.log('cancel auction!');
-                //remove auction[i];
 //<php
 //}
 //?>
@@ -400,7 +456,7 @@ function auctionGen(args){
         },
         payUser:function(obj){
             var val = obj.data.price;
-                //t = obj.data.caller;
+                t = obj.data.caller;
             console.log('won auction! user gets (' + val.toFixed(2) + ') funds!');
             //t = this;
             if( (userStats.money + val) <= Number.MAX_VALUE){
@@ -410,13 +466,13 @@ function auctionGen(args){
                     //function(data){
                         //userStats.money = data;
                         //setStatBar();
-                        //t.disable();  //user recieved funds, disable div
+                        t.disable();  //user recieved funds, disable div
                         //AucionSell.save();
                     //},
                     //function(){
                         
                     //},
-                    //{val:val}
+                    //{price:val}
                 //);
 //<php
 //}
@@ -480,9 +536,9 @@ var AuctionSell =
 					userSales[i].update(dt);
 					++i;
 				}
-				else{
-					userSales.splice(i, 1);
-				}
+				//else{
+					//userSales.splice(i, 1);
+				//}
 			}
 		}
 	},
@@ -500,13 +556,13 @@ var AuctionSell =
                     userSales = [];
                     
                     for(var i = 0; i < len; i++){
-                        var ad = sd[i], //auction data
+                        /*var ad = sd[i], //auction data
                             na = auctionGen(ad);    //new auction
                     
                         na.restart(); 
                         na.toggleCC();
                         
-                        userSales.push(na);
+                        userSales.push(na);*/
                     }
                 }
             }
@@ -552,11 +608,11 @@ var AuctionSell =
         //for now, add code here
         var k = 'AuctionSell';
         
-        if(Storage.local !== null && k in Storage.local){
+        if(Storage.local !== null){
 //<php if(DEBUG){?>
             //var jstr = JSON.stringify(userSales);
             //console.log(jstr);
-            //Storage.local['AuctionSell'] = jstr;
+            //Storage.local[k] = jstr;
 //<php
 //}
 //else{?>

@@ -175,13 +175,14 @@ var Garage = {
         //as when using $.ajax to initialize the car list, they may be out of order
 		var len = userGarage.length;
         
-        if(len == 0){
+        if(len == 0 || index > len){
+            console.log('invalid index (' + index.toString() + ') into array of length (' + len.toString() + ')');
             return null;
         }
         
         for(var i = 0; i < len; i++){
             if(index == i){
-                return userGarage[i];;
+                return userGarage[i];
             }
         }
         
@@ -198,6 +199,7 @@ var Garage = {
         
         for(var i = 0; i < len; i++){
             var car = userGarage[i];
+            
             if(id == car.id){
                 return car;
             }
