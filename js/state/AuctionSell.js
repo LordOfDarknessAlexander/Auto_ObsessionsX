@@ -89,8 +89,9 @@ function auctionGen(args){
             }
             else{
                 var car = this._car,
-                    btnID = 'as' + (car.id).toString(),
-                    liID = 'asd' + (car.id).toString();
+                    cidStr = (car.id).toString(),
+                    btnID = 'as' + cidStr,
+                    liID = 'asd' + cidStr;
                     
                 var btnStr = "<div id='" + liID + "'>" + 
                     "<img src='" + car.getFullPath() + "'>" +
@@ -309,24 +310,38 @@ function auctionGen(args){
 		},
         toggleCC:function(){
             //toggles the cancel/cash button
-            if(this._car !== null){
-                var divID = 'div#asd' + (this._car.id).toString(),
+            var t = this;
+            
+            if(t._car !== null){
+                var divID = 'div#asd' + (t._car.id).toString(),
                     btnID = divID + ' div#btns button#cc',
                     btn = $(btnID);
                     
-                if(this._expired){
+                if(t._expired){
+                    //set cash button, for user to recieve funds
+                    var data = {
+                        caller:t,
+                        cid:this._car.id,
+                        price:this._currentBid
+                    };
                     btn.css({
                         'background':"url('images/money.jpg') no-repeat 0 0",
                         'background-size':"100% 100%",
                     });
-                    //btn.off().click({cid:this._car.id, price:this._currentBid}, this.payUser);
+                    btn.off().click(data, this.payUser);
                 }
                 else{
+                    //auction still active, allow user the chance to cancel
+                    var data = {
+                        caller:t,
+                        cid:this._car.id,
+                        price:this._currentBid
+                    };
                     btn.css({
                         'background':"url('images/cancel.jpg') no-repeat 0 0",
                         'background-size':"100% 100%",
                     });
-                    //btn.off().click({cid:this._car.id, price:this._currentBid}, this.cancelAuction);
+                    btn.off().click(data, this.cancelAuction);
                 }
 			
             }
@@ -335,59 +350,87 @@ function auctionGen(args){
             //view an auction while it is active!
             //Auction.init(carID);
         },
-        cancelAuction:function(){
+        cancelAuction:function(obj){
             //user has decided to not sell car, removing it from userSales
             //user pays a penalty
             //alert('To cancel this auction the House will require a cancelation fee of ...');
-            if(!this.expired){
+            var t = obj.data.caller;     //alias of this(auction object), since using this inside the current function refrences the jq object, button#cc
+                //id = obj.cid, //car id
+                //p = obj.price;    //sale price of car
+            if(!t.expired){
 //<php if(loggedIn() ){>
                 //make ajax call to pasRemove
+                /*
+                jq.post('pas/remove.php?op=ucs',    //user cancel sale
+                    function(data){
+                        //refresh AuctionSell div
+                    },
+                    function(jqxhr){
+                        
+                    },
+                    {cid:id, price:p}
+                );
+                */
 //<php
 //}
 //else{>
-                console.log('cancel auction!');
                 var len = userSales.length;
                 
-                if(len != 0){
-                    var i = 0;
-                    
-                    for(; i < len; i++){
-                        if(userSales[i]._car.id == this._car.id){
-                            break;
-                        }
-                    }
-                    //remove auction[i];
+                if(len == 0){
+                    console.log('user sales has length of 0, can not remove sale');
+                    return;
                 }
+                
+                var i = 0;
+                
+                for(; i < len; i++){
+                    if( (userSales[i]._car !== null) && (userSales[i]._car.id == t._car.id) ){
+                        break;
+                    }
+                }
+                console.log('cancel auction!');
+                //remove auction[i];
 //<php
 //}
 //?>
             }
-            //else, can not cancel auction which the user has been paid
-            
-            //AucionSell.save();
+            //else
+            //can not cancel auction for which the user has already been paid
+                
         },
         payUser:function(obj){
-            var val = obj.data.price; 
+            var val = obj.data.price;
+                //t = obj.data.caller;
             console.log('won auction! user gets (' + val.toFixed(2) + ') funds!');
-            
+            //t = this;
             if( (userStats.money + val) <= Number.MAX_VALUE){
 //<php if(loggedIn() ){>
                 //call pasUpdate!
+                //jq.post('pas/sale.php',
+                    //function(data){
+                        //userStats.money = data;
+                        //setStatBar();
+                        //t.disable();  //user recieved funds, disable div
+                        //AucionSell.save();
+                    //},
+                    //function(){
+                        
+                    //},
+                    //{val:val}
+                //);
 //<php
 //}
 //else{>
                 userStats.money += val;
                 //save user!
+                //t.toggleCC();
+                //AucionSell.save();
 //<php
 //}>
             }
-            //var divID = 'div#asd' + this._car.id.toString(),
-                //div = $(divID),
-                //cc = $(divID + ' button#cc');
-            //cc.off();
-            //div.css({"opacity":"0.45", "cursor":"default"});
-            
-            //AucionSell.save();
+            //else{
+                //jq.Err('', 'Maximum funds reached');
+            //}
         }
 	};
 }

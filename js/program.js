@@ -173,9 +173,7 @@ function(){
     setAdBG();
     jq.adBar.hide();
     jq.nav.hide();
-	//userStats.money = 150;
-	//saveUser();
-	//jq.Game.homeImg.hide();
+	//jq.setErr('Welcome home, ' + user.name);
 	
 	function init(){
 		if(!stop){
