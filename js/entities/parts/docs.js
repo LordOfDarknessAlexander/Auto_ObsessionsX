@@ -40,10 +40,10 @@ var Documents = {
             bits = parts;
         }
         
-        var owner = carPart(carPrice * 0.07, Documents.TYPE.ownership),
-            build = carPart(carPrice * 0.05, Documents.TYPE.build),
-            history = carPart(carPrice * 0.03, Documents.TYPE.history),
-            ph0 = carPart(carPrice * 0.09, Documents.TYPE.ph0);
+        var owner = carPart(carPrice * 0.007, Documents.TYPE.ownership),
+            build = carPart(carPrice * 0.005, Documents.TYPE.build),
+            history = carPart(carPrice * 0.003, Documents.TYPE.history),
+            ph0 = carPart(carPrice * 0.009, Documents.TYPE.ph0);
         
         if(bits){
             var ownerBF = (bits & 0xF000) >> 12,

@@ -9,7 +9,7 @@ function divFunds(){?>div#AddFunds<?php
 }
 ?>
 /*
-funds page styles
+ao Store page styles
 */
 <?php divFunds();?>
 {
@@ -28,10 +28,8 @@ funds page styles
 
 <?php divFunds();?> li 
 {
-	padding: 10px 0;
+	padding: 0 0;
 	display:inline;
-	margin: 8px;
-	margin-top: 8em;
 }
 <?php divFunds();?> label#userCash{<?php
     posAbs();
@@ -44,6 +42,52 @@ funds page styles
 	width: 150px;
 	height:2em;
 }
+
+<?php divFunds();?> #addMinorFundsBtn{<?php
+    defaultBtnBG();
+?>
+	height:50px;
+}
+<?php divFunds();?> #addMediumFundsBtn{<?php
+    defaultBtnBG();
+?>
+	height:50px;
+}
+<?php divFunds();?> #addMajorFundsBtn{<?php
+    defaultBtnBG();
+?>
+	height:50px;
+}
+<?php divFunds();?> #addAllowanceBtn{<?php
+    defaultBtnBG();
+?>
+	height:50px;	
+}
+<?php divFunds();?> form{
+	position:absolute;
+	color:red;
+	top:30%;
+    width:10%;
+    text-align:center;
+    font-size:1.2vw;
+    font-weight:bold;
+}
+<?php divFunds();?> form#tokens{
+<?php css::rm();?>
+}
+<?php divFunds();?> form#cash{
+<?php css::lm();?>
+}
+<?php divFunds();?> form input{
+	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	color: red;
+	width:100%;
+	height:50px;
+<?php
+    cursorPtr();
+    fontBold();
+?>
+}
 <?php /*divFunds();> #addFundsBackButton
 {
 	<php
@@ -54,49 +98,3 @@ funds page styles
 	height:50px;
 	
 }*/?>
-
-<?php divFunds();?> #addMinorFundsBtn{<?php
-    defaultBtnBG();
-?>
-	width:150px;
-	height:50px;
-}
-<?php divFunds();?> #addMediumFundsBtn{<?php
-    defaultBtnBG();
-?>
-	width:150px;
-	height:50px;
-}
-<?php divFunds();?> #addMajorFundsBtn{<?php
-    defaultBtnBG();
-?>
-	width:150px;
-	height:50px;
-}
-<?php divFunds();?> #addAllowanceBtn{<?php
-    defaultBtnBG();
-?>
-	width:150px;
-	height:50px;	
-}
-<?php divFunds();?> form{
-	position:absolute;
-	color:red;
-	top:30%;
-}
-<?php divFunds();?> form input{
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
-	color: red;
-	width:150px;
-	height:50px;
-<?php
-    cursorPtr();
-    fontBold();
-?>
-}
-<?php divFunds();?> form#tokens{
-	right:5%;
-}
-<?php divFunds();?> form#cash{
-	left:5%;
-}

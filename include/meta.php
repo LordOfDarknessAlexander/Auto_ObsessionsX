@@ -1,7 +1,7 @@
 <?php
 //this php script commands the server to generate meta includes(CSS and JS) of the application
 require_once 'html.php';
-
+//css to be included in the <head> element of the html document
 $paths = array(
     'auto',
     //
@@ -9,7 +9,7 @@ $paths = array(
     'auction',
     'AuctionSell',
     'LoseAuction',
-    'garage',
+    //'garage',
     //'profile',
     //'register'
 );
@@ -19,6 +19,7 @@ foreach($paths as $p){html::incPHPCSS($p);}
 ?>
 <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
 <?php
+//global javascripts, to be included in the <head> element of the html document
 $paths = array(
 	'jquery.2.1.1.min',
 	'payRequest',

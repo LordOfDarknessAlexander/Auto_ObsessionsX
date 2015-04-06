@@ -2,7 +2,7 @@
 //Car View UI stylings
 //header("Content-type: text/css; charset: UTF-8");
 require_once 'ui.php';
-css::header();
+//css::header();
 //
 function divCarView(){?>div#CarView<?php
 }
@@ -19,6 +19,7 @@ function rStatView($id, $hTop, $dTop){
 ?>
 }<?php
 }
+
 function lStatView($id, $hTop, $dTop){
     divCarView(); echo "h2#$id";?>{<?php
     css::lm();

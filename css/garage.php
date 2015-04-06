@@ -3,9 +3,9 @@
 //garage UI stylings as php commands
 require_once 'ui.php';
 //
-css::header();
+//css::header();
 //
-require_once 'carView.php';
+//require_once 'carView.php';
 // 
 //function dug(){
     //user's garage div

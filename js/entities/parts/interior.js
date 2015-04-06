@@ -46,9 +46,9 @@ var Interior = {
             rb = repairs;
         }
         
-        var seats = carPart(carPrice * 0.12, Interior.TYPE.seats),
-            carpet = carPart(carPrice * 0.08, Interior.TYPE.carpet),
-            dash = carPart(carPrice * 0.06, Interior.TYPE.dash),
+        var seats = carPart(carPrice * 0.062, Interior.TYPE.seats),
+            carpet = carPart(carPrice * 0.043, Interior.TYPE.carpet),
+            dash = carPart(carPrice * 0.067, Interior.TYPE.dash),
             panels = carPart(carPrice * 0.085, Interior.TYPE.panels);
             
         if(bits){

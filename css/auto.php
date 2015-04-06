@@ -20,8 +20,7 @@ css::header();
     box-sizing: border-box;
 }
 
-body 
-{
+body{
     font-family: arial, sans-serif;
     font-size: 18px;
     -webkit-user-select: none;
@@ -32,8 +31,7 @@ body
     color: #751ec3;
 }
 
-canvas 
-{
+canvas{
     position: absolute;
     top: 0;
     left: 0;
@@ -54,7 +52,7 @@ li{
 }
 
 a{
-    <?php //styling for all anchor elements on page?>
+<?php //styling for all anchor elements on page?>
     text-decoration: none;
     color:blue;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -68,6 +66,9 @@ p#legal
     bottom:0%;
     left:0%;
 }
+/*
+Proress bar styles
+*/
 progress
 {
     /*display:none;
@@ -100,6 +101,9 @@ progress.med::-moz-progress-bar{
     background-color:yellow;
 }
 <?php //EI pb stylings?>
+/*
+Forms
+*/
 #loginfields
 {
 	font-size:0.75em;
@@ -126,6 +130,9 @@ progress.med::-moz-progress-bar{
 {
   width: 200px;
 }
+/*
+Button styles
+*/
 button
 {	/*all button elements will share this background (and other properties) unless otherwise specified*/
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
@@ -169,6 +176,9 @@ button#homeBtn{
     
     /*font-weight: bold;*/
 }
+/*
+pre styles(preformated text)
+*/
 pre#info{
 <?php //lm();
     //css:size('90%', '10%');
@@ -184,6 +194,8 @@ pre#info{
     z-index:2;
     opacity:50%;
 }
+/*
+*/
 .wrapper 
 {
     height:100%;
@@ -194,6 +206,9 @@ pre#info{
     /*z-index:1;*/
     color:red;
 }
+/*
+img styles
+*/
 img#adBar
 {
 	/*background:url('../images/logos/AutoZone.png') no-repeat 0 0;*/
@@ -214,13 +229,6 @@ img#adBar
   height: 100%;
   z-index: 20;
 }
-/*#login
-{
-	position: absolute;
-	float: left;
-	top : 20%;
-	
-}*/
 
 #splash
 {
@@ -279,8 +287,8 @@ div#reg-navigation{
 ?>
     top:0%;
     right:0%;
+    text-align:center;
     z-index:3;
-
 }
 div#reg-navigation a{
 <?php
@@ -290,7 +298,6 @@ div#reg-navigation a{
     color: red;
     font-weight: bold;
     text-decoration: none;
-    text-align:center;
 	padding : 2%;
 }
 div#reg-navigation a:hover{
