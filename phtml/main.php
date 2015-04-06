@@ -28,6 +28,7 @@ $ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
     <pre id='info'></pre>
     <img id='adBar'>
 <?php
+//this is not working on site without a new session
 //session_start();
 if(isset($_SESSION) AND isset($_SESSION['uname']) ){
     $uname = $_SESSION['uname'];
