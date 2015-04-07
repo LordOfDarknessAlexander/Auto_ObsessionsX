@@ -6,11 +6,11 @@
 //
 require_once 'get.php';
 require_once '../re.php';
-//php namespaces require v5 or greater, but server only runs v4
+//php namespaces require PHP 5.0 or greater, but server only runs v4 :(
 //use \pas\get as pg;
 //use pas\get\user as pgu;
 //use pas\get\auction as pga;
-//use pa1s\get\sales as pgs;
+//use pas\get\sales as pgs;
 function echoUserCars(){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
@@ -32,6 +32,7 @@ function echoUserCars(){
                 'interior' => intval($row['interior']),
                 'docs' => intval($row['docs']),
                 'repairs' => intval($row['repairs'])
+                //'info'=>$row['info']
             );
         }
         mysqli_free_result($res);
@@ -43,6 +44,43 @@ function echoUserCars(){
     //echo 'WIN!';
     //exit();
     echo json_encode($cars);
+}
+function getCurrentCarBracket(){
+    //
+    global $AO_DB;
+    $s = 'stage';
+    $users = 'users';
+    $UID = 'user_id';
+    //$id = getUserID();
+    //$res = $AO_DB->query(
+        //"SELECT $s FROM $users WHERE $UID = $id"
+    //);
+    
+    //if($res){
+        $stage = 'classic';   //$res->fetch_assoc()[$s];
+        //select only cars of the type matching the user's stage
+        $cars = $AO_DB->query(
+            "SELECT * FROM $aoCars WHERE type = '$stage'"
+        );
+        if($cars){
+            /*while($r = mysqli_fetch_array($cars) ){
+            //insert an new array representing a car at the end of $cars
+                $cars[] = array(
+                    'carID' => intval($r['car_id']),
+                    'drivetrain' => intval($r['drivetrain']),
+                    'body' => intval($r['body']),
+                    'interior' => intval($r['interior']),
+                    'docs' => intval($r['docs']),
+                    'repairs' => intval($r['repairs'])
+                    //'info'=>$r['info']
+                );
+            }*/
+            $cars->close();
+        }
+        //$res->close();
+    //}
+    //echo '
+    //return array();
 }
 function eLoadUser(){
     //loads all the user's data from a single ajax call!

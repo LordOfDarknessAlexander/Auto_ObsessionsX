@@ -9,6 +9,22 @@ require_once '../../secure.php';
 echo 'executing script in directory: ' . __DIR__;
 ?><br>
 <?php
+//in the original document, the attribute is specified as 'class',
+//which is reserved in phpo and html, so will be designated as the vehicle's 'type' attribute, instead.
+
+/*class aoCarType{
+    const CLASSIC = 'classic',
+        CUSTOM = 'custom',
+        MUSCLE = 'muscle',
+        FOREIGN = 'foreign',
+        UNIQUE = 'unique';
+}*/
+//each can be broken down into sub-ranges, based on price, to be used with sql when retriving database entries
+//low(10-30k),
+//mid(30-75k),
+//high(75-150k),
+//elite(150k+)
+
 function getMakeHash($str){
     //0 is a reserved value and is not used
     //returns an integer value based on the in-game manufactures(those with folders is images/cars/)
@@ -178,6 +194,7 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                                 $node = $doc->getElementById('_' . strval($id) );
                                 $price = 10000;
                                 $info = 'Default info';
+                                $type = 'NOT_SET';
                                 
                                 if($node === null){
                                     echo "no entry with id: _$id, in source xml document $xmlPath, adding entry!<br>";
@@ -186,6 +203,7 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                                     $node = $doc->createElement('car', 'Default Car Info');
                                     $node->setAttribute('id', '_' . strval($id) );
                                     $node->setAttribute('price', strval($price) );
+                                    $node->setAttribute('type', $type);
                                     $node->setIdAttribute('id', true);
                                     
                                     $root->appendChild($node);
@@ -196,6 +214,7 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                                     //or evil enough to attempt to hack our database
                                     $price = floatval(filter_var(trim($node->attributes->getNamedItem('price')->nodeValue), FILTER_SANITIZE_NUMBER_FLOAT) );
                                     $info = filter_var(trim($node->textContent), FILTER_SANITIZE_STRING);
+                                    $type = filter_var(trim($node->attributes->getNamedItem('type')->nodeValue), FILTER_SANITIZE_STRING);
                                     //$info can only be a certain length(128 chars),
                                     //so make sure it is by removing any values outside the bounds
                                     //$info = 
@@ -203,21 +222,14 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                                 
                                 $y = intval($year);
                                 //echo 'variables set!';
-                                //$AO_DB->con->prepare(
-                                    //"INSERT INTO aoCars 
-                                    ///(`car_id`, `make`, `year`, `model`, `price`, `info`) 
-                                    //VALUE
-                                    //(?, ?, ?, ?, ?, ?)
-                                    //ON DUPLICATE KEY UPDATE price = $price, info = '$info'";
-                                //);
                                 $aoCars = 'aoCars';
                                 $q = "INSERT INTO $aoCars 
-                                    (`car_id`, `make`, `year`, `model`, `price`, `info`) 
+                                    (`car_id`, `make`, `year`, `model`, `price`, `info`, `type`) 
                                     VALUES
-                                    ($id, '$make', $y, '$n', $price, '$info')
-                                    ON DUPLICATE KEY UPDATE price = $price, info = '$info'";
+                                    ($id, '$make', $y, '$n', $price, '$info', '$type')
+                                    ON DUPLICATE KEY UPDATE price = $price, type = '$type', info = '$info'";
 ?><br><?php
-echo $q;
+//echo $q;
 ?><br><?php
                                 if($AO_DB->query($q) == TRUE){
                                     echo "added element with id: $id, to database!";?><br><?php

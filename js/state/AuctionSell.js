@@ -526,12 +526,13 @@ var AuctionSell =
         jq.AuctionSell.menu.toggle();
 	},
 	update : function(dt){
-		var i;
+		var i,
+            len = userSales.length;
         
-		if(userSales.length > 0){
+		if(len > 0){
 			i = 0;
             
-			while(i < userSales.length){
+			while(i < len){
 				if(!userSales[i]._expired){
 					userSales[i].update(dt);
 					++i;
@@ -556,13 +557,13 @@ var AuctionSell =
                     userSales = [];
                     
                     for(var i = 0; i < len; i++){
-                        /*var ad = sd[i], //auction data
+                        var ad = sd[i], //auction data
                             na = auctionGen(ad);    //new auction
                     
                         na.restart(); 
                         na.toggleCC();
                         
-                        userSales.push(na);*/
+                        //userSales.push(na);   //uncommenting this breaks game now...
                     }
                 }
             }
