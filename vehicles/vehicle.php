@@ -12,17 +12,19 @@ class Vehicle
         $_year,  //uint
         $_model, //str
         $_price, //uint
+        $_type,   //str, value of aoCarType
         $_info;  //str
         //$_upgrades,
         //$repairs;
     
-    public function __construct($id, $make, $year, $model, $price, $info){  //$upgrades, $repairs
+    public function __construct($id, $make, $year, $model, $price, $info, $carType){  //$upgrades, $repairs
         $this->_id = $id;
         $this->_make = $make;
         $this->_year = $year;
         $this->_model = $model;
         $this->_info = $info;
         $this->_price = $price;
+        $this->_type = $carType;
         //echo $this->_make;
         //echo $this->_year;
         //echo $this->_model;
@@ -33,11 +35,12 @@ class Vehicle
     public static function fromArray($array){
         return new Vehicle(
             intval($array['car_id']),
-            $array['make'],
+            $array['make'], //str
             intval($array['year']),
-            $array['model'],
+            $array['model'],    
             intval($array['price']),
-            $array['info']
+            $array['info'],  //str
+            $array['type']    //str
         );
     }
     //public static function fromPost(){
@@ -63,7 +66,7 @@ class Vehicle
         return $this->_make . '/' . $this->_year . '/' . $this->_model . '.jpg';
     }
     public function getFullPath(){
-        //$localExecution = true;
+        //absolute file path, on the server
         return rootURL() . 'images/cars/' . $this->getLocalPath();
     }
     public function getPrice(){
@@ -77,6 +80,9 @@ class Vehicle
     public function getInfo(){
         return $this->_info;
     }
+    public function getType(){
+        return $this->_type;
+    }    
     //public static function fromPost(){
         //initialize a single vehicle with values POSTed to the page
     //}

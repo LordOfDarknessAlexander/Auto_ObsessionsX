@@ -19,11 +19,11 @@ function sqlSelectAll($tableName, $callbackStr){
     //);
     
     //if($res){
-        $stage = 'classic';   //$res->fetch_assoc()[$s];
+        $stage = 'muscle';   //$res->fetch_assoc()[$s];
         //select only cars of the type matching the user's stage
         $res = $AO_DB->query(
             "SELECT * FROM $tableName"
-            //"SELECT * FROM $aoCars WHERE type = '$stage'"
+            //"SELECT * FROM $tableName WHERE type = '$stage'"
         );
         if($res){
             $index = 0;
@@ -47,8 +47,9 @@ function outputCar($args){
     $btnID = 'as' . $istr;
     $liID = 'asli' . $istr;
     $car = Vehicle::fromArray($args[0]);
+    //if()
 ?>
-<li id='<?php echo $liID;?>'> 
+<li id='<?php echo $liID;?>' class='<?php echo $car->getType();?>'> 
     <img src='<?php echo $car->getFullPath();?>'>
     <label id='infoLabel'><?php echo $car->getFullName();?><!---<br><php echo $car->getInfo();?--></label>
     <button id='<?php echo $car->getID();?>'>

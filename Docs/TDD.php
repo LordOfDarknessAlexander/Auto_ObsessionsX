@@ -238,12 +238,25 @@ class Stuff{
 }</p></pre>
 </code>
     <h4 id='imgs'>Images</h4><hr>
-<pre>	All large image resources, such as backgrounds, car photos assume the JPG format.
+<pre>    All large (non-transparent)image resources, such as backgrounds, car photos assume the JPG format.
 Logos for advertising are currently 385x85 .png, as they are small images where retention of resolution is important.
-    IMPORTANT! Any logos which are registered trademarks much be licensed appropriately before hosting final page, to avoid legal action.</pre>
+    Since the previous project did not have standardized image sizes the image library is uncessicarily bloated and chaotic,
+as a result file range from very small(32kb), to very large(2mb) and various aspect ratios (most commonly 4/3 (1.33) or 3/2(1.5) ).
+    This results in transfer for images being extremely slow, as many very large images have to be transfered, quite frequently.
+This increased bandwidth and slows execution down(eg. the garage or auction select screens).
+All vehicle images shall be a height of 720 (if issues with resoulton arise, increase to full 1080 resolution, or reduce to 640, for increased preformance!), as a result ,
+    (4/3 = 960x720)
+    (3/2 = 1080x720)
+full HD:
+    (4/3 = 1440x1080)
+    (3/2 = 1620x1080)
+</pre>
+<pre class='note'>For all future entries, an aspect ratio of 4/3 is prefered.</pre>
+<pre>   IMPORTANT! Any logos which are registered trademarks much be licensed appropriately before hosting final page, to avoid legal action.</pre>
 <h4 id='png'><?php a::png();?></h4><hr>
 <pre>PNG(Portable Network Graphics) is a lossless compression method for images.
-Most useful for small to medium sized images where data integrity and resolution must be maintained.</pre>
+Most useful for small to medium sized images where data integrity and resolution must be maintained.
+Supports transparency.</pre>
 <h4 id='jpg'><?php a::jpg();?></h4><hr>
 <pre>JPEG/JPG (Joint Photographic Experts Group) is a lossy compression compression method for images.
 Should be used with large images(where maintaining detail/resolution/integrity is not important.
@@ -414,7 +427,7 @@ aoAuctionLossDB: tracks the id's of the vehicles a user has lost and may no long
 </pre>
 <h2 id='aodb'>GameFlow UML</h2><hr>
 <pre>
-<img alt='UML' title='Auto-Obsession UML' height='650' src='AOUML.jpg' width='960'><br>
+<img src='AOUML.jpg'><br>
 UML Diagram depicts the transitions that exist in the game. Auto-Obsession is a User based website and game and the following is intended to help guide the programmers of 
 the game to understand the screen transitional flow that should live in the totality of the project.
 </pre>

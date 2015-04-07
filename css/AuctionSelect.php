@@ -4,11 +4,9 @@ require_once 'ui.php';
 //
 css::header();
 //    
-function divAS(){?>div#AuctionSelect
-<?php
+function divAS(){?>div#AuctionSelect<?php
 }
-function lih(){?>
-    height:64px;
+function lih(){?>   height:64px;
 <?php
 }
 //function dasCV(){
@@ -52,9 +50,10 @@ Action Select UI stylings
 <?php divAS();?> li
 {
 	/*margin:70px 0% 5% 0;	*/
-	top right bottom left
+	top right bottom left   /*this line should cause the code to break, invalid css*/
 	/*padding: 50px 50px;*/
 	display:inline;
+    background: url('../images/label.jpg');
 <?php lih();?>
 }
 <?php divAS();?> li img
@@ -66,13 +65,32 @@ Action Select UI stylings
 }
 <?php divAS();?> li label#infoLabel
 {
-	background: url('../images/label.png');
+	opacity:0.70;
 	text-align:center;
 <?php posAbs();?>
 	left:128px;
 	width:70%;
 <?php lih();?>
 }
+/*
+Tint divs diffrent colours for diffrent classes
+*/
+<?php divAS();?> li.classic label#infoLabel{
+	background-color:yellow;
+}
+<?php divAS();?> li.muscle label#infoLabel{
+	background-color:green;
+}
+<?php divAS();?> li.custom label#infoLabel{
+	background-color:blue;
+}
+<?php divAS();?> li.unique label#infoLabel{
+	background-color:white;
+}
+<?php divAS();?> li.foreign label#infoLabel{
+	background-color:black;
+}
+
 <?php divAS();?> li button
 {
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
