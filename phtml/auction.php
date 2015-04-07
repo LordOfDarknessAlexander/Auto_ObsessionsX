@@ -8,22 +8,40 @@ function sqlSelectAll($tableName, $callbackStr){
     //$tableName: string name of the table in the database to query
     //$callbackStr: string name of a user defined function to be called!
     //queries the data base, selecting all elements and preforming callback on each
-    global $AO_DB;
-    $res = $AO_DB->query('SELECT * FROM ' . $tableName);
-
-    if($res){
-        $index = 0;
-        while($row = mysqli_fetch_array($res) ){
-            call_user_func($callbackStr, array($row, $index) );
-            $index++;
+     global $AO_DB;
+    $s = 'stage';
+    $users = 'users';
+    $UID = 'user_id';
+    //$id = getUID();
+    //get the user's current stage/tier
+    //$res = $AO_DB->query(
+        //"SELECT $s FROM $users WHERE $UID = $id"
+    //);
+    
+    //if($res){
+        $stage = 'classic';   //$res->fetch_assoc()[$s];
+        //select only cars of the type matching the user's stage
+        $res = $AO_DB->query(
+            "SELECT * FROM $tableName"
+            //"SELECT * FROM $aoCars WHERE type = '$stage'"
+        );
+        if($res){
+            $index = 0;
+            
+            while($row = mysqli_fetch_array($res) ){
+                call_user_func($callbackStr, array($row, $index) );
+                $index++;
+            }
+            $res->close();
         }
-        mysqli_free_result($res);
-    }
-    else{
+        //$res->close();
+    //}
+    //else{
         //no result!
-    }
+    //}
 }
 function outputCar($args){
+    //generates the html for a vehicle entry
     $i = $args[1];
     $istr = strval($i);
     $btnID = 'as' . $istr;
