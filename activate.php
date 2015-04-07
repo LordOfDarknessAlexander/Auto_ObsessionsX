@@ -32,11 +32,10 @@ $msg='';
 
 if(isset($_GET['email']) && isset($_GET['email_code']))
 {
-	echo 'Great foods';
 	$code = mysqli_real_escape_string($AO_DB->con,$_GET['email_code']);
 	$e =  mysqli_real_escape_string($AO_DB->con,$_GET['email']);
 	$a = mysqli_real_escape_string($AO_DB->con,1);
-	$q = "UPDATE users SET confirm ='$a' WHERE email='$e' AND email_code='$code' ";
+	$q = "UPDATE users SET confirm ='$a' WHERE email='$e' AND email_code='$code' AND confirm = '0' ";
 	
 	echo "email:$e";?><br><?php
     echo "email_code:$code";?><br><?php
@@ -48,7 +47,7 @@ if(isset($_GET['email']) && isset($_GET['email_code']))
 	}
 	else
 	{
-	   $ac = "UPDATE users SET confirm ='$a' WHERE email='$e'  ";
+	   $ac = "UPDATE users SET confirm ='$a' WHERE email='$e' AND confirm = '0' ";
 	   $resultB = mysqli_query ($AO_DB->con, $ac);
 	   if($resultB)
 	   {

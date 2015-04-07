@@ -152,7 +152,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                // register_User($register_email,$uname,$email_code);
 			   $sender = 'From: auto_obsessions@851entertainment.com';
 			   $subject = 'Auto-Obsessions Registration';
-			   $body = "thanks for registering " .$uname. " \n\n click the link below:\n\n http://851entertainment.com/Auto_ObsessionsX/activate.php?email=" .$e. "&email_code= " .$email_code. "\n\n - auto-obsessions;";
+			   $body = "thanks for registering " .$uname. " \n\n click the link below to activate your account :\n\n http://851entertainment.com/Auto_ObsessionsX/activate.php?email=" .$e. "&email_code= " .$email_code. "\n\n - auto-obsessions;";
 			   mail($e, $subject, $body, $sender);
                 //res = pasGet::userLogin($e, $uname);
                 
