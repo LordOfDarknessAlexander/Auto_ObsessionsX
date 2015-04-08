@@ -16,6 +16,10 @@ require_once '../pasMeta.php';
         //single identifier, or comma seperated list of identifiers
         //return "SELECT $rows FROM $tableName";
     //}
+    //public static function selectWhere($tableName, $rows, $cond){
+        //single identifier, or comma seperated list of identifiers
+        //return "SELECT $rows FROM $tableName WHERE $cond";
+    //}
 }*/
 class pasGet{
     private static
@@ -134,7 +138,26 @@ class pasGet{
             //"SELECT $UID, user_level FROM $users WHERE (email ='?' AND uname = '?')"
         //);
     }
-
+    public static function userStage(){
+        //returns the user's current stage in the Auction Select screen
+        global $AO_DB;
+        
+        $users = 'users';
+        $T = 'stage';
+        $UID = 'user_id';
+        $uid = getUID();
+        $ret = 'classic';
+        
+        /*$res = $AO_DB->query(
+            "SELECT $T FROM $users WHERE $UID = $uid"
+        );
+        
+        if($res){
+            $ret = $res->fetch_assoc()[$T];
+            $res->close();
+        }*/
+        return $ret;
+    }
     public static function allCarIDs(){
         global $AO_DB;
         /*if(self::$_allAuctionsCID){
@@ -313,7 +336,7 @@ class pasGet{
     public static function auctionCarsByType(){
         //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
         //returning them as a JSON array
-        $type = 'classic';   //aoCarType::CLASSIC;
+        $type = pasGet::userStage();
         $cars = array();
         $CID = 'car_id';
         //returns an array, containing an array for each row/car entry,

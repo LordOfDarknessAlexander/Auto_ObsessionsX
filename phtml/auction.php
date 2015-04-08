@@ -91,7 +91,7 @@ function outputCar($args){
 <?php
 //selects all elements from aoCars,
 //then preforms outputCar on each of its elements
-//sqlSelectAll('aoCars', 'outputCar');
+sqlSelectAll('aoCars', 'outputCar');
 ?>
         </ul>
     </div>

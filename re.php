@@ -21,4 +21,8 @@ function isPassword($str){
     //no special characters, whitespace or symbols
     return preg_match('/^\w{8,12}$/', $str);
 }
+//function isArgList($str){
+    //
+    //return preg_match('/([[:alpha:]]+(,\s*)*)+/', $str;
+//}
 ?>	

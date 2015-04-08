@@ -127,7 +127,7 @@ if(isset($_GET) && !empty($_GET) ){
     $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
     
     if($op == 'asc'){
-        pasGet::auctionCarsByType();
+        pasGet::auctionCars();  //ByType();
         exit();
     }
     if($op == 'gucc'){

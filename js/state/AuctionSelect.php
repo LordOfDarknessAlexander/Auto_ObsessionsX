@@ -37,10 +37,10 @@ var AuctionSelect =
 	list : $('<?php asCarView();?> ul#auctionCars'),
     setCarBtn:function(i, data){
         var carID = data.carID,
-            name = data.name,
-            price = data.price,
-            srcLocal = data.src,
-            path = /*getHostPath() +*/ 'images/cars/' + srcLocal,
+            //name = data.name,
+            //price = data.price,
+            //srcLocal = data.src,
+            //path = /*getHostPath() +*/ 'images/cars/' + srcLocal,
             hasCar = data.hasCar,
             hasLostCar = data.hasLostCar,
             liID = 'asli' + (i).toString(),
@@ -50,16 +50,16 @@ var AuctionSelect =
             li = $(liName),
             btn = $(liName + ' button');
         //
-        var btnStr = "<li id=\'" + liID + "\'>" + 
+        /*var btnStr = "<li id=\'" + liID + "\'>" + 
             "<img src=\'" + path + "\'>" +
             "<label id=\'" + labelID + "\'>" + name + "</label>" +
-            "<button>" + 
+            "<button id=\'" + carID.toString() + "'>" + 
                 "<label id=\'price\'>$" + price.toFixed(2) + "</label><br>" +
                 "Bid Now!<br>" +
             "</button>" +
         "</li><br>";
         this.list.append(btnStr);
-        
+        */
         //var btn = $('#' + btnID);
          
         // var hasCar = false;
