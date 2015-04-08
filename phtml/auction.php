@@ -64,6 +64,28 @@ function outputCar($args){
     <!--view all available auctions-->
     <h1>Auction Select</h1>
 <?php backBtn();?>
+    <form action='javascript:void(0)' id = 'filter'>Filters<hr>
+        stage<br><select id='stage'>
+            <option value='All'>All</option>
+            <option value='classic'>classic</option>
+            <option value='custom'>custom</option>
+            <option value='muscle'>muscle</option>
+            <option value='foreign'>foreign</option>
+            <option value='unique'>unique</option>
+        </select>
+        <br>
+        tier<br><select id='tier'>
+            <option value='All'>All</option>
+            <option value='low'>low</option>
+            <option value='mid'>mid</option>
+            <option value='high'>high</option>
+            <option value='elite'>elite</option>
+        </select>
+        <br>
+        <!--input id='showDisabled' type='checkbox' value=''>
+        display unavailable auctions-->
+        <input id='submit' type='submit' value='submit'>
+    </form>
     <div id='carView'>
         <ul id='auctionCars'>
 <?php

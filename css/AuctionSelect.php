@@ -72,6 +72,15 @@ Action Select UI stylings
 	width:70%;
 <?php lih();?>
 }
+<?php divAS();?> form#filter
+{
+	text-align:left;
+    font-size:1.5vw;
+<?php posAbs();?>
+	left:0%;
+    top:30%;
+	width:10%;
+}
 /*
 Tint divs diffrent colours for diffrent classes
 */
