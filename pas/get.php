@@ -177,6 +177,32 @@ class pasGet{
         }
         return array();
     }
+    public static function carIDsByType($carType){
+        global $AO_DB;
+       
+        $aoCars = 'aoCars';
+        $CID = 'car_id';
+        $T = 'type';
+        $ret = array();
+        //if is str(carType)
+        $res = $AO_DB->query(
+            "SELECT * FROM $aoCars WHERE $T = '$carType'"
+        );
+        
+        if($res){
+            while($row = $res->fetch_assoc() ){
+                $car = Vehicle::fromArray($row);
+                $ret[] = array(
+                    'car_id'=>$car->getID(),
+                    'src'=>'',  //$car->getFullPath(),
+                    'name'=>$car->getFullName(),
+                    'price'=>$car->getPrice()
+                );                    
+            }            
+            $res->close();
+        }
+        return $ret;    //will be empty if sql fails
+    }
     public static function currentCarID(){
         //returns the user's currently selected vehicle
         global $AO_DB;
@@ -250,7 +276,7 @@ class pasGet{
         $CID = 'car_id';
         $cars = array();
        
-        $res = pasGet::AllCarIDs(); //returns an array, containing an array for each row/car entry
+        $res = pasGet::allCarIDs(); //returns an array, containing an array for each row/car entry
         
         if(!empty($res)){
             foreach($res as $row){
@@ -282,6 +308,74 @@ class pasGet{
         else{   //The no entries in table
             //echo "<p class='error'>User: has no entries in database</p>";
         }*/
+        echo json_encode($cars);
+    }
+    public static function auctionCarsByType(){
+        //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
+        //returning them as a JSON array
+        $type = 'classic';   //aoCarType::CLASSIC;
+        $cars = array();
+        $CID = 'car_id';
+        //returns an array, containing an array for each row/car entry,
+        //or an empty arry on failure
+        $res = pasGet::carIDsByType($type);
+        
+        if(!empty($res)){
+            foreach($res as $row){
+                $cid = $row[$CID];
+                $cars[] = array(
+                    'carID'=>$cid,
+                    'src'=>$row['src'],
+                    'name'=>$row['name'],
+                    'price'=>$row['price'],
+                    'hasCar' => hasCar($cid),   //does user have this car?
+                    'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
+                    //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
+                );
+            }
+        }
+        echo json_encode($cars);
+    }
+    public static function auctionCarsByTypeRange(){
+        //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
+        $type = 'unique';
+        $cars = array();
+        $CID = 'car_id';
+        //returns an array, containing an array for each row/car entry,
+        //or an empty arry on failure
+        
+        //if($r == aoPriceRange::low){
+            //$gt = 10000.00;
+            //$lt = 0.00;
+        //}
+        //else if($r == aoPriceRange::mid){
+            //$gt = 10000.00;
+            //$lt = 0.00;
+        //}
+        //if($r == aoPriceRange::high){
+            //$gt = 10000.00;
+            //$lt = 0.00;
+        //}
+        //else if($r == aoPriceRange::elite){
+            //$gt = 10000.00;
+            //$lt = 0.00;
+        //}
+        $res = pasGet::carIDsByType($type);
+        
+        if(!empty($res)){
+            foreach($res as $row){
+                $cid = $row[$CID];
+                $cars[] = array(
+                    'carID'=>$cid,
+                    'src'=>$row['src'],
+                    'name'=>$row['name'],
+                    'price'=>$row['price'],
+                    'hasCar' => hasCar($cid),   //does user have this car?
+                    'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
+                    //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
+                );
+            }
+        }
         echo json_encode($cars);
     }
     public static function auctionCarsCount(){

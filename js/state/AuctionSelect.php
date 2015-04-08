@@ -37,6 +37,9 @@ var AuctionSelect =
 	list : $('<?php asCarView();?> ul#auctionCars'),
     setCarBtn:function(i, data){
         var carID = data.carID,
+            name = data.name,
+            price = data.price,
+            //src = data.src,
             hasCar = data.hasCar,
             hasLostCar = data.hasLostCar,
             liID = 'asli' + (i).toString(),
@@ -45,18 +48,17 @@ var AuctionSelect =
             liName = '<?php asCarView();?> ul#auctionCars li#' + liID,
             li = $(liName),
             btn = $(liName + ' button');
-        //<php if(guest){}
-            /*var btnStr = "<li id=\'" + liID + "\'>" + 
-                "<img src=\'" + car.getFullPath() + "\'>" +
-                "<label id=\'" + labelID + "\'>" + car.getFullName() + "-<br>" + car.getInfo() + "</label>" +
-                "<button id=\'" + btnID + "\'>" + 
-                    "<label id=\'price\'>$" + (car.getPrice() ).toString() + "</label><br>" +
-                    "Bid Now!<br>" +
-                    //"<label id=\'expireTime\'>Auction expire time!</label>" +
-                "</button>" +
-            "</li><br>";
-            this.list.append(btnStr);*/
-        //}?>
+        //
+        var btnStr = "<li id=\'" + liID + "\'>" + 
+            "<img src=\'" /*+ src*/ + "\'>" +
+            "<label id=\'" + labelID + "\'>" + name + "</label>" +
+            "<button>" + 
+                "<label id=\'price\'>$" + price.toFixed(2) + "</label><br>" +
+                "Bid Now!<br>" +
+            "</button>" +
+        "</li><br>";
+        this.list.append(btnStr);
+        
         //var btn = $('#' + btnID);
          
         // var hasCar = false;
@@ -88,6 +90,7 @@ var AuctionSelect =
             btn.off().click({index:i}, this.initAuction);
             //btn.css('background-image', "url(\'..\\images\\vehicle.jpg");	//car.getFullPath());
         }
+        //li.hide();
     },
 	init : function()
 	{	//init buttons base on cars in xml database
@@ -99,7 +102,7 @@ $funcName = "$fileName, AuctionSelect::init()";
             //this.list.empty();
 		//
         //var funcName = 'js/state/AuctionSelect.php, AuctionSelect::init()';
-        jq.get('pas/query.php?op=asc',
+        jq.get('pas/query.php?op=asc',  //'pas/query?asc',
             function(data){
                 <?php isValidData();?>
                 //alert(funcName + ', ajax response success!' + JSON.stringify(data) );
@@ -117,6 +120,8 @@ $funcName = "$fileName, AuctionSelect::init()";
                     AuctionSelect.setCarBtn(i, data[i]);  
                     //AuctionSelect.setCarBtn(carID, i, hasCar);
                 }
+                //filter results, display only cars
+
             },
             function(jqxhr){
                 //call will fail if result is not properly formated JSON!

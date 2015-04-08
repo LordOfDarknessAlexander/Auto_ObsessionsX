@@ -9,101 +9,103 @@ require_once 'include/dbConnect.php';  //sql database connections
 //
 //secure::loggin();
 //
-function getUID(){
-    //returns the user if logged in, else echo error and force user to redirect to login
-    $uid = 'user_id';
-    
-    if(isset($_SESSION) && isset($_SESSION[$uid]) ){
-        return intval($_SESSION[$uid]);
-    }
-    //echo "<p class='error'>User not logged in, could not access user session, Please try again.</p>";
-    //header('location: login.php');
-    return 3;   //for testing
-}
-function getUserTableName(){
-    //returns the name of the table used by the currently logged in user
-    //used to access tables in aoUsersDB and aoCarSalesDB
-    $id = strval(getUID() );
-    return "user$id";
-}
-function hasCar($id){
-    //does the user's table in aoUsersDB already have an entry with car_id '$id'
-    global $aoUsersDB;
-    
-    $ret = false;
-    $CID = 'car_id';
-    $tableName = getUserTableName();
-   
-    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $id");
-    
-    if($res){
-        //user has car
-        $ret = mysqli_num_rows($res) != 0 ? true : false;
-		$res->close();
-    }
-    else{
-        //query failed, user has no entry in database
-        //$er = sqlError($aoUsersDB);
-        //$erno = $aoUsersDB->con->errno;
-        //$err = $aoUsersDB->con->error;
-        //echo "pas/meta.php hasCar($id), sql query failed:($erno), reason: $err";
-        //exit();
-    }
-    
-    return $ret;
-}
-function hasLostCar($id){
-    //does the user's table in aoAuctionLossDB already have an entry with car_id '$id'
-    global $aoAuctionLossDB;
-    
-    $CID = 'car_id';
-    $ret = false;
-    $tableName = getUserTableName();
-
-    $res = $aoAuctionLossDB->query("SELECT * FROM $tableName WHERE $CID = $id");
-    
-    if($res){
-        //user has car
-        $ret = mysqli_num_rows($res) != 0 ? true : false;
-        $res->close();
-    }
-    else{
-        //query failed, user has no entry in database
-        //$er = sqlError($aoUsersDB);
-        //echo "pas/meta.php hasLostCar($id), sql query failed:($er->no), reason: $er->info";
-    }
-    
-    return $ret;
-}
-function sellCar($cid, $price){
-    //does the user's table in aoUsersDB already have an entry with car_id '$id'
-    global $aoUsersDB;
-    //global $aoCarSalesDB;
-    $CID = 'car_id';
-    $ret = false;
-    $tableName = getUserTableName();
-   
-    $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $cid");
-    
-    if($res){
-        //user has car
-        if(mysqli_num_rows($res) ){
-            $data = $res->fetch_assoc();
-            //pasUpdate::soldCar($data, $price);
-            //pasRemove::userCar($data['car_id']);
+//class user{
+    function getUID(){
+        //returns the user if logged in, else echo error and force user to redirect to login
+        $uid = 'user_id';
+        
+        if(isset($_SESSION) && isset($_SESSION[$uid]) ){
+            return intval($_SESSION[$uid]);
         }
-        $res->close();
+        //echo "<p class='error'>User not logged in, could not access user session, Please try again.</p>";
+        //header('location: login.php');
+        return 3;   //for testing
     }
-    else{
-        //query failed, user has no entry in database
-        //$er = sqlError($aoUsersDB);
-        //$erno = $aoUsersDB->con->errno;
-        //$err = $aoUsersDB->con->error;
-        //echo "hasCar($id), bind_params failed:($erno), reason: $err";
-        //exit();
+    function getUserTableName(){
+        //returns the name of the table used by the currently logged in user
+        //used to access tables in aoUsersDB and aoCarSalesDB
+        $id = strval(getUID() );
+        return "user$id";
     }
-    return $ret;
-}
+    function hasCar($id){
+        //does the user's table in aoUsersDB already have an entry with car_id '$id'
+        global $aoUsersDB;
+        
+        $ret = false;
+        $CID = 'car_id';
+        $tableName = getUserTableName();
+       
+        $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $id");
+        
+        if($res){
+            //user has car
+            $ret = mysqli_num_rows($res) != 0 ? true : false;
+            $res->close();
+        }
+        else{
+            //query failed, user has no entry in database
+            //$er = sqlError($aoUsersDB);
+            //$erno = $aoUsersDB->con->errno;
+            //$err = $aoUsersDB->con->error;
+            //echo "pas/meta.php hasCar($id), sql query failed:($erno), reason: $err";
+            //exit();
+        }
+        
+        return $ret;
+    }
+    function hasLostCar($id){
+        //does the user's table in aoAuctionLossDB already have an entry with car_id '$id'
+        global $aoAuctionLossDB;
+        
+        $CID = 'car_id';
+        $ret = false;
+        $tableName = getUserTableName();
+
+        $res = $aoAuctionLossDB->query("SELECT * FROM $tableName WHERE $CID = $id");
+        
+        if($res){
+            //user has car
+            $ret = mysqli_num_rows($res) != 0 ? true : false;
+            $res->close();
+        }
+        else{
+            //query failed, user has no entry in database
+            //$er = sqlError($aoUsersDB);
+            //echo "pas/meta.php hasLostCar($id), sql query failed:($er->no), reason: $er->info";
+        }
+        
+        return $ret;
+    }
+    function sellCar($cid, $price){
+        //does the user's table in aoUsersDB already have an entry with car_id '$id'
+        global $aoUsersDB;
+        //global $aoCarSalesDB;
+        $CID = 'car_id';
+        $ret = false;
+        $tableName = getUserTableName();
+       
+        $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $cid");
+        
+        if($res){
+            //user has car
+            if(mysqli_num_rows($res) ){
+                $data = $res->fetch_assoc();
+                //pasUpdate::soldCar($data, $price);
+                //pasRemove::userCar($data['car_id']);
+            }
+            $res->close();
+        }
+        else{
+            //query failed, user has no entry in database
+            //$er = sqlError($aoUsersDB);
+            //$erno = $aoUsersDB->con->errno;
+            //$err = $aoUsersDB->con->error;
+            //echo "hasCar($id), bind_params failed:($erno), reason: $err";
+            //exit();
+        }
+        return $ret;
+    }
+//}
 function getCarFromID($carID){
     //selects a vehicle from the car database($AO_DB),
     //returning it as a an instance of a php class

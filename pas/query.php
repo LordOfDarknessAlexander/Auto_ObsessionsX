@@ -50,6 +50,7 @@ function eLoadUser(){
     //loads all the user's data from a single ajax call!
     global $aoUsersDB;
     
+    $CID = 'car_id';
     $cars = array();
     $userID = getUserTableName();
     
@@ -61,7 +62,7 @@ function eLoadUser(){
         while($row = mysqli_fetch_array($res) ){
             //insert an new array representing a car at the end of $cars
             $cars[] = array(
-                'carID' => intval($row['car_id']),
+                'carID' => intval($row[$CID]),
                 'drivetrain' => intval($row['drivetrain']),
                 'body' => intval($row['body']),
                 'interior' => intval($row['interior']),
@@ -126,7 +127,7 @@ if(isset($_GET) && !empty($_GET) ){
     $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
     
     if($op == 'asc'){
-        pasGet::auctionCars();
+        pasGet::auctionCarsByType();
         exit();
     }
     if($op == 'gucc'){
