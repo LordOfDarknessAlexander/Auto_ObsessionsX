@@ -39,7 +39,8 @@ var AuctionSelect =
         var carID = data.carID,
             name = data.name,
             price = data.price,
-            //src = data.src,
+            srcLocal = data.src,
+            path = /*getHostPath() +*/ 'images/cars/' + srcLocal,
             hasCar = data.hasCar,
             hasLostCar = data.hasLostCar,
             liID = 'asli' + (i).toString(),
@@ -50,7 +51,7 @@ var AuctionSelect =
             btn = $(liName + ' button');
         //
         var btnStr = "<li id=\'" + liID + "\'>" + 
-            "<img src=\'" /*+ src*/ + "\'>" +
+            "<img src=\'" + path + "\'>" +
             "<label id=\'" + labelID + "\'>" + name + "</label>" +
             "<button>" + 
                 "<label id=\'price\'>$" + price.toFixed(2) + "</label><br>" +

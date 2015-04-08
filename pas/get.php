@@ -194,7 +194,7 @@ class pasGet{
                 $car = Vehicle::fromArray($row);
                 $ret[] = array(
                     'car_id'=>$car->getID(),
-                    'src'=>'',  //$car->getFullPath(),
+                    'src'=>$car->getLocalPath(),
                     'name'=>$car->getFullName(),
                     'price'=>$car->getPrice()
                 );                    
