@@ -225,15 +225,6 @@ function switchStates( GAME_MODE)
 			Store.update();
 		break;
 		
-		case TUTORIAL:
-			//Tutorial.update();
-		break;
-		
-		case NEW_USER:
-			Register();
-			
-		break;
-		
 		case LOGIN_USER:
 			//Login.update();
 		break;
@@ -252,20 +243,6 @@ function splash(){
     $('#splash').show();
     $('.sound').show();  
     assetLoader.sounds.engine.play();
-}
-
-function Register()
-{
-	stop = true;
-	auctionStop = true;
-	context.clearRect(0, 0, canvas.width, canvas.height);
-    	$('#Register').show(); 
-
-	appState = GAME_MODE.NEW_USER;
-    
-	if(appState == GAME_MODE.NEW_USER){
-		console.log("Register THis");
-	}
 }
 
 //Main Menu  
@@ -419,15 +396,7 @@ function(){
     //delete menu image, since the game can not navigate back to this screen after clicking
     startGame();
 });
-$('.Register').click(
-function(){
-    $('#menu').hide();
-    $('#Register').show();
-    Register();
-    delete mainMenu;	//don't delete, can still navigate back to this page
-    //delete credits
-    //delete menu image, since the game can not navigate back to this screen after clicking
-});
+
 //
 //Main Menu button bindings
 //
