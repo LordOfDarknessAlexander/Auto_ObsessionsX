@@ -13,7 +13,8 @@ class aoPriceRange{
         LOW = 'low',
         MID = 'mid',
         HIGH = 'high',
-        ELITE = 'elite';
+        ELITE = 'elite',
+        ALL = 'all';
 }
 /*class sql{
     public static function selectAll($tableName){
@@ -21,6 +22,7 @@ class aoPriceRange{
     }
     //public static function selectAll($tableName, $rows){
         //single identifier, or comma seperated list of identifiers
+        //isArgList($rows)
         //return "SELECT $rows FROM $tableName";
     //}
     //public static function selectWhere($tableName, $rows, $cond){
@@ -95,10 +97,10 @@ class pasGet{
     public static function init(){
         global $AO_DB;
         
-        $aoCars = 'aoCars';
-        $aoCars = 'users';
-        $UID = 'user_id';
-        $CID = 'car_id';
+        $aoCars = ao::CARS;
+        $users = ao::USERS;
+        $UID = ao::UID;
+        $CID = ao::CID;
         //
         //AO_DB aoCars
         //
@@ -149,9 +151,9 @@ class pasGet{
         //returns the user's current stage in the Auction Select screen
         global $AO_DB;
         
-        $users = 'users';
+        $users = ao::USERS;
         $T = 'stage';
-        $UID = 'user_id';
+        $UID = ao::UID;
         $uid = getUID();
         $ret = 'classic';
         
@@ -190,8 +192,8 @@ class pasGet{
         }*/
         //else bind failed,
         //default to regular query
-        $aoCars = 'aoCars';
-        $CID = 'car_id';
+        $aoCars = ao::CARS;
+        $CID = ao::CID;
         
         $res = $AO_DB->query(
             "SELECT $CID FROM $aoCars"
@@ -210,9 +212,11 @@ class pasGet{
     public static function carIDsByType($carType){
         global $AO_DB;
        
-        $aoCars = 'aoCars';
-        $CID = 'car_id';
+        $aoCars = ao::CARS;
+        $CID = ao::CID;
         $T = 'type';
+        $n = 'name';
+        $p = 'price';
         $ret = array();
         //if is str(carType)
         $res = $AO_DB->query(
@@ -223,10 +227,10 @@ class pasGet{
             while($row = $res->fetch_assoc() ){
                 $car = Vehicle::fromArray($row);
                 $ret[] = array(
-                    'car_id'=>$car->getID(),
+                    $CID=>$car->getID(),
                     'src'=>$car->getLocalPath(),
-                    'name'=>$car->getFullName(),
-                    'price'=>$car->getPrice()
+                    $N=>$car->getFullName(),
+                    $P=>$car->getPrice()
                 );                    
             }            
             $res->close();
@@ -236,9 +240,10 @@ class pasGet{
     public static function carIDsByPriceRange($range){
         global $AO_DB;
        
-        $aoCars = 'aoCars';
-        $CID = 'car_id';
+        $aoCars = ao::CARS;
+        $CID = ao::CID;
         $P = 'price';
+        $N = 'name';
         $ret = array();
         
         if($range == aoPriceRange::LOW){
@@ -266,10 +271,10 @@ class pasGet{
             while($row = $res->fetch_assoc() ){
                 $car = Vehicle::fromArray($row);
                 $ret[] = array(
-                    'car_id'=>$car->getID(),
+                    $CID=>$car->getID(),
                     'src'=>$car->getLocalPath(),
-                    'name'=>$car->getFullName(),
-                    'price'=>$car->getPrice()
+                    $N=>$car->getFullName(),
+                    $P=>$car->getPrice()
                 );                    
             }            
             $res->close();
@@ -279,10 +284,11 @@ class pasGet{
     public static function carIDsByTypeAndRange($carType, $range){
         global $AO_DB;
        
-        $aoCars = 'aoCars';
-        $CID = 'car_id';
+        $aoCars = ao::CARS;
+        $CID = ao::CID;
         $P = 'price';
         $T = 'type';
+        $N = 'name';
         $ret = array();
         
         if($range == aoPriceRange::LOW){
@@ -310,10 +316,10 @@ class pasGet{
             while($row = $res->fetch_assoc() ){
                 $car = Vehicle::fromArray($row);
                 $ret[] = array(
-                    'car_id'=>$car->getID(),
+                    $CID=>$car->getID(),
                     'src'=>$car->getLocalPath(),
-                    'name'=>$car->getFullName(),
-                    'price'=>$car->getPrice()
+                    $N=>$car->getFullName(),
+                    $P=>$car->getPrice()
                 );                    
             }            
             $res->close();
@@ -324,9 +330,9 @@ class pasGet{
         //returns the user's currently selected vehicle
         global $AO_DB;
         $id = 2;  //$_SESSION['user_id'];
-        $users = 'users';
-        $CID = 'car_id';
-        $UID = 'user_id';
+        $users = ao::USERS;
+        $CID = ao::CID;
+        $UID = ao::UID;
         
         $res = $AO_DB->query(
             "SELECT $CID FROM $users WHERE $UID = $id"
@@ -349,10 +355,9 @@ class pasGet{
         global $AO_DB;
         global $aoUsersDB;
         //$id = 2;  //$_SESSION['user_id'];
-        $users = 'users';
-        $CID = 'car_id';
-        $UID = 'user_id';
-        
+        $users = ao::USERS;
+        $CID = ao::CID;
+        $UID = ao::UID;        
         /*$result = $AO_DB->query(
             //"SELECT $CID FROM $users WHERE $UID = $id"
         //);
@@ -389,8 +394,8 @@ class pasGet{
         //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
         //returning them as a JSON array
         global $AO_DB;
-        $aoCars = 'aoCars';
-        $CID = 'car_id';
+        $aoCars = ao::CARS;
+        $CID = ao::CID;
         $cars = array();
        
         $res = pasGet::allCarIDs(); //returns an array, containing an array for each row/car entry
@@ -432,7 +437,9 @@ class pasGet{
         //returning them as a JSON array
         $type = pasGet::userStage();
         $cars = array();
-        $CID = 'car_id';
+        $CID = ao::CID;
+        $N = 'name';
+        $P = 'price';
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
         $res = pasGet::carIDsByType($type);
@@ -443,8 +450,8 @@ class pasGet{
                 $cars[] = array(
                     'carID'=>$cid,
                     'src'=>$row['src'],
-                    'name'=>$row['name'],
-                    'price'=>$row['price'],
+                    $N=>$row[$N],
+                    $P=>$row[$P],
                     'hasCar' => hasCar($cid),   //does user have this car?
                     'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
@@ -459,6 +466,8 @@ class pasGet{
         $type = pasGet::userStage();
         $cars = array();
         $CID = 'car_id';
+        $N = 'name';
+        $P = 'price';
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
         $res = pasGet::carIDsByPriceRange($range);
@@ -470,8 +479,8 @@ class pasGet{
                 $cars[] = array(
                     'carID'=>$cid,
                     'src'=>$row['src'],
-                    'name'=>$row['name'],
-                    'price'=>$row['price'],
+                    $N=>$row[$N],
+                    $P=>$row[$P],
                     'hasCar' => hasCar($cid),   //does user have this car?
                     'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
@@ -484,7 +493,7 @@ class pasGet{
         //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
         $type = pasGet::userStage();
         $cars = array();
-        $CID = 'car_id';
+        $CID = ao::CID;
         $P = 'price';
         $N = 'name';
         $S = 'src';
@@ -513,7 +522,7 @@ class pasGet{
     public static function auctionCarsCount(){
         //returns the number of entries in vehicle database
         global $AO_DB;
-        $aoCars = 'aoCars';
+        $aoCars = ao::CARS;
         //$count is initialized when this is called for the first time
         static $count = 0;
         //static $getCars = $AO_DB->prepare(
@@ -579,8 +588,13 @@ class pasGet{
         global $AO_DB;
         
         $id = getUID();
-        $UID = 'user_id';
-        $users = 'users';
+        $UID = ao::UID;
+        $users = ao::USERS;
+        $M = 'money';
+        $T = 'tokens';
+        $P = 'prestige';
+        $MM = 'm_marker';
+        
         $res = $AO_DB->query(
             "SELECT * FROM $users WHERE $UID = $id"
         );
@@ -589,10 +603,10 @@ class pasGet{
             $rows = $res->fetch_assoc();
             //NOTE:sql retrives data as strings, so must conver to numeric type before sending(strings are bulky)
             $ret = array(
-                'money'=>floatval($rows['money']),
-                'tokens'=>intval($rows['tokens']),
-                'prestige'=>intval($rows['prestige']),
-                'm_marker'=>intval($rows['m_marker']),
+                $M=>floatval($rows[$M]),
+                $T=>intval($rows[$T]),
+                $P=>intval($rows[$P]),
+                $MM=>intval($rows[$MM]),
                 'cid'=>intval($rows['car_id'])
             );
             $res->close();
@@ -666,7 +680,8 @@ class pasGet{
         );
         
         if($res){
-            $CID = 'car_id';
+            $CID = ao::CID;
+            
             while($row = $res->fetch_assoc() ){
                 //mysqli retuns values as strings, so convert them
                 //to proper types, for faster transfer back to server!

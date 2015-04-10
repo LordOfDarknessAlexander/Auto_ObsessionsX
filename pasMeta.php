@@ -6,13 +6,14 @@
 require_once 'vehicles/vehicle.php';
 require_once 'include/dbConnect.php';  //sql database connections
 //require_once '../include/secure.php';
+require_once 'ao.php';
 //
 //secure::loggin();
 //
 //class user{
     function getUID(){
         //returns the user if logged in, else echo error and force user to redirect to login
-        $uid = 'user_id';
+        $UID = ao::UID;
         
         if(isset($_SESSION) && isset($_SESSION[$uid]) ){
             return intval($_SESSION[$uid]);
@@ -32,7 +33,7 @@ require_once 'include/dbConnect.php';  //sql database connections
         global $aoUsersDB;
         
         $ret = false;
-        $CID = 'car_id';
+        $CID = ao::CID;
         $tableName = getUserTableName();
        
         $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $id");
@@ -57,7 +58,7 @@ require_once 'include/dbConnect.php';  //sql database connections
         //does the user's table in aoAuctionLossDB already have an entry with car_id '$id'
         global $aoAuctionLossDB;
         
-        $CID = 'car_id';
+        $CID = ao::CID;
         $ret = false;
         $tableName = getUserTableName();
 
@@ -80,7 +81,7 @@ require_once 'include/dbConnect.php';  //sql database connections
         //does the user's table in aoUsersDB already have an entry with car_id '$id'
         global $aoUsersDB;
         //global $aoCarSalesDB;
-        $CID = 'car_id';
+        $CID = ao::CID;
         $ret = false;
         $tableName = getUserTableName();
        
@@ -110,8 +111,8 @@ function getCarFromID($carID){
     //selects a vehicle from the car database($AO_DB),
     //returning it as a an instance of a php class
     global $AO_DB;
-    $aoCars = 'aoCars';
-    $CID = 'car_id';
+    $aoCars = ao::CARS;
+    $CID = ao::CID;
     //prepare!
     //$res = pasGet::allCarIDs();
     $res = $AO_DB->query(

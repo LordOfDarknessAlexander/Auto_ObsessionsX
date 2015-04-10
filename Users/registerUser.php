@@ -120,13 +120,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	if(empty($errors)){ 
 		// If there were no errors
 		//Determine whether the email address has already been registered	
-		$users = 'users';
+		$users = ao::USERS;
+        $UID = ao::UID;
+        $CID = ao::CID;
        // $getUID = $AO_DB->prepare(
           //  "SELECT user_id FROM $users WHERE email = '$e' "
       //  );
-      
-        $UID = 'user_id';
-        $CID = 'car_id';
         
 		$result = $AO_DB->query(
             "SELECT $UID FROM $users WHERE email = '$e' "
@@ -139,9 +138,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             //$addNewUser = $AO_DB->con->prepare();
 			$result = $AO_DB->query(
                 "INSERT INTO $users
-                ($UID, uname, title, fname, lname, $CID, money, tokens, prestige, m_marker, user_level, email, email_code, psword, registration_date, confirm)
+                ($UID, uname, title, fname, lname,
+                $CID, money, tokens, prestige, m_marker,
+                user_level, email, email_code, psword,
+                registration_date, confirm)
                 VALUES
-                ('', '$uname', '$title', '$fn', '$ln', 0, 50000, 0,0,0,0, '$e', '$email_code', SHA1('$p'), NOW(), 0)"
+                ('', '$uname', '$title', '$fn', '$ln',
+                0, 50000, 0,0,0,
+                0, '$e', '$email_code', SHA1('$p'),
+                NOW(), 0)"
             );	
 			
 			$register_email = '$e';

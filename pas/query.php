@@ -18,6 +18,13 @@ function echoUserCars(){
     $cars = array();
     $userID = getUserTableName();
     
+    $DT = 'drivetrain';
+    $CID = ao::CID;
+    $B = 'body';
+    $IN = 'interior';
+    $R = 'repairs';
+    $D = 'docs';
+    
     $res = $aoUsersDB->query(
         "SELECT * FROM $userID"
     );
@@ -26,12 +33,12 @@ function echoUserCars(){
         while($row = mysqli_fetch_array($res) ){
             //insert an new array representing a car at the end of $cars
             $cars[] = array(
-                'carID' => intval($row['car_id']),
-                'drivetrain' => intval($row['drivetrain']),
-                'body' => intval($row['body']),
-                'interior' => intval($row['interior']),
-                'docs' => intval($row['docs']),
-                'repairs' => intval($row['repairs'])
+                'carID'=>intval($row[$CID]),
+                $DT=>intval($row[$DT]),
+                $B=>intval($row[$B]),
+                $IN=>intval($row[$IN]),
+                $D=>intval($row[$D]),
+                $R=>intval($row[$R])
                 //'info'=>$row['info']
             );
         }
@@ -50,7 +57,14 @@ function eLoadUser(){
     //loads all the user's data from a single ajax call!
     global $aoUsersDB;
     
-    $CID = 'car_id';
+    $CID = ao::CID;
+    
+    $DT = 'drivetrain';
+    $B = 'body';
+    $IN = 'interior';
+    $R = 'repairs';
+    $D = 'docs';
+    
     $cars = array();
     $userID = getUserTableName();
     
@@ -62,12 +76,12 @@ function eLoadUser(){
         while($row = mysqli_fetch_array($res) ){
             //insert an new array representing a car at the end of $cars
             $cars[] = array(
-                'carID' => intval($row[$CID]),
-                'drivetrain' => intval($row['drivetrain']),
-                'body' => intval($row['body']),
-                'interior' => intval($row['interior']),
-                'docs' => intval($row['docs']),
-                'repairs' => intval($row['repairs'])
+                'carID'=>intval($row[$CID]),
+                $DT=>intval($row[$DT]),
+                $B=>intval($row[$B]),
+                $IN=>intval($row[$IN]),
+                $D=>intval($row[$D]),
+                $R=>intval($row[$R])
                 //info=>$row['info']
             );
         }

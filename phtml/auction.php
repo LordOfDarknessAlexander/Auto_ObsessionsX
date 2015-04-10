@@ -10,8 +10,8 @@ function sqlSelectAll($tableName, $callbackStr){
     //queries the data base, selecting all elements and preforming callback on each
      global $AO_DB;
     $s = 'stage';
-    $users = 'users';
-    $UID = 'user_id';
+    $users = ao::USERS;
+    $UID = ao::UID;
     //$id = getUID();
     //get the user's current stage/tier
     //$res = $AO_DB->query(

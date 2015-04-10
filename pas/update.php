@@ -32,7 +32,7 @@ class pasUpdate{
         global $aoAuctionLossDB;
         $table = getUserTableName();
         $ret = false;
-        $CID = 'car_id';
+        $CID =ao::CID;
         
         $res = $aoAuctionLossDB->query(
             //if entry does not exist add it, else update
@@ -47,10 +47,11 @@ class pasUpdate{
     }
     public static function userCurrentCar($carID){
         global $AO_DB;
-        $users = 'users';
+        $users = ao::USERS;
         $id = strval(getUID() );
-        $UID = 'user_id';
-        $CID = 'car_id';
+        $UID = ao::UID;
+        $CID = ao::CID;
+        
         return hasCar($carID) ? ($AO_DB->query(
             "UPDATE $users SET $CID = $carID WHERE $UID = $id"
         ) ? $carID : 0) : 0;
@@ -155,7 +156,7 @@ class purchase{
         if(is_float($funds) && $funds > 0.0){
             $f = round($funds, 2);  //round currency to 2 decimal places
             $uid = strval(getUID() );
-            $users = 'users';
+            $users = ao::USERS;
             $m = 'money';
             $rm = $AO_DB->query(
                 "SELECT $m FROM $users WHERE user_id = $uid"
@@ -196,7 +197,7 @@ class purchase{
         
         if(is_int($val) && $val > 0){
             $uid = strval(getUID() );
-            $users = 'users';
+            $users = ao::USERS;
             $t = 'tokens';
             $rt = $AO_DB->query(
                 "SELECT $t FROM $users WHERE user_id = $uid"

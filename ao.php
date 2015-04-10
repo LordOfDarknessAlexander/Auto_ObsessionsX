@@ -8,9 +8,15 @@ class ao{
         'AB'=>'Andrew Best'
     );*/
     //constant database names
-    //public static
-        //USERS = 'users',  //table containing all registered users
-        //CARS = 'aoCars'   //database containing all core vehicle data
+    const
+        USERS = 'users',  //table containing all registered users
+        CARS = 'aoCars',   //database containing all core vehicle data
+        //sql column names
+        CID = 'car_id',
+        UID = 'user_id';
+        //vehicle parts
+        //PRICE = 'price',
+        //
     
     //static mysql database connections
     //public static

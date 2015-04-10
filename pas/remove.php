@@ -17,7 +17,7 @@ class pasRemove
         //call this when a user deletes their account,
         //or an admin removes them for violating terms of service, etc
         global $AO_DB;
-        $users = 'users';
+        $users = ao::USERS;
         //echo "removing user account with email:$email and password:$pw<br>";
         $res = $AO_DB->query(
             "SELECT user_id FROM $users WHERE(
@@ -55,7 +55,7 @@ class pasRemove
         //drops the table of user with id userIDfrom aoUsersDB
         //returns true on success, false on failure
         global $AO_DB;
-        $users = 'users';
+        $users = ao::USERS;
         //$_dropUser = $AO_DB->prepare(
             //"DELETE * FROM $users WHERE user_id=?"
         //);
