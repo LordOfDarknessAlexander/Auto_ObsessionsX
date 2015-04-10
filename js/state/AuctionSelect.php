@@ -37,10 +37,10 @@ var AuctionSelect =
 	list : $('<?php asCarView();?> ul#auctionCars'),
     setCarBtn:function(i, data){
         var carID = data.carID,
-            //name = data.name,
-            //price = data.price,
-            //srcLocal = data.src,
-            //path = /*getHostPath() +*/ 'images/cars/' + srcLocal,
+            name = data.name,
+            price = data.price,
+            srcLocal = data.src,
+            path = /*getHostPath() +*/ 'images/cars/' + srcLocal,
             hasCar = data.hasCar,
             hasLostCar = data.hasLostCar,
             liID = 'asli' + (i).toString(),
@@ -50,7 +50,7 @@ var AuctionSelect =
             li = $(liName),
             btn = $(liName + ' button');
         //
-        /*var btnStr = "<li id=\'" + liID + "\'>" + 
+        var btnStr = "<li id=\'" + liID + "\'>" + 
             "<img src=\'" + path + "\'>" +
             "<label id=\'" + labelID + "\'>" + name + "</label>" +
             "<button id=\'" + carID.toString() + "'>" + 
@@ -59,7 +59,7 @@ var AuctionSelect =
             "</button>" +
         "</li><br>";
         this.list.append(btnStr);
-        */
+        
         //var btn = $('#' + btnID);
          
         // var hasCar = false;
@@ -102,7 +102,10 @@ $funcName = "$fileName, AuctionSelect::init()";
         //if(loggedIn)
             //this.list.empty();
 		//
-        //var funcName = 'js/state/AuctionSelect.php, AuctionSelect::init()';
+        var args = {
+            type:'',
+            range:''
+        };
         jq.get('pas/query.php?op=asc',  //'pas/query?asc',
             function(data){
                 <?php isValidData();?>
@@ -129,6 +132,7 @@ $funcName = "$fileName, AuctionSelect::init()";
                 alert('<?php echo "$funcName, ajax call failed! Reason: ";?>' + jqxhr.responseText);
                 //console.log(funcName + ', loading game resources failed, abort!');
             }
+            //args
         );
 <?php
 function setCarBtn($args){

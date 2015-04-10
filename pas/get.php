@@ -8,6 +8,13 @@ require_once '../pasMeta.php';
 //
 //secure::loggin();
 //
+class aoPriceRange{
+    const
+        LOW = 'low',
+        MID = 'mid',
+        HIGH = 'high',
+        ELITE = 'elite';
+}
 /*class sql{
     public static function selectAll($tableName){
         return "SELECT * FROM $tableName";
@@ -226,6 +233,93 @@ class pasGet{
         }
         return $ret;    //will be empty if sql fails
     }
+    public static function carIDsByPriceRange($range){
+        global $AO_DB;
+       
+        $aoCars = 'aoCars';
+        $CID = 'car_id';
+        $P = 'price';
+        $ret = array();
+        
+        if($range == aoPriceRange::LOW){
+            $gt = 10000.00;
+            $lt = 30000.00;
+        }
+        elseif($range == aoPriceRange::MID){
+            $gt = 30000.00;
+            $lt = 75000.00;
+        }
+        elseif($range == aoPriceRange::HIGH){
+            $gt = 7.5e4;    //75000
+            $lt = 1.5e5;
+        }
+        elseif($range == aoPriceRange::ELITE){
+            $gt = 1.5e5;    //150000.00
+            $lt = 1.0e16;    //cap of 10 trillion, no car should ever be this expensive
+        }
+        
+        $res = $AO_DB->query(
+            "SELECT * FROM $aoCars WHERE $P >= $gt AND $P < $lt"
+        );
+        
+        if($res){
+            while($row = $res->fetch_assoc() ){
+                $car = Vehicle::fromArray($row);
+                $ret[] = array(
+                    'car_id'=>$car->getID(),
+                    'src'=>$car->getLocalPath(),
+                    'name'=>$car->getFullName(),
+                    'price'=>$car->getPrice()
+                );                    
+            }            
+            $res->close();
+        }
+        return $ret;    //will be empty if sql fails
+    }
+    public static function carIDsByTypeAndRange($carType, $range){
+        global $AO_DB;
+       
+        $aoCars = 'aoCars';
+        $CID = 'car_id';
+        $P = 'price';
+        $T = 'type';
+        $ret = array();
+        
+        if($range == aoPriceRange::LOW){
+            $gt = 10000.00;
+            $lt = 30000.00;
+        }
+        elseif($range == aoPriceRange::MID){
+            $gt = 30000.00;
+            $lt = 75000.00;
+        }
+        elseif($range == aoPriceRange::HIGH){
+            $gt = 7.5e4;    //75000
+            $lt = 1.5e5;
+        }
+        elseif($range == aoPriceRange::ELITE){
+            $gt = 1.5e5;    //150000.00
+            $lt = 1.0e16;    //cap of 10 trillion, no car should ever be this expensive
+        }
+        
+        $res = $AO_DB->query(
+            "SELECT * FROM $aoCars WHERE $T = '$carType' AND $P >= $gt AND $P < $lt"
+        );
+        
+        if($res){
+            while($row = $res->fetch_assoc() ){
+                $car = Vehicle::fromArray($row);
+                $ret[] = array(
+                    'car_id'=>$car->getID(),
+                    'src'=>$car->getLocalPath(),
+                    'name'=>$car->getFullName(),
+                    'price'=>$car->getPrice()
+                );                    
+            }            
+            $res->close();
+        }
+        return $ret;    //will be empty if sql fails
+    }
     public static function currentCarID(){
         //returns the user's currently selected vehicle
         global $AO_DB;
@@ -359,40 +453,55 @@ class pasGet{
         }
         echo json_encode($cars);
     }
-    public static function auctionCarsByTypeRange(){
+    public static function auctionCarsByPriceRange($range){
         //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
-        $type = 'unique';
+        //returning them as a JSON array
+        $type = pasGet::userStage();
         $cars = array();
         $CID = 'car_id';
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
-        
-        //if($r == aoPriceRange::low){
-            //$gt = 10000.00;
-            //$lt = 0.00;
-        //}
-        //else if($r == aoPriceRange::mid){
-            //$gt = 10000.00;
-            //$lt = 0.00;
-        //}
-        //if($r == aoPriceRange::high){
-            //$gt = 10000.00;
-            //$lt = 0.00;
-        //}
-        //else if($r == aoPriceRange::elite){
-            //$gt = 10000.00;
-            //$lt = 0.00;
-        //}
-        $res = pasGet::carIDsByType($type);
+        $res = pasGet::carIDsByPriceRange($range);
         
         if(!empty($res)){
             foreach($res as $row){
                 $cid = $row[$CID];
+                
                 $cars[] = array(
                     'carID'=>$cid,
                     'src'=>$row['src'],
                     'name'=>$row['name'],
                     'price'=>$row['price'],
+                    'hasCar' => hasCar($cid),   //does user have this car?
+                    'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
+                    //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
+                );
+            }
+        }
+        echo json_encode($cars);
+    }
+    public static function auctionCarsByTypeRange(){
+        //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
+        $type = pasGet::userStage();
+        $cars = array();
+        $CID = 'car_id';
+        $P = 'price';
+        $N = 'name';
+        $S = 'src';
+        $range = aoPriceRange::LOW;
+        //returns an array, containing an array for each row/car entry,
+        //or an empty arry on failure
+        $res = pasGet::carIDsByTypeRange($type, $range);
+        
+        if(!empty($res)){
+            foreach($res as $row){
+                $cid = $row[$CID];
+                
+                $cars[] = array(
+                    'carID'=>$cid,
+                    $S=>$row[$S],
+                    $N=>$row[$N],
+                    $P=>$row[$P],
                     'hasCar' => hasCar($cid),   //does user have this car?
                     'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?

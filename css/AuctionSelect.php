@@ -112,6 +112,7 @@ Tint divs diffrent colours for diffrent classes
 <?php lih();?>
 	width:15%;
 	color:red;
+    /*z-index:5;*/
 }
 <?php divAS();?> li button label
 {

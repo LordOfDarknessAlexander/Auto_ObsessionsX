@@ -3,9 +3,25 @@
 function isAlpha($str){
     //is a singular word, containing only letters(a-z and/or A-Z),
     //no special characters, whitespace or symbols
-    //+ matches 0 or more repetitions
+    //+ matches 1 or more repetitions of pattern,
+    //NOTE: string can be any size, from 1 to infinity,
+    //could cause memory with large strings,
+    //PHP hard limit for variable allocation is 128MB but could be as large as 2GB!
     return preg_match('/^[[:alpha:]]+$/', $str);
-}/*
+}
+//function isAlphaSmall($str){
+    //is a singular word, containing only letters(a-z and/or A-Z),
+    //no special characters, whitespace or symbols
+    //+ matches 1 or more repetitions
+    //return preg_match('/^[[:alpha:]]+{,8}$/', $str);
+//}
+//function isAlphaMedium($str){
+    //return preg_match('/^[[:alpha:]]+{8,64}$/', $str);
+//}
+//function isAlphaLarge($str){
+    //return preg_match('/^[[:alpha:]]+{64,128}$/', $str);
+//}
+/*
 function isWord($str){
     //is a singular word, containing only letters,
     //no special characters, whitespace or symbols

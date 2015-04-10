@@ -127,9 +127,31 @@ if(isset($_GET) && !empty($_GET) ){
     $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
     
     if($op == 'asc'){
-        pasGet::auctionCars();  //ByType();
+        //$sp = isset($_POST) ? true : false;
+        //if($sp){
+            //$type = isAlpha($_POST['type']) ? $_POST['type'] : '';
+            $range = aoPriceRange::ELITE;  //isAlpha($_POST['range']) ? $_POST['range'] : '';
+            
+            //if($type != '' && $range != ''){
+                //pasGet::auctionCarsByTypeAndRange($type, $range);  //ByType();
+                //exit();
+            //}
+            //elseif($type != '' && $range == ''){
+                //pasGet::auctionCarsByType($type);
+                //exit();
+            //}
+            //elseif($type == '' && $range != ''){
+                pasGet::auctionCarsByPriceRange($range);
+                //exit()
+            //}
+            //echo '$_POST set but ';
+            //exit();
+        //}
+        //else $_POST not set, return all cars
+        //pasGet::auctionCars();
         exit();
     }
+
     if($op == 'gucc'){
         //echo json_encode(pasGet::currentCar() );
         exit();
