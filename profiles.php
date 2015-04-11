@@ -18,11 +18,9 @@ require 'include/nav.php';
 require 'Users/includes/info-col.php';
 ?>
 	<div id='content'><!-- Start of page content. -->
-        <h2>This is page Five</h2>
-        <p>The page five content. The page five content. The page five content.<br>The page 
-        five content. The page five content. The page five content.<br>The page five content. The page 
-        five content. The page five content.<br>The page five content. The page five content. The page 
-        five content.</p>
+        <h2>Profile</h2>
+        <p>The profile content. 
+       </p>
             <!-- End of page five content. -->
     </div>
 </div>	

@@ -19,11 +19,9 @@ require 'Users/includes/info-col.php';
 ?>
 	<div id='content'><!-- Start of the page-specific content. -->
         <h2>Credits</h2>
-        <p>The page four content. The page four content. The page four content.<br>The page 
-        four content. The page four content. The page four content.<br>The page four content. The page 
-        four content. The page four content.<br>The page four content. The page four content. The page 
-        four content.</p>
-	<!-- End of the page 4 content. -->
+        <p>Development Team : Alexander Sanchez, Tyler Drury<br>
+        </p>
+	<!-- End of the Credits content. -->
     </div>
 </div>	
 <?php
