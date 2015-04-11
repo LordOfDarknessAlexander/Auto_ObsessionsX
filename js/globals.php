@@ -45,7 +45,7 @@ var logos = [
 ];
 var userStats = {
 	fn:'',
-	money:0 ,
+	money:50000 ,
 	tokens:2,
 	prestige:0,
 	marker:0
@@ -92,7 +92,7 @@ function loadUser()
 }
 else{
 ?>
-	/*if(Storage.local !== null){
+	if(Storage.local !== null){
         if('_carID' in Storage.local){
 			_curCarID = (int)JSON.parse(Storage.local._carID);
 			
@@ -113,7 +113,7 @@ else{
 				marker:0
 			};
 		}
-	}*/
+	}
 <?php
 }
 ?>
