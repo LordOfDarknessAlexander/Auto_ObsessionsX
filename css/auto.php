@@ -159,7 +159,7 @@ button#backBtn
 	background-size : 100% 100%;
 
 	left:5%;
-	bottom:2%;
+<?php css::marginBtm();?>
 }
 button#homeBtn{
 <?php
@@ -171,7 +171,7 @@ button#homeBtn{
     background-size : 100% 100%;
     
 	right:5%;
-	bottom:2%;
+<?php css::marginBtm();?>
     margin:0%;
     
     /*font-weight: bold;*/
@@ -216,7 +216,7 @@ img#adBar
 	width:60%;
 	height:8%;
 	left:20%;
-	bottom:2%;
+<?php css::marginBtm();?>
     z-index:3;
 }
 <?php //Game Screen/State stylings?>

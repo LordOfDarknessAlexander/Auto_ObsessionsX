@@ -153,10 +153,11 @@ This document describes the technical standards used in the development of the A
     </li>
 </ol>
 <hr><h2>Standards</h2><hr>
-<pre>   Code segments and text in <p class='good'>GREEN</p> adhere to the standard and should be used.
-Examples, styles and formats which break the standard and should not be used are in <p class='bad'>RED</p> and the author will be responsible for making sure the code they write is in-line with this standard,
-else be subjected to gruesome torture.
-<p class='tip'>Helpful tips or tricks are displayed in a grey box with white text like this!<br></p></pre>
+<pre>   <p class='good'>GREEN</p> code segments and text adhere to standard pratices and conventions, which should be used.
+<p class='bad'>RED</p> segments are examples which styles, formats, safe coding conduct are broken and <i>should not</i> be used in code,
+the author will be responsible for making sure the code they write is in-line with this standard,
+else be subjected to gruesome torture and horrific other various crimes against both humanity and nature until they comply :)
+<h3>TIP</h3><p class='tip'>Helpful tips or tricks are displayed in a grey box with white text like this!<br></p></pre>
     <h3 id='fileFormats'>File formats:</h3><hr>
     <pre></pre>
     <h4 id='text'>Text</h4><hr>
@@ -216,6 +217,30 @@ function makeStuff(args){
     };
 }</p>
 </code>
+    There is no namespace mechanic in JavaScript! The two conventional ways are by declaring a global object,
+initialized with declared fields, or a function with locally and/or externally declared fields.
+Use of global objects are prefered, as fields declared and set within the function add to overhead,
+as the variables will be initialized and assigned on each invocation of the function.
+<code><p class='good'>
+var ao = {
+    //global object encapsulating a related collection of data or functions.
+    //May also be conceptualized as a Dictionary or Map of generic bindings to named fields
+    _PRIV_STR = 'private const string',
+    publicInt:7,    //public non-const integer
+    otherData:{
+        ...
+    }
+    //
+    _privDoStuff(){
+        return;
+    },
+    doStuff:function(args){
+        this._privDoStuff();
+        return;
+    },
+};
+//technically javascript's dynamic nature allows you to modify any of the previous fields.
+</code>
 php:<code><p class='good'>
 class Stuff{
     //doc string, about this class
@@ -241,15 +266,28 @@ class Stuff{
 <pre>    All large (non-transparent)image resources, such as backgrounds, car photos assume the JPG format.
 Logos for advertising are currently 385x85 .png, as they are small images where retention of resolution is important.
     Since the previous project did not have standardized image sizes the image library is uncessicarily bloated and chaotic,
-as a result file range from very small(32kb), to very large(2mb) and various aspect ratios (most commonly 4/3 (1.33) or 3/2(1.5) ).
-    This results in transfer for images being extremely slow, as many very large images have to be transfered, quite frequently.
-This increased bandwidth and slows execution down(eg. the garage or auction select screens).
-All vehicle images shall be a height of 720 (if issues with resoulton arise, increase to full 1080 resolution, or reduce to 640, for increased preformance!), as a result ,
+as a result file range from very small(32kb), to very large(2mb) and various aspect ratios (most common aspect resolutions 4/3 (1.33) or 3/2(1.5) ).
+    This results in transfer for images being extremely slow, as many very large images have to be transfered, quite frequently, on screen transions, across manny pages.
+increasing bandwidth, slowing execution drastically(eg. the garage or auction select screens).
+    After reducing file size from the original source,
+the vehicle image library storage reduced from ~246mb to less than 28mb(at 720p).
+
+    All vehicle images shall be a height of 720 (if issues with resoulton arise, increase to full 1080 resolution, or reduce to 640, for increased preformance!),
+the resulting images sizes then become:
+    (4/3 = 853x640)
+    (3/2 = 960x640)
+<hr>
     (4/3 = 960x720)
     (3/2 = 1080x720)
-full HD:
+<hr>full HD:
     (4/3 = 1440x1080)
     (3/2 = 1620x1080)
+<hr>
+    One of these resolutions must be selected, then artist department must edit them to prevent strentching,
+as the various aspect ratios cause distortions in the preportions of the vehicles.
+    The current vehicle port on the site currently consumes 60% width and height of the browser.
+Should be standardized to either a constant aspect resolution(preferred) at either,
+4:3 (either 40%,30% or 80%,60%) or 1:5 (60%,40%) to maintain aspect resolution.
 </pre>
 <pre class='note'>For all future entries, an aspect ratio of 4/3 is prefered.</pre>
 <pre>   IMPORTANT! Any logos which are registered trademarks much be licensed appropriately before hosting final page, to avoid legal action.</pre>

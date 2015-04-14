@@ -85,7 +85,7 @@ ao Store page styles
 	height:50px;
 <?php
     cursorPtr();
-    fontBold();
+    css::fontBold();
 ?>
 }
 <?php /*divFunds();> #addFundsBackButton

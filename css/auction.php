@@ -35,7 +35,7 @@ Auction Screen
 <?php divAuction();?> button#auctionBackButton
 {<?php
     posAbs();
-    fontBold();
+    css::fontBold();
     defaultBtnBG();
 ?>
 	width:150px;
@@ -48,7 +48,7 @@ Auction Screen
 {<?php
     defaultBtnBG();
     posAbs();
-    fontBold();
+    css::fontBold();
     //css::size('12%', '5%');
     //css::left();
     //css::bottom();
@@ -63,7 +63,7 @@ Auction Screen
 {<?php
     defaultBtnBG();
     posAbs();
-    fontBold();
+    css::fontBold();
     //css::size();
     //css::left();
     //css::bottom();
@@ -89,7 +89,7 @@ Auction Screen
 
 <?php divAuction();?> label#carInfo
 {<?php
-    fontBold();
+    css::fontBold();
     defaultColor();
     posAbs();
     //css::size();
@@ -104,7 +104,7 @@ Auction Screen
 }
 <?php divAuction();?> label#carName
 {<?php
-    fontBold();
+    css::fontBold();
     defaultColor();
     posAbs();
     //css::size();

@@ -45,8 +45,8 @@ User Garage div Stylings
 {<?php
     posAbs();
     css::size('8.75%', '7.5%');
+    css::marginBtm();
 ?>
-    bottom:2%;
     left:18.75%;
     
     font-size:1.5vw;
@@ -56,8 +56,8 @@ User Garage div Stylings
 {<?php
     posAbs();
     css::size('8.75%', '7.5%');
+    css::marginBtm();
 ?>
-    bottom:2%;
     left:10%;
     
     font-size:1.5vw;
@@ -67,8 +67,8 @@ User Garage div Stylings
 {<?php
     posAbs();
     css::size('8.75%', '7.5%');
+    css::marginBtm();
 ?>
-    bottom:2%;
     left:36.25%;
     
     font-size:1.5vw;
@@ -78,8 +78,8 @@ User Garage div Stylings
 {<?php
     posAbs();
     css::size('8.75%', '7.5%');
+    css::marginBtm();
 ?>
-    bottom:2%;
     left:27.5%;
     
     font-size:1.5vw;

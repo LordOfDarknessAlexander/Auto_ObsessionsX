@@ -94,10 +94,21 @@ class css{
 <?php
     }
     public static function rm(){  //right margin
-        css::right('5%');
+        $hp = 5.0;  //horizontal padding
+        css::right(strval($hp) . '%');
     }
     public static function lm(){  //left margin
-       css:: left('5%');
+        $hp = 5.0;  //horizontal padding
+        css:: left(strval($hp) . '%');
+    }
+    public static function marginBtm(){
+        //nav bottom margin
+        $v = 2.0;
+        css::bottom(strval($v) . '%');
+    }
+    //font
+    public static function fontBold(){?>    font-weight:bold;
+<?php
     }
 }
 //any file including this one MUST be a CSS file, so output the header when included

@@ -56,7 +56,7 @@ Car View Screen
 <?php divCarView();?> button{<?php
 	//rule for all button in CarView div
 	defaultColor();
-    fontBold();
+    css::fontBold();
     cursorPtr();
     posAbs();
 ?>
@@ -64,7 +64,7 @@ Car View Screen
 <?php divCarView();?> button#select
 {
     position:absolute;
-	bottom:2%;
+<?php css::marginBtm();?>
 	left:10%;
 	height:7.5%;
     width:10%;
@@ -76,7 +76,7 @@ Car View Screen
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	background-size: 100% 100%;
 	right:10%;
-	bottom:2%;
+<?php css::marginBtm();?>
 	height:7.5%;
     width:10%;
     font-size:1.5vw;
@@ -97,7 +97,7 @@ Car View Screen
 }
 <?php divCarView();?> label#carName
 {<?php
-    fontBold();
+    css::fontBold();
     //css::top('20%');
 ?>
 	background-image:url('../images/checkers.png');
@@ -108,7 +108,7 @@ Car View Screen
 }
 <?php divCarView();?> label#carInfo{
 	text-align:left;
-	bottom:2%;
+	<?php css::marginBtm();?>
     font-size:1.5vw;
 }
 <?php divCarView();?> h2{
