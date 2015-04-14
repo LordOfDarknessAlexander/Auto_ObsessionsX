@@ -324,7 +324,7 @@ function setMoney(val)
 	if(userStats.money <= 0)
 	{
 		//userStats.money = 0;
-		alert("You are out of money Dude!");
+		alert("You are out of money! Refresh Money?");
 		$('div#statBar label#money').text('Refresh Dough???: ' + userStats.money.toFixed(2) );
 	}	
 }
