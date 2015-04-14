@@ -67,7 +67,7 @@ class Vehicle
     }
     public function getFullPath(){
         //absolute file path, on the server
-        return rootURL() . 'images/cars720/' . $this->getLocalPath();
+        return rootURL() . 'images/cars/' . $this->getLocalPath();
     }
     public function getPrice(){
         //returns price after accumulating upgrades and repairs
