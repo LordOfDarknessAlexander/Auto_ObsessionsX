@@ -167,6 +167,39 @@ class pasGet{
         }*/
         return $ret;
     }
+    public static function allCarData(){
+        //
+        global $AO_DB;
+
+        $aoCars = ao::CARS;
+        $CID = ao::CID;
+        $N = 'name';
+        $P = 'price';
+        $ret = array();
+        
+        //echo 'car data!';
+        
+        $res = $AO_DB->query(
+            "SELECT * FROM $aoCars"
+        );
+        
+        if($res){   
+            while($row = $res->fetch_assoc()){    
+                //echo json_encode($row);
+                $car = Vehicle::fromArray($row);
+
+                $ret[] = array(
+                    $CID=>$car->getID(),
+                    'src'=>$car->getLocalPath(),
+                    $N=>$car->getFullName(),
+                    $P=>$car->getPrice()
+                );           
+            }
+            $res->close();
+        }
+        //echo json_encode($ret);
+        return $ret;
+    }
     public static function allCarIDs(){
         global $AO_DB;
         /*if(self::$_allAuctionsCID){
@@ -194,20 +227,19 @@ class pasGet{
         //default to regular query
         $aoCars = ao::CARS;
         $CID = ao::CID;
+        $ret = array();
         
         $res = $AO_DB->query(
             "SELECT $CID FROM $aoCars"
         );
         
-        if($res){
-            $ret = array();
+        if($res){            
             while($row = $res->fetch_assoc()){
-                $ret[] = $row;  //[$cid];
-            }            
+                $ret[] = $row;  //intval($row[$cid]);
+            }      
             $res->close();
-            return $ret;
         }
-        return array();
+        return $ret;
     }
     public static function carIDsByType($carType){
         global $AO_DB;
@@ -215,8 +247,8 @@ class pasGet{
         $aoCars = ao::CARS;
         $CID = ao::CID;
         $T = 'type';
-        $n = 'name';
-        $p = 'price';
+        $N = 'name';
+        $P = 'price';
         $ret = array();
         //if is str(carType)
         $res = $AO_DB->query(
@@ -226,12 +258,13 @@ class pasGet{
         if($res){
             while($row = $res->fetch_assoc() ){
                 $car = Vehicle::fromArray($row);
+                
                 $ret[] = array(
                     $CID=>$car->getID(),
                     'src'=>$car->getLocalPath(),
                     $N=>$car->getFullName(),
                     $P=>$car->getPrice()
-                );                    
+                );               
             }            
             $res->close();
         }
@@ -270,6 +303,7 @@ class pasGet{
         if($res){
             while($row = $res->fetch_assoc() ){
                 $car = Vehicle::fromArray($row);
+                
                 $ret[] = array(
                     $CID=>$car->getID(),
                     'src'=>$car->getLocalPath(),
@@ -281,7 +315,7 @@ class pasGet{
         }
         return $ret;    //will be empty if sql fails
     }
-    public static function carIDsByTypeAndRange($carType, $range){
+    public static function carIDsByTypeRange($carType, $range){
         global $AO_DB;
        
         $aoCars = ao::CARS;
@@ -307,6 +341,14 @@ class pasGet{
             $gt = 1.5e5;    //150000.00
             $lt = 1.0e16;    //cap of 10 trillion, no car should ever be this expensive
         }
+        elseif($range == aoPriceRange::ALL){
+            $gt = 0.0;
+            $lt = 1.0e16;
+        }
+        else{
+            echo "invalid value ($range)";
+            return $ret;
+        }
         
         $res = $AO_DB->query(
             "SELECT * FROM $aoCars WHERE $T = '$carType' AND $P >= $gt AND $P < $lt"
@@ -315,6 +357,7 @@ class pasGet{
         if($res){
             while($row = $res->fetch_assoc() ){
                 $car = Vehicle::fromArray($row);
+                
                 $ret[] = array(
                     $CID=>$car->getID(),
                     'src'=>$car->getLocalPath(),
@@ -397,14 +440,23 @@ class pasGet{
         $aoCars = ao::CARS;
         $CID = ao::CID;
         $cars = array();
+        $N = 'name';
+        $P = 'price';
        
-        $res = pasGet::allCarIDs(); //returns an array, containing an array for each row/car entry
+        $res = pasGet::allCarData(); //returns an array, containing an array for each row/car entry
         
         if(!empty($res)){
             foreach($res as $row){
+                //echo json_encode($row);
+                //$car = Vehicle::fromArray($row);
                 $cid = $row[$CID];
+                
                 $cars[] = array(
-                    'carID' => $cid,
+                    'carID'=>$cid,
+                    'src'=>$row['src'],
+                    $N=>$row[$N],
+                    $P=>$row[$P],
+                    //
                     'hasCar' => hasCar($cid),   //does user have this car?
                     'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
@@ -432,17 +484,17 @@ class pasGet{
         }*/
         echo json_encode($cars);
     }
-    public static function auctionCarsByType(){
+    public static function auctionCarsByType($carType){
         //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
         //returning them as a JSON array
-        $type = pasGet::userStage();
+        //$type = pasGet::userStage();
         $cars = array();
         $CID = ao::CID;
         $N = 'name';
         $P = 'price';
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
-        $res = pasGet::carIDsByType($type);
+        $res = pasGet::carIDsByType($carType);
         
         if(!empty($res)){
             foreach($res as $row){
@@ -489,15 +541,15 @@ class pasGet{
         }
         echo json_encode($cars);
     }
-    public static function auctionCarsByTypeRange(){
+    public static function auctionCarsByTypeAndRange($type, $range){
         //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
-        $type = pasGet::userStage();
+        //$type = pasGet::userStage();
         $cars = array();
         $CID = ao::CID;
         $P = 'price';
         $N = 'name';
         $S = 'src';
-        $range = aoPriceRange::LOW;
+        //$range = aoPriceRange::LOW;
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
         $res = pasGet::carIDsByTypeRange($type, $range);
@@ -511,6 +563,7 @@ class pasGet{
                     $S=>$row[$S],
                     $N=>$row[$N],
                     $P=>$row[$P],
+                    //
                     'hasCar' => hasCar($cid),   //does user have this car?
                     'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?

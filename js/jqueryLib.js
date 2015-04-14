@@ -55,6 +55,11 @@ var jq = {
         jq.error.text(funcName + ',\nError:' + info);
         jq.error.show();
     },
+    //ajaxFail:function(jqxhr){
+        //default failure message when an Ajax call fails
+        //jq.setErr('<?php echo $funcName;?>', 'ajax call failed! Reason: ' + jqxhr.responseText);
+        //console.log(funcName + ', loading game resources failed, abort!');
+    //},
 	Main : {
 		menu:$('#main')
 	},

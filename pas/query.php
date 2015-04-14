@@ -11,6 +11,9 @@ require_once '../re.php';
 //use pas\get\user as pgu;
 //use pas\get\auction as pga;
 //use pas\get\sales as pgs;
+$gs = isset($_GET) && !empty($_GET) ? true : false;
+$ps = isset($_POST) && !empty($_POST) ? true : false;
+
 function echoUserCars(){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
@@ -136,33 +139,38 @@ function getUserSoldCars(){
 //echo json_encode(false);
 //exit();
 if(isset($_GET) && !empty($_GET) ){
+    //echo 'GET set';
     //args being passed vai the url
     //regex match, must contain no whitespace, numbers or special characters!
     $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
     
     if($op == 'asc'){
-        //$sp = isset($_POST) ? true : false;
-        //if($sp){
-            //$type = isAlpha($_POST['type']) ? $_POST['type'] : '';
-            $range = aoPriceRange::ELITE;  //isAlpha($_POST['range']) ? $_POST['range'] : '';
-            
-            //if($type != '' && $range != ''){
-                //pasGet::auctionCarsByTypeAndRange($type, $range);  //ByType();
-                //exit();
-            //}
-            //elseif($type != '' && $range == ''){
-                //pasGet::auctionCarsByType($type);
-                //exit();
-            //}
-            //elseif($type == '' && $range != ''){
-                pasGet::auctionCarsByPriceRange($range);
-                //exit()
-            //}
-            //echo '$_POST set but ';
-            //exit();
-        //}
-        //else $_POST not set, return all cars
-        //pasGet::auctionCars();
+        $T = 'type';
+        $R = 'range';
+        
+        if($ps && (isset($_POST[$T]) || isset($_POST[$R]) ) ){
+            $t = isset($_POST[$T]) ? $_POST[$T] : '';
+            $r = isset($_POST[$R]) ? $_POST[$R] : '';
+            //echo $t;
+            //echo $r;
+            if($t != '' && $r != ''){
+                //echo 'auction cars, type and range';
+                pasGet::auctionCarsByTypeAndRange($t, $r);
+                exit();
+            }
+            elseif($t == '' && $r != ''){
+                //echo "auction cars, range ($r)";
+                pasGet::auctionCarsByPriceRange($r);
+                exit();
+            }
+            elseif($t != '' && $r == ''){
+                //echo "auction cars, type ($t)";
+                pasGet::auctionCarsByType($t);
+                exit();
+            }
+        }
+        //echo 'auction cars, no filter';
+        pasGet::auctionCars();
         exit();
     }
 
@@ -191,7 +199,7 @@ if(isset($_GET) && !empty($_GET) ){
 //else no vars passed via GET
 //echo '_GET not set, checking $_POST';
 //exit();
-if(isset($_POST) && !empty($_POST) ){
+if($ps){
     //echo 'post set!';
     //echo json_encode($_POST);
     //exit();    
@@ -235,6 +243,37 @@ if(isset($_POST) && !empty($_POST) ){
         }
         exit();
     }
+    /*elseif(isset($_POST['type']) || isset($_POST['range']) ){
+        $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
+    
+        if($op == 'asc'){
+            $T = 'type';
+            $R = 'range';
+            
+            $t = isset($_POST[$T]) ? $_POST[$T] : '';
+            $r = isset($_POST[$R]) ? $_POST[$R] : '';
+            //echo $t;
+            //echo $r;
+            if($t != '' && $r != ''){
+                echo 'type and range';
+                pasGet::auctionCarsByTypeAndRange($t, $r);
+                //pasGet::auctionCars();
+                exit();
+            }
+            elseif($t == '' && $r != ''){
+                echo 'range';
+                //pasGet::auctionCarsByPriceRange($r);
+                exit();
+            }
+            elseif($t != '' && $r == ''){
+                echo 'type';
+                pasGet::auctionCarsByType($r);
+                exit();
+            }
+            //echo invalid $_POST;
+            exit();
+        }
+    }*/
     //other post vars
     echo 'other post vars';// . json_encode($_POST);
     exit();

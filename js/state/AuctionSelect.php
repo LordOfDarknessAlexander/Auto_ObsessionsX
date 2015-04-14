@@ -33,9 +33,10 @@ function isValidData(){
 //Auction Select State
 //
 var AuctionSelect =
-{	//object representing
+{	//object representing the Auction Select state and interface
 	list : $('<?php asCarView();?> ul#auctionCars'),
     setCarBtn:function(i, data){
+        //Dynamically add an html li (containing auction info) to the DOM
         var carID = data.carID,
             name = data.name,
             price = data.price,
@@ -59,24 +60,9 @@ var AuctionSelect =
             "</button>" +
         "</li><br>";
         this.list.append(btnStr);
-        
-        //var btn = $('#' + btnID);
-         
-        // var hasCar = false;
-        
-        // for(var j = 0; j < userGarage.length; j++)
-        // {
-            // var gc = userGarage[j];
-
-            // if(carName/*id*/ == gc.getFullName()/*id*/){
-                // hasCar = true;
-                // break;
-            // }
-        // }
 
         if(hasCar){
         	//display but disable user from entering auction
-            //var li = $('#' + liID);
             li.css('opacity', '0.45');
             btn.off().click(this.denyAuction).css('cursor', 'default');
         }
@@ -102,38 +88,48 @@ $funcName = "$fileName, AuctionSelect::init()";
         //if(loggedIn)
             //this.list.empty();
 		//
-        var args = {
-            type:'',
-            range:''
-        };
-        jq.get('pas/query.php?op=asc',  //'pas/query?asc',
-            function(data){
-                <?php isValidData();?>
-                //alert(funcName + ', ajax response success!' + JSON.stringify(data) );
-                var len = data.length;
-                
-                if(len == 0){
-                    console.log('<?php echo "$funcName, no entries in database, should have 1 entry per car in database";?>');
-                    return;
-                }
-                //iterate over each vehicle data entry
-                for(var i = 0; i < len; i++){
-                    //var carID = data[i].carID,
-                        //hasCar = data[i].hasCar;
-                        
-                    AuctionSelect.setCarBtn(i, data[i]);  
-                    //AuctionSelect.setCarBtn(carID, i, hasCar);
-                }
-                //filter results, display only cars
-
-            },
-            function(jqxhr){
-                //call will fail if result is not properly formated JSON!
-                alert('<?php echo "$funcName, ajax call failed! Reason: ";?>' + jqxhr.responseText);
-                //console.log(funcName + ', loading game resources failed, abort!');
+        function done(data){
+            <?php isValidData();?>
+            //alert(funcName + ', ajax response success!' + JSON.stringify(data) );
+            var len = data.length;
+            
+            if(len == 0){
+                console.log('<?php echo "$funcName, no entries in database, should have 1 entry per car in database";?>');
+                return;
             }
-            //args
-        );
+            //iterate over each vehicle data entry
+            for(var i = 0; i < len; i++){
+                //var carID = data[i].carID,
+                    //hasCar = data[i].hasCar;
+                    
+                AuctionSelect.setCarBtn(i, data[i]);  
+                //AuctionSelect.setCarBtn(carID, i, hasCar);
+            }
+            //filter results, display only cars
+        }
+        function failed(jqxhr){
+            //call will fail if result is not properly formated JSON!
+            alert('<?php echo "$funcName, ajax call failed! Reason: ";?>' + jqxhr.responseText);
+            //console.log(funcName + ', loading game resources failed, abort!');
+        }
+        var args = {
+            //type:'muscle'
+            range:'elite'
+        };
+        
+        if(args === null || args === undefined){
+            jq.get('pas/query.php?op=asc',  //'pas/query?asc',
+                done,
+                failed
+            );
+        }
+        else{
+            jq.post('pas/query.php?op=asc',
+                done,
+                failed,
+                args
+            );
+        }
 <?php
 function setCarBtn($args){
     $id = $args[0];
