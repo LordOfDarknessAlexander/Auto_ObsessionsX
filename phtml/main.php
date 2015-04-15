@@ -9,8 +9,8 @@ $AO_NAME = 'Auto Obsessions';
 $TD_NAME = 'Tyler Drury';
 $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
-$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-//$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
+//$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
 ?>	
 <div class='wrapper'>
 	<!--root div element of web page!-->	
@@ -61,7 +61,7 @@ else{?>
         </div>
       
         <div id='splash'>
-            <h2><?php echo $AO_NAME.' Presents!';?></h2>
+          <!--  <h2><?php /*echo $AO_NAME.' Presents!';*/?></h2>-->
         </div>
         <div id='main'>		
             <h1><?php echo $AO_NAME;?></h1>
