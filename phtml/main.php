@@ -9,8 +9,8 @@ $AO_NAME = 'Auto Obsessions';
 $TD_NAME = 'Tyler Drury';
 $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
-$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-//$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
+//$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
 ?>	
 <div class='wrapper'>
 	<!--root div element of web page!-->	
@@ -64,7 +64,7 @@ else{?>
           <!--  <h2><?php /*echo $AO_NAME.' Presents!';*/?></h2>-->
         </div>
         <div id='main'>		
-            <h1><?php echo $AO_NAME;?></h1>
+            <h1><?php echo "Welcome $uname";?></h1> 
 <?php session_start();
 
 if(isset($_SESSION) AND isset($_SESSION['uname']) ){
@@ -75,19 +75,20 @@ else{
     $loggedIn = false;
     $uname = 'guest';
 }
-echo "Welcome $uname";
+
 ?>
             <ul>
-               <li><a href="javascript:void(0)" class="button play">Play<?php if(!$loggedIn){ echo ' as Guest';}?></a></li>
 <?php
 if($loggedIn){?>
+			   <li><a href="javascript:void(0)" class="button play">Play<?php if($loggedIn){ echo ' Game';}?></a></li>
                <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
             </ul>
 <?php
 }
 else{?>
+				<li><a href='Users/registerUser.php' class='button Register'>Register</a></li> 
                 <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
-                <li><a href='Users/registerUser.php' class='button Register'>Register</a></li> 
+				  <li><a href="javascript:void(0)" class="button play">Play<?php if(!$loggedIn){ echo ' as Guest';}?></a></li>
             </ul> 
             
             <div id='loginfields'>

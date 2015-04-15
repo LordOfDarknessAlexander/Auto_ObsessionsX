@@ -46,9 +46,14 @@ ul{
     list-style: none;
     padding: 0;
     margin: 0;
+	display:inline;
+	margin-left: 2%;
 }
 li{
     /*padding: 10px 0;*/
+	display:inline;
+	margin-left: 2%;
+	
 }
 
 a{
@@ -111,7 +116,7 @@ Forms
     position:relative;
     bottom:40%;
     right:40%;
-	margin-left :10%;
+	margin-left :60%;
 }
 #progress 
 {
@@ -139,6 +144,7 @@ button
     background-size:100% 100%;
 	color:red;
     cursor:pointer;	
+	
 }
 button:hover {
     /*mouse over*/
@@ -289,7 +295,8 @@ div#reg-navigation{
     right:0%;
     text-align:center;
     z-index:3;
-	display:inline;
+	top : 5%;
+	
 }
 div#reg-navigation a{
 <?php
@@ -300,7 +307,7 @@ div#reg-navigation a{
     font-weight: bold;
     text-decoration: none;
 	padding : 2%;
-	display:inline;
+	top : 5%;
 }
 div#reg-navigation a:hover{
 <?php
@@ -310,7 +317,7 @@ div#reg-navigation a:hover{
 ?>  
 	color:green;
 	padding : 2%;
-	display:inline;
+	top : 5%;
 }
 /* visited link */
 #div#main a:visited {
