@@ -110,7 +110,7 @@ Forms
     color:white;
     position:relative;
     bottom:40%;
-    right:30%;
+    right:40%;
 	margin-left :10%;
 }
 #progress 
@@ -289,6 +289,7 @@ div#reg-navigation{
     right:0%;
     text-align:center;
     z-index:3;
+	display:inline;
 }
 div#reg-navigation a{
 <?php
@@ -299,6 +300,7 @@ div#reg-navigation a{
     font-weight: bold;
     text-decoration: none;
 	padding : 2%;
+	display:inline;
 }
 div#reg-navigation a:hover{
 <?php
@@ -308,6 +310,7 @@ div#reg-navigation a:hover{
 ?>  
 	color:green;
 	padding : 2%;
+	display:inline;
 }
 /* visited link */
 #div#main a:visited {
@@ -315,7 +318,7 @@ div#reg-navigation a:hover{
 }
 /* mouse over link */
 div#main a:hover {
-    color:purple;
+    color:green;
 }
 /*Root site menu*/
 div#menu
@@ -326,6 +329,7 @@ div#menu
     width: 100%;
     height: 100%;
     border: 1px solid black;
+	display:inline;
     z-index: 2;
     text-align: center;
     background-color: black;
@@ -406,6 +410,7 @@ credits page UI stylings
 	position :relative;
 	padding: 0.5%;
 	margin-top : 1%;
+	display: inline;
 	margin-bottom : 1%;
     line-height: 40px;
     border: 1px solid #AA2666;

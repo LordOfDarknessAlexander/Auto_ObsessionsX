@@ -9,8 +9,8 @@ $AO_NAME = 'Auto Obsessions';
 $TD_NAME = 'Tyler Drury';
 $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
-//$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
+$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+//$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
 ?>	
 <div class='wrapper'>
 	<!--root div element of web page!-->	
