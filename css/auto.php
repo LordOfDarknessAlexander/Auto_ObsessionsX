@@ -45,13 +45,19 @@ canvas{
 ul{
     list-style: none;
     padding: 0;
-    margin: 0;
+   /* margin: 0;*/
+	margin: 2%;
 	display:inline;
+	margin-bottom : 2%;
+	margin-top: 2%;
 	
 }
 li{
     /*padding: 10px 0;*/
 	display:inline;
+	margin: 2%;
+	margin-bottom : 2%;
+	margin-top: 2%;
 }
 
 a{

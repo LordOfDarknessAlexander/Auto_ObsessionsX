@@ -17,7 +17,7 @@ function statBar($id){
 }
 ?>
 <div id='RepairShop'>
-    <h1>Repair Shop</h1>
+   <!-- <h1>Repair Shop</h1> -->
     <p id='error'></p>
 <?php
     backBtn();
