@@ -1,9 +1,9 @@
 <?php
 //functions which output common CSS properties
 function defaultBG(){
-    css::defaultBG('../images/defaultBG.jpg');
+    css::defaultBG('../images/bgTile.png');
     //echo "background-size:100% 100%;";
-    css::bgSize('100%', '100%');
+  //  css::bgSize('100%', '100%');
 }
 function defaultBtnBG(){
     css::defaultBG('../images/defaultBtn.png');
@@ -59,7 +59,7 @@ class css{
     public static function defaultBG($url){
         //default background image css fragment
         //image does not repeat and is positioned at (0,0)?>
-    background:url('<?php echo $url;?>') no-repeat 0 0;
+    background:url('<?php echo $url;?>');
 <?php
     }
     public static function bgSize($width, $height){?>

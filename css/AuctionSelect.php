@@ -53,6 +53,7 @@ Action Select UI stylings
 	top right bottom left   /*this line should cause the code to break, invalid css*/
 	/*padding: 50px 50px;*/
 	display:inline;
+	margin : 2%;
     background: url('../images/label.jpg');
 <?php lih();?>
 }
