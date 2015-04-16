@@ -291,7 +291,7 @@ div#reg-navigation{
     right:0%;
     text-align:center;
     z-index:3;
-	top : 9%;
+	top : 19%;
 	
 }
 div#reg-navigation a{
@@ -303,7 +303,7 @@ div#reg-navigation a{
     font-weight: bold;
     text-decoration: none;
 	padding : 2%;
-	top : 9%;
+	top : 19%;
 }
 div#reg-navigation a:hover{
 <?php
@@ -313,7 +313,7 @@ div#reg-navigation a:hover{
 ?>  
 	color:green;
 	padding : 2%;
-	top : 9%;
+	top : 19%;
 }
 /* visited link */
 #div#main a:visited {
