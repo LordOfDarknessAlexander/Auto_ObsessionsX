@@ -32,7 +32,7 @@ User Garage div Stylings
     posAbs();
     //defaultBG();
     css::size();
-    css::size('100%', '100%');
+    //css::size('100%', '100%');
     css::defaultTileBG();
     //background: url('../images/defaultBG.jpg') no-repeat 0 0; 
 	//background-size : 100% 100%;
