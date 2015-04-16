@@ -78,8 +78,10 @@ Main Game Menu Styles
 <?php defaultColor();?>
 	padding: 10px 0;
 	display:inline;
-	margin: 8px;
-	margin-top: 8em;
+	/*margin: 8px;
+	margin-top: 8em;*/
+	margin : 12px;
+	margin-top : 12em;
 	top: 20%;
 }
 <?php dgm();?> div{
