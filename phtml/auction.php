@@ -62,7 +62,7 @@ function outputCar($args){
 ?>
 <div id='AuctionSelect'>
     <!--view all available auctions-->
-    <h1>Auction Select</h1>
+  <!--  <h1>Auction Select</h1>  -->
 <?php backBtn();?>
     <form action='javascript:void(0)' id = 'filter'>Filters<hr>
         stage<br><select id='stage'>
@@ -115,7 +115,7 @@ function outputCar($args){
 
 <div id='AuctionSell'>
     <!--user sells one of their cars, biding open only to AI-->
-    <h1>Auctioned Cars</h1>
+   <!-- <h1>Auctioned Cars</h1>  -->
 <?php
     backBtn();
     homeBtn();

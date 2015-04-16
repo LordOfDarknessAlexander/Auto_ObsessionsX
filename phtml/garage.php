@@ -12,7 +12,7 @@ function cvStatBar($id){
 }
 ?>
 <div id='Garage'>
-    <h1>Garage</h1>
+   <!-- <h1>Garage</h1>  -->
 <?php
     backBtn();
     selectBtn();	

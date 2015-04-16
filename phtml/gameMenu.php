@@ -23,7 +23,7 @@
 ?>
 <div id='gameMenu'>
     <!--Root Game Menu, hub for page navigation-->
-    <h1>My Home</h1>
+   <!-- <h1>My Home</h1> -->
     <!--img id='homeImg' src='images\\garageEmpty.png'-->
 
     <div id='menuLeft'>

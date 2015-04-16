@@ -35,7 +35,7 @@ Action Select UI stylings
     top:0%;
     left:0%;*/
 	margin:0;
-	padding:2%;
+	padding:0;
 	list-style-type:none;
 }
 <?php divAS();?> div#carView{
