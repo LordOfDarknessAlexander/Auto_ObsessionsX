@@ -183,7 +183,7 @@ root\
         someBackground.png
         randomLargeImage.jpg
     audio\
-        ambient.mp3
+        ambientSound0.mp3
     css\
         main.css
     js\
@@ -195,7 +195,8 @@ root\
 Functions and variables that are private or protected(or for languages like JS which have no protection, those with the intent of being used as such)
 
 js:<code><p class='good'>
-//declares a function, which returns an object
+//declares a function, which returns a new object,
+//adopting a class like structure
 function makeStuff(args){
     //doc string, about this class ctor/generator
     //Static constants are owned by this generator,
@@ -238,10 +239,16 @@ var ao = {
         this._privDoStuff();
         return;
     },
-};
-//technically javascript's dynamic nature allows you to modify any of the previous fields.
+};</p>
 </code>
-php:<code><p class='good'>
+technically javascript's dynamic nature allows the modification any of the fields in the previous script.
+<hr>
+PHP:
+    Variables in PHP begin with a &amp;(functions do not).
+    To distinguish related groups of functions, variables or classes at
+global scope either prefix them with a short abbreviation of the namespace(aoSomeFunc(){}, class aoVehicle{}, $aoUserDB = new dbConnect();),
+or declared them as a static member of a class (eg, pasGet::, a::, html::, css::)
+<code><p class='good'>
 class Stuff{
     //doc string, about this class
     //data always comes first in class declarations!
@@ -257,31 +264,45 @@ class Stuff{
     public function getProt(){
         return $self->_prot;
     }
-    protected function getPriv(){
+    protected function _getPriv(){
         return $self->_priv;
     }
-}</p></pre>
-</code>
+}</p></code>
+<p class='tip'>PHP allows for a namespace mechanism, which is only supported in v5 or greater.
+As the current webhost(GoDaddy) does not that language version,
+the feature is not used in any studio scripts and will not be mentioned or referenced in examples.</p>
+</pre>
     <h4 id='imgs'>Images</h4><hr>
-<pre>    All large (non-transparent)image resources, such as backgrounds, car photos assume the JPG format.
+<pre><h5 id='imgAR'>Aspect Ratios:</h5>
+    The aspect ratio is an ipmortant relation between its size and height and is calculated and expressed as, w/h, or w:h,
+and is expressed in the lowest common denominator, while screen resoulution usually is expressed as the whole number pixel values (1920x1080).
+This relation is useful when preforming transforms on the image, as well as applyin more complex matrix operations(for displaying images using GPU accelerated programming)
+<h5 id='imgFD'>Image formats and dimensions:</h5>
+    All large (non-transparent)image resources, such as backgrounds, car photos assume the JPG format.
 Logos for advertising are currently 385x85 .png, as they are small images where retention of resolution is important.
     Since the previous project did not have standardized image sizes the image library is uncessicarily bloated and chaotic,
 as a result file range from very small(32kb), to very large(2mb) and various aspect ratios (most common aspect resolutions 4/3 (1.33) or 3/2(1.5) ).
     This results in transfer for images being extremely slow, as many very large images have to be transfered, quite frequently, on screen transions, across manny pages.
 increasing bandwidth, slowing execution drastically(eg. the garage or auction select screens).
     After reducing file size from the original source,
-the vehicle image library storage reduced from ~246mb to less than 28mb(at 720p).
+storage of the vehicle image library reduced from ~246mb(0.24gb) to less than 28mb(0.03gb at 720p),
+resulting in a ~11% reduction(of it original size) which,
+while this does not seem significant,
+it is a reduction of 215mb which does not need to be stored and tranfered, at no loss to resolution or image quality!
 
     All vehicle images shall be a height of 720 (if issues with resoulton arise, increase to full 1080 resolution, or reduce to 640, for increased preformance!),
 the resulting images sizes then become:
     (4/3 = 853x640)
     (3/2 = 960x640)
+    (16/9 = 1152x648)
 <hr>
     (4/3 = 960x720)
     (3/2 = 1080x720)
+    (16/9 = 1280x720)
 <hr>full HD:
     (4/3 = 1440x1080)
     (3/2 = 1620x1080)
+    (16/9 = 1920x1080)
 <hr>
     One of these resolutions must be selected, then artist department must edit them to prevent strentching,
 as the various aspect ratios cause distortions in the preportions of the vehicles.
@@ -291,6 +312,7 @@ Should be standardized to either a constant aspect resolution(preferred) at eith
 </pre>
 <pre class='note'>For all future entries, an aspect ratio of 4/3 is prefered.</pre>
 <pre>   IMPORTANT! Any logos which are registered trademarks much be licensed appropriately before hosting final page, to avoid legal action.</pre>
+
 <h4 id='png'><?php a::png();?></h4><hr>
 <pre>PNG(Portable Network Graphics) is a lossless compression method for images.
 Most useful for small to medium sized images where data integrity and resolution must be maintained.
