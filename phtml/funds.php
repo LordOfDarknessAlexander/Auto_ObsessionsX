@@ -7,7 +7,7 @@ require_once 'AO_UI.php';
 ?>
 
 <div id='AddFunds'>
-    <h1>AddFunds</h1>
+  <!--  <h1>AddFunds</h1>  -->
     <?php backBtn();?>
 	<?php homeBtn();?>
     <!--button id='addFundsBackButton'>Back</button-->
