@@ -24,6 +24,9 @@ class a{
     public static function w3SQL(){?>
 <a href='http://www.w3schools.com/sql/sql_quickref.asp'>W3 SQL</a><?php
     }
+    public static function phpDOM(){?>
+<a href='http://php.net/manual/en/book.dom.php'>DOM</a><?php
+    }
     //public static function python(){<a href=''>Python</a>}
     //public static function perl(){<a href=''>Perl</a>}
     public static function javascript(){
@@ -32,6 +35,9 @@ class a{
     }
     public static function json(){?>
 <a href='http://json.org/'>JSON</a><?php
+    }
+    public static function jQuery(){?>
+<a href='https://jquery.com/'>jQuery</a><?php
     }
     public static function css(){?>
 <a href='http://www.w3schools.com/cssref/'>CSS</a><?php
@@ -56,12 +62,10 @@ class a{
     //}
     //image type specs
     public static function png(){?>
-<a href='http://www.w3.org/TR/PNG/'>PNG</a>
-<?php
+<a href='http://www.w3.org/TR/PNG/'>PNG</a><?php
     }
     public static function jpg(){?>
-<a href='http://www.w3.org/Graphics/JPEG/'>JPG</a>
-<?php
+<a href='http://www.w3.org/Graphics/JPEG/'>JPG</a><?php
     }
 };
 //if(secure::adminLogin()){
@@ -99,17 +103,18 @@ p.tip{color:white;background-color:grey;}
 This document describes the technical standards used in the development of the Auto-Obsessions site.
 <h2>Table of contents</h2><hr>
 <ol>
+    <li><a href='#standards'>Standards and Conventions</a>
     <li>
         <a href='#fileFormats'>File Formats</a>
         <ol>
             <li>
                 <a href='#text'>Text</a>
                 <ol>
-                    <li><a href=''>HTML</a></li>
-                    <li><a href=''>JavaScript</a></li>
-                    <li><a href=''>CSS</a></li>
-                    <li><a href=''>XML</a></li>
-                    <li><a href=''>PHP</a></li>                
+                    <li><a href='#textHTML'>HTML</a></li>
+                    <li><a href='#textJS'>JavaScript</a></li>
+                    <li><a href='#textCSS'>CSS</a></li>
+                    <li><a href='#textXML'>XML</a></li>
+                    <li><a href='#textPHP'>PHP</a></li>                
                 </ol>
             </li>
             <li>
@@ -138,7 +143,7 @@ This document describes the technical standards used in the development of the A
         </ol>
     </li>
     <li>
-        <a href=''>Game Mechanics</a>
+        <a href='#aoGM'>Game Mechanics</a>
         <ol>
             <li>
                 <a href='#carLC'>Vehicle Life Cycle</a>
@@ -157,55 +162,60 @@ This document describes the technical standards used in the development of the A
         <a href='#aodb'>Databases</a>
     </li>
 </ol>
-<hr><h2>Standards</h2><hr>
+<hr><h2 id='standards'>Standards and Conventions</h2><hr>
 <pre>   <p class='good'>GREEN</p> code segments and text adhere to standard pratices and conventions, which should be used.
 <p class='bad'>RED</p> segments are examples which styles, formats, safe coding conduct are broken and <i>should not</i> be used in code,
 the author will be responsible for making sure the code they write is in-line with this standard,
 else be subjected to gruesome torture and horrific other various crimes against both humanity and nature until they comply :)
 <h3>TIP</h3><p class='tip'>Helpful tips or tricks are displayed in a grey box with white text like this!<br></p></pre>
-    <h3 id='fileFormats'>File Formats</h3><hr>
+    <h2 id='fileFormats'>File Formats</h2><hr>
     <pre>    While programs may be written in a single language, in the industry it is rare.
 In many web application(or in general most computer programs) require several diffrent languages and resource types
 interacting together to bring the user a fully immersive experience.
 This can quickly become confusing and overwhelming when switching between 3 or more in a large project,
     This project employes 5 text, 2 image and 1 audio file formats to accomplish the desired user experience.</pre>
-    <h4 id='text'>Text</h4><hr>
+    <h3 id='text'>Text</h3><hr>
 <pre>    In web development there are several layers of various languages, each has its own (independent) standard and specific purpose.
 Thus consistency in style across all file types is important for the readability and maintainability of code.
-<!--All files should be UTF-8 encoded, without BOM.pre><br>-->
-<?php a::html5();?>-Expresses raw (strucutred) data(does not DO anything!), extension (.html),
+<p class='tip'>All text files (unless otherwise specified) should be encoded using UTF-8, without BOM</p>
+</pre>
+<pre id='textHTML'><?php a::html5();?>-Expresses raw (strucutred) data(does not DO anything!), extension (.html),
 pages should be embedded within PHP(this project does not use raw HTML files),
 as PHP is more powerful and flexible than HTML on its own
-
-<?php a::xml();?>-extension (.xml), is purely a markup language (with no functionality),
+</pre>
+<pre id='textXML'><?php a::xml();?>-extension (.xml), is purely a markup language (with no functionality),
 intended for the expression of an application's data.
-As xml closely adheres to html(with subtly yet important differences) xml files should follow the same stylings as html pages.
-
+As xml closely adheres to html(with subtly yet important differences),
+xml files should follow the same styles/formating as html pages.
+</pre>
+<pre id='textJS'>
 <?php a::javascript();?>-Controls local browser functionality,
 MIME type application/javascript, extension (.js).
 May be embeded within a php page, to allow for server side off-load of
 processing or file/database io and textual replacement when dispatched to a browser.
-
-<?php a::css();?>-For the display/styling/animating of HTML elements displayed by a browser.
+The inclusion of jQuery allows for the dynamic manipulation of the page's DOM at run-time by the brwoser,
+Changes made this way are to the version existing within the browser, not the source on the server!
+</pre>
+<pre id='textCSS'><?php a::css();?>-For the display/styling/animating of HTML elements displayed by a browser.
 MIME type text/css, extension (.css).
 As with js files, may be embeded within a php page,
 to take advantage of server-side data transforms upon page dispatched.
 This can be useful (for example) to bind jQuery selectors by providing an interface across the (3)seperate file types,
 which reduce typing and spelling/syntax errors in the jQuery selector strings.
-
-<?php a::php();?>-Sever-side scripting language, which provides:
-database(mySqli) and DOM(x[ht]ml) interfaces,
+</pre>
+<pre id='textPHP'><?php a::php();?>-Sever-side scripting language, which provides:
+database(<?php a::phpMySQLi();?>) and <?php a::phpDOM();?>(x[ht]ml) interfaces,
 preprocessing facilities for html(as well as other text file types, .js, .css, etc),
 allows for a file include mechanism(include/require) in other languages(which do not natively support this mechanism),
 the ability to express(easily) functions, classes and objects in aconventional OOP manner,
 which may be a feature the processed file does not natively support!
 and provides an interface from which javascript may asynchronously request server processes,
-using jQuery AJAX($.ajax), or with the higher level interface using jq.get and jq.post(located in js/jqLib.php)
+using <?php a::jQuery();?> AJAX($.ajax), or with the higher level interface using jq.get and jq.post(located in js/jqLib.php)
 </pre>
 <p class='tip'>
     Keeping coherent style should reduce to the lowest common denominator of all languages involved.
 </p>
-<h5 id='dfn'>Directory structure and file name</h5><hr>
+<h4 id='dfn'>Directory Structure and File Name</h4><hr>
 <pre>   Directories and files are camelCased, like so
 root\
     images\
@@ -220,7 +230,7 @@ root\
         main.js
     index.php
 </pre>
-<h5 id='cfn'>Classes, Functions, Variables and Namespaces</h5><hr>
+<h4 id='cfn'>Classes, Functions, Variables and Namespaces</h4><hr>
 <pre>   As Object Oriented Programming(OOP) is not the background of everyone,
 First, some definitions:
     Variable(data/POD)-
@@ -235,7 +245,7 @@ which is (typically)never allocated, and has static duration(in compiled languag
 <p class='tip'>The HTML and CSS 'class' attribute/selector is not the same as
 that of the OOP concept(as neither are programing languages)</p>
 </pre>
-<h5 id='cfnDU'>Declaration and Usage</h5><hr>
+<h4 id='cfnDU'>Declaration and Usage</h4><hr>
 <pre>   All gloabally accessable classes are declared (unless prefixed with a namespace, eg: aoVehicle, pasGet, dbConnect),
 with CamelCase(starting with a capital).
     Functions and variables that are private or protected(or for languages like JS which have no protection, those with the intent of being used as such)
@@ -324,14 +334,15 @@ class Stuff{
 As the current webhost(GoDaddy) does not that language version,
 the feature is not used in any studio scripts and will not be mentioned or referenced in examples.</p>
 </pre>
-    <h4 id='imgs'>Images</h4><hr>
-<pre><h5 id='imgAR'>Aspect Ratios:</h5>    The aspect ratio is an important relation between its size and height and is calculated and expressed as, w/h, or w:h,
+    <h3 id='imgs'>Images</h3><hr>
+<pre><h4 id='imgAR'>Aspect Ratios:</h4>    The aspect ratio is an important relation between its size and height and is calculated and expressed as, w/h, or w:h,
 and is expressed in the lowest common denominator.
     This relation is useful when preforming calculations and transforms on the image,
 as well as applyin more complex matrix operations(for displaying images using GPU programming).
 <p class='tip'>Common Aspect Ratios:
     Computer Monitors-4:3 for standards and 16:9 for widescreens,
-    Mobile-1:1(some blackberry), 4:3, 3:2, 4:5, 5:3, 16:9(exclussively iPhone5 or Greater and some blackberry)
+    Mobile-4:3, 3:2, 4:5, 5:3, 16:9(exclussively iPhone5 or Greater)
+    Blackberry-1:1 and 16:9
     Tablets(iPad and Android)-4:3
     
 For mobile the inverses must also be taken into account,
@@ -339,8 +350,9 @@ if landscape and portrait are considered.
 </p>
     It is helpful(to avoid image stretch) to have image resources adopt the same aspect ratio as the display rendering them,
     but as various devices have varying aspect ratios
-but an aspect ratio of 1:1 can also be acceptable, as the preportions are scaled so stretching apears relatively undistorted.
-<h5 id='imgFD'>Image Formats and Dimensions:</h5>    All large (non-transparent)image resources, such as backgrounds, car photos assume the JPG format.
+but an aspect ratio of 1:1 can also be acceptable,
+as the preportions are scaled so stretching appears relatively undistorted.
+<h4 id='imgFD'>Image Formats and Dimensions:</h4>    All large (non-transparent)image resources, such as backgrounds, car photos assume the JPG format.
 Logos for advertising are currently 385x85 .png, as they are small images where retention of resolution is important.
     Since the previous project did not have standardized image sizes the image library is uncessicarily bloated and chaotic,
 as a result file range from very small(32kb), to very large(2mb) and various aspect ratios (most common aspect resolutions 4/3 (1.33) or 3/2(1.5) ).
@@ -348,11 +360,11 @@ as a result file range from very small(32kb), to very large(2mb) and various asp
 increasing bandwidth, slowing execution drastically(eg. the garage or auction select screens).
     After reducing file size from the original source,
 storage of the vehicle image library reduced from ~246mb(0.24gb) to less than 28mb(0.03gb at 720p),
-resulting in a ~11% reduction(of it original size) which,
-while this does not seem significant,
-it is a reduction of 215mb which does not need to be stored and tranfered, at no loss to resolution or image quality!
+resulting in a ~81% reduction(of it original size) which,
+is a reduction of 215mb which does not need to be stored and transfered,
+at no loss to resolution or image quality!
 
-    All vehicle images shall be a height of 720.
+    As a result all vehicle images shall be a height of 720.
 If issues with resoulton arise, increase to full 1080 resolution and/or widescreen aspect ratio,
 or reduce to 640, for increased preformance!
 
@@ -371,15 +383,15 @@ The resulting images sizes then become:
 <hr>
     One of these resolutions must be selected, then artist department must edit them to prevent strentching,
 as the various aspect ratios cause distortions in the preportions of the vehicles.
+<p class='tip'>For all future entries, an aspect ratio of 4/3 is prefered, as it is the most universal.</p>
     The current vehicle port on the site currently consumes 60% width and height of the browser.
 Should be standardized to either a constant aspect resolution(preferred) at either,
 4:3 (either 40%,30% or 80%,60%) or 3:2 (60%,40%) to maintain aspect resolution.
+<p class='tip'>IMPORTANT! Any logos which are registered trademarks much be licensed appropriately before hosting final page, to avoid legal action.</p>    
+    Small images should be between 32 pixels high or greater and 128 pixles in height or less.
+    Medium sized images, a min of 128 height and max of 256 pixels is preferred.
+    Large images with heights over 256 should be no larger than 2048, as this is(roughly) larger than most display sizes.
 </pre>
-<p class='tip'>For all future entries, an aspect ratio of 4/3 is prefered.</p>
-<pre>   IMPORTANT! Any logos which are registered trademarks much be licensed appropriately before hosting final page, to avoid legal action.</pre>
-    
-    Small images should 128 pixles in height or less.
-    Medium sized images, a height of 256 pixels is preferred.
 <h4 id='png'><?php a::png();?></h4><hr>
 <pre>    PNG(Portable Network Graphics) is a lossless compression method for images.
 Most useful for small to medium sized images where data integrity and resolution must be maintained.
@@ -389,10 +401,10 @@ Supports transparency.</pre>
 Should be used with large images(where maintaining detail/resolution/integrity is not important.
 Good for maintaining collections of large images with relatively low memory overhead.</pre>
 </pre>
-    <h4 id='audio'>Audio</h4><hr>
+    <h3 id='audio'>Audio</h3><hr>
 <pre>    All audio files adopt the MP3 format.</pre>
 
-<h3 id='#strStyles'>String Formatting</h3><hr>
+<h2 id='strStyles'>String Formatting</h2><hr>
 <pre>    Html/xml makes extensive use of quotes and double quotes for the
 declaration of strings.<br>
 As html is often embedded inside other strings it quickly
@@ -400,13 +412,15 @@ become difficult to read
 ALWAYS USE SINGLE QUOTES IN HTML, unless absolutely necessary(then the use of an html entity would be preferred)
 </pre>
 <h3 id='jsH'><?php a::javascript();?></h3><hr>
-<pre>   use single quoted string. json</pre>
+<pre>   Supports single and double quoted strings,
+use single quotes for any string which does not have (') or (\) embeded and for JSON strings.
+Use double quote strings to represent URL paths and X(HT)ML nodes strings</pre>
 <code>
 <p class='good'>var str = '{"id":"string"}';</p>
 <p class='bad'>var str = "{\"id\":\"string\"}";</p>
 </code>
 <pre>   The exception is if it has html or url paths embedded.
-"images/defaultBtn.png";   requires only single slash.
+"images/defaultBtn.png";   requires only single slashes.
 
 This method can clearly distinguish the embedded quotes when expressed as a string:</pre>
 <code>
@@ -426,6 +440,8 @@ and do not require the substitution of variables.</pre>
 <p class='good'>$str = 'simple string'; //keep it simple, nothing complex</p>
 <p class='bad'>$str = 'this \' must be escaped';</p>
 <p class='good'>$str = '{"id":"string"}';</p>
+And as with before, using double quotes looks the same:
+<p class='bad'>$str = "{\"id\":\"string\"}";</p>
 </code>
     Double quoted strings may contain single quotes without escaping,
 and support the direct substitution of variables.
@@ -469,21 +485,21 @@ This makes for rather cumbersome syntax which is less flexible.
 <p class='tip'>
     In php and javascript, use json_encode() or JSON.stringify() to convert complex data objects into valid JSON strings
 </p>
-<hr><h2>Game Mechanics</h2><hr>
+<hr><h2 id='aoGM'>Game Mechanics</h2><hr>
 <pre>   Auto-Obsessions implements several high level API to simulate the experience of owning, moding and auctioning cars.
 </pre>
 <h3 id='carLC'>Vehicle Life Cycle</h3><hr>
 <pre>    The user's experience consists of engaging in auctions, repairing/moding car then ultimately selling them for a profit.</pre>
-<h4 id='buying'>Auction</h4><hr>
+<h3 id='buying'>Auction</h3><hr>
 <pre>    Here, the users bids against randomized AI to compete in a bidding war for a car.
 A static table(aoCars) exists in the core database(finalpost),
 purchasing a car copies the data from aoCars(entries are never removed from aoCars), into the user's table, where they may freely mod their new ride.
 </pre>
-<h4 id='owning'>Garage-life</h4><hr>
+<h3 id='owning'>Garage-life</h3><hr>
 <pre>   At this point users may View, Upgrade, or Sell vehicles they have previously purchased.
 View a car does not change any.
 </pre>
-<h4 id='selling'>Making money</h4><hr>
+<h3 id='selling'>Making money</h3><hr>
 <pre>   An Ajax POST request is made to the server (from js),
 , with the script returning their new funds.
 </pre>
