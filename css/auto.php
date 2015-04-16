@@ -250,9 +250,7 @@ div#statBar{
     posAbs();
     css::size('100%', '15%');
 ?>
-    /*background-color:red;*/
 	background: url('../images/statBarTile.png');
-	/*background-size : 100%,40%;*/
 	top:0%;
 	left:0%;
 	
@@ -293,7 +291,7 @@ div#reg-navigation{
     right:0%;
     text-align:center;
     z-index:3;
-	top : 7%;
+	top : 9%;
 	
 }
 div#reg-navigation a{
@@ -305,7 +303,7 @@ div#reg-navigation a{
     font-weight: bold;
     text-decoration: none;
 	padding : 2%;
-	top : 7%;
+	top : 9%;
 }
 div#reg-navigation a:hover{
 <?php
@@ -315,7 +313,7 @@ div#reg-navigation a:hover{
 ?>  
 	color:green;
 	padding : 2%;
-	top : 7%;
+	top : 9%;
 }
 /* visited link */
 #div#main a:visited {
