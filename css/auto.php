@@ -251,8 +251,8 @@ div#statBar{
     css::size('100%', '15%');
 ?>
     /*background-color:red;*/
-	background: url('../images/StatBar.png') no-repeat 0 0;
-	background-size : 100%,40%;
+	background: url('../images/statBarTile.png');
+	/*background-size : 100%,40%;*/
 	top:0%;
 	left:0%;
 	

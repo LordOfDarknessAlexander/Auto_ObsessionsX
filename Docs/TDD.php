@@ -13,31 +13,34 @@ class a{
     //websites
     //public static function google(){<a href='www.google.ca'>Google</a>}
     public static function php(){?>
-<a href='http://php.net/'>PHP</a>
-<?php
+<a href='http://php.net/'>PHP</a><?php
+    }
+    public static function phpMySQLi(){?>
+<a href='http://php.net/manual/en/book.mysqli.php'>mySQLi</a><?php
+    }
+    public static function mySQL(){?>
+<a href='http://dev.mysql.com/doc/refman/5.6/en/'>mySQL</a><?php
+    }
+    public static function w3SQL(){?>
+<a href='http://www.w3schools.com/sql/sql_quickref.asp'>W3 SQL</a><?php
     }
     //public static function python(){<a href=''>Python</a>}
     //public static function perl(){<a href=''>Perl</a>}
     public static function javascript(){
         //links to ECMAScript Spec?>
-<a href='http://www.ecma-international.org/ecma-262/5.1/'>JavaScript</a>
-<?php
+<a href='http://www.ecma-international.org/ecma-262/5.1/'>JavaScript</a><?php
     }
     public static function json(){?>
-<a href='http://json.org/'>JSON</a>
-<?php
+<a href='http://json.org/'>JSON</a><?php
     }
     public static function css(){?>
-<a href='http://www.w3schools.com/cssref/'>CSS</a>
-<?php
+<a href='http://www.w3schools.com/cssref/'>CSS</a><?php
     }
     public static function html5(){?>
-<a href='http://dev.w3.org/html5/html-author/'>HTML5</a>
-<?php
+<a href='http://dev.w3.org/html5/html-author/'>HTML5</a><?php
     }
     public static function xml(){?>
-<a href='http://www.w3.org/XML/'>XML</a>
-<?php
+<a href='http://www.w3.org/XML/'>XML</a><?php
     }
     //browsers
     //public static chrome(){
@@ -112,6 +115,8 @@ This document describes the technical standards used in the development of the A
             <li>
                 <a href='#imgs'>Images</a>
                 <ol>
+                    <li><a href='#imgAR'>Aspect Ratios</a></li>
+                    <li><a href='#imgFD'>Formats and Dimensions</a></li>
                     <li><a href='#png'>PNG</a></li>
                     <li><a href='#jpg'>JPG</a></li>
                 </ol>
@@ -158,23 +163,48 @@ This document describes the technical standards used in the development of the A
 the author will be responsible for making sure the code they write is in-line with this standard,
 else be subjected to gruesome torture and horrific other various crimes against both humanity and nature until they comply :)
 <h3>TIP</h3><p class='tip'>Helpful tips or tricks are displayed in a grey box with white text like this!<br></p></pre>
-    <h3 id='fileFormats'>File formats:</h3><hr>
-    <pre></pre>
+    <h3 id='fileFormats'>File Formats</h3><hr>
+    <pre>    While programs may be written in a single language, in the industry it is rare.
+In many web application(or in general most computer programs) require several diffrent languages and resource types
+interacting together to bring the user a fully immersive experience.
+This can quickly become confusing and overwhelming when switching between 3 or more in a large project,
+    This project employes 5 text, 2 image and 1 audio file formats to accomplish the desired user experience.</pre>
     <h4 id='text'>Text</h4><hr>
 <pre>    In web development there are several layers of various languages, each has its own (independent) standard and specific purpose.
-This can quickly become confusing and overwhelming when switching between 3 or more in a large project,
-so consistency in style across all file types is important for the readability and maintainability of code.
-<!--All files should be UTF-8 encoded, without BOM.</pre><br>--></pre>
-<?php a::html5();?>: for expression of raw (strucutred) data, extension (.html), pages should be embedded within PHP, as it is more powerful and flexible than html on its own<br>
-<?php a::xml();?>: XML, extension (.xml), is purely a markup language (with no functionality),
+Thus consistency in style across all file types is important for the readability and maintainability of code.
+<!--All files should be UTF-8 encoded, without BOM.pre><br>-->
+<?php a::html5();?>-Expresses raw (strucutred) data(does not DO anything!), extension (.html),
+pages should be embedded within PHP(this project does not use raw HTML files),
+as PHP is more powerful and flexible than HTML on its own
+
+<?php a::xml();?>-extension (.xml), is purely a markup language (with no functionality),
 intended for the expression of an application's data.
-As xml closely adheres to html(with subtly yet important differences) xml files should follow the same stylings as html pages.<br>
-<?php a::javascript();?>: for local browser functionality, MIME type application/javascript, extension (.js), may be embeded within a php page.<br>
-<?php a::css();?>: for data display/styling. MIME type text/css, extension (.css), may be embeded within a php page.<br>
-<?php a::php();?>: Sever-side scripting language and database interface.<br>
+As xml closely adheres to html(with subtly yet important differences) xml files should follow the same stylings as html pages.
+
+<?php a::javascript();?>-Controls local browser functionality,
+MIME type application/javascript, extension (.js).
+May be embeded within a php page, to allow for server side off-load of
+processing or file/database io and textual replacement when dispatched to a browser.
+
+<?php a::css();?>-For the display/styling/animating of HTML elements displayed by a browser.
+MIME type text/css, extension (.css).
+As with js files, may be embeded within a php page,
+to take advantage of server-side data transforms upon page dispatched.
+This can be useful (for example) to bind jQuery selectors by providing an interface across the (3)seperate file types,
+which reduce typing and spelling/syntax errors in the jQuery selector strings.
+
+<?php a::php();?>-Sever-side scripting language, which provides:
+database(mySqli) and DOM(x[ht]ml) interfaces,
+preprocessing facilities for html(as well as other text file types, .js, .css, etc),
+allows for a file include mechanism(include/require) in other languages(which do not natively support this mechanism),
+the ability to express(easily) functions, classes and objects in aconventional OOP manner,
+which may be a feature the processed file does not natively support!
+and provides an interface from which javascript may asynchronously request server processes,
+using jQuery AJAX($.ajax), or with the higher level interface using jq.get and jq.post(located in js/jqLib.php)
 </pre>
+<p class='tip'>
     Keeping coherent style should reduce to the lowest common denominator of all languages involved.
-</pre>
+</p>
 <h5 id='dfn'>Directory structure and file name</h5><hr>
 <pre>   Directories and files are camelCased, like so
 root\
@@ -190,9 +220,25 @@ root\
         main.js
     index.php
 </pre>
-<h5 id='cfn'>Classes, functions and variables</h5><hr>
-<pre>   All classes are (unless prefixed with a namespace, eg: ao, pas).
-Functions and variables that are private or protected(or for languages like JS which have no protection, those with the intent of being used as such)
+<h5 id='cfn'>Classes, Functions, Variables and Namespaces</h5><hr>
+<pre>   As Object Oriented Programming(OOP) is not the background of everyone,
+First, some definitions:
+    Variable(data/POD)-
+    Function-A single memory location which repressents a stack of commands which operate on data,
+either anonymous or bound to a textual identifier.
+In javascript functions can be 'new'ed to mimic classes/objects.
+    Class-A declaration of a related collection of data and functions which,
+when an instance is initialized/allocated/returned,
+possess a unique memory location(in part or in whole).
+    Namespace-A collection of related variables, functions, and classes,
+which is (typically)never allocated, and has static duration(in compiled languages, these are a compiler construct)
+<p class='tip'>The HTML and CSS 'class' attribute/selector is not the same as
+that of the OOP concept(as neither are programing languages)</p>
+</pre>
+<h5 id='cfnDU'>Declaration and Usage</h5><hr>
+<pre>   All gloabally accessable classes are declared (unless prefixed with a namespace, eg: aoVehicle, pasGet, dbConnect),
+with CamelCase(starting with a capital).
+    Functions and variables that are private or protected(or for languages like JS which have no protection, those with the intent of being used as such)
 
 js:<code><p class='good'>
 //declares a function, which returns a new object,
@@ -216,8 +262,7 @@ function makeStuff(args){
             return this._priv;
         }
     };
-}</p>
-</code>
+}</p></code>
     There is no namespace mechanic in JavaScript! The two conventional ways are by declaring a global object,
 initialized with declared fields, or a function with locally and/or externally declared fields.
 Use of global objects are prefered, as fields declared and set within the function add to overhead,
@@ -226,22 +271,29 @@ as the variables will be initialized and assigned on each invocation of the func
 var ao = {
     //global object encapsulating a related collection of data or functions.
     //May also be conceptualized as a Dictionary or Map of generic bindings to named fields
-    _PRIV_STR = 'private const string',
+    _PRIV_STR:'private const string',
     publicInt:7,    //public non-const integer
     otherData:{
         ...
     }
     //
     _privDoStuff(){
+        //private/protected function which should only be called by this object (or its children),
+        //from within its other functions
         return;
     },
     doStuff:function(args){
+        //public accesser, which calls a private/protected method
         this._privDoStuff();
         return;
     },
-};</p>
-</code>
-technically javascript's dynamic nature allows the modification any of the fields in the previous script.
+};</p></code>
+    This is not a true namespace or static interface, as the code is initialized,
+its members are accessed with dot (.) notation, as its a global object(more akin to a static class),
+and not accessible (in other scripts) until the script has been parsed by the browser.
+    Technically javascript's dynamic nature allows the modification any of the fields in the previous script,
+so these naming conventions are purely synatictical and are enforced as a human readbility concern,
+as the programmer must be able to properly, clearly and easily express their intent.
 <hr>
 PHP:
     Variables in PHP begin with a &amp;(functions do not).
@@ -273,12 +325,22 @@ As the current webhost(GoDaddy) does not that language version,
 the feature is not used in any studio scripts and will not be mentioned or referenced in examples.</p>
 </pre>
     <h4 id='imgs'>Images</h4><hr>
-<pre><h5 id='imgAR'>Aspect Ratios:</h5>
-    The aspect ratio is an ipmortant relation between its size and height and is calculated and expressed as, w/h, or w:h,
-and is expressed in the lowest common denominator, while screen resoulution usually is expressed as the whole number pixel values (1920x1080).
-This relation is useful when preforming transforms on the image, as well as applyin more complex matrix operations(for displaying images using GPU accelerated programming)
-<h5 id='imgFD'>Image formats and dimensions:</h5>
-    All large (non-transparent)image resources, such as backgrounds, car photos assume the JPG format.
+<pre><h5 id='imgAR'>Aspect Ratios:</h5>    The aspect ratio is an important relation between its size and height and is calculated and expressed as, w/h, or w:h,
+and is expressed in the lowest common denominator.
+    This relation is useful when preforming calculations and transforms on the image,
+as well as applyin more complex matrix operations(for displaying images using GPU programming).
+<p class='tip'>Common Aspect Ratios:
+    Computer Monitors-4:3 for standards and 16:9 for widescreens,
+    Mobile-1:1(some blackberry), 4:3, 3:2, 4:5, 5:3, 16:9(exclussively iPhone5 or Greater and some blackberry)
+    Tablets(iPad and Android)-4:3
+    
+For mobile the inverses must also be taken into account,
+if landscape and portrait are considered.
+</p>
+    It is helpful(to avoid image stretch) to have image resources adopt the same aspect ratio as the display rendering them,
+    but as various devices have varying aspect ratios
+but an aspect ratio of 1:1 can also be acceptable, as the preportions are scaled so stretching apears relatively undistorted.
+<h5 id='imgFD'>Image Formats and Dimensions:</h5>    All large (non-transparent)image resources, such as backgrounds, car photos assume the JPG format.
 Logos for advertising are currently 385x85 .png, as they are small images where retention of resolution is important.
     Since the previous project did not have standardized image sizes the image library is uncessicarily bloated and chaotic,
 as a result file range from very small(32kb), to very large(2mb) and various aspect ratios (most common aspect resolutions 4/3 (1.33) or 3/2(1.5) ).
@@ -290,8 +352,11 @@ resulting in a ~11% reduction(of it original size) which,
 while this does not seem significant,
 it is a reduction of 215mb which does not need to be stored and tranfered, at no loss to resolution or image quality!
 
-    All vehicle images shall be a height of 720 (if issues with resoulton arise, increase to full 1080 resolution, or reduce to 640, for increased preformance!),
-the resulting images sizes then become:
+    All vehicle images shall be a height of 720.
+If issues with resoulton arise, increase to full 1080 resolution and/or widescreen aspect ratio,
+or reduce to 640, for increased preformance!
+
+The resulting images sizes then become:
     (4/3 = 853x640)
     (3/2 = 960x640)
     (16/9 = 1152x648)
@@ -308,17 +373,19 @@ the resulting images sizes then become:
 as the various aspect ratios cause distortions in the preportions of the vehicles.
     The current vehicle port on the site currently consumes 60% width and height of the browser.
 Should be standardized to either a constant aspect resolution(preferred) at either,
-4:3 (either 40%,30% or 80%,60%) or 1:5 (60%,40%) to maintain aspect resolution.
+4:3 (either 40%,30% or 80%,60%) or 3:2 (60%,40%) to maintain aspect resolution.
 </pre>
-<pre class='note'>For all future entries, an aspect ratio of 4/3 is prefered.</pre>
+<p class='tip'>For all future entries, an aspect ratio of 4/3 is prefered.</p>
 <pre>   IMPORTANT! Any logos which are registered trademarks much be licensed appropriately before hosting final page, to avoid legal action.</pre>
-
+    
+    Small images should 128 pixles in height or less.
+    Medium sized images, a height of 256 pixels is preferred.
 <h4 id='png'><?php a::png();?></h4><hr>
-<pre>PNG(Portable Network Graphics) is a lossless compression method for images.
+<pre>    PNG(Portable Network Graphics) is a lossless compression method for images.
 Most useful for small to medium sized images where data integrity and resolution must be maintained.
 Supports transparency.</pre>
 <h4 id='jpg'><?php a::jpg();?></h4><hr>
-<pre>JPEG/JPG (Joint Photographic Experts Group) is a lossy compression compression method for images.
+<pre>    JPEG/JPG (Joint Photographic Experts Group) is a lossy compression compression method for images.
 Should be used with large images(where maintaining detail/resolution/integrity is not important.
 Good for maintaining collections of large images with relatively low memory overhead.</pre>
 </pre>
