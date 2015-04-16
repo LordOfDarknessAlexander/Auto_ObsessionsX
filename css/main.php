@@ -82,7 +82,7 @@ Main Game Menu Styles
 	margin-top: 8em;
 	/*margin : 12px;
 	margin-top : 12em;*/
-	top: 20%;
+	/*top: 20%;*/
 }
 <?php dgm();?> div{
 <?php
