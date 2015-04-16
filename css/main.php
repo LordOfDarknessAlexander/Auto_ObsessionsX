@@ -114,7 +114,7 @@ Main Game Menu Styles
 }
 <?php dml();?> button#myCars{
 <?php
-    css::defaultBG('../images/garageBtn.png');
+    css::defaultBG('../images/garageBtn.jpg');
     css::bgSize('100%', '100%');
     lz();
 ?>
@@ -122,7 +122,7 @@ Main Game Menu Styles
 }
 <?php dml();?> button#toAuctionBtn{
 <?php
-    css::defaultBG('../images/auctionBtn.png');
+    css::defaultBG('../images/auctionBtn.jpg');
     css::bgSize('100%', '100%');
     lz();
 ?>
@@ -130,7 +130,7 @@ Main Game Menu Styles
 }
 <?php dmr();?> button#profile{
 <?php
-    css::defaultBG('../images/profileBtn.png');
+    css::defaultBG('../images/profileBtn.jpg');
     css::bgSize('100%', '100%');
     rz();
 ?>
@@ -138,7 +138,7 @@ Main Game Menu Styles
 }
 <?php dmr();?> button#buyUpgradesBtn
 {<?php
-    css::defaultBG('../images/repairBtn.png');
+    css::defaultBG('../images/repairBtn.jpg');
     css::bgSize('100%', '100%');
     rz();
 ?>
