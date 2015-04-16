@@ -47,13 +47,11 @@ ul{
     padding: 0;
     margin: 0;
 	display:inline;
-	/*margin-left: 2%;*/
+	
 }
 li{
     /*padding: 10px 0;*/
 	display:inline;
-	/*margin-left: 2%;*/
-	
 }
 
 a{
@@ -117,6 +115,7 @@ Forms
     bottom:40%;
     right:40%;
 	margin-left :60%;
+	margin-top: 4%;
 }
 #progress 
 {
@@ -335,15 +334,13 @@ div#menu
     width: 100%;
     height: 100%;
     border: 1px solid black;
-	display:inline;
     z-index: 2;
     text-align: center;
     background-color: black;
 }
 div#main
 {
-   
- margin-top : 22%;
+ margin-top : 6%;
 }
 /*
 credits page UI stylings
@@ -408,6 +405,8 @@ credits page UI stylings
 {
   color: #AFCAAF;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  font-size : 100%;
+  margin-bottom : 5%;
 }
 
 .button 
