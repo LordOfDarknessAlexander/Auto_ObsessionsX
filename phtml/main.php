@@ -29,7 +29,7 @@ $ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
     <img id='adBar'>
 <?php
 //this is not working on site without a new session
-//session_start();
+session_start();
 if(isset($_SESSION) AND isset($_SESSION['uname']) ){
     $uname = $_SESSION['uname'];
     $loggedIn = true;
@@ -64,7 +64,7 @@ else{?>
           <!--  <h2><?php /*echo $AO_NAME.' Presents!';*/?></h2>-->
         </div>
         <div id='main'>		
-            <h1><?php echo "Welcome $uname";?></h1> 
+             
 <?php session_start();
 
 if(isset($_SESSION) AND isset($_SESSION['uname']) ){
@@ -77,6 +77,7 @@ else{
 }
 
 ?>
+			<h1><?php echo "Welcome $uname";?></h1>
             <ul>
 <?php
 if($loggedIn){?>

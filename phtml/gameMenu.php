@@ -19,6 +19,7 @@
     //then finally the local folder which THIS script is located
     //require_once($val.'.php');
 //}
+
 ?>
 <div id='gameMenu'>
     <!--Root Game Menu, hub for page navigation-->

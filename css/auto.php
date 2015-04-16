@@ -47,12 +47,12 @@ ul{
     padding: 0;
     margin: 0;
 	display:inline;
-	margin-left: 2%;
+	/*margin-left: 2%;*/
 }
 li{
     /*padding: 10px 0;*/
 	display:inline;
-	margin-left: 2%;
+	/*margin-left: 2%;*/
 	
 }
 
@@ -291,11 +291,10 @@ div#reg-navigation{
     posAbs();
     defaultBtnBG();
 ?>
-    top:0%;
     right:0%;
     text-align:center;
     z-index:3;
-	top : 5%;
+	top : 7%;
 	
 }
 div#reg-navigation a{
@@ -307,7 +306,7 @@ div#reg-navigation a{
     font-weight: bold;
     text-decoration: none;
 	padding : 2%;
-	top : 5%;
+	top : 7%;
 }
 div#reg-navigation a:hover{
 <?php
@@ -317,7 +316,7 @@ div#reg-navigation a:hover{
 ?>  
 	color:green;
 	padding : 2%;
-	top : 5%;
+	top : 7%;
 }
 /* visited link */
 #div#main a:visited {
@@ -340,6 +339,11 @@ div#menu
     z-index: 2;
     text-align: center;
     background-color: black;
+}
+div#main
+{
+   
+ margin-top : 22%;
 }
 /*
 credits page UI stylings
