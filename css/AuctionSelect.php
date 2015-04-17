@@ -103,7 +103,7 @@ Tint divs diffrent colours for diffrent classes
 
 <?php divAS();?> li button
 {
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
+	background: url('../images/defaultBtn2.png') no-repeat 0 0;
 	background-size : 100% 100%;
 <?php
     posAbs();
