@@ -153,6 +153,8 @@ button
 }
 button:hover {
     /*mouse over*/
+	background: url('../images/defaultBtn2.png') no-repeat 0 0;
+	background-size:100% 100%;
     color:green;
 }
 button:active {
@@ -327,6 +329,11 @@ div#reg-navigation a:hover{
 }
 /* mouse over link */
 div#main a:hover {
+<?php
+    //mouse over
+    css::defaultBG('../images/defaultBtn2.png');
+    css::bgSize('100%', '100%');
+?>  
     color:green;
 }
 /*Root site menu*/

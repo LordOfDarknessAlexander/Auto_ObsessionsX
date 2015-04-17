@@ -9,8 +9,8 @@ $AO_NAME = 'Auto Obsessions';
 $TD_NAME = 'Tyler Drury';
 $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
-$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-//$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
+//$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
+$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
 ?>	
 <div class='wrapper'>
 	<!--root div element of web page!-->	
@@ -87,7 +87,7 @@ if($loggedIn){?>
 <?php
 }
 else{?>
-				<li><a href='Users/registerUser.php' class='button Register'>Register</a></li> 
+				<li><a id='reg' class='button Register' href='<?php echo rootURL() . 'Users/registerUser.php';?>'>Register</a></li> </li> 
                 <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
 				  <li><a href="javascript:void(0)" class="button play">Play<?php if(!$loggedIn){ echo ' as Guest';}?></a></li>
             </ul> 
