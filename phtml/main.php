@@ -109,6 +109,7 @@ else{?>
 		</div>
       
         <div id='credits'>
+		<h1>Auto-Obsessions Credits</h1>
             <!--could just be a link at the bottom of the page-->
             <ul>
                 <li class='artwork'>Character design and art: <?php echo $AS_NAME;?></li>
@@ -120,7 +121,10 @@ else{?>
             <ul>
               <li class='developer'>Developer: <?php echo $OWNER_NAME;?></li>
             </ul>
-            <a href='javascript:void(0)' class='button back'>Back</a>
+			<br/>
+			<br/>
+           <!-- <a href='javascript:void(0)' class='button back'>Back</a> -->
+		   <a href='index.php' class='button back' title='Home Page'>Back</a><br>
         </div> 
 		<div id='Register'>
 		

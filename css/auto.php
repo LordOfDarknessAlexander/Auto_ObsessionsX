@@ -361,6 +361,7 @@ credits page UI stylings
 #credits li 
 {	/*styling for all li(list item) in div element with id credits*/
     padding: 5px 0;
+	display:navigation;
 }
 
 .artwork, .music, .developer 
