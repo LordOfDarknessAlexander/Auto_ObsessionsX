@@ -40,6 +40,8 @@ var jq = {
 		this.userCash.html(val.toString());
 	},
     setErr:function(funcName, info){
+        //
+        //sets the jq.error info box, to inform the user an error occured
         //clear error            
         if(funcName === null || funcName === undefined){
             jq.error.text('');
@@ -109,7 +111,8 @@ var jq = {
 		selectBtn:$('div#Garage button#select'),
 		viewBtn:$('div#Garage button#viewCar'),
         shopBtn:$('div#Garage button#shop'),
-		toggle : function()
+		//
+        toggle : function()
 		{	//from game menu to garage, or vice versa
 			$('#gameMenu').toggle();
 			this.menu.toggle();	//this refers to jq.Garage
@@ -140,7 +143,8 @@ var jq = {
 		//carImg : $('img#car'),
         carName : $('div#CarView label#carName'),
 		carInfo : $('div#CarView label#carInfo'),
-		toggle:function()
+		//
+        toggle:function()
 		{	//go from (my cars to car view) || (car view to my cars)
 			//jq.Garage.menu.toggle();
 			//this.menu.toggle();
@@ -165,7 +169,8 @@ var jq = {
 		menu : $('div#AddFunds'),
 		backBtn : $('div#AddFunds button#backBtn'),
         homeBtn : $('div#AddFunds button#homeBtn'),
-		toggle : function()
+		//
+        toggle : function()
 		{	//from game menu to funds or vice versa
 			//$('#gameMenu').toggle();
             jq.RepairShop.menu.toggle();
@@ -200,16 +205,6 @@ var jq = {
         menu : $('div#loss'),
         homeBtn:$('div#loss button#homeBtn'),
        
-    },
-    Profile:{
-        menu:$('div#profile'),
-        backBtn:$('div#profile button#backBtn'),
-        toggle : function()
-		{
-			jq.Game.menu.toggle();
-			jq.Profile.menu.toggle();
-            jq.setErr();    //clear error when changing pages
-		}
     },
     /*Messages:{
         menu:$('div#messages'),
@@ -305,7 +300,6 @@ $('#addFunds').click(function()
 //jq.Game.toSearchBtn.click(jq.Search.toggle);
 //jq.Game.toBuisnessBtn.click(jq.Business.toggle);
 //
-jq.Profile.backBtn.click(jq.Profile.toggle);
 //jq.Ranks.backBtn.click(jq.Ranks.toggle);
 //jq.Messages.backBtn.click(jq.Messages.toggle);
 //jq.Search.backBtn.click(jq.Search.toggle);

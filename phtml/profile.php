@@ -1,45 +1,48 @@
 <?php
 //require_once '../pas/get.php';    //this is causing game to break :(
+//require_once 'pas/profile.php';
+//$stats = pasGet::userSaleStats();
 ?>
 <div id='profile'>
     <button id='backBtn'></button>
     <!---->
     <div id='userStats'>
-<h2>Purchasing</h2>
+<h2 id='purch'>Purchasing</h2>
 <hr>
-cars currently owned:<p><?php //echo pasGet::userCarCount();?></p><br>
-total cars purchased:<label></label><br>
-total upgrades purchased:<label></label><br>
-<h2>Sales</h2>
+Cars Owned:<p id='cco'><?php //echo pasGet::userCarCount();?></p><br>
+Cars Purchased:<label id='tcp'><?php ?></label><br>
+Upgrades Purchased:<label id='tup'><?php ?></label><br>
+<h2 id='statSales'>Sales</h2>
 <hr>
-total cars sold:<label><?php //echo pasGet::userSaleCount();?></label><br>
+Cars Sold:<label id='tcs'><?php //echo pasGet::userSaleCount();?></label><br>
 <h2>Auctions</h2>
 <hr>
-Auction wins:<label id='aWins'></label><br>
-Auction losses:<label id='aLosses'></label><br>
-Average:<label id='avg'></label><br>
+Auction Wins:<label id='aWins'><?php ?></label><br>
+Auction Losses:<label id='aLosses'><?php ?></label><br>
+Average:<label id='aAvg'><?php ?></label><br>
     </div>
     <!---->
     <div id='salesInfo'>
-<h2>Income</h2>
+<h2 id='inc'>Income</h2>
 <hr>
-total funds purchased:<label></label><br>
-total tokens purchased:<label></label><br>
-Allowance per hour:<label></label><br>
-total Allowance earned:<label></label><br>
+Total Funds Purchased:<label id='tfp'></label><br>
+Total Tokens Purchased:<label id='ttp'></label><br>
+Allowance per Hour:<label id='aph'></label><br>
+Total Allowance Earned:<label id='tae'></label><br>
 <hr>
-total invested in cars:<label></label><br>
-total invested in upgrades:<label></label><br>
-<h2>Sales</h2>
+Total Invested in Cars:<label id='tic'></label><br>
+Total Invested in Upgrades:<label id='tiu'></label><br>
+<h2 id='incSales'>Sales</h2>
 <hr>
-total funds spent:<label></label><br>
-total tokens spent:<label></label><br>
-total paid to Auction House:<label></label><br>
+Total Funds Spent:<label id='tfs'></label><br>
+Total Tokens Spent:<label id='tts'></label><br>
+Total Paid to Auction House:<label id='tpAH'></label><br>
 <h2>Profits</h2>
 <hr>
-net sales profit:<label></label><br>
-gross sales profit:<label></label><br>
+Net Sales Profit:<label id='nsp'></label><br>
+Gross Sales Profit:<label id='gsp'></label><br>
+Difference:<label id='ngd'></label><br>
 <!--average the user 'over bids' on sales-->
-average gain/loss per trade:<label></label><br>
+average gain/loss per trade:<label id='aGL'></label><br>
     </div>
 </div>

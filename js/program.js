@@ -422,7 +422,7 @@ function(){
 //
 //Main, right menu
 //
-jq.Game.toProfileBtn.click(jq.Profile.toggle);
+jq.Game.toProfileBtn.click(Profile.init);
 jq.Game.repairBtn.click(
 function(){
     //rebind back button to return us to main menu
