@@ -85,13 +85,10 @@ Car View Screen
 {<?php
     defaultColor();
     posAbs();
-    //css::size('60%', '10%');
+    css::size('60%', '10%');
+    css::bgColor('grey');
 ?>
-    background-color:grey;
 	/*background-image:url('../images/checkers.png');*/
-
-	width:60%;
-	height:10%;
 
 	left:20%;
 }
@@ -107,17 +104,19 @@ Car View Screen
     font-size:2vw;
 }
 <?php divCarView();?> label#carInfo{
-	text-align:left;
-	<?php css::marginBtm();?>
+<?php
+    css::marginBtm();
+    css::txtAlignL();
+?>
     font-size:1.5vw;
 }
 <?php divCarView();?> h2{
 <?php
     posAbs();
     css::size('14%', '5%');
+    css::bgColor('grey');
 ?>
     font-size:2vw;/*size element relative to viewport width!*/
-    background-color:grey;
     /*background:url('../headerBG.jpg');*/
     margin:0%;    
 }
@@ -126,12 +125,12 @@ Car View Screen
     posAbs();
     scrollY();
     css::size('14%', '23%');
+    css::txtAlignL();
+    css::bgColor('grey');
 ?>
     background: url('../images/defaultBG.jpg') no-repeat 0 0;
-    /*background-color:grey;*/
     
     font-size:1.5vw;
-    text-align:left;
 }
 /*
 Car View left div

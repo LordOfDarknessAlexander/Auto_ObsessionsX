@@ -1,5 +1,8 @@
 <?php
-//
+function loggedIn(){
+    //return isset($_SESSION) && isset($_SESSION[ao::UID]);
+    return true;
+}
 ?>
 //
 //User Profile jQuery interface bindings
@@ -81,29 +84,20 @@ var Profile = {
     //User Profile State interface
     //
     init:function(){
-<?php $funcName = 'js/state/profile.php Profile::init()';?>
-        jq.post('pas/profile.php',
-            function(data){
-                if(data === null || data == undefined){
-                    return;
-                }
-                //alert(JSON.stringify(data));
-                //
-                //set contents on page, then transition,
-                //as it is much cleaner and ensures the user does not
-                //witness the page updates
-                //
-                jq.Profile.stats.set(data.stats);
-                jq.Profile.sales.set(data.income)
-                //
-                jq.Profile.toggle();
-            },
-            function(jqxhr){
-                //do not show screen transition,
-                //play failure sound
-                jq.setErr("<?php echo $funcName;?>", jqxhr.responseText);
-            }
-        );
+<?php if(loggedIn() ){?>
+        pas.set.userProfileData();
+<?php
+}
+else{?>
+        //get stats from vars saved to local vars and storage!
+        //var data = getUserProfileData();
+        //jq.Profile.stats.set(data.stats);
+        //jq.Profile.sales.set(data.income)
+        //
+        jq.Profile.toggle();
+<?php
+}
+?>
     },
 	update:function(){
 	},

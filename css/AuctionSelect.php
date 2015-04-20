@@ -75,9 +75,11 @@ Action Select UI stylings
 }
 <?php divAS();?> form#filter
 {
-	text-align:left;
     font-size:1.5vw;
-<?php posAbs();?>
+<?php
+    posAbs();
+    css::txtAlignL();
+?>
 	left:0%;
     top:30%;
 	width:10%;
@@ -86,19 +88,19 @@ Action Select UI stylings
 Tint divs diffrent colours for diffrent classes
 */
 <?php divAS();?> li.classic label#infoLabel{
-	background-color:yellow;
+<?php css::bgColor('yellow');?>
 }
 <?php divAS();?> li.muscle label#infoLabel{
-	background-color:green;
+<?php css::bgColor('green');?>
 }
 <?php divAS();?> li.custom label#infoLabel{
-	background-color:blue;
+<?php css::bgColor('blue');?>
 }
 <?php divAS();?> li.unique label#infoLabel{
-	background-color:white;
+<?php css::bgColor('white');?>
 }
 <?php divAS();?> li.foreign label#infoLabel{
-	background-color:black;
+<?php css::bgColor('black');?>
 }
 
 <?php divAS();?> li button

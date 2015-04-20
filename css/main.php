@@ -11,6 +11,7 @@ require_once 'profile.php';
 require_once 'repair.php';
 require_once 'garage.php';
 require_once 'carView.php';
+require_once 'profile.php';
 //    
 function dgm(){?>div#gameMenu<?php
 }

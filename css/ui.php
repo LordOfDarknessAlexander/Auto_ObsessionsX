@@ -35,11 +35,7 @@ function scrollY(){?>    overflow-y:scroll;
 }
 
 class css{
-    public static function color($color = 'red'){
-        //string representing hex, word(ie red, white, blue), or rbga
-        ?>    color:<?php echo $color;?>;
-<?php
-    }
+    //a static interface encapsulating common CCS text fragments
     public static function width($str){
         //if( (int)$str > 0){
         ?>    width:<?php echo $str;?>;
@@ -77,6 +73,7 @@ class css{
     public static function header(){
         header("Content-type: text/css; charset: UTF-8");
     }
+    //Margins, Boarders and Off-sets
     public static function right($str){?>
     right:<?php echo $str;?>;
 <?php
@@ -106,8 +103,26 @@ class css{
         $v = 2.0;
         css::bottom(strval($v) . '%');
     }
-    //font
+    //Text and Font
     public static function fontBold(){?>    font-weight:bold;
+<?php
+    }
+    public static function txtAlignL(){?>    text-align:left;
+<?php
+    }
+    public static function txtAlignR(){?>    text-align:right;
+<?php
+    }
+    public static function txtAlignCntr(){?>    text-align:center;
+<?php
+    }
+    //Colors
+    public static function color($color = 'red'){
+        //string representing hex, word(ie red, white, blue), or rbga
+    ?>    color:<?php echo $color;?>;
+<?php
+    }
+    public static function bgColor($str = 'grey'){?>    background-color:<?php echo $str;?>;
 <?php
     }
 }

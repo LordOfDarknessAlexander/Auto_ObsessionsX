@@ -47,6 +47,7 @@ function getCar(carID){
     }
     return null;
 }
+
 //userGarage.push(xdbCars[0]);
 //userGarage.push(xdbCars[1]);
 //userGarage.push(xdbCars[3]);
@@ -437,7 +438,7 @@ var Garage = {
 			div.children('label#carInfo').text(src.children('label#carInfo').text() );
 			//div.children('label#name').text(src.children('label#name').text() );
 			
-			var car = userGarage[i],
+			var car = Garage.getCarByIndex(i); //userGarage[i],
 				stats = car.getStats();
 			
 			//$('div#userCar img#carImg').attr('src', car.getFullPath() );

@@ -82,29 +82,32 @@ Auction Select Car View
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 	background-size : 100% 100%;
     /*background-color:blue;*/
-<?php posAbs();?>
+<?php
+    posAbs();
+    css::txtAlignL();
+?>
 	height:15%;
 	width:25%;
     left:65%;
-    text-align:left;
+
     font-size:1.5vw;
     display:block;
 }
-<?php dcv();?> div label#price
-{
-	height:50%;
-	width:100%;
+<?php dcv();?> div label#price{
+<?php
+    css::txtAlignL();
+    css::size('100%', '50%');
+?>
     left:0%;
-    text-align:left;
     font-size:1.25vw;
     display:block;
 }
-<?php dcv();?> div label#expireTime
-{
-	height:50%;
-	width:100%;
+<?php dcv();?> div label#expireTime{
+<?php
+    css::size('100%', '50%');
+    css::txtAlignL();
+?>
     left:0%;
-    text-align:left;
     font-size:1.25vw;
     display:block;
 }

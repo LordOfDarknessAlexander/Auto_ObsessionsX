@@ -91,23 +91,23 @@ progress::-webkit-progress-bar{
     background:grey;
 }
 progress::-webkit-progress-value{
-    background-color:red;
+<?php css::bgColor('red');?>
 }
 progress.high::-webkit-progress-value{
-    background-color:green;
+<?php css::bgColor('green');?>
 }
 progress.med::-webkit-progress-value{
-    background-color:yellow;
+<?php css::bgColor('yellow');?>
 }
 <?php //Firefox pb stylings?>
 progress::-moz-progress-bar{
-    background-color:red;
+<?php css::bgColor('red');?>
 }
 progress.high::-moz-progress-bar{
-    background-color:green;
+<?php css::bgColor('green');?>
 }
 progress.med::-moz-progress-bar{
-    background-color:yellow;
+<?php css::bgColor('yellow');?>
 }
 <?php //EI pb stylings?>
 /*
@@ -195,8 +195,8 @@ pre styles(preformated text)
 pre#info{
 <?php //lm();
     //css:size('90%', '10%');
+    css::bgColor('grey');
 ?>
-    background-color:grey;
     position:absolute;
     height:10%;
     width:90%;
@@ -257,6 +257,7 @@ div#statBar{
 <?php
     posAbs();
     css::size('100%', '15%');
+    css::txtAlignL();
 ?>
 	background: url('../images/statBarTile.png');
 	top:0%;
@@ -264,7 +265,6 @@ div#statBar{
 	
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
-	text-align:left;
 	color:red;
 	font-weight: bold;
 	z-index : 2;
@@ -337,18 +337,18 @@ div#main a:hover {
     color:green;
 }
 /*Root site menu*/
-div#menu
-{
+div#menu{
+<?php
+    css::bgColor('black');
+    css::txtAlignCntr();
+    css::size('100%', '100%');
+?>
     background-image:url('../images/AbsuMenu.png');
     background-size : 100% 100%;
     position: absolute;
-    width: 100%;
-    height: 100%;
     border: 1px solid black;
 	display: inline;
     z-index: 2;
-    text-align: center;
-    background-color: black;
 }
 div#main
 {
@@ -494,19 +494,6 @@ credits page UI stylings
   height: 100%;
   position: absolute;
 }
-/*div#profile
-{
-    background: url('../images//defaultBG.jpg') no-repeat 0 0;
-	background-size : 100% 100%;
-    display: none;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top:0%;
-    left:0%;
-    z-index:1;
-}*/
 /*
 div#messages
 {

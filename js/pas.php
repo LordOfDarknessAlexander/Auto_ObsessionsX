@@ -100,6 +100,33 @@ $funcName = "$fileName, pas::set::userCar(vehicleID)";
                 },
                 {carID:vehicleID}
             )
+        },
+        userProfileData:function(){
+<?php
+$funcName = "$fileName, pas::set::userUserProfileData()";
+?>
+            jq.post('pas/profile.php',
+                function(data){
+                    if(data === null || data == undefined){
+                        return;
+                    }
+                    //alert(JSON.stringify(data));
+                    //
+                    //set contents on page, then transition,
+                    //as it is much cleaner and ensures the user does not
+                    //witness the page updates
+                    //
+                    jq.Profile.stats.set(data.stats);
+                    jq.Profile.sales.set(data.income)
+                    //
+                    jq.Profile.toggle();
+                },
+                function(jqxhr){
+                    //do not show screen transition,
+                    //play failure sound
+                    jq.setErr("<?php echo $funcName;?>", jqxhr.responseText);
+                }
+            );
         }
     },
     query:{

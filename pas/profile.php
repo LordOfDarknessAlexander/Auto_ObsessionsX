@@ -118,6 +118,8 @@ function getUserSoldCars(){
     echo json_encode($cars);
 }
 //
+//const key passed as an argument in the url,
+//to switch between functionality of this page
 $OP = 'op';
 //echo json_encode(false);
 //exit();

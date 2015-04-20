@@ -1,12 +1,18 @@
 <?php
-//auction state stylings
 require_once 'ui.php';
 //
-css::header();
+//css::header();
 //    
 function divPro(){?>div#profile<?php
 }
+function dpus(){divPro();?> div#userStats<?php
+}
+function dpsi(){divPro();?> div#salesInfo<?php
+}
 ?>
+/*
+User Profile Screen Styles
+*/
 <?php divPro();?>
 {
 <?php
@@ -19,27 +25,34 @@ function divPro(){?>div#profile<?php
 	z-index: 1;
 }
 <?php divPro();?> h2{
-    text-align:center;
+<?php
+    css::txtAlignCntr();
+    css::fontBold();
+?>
     font-size:1.5vw;
-    font-weight:bold;
 }
 <?php divPro();?> div{
 <?php
     posAbs();	
     css::size('18%', '60%');
     scrollY();
+    css::txtAlignL();
 ?>
     display:block;
-	text-align:left;
 
     top:28%;
     
     font-size:1.25vw;
 }
-<?php divPro();?> div#userStats{
+/*
+PRofile DIV User Stats
+*/
+<?php dpus();?>{
     left:2%;
 }
-<?php divPro();?> div#salesInfo
-{
+/*
+Profile DIV Sales info
+*/
+<?php dpsi();?>{
     right:2%;
 }

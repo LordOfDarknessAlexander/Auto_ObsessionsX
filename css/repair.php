@@ -36,10 +36,8 @@ Repair Screen Styles
 <?php divRepair();?> h2{
 <?php
     posAbs();
-    css::height('5%');
-    //css:width('14%');
+    css::size('14%', '5%');
 ?>
-	width:14%;
     font-size:1.8vw;/*size element relative to viewport width!*/
     /*font-weight:bold;
     background-color:grey;*/
@@ -65,19 +63,18 @@ Repair Screen Styles
     posAbs();
     css::size('14%', '23%');
     scrollY();
+    css::txtAlignL();
 ?>
     background:url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/
     
     font-size:1.25vw;
-    text-align:left;
 }
 <?php divRepair();?> div button{
 <?php
     //posAbs();
+    css::size('45%', '20%');
 ?>
-    width:45%;
-    height:20%;
     font-size:0.65rem;
     /*font-weight:bold;*/
 }
@@ -104,7 +101,7 @@ left div
     //lStatView('body', '60%', '65%');
 ?>
 <?php divRepair();?> h2#dt{
-    <?php
+<?php
     css::lm();
     css::top('28%');
 ?>
