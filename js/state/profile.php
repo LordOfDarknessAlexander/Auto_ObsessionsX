@@ -10,7 +10,7 @@ function loggedIn(){
 jq.Profile = {
     //dynamically bind this object to the jq namespace
     div:$('div#profile'),
-    backBtn:$('button#backBtn', this.div),
+    backBtn:$('div#profile button#backBtn'),
     //
     stats:{
         div:$('div#userStats', this.div),
