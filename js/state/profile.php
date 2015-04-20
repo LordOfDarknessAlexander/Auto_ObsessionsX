@@ -12,13 +12,13 @@ jq.Profile = {
     stats:{
         div:$('div#userStats', this.div),
         //
-        ownedCars:$('p#cco', this.statsDiv),
+        ownedCars:$('label#cco', this.statsDiv),
         purchCars:$('label#tcp', this.statsDiv),
         purchUR:$('label#tup', this.statsDiv),
         soldCars:$('label#tcs', this.statsDiv),
         aWins:$('label#aWins', this.statsDiv),
         aLoss:$('label#aLosses', this.statsDiv),
-        aAvg:$('label#aAvg', this.statsDiv),
+        remain:$('label#remain', this.statsDiv),
         //
         set:function(data){
             //
@@ -28,7 +28,7 @@ jq.Profile = {
             this.soldCars.text(data.carsSold.toString());
             this.aWins.text(data.wins.toString());
             this.aLoss.text(data.losses.toString());
-            this.aAvg.text(data.avg.toFixed(2));
+            this.remain.text(data.remain.toString());
         },
     },
     sales:{        

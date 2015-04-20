@@ -573,7 +573,7 @@ class pasGet{
         echo json_encode($cars);
     }
     public static function auctionCarsCount(){
-        //returns the number of entries in vehicle database
+        //returns the number of entries in vehicle database(aoCars in $AO_DB)
         global $AO_DB;
         $aoCars = ao::CARS;
         //$count is initialized when this is called for the first time
@@ -599,7 +599,8 @@ class pasGet{
                 $res->close();
             }
             else{   //select failed, no vehicles
-                //echo "<p class='error'>User: has no entries in database</p>";
+                echo 'error! no entries in vehicle database';
+                //exit();
             }
         }
         return $count;
@@ -699,29 +700,31 @@ class pasGet{
         //returns how many auctions the user has won
         //carCount + salesCount();
     //}
-    //public static function getAuctionLosses(){
+    public static function auctionLosses(){
         //returns how many auctions the user has lost
-        //global aoFailedAuctions;
-        //$uid = getUserTableName();
-        //$count = 0;
-        /*
-        $res = $aoCarSalesDB->query(
+        global $aoAuctionLossDB;
+        $uid = getUserTableName();
+        $count = 0;
+        
+        $res = $aoAuctionLossDB->query(
             "SELECT * FROM $uid"
         );
         
         if($res){
             $count = $res->num_rows;
-            //fetch each entry until there are no more
-            //while($row = mysqli_fetch_array($res) ){
-                //$count += 1;
-            //}
             $res->close();
-        }*/
-    //}
-    //public static function getAuctionAvg(){
+        }
+        return $count;
+    }
+    public static function auctionAvg(){
         //returns aver ratio of wins/losses
-        //return (getAuctionWins() - getAuctionLosses() ) / getTotalCarCount();
-    //}
+        $wins = pasGet::getTotalUserCarCount();
+        $loss = pasGet::auctionLosses();
+        $diff = $wins - $loss;
+        $total = $wins + $loss;
+        
+        return 0.0;//$total != 0 ? ($diff / $total) : 0.0;
+    }
     public static function userSales(){
         //returns the user's total active and expired actions
         global $aoCarSalesDB;
@@ -771,19 +774,19 @@ class pasGet{
     //}
     public static function getTotalUserCarCount(){
         //total cars ever purchased by the user
-        return getUserCarCount() + getUserSalesCount();
+        return pasGet::userCarCount() + pasGet::userSalesCount();
     }
     public static function getRemainingCarCount(){
         //returns the number of cars the user still has to purchase
         //$ret = getAuctionCarsCount() - (getUserCarCount() + getUserSalesCount() );
         //echo $ret
-        return getAuctionCarsCount() - getTotalUserCarCount();
+        return pasGet::auctionCarsCount() - pasGet::getTotalUserCarCount();
     }
-    public static function getGameCompletion(){
+    public static function gameCompletion(){
         //percentage of cars bought and sold by the user
-        $acCount = getAuctionCarsCount();
+        $acCount = pasGet::auctionCarsCount();
         
-        return $acCount != 0 ? getTotalUserCarCount() / $acCount : 0.0;
+        return $acCount != 0 ? pasGet::getTotalUserCarCount() / $acCount : 0.0;
     }	
 }
 pasGet::init();

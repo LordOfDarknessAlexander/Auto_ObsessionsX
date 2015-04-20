@@ -35,13 +35,15 @@ function getUserPurchases(){
     //$avg = $l > 0 ? $w / $l : $w;
     
     return array(
-        'carsOwned'=>0,
+        'carsOwned'=>pasGet::userCarCount(),
         'carsPurch'=>0,
         'urPurch'=>0,
-        'carsSold'=>0,
-        'wins'=>0,
-        'losses'=>0,
-        'avg'=>0
+        'carsSold'=>pasGet::userSalesCount(),
+        'remain'=>pasGet::getRemainingCarCount(),
+        'wins'=>pasGet::getTotalUserCarCount(),
+        'losses'=>pasGet::auctionLosses(),
+        'avg'=>pasGet::auctionAvg(),
+        'comp'=>pasGet::gameCompletion()
     );
 }
 

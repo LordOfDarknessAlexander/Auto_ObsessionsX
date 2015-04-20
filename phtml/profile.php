@@ -9,40 +9,47 @@
     <div id='userStats'>
 <h2 id='purch'>Purchasing</h2>
 <hr>
-Cars Owned:<p id='cco'><?php //echo pasGet::userCarCount();?></p><br>
-Cars Purchased:<label id='tcp'><?php ?></label><br>
-Upgrades Purchased:<label id='tup'><?php ?></label><br>
+<pre>Cars Owned:<label id='cco'><?php //echo pasGet::userCarCount();?></label>
+Cars Purchased:<label id='tcp'><?php ?></label>
+Upgrades Purchased:<label id='tup'><?php ?></label>
+</pre>
 <h2 id='statSales'>Sales</h2>
 <hr>
 Cars Sold:<label id='tcs'><?php //echo pasGet::userSaleCount();?></label><br>
 <h2>Auctions</h2>
-<hr>
-Auction Wins:<label id='aWins'><?php ?></label><br>
-Auction Losses:<label id='aLosses'><?php ?></label><br>
-Average:<label id='aAvg'><?php ?></label><br>
+<hr><pre>
+Wins:<label id='aWins'><?php ?></label>
+Losses:<label id='aLosses'><?php ?></label>
+Remaining:<label id='remain'><?php ?></label>
+</pre>
     </div>
     <!---->
     <div id='salesInfo'>
 <h2 id='inc'>Income</h2>
-<hr>
-Total Funds Purchased:<label id='tfp'></label><br>
-Total Tokens Purchased:<label id='ttp'></label><br>
-Allowance per Hour:<label id='aph'></label><br>
-Total Allowance Earned:<label id='tae'></label><br>
-<hr>
-Total Invested in Cars:<label id='tic'></label><br>
-Total Invested in Upgrades:<label id='tiu'></label><br>
+<hr><pre>
+Funds Purchased:<label id='tfp'><?php ?></label>
+Tokens Purchased:<label id='ttp'><?php ?></label>
+Allowance per Hour:<label id='aph'><?php ?></label>
+Total Allowance Earned:<label id='tae'><?php ?></label>
+</pre>
+<h2 id='inv'>Investments</h2>
+<hr><pre>
+Total Cars:<label id='tic'><?php ?></label>
+Total Upgrades:<label id='tiu'><?php ?></label>
+</pre>
 <h2 id='incSales'>Sales</h2>
-<hr>
-Total Funds Spent:<label id='tfs'></label><br>
-Total Tokens Spent:<label id='tts'></label><br>
-Total Paid to Auction House:<label id='tpAH'></label><br>
+<hr><pre>
+Total Funds Spent:<label id='tfs'><?php ?></label>
+Total Tokens Spent:<label id='tts'><?php ?></label>
+Total Paid to Auction House:<label id='tpAH'><?php ?></label>
+</pre>
 <h2>Profits</h2>
-<hr>
-Net Sales Profit:<label id='nsp'></label><br>
-Gross Sales Profit:<label id='gsp'></label><br>
-Difference:<label id='ngd'></label><br>
+<hr><pre>
+Net Sales Profit:<label id='nsp'><?php ?></label>
+Gross Sales Profit:<label id='gsp'><?php ?></label>
+Difference:<label id='ngd'><?php ?></label>
 <!--average the user 'over bids' on sales-->
-average gain/loss per trade:<label id='aGL'></label><br>
+Average Gain/Loss per Trade:<label id='aGL'><?php ?></label>
+</pre>
     </div>
 </div>
