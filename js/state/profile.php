@@ -13,15 +13,15 @@ jq.Profile = {
     backBtn:$('div#profile button#backBtn'),
     //
     stats:{
-        div:$('div#userStats', this.div),
+        div:$('div#profile div#userStats'),
         //
-        ownedCars:$('label#cco', this.statsDiv),
-        purchCars:$('label#tcp', this.statsDiv),
-        purchUR:$('label#tup', this.statsDiv),
-        soldCars:$('label#tcs', this.statsDiv),
-        aWins:$('label#aWins', this.statsDiv),
-        aLoss:$('label#aLosses', this.statsDiv),
-        remain:$('label#remain', this.statsDiv),
+        ownedCars:$('label#cco', this.div),
+        purchCars:$('label#tcp', this.div),
+        purchUR:$('label#tup', this.div),
+        soldCars:$('label#tcs', this.div),
+        aWins:$('label#aWins', this.div),
+        aLoss:$('label#aLosses', this.div),
+        remain:$('label#remain', this.div),
         //
         set:function(data){
             //
@@ -35,21 +35,21 @@ jq.Profile = {
         },
     },
     sales:{        
-        div:$('div#salesInfo', this.div),
+        div:$('div#profile div#salesInfo'),
         //
-        totalFunds:$('label#tfp', this.salesDiv),
-        totalTokens:$('label#ttp', this.salesDiv),
-        aph:$('label#aph', this.salesDiv),
-        totalAllowance:$('label#tae', this.salesDiv),
-        carsInvst:$('label#tic', this.salesDiv),
-        urInvst:$('label#tiu', this.salesDiv),
-        fundsSpent:$('label#tfs', this.salesDiv),
-        tokensSpent:$('label#tts', this.salesDiv),
-        paidAH:$('label#tpAH', this.salesDiv),
-        netSales:$('label#nsp', this.salesDiv),
-        grossSales:$('label#gsp', this.salesDiv),
-        dif:$('label#ngd', this.salesDiv),
-        avgGL:$('label#aGL', this.salesDiv),
+        totalFunds:$('label#tfp', this.div),
+        totalTokens:$('label#ttp', this.div),
+        aph:$('label#aph', this.div),
+        totalAllowance:$('label#tae', this.div),
+        carsInvst:$('label#tic', this.div),
+        urInvst:$('label#tiu', this.div),
+        fundsSpent:$('label#tfs', this.div),
+        tokensSpent:$('label#tts', this.div),
+        paidAH:$('label#tpAH', this.div),
+        netSales:$('label#nsp', this.div),
+        grossSales:$('label#gsp', this.div),
+        dif:$('label#ngd', this.div),
+        avgGL:$('label#aGL', this.div),
         //
         set:function(data){
             this.totalFunds.text(data.fundsPurch.toFixed(2));
