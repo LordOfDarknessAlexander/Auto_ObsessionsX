@@ -29,15 +29,6 @@ Action Select UI stylings
 	padding-top: 92px;
 	z-index: 1;
 }
-<?php divAS();?> ul
-{
-    /*position:absolute;
-    top:0%;
-    left:0%;*/
-	margin:0;
-	padding:0;
-	list-style-type:none;
-}
 <?php divAS();?> div#carView{
 <?php
     posAbs();
@@ -46,32 +37,6 @@ Action Select UI stylings
 ?>
     bottom:0%;
     left:10%;
-}
-<?php divAS();?> li
-{
-	/*margin:70px 0% 5% 0;	*/
-	top right bottom left   /*this line should cause the code to break, invalid css*/
-	/*padding: 50px 50px;*/
-	display:inline;
-	margin : 2%;
-    background: url('../images/label.jpg');
-<?php lih();?>
-}
-<?php divAS();?> li img
-{
-<?php posAbs();?>
-	left:0%;
-	width:128px;
-<?php lih();?>
-}
-<?php divAS();?> li label#infoLabel
-{
-	opacity:0.70;
-	text-align:center;
-<?php posAbs();?>
-	left:128px;
-	width:70%;
-<?php lih();?>
 }
 <?php divAS();?> form#filter
 {
@@ -85,25 +50,35 @@ Action Select UI stylings
 	width:10%;
 }
 /*
-Tint divs diffrent colours for diffrent classes
+Tint divs different colours for different classes
 */
-<?php divAS();?> li.classic label#infoLabel{
+<?php divAS();?> div.classic label#infoLabel{
 <?php css::bgColor('yellow');?>
 }
-<?php divAS();?> li.muscle label#infoLabel{
-<?php css::bgColor('green');?>
-}
-<?php divAS();?> li.custom label#infoLabel{
-<?php css::bgColor('blue');?>
-}
-<?php divAS();?> li.unique label#infoLabel{
-<?php css::bgColor('white');?>
-}
-<?php divAS();?> li.foreign label#infoLabel{
+<?php divAS();?> div.muscle label#infoLabel{
 <?php css::bgColor('black');?>
 }
+<?php divAS();?> div.custom label#infoLabel{
+<?php css::bgColor('blue');?>
+}
+<?php divAS();?> div.unique label#infoLabel{
+<?php css::bgColor('white');?>
+}
+<?php divAS();?> div.foreign label#infoLabel{
+<?php css::bgColor('orange');?>
+}
 
-<?php divAS();?> li button
+<?php divAS();?> div.lost label#infoLabel{
+<?php css::bgColor('red');?>
+}
+<?php divAS();?> div.isf label#infoLabel{
+<?php css::bgColor('grey');?>
+}
+<?php divAS();?> div.owned label#infoLabel{
+<?php css::bgColor('green');?>
+}
+
+<?php divAS();?> div#carView div button
 {
 	background: url('../images/defaultBtn2.png') no-repeat 0 0;
 	background-size : 100% 100%;
@@ -117,13 +92,67 @@ Tint divs diffrent colours for diffrent classes
 	color:red;
     /*z-index:5;*/
 }
-<?php divAS();?> li button label
+/**/
+<?php divAS();?> div#carView div
 {
-	font-size:1.25em;
-	/*font-family::;
-	display:inline;
-	position:absolute;*/
-	text-align::center;
-	color:red;
-    cursor:pointer;
+	/*margin:35px 0% 35px 0%;	*/
+	/*top right bottom left   this line should cause the code to break, invalid css*/
+	/*padding: 50px 50px;
+	display:inline;*/
+	/*margin : 2%;*/
+    background: url('../images/label.jpg');
+<?php lih();?>
 }
+<?php divAS();?> div#carView div img
+{
+<?php posAbs();?>
+	left:0%;
+	width:128px;
+<?php lih();?>
+}
+<?php divAS();?> div#carView div label#infoLabel
+{
+	opacity:0.70;
+	text-align:center;
+<?php posAbs();?>
+	left:128px;
+	width:70%;
+<?php lih();?>
+}
+/*
+<php divAS();> ul
+{
+    /*position:absolute;
+    top:0%;
+    left:0%;
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+<php divAS();> li{
+
+	/*margin:35px 0% 35px 0%;	
+	/*top right bottom left   this line should cause the code to break, invalid css
+	/*padding: 50px 50px;
+	display:inline;
+	/*margin : 2%;
+    background: url('../images/label.jpg');
+<php lih();>
+}
+<php divAS();> li img
+{
+<php posAbs();>
+	left:0%;
+	width:128px;
+<php lih();>
+}
+<php divAS();> li label#infoLabel
+{
+	opacity:0.70;
+	text-align:center;
+<php posAbs();>
+	left:128px;
+	width:70%;
+<php lih();>
+}
+*/

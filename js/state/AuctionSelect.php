@@ -34,7 +34,7 @@ function isValidData(){
 //
 var AuctionSelect =
 {	//object representing the Auction Select state and interface
-	list : $('<?php asCarView();?> ul#auctionCars'),
+	list : $('<?php asCarView();?>'),
     setCarBtn:function(i, data){
         //Dynamically add an html li (containing auction info) to the DOM
         var carID = data.carID,
@@ -46,34 +46,41 @@ var AuctionSelect =
             hasLostCar = data.hasLostCar,
             liID = 'asli' + (i).toString(),
             //btnID = "as" + (i).toString(),
-            labelID = 'infoLabel',
-            liName = '<?php asCarView();?> ul#auctionCars li#' + liID,
-            li = $(liName),
-            btn = $(liName + ' button');
+            labelID = 'infoLabel';
         //
-        var btnStr = "<li id=\'" + liID + "\'>" + 
+        var btnStr = "<div id=\'" + liID + "\'>" + 
             "<img src=\'" + path + "\'>" +
             "<label id=\'" + labelID + "\'>" + name + "</label>" +
             "<button id=\'" + carID.toString() + "'>" + 
-                "<label id=\'price\'>$" + price.toFixed(2) + "</label><br>" +
+                //"<label id=\'price\'>$" + price.toFixed(2) + "</label><br>" +
                 "Bid Now!<br>" +
             "</button>" +
         "</li><br>";
+        
         this.list.append(btnStr);
+        
+        var liName = '<?php asCarView();?> div#' + liID,
+            div = $(liName),
+            btn = $('button', div);
 
         if(hasCar){
         	//display but disable user from entering auction
-            li.css('opacity', '0.45');
+            div.css('opacity', '0.45').addClass('owned');
             btn.off().click(this.denyAuction).css('cursor', 'default');
         }
         else if(hasLostCar){
         	//user has previously loss, fade and highlight red!
-            li.css('opacity', '0.45');
+            div.css('opacity', '0.45').addClass('lost');
             //li.css('background-color', 'red');
+            btn.off().click(this.denyAuction).css('cursor', 'default');
+        }
+        else if(price > userStats.money){
+            div.css('opacity', '0.45').addClass('isf');
             btn.off().click(this.denyAuction).css('cursor', 'default');
         }
         else{
             //var carID = btn.attr('id');
+            div.removeClass();
             btn.off().click({index:i}, this.initAuction);
             //btn.css('background-image', "url(\'..\\images\\vehicle.jpg");	//car.getFullPath());
         }
@@ -86,7 +93,7 @@ $funcName = "$fileName, AuctionSelect::init()";
 ?>
 		//appState = GAME_MODE.AUCTION_SElECT;
         //if(loggedIn)
-            //this.list.empty();
+        this.list.empty();
 		//
         function done(data){
             <?php isValidData();?>
@@ -178,7 +185,7 @@ function setCarBtn($args){
         //
 		var i = obj.data.index,
             liID = 'asli' + (i).toString(),
-            liName = '<?php asCarView();?> ul#auctionCars li#' + liID,
+            liName = '<?php asCarView();?> div#' + liID,
             li = $(liName),
             btn = $(liName + ' button'),
             carID = parseInt(btn.attr('id') );

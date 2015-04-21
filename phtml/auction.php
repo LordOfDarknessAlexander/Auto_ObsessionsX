@@ -87,13 +87,13 @@ function outputCar($args){
         <input id='submit' type='submit' value='submit'>
     </form>
     <div id='carView'>
-        <ul id='auctionCars'>
+        <!--ul id='auctionCars'-->
 <?php
 //selects all elements from aoCars,
 //then preforms outputCar on each of its elements
 //sqlSelectAll('aoCars', 'outputCar');
 ?>
-        </ul>
+        <!--/ul-->
     </div>
 </div>
 

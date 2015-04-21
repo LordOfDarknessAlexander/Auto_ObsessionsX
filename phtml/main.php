@@ -41,15 +41,15 @@ else{
 //echo "Player $uname";
 ?>
 <div id='reg-navigation'>
-    <a id='home' href='<?php echo rootURL() . 'Users/index.php';?>'>Home</a></li>
+    <a id='home' href='<?php echo rootURL() . 'Users/index.php';?>'>Home</a></li><br>
 <?php
 if($loggedIn){?>
-    <a id='mem' href='members-page.php'>Members</a>
-    <a id='logout' href='logout.php'>Logout</a>
+    <a id='mem' href='members-page.php'>Members</a><br>
+    <a id='logout' href='logout.php'>Logout</a><br>
 <?php
 }
 else{?>
-    <a id='reg' href='<?php echo rootURL() . 'Users/registerUser.php';?>'>Register</a>
+    <a id='reg' href='<?php echo rootURL() . 'Users/registerUser.php';?>'>Register</a><br>
 <?php
 }
 ?>
