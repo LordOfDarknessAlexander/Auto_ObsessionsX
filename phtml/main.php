@@ -64,19 +64,7 @@ else{?>
           <!--  <h2><?php /*echo $AO_NAME.' Presents!';*/?></h2>-->
         </div>
         <div id='main'>		
-             
-<?php session_start();
 
-if(isset($_SESSION) AND isset($_SESSION['uname']) ){
-    $uname = $_SESSION['uname'];
-    $loggedIn = true;
-}
-else{
-    $loggedIn = false;
-    $uname = 'guest';
-}
-
-?>
 			<h1><?php echo "Welcome $uname";?></h1>
             <ul>
 <?php
