@@ -18,6 +18,7 @@ require_once 'ao.php';
         if(isset($_SESSION) && isset($_SESSION[$uid]) ){
             return intval($_SESSION[$uid]);
         }*/
+		
         if(isset($_SESSION) && isset($_SESSION[$UID ]) ){
             return intval($_SESSION[$UID ]);
         }
