@@ -27,6 +27,11 @@ function carPart(carPrice, partType){   //partType
             //console.log(ret);
             return ret;
         },
+        getPriceStr:function(){
+            //returns a human readable, formated currency value as a string
+            var p = this.getPrice();    //floating point value
+            return '$' + p.toFixed(2);  //round to 2 decimal places
+        },
         //getInstallPrice:function(){
             //price the first time 
         //}
@@ -34,11 +39,21 @@ function carPart(carPrice, partType){   //partType
             //price the user pays for this upgrade
             return this._price * 1.25;
         },
+        getSalePriceStr:function(){
+            //returns a human readable, formated currency value as a string
+            var p = this.getSalePrice();    //floating point value
+            return '$' + p.toFixed(2);  //round to 2 decimal places
+        },
         getRepairPrice:function(){
             //price the user pays for repairs
             var ret = this._price * 0.75;
             //console.log(ret);
             return ret;
+        },
+        getRepairPriceStr:function(){
+            //returns a human readable, formated currency value as a string
+            var p = this.getRepairPrice();    //floating point value
+            return '$' + p.toFixed(2);  //round to 2 decimal places
         },
         getLocalPath:function(){
             return '';//'images\\upgrades\\' + stringFromPartType(this._type) + '.png';

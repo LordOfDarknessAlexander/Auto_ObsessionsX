@@ -180,22 +180,6 @@ var jq = {
             jq.setErr();    //clear error when changing pages
 		}
 	},
-	RepairShop : {
-		menu : $('div#RepairShop'),
-		backBtn : $('div#RepairShop button#backBtn'),
-		upgrades : $('div#RepairShop div#upgrades'),
-		repairs : $('div#RepairShop div#repairs'),
-        //dt:$('div#RepairShop div#drivetrain'),
-        //body:$('div#RepairShop div#body'),
-        //interior:$('div#RepairShop div#interior'),
-        //docs:$('div#RepairShop div#docs'),
-        /*toggle : function()
-		{	//from game menu to funds or vice versa
-			jq.Funds.menu.toggle();
-			this.menu.toggle();
-            jq.setErr();    //clear error when changing pages
-		}*/
-	},
     Sold : {
         menu : $('div#sold'),
         homeBtn:$('div#sold button#homeBtn'),
