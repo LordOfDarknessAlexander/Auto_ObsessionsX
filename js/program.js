@@ -274,7 +274,7 @@ function startGame()
     jq.adBar.show();
     jq.nav.show();
     
-    jq.setErr();
+    jq.setErr();    //'dur', 'stuff and things');
     
 	appState = GAME_MODE.RUNNING;
 	player.reset();

@@ -193,27 +193,26 @@ button#homeBtn{
 pre styles(preformated text)
 */
 pre#info{
-<?php //lm();
-    //css:size('90%', '10%');
+<?php
+    posAbs();
+    css::lm();
+    css::size('90%', '10%');
     css::bgColor('grey');
+    css::txtAlignCntr();
 ?>
-    position:absolute;
-    height:10%;
-    width:90%;
     bottom:72%;
-    left:5%;
     font-size:1vw;
-    text-align:center;
     z-index:2;
-    opacity:50%;
+    /*opacity:50%;*/
 }
 /*
+Document root
 */
-.wrapper 
-{
-    height:100%;
-    width: 100%;
-    position: absolute;
+.wrapper{
+<?php
+    css::size('100%', '100%');
+    posAbs();
+?>
     top: 0%;
     left: 0%;
     /*z-index:1;*/
@@ -222,14 +221,15 @@ pre#info{
 /*
 img styles
 */
-img#adBar
-{
+img#adBar{
 	/*background:url('../images/logos/AutoZone.png') no-repeat 0 0;*/
-	position:absolute;
-	width:60%;
-	height:8%;
+<?php
+    posAbs();
+    css::size('60%', '8%');
+    css::marginBtm();
+?>
 	left:20%;
-<?php css::marginBtm();?>
+
     z-index:3;
 }
 <?php //Game Screen/State stylings?>
@@ -295,9 +295,9 @@ div#reg-navigation{
 <?php
     posAbs();
     defaultBtnBG();
+    css::txtAlignCntr();
 ?>
     right:0%;
-    text-align:center;
     z-index:3;
 	top : 19%;
 	
@@ -371,22 +371,20 @@ credits page UI stylings
 	display:navigation;
 }
 
-.artwork, .music, .developer 
-{
+.artwork,
+.music,
+.developer{
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-.artwork 
-{
+.artwork{
     color: #fa8526;
 }
-.developer 
-{
+.developer{
     color: #13eb8a;
 }
 
-.sound 
-{
+.sound{
     background-size:100% 100%;
     display: none;
     position: absolute;
@@ -397,33 +395,28 @@ credits page UI stylings
     cursor: pointer;
     z-index: 3;
 }
-.sound-on 
-{
-  background-image: url('../images/soundOn.png');
-  background-repeat: no-repeat;
+.sound-on{
+    background-image: url('../images/soundOn.png');
+    background-repeat: no-repeat;
 }
 
-.sound-off 
-{
-  background-image: url('../images/soundOff.png');
-  background-repeat: no-repeat;
+.sound-off{
+    background-image: url('../images/soundOff.png');
+    background-repeat: no-repeat;
 }
 
-#enemyBid
-{
- color:aqua;	
+#enemyBid{
+    color:aqua;
 }
 
-#main h1 
-{
-  color: #AFCAAF;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  font-size : 100%;
-  margin-bottom : 5%;
+#main h1{
+    color: #AFCAAF;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-size : 100%;
+    margin-bottom : 5%;
 }
 
-.button 
-{
+.button{
   	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	color:red;
     cursor:pointer;
@@ -438,8 +431,8 @@ credits page UI stylings
     line-height: 40px;
     border: 1px solid #AA2666;
     font-weight: bold;
-   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-   border-radius: 3px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    border-radius: 3px;
 }
 
 .button:hover 
@@ -457,42 +450,39 @@ credits page UI stylings
     line-height: 40px;
     border: 1px solid #AA2666;
     font-weight: bold;
-   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-   border-radius: 3px;;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    border-radius: 3px;;
 }
 
-.music 
-{
-  color: #e6e71f;
+.music{
+    color: #e6e71f;
 }
 
-.back, .back:hover 
-{
-  margin-top: 10px;
+.back,
+.back:hover{
+    margin-top: 10px;
 }
 
-#sold 
-{
- /* background-image: url('../images/logo.png');*/
-  display: none;
-  text-align: center;
-  margin-top: 0em;
-  padding-top: 92px;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  position: absolute;
+div#sold{
+    /* background-image: url('../images/logo.png');*/
+    display: none;
+    text-align: center;
+    margin-top: 0em;
+    padding-top: 92px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
-#sold label
-{
-  top: 40%;
-  left: 0%;
-  text-align: center;
-  //padding-top: 92px;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  position: absolute;
+div#sold label{
+    top: 40%;
+    left: 0%;
+    text-align: center;
+    //padding-top: 92px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 /*
 div#messages
@@ -588,7 +578,6 @@ a.tooltip span
 //require_once 'tablet.php';  //tablets, iPads, etc
 //require_once 'laptop.php';  //laptop and other large mobile devices
 ?>
-
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) 
 {

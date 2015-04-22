@@ -143,7 +143,9 @@ var Repair = {
                     btnTag = 'button#',
                     div = jq.RepairShop.dt;
                 
-                for(var key in type){//i = type.engine; i <= type.exhaust; i++){ 
+                for(var key in type){   //i = type.engine; i <= type.exhaust; i++){ 
+                    //using hasOwnProperty ensures on iteration only over fields present in the object,
+                    //not those found in its prototype(if one exists)
                     if(type.hasOwnProperty(key) ){
                         var i = type[key],
                             part = car._dt.getPartType(i),
