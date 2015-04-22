@@ -41,7 +41,7 @@ else{
 //echo "Player $uname";
 ?>
 <div id='reg-navigation'>
-    <a id='home' class='tooltip' href='<?php echo rootURL() . 'Users/index.php';?>'>Home<span><!--img src=''-->Tooltip!</span></a></li><br>
+    <a id='home' class='tooltip' href='<?php echo rootURL() . 'Users/index.php';?>'>Home<!--span><!--img src=''>Tooltip!</span--></a></li><br>
 <?php
 if($loggedIn){?>
     <a id='mem' href='members-page.php'>Members</a><br>
@@ -65,7 +65,19 @@ else{?>
         </div>
         
         <div id='main'>		
+             
+<?php session_start();
 
+if(isset($_SESSION) AND isset($_SESSION['uname']) ){
+    $uname = $_SESSION['uname'];
+    $loggedIn = true;
+}
+else{
+    $loggedIn = false;
+    $uname = 'guest';
+}
+
+?>
 			<h1><?php echo "Welcome $uname";?></h1>
             <ul>
 <?php
