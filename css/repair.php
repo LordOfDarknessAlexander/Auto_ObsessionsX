@@ -41,7 +41,7 @@ Repair Screen Styles
     font-size:1.8vw;/*size element relative to viewport width!*/
     /*font-weight:bold;
     background-color:grey;*/
-    background:url('../images/checkers.png');
+    background:url('../images/label.jpg');
     margin:0%;    
 }
 <?php divRepair();?> button#addFunds{
