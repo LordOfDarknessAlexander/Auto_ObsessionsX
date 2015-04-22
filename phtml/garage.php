@@ -10,6 +10,26 @@ function cvStatBar($id){
     echo $id . ':';
     br(); pb("pb$id"); br(); hr();
 }
+function carView(){
+    //display vehicle data?>
+    <img id='carImg'><br>
+    <label id='carName'></label><br>
+    <label id='carInfo'></label><br>
+    <button id='con'>0</button>
+    <div id='progressBars'>
+<?php
+//cvStatBar('Drivetrain');
+//cvStatBar('Body');
+//cvStatBar('Interior');
+//cvStatBar('Documents');
+?>
+        drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
+        <br>body:<br><progress id='bodyPB' value='0.0'></progress>
+        <br>interior:<br><progress id='interiorPB' value='0.0'></progress>
+        <br>documents:<br><progress id='docsPB' value='0.0'></progress>
+    </div>
+<?php
+}
 ?>
 <div id='Garage'>
    <!-- <h1>Garage</h1>  -->
@@ -28,53 +48,11 @@ function cvStatBar($id){
         </ul>
     </div>
     <div id='userCar'>
-        <!--display for currently selected vehicle-->
-        <img id='carImg'> <!--src='images/vehicle.jpg'-->
-        <br>
-        <!--label id='curCarName'>m:</label>
-        <label id='curCarInfo'>current car info</label-->
-        <label id='carName'>name</label>
-        <br>
-        <label id='carInfo'>info</label>
-        <br>
-        <button id='con'>0</button>
-        <div id='progressBars'>
-            <!--progress bar 'value' attribute is between 0.0 and 1.0-->
-<?php
-//cvStatBar('Drivetrain');
-//cvStatBar('Body');
-//cvStatBar('Interior');
-//cvStatBar('Documents');
-?>
-drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
-<br>body:<br><progress id='bodyPB' value='0.0'></progress>
-<br>interior:<br><progress id='interiorPB' value='0.0'></progress>
-<br>documents:<br><progress id='docsPB' value='0.0'></progress>
-        </div>
+<?php carView();?>
     </div>
     <div id='selectedCar'>
-        <!--display vehicle picked by user-->
-        <img id='carImg'> <!--src='images/vehicle.jpg'-->
-        <br>
-        <label id='carName'></label>
-        <br>
-        <label id='carInfo'></label>
-        <br>
-        <button id='con'>0</button>
-        <div id='progressBars'>
-<?php
-//cvStatBar('Drivetrain');
-//cvStatBar('Body');
-//cvStatBar('Interior');
-//cvStatBar('Documents');
-?>
-drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
-<br>body:<br><progress id='bodyPB' value='0.0'></progress>
-<br>interior:<br><progress id='interiorPB' value='0.0'></progress>
-<br>documents:<br><progress id='docsPB' value='0.0'></progress>
-        </div>
+<?php carView();?>
     </div>
-
     <!--ul id='carBtns'>
     <!--list is populated in '../program.js' from '../user.xml'
     the list items dont have to exist but the root tag must>

@@ -189,12 +189,12 @@ var jq = {
         //body:$('div#RepairShop div#body'),
         //interior:$('div#RepairShop div#interior'),
         //docs:$('div#RepairShop div#docs'),
-        toggle : function()
+        /*toggle : function()
 		{	//from game menu to funds or vice versa
 			jq.Funds.menu.toggle();
 			this.menu.toggle();
             jq.setErr();    //clear error when changing pages
-		}
+		}*/
 	},
     Sold : {
         menu : $('div#sold'),

@@ -41,7 +41,7 @@ else{
 //echo "Player $uname";
 ?>
 <div id='reg-navigation'>
-    <a id='home' href='<?php echo rootURL() . 'Users/index.php';?>'>Home</a></li><br>
+    <a id='home' class='tooltip' href='<?php echo rootURL() . 'Users/index.php';?>'>Home<span><!--img src=''-->Tooltip!</span></a></li><br>
 <?php
 if($loggedIn){?>
     <a id='mem' href='members-page.php'>Members</a><br>
@@ -63,6 +63,7 @@ else{?>
         <div id='splash'>
           <!--  <h2><?php /*echo $AO_NAME.' Presents!';*/?></h2>-->
         </div>
+        
         <div id='main'>		
 
 			<h1><?php echo "Welcome $uname";?></h1>
@@ -146,7 +147,7 @@ $scripts = array(
 foreach($scripts as $val){
     //require will look in the absolute path, then relative,
     //then finally the local folder which THIS script is located
-    require_once($val.'.php');
+    require_once($val . '.php');
 }
 ?>
     <!--div id='messages'>
