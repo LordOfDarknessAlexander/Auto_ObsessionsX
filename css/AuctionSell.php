@@ -52,7 +52,7 @@ Auction Select Car View
 	display:inline;*/
     height:15%;
    // background-color:grey;
-   background:url('../images/checkers.png');
+   background:url('../images/label.jpg');
     display:block;
 }
 <?php dcv();?> div div#btns
