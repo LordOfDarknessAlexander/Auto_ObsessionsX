@@ -12,8 +12,8 @@ var player = (function(player)
  
   // spritesheets
   player.sheet     = new SpriteSheet('images/normal_walk.png', player.width, player.height);
-  player.walkAnim  = new Animation(player.sheet, 4, 0, 15);
-  player.jumpAnim  = new Animation(player.sheet, 4, 15, 15);
+  player.walkAnim  = new Animation(player.sheet, 4, 0, 6);
+  player.jumpAnim  = new Animation(player.sheet, 4, 7, 10);
   player.fallAnim  = new Animation(player.sheet, 4, 11, 11);
   player.anim      = player.walkAnim;
 
@@ -24,7 +24,11 @@ var player = (function(player)
   {
     player.anim = player.walkAnim;
     player.anim.update();
-    
+    if(Auction.playerWinning)
+	{
+		player.anim = player.jumpAnim;
+		player.anim.update();
+	}
     
   };
  
