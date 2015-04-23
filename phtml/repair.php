@@ -13,8 +13,9 @@ function ub($str){
 }
 function statBar($id){
     echo "$id:"; br();
-    ub("ub$id"); rb("rb$id");
-    br(); pb("pb$id"); br(); hr();
+    ub("ub$id");
+    rb("rb$id"); br();
+    pb("pb$id"); br(); //hr();
 }
 ?>
 <div id='RepairShop'>
@@ -24,20 +25,28 @@ function statBar($id){
     backBtn();
 ?>
 	<button id='addFunds'>Store</button>
+    <div id='switch'>
+        <button id='dt'>DT</button><br>
+        <button id='body'>B</button><br>
+        <button id='inter'>I</button><br>
+        <button id='docs'>D</button><br>
+    </div>
     <!--a id='addFunds' href='<php echo rootURL() . 'state/funds.php';?>'>Add Funds</a-->
-    <h2 id='dt'>Drivetrain</h2>	
-    <div id='drivetrain'><?php 
+    <!--cid for car info div-->
+    <div id='cid0'>
+        <h2 id='dt'>Drivetrain</h2>
+        <img src=''><?php 
         statBar('Engine');
-        statBar('Transmission');
-        statBar('Axel');
-        statBar('Exhaust');?>
+        //statBar('Transmission');
+        //statBar('Axel');
+        //statBar('Exhaust');?>
 <!--Fuel System:-->
     </div>
     <h2 id='body'>Body</h2>
     <div id='body'><?php
         statBar('Chasis');
-        statBar('Panels');
-        statBar('Paint');?>
+        //statBar('Panels');
+        //statBar('Paint');?><!--
 Chrome:
 <button id='ubPH0' class='ub'></button>
 <button id='rbPH0' class='rb'></button>
@@ -49,9 +58,9 @@ Chrome:
     <h2 id='interior'>Interior</h2>
     <div id='interior'><?php
         statBar('Seats');
-        statBar('Carpet');
-        statBar('Dash');
-        statBar('Panels');?>
+        //statBar('Carpet');
+        //statBar('Dash');
+        //statBar('Panels');?>
 <!--PLACEHOLDER:-->
     </div>
     <!---->

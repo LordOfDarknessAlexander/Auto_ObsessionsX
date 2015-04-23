@@ -7,7 +7,7 @@ jq.RepairShop = {
     backBtn : $('div#RepairShop button#backBtn'),
     upgrades : $('div#RepairShop div#upgrades'),
     repairs : $('div#RepairShop div#repairs'),
-    dt:$('div#RepairShop div#drivetrain')
+    dt:$('div#RepairShop div#cid0')
     //body:$('div#RepairShop div#body'),
     //interior:$('div#RepairShop div#interior'),
     //docs:$('div#RepairShop div#docs'),

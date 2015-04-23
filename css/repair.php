@@ -9,12 +9,13 @@ require_once 'funds.php';
 function divRepair(){?>
 div#RepairShop<?php
 }
+function cid0(){divRepair();?> div#cid0<?php
+}
+cmntHeader('Repair Screen Styles');
 ?>
-/*
-Repair Screen Styles
-*/
-<?php divRepair();?>
-{<?php
+
+<?php divRepair();?>{
+<?php
     posAbs();
     //defaultBG();
     css::size('100%', '100%');
@@ -37,6 +38,7 @@ Repair Screen Styles
 <?php
     posAbs();
     css::size('14%', '5%');
+    css::txtAlignCntr();
 ?>
     font-size:1.8vw;/*size element relative to viewport width!*/
     /*font-weight:bold;
@@ -61,8 +63,8 @@ Repair Screen Styles
 <?php divRepair();?> div{
 <?php
     posAbs();
-    css::size('14%', '23%');
-    scrollY();
+    css::size('14%', '25%');
+    //scrollY();
     css::txtAlignL();
 ?>
     background:url('../images/defaultBG.jpg') no-repeat 0 0;
@@ -73,7 +75,7 @@ Repair Screen Styles
 <?php divRepair();?> div button{
 <?php
     //posAbs();
-    css::size('45%', '20%');
+    css::size('49%', '20%');
 ?>
     font-size:0.65rem;
     /*font-weight:bold;*/
@@ -81,10 +83,16 @@ Repair Screen Styles
 <?php divRepair();?> div button.ub{
     background:url('../images/upgrade.png') no-repeat 0 0;
     background-size:100% 100%;
+    bottom:10%;
+    position:absolute;
+    left:0%;
 }
 <?php divRepair();?> div button.rb{
     background:url('../images/repair.png') no-repeat 0 0;
     background-size:100% 100%;
+    bottom:10%;
+    position:absolute;
+    right:0%;
 }
 <?php divRepair();?> div progress{
 <?php
@@ -93,6 +101,23 @@ Repair Screen Styles
     width:100%;
     height:10%;
 }
+<?php divRepair();?> div#switch{
+<?php
+    posAbs();
+    css::size('5%', '60%');
+    //scrollY();
+    css::txtAlignCntr();
+?>
+    top:28%;
+    background:url('../images/defaultBG.jpg') no-repeat 0 0;
+    /*background-color:grey;*/
+}
+<?php divRepair();?> div#switch button{
+<?php
+    css::size('100%', '25%');
+?>
+    /*background-color:grey;*/
+}
 /*
 left div
 */
@@ -100,16 +125,32 @@ left div
     //lStatView('dt', '28%', '33%');
     //lStatView('body', '60%', '65%');
 ?>
-<?php divRepair();?> h2#dt{
+<?php divRepair();?> div#cid0{
 <?php
     css::lm();
     css::top('28%');
 ?>
 }
-<?php divRepair();?> div#drivetrain{
+<?php divRepair();?> div#cid0 img{
 <?php
-    css::lm();
-    css::top('33%');
+    css::bottom('30%');
+    css::size('100%', '50%');
+?>
+}
+<?php divRepair();?> div#cid0 h2#dt{
+<?php
+    css::top('0%');
+    css::width('100%');
+    css::height('1.8vw');
+?>
+}
+
+<?php divRepair();?> div progress{
+<?php
+    posAbs();
+    css::bottom('0%');
+    css::left('0%');
+    css::width('100%');
 ?>
 }
 <?php divRepair();?> h2#body{

@@ -10,7 +10,11 @@ function defaultBtnBG(){
     //echo "background-size:100% 100%;";
     css::bgSize('100%', '100%');
 }
-
+function cmntHeader($str){?>
+/*
+<?php echo "$str\n";?>
+*/<?php
+}
 function defaultColor($color = 'red'){?>    color:<?php echo $color;?>;
 <?php
 }
