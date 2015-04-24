@@ -59,7 +59,7 @@ class Vehicle
     //public infoFromID(){}
     public function getFullName(){
         //return a human readable name
-        return $this->_make . ' ' . $this->_year . ' ' . $this->_model;
+        return $this->_year . ' ' . $this->_make . ' ' . $this->_model;
     }
     public function getLocalPath(){
         //local path in project

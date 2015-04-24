@@ -82,6 +82,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         _body:body,  //null,
         _interior:inter, //null,
         _docs:docs,  //Documents.make(Price), //null
+        _info:'Default Car Info',
         //}
 		//image : img,
 		//getters
@@ -103,7 +104,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		getInfo : function()
 		{	//var node = xbdCars.getElementById(this._id);
 			//return node.text;
-			return 'Default Car Info';
+			return this._info;
 		},
 		getStats : function()
 		{	//returns a constant object representing completion of upgreades,
@@ -118,9 +119,9 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		displayInfo : function(){
 			//context if from globals
 			context.fillText(this.name, VEHICLE_XPOS + 40, 120);
-			context.fillText("Value"+ this.price  ,VEHICLE_XPOS + 40, 140);
-			context.fillText("Orig" + this.originality  ,VEHICLE_XPOS + 40, 160);
-			context.fillText("Condition"+ this.condition  ,VEHICLE_XPOS + 40, 180);
+			context.fillText('Value'+ this.price  ,VEHICLE_XPOS + 40, 140);
+			context.fillText('Orig' + this.originality  ,VEHICLE_XPOS + 40, 160);
+			context.fillText('Condition'+ this.condition  ,VEHICLE_XPOS + 40, 180);
 //			Vehicle.draw = function()
 //			{
 //				context.drawImage(this.image,VEHICLE_XPOS,VEHICLE_YPOS);
@@ -148,7 +149,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		},
 		getFullName : function()
 		{	//returns a string representing the 'proper' car name
-			return this.make + ' ' + this.year + ' ' + this.name;
+			return this.year + ' ' + this.make + ' ' + this.name;
 		},
         //getLocalPath : function()
 		//{	//returns the relative path for the image path of this car on the server
