@@ -113,7 +113,7 @@ Auction Select Car View
 }
 <?php dcv();?> div#btns button#view
 {
-    background: url('../images/view.png') no-repeat 0 0;
+    background: url('../images/icons/view.png') no-repeat 0 0;
     background-size:100% 100%;
     position:absolute;
     top:25%;
@@ -124,7 +124,7 @@ Auction Select Car View
 }
 <?php dcv();?> div#btns button#cc
 {
-    background: url('../images/cancel.png') no-repeat 0 0;
+    background: url('../images/icons/cancel.png') no-repeat 0 0;
     background-size:100% 100%;
     position:absolute;
     top:25%;

@@ -369,7 +369,7 @@ function auctionGen(args){
                         price:this._currentBid
                     };
                     btn.css({
-                        'background':"url('images/money.png') no-repeat 0 0",
+                        'background':"url('images/icons/money.png') no-repeat 0 0",
                         'background-size':"100% 100%",
                     });
                     btn.off().click(data, this.payUser);
@@ -382,7 +382,7 @@ function auctionGen(args){
                         price:this._currentBid
                     };
                     btn.css({
-                        'background':"url('images/cancel.png') no-repeat 0 0",
+                        'background':"url('images/icons/cancel.png') no-repeat 0 0",
                         'background-size':"100% 100%",
                     });
                     btn.off().click(data, this.cancelAuction);

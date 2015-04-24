@@ -81,14 +81,14 @@ cmntHeader('Repair Screen Styles');
     /*font-weight:bold;*/
 }
 <?php divRepair();?> div button.ub{
-    background:url('../images/upgrade.png') no-repeat 0 0;
+    background:url('../images/icons/upgrade.png') no-repeat 0 0;
     background-size:100% 100%;
     bottom:10%;
     position:absolute;
     left:0%;
 }
 <?php divRepair();?> div button.rb{
-    background:url('../images/repair.png') no-repeat 0 0;
+    background:url('../images/icons/repair.png') no-repeat 0 0;
     background-size:100% 100%;
     bottom:10%;
     position:absolute;

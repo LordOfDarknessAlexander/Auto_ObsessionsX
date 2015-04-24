@@ -68,8 +68,11 @@ Chrome:
     <!---->
 
     <div id='cid3'>
-        <h2 id='docs'><!--Documentation--></h2>
-Ownership:<button id='ubOwnership' class='ub'></button><br>
+        <h2 id='docs'><!--Documentation--></h2><?php
+        statBar('');
+?>
+        
+<!--Ownership:<button id='ubOwnership' class='ub'></button><br>
 <progress id='pbOwnership' value='0.0'></progress>
 <br>Build Sheet:
 <button id='ubBuildSheet' class='ub'></button><br>

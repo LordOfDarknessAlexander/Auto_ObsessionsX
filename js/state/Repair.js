@@ -149,6 +149,7 @@ var Repair = {
                 var type = Drivetrain.TYPE,
                     btnTag = 'button#',
                     div = jq.RepairShop.dt;
+                
                 this.setPageDT();
                 /*for(var key in type){   //i = type.engine; i <= type.exhaust; i++){ 
                     //using hasOwnProperty ensures on iteration only over fields present in the object,
@@ -347,61 +348,88 @@ var Repair = {
 	},
     setPageDT:function(){
         this._partPage = Vehicle.PART_TYPE.DT;
+        
+        var type = Drivetrain.TYPE,     //types of parts conposing the drivetrain
+            btnTag = 'button#',
+            div = jq.RepairShop.dt;
         //rebind headers
         $('h2', jq.RepairShop.dt).text('Engine');
         $('h2', jq.RepairShop.cid1).text('Transmission');
         $('h2', jq.RepairShop.cid2).text('Axel');
         $('h2', jq.RepairShop.cid3).text('Exhaust');
         //rebind img paths
-        //$('img', jq.RepairShop.cid0).attr('src');
-        //$('img', jq.RepairShop.cid1).attr('src');
-        //$('img', jq.RepairShop.cid2).attr('src');
-        //$('img', jq.RepairShop.cid3).attr('src');
+        var root = getHostPath() + 'images/parts/drivetrain/';
+        $('img', jq.RepairShop.dt).attr('src', root + 'engine.png');
+        $('img', jq.RepairShop.cid1).attr('src', root + 'transmission.png');
+        $('img', jq.RepairShop.cid2).attr('src', root + 'axel.png');
+        $('img', jq.RepairShop.cid3).attr('src', root + 'exhaust.png');
         //rebind jq callbacks
         
+        /*for(var key in type){   //i = type.engine; i <= type.exhaust; i++){ 
+            //using hasOwnProperty ensures on iteration only over fields present in the object,
+            //not those found in its prototype(if one exists)
+            if(type.hasOwnProperty(key) ){
+                var i = type[key],
+                    part = car._dt.getPartType(i),
+                    str = Drivetrain.strFromType(i),
+                    ub = $(btnTag + 'ub' + str, div),    //upgrade button
+                    rb = $(btnTag + 'rb' + str, div),
+                    pb = $('progress#pb' + str, div); //repair button
+
+                bindUpgradeBtn(ub, part, i, upgradeDT);
+                bindRepairBtn(rb, part, i, repairDT);
+                pbSetColor(pb, part.getPercent() );
+            }
+        }*/       
     },
     setPageBody:function(){
-        this._partPage = Vehicle.PART_TYPE.DT;
+        this._partPage = Vehicle.PART_TYPE.BODY;
         //rebind headers
         $('h2', jq.RepairShop.dt).text('Chasis');
         $('h2', jq.RepairShop.cid1).text('Panels');
         $('h2', jq.RepairShop.cid2).text('Paint');
         $('h2', jq.RepairShop.cid3).text('Chrome');
         //rebind img paths
-        //$('img', jq.RepairShop.cid0).attr('src');
-        //$('img', jq.RepairShop.cid1).attr('src');
-        //$('img', jq.RepairShop.cid2).attr('src');
-        //$('img', jq.RepairShop.cid3).attr('src');
+        var root = getHostPath() + 'images/parts/body/';
+        //$('img', jq.RepairShop.dt).attr('src', root + 'chasis.png');
+        //$('img', jq.RepairShop.cid1).attr('src', root + 'panels.png');
+        //$('img', jq.RepairShop.cid2).attr('src', root + 'paint.png');
+        //$('img', jq.RepairShop.cid3).attr('src', root + 'chrome.png');
+        //rebind jq callbacks
         //rebind jq callbacks
         
     },
     setPageInterior:function(){
-        this._partPage = Vehicle.PART_TYPE.DT;
+        this._partPage = Vehicle.PART_TYPE.INTER;
         //rebind headers
         $('h2', jq.RepairShop.dt).text('Seats');
         $('h2', jq.RepairShop.cid1).text('Carpet');
         $('h2', jq.RepairShop.cid2).text('Dash');
         $('h2', jq.RepairShop.cid3).text('Panels');
         //rebind img paths
-        //$('img', jq.RepairShop.cid0).attr('src');
-        //$('img', jq.RepairShop.cid1).attr('src');
-        //$('img', jq.RepairShop.cid2).attr('src');
-        //$('img', jq.RepairShop.cid3).attr('src');
+        var root = getHostPath() + 'images/parts/interior/';
+        //$('img', jq.RepairShop.dt).attr('src', root + 'seats.png');
+        //$('img', jq.RepairShop.cid1).attr('src', root + 'carpet.png');
+        //$('img', jq.RepairShop.cid2).attr('src', root + 'dash.png');
+        //$('img', jq.RepairShop.cid3).attr('src', root + 'panels.png');
+        //rebind jq callbacks
         //rebind jq callbacks
         
     },
     setPageDocs:function(){
-        this._partPage = Vehicle.PART_TYPE.DT;
+        this._partPage = Vehicle.PART_TYPE.DOCS;
         //rebind headers
         $('h2', jq.RepairShop.dt).text('Ownership');
         $('h2', jq.RepairShop.cid1).text('Build');
         $('h2', jq.RepairShop.cid2).text('History');
         $('h2', jq.RepairShop.cid3).text('Exhaust');
         //rebind img paths
-        //$('img', jq.RepairShop.cid0).attr('src');
-        //$('img', jq.RepairShop.cid1).attr('src');
-        //$('img', jq.RepairShop.cid2).attr('src');
-        //$('img', jq.RepairShop.cid3).attr('src');
+        var root = getHostPath() + 'images/parts/documents/';
+        //$('img', jq.RepairShop.dt).attr('src', root + 'ownership.png');
+        //$('img', jq.RepairShop.cid1).attr('src', root + 'build.png');
+        //$('img', jq.RepairShop.cid2).attr('src', root + 'history.png');
+        //$('img', jq.RepairShop.cid3).attr('src', root + 'exhaust.png');
+        //rebind jq callbacks
         //rebind jq callbacks
         
     }
