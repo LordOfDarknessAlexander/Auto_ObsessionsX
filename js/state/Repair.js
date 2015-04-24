@@ -1,16 +1,22 @@
-﻿/*Repair State interface, mod your ride and upgrade parts
-Dependant on state\Garage.js, for userGarage and car index
-and Vehicle.js for Cars and Parts*/
+﻿//Repair State interface, mod your ride and upgrade parts
+//Dependant on state\Garage.js, for userGarage and car index
+//and js/entities/ for Vehicle and Parts
 jq.RepairShop = {
     //jquery html bindings
     menu : $('div#RepairShop'),
     backBtn : $('div#RepairShop button#backBtn'),
-    upgrades : $('div#RepairShop div#upgrades'),
-    repairs : $('div#RepairShop div#repairs'),
-    dt:$('div#RepairShop div#cid0')
-    //body:$('div#RepairShop div#body'),
-    //interior:$('div#RepairShop div#interior'),
-    //docs:$('div#RepairShop div#docs'),
+    //upgrades : $('div#RepairShop div#upgrades'),
+    //repairs : $('div#RepairShop div#repairs'),
+    pSwitch:$('div#RepairShop div#switch'),
+    sDT:$('div#RepairShop div#switch button#dt'),
+    sBody:$('div#RepairShop div#switch button#body'),
+    sInter:$('div#RepairShop div#switch button#inter'),
+    sDocs:$('div#RepairShop div#switch button#docs'),
+    //cid, car info div
+    dt:$('div#RepairShop div#cid0'),
+    cid1:$('div#RepairShop div#cid1'),
+    cid2:$('div#RepairShop div#cid2'),
+    cid3:$('div#RepairShop div#cid3'),
     /*toggle : function()
     {	//from game menu to funds or vice versa
         jq.Funds.menu.toggle();
@@ -65,6 +71,7 @@ function bindRepairBtn(jqo, part, carType, onClickCB){
 }
 //
 var Repair = {
+    _partPage:Vehicle.PART_TYPE.DT,
 	init : function()
 	{   //initializes the state, enabling ui and core logic of this screen
 		//appState = GAME_MODE.Repair;
@@ -142,8 +149,8 @@ var Repair = {
                 var type = Drivetrain.TYPE,
                     btnTag = 'button#',
                     div = jq.RepairShop.dt;
-                
-                for(var key in type){   //i = type.engine; i <= type.exhaust; i++){ 
+                this.setPageDT();
+                /*for(var key in type){   //i = type.engine; i <= type.exhaust; i++){ 
                     //using hasOwnProperty ensures on iteration only over fields present in the object,
                     //not those found in its prototype(if one exists)
                     if(type.hasOwnProperty(key) ){
@@ -158,7 +165,7 @@ var Repair = {
                         bindRepairBtn(rb, part, i, repairDT);
                         pbSetColor(pb, part.getPercent() );
                     }
-                }
+                }*/
             }
             //else{
                 //hide view and display purchase button
@@ -176,7 +183,7 @@ var Repair = {
                     btnTag = 'button#',
                     div = $('div#RepairShop div#body');
                 
-                for(var key in type){   //var i = type.chasis; i <= type.ph0; i++){ 
+                /*for(var key in type){   //var i = type.chasis; i <= type.ph0; i++){ 
                     if(type.hasOwnProperty(key) ){
                         var i = type[key],
                             part = car._body.getPartType(i),
@@ -189,7 +196,7 @@ var Repair = {
                         bindRepairBtn(rb, part, i, repairBody);                    
                         pbSetColor(pb, part.getPercent() );
                     }
-                }
+                }*/
             }
             //else{
                 //hide view and display purchase button
@@ -200,7 +207,7 @@ var Repair = {
                     btnTag = 'button#',
                     div = $('div#RepairShop div#interior');
                 
-                for(var i = type.seats; i <= type.panels; i++){ 
+                /*for(var i = type.seats; i <= type.panels; i++){ 
                     var part = car._interior.getPartType(i),
                         str = Interior.strFromType(i),
                         ub = $(btnTag + 'ub' + str, div),
@@ -210,7 +217,7 @@ var Repair = {
                     bindUpgradeBtn(ub, part, i, upgradeInterior);
                     bindRepairBtn(rb, part, i , repairInterior);
                     pbSetColor(pb, part.getPercent() );
-                }
+                }*/
             }
             else{
                 //hide view and display purchase button
@@ -221,7 +228,7 @@ var Repair = {
                     btnTag = 'button#',
                     div = $('div#RepairShop div#docs');
                 
-                for(var i = type.ownership; i <= type.ph0; i++){ 
+                /*for(var i = type.ownership; i <= type.ph0; i++){ 
                     var part = car._docs.getPartType(i),                    
                         str = Documents.strFromType(i),
                         ub = $(btnTag + 'ub' + str, div),
@@ -230,7 +237,7 @@ var Repair = {
                     bindRepairBtn(ub, part, i, upgradeDocs);
                     //docs don't have repair buttons
                     pbSetColor(pb, part.getPercent() );
-                }
+                }*/
             }
             else{
                 //hide view and display purchase button
@@ -338,6 +345,66 @@ var Repair = {
 	render : function(){
 		//additional rendering to 2D context
 	},
+    setPageDT:function(){
+        this._partPage = Vehicle.PART_TYPE.DT;
+        //rebind headers
+        $('h2', jq.RepairShop.dt).text('Engine');
+        $('h2', jq.RepairShop.cid1).text('Transmission');
+        $('h2', jq.RepairShop.cid2).text('Axel');
+        $('h2', jq.RepairShop.cid3).text('Exhaust');
+        //rebind img paths
+        //$('img', jq.RepairShop.cid0).attr('src');
+        //$('img', jq.RepairShop.cid1).attr('src');
+        //$('img', jq.RepairShop.cid2).attr('src');
+        //$('img', jq.RepairShop.cid3).attr('src');
+        //rebind jq callbacks
+        
+    },
+    setPageBody:function(){
+        this._partPage = Vehicle.PART_TYPE.DT;
+        //rebind headers
+        $('h2', jq.RepairShop.dt).text('Chasis');
+        $('h2', jq.RepairShop.cid1).text('Panels');
+        $('h2', jq.RepairShop.cid2).text('Paint');
+        $('h2', jq.RepairShop.cid3).text('Chrome');
+        //rebind img paths
+        //$('img', jq.RepairShop.cid0).attr('src');
+        //$('img', jq.RepairShop.cid1).attr('src');
+        //$('img', jq.RepairShop.cid2).attr('src');
+        //$('img', jq.RepairShop.cid3).attr('src');
+        //rebind jq callbacks
+        
+    },
+    setPageInterior:function(){
+        this._partPage = Vehicle.PART_TYPE.DT;
+        //rebind headers
+        $('h2', jq.RepairShop.dt).text('Seats');
+        $('h2', jq.RepairShop.cid1).text('Carpet');
+        $('h2', jq.RepairShop.cid2).text('Dash');
+        $('h2', jq.RepairShop.cid3).text('Panels');
+        //rebind img paths
+        //$('img', jq.RepairShop.cid0).attr('src');
+        //$('img', jq.RepairShop.cid1).attr('src');
+        //$('img', jq.RepairShop.cid2).attr('src');
+        //$('img', jq.RepairShop.cid3).attr('src');
+        //rebind jq callbacks
+        
+    },
+    setPageDocs:function(){
+        this._partPage = Vehicle.PART_TYPE.DT;
+        //rebind headers
+        $('h2', jq.RepairShop.dt).text('Ownership');
+        $('h2', jq.RepairShop.cid1).text('Build');
+        $('h2', jq.RepairShop.cid2).text('History');
+        $('h2', jq.RepairShop.cid3).text('Exhaust');
+        //rebind img paths
+        //$('img', jq.RepairShop.cid0).attr('src');
+        //$('img', jq.RepairShop.cid1).attr('src');
+        //$('img', jq.RepairShop.cid2).attr('src');
+        //$('img', jq.RepairShop.cid3).attr('src');
+        //rebind jq callbacks
+        
+    }
 };
 function upgradePartUpdate(part, jqBtn, jqPB){
     if(part !== null){         
@@ -637,3 +704,8 @@ function(){
 	//resetStates();
 	//appState = GAME_MODE.Main_Menu;
 });
+
+jq.RepairShop.sDT.click(Repair.setPageDT);
+jq.RepairShop.sBody.click(Repair.setPageBody);
+jq.RepairShop.sInter.click(Repair.setPageInterior);
+jq.RepairShop.sDocs.click(Repair.setPageDocs);

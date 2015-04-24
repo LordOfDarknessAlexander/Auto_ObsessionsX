@@ -63,7 +63,7 @@ cmntHeader('Repair Screen Styles');
 <?php divRepair();?> div{
 <?php
     posAbs();
-    css::size('14%', '25%');
+    css::size('14%', '29%');
     //scrollY();
     css::txtAlignL();
 ?>
@@ -131,13 +131,15 @@ left div
     css::top('28%');
 ?>
 }
-<?php divRepair();?> div#cid0 img{
+<?php divRepair();?> div img{
 <?php
-    css::bottom('30%');
+    //posAbs();
+    css::top('15%');
     css::size('100%', '50%');
+    css::bgSize('100%', '100%');
 ?>
 }
-<?php divRepair();?> div#cid0 h2#dt{
+<?php divRepair();?> div h2{
 <?php
     css::top('0%');
     css::width('100%');
@@ -153,16 +155,16 @@ left div
     css::width('100%');
 ?>
 }
-<?php divRepair();?> h2#body{
+<?php divRepair();?> div#cid1 h2{
     <?php
-    css::lm();
-    css::top('60%');
+    //css::lm();
+    //css::top('60%');
 ?>
 }
-<?php divRepair();?> div#body{
+<?php divRepair();?> div#cid1{
 <?php
     css::lm();
-    css::top('65%');
+    css::top('59%');
 ?>
 }
 /*
@@ -172,27 +174,27 @@ right div
     //rStatView('interior', '28%', '33%');
     //rStatView('docs', '60%', '65%');
 ?>
-<?php divRepair();?> h2#interior{
+<?php divRepair();?> div#cid2 h2{
+<?php
+    //css::rm();
+    //css::top('28%');
+?>
+}
+<?php divRepair();?> div#cid2{
 <?php
     css::rm();
     css::top('28%');
 ?>
 }
-<?php divRepair();?> div#interior{
+<?php divRepair();?> div#cid3 h2{
 <?php
-    css::rm();
-    css::top('33%');
+    //css::rm();
+    //css::top('60%');
 ?>
 }
-<?php divRepair();?> h2#docs{
+<?php divRepair();?> div#cid3{
 <?php
     css::rm();
-    css::top('60%');
-?>
-}
-<?php divRepair();?> div#docs{
-<?php
-    css::rm();
-    css::top('65%');
+    css::top('59%');
 ?>
 }

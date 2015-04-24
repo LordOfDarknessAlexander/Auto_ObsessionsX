@@ -10,7 +10,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         carID = 0x0;
     }
     if(carInfo === null || carInfo === undefined){
-        carInfo = '';
+        carInfo = 'Default Car Info';
     }
     if(parts === null || parts === undefined){
         parts = null;
@@ -82,7 +82,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         _body:body,  //null,
         _interior:inter, //null,
         _docs:docs,  //Documents.make(Price), //null
-        _info:'Default Car Info',
+        _info:carInfo,
         //}
 		//image : img,
 		//getters
@@ -408,3 +408,9 @@ var Vehicle = function(imgSrc)	//xmlNode)
 	}
 };
 */
+Vehicle.PART_TYPE = {
+    DT:0,
+    BODY:1,
+    INTER:2,
+    DOCS:3
+};

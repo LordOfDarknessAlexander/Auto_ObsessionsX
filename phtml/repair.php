@@ -12,7 +12,9 @@ function ub($str){
 <?php
 }
 function statBar($id){
-    echo "$id:"; br();
+    //echo "$id:";
+    br();?>
+    <img src=''><?php
     ub("ub$id");
     rb("rb$id"); br();
     pb("pb$id"); br(); //hr();
@@ -34,16 +36,16 @@ function statBar($id){
     <!--a id='addFunds' href='<php echo rootURL() . 'state/funds.php';?>'>Add Funds</a-->
     <!--cid for car info div-->
     <div id='cid0'>
-        <h2 id='dt'>Drivetrain</h2>
-        <img src=''><?php 
+        <h2 id='dt'>Drivetrain</h2><?php 
         statBar('Engine');
         //statBar('Transmission');
         //statBar('Axel');
         //statBar('Exhaust');?>
 <!--Fuel System:-->
     </div>
-    <h2 id='body'>Body</h2>
-    <div id='body'><?php
+    
+    <div id='cid1'>
+        <h2 id='body'></h2><?php
         statBar('Chasis');
         //statBar('Panels');
         //statBar('Paint');?><!--
@@ -55,8 +57,8 @@ Chrome:
 <br>
 <!--PLACEHOLDER:-->
     </div>
-    <h2 id='interior'>Interior</h2>
-    <div id='interior'><?php
+    <div id='cid2'>
+        <h2 id='interior'><!--Interior--></h2><?php
         statBar('Seats');
         //statBar('Carpet');
         //statBar('Dash');
@@ -64,8 +66,9 @@ Chrome:
 <!--PLACEHOLDER:-->
     </div>
     <!---->
-    <h2 id='docs'>Documentation</h2>
-    <div id='docs'>
+
+    <div id='cid3'>
+        <h2 id='docs'><!--Documentation--></h2>
 Ownership:<button id='ubOwnership' class='ub'></button><br>
 <progress id='pbOwnership' value='0.0'></progress>
 <br>Build Sheet:
