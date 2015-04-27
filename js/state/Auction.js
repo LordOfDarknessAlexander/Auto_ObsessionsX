@@ -96,8 +96,8 @@ var Auction =
                     vehiclePrice = Auction._car.getPrice();
 					
 					Auction.ai = [Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice()))];
-					
-                    Auction.currentBid = vehiclePrice * 0.1;
+					Auction.currentBid = vehiclePrice * 0.1;
+                    Auction.currentBid = vehiclePrice * 0.04;
                     //jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
             
                     context.font = '26px arial, sans-serif';  
