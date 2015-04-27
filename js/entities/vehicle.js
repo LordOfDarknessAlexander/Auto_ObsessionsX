@@ -75,14 +75,14 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		year : Year,	//parseInt(node.attr('year') ),
 		id : carID,	//node.attr('id'),
 		//_info: node.text(),
-		_parts : [],	//only retain currently upgraded parts, array is copied
+		_parts : [],	//obsolete, only retain currently upgraded parts, array is copied
         //_parts:{
             //parts with value null, mean user hasn't purchase/installed part
         _dt:dt,
         _body:body,  //null,
         _interior:inter, //null,
         _docs:docs,  //Documents.make(Price), //null
-        _info:carInfo,
+        _info:carInfo,  //string of up to 255 char
         //}
 		//image : img,
 		//getters

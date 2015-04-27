@@ -350,7 +350,7 @@ var Repair = {
         this._partPage = Vehicle.PART_TYPE.DT;
         
         var type = Drivetrain.TYPE,     //types of parts conposing the drivetrain
-            btnTag = 'button#';;
+            btnTag = 'button#';
             //div = jq.RepairShop.dt;
         //rebind headers
         $('h2', jq.RepairShop.dt).text('Engine');
@@ -374,15 +374,15 @@ var Repair = {
                 //not those found in its prototype(if one exists)
                 if(type.hasOwnProperty(key) ){
                     var t = type[key],
-                        div = getDivURSlot(t),
+                        div = Drivetrain.getDivURSlot(t),
                         part = car._dt.getPartType(t),  //part to upgrade
                         str = //Drivetrain.strFromType(t),
                         ub = $(btnTag + 'ub' /*+ str*/, div),    //upgrade button
                         rb = $(btnTag + 'rb' /*+ str*/, div),   //repair button
                         pb = $('progress#pb' /*+ str*/, div);   //progres bar
 
-                    bindUpgradeBtn(ub, part, t, upgradeDT);
-                    bindRepairBtn(rb, part, t, repairDT);
+                    bindUpgradeBtn(ub, part, t, Drivetrain.upgrade);
+                    bindRepairBtn(rb, part, t, Drivetrain.repair);
                     pbSetColor(pb, part.getPercent() );
                 }
             }
@@ -390,6 +390,9 @@ var Repair = {
         //else user has no car, do have to set
     },
     setPageBody:function(){
+        var type = Body.TYPE,
+            btnTag = 'button#';
+        
         this._partPage = Vehicle.PART_TYPE.BODY;
         //rebind headers
         $('h2', jq.RepairShop.dt).text('Chasis');
@@ -403,10 +406,34 @@ var Repair = {
         //$('img', jq.RepairShop.cid2).attr('src', root + 'paint.png');
         //$('img', jq.RepairShop.cid3).attr('src', root + 'chrome.png');
         //rebind jq callbacks
-        //rebind jq callbacks
+        var car = Garage.getCurrentCar();
+    
+        if(car !== null){
+           
+            for(var key in type){
+                //using hasOwnProperty ensures on iteration only over fields present in the object,
+                //not those found in its prototype(if one exists)
+                if(type.hasOwnProperty(key) ){
+                    var t = type[key],
+                        div = Body.getDivURSlot(t),
+                        part = car._body.getPartType(t),  //part to upgrade
+                        ub = $(btnTag + 'ub', div),    //upgrade button
+                        rb = $(btnTag + 'rb', div),   //repair button
+                        pb = $('progress#pb', div);   //progres bar
+
+                    bindUpgradeBtn(ub, part, t, Body.upgrade);
+                    bindRepairBtn(rb, part, t, Body.repair);
+                    pbSetColor(pb, part.getPercent() );
+                }
+            }
+        }
+        //else user has no car, do have to set
         
     },
     setPageInterior:function(){
+        var type = Interior.TYPE,
+            btnTag = 'button#';
+        
         this._partPage = Vehicle.PART_TYPE.INTER;
         //rebind headers
         $('h2', jq.RepairShop.dt).text('Seats');
@@ -420,8 +447,27 @@ var Repair = {
         //$('img', jq.RepairShop.cid2).attr('src', root + 'dash.png');
         //$('img', jq.RepairShop.cid3).attr('src', root + 'panels.png');
         //rebind jq callbacks
-        //rebind jq callbacks
-        
+        var car = Garage.getCurrentCar();
+    
+        if(car !== null){
+           
+            for(var key in type){
+                //using hasOwnProperty ensures on iteration only over fields present in the object,
+                //not those found in its prototype(if one exists)
+                if(type.hasOwnProperty(key) ){
+                    var t = type[key],
+                        div = Interior.getDivURSlot(t),
+                        part = car._interior.getPartType(t),  //part to upgrade
+                        ub = $(btnTag + 'ub', div),    //upgrade button
+                        rb = $(btnTag + 'rb', div),   //repair button
+                        pb = $('progress#pb', div);   //progres bar
+
+                    bindUpgradeBtn(ub, part, t, Interior.upgrade);
+                    bindRepairBtn(rb, part, t, Interior.repair);
+                    pbSetColor(pb, part.getPercent() );
+                }
+            }
+        }
     },
     setPageDocs:function(){
         this._partPage = Vehicle.PART_TYPE.DOCS;
@@ -437,7 +483,30 @@ var Repair = {
         //$('img', jq.RepairShop.cid2).attr('src', root + 'history.png');
         //$('img', jq.RepairShop.cid3).attr('src', root + 'exhaust.png');
         //rebind jq callbacks
-        //rebind jq callbacks
+        var car = Garage.getCurrentCar();
+    
+        if(car !== null){
+            //var i = 0;
+            
+            /*for(var key in type){
+                //using hasOwnProperty ensures on iteration only over fields present in the object,
+                //not those found in its prototype(if one exists)
+                if(type.hasOwnProperty(key) ){
+                    var t = type[key],
+                        div = Drivetrain.getDivURSlot(t),
+                        part = car._dt.getPartType(t),  //part to upgrade
+                        str = //Drivetrain.strFromType(t),
+                        ub = $(btnTag + 'ub', div),    //upgrade button
+                        rb = $(btnTag + 'rb', div),   //repair button
+                        pb = $('progress#pb', div);   //progres bar
+
+                    bindUpgradeBtn(ub, part, t, Drivetrain.upgrade);
+                    //bindRepairBtn(rb, part, t, Drivetrain.repair);
+                    rb.off().hide();
+                    pbSetColor(pb, part.getPercent() );
+                }
+            }*/
+        }
         
     }
 };
@@ -468,23 +537,24 @@ function repairPartUpdate(part, jqBtn, jqPB){
         pbSetColor(jqPB, part.getPercent() );
     }
 }
-function getDivURSlot(carType){
-    var str = 'div#RepairShop div#';
+Drivetrain.getDivURSlot = function(carType){
+    var T = Drivetrain.TYPE,
+        str = 'div#RepairShop div#';
     
     switch(carType){
-        case Drivetrain.TYPE.engine:
+        case T.engine:
             str += 'cid0';
         break;
         
-        case Drivetrain.TYPE.trans:
+        case T.trans:
             str += 'cid1';
         break;
         
-        case Drivetrain.TYPE.axel:
+        case T.axel:
             str += 'cid2';
         break;
         
-        case Drivetrain.TYPE.exhaust:
+        case T.exhaust:
             str += 'cid3';
         break;
         
@@ -493,14 +563,14 @@ function getDivURSlot(carType){
     }
     var div = $(str);
     return div;
-}
-function upgradeDT(obj){
+};
+Drivetrain.upgrade = function(obj){
     //
     var car = Garage.getCurrentCar();
     
     if(car !== null){
-        var type = obj.data.type,
-            str = Drivetrain.strFromType(type);
+        var type = obj.data.type;
+            //str = Drivetrain.strFromType(type);
         //console.log('upgrading part of type: ' + str);
         
         if(car._dt === null){
@@ -521,7 +591,7 @@ function upgradeDT(obj){
                 var part = car._dt.getPartType(type);
                 //if part is upgraded to max, unbind and make unclickable
                 if(part !== null){    
-                    var div = getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
+                    var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
                     
                     upgradePartUpdate(
                         part,
@@ -534,14 +604,15 @@ function upgradeDT(obj){
         Repair.save();
     }
     //else no car, do nothing
-}
-function repairDT(obj){
+};
+
+Drivetrain.repair = function(obj){
     //
     var car = Garage.getCurrentCar();
     
     if(car !== null){
-        var type = obj.data.type,
-            str = Drivetrain.strFromType(type);
+        var type = obj.data.type;
+            //str = Drivetrain.strFromType(type);
         
         if(car._dt.repairPart(type) ){
             //console.log('repaired part!');
@@ -549,7 +620,7 @@ function repairDT(obj){
             var part = car._dt.getPartType(type);
             
             if(part !== null){
-                var div = getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
+                var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
                 
                 repairPartUpdate(
                     part,
@@ -561,14 +632,42 @@ function repairDT(obj){
         Repair.save();
     }
     //else no car, do nothing
-}
-function upgradeBody(obj){
+};
+//
+Body.getDivURSlot = function(carType){
+    var T = Body.TYPE,
+        str = 'div#RepairShop div#';
+    
+    switch(carType){
+        case T.chasis:
+            str += 'cid0';
+        break;
+        
+        case T.panels:
+            str += 'cid1';
+        break;
+        
+        case T.paint:
+            str += 'cid2';
+        break;
+        
+        case T.ph0:
+            str += 'cid3';
+        break;
+        
+        default:
+            return null;
+    }
+    var div = $(str);
+    return div;
+};
+Body.upgrade = function(obj){
     //
     var car = Garage.getCurrentCar();
     
     if(car !== null){
-        var type = obj.data.type,
-            str = Body.strFromType(type);
+        var type = obj.data.type;
+            //str = Body.strFromType(type);
         
         //console.log('upgrading part of type: ' + str);
         
@@ -591,26 +690,26 @@ function upgradeBody(obj){
             var part = car._body.getPartType(type);
             //if part is upgraded to max, unbind and make unclickable
             if(part !== null){            
-                var div = $('div#RepairShop div#body');
+                var div = Body.getDivURSlot(type);  //$('div#RepairShop div#body');
                 
                 upgradePartUpdate(
                     part,
-                    $('button#ub' + str, div),
-                    $('progress#pb' + str, div)
+                    $('button#ub', div),
+                    $('progress#pb', div)
                 );
             }
         }
         Repair.save();
     }
     //else no car, do nothing
-}
-function repairBody(obj){
-//    console.log('repair part!');
+};
+Body.repair = function(obj){
+    //console.log('repair part!');
     var car = Garage.getCurrentCar();
     
     if(car !== null){
-        var type = obj.data.type,
-            str = Body.strFromType(type);
+        var type = obj.data.type;
+            //str = Body.strFromType(type);
             
         if(car._body === null){
             //add part
@@ -622,12 +721,12 @@ function repairBody(obj){
                 var part = car._body.getPartType(type);
                 
                 if(part !== null){
-                    var div = $('div#RepairShop div#body');
+                    var div = Body.getDivURSlot(type);  //$('div#RepairShop div#body');
                     
                     repairPartUpdate(
                         part,
-                        $('button#rb' + str, div),
-                        $('progress#pb' + str, div)
+                        $('button#rb', div),
+                        $('progress#pb', div)
                     );
                 }
             }
@@ -635,14 +734,42 @@ function repairBody(obj){
         Repair.save();
     }
     //else no car, do nothing
-}
-function upgradeInterior(obj){
+};
+Interior.getDivURSlot = function(carType){
+
+    var T = Interior.TYPE,
+        str = 'div#RepairShop div#';
+    
+    switch(carType){
+        case T.seats:
+            str += 'cid0';
+        break;
+        
+        case T.carpet:
+            str += 'cid1';
+        break;
+        
+        case T.dash:
+            str += 'cid2';
+        break;
+        
+        case T.panels:
+            str += 'cid3';
+        break;
+        
+        default:
+            return null;
+    }
+    var div = $(str);
+    return div;
+};
+Interior.upgrade = function(obj){
     //
     var car = Garage.getCurrentCar();
     
     if(car !== null){
-        var type = obj.data.type,
-            str = Interior.strFromType(type);
+        var type = obj.data.type;
+            //str = Interior.strFromType(type);
         //console.log('upgrading part of type: ' + str);
         
         if(car._interior === null){
@@ -665,26 +792,26 @@ function upgradeInterior(obj){
             var part = car._interior.getPartType(type);
             //if part is upgraded to max, unbind and make unclickable
             if(part !== null){         
-                var div = $('div#RepairShop div#interior');
+                var div = Interior.getDivURSlot(type);  //$('div#RepairShop div#interior');
                 
                 upgradePartUpdate(
                     part,
-                    $('button#ub' + str, div),
-                    $('progress#pb' + str, div)
+                    $('button#ub', div),
+                    $('progress#pb', div)
                 );
             }
         }
         Repair.save();
     }
     //else no car, do nothing
-}
-function repairInterior(obj){
+};
+Interior.repair = function(obj){
 //    console.log('repair part!');
     var car = Garage.getCurrentCar();
     
     if(car !== null){
-        var type = obj.data.type,    
-            str = Interior.strFromType(type);
+        var type = obj.data.type;  
+            //str = Interior.strFromType(type);
             
         if(car._interior === null){
             //add part
@@ -696,12 +823,12 @@ function repairInterior(obj){
                 var part = car._interior.getPartType(type);
                 
                 if(part !== null){
-                    var div = $('div#RepairShop div#interior');
+                    var div = Interior.getDivURSlot(type);  //$('div#RepairShop div#interior');
                     
                     repairPartUpdate(
                         part,
-                        $('button#rb' + str, div),
-                        $('progress#pb' + str, div)
+                        $('button#rb', div),
+                        $('progress#pb', div)
                     );
                 }
             }
@@ -709,14 +836,14 @@ function repairInterior(obj){
         Repair.save();
     }
     //else no car, do nothing
-}
+};
 function upgradeDocs(obj){
     //
     var car = Garage.getCurrentCar();
     
     if(car !== null){
-        var type = obj.data.type,
-            str = Documents.strFromType(type);
+        var type = obj.data.type;
+            //str = Documents.strFromType(type);
         //console.log('upgrading part of type: ' + str);
         
         if(car._docs === null){
@@ -738,13 +865,13 @@ function upgradeDocs(obj){
             var part = car._docs.getPartType(type);
             //if part is upgraded to max, unbind and make unclickable
             if(part !== null){
-                var str = Documents.strFromType(type),
-                    div = $('div#RepairShop div#docs');
+                var div = $('div#RepairShop div#docs');
+                    //str = Documents.strFromType(type),
                 
                 upgradePartUpdate(
                     part,
-                    $('button#ub' + str, div),
-                    $('progress#pb' + str, div)
+                    $('button#ub', div),
+                    $('progress#pb', div)
                 );
             }
             Repair.save();
