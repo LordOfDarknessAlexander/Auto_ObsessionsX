@@ -15,9 +15,9 @@ function statBar($id){
     //echo "$id:";
     br();?>
     <img src=''><?php
-    ub("ub$id");
-    rb("rb$id"); br();
-    pb("pb$id"); br(); //hr();
+    ub("ub");
+    rb("rb"); br();
+    pb("pb"); br(); //hr();
 }
 ?>
 <div id='RepairShop'>
@@ -37,7 +37,8 @@ function statBar($id){
     <!--cid for car info div-->
     <div id='cid0'>
         <h2 id='dt'>Drivetrain</h2><?php 
-        statBar('Engine');
+        statBar('');
+        //statBar('Engine');
         //statBar('Transmission');
         //statBar('Axel');
         //statBar('Exhaust');?>
@@ -46,7 +47,8 @@ function statBar($id){
     
     <div id='cid1'>
         <h2 id='body'></h2><?php
-        statBar('Chasis');
+        statBar('');
+        //statBar('Chasis');
         //statBar('Panels');
         //statBar('Paint');?><!--
 Chrome:
@@ -59,7 +61,8 @@ Chrome:
     </div>
     <div id='cid2'>
         <h2 id='interior'><!--Interior--></h2><?php
-        statBar('Seats');
+        statBar('');
+        //statBar('Seats');
         //statBar('Carpet');
         //statBar('Dash');
         //statBar('Panels');?>

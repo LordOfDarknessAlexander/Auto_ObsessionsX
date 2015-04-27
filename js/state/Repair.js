@@ -350,8 +350,8 @@ var Repair = {
         this._partPage = Vehicle.PART_TYPE.DT;
         
         var type = Drivetrain.TYPE,     //types of parts conposing the drivetrain
-            btnTag = 'button#',
-            div = jq.RepairShop.dt;
+            btnTag = 'button#';;
+            //div = jq.RepairShop.dt;
         //rebind headers
         $('h2', jq.RepairShop.dt).text('Engine');
         $('h2', jq.RepairShop.cid1).text('Transmission');
@@ -364,23 +364,30 @@ var Repair = {
         $('img', jq.RepairShop.cid2).attr('src', root + 'axel.png');
         $('img', jq.RepairShop.cid3).attr('src', root + 'exhaust.png');
         //rebind jq callbacks
-        
-        /*for(var key in type){   //i = type.engine; i <= type.exhaust; i++){ 
-            //using hasOwnProperty ensures on iteration only over fields present in the object,
-            //not those found in its prototype(if one exists)
-            if(type.hasOwnProperty(key) ){
-                var i = type[key],
-                    part = car._dt.getPartType(i),
-                    str = Drivetrain.strFromType(i),
-                    ub = $(btnTag + 'ub' + str, div),    //upgrade button
-                    rb = $(btnTag + 'rb' + str, div),
-                    pb = $('progress#pb' + str, div); //repair button
+        var car = Garage.getCurrentCar();
+    
+        if(car !== null){
+            //var i = 0;
+            
+            for(var key in type){
+                //using hasOwnProperty ensures on iteration only over fields present in the object,
+                //not those found in its prototype(if one exists)
+                if(type.hasOwnProperty(key) ){
+                    var t = type[key],
+                        div = getDivURSlot(t),
+                        part = car._dt.getPartType(t),  //part to upgrade
+                        str = //Drivetrain.strFromType(t),
+                        ub = $(btnTag + 'ub' /*+ str*/, div),    //upgrade button
+                        rb = $(btnTag + 'rb' /*+ str*/, div),   //repair button
+                        pb = $('progress#pb' /*+ str*/, div);   //progres bar
 
-                bindUpgradeBtn(ub, part, i, upgradeDT);
-                bindRepairBtn(rb, part, i, repairDT);
-                pbSetColor(pb, part.getPercent() );
+                    bindUpgradeBtn(ub, part, t, upgradeDT);
+                    bindRepairBtn(rb, part, t, repairDT);
+                    pbSetColor(pb, part.getPercent() );
+                }
             }
-        }*/       
+        }
+        //else user has no car, do have to set
     },
     setPageBody:function(){
         this._partPage = Vehicle.PART_TYPE.BODY;
@@ -461,6 +468,32 @@ function repairPartUpdate(part, jqBtn, jqPB){
         pbSetColor(jqPB, part.getPercent() );
     }
 }
+function getDivURSlot(carType){
+    var str = 'div#RepairShop div#';
+    
+    switch(carType){
+        case Drivetrain.TYPE.engine:
+            str += 'cid0';
+        break;
+        
+        case Drivetrain.TYPE.trans:
+            str += 'cid1';
+        break;
+        
+        case Drivetrain.TYPE.axel:
+            str += 'cid2';
+        break;
+        
+        case Drivetrain.TYPE.exhaust:
+            str += 'cid3';
+        break;
+        
+        default:
+            return null;
+    }
+    var div = $(str);
+    return div;
+}
 function upgradeDT(obj){
     //
     var car = Garage.getCurrentCar();
@@ -488,12 +521,12 @@ function upgradeDT(obj){
                 var part = car._dt.getPartType(type);
                 //if part is upgraded to max, unbind and make unclickable
                 if(part !== null){    
-                    var div = $('div#RepairShop div#drivetrain');
+                    var div = getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
                     
                     upgradePartUpdate(
                         part,
-                        $('button#ub' + str, div),
-                        $('progress#pb' + str, div)
+                        $('button#ub', div),
+                        $('progress#pb', div)
                     );
                 }
             }
@@ -516,12 +549,12 @@ function repairDT(obj){
             var part = car._dt.getPartType(type);
             
             if(part !== null){
-                var div = $('div#RepairShop div#drivetrain');
+                var div = getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
                 
                 repairPartUpdate(
                     part,
-                    $('button#rb' + str, div),
-                    $('progress#pb' + str, div)
+                    $('button#rb', div),
+                    $('progress#pb', div)
                 );
             }
         }

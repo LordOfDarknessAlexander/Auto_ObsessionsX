@@ -285,7 +285,7 @@ var ao = {
     publicInt:7,    //public non-const integer
     otherData:{
         ...
-    }
+    },
     //
     _privDoStuff(){
         //private/protected function which should only be called by this object (or its children),
@@ -296,7 +296,7 @@ var ao = {
         //public accesser, which calls a private/protected method
         this._privDoStuff();
         return;
-    },
+    }
 };</p></code>
     This is not a true namespace or static interface, as the code is initialized,
 its members are accessed with dot (.) notation, as its a global object(more akin to a static class),
@@ -310,7 +310,7 @@ PHP:
     To distinguish related groups of functions, variables or classes at
 global scope either prefix them with a short abbreviation of the namespace(aoSomeFunc(){}, class aoVehicle{}, $aoUserDB = new dbConnect();),
 or declared them as a static member of a class (eg, pasGet::, a::, html::, css::)
-<code><p class='good'>
+<code><p class='good'>&lt;?php
 class Stuff{
     //doc string, about this class
     //data always comes first in class declarations!
@@ -329,11 +329,60 @@ class Stuff{
     protected function _getPriv(){
         return $self->_priv;
     }
-}</p></code>
-<p class='tip'>PHP allows for a namespace mechanism, which is only supported in v5 or greater.
-As the current webhost(GoDaddy) does not that language version,
+}
+?&gt;</p></code><p class='tip'>PHP allows for a namespace mechanism, which is only supported in v5 or greater.
+As the current webhost(GoDaddy) does not use that language version,
 the feature is not used in any studio scripts and will not be mentioned or referenced in examples.</p>
-</pre>
+    One fundemental aspect of OOP and the concept of <i>classes</i> is the encapsulation of data,
+along with functions which either return(get) or modify(set) data contained
+within an instansiated object or statically allocated class members/functions.
+<p class='tip'>    With dynamic languages(generally) functions and their bindings,
+This is known as reflection and allows for run-time introspection and mutation
+of a program's source code, essentailly allowing for the potential for 'sentient'
+programs which can modify their behaviour based on an AI and input from its execution environment.
+</p>    Getters and Setters which are public are prefixed with 'get' and 'set', respectively,
+along with a clear, conciece, name relating to (and ideally being a shortened version) of the member being accessed or modified.    
+    Protected and private member are declared the same,
+except further prefixed with an underscore(_), as convention dictates.
+Example, declaring getter and setters,
+JavaScript:
+<code><p class='good'>
+var thing = {
+    _stuff:0,
+    getStuff:function(){
+        //copy returns the value 0
+        return this._stuff;
+    },
+    _setStuff:function(value){
+        //modifies the value at the memory address bound to the identifier
+        //repressented by this._stuff.
+        this._stuff = value;
+        //in some cases either an instance of the object,
+        //or the memory address of _stuff may be desirable to return,
+        //to allow for 'chaining' function calls, like with jQuery!
+    }
+};</p></code>
+PHP:
+<code><p class='good'>
+class thing{
+    private _stuff;
+    function __construct($i){
+        $this->_stuff = $i;
+    }
+    function getStuff(){
+        //copy returns the value of stuff
+        return this->_stuff;
+    }
+    function &amp;getStuff(){
+        //the memory address of stuff
+        return &amp;this->_stuff;
+    }
+    protected function _setStuff($value){
+        //preform optional validation of data being assigned,
+        //for added security
+        this->_stuff = $value;
+    }
+}</p></code></pre>
     <h3 id='imgs'>Images</h3><hr>
 <pre><h4 id='imgAR'>Aspect Ratios:</h4>    The aspect ratio is an important relation between its size and height and is calculated and expressed as, w/h, or w:h,
 and is expressed in the lowest common denominator.
