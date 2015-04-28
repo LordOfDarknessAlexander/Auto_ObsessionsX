@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `users` (
     `m_marker` int(40) NOT NULL,
     `user_level` tinyint(2) unsigned,   
     `email` varchar(50) NOT NULL,
+	`email_code` varchar(32) NOT NULL,
     `psword` char(40) NOT NULL,
     `registration_date` datetime NOT NULL,
     `confirm` tinyint(2) unsigned
