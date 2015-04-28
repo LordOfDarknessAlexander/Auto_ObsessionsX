@@ -107,8 +107,10 @@ Car View Screen
 <?php
     css::marginBtm();
     css::txtAlignL();
+    scrollY();
 ?>
     font-size:1.5vw;
+    display:block;
 }
 <?php divCarView();?> h2{
 <?php

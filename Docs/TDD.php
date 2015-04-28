@@ -480,25 +480,31 @@ Opposed to using double quote inside double quotes:
 <p class='bad'>var htmlStr = "&lt;button id=\"" + id + "\"&gt;text&lt;/button&gt;";</p>
 </code>
 <h3 id='phpH'><?php a::php();?></h3><hr>
-<pre>    PHP differentiates between single and double quoted <a href='http://php.net/language.types.string'>strings</a> (also see nowdoc and heredoc, but these are less frequently used) with
-certain distinctions.
+<pre>    PHP differentiates between single and double quoted <a href='http://php.net/language.types.string'>strings</a> with
+certain distinctions. Also see nowdoc and heredoc,
+but these are less frequently used.
+<p class='tip'>    Since these styles of string are support by v5 or higher,
+all 8.5:1 games/sites/app will not use them,
+as the host only support v4 of PHP.</p>
     Single quoted strings require the escaping of special characters, /, ', etc
 They are to be used in simple strings which do not contain embedded data(html/json)
 and do not require the substitution of variables.</pre>
-<code>
+<code>&lt;?php
 <p class='good'>$str = 'simple string'; //keep it simple, nothing complex</p>
 <p class='bad'>$str = 'this \' must be escaped';</p>
 <p class='good'>$str = '{"id":"string"}';</p>
-And as with before, using double quotes looks the same:
+//as with JavaScript,
+//using double quotes looks the same and should be avoided
 <p class='bad'>$str = "{\"id\":\"string\"}";</p>
+?&gt;
 </code>
-    Double quoted strings may contain single quotes without escaping,
-and support the direct substitution of variables.
+<pre>    Double quoted strings may contain single quotes without escaping,
+and support the direct substitution of variables.</pre>
 <code>
 <p class='bad'>$str = "simple string";  //double quote for 'complex strings', nothing special here</p>
-<p class='good'>$str = "this ' doesn't need escaping'!";</p><br>
+<p class='good'>$str = "this ' doesn't need escaping'!";</p>
 </code>
-When embedding dynamic variables into a string this format is preferred
+<pre>    When embedding dynamic variables into a string this format is preferred</pre>
 <code>
 <p class='good'>
 &lt;?php<br>
@@ -507,33 +513,36 @@ echo "&lt;button id='$str'&gt;This can't be real&lt;/button&gt;";   //embedded s
 $str = "SELECT $str FROM table";   //embedded string as an sql statement, $str will be replaced by the literal value(not including the quotes)<br>
 ?&gt;</p>
 </code>
-While this is acceptable, in PHP, html elements should rarely be expressed as strings then echo'ed out to the browser(as this is slow and overly complex),
-rather, it's preferred to inject the html directly as the site like so.
-<code>
+<pre>    While this is acceptable, in PHP, html elements should rarely be expressed as strings then echo'ed out to the browser(as this is slow and overly complex),
+rather, it's preferred to inject the html directly as the site like so.<code>
 <p class='good'>
-&lt;?php<br>
-$str = 'guid';<br>
-?&gt;<br>
-&lt;button id='&lt;?php echo $str;?&gt;'&gt;This can't be real&lt;/button&gt;<br>
-&lt;?php<br>
-enter php mode and continue on with script!<br>
-?&gt;</p>
-</code>
+&lt;?php
+$str = 'guid';
+?&gt;
+&lt;button id='&lt;?php echo $str;?&gt;'&gt;This can't be real&lt;/button&gt;
+&lt;?php
+enter php mode and continue on with script!
+?&gt;</p></code>
 <?php $str = 'guid';?>
-<button id='<?php echo $str;?>'>text</button><br>
+<button id='<?php echo $str;?>'>text</button>
 <p class='tip'>
-By closing the php tag(with ?&gt;) the script will revert to pure html, allowing to create functions and other PHP constructs which output elements.
-</p>
+    By closing the php tag(with ?&gt;) the script will revert to pure html, allowing to create functions and other PHP constructs which output elements.
+</p></pre>
 <h3 id='jsonH'><?php a::json();?></h3><hr>
-    The <a href = 'http://json.org/'>json standard</a> requires the use of double quotes for expressing all string data
-This makes for rather cumbersome syntax which is less flexible.
-<code>
-<p class='bad'>"{\"id\":\"string data\"}" //ugly</p>
-<p class='good'>'{"id":"string"}';   //better</p>
-</code>
-<p class='tip'>
-    In php and javascript, use json_encode() or JSON.stringify() to convert complex data objects into valid JSON strings
-</p>
+<pre>    The <a href = 'http://json.org/'>json standard</a> requires the use of double quotes for expressing all string data
+This makes for rather cumbersome syntax which is less flexible.</pre><code>
+<p class='bad'>var jsonStr = "{\"id\":\"string data\"}";</p>
+<p class='good'>var jsonStr = '{"id":"string"}';</p>
+</code><pre><p class='tip'>    In php and javascript, use json_encode() or JSON.stringify() to convert complex data objects into valid JSON strings</p></pre>
+<code>&lt;?php
+<p class='bad'>$jsonStr = "{\"id\":\"string data\"}";</p>
+<p class='good'>$jsonStr = '{"id":"string"}';</p>
+<pre><p class='tip'>    To create properly formated JSON strings in PHP,
+create an assosiative array, then use json_encode() to convert to an object string!</p>
+//prefered way to generate a json string from an 'object':
+$obj = array('val0'=>0,'val1'=>'second');
+$jsonStr = json_encode($obj);
+?&gt;</pre></code>
 <hr><h2 id='aoGM'>Game Mechanics</h2><hr>
 <pre>   Auto-Obsessions implements several high level API to simulate the experience of owning, moding and auctioning cars.
 </pre>
@@ -549,31 +558,35 @@ purchasing a car copies the data from aoCars(entries are never removed from aoCa
 View a car does not change any.
 </pre>
 <h3 id='selling'>Making money</h3><hr>
-<pre>   An Ajax POST request is made to the server (from js),
-, with the script returning their new funds.
+<pre>   Processing in-game funds is managed by the server in PHP.
+If the user is not a registered user, processing is off-loaded 
+to the browser to simulate the interaction(as guests do not have access to the databases).
+    An Ajax POST request is made to the server (from js),
+where the transaction is validated and processed by the server,
+before updating the user's table entry with the script returning their new funds,
+which then uses jQuery to update the DOM to display the new values.
 </pre>
 <h3>Repairs and upgrades</h3><hr>
 <pre>    Vehicle upgrades and repairs are represented by bitfields,
-minimizing bandwidth from sql queries and sending data with php/ajax by overlaying complex abstractions atop collections of bits(more specifically chars, shorts and ints) 
-    <br>
+
     Each field is represented by 4(8-bit) bytes taking the form {XXXX,FFFF}.
-    Each group of 4 bits represents a single part of the car.
-    The X's aRE reserved and not used.
+Each group of 4 bits represents a single part of the car.
+The X's aRE reserved and not used.
     
-    Each bit represents one of 5 stages:
-        0x0(no upgrade)
-        0x1(stage 1)
-        0x2(stage 2)
-        0x4(stage 3)
-        0x8(stage 4)
+Each bit represents one of 5 stages:
+    0x0(no upgrade)
+    0x1(stage 1)
+    0x2(stage 2)
+    0x4(stage 3)
+    0x8(stage 4)
 
-    Binary Visual:
-        {0000,0000,0000,0000}    //new part
-        {1000,1000,1000,1000}   //field fully upgraded<br>
+Binary Visual:
+    {0000,0000,0000,0000}    //new part
+    {1000,1000,1000,1000}   //field fully upgraded
 
-    Hex Visual:
-        {0x0,0x0,0x0,0x0}       //new
-        {0x8,0x8,0x8,0x8}       //maxed<br>
+Hex Visual:
+    {0x0,0x0,0x0,0x0}       //new
+    {0x8,0x8,0x8,0x8}       //maxed
 
     The repair bit field contains 2 bytes(16-bits) representing
 one repair for each part in each field. It takes on the structure:
@@ -581,25 +594,25 @@ one repair for each part in each field. It takes on the structure:
   
     When fully upgraded all bits are full(0xF) and the field values appear as such
 
-    {1111,1111,1111,1111}(bin)
+{1111,1111,1111,1111}(bin)
     OR
-    {0xF,0xF,0xF,0xF}(hex)
+{0xF,0xF,0xF,0xF}(hex)
 
     To access values in php or javascript a combination of bitshift and masking is required.
 
-    Bandwidth for single user's vehicle(24-bytes)
-        id uint(4)
-        dt uint(4)
-        body uint(4)
-        interior uint(4)
-        docs uint(4)
-        repairs uint(4)
+Bandwidth for a single user's vehicle(24-bytes)
+    id uint(4)
+    dt uint(4)
+    body uint(4)
+    interior uint(4)
+    docs uint(4)
+    repairs uint(4)
 
-    pending updates/overhaul could be reduced to (16-bytes)
-        id uint(4)
-        dt/body uint(4)
-        interior/docs uint(4)
-        repairs uint(4)
+pending updates/overhaul could be reduced to (16-bytes)
+    id uint(4)
+    dt/body uint(4)
+    interior/docs uint(4)
+    repairs uint(4)
 </pre>
     <h3 id='ai'>AI</h3><hr>
 <pre>   The AI drives the user's bidding experience.

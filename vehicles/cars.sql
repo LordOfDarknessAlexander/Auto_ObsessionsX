@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `aoCars` (
     `year` int NOT NULL,
     `model` varchar(50) NOT NULL,
     `price` int unsigned NOT NULL,
-    `info` char(128) NOT NULL
+    `info` char(255) NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
 -- Data is added dynamically through php script!

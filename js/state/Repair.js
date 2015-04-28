@@ -29,7 +29,7 @@ function disable(jqo){
     //disables the jquery object passed
     jqo.css(
         {'opacity':'0.45','cursor':'default'}
-    ).text('$0.00').off();
+    ).text('$0.00').off().show();
 }
 function bindUpgradeBtn(jqo, part, carType, onClickCB){
     cssEnable = {
@@ -57,7 +57,7 @@ function bindRepairBtn(jqo, part, carType, onClickCB){
     };
     
     if(!part._repaired){
-        jqo.off().click(
+        jqo.show().off().click(
             {type:carType}, onClickCB
         ).css(
             cssEnable
@@ -232,10 +232,12 @@ var Repair = {
                 /*for(var i = type.ownership; i <= type.ph0; i++){ 
                     var part = car._docs.getPartType(i),                    
                         str = Documents.strFromType(i),
-                        ub = $(btnTag + 'ub' + str, div),
-                        pb = $('progress#pb' + str, div);
+                        ub = $(btnTag + 'ub', div),
+                        rb = $(btnTag + 'rb', div),
+                        pb = $('progress#pb', div);
                     
-                    bindRepairBtn(ub, part, i, upgradeDocs);
+                    bindUpgradeBtn(ub, part, i, upgradeDocs);
+                    rb.off().hide();
                     //docs don't have repair buttons
                     pbSetColor(pb, part.getPercent() );
                 }*/
@@ -359,6 +361,7 @@ var Repair = {
         $('h2', jq.RepairShop.cid3).text('Exhaust');
         //rebind img paths
         var root = getHostPath() + 'images/parts/drivetrain/';
+        
         $('img', jq.RepairShop.dt).attr('src', root + 'engine.png');
         $('img', jq.RepairShop.cid1).attr('src', root + 'transmission.png');
         $('img', jq.RepairShop.cid2).attr('src', root + 'axel.png');
@@ -377,9 +380,9 @@ var Repair = {
                         div = Drivetrain.getDivURSlot(t),
                         part = car._dt.getPartType(t),  //part to upgrade
                         str = //Drivetrain.strFromType(t),
-                        ub = $(btnTag + 'ub' /*+ str*/, div),    //upgrade button
-                        rb = $(btnTag + 'rb' /*+ str*/, div),   //repair button
-                        pb = $('progress#pb' /*+ str*/, div);   //progres bar
+                        ub = $(btnTag + 'ub', div),    //upgrade button
+                        rb = $(btnTag + 'rb', div),   //repair button
+                        pb = $('progress#pb', div);   //progres bar
 
                     bindUpgradeBtn(ub, part, t, Drivetrain.upgrade);
                     bindRepairBtn(rb, part, t, Drivetrain.repair);
@@ -401,10 +404,11 @@ var Repair = {
         $('h2', jq.RepairShop.cid3).text('Chrome');
         //rebind img paths
         var root = getHostPath() + 'images/parts/body/';
-        //$('img', jq.RepairShop.dt).attr('src', root + 'chasis.png');
-        //$('img', jq.RepairShop.cid1).attr('src', root + 'panels.png');
-        //$('img', jq.RepairShop.cid2).attr('src', root + 'paint.png');
-        //$('img', jq.RepairShop.cid3).attr('src', root + 'chrome.png');
+        
+        $('img', jq.RepairShop.dt).attr('src', root + 'chasis.png');
+        $('img', jq.RepairShop.cid1).attr('src', root + 'panels.png');
+        $('img', jq.RepairShop.cid2).attr('src', root + 'paint.png');
+        $('img', jq.RepairShop.cid3).attr('src', root + 'chrome.png');
         //rebind jq callbacks
         var car = Garage.getCurrentCar();
     
@@ -442,10 +446,11 @@ var Repair = {
         $('h2', jq.RepairShop.cid3).text('Panels');
         //rebind img paths
         var root = getHostPath() + 'images/parts/interior/';
-        //$('img', jq.RepairShop.dt).attr('src', root + 'seats.png');
-        //$('img', jq.RepairShop.cid1).attr('src', root + 'carpet.png');
-        //$('img', jq.RepairShop.cid2).attr('src', root + 'dash.png');
-        //$('img', jq.RepairShop.cid3).attr('src', root + 'panels.png');
+        
+        $('img', jq.RepairShop.dt).attr('src', root + 'seats.png');
+        $('img', jq.RepairShop.cid1).attr('src', root + 'carpet.png');
+        $('img', jq.RepairShop.cid2).attr('src', root + 'dash.png');
+        $('img', jq.RepairShop.cid3).attr('src', root + 'panels.png');
         //rebind jq callbacks
         var car = Garage.getCurrentCar();
     
@@ -470,42 +475,41 @@ var Repair = {
         }
     },
     setPageDocs:function(){
+        var type = Documents.TYPE;
+        
         this._partPage = Vehicle.PART_TYPE.DOCS;
         //rebind headers
         $('h2', jq.RepairShop.dt).text('Ownership');
         $('h2', jq.RepairShop.cid1).text('Build');
         $('h2', jq.RepairShop.cid2).text('History');
-        $('h2', jq.RepairShop.cid3).text('Exhaust');
+        $('h2', jq.RepairShop.cid3).text('Restoration');
         //rebind img paths
         var root = getHostPath() + 'images/parts/documents/';
-        //$('img', jq.RepairShop.dt).attr('src', root + 'ownership.png');
-        //$('img', jq.RepairShop.cid1).attr('src', root + 'build.png');
-        //$('img', jq.RepairShop.cid2).attr('src', root + 'history.png');
-        //$('img', jq.RepairShop.cid3).attr('src', root + 'exhaust.png');
+        
+        $('img', jq.RepairShop.dt).attr('src', root + 'ownership.png');
+        $('img', jq.RepairShop.cid1).attr('src', root + 'build.png');
+        $('img', jq.RepairShop.cid2).attr('src', root + 'history.png');
+        $('img', jq.RepairShop.cid3).attr('src', root + 'restoration.png');
         //rebind jq callbacks
         var car = Garage.getCurrentCar();
     
         if(car !== null){
-            //var i = 0;
-            
-            /*for(var key in type){
-                //using hasOwnProperty ensures on iteration only over fields present in the object,
-                //not those found in its prototype(if one exists)
+            for(var key in type){
                 if(type.hasOwnProperty(key) ){
                     var t = type[key],
-                        div = Drivetrain.getDivURSlot(t),
-                        part = car._dt.getPartType(t),  //part to upgrade
-                        str = //Drivetrain.strFromType(t),
+                        btnTag = 'button#',
+                        div = Documents.getDivURSlot(t),
+                        part = car._docs.getPartType(t),  //part to upgrade
                         ub = $(btnTag + 'ub', div),    //upgrade button
                         rb = $(btnTag + 'rb', div),   //repair button
                         pb = $('progress#pb', div);   //progres bar
 
-                    bindUpgradeBtn(ub, part, t, Drivetrain.upgrade);
+                    bindUpgradeBtn(ub, part, t, Documents.upgrade);
                     //bindRepairBtn(rb, part, t, Drivetrain.repair);
                     rb.off().hide();
                     pbSetColor(pb, part.getPercent() );
                 }
-            }*/
+            }
         }
         
     }
@@ -837,7 +841,35 @@ Interior.repair = function(obj){
     }
     //else no car, do nothing
 };
-function upgradeDocs(obj){
+Documents.getDivURSlot = function(carType){
+
+    var T = Documents.TYPE,
+        str = 'div#RepairShop div#';
+
+    switch(carType){
+        case T.ownership:
+            str += 'cid0';
+        break;
+        
+        case T.build:
+            str += 'cid1';
+        break;
+        
+        case T.history:
+            str += 'cid2';
+        break;
+        
+        case T.ph0:
+            str += 'cid3';
+        break;
+        
+        default:
+            return null;
+    }
+    var div = $(str);
+    return div;
+};
+Documents.upgrade = function(obj){
     //
     var car = Garage.getCurrentCar();
     
@@ -865,7 +897,7 @@ function upgradeDocs(obj){
             var part = car._docs.getPartType(type);
             //if part is upgraded to max, unbind and make unclickable
             if(part !== null){
-                var div = $('div#RepairShop div#docs');
+                var div = Documents.getDivURSlot(type);//$('div#RepairShop div#docs');
                     //str = Documents.strFromType(type),
                 
                 upgradePartUpdate(
@@ -878,7 +910,7 @@ function upgradeDocs(obj){
         }
     }
     //else no car, do nothing
-}
+};
 jq.RepairShop.backBtn.click(
 function(){
 	//toggleRepair();
