@@ -357,7 +357,7 @@ var Repair = {
         //rebind headers
         $('h2', jq.RepairShop.dt).text('Engine');
         $('h2', jq.RepairShop.cid1).text('Transmission');
-        $('h2', jq.RepairShop.cid2).text('Axel');
+        $('h2', jq.RepairShop.cid2).text('Axle');
         $('h2', jq.RepairShop.cid3).text('Exhaust');
         //rebind img paths
         var root = getHostPath() + 'images/parts/drivetrain/';
@@ -398,7 +398,7 @@ var Repair = {
         
         this._partPage = Vehicle.PART_TYPE.BODY;
         //rebind headers
-        $('h2', jq.RepairShop.dt).text('Chasis');
+        $('h2', jq.RepairShop.dt).text('Chassis');
         $('h2', jq.RepairShop.cid1).text('Panels');
         $('h2', jq.RepairShop.cid2).text('Paint');
         $('h2', jq.RepairShop.cid3).text('Chrome');
