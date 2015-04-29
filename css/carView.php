@@ -67,7 +67,7 @@ Car View Screen
 <?php css::marginBtm();?>
 	left:10%;
 	height:7.5%;
-    width:10%;
+    width:8.75%;
     font-size:1.5vw;
 }
 <?php divCarView();?> button#sell
@@ -78,7 +78,7 @@ Car View Screen
 	right:10%;
 <?php css::marginBtm();?>
 	height:7.5%;
-    width:10%;
+    width:8.75%;
     font-size:1.5vw;
 }
 <?php divCarView();?> label
@@ -118,7 +118,7 @@ Car View Screen
     css::size('14%', '5%');
     css::bgColor('grey');
 ?>
-    font-size:2vw;/*size element relative to viewport width!*/
+    font-size:1.85vw;/*size element relative to viewport width!*/
     /*background:url('../headerBG.jpg');*/
     margin:0%;    
 }
@@ -126,7 +126,7 @@ Car View Screen
 <?php
     posAbs();
     scrollY();
-    css::size('14%', '23%');
+    css::size('14%', '24%');
     css::txtAlignL();
     css::bgColor('grey');
 ?>
@@ -156,12 +156,12 @@ Car View left div
 }
 <?php divCarView();?> h2#body{<?php
     css::lm();
-    css::top('60%');
+    css::top('59%');
 ?>
 }
 <?php divCarView();?> div#body{<?php
     css::lm();
-    css::top('65%');
+    css::top('64%');
 ?>
 }
 /*
@@ -179,11 +179,11 @@ Car View right div
 }
 <?php divCarView();?> h2#docs{<?php
     css::rm();
-    css::top('60%');
+    css::top('59%');
 ?>;
 }
 <?php divCarView();?> div#docs{<?php
     css::rm();
-    css::top('65%');
+    css::top('64%');
 ?>
 }

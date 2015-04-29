@@ -69,9 +69,9 @@ Main Game Menu Styles
     css::size('100%', '100%');
     css::defaultTileBG();
     //background:#000000 url('../images/bgTile.png') repeat 0 0;
+    css::txtAlignCntr();
+    displayNone();
 ?>
-    display: none;
-	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
 }
@@ -109,7 +109,7 @@ Main Game Menu Styles
 <?php dmr();?> button{
 <?php
     posAbs();
-    css::size('95%', '48%');
+    css::size('95%', '49%');
     //css::bgSize('100%', '100%');
 ?>
 }
@@ -118,30 +118,30 @@ Main Game Menu Styles
     css::defaultBG('../images/garageBtn.jpg');
     css::bgSize('100%', '100%');
     lz();
+    css::top('0%');
 ?>
-    top:0%;
 }
 <?php dml();?> button#toAuctionBtn{
 <?php
     css::defaultBG('../images/auctionBtn.jpg');
     css::bgSize('100%', '100%');
     lz();
+    css::top('51%');
 ?>
-    top:52%;
 }
 <?php dmr();?> button#profile{
 <?php
     css::defaultBG('../images/profileBtn.jpg');
     css::bgSize('100%', '100%');
     rz();
+    css::top('0%');
 ?>
-    top:0%;
 }
 <?php dmr();?> button#buyUpgradesBtn
 {<?php
     css::defaultBG('../images/repairBtn.jpg');
     css::bgSize('100%', '100%');
     rz();
+    css::top('51%');
 ?>
-	top:52%;
 }
