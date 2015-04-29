@@ -42,10 +42,12 @@ else{
 ?>
 <div id='reg-navigation'>
     <a id='home' class='tooltip' href='<?php echo rootURL() . 'Users/index.php';?>'>Home<!--span><!--img src=''>Tooltip!</span--></a></li><br>
+	<button id='addFunds' class='tooltip' >Store</button><br>
 <?php
 if($loggedIn){?>
     <a id='mem' href='members-page.php'>Members</a><br>
     <a id='logout' href='logout.php'>Logout</a><br>
+	
 <?php
 }
 else{?>

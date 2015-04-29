@@ -26,7 +26,7 @@ function statBar($id){
 <?php
     backBtn();
 ?>
-	<button id='addFunds'>Store</button>
+	<!--<button id='addFunds'>Store</button> -->
     <div id='switch'>
         <button id='dt'>DT</button><br>
         <button id='body'>B</button><br>
