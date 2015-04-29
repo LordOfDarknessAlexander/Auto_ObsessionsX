@@ -104,19 +104,48 @@ cmntHeader('Repair Screen Styles');
 <?php divRepair();?> div#switch{
 <?php
     posAbs();
-    css::size('5%', '60%');
+    css::size('18%', '10%');
     //scrollY();
     css::txtAlignCntr();
 ?>
-    top:28%;
+    top:15%;
+    left:1%;
     background:url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/
+    display:block;
 }
 <?php divRepair();?> div#switch button{
 <?php
-    css::size('100%', '25%');
+    posAbs();
+    css::size('49%', '49%');
 ?>
+    /*border:0%;
+    padding:0% 0%;*/
     /*background-color:grey;*/
+}
+<?php divRepair();?> div#switch button#dt{
+<?php
+    css::left('0%');
+    css::top('0%');
+?>
+}
+<?php divRepair();?> div#switch button#body{
+<?php
+    css::left('0%');
+    css::bottom('0%');
+?>
+}
+<?php divRepair();?> div#switch button#inter{
+<?php
+    css::right('0%');
+    css::top('0%');
+?>
+}
+<?php divRepair();?> div#switch button#docs{
+<?php
+    css::right('0%');
+    css::bottom('0%');
+?>
 }
 /*
 left div
