@@ -45,6 +45,7 @@ function auctionGen(args){
 			end:null
 		},
 		_expired:false,
+        _cashedIn:false,    //has user received cash for this sale
 		_curTime:0.0,
 		//
 		init:function(index){
@@ -271,7 +272,9 @@ function auctionGen(args){
                 id:this._car.id,
                 bid:this._currentBid,   //current highest bid
                 time:this._curTime, //time remaining on auction, 0 if expired
-                //date:this._date   //start and end dates
+                //date:this._date   //start and end dates,
+                expired:this._expired,
+                cashedId:this._cashedIn
 			};
 		},
 		enemyBidding : function()
@@ -354,7 +357,7 @@ function auctionGen(args){
 		},
         toggleCC:function(){
             //toggles the cancel/cash button
-            var t = this;
+            var t = this;   //owning object, not this function
             
             if(t._car !== null){
                 var divID = 'div#asd' + (t._car.id).toString(),
@@ -459,15 +462,17 @@ function auctionGen(args){
                 t = obj.data.caller;
             console.log('won auction! user gets (' + val.toFixed(2) + ') funds!');
             //t = this;
-            if( (userStats.money + val) <= Number.MAX_VALUE){
+            //if(t._expired && !t._cashedIn){
+                if( (userStats.money + val) <= Number.MAX_VALUE){
 //<php if(loggedIn() ){>
                 //call pasUpdate!
                 //jq.post('pas/sale.php',
                     //function(data){
                         //userStats.money = data;
-                        //setStatBar();
-                        t.disable();  //user recieved funds, disable div
-                        //AucionSell.save();
+                        //t.disable();  //user recieved funds, disable div
+                        t._cashedIn = true;
+                        setStatBar();
+                        //AuctionSell.save();
                     //},
                     //function(){
                         
@@ -483,7 +488,8 @@ function auctionGen(args){
                 //AucionSell.save();
 //<php
 //}>
-            }
+                }
+            //}
             //else{
                 //jq.Err('', 'Maximum funds reached');
             //}

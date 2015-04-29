@@ -362,7 +362,7 @@ Auction.sold = function(){
             //Garage.save();
 //<php
 //}?>
-            ajax_post();    //get user info from server
+            //ajax_post();    //get user info from server
             setStatBar();
         }
         else{

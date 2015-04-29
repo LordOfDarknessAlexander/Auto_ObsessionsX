@@ -41,6 +41,42 @@ require_once 'remove.php';
     }
     return null;
 }*/
+function payUser($value){
+    global $aoUsersDB;
+    $aoUsers = 'aoUsers';
+    //$UID = ao::UID;
+    $M = 'money';
+    $CI = 'cashedIn';
+    $EX = 'expired';
+    $ret = 0; //new funds after transaction
+    
+   //$rm = $aoUsersDB->query(
+        //"SELECT $M FROM $aoUsers WHERE $UID = $uid"
+    //);
+    //$rs = $aoSales->query(
+        //"SELECT $CI, $EX FROM $ut WHERE $UID = $uid"
+    //);
+    
+    //if($rm && $rs){
+        //$um = (float)$rm->fetch_assoc()[$M];
+        //$ci = (bool)$rs->fetch_assoc()[$CI];
+        //$ex = (bool)$rs->fetch_assoc()[$EX];
+        //        
+        //if(!$ci && $ex){
+            //user has not received payment for this sale
+            //$nf = $um + $value;
+            
+            //$ret = $nf < MAX_FLOAT ? $nt : $um;
+            //}
+        //}
+        //else{
+            //$ret = $um;
+        //}
+    //}
+    
+    //else not valid car ID, do nothing
+    //return json_encode($ret);
+}
 function setUserCar($carID){
     global $AO_DB;
     //$aoUsers = 'aoUSers';

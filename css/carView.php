@@ -4,6 +4,10 @@
 require_once 'ui.php';
 //css::header();
 //
+$fs = '1.5vw';  //font size
+$btnW = '8.75%';
+$btnH = '7.5%';
+//
 function divCarView(){?>div#CarView<?php
 }
 function rStatView($id, $hTop, $dTop){
@@ -49,8 +53,7 @@ Car View Screen
 /*	padding-top: 92px;*/
 	z-index: 1;
 }
-<?php divCarView();?> progress
-{
+<?php divCarView();?> progress{
     width:100%;
 }
 <?php divCarView();?> button{<?php
@@ -61,24 +64,25 @@ Car View Screen
     posAbs();
 ?>
 }
-<?php divCarView();?> button#select
-{
-    position:absolute;
-<?php css::marginBtm();?>
-	left:10%;
-	height:7.5%;
-    width:8.75%;
+<?php divCarView();?> button#select{
+<?php
+    posAbs();
+    css::marginBtm();
+    css::size($btnW, $btnH);
+    css::left('10%');
+?>	
     font-size:1.5vw;
 }
-<?php divCarView();?> button#sell
-{
-    position:absolute;
+<?php divCarView();?> button#sell{
+<?php
+    css::marginBtm();
+    css::size($btnW, $btnH);
+    css::right('10%');
+    posAbs();
+?>
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
 	background-size: 100% 100%;
-	right:10%;
-<?php css::marginBtm();?>
-	height:7.5%;
-    width:8.75%;
+
     font-size:1.5vw;
 }
 <?php divCarView();?> label
