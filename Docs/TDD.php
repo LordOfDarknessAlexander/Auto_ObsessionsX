@@ -77,6 +77,7 @@ html::docType();
 html::charset();
 html::title('AO TDD');
 ?>
+<meta name='author' content='Tyler Drury'>
 <style>
 body{
     background-color:black;
@@ -160,6 +161,12 @@ This document describes the technical standards used in the development of the A
     </li>
     <li>
         <a href='#aodb'>Databases</a>
+        <ol>
+            <li><a href='#mainDB'>finalpost</a></li>
+            <li><a href='#usersDB'>aoUsersDB</a></li>
+            <li><a href='#carSalesDB'>aoSalesDB</a></li>
+            <li><a href='#lossDB'>aoAuctionLossDB</a></li>
+        </ol>
     </li>
 </ol>
 <hr><h2 id='standards'>Standards and Conventions</h2><hr>
@@ -629,6 +636,74 @@ finalpost:contains the static vehicle table, aoCars, and the dynamic user's tabl
 aoUsersDB: contains a table for each user to maintain their car collection(garage), which has an entry for each car.
 aoCarSalesDB: contains all data regarding the user's vehicle sales(existing, pending and expired).
 aoAuctionLossDB: tracks the id's of the vehicles a user has lost and may no longer bid on.
+
+<h3 id='mainDB'>finalpost</h3>
+    This database contains two distinct tables, both the vehicle and the user tables reside here.
+    The vehicle table, named 'aoCars', is a static table which does not change during the execution.
+Should only be changed when the site is down for maintenance.
+
+Table:
+<code class='sql'>
+    --cars.sql
+    --structure passed when using CREATE TABLE
+    `car_id` int unsigned NOT NULL PRIMARY KEY,
+    `make` varchar(30) NOT NULL,
+    `year` int NOT NULL,
+    `model` varchar(50) NOT NULL,
+    `price` int unsigned NOT NULL,
+    `info` char(255) NOT NULL
+</code>
+    car_id:represents the unique id of the vehicle, constructed from combining {make | year | model}.
+    make:manufacturer which produced this vehicle
+    year:year of production
+    model:
+    price:sale value of the vehicle
+    info:a short description detailing the history/background of the vehicle.
+    
+    The user's table, named 'users' is a dynamic table containing all registered
+users. These entries are updated frequently as the user progresses through the game.
+Entries are added and removed via either register.php or disband.php,
+which the user may register or disband their account, respectively.
+
+<h3 id='usersDB'>aoUsersDB</h3>
+    Dynamic database, containing a table entry for each registered user,
+which each contain a collection of vehicles which each user has purchased,
+and the unique upgrades and repairs purchased for each.
+<code class='sql'>
+    `car_id` int unsigned NOT NULL PRIMARY KEY,
+    `drivetrain` int unsigned,
+    `body` int unsigned,
+    `interior` int unsigned,
+    `docs` int unsigned,
+    `repairs` int unsigned
+</code>
+    car_id:car owned by user(make, year and model can be derived from this)
+    drivetrain:bitfield representing mods made to
+    body:bitfield representing mods made to the car's exterior
+    interior:bitfield representing mods made to the car's 
+    docs:bitfield representing updates made to car's documentation
+    repairs:4 groups of 4 bits(16-bits),
+representing the repairs made to each component of each upgrade slot.
+<h3 id='carSalesDB'>aoCarSalesDB</h3>
+    Dynamic database containing a table for each user,
+with entries containing the sales posted to the auction house by a user.
+<code class='sql'>
+    `car_id` int unsigned NOT NULL PRIMARY KEY,
+    `price` float NOT NULL
+</code>
+    car_id:vehicle being posted for sale
+    price:either the current price being bid(if active),
+or the final, winning bid, if expired
+
+<h3 id='lossDB'>aoAuctionLossDB</h3>
+    Dynamic database containing a table for each user,
+with entries containing the vehicle ids for each
+auction a user has lost.
+<code class='sql'>
+    `car_id` int unsigned NOT NULL PRIMARY KEY
+</code>
+    Retains only the id of vehicles which are no longer available to select,
+as the user has already failed to purchase the vehicle.
 </pre>
 <h2 id='aodb'>GameFlow UML</h2><hr>
 <pre>
