@@ -18,7 +18,8 @@ class aoPriceRange{
 }
 /*class sql{
     public static function selectAll($tableName){
-        return "SELECT * FROM $tableName";
+        //$str = mysql_real_escape_string($tableName);
+        return "SELECT * FROM $str";
     }
     //public static function selectAll($tableName, $rows){
         //single identifier, or comma seperated list of identifiers
@@ -27,6 +28,7 @@ class aoPriceRange{
     //}
     //public static function selectWhere($tableName, $rows, $cond){
         //single identifier, or comma seperated list of identifiers
+        //$r = mysql_real_escape_string($rows);
         //return "SELECT $rows FROM $tableName WHERE $cond";
     //}
 }*/

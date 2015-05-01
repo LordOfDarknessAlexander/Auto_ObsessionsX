@@ -488,7 +488,7 @@ function auctionGen(args){
                 //AucionSell.save();
 //<php
 //}>
-                }
+                //}
             //}
             //else{
                 //jq.Err('', 'Maximum funds reached');
