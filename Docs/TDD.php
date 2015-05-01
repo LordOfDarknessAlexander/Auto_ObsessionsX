@@ -144,6 +144,13 @@ This document describes the technical standards used in the development of the A
         </ol>
     </li>
     <li>
+        <a href='#security'>Security</a>
+        <ol>
+            <li><a href='#xss'>Cross-Site Attacks(XSS)</a></li>
+            <li><a href='#sqlInj'>SQL Injection</a></li>
+        </ol>
+    </li>
+    <li>
         <a href='#aoGM'>Game Mechanics</a>
         <ol>
             <li>

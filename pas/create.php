@@ -179,8 +179,11 @@ $q = '';
     }
 }*/
 if(isset($_POST) && !empty($_POST) ){
-    if(isset($_POST['carID'])){
-        $carID = $_POST['carID'];
+    $op = 'op';
+    $cid = 'carID';
+    
+    if(isset($_POST[$cid])){
+        $carID = $_POST[$cid];
         //validate value, must be an int!
         //echo json_encode($carID);
 
@@ -188,7 +191,8 @@ if(isset($_POST) && !empty($_POST) ){
         if(isset($_GET) && !empty($_GET) ){
             //args being passed via the url
             //$op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
-            if(isset($_GET['op']) ){
+            if(isset($_GET[$op]) ){
+                //$str = isAlpha($_GET[$op]) ? $_GET[$op] : '';
                 /*if($_GET['op'] == 'insert'){
                     //inserts a car with carID from the vehicle database into the
                     //logged in user's table in aoUsersDB

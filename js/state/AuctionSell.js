@@ -274,7 +274,7 @@ function auctionGen(args){
                 time:this._curTime, //time remaining on auction, 0 if expired
                 //date:this._date   //start and end dates,
                 expired:this._expired,
-                cashedId:this._cashedIn
+                cashedIn:this._cashedIn
 			};
 		},
 		enemyBidding : function()
@@ -463,18 +463,18 @@ function auctionGen(args){
             console.log('won auction! user gets (' + val.toFixed(2) + ') funds!');
             //t = this;
             //if(t._expired && !t._cashedIn){
-                if( (userStats.money + val) <= Number.MAX_VALUE){
+                //if( (userStats.money + val) <= Number.MAX_VALUE){
 //<php if(loggedIn() ){>
                 //call pasUpdate!
                 //jq.post('pas/sale.php',
                     //function(data){
                         //userStats.money = data;
-                        //t.disable();  //user recieved funds, disable div
+                        //t.disable();  //user received funds, disable div
                         t._cashedIn = true;
                         setStatBar();
                         //AuctionSell.save();
                     //},
-                    //function(){
+                    //function(jqxhr){
                         
                     //},
                     //{price:val}
@@ -521,9 +521,9 @@ var AuctionSell =
                 
                 as.toggleCC();
                 
-                userSales.push(as);
+                //userSales.push(as);
                 //console.log(JSON.stringify(userSales) );
-                AuctionSell.save();
+                //AuctionSell.save();
             }
             jq.AuctionSell.toggle();
             return;

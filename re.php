@@ -5,8 +5,11 @@ function isAlpha($str){
     //no special characters, whitespace or symbols
     //+ matches 1 or more repetitions of pattern,
     //NOTE: string can be any size, from 1 to infinity,
-    //could cause memory with large strings,
+    //could cause memory/security issues with large strings,
     //PHP hard limit for variable allocation is 128MB but could be as large as 2GB!
+    //NOTE:Also, as it validates only against numbers and letters,
+    //inserting any special characters (%,&,<,>) to induce an attack
+    //will be prevented(also, escaping the string will cause it to fail)
     return preg_match('/^[[:alpha:]]+$/', $str);
 }
 //function isAlphaSmall($str){

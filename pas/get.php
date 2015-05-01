@@ -650,6 +650,7 @@ class pasGet{
         $MM = 'm_marker';
         
         $res = $AO_DB->query(
+            //"SELECT $M, $T, $P, $MM FROM $users WHERE $UID = $id"
             "SELECT * FROM $users WHERE $UID = $id"
         );
         //Count the returned rows

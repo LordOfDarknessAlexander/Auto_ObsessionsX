@@ -43,14 +43,15 @@ require_once 'remove.php';
 }*/
 function payUser($value){
     global $aoUsersDB;
+    global $aoCarSalesDB;
     $aoUsers = 'aoUsers';
     //$UID = ao::UID;
     $M = 'money';
     $CI = 'cashedIn';
     $EX = 'expired';
-    $ret = 0; //new funds after transaction
+    $ret = 0;   //new funds after transaction
     
-   //$rm = $aoUsersDB->query(
+    //$rm = $aoUsersDB->query(
         //"SELECT $M FROM $aoUsers WHERE $UID = $uid"
     //);
     //$rs = $aoSales->query(
