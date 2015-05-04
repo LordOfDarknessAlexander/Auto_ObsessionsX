@@ -245,7 +245,8 @@ class pasGet{
     }
     public static function carIDsByType($carType){
         global $AO_DB;
-       
+        
+        //$carType = $AO_DB->strip($carType);
         $aoCars = ao::CARS;
         $CID = ao::CID;
         $T = 'type';
@@ -566,8 +567,8 @@ class pasGet{
                     $N=>$row[$N],
                     $P=>$row[$P],
                     //
-                    'hasCar' => hasCar($cid),   //does user have this car?
-                    'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
+                    'hasCar'=>hasCar($cid),   //does user have this car?
+                    'hasLostCar'=>hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
                 );
             }

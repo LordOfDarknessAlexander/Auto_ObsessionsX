@@ -7,6 +7,8 @@ require_once '../re.php';
 //
 //secure::loggin();
 //
+$ps = isset($_POST) && !empty($_POST) ? true : false;
+$gs = isset($_GET) && !empty($_GET) ? true : false;
 /*class sql{
     public static function insert($table, $valStr){
         //check using regex that $valStr contains a
@@ -32,7 +34,7 @@ class pasUpdate{
         global $aoAuctionLossDB;
         $table = getUserTableName();
         $ret = false;
-        $CID =ao::CID;
+        $CID = ao::CID;
         
         $res = $aoAuctionLossDB->query(
             //if entry does not exist add it, else update
@@ -53,7 +55,10 @@ class pasUpdate{
         $CID = ao::CID;
         
         return hasCar($carID) ? ($AO_DB->query(
-            "UPDATE $users SET $CID = $carID WHERE $UID = $id"
+            "UPDATE $users SET
+                $CID = $carID
+            WHERE
+                $UID = $id"
         ) ? $carID : 0) : 0;
     }
 }
@@ -152,14 +157,16 @@ class purchase{
     static public function funds($funds){
         global $AO_DB;
         $MAX_FUNDS = PHP_INT_MAX;
+        $UID = ao::UID;
         
         if(is_float($funds) && $funds > 0.0){
             $f = round($funds, 2);  //round currency to 2 decimal places
             $uid = strval(getUID() );
             $users = ao::USERS;
             $m = 'money';
+            
             $rm = $AO_DB->query(
-                "SELECT $m FROM $users WHERE user_id = $uid"
+                "SELECT $m FROM $users WHERE $UID = $uid"
             );
             
             if($rm){
@@ -168,7 +175,7 @@ class purchase{
                 
                 if($nf < $MAX_FUNDS){
                     $res = $AO_DB->query(
-                        "UPDATE $users SET $m = $nf WHERE user_id = $uid"
+                        "UPDATE $users SET $m = $nf WHERE $UID = $uid"
                     );
                     if($res){
                         echo json_encode($nf);
@@ -194,13 +201,15 @@ class purchase{
         //$val must be an unsigned int greater than 0
         global $AO_DB;
         $MAX_TOKENS = PHP_INT_MAX;
+        $UID = ao::UID;
         
         if(is_int($val) && $val > 0){
             $uid = strval(getUID() );
             $users = ao::USERS;
             $t = 'tokens';
+            
             $rt = $AO_DB->query(
-                "SELECT $t FROM $users WHERE user_id = $uid"
+                "SELECT $t FROM $users WHERE $UID = $uid"
             );
             
             if($rt){
@@ -209,7 +218,7 @@ class purchase{
                 
                 if($nt < $MAX_TOKENS){
                     $res = $AO_DB->query(
-                        "UPDATE $users SET $t=$nt WHERE user_id = $uid"
+                        "UPDATE $users SET $t = $nt WHERE $UID = $uid"
                     );
                     
                     if($res){
@@ -290,18 +299,26 @@ function  addMarkers($val){
     //else no valid get args!
     //exit();
 //}
-if(isset($_POST) && !empty($_POST) ){
+if($ps){
+    $CID = ao::CID;
+    $OP = 'op';
+    $DT = 'drivetrain';
+    $B = 'body';
+    $I = 'interior';
+    $D = 'docs';
+    $R = 'repairs';
+    
     if(isset($_POST['carID'])){
         //
-        $carID = $_POST['carID'];   //is_int($_POST['carID']) ? $_POST['carID'] : ;
+        $carID = $_POST['carID'];   //is_int($_POST['carID']) ? intval($_POST['carID']) : 0;
         //validate value, must be an int!
         //echo json_encode($carID);
 
         //switch the operation besed on value passed in url
-        if(isset($_GET) && !empty($_GET) ){
+        if($gs){
             //args being passed via the url
-            if(isset($_GET['op']) ){
-                $op = isAlpha($_GET['op']) ? $_GET['op'] : '';
+            if(isset($_GET[$OP]) ){
+                $op = isAlpha($_GET[$OP]) ? $_GET[$OP] : '';
                     
                 if($op == 'insert'){
                     //inserts a car with carID from the vehicle database into the
@@ -316,10 +333,13 @@ if(isset($_POST) && !empty($_POST) ){
                         exit();
                     }
                     else{
-                        $tableName = getUserTableName();   //$_SESSION['userID'];
+                        $tableName = getUserTableName();
                         
                         $res = $aoUsersDB->query(
-                            "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
+                            "INSERT INTO $tableName
+                                ($CID, $DT, $B, $I, $D, $R)
+                            VALUES
+                                ($carID, 0,0,0,0,0)"
                             //IF entry EXISTS do nothing
                         );
                         echo json_encode($res);
@@ -339,7 +359,10 @@ if(isset($_POST) && !empty($_POST) ){
                     $tableName = getUserTableName();    //$_SESSION['userID'];
 
                     $res = $aoUsersDB->query(
-                        "UPDATE $tableName SET drivetrain=$dt, body=$body, interior=$inter, docs=$docs, repairs=$rep WHERE car_id = $carID"
+                        "UPDATE $tableName SET
+                            $DT=$dt, $B=$body, $I=$inter, $D=$docs, $R=$rep
+                        WHERE
+                            $CID = $carID"
                     );
                     
                     echo json_encode($res);
@@ -382,10 +405,10 @@ if(isset($_POST) && !empty($_POST) ){
     elseif(isset($_POST['udv'])){
         //user data value, for updating the user's stats
         if(is_numeric($_POST['udv']) ){
-            if(isset($_GET) && !empty($_GET) ){
+            if($gs){
                 //args being passed via the url
-                if(isset($_GET['op']) ){
-                    $op = isAlpha($_GET['op']) ? $_GET['op'] : '';
+                if(isset($_GET[$OP]) ){
+                    $op = isAlpha($_GET[$OP]) ? $_GET[$OP] : '';
                     //echo json_encode(gettype($_POST['udv'])); //returns a string
                     //exit();
                     if($op == 'puf'){

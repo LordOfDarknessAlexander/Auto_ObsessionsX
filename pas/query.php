@@ -202,6 +202,7 @@ if($gs){
 //echo '_GET not set, checking $_POST';
 //exit();
 if($ps){
+    $OP = 'op';
     //echo 'post set!';
     //echo json_encode($_POST);
     //exit();    
@@ -213,9 +214,9 @@ if($ps){
         //
         //switch the operation besed on value passed in url
         //
-        if(isset($_GET) && !empty($_GET) ){
+        if($gs){
             //args being passed via the url
-            $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
+            $op = (isset($_GET[$OP]) && isAlpha($_GET[$OP]) ) ? $_GET[$OP] : '';
 
             if($op == 'hasCar'){
                 //echo '{"hasCar": ' . strval(false) . '}';

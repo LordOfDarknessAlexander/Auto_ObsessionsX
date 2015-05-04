@@ -70,12 +70,13 @@ function getUserIncome(){
         'aGL'=>0.0
     );
 }
-function eUSerData(){
+function eUserData(){
     //returns all stats for the user's profile
     $purch = getUserPurchases();
     $inc = getUserIncome();
     
-    echo json_encode(array(
+    echo json_encode(
+        array(
             'stats'=>$purch,
             'income'=>$inc
         )

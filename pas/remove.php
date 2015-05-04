@@ -17,17 +17,18 @@ class pasRemove
         //call this when a user deletes their account,
         //or an admin removes them for violating terms of service, etc
         global $AO_DB;
+        $UID = ao::UID;
         $users = ao::USERS;
         //echo "removing user account with email:$email and password:$pw<br>";
         $res = $AO_DB->query(
-            "SELECT user_id FROM $users WHERE(
+            "SELECT $UID FROM $users WHERE(
                 email ='$email' AND psword=SHA1('$pw')
             )"
         );
         //echo json_encode($res);
         
         if($res->num_rows){
-            $uid = $res->fetch_assoc()['user_id'];
+            $uid = $res->fetch_assoc()[$UID];
             //
             //echo "removing user account with ID:$uid<br>";
             //remove from finalpost users
@@ -56,6 +57,7 @@ class pasRemove
         //returns true on success, false on failure
         global $AO_DB;
         $users = ao::USERS;
+        $UID = ao::UID;
         //$_dropUser = $AO_DB->prepare(
             //"DELETE * FROM $users WHERE user_id=?"
         //);
@@ -67,7 +69,7 @@ class pasRemove
         //}
         //else preform regular query fallback
         $ret = $AO_DB->query(
-            "DELETE FROM $users WHERE user_id=$uid"
+            "DELETE FROM $users WHERE $UID=$uid"
         );
         ////if($ret){$ret->close()};?
         return ($AO_DB->con->affected_rows != 0) ? true : false;
@@ -94,7 +96,7 @@ class pasRemove
         //returns true on success, false on failure
         //global $aoCarSalesDB;
         
-        $tableName = "user$uid";//getUserTableName();
+        $tableName = getUserTableName();
         
         //returns true if user was dropped, false on error
         /*$ret = $aoCarSalesDB->query(
@@ -161,10 +163,11 @@ class pasRemove
         //returning true upon success and false on failure
         global $aoUsersDB;
         
+        $CID = ao::CID;
         $uid = getUserTableName();    //$_SESSION['user_id'];
         
         $ret = $aoUSersDB->query(
-            "DELETE FROM $uid WHERE car_id = $carID"
+            "DELETE FROM $uid WHERE $CID = $carID"
         );
         
         if(!$ret){    //AND DEBUG){
