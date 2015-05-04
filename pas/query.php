@@ -138,11 +138,13 @@ function getUserSoldCars(){
 }
 //echo json_encode(false);
 //exit();
-if(isset($_GET) && !empty($_GET) ){
+
+if($gs){
     //echo 'GET set';
     //args being passed vai the url
     //regex match, must contain no whitespace, numbers or special characters!
-    $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
+    $OP = 'op';
+    $op = (isset($_GET[$OP]) && isAlpha($_GET[$OP]) ) ? $_GET[$OP] : '';
     
     if($op == 'asc'){
         $T = 'type';
@@ -169,7 +171,7 @@ if(isset($_GET) && !empty($_GET) ){
                 exit();
             }
         }
-        //echo 'auction cars, no filter';
+        //echo 'auction cars, no filter!';
         pasGet::auctionCars();
         exit();
     }

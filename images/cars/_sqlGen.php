@@ -187,7 +187,7 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                                 $nameHash++;
                             }
                             $n = $name->getBasename('.jpg');
-                            $model = $n;
+                            $model = $AO_DB->strip($n); //replace special chars
                             //echo '    ' . $n;
                             if(isset($make) && isset($year) && isset($model) ){
                                 $id = $mHash | $yHash | $nameHash;
@@ -218,6 +218,10 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                                     //$info can only be a certain length(128 chars),
                                     //so make sure it is by removing any values outside the bounds
                                     //$info = 
+                                    //if(!$price OR !$info OR !$type){
+                                        //data failed sanitization, so skip
+                                        //continue;
+                                    //}
                                 }
                                 
                                 $y = intval($year);

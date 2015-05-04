@@ -474,6 +474,121 @@ As html is often embedded inside other strings it quickly
 become difficult to read
 ALWAYS USE SINGLE QUOTES IN HTML, unless absolutely necessary(then the use of an html entity would be preferred)
 </pre>
+<h3 id='security'>Security</h3>
+<pre>   On line, security is a major concern.
+Users expect their private data to remain that way,
+especially when maintaining a database including,
+home addresses, contact/personal information,
+email accounts/passwords, credit card numbers, etc.
+    Leaking confidential information due to a subtle security gap,
+which could have easily been avoided,
+is all that's needed to destroy a company and the lively hood
+    Not all users are friendly!
+In fact, it is best to designing a site with the expectation
+that the majority of users will attempt to exploit the site.
+    While most human users are generally friendly,
+seeking to interact legitimately with the site,
+consuming its services and contributing,
+a single individual can execute many hostile programs(or bots),
+which continually search the web for vulnerable sites
+autonomously.
+    Cross-Site Scripting, SQL Injection
+</pre>
+    <h4 id='xss'>Cross-Site Attacks(XSS)</h4>
+<pre>
+</pre>
+    <h4 id='sqlInj'>SQL Injection Attacks</h4>
+<pre>   This type of attack is common and extremely dangerous.
+It consists of 'injecting' data into a web application which implements SQL
+queries. The main source of this attack is from untrusted input,
+most generally from forms submitted by untrusted sources.
+These attack may also arise from another source,
+such as data stored on the database itself.
+    Developers often trust data entered them self (believing it correct),
+leading to subtle issues which are difficult to find.
+    <p class='tip'>IMPORTANT! All entries stored in a database should ALWAYS be treated as hostile,
+until properly validated.
+Similar to the 'would rather have and not need, than need and not have' principle</p>
+    When successful, the SQL query is manipulated to preform operations
+not intended by the developer.
+<code class='php'>
+&lt;?php
+<p class='bad'>$uid = $_POST['user_id'];</p>
+$db = new dbConnect();
+$result = $db->query(<p class='bad'>    "SELECT * FROM table WHERE user_id = $uid"</p>);
+?&gt;
+</code>
+    This example has several severe issues.
+    Firstly, $_POST may not even exist and the value being passed has not been validated.
+Secondly the value 
+    Secondly, an untrusted third party is telling the script which
+user ID to use, which may not even be a valid ID to begin with.
+    This data may contain hidden form fields,
+which are believed to be safe, or additional SQL commands.
+<p class='tip'>Ideally data used in query strings should come
+from a trusted source(such as constants or functions local to the script),
+unless absolutely necessary!</p>
+    Lastly the value value at the index 'user_id' has not been escaped,
+    or bound as a parameter(to a prepared statement).
+<p class='tip'>Additionally, SQL prepared statements may be used for added security,
+but as this feature is NOT natively supported by v4,
+8.1:5E sites to not take advantage of this security feature, yet!</p>
+    These are common mistakes, which may be easily overlooked!
+The following is an example of what could go wrong.
+<code class='php'><p class='bad'>&lt;?php
+$uid = "'' OR ''=''";</p>
+//subbing into the query string
+$result = $db->query(
+    "SELECT * FROM table WHERE user_id ='' OR ''=''"
+);
+?&gt;
+</code>
+    When accessing or storing values in a database it is reasonable
+(with names for example) that the entries may contain quotes. This would allow
+an attacker to take advantage an embed hostile commands,
+when the value is later used in a query,
+the additional commands are(unknowingly) executed, if not properly escaped.
+    The following is an example of what could go wrong.
+<code class='php'><p class='bad'>&lt;?php
+$uid = "";</p>
+//subbing into the query string
+$result = $db->query(
+    "SELECT name FROM table WHERE user_id =$uid"
+);
+if($result){
+    //
+    $n = $result->fet_assoc()['name'];  //
+    //$n = "''; DROP TABLE table";
+    $result = $db->query(
+        "SELECT * FROM table WHERE user_id = ''; DROP TABLE table"
+    );
+}
+?&gt;
+</code>
+    This effectively bypasses the user_id,
+instead returning all entries from table, for all users
+allowing the attacker access to all private information,
+then continues on, executing the command to destroy the table.
+<code class='php'><p class='good'>&lt;?php
+//preform a regular expression check to see if
+//if the value is formatted as a 32 bit unsigned integer(as either bin, oct, dec, or hex),
+//the function will escape the string passed to it
+$uid = isUInt32($_POST['user_id']) ? intval($_POST['user_id']) : 0;
+//if intval fails to convert to te string, 0 is returned
+$db = new dbConnect();
+//code fails here,
+//no query is executed, disaster averted!
+if($uid > 0){
+    $result = $db->query(
+        "SELECT * FROM table WHERE user_id = $uid"
+    );
+}
+?&gt;</p></code>
+    Using regular expressions
+</pre>    
+<ol>
+    <li><a href='http://phpsecurity.readthedocs.org/en/latest/Injection-Attacks.html#disclosure-of-stored-data'>SQL Injection</a></li>
+</ol>
 <h3 id='jsH'><?php a::javascript();?></h3><hr>
 <pre>   Supports single and double quoted strings,
 use single quotes for any string which does not have (') or (\) embeded and for JSON strings.
