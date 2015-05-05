@@ -1,8 +1,7 @@
 ﻿//
-//Sprites are anything drawn to the screen (ground, enemies, etc.)
-//
-function Sprite(x, y, type) 
-{
+function Sprite(x, y, type){
+    //Sprites are anything drawn to the screen (ground, enemies, etc.)
+    //
 	//this.position = new Vector2(x,y);
 	//this.size = new Vector2(standWidth,standWidth);
 	this.x      = x;
@@ -10,19 +9,17 @@ function Sprite(x, y, type)
 	this.width  = standWidth;
 	this.height = standWidth;
 	this.type   = type;
-	Vector.call(this, x, y, 0, 0);
 	
-	//Update the Sprite's position by the player's speed
+    Vector.call(this, x, y, 0, 0);
 	
-	this.update = function() 
-	{
+	this.update = function(){
+        //Update the Sprite's position by the player's speed
 		this.dx = -player.speed;
 		this.advance();
-	};
+	};	
 	
-	// Draw the sprite at it's current position
-	this.draw = function() 
-	{
+	this.draw = function(){
+        //Draw the sprite at it's current position
 		context.save();
 		context.translate(0.5,0.5);
 		context.drawImage(assetLoader.images[this.type], this.x, this.y);
@@ -38,14 +35,12 @@ Sprite.prototype = Object.create(Vector.prototype);
 		size : Vector2(standWidth,standWidth),
 		type : type,	
 		//Update the Sprite's position by the player's speed
-		update : function() 
-		{
+		update : function(){
 			this.dx = -player.speed;
 			this.advance();
 		},	
 		//Draw the sprite at it's current position
-		draw : function() 
-		{
+		draw : function(){
 			context.save();
 			context.translate(0.5,0.5);
 			context.drawImage(assetLoader.images[this.type], this.x, this.y);

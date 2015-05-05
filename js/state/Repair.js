@@ -124,8 +124,8 @@ var Repair = {
             //$('label#info').show();
 		}
 	},
-	_initButtons : function()
-	{
+	_initButtons : function(){
+        //
 		var car = Garage.getCurrentCar();
        
         if(car !== null){
@@ -455,7 +455,7 @@ var Repair = {
         var car = Garage.getCurrentCar();
     
         if(car !== null){
-           
+            //
             for(var key in type){
                 //using hasOwnProperty ensures on iteration only over fields present in the object,
                 //not those found in its prototype(if one exists)
@@ -511,12 +511,11 @@ var Repair = {
                 }
             }
         }
-        
     }
 };
 function upgradePartUpdate(part, jqBtn, jqPB){
     if(part !== null){         
-        
+        //
         if(part._stage == carPart.STAGE.pro){
             disable(jqBtn);
         }

@@ -389,8 +389,7 @@ var Garage = {
 //?>
         }
     },
-	setCurrentCar : function()
-	{
+	setCurrentCar : function(){
         var div = $('div#Garage div#userCar');
         
         this.setCurrentIndex();
@@ -422,12 +421,12 @@ var Garage = {
             div.hide();
         }
 	},
-	setSelectCar : function(index)
-	{
+	setSelectCar : function(index){
+        //
 		var i = index.data.index;
 	
-		if(i < userGarage.length)
-		{
+		if(i < userGarage.length){
+            //
 			var div = $('div#Garage div#selectedCar');
 			var src = $('#carSelBtn' + i);
 		
@@ -463,8 +462,8 @@ var Garage = {
 			div.show();
 		}
 	},
-	setCarBtnText : function(index)
-	{
+	setCarBtnText : function(index){
+        //
 		var car = userGarage[index];
 		var btn = $('#carSelBtn' + index);
 		//var car = userGarage[i];
@@ -484,8 +483,8 @@ var Garage = {
 			$('div#Garage #select').hide();
 			$('div#Garage #viewCar').hide();
 		}
-		else
-        {	//$('div#Garage #userCar').show();
+		else{
+        	//$('div#Garage #userCar').show();
 			//$('div#selectedCar').show();
 			$('div#Garage #select').show();
 			$('div#Garage #viewCar').show();
@@ -521,10 +520,10 @@ var Garage = {
 //Garage.save();
 var CarView = {
 	//carView state object
-	init : function(index)
-	{
-		if(selCarIndex !== null && userGarage.length != 0)
-		{
+	init : function(index){
+        //
+		if(selCarIndex !== null && userGarage.length != 0){
+            //
 			var car = userGarage[selCarIndex];
             setHomeImg(car.getFullPath() );
             jq.carImg.show();

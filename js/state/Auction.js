@@ -96,7 +96,7 @@ var Auction =
                     vehiclePrice = Auction._car.getPrice();
 					
 					Auction.ai = [Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice()))];
-					Auction.currentBid = vehiclePrice * 0.1;
+					//Auction.currentBid = vehiclePrice * 0.1;
                     Auction.currentBid = vehiclePrice * 0.04;
                     //jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
             
@@ -109,7 +109,7 @@ var Auction =
                     Auction.setBidBtnText();
                     
                     //$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
-                    $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:$' + (Auction._car.getPrice() ).toString() );
+                    $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + Auction._car.getPriceStr() );
                     $('div#Auction label#carInfo').text(Auction._car.getInfo() );
                     //$('#menu').removeClass('gameMenu');
                     //$('#menu').addClass('Auction');
@@ -144,8 +144,9 @@ var Auction =
 		//assetLoader.sounds.bg.loop = true;
 		//assetLoader.sounds.bg.play();
 	},
-	close : function()
-	{
+	close : function(){
+        //End the auction
+        //closing bidding and clearing local vars
 		auctionStop = true;
 		auctionEnded = false;
 		endGame = false;
@@ -174,8 +175,8 @@ var Auction =
         
         jq.carImg.hide();
 	},
-	update : function()
-	{	//main update logic, called per frame
+	update : function(){
+		//main update logic, called per frame
 		this.bidTimers();
 		this.enemyBidding();
 		//this.currentBidder();
@@ -225,8 +226,8 @@ var Auction =
 			
 	  //	Auction.buyOut();
 	},
-	render : function()
-	{
+	render : function(){
+        //draw scene specific content to canvas
 		var imgOffset = 20;
 		context.drawImage(backgroundImage, 0,-10);
 		context.font = '14px arial, sans-serif';
@@ -352,8 +353,8 @@ var Auction =
 		//context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
 		//context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
 	},
-	updatePlayer : function() 
-	{
+	updatePlayer : function(){
+        //
 	    player.update();
 		
         if((this.playerBid > this.ai[0].currBid) &&
@@ -372,12 +373,12 @@ var Auction =
 			}
 		}
 	},
-	playerBidding : function() 
-	{
-	    if(!this.playerWinning && this.playerCanBid)
-		{
-            if(userStats.money >= (this.currentBid + this.raisePerc))
-			{
+	playerBidding : function(){
+        //user bidding logic
+	    if(!this.playerWinning && this.playerCanBid){
+            //
+            if(userStats.money >= (this.currentBid + this.raisePerc) ){
+                //only let user bid if they have enough funds to bad it up!
                 this.playerWinning = true;
                 this.enemyWinning = false;
                 this.playerBidTimer = 0;
@@ -395,14 +396,14 @@ var Auction =
 	},
 	enemyBidding : function()
 	{
-	    if(!this.playerWon && this.enemyCanBid)
-		{	
-			for(var i = 0; i < this.ai.length; i++)
-			{						
-				if(this.ai[i].canBid && !this.ai[i].leftAuction)
-				{
-					if(this.ai[i].currBid < this.currentBid)
-					{
+	    if(!this.playerWon && this.enemyCanBid){
+            //
+			for(var i = 0; i < this.ai.length; i++){
+                //foreach ai
+				if(this.ai[i].canBid && !this.ai[i].leftAuction){
+                    //can bid and still participating
+					if(this.ai[i].currBid < this.currentBid){
+                        //
 					    this.ai[i].currBid = this.currentBid + this.raisePerc;
 					    
                         if(this.ai[i].currBid == this.currentBid){
@@ -509,11 +510,11 @@ var Auction =
 		
         if(this.winningTimer >= this.winningTimerCap)
 		{
-			while((this.playerWinning || this.enemyWinning) && (this.goingTimer < 660) && (!auctionStop))
+			while(( this.playerWinning || this.enemyWinning) && (this.goingTimer < 660) && (!auctionStop))
 			{
 				this.goingTimer++;
 				
-                if((this.goingTimer > 0) && (this.goingTimer < 360))
+                if( (this.goingTimer > 0) && (this.goingTimer < 360))
 				{
 					this.goingTimer++
 					//console.log("Going once");
@@ -522,38 +523,31 @@ var Auction =
 					break;
 					
 				}
-				else if((this.goingTimer > 370) && (this.goingTimer < 650))
+				else if( (this.goingTimer > 370) && (this.goingTimer < 650) )
 				{
 					//console.log("Going twice");
 					context.fillText( "Going Twice" ,ENEMY_X + 715 , 290);
 					assetLoader.sounds.going.play();
-					break;
-		
+					break;		
 				}
-				else if(this.goingTimer >= 660)
-				{
+				else if(this.goingTimer >= 660){
 					endGame = true;
 					this.goingTimer = 0;
 					
-					if(this.playerWinning)
-					{
+					if(this.playerWinning){
 						this.playerWon = true;
 						this.buyOut();
 						console.log("Player won");
 						context.fillText( "Sold to player!" ,ENEMY_X + 715 , 310);
 					}
-					else if(this.enemyWinning)
-					{
+					else if(this.enemyWinning){
 						this.playerWinning = false;
 						this.playerWon = false;
 						
-                        for(var i = 0; i < this.ai.length; ++i)
-						{
-							if(this.ai[i].winningBid)
-							{
+                        for(var i = 0; i < this.ai.length; ++i){
+							if(this.ai[i].winningBid){
 								console.log("AI won");
 								context.fillText("Sold to " + this.ai[i], ENEMY_X + 715, 310);
-								
 							}
 						}
 					}
@@ -573,8 +567,8 @@ var Auction =
 		btn.click(function(){playerBoughtOut = true;});
 		btn.css('opacity', '0.65');
 		
-		if(this.playerWon)
-		{
+		if(this.playerWon){
+            //
             if(userStats.money >= this.currentBid){
                 userStats.money = userStats.money - this.currentBid;
                 auctionEnded = true;
@@ -588,9 +582,10 @@ var Auction =
                 //user does not have enough money!
             }
 		}
-		else if(playerBoughtOut)
-		{
+		else if(playerBoughtOut){
+            //
             if(userStats.money >= vehiclePrice){
+                //
                 console.log("Enemy winning " + this.enemyWinning);
                 userStats.money = vehiclePrice;
                 auctionEnded = true;
@@ -612,8 +607,8 @@ var Auction =
 	}
 };
 //Auction jQuery bindings
-$('#bid').click(function()
-{
+$('#bid').click(
+function(){
 	Auction.playerBidding();
 	playerDidBid = true;
 	//$('#bid').text(

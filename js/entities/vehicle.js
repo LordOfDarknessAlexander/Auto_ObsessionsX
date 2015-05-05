@@ -75,7 +75,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		year : Year,	//parseInt(node.attr('year') ),
 		id : carID,	//node.attr('id'),
 		//_info: node.text(),
-		_parts : [],	//obsolete, only retain currently upgraded parts, array is copied
+		//_parts : [],	//obsolete, only retain currently upgraded parts, array is copied
         //_parts:{
             //parts with value null, mean user hasn't purchase/installed part
         _dt:dt,
@@ -101,6 +101,10 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			//}
 			return this._price; // + upgradeCost;
 		},
+        getPriceStr:function(){
+            //string value of price, including currency(for displaying)
+			return '$' + this.getPrice().toFixed(2); // + upgradeCost;
+		},
 		getInfo : function()
 		{	//var node = xbdCars.getElementById(this._id);
 			//return node.text;
@@ -119,9 +123,9 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		displayInfo : function(){
 			//context if from globals
 			context.fillText(this.name, VEHICLE_XPOS + 40, 120);
-			context.fillText('Value'+ this.price  ,VEHICLE_XPOS + 40, 140);
-			context.fillText('Orig' + this.originality  ,VEHICLE_XPOS + 40, 160);
-			context.fillText('Condition'+ this.condition  ,VEHICLE_XPOS + 40, 180);
+			context.fillText('Value' + this.price, VEHICLE_XPOS + 40, 140);
+			context.fillText('Orig' + this.originality, VEHICLE_XPOS + 40, 160);
+			context.fillText('Condition' + this.condition, VEHICLE_XPOS + 40, 180);
 //			Vehicle.draw = function()
 //			{
 //				context.drawImage(this.image,VEHICLE_XPOS,VEHICLE_YPOS);
@@ -188,7 +192,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 				_price : this._price,
 				//condition : this.condition.toString(),
 				//originality : this.originality.toString(),
-                _parts:this._parts,
+                //_parts:this._parts,
                 _dt:this._dt !== null ? this._dt.getBits() : 0,
                 _body:this._body !== null ? this._body.getBits() : 0,
                 _interior:this._interior !== null ? this._interior.getBits() : 0,
