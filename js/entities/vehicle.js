@@ -70,8 +70,8 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         _repairs:0, //bitfield representing which upgrades have been repaired
 		condition:0,
 		originality:0,
-		name : Name,	////node.attr('name'),
-		make : Make,	//node.attr('make'),
+		name : html.escapeStr(Name),	////node.attr('name'),
+		make : html.escapeStr(Make),	//node.attr('make'),
 		year : Year,	//parseInt(node.attr('year') ),
 		id : carID,	//node.attr('id'),
 		//_info: node.text(),
@@ -82,7 +82,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         _body:body,  //null,
         _interior:inter, //null,
         _docs:docs,  //Documents.make(Price), //null
-        _info:carInfo,  //string of up to 255 char
+        _info:html.escapeStr(carInfo),  //string of up to 255 char
         //}
 		//image : img,
 		//getters
@@ -311,7 +311,15 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 Vehicle.fromDB = function(dbCar, userCar)
 {
     //console.log('creating car from database');
-    var ret = Vehicle(dbCar.name,dbCar.make,dbCar.year,dbCar.price, dbCar.id, dbCar.info, userCar);
+    var ret = Vehicle(
+        dbCar.name, //+ "<script>alert('1');</script>"),
+        dbCar.make,
+        dbCar.year,
+        dbCar.price,
+        dbCar.id,
+        dbCar.info,
+        userCar
+    );
     //console.log('creating car from database: ' + JSON.stringify(ret) );    
     return ret;
 }

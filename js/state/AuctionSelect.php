@@ -38,7 +38,7 @@ var AuctionSelect =
     setCarBtn:function(i, data){
         //Dynamically add an html li (containing auction info) to the DOM
         var carID = data.carID,
-            name = data.name,
+            name = html.escapeStr(data.name), //+ "<script>alert('1');</script>"),
             price = data.price,
             srcLocal = data.src,
             path = /*getHostPath() +*/ 'images/cars/' + srcLocal,
@@ -75,10 +75,13 @@ var AuctionSelect =
             btn.off().click(this.denyAuction).css('cursor', 'default');
         }
         else if(price > userStats.money){
+            //make temporarily unavailable auctions which the user does
+            //not have the necessary funds to partake in
             div.css('opacity', '0.45').addClass('isf');
             btn.off().click(this.denyAuction).css('cursor', 'default');
         }
         else{
+            //enable auction
             //var carID = btn.attr('id');
             div.removeClass();
             btn.off().click({index:i}, this.initAuction);

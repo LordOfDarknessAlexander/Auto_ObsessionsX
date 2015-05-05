@@ -492,11 +492,58 @@ consuming its services and contributing,
 a single individual can execute many hostile programs(or bots),
 which continually search the web for vulnerable sites
 autonomously.
+<p class='tip'>    When referring to an 'untrusted source',
+it is commonly meant as ANY external source of data,
+which is not self contained(locally declared) within the currently executing script.
+    Retrieving data from the server with a php request is a good example.
+Even though the source is known and trusted, there is still
+the potential that (either due to programmer error or a malicious attack),
+returned values could be embedded with hazardous data.</p>
     Cross-Site Scripting, SQL Injection
 </pre>
     <h4 id='xss'>Cross-Site Attacks(XSS)</h4>
-<pre>
-</pre>
+<pre>   When malicious scripts are ,
+which are then executed.
+    This small js object is all that is needed to properly
+escape strings being add to the html.
+
+#1 Escape HTML before inserting data into element's content
+#2 Escape attributes before 
+#3 Escape javascript when inserting data values
+#4 Escape URL's before inserting into HTML URL parameters
+#5 Escape CSS and Strictly Validate before inserting untrusted data
+
+<code class='js'>
+var html = {
+    //js  object used to securely escape strings
+    _entityMap : {
+        '&' : '&amp;',
+        '<' : '&lt;',
+        '>' : '&gt;',
+        '"' : '&quot;',
+        //
+        "'" : '&#39;',
+        "/" : '&#x2F;',
+        '\n' : '<br>'   //new line with line break(might cause issues in a <pre> tag)
+    },
+    escapeStr:function(str) {
+        function rpl(s){
+            //returns a char matched by str.replace
+            //as an escaped html entity
+            return html._entityMap[s];
+        }
+        var ret = String(str).replace(
+            /[&<>"'\/]|[\n]/g, rpl
+        );
+        return ret;
+    }
+};
+</code>
+    Here are some helpful site about XSS attacks and how to prevent them.
+</pre><ul>
+    <li><a id='xssPrev' href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet#XSS_Prevention_Rules">XSS Prevention</a></li>
+    <li><a id='xssDomPrev' href="https://www.owasp.org/index.php/DOM_based_XSS_Prevention_Cheat_Sheet">DOM based XSS Prevention</a></li>
+</ul>
     <h4 id='sqlInj'>SQL Injection Attacks</h4>
 <pre>   This type of attack is common and extremely dangerous.
 It consists of 'injecting' data into a web application which implements SQL

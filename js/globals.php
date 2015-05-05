@@ -264,3 +264,27 @@ function pbSetColor(jqPB, value){
     }
     jqPB.attr('value', value);
 }
+
+var html = {
+    _entityMap : {
+        '&' : '&amp;',
+        '<' : '&lt;',
+        '>' : '&gt;',
+        '"' : '&quot;',
+        //
+        "'" : '&#39;',
+        "/" : '&#x2F;',
+        '\n' : '<br>'   //new line with line break(might cause issues in a <pre> tag)
+    },
+    escapeStr:function(str) {
+        function rpl(s){
+            //returns a char matched by str.replace
+            //as an escaped html entity
+            return html._entityMap[s];
+        }
+        var ret = String(str).replace(
+            /[&<>"'\/]|[\n]/g, rpl
+        );
+        return ret;
+    }
+};

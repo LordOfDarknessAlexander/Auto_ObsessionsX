@@ -348,7 +348,7 @@ var Garage = {
                 stats = car.getStats();
             
             $('img#carImg', div).attr('src', car.getFullPath() );
-            $('label#carName', div).text(car.getFullName() );;
+            $('label#carName', div).text(car.getFullName() );
             $('label#carInfo', div).text(car.getInfo() );
 //<php
 //function pbSetColor($str){
