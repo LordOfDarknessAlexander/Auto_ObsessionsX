@@ -273,8 +273,9 @@ var html = {
         '"' : '&quot;',
         //
         "'" : '&#39;',
-        "/" : '&#x2F;',
-        '\n' : '<br>'   //new line with line break(might cause issues in a <pre> tag)
+        "/" : '&#x2F;'
+        //"\\" : '&#92;'      //start of an escape character
+        //'\n' : '<br>'   //new line with line break(might cause issues in a <pre> tag)
     },
     escapeStr:function(str) {
         function rpl(s){
@@ -283,7 +284,7 @@ var html = {
             return html._entityMap[s];
         }
         var ret = String(str).replace(
-            /[&<>"'\/]|[\n]/g, rpl
+            /[&<>"'\/]/g, rpl
         );
         return ret;
     }

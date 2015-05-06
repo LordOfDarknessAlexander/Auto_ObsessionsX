@@ -96,6 +96,10 @@ p.good{color:green;}
 p.ok{color:yellow;}
 p.bad{color:red;}
 p.tip{color:white;background-color:grey;}
+
+b.good{color:green;}
+b.ok{color:yellow;}
+b.bad{color:red;}
 </style>
 </head>
 <body>
@@ -507,7 +511,12 @@ which are then executed.
     This small js object is all that is needed to properly
 escape strings being add to the html.
 
-#1 Escape HTML before inserting data into element's content
+#1 Escape HTML before inserting data into element's content<hr>
+<code class='html'>
+&lt;html&gt;
+&lt;div&gt;<b class='bad'>Escape data added here</b>&lt;/div&gt;
+&lt;/html&gt;
+</code>
 #2 Escape attributes before 
 #3 Escape javascript when inserting data values
 #4 Escape URL's before inserting into HTML URL parameters
@@ -523,8 +532,7 @@ var html = {
         '"' : '&quot;',
         //
         "'" : '&#39;',
-        "/" : '&#x2F;',
-        '\n' : '<br>'   //new line with line break(might cause issues in a <pre> tag)
+        "/" : '&#x2F;'
     },
     escapeStr:function(str) {
         function rpl(s){
@@ -533,7 +541,7 @@ var html = {
             return html._entityMap[s];
         }
         var ret = String(str).replace(
-            /[&<>"'\/]|[\n]/g, rpl
+            /[&<>"'\/]/g, rpl
         );
         return ret;
     }
