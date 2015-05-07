@@ -7,25 +7,46 @@ function br(){?>
 <br>
 <?php
 }
+
+function te($tag){
+    //tag end </$str>?>&lt;/<?php echo $tag?>&gt;
+<?php
+}
+function htmlCmt($str){
+    //?>&lt;!--<?php echo $str;?>--&gt;
+<?php
+}
 //
+function eW3(){
+    echo a::W3;
+}
+function eW3S(){
+    echo a::W3Schools;
+}
+function ePHP(){
+    echo a::PHP;
+}
 class a{
     //class representing common html Anchor elements used through out docs
+    const PHP = "http://php.net/",
+        W3 = "http://www.w3.org/",
+        W3Schools = "http://www.w3schools.com/";
     //websites
     //public static function google(){<a href='www.google.ca'>Google</a>}
     public static function php(){?>
-<a href='http://php.net/'>PHP</a><?php
+<a href='<?php ePHP();?>'>PHP</a><?php
     }
     public static function phpMySQLi(){?>
-<a href='http://php.net/manual/en/book.mysqli.php'>mySQLi</a><?php
+<a href='<?php ePHP();?>manual/en/book.mysqli.php'>mySQLi</a><?php
     }
     public static function mySQL(){?>
 <a href='http://dev.mysql.com/doc/refman/5.6/en/'>mySQL</a><?php
     }
     public static function w3SQL(){?>
-<a href='http://www.w3schools.com/sql/sql_quickref.asp'>W3 SQL</a><?php
+<a href='<?php eW3S();?>sql/sql_quickref.asp'>W3 SQL</a><?php
     }
     public static function phpDOM(){?>
-<a href='http://php.net/manual/en/book.dom.php'>DOM</a><?php
+<a href='<?php ePHP();?>manual/en/book.dom.php'>DOM</a><?php
     }
     //public static function python(){<a href=''>Python</a>}
     //public static function perl(){<a href=''>Perl</a>}
@@ -40,13 +61,13 @@ class a{
 <a href='https://jquery.com/'>jQuery</a><?php
     }
     public static function css(){?>
-<a href='http://www.w3schools.com/cssref/'>CSS</a><?php
+<a href='<?php eW3S();?>cssref/'>CSS</a><?php
     }
     public static function html5(){?>
 <a href='http://dev.w3.org/html5/html-author/'>HTML5</a><?php
     }
     public static function xml(){?>
-<a href='http://www.w3.org/XML/'>XML</a><?php
+<a href='<?php eW3();?>XML/'>XML</a><?php
     }
     //browsers
     //public static chrome(){
@@ -62,10 +83,10 @@ class a{
     //}
     //image type specs
     public static function png(){?>
-<a href='http://www.w3.org/TR/PNG/'>PNG</a><?php
+<a href='<?php eW3();?>TR/PNG/'>PNG</a><?php
     }
     public static function jpg(){?>
-<a href='http://www.w3.org/Graphics/JPEG/'>JPG</a><?php
+<a href='<?php eW3();?>Graphics/JPEG/'>JPG</a><?php
     }
 };
 //if(secure::adminLogin()){
@@ -513,16 +534,57 @@ escape strings being add to the html.
 
 #1 Escape HTML before inserting data into element's content<hr>
 <code class='html'>
-&lt;html&gt;
-&lt;div&gt;<b class='bad'>Escape data added here</b>&lt;/div&gt;
-&lt;/html&gt;
+&lt;body&gt;
+&lt;div&gt;<b class='bad'>Escape data inserted here</b><?php te('div');?>
+<?php te('body');?>
 </code>
-#2 Escape attributes before 
-#3 Escape javascript when inserting data values
+#2 Escape common HTML attributes
+<code class='html'>
+&lt;div attr=&#x27;<b class='bad'>Escape data inserted here</b>&#x27;&gt;
+<?php te('div');?>
+</code>
+#3 Escape javascript(in html scripts tags, or php) when inserting data values
+<code class='html'>
+&lt;body&gt;
+    &lt;!--inside quoted strings--&gt;
+    &lt;script&gt;alert(&#x27;<b class='bad'>Escape data inserted here</b>&#x27;);<?php te('script');?>
+
+    &lt;!--on the right hand side of a quoted expression--&gt;
+    &lt;script&gt;x = &#x27;<b class='bad'>Escape data inserted here</b>&#x27;;<?php te('script');?>
+
+    &lt;!--inside quoted event handler--&gt;
+    &lt;div onmouseover = &quot;x = &#x27;<b class='bad'>Escape data inserted here</b>&#x27;&quot;<?php te('div');?>
+<?php te('body');?>
+</code>
 #4 Escape URL's before inserting into HTML URL parameters
+<code class='html'>
+&lt;!--When receiving untrusted data to be put into an HTTP GET parameter value--&gt;
+&lt;a href=&quot;http://www.somesite.com?test=<b class='bad'>Escape data inserted here</b>&quot;&gt;untrusted link!<?php te('a');?>
+</code>
+<p class='tip'>    This is a prime example why standards should always be adhered to.
+    Even though HTML supports unquoted attributes, <b>it is incredibly unsafe!</b>
+    Unquoted attributes can be broken out of with characters including [space] % * + , - / ; &lt; = &gt; ^ and |.
+    Entity encoding is useless in this context!
+    <b class='good'>Always use double quotes when expressing URL paths in HTML</b>.</p>
 #5 Escape CSS and Strictly Validate before inserting untrusted data
+<code class='css'>
+&lt;!--property value--&gt;
+&lt;style&gt;selector{
+    property : <b class='bad'>Escape data inserted here</b>;
+}<?php te('style');?>
+
+&lt;!--property value--&gt;
+&lt;style&gt;selector{
+    property:&quot;<b class='bad'>Escape data inserted here</b>&quot;;
+}<?php te('style');?>
+
+&lt;!--property value--&gt;
+&lt;span style=&quot;property : <b class='bad'>Escape data inserted here</b>&quot;&gt;text<?php te('span');?>
+</code>
+    There are several API's provided for escaping data on both server and client side scripting.
 
 <code class='js'>
+//js
 var html = {
     //js  object used to securely escape strings
     _entityMap : {
@@ -568,11 +630,13 @@ Similar to the 'would rather have and not need, than need and not have' principl
 not intended by the developer.
 <code class='php'>
 &lt;?php
-<p class='bad'>$uid = $_POST['user_id'];</p>
+<b class='bad'>$uid = $_POST['user_id'];</b>
 $db = new dbConnect();
-$result = $db->query(<p class='bad'>    "SELECT * FROM table WHERE user_id = $uid"</p>);
-?&gt;
-</code>
+
+$result = $db->query(
+    <b class='bad'>"SELECT * FROM table WHERE user_id = $uid"</b>
+);
+?&gt;</code>
     This example has several severe issues.
     Firstly, $_POST may not even exist and the value being passed has not been validated.
 Secondly the value 
@@ -590,8 +654,9 @@ but as this feature is NOT natively supported by v4,
 8.1:5E sites to not take advantage of this security feature, yet!</p>
     These are common mistakes, which may be easily overlooked!
 The following is an example of what could go wrong.
-<code class='php'><p class='bad'>&lt;?php
-$uid = "'' OR ''=''";</p>
+<code class='php'>
+&lt;?php
+<b class='bad'>$uid = "'' OR ''=''";</b>
 //subbing into the query string
 $result = $db->query(
     "SELECT * FROM table WHERE user_id ='' OR ''=''"
@@ -604,8 +669,9 @@ an attacker to take advantage an embed hostile commands,
 when the value is later used in a query,
 the additional commands are(unknowingly) executed, if not properly escaped.
     The following is an example of what could go wrong.
-<code class='php'><p class='bad'>&lt;?php
-$uid = "";</p>
+<code class='php'>
+&lt;?php
+<b class='bad'>$uid = "";</b>
 //subbing into the query string
 $result = $db->query(
     "SELECT name FROM table WHERE user_id =$uid"
@@ -624,7 +690,8 @@ if($result){
 instead returning all entries from table, for all users
 allowing the attacker access to all private information,
 then continues on, executing the command to destroy the table.
-<code class='php'><p class='good'>&lt;?php
+<code class='php'>
+&lt;?php<b class='good'>
 //preform a regular expression check to see if
 //if the value is formatted as a 32 bit unsigned integer(as either bin, oct, dec, or hex),
 //the function will escape the string passed to it
@@ -638,12 +705,18 @@ if($uid > 0){
         "SELECT * FROM table WHERE user_id = $uid"
     );
 }
-?&gt;</p></code>
-    Using regular expressions
+</b>?&gt;</code>
 </pre>    
 <ol>
     <li><a href='http://phpsecurity.readthedocs.org/en/latest/Injection-Attacks.html#disclosure-of-stored-data'>SQL Injection</a></li>
 </ol>
+<h4>Regular Expression</h4>
+<pre>
+    Both PHP and JS support expressing and manipulating string data using Regular Expressions.
+Regular Expressions describe patterns within a sequence of characters.
+The most common use is to preform pattern-matching and search-and-replace operations on text.
+
+</pre>
 <h3 id='jsH'><?php a::javascript();?></h3><hr>
 <pre>   Supports single and double quoted strings,
 use single quotes for any string which does not have (') or (\) embeded and for JSON strings.
