@@ -190,6 +190,11 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                             $model = $AO_DB->strip($n); //replace special chars
                             //echo '    ' . $n;
                             if(isset($make) && isset($year) && isset($model) ){
+                                //
+                                $P = 'price';
+                                $I = 'info';
+                                $T = 'type';
+                                //
                                 $id = $mHash | $yHash | $nameHash;
                                 $node = $doc->getElementById('_' . strval($id) );
                                 $price = 10000;
@@ -202,8 +207,8 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                                     
                                     $node = $doc->createElement('car', 'Default Car Info');
                                     $node->setAttribute('id', '_' . strval($id) );
-                                    $node->setAttribute('price', strval($price) );
-                                    $node->setAttribute('type', $type);
+                                    $node->setAttribute($P, strval($price) );
+                                    $node->setAttribute($T, $type);
                                     $node->setIdAttribute('id', true);
                                     
                                     $root->appendChild($node);
@@ -212,9 +217,9 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                                     //trim() values from xml, to remove whitespace from string values,
                                     //as a safety precaution in case someone is daft enough to add whitespace to the source text,
                                     //or evil enough to attempt to hack our database
-                                    $price = floatval(filter_var(trim($node->attributes->getNamedItem('price')->nodeValue), FILTER_SANITIZE_NUMBER_FLOAT) );
+                                    $price = floatval(filter_var(trim($node->attributes->getNamedItem($P)->nodeValue), FILTER_SANITIZE_NUMBER_FLOAT) );
                                     $info = filter_var(trim($node->textContent), FILTER_SANITIZE_STRING);
-                                    $type = filter_var(trim($node->attributes->getNamedItem('type')->nodeValue), FILTER_SANITIZE_STRING);
+                                    $type = filter_var(trim($node->attributes->getNamedItem($T)->nodeValue), FILTER_SANITIZE_STRING);
                                     //$info can only be a certain length(128 chars),
                                     //so make sure it is by removing any values outside the bounds
                                     //$info = 
@@ -227,11 +232,13 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                                 $y = intval($year);
                                 //echo 'variables set!';
                                 $aoCars = 'aoCars';
+                                
                                 $q = "INSERT INTO $aoCars 
-                                    (`car_id`, `make`, `year`, `model`, `price`, `info`, `type`) 
+                                    (`car_id`, `make`, `year`, `model`, `$P`, `$I`, `$T`) 
                                     VALUES
                                     ($id, '$make', $y, '$n', $price, '$info', '$type')
-                                    ON DUPLICATE KEY UPDATE price = $price, type = '$type', info = '$info'";
+                                    ON DUPLICATE KEY UPDATE
+                                    $P = $price, $T = '$type', $I = '$info'";
 ?><br><?php
 //echo $q;
 ?><br><?php
