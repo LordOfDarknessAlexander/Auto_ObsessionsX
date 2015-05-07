@@ -20,6 +20,7 @@ class sql{
     public static function selectAll(&$tableName){
         //preferably, $tableName should be a single word,
         //but can also be expanded to include addional sql WHERE, GROUP BY, ORDER BY, LIMIT, etc statements
+        //$str = mysqli_real_escape_string($tableName);
         return "SELECT * FROM $tableName";
     }
     //public static function selectAll(&$tableName, &$stmtsStr){

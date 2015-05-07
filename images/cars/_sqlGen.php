@@ -240,7 +240,7 @@ foreach(new DirectoryIterator(__DIR__) as $file){
                                     ON DUPLICATE KEY UPDATE
                                     $P = $price, $T = '$type', $I = '$info'";
 ?><br><?php
-//echo $q;
+//echo $info;
 ?><br><?php
                                 if($AO_DB->query($q) == TRUE){
                                     echo "added element with id: $id, to database!";?><br><?php

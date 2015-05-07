@@ -712,7 +712,7 @@ if($uid > 0){
 </ol>
 <h4>Regular Expression</h4>
 <pre>
-    Both PHP and JS support expressing and manipulating string data using Regular Expressions.
+    Both PHP and <a href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp">JavaScript</a> support expressing and manipulating string data using Regular Expressions.
 Regular Expressions describe patterns within a sequence of characters.
 The most common use is to preform pattern-matching and search-and-replace operations on text.
 
@@ -761,19 +761,18 @@ and support the direct substitution of variables.</pre>
 <p class='bad'>$str = "simple string";  //double quote for 'complex strings', nothing special here</p>
 <p class='good'>$str = "this ' doesn't need escaping'!";</p>
 </code>
-<pre>    When embedding dynamic variables into a string this format is preferred</pre>
+<pre>    When embedding dynamic variables into a string this format is preferred
 <code>
-<p class='good'>
-&lt;?php<br>
-$str = 'guid'; //simple string<br>
-echo "&lt;button id='$str'&gt;This can't be real&lt;/button&gt;";   //embedded string in a button<br>
-$str = "SELECT $str FROM table";   //embedded string as an sql statement, $str will be replaced by the literal value(not including the quotes)<br>
-?&gt;</p>
-</code>
-<pre>    While this is acceptable, in PHP, html elements should rarely be expressed as strings then echo'ed out to the browser(as this is slow and overly complex),
-rather, it's preferred to inject the html directly as the site like so.<code>
-<p class='good'>
 &lt;?php
+<b class='good'>
+$str = 'guid'; //simple string
+echo "&lt;button id='$str'&gt;This can't be real&lt;/button&gt;";   //embedded string in a button
+$str = "SELECT $str FROM table";   //embedded string as an sql statement, $str will be replaced by the literal value(not including the quotes)<br>
+</b>?&gt;</code>
+    While this is acceptable, in PHP, html elements should rarely be expressed as strings then echo'ed out to the browser(as this is slow and overly complex),
+rather, it's preferred to inject the html directly as the site like so.
+<code class='php'>
+&lt;?php<p class='good'>
 $str = 'guid';
 ?&gt;
 &lt;button id='&lt;?php echo $str;?&gt;'&gt;This can't be real&lt;/button&gt;
