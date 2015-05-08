@@ -91,14 +91,14 @@ var Repair = {
 			//$('div#RepairShop div#repairs').show();
             
             jq.RepairShop.dt.show();
-			$('div#body', div).show();
-            $('div#interior', div).show();
-            $('div#docs', div).show();
+			jq.RepairShop.cid1.show();
+            jq.RepairShop.cid2.show();
+            jq.RepairShop.cid3.show();
             
-            $('h2#dt', div).show();
-			$('h2#body', div).show();
-            $('h2#interior', div).show();
-            $('h2#docs', div).show();
+            //$('h2#dt', div).show();
+			//$('h2#body', div).show();
+            //$('h2#interior', div).show();
+            //$('h2#docs', div).show();
             
             //$('label#info').text('');
             //$('div#RepairShop p#error').hide();
@@ -111,14 +111,14 @@ var Repair = {
 			//$('div#RepairShop div#repairs').hide();
             
             jq.RepairShop.dt.hide();
-			$('div#body', div).hide();
-            $('div#interior', div).hide();
-            $('div#docs', div).hide();
+			jq.RepairShop.cid1.hide();
+            jq.RepairShop.cid2.hide();
+            jq.RepairShop.cid3.hide();
             
-            $('h2#dt', div).hide();
-			$('h2#body', div).hide();
-            $('h2#interior', div).hide();
-            $('h2#docs', div).hide();
+            //$('h2#dt', div).hide();
+			//$('h2#body', div).hide();
+            //$('h2#interior', div).hide();
+            //$('h2#docs', div).hide();
             
             //$('label#info').text('No vehicle currently selected, visit the Garage to select one!');
             //$('label#info').show();
