@@ -42,14 +42,23 @@ canvas{
 }
 
 <?php //default element stylings for the entire page?>
+/* Auctions America Banner  */
+#aAmerica
+{
+	height : 20%;
+	margin-left : 25%;
+	color: #FF2E00;
+	margin-top : 2%;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
 ul{
     list-style: none;
     padding: 0;
    /* margin: 0;*/
 	margin: 2%;
 	display:inline;
-	margin-bottom : 2%;
-	margin-top: 2%;
+	/*margin-bottom : 2%;
+	margin-top: 2%;*/
 	
 }
 li{
@@ -278,6 +287,11 @@ div#statBar label#money{left:0%;top:75%;}
 div#statBar label#tokens{left:25%;top:75%;}
 div#statBar label#prestige{left:50%;top:75%;}
 div#statBar label#m_marker{left:75%;top:75%;}
+
+
+	
+	
+	
 
 img#mainCar{
 <?php
