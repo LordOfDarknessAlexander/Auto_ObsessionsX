@@ -873,6 +873,12 @@ pending updates/overhaul could be reduced to (16-bytes)
     <h3 id='ai'>AI</h3><hr>
 <pre>   The AI drives the user's bidding experience.
 To bypass the complexity of interacting peer to peer, randomized AI are implemented to simulate an engaging user experience.
+<br>
+<h3> The software is not adjusting the pricing to reflect the adjusted condition of the vehicle. See below for an example:</h3>
+If a car shows in the spreadsheet I provided for $100000 that is the value of the vehicle at 100% condition
+If the software adjusts the condition to 31%, the software needs to adjust the value accordingly. So that vehicle needs to be $31000. That number is what we need to create the variables for the AI bidders.
+Our AI bidders are still bidding way to high. We should have them bidding from 75% to 125% of the adjusted value. 
+
 </pre>
     <h3 id='store'>Store</h3><hr>
 <pre>    The Auto-Obsessions' store processes user transitions via <a href=''>PayPal javescript API</a>.
@@ -881,12 +887,12 @@ Upon completion of the transaction, the user is updated.
 <h2 id='aodb'>Databases</h2><hr>
 <pre>   Auto-Obsession implements several databases (with mySQLi) for maintaining user and application data.
 
-finalpost:contains the static vehicle table, aoCars, and the dynamic user's table, aoUsers, which contains all relevant registered user data (TODO:rename finalpost).
+aoUsersDB:contains the static vehicle table, aoCars, and the dynamic user's table, aoUsers, which contains all relevant registered user data (TODO:rename finalpost).
 aoUsersDB: contains a table for each user to maintain their car collection(garage), which has an entry for each car.
 aoCarSalesDB: contains all data regarding the user's vehicle sales(existing, pending and expired).
 aoAuctionLossDB: tracks the id's of the vehicles a user has lost and may no longer bid on.
 
-<h3 id='mainDB'>finalpost</h3>
+<h3 id='mainDB'>aoUsersDB</h3>
     This database contains two distinct tables, both the vehicle and the user tables reside here.
     The vehicle table, named 'aoCars', is a static table which does not change during the execution.
 Should only be changed when the site is down for maintenance.
