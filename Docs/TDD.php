@@ -871,10 +871,11 @@ pending updates/overhaul could be reduced to (16-bytes)
     repairs uint(4)
 </pre>
     <h3 id='ai'>AI</h3><hr>
+	
 <pre>   The AI drives the user's bidding experience.
 To bypass the complexity of interacting peer to peer, randomized AI are implemented to simulate an engaging user experience.
 <br>
-<h3> The software is not adjusting the pricing to reflect the adjusted condition of the vehicle. See below for an example:</h3>
+<h3>TODO >>>>> The software is not adjusting the pricing to reflect the adjusted condition of the vehicle. See below for an example:</h3>
 If a car shows in the spreadsheet I provided for $100000 that is the value of the vehicle at 100% condition
 If the software adjusts the condition to 31%, the software needs to adjust the value accordingly. So that vehicle needs to be $31000. That number is what we need to create the variables for the AI bidders.
 Our AI bidders are still bidding way to high. We should have them bidding from 75% to 125% of the adjusted value. 
