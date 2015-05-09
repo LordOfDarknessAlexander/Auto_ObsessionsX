@@ -124,24 +124,32 @@ cmntHeader('Repair Screen Styles');
     /*background-color:grey;*/
 }
 <?php divRepair();?> div#switch button#dt{
+	 background:url('../images/drivetrain.png') no-repeat 0 0;
+	 background-size:100% 100%;
 <?php
     css::left('0%');
     css::top('0%');
 ?>
 }
 <?php divRepair();?> div#switch button#body{
+	 background:url('../images/body.png') no-repeat 0 0;
+	 background-size:100% 100%;
 <?php
     css::left('0%');
     css::bottom('0%');
 ?>
 }
 <?php divRepair();?> div#switch button#inter{
+	 background:url('../images/interior.png') no-repeat 0 0;
+	 background-size:100% 100%;
 <?php
     css::right('0%');
     css::top('0%');
 ?>
 }
 <?php divRepair();?> div#switch button#docs{
+	 background:url('../images/documents.png') no-repeat 0 0;
+	 background-size:100% 100%;
 <?php
     css::right('0%');
     css::bottom('0%');
