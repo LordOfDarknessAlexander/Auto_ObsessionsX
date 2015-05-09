@@ -887,7 +887,7 @@ Upon completion of the transaction, the user is updated.
 <h2 id='aodb'>Databases</h2><hr>
 <pre>   Auto-Obsession implements several databases (with mySQLi) for maintaining user and application data.
 
-aoMembersDB:contains the static vehicle table, aoCars, and the dynamic user's table, aoUsers, which contains all relevant registered user data (TODO:rename finalpost).
+aoMembersDB:contains the static vehicle table, aoCars, and the dynamic user's table, aoUsers, which contains all relevant registered user data .
 aoUsersDB: contains a table for each user to maintain their car collection(garage), which has an entry for each car.
 aoCarSalesDB: contains all data regarding the user's vehicle sales(existing, pending and expired).
 aoAuctionLossDB: tracks the id's of the vehicles a user has lost and may no longer bid on.
