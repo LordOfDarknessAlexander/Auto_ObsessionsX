@@ -17,7 +17,7 @@ $ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
     <div class='sound sound-off'></div>
 	
     <div id='statBar'>  
-	<div id ='aAmerica'> Images provided by Auctions America</div>
+	<div id ='aAmerica'> Car Images by Auctions America</div>
         <!--this stat bar will be visible across all pages/divs-->
         <label id='money'>Money: </label>
         <label id='tokens'>Tokens:</label>

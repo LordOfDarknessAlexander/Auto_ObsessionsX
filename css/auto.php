@@ -45,8 +45,9 @@ canvas{
 /* Auctions America Banner  */
 #aAmerica
 {
-	height : 20%;
-	margin-left : 25%;
+	/*height : 200px;*/
+	font-weight: bold;
+	margin-left : 28%;
 	color: #FF2E00;
 	margin-top : 2%;
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;

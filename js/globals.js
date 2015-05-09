@@ -209,7 +209,7 @@ function resetStates()
 	appState = GAME_MODE.RUNNING;
 }
 function getHostPath(){
-    //gloablly accessable function, the local path maybe diffrent,
+    //globally accessible function, the local path maybe different,
     //DON'T CHANGE THE PATH, instead rename/relocate your project folder,
     //so devs don't have a commit war, having to change this function
     //for each of their projects each time they commit!
