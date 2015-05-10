@@ -101,7 +101,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			//}
 			//return this._price; // + upgradeCost;
 			//Make condition random 
-			this.condition = this.getCondition();
+			//this.condition = this.getCondition();
 			//return this.condition *  Math.random(0.0,1.25);
 			//return this._price * this.condition *  Math.random(0.0,1.25) ; 
 			//temp return car auction vehicle price based on random conditon of vehicle
@@ -156,8 +156,8 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 				(this._interior !== null ? this._interior.getPercentAvg() : 0.0) +
 				(this._docs !== null ? this._docs.getPercentAvg() : 0.0)
 			) * 0.25;
-			//return Math.floor(ret * 100.0);// *  Math.random(0.0,1.25);
-			return ret * Math.random(0,100);
+			return Math.floor(ret * 100.0);// *  Math.random(0.0,1.25);
+			//return ret * Math.random(0,100);
 			//drop decimal, convert from [0.0-1.0] to [0-100]
 			//return Math.floor(ret / Math.random(0,100)); 
 		},
