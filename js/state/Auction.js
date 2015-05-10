@@ -93,7 +93,7 @@ var Auction =
                 if(Auction._car !== null)
                 {
                     console.log(Auction._car.getFullName());
-                    vehiclePrice = Auction._car.getPrice();
+                    vehiclePrice = Auction._car.getPrice(Math.random(0.0,1.25));
 					
 					Auction.ai = [Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice()))];
 					//Auction.currentBid = vehiclePrice * 0.1;
