@@ -11,12 +11,12 @@ function getHostPath(){
 function payRequest(amount, triggerCB)
 {	//pass the ammount for purchasing
     //valid currency codes(for english speaking countries only)
-    //CND, canadian dolla
+    //CAD, canadian dolla
     //USD, us dollar,
     //AUD, austrailian dollar,
     //EUR,  euro,
     //NZD,    new zealand dollar
-	var currencyCode = 'USD',
+	var currencyCode = 'CAD',
 		returnURL = getHostPath() + 'index.php',
 		cancelURL = getHostPath() + 'index.php',
  		//company's email
