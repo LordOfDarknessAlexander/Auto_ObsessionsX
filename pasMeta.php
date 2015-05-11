@@ -19,8 +19,8 @@ require_once 'ao.php';
             return intval($_SESSION[$uid]);
         }*/
 		
-        if(isset($_SESSION) && isset($_SESSION[$UID ]) ){
-            return intval($_SESSION[$UID ]);
+        if(isset($_SESSION) && isset($_SESSION[$UID]) ){
+            return intval($_SESSION[$UID]);
         }
         //echo "<p class='error'>User not logged in, could not access user session, Please try again.</p>";
         //header('location: login.php');

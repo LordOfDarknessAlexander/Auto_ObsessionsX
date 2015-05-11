@@ -360,7 +360,7 @@ var Repair = {
         $('h2', jq.RepairShop.cid2).text('Axle');
         $('h2', jq.RepairShop.cid3).text('Exhaust');
         //rebind img paths
-        var root = getHostPath() + 'images/parts/drivetrain/';
+        var root = /*getHostPath() + */'images/parts/drivetrain/';
         
         $('img', jq.RepairShop.dt).attr('src', root + 'engine.png');
         $('img', jq.RepairShop.cid1).attr('src', root + 'transmission.png');

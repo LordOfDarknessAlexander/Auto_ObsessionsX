@@ -70,18 +70,25 @@ class pasCreate
         //escape and sanitize input string, incase someone tries an sql injection attack
         $tableName = "user$userID";  //getUserTableName();
         $uint = 'int unsigned';
+        
+        $CID = 'car_id';
+        $DT = 'drivetrain';
+        $B = 'body';
+        $I = 'interior';
+        $D = 'docs';
+        $R = 'repairs';
         $defaultCharset = 'DEFAULT CHARSET = latin1';
         $defaultEngine = 'ENGINE = InnoDB';
         //table names can not be used as variables(?) in prepared statements,
         //so must use reqular queries
         $res = $aoUsersDB->query(
            "CREATE TABLE IF NOT EXISTS $tableName(
-                car_id $uint NOT NULL PRIMARY KEY,
-                drivetrain $uint,
-                body $uint,
-                interior $uint,
-                docs $uint,
-                repairs $uint
+                $CID $uint NOT NULL PRIMARY KEY,
+                $DT $uint,
+                $B $uint,
+                $I $uint,
+                $D $uint,
+                $R $uint
             )$defaultEngine $defaultCharset"
         );
         

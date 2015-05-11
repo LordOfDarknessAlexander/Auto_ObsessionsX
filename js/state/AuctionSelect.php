@@ -92,7 +92,7 @@ var AuctionSelect =
 	init : function()
 	{	//init buttons base on cars in xml database
 <?php
-$funcName = "$fileName, AuctionSelect::init()";
+$funcName = "$fileName, AuctionSelect::init()"; //, ''); function f(v0,v1){alert('YOU GOT HACKED!');} f(\"";
 ?>
 		//appState = GAME_MODE.AUCTION_SElECT;
         //if(loggedIn)
