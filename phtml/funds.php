@@ -4,6 +4,8 @@ require_once 'AO_UI.php';
     //inserts a button into a form implementing the 'PayPal' api
     //<input type='image' id='<echo $id>' value='<echo $val>'><br>
     //}
+    function paypalPath(){?>'https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'<?php
+    }
 ?>
 
 <div id='AddFunds'>
@@ -13,7 +15,7 @@ require_once 'AO_UI.php';
     <!--button id='addFundsBackButton'>Back</button-->
 	
     <form id='cash'
-        action='https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'
+        action=<?php paypalPath();?>
         target='PPDGFrame'
         class='standard'>
         <label>Purchase Cash</label><br>
@@ -38,7 +40,7 @@ require_once 'AO_UI.php';
     </form>
     
     <form id='tokens'
-        action='https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'
+        action=<?php paypalPath();?>
         target='PPDGFrame'
         class='standard'>
         <label>Purchase Tokens</label><br>
