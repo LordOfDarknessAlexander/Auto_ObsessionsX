@@ -18,6 +18,10 @@ var Store = {
 	}
 };
 
+function addMinorFundsBtn(){
+    console.log('adding minor funds!');
+}
+
 function addFunds(funds){
 <?php $funcName = 'js/pas.js pas::update::funds(funds)';?>
 	//var MAX_MONEY = 50000000;

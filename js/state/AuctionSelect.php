@@ -32,9 +32,28 @@ function isValidData(){
 //
 //Auction Select State
 //
+function selectAllStage(){
+    //var pDiv = $('div#auctionSelect div#filter),
+        //btn = $('button#slctAllF', pDiv);
+        
+    //pDiv.children.removeClass();
+    //btn.addClass('select');
+    
+<?php
+    //if(loggedin() ){?>
+    pas.query.filter.stage.all();
+<?php
+    //}
+    //else{?>
+    //jq.cars.filter();
+<?php
+//}
+?>
+}
 var AuctionSelect =
 {	//object representing the Auction Select state and interface
-	list : $('<?php asCarView();?>'),
+	list:$('<?php asCarView();?>'),
+    //
     setCarBtn:function(i, data){
         //Dynamically add an html li (containing auction info) to the DOM
         var carID = data.carID,
@@ -89,55 +108,68 @@ var AuctionSelect =
         }
         //li.hide();
     },
-	init : function()
+    loadView:function(data){
+<?php
+$funcName = "$fileName, AuctionSelect::loadView(data)";
+?>
+        <?php isValidData();?>
+        //alert(funcName + ', ajax response success!' + JSON.stringify(data) );
+        var len = data.length;
+        
+        if(len == 0){
+            console.log('<?php
+                echo "$funcName, no entries in database, should have 1 entry per car in database";
+            ?>');
+            return;
+        }
+        //iterate over each vehicle data entry
+        for(var i = 0; i < len; i++){
+            AuctionSelect.setCarBtn(i, data[i]);  
+        }
+        //filter results, display only cars
+    },
+    loadViewFailed:function(jqxhr){
+        alert('<?php
+            echo "$funcName, ajax call failed! Reason: ";
+        ?>' + jqxhr.responseText);
+        //console.log(funcName + ', loading game resources failed, abort!');
+    },
+	init : function(args)
 	{	//init buttons base on cars in xml database
 <?php
 $funcName = "$fileName, AuctionSelect::init()"; //, ''); function f(v0,v1){alert('YOU GOT HACKED!');} f(\"";
+    //if(loggedIn){
 ?>
-		//appState = GAME_MODE.AUCTION_SElECT;
-        //if(loggedIn)
-        this.list.empty();
+        AuctionSelect.list.empty();
+<?php
+    //}
+    //else{?>
+<?php
+    //}
+?>
+    //appState = GAME_MODE.AUCTION_SElECT;
 		//
-        function done(data){
-            <?php isValidData();?>
-            //alert(funcName + ', ajax response success!' + JSON.stringify(data) );
-            var len = data.length;
-            
-            if(len == 0){
-                console.log('<?php echo "$funcName, no entries in database, should have 1 entry per car in database";?>');
-                return;
-            }
-            //iterate over each vehicle data entry
-            for(var i = 0; i < len; i++){
-                //var carID = data[i].carID,
-                    //hasCar = data[i].hasCar;
-                    
-                AuctionSelect.setCarBtn(i, data[i]);  
-                //AuctionSelect.setCarBtn(carID, i, hasCar);
-            }
-            //filter results, display only cars
-        }
-        function failed(jqxhr){
-            //call will fail if result is not properly formated JSON!
-            alert('<?php echo "$funcName, ajax call failed! Reason: ";?>' + jqxhr.responseText);
-            //console.log(funcName + ', loading game resources failed, abort!');
-        }
-        var args = {
+        //var args = {
             //type:'muscle'
-            range:'elite'
-        };
+            //range:'elite'
+        //};
         
         if(args === null || args === undefined){
-            jq.get('pas/query.php?op=asc',  //'pas/query?asc',
-                done,
-                failed
+            jq.get(
+                'pas/query.php?op=asc',  //'pas/query?asc',
+                AuctionSelect.loadView,
+                AuctionSelect.loadViewFailed
             );
         }
         else{
-            jq.post('pas/query.php?op=asc',
-                done,
-                failed,
-                args
+            var t = 'type' in args.data ? args.data.type : '',
+                r = 'range' in args.data ? args.data.range : '';
+                
+            jq.post(
+                'pas/query.php?op=asc',
+                AuctionSelect.loadView,
+                AuctionSelect.loadViewFailed,
+                {type:t, range:r}
             );
         }
 <?php
@@ -225,3 +257,47 @@ function(){
 	//$('#menu').addClass('auction');
 	//AuctionSelect.init();
 });
+$('div#filter button#slctAllF').click(
+    {type:'all'},
+    AuctionSelect.init
+);
+$('div#filter button#slctMuscleF').click(
+    {type:'muscle'},
+    AuctionSelect.init
+);
+$('div#filter button#slctForeign').click(
+    {type:'foreign'},
+    AuctionSelect.init
+);
+$('div#filter button#slctClassic').click(
+    {type:'classic'},
+    AuctionSelect.init
+);
+$('div#filter button#slctCustom').click(
+    {type:'custom'},
+    AuctionSelect.init
+);
+$('div#filter button#slctUnique').click(
+    {type:'unique'},
+    AuctionSelect.init
+);
+$('div#tier button#slctAll').click(
+    {range:'low'},
+    AuctionSelect.init
+);
+$('div#tier button#slctLow').click(
+    {range:'low'},
+    AuctionSelect.init
+);
+$('div#tier button#slctMid').click(
+    {range:'mid'},
+    AuctionSelect.init
+);
+$('div#tier button#slctHigh').click(
+    {range:'high'},
+    AuctionSelect.init
+);
+$('div#tier button#slctElite').click(
+    {range:'elite'},
+    AuctionSelect.init
+);

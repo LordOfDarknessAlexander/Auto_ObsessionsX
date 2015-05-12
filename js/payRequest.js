@@ -22,8 +22,7 @@ function payRequest(amount, triggerCB)
  		//company's email
 		recieverEmail = 'that_canadianguy@hotmail.com';
 		
-	//var request = 
-    return {
+	var request = {
 		'returnUrl':returnURL,
 		'requestEnvelope':{'errorLanguage':'en_US'},
 		'currencyCode':currencyCode,
@@ -41,7 +40,7 @@ function payRequest(amount, triggerCB)
 	//var req = PAYPAL.Pay(request);
     
 	//must be set so paypal knows which purchase to process
-	//$('#paykey').attr('value').html(req.payKey);
+	//$('form input#paykey').attr('value').html(req.payKey);
 	//create the payPal flow
 	//return new PAYPAL.apps.DGFlow(triggerCB)
 }

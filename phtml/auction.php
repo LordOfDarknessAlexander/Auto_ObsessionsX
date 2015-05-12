@@ -64,28 +64,41 @@ function outputCar($args){
     <!--view all available auctions-->
   <!--  <h1>Auction Select</h1>  -->
 <?php backBtn();?>
-    <form action='javascript:void(0)' id = 'filter'>Filters<hr>
-        stage<br><select id='stage'>
+    <div id='filter'><!--action='javascript:void(0)'-->Filters<hr>
+        stage<br>
+        <button id='slctAllF'>All</button><br>
+        <button id='slctClassic'>Classic</button><br>
+        <button id='slctCustom'>Custom</button><br>
+        <button id='slctMuscleF'>Muscle</button><br>
+        <button id='slctUnique'>Unique</button><br>
+        <button id='slctForeign'>Foreign</button><br>
+        <!--select id='stage'>
             <option value='All'>All</option>
             <option value='classic'>classic</option>
             <option value='custom'>custom</option>
             <option value='muscle'>muscle</option>
             <option value='foreign'>foreign</option>
             <option value='unique'>unique</option>
-        </select>
+        </select-->
         <br>
-        tier<br><select id='tier'>
+        tier<br>
+            <button id='slctAll'>All</button><br>
+            <button id='slctLow'>Low</button><br>
+            <button id='slctMid'>Mid</button><br>
+            <button id='slctHigh'>High</button><br>
+            <button id='slctElite'>Elite</button><br>
+            <!--select id='tier'>
             <option value='All'>All</option>
             <option value='low'>low</option>
             <option value='mid'>mid</option>
             <option value='high'>high</option>
-            <option value='elite'>elite</option>
+            <option value='elite'>elite</option-->
         </select>
         <br>
         <!--input id='showDisabled' type='checkbox' value=''>
         display unavailable auctions-->
-        <input id='submit' type='submit' value='submit'>
-    </form>
+        <!--input id='submit' type='submit' value='submit'-->
+    </div>
     <div id='carView'>
         <!--ul id='auctionCars'-->
 <?php

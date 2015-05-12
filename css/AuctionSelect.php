@@ -38,7 +38,7 @@ Action Select UI stylings
     bottom:0%;
     left:10%;
 }
-<?php divAS();?> form#filter
+<?php divAS();?> div#filter
 {
     font-size:1.5vw;
 <?php

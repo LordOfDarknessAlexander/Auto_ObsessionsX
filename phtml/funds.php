@@ -6,6 +6,21 @@ require_once 'AO_UI.php';
     //}
     function paypalPath(){?>'https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'<?php
     }
+class pp{
+    //encapsulates variables and functions related to the paypal store API
+    const SANDBOX = true; 
+    
+    function storePath(){
+        //FALSE on server AND when live,
+        //TRUE when site's under developement or testing locally(with xampp)
+        ?>https://www.<?php
+        if(pp::SANDBOX){
+            ?>sandbox.<?php
+        }?>paypal.com/cgi-bin/webscr?<?php
+    }
+    function minorFundsPath(){pp::storePath();?>cmd=_express-checkout&amp;token=EC-5XT8625765497150M<?php
+    }
+}
 ?>
 
 <div id='AddFunds'>
@@ -13,9 +28,9 @@ require_once 'AO_UI.php';
     <?php backBtn();?>
 	<?php homeBtn();?>
     <!--button id='addFundsBackButton'>Back</button-->
-	
-    <form id='cash'
-        action=<?php paypalPath();?>
+	<a href='<?php pp::minorFundsPath();?>'><input type='image' id='addMinorFundsBtn' value='chump change'></a>
+    <div id='cash'>
+        <!--action=<?php //paypalPath();?>
         target='PPDGFrame'
         class='standard'>
         <label>Purchase Cash</label><br>
@@ -56,7 +71,7 @@ require_once 'AO_UI.php';
         <input id='paykey' type='hidden' name='paykey' value='insert_pay_key'>
     </form>
 
-    <script type='text/javascript' charset='utf-8'>
+    <!--script type='text/javascript' charset='utf-8'>
     var minorFundsPPFlow = payRequest(1.99, {trigger: 'addMinorFundsBtn'});
     </script>
     <script type='text/javascript' charset='utf-8'>

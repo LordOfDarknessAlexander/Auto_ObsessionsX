@@ -140,21 +140,21 @@ function getUserSoldCars(){
 //exit();
 
 if($gs){
-    //echo 'GET set';
+    //echo '_GET';
     //args being passed vai the url
     //regex match, must contain no whitespace, numbers or special characters!
     $OP = 'op';
-    $op = (isset($_GET[$OP]) && isAlpha($_GET[$OP]) ) ? $_GET[$OP] : '';
+    $op = (isset($_GET[$OP]) && isAlphaSmall($_GET[$OP]) ) ? $_GET[$OP] : '';
     
     if($op == 'asc'){
         $T = 'type';
         $R = 'range';
         
         if($ps && (isset($_POST[$T]) || isset($_POST[$R]) ) ){
-            $t = isset($_POST[$T]) ? $_POST[$T] : '';
-            $r = isset($_POST[$R]) ? $_POST[$R] : '';
-            //echo $t;
-            //echo $r;
+            $t = (isset($_POST[$T]) && isAlphaSmall($_POST[$T]) ) ? $_POST[$T] : '';
+            $r = (isset($_POST[$R]) && isAlphaSmall($_POST[$R]) ) ? $_POST[$R] : '';
+            //echo "T:$t";
+            //echo "R:$r";
             if($t != '' && $r != ''){
                 //echo 'auction cars, type and range';
                 pasGet::auctionCarsByTypeAndRange($t, $r);
