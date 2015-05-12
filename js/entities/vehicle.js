@@ -103,9 +103,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			//}
 			//return this._price; // + upgradeCost;
 		
-			//return this._price * this.condition *  Math.random(0.0,1.25) ; 
 			//temp return car auction vehicle price based on random conditon of vehicle
-			return this._price *  Math.random(0.5,1.25) ;
 			//return this._price *  this.condition;
 		},
         getPriceStr:function(){
@@ -164,7 +162,6 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			//return Math.floor(ret * 100.0);// *  Math.random(0.0,1.25);
 				//Make condition random 
 			//this.condition = this.getCondition();
-			return this.condition *  Math.random(0,125);
 			 
 		},
 		getFullName : function()
