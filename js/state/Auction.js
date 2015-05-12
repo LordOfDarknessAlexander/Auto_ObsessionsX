@@ -56,7 +56,7 @@ var Auction =
 	playerWinning : false,
 	playerWon : false, //Whether or not the player won the auction
 	raisePerc : 0, //How much the AI and player will raise each bid by
-	
+	vcondition: 0,
 	init:function(index)
 	{	//call to start an auction for car		
         console.log(index);
@@ -94,6 +94,7 @@ var Auction =
                 {
                     console.log(Auction._car.getFullName());
                     vehiclePrice = Auction._car.getPrice();
+					vcondition = Auction._car.getRandCondition();
 					
 					Auction.ai = [Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice()))];
 					//Auction.currentBid = vehiclePrice * 0.1;
@@ -109,7 +110,8 @@ var Auction =
                     Auction.setBidBtnText();
                     
                     //$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
-                    $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + Auction._car.getPriceStr() );
+                   // $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + Auction._car.getPriceStr() );
+				   $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + Auction._car.getPriceStr() + '<br>' + 'condition  ' + vcondition );
                     $('div#Auction label#carInfo').text(Auction._car.getInfo() );
                     //$('#menu').removeClass('gameMenu');
                     //$('#menu').addClass('Auction');
@@ -346,8 +348,8 @@ var Auction =
 		
 		this.going();
 		//current bid HUD
-		//var gorguts;
-		//gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ this.currentBid.toFixed(2)  ,426, 114);
+		var gorguts;
+		gorguts =  context.fillText('Condition :  ' + this.vcondition.toFixed(2)  ,left, 262);
 		
 		//these could be HTML elements in the Auction div
 		//context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
