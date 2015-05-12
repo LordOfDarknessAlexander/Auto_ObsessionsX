@@ -348,8 +348,8 @@ var Auction =
 		
 		this.going();
 		//current bid HUD
-		var gorguts;
-		gorguts =  context.fillText('Condition :  ' + this.vcondition.toFixed(2)  ,left, 262);
+		//var gorguts;
+		//gorguts =  context.fillText('Condition :  ' + this.vcondition.toFixed(2)  ,left, 262);
 		
 		//these could be HTML elements in the Auction div
 		//context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
