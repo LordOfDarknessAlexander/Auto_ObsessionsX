@@ -94,18 +94,18 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
             //p += _body.getPrice();
             //p += this._interior.getPrice();
             //p += this._docs.getPrice();
+			
+			this.getRandCondition();
             
             //for(var i = 0; i < parts.length; i++)
 			//{
 				//upgradeCost += this._parts[i].getPrice();
 			//}
 			//return this._price; // + upgradeCost;
-			//Make condition random 
-			//this.condition = this.getCondition();
-			//return this.condition *  Math.random(0.0,1.25);
+		
 			//return this._price * this.condition *  Math.random(0.0,1.25) ; 
 			//temp return car auction vehicle price based on random conditon of vehicle
-			return this._price *  Math.random(0.0,1.25) ;
+			return this._price *  Math.random(0.5,1.25) ;
 			//return this._price *  this.condition;
 		},
         getPriceStr:function(){
@@ -160,6 +160,14 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			//return ret * Math.random(0,100);
 			//drop decimal, convert from [0.0-1.0] to [0-100]
 			//return Math.floor(ret / Math.random(0,100)); 
+		},
+		getRandCondition : function(){
+           
+			//return Math.floor(ret * 100.0);// *  Math.random(0.0,1.25);
+				//Make condition random 
+			//this.condition = this.getCondition();
+			return this.condition *  Math.random(0,125);
+			 
 		},
 		getFullName : function()
 		{	//returns a string representing the 'proper' car name
