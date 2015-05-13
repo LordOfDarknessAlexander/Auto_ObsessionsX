@@ -113,7 +113,8 @@ var Auction =
                     
                     //$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
                    // $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + Auction._car.getPriceStr() );
-				   $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + Auction._car.getPriceStr() + '<br>' + 'condition  ' + vcondition );
+				   //display vehicle current value based on current random condition
+				   $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + vehiclePrice + '<br>' + 'condition  ' + vcondition );
                     $('div#Auction label#carInfo').text(Auction._car.getInfo() );
                     //$('#menu').removeClass('gameMenu');
                     //$('#menu').addClass('Auction');
