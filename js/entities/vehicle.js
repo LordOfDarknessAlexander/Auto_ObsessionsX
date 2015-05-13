@@ -4,6 +4,9 @@
 //values are between 00 and FF, allowing for 255x255x255 unique vehicles
 //ID's can be procedurally generated!
 //ao.car.create =
+var adjustedPrice = 0;
+var conditonPerc = 0;
+
 function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 {
     if(carID === null || carID === undefined){
@@ -65,6 +68,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
     }*/
 
 	return {
+		
 		//pos:new Vector(VEHICLE_XPOS, VEHICLE_YPOS,0,0)
 		_price:Price,	//original sale price on year made, does not change
         _repairs:0, //bitfield representing which upgrades have been repaired
@@ -95,18 +99,17 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
             //p += this._interior.getPrice();
             //p += this._docs.getPrice();
 			
-			this.getRandCondition();
+			//this.getRandCondition();
+			//this._price = this.price / 100 * this.condition;
             
             //for(var i = 0; i < parts.length; i++)
 			//{
 				//upgradeCost += this._parts[i].getPrice();
 			//}
-			//return this._price; // + upgradeCost;
-		
-			//return this._price  *  Math.random(0.0,1.25) * this.condition; 
-			//temp return car auction vehicle price based on random conditon of vehicle
-			return this._price *  Math.random(0.5,1.25) + this.condition;
-			//return this._price *  this.condition;
+			//Just return price here
+			//return this._price * Math.random(0.0,1.25); //* this.condition; 
+			return this._price; // + upgradeCost;
+	
 		},
         getPriceStr:function(){
             //string value of price, including currency(for displaying)
@@ -161,12 +164,35 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		},
 		getRandCondition : function(){
            
-			//return Math.floor(ret * 100.0);// *  Math.random(0.0,1.25);
-				//Make condition random 
-			//this.condition = this.getCondition();
 			return this.condition +  Math.floor(Math.random(1,100) * 100) ;
 			 
 		},
+		
+		getAdjustedConditionPrice : function(){
+           
+			//this.getPrice();
+			this.getRandCondition();
+			//temp return car auction vehicle price based on random condition of vehicle
+			//car price - adjusted condition / 100
+			//return this._price *  Math.random(0.5,1.25) + this.condition;
+			//this.conditon = this.condition / 100;
+			
+			
+			//this.conditionPerc = Math.floor(this.condition / 100 );
+			//price of vehicle based on its conditionn = 6500
+			//this.adjustedPrice = this._price * this.conditionPerc;
+			this.adjustedPrice = this._price * this.condition;
+			//var ret2 = this._price - this.ret;
+			//Product
+			var ret2 = this._price - this.adjustedPrice;
+			//return this.ret2; 
+			//return this._price *  Math.random(0.5,1.25) + this.condition;
+			//return this._price * Math.random(0.5,1.25);
+			//return this.ret2;
+			return this.adjustedPrice;
+			 
+		},
+		
 		getFullName : function()
 		{	//returns a string representing the 'proper' car name
 			return this.year + ' ' + this.make + ' ' + this.name;
@@ -337,6 +363,7 @@ Vehicle.fromDB = function(dbCar, userCar)
         dbCar.year,
         dbCar.price,
         dbCar.id,
+		//dbCar.condition,
         dbCar.info,
         userCar
     );
