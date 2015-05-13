@@ -96,7 +96,10 @@ var Auction =
                     //vehiclePrice = Auction._car.getPrice();
 				   //vehiclePrice = Auction._car.getAdjustedConditionPrice();
 					vcondition = Auction._car.getRandCondition();
-					vehiclePrice = Auction._car.getPrice() * vcondition/100 * 100;
+					//proper formula
+					vehiclePrice = Auction._car.getPrice() * vcondition/100 ;
+					//vehiclePrice = Auction._car.getPrice() ;
+					//35,200 
 					
 					Auction.ai = [Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice()))];
 					//Auction.currentBid = vehiclePrice * 0.1;
