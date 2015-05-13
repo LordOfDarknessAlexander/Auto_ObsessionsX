@@ -4,8 +4,6 @@
 //values are between 00 and FF, allowing for 255x255x255 unique vehicles
 //ID's can be procedurally generated!
 //ao.car.create =
-var adjustedPrice = 0;
-var conditonPerc = 0;
 
 function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 {
@@ -165,31 +163,6 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		getRandCondition : function(){
            
 			return this.condition +  Math.floor(Math.random(1,100) * 100) ;
-			 
-		},
-		
-		getAdjustedConditionPrice : function(){
-           
-			//this.getPrice();
-			this.getRandCondition();
-			//temp return car auction vehicle price based on random condition of vehicle
-			//car price - adjusted condition / 100
-			//return this._price *  Math.random(0.5,1.25) + this.condition;
-			//this.conditon = this.condition / 100;
-			
-			
-			//this.conditionPerc = Math.floor(this.condition / 100 );
-			//price of vehicle based on its conditionn = 6500
-			//this.adjustedPrice = this._price * this.conditionPerc;
-			this.adjustedPrice = this._price * this.condition;
-			//var ret2 = this._price - this.ret;
-			//Product
-			var ret2 = this._price - this.adjustedPrice;
-			//return this.ret2; 
-			//return this._price *  Math.random(0.5,1.25) + this.condition;
-			//return this._price * Math.random(0.5,1.25);
-			//return this.ret2;
-			return this.adjustedPrice;
 			 
 		},
 		
