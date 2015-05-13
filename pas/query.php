@@ -14,6 +14,28 @@ require_once '../re.php';
 $gs = isset($_GET) && !empty($_GET) ? true : false;
 $ps = isset($_POST) && !empty($_POST) ? true : false;
 
+function getCarStatsFromArray($row){
+    //convert the result of an sql query,
+    //which stores all values as strings,
+    //to the proper primitives/types
+    $CID = ao::CID;
+    //
+    $DT = 'drivetrain';
+    $B = 'body';
+    $IN = 'interior';
+    $R = 'repairs';
+    $D = 'docs';
+    
+    return array(
+        'carID'=>intval($row[$CID]),
+        $DT=>intval($row[$DT]),
+        $B=>intval($row[$B]),
+        $IN=>intval($row[$IN]),
+        $D=>intval($row[$D]),
+        $R=>intval($row[$R])
+    );
+}
+
 function echoUserCars(){
     //selects all vehicles the user owns, returning it as a JSON array
     global $aoUsersDB;
@@ -21,12 +43,12 @@ function echoUserCars(){
     $cars = array();
     $userID = getUserTableName();
     
-    $DT = 'drivetrain';
-    $CID = ao::CID;
-    $B = 'body';
-    $IN = 'interior';
-    $R = 'repairs';
-    $D = 'docs';
+    //$DT = 'drivetrain';
+    //$CID = ao::CID;
+    //$B = 'body';
+    //$IN = 'interior';
+    //$R = 'repairs';
+    //$D = 'docs';
     
     $res = $aoUsersDB->query(
         "SELECT * FROM $userID"
@@ -35,15 +57,16 @@ function echoUserCars(){
     if($res){
         while($row = mysqli_fetch_array($res) ){
             //insert an new array representing a car at the end of $cars
-            $cars[] = array(
-                'carID'=>intval($row[$CID]),
-                $DT=>intval($row[$DT]),
-                $B=>intval($row[$B]),
-                $IN=>intval($row[$IN]),
-                $D=>intval($row[$D]),
-                $R=>intval($row[$R])
+            $cars[] = getCarStatsFromArray($row);
+                //array(
+                //'carID'=>intval($row[$CID]),
+                //$DT=>intval($row[$DT]),
+                //$B=>intval($row[$B]),
+                //$IN=>intval($row[$IN]),
+                //$D=>intval($row[$D]),
+                //$R=>intval($row[$R])
                 //'info'=>$row['info']
-            );
+            //);
         }
         mysqli_free_result($res);
         //echo json_encode($cars);
@@ -60,13 +83,13 @@ function eLoadUser(){
     //loads all the user's data from a single ajax call!
     global $aoUsersDB;
     
-    $CID = ao::CID;
+    //$CID = ao::CID;
     
-    $DT = 'drivetrain';
-    $B = 'body';
-    $IN = 'interior';
-    $R = 'repairs';
-    $D = 'docs';
+    //$DT = 'drivetrain';
+    //$B = 'body';
+    //$IN = 'interior';
+    //$R = 'repairs';
+    //$D = 'docs';
     
     $cars = array();
     $userID = getUserTableName();
@@ -78,15 +101,16 @@ function eLoadUser(){
     if($res){
         while($row = mysqli_fetch_array($res) ){
             //insert an new array representing a car at the end of $cars
-            $cars[] = array(
-                'carID'=>intval($row[$CID]),
-                $DT=>intval($row[$DT]),
-                $B=>intval($row[$B]),
-                $IN=>intval($row[$IN]),
-                $D=>intval($row[$D]),
-                $R=>intval($row[$R])
+            $cars[] = getCarStatsFromArray($row);
+            //array(
+                //'carID'=>intval($row[$CID]),
+                //$DT=>intval($row[$DT]),
+                //$B=>intval($row[$B]),
+                //$IN=>intval($row[$IN]),
+                //$D=>intval($row[$D]),
+                //$R=>intval($row[$R])
                 //info=>$row['info']
-            );
+            //);
         }
         mysqli_free_result($res);
         //echo json_encode($cars);

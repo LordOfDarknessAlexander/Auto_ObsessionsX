@@ -84,8 +84,8 @@ var AuctionSelect = {
             liID = 'asli' + (i).toString(),
             //btnID = "as" + (i).toString(),
             labelID = 'infoLabel',
-            defCrsr = {cursor:'default'};   //default cursor css
-            //tc = {opacity:'0.45'};
+            defCrsr = {cursor:'default'},   //default cursor css
+            tc = {opacity:'0.45'};    //css for partial transparency
         //
         var btnStr = "<div id=\'" + liID + "\'>" + 
             "<img src=\'" + path + "\'>" +
@@ -94,7 +94,7 @@ var AuctionSelect = {
                 //"<label id=\'price\'>$" + price.toFixed(2) + "</label><br>" +
                 "Bid Now!<br>" +
             "</button>" +
-        "</li><br>";
+        "</div>";
         
         this.list.append(btnStr);
         
@@ -104,19 +104,19 @@ var AuctionSelect = {
 
         if(hasCar){
         	//display but disable user from entering auction
-            div.css('opacity', '0.45').addClass('owned');
+            div.css(tc).addClass('owned');
             btn.off().click(this.denyAuction).css(defCrsr);
         }
         else if(hasLostCar){
         	//user has previously loss, fade and highlight red!
-            div.css('opacity', '0.45').addClass('lost');
+            div.css(tc).addClass('lost');
             //li.css('background-color', 'red');
             btn.off().click(this.denyAuction).css(defCrsr);
         }
         else if(price > userStats.money){
             //make temporarily unavailable auctions which the user does
             //not have the necessary funds to partake in
-            div.css('opacity', '0.45').addClass('isf');
+            div.css(tc).addClass('isf');
             btn.off().click(this.denyAuction).css(defCrsr);
         }
         else{
@@ -154,8 +154,8 @@ $funcName = "$fileName, AuctionSelect::loadView(data)";
         ?>' + jqxhr.responseText);
         //console.log(funcName + ', loading game resources failed, abort!');
     },
-	init : function(args)
-	{	//init buttons base on cars in xml database
+	init : function(args){
+        //init buttons base on cars in xml database
 <?php
 $funcName = "$fileName, AuctionSelect::init()"; //, ''); function f(v0,v1){alert('YOU GOT HACKED!');} f(\"";
     //if(loggedIn){
@@ -175,6 +175,9 @@ $funcName = "$fileName, AuctionSelect::init()"; //, ''); function f(v0,v1){alert
         //};
         
         if(args === null || args === undefined){
+            slctStage('button#slctAllF');
+            slctTier('button#slctAll');
+            
             jq.get(
                 'pas/query.php?op=asc',  //'pas/query?asc',
                 AuctionSelect.loadView,
@@ -182,8 +185,11 @@ $funcName = "$fileName, AuctionSelect::init()"; //, ''); function f(v0,v1){alert
             );
         }
         else{
-            var t = 'type' in args ? args.type : '',
-                r = 'range' in args ? args.range : '';
+            var t = 'type' in args ? args.type : 'all',//getUserStage(),
+                r = 'range' in args ? args.range : 'all';   //getUserTier();
+                
+            //setUserStage(t);
+            //setUserTier(r);
                 
             jq.post(
                 'pas/query.php?op=asc',
@@ -269,13 +275,13 @@ function setCarBtn($args){
 //
 function getUserStage(){
     if(Storage.local !== null && '_stage' in Storage.local){
-		//return JSON.parse(Storage.local._stage);
+		//return JSON.parse(Storage.local._stage).toLowerCase();
     }
     return 'all';
 }
 function getUserTier(){
     if(Storage.local !== null && '_tier' in Storage.local){
-        //var str = JSON.parse(Storage.local._tier);
+        //var str = JSON.parse(Storage.local._tier).toLowerCase();
         
         //if(strval(str) && str in ao.Tier){
             //return ;
@@ -285,13 +291,17 @@ function getUserTier(){
 }
 function setUserStage(stage){
     if(Storage.local !== null){
-        //Storage.local._stage = stage in ao.STAGE ? JSON.stringify(stage) : 'all';
+        //var v = stage in aoSTAGE ? JSON.stringify(stage)() : 'all';
+        //Storage.local._stage = v;
+        //return v;
     }
     return 'all';
 }
 function setUserTier(tier){
     if(Storage.local !== null){
-        //Storage.local._tier = tier in ao.STAGE ? JSON.stringify(tier) : 'all';
+        //var v = tier in aoTIER ? JSON.stringify(tier) : 'all';
+        //Storage.local._tier = v;
+        //return v;
     }
     return 'all';
 }
@@ -375,7 +385,7 @@ function(){
     slctTier('button#slctAll');
     
     AuctionSelect.init(
-        //{range:'all'}
+        {range:'all'}
     );
 });
 $('div#tier button#slctLow').click(

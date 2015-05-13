@@ -150,7 +150,7 @@ $scripts = array(
     'funds',
     'garage',
     
-    'profile',
+    'profile'
     //messages
     //ranks
     //search

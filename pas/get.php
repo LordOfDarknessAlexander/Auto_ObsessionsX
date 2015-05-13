@@ -31,6 +31,11 @@ class aoPriceRange{
         //$r = mysql_real_escape_string($rows);
         //return "SELECT $rows FROM $tableName WHERE $cond";
     //}
+    //public static function selectAllFromUser(){
+        //selects all entries in database with a user table entry
+        $userID = getUserTableName();
+        return "SELECT * FROM $userID";
+    //}
 }*/
 class pasGet{
     private static
@@ -370,7 +375,7 @@ class pasGet{
         $q = "SELECT * FROM $aoCars WHERE $P >= $gt AND $P < $lt";
         
         if($ct != 'all'){
-            " AND $T = '$ct'";
+            $q .= " AND $T = '$ct'";
         }
         
         $res = $AO_DB->query($q);
