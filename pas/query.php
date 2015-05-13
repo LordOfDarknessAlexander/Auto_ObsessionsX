@@ -153,7 +153,7 @@ if($gs){
         if($ps && (isset($_POST[$T]) || isset($_POST[$R]) ) ){
             $t = (isset($_POST[$T]) && isAlphaSmall($_POST[$T]) ) ? $_POST[$T] : '';
             $r = (isset($_POST[$R]) && isAlphaSmall($_POST[$R]) ) ? $_POST[$R] : '';
-            //echo "T:$t";
+            //echo "_POST:" . json_encode($_POST);
             //echo "R:$r";
             if($t != '' && $r != ''){
                 //echo 'auction cars, type and range';

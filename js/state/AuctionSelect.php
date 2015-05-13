@@ -29,6 +29,24 @@ function isValidData(){
 <?php
 }
 ?>
+aoSTAGE = {
+    //
+    all:'all',
+    unique:'unique',
+    classic:'classic',
+    custom:'custom',
+    foreign:'foreign',
+    muscle:'muscle'
+};    
+
+aoTIER = {
+    //price range tiers
+    all:'all',
+    low:'low',
+    mid:'mid',
+    high:'high',
+    elite:'elite'
+};
 //
 //Auction Select State
 //
@@ -50,8 +68,8 @@ function selectAllStage(){
 //}
 ?>
 }
-var AuctionSelect =
-{	//object representing the Auction Select state and interface
+var AuctionSelect = {
+	//object representing the Auction Select state and interface
 	list:$('<?php asCarView();?>'),
     //
     setCarBtn:function(i, data){
@@ -65,7 +83,9 @@ var AuctionSelect =
             hasLostCar = data.hasLostCar,
             liID = 'asli' + (i).toString(),
             //btnID = "as" + (i).toString(),
-            labelID = 'infoLabel';
+            labelID = 'infoLabel',
+            defCrsr = {cursor:'default'};   //default cursor css
+            //tc = {opacity:'0.45'};
         //
         var btnStr = "<div id=\'" + liID + "\'>" + 
             "<img src=\'" + path + "\'>" +
@@ -85,19 +105,19 @@ var AuctionSelect =
         if(hasCar){
         	//display but disable user from entering auction
             div.css('opacity', '0.45').addClass('owned');
-            btn.off().click(this.denyAuction).css('cursor', 'default');
+            btn.off().click(this.denyAuction).css(defCrsr);
         }
         else if(hasLostCar){
         	//user has previously loss, fade and highlight red!
             div.css('opacity', '0.45').addClass('lost');
             //li.css('background-color', 'red');
-            btn.off().click(this.denyAuction).css('cursor', 'default');
+            btn.off().click(this.denyAuction).css(defCrsr);
         }
         else if(price > userStats.money){
             //make temporarily unavailable auctions which the user does
             //not have the necessary funds to partake in
             div.css('opacity', '0.45').addClass('isf');
-            btn.off().click(this.denyAuction).css('cursor', 'default');
+            btn.off().click(this.denyAuction).css(defCrsr);
         }
         else{
             //enable auction
@@ -244,15 +264,34 @@ function setCarBtn($args){
         //render additional, not html elements
 	}
 };
+//
+//jQuery bindings!
+//
 function getUserStage(){
-    if(Storage.local !== null){
-		//JSON.parseInt(Storage.local._stage);
+    if(Storage.local !== null && '_stage' in Storage.local){
+		//return JSON.parse(Storage.local._stage);
     }
     return 'all';
 }
 function getUserTier(){
-    if('local' in Storage){
+    if(Storage.local !== null && '_tier' in Storage.local){
+        //var str = JSON.parse(Storage.local._tier);
         
+        //if(strval(str) && str in ao.Tier){
+            //return ;
+        //}
+    }
+    return 'all';
+}
+function setUserStage(stage){
+    if(Storage.local !== null){
+        //Storage.local._stage = stage in ao.STAGE ? JSON.stringify(stage) : 'all';
+    }
+    return 'all';
+}
+function setUserTier(tier){
+    if(Storage.local !== null){
+        //Storage.local._tier = tier in ao.STAGE ? JSON.stringify(tier) : 'all';
     }
     return 'all';
 }

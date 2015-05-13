@@ -246,31 +246,40 @@ class pasGet{
     public static function carIDsByType($carType){
         global $AO_DB;
         
-        //$carType = $AO_DB->strip($carType);
         $aoCars = ao::CARS;
         $CID = ao::CID;
         $T = 'type';
         $N = 'name';
         $P = 'price';
+        $S = 'src';
+        $ct = $AO_DB->escape($carType);
         $ret = array();
         //if is str(carType)
-        $res = $AO_DB->query(
-            "SELECT * FROM $aoCars WHERE $T = '$carType'"
-        );
+        //echo "carType" . json_encode($carType);
+        //echo "CT:" . json_encode($ct);
+        $q = "SELECT * FROM $aoCars";
+        
+        if($ct != 'all'){
+            $q .= " WHERE $T = '$ct'";
+        }
+        //echo $q;
+        $res = $AO_DB->query($q);
         
         if($res){
             while($row = $res->fetch_assoc() ){
+                //echo json_encode($row);
                 $car = Vehicle::fromArray($row);
                 
                 $ret[] = array(
                     $CID=>$car->getID(),
-                    'src'=>$car->getLocalPath(),
+                    $S=>$car->getLocalPath(),
                     $N=>$car->getFullName(),
                     $P=>$car->getPrice()
                 );               
             }            
             $res->close();
         }
+        //echo json_encode($ret);
         return $ret;    //will be empty if sql fails
     }
     public static function carIDsByPriceRange($range){
@@ -329,7 +338,9 @@ class pasGet{
         $P = 'price';
         $T = 'type';
         $N = 'name';
+        $S = 'src';
         $ret = array();
+        $ct = $AO_DB->escape($carType);
         
         if($range == aoPriceRange::LOW){
             $gt = 10000.00;
@@ -356,9 +367,13 @@ class pasGet{
             return $ret;
         }
         
-        $res = $AO_DB->query(
-            "SELECT * FROM $aoCars WHERE $T = '$carType' AND $P >= $gt AND $P < $lt"
-        );
+        $q = "SELECT * FROM $aoCars WHERE $P >= $gt AND $P < $lt";
+        
+        if($ct != 'all'){
+            " AND $T = '$ct'";
+        }
+        
+        $res = $AO_DB->query($q);
         
         if($res){
             while($row = $res->fetch_assoc() ){
@@ -366,7 +381,7 @@ class pasGet{
                 
                 $ret[] = array(
                     $CID=>$car->getID(),
-                    'src'=>$car->getLocalPath(),
+                    $S=>$car->getLocalPath(),
                     $N=>$car->getFullName(),
                     $P=>$car->getPrice()
                 );                    
@@ -448,6 +463,7 @@ class pasGet{
         $cars = array();
         $N = 'name';
         $P = 'price';
+        $S = 'src';
        
         $res = pasGet::allCarData(); //returns an array, containing an array for each row/car entry
         
@@ -459,7 +475,7 @@ class pasGet{
                 
                 $cars[] = array(
                     'carID'=>$cid,
-                    'src'=>$row['src'],
+                    $S=>$row[$S],
                     $N=>$row[$N],
                     $P=>$row[$P],
                     //
@@ -498,16 +514,18 @@ class pasGet{
         $CID = ao::CID;
         $N = 'name';
         $P = 'price';
+        $S = 'src';
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
         $res = pasGet::carIDsByType($carType);
-        
+        //echo json_encode($res);
         if(!empty($res)){
             foreach($res as $row){
+                //echo json_encode($row);
                 $cid = $row[$CID];
                 $cars[] = array(
                     'carID'=>$cid,
-                    'src'=>$row['src'],
+                    $S=>$row[$S],
                     $N=>$row[$N],
                     $P=>$row[$P],
                     'hasCar' => hasCar($cid),   //does user have this car?
@@ -526,6 +544,7 @@ class pasGet{
         $CID = 'car_id';
         $N = 'name';
         $P = 'price';
+        $S = 'src';
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
         $res = pasGet::carIDsByPriceRange($range);
@@ -536,7 +555,7 @@ class pasGet{
                 
                 $cars[] = array(
                     'carID'=>$cid,
-                    'src'=>$row['src'],
+                    $S=>$row[$S],
                     $N=>$row[$N],
                     $P=>$row[$P],
                     'hasCar' => hasCar($cid),   //does user have this car?

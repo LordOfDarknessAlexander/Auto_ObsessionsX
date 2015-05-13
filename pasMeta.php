@@ -10,6 +10,28 @@ require_once 'ao.php';
 //
 //secure::loggin();
 //
+function eP(){
+    //echo's variables submitted to a script via _POST
+    echo (isset($_POST)?
+        json_encode($_POST)
+    :
+        '_POST not set!');
+}
+function eG(){
+    //echo's variables submitted to a script via _GET
+    echo (isset($_GET)?
+        json_encode($_GET)
+    :
+        '_GET not set!');
+}
+function eS(){
+    //echo's _SESSION variables(when user logged in)
+    echo (isset($_SESSION)?
+        json_encode($_SESSION)
+    :
+        '_SESSION not set! Please log in.');
+}
+
 //class user{
     function getUID(){
         //returns the user if logged in, else echo error and force user to redirect to login

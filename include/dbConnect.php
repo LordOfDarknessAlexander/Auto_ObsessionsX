@@ -55,6 +55,10 @@ class dbConnect
         //echo value not set at key
         return '';
     }
+    public function escape($str){
+        //escapes str for use in an sql query!
+        return mysqli_real_escape_string($this->con, strip_tags($str) );
+    }
 }
 $AO_DB = new dbConnect();    //main database connection
 $aoUsersDB = new dbConnect('aoUsersDB');    //user database
