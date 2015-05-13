@@ -104,8 +104,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			//{
 				//upgradeCost += this._parts[i].getPrice();
 			//}
-			//Just return price here
-			//return this._price * Math.random(0.0,1.25); //* this.condition; 
+			
 			return this._price; // + upgradeCost;
 	
 		},
