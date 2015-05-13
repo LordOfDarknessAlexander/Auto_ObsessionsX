@@ -65,13 +65,14 @@ function outputCar($args){
   <!--  <h1>Auction Select</h1>  -->
 <?php backBtn();?>
     <div id='filter'><!--action='javascript:void(0)'-->Filters<hr>
-        stage<br>
-        <button id='slctAllF'>All</button><br>
-        <button id='slctClassic'>Classic</button><br>
-        <button id='slctCustom'>Custom</button><br>
-        <button id='slctMuscleF'>Muscle</button><br>
-        <button id='slctUnique'>Unique</button><br>
-        <button id='slctForeign'>Foreign</button><br>
+        <div id='stage'>stage<br>
+            <button id='slctAllF'>All</button><br>
+            <button id='slctClassic'>Classic</button><br>
+            <button id='slctCustom'>Custom</button><br>
+            <button id='slctMuscleF'>Muscle</button><br>
+            <button id='slctUnique'>Unique</button><br>
+            <button id='slctForeign'>Foreign</button><br>
+        </div>
         <!--select id='stage'>
             <option value='All'>All</option>
             <option value='classic'>classic</option>
@@ -80,8 +81,7 @@ function outputCar($args){
             <option value='foreign'>foreign</option>
             <option value='unique'>unique</option>
         </select-->
-        <br>
-        tier<br>
+        <div id='tier'>tier<br>
             <button id='slctAll'>All</button><br>
             <button id='slctLow'>Low</button><br>
             <button id='slctMid'>Mid</button><br>
@@ -92,8 +92,9 @@ function outputCar($args){
             <option value='low'>low</option>
             <option value='mid'>mid</option>
             <option value='high'>high</option>
-            <option value='elite'>elite</option-->
-        </select>
+            <option value='elite'>elite</option>
+        </select-->
+        </div>
         <br>
         <!--input id='showDisabled' type='checkbox' value=''>
         display unavailable auctions-->

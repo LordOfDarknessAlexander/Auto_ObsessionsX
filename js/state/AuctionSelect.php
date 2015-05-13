@@ -162,8 +162,8 @@ $funcName = "$fileName, AuctionSelect::init()"; //, ''); function f(v0,v1){alert
             );
         }
         else{
-            var t = 'type' in args.data ? args.data.type : '',
-                r = 'range' in args.data ? args.data.range : '';
+            var t = 'type' in args ? args.type : '',
+                r = 'range' in args ? args.range : '';
                 
             jq.post(
                 'pas/query.php?op=asc',
@@ -244,6 +244,18 @@ function setCarBtn($args){
         //render additional, not html elements
 	}
 };
+function getUserStage(){
+    if(Storage.local !== null){
+		//JSON.parseInt(Storage.local._stage);
+    }
+    return 'all';
+}
+function getUserTier(){
+    if('local' in Storage){
+        
+    }
+    return 'all';
+}
 jq.AuctionSelect.backBtn.click(
 function(){ 	
 	setAdBG();
@@ -257,47 +269,105 @@ function(){
 	//$('#menu').addClass('auction');
 	//AuctionSelect.init();
 });
+function slctStage(str){
+    var t = $('div#filter div#stage'),
+        s = t.children('button.select');
+    
+    s.removeClass();
+    $(str, t).addClass('select');
+}
+function slctTier(str){
+    var p = $('div#filter div#tier'),
+        s = p.children('button.select');
+    
+    s.removeClass();
+    $(str, p).addClass('select');
+}
 $('div#filter button#slctAllF').click(
-    {type:'all'},
-    AuctionSelect.init
-);
+function(){
+    slctStage('button#slctAllF');
+    
+    AuctionSelect.init(
+        {type:'all'}
+    );
+});
 $('div#filter button#slctMuscleF').click(
-    {type:'muscle'},
-    AuctionSelect.init
-);
+function(){
+    slctStage('button#slctMuscleF');
+    
+    AuctionSelect.init(
+        {type:'muscle'}
+    );
+});
 $('div#filter button#slctForeign').click(
-    {type:'foreign'},
-    AuctionSelect.init
-);
+function(){
+    slctStage('button#slctForeign');
+    
+    AuctionSelect.init(
+        {type:'foreign'}
+    );
+});
 $('div#filter button#slctClassic').click(
-    {type:'classic'},
-    AuctionSelect.init
-);
+function(){
+    slctStage('button#slctClassic');
+    
+    AuctionSelect.init(
+        {type:'classic'}
+    );
+});
 $('div#filter button#slctCustom').click(
-    {type:'custom'},
-    AuctionSelect.init
-);
+function(){
+    slctStage('button#slctCustom');
+    
+    AuctionSelect.init(
+        {type:'custom'}
+    );
+});
 $('div#filter button#slctUnique').click(
-    {type:'unique'},
-    AuctionSelect.init
-);
+function(){
+    slctStage('button#slctUnique');
+    
+    AuctionSelect.init(
+        {type:'unique'}
+    );
+});
 $('div#tier button#slctAll').click(
-    {range:'low'},
-    AuctionSelect.init
-);
+function(){
+    slctTier('button#slctAll');
+    
+    AuctionSelect.init(
+        //{range:'all'}
+    );
+});
 $('div#tier button#slctLow').click(
-    {range:'low'},
-    AuctionSelect.init
-);
+function(){
+    slctTier('button#slctLow');
+
+    AuctionSelect.init(
+        {range:'low'}
+    );
+});
 $('div#tier button#slctMid').click(
-    {range:'mid'},
-    AuctionSelect.init
-);
+function(){
+    slctTier('button#slctMid');
+    
+    AuctionSelect.init(
+        {range:'mid'}
+    );
+});
 $('div#tier button#slctHigh').click(
-    {range:'high'},
-    AuctionSelect.init
-);
+function(){
+    slctTier('button#slctHigh');
+    
+    AuctionSelect.init(
+        {range:'high'}
+    );
+});
 $('div#tier button#slctElite').click(
-    {range:'elite'},
-    AuctionSelect.init
-);
+function(){
+    slctTier('button#slctElite');
+    
+    AuctionSelect.init(
+        {range:'elite'}
+    );
+});

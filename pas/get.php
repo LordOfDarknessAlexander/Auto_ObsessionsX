@@ -281,6 +281,9 @@ class pasGet{
         $P = 'price';
         $N = 'name';
         $ret = array();
+        //set conditions to default(select all)
+        $gt = 0.00;
+        $lt = 1.0e16;
         
         if($range == aoPriceRange::LOW){
             $gt = 10000.00;

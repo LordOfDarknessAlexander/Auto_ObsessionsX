@@ -165,11 +165,17 @@ button:hover {
     /*mouse over*/
 	background: url('../images/defaultBtn2.png') no-repeat 0 0;
 	background-size:100% 100%;
+    color:yellow;
+}
+button.select{
+    /*mouse clicked and active*/
+	background: url('../images/icons/btnSelect.png') no-repeat 0 0;
+	background-size:100% 100%;
     color:green;
 }
 button:active {
     /*mouse pressed*/
-    color:blue;
+    color:yellow;
 }
 button#backBtn
 {   /*sets properties for all button tags with id backBtn*/
