@@ -220,13 +220,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		echo '</p><h3>Please try again.</h3><p><br></p>';
 	}// End of if (empty($errors))
 } // End of the main Submit conditionals
+/*
 function ep($str){
     //safely echos the entry in $_POST
     if(isset($_POST[$str])){
         //trim removes access whitespace around start and end of entry,
         echo trim($_POST[$str]);
     }
-}
+}*/
 function fl($name, $text){
     //generates an html form label
     //name:string identifier for the tag
