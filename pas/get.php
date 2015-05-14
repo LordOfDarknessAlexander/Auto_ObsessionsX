@@ -37,6 +37,24 @@ class aoPriceRange{
         return "SELECT * FROM $userID";
     //}
 }*/
+function auctionCarInfoFromArray($r){
+    $CID = ao::CID;
+    $N = 'name';
+    $P = 'price';
+    $S = 'src';
+    $cid = $r[$CID];
+    
+    return array(
+        'carID'=>$cid,
+        $S=>$r[$S],     //image source
+        $N=>$r[$N],     //
+        $P=>floatval($r[$P]),       //unmodified price of vehicle
+        //
+        'hasCar'=>hasCar($cid),   //does user have this car?
+        'hasLostCar'=>hasLostCar($cid)   //did the user lose the auction for this car
+        //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
+    );
+}
 class pasGet{
     private static
         $_allCars,
@@ -182,6 +200,7 @@ class pasGet{
         $CID = ao::CID;
         $N = 'name';
         $P = 'price';
+        $S = 'src';
         $ret = array();
         
         //echo 'car data!';
@@ -197,7 +216,7 @@ class pasGet{
 
                 $ret[] = array(
                     $CID=>$car->getID(),
-                    'src'=>$car->getLocalPath(),
+                    $S=>$car->getLocalPath(),
                     $N=>$car->getFullName(),
                     $P=>$car->getPrice()
                 );           
@@ -294,6 +313,7 @@ class pasGet{
         $CID = ao::CID;
         $P = 'price';
         $N = 'name';
+        $S = 'src';
         $ret = array();
         //set conditions to default(select all)
         $gt = 0.00;
@@ -326,7 +346,7 @@ class pasGet{
                 
                 $ret[] = array(
                     $CID=>$car->getID(),
-                    'src'=>$car->getLocalPath(),
+                    $S=>$car->getLocalPath(),
                     $N=>$car->getFullName(),
                     $P=>$car->getPrice()
                 );                    
@@ -346,6 +366,8 @@ class pasGet{
         $S = 'src';
         $ret = array();
         $ct = $AO_DB->escape($carType);
+        
+        //echo "Type:$ct Range:$range";
         
         if($range == aoPriceRange::LOW){
             $gt = 10000.00;
@@ -398,7 +420,7 @@ class pasGet{
     public static function currentCarID(){
         //returns the user's currently selected vehicle
         global $AO_DB;
-        $id = 2;  //$_SESSION['user_id'];
+        $id = getUID();  //$_SESSION['user_id'];
         $users = ao::USERS;
         $CID = ao::CID;
         $UID = ao::UID;
@@ -466,9 +488,9 @@ class pasGet{
         $aoCars = ao::CARS;
         $CID = ao::CID;
         $cars = array();
-        $N = 'name';
-        $P = 'price';
-        $S = 'src';
+        //$N = 'name';
+        //$P = 'price';
+        //$S = 'src';
        
         $res = pasGet::allCarData(); //returns an array, containing an array for each row/car entry
         
@@ -476,18 +498,18 @@ class pasGet{
             foreach($res as $row){
                 //echo json_encode($row);
                 //$car = Vehicle::fromArray($row);
-                $cid = $row[$CID];
+                //$cid = $row[$CID];
                 
-                $cars[] = array(
-                    'carID'=>$cid,
-                    $S=>$row[$S],
-                    $N=>$row[$N],
-                    $P=>$row[$P],
+                $cars[] = auctionCarInfoFromArray($row);//array(
+                    //'carID'=>$cid,
+                    //$S=>$row[$S],
+                    //$N=>$row[$N],
+                    //$P=>$row[$P],
                     //
-                    'hasCar' => hasCar($cid),   //does user have this car?
-                    'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
+                    //'hasCar' => hasCar($cid),   //does user have this car?
+                    //'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
-                );
+                //);
             }
         }
         /*$res = $AO_DB->query(
@@ -517,9 +539,9 @@ class pasGet{
         //$type = pasGet::userStage();
         $cars = array();
         $CID = ao::CID;
-        $N = 'name';
-        $P = 'price';
-        $S = 'src';
+        //$N = 'name';
+        //$P = 'price';
+        //$S = 'src';
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
         $res = pasGet::carIDsByType($carType);
@@ -527,16 +549,16 @@ class pasGet{
         if(!empty($res)){
             foreach($res as $row){
                 //echo json_encode($row);
-                $cid = $row[$CID];
-                $cars[] = array(
-                    'carID'=>$cid,
-                    $S=>$row[$S],
-                    $N=>$row[$N],
-                    $P=>$row[$P],
-                    'hasCar' => hasCar($cid),   //does user have this car?
-                    'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
+                //$cid = $row[$CID];
+                $cars[] = auctionCarInfoFromArray($row);    //array(
+                    //'carID'=>$cid,
+                    //$S=>$row[$S],
+                    //$N=>$row[$N],
+                    //$P=>$row[$P],
+                    //'hasCar' => hasCar($cid),   //does user have this car?
+                    //'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
-                );
+               // );
             }
         }
         echo json_encode($cars);
@@ -546,27 +568,26 @@ class pasGet{
         //returning them as a JSON array
         $type = pasGet::userStage();
         $cars = array();
-        $CID = 'car_id';
-        $N = 'name';
-        $P = 'price';
-        $S = 'src';
+        //$CID = 'car_id';
+        //$N = 'name';
+        //$P = 'price';
+        //$S = 'src';
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
         $res = pasGet::carIDsByPriceRange($range);
         
         if(!empty($res)){
             foreach($res as $row){
-                $cid = $row[$CID];
-                
-                $cars[] = array(
-                    'carID'=>$cid,
-                    $S=>$row[$S],
-                    $N=>$row[$N],
-                    $P=>$row[$P],
-                    'hasCar' => hasCar($cid),   //does user have this car?
-                    'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
+                //$cid = $row[$CID];                
+                $cars[] = auctionCarInfoFromArray($row);    //array(
+                    //'carID'=>$cid,
+                    //$S=>$row[$S],
+                    //$N=>$row[$N],
+                    //$P=>$row[$P],
+                    //'hasCar' => hasCar($cid),   //does user have this car?
+                    //'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
-                );
+                //);
             }
         }
         echo json_encode($cars);
@@ -586,18 +607,17 @@ class pasGet{
         
         if(!empty($res)){
             foreach($res as $row){
-                $cid = $row[$CID];
-                
-                $cars[] = array(
-                    'carID'=>$cid,
-                    $S=>$row[$S],
-                    $N=>$row[$N],
-                    $P=>$row[$P],
+                //$cid = $row[$CID];                
+                $cars[] = auctionCarInfoFromArray($row);    //array(
+                    //'carID'=>$cid,
+                    //$S=>$row[$S],
+                    //$N=>$row[$N],
+                    //$P=>$row[$P],
                     //
-                    'hasCar'=>hasCar($cid),   //does user have this car?
-                    'hasLostCar'=>hasLostCar($cid)   //did the user lose the auction for this car
+                    //'hasCar'=>hasCar($cid),   //does user have this car?
+                    //'hasLostCar'=>hasLostCar($cid)   //did the user lose the auction for this car
                     //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
-                );
+                //);
             }
         }
         echo json_encode($cars);

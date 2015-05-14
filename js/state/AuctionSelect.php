@@ -29,45 +29,82 @@ function isValidData(){
 <?php
 }
 ?>
-aoSTAGE = {
-    //
-    all:'all',
-    unique:'unique',
-    classic:'classic',
-    custom:'custom',
-    foreign:'foreign',
-    muscle:'muscle'
-};    
-
-aoTIER = {
-    //price range tiers
-    all:'all',
-    low:'low',
-    mid:'mid',
-    high:'high',
-    elite:'elite'
+ao = {
+    STAGE:{
+        //
+        all:'all',
+        unique:'unique',
+        classic:'classic',
+        custom:'custom',
+        foreign:'foreign',
+        muscle:'muscle'
+    },
+    TIER:{
+        //price range tiers
+        all:'all',
+        low:'low',
+        mid:'mid',
+        high:'high',
+        elite:'elite'
+    }
 };
+function getUserStage(){
+    if(Storage.local !== null && '_stage' in Storage.local){
+        var str = JSON.parse(Storage.local._stage).toLowerCase();
+		
+        if(typeof str == 'string' && str in ao.STAGE){
+            return str;
+        }
+    }
+    return ao.STAGE.all;
+}
+function getUserTier(){
+    if(Storage.local !== null && '_tier' in Storage.local){
+        var str = JSON.parse(Storage.local._tier).toLowerCase();
+        
+        if(typeof str == 'string' && str in ao.TIER){
+            return str;
+        }
+    }
+    return ao.TIER.all;
+}
+function setUserStage(stage){
+    if(Storage.local !== null){
+        var v = stage in ao.STAGE ? JSON.stringify(stage) : ao.STAGE.all;
+        Storage.local._stage = v;
+        return v;
+    }
+    return ao.STAGE.all;
+}
+function setUserTier(tier){
+    if(Storage.local !== null){
+        var v = tier in ao.TIER ? JSON.stringify(tier) : ao.TIER.all;
+        Storage.local._tier = v;
+        return v;
+    }
+    return ao.TIER.all;
+}
 //
 //Auction Select State
 //
-function selectAllStage(){
+//function selectAllStage(){
     //var pDiv = $('div#auctionSelect div#filter),
         //btn = $('button#slctAllF', pDiv);
         
     //pDiv.children.removeClass();
     //btn.addClass('select');
     
-<?php
+//<?php
     //if(loggedin() ){?>
-    pas.query.filter.stage.all();
-<?php
+    //pas.query.filter.stage.all();
+//<?php
     //}
     //else{?>
     //jq.cars.filter();
-<?php
+//<?php
 //}
-?>
-}
+//?>
+//}
 var AuctionSelect = {
 	//object representing the Auction Select state and interface
 	list:$('<?php asCarView();?>'),
@@ -129,6 +166,8 @@ var AuctionSelect = {
         //li.hide();
     },
     loadView:function(data){
+        //validates data, then proceeds to add a
+        //new element to the carView div for each entry in data
 <?php
 $funcName = "$fileName, AuctionSelect::loadView(data)";
 ?>
@@ -137,9 +176,11 @@ $funcName = "$fileName, AuctionSelect::loadView(data)";
         var len = data.length;
         
         if(len == 0){
+            //?php if(DEBUG){>
             console.log('<?php
                 echo "$funcName, no entries in database, should have 1 entry per car in database";
             ?>');
+            //?php }>
             return;
         }
         //iterate over each vehicle data entry
@@ -149,13 +190,15 @@ $funcName = "$fileName, AuctionSelect::loadView(data)";
         //filter results, display only cars
     },
     loadViewFailed:function(jqxhr){
+        //called when loading the div fails,
+        //outputs error message
         alert('<?php
             echo "$funcName, ajax call failed! Reason: ";
         ?>' + jqxhr.responseText);
         //console.log(funcName + ', loading game resources failed, abort!');
     },
 	init : function(args){
-        //init buttons base on cars in xml database
+        //init buttons based on cars in database
 <?php
 $funcName = "$fileName, AuctionSelect::init()"; //, ''); function f(v0,v1){alert('YOU GOT HACKED!');} f(\"";
     //if(loggedIn){
@@ -178,6 +221,9 @@ $funcName = "$fileName, AuctionSelect::init()"; //, ''); function f(v0,v1){alert
             slctStage('button#slctAllF');
             slctTier('button#slctAll');
             
+            setUserStage(ao.STAGE.all);
+            setUserTier(ao.TIER.all)
+            
             jq.get(
                 'pas/query.php?op=asc',  //'pas/query?asc',
                 AuctionSelect.loadView,
@@ -185,11 +231,13 @@ $funcName = "$fileName, AuctionSelect::init()"; //, ''); function f(v0,v1){alert
             );
         }
         else{
-            var t = 'type' in args ? args.type : 'all',//getUserStage(),
-                r = 'range' in args ? args.range : 'all';   //getUserTier();
+            var cs = getUserStage(),    //currentstage
+                ct = getUserTier(),
+                t = 'type' in args ? args.type : cs,
+                r = 'range' in args ? args.range : ct;
                 
-            //setUserStage(t);
-            //setUserTier(r);
+            setUserStage(t);
+            setUserTier(r);
                 
             jq.post(
                 'pas/query.php?op=asc',
@@ -273,38 +321,6 @@ function setCarBtn($args){
 //
 //jQuery bindings!
 //
-function getUserStage(){
-    if(Storage.local !== null && '_stage' in Storage.local){
-		//return JSON.parse(Storage.local._stage).toLowerCase();
-    }
-    return 'all';
-}
-function getUserTier(){
-    if(Storage.local !== null && '_tier' in Storage.local){
-        //var str = JSON.parse(Storage.local._tier).toLowerCase();
-        
-        //if(strval(str) && str in ao.Tier){
-            //return ;
-        //}
-    }
-    return 'all';
-}
-function setUserStage(stage){
-    if(Storage.local !== null){
-        //var v = stage in aoSTAGE ? JSON.stringify(stage)() : 'all';
-        //Storage.local._stage = v;
-        //return v;
-    }
-    return 'all';
-}
-function setUserTier(tier){
-    if(Storage.local !== null){
-        //var v = tier in aoTIER ? JSON.stringify(tier) : 'all';
-        //Storage.local._tier = v;
-        //return v;
-    }
-    return 'all';
-}
 jq.AuctionSelect.backBtn.click(
 function(){ 	
 	setAdBG();
