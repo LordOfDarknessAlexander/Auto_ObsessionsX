@@ -96,6 +96,8 @@ function eS(){
             $res->close();
         }
         else{
+			
+			
             //query failed, user has no entry in database
             //$er = sqlError($aoUsersDB);
             //echo "pas/meta.php hasLostCar($id), sql query failed:($er->no), reason: $er->info";
