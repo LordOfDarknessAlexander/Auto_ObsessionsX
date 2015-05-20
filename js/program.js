@@ -35,8 +35,8 @@ function update(deltaTime){
 
 	timer++;
 }
-Auction.setup = function()
-{
+Auction.setup = function(){
+    //
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	
 	if(!auctionStop){
@@ -45,14 +45,13 @@ Auction.setup = function()
 		Auction.update();
 	}
 }
-function auctionMode(deltaTime)
-{	//in-Auction update, core of game logic
-   ticker = 0;
-   stop = true;
-   
+function auctionMode(deltaTime){
+    //in-Auction update, core of game logic
+    ticker = 0;
+    stop = true;
+
     //$('#money').html(money);
-    Auction.setup();//auctionInit();
-  
+    Auction.setup();//auctionInit();  
 }
 function load(){
 //<?php if(loggedIn() ){

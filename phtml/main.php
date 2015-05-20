@@ -31,24 +31,62 @@ $ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
 <?php
 //this is not working on site without a new session
 session_start();
-if(isset($_SESSION) AND isset($_SESSION['uname']) ){
-    $uname = $_SESSION['uname'];
-    $loggedIn = true;
+//session set, has the session be started and initialized
+//if $_SESSION is an empty array,
+//user is using guest account and not currenlty logged in
+$_SESSION = array('dur'=>0);
+//userLoggin!
+$ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
+
+function hrefVoid(){
+    //standard javascript for linking a document to itself,
+    //causing a page refresh
+    ?>href='javascript:void(0)'<?php
 }
-else{
-    $loggedIn = false;
-    $uname = 'guest';
+
+function eS(){
+    //echo session stats, for debug only!
+    //Note:hostile programs and user may attempt to modify
+    //session variables for malicious purposes!
+    global $ss;
+    
+    echo 'session info:' . json_encode(
+        array(
+            'set'=>$ss,
+            'id'=>session_id(),
+            'status'=>session_status()
+        )
+    ) . PHP_EOL;
+    
+    echo 'session data:' . PHP_EOL;
+    echo json_encode($ss ? $_SESSION : array() ) . PHP_EOL;
+}
+//eS();
+//exit();
+
+function loggedIn(){
+    //session started and the user has provided
+    //a valid email/username and pasword
+    global $ss;
+    return $ss && isset($_SESSION['uname']) ? true : false;
+}
+function getUserName(){
+    global $ss;
+    
+    return loggedIn()?
+        $_SESSION['uname'] : 'guest';
 }
 //echo "Player $uname";
 ?>
 <div id='reg-navigation'>
-    <a id='home' class='tooltip' href='<?php echo rootURL() . 'Users/index.php';?>'>Home<!--span><!--img src=''>Tooltip!</span--></a></li><br>
-	<a id='addFunds' class='tooltip' >Store</a></li><br>
+    <a id='home' class='tooltip' href='<?php
+    echo rootURL() . 'Users/index.php';
+    ?>'>Home<!--span><!--img src=''>Tooltip!</span--></a></li><br>
+	<a id='addFunds' class='tooltip'>Store</a></li><br>
 <?php
-if($loggedIn){?>
+if(loggedIn() ){?>
     <a id='mem' href='members-page.php'>Members</a><br>
-    <a id='logout' href='logout.php'>Logout</a><br>
-	
+    <a id='logout' href='logout.php'>Logout</a><br>	
 <?php
 }
 else{?>
@@ -64,38 +102,25 @@ else{?>
         </div>
       
         <div id='splash'>
-          <!--  <h2><?php /*echo $AO_NAME.' Presents!';*/?></h2>-->
+          <!--  <h2><php /*echo $AO_NAME.' Presents!';*/></h2>-->
         </div>
         
         <div id='main'>		
-             
-<?php session_start();
-
-if(isset($_SESSION) AND isset($_SESSION['uname']) ){
-    $uname = $_SESSION['uname'];
-    $loggedIn = true;
-}
-else{
-    $loggedIn = false;
-    $uname = 'guest';
-}
-
-?>
-			<h1><?php echo "Welcome $uname";?></h1>
+			<h1><?php echo 'Welcome ' . getUserName();?></h1>
             <ul>
 <?php
-if($loggedIn){?>
-			   <li><a href="javascript:void(0)" class="button play">Play<?php if($loggedIn){ echo ' Game';}?></a></li>
-               <li><a href="javascript:void(0)" class="button credits">Credits</a></li>
-            </ul>
+if(!loggedIn() ){?>
+                <li><a id='reg' class='button Register' href='<?php
+                echo rootURL() . 'Users/registerUser.php';
+                ?>'>Register</a></li>
 <?php
-}
-else{?>
-				<li><a id='reg' class='button Register' href='<?php echo rootURL() . 'Users/registerUser.php';?>'>Register</a></li> </li> 
-                <li><a href='javascript:void(0)' class='button credits'>Credits</a></li>
-				  <li><a href="javascript:void(0)" class="button play">Play<?php if(!$loggedIn){ echo ' as Guest';}?></a></li>
-            </ul> 
-            
+}?>
+                <li><a class='button play' <?php hrefVoid();?>>Play <?php
+                echo loggedIn()? 'Game' : 'as Guest';
+                ?></a></li>
+                <li><a class='button credits' <?php hrefVoid();?>>Credits</a></li>
+            </ul>
+           
             <div id='loginfields'>
                 <h2>Login</h2>
                 <form action='login.php' method='post'>
@@ -106,9 +131,6 @@ else{?>
                     <p><input id='submit' type='submit' name='submit' value='Login'></p>
                 </form>
             </div>
-<?php
-}
-?> 
             <?php require 'phtml/legal.php';?>
 		</div>
       
@@ -116,14 +138,20 @@ else{?>
 		<h1>Auto-Obsessions Credits</h1>
             <!--could just be a link at the bottom of the page-->
             <ul>
-                <li class='artwork'>Character design and art: <?php echo $AS_NAME;?></li>
+                <li class='artwork'>Character design and art: <?php
+                echo $AS_NAME;
+                ?></li>
             </ul>
             <ul>
-                <li class='artwork'>Programming Crew: <?php echo $AS_NAME.', '.$TD_NAME.', '.$AB_NAME;?></li>
+                <li class='artwork'>Programming Crew: <?php
+                echo $AS_NAME . ', ' . $TD_NAME . ', ' . $AB_NAME;
+                ?></li>
             </ul>
              
             <ul>
-              <li class='developer'>Developer: <?php echo $OWNER_NAME;?></li>
+              <li class='developer'>Developer: <?php
+              echo $OWNER_NAME
+              ?></li>
             </ul>
 			<br/>
 			<br/>

@@ -25,8 +25,12 @@ require 'includes/nav.php';
 <?php
 // This code inserts a record into the users table
 // Has the form been submitted?
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-{
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+//$str = '\n|\t|\r|\v|\f';
+//echo stripWS($str);
+//echo removeWS($str);
+//exit();
 	$errors = array(); // Start an array named errors 
 
 	$stripped = $AO_DB->strip('title');
@@ -137,16 +141,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             $email_code = md5($_POST['uname'] + microtime());
             //$addNewUser = $AO_DB->con->prepare();
 			$result = $AO_DB->query(
-                "INSERT INTO $users
-                ($UID, uname, title, fname, lname,
-                $CID, money, tokens, prestige, m_marker,
-                user_level, email, email_code, psword,
-                registration_date, confirm)
-                VALUES
-                ('', '$uname', '$title', '$fn', '$ln',
-                0, 50000, 0,0,0,
-                0, '$e', '$email_code', SHA1('$p'),
-                NOW(), 0)"
+                "INSERT INTO $users(
+                    $UID, uname, title, fname, lname,
+                    $CID, money, tokens, prestige, m_marker,
+                    user_level, email, email_code, psword,
+                    registration_date, confirm
+                )VALUES(
+                    '', '$uname', '$title', '$fn', '$ln',
+                    0, 50000, 0,0,0,
+                    0, '$e', '$email_code', SHA1('$p'),
+                    NOW(), 0
+                )"
             );	
 			
 			$register_email = '$e';

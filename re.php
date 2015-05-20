@@ -45,4 +45,16 @@ function isPassword($str){
     //
     //return preg_match('/([[:alpha:]]+(,\s*)*)+/', $str;
 //}
-?>	
+function stripWS($str){
+    return preg_replace('/^(\s+)+$/', ' ', $str);
+}
+function removeWS($str){
+    //replace all whitespace with nothing
+    return preg_replace('/^(\s+)+$/', '', $str);
+}
+function capWord($str){
+    //capitalize first lettter in each word
+    //return preg_replace('/^(\s+)+$/', '', $str);
+}
+
+?>

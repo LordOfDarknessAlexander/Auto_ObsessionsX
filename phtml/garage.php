@@ -31,15 +31,16 @@ function carView(){
 <?php
 }
 ?>
+
 <div id='Garage'>
    <!-- <h1>Garage</h1>  -->
 <?php
-    backBtn();
-    selectBtn();	
+    //backBtn();
+    //selectBtn();	
 ?>
-    <button id='viewCar'>View</button>
+    <!--button id='viewCar'>View</button>
     <button id='shop'>Upgrades</button>
-    <button id='sales'>Sales</button>
+    <button id='sales'>Sales</button-->
   
     <div id='carListView'>
         <ul id='carBtns'>
@@ -48,10 +49,10 @@ function carView(){
         </ul>
     </div>
     <div id='userCar'>
-<?php carView();?>
+<?php //carView();?>
     </div>
     <div id='selectedCar'>
-<?php carView();?>
+<?php //carView();?>
     </div>
     <!--ul id='carBtns'>
     <!--list is populated in '../program.js' from '../user.xml'
@@ -61,9 +62,9 @@ function carView(){
 
 <div id='CarView'>
     <!--<selectBtn();>display vehicle stats and actions-->
-    <label id='carName'>--Name--</label>
+    <!--label id='carName'>--Name--</label>
     <button id='select'>Select</button>
-    <button id='sell'>Sell</button>
+    <button id='sell'>Sell</button-->
 	
     <!--img id='car'> <src='images\\vehicle.jpg'-->
     <!--div id='statLabels'>
@@ -74,15 +75,15 @@ function carView(){
     </div-->
     <!--div id='carInfoBoxes'></div-->
 <?php  
-    carInfoLabel();
-    backBtn();
-    homeBtn();
+    //carInfoLabel();
+    //backBtn();
+    //homeBtn();
 ?>	
     <h2 id='dt'>Drivetrain</h2>	
     <div id='drivetrain'>	
 <?php
-cvStatBar('Engine');
-cvStatBar('Transmission');
+//cvStatBar('Engine');
+//cvStatBar('Transmission');
 ?>
 Drive Axel:<br>
 <progress id='pbAxel' value='0.0'></progress>
@@ -91,11 +92,11 @@ Drive Axel:<br>
     <h2 id='body'>Body</h2>
     <div id='body'>
 <?php
-cvStatBar('Chasis');
+//cvStatBar('Chasis');
 ?>
 Body Panels:<br>
 <progress id='pbPanels' value='0.0'></progress>
-<br><?php cvStatBar('Paint');?>
+<br><?php //cvStatBar('Paint');?>
 Chrome:<br>
 <progress id='pbPH0' value='0.0'></progress>
 <br>
@@ -103,9 +104,9 @@ Chrome:<br>
     <h2 id='interior'>Interior</h2>
     <div id='interior'>
 <?php
-cvStatBar('Seats');
-cvStatBar('Carpet');
-cvStatBar('Dash');
+//cvStatBar('Seats');
+//cvStatBar('Carpet');
+//cvStatBar('Dash');
 ?>
 Door Panels:<br>
 <progress id='pbPanels' value='0.0'></progress>
@@ -114,11 +115,11 @@ Door Panels:<br>
     <h2 id='docs'>Documentation</h2>
     <div id='docs'>
 <?php
-cvStatBar('Ownership');
+//cvStatBar('Ownership');
 ?>
 Build Sheet:<br>
 <progress id='pbBuildSheet' value='0.0'></progress>
-<?php cvStatBar('History');?>
+<?php //cvStatBar('History');?>
 Restoration:<br>
 <progress id='pbPH0' value='0.0'></progress>
 <br>
