@@ -223,10 +223,6 @@ function switchStates( GAME_MODE)
 		case ADD_FUNDS:
 			Store.update();
 		break;
-		
-		case LOGIN_USER:
-			//Login.update();
-		break;
 			
 		default:
 			RUNNING; 
@@ -295,15 +291,11 @@ function startGame()
 	setStatBar();
 	switchStates();
 	
-	//if(appState == GAME_MODE.RUNNING){
-	  //console.log("Run , run squirrel");
-	//}
-	//if(audioEnabled() ){
-        assetLoader.sounds.gameOver.pause();
-        assetLoader.sounds.bg.currentTime = 0;
-        assetLoader.sounds.bg.loop = true;
-        assetLoader.sounds.bg.play();
-    //}
+	assetLoader.sounds.gameOver.pause();
+	assetLoader.sounds.bg.currentTime = 0;
+	assetLoader.sounds.bg.loop = true;
+	assetLoader.sounds.bg.play();
+    
 }
 
 Auction.sold = function(){
@@ -329,8 +321,7 @@ Auction.sold = function(){
 	auctionEnded = true;
 	auctionOver = true;
 	endGame = true;
-	//   $('div#loss label').text(Auction._car.getFullName() );
-    
+	
 	//disable user from entering an auction for this car again
 	//in case of unintended bugs, make sure user doesn't already own car
     if(Auction._car !== null){
@@ -412,8 +403,6 @@ function(){
 	jq.Game.menu.toggle();
 	jq.AuctionSelect.menu.toggle();
     jq.carImg.hide();
-	//$('#menu').addClass('auction');
-	//auctionStop = false;
 	AuctionSelect.init();
     jq.adBar.hide();
     jq.setErr();    //clear error when changing pages
@@ -531,67 +520,5 @@ function(){
 });
 
 assetLoader.downloadAll();
-/*
-jq.Funds.homeBtn.click(
-function(){
-	//Auction.cancel();	//stop the auction, aborting the sale
-	
-	//$('#Auction').hide();
-	jq.Funds.hide();
-	jq.Game.menu.show();
-  //  jq.carImg.show();
-	//jq.Game.menu.children().toggle();	//hides/showns all child elements
-	ajax_post();
-    setStatBar();
-	//setAdBG();
-    setHomeImg();
-	
-});*/
-//Auction State Back Button
 
-/*jq.Sold.homeBtn.click(
-function(){
-    jq.Sold.menu.hide();
-	jq.Main.menu.show();
-    jq.carImg.show();
-    //appState = GAME_MODE.HOME:
-});*/
-//function rotateBtns(index)
-//{		
-	//setCarBtnText(index.data.index, c);
-//	setCarBtnText(2, c1);
-	/*var btns = [
-		$('#carSelBtn0'),
-		$('#carSelBtn1'),
-		$('#carSelBtn2')
-		//$('#carSelBtn3'),
-		//$('#carSelBtn4')
-		
-	];*/
-	//btns[0].children('label#make').text('Jaguar');
-	//btns[0].children('label#year').text('1969');
-	//btns[0].children('label#name').text('E-Type Series II 4.2 Roadster');
-	   
-	//
-	//
-	//for(var i = 0; i < btns.length; i++)
-	//{
-		//var tmp = btns[i];
-		//if(tmp.positio.left <= 100)
-		//{
-			//hide
-			//animate
-			//tmp.animate({left:'250px'}, 200);
-		//}else if(tmp.hidden() )
-		//{
-			//animate
-			//show
-		//}
-		//else{
-			//tmp.animate({right:'50px'}, 200);
-		//}
-	//}
-	
-//}
-//$('#guestPlay').click(initGuest);
 });
