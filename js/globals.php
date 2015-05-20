@@ -8,8 +8,7 @@ function loggedIn(){
 ?>
 // define variables
 var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
-//var canUseSessionStorage = 'sessionStorage' in code && code.sessionStorage !== null;
-//
+
 var canvas = document.getElementById('canvas');	//$("#canvas")?
 var context = canvas.getContext('2d');
 //aspect ratio
@@ -128,7 +127,6 @@ function ajax_post()
 {
     // Create our XMLHttpRequest object
     //var dataStr = ''; //args to pass to script
-	//afn = userStats.fn;
 	amoney = userStats.money;
 	atokens = userStats.tokens;
 	aprestige = userStats.prestige;
@@ -172,15 +170,13 @@ var ADD_FUNDS;
 var RUNNING;
 var SPLASH;
 var MAIN_MENU;
-var TUTORIAL;
-var NEW_USER;
-var LOGIN_USER;
+
 
 
 
 var playSound;
 var splashTimer = 600.00;
-//InMenu UI Constansts
+//InMenu UI Constants
 
 var buttonsPlaceY = 200;
 //Enemy Bid Timer check

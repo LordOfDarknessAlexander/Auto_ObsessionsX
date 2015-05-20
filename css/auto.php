@@ -373,7 +373,7 @@ div#menu{
 }
 div#main
 {
- /*margin-top : 6%;*/
+ margin-top : 6%;
 }
 /*
 credits page UI stylings
