@@ -2,23 +2,7 @@
 
 var playerBoughtOut = false; //temporary for our dev button "buyout"
 
-/*function shuffleArray(array) 
-{	//sort array items
-    var counter = array.length, temp, index;
-    // While there are elements in the array
-    while (counter > 0) 
-    {   // Pick a random index
-        index = Math.floor(Math.random() * counter);
-        // Decrease counter by 1
-        counter--;
-        // And swap the last element with it
-        temp = array[counter];
-        array[counter] = array[index];
-        array[index] = temp;
-       
-    }
-    return array;
-}*/
+
 //ao.state.Auction =
 var Auction =
 {	//manages the state for purchasing cars
@@ -95,12 +79,13 @@ var Auction =
                     console.log(Auction._car.getFullName());
                     //vehiclePrice = Auction._car.getPrice();
 				   //vehiclePrice = Auction._car.getAdjustedConditionPrice();
-					vcondition = Auction._car.getRandCondition();
+				//	vcondition = Auction._car.getRandCondition();
+					vcondition = Auction._car.getCondition() ;
 					//proper formula
 					vehiclePrice = Auction._car.getPrice() * vcondition/100 ;
+					//vehiclePrice = Auction._car.getPrice() * vcondition * 100;
 					//vehiclePrice = Auction._car.getPrice() ;
 					//35,200 
-					
 					Auction.ai = [Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice())), Enemy(price(Auction._car.getPrice()))];
 					//Auction.currentBid = vehiclePrice * 0.1;
                     Auction.currentBid = vehiclePrice * 0.04;
