@@ -373,7 +373,7 @@ div#menu{
 }
 div#main
 {
- margin-top : 6%;
+ /*margin-top : 6%;*/
 }
 /*
 credits page UI stylings
@@ -599,6 +599,7 @@ a.tooltip span
 //require_once 'tablet.php';  //tablets, iPads, etc
 //require_once 'laptop.php';  //laptop and other large mobile devices
 ?>
+
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) 
 {
