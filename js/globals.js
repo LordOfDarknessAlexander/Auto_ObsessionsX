@@ -132,9 +132,7 @@ var ADD_FUNDS;
 var RUNNING;
 var SPLASH;
 var MAIN_MENU;
-var TUTORIAL;
-var NEW_USER;
-var LOGIN_USER;
+
 
 
 
