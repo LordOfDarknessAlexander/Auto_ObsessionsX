@@ -6,7 +6,6 @@ function ep($str){
         echo $_POST[$str];
 }
 
-
 ?>	
 <html lang=en>
 <head>

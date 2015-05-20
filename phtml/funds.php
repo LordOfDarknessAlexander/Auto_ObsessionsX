@@ -28,12 +28,12 @@ class pp{
     <?php backBtn();?>
 	<?php homeBtn();?>
     <!--button id='addFundsBackButton'>Back</button-->
-	<a href='<?php pp::minorFundsPath();?>'><input type='image' id='addMinorFundsBtn' value='chump change'></a>
+	<!--a href='<?php //pp::minorFundsPath();?>'><input type='image' id='addMinorFundsBtn' value='chump change'></a-->
     <div id='cash'>
         <!--action=<?php //paypalPath();?>
         target='PPDGFrame'
         class='standard'>
-        <label>Purchase Cash</label><br>
+        <label>Purchase Cash</label><br-->
         <ul>
             <!--doesn't work if is type='button' Also, stylings no longer work :(
             paypalBtn('addAllowance', 'Get Credits');
@@ -52,7 +52,7 @@ class pp{
             <!--replace 'insert_pay_key' with Vendor's-->
             <input id='paykey' type='hidden' name='paykey' value='insert_pay_key'>
         </ul>
-    </form>
+    </div>
     
     <form id='tokens'
         action=<?php paypalPath();?>

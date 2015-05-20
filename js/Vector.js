@@ -16,7 +16,7 @@
         _dy:dy || 0.0,
         //
         advance:function(){
-            // Move the player advance the vectors position by dx,dy
+            //increment vector by dx,dy
             this._x += this._dx;
             this._y += this._dy;
         }

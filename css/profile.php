@@ -45,7 +45,7 @@ User Profile Screen Styles
     font-size:1.25vw;
 }
 /*
-PRofile DIV User Stats
+Profile DIV User Stats
 */
 <?php dpus();?>{
     left:2%;

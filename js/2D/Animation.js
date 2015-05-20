@@ -44,35 +44,36 @@
     };
 }
 /*
-function Animation(spritesheet, frameSpeed, startFrame, endFrame) 
-{
+function Animation(spritesheet, frameSpeed, startFrame, endFrame){
+    //
+    //start and end range for frames
+    var anim = [];
+    for(var frameNumber = startFrame; frameNumber <= endFrame; frameNumber++){
+        anim.push(frameNumber);
+    }
 	return {
-		animationSequence : [],  // array holding the order of the animation
-		_curFrame : 0,        // the current frame to draw
-		_counter : 0,             // keep track of frame rate
-		
-		// start and end range for frames
-		for (var frameNumber = startFrame; frameNumber <= endFrame; frameNumber++)
-		animationSequence.push(frameNumber);
-		
-		// Update the animation
-		update : function() 
-		{
-		// update to the next frame if it is time
-		if (counter == (frameSpeed - 1))
-		  currentFrame = (currentFrame + 1) % animationSequence.length;
-		
-		 // update the counter
-		 counter = (counter + 1) % frameSpeed;
+		animSeq:anim,  //animation sequence, array holding the order of the animation
+		_curFrame:0,        // the current frame to draw
+		_counter:0,             // keep track of frame rate		
+        //
+		update:function(){
+            //Update the animation
+            //update to the next frame if it is time
+            if(this._counter == (frameSpeed - 1))
+                this._curFrame = (currentFrame + 1) % animationSequence.length;
+            
+            //update the counter
+            counter = (counter + 1) % frameSpeed;
 		},
-		// datatype {integer} x - X position to draw
-		// datatype {integer} y - Y position to draw
-		draw : function(x, y) 
-		{	// Draw the current frame
-			// get the row and col of the frame
-			var row = Math.floor(animationSequence[currentFrame] / spritesheet.framesPerRow);
-			var col = Math.floor(animationSequence[currentFrame] % spritesheet.framesPerRow);
-			context.drawImage(
+		draw:function(x, y){
+            //Draw the current frame
+            //datatype {integer} x - X position to draw
+            //datatype {integer} y - Y position to draw
+			//get the row and col of the frame
+			var row = Math.floor(animationSequence[currentFrame] / spritesheet.framesPerRow),
+			    col = Math.floor(animationSequence[currentFrame] % spritesheet.framesPerRow);
+			
+            context.drawImage(
 			  spritesheet.image,
 			  col * spritesheet.frameWidth, row * spritesheet.frameHeight,
 			  spritesheet.frameWidth, spritesheet.frameHeight,

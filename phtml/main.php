@@ -9,32 +9,12 @@ $AO_NAME = 'Auto Obsessions';
 $TD_NAME = 'Tyler Drury';
 $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
-//$ROOT_URL = 'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/';
-$ROOT_URL = 'http://851entertainment.com/Auto_ObsessionsX/';
-?>	
-<div class='wrapper'>
-	<!--root div element of web page!-->	
-    <div class='sound sound-off'></div>
-	
-    <div id='statBar'>  
-        <div id ='aAmerica'> PHOTOS COURTESY OF AUCTIONS AMERICA</div>
-        <!--this stat bar will be visible across all pages/divs-->
-        <label id='money'>Money: </label>
-        <label id='tokens'>Tokens:</label>
-        <label id='prestige'>Prestige:</label>
-        <label id='m_marker'>Mile Markers:</label>
-    </div>
-	
-    <img id='mainCar' src='images\\garageEmpty.png'>
-    <pre id='info'></pre>
-    <img id='adBar'>
-<?php
 //this is not working on site without a new session
 session_start();
 //session set, has the session be started and initialized
 //if $_SESSION is an empty array,
 //user is using guest account and not currenlty logged in
-$_SESSION = array('dur'=>0);
+$_SESSION = array('dur'=>0);    //must log in to set session vars!
 //userLoggin!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
 
@@ -61,8 +41,6 @@ function eS(){
     echo 'session data:' . PHP_EOL;
     echo json_encode($ss ? $_SESSION : array() ) . PHP_EOL;
 }
-//eS();
-//exit();
 
 function loggedIn(){
     //session started and the user has provided
@@ -77,25 +55,46 @@ function getUserName(){
         $_SESSION['uname'] : 'guest';
 }
 //echo "Player $uname";
-?>
-<div id='reg-navigation'>
-    <a id='home' class='tooltip' href='<?php
-    echo rootURL() . 'Users/index.php';
-    ?>'>Home<!--span><!--img src=''>Tooltip!</span--></a></li><br>
-	<a id='addFunds' class='tooltip'>Store</a></li><br>
+//eS();
+//exit();
+?>	
+<div class='wrapper'>
+	<!--root div element of web page!-->
+    <div class='sound sound-off'></div>
+	
+    <div id='statBar'>  
+        <div id ='aAmerica'> PHOTOS COURTESY OF AUCTIONS AMERICA</div>
+        <!--this stat bar will be visible across all pages/divs-->
+        <label id='money'>Money: </label>
+        <label id='tokens'>Tokens:</label>
+        <label id='prestige'>Prestige:</label>
+        <label id='m_marker'>Mile Markers:</label>
+    </div>
+	
+    <img id='mainCar' src='images\\garageEmpty.png'>
+    <pre id='info'></pre>
+    <img id='adBar'>
+    
+    <div id='reg-navigation'>
+        <a id='home' class='tooltip' href='<?php
+        echo rootURL() . 'Users/index.php';
+        ?>'>Home<!--span><!--img src=''>Tooltip!</span--></a><br>
+        <a id='addFunds' class='tooltip'>Store</a><br>
 <?php
 if(loggedIn() ){?>
-    <a id='mem' href='members-page.php'>Members</a><br>
-    <a id='logout' href='logout.php'>Logout</a><br>	
+        <a id='mem' href='members-page.php'>Members</a><br>
+        <a id='logout' href='logout.php'>Logout</a><br>	
 <?php
 }
 else{?>
-    <a id='reg' href='<?php echo rootURL() . 'Users/registerUser.php';?>'>Register</a><br>
+        <a id='reg' href='<?php echo rootURL() . 'Users/registerUser.php';?>'>Register</a><br>
 <?php
 }
 ?>
-</div>
+    </div>
+    <!--sub-menus/screens/states-->
     <div id='menu'>
+        <!--splash/loggin-->
         <div id='progress'>
             <div id='percent'>Downloading: <span id='p'></span></div>
             <progress id='progress-bar' value='0'></progress>
@@ -137,7 +136,7 @@ if(!loggedIn() ){?>
 		</div>
       
         <div id='credits'>
-		<h1>Auto-Obsessions Credits</h1>
+            <h1>Auto-Obsessions Credits</h1>
             <!--could just be a link at the bottom of the page-->
             <ul>
                 <li class='artwork'>Character design and art: <?php
@@ -155,14 +154,11 @@ if(!loggedIn() ){?>
               echo $OWNER_NAME
               ?></li>
             </ul>
-			<br/>
-			<br/>
+			<br>
+			<br>
            <!-- <a href='javascript:void(0)' class='button back'>Back</a> -->
 		   <a href='index.php' class='button back' title='Home Page'>Back</a><br>
-        </div> 
-		<div id='Register'>
-		
-		</div>
+        </div>
     </div><!--end menu-->      
 
     <canvas id='canvas' width='900' height='600'>

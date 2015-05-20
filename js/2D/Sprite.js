@@ -28,19 +28,19 @@ function Sprite(x, y, type){
 }
 Sprite.prototype = Object.create(Vector.prototype);
 //UPDATE
-/*function Sprite(x, y, type) 
-{	//create and return a new object({};)
+/*function Sprite(x, y, type){
+	//create and return a new object({};)
 	return {
-		position : Vector2(x,y),
-		size : Vector2(standWidth,standWidth),
+		pos : Vector2(x,y), //position
+		size : Vector2(standWidth, standWidth),
 		type : type,	
 		//Update the Sprite's position by the player's speed
-		update : function(){
+		update:function(){
 			this.dx = -player.speed;
 			this.advance();
 		},	
 		//Draw the sprite at it's current position
-		draw : function(){
+		draw:function(){
 			context.save();
 			context.translate(0.5,0.5);
 			context.drawImage(assetLoader.images[this.type], this.x, this.y);
