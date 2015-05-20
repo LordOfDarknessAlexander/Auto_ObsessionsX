@@ -115,10 +115,12 @@ if(!loggedIn() ){?>
                 ?>'>Register</a></li>
 <?php
 }?>
-                <li><a class='button play' <?php hrefVoid();?>>Play <?php
+               
+                <li><a class='button credits' <?php hrefVoid();?>>Credits</a></li>
+				
+				 <li><a class='button play' <?php hrefVoid();?>>Play <?php
                 echo loggedIn()? 'Game' : 'as Guest';
                 ?></a></li>
-                <li><a class='button credits' <?php hrefVoid();?>>Credits</a></li>
             </ul>
            
             <div id='loginfields'>
