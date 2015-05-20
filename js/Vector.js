@@ -1,17 +1,13 @@
 ﻿//vehicle 'class' and any other api
 //
 //A vector for 2d space.
- 
-// datatype {integer} x - Center x coordinate.
-// datatype {integer} y - Center y coordinate.
-// @datatype {integer} dx - Change in x.
-// datatype {integer} dy - Change in y.
-/*function Vector2(x, y, dx, dy){
+function Vector2(x, y, dx, dy){
+    //returns a 2D vector object
     return {
-        // position
+        //position
         _x:x || 0.0,
         _y:y || 0.0,
-        // direction
+        //direction
         _dx:dx || 0.0,
         _dy:dy || 0.0,
         //
@@ -21,7 +17,7 @@
             this._y += this._dy;
         }
     };
-}*/
+}
 function Vector(x, y, dx, dy){
     // position
     this.x = x || 0;

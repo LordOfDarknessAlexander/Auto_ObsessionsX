@@ -28,22 +28,22 @@ function Sprite(x, y, type){
 }
 Sprite.prototype = Object.create(Vector.prototype);
 //UPDATE
-/*function Sprite(x, y, type){
-	//create and return a new object({};)
+/*function Sprite2D(x, y, type){
+	//create and return a new 2D sprite object
 	return {
-		pos : Vector2(x,y), //position
-		size : Vector2(standWidth, standWidth),
-		type : type,	
+		pos:Vector2(x,y), //position
+		size:Vector2(standWidth, standWidth),
+		type:type,	
 		//Update the Sprite's position by the player's speed
-		update:function(){
-			this.dx = -player.speed;
-			this.advance();
+		update:function(dt){
+			//this.dx = -player.speed;
+			//this.pos.advance();
 		},	
 		//Draw the sprite at it's current position
 		draw:function(){
 			context.save();
 			context.translate(0.5,0.5);
-			context.drawImage(assetLoader.images[this.type], this.x, this.y);
+			context.drawImage(assetLoader.images[this.type], this.pos.x, this.pos.y);
 			context.restore();
 		}
 	};
