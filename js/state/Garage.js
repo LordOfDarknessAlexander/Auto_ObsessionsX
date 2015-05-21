@@ -368,6 +368,8 @@ var Garage = {
             pbSetColor($('progress#docsPB', div), stats._docs);
             
             $('button#con', div).text(car.getCondition().toString() );
+			 //$('button#con', div).text(car.getRandCondition().toString() );
+			
         }
     },
     setCurrentIndex:function(){

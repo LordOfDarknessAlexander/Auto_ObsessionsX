@@ -311,6 +311,7 @@ if($ps){
     if(isset($_POST['carID'])){
         //
         $carID = $_POST['carID'];   //is_int($_POST['carID']) ? intval($_POST['carID']) : 0;
+		//$carCon = $_POST['repairs']; 
         //validate value, must be an int!
         //echo json_encode($carID);
 

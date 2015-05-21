@@ -332,6 +332,7 @@ var Repair = {
                 interior:car._interior !== null ? car._interior.getBits() : 0,
                 docs:car._docs !== null ? car._docs.getBits() : 0,
                 repairs:car.getRepairBitfield()
+			  
             }
         );
 //<php//

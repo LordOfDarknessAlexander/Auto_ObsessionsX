@@ -330,7 +330,9 @@ Auction.sold = function(){
             jq.Sold.menu.show();
             $('div#sold label').html('Congratulations!<br>You won the auction for the ' + Auction._car.getFullName() + '<br>Go to the garage to view your prize!');
 //<php if(loggedIn){>
+			//Auction._car.repairs == Auction.vcondition;
             pas.insertCar(Auction._car.id);
+			//pas.insertCar(Auction._car.repairs);
 //<php
 //}
 //else{?>

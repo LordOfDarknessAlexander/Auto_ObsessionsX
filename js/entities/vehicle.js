@@ -96,16 +96,11 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
             //p += _body.getPrice();
             //p += this._interior.getPrice();
             //p += this._docs.getPrice();
-			
-			//this.getRandCondition();
-			//this._price = this.price / 100 * this.condition;
             
             //for(var i = 0; i < parts.length; i++)
 			//{
 				//upgradeCost += this._parts[i].getPrice();
 			//}
-			//Just return price here
-			//return this._price * Math.random(0.0,1.25); //* this.condition; 
 			return this._price; // + upgradeCost;
 	
 		},
@@ -162,14 +157,14 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		},
 		getRandCondition : function(){
            
-			//return this.condition +  Math.floor(Math.random(1,100) * 100) ;
-				var ret = (
+			return this.condition +  Math.floor(Math.random(1,100) * 100) ;
+			/*	var ret = (
 				(this._dt !== null ? this._dt.getPercentAvg() : 0.0) +
 				(this._body !== null ? this._body.getPercentAvg() : 0.0) +		//this._body.completion()
 				(this._interior !== null ? this._interior.getPercentAvg() : 0.0) +
 				(this._docs !== null ? this._docs.getPercentAvg() : 0.0)
 			) * 0.25;
-			return Math.random(Math.floor( ret * 100.0) ,1,100) * 100;
+			return Math.random(Math.floor( ret * 100.0) ,1,100) * 100;*/
 			 
 		},
 		

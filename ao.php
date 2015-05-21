@@ -14,6 +14,7 @@ class ao{
         //sql column names
         CID = 'car_id',
         UID = 'user_id';
+		
         //vehicle parts
         //PRICE = 'price',
         //
