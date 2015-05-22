@@ -114,10 +114,8 @@ if(!loggedIn() ){?>
                 ?>'>Register</a></li>
 <?php
 }?>
-               
-                <li><a class='button credits' <?php hrefVoid();?>>Credits</a></li>
-				
-				 <li><a class='button play' <?php hrefVoid();?>>Play <?php
+                <li><a class='button credits' <?php hrefVoid();?>>Credits</a></li>				
+				<li><a class='button play' <?php hrefVoid();?>>Play <?php
                 echo loggedIn()? 'Game' : 'as Guest';
                 ?></a></li>
             </ul>
@@ -150,9 +148,9 @@ if(!loggedIn() ){?>
             </ul>
              
             <ul>
-              <li class='developer'>Developer: <?php
-              echo $OWNER_NAME
-              ?></li>
+                <li class='developer'>Developer: <?php
+                echo $OWNER_NAME
+                ?></li>
             </ul>
 			<br>
 			<br>

@@ -1,7 +1,7 @@
 ﻿//vehicle 'class' and any other api
 //
 //A vector for 2d space.
-function Vector2(x, y, dx, dy){
+/*function Vector2(x, y, dx, dy){
     //returns a 2D vector object
     return {
         //position
@@ -17,7 +17,7 @@ function Vector2(x, y, dx, dy){
             this._y += this._dy;
         }
     };
-}
+}*/
 function Vector(x, y, dx, dy){
     // position
     this.x = x || 0;
@@ -26,7 +26,6 @@ function Vector(x, y, dx, dy){
     this.dx = dx || 0;
     this.dy = dy || 0;
 }
-
 
 // Move the player advance the vectors position by dx,dy
 Vector.prototype.advance = function(){
