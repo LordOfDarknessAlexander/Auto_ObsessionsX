@@ -344,27 +344,28 @@ Vehicle.fromDB = function(dbCar, userCar){
     //console.log('creating car from database: ' + JSON.stringify(ret) );    
     return ret;
 };
-//Vehicle.getRandomParts = function(){
+
+Vehicle.getRandomParts = function(){
     //
-    //var parts = {
-        //dt:carPart.getRandStage(),
-        //body:carPart.getRandStage(),
-        //inter:carPart.getRandStage(),
-        //docs:carPart.getRandStage()
-    //};
-    //return parts;
+    var parts = {
+        dt:carPart.getRandStage(),
+        body:carPart.getRandStage(),
+        inter:carPart.getRandStage(),
+        docs:carPart.getRandStage()
+    };
+    return parts;
     
-//};
-//Vehicle.getRandomRepairs = function(){
-    //var ret = 0;
-    //return ret;
-//};
-//Vehicle.makeRandom = function(name, price){
-    //var part = Vehicle.getRandomParts(),
-        //rep = Vehicle.getRandomRepairs();
+};
+Vehicle.getRandomRepairs = function(){
+    var ret = 0;
+    return ret;
+};
+Vehicle.makeRandom = function(name, price){
+    var part = Vehicle.getRandomParts(),
+     rep = Vehicle.getRandomRepairs();
         
-    //return Vehicle( );
-//};
+    return Vehicle( );
+};
 
 //TEMPORARY
 //xml data base of cars, loaded from server!
