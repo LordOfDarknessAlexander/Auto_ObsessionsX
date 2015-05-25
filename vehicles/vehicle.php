@@ -89,8 +89,16 @@ class Vehicle
     public function toJSON(){
         //returns json representation of the vehicle data, for transfer over internet
         //Fix:accessing object values doesn't work!
-        //return '{"data":"this is data!"}';
-        //'{"make": "", "year":"", "name":"", "info":"", "price":""}';
+        //return json_encode(
+            //array(
+                //'id'=>$this->_id,
+                //'make'=>$this->_make,
+                //'year'=>$this->_year,
+                //'name'=>$this->_model,
+                //'info'=>$this->_info,
+                //'price'=>$this->_price
+            //)
+        //);
         return '{"id":' . strval($this->_id) . ', "make":"' . $this->_make . '", "year":' . strval($this->_year) . ', "name":"' . $this->_model . '", "info":"' . $this->_info . '", "price":' . strval($this->_price) . '}';
     }
     public function applyUpgrades(){
@@ -121,6 +129,16 @@ class Vehicle
             //}
         //}
         //else create new car with no repairs or upgrades
+    }
+    public static function getRandStage(){
+        $r = rand(0, 4);
+        $ret = $r == 0 ? 0 : 0x00000001 << ($r - 1);
+        return $ret;
+    }
+    public static function getRandRepairs(){
+        
+        $ret = rand(0x0, 0xf);
+        return $ret;
     }
 }
 ?>

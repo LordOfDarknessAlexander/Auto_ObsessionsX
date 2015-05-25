@@ -329,8 +329,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         }
 	};
 }
-Vehicle.fromDB = function(dbCar, userCar)
-{
+Vehicle.fromDB = function(dbCar, userCar){
     //console.log('creating car from database');
     var ret = Vehicle(
         dbCar.name, //+ "<script>alert('1');</script>"),
@@ -344,7 +343,29 @@ Vehicle.fromDB = function(dbCar, userCar)
     );
     //console.log('creating car from database: ' + JSON.stringify(ret) );    
     return ret;
-}
+};
+//Vehicle.getRandomParts = function(){
+    //
+    //var parts = {
+        //dt:carPart.getRandStage(),
+        //body:carPart.getRandStage(),
+        //inter:carPart.getRandStage(),
+        //docs:carPart.getRandStage()
+    //};
+    //return parts;
+    
+//};
+//Vehicle.getRandomRepairs = function(){
+    //var ret = 0;
+    //return ret;
+//};
+//Vehicle.makeRandom = function(name, price){
+    //var part = Vehicle.getRandomParts(),
+        //rep = Vehicle.getRandomRepairs();
+        
+    //return Vehicle( );
+//};
+
 //TEMPORARY
 //xml data base of cars, loaded from server!
 //This should work!!!!

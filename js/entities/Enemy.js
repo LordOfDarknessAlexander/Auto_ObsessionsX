@@ -10,24 +10,20 @@
 		leftAuction : false, //Flag to determine whether or not the enemy has left the auction
 		winningBid : false, //Flag to determine whether or not the enemy is currently holding the winning bid
 		
-		reset : function()
-		{
+		reset : function(){
 			this.bidTimer = 0;
 			this.currBid = 0;
 			this.bidCooldown = 5;
 			this.canBid = false;
 			this.leftAuction = false;
 		},
-		update : function()
-		{
-			if(this.currBid >= this.bidCap)
-			{
+		update : function(){
+			if(this.currBid >= this.bidCap){
 				this.leftAuction = true;
 			}
 			
 			//If the enemy can bid and is still active in the auction increment the bid timer
-			if(!this.canBid && !this.leftAuction)
-			{
+			if(!this.canBid && !this.leftAuction){
 				this.bidTimer++;
 				//Once the bidTimer has reached the timer cap, allow the enemy to bid again and reset the bid timer
 				if(this.bidTimer >= this.BID_TIMER_CAP)
@@ -40,8 +36,8 @@
 	};
 }
 
-function price(vehiclePrice, bias)
-{
+function price(vehiclePrice, bias){
+    //
 	var b = (typeof(bias) === 'undefined' || bias === null) ? 1.0 : bias;
 	
     function lerp(Min, Max, t){

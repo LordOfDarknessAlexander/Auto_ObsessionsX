@@ -148,6 +148,8 @@ function carPart(carPrice, partType){   //partType
         }*/
 	};
 }
+
+//carPart.getRadStage = function(){}
 carPart.type = {
     interior:1,
     engine:2,

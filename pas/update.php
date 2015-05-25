@@ -320,7 +320,7 @@ if($ps){
             //args being passed via the url
             if(isset($_GET[$OP]) ){
                 $op = isAlpha($_GET[$OP]) ? $_GET[$OP] : '';
-                    
+                
                 if($op == 'insert'){
                     //inserts a car with carID from the vehicle database into the
                     //logged in user's table in aoUsersDB
@@ -335,6 +335,12 @@ if($ps){
                     }
                     else{
                         $tableName = getUserTableName();
+                        
+                        $dt = Vehicle.getRandStage();
+                        $b = Vehicle.getRandStage();
+                        $i = Vehicle.getRandStage();
+                        $d = Vehicle.getRandStage();
+                        $r = Vehicle.getRandRepairs();
                         
                         $res = $aoUsersDB->query(
                             "INSERT INTO $tableName

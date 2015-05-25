@@ -31,17 +31,6 @@ ao Store page styles
 	padding: 0 0;
 	display:inline;
 }
-<?php divFunds();?> label#userCash{<?php
-    posAbs();
-    defaultBtnBG();
-?>
-	color:white;
-	text-align:center;
-	bottom:0px;
-	left:0px;
-	width: 150px;
-	height:2em;
-}
 
 <?php divFunds();?> #addMinorFundsBtn{<?php
     defaultBtnBG();
@@ -66,27 +55,39 @@ ao Store page styles
 <?php divFunds();?> form{
 	position:absolute;
 	color:red;
-	top:30%;
     width:10%;
     text-align:center;
     font-size:1.2vw;
     font-weight:bold;
 }
-<?php divFunds();?> form#tokens{
-<?php css::rm();?>
+<?php divFunds();?> div#tokens{
+<?php
+    posAbs();
+    css::rm();
+?>
+    left:2%;
+    top:30%;
+    height:25%;
 }
 <?php divFunds();?> form#cash{
 <?php css::lm();?>
+	top:30%;
 }
-<?php divFunds();?> form input{
-	background: url('../images/defaultBtn.png') no-repeat 0 0;
-	color: red;
-	width:100%;
-	height:50px;
-<?php
-    cursorPtr();
-    css::fontBold();
-?>
+<?php divFunds();?> div#tokens form{
+    position:absolute;
+    height:25%;
+}
+<?php divFunds();?> form#t3{
+    top:0%;
+}
+<?php divFunds();?> form#t5{
+    top:25%;
+}
+<?php divFunds();?> form#t10{
+    top:50%;
+}
+<?php divFunds();?> form#t20{
+    top:75%;
 }
 <?php /*divFunds();> #addFundsBackButton
 {
