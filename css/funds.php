@@ -52,50 +52,67 @@ ao Store page styles
 ?>
 	height:50px;	
 }
-<?php divFunds();?> form{
-	position:absolute;
-	color:red;
-    width:10%;
+
+<?php divFunds();?> div form{
+    position:absolute;
+    height:25%;
+    width:100%;
+    
+    color:red;
     text-align:center;
     font-size:1.2vw;
     font-weight:bold;
 }
+<?php divFunds();?> div form input{
+    width:100%;
+    height:100%;
+}
+/*
+Token Div
+*/
 <?php divFunds();?> div#tokens{
 <?php
     posAbs();
-    css::rm();
 ?>
-    left:2%;
+    background-color:grey;
     top:30%;
-    height:25%;
+    height:50%;
+    width:20%;
 }
-<?php divFunds();?> form#cash{
-<?php css::lm();?>
-	top:30%;
-}
-<?php divFunds();?> div#tokens form{
-    position:absolute;
-    height:25%;
-}
-<?php divFunds();?> form#t3{
+<?php divFunds();?> div#tokens form#t3{
     top:0%;
 }
-<?php divFunds();?> form#t5{
+<?php divFunds();?> div#tokens form#t5{
     top:25%;
 }
-<?php divFunds();?> form#t10{
+<?php divFunds();?> div#tokens form#t10{
     top:50%;
 }
-<?php divFunds();?> form#t20{
+<?php divFunds();?> div#tokens form#t20{
     top:75%;
 }
-<?php /*divFunds();> #addFundsBackButton
-{
-	<php
+/*
+Cash Div
+*/
+<?php divFunds();?> div#cash{
+<?php
     posAbs();
->
-	background: url('../images/backBtn.png') no-repeat 0 0;
-	width:150px;
-	height:50px;
-	
-}*/?>
+?>
+    right:0%;
+    background-color:grey;
+	top:30%;
+    height:50%;
+    width:20%;
+}
+<?php divFunds();?> div#cash form#c50{
+    top:0%;
+}
+<?php divFunds();?> div#cash form#c200{
+    top:25%;
+}
+<?php divFunds();?> div#cash form#c500{
+    top:50%;
+}
+<?php divFunds();?> div#cash form#c1000{
+    top:75%;
+}
