@@ -123,34 +123,50 @@ cmntHeader('Repair Screen Styles');
     padding:0% 0%;*/
     /*background-color:grey;*/
 }
-<?php divRepair();?> div#switch button#dt{
-	 background:url('../images/drivetrain.png') no-repeat 0 0;
-	 background-size:100% 100%;
+<?php divRepair();?> div#switch button#dt {
 <?php
+	css::defaultBG('../images/drivetrain.png');
+    css::bgSize('100%', '100%');
     css::left('0%');
     css::top('0%');
 ?>
 }
-<?php divRepair();?> div#switch button#body{
-	 background:url('../images/body.png') no-repeat 0 0;
-	 background-size:100% 100%;
+
+<?php divRepair();?> div#switch button#dt :hover{
 <?php
+    //mouse over
+    css::defaultBG('../images/defaultBtn2.png');
+    css::bgSize('100%', '100%');
+	css::left('0%');
+    css::top('0%');
+?>  
+	color:green;
+	padding : 2%;
+	top : 19%;
+}
+
+<?php divRepair();?> div#switch button#body{
+	
+<?php
+	css::defaultBG('../images/body.png');
+    css::bgSize('100%', '100%');
     css::left('0%');
     css::bottom('0%');
 ?>
 }
 <?php divRepair();?> div#switch button#inter{
-	 background:url('../images/interior.png') no-repeat 0 0;
-	 background-size:100% 100%;
 <?php
+	css::defaultBG('../images/interior.png');
+    css::bgSize('100%', '100%');
     css::right('0%');
     css::top('0%');
 ?>
 }
 <?php divRepair();?> div#switch button#docs{
-	 background:url('../images/documents.png') no-repeat 0 0;
-	 background-size:100% 100%;
+	
 <?php
+	css::defaultBG('../images/documents.png');
+    css::bgSize('100%', '100%');
     css::right('0%');
     css::bottom('0%');
 ?>
