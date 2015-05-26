@@ -149,7 +149,7 @@ function carPart(carPrice, partType){   //partType
 	};
 }
 
-//carPart.getRandStage = function(){}
+carPart.getRandStage = function(){}
 carPart.type = {
     interior:1,
     engine:2,
@@ -165,7 +165,7 @@ carPart.STAGE = {
     racing:0x4,     //0100
     pro:0x8         //1000
 };
-/*
+
 function stringFromPartType(type){
     //returns a string identifier from a carPart's type
     var ret = '';
@@ -193,4 +193,4 @@ function stringFromPartType(type){
         break;
     }
     return ret;
-}*/
+}

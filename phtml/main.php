@@ -80,10 +80,12 @@ function getUserName(){
         echo rootURL() . 'Users/index.php';
         ?>'>Home<!--span><!--img src=''>Tooltip!</span--></a><br>
         <a id='addFunds' class='tooltip'>Store</a><br>
+		<a id ='slots' href='Slots/index.html'>Slots</a><br>
 <?php
 if(loggedIn() ){?>
         <a id='mem' href='members-page.php'>Members</a><br>
         <a id='logout' href='logout.php'>Logout</a><br>	
+		
 <?php
 }
 else{?>
@@ -157,8 +159,9 @@ if(!loggedIn() ){?>
            <!-- <a href='javascript:void(0)' class='button back'>Back</a> -->
 		   <a href='index.php' class='button back' title='Home Page'>Back</a><br>
         </div>
-    </div><!--end menu-->      
-
+    </div><!--end menu-->    
+	
+	
     <canvas id='canvas' width='900' height='600'>
         <p>You're browser does not support the required functionality to play this game.</p>
         <p>Please update to a modern browser such as <a href='www.google.com/chrome/‎'>Google Chrome</a> to play.</p>

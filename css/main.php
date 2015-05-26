@@ -129,6 +129,18 @@ Main Game Menu Styles
     css::top('51%');
 ?>
 }
+
+
+<?php dml();?>div#slots
+{
+    <?php
+    css::defaultBG('../images/body.png');
+    css::bgSize('50%', '50%');
+    //lz();
+    css::top('-50%');
+?>
+margin-left: 20%;
+}
 <?php dmr();?> button#profile{
 <?php
     css::defaultBG('../images/profileBtn.jpg');

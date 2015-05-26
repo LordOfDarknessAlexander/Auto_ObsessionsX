@@ -505,6 +505,18 @@ div#sold label{
     height: 100%;
     position: absolute;
 }
+div#slots
+{
+    background: url('../images/defaultBG.jpg') no-repeat 0 0;
+    display: none;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0%;
+    left:0%;
+    z-index:1;
+}
 /*
 div#messages
 {
