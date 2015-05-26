@@ -69,21 +69,21 @@ Main Game Menu Styles
     posAbs();
     css::size('100%', '100%');
     css::defaultTileBG();
-    //background:#000000 url('../images/bgTile.png') repeat 0 0;
     css::txtAlignCntr();
+	
     displayNone();
 ?>
 	padding-top: 92px;
 	z-index: 1;
 }
-<?php dgm();?> div#slots a
+ div#slots a
 {
 <?php
     posAbs();
     css::defaultBG('../images/body.png');
     css::bgSize('100%', '100%');
     css::txtAlignCntr();
-	css::bottom('82%');
+	css::bottom('12%');
 ?>
 	width: 40%;
 	color:red;
@@ -91,14 +91,14 @@ Main Game Menu Styles
     z-index:2;
 	
 }
-<?php dgm();?> div#slots a:hover
+ div#slots a:hover
 {
 <?php
     posAbs();
     css::defaultBG('../images/logo.png');
     css::bgSize('100%', '100%');
     css::txtAlignCntr();
-	css::bottom('82%');
+	css::bottom('12%');
 ?>
 	width: 40%;
 	color:green;
@@ -123,6 +123,7 @@ Main Game Menu Styles
     posAbs();
     defaultColor();
     css::size('15%', '60%');
+	
 ?>
 }
 <?php dml();?>{

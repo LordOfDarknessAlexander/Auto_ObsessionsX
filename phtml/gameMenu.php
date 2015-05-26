@@ -25,9 +25,9 @@
 <div id='gameMenu'>
     <!--Root Game Menu, hub for page navigation-->
     <!--img id='homeImg' src='images\\garageEmpty.png'-->
-	<div id='slots'>
-			<a id ='slots' href='Slots/index.html' target="_blank">Slots</a>
-		</div>	
+	<div id='slots' style='margin-top: -21%;'>
+			<a id ='slots' href='Slots/index.html' target="_blank">Slots</a><br/>
+		</div>
     <div id='menuLeft'>
         <button id ='myCars'>My Garage</button><br/>
         <button id='toAuctionBtn'>Go to Auction</button><br/>
@@ -39,3 +39,4 @@
 	
     <!--img id='adBar'-->
 </div><!--end Game Menu-->
+	
