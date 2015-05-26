@@ -359,7 +359,7 @@ div#slots
 	top : 82%;
 	padding : 2%;
 }
-
+/*
 div#slots a
 {
 <?php
@@ -389,7 +389,7 @@ div#slots a:hover
     z-index:2;
 	top : 82%;
 	padding : 2%;
-}
+}*/
 
 /* visited link */
 #div#main a:visited {

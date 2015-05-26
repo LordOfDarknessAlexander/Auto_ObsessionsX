@@ -75,6 +75,37 @@ Main Game Menu Styles
 	padding-top: 92px;
 	z-index: 1;
 }
+<?php dgm();?> div#slots a
+{
+<?php
+    posAbs();
+    css::defaultBG('../images/body.png');
+    css::bgSize('100%', '100%');
+    css::txtAlignCntr();
+?>
+	width: 40%;
+	color:red;
+    left:10%;
+    z-index:2;
+	top: 22%;
+	
+}
+<?php dgm();?> div#slots a:hover
+{
+<?php
+    posAbs();
+    css::defaultBG('../images/logo.png');
+    css::bgSize('100%', '100%');
+    css::txtAlignCntr();
+?>
+	width: 40%;
+	color:green;
+    left:10%;
+    z-index:2;
+	top: 22%;
+	
+}
+
 <?php dgm();?> li{
 <?php defaultColor();?>
 	padding: 10px 0;
