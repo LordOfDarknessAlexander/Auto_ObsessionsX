@@ -76,7 +76,7 @@ Main Game Menu Styles
 	padding-top: 92px;
 	z-index: 1;
 }
- div#slots a
+<?php dgm();?> div#slots a
 {
 <?php
     posAbs();
@@ -91,7 +91,7 @@ Main Game Menu Styles
     z-index:2;
 	
 }
- div#slots a:hover
+<?php dgm();?> div#slots a:hover
 {
 <?php
     posAbs();
@@ -104,7 +104,7 @@ Main Game Menu Styles
 	color:green;
     left:10%;
     z-index:2;
-
+	
 }
 
 <?php dgm();?> li{

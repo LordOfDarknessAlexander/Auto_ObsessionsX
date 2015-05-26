@@ -371,7 +371,7 @@ div#slots a
 	width: 20%;
 	color:red;
     left:10%;
-    z-index:2;
+    z-index:30;
 	top : 82%;
 	padding : 2%;
 }
@@ -386,7 +386,7 @@ div#slots a:hover
 	width: 20%;
 	color:green;
     left:10%;
-    z-index:2;
+    z-index:30;
 	top : 82%;
 	padding : 2%;
 }*/
