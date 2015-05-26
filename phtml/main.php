@@ -74,13 +74,13 @@ function getUserName(){
     <img id='mainCar' src='images\\garageEmpty.png'>
     <pre id='info'></pre>
     <img id='adBar'>
-    
+   
     <div id='reg-navigation'>
         <a id='home' class='tooltip' href='<?php
         echo rootURL() . 'Users/index.php';
         ?>'>Home<!--span><!--img src=''>Tooltip!</span--></a><br>
         <a id='addFunds' class='tooltip'>Store</a><br>
-		<a id ='slots' href='Slots/index.html'>Slots</a><br>
+		
 <?php
 if(loggedIn() ){?>
         <a id='mem' href='members-page.php'>Members</a><br>
@@ -134,7 +134,7 @@ if(!loggedIn() ){?>
             </div>
             <?php require 'phtml/legal.php';?>
 		</div>
-      
+	
         <div id='credits'>
             <h1>Auto-Obsessions Credits</h1>
             <!--could just be a link at the bottom of the page-->
@@ -161,7 +161,9 @@ if(!loggedIn() ){?>
         </div>
     </div><!--end menu-->    
 	
-	
+		<div id='slots'>
+			<a id ='slots' href='Slots/index.html'>Slots</a><br>
+		</div>
     <canvas id='canvas' width='900' height='600'>
         <p>You're browser does not support the required functionality to play this game.</p>
         <p>Please update to a modern browser such as <a href='www.google.com/chrome/‎'>Google Chrome</a> to play.</p>
