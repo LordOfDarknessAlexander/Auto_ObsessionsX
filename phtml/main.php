@@ -162,7 +162,7 @@ if(!loggedIn() ){?>
     </div><!--end menu-->    
 	
 		<div id='slots'>
-			<a id ='slots' href='Slots/index.html'>Slots</a><br>
+			<a id ='slots' href='Slots/index.html' target="_blank">Slots</a><br>
 		</div>
     <canvas id='canvas' width='900' height='600'>
         <p>You're browser does not support the required functionality to play this game.</p>
