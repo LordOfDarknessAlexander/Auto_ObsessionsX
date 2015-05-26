@@ -41,9 +41,10 @@ function lz(){
 function rz(){
     css::right('0%');
 }
-//function tz(){
-    //top('0%');
-//}
+/*
+function tz(){
+    top('0%');
+}*/
 //function btm(){
     //bottom('2%');
 //}
@@ -82,12 +83,12 @@ Main Game Menu Styles
     css::defaultBG('../images/body.png');
     css::bgSize('100%', '100%');
     css::txtAlignCntr();
+	css::bottom('82%');
 ?>
 	width: 40%;
 	color:red;
     left:10%;
     z-index:2;
-	top: 22%;
 	
 }
 <?php dgm();?> div#slots a:hover
@@ -97,13 +98,13 @@ Main Game Menu Styles
     css::defaultBG('../images/logo.png');
     css::bgSize('100%', '100%');
     css::txtAlignCntr();
+	css::bottom('82%');
 ?>
 	width: 40%;
 	color:green;
     left:10%;
     z-index:2;
-	top: 22%;
-	
+
 }
 
 <?php dgm();?> li{
