@@ -349,10 +349,13 @@ div#slots
 {
 <?php
     posAbs();
-    defaultBtnBG();
+    css::defaultBG('../images/body.png');
+    css::bgSize('100%', '100%');
     css::txtAlignCntr();
 ?>
-    left:20%;
+	height: 6%;
+	width: 6%;
+    left:10%;
     z-index:3;
 	top : 89%;
 }
