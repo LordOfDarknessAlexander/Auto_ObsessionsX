@@ -74,7 +74,7 @@ Token Div
 <?php
     posAbs();
 ?>
-    /*background-color:grey;*/
+    background-color:grey;
     top:30%;
     height:50%;
     width:20%;
@@ -99,7 +99,7 @@ Cash Div
     posAbs();
 ?>
     right:0%;
-    /*background-color:grey;*/
+    background-color:grey;
 	top:30%;
     height:50%;
     width:20%;

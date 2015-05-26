@@ -8,74 +8,75 @@ require_once 'AO_UI.php';
     }
 class pp{
     //encapsulates variables and functions related to the paypal store API
-    const SANDBOX = true; 
+    //const SANDBOX = true; 
     
     function storePath(){
         //FALSE on server AND when live,
         //TRUE when site's under developement or testing locally(with xampp)
         ?>https://www.<?php
-        if(pp::SANDBOX){
-            ?>sandbox.<?php
-        }?>paypal.com/cgi-bin/webscr?<?php
+        //if(pp::SANDBOX){
+            //><--sandbox.<?php
+        //}?>paypal.com/cgi-bin/webscr?<?php
+    }
+    public static function eSP(){
+        //echo store path
+        echo "https://www.paypal.com/cgi-bin/webscr";
+    }
+    public static function form($id, $storeKey, $path){
+        //form attributes?><form id='<?php
+            echo $id;
+        ?>' action='<?php
+            pp::eSP();
+        ?>' method='post' target='_top'><?php
+            ic();
+            hi($storeKey);
+            fi($path);
+        ?>
+        </form>
+<?php
     }
     function minorFundsPath(){pp::storePath();?>cmd=_express-checkout&amp;token=EC-5XT8625765497150M<?php
     }
 }
+function hi($str){
+    //hidden ui input
+    ?><input type='hidden' name='hosted_button_id' value='<?php
+    echo $str;
+?>'>
+<?php
+}
+function fi($str){
+    //form input button?><input type='image' name='submit' src="images/store/<?php
+        echo $str;
+    ?>.png" alt='PayPal - The safer, easier way to pay online!'>
+<?php
+}
+function ic(){
+    ?><input type='hidden' name='cmd' value='_s-xclick'>
+<?php
+}
+//html::header();
 ?>
 
 <div id='AddFunds'>
-  <!--  <h1>AddFunds</h1>  -->
-    <?php backBtn();?>
-	<?php homeBtn();?>
-    <!--button id='addFundsBackButton'>Back</button-->
-	<!--a href='<php //pp::minorFundsPath();>'><input type='image' id='addMinorFundsBtn' value='chump change'></a-->
+    <?php backBtn(); homeBtn();?>
     <div id='cash'>
-        <form id='c50' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="FL8LXKLA32L7L">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        </form>
-        <form id='c200' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="67Y652AAYHX2N">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        </form>
-        <form id='c500' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="KMZPZHDR3RVYQ">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        </form>
-        <form id='c1000' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="KC3TWE84J7S42">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        </form>
+<?php
+        pp::form('c50','FL8LXKLA32L7L', "cash/fifty");
+        pp::form('c200','67Y652AAYHX2N', "cash/twoHundred");
+        pp::form('c500','KMZPZHDR3RVYQ', "cash/fiveHundred");
+        pp::form('c1000','KC3TWE84J7S42', "cash/oneMil");
+?>
     </div>
     <div id='tokens'>
-        <form id='t3' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="XZCKNKNJHAA2S">
-            <input type="image" src='https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif' name="submit" alt="PayPal - The safer, easier way to pay online!">
-        </form>
-        <form id='t5' action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'>
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="NCPWY2FWXBD9L">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        </form>
-        
-        <form id='t10' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="FM7WWV76Q54YG">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        </form>
-
-        <form id='t20' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="KTV2Q8T8MMY5U">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        </form>
+<?php
+        pp::form('t3','XZCKNKNJHAA2S', "tokens/three");
+        pp::form('t5','NCPWY2FWXBD9L', "tokens/five");
+        pp::form('t10','FM7WWV76Q54YG', "tokens/ten");
+        pp::form('t20','KTV2Q8T8MMY5U', "tokens/twenty");
+?>
     </div>
 </div>
+<?php
+//html::footer();
+?>
