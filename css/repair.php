@@ -87,6 +87,9 @@ cmntHeader('Repair Screen Styles');
     position:absolute;
     left:0%;
 }
+
+
+
 <?php divRepair();?> div button.rb{
     background:url('../images/icons/repair.png') no-repeat 0 0;
     background-size:100% 100%;
@@ -132,7 +135,7 @@ cmntHeader('Repair Screen Styles');
 ?>
 }
 
-<?php divRepair();?> div#switch button#dt :hover{
+<?php divRepair();?> div#switch button#dt:hover{
 <?php
     //mouse over
     css::defaultBG('../images/defaultBtn2.png');
@@ -141,8 +144,7 @@ cmntHeader('Repair Screen Styles');
     css::top('0%');
 ?>  
 	color:green;
-	padding : 2%;
-	top : 19%;
+	
 }
 
 <?php divRepair();?> div#switch button#body{
@@ -154,6 +156,17 @@ cmntHeader('Repair Screen Styles');
     css::bottom('0%');
 ?>
 }
+<?php divRepair();?> div#switch button#body:hover{
+	
+<?php
+	 //mouse over
+    css::defaultBG('../images/defaultBtn2.png');
+    css::bgSize('100%', '100%');
+    css::left('0%');
+    css::bottom('0%');
+?>
+}
+
 <?php divRepair();?> div#switch button#inter{
 <?php
 	css::defaultBG('../images/interior.png');
@@ -162,6 +175,17 @@ cmntHeader('Repair Screen Styles');
     css::top('0%');
 ?>
 }
+
+<?php divRepair();?> div#switch button#inter:hover{
+<?php
+	 //mouse over
+    css::defaultBG('../images/defaultBtn2.png');
+    css::bgSize('100%', '100%');
+    css::right('0%');
+    css::top('0%');
+?>
+}
+
 <?php divRepair();?> div#switch button#docs{
 	
 <?php
@@ -171,6 +195,18 @@ cmntHeader('Repair Screen Styles');
     css::bottom('0%');
 ?>
 }
+<?php divRepair();?> div#switch button#docs:hover{
+	
+<?php
+	 //mouse over
+    css::defaultBG('../images/defaultBtn2.png');
+    css::bgSize('100%', '100%');
+    css::right('0%');
+    css::bottom('0%');
+?>
+}
+
+
 /*
 left div
 */
