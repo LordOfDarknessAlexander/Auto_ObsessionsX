@@ -160,10 +160,7 @@ if(!loggedIn() ){?>
 		   <a href='index.php' class='button back' title='Home Page'>Back</a><br>
         </div>
     </div><!--end menu-->    
-	
-<!--		<div id='slots'>
-			<a id ='slots' href='Slots/index.html' target="_blank">Slots</a><br>
-		</div>  -->
+
     <canvas id='canvas' width='900' height='600'>
         <p>You're browser does not support the required functionality to play this game.</p>
         <p>Please update to a modern browser such as <a href='www.google.com/chrome/‎'>Google Chrome</a> to play.</p>

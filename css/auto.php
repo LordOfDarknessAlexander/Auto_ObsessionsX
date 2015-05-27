@@ -359,37 +359,7 @@ div#slots
 	top : 82%;
 	padding : 2%;
 }
-/*
-div#slots a
-{
-<?php
-    posAbs();
-    css::defaultBG('../images/body.png');
-    css::bgSize('100%', '100%');
-    css::txtAlignCntr();
-?>
-	width: 20%;
-	color:red;
-    left:10%;
-    z-index:30;
-	top : 82%;
-	padding : 2%;
-}
-div#slots a:hover
-{
-<?php
-    posAbs();
-    css::defaultBG('../images/logo.png');
-    css::bgSize('100%', '100%');
-    css::txtAlignCntr();
-?>
-	width: 20%;
-	color:green;
-    left:10%;
-    z-index:30;
-	top : 82%;
-	padding : 2%;
-}*/
+
 
 /* visited link */
 #div#main a:visited {
