@@ -48,9 +48,7 @@ function loggedIn(){
     global $ss;
     return $ss && isset($_SESSION['uname']) ? true : false;
 }
-function getUserName(){
-    global $ss;
-    
+function getUserName(){    
     return loggedIn()?
         $_SESSION['uname'] : 'guest';
 }
@@ -77,7 +75,7 @@ function getUserName(){
    
     <div id='reg-navigation'>
         <a id='home' class='tooltip' href='<?php
-        echo rootURL() . 'Users/index.php';
+            echo rootURL() . 'Users/index.php';
         ?>'>Home<!--span><!--img src=''>Tooltip!</span--></a><br>
         <a id='addFunds' class='tooltip'>Store</a><br>
 		
@@ -112,13 +110,13 @@ else{?>
 <?php
 if(!loggedIn() ){?>
                 <li><a id='reg' class='button Register' href='<?php
-                echo rootURL() . 'Users/registerUser.php';
+                    echo rootURL() . 'Users/registerUser.php';
                 ?>'>Register</a></li>
 <?php
 }?>
                 <li><a class='button credits' <?php hrefVoid();?>>Credits</a></li>				
 				<li><a class='button play' <?php hrefVoid();?>>Play <?php
-                echo loggedIn()? 'Game' : 'as Guest';
+                    echo loggedIn()? 'Game' : 'as Guest';
                 ?></a></li>
             </ul>
            

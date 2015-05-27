@@ -45,9 +45,13 @@ Action Select UI stylings
     posAbs();
     css::txtAlignL();
 ?>
-	left:0%;
+	left:1%;
     top:30%;
-	width:10%;
+	width:8%;
+}
+<?php divAS();?> div#filter div button{
+    width:100%;
+<?php css::txtAlignCntr();?>
 }
 /*
 Tint divs different colours for different classes
