@@ -261,13 +261,23 @@ img#adBar{
 
 #splash
 {
-  background-image: url('../images/Splash.png')no-repeat 0 0;
+  background-image: url('../images/logo.png')no-repeat 0 0;
   background-size : 100% 100%;
   width: 100%;
   height: 100%;
   z-index: 20;
 
 }
+#Slots
+{
+  background-image: url('../images/Splash.png')no-repeat 0 0;
+  color: white;
+  background-size : 100% 100%;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+}
+
 <?php //Stat Bar Game HUD?>
 div#statBar{
 <?php

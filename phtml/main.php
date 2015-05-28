@@ -159,12 +159,16 @@ if(!loggedIn() ){?>
            <!-- <a href='javascript:void(0)' class='button back'>Back</a> -->
 		   <a href='index.php' class='button back' title='Home Page'>Back</a><br>
         </div>
+		<div id ='Slots' width='600' height='300'> 
+		
+		</div>
     </div><!--end menu-->    
 
     <canvas id='canvas' width='900' height='600'>
         <p>You're browser does not support the required functionality to play this game.</p>
         <p>Please update to a modern browser such as <a href='www.google.com/chrome/‎'>Google Chrome</a> to play.</p>
-    </canvas>    
+    </canvas>   
+	
 <?php
 //php includes the source html files here
 //require_once 'mainMenu.php';

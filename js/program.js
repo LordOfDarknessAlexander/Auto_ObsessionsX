@@ -223,6 +223,12 @@ function switchStates( GAME_MODE)
 		case ADD_FUNDS:
 			Store.update();
 		break;
+		
+		case SLOTS:
+			//Slots.update();
+			callSlots();
+			setStatBar();
+		break;
 			
 		default:
 			RUNNING; 
@@ -258,6 +264,21 @@ function mainMenu()
     $('#menu').addClass('main');
     $('.sound').show();
     //jq.adBar.show();
+}
+
+function callSlots()
+{
+	stop = true;
+	auctionStop = true;
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	$('#Slots').show();
+
+	appState = GAME_MODE.SLOTS;
+	if(appState == GAME_MODE.SLOTS)
+	{
+		console.log("Register THis Slot Action");
+	
+	}
 }
 
 //money = 50000;
@@ -332,7 +353,7 @@ Auction.sold = function(){
 //<php if(loggedIn){>
 			//Auction._car.repairs == Auction.vcondition;
             pas.insertCar(Auction._car.id);
-			//pas.insertCar(Auction._car.repairs);
+			pas.insertCar(Auction._car.repairs);
 //<php
 //}
 //else{?>
@@ -387,6 +408,14 @@ function(){
     delete mainMenu;
     //delete menu image, since the game can not navigate back to this screen after clicking
     startGame();
+});
+//Slots
+$('.playSlots').click(
+function(){
+    $('#gameMenu').hide();
+	$('#Slots').show();
+    //delete menu image, since the game can not navigate back to this screen after clicking
+	callSlots();
 });
 
 //
