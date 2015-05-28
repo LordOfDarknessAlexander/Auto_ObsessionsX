@@ -131,12 +131,13 @@ class Vehicle
         //else create new car with no repairs or upgrades
     }
     public static function getRandStage(){
+        //
         $r = rand(0, 4);
         $ret = $r == 0 ? 0 : 0x00000001 << ($r - 1);
         return $ret;
     }
     public static function getRandRepairs(){
-        
+        //
         $ret = rand(0x0, 0xf);
         return $ret;
     }

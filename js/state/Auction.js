@@ -20,8 +20,8 @@ var playerBoughtOut = false; //temporary for our dev button "buyout"
     return array;
 }*/
 //ao.state.Auction =
-var Auction =
-{	//manages the state for purchasing cars
+var Auction = {
+	//manages the state for purchasing cars
 	//_enemies:[],
 	/*
 	//need to use namsespace to allow private vars we could implement and make all auction vars private
@@ -523,12 +523,11 @@ var Auction =
 		
         if(this.winningTimer >= this.winningTimerCap)
 		{
-			while(( this.playerWinning || this.enemyWinning) && (this.goingTimer < 660) && (!auctionStop))
+			while( (this.playerWinning || this.enemyWinning) && (this.goingTimer < 660) && (!auctionStop))
 			{
 				this.goingTimer++;
 				
-                if( (this.goingTimer > 0) && (this.goingTimer < 360))
-				{
+                if( (this.goingTimer > 0) && (this.goingTimer < 360)){
 					this.goingTimer++
 					//console.log("Going once");
 					context.fillText( "Going Once" ,ENEMY_X + 715 , 270);
@@ -536,10 +535,9 @@ var Auction =
 					break;
 					
 				}
-				else if( (this.goingTimer > 370) && (this.goingTimer < 650) )
-				{
+				else if( (this.goingTimer > 370) && (this.goingTimer < 650) ){
 					//console.log("Going twice");
-					context.fillText( "Going Twice" ,ENEMY_X + 715 , 290);
+					context.fillText("Going Twice" ,ENEMY_X + 715 , 290);
 					assetLoader.sounds.going.play();
 					break;		
 				}
@@ -576,9 +574,9 @@ var Auction =
 		//bidding continues until only 1 bidder remains
 		//
 		//disable buyout button for remthis.ainder of auction
-		var btn = $('div#Auction button#buyout');
-		btn.click(function(){playerBoughtOut = true;});
-		btn.css('opacity', '0.65');
+		//var btn = $('div#Auction button#buyout');
+		//btn.click(function(){playerBoughtOut = true;});
+		//btn.css('opacity', '0.65');
 		
 		if(this.playerWon){
             //
@@ -616,7 +614,7 @@ var Auction =
 		}
 	},
 	setBidBtnText : function(){
-		$('#bid').text("Bid: $" + this.currentBid.toFixed(2) );
+		$('#bid').text('Bid: $' + this.currentBid.toFixed(2) );
 	}
 };
 //Auction jQuery bindings
@@ -627,6 +625,7 @@ function(){
 	//$('#bid').text(
 	Auction.setBidBtnText();
 });
+//$('button#buyout').click(Auction.buyOut);
 jq.Auction.backBtn.click(
 function(){
 	Auction.close();

@@ -42,10 +42,7 @@ class pasUpdate{
             "INSERT INTO $table ($CID) VALUES ($carID)"
         );
         
-        if($res){
-            $ret = true;
-        }
-        return $ret;
+        return $res ? true : false;
     }
     public static function userCurrentCar($carID){
         global $AO_DB;
@@ -272,7 +269,7 @@ function addPrestige($val){
         //echo "purchase::tokens(), invalid value $t, purchase::failed";
     }
 }
-function  addMarkers($val){
+function addMarkers($val){
     //$val must be an unsigned int greater than 0
     global $AO_DB;
     
@@ -336,11 +333,11 @@ if($ps){
                     else{
                         $tableName = getUserTableName();
                         
-                        $dt = Vehicle.getRandStage();
-                        $b = Vehicle.getRandStage();
-                        $i = Vehicle.getRandStage();
-                        $d = Vehicle.getRandStage();
-                        $r = Vehicle.getRandRepairs();
+                        $dt = Vehicle::getRandStage();
+                        $b = Vehicle::getRandStage();
+                        $i = Vehicle::getRandStage();
+                        $d = Vehicle::getRandStage();
+                        $r = Vehicle::getRandRepairs();
                         
                         $res = $aoUsersDB->query(
                             "INSERT INTO $tableName
@@ -349,6 +346,7 @@ if($ps){
                                 ($carID, 0,0,0,0,0)"
                             //IF entry EXISTS do nothing
                         );
+                        //res continas the result of the insertion
                         echo json_encode($res);
                     }
                     exit();
@@ -356,12 +354,12 @@ if($ps){
                 elseif($op == 'update'){
                     //inserts a car with carID from the vehicle database into the
                     //logged in user's table in aoUsersDB
-                    $dt = intval($_POST['dt']);
-                    $body = intval($_POST['body']);
-                    $inter = intval($_POST['interior']);
-                    $docs = intval($_POST['docs']);
+                    $dt = intval($_POST['dt']);     //isUInt8($_POST['dt']) ? intval($_POST['dt']) : 0;
+                    $body = intval($_POST[$B]);     //isUInt8($_POST['body']) ? intval($_POST['body']) : 0;
+                    $inter = intval($_POST[$I]);
+                    $docs = intval($_POST[$D]);
                     
-                    $rep = intval($_POST['repairs']);
+                    $rep = intval($_POST[$R]);
                     
                     $tableName = getUserTableName();    //$_SESSION['userID'];
 

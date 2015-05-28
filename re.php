@@ -10,6 +10,9 @@ function isAlpha($str){
     //NOTE:Also, as it validates only against numbers and letters,
     //inserting any special characters (%,&,<,>) to induce an attack
     //will be prevented(also, any attempt at escaping the string will cause it to fail)
+    //^ matches the start of a string,
+    //$ matches end of string
+    //
     return preg_match('/^[[:alpha:]]+$/', $str);
 }
 function isAlphaSmall($str){
@@ -32,7 +35,7 @@ function isWord($str){
     return preg_match('/^[[:word:]]+$/', $str);
 }
 function isNumber($str){
-    //is string a continuous series of digits
+    //is string a continuous series of integer digits(no commas or periods)
     //no special characters, letters, whitespace or symbols
     return preg_match('/^[[:digit:]]+/$', $str);
 }*/
@@ -41,6 +44,10 @@ function isPassword($str){
     //no special characters, whitespace or symbols
     return preg_match('/^\w{8,12}$/', $str);
 }
+//function isHexColor($str){
+    //matches either 0x000000 || #000000 hex repressentation of 32 bit colors
+    //return preg_match('/^(#|0x)(?:(?:[a-f]{2}){1,3})$/i', $str) ? true : false;
+//}
 //function isArgList($str){
     //
     //return preg_match('/([[:alpha:]]+(,\s*)*)+/', $str;

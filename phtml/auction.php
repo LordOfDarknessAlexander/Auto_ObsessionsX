@@ -119,12 +119,20 @@ function outputCar($args){
     backBtn();
     homeBtn();
 ?>
-    <button id='bid'>"Bid:money"</button>
+    <button id='bid'>Bid:money</button>
     <!--button id='buyout'>Buyout</button-->
     <!--auctionCar will be <img id=userCar'>.
     The code can be streamlined with jQuery in JS-->	
     <!--label id='carPrice'></label-->
     <label id='carInfo'></label>
+    
+    <!--div id='bids'>
+        <label id='b0'></label>
+        <label id='b1'></label>
+        <label id='b2'></label>
+        <label id='b3'></label>
+        <label id='user'></label>
+    </div-->
 </div>
 
 <div id='AuctionSell'>
