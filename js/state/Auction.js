@@ -95,8 +95,8 @@ var Auction =
                     console.log(Auction._car.getFullName());
                     //vehiclePrice = Auction._car.getPrice();
 				   //vehiclePrice = Auction._car.getAdjustedConditionPrice();
+					//vcondition = Auction._car.getRandCondition();
 					vcondition = Auction._car.getRandCondition();
-					
 					vehiclePrice = Auction._car.getPrice() * vcondition/100 ;
 					vcondition2 = Auction._car.getCondition();
 					//vehiclePrice = Auction._car.getPrice() ;
@@ -121,7 +121,7 @@ var Auction =
                     //$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
                    // $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + Auction._car.getPriceStr() );
 				   //display vehicle current value based on current random condition
-				  // $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + vehiclePrice.toFixed(0) + '<br>' + 'condition  ' + vcondition.toFixed(0) + 'condition2  ' + vcondition2 );
+				  
 				   $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + vehiclePrice.toFixed(0) + '<br>' + 'condition  ' + vcondition.toFixed(0));
                     $('div#Auction label#carInfo').text(Auction._car.getInfo() );
                     //$('#menu').removeClass('gameMenu');

@@ -159,9 +159,7 @@ if(!loggedIn() ){?>
            <!-- <a href='javascript:void(0)' class='button back'>Back</a> -->
 		   <a href='index.php' class='button back' title='Home Page'>Back</a><br>
         </div>
-		<div id ='Slots' width='600' height='300'> 
 		
-		</div>
     </div><!--end menu-->    
 
     <canvas id='canvas' width='900' height='600'>

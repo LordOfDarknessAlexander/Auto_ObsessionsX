@@ -10,8 +10,8 @@ html::title('Slots');
 html::charset();
 ?>
 <link rel='stylesheet' type='text/css' href='Users/includes.css'>
-<link rel='stylesheet' type='text/css' href='css/auto.php'>
-<link rel = 'stylesheet' href = 'Slots/gameStyles/gameStyleSheet.css'>
+
+<link rel = 'stylesheet' href = 'css/gameStyleSheet.css'>
 <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 </head>
@@ -78,7 +78,7 @@ html::charset();
 					
 		</div>
 				
-		<script type='text/javascript' src='Slots/src/miniSlots.js'></script>				
+		<script type='text/javascript' src='js/slots/miniSlots.js'></script>				
 	</body>
 		
 		
