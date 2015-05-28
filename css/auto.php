@@ -268,15 +268,7 @@ img#adBar{
   z-index: 20;
 
 }
-#Slots
-{
-  background-image: url('../images/Splash.png')no-repeat 0 0;
-  color: white;
-  background-size : 100% 100%;
-  width: 100%;
-  height: 100%;
-  z-index: 20;
-}
+
 
 <?php //Stat Bar Game HUD?>
 div#statBar{
@@ -355,18 +347,20 @@ div#reg-navigation a:hover{
 	padding : 2%;
 	top : 19%;
 }
-div#slots
+div#Slots
 {
 <?php
     posAbs();
-   //css::defaultBG('../images/body.png');
+    css::defaultBG('../images/logo.png');
+	css::bgSize('100%', '100%');
     css::txtAlignCntr();
 ?>
-	width: 20%;
+	width: 100%;
+	height: 100%;
 	color:red;
     left:10%;
     z-index:2;
-	top : 82%;
+	top : 22%;
 	padding : 2%;
 }
 

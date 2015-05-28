@@ -81,6 +81,7 @@ function load(){
             //set user garage
             //
             var len = data.garage.length;
+			
             
             if(len == 0){
                 //exit early is user has no cars
@@ -172,13 +173,13 @@ function(){
     setAdBG();
     jq.adBar.hide();
     jq.nav.hide();
+	
 	//jq.setErr('Welcome home, ' + user.name);
 	
 	function init(){
 		if(!stop){
 			requestAnimFrame(init);			
 			update(0.33);
-			
 			if((timer >= 300.00) && (timer <= 900.00)){
 				appState = GAME_MODE.MAIN_MENU;
 				mainMenu();
@@ -191,8 +192,8 @@ function(){
 //Load the splash screen first
 assetLoader.finished = function(){
     //executed when assetLoader finalizes resource creation
-	$('#splash').removeClass('#Register');
-  	$('#Register').hide();
+	$('#splash').removeClass('#Slots');
+  	$('#Slots').hide();
   	switchStates();  
 }	
 
@@ -232,6 +233,7 @@ function switchStates( GAME_MODE)
 			
 		default:
 			RUNNING; 
+			
 		// etc...
 	}
 }
@@ -242,6 +244,8 @@ function splash(){
     garageDoor();
     $('#progress').hide();
     $('#splash').show();
+	$('#splash').removeClass('#Slots');
+	 $('#Slots').hide();
     $('.sound').show();  
     assetLoader.sounds.engine.play();
 }
@@ -258,8 +262,8 @@ function mainMenu()
 
     $('#progress').hide();
     $('#splash').hide();
-    $('#Register').hide();
-    $('#menu').removeClass('#Register');
+    $('#Slots').hide();
+    $('#menu').removeClass('#Slots');
     $('#main').show();
     $('#menu').addClass('main');
     $('.sound').show();
@@ -289,7 +293,7 @@ function startGame()
 	//$('#money').html(money);
     jq.adBar.show();
     jq.nav.show();
-    
+   
     jq.setErr();
     
 	appState = GAME_MODE.RUNNING;
@@ -403,6 +407,8 @@ $('.play').click(
 function(){
     $('#menu').hide();
     $('#gameMenu').show();
+	$('#gameMenu').removeClass('#Slots');
+	 $('#Slots').hide();
     //can no longer navigate to credits or the root menus anymore
     delete credits;
     delete mainMenu;
@@ -493,7 +499,7 @@ function(){
     setHomeImg();
     jq.setErr();    //clear error when changing pages
 	//var car = Garage.getCurrentCar();
-	
+	 $('#Slots').hide();
 	//if(car !== null){
 		//jq.Game.homeImg.attr('src', car.getFullPath() );
     

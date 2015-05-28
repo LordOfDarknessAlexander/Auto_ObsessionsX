@@ -28,6 +28,6 @@ require 'Users/includes/info-col.php';
     </div>
 </div>	
 <?php
-require '../phtml/legal.php';
+require 'phtml/legal.php';
 html::footer();
 ?>

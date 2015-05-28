@@ -23,17 +23,23 @@
 ?>
 
 <div id='gameMenu'>
+<?php  if($isSlots)
+{
+	echo "<div id='Slots' style='margin-top: -66%; height: 30%; width: 60%;' > 
+	</div>";
+}
 
+?>
 <div id='slots' style= "height: 18%;" >
-			<a id ='slots' style='margin-top: -26%; height: 18%; width: 40%;' href='Slots/index.html' target="_blank">Slots</a><br/>  
-		<!--	<a id ='slots' style='margin-top: -26%; height: 18%; width: 40%;' class='button playSlots'>Slots</a><br/>  -->
+		<!--	<a id ='slots' style='margin-top: -26%; height: 18%; width: 40%;' href='Slots/index.html' target="_blank">Slots</a><br/>  -->
+		<!--	<a id ='slots' style='margin-top: -26%; height: 18%; width: 40%;' class='button playSlots'>Slots</a><br/>  --->
+		<a id ='slots' style='margin-top: -26%; height: 18%; width: 40%;' href='slots.php' target="_blank">Slots</a><br/>
 			
 		</div>
     <!--Root Game Menu, hub for page navigation-->
     <!--img id='homeImg' src='images\\garageEmpty.png'-->
 	
-	<div id='Slots' >
-	</div>
+	
     <div id='menuLeft'>
         <button id ='myCars'>My Garage</button><br/>
         <button id='toAuctionBtn'>Go to Auction</button><br/>

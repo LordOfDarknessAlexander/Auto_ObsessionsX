@@ -18,6 +18,8 @@ $_SESSION = array('dur'=>0);    //must log in to set session vars!
 //userLoggin!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
 
+//slots
+$isSlots = false;
 function hrefVoid(){
     //standard javascript for linking a document to itself,
     //causing a page refresh
