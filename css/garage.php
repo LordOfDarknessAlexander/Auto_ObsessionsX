@@ -191,6 +191,7 @@ div#progressBars{
 div#userCar div#progressBars,
 div#selectedCar div#progressBars{
 <?php
+    posAbs();
 ?>
     font-size:0.75em;
     text-align:left;
@@ -198,6 +199,7 @@ div#selectedCar div#progressBars{
     bottom:0%;
     left:0%;
     width:70%;
+    /*height:25%;*/
 }
 <?php divGarage();?> div#progressBars progress
 {	

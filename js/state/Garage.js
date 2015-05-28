@@ -362,10 +362,10 @@ var Garage = {
 //pbSetColor('Docs');
 //?>
             //set progress bar
-            pbSetColor($('progress#drivetrainPB', div), stats._driveterrain);
-            pbSetColor($('progress#bodyPB', div), stats._body);
-            pbSetColor($('progress#interiorPB', div), stats._interior);
-            pbSetColor($('progress#docsPB', div), stats._docs);
+            pbSetColor($('progress#pbDrivetrain', div), stats._driveterrain);
+            pbSetColor($('progress#pbBody', div), stats._body);
+            pbSetColor($('progress#pbInterior', div), stats._interior);
+            pbSetColor($('progress#pbDocuments', div), stats._docs);
             
             $('button#con', div).text(car.getCondition().toString() );
 			 //$('button#con', div).text(car.getRandCondition().toString() );
@@ -454,10 +454,10 @@ var Garage = {
 //pbSetColor('Interior');
 //pbSetColor('Docs');
 //?>
-			pbSetColor($('progress#drivetrainPB', div), stats._driveterrain);
-			pbSetColor($('progress#bodyPB', div), stats._body);
-			pbSetColor($('progress#interiorPB', div), stats._interior);
-			pbSetColor($('progress#docsPB', div), stats._docs);
+			pbSetColor($('progress#pbDrivetrain', div), stats._driveterrain);
+			pbSetColor($('progress#pbBody', div), stats._body);
+			pbSetColor($('progress#pbInterior', div), stats._interior);
+			pbSetColor($('progress#pbDocuments', div), stats._docs);
 			
             $('button#con', div).text(car.getCondition().toString() );
             

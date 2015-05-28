@@ -8,13 +8,13 @@ function selectBtn(){?>
 
 function cvStatBar($id){
     echo $id . ':';
-    br(); pb("pb$id"); br(); hr();
+    br(); pb("pb$id"); br(); //hr();
 }
 function carView(){
     //display vehicle data?>
     <img id='carImg'><br>
-    <label id='carName'></label><br>
-    <label id='carInfo'></label><br>
+    <label id='carName'></label>
+    <label id='carInfo'></label>
     <button id='con'>0</button>
     <div id='progressBars'>
 <?php
@@ -23,10 +23,6 @@ cvStatBar('Body');
 cvStatBar('Interior');
 cvStatBar('Documents');
 ?>
-        drivetrain:<br><progress id='drivetrainPB' value='0.0'></progress>
-        <br>body:<br><progress id='bodyPB' value='0.0'></progress>
-        <br>interior:<br><progress id='interiorPB' value='0.0'></progress>
-        <br>documents:<br><progress id='docsPB' value='0.0'></progress>
     </div>
 <?php
 }
