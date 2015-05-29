@@ -343,7 +343,7 @@ if($ps){
                             "INSERT INTO $tableName
                                 ($CID, $DT, $B, $I, $D, $R)
                             VALUES
-                                ($carID, 0,0,0,0,0)"
+                                ($carID, $dt, $b, $i, $d, $r)"
                             //IF entry EXISTS do nothing
                         );
                         //res continas the result of the insertion

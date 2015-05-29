@@ -153,10 +153,9 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 				(this._docs !== null ? this._docs.getPercentAvg() : 0.0)
 			) * 0.25;
 			return Math.floor(ret * 100.0);// *  Math.random(0.0,1.25);
-			
 		},
 		getRandCondition : function(){
-           
+            //
 			return this.condition +  Math.floor(Math.random(1,100) * 100) ;
 			/*	var ret = (
 				(this._dt !== null ? this._dt.getPercentAvg() : 0.0) +

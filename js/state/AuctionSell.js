@@ -284,7 +284,7 @@ function auctionGen(args){
                 upPerc =  0.06 * cb;
 			
             for(var i = 0; i < this._ai.length; i++){					
-				if(this._ai[i].canBid && !this._ai[i].winningBid){	//global cooldown timer has refreshed, bidding now available
+				if(this._ai[i].canBid() && !this._ai[i].winningBid){	//global cooldown timer has refreshed, bidding now available
                     //if AI can bid and is not currently the top bidder
                     if((this._ai[i].currBid < cb) && (!this._ai[i].leftAuction)){
 						this._ai[i].currBid = cb + upPerc;
@@ -303,8 +303,8 @@ function auctionGen(args){
 				}
 			}
 		},
-		bidFinder : function()
-		{	//determine bidder
+		bidFinder : function(){
+			//determine bidder
 			//check the bids of each this._ai to determine the highest bid,
 			//then setting the state;
 			for(var i = 0; i < this._ai.length; ++i){
@@ -313,37 +313,32 @@ function auctionGen(args){
 				}
 			}
 		},
-		checkBid : function(index)
-		{	//check if the enemy at the current index has a higher bid than the other this._ai's
-			var ret = true;
-            
+		checkBid : function(index){
+            //check if the enemy at the current index has a higher bid than the other this._ai's            
 			for(var i = 0; i < this._ai.length; i++){
 				if(index != i){
 					if(this._ai[index].currBid > this._ai[i].currBid){
 						continue;
 					}
-					else{
-						ret = false;
-						break;
-					}
+                    return false;
 				}
 			}
-			return ret;
+			return true;
 		},
 		setBid : function(index){
             var ai = this._ai[index];   //temporary val is useful when not setting object values
 			
             if(!ai.leftAuction){
 				if(!ai.winningBid){
-					this._currentBid = ai.currBid;
+					//this._currentBid = ai.currBid;
 					//console.log(this._currentBid);
 				}			
 				//iterate over this._ai, assigning the bidder at index as the current bidder,
 				//assigning all others to false
-				for(var i = 0; i < this._ai.length; i++){
+				//for(var i = 0; i < this._ai.length; i++){
                     //must index into the array diretly if we want to set values!
-					this._ai[i].canBid = (i == index ? true : false);
-				}
+					//this._ai[i].canBid = (i == index ? true : false);
+				//}
 			}
 		},	
 		currentBidder : function(){	

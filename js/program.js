@@ -54,20 +54,21 @@ function auctionMode(deltaTime){
     Auction.setup();//auctionInit();  
 }
 function load(){
-//<?php if(loggedIn() ){
+//<php if(loggedIn() ){>
     var funcName = 'js/program.js load()';
     
     jq.post('pas/query.php',
         function(data){
             //the response string is converted by jquery into a Javascript object!
             if(data === null){
-                alert(funcName + ', Error:ajax response returned null!');
+                jq.setErr(funcName, 'Error:ajax response returned null! Could not load user data');
                 return;
             }
             //alert('ajax response recieved:' + JSON.stringify(data) );
             //
             //set user data
             //
+            //var s = data.stats;
             userStats = {
                 money:data.stats.money,
                 tokens:data.stats.tokens,
@@ -81,11 +82,10 @@ function load(){
             //set user garage
             //
             var len = data.garage.length;
-			
             
             if(len == 0){
                 //exit early is user has no cars
-                console.log(funcName + ', user has no cars!, Buy some, right now!');
+                jq.setErr(funcName, 'user has no cars! Vist the store to purchase some!');
                 return;
             }
             var args = [];
@@ -101,13 +101,15 @@ function load(){
                 AuctionSell.load();//data.sales);
                 setHomeImg();
             }).fail(function(){
-                console.log(funcName + ', loading game resources failed, abort!');
+                //console.log(f
+                jq.setErr(funcNam, 'loading game resources failed, abort!');
             });
         },
         function(jqxhr){
             //call will fail if result is not properly formated JSON!
-            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
-            console.log(funcName + ', loading game resources failed, abort!');
+            //alert(
+            jq.setErr(funcName, 'ajax call failed! Reason: ' + jqxhr.responseText);
+            //console.log(funcName + ', loading game resources failed, abort!');
         }
     );
 //<?php
@@ -134,40 +136,7 @@ function(){
 	//loadUser();
     //Garage.load();  //load user garage!
     //AuctionSell.load(); //load user sales, after garage!
-    /*var jqxhr = $.ajax({
-            type:'POST',
-            url:getHostPath() + 'pas/query.php',
-            dataType:'json',
-            data:'' //{carID:24577}
-        }).done(function(data){
-            //the response string is converted by jquery into a Javascript object!
-            if(data === null){
-                alert(funcName + ', Error:ajax response returned null!');
-                return;
-            }
-            //alert('ajax response recieved:' + JSON.stringify(data) );
-            
-            if(data.length == 0){
-                //exit early is user has no cars
-                console.log(funcName + ',user has no cars!, Buy some, right now!');
-                return;
-            }
-            var args = [];
-            
-            for(var i = 0; i < data.length; i++){
-                var obj = data[i];
-                args.push(VehicleFromDB(obj) ); //adds ajax request object to array
-            }
-            $.when.apply($, args).done(function(){
-                AuctionSell.load();
-            }).fail(function(){
-                console.log(funcName + ', loading game resources failed, abort!');
-            });
-        }).fail(function(jqxhr){
-            //call will fail if result is not properly formated JSON!
-            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
-            console.log(funcName + ', loading game resources failed, abort!');
-        });*/
+   
     //jq.Game.setHomeImg();
     setHomeImg();   //in Garage.js
     setAdBG();
@@ -180,7 +149,7 @@ function(){
 		if(!stop){
 			requestAnimFrame(init);			
 			update(0.33);
-			if((timer >= 300.00) && (timer <= 900.00)){
+			if( (timer >= 300.00) && (timer <= 900.00)){
 				appState = GAME_MODE.MAIN_MENU;
 				mainMenu();
 			  
@@ -198,10 +167,9 @@ assetLoader.finished = function(){
 }	
 
 //app may only exist in one state at a time
-function switchStates( GAME_MODE) 
-{	 //call various update based on appState
-	switch (GAME_MODE) 
-	{
+function switchStates(GAME_MODE){
+    //call various update based on appState
+	switch (GAME_MODE){
 		case SPLASH:
 			splash();
 			garageDoor();
@@ -215,7 +183,7 @@ function switchStates( GAME_MODE)
 			Auction.update();
 			setStatBar();
 		break;
-		        
+
 		case REPAIR:
 			Repair.update();
 			setStatBar();
@@ -270,8 +238,8 @@ function mainMenu()
     //jq.adBar.show();
 }
 
-function callSlots()
-{
+function callSlots(){
+    //change to slots
 	stop = true;
 	auctionStop = true;
 	context.clearRect(0, 0, canvas.width, canvas.height);
@@ -286,8 +254,8 @@ function callSlots()
 }
 
 //money = 50000;
-function startGame() 
-{	//initialize the game state
+function startGame(){
+	//initialize the game state
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	//document.getElementById('gameMenu').style.display = 'true';  
 	//$('#money').html(money);
@@ -316,11 +284,13 @@ function startGame()
 	setStatBar();
 	switchStates();
 	
-	assetLoader.sounds.gameOver.pause();
-	assetLoader.sounds.bg.currentTime = 0;
-	assetLoader.sounds.bg.loop = true;
-	assetLoader.sounds.bg.play();
-    
+    //if(audioEnabled() ){
+        //var s = assetLoader.sounds;
+        assetLoader.sounds.gameOver.pause();
+        assetLoader.sounds.bg.currentTime = 0;
+        assetLoader.sounds.bg.loop = true;
+        assetLoader.sounds.bg.play();
+    //}    
 }
 
 Auction.sold = function(){
@@ -336,6 +306,7 @@ Auction.sold = function(){
 	
 	jq.Sold.menu.show();
 	//if(audioEnabled() ){
+        //var s = assetLoader.sounds;
         assetLoader.sounds.bg.pause();
         assetLoader.sounds.gameOver.currentTime = 0;
         assetLoader.sounds.gameOver.play();
@@ -350,10 +321,13 @@ Auction.sold = function(){
 	//disable user from entering an auction for this car again
 	//in case of unintended bugs, make sure user doesn't already own car
     if(Auction._car !== null){
+        var n = Auction._car.getFullName(),
+            sl = $('div#sold label');
+        
         if(Auction.playerWon){
      //not the right object!?
             jq.Sold.menu.show();
-            $('div#sold label').html('Congratulations!<br>You won the auction for the ' + Auction._car.getFullName() + '<br>Go to the garage to view your prize!');
+            sl.html('Congratulations!<br>You won the auction for the ' + n + '<br>Go to the garage to view your prize!');
 //<php if(loggedIn){>
 			//Auction._car.repairs == Auction.vcondition;
             pas.insertCar(Auction._car.id);
@@ -363,8 +337,7 @@ Auction.sold = function(){
 //else{?>
             //var hasCar = false;
             
-            //for(var i = 0; i < userGarage.length; i++)
-            //{
+            //for(var i = 0; i < userGarage.length; i++){
                 //if(Auction._car.name/*id*/ == userGarage[i].name/*id*/)
                 //{
                     //hasCar = true;
@@ -379,13 +352,12 @@ Auction.sold = function(){
             //Garage.save();
 //<php
 //}?>
-            //ajax_post();    //get user info from server
             setStatBar();
         }
         else{
             //jq.Sold.menu.show();
             //setHomeImg();
-            $('div#sold label').html('Unfortunately,<br> you lost the auction for the ' + Auction._car.getFullName() + '<br>Better luck next time!');
+            sl.html('Unfortunately,<br> you lost the auction for the ' + n + '<br>Better luck next time!');
 //<php if(loggedIn){>
             pas.insertLoss(Auction._car.id);
 //<php
@@ -408,7 +380,7 @@ function(){
     $('#menu').hide();
     $('#gameMenu').show();
 	$('#gameMenu').removeClass('#Slots');
-	 $('#Slots').hide();
+	$('#Slots').hide();
     //can no longer navigate to credits or the root menus anymore
     delete credits;
     delete mainMenu;
@@ -423,7 +395,6 @@ function(){
     //delete menu image, since the game can not navigate back to this screen after clicking
 	callSlots();
 });
-
 //
 //Main Menu button bindings
 //
