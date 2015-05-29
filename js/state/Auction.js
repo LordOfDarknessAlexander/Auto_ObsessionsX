@@ -55,7 +55,7 @@ var Auction = {
     playerCanBid: true,
 	playerWinning : false,
 	playerWon : false, //Whether or not the player won the auction
-	raisePerc : 0, //How much the AI and player will raise each bid by
+	raisePerc : 0.08, //How much the AI and player will raise each bid by
 	vcondition: 0,
 	init:function(index){
         //call to start an auction for car		
@@ -105,7 +105,6 @@ var Auction = {
 					vcondition2 = vcondition + vcondition2;
 					//Auction._car.getCondition == vcondition2;
 					
-					
 					Auction.ai = [
                         Enemy(price(p)),
                         Enemy(price(p)),
@@ -113,7 +112,7 @@ var Auction = {
                         Enemy(price(p))
                     ];
 					//Auction.currentBid = vehiclePrice * 0.1;
-                    Auction.currentBid = vehiclePrice * 0.04;
+                    Auction.currentBid = vehiclePrice * Auction.raisePerc;
                     //jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
             
                     context.font = '26px arial, sans-serif';  
@@ -198,8 +197,9 @@ var Auction = {
 	},
     getRaise:function(){
         //returns the current bid plus and additional increase, based on a percentage
-        var b = this.currentBid;
-        return b + (b * this.raisePerc);
+        var b = this.currentBid,
+            cv = Auction._car.getPrice();
+        return b + (cv * this.raisePerc);
     },
 	update : function(){
 		//main update logic, called per frame

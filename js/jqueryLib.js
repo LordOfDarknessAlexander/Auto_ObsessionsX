@@ -130,7 +130,6 @@ var jq = {
 		backBtn : $('div#Auction button#backBtn'),
 		homeBtn : $('div#Auction button#homeBtn'),
 		carPrice : $('div#Auction label#carPrice')
-				
 		//cashLabel:$('#myCash'),
         //carPrice:$('#carPrice');
 	},
