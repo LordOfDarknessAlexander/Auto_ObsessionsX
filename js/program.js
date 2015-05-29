@@ -94,6 +94,7 @@ function load(){
                 var obj = data.garage[i];
                 args.push(VehicleFromDB(obj) ); //adds ajax request object to array
             }
+            
             $.when.apply($, args).done(function(){
                 //the UI is dependant on the users garage being loaded,
                 //so init ui after all ajax calls have completed
@@ -102,7 +103,7 @@ function load(){
                 setHomeImg();
             }).fail(function(){
                 //console.log(f
-                jq.setErr(funcNam, 'loading game resources failed, abort!');
+                jq.setErr(funcName, 'loading game resources failed, abort!');
             });
         },
         function(jqxhr){
@@ -149,6 +150,7 @@ function(){
 		if(!stop){
 			requestAnimFrame(init);			
 			update(0.33);
+            
 			if( (timer >= 300.00) && (timer <= 900.00)){
 				appState = GAME_MODE.MAIN_MENU;
 				mainMenu();

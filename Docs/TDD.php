@@ -269,20 +269,41 @@ root\
         main.js
     index.php
 </pre>
-<h4 id='cfn'>Classes, Functions, Variables and Namespaces</h4><hr>
-<pre>   As Object Oriented Programming(OOP) is not the background of everyone,
+<h4 id='cfn'>Variables, Operators, Functions, Classes and Namespaces</h4><hr>
+<pre>   As Object Oriented Programming(OOP) is not everyone's background,
+it can be difficult to make sense of the various mechanism,
+especially when various object oriented languages impliment diffrent features.
+Before discussing how to express code,
+it is usefull to understand the concepts involded and how to
+visually and logically seperate these concepts,
+so that developers can instictually read/write code without
+having to first desipher it physical for and the authors intent,
+as it should <b>intrinsic to the form expressed</b> in the code itself.
+
 First, some definitions:
-    Variable(data/POD)-
-    Function-A single memory location which repressents a stack of commands which operate on data,
-either anonymous or bound to a textual identifier.
-In javascript functions can be 'new'ed to mimic classes/objects.
-    Class-A declaration of a related collection of data and functions which,
+    Variable(data/POD)-this is not always the same for all languages,
+        as some (like Obj-C, Javascript and Python) implement plain old data as being derived
+        from a base class/object proto type.
+    Function-A unique memory location which repressents a stack of commands which operates on data,
+        either declared anonymously(lambdas/closures) or bound to a textual identifier.
+<p class='tip'>    In javascript functions can be 'new'ed to mimic classes/objects,
+which copies the code and allocates a new portion of memory for it,
+increasing memory consumption(by duplicating executable source).
+<b>DO NOT</b> <i>new</i> functions unless syntactically and contextually appropriate.
+</p>
+    Class-Encapsulates a single related collection of data and functions,
+        which may(or may not, in the case of class which entierly contain static methods)
+        be instansiated 
+    Namespace-Encapsulates related collections of data, functions, classes and other namespaces.
+        Namespace are never instansiated (and often best used to represent <i>static classes/interfaces</i>).
+    Class-Encapsulates a related collection of data and functions which,
 when an instance is initialized/allocated/returned,
 possess a unique memory location(in part or in whole).
-    Namespace-A collection of related variables, functions, and classes,
-which is (typically)never allocated, and has static duration(in compiled languages, these are a compiler construct)
-<p class='tip'>The HTML and CSS 'class' attribute/selector is not the same as
+<p class='tip'> The HTML and CSS 'class' attribute/selector is not the same as
 that of the OOP concept(as neither are programing languages)</p>
+    Namespace-Encapsulates related variables, functions, classes and other namespaces,
+        which is never instansiated, has static duration(in compiled languages,
+        these are a compile-time construct, used in name mangling)
 </pre>
 <h4 id='cfnDU'>Declaration and Usage</h4><hr>
 <pre>   All gloabally accessable classes are declared (unless prefixed with a namespace, eg: aoVehicle, pasGet, dbConnect),
@@ -293,17 +314,20 @@ js:<code><p class='good'>
 //declares a function, which returns a new object,
 //adopting a class like structure
 function makeStuff(args){
-    //doc string, about this class ctor/generator
+    //doc string! this is where info about this function goes
+    //this in an example of a class ctor/generator
     //Static constants are owned by this generator,
     //as they should only be assign once and only one 
     this.PUB_VAR = 0;
     this._VAR = 0;
     //
     return {
-        pub:args[0],
+        pub:args[0],    //short doc string about var
         _prot:'protected',
         _priv:'private',
-        //
+        //Declare all function AFTER data members,
+        //as it makes no sense to have functions
+        //operating on variables which do no exist/are no declared
         getProt:function(){
             return this._prot;
         }
@@ -345,7 +369,7 @@ so these naming conventions are purely synatictical and are enforced as a human 
 as the programmer must be able to properly, clearly and easily express their intent.
 <hr>
 PHP:
-    Variables in PHP begin with a &amp;(functions do not).
+    Variables in PHP begin with an &amp;(functions do not).
     To distinguish related groups of functions, variables or classes at
 global scope either prefix them with a short abbreviation of the namespace(aoSomeFunc(){}, class aoVehicle{}, $aoUserDB = new dbConnect();),
 or declared them as a static member of a class (eg, pasGet::, a::, html::, css::)
@@ -369,7 +393,7 @@ class Stuff{
         return $self->_priv;
     }
 }
-?&gt;</p></code><p class='tip'>PHP allows for a namespace mechanism, which is only supported in v5 or greater.
+?&gt;</p></code><p class='tip'>    PHP allows for a namespace mechanism, which is only supported in v5 or greater.
 As the current webhost(GoDaddy) does not use that language version,
 the feature is not used in any studio scripts and will not be mentioned or referenced in examples.</p>
     One fundemental aspect of OOP and the concept of <i>classes</i> is the encapsulation of data,
@@ -380,12 +404,26 @@ This is known as reflection and allows for run-time introspection and mutation
 of a program's source code, essentailly allowing for the potential for 'sentient'
 programs which can modify their behaviour based on an AI and input from its execution environment.
 </p>    Getters and Setters which are public are prefixed with 'get' and 'set', respectively,
-along with a clear, conciece, name relating to (and ideally being a shortened version) of the member being accessed or modified.    
-    Protected and private member are declared the same,
+along with a clear, conciece, name relating to (and ideally being a shortened version) of the member being accessed or modified.
+<p class='tip'>    Typing less is always better! Programming should be easy and quick while maintaining
+clearity and functionality.
+    Make internal class or local function vars very descriptive,
+as these as less frequently accessed/readed(as they are local to their enclosed structure)
+and are(usually) not accessed from outside the containing scope.
+    While, with more frequent, globally accessible interfaces shorter and more concise,
+as they are more fequently used(and easier to remember, by their sharp, short names),
+resulting in less typing.
+</p>
+    Protected and private (non-static/const) members are declared <i>camelCased</i>,
 except further prefixed with an underscore(_), as convention dictates.
+Not only is this easier to read, but also means,
+with the auto complete functionality of modern text editers,
+when accessing local vars, one needs to type no fewer than 2 keys,
+as the (_) will first display ALL vars to select from without having to
+remeber what its specific name begins with!
+
 Example, declaring getter and setters,
-JavaScript:
-<code><p class='good'>
+JavaScript:<code><p class='good'>
 var thing = {
     _stuff:0,
     getStuff:function(){
@@ -401,8 +439,7 @@ var thing = {
         //to allow for 'chaining' function calls, like with jQuery!
     }
 };</p></code>
-PHP:
-<code><p class='good'>
+PHP:<code><p class='good'>
 class thing{
     private _stuff;
     function __construct($i){
@@ -483,10 +520,14 @@ Should be standardized to either a constant aspect resolution(preferred) at eith
 <h4 id='png'><?php a::png();?></h4><hr>
 <pre>    PNG(Portable Network Graphics) is a lossless compression method for images.
 Most useful for small to medium sized images where data integrity and resolution must be maintained.
-Supports transparency.</pre>
+Supports transparency.
+Compression is more effective the larger the image, and the more frequently
+pixels are repeated.
+Solid colors are best, as they require only a single hash entry in the compressed file.</pre>
 <h4 id='jpg'><?php a::jpg();?></h4><hr>
-<pre>    JPEG/JPG (Joint Photographic Experts Group) is a lossy compression compression method for images.
-Should be used with large images(where maintaining detail/resolution/integrity is not important.
+<pre>    JPEG/JPG (Joint Photographic Experts Group) is a lossy compression method for images.
+Used for images which do not require alpha/transparency or large images,
+where maintaining detail/resolution/integrity is not important.
 Good for maintaining collections of large images with relatively low memory overhead.</pre>
 </pre>
     <h3 id='audio'>Audio</h3><hr>
@@ -496,11 +537,95 @@ Good for maintaining collections of large images with relatively low memory over
 <pre>    Html/xml makes extensive use of quotes and double quotes for the
 declaration of strings.<br>
 As html is often embedded inside other strings it quickly
-become difficult to read
+become difficult to read.
 ALWAYS USE SINGLE QUOTES IN HTML, unless absolutely necessary(then the use of an html entity would be preferred)
 </pre>
+<h3 id='jsH'><?php a::javascript();?></h3><hr>
+<pre>   Supports single and double quoted strings,
+use single quotes for any string which does not have (') or (\) embeded and for JSON strings.
+Use double quote strings to represent URL paths and X(HT)ML nodes strings</pre>
+<code>
+<p class='good'>var str = '{"id":"string"}';</p>
+<p class='bad'>var str = "{\"id\":\"string\"}";</p>
+</code>
+<pre>   The exception is if it has html or url paths embedded.
+"images/defaultBtn.png";   requires only single slashes.
+
+This method can clearly distinguish the embedded quotes when expressed as a string:</pre>
+<code>
+<p class='good'>var htmlStr = "&lt;button id='" + id + "'&gt;text&lt;/button&gt;";</p>
+</code>
+Opposed to using double quote inside double quotes:
+<code>
+<p class='bad'>var htmlStr = "&lt;button id=\"" + id + "\"&gt;text&lt;/button&gt;";</p>
+</code>
+<h3 id='phpH'><?php a::php();?></h3><hr>
+<pre>    PHP differentiates between single and double quoted <a href='http://php.net/language.types.string'>strings</a> with
+certain distinctions. Also see nowdoc and heredoc,
+but these are less frequently used.
+<p class='tip'>    Since these styles of string are support by v5 or higher,
+all 8.5:1 games/sites/app will not use them,
+as the host only support v4 of PHP.</p>
+    Single quoted strings require the escaping of special characters, /, ', etc
+They are to be used in simple strings which do not contain embedded data(html/json)
+and do not require the substitution of variables.</pre>
+<code>&lt;?php
+<p class='good'>$str = 'simple string'; //keep it simple, nothing complex</p>
+<p class='bad'>$str = 'this \' must be escaped';</p>
+<p class='good'>$str = '{"id":"string"}';</p>
+//as with JavaScript,
+//using double quotes looks the same and should be avoided
+<p class='bad'>$str = "{\"id\":\"string\"}";</p>
+?&gt;
+</code>
+<pre>    Double quoted strings may contain single quotes without escaping,
+and support the direct substitution of variables.</pre>
+<code>
+<p class='bad'>$str = "simple string";  //double quote for 'complex strings', nothing special here</p>
+<p class='good'>$str = "this ' doesn't need escapin'!";</p>
+</code>
+<pre>    When embedding dynamic variables into a string this format is preferred
+<code class='php'>
+&lt;?php<b class='good'>
+$str = 'guid'; //simple string
+echo "&lt;button id='$str'&gt;This can't be real&lt;/button&gt;";   //embedded string in a button
+$str = "SELECT $str FROM table";   //embedded string as an sql statement, $str will be replaced by the literal value(not including the quotes)
+</b>?&gt;</code>
+    While this is acceptable, in PHP, html elements should rarely be expressed as strings then echo'ed out to the browser(as this is slow and overly complex),
+rather, it's preferred to inject the html directly as the site like so.
+<code class='php'>
+&lt;?php
+$str = 'guid';
+?&gt;<p class='good'>&lt;button id='&lt;?php
+    echo $str;
+?&gt;'&gt;This can't be real&lt;/button&gt;</p>&lt;?php
+//enter php mode and continue on with script!
+?&gt;</code>
+<?php $str = 'guid';?>
+<button id='<?php echo $str;?>'>text</button>
+<p class='tip'>
+    By closing the php tag(with ?&gt;) the script will revert to pure html, allowing to create functions and other PHP constructs which output elements.
+</p></pre>
+<h3 id='jsonH'><?php a::json();?></h3><hr>
+<pre>    The <a href = 'http://json.org/'>json standard</a> requires the use of double quotes for expressing all string data
+This makes for rather cumbersome syntax which is less flexible.</pre><code class='php'>
+&lt;?php
+<p class='bad'>var jsonStr = "{\"id\":\"string data\"}";</p>
+<p class='good'>var jsonStr = '{"id":"string"}';</p>
+</code>
+<p class='tip'>    In php and javascript, use json_encode() or JSON.stringify() to convert complex data objects into valid JSON strings</p>
+<code class='php'>
+<p class='bad'>$jsonStr = "{\"id\":\"string data\"}";</p>
+<p class='good'>$jsonStr = '{"id":"string"}';</p>
+<pre><p class='tip'>    To create properly formated JSON strings in PHP,
+create an assosiative array, then use json_encode() to convert to an object string!</p>
+//prefered way to generate a json string from an 'object':
+$obj = array('val0'=>0,'val1'=>'second');
+$jsonStr = json_encode($obj);
+?&gt;</pre></code>
+
 <h3 id='security'>Security</h3>
-<pre>   On line, security is a major concern.
+<pre>   On-line, security is a major concern.
 Users expect their private data to remain that way,
 especially when maintaining a database including,
 home addresses, contact/personal information,
@@ -710,95 +835,12 @@ if($uid > 0){
 <ol>
     <li><a href='http://phpsecurity.readthedocs.org/en/latest/Injection-Attacks.html#disclosure-of-stored-data'>SQL Injection</a></li>
 </ol>
-<h4>Regular Expression</h4>
+<h4>Regular Expressions</h4>
 <pre>
     Both PHP and <a href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp">JavaScript</a> support expressing and manipulating string data using Regular Expressions.
 Regular Expressions describe patterns within a sequence of characters.
 The most common use is to preform pattern-matching and search-and-replace operations on text.
-
 </pre>
-<h3 id='jsH'><?php a::javascript();?></h3><hr>
-<pre>   Supports single and double quoted strings,
-use single quotes for any string which does not have (') or (\) embeded and for JSON strings.
-Use double quote strings to represent URL paths and X(HT)ML nodes strings</pre>
-<code>
-<p class='good'>var str = '{"id":"string"}';</p>
-<p class='bad'>var str = "{\"id\":\"string\"}";</p>
-</code>
-<pre>   The exception is if it has html or url paths embedded.
-"images/defaultBtn.png";   requires only single slashes.
-
-This method can clearly distinguish the embedded quotes when expressed as a string:</pre>
-<code>
-<p class='good'>var htmlStr = "&lt;button id='" + id + "'&gt;text&lt;/button&gt;";</p>
-</code>
-Opposed to using double quote inside double quotes:
-<code>
-<p class='bad'>var htmlStr = "&lt;button id=\"" + id + "\"&gt;text&lt;/button&gt;";</p>
-</code>
-<h3 id='phpH'><?php a::php();?></h3><hr>
-<pre>    PHP differentiates between single and double quoted <a href='http://php.net/language.types.string'>strings</a> with
-certain distinctions. Also see nowdoc and heredoc,
-but these are less frequently used.
-<p class='tip'>    Since these styles of string are support by v5 or higher,
-all 8.5:1 games/sites/app will not use them,
-as the host only support v4 of PHP.</p>
-    Single quoted strings require the escaping of special characters, /, ', etc
-They are to be used in simple strings which do not contain embedded data(html/json)
-and do not require the substitution of variables.</pre>
-<code>&lt;?php
-<p class='good'>$str = 'simple string'; //keep it simple, nothing complex</p>
-<p class='bad'>$str = 'this \' must be escaped';</p>
-<p class='good'>$str = '{"id":"string"}';</p>
-//as with JavaScript,
-//using double quotes looks the same and should be avoided
-<p class='bad'>$str = "{\"id\":\"string\"}";</p>
-?&gt;
-</code>
-<pre>    Double quoted strings may contain single quotes without escaping,
-and support the direct substitution of variables.</pre>
-<code>
-<p class='bad'>$str = "simple string";  //double quote for 'complex strings', nothing special here</p>
-<p class='good'>$str = "this ' doesn't need escaping'!";</p>
-</code>
-<pre>    When embedding dynamic variables into a string this format is preferred
-<code>
-&lt;?php
-<b class='good'>
-$str = 'guid'; //simple string
-echo "&lt;button id='$str'&gt;This can't be real&lt;/button&gt;";   //embedded string in a button
-$str = "SELECT $str FROM table";   //embedded string as an sql statement, $str will be replaced by the literal value(not including the quotes)<br>
-</b>?&gt;</code>
-    While this is acceptable, in PHP, html elements should rarely be expressed as strings then echo'ed out to the browser(as this is slow and overly complex),
-rather, it's preferred to inject the html directly as the site like so.
-<code class='php'>
-&lt;?php<p class='good'>
-$str = 'guid';
-?&gt;
-&lt;button id='&lt;?php echo $str;?&gt;'&gt;This can't be real&lt;/button&gt;
-&lt;?php
-enter php mode and continue on with script!
-?&gt;</p></code>
-<?php $str = 'guid';?>
-<button id='<?php echo $str;?>'>text</button>
-<p class='tip'>
-    By closing the php tag(with ?&gt;) the script will revert to pure html, allowing to create functions and other PHP constructs which output elements.
-</p></pre>
-<h3 id='jsonH'><?php a::json();?></h3><hr>
-<pre>    The <a href = 'http://json.org/'>json standard</a> requires the use of double quotes for expressing all string data
-This makes for rather cumbersome syntax which is less flexible.</pre><code>
-<p class='bad'>var jsonStr = "{\"id\":\"string data\"}";</p>
-<p class='good'>var jsonStr = '{"id":"string"}';</p>
-</code><pre><p class='tip'>    In php and javascript, use json_encode() or JSON.stringify() to convert complex data objects into valid JSON strings</p></pre>
-<code>&lt;?php
-<p class='bad'>$jsonStr = "{\"id\":\"string data\"}";</p>
-<p class='good'>$jsonStr = '{"id":"string"}';</p>
-<pre><p class='tip'>    To create properly formated JSON strings in PHP,
-create an assosiative array, then use json_encode() to convert to an object string!</p>
-//prefered way to generate a json string from an 'object':
-$obj = array('val0'=>0,'val1'=>'second');
-$jsonStr = json_encode($obj);
-?&gt;</pre></code>
 <hr><h2 id='aoGM'>Game Mechanics</h2><hr>
 <pre>   Auto-Obsessions implements several high level API to simulate the experience of owning, moding and auctioning cars.
 </pre>
