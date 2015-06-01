@@ -34,6 +34,24 @@ cvStatBar('Documents');
     backBtn();
     selectBtn();	
 ?>
+    <!--div id='filter'>Filters<hr>
+        <div id='stage'>stage<br>
+            <button id='slctAllF'>All</button><br>
+            <button id='slctClassic'>Classic</button><br>
+            <button id='slctCustom'>Custom</button><br>
+            <button id='slctMuscleF'>Muscle</button><br>
+            <button id='slctUnique'>Unique</button><br>
+            <button id='slctForeign'>Foreign</button><br>
+        </div>
+
+        <div id='tier'>tier<br>
+            <button id='slctAll'>All</button><br>
+            <button id='slctLow'>Low</button><br>
+            <button id='slctMid'>Mid</button><br>
+            <button id='slctHigh'>High</button><br>
+            <button id='slctElite'>Elite</button><br>
+        </div>
+    </div-->
     <button id='viewCar'>View</button>
     <button id='shop'>Upgrades</button>
     <button id='sales'>Sales</button>

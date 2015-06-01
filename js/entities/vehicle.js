@@ -167,8 +167,8 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			 
 		},
 		
-		getFullName : function()
-		{	//returns a string representing the 'proper' car name
+		getFullName : function(){
+            //returns a string representing the 'proper' car name
 			return this.year + ' ' + this.make + ' ' + this.name;
 		},
         //getLocalPath : function()
@@ -176,13 +176,13 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			//return 'images\\cars\\' + this.make + '\\' + this.year + '\\' + this.name + '.jpg';
 			//return '';
 		//},
-		getFullPath : function()
-		{	//returns the absolute url for the image path of this car on the server
+		getFullPath : function(){
+            //returns the absolute url for the image path of this car on the server
 			return /*baseURL +*/ 'images\\cars\\' + this.make + '\\' + this.year + '\\' + this.name + '.jpg';
 			//return '';
 		},
-		initParts : function()
-		{	//loads parts
+		initParts : function(){
+            //loads parts
 			//this._parts = [];
 			//var thisXML = xmlDoc.ElementById(this.id);
 			//if(this.parts.length != 0)
@@ -197,8 +197,8 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 				//}
 			//}
 		},
-		toJSON : function()
-		{	//converts a vehicle to a JSON string, to be saved to local storage,
+		toJSON : function(){
+            //converts a vehicle to a JSON string, to be saved to local storage,
 			//this is called by JSON.stringify and will be serialized
 			return {
                 id : this.id.toString(),

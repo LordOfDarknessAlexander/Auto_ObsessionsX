@@ -48,8 +48,8 @@ $funcName = "$fileName, pas::insertCar(vehicleID)";
                 //call will fail if result is not properly formated JSON!
                 jq.setErr('<?php eFN();?>', 'ajax call failed!\nReason: ' + jqxhr.responseText);
                 Auction._car = null;
-                ajax_loadUser();
-                ajax_post();    //get user info from server
+                //ajax_loadUser();
+                //ajax_post();    //get user info from server
                 Auction.close();
                 //init(); //this exists only within the scope of document.ready()
             },

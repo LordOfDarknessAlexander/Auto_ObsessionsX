@@ -277,8 +277,8 @@ function auctionGen(args){
                 cashedIn:this._cashedIn
 			};
 		},
-		enemyBidding : function()
-		{	//determine 
+		enemyBidding : function(){
+            //determine 
 			//upPercentage of vehicle for next bid
             var cb = this._currentBid;
                 upPerc =  0.06 * cb;
@@ -286,7 +286,7 @@ function auctionGen(args){
             for(var i = 0; i < this._ai.length; i++){					
 				if(this._ai[i].canBid() && !this._ai[i].winningBid){	//global cooldown timer has refreshed, bidding now available
                     //if AI can bid and is not currently the top bidder
-                    if((this._ai[i].currBid < cb) && (!this._ai[i].leftAuction)){
+                    if( (this._ai[i].currBid < cb) && (!this._ai[i].leftAuction) ){
 						this._ai[i].currBid = cb + upPerc;
 						this._ai[i].winningBid = true;
 						break;
@@ -295,8 +295,8 @@ function auctionGen(args){
 			}
 			//if the bidders bid is at o or less than the current bid player wins bid
 		},	
-		bidTimers : function()
-		{	//updates this._ai bidding timers	
+		bidTimers : function(){
+            //updates this._ai bidding timers	
 			for(var i = 0; i < this._ai.length; ++i){
 				if(!this._ai[i].leftAuction){
 					this._ai[i].update();

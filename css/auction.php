@@ -120,3 +120,14 @@ Auction Screen
 	top:18%;
     font-size:2vw;
 }
+<?php divAuction();?> div#pbCD{
+<?php
+    posAbs();
+    css::size('20%','30%');
+    css::right('0%');
+    css::top('35%');
+?>
+}
+<?php divAuction();?> div#pbCD progress{
+    width:100%;
+}

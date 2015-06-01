@@ -46,12 +46,12 @@ var Auction = {
 	playerBid : 0,
 	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
 	winningTimerCap : 100.0, //Max amount of time the winningTimer will run for before activating the going timer
-	goingTimer: 0.0, //Timer for going once, going twice, sold
-	enemyBidTimer: 0.0, //Slight delay after the player bids to prevent the AI from spam bidding
+	goingTimer: 0.0, //Timer forcountdown to final sale: going once, going twice, sold
+	//enemyBidTimer: 0.0, //Slight delay after the player bids to prevent the AI from spam bidding
     playerBidTimer: 0.0, //Slight delay after the player bids to prevent the player from spam bidding
     bidTimerCap: 50, //Max time the bidTimer can go to
 	enemyWinning : false,
-	enemyCanBid: true, //Boolean determining whether anyone can bid again or not
+	//enemyCanBid: true, //Boolean determining whether anyone can bid again or not
     playerCanBid: true,
 	playerWinning : false,
 	playerWon : false, //Whether or not the player won the auction
@@ -178,9 +178,9 @@ var Auction = {
 		//delete buyOut;	
 		
 		//enemy1 = null;
-		enemy2 = null;
-		enemy3 = null;
-		enemy4 = null;
+		//enemy2 = null;
+		//enemy3 = null;
+		//enemy4 = null;
 
 		this.playerBid = 0;
 		
@@ -199,6 +199,15 @@ var Auction = {
         
         jq.carImg.hide();
 	},
+    getGoingPerc:function(){
+        return;
+    },
+    canPlayerBid:function(){
+        return this.playerBidTimer >= this.bidTimerCap;
+    },
+    getPlayerTimerPerc:function(){
+        return this.playerBidTimer / this.bidTimerCap;
+    },
     getRaise:function(){
         //returns the current bid plus and additional increase, based on a percentage
         var b = this.currentBid,
@@ -209,6 +218,8 @@ var Auction = {
 		//main update logic, called per frame
         var btc = this.bidTimerCap;
         
+        //static call, to update global enemy bid cooldown counter
+		Enemy.update();
 		this.bidTimers();
 		this.enemyBidding();
 		//this.currentBidder();
@@ -241,15 +252,6 @@ var Auction = {
 		    }
 		    else if(this.playerBidTimer >= btc){
 		        this.playerCanBid = true;
-		    }
-		}
-
-		if(!this.enemyCanBid){
-		    if(this.enemyBidTimer < btc){
-		        this.enemyBidTimer++;
-		    }
-		    else if(this.enemyBidTimer >= btc){
-		        this.enemyCanBid = true;
 		    }
 		}
 		
@@ -290,7 +292,38 @@ var Auction = {
             player.y = 284;
             context.fillText(str, ENEMY_X, 300);
 		}
+        //draw enemies
+        var i = 0;
+        
+        function draw(){
+            var bid = Auction.ai[i].currBid;
+                str = bidders[i] + '$' + bid.toFixed(2);
             
+            if(bid >= cb){
+                context.drawImage(curBidImage, left, ewinPos);
+                context.fillText(str, tx, t1);		
+            }
+            else{
+                context.drawImage(slimer, left, t0 + (h * i) );
+                context.fillText(str, tx, t2 + (h * i) );
+            }
+            //i++;
+        }
+        for(; i < Auction.ai.length; i++){
+            draw();
+        }
+//<php
+//if(DEBUG){>
+        pbSetColor(jq.Auction.cdpbG, Enemy.getTimerPerc() );
+        pbSetColor(jq.Auction.cdpb0, this.ai[0].getTimerPerc() );
+        pbSetColor(jq.Auction.cdpb1, this.ai[1].getTimerPerc() );
+        pbSetColor(jq.Auction.cdpb2, this.ai[2].getTimerPerc() );
+        pbSetColor(jq.Auction.cdpb3, this.ai[3].getTimerPerc() );
+        pbSetColor(jq.Auction.pbUser, this.getPlayerTimerPerc() );    //player.getTimerPerc() );
+        pbSetColor(jq.Auction.going, this.getGoingPerc() );
+//<php
+//}
+//>
         /*var highestBid = this.currentBid,
             bids = [],
             hi = 0; //highest index
@@ -357,25 +390,7 @@ var Auction = {
             }
         }
         */
-		var i = 0;
-        
-        function draw(){
-            var bid = Auction.ai[i].currBid;
-                str = bidders[i] + '$' + bid.toFixed(2);
-            
-            if(bid >= cb){
-                context.drawImage(curBidImage, left, ewinPos);
-                context.fillText(str, tx, t1);		
-            }
-            else{
-                context.drawImage(slimer, left, t0 + (h * i) );
-                context.fillText(str, tx, t2 + (h * i) );
-            }
-            //i++;
-        }
-        for(; i < Auction.ai.length; i++){
-            draw();
-        }
+		
         /*str = bidders[i] + '$' + bid.toFixed(2);
         
 		if(bid >= cb){
@@ -482,7 +497,7 @@ var Auction = {
 	enemyBidding:function(){
         //iterates over enemies
         //placing a bid if able to do so
-	    if(!this.playerWon && this.enemyCanBid){
+	    if(!this.playerWon){
             //
             //TODO:sort by which enemy has the highest bid Timer,
             //then execute in that order. This approach ensures
@@ -491,117 +506,32 @@ var Auction = {
                 //foreach ai
                 //var e = this.ai[i];
                 
-				if(!this.ai[i].leftAuction && this.ai[i].canBid() ){
-                    //can bid and still participating
-                    //console.log('ai active');
-					if(this.ai[i].currBid < this.currentBid){
-                        //is the ai's last bid the current highest?
-                        var raise = this.getRaise();    //currentBid + this.raisePerc;
-					    //if ai doesn't have enough, no bid
-                        if(raise <= this.ai[i].bidCap){
-                            this.currentBid = raise;
-                            this.ai[i].bid(raise);
-                            //this.ai[i].currBid = this.currentBid + this.raisePerc;
-                            
-                            //if(this.ai[i].currBid == this.currentBid){
-                                //break;
-                            //}
-                            //this.ai[i].winningBid = true;
-                            //this.ai[i].bidTimer = 0;
-                            //this.currentBid = rathis.ai[i].currBid;
-    //<php if($DEBUG){>
-                            console.log('ai ' + i + ' bidding ' + this.ai[i].currBid + ' and cap is ' + this.ai[i].bidCap);
-    //<php}>
-                            this.winningTimer = 0;
-                            this.enemyCanBid = false;
-                            this.enemyBidTimer = 0;
-                            this.goingTimer = 0;
-                            this.enemyWinning = true;
-                            this.playerWinning = false;
-                            assetLoader.sounds.bidder.play();
-                            break;
-                        }
+                //can bid and still participating
+                //console.log('ai active');
+                if(this.ai[i].currBid < this.currentBid){
+                    //is the ai's last bid the current highest?
+                    var raise = this.getRaise();    //currentBid + this.raisePerc;
+                    //if ai doesn't have enough, no bid
+                    if(this.ai[i].bid(raise) ){
+//<php if($DEBUG){>
+                        console.log('ai ' + i + ' bidding ' + this.ai[i].getBidStr() + ' and cap is ' + this.ai[i].getBidCapStr() );
+//<php}>
+                        Enemy.resetTimer();
+                        
+                        this.currentBid = raise;
+                        this.winningTimer = 0;
+                        this.goingTimer = 0;
+                        this.enemyWinning = true;
+                        this.playerWinning = false;
+                        assetLoader.sounds.bidder.play();
+                        break;
                     }
-                    //else the raise has no become more than the ai
-                    //can afford, so disable
-				}
+                }
+                //else the raise has become more than the ai
+                //can afford, so disable
 			}
 		 }
-	},
-	/*bidFinder : function()
-	{	//determine bidder
-		//check the bids of each this.ai to determine the highest bid,
-		//then setting the state;
-		for(var i = 0; i < this.ai.length; ++i)
-		{
-			if(this.checkBid(i))
-			{
-				this.setBid(i);
-			}
-		}
-	},
-	checkBid : function(index)
-	{	//check if the enemy at the current index has a higher bid than the other ai's or player
-		var ret = true;
-		for(var i = 0; i < this.ai.length; i++)
-		{
-			if(index != i)
-			{
-				if(this.ai[index].currBid > this.ai[i].currBid)
-				{
-					continue;
-				}
-				else
-				{
-					ret = false;
-					break;
-				}
-			}
-		}
-		return ret;
-	},
-	setBid : function(index)
-	{
-		if(!this.ai[index].leftAuction)
-		{
-			if(!this.ai[index].winningBid)
-			{
-			    this.currentBid = this.ai[index].currBid;
-			    console.log("Setting currentBid to AI " + index + "'s bid of " + this.ai[index].currBid);
-			    this.playerWinning = false;
-			    this.goingTimer = 0;
-			}
-		
-			//iterate over this.ai, assigning the bidder at index as the current bidder,
-			//assigning all others to false
-			for(var i = 0; i < this.ai.length; i++)
-			{
-				this.ai[i].winningBid = (this.ai[i].currBid == this.currentBid ? true : false);
-				this.ai[i].canBid = (i == index ? true : false);
-			}
-		}
-	},	*/
-	/*currentBidder : function()
-	{	//determine if player has highest bid
-		//Player has the current bid
-		for(var i = 0; i < this.ai.length; ++i)
-		{
-			if(this.playerBid > this.ai[i].currBid)
-			{
-			    this.currentBid = this.playerBid;
-				this.playerWinning = true;
-				this.enemyWinning = false;
-				this.ai[i].winningBid = false;
-			}
-			//else if(this.playerBid < this.ai[i].currBid)
-			//{
-				/*if(!this.ai[i].leftAuction)
-				{
-					this.bidFinder();
-				}
-			//}
-		}
-	},*/
+	},	
 	going:function(){
         //begin sale count down after a wthis.aiting period if no other bids are offered
 		//Going crowd roars someone is about to win the bid
@@ -622,7 +552,6 @@ var Auction = {
 				
                 if( (t > 0) && (t < first)){
                     var x = ENEMY_X + 715;
-					//this.goingTimer++
 					//console.log('Going once');
 					context.fillText('Going Once', x, 270);
 					assetLoader.sounds.going.play();

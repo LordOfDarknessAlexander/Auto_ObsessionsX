@@ -40,6 +40,24 @@ var player = (function(player){
         player.x = PLAYER_XPOS;
         player.y = PLAYER_YPOS;
     };
+    /*canBid:function(){
+        //has the enemy's personal bid cooldown refreshed
+        return Player.canBid() && (this._bidTimer >= this.BID_TIMER_CAP); //&& this.bidTimer >= Enemy.BID_CD
+    },
+    bid:function(raise){
+        //place a bid, setting local state
+        if(this.canBid() && raise <= this.bidCap){
+            this.currBid = raise;
+            this.winningBid = true;
+            this.bidTimer = 0;
+            Enemy.resetTimer();
+            //Auction.setBidBtnText();
+            //assetLoader.sounds.bidder.play();
+            //console.log(JSON.stringify(this) + ', bidding: ' + raise.toFixed(2) );
+            return;
+        }
+        this.winningBid = false;
+    };*/
 
     return player;
 })(Object.create(Vector.prototype));
@@ -50,7 +68,8 @@ function user(){
 	return {
 		position : Vector(PLAYER_XPOS, PLAYER_YPOS, 0, player.dy);
 		size : Vector(PLAYER_XPOS, PLAYER_YPOS, 0, player.dy);
-		speed     : 6;
+		speed     : 6,
+        _bidTimer:0,
 		// spritesheets
 		sheet : new SpriteSheet('images/normal_walk.png', player.width, player.height);
 		walkAnim  : new Animation(player.sheet, 4, 0, 15),
@@ -70,5 +89,10 @@ function user(){
 			this.position.y = PLAYER_YPOS;
 		}
 	};
-}*/
+}
+user._money = 0;
+user._tokens = 0;
+user._prest = 0;
+user._markers = 0;
+*/
 

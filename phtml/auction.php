@@ -125,7 +125,16 @@ function outputCar($args){
     The code can be streamlined with jQuery in JS-->	
     <!--label id='carPrice'></label-->
     <label id='carInfo'></label>
-    
+<?php //FOR DEV USE ONLY, not in the final release?>
+    <div id='pbCD'>
+        <progress id='gcd'><!--global cooldown--></progress>
+        <progress id='ai0'></progress>
+        <progress id='ai1'></progress>
+        <progress id='ai2'></progress>
+        <progress id='ai3'></progress>
+        <progress id='user'></progress>
+        <progress id='going'></progress>
+    </div>
     <!--div id='bids'>
         <label id='b0'></label>
         <label id='b1'></label>
