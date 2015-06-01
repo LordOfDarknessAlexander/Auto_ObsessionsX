@@ -284,6 +284,11 @@ First, some definitions:
     Variable(data/POD)-this is not always the same for all languages,
         as some (like Obj-C, Javascript and Python) implement plain old data as being derived
         from a base class/object proto type.
+    Operator-built in(some time can be overrided) constructs,
+        which differ from functions in syntax and semantics,
+        commonly repressenting arithmetic and logical expressions,
+        which(usually) take <i>left-hand side</i> and <i>right-hand side</i>,
+        operands instead of a common seperated argument list
     Function-A unique memory location which repressents a stack of commands which operates on data,
         either declared anonymously(lambdas/closures) or bound to a textual identifier.
 <p class='tip'>    In javascript functions can be 'new'ed to mimic classes/objects,

@@ -32,8 +32,9 @@
                 this.currBid = raise;
                 this.winningBid = true;
                 this.bidTimer = 0;
+                //Auction.setBidBtnText();
                 //assetLoader.sounds.bidder.play();
-                console.log(JSON.stringify(this) + ', bidding: ' + raise.toFixed(2) );
+                //console.log(JSON.stringify(this) + ', bidding: ' + raise.toFixed(2) );
                 return;
             }
             this.winningBid = false;
@@ -61,9 +62,15 @@
 //static class constants
 //Enemy.BID_CD = 5.0; //individual cooldown, Time the AI has to wait to bid again
 //Enemy.BID_TIMER_CAP = (1.0 / 32.0) * 8, //Max wait time between bids, wait 8 frames(at 32fps)
+//Enemy._timer = 0;
 //Enemy.canBid = function(){
     //static function regulating global bid cooldown
-    //return Enemy.timmer >= Enemy.BID_CD;
+    //return Enemy.timer >= Enemy.BID_CD;
+//}
+//Enemy.update = function(){
+    //if(Enemy._timer < Enemy.BID_CD){
+        //Enemy._timer++;
+    //}
 //}
 function price(vehiclePrice, bias){
     //

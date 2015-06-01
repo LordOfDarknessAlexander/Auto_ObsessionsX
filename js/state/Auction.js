@@ -496,29 +496,33 @@ var Auction = {
 					if(this.ai[i].currBid < this.currentBid){
                         //is the ai's last bid the current highest?
                         var raise = this.getRaise();    //currentBid + this.raisePerc;
-					    
-					    this.currentBid = raise;
-                        this.ai[i].bid(raise);
-                        //this.ai[i].currBid = this.currentBid + this.raisePerc;
-					    
-                        //if(this.ai[i].currBid == this.currentBid){
-					        //break;
-					    //}
-					    //this.ai[i].winningBid = true;
-					    //this.ai[i].bidTimer = 0;
-					    //this.currentBid = rathis.ai[i].currBid;
-//<php if($DEBUG){>
-						console.log('ai ' + i + ' bidding ' + this.ai[i].currBid + ' and cap is ' + this.ai[i].bidCap);
-//<php}>
-						this.winningTimer = 0;
-						this.enemyCanBid = false;
-						this.enemyBidTimer = 0;
-						this.goingTimer = 0;
-						this.enemyWinning = true;
-						this.playerWinning = false;
-						assetLoader.sounds.bidder.play();
-						break;
-					}
+					    //if ai doesn't have enough, no bid
+                        if(raise <= this.ai[i].bidCap){
+                            this.currentBid = raise;
+                            this.ai[i].bid(raise);
+                            //this.ai[i].currBid = this.currentBid + this.raisePerc;
+                            
+                            //if(this.ai[i].currBid == this.currentBid){
+                                //break;
+                            //}
+                            //this.ai[i].winningBid = true;
+                            //this.ai[i].bidTimer = 0;
+                            //this.currentBid = rathis.ai[i].currBid;
+    //<php if($DEBUG){>
+                            console.log('ai ' + i + ' bidding ' + this.ai[i].currBid + ' and cap is ' + this.ai[i].bidCap);
+    //<php}>
+                            this.winningTimer = 0;
+                            this.enemyCanBid = false;
+                            this.enemyBidTimer = 0;
+                            this.goingTimer = 0;
+                            this.enemyWinning = true;
+                            this.playerWinning = false;
+                            assetLoader.sounds.bidder.play();
+                            break;
+                        }
+                    }
+                    //else the raise has no become more than the ai
+                    //can afford, so disable
 				}
 			}
 		 }
@@ -613,7 +617,7 @@ var Auction = {
             
 			while( (this.playerWinning || this.enemyWinning) && (t < 660) && (!auctionStop) ){
 				this.goingTimer++;
-                t = this.goingTimer;
+                t = this.goingTimer;    //reset t after increment!
 				
                 if( (t > 0) && (t < first)){
                     var x = ENEMY_X + 715;
