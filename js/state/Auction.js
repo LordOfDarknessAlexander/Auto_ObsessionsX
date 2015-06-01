@@ -100,12 +100,13 @@ var Auction = {
 				   //vehiclePrice = Auction._car.getAdjustedConditionPrice();
 					//vcondition = Auction._car.getRandCondition();
 					vcondition = Auction._car.getRandCondition();
+					//vcondition = Auction._car.getSelection();
 					
 					vehiclePrice = Auction._car.getPrice() * vcondition/100 ;
-					vcondition2 = Auction._car.getCondition();
+					//vcondition2 = Auction._car.getCondition();
 					//vehiclePrice = Auction._car.getPrice() ;
 					//35,200 
-					vcondition2 = vcondition + vcondition2;
+				//	vcondition2 = vcondition + vcondition2;
 					//Auction._car.getCondition == vcondition2;
 					
 					Auction.ai = [

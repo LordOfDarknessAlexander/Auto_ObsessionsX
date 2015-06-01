@@ -347,22 +347,7 @@ div#reg-navigation a:hover{
 	padding : 2%;
 	top : 19%;
 }
-div#Slots
-{
-<?php
-    posAbs();
-    css::defaultBG('../images/logo.png');
-	css::bgSize('100%', '100%');
-    css::txtAlignCntr();
-?>
-	width: 100%;
-	height: 100%;
-	color:red;
-    left:10%;
-    z-index:2;
-	top : 22%;
-	padding : 2%;
-}
+
 
 
 /* visited link */

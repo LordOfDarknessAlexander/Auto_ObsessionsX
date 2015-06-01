@@ -89,6 +89,7 @@ Main Game Menu Styles
 	color:red;
     left:10%;
     z-index:2;
+	margin-top: -26%;
 	
 }
 <?php dgm();?> div#slots a:hover
@@ -102,6 +103,7 @@ Main Game Menu Styles
 ?>
 	width: 40%;
 	color:green;
+	margin-top: -26%;
     left:10%;
     z-index:2;
 	
