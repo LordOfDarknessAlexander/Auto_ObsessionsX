@@ -98,6 +98,7 @@ var Auction = {
                     var p = Auction._car.getPrice();
                     //vehiclePrice = Auction._car.getPrice();
 				   //vehiclePrice = Auction._car.getAdjustedConditionPrice();
+					//vcondition = Auction._car.getRandCondition();
 					vcondition = Auction._car.getRandCondition();
 					
 					vehiclePrice = Auction._car.getPrice() * vcondition/100 ;
