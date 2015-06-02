@@ -1,22 +1,41 @@
 //Application main
 var AutoObessesions = {};
 
-function getLastAllowanceTime(){
-    //the last time the user collected their allowance
-	if(Storage.local !== null){
-		if('_lastAllowanceTime' in Storage.local){
-			return parseInt(Storage.local._lastAllowanceTime);
-			//userStats.money = 225000;
-		}
-	}
+var Allowance = {
+    CAP:3000,//( (1000 * 60) * 60) * 24;  //86400000,
+    getDelta:function(){
+        //get diffrence between last time and now        
+        return Date.now() - Allowance.getLastTime();
+    },
+    getLastTime:function(){
+        //the last time the user collected their allowance
+        if(Storage.local !== null){
+            if('_lastAllowanceTime' in Storage.local){
+                return parseInt(Storage.local._lastAllowanceTime);
+                //userStats.money = 225000;
+            }
+        }
+        return 0;
+    },
+    setLastTime:function(){
+        if(Storage.local !== null){
+            var time = Date.now()	//a time of 0
+            Storage.local._lastAllowanceTime = JSON.stringify(time);
+        }
+    },
+    getRefreshMS:function(){
+        //return time left until button can be clicked
+        return Allowance.CAP - Allowance.getDelta();
+    },
+    getRefreshPerc:function(){
+        return Allowance.getDelta() / Allowance.CAP;
+    }
+};
+function getCollectionValue(){
+    //returns the total value of the user's garage,
+    //including upgrades and repairsreturn
+    return 0.0;
 }
-function setLastAllowanceTime(){
-	if(Storage.local !== null){
-		var time = Date.now()	//a time of 0
-		Storage.local._lastAllowance = time.toString();
-	}
-}
-
 function garageDoor(){
 	backgroundY -= speed;
     
@@ -131,7 +150,7 @@ function(){
 	//Storage.local.clear();
 	//alert('doc ready!');
 	//pas.query.loadUser();   //load user stats!
-	getLastAllowanceTime();
+	Allowance.getLastTime();
 	//setStatBar();
     load();
 	//loadUser();

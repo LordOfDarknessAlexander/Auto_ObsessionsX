@@ -254,7 +254,7 @@ class pasGet{
         $aoCars = ao::CARS;
         $CID = ao::CID;
         $ret = array();
-        
+        //$res = sql::slctFrom($CID, $aoCars);
         $res = $AO_DB->query(
             "SELECT $CID FROM $aoCars"
         );

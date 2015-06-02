@@ -120,18 +120,19 @@ function addMarkers(markers){
     //}
 }
 //jQuery Interface
-$('#addAllowanceBtn').click(
-function()
-{	//allowance accumulates every few seconds
-	//var
-		//last = getLastAllowanceTime(),
-		//now = Date.now(),
-		//delta = now - last;
-		//carValue = getCollectionValue();
-	
-	var val = 1;	//(base + carvalue) * delta;
-	addFunds(val);
+$('button#addAllowance').click(
+function(){
+	//allowance accumulates every few seconds
+	var delta = Allowance.getDelta(),
+		carValue = getCollectionValue();
+        
+	if(delta >= Allowance.CAP){
+        var val = 1;	//(base + carValue) * delta;
+        addFunds(val);
+        setLastAllowanceTime();
+    }
 });
+/*
 $('#addMinorFundsBtn').click(
 function()
 {	//open paypal form
@@ -171,7 +172,7 @@ $('#add20TokensBtn').click(
 function(){
 	addTokens(20);
 });
-
+*/
 jq.Funds.backBtn.click(
 function(){
 	jq.Funds.toggle();

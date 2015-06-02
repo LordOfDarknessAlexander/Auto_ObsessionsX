@@ -9,18 +9,37 @@ require_once '../re.php';
 //
 $ps = isset($_POST) && !empty($_POST) ? true : false;
 $gs = isset($_GET) && !empty($_GET) ? true : false;
-/*class sql{
-    public static function insert($table, $valStr){
-        //check using regex that $valStr contains a
-        //comma seperated list of identifiers
-        return "INSERT INTO $table ($rowStr) VALUES ($valStr)"
+//
+class user{
+    //
+    public static function slctFromEntry($fields){
+        //select column(s) from a user's row entry in database 'AO_DB' in table 'users'
+        global $AO_DB;
+        //$fields is a comma seperated list of row names
+        $uid = strval(getUID() );
+        $UID = ao::UID;
+        $q = sql::slctFrom($fields, ao::USERS);
+        //echo $q;
+        return $q == '' ? null : $AO_DB->query($q . " WHERE $UID = $uid");
     }
-    public static function insert($table, $rowStr, $valStr){
-        //check using regex that $rowStr and $valStr contain
-        //comma seperated list of identifiers
-        return "INSERT INTO $table ($valStr)"
+    public static function updateEntry($values){
+        //updates the user's entry in database 'AO_DB' in table 'users'
+        //$values is a comma seperated list of assignment expressions
+        global $AO_DB;
+        
+        if(is_string($values) ){
+            $U = 'users';
+            $UID = ao::UID;
+            $uid = strval(getUID() );
+            $v = mysqli_real_escape_string($AO_DB->con, $values);
+            $q = "UPDATE $U SET $v WHERE $UID = $uid";
+            //echo $q;
+            return $AO_DB->query($q);
+        }
+        return null;
     }
-}*/
+}
+
 class pasUpdate{
     public static function soldCar($carID, $price){
         //$res = $aoUsersDB->query(
@@ -45,103 +64,25 @@ class pasUpdate{
         return $res ? true : false;
     }
     public static function userCurrentCar($carID){
-        global $AO_DB;
-        $users = ao::USERS;
-        $id = strval(getUID() );
-        $UID = ao::UID;
+        //global $AO_DB;
         $CID = ao::CID;
+        //$UID = ao::UID;
+        //$users = 'users';
+        //$uid = strval(getUID() );
         
-        return hasCar($carID) ? ($AO_DB->query(
-            "UPDATE $users SET
-                $CID = $carID
-            WHERE
-                $UID = $id"
-        ) ? $carID : 0) : 0;
+        return hasCar($carID)?
+            (user::updateEntry("$CID = $carID")?
+                $carID : 0
+            ) : 0;
+        //return hasCar($carID) ? ($AO_DB->query(
+            //"UPDATE $users SET
+                //$CID = $carID
+            //WHERE
+               //$UID = $uid"
+        //) ? $carID : 0) : 0;
     }
 }
-/*public static function hasSoldCar($carID){
-    //does the user's table in aoCarSalesDB already have an entry with car_id '$id'
-    global $aoSoldCarsDB;
-    
-    $tableName = getUserTableName();    //$_SESSION['userID'];
-    $ret = false;
-    
-    $res = $aoSoldCarsDB->query("SELECT * FROM $tableName WHERE car_id = $id");
-    
-    if($res){
-        //user has sold car, valid entry in db
-        $ret = mysqli_num_rows($res) != 0 ? true : false;
-    }
-    //else{user still owns car, no entry in db}
-    mysqli_free_result($res);
-    
-    return $ret;
-}*/
-
-/*public static function getCarFromID($carID){
-    //selects a vehicle from the car database,
-    //returning it as a JSON object string
-    global $AO_DB;
-    $aoCars = 'aoCars';
-    static $_getCar = $AO_DB->prepare(
-        "SELECT * FROM $aoCars WHERE car_id = ?"
-    );
-    if(_getCar){
-        //bind_params
-            //execute
-    }
-    else{
-        $res = $AO_DB->query(
-            "SELECT * FROM $aoCars WHERE car_id = $carID"
-        );
-        if($res){
-            if(mysqli_num_rows($res) != 0){
-                //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
-                $data = $res->fetch_assoc();//@mysqli_query($CARS.$con, $q); // Run the query
-                $car = Vehicle::fromArray($data);
-                //echo '{"data":"this is data!"}';
-                return $car;
-                //echo Vehicle::fromArray($result->fetch_assoc() )->toJSON();
-            } 
-            else{
-                //$er = sqlError($AO_DB);
-                //echo "<h2>System Error</h2>
-                //<p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
-                //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
-            } 
-            mysqli_free_result($res);
-        }
-        else{   //The vehicle is already registered
-            //return null; //echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
-        }
-    }
-    return null;
-}*/
-/*function updateSale($sale){
-    gloabal $aoCarSalesDB;
-    $res = $aoCarSalesDB->query(
-        "IF NOT EXISTS entry with saleID
-        INSERT ... ELSE
-        ON DUPLICATE KEY UPDATE existing sale"
-    );
-    return $ret;
-}*/
-/*function updateUser(){
-    gloabal $AO_DB;
-    $users = 'users';
-    $uid = getUserTableName();
-    //$cash, $tok, $prest, $markers;
-    //static $updateUser = $AO_DB->prepare(
-        //"UPDATE $users SET
-        //(money = ?, tokens = ?, prestige = ?, m_markers = ?)
-        //WHERE user_id = ?"
-    //);
-    
-    $res = $AO_DB->query("UPDATE $users SET (money, tokens, presteige, markers) WHERE user_id = $uid");
-    //return;
-}
-
-/*if(isset($_GET) && !empty($_GET) ){
+/*if($gs){
     //args being passed vai the url
     if(isset($_GET['op']) && $_GET['op'] == 'asc'){
         getAuctionCars();
@@ -152,29 +93,24 @@ class purchase{
     //private
     //const FAILED = 'Could not complete purchase!';
     static public function funds($funds){
-        global $AO_DB;
-        $MAX_FUNDS = PHP_INT_MAX;
-        $UID = ao::UID;
-        
+        //add funds to loggedin user's account        
         if(is_float($funds) && $funds > 0.0){
             $f = round($funds, 2);  //round currency to 2 decimal places
-            $uid = strval(getUID() );
-            $users = ao::USERS;
-            $m = 'money';
-            
-            $rm = $AO_DB->query(
-                "SELECT $m FROM $users WHERE $UID = $uid"
-            );
+            $m = 'money';            
+            $rm = user::slctFromEntry($m);  //previous user funds
             
             if($rm){
+                //$UID = ao::UID;
+                $MF = PHP_INT_MAX;
                 $uf = floatval($rm->fetch_assoc()[$m]);  //user funds
                 $nf = $uf + $f;   //new funds
-                
-                if($nf < $MAX_FUNDS){
-                    $res = $AO_DB->query(
-                        "UPDATE $users SET $m = $nf WHERE $UID = $uid"
-                    );
+                //echo $nf;
+                if($nf < $MF){
+                    //echo $nf;
+                    $res = user::updateEntry("$m = $nf");
+                    //echo json_encode($res);
                     if($res){
+                        //echo 'win';
                         echo json_encode($nf);
                         return;
                     }
@@ -184,7 +120,7 @@ class purchase{
                 //else
                 echo 'Operation failed, could not purchase more funds, cap reached!';
                 $rm->close();
-                echo json_encode($nf);
+                echo json_encode($uf);
             }
             //else
             //echo 'sql error, select query failed!';
@@ -196,27 +132,18 @@ class purchase{
     static public function tokens($val){
         //adds $val number of tokens to user's account,
         //$val must be an unsigned int greater than 0
-        global $AO_DB;
         $MAX_TOKENS = PHP_INT_MAX;
-        $UID = ao::UID;
         
         if(is_int($val) && $val > 0){
-            $uid = strval(getUID() );
-            $users = ao::USERS;
-            $t = 'tokens';
-            
-            $rt = $AO_DB->query(
-                "SELECT $t FROM $users WHERE $UID = $uid"
-            );
+            $t = 'tokens';            
+            $rt = user::slctFromEntry($t);
             
             if($rt){
                 $ut = intval($rt->fetch_assoc()[$t]);   //user's current tokens
                 $nt = $ut + $val;    //new tokens
                 
                 if($nt < $MAX_TOKENS){
-                    $res = $AO_DB->query(
-                        "UPDATE $users SET $t = $nt WHERE $UID = $uid"
-                    );
+                    $res = user::updateEntry("$t = $nt");
                     
                     if($res){
                         echo json_encode($nt);
@@ -242,49 +169,77 @@ class purchase{
     }
 }
 function addPrestige($val){
-    //$val must be an unsigned int greater than 0
-    global $AO_DB;
-    
-    if(is_int($val) AND $val > 0){
-        //$uid = //getUID();
-        $user = 'users';
-        //$p = 'prestige';
-        //$rp = $AO_DB->query(
-            //"SELECT prestige FROM $users WHERE user_id = $uid"
-        //)
-        //if($rp){
-            //$np = intval($rt->fetch_assoc()['tokens']) + $val;    //new prestige
-            //if(t < $MAX_PRESTIGE){
-                //$res = $AO_DB->query(
-                    //"UPDATE $users SET prestige=$t WHERE user_id = $uid"
-                //);
-            //}
-            //else{
-                //'Operation failed, could not grant more prestige, cap reached!';
-            //}
-        //}
+    //$val must be an unsigned int greater than 0    
+    if(is_int($val) && $val > 0){
+        $t = 'prestige';
+        $rt = user::slctFromEntry($t);
+       
+        if($rt){
+            $MP = PHP_INT_MAX;  //static max prestige
+            $ut = intval($rt->fetch_assoc()[$t]);   //user's current tokens
+            $nt = $ut + $val;    //new tokens
+            
+            if($nt < $MP){
+                $res = user::updateEntry("$t = $nt");
+
+                if($res){
+                    echo json_encode($nt);
+                    return;
+                }
+                //else
+                //echo json_encode($ut);
+                //output sql errors
+                return;
+            }
+            //else
+            echo 'Operation failed, could not purchase more tokens, cap reached!';
+            $rt->close();
+            echo json_encode($ut);
+            return;
+        }
+        //else
+        //echo 'sql error, select query failed!';
+        //return;
     }
-    else{
-        //$t = json_encode($funds);
-        //echo "purchase::tokens(), invalid value $t, purchase::failed";
-    }
+    //$f = json_encode($funds);
+    //echo "purchase::funds(), invalid value $f, purchase::failed";
 }
-function addMarkers($val){
+function incMarkers(){
     //$val must be an unsigned int greater than 0
     global $AO_DB;
     
-    if(is_int($val) AND $val > 0){
-        //$uid = //getUID();
-        $user = 'users';
-        //$m = 'm_markers';
-        //$res = $AO_DB->query(
-            //"UPDATE $users SET tokens=$val WHERE user_id = $uid"
-        //);
+    $MAX_TOKENS = PHP_INT_MAX;
+    $UID = ao::UID;
+    $uid = strval(getUID() );
+    $users = ao::USERS;
+    $t = 'm_markers';
+
+    $rt = user::slctFromEntry($t);
+
+    if($rt){
+        $ut = intval($rt->fetch_assoc()[$t]);   //user's current tokens
+        $nt = $ut + $val;    //new tokens
+        
+        if($nt < $MAX_TOKENS){
+            $res = user::updateEntry("$t = $nt");
+
+            if($res){
+                echo json_encode($nt);
+                return;
+            }
+            //else
+            //echo json_encode($ut);
+            //output sql errors
+            return;
+        }
+        //else
+        echo 'Operation failed, could not purchase more tokens, cap reached!';
+        $rt->close();
+        echo json_encode($ut);
+        return;
     }
-    else{
-        //$t = json_encode($funds);
-        //echo "purchase::tokens(), invalid value $t, purchase::failed";
-    }
+    //$f = json_encode($funds);
+    //echo "purchase::funds(), invalid value $f, purchase::failed";
 }
 //if(isset($_GET) ){
     //if(isset($_GET['op']) ){
@@ -339,6 +294,7 @@ if($ps){
                         $d = Vehicle::getRandStage();
                         $r = Vehicle::getRandRepairs();
                         
+                        //echo "dt:$dt, body:$b, interior:$i, documents:$d, repairs:$r";
                         $res = $aoUsersDB->query(
                             "INSERT INTO $tableName
                                 ($CID, $DT, $B, $I, $D, $R)
@@ -346,7 +302,7 @@ if($ps){
                                 ($carID, $dt, $b, $i, $d, $r)"
                             //IF entry EXISTS do nothing
                         );
-                        //res continas the result of the insertion
+                        //res contains the result of the operation
                         echo json_encode($res);
                     }
                     exit();
@@ -457,4 +413,85 @@ else{
     echo 'not passing post vars!';
     exit();
 }
+/*public static function hasSoldCar($carID){
+    //does the user's table in aoCarSalesDB already have an entry with car_id '$id'
+    global $aoSoldCarsDB;
+    
+    $tableName = getUserTableName();    //$_SESSION['userID'];
+    $ret = false;
+    
+    $res = $aoSoldCarsDB->query("SELECT * FROM $tableName WHERE car_id = $id");
+    
+    if($res){
+        //user has sold car, valid entry in db
+        $ret = mysqli_num_rows($res) != 0 ? true : false;
+    }
+    //else{user still owns car, no entry in db}
+    mysqli_free_result($res);
+    
+    return $ret;
+}*/
+
+/*public static function getCarFromID($carID){
+    //selects a vehicle from the car database,
+    //returning it as a JSON object string
+    global $AO_DB;
+    $aoCars = 'aoCars';
+    static $_getCar = $AO_DB->prepare(
+        "SELECT * FROM $aoCars WHERE car_id = ?"
+    );
+    if(_getCar){
+        //bind_params
+            //execute
+    }
+    else{
+        $res = $AO_DB->query(
+            "SELECT * FROM $aoCars WHERE car_id = $carID"
+        );
+        if($res){
+            if(mysqli_num_rows($res) != 0){
+                //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
+                $data = $res->fetch_assoc();//@mysqli_query($CARS.$con, $q); // Run the query
+                $car = Vehicle::fromArray($data);
+                //echo '{"data":"this is data!"}';
+                return $car;
+                //echo Vehicle::fromArray($result->fetch_assoc() )->toJSON();
+            } 
+            else{
+                //$er = sqlError($AO_DB);
+                //echo "<h2>System Error</h2>
+                //<p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
+                //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
+            } 
+            mysqli_free_result($res);
+        }
+        else{   //The vehicle is already registered
+            //return null; //echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
+        }
+    }
+    return null;
+}*/
+/*function updateSale($sale){
+    gloabal $aoCarSalesDB;
+    $res = $aoCarSalesDB->query(
+        "IF NOT EXISTS entry with saleID
+        INSERT ... ELSE
+        ON DUPLICATE KEY UPDATE existing sale"
+    );
+    return $ret;
+}*/
+/*function updateUser(){
+    gloabal $AO_DB;
+    $users = 'users';
+    $uid = getUserTableName();
+    //$cash, $tok, $prest, $markers;
+    //static $updateUser = $AO_DB->prepare(
+        //"UPDATE $users SET
+        //(money = ?, tokens = ?, prestige = ?, m_markers = ?)
+        //WHERE user_id = ?"
+    //);
+    
+    $res = $AO_DB->query("UPDATE $users SET (money, tokens, prestige, markers) WHERE user_id = $uid");
+    //return;
+}*/
 ?>

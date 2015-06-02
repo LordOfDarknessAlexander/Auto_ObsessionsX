@@ -1,25 +1,17 @@
-﻿jq.Auction.divPB = $('div#Auction div#pbCD');
-jq.Auction.cdpbG = $('progress#gcd', jq.Auction.divPB);
-jq.Auction.cdpb0 = $('progress#ai0', jq.Auction.divPB);
-jq.Auction.cdpb1 = $('progress#ai1', jq.Auction.divPB);
-jq.Auction.cdpb2 = $('progress#ai2', jq.Auction.divPB);
-jq.Auction.cdpb3 = $('progress#ai3', jq.Auction.divPB);
-jq.Auction.pbUser = $('progress#user', jq.Auction.divPB);
-jq.Auction.going = $('progress#going', jq.Auction.divPB);
-
-function Enemy(bidCap){
+﻿function Enemy(bidCap){
 	//enemy class
     //Math.floor rounds down to the nearest integer,
     //this ensures no ai starts ready to bid,
     //so that there is a gap
     var BCD = 32,
-        r = Math.floor( (Math.random() * BCD) );
+        BID_CAP = BCD * 8.0,
+        r = Math.floor(Math.random() * (BID_CAP * 0.65) );
     
 	return {
 		bidCap : bidCap, //The most the enemy will bid
 		_bidTimer : r, //r Timer for between bids
 		bidCooldown : BCD * 3.5, //The number of frames the AI has to wait to bid again
-		BID_TIMER_CAP : BCD * 8.0, //Max wait time between bids, in number of frames
+		BID_TIMER_CAP : BID_CAP, //Max wait time between bids, in number of frames
 		currBid : 0.0, //The enemy's current bid
 		leftAuction : false, //Flag to determine whether or not the enemy has left the auction
 		winningBid : false, //Flag to determine whether or not the enemy is currently holding the winning bid

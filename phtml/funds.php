@@ -53,6 +53,7 @@ function ic(){
 
 <div id='AddFunds'>
     <?php backBtn(); homeBtn();?>
+    <button id='addAllowance'></button>
     <div id='cash'>
 <?php
         pp::form('c50', 'FL8LXKLA32L7L', "cash/fifty");

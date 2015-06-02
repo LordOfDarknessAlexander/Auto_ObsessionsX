@@ -31,7 +31,64 @@ function eS(){
     :
         '_SESSION not set! Please log in.');
 }
+class sql{
+    /*public static function insert($table, $valStr){
+        //check using regex that $valStr contains a
+        //comma seperated list of identifiers
+        if(is_string($table) && is_string($valStr) ){
+            $t = mysqli::real_escape_string($table);
+            $v = mysqli::real_escape_string($valStr);
+            
+            return "INSERT INTO $t ($v)";
+        }
+        return '';
+    }
+    public static function insertVal($table, $rowStr, $valStr){
+        //check using regex that $rowStr and $valStr contain
+        //comma seperated list of identifiers
+        if(is_string($table) && && is_string($rowStr) && is_string($valStr) ){
+            $t = mysqli::real_escape_string($table);
+            $r = mysqli::real_escape_string($rowStr);
+            $v = mysqli::real_escape_string($valStr);
+            //if(debug() ){
+                //$ret = "INSERT INTO $t ($r) VALUES ($v)";
+                //echo $ret;
+                //return $ret;
+            //}
+            return "INSERT INTO $t ($r) VALUES ($v)";
+        }
+        return '';
+    }*/
+    public static function slctFrom($fields, $table){
+        //$fields is a comma seperated list of row names
+        global $AO_DB;
+        //
+        if(is_string($table) && is_string($fields) ){
+            $f = mysqli_real_escape_string($AO_DB->con, $fields);
+            $t = mysqli_real_escape_string($AO_DB->con, $table);
 
+            return "SELECT $f FROM $t";
+        }
+        return '';
+    }
+    public static function slctAllFrom($table){
+        //$fields is a comma seperated list of row names
+        return sql::slctFrom('*', $table);
+    }
+    //public static function slctFromCars($fields){
+        //global $AO_DB;
+        
+        //if(is_string($fields) ){
+            //$aoCars = ao::CARS;
+            //$f = mysqli_real_escape_string($AO_DB->con, $fields);
+            //return "SELECT $f FROM $aoCars";
+        //}
+        //return '';
+    //}
+    //public static function slctAllFromCars(){
+        //return sql::slctFromCars('*');
+    //}
+}
 //class user{
     function getUID(){
         //returns the user if logged in, else echo error and force user to redirect to login
@@ -62,7 +119,9 @@ function eS(){
         $CID = ao::CID;
         $tableName = getUserTableName();
        
-        $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $id");
+        $res = $aoUsersDB->query(
+            "SELECT * FROM $tableName WHERE $CID = $id"
+        );
         
         if($res){
             //user has car

@@ -1,24 +1,15 @@
-﻿var enemy1, enemy2, enemy3, enemy4;
-
+﻿//
+jq.Auction.divPB = $('div#Auction div#pbCD');
+jq.Auction.cdpbG = $('progress#gcd', jq.Auction.divPB);
+jq.Auction.cdpb0 = $('progress#ai0', jq.Auction.divPB);
+jq.Auction.cdpb1 = $('progress#ai1', jq.Auction.divPB);
+jq.Auction.cdpb2 = $('progress#ai2', jq.Auction.divPB);
+jq.Auction.cdpb3 = $('progress#ai3', jq.Auction.divPB);
+jq.Auction.pbUser = $('progress#user', jq.Auction.divPB);
+jq.Auction.going = $('progress#going', jq.Auction.divPB);
+//
 var playerBoughtOut = false; //temporary for our dev button "buyout"
 
-/*function shuffleArray(array) 
-{	//sort array items
-    var counter = array.length, temp, index;
-    // While there are elements in the array
-    while (counter > 0) 
-    {   // Pick a random index
-        index = Math.floor(Math.random() * counter);
-        // Decrease counter by 1
-        counter--;
-        // And swap the last element with it
-        temp = array[counter];
-        array[counter] = array[index];
-        array[index] = temp;
-       
-    }
-    return array;
-}*/
 //ao.state.Auction =
 var Auction = {
 	//manages the state for purchasing cars
@@ -659,3 +650,20 @@ function(){
     jq.carImg.hide();
     jq.setErr();    //clear error when changing pages	
 });
+/*function shuffleArray(array) 
+{	//sort array items
+    var counter = array.length, temp, index;
+    // While there are elements in the array
+    while (counter > 0) 
+    {   // Pick a random index
+        index = Math.floor(Math.random() * counter);
+        // Decrease counter by 1
+        counter--;
+        // And swap the last element with it
+        temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+       
+    }
+    return array;
+}*/
