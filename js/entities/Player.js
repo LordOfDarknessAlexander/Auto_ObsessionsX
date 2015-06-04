@@ -18,25 +18,23 @@ var player = (function(player){
     Vector.call(player,  PLAYER_XPOS,  PLAYER_YPOS, 0, player.dy);
 
     //update
-    player.update = function() 
-    {
+    player.update = function(){
         player.anim = player.walkAnim;
         player.anim.update();
-        if(Auction.playerWinning)
-        {
+        
+        if(Auction.playerWinning){
             player.anim = player.jumpAnim;
             player.anim.update();
         }
     };
-//Draw the player at it's current position 
-    player.draw = function() 
-    {
+    
+    player.draw = function(){
+        //Draw the player at it's current position
         player.anim.draw(player.x, player.y);
     };
 
-    // Reset the player's position
-    player.reset = function() 
-    {
+    player.reset = function(){
+        //Reset the player's position
         player.x = PLAYER_XPOS;
         player.y = PLAYER_YPOS;
     };

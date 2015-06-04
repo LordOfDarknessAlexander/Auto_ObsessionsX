@@ -18,10 +18,6 @@ var Store = {
 	}
 };
 
-function addMinorFundsBtn(){
-    console.log('adding minor funds!');
-}
-
 function addFunds(funds){
 <?php $funcName = 'js/pas.js pas::update::funds(funds)';?>
 	//var MAX_MONEY = 50000000;
@@ -124,12 +120,12 @@ $('button#addAllowance').click(
 function(){
 	//allowance accumulates every few seconds
 	var delta = Allowance.getDelta(),
-		carValue = getCollectionValue();
+		carValue = Garage.getCollectionValue() * 0.1;   
         
 	if(delta >= Allowance.CAP){
         var val = 1;	//(base + carValue) * delta;
         addFunds(val);
-        setLastAllowanceTime();
+        Allowance.setLastTime();
     }
 });
 /*
@@ -172,6 +168,9 @@ $('#add20TokensBtn').click(
 function(){
 	addTokens(20);
 });
+//function addMinorFundsBtn(){
+//    console.log('adding minor funds!');
+//}
 */
 jq.Funds.backBtn.click(
 function(){

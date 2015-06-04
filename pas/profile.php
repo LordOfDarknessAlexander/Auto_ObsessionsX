@@ -16,20 +16,6 @@ require_once '../re.php';
 $gs = isset($_GET) && !empty($_GET) ? true : false; //get set
 $ps = isset($_POST) && !empty($_POST) ? true : false;   //post set
 
-class sql{
-    public static function selectAll(&$tableName){
-        //preferably, $tableName should be a single word,
-        //but can also be expanded to include addional sql WHERE, GROUP BY, ORDER BY, LIMIT, etc statements
-        //$str = mysqli_real_escape_string($tableName);
-        return "SELECT * FROM $tableName";
-    }
-    //public static function selectAll(&$tableName, &$stmtsStr){
-        //preferably, $tableName should be a single word,
-        //but can also be expanded to include addional sql WHERE, GROUP BY, ORDER BY, LIMIT, etc statements
-        //return "SELECT * FROM $tableName WHERE $stmtsStr";
-    //}
-}
-
 function getUserPurchases(){
     //$w = getUserWins();
     //$l = getUserLosses();

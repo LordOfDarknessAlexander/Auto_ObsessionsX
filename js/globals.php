@@ -118,10 +118,14 @@ else{
 ?>
 }
 
-//function audioEnabled(){
-    //return '_audioEnabled' in Storage.local ?
-        //Boolean(JSON.parse(Storage.local._audioEnabled) ): true;
-//}
+function audioEnabled(){
+    return (Storage.local !== null && '_audioEnabled' in Storage.local)?
+        Boolean(JSON.parse(Storage.local._audioEnabled) ) : true;
+}
+function toggleAudio(){
+    var b = !audioEnabled();
+    Storage.local._audioEnabled = JSON.stringify(b);
+}
 var amoney;
 var atokens;
 var aprestige;

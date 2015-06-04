@@ -31,11 +31,7 @@ var Allowance = {
         return Allowance.getDelta() / Allowance.CAP;
     }
 };
-function getCollectionValue(){
-    //returns the total value of the user's garage,
-    //including upgrades and repairsreturn
-    return 0.0;
-}
+
 function garageDoor(){
 	backgroundY -= speed;
     
@@ -491,10 +487,9 @@ function(){
     setHomeImg();
     jq.setErr();    //clear error when changing pages
 	//var car = Garage.getCurrentCar();
-	 $('#Slots').hide();
+	$('#Slots').hide();
 	//if(car !== null){
 		//jq.Game.homeImg.attr('src', car.getFullPath() );
-    
 	//}	
 });
 
@@ -526,13 +521,17 @@ function(){
 //Sound Button
 $('.sound').click(
 function(){
-    var $this = $(this);    //references the jq object calling .click, not the function!
-    // sound off
+    //references the jq object calling .click, not the function!
+    var $this = $(this);
+        ae = audioEnabled();
+        
     if($this.hasClass('sound-on')){
+        //disable audio
         $this.removeClass('sound-on').addClass('sound-off');
         playSound = false;
     }
-    else{ // sound on
+    else{
+        //enable audio
         $this.removeClass('sound-off').addClass('sound-on');
         playSound = true;
     }
@@ -549,5 +548,4 @@ function(){
 });
 
 assetLoader.downloadAll();
-
 });

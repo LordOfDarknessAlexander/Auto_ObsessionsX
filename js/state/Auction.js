@@ -17,12 +17,10 @@ var Auction = {
 	/*
 	//need to use namsespace to allow private vars we could implement and make all auction vars private
 	_user : {	//object representing the current human player
-		canBid:false,
-		didBid:false,
 		didWin:false,
 		startEndBid:false,
-		endBidTimer:0,
-		bid:0	//current bid
+		_bidTimer:0,
+		_bid:0	//current bid
 		//functions
 		nextBid : function(){
 			this.bid += (this.bid * 1.0);
@@ -43,7 +41,7 @@ var Auction = {
     bidTimerCap: 50, //Max time the bidTimer can go to
 	enemyWinning : false,
 	//enemyCanBid: true, //Boolean determining whether anyone can bid again or not
-    playerCanBid: true,
+    //playerCanBid: true,
 	playerWinning : false,
 	playerWon : false, //Whether or not the player won the auction
 	raisePerc : 0.08, //How much the AI and player will raise each bid by
@@ -63,12 +61,17 @@ var Auction = {
             assetLoader.sounds.bg.play();
         //}
         
+        appState = GAME_MODE.AUCTION;
         auctionStop = false;
 		this.playerBid = 0;
         
         var funcName = 'Auction.js, Auction::init()';
         
         $.when(
+            //jq.post(
+                //'pas/query.php',
+                //{carID:index}
+            //);
             $.ajax({
                 type:'POST',
                 url:getHostPath() + 'pas/query.php',
@@ -87,7 +90,6 @@ var Auction = {
                 if(Auction._car !== null){
                     //console.log(Auction._car.getFullName());
                     var p = Auction._car.getPrice();
-                    //vehiclePrice = Auction._car.getPrice();
 				   //vehiclePrice = Auction._car.getAdjustedConditionPrice();
 					//vcondition = Auction._car.getRandCondition();
 					vcondition = Auction._car.getRandCondition();
@@ -143,21 +145,12 @@ var Auction = {
             jq.setErr(funcName, 'calling $.when failed! Reason: ' + jqxhr.responseText);
             //console.log('loading game resources failed, abort!');
         });
-		
-        appState = GAME_MODE.AUCTION;
         
 		//if(index < xdbCars.length){	//make sure index is within bounds to be safe
 			//Auction._car = xdbCars[index];	//copy assigned
 		//}
 		
 		//this.setup();
-		
-		//assetLoader.sounds.gameOver.pause();
-		//assetLoader.sounds.going.pause();
-		//assetLoader.sounds.sold.pause();
-		//assetLoader.sounds.bg.currentTime = 0;
-		//assetLoader.sounds.bg.loop = true;
-		//assetLoader.sounds.bg.play();
 	},
 	close : function(){
         //End the auction
@@ -165,16 +158,8 @@ var Auction = {
 		auctionStop = true;
 		auctionEnded = false;
 		endGame = false;
-		//delete sold;
-		//delete buyOut;	
 		
-		//enemy1 = null;
-		//enemy2 = null;
-		//enemy3 = null;
-		//enemy4 = null;
-
-		this.playerBid = 0;
-		
+		this.playerBid = 0;		
 		this.currentBid = 0;
 		//this.currentBid = vehiclePrice * 0.1;
 		
@@ -191,7 +176,7 @@ var Auction = {
         jq.carImg.hide();
 	},
     getGoingPerc:function(){
-        return;
+        return 0.0;
     },
     canPlayerBid:function(){
         return this.playerBidTimer >= this.bidTimerCap;
@@ -203,6 +188,7 @@ var Auction = {
         //returns the current bid plus and additional increase, based on a percentage
         var b = this.currentBid,
             cv = Auction._car.getPrice();
+        
         return b + (cv * this.raisePerc);
     },
 	update : function(){
@@ -211,6 +197,7 @@ var Auction = {
         
         //static call, to update global enemy bid cooldown counter
 		Enemy.update();
+        
 		this.bidTimers();
 		this.enemyBidding();
 		//this.currentBidder();
@@ -237,13 +224,13 @@ var Auction = {
 			this.close();					
 		}
 
-		if(!this.playerCanBid){
+		if(!this.canPlayerBid()){
 		    if(this.playerBidTimer < btc){
 		        this.playerBidTimer++;
 		    }
-		    else if(this.playerBidTimer >= btc){
-		        this.playerCanBid = true;
-		    }
+		    //else if(this.playerBidTimer >= btc){
+		        //this.playerCanBid = true;
+		    //}
 		}
 		
 		if(!auctionStop){
@@ -462,7 +449,7 @@ var Auction = {
 	},
 	playerBidding:function(){
         //user bidding logic
-	    if(!this.playerWinning && this.playerCanBid){
+	    if(!this.playerWinning && this.canPlayerBid()){
             //
             var raise = this.getRaise();    //currentBid + this.raisePerc;
             
@@ -473,7 +460,7 @@ var Auction = {
                 this.playerBidTimer = 0;
                 this.goingTimer = 0;
                 //Setting the enemy's ability to bid to false so that as soon as the player bids the enemy is unable to
-                this.playerCanBid = false;
+                //this.playerCanBid = false;
                 this.playerBid = raise;
                 this.currentBid = this.playerBid;
 //<php if($DEBUG){>
