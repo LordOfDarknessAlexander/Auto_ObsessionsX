@@ -75,14 +75,15 @@ var Repair = {
 	init : function()
 	{   //initializes the state, enabling ui and core logic of this screen
 		//appState = GAME_MODE.Repair;
+        
         jq.RepairShop.menu.show();
         
         var div = $('div#RepairShop');
-        
-		if(_curCarID !== 0)
-		{
-			var car = Garage.getCurrentCar();
-                img = $('img#userCar', div),
+        //if(carID == null || carID == undefined){
+		if(_curCarID !== 0){
+			var car = Garage.getCurrentCar(),
+                img = $('img#userCar', div);
+            
             img.attr('src', car === null ? 'images\\garageEmpty.png' : car.getFullPath() );
 			
 			this._initButtons();

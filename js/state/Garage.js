@@ -488,6 +488,7 @@ var Garage = {
 		else{
         	//$('div#Garage #userCar').show();
 			//$('div#selectedCar').show();
+            //if(Garge.getUserCar() )
 			$('div#Garage #select').show();
 			$('div#Garage #viewCar').show();
 
@@ -686,7 +687,7 @@ function(){
 	if(selCarIndex !== null){
 		Garage.setCurrentCar();
 
-        jq.Game.setHomeImg();	//set home car image
+        setHomeImg();	//set home car image
 	}
 });
 //
