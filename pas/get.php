@@ -16,6 +16,34 @@ class aoPriceRange{
         ELITE = 'elite',
         ALL = 'all';
 }
+/*function aoPriceFromRange($range){
+    $ret = array();
+
+    if($range == aoPriceRange::LOW){
+        $ret[] = 10000.00;
+        $ret[] = 30000.00;
+    }
+    elseif($range == aoPriceRange::MID){
+        $ret[] = 30000.00;
+        $ret[] = 75000.00;
+    }
+    elseif($range == aoPriceRange::HIGH){
+        $ret[] = 7.5e4;    //75000
+        $ret[] = 1.5e5;
+    }
+    elseif($range == aoPriceRange::ELITE){
+        $ret[] = 1.5e5;    //150000.00
+        $ret[] = 1.0e16;    //cap of 10 trillion, no car should ever be this expensive
+    }
+    elseif($range == aoPriceRange::ALL){
+        $ret[] = 0.0;
+        $ret[] = 1.0e16;
+    }
+    else{
+        echo "invalid value ($range)";
+        return $ret;
+    }
+}*/
 /*class sql{
     public static function selectAll($tableName){
         //$str = mysql_real_escape_string($tableName);
@@ -37,7 +65,23 @@ class aoPriceRange{
         return "SELECT * FROM $userID";
     //}
 }*/
+function asCarInfoFromArray($r){
+    //returns data to display elements in Auction Select
+    $CID = ao::CID;
+    $N = 'name';
+    $P = 'price';
+    $S = 'src';
+    $car = Vehicle::fromArray($r);
+
+    return array(
+        $CID=>$car->getID(),
+        $S=>$car->getLocalPath(),
+        $N=>$car->getFullName(),
+        $P=>$car->getPrice()
+    );           
+}
 function auctionCarInfoFromArray($r){
+    //prepares the car values required for posting an auction
     $CID = ao::CID;
     $N = 'name';
     $P = 'price';
@@ -210,16 +254,8 @@ class pasGet{
         );
         
         if($res){   
-            while($row = $res->fetch_assoc()){    
-                //echo json_encode($row);
-                $car = Vehicle::fromArray($row);
-
-                $ret[] = array(
-                    $CID=>$car->getID(),
-                    $S=>$car->getLocalPath(),
-                    $N=>$car->getFullName(),
-                    $P=>$car->getPrice()
-                );           
+            while($row = $res->fetch_assoc()){
+                $ret[] = asCarInfoFromArray($row);
             }
             $res->close();
         }
@@ -271,11 +307,11 @@ class pasGet{
         global $AO_DB;
         
         $aoCars = ao::CARS;
-        $CID = ao::CID;
+        //$CID = ao::CID;
         $T = 'type';
-        $N = 'name';
-        $P = 'price';
-        $S = 'src';
+        //$N = 'name';
+        //$P = 'price';
+        //$S = 'src';
         $ct = $AO_DB->escape($carType);
         $ret = array();
         //if is str(carType)
@@ -290,16 +326,13 @@ class pasGet{
         $res = $AO_DB->query($q);
         
         if($res){
-            while($row = $res->fetch_assoc() ){
-                //echo json_encode($row);
-                $car = Vehicle::fromArray($row);
-                
-                $ret[] = array(
-                    $CID=>$car->getID(),
-                    $S=>$car->getLocalPath(),
-                    $N=>$car->getFullName(),
-                    $P=>$car->getPrice()
-                );               
+            while($row = $res->fetch_assoc() ){                
+                $ret[] = asCarInfoFromArray($row);    //array(
+                    //$CID=>$car->getID(),
+                    //$S=>$car->getLocalPath(),
+                    //$N=>$car->getFullName(),
+                    //$P=>$car->getPrice()
+                //);               
             }            
             $res->close();
         }
@@ -342,14 +375,7 @@ class pasGet{
         
         if($res){
             while($row = $res->fetch_assoc() ){
-                $car = Vehicle::fromArray($row);
-                
-                $ret[] = array(
-                    $CID=>$car->getID(),
-                    $S=>$car->getLocalPath(),
-                    $N=>$car->getFullName(),
-                    $P=>$car->getPrice()
-                );                    
+                $ret[] = asCarInfoFromArray($row);
             }            
             $res->close();
         }
@@ -393,7 +419,7 @@ class pasGet{
             echo "invalid value ($range)";
             return $ret;
         }
-        
+        //if(!empty($r) ){
         $q = "SELECT * FROM $aoCars WHERE $P >= $gt AND $P < $lt";
         
         if($ct != 'all'){
@@ -404,14 +430,7 @@ class pasGet{
         
         if($res){
             while($row = $res->fetch_assoc() ){
-                $car = Vehicle::fromArray($row);
-                
-                $ret[] = array(
-                    $CID=>$car->getID(),
-                    $S=>$car->getLocalPath(),
-                    $N=>$car->getFullName(),
-                    $P=>$car->getPrice()
-                );                    
+                $ret[] = asCarInfoFromArray($row);
             }            
             $res->close();
         }

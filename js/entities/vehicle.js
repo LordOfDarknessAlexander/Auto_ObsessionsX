@@ -65,8 +65,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         }
     }*/
 
-	return {
-		
+	return {		
 		//pos:new Vector(VEHICLE_XPOS, VEHICLE_YPOS,0,0)
 		_price:Price,	//original sale price on year made, does not change
         _repairs:0, //bitfield representing which upgrades have been repaired
@@ -88,19 +87,15 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         //}
 		//image : img,
 		//getters
-		getPrice : function()
-		{	//calculates sale price based on age, condition and completed upgrades
+		getPrice : function(){
+            //calculates sale price based on age, condition and completed upgrades
 			//var p = this._price;  //base price of car
 
             //p += _dt.getPrice();
             //p += _body.getPrice();
             //p += this._interior.getPrice();
             //p += this._docs.getPrice();
-            
-            //for(var i = 0; i < parts.length; i++)
-			//{
-				//upgradeCost += this._parts[i].getPrice();
-			//}
+
 			return this._price; // + upgradeCost;
 	
 		},

@@ -20,7 +20,7 @@ Action Select UI stylings
 {	/*Auction page stylings*/ 
 <?php
     posAbs();
-    defaultBG();
+    css::defaultTileBG();
     css::size();
 ?>
 	display: none;

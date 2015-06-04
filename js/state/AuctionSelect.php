@@ -31,7 +31,6 @@ function isValidData(){
 ?>
 ao = {
     STAGE:{
-        //
         all:'all',
         unique:'unique',
         classic:'classic',

@@ -145,7 +145,7 @@ if(!loggedIn() ){?>
             </ul>
             <ul>
                 <li class='artwork'>Programming Crew: <?php
-                echo $AS_NAME . ', ' . $TD_NAME . ', ' . $AB_NAME;
+                echo "$AS_NAME, $TD_NAME, $AB_NAME";
                 ?></li>
             </ul>
              

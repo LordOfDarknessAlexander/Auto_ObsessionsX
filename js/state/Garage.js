@@ -517,6 +517,18 @@ var Garage = {
 				$('#carSelBtn' + i).click({index:i}, this.setSelectCar);	//this.setSelectedCar);
 			}
 		}
+    },
+    getCollectionValue:function(){
+        //returns the total value of the user's garage,
+        //including upgrades and repairs
+        var ret = 0.0,
+            len = userGarage.length;
+            
+        for(var i = 0; i < len; i++){
+            ret += userGarage[i].getPrice();
+        }
+        
+        return ret;
     }
 };
 //Garage.save();
