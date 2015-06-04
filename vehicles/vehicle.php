@@ -3,6 +3,10 @@
 //require_once 'ao.php';
 require_once 'part.php';
 //
+function ri(){
+    $i = rand(0, 4);
+    return $i == 0 ? 0 : 0x1 << ($i - 1);
+}
 class Vehicle
 {   //class representing a Vehicle on the server
     //private const
@@ -132,8 +136,12 @@ class Vehicle
     }
     public static function getRandStage(){
         //
-        $r = rand(0, 4);
-        $ret = $r == 0 ? 0 : 0x00000001 << ($r - 1);
+        $r0 = ri();
+        $r1 = ri() << (4 * 1);
+        $r2 = ri() << (4 * 2);
+        $r3 = ri() << (4 * 3);
+        $ret = ($r3 | $r2 | $r1 | $r0);
+        
         return $ret;
     }
     public static function getRandRepairs(){
