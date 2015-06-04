@@ -173,7 +173,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 		//},
 		getFullPath : function(){
             //returns the absolute url for the image path of this car on the server
-			return /*baseURL +*/ 'images\\cars\\' + this.make + '\\' + this.year + '\\' + this.name + '.jpg';
+			return /*baseURL +*/ 'images/cars/' + this.make + '/' + this.year + '/' + this.name + '.jpg';
 			//return '';
 		},
 		initParts : function(){
