@@ -200,7 +200,8 @@ function auctionGen(args){
 					}
 					console.log('Ending auction');
 					this.endAuction();
-//					this.close();
+					this.close();
+                    return;
 				}
                 //close auction here!
                 //console.log('Ending auction');
@@ -540,7 +541,7 @@ var AuctionSell =
                 userSales.push(as);
 				var TOM = 0;
                 //console.log(JSON.stringify(userSales) );
-               AuctionSell.save(); //overwrites the array that is just made
+                AuctionSell.save();
             }
             jq.AuctionSell.toggle();
             return;
@@ -556,6 +557,18 @@ var AuctionSell =
 			for(; i < len; i++){
 				//if(!userSales[i]._expired){
                 userSales[i].update(dt);
+                
+                if(userSales[i].isExpired() ){  //this._curTime >= this.MAX_AUCTION_TIME){
+                    //continue to update until time runs out
+					for(var i = 0; i < userSales[i]._ai.length; ++i){
+						if(userSales[i]._ai[i].winningBid){
+							console.log('AI ' + i + ' has won the bid for the ' + this._car.getFullName() + ' for (' + Math.round(this._ai[i].currBid) + '), Original Price (' + this._car.getPrice() + ')');
+						}
+					}
+					console.log('Ending auction');
+					userSales[i].endAuction();
+					userSales[i].close();
+				}
 				//}
 				//else{
 					//userSales.splice(i, 1);
@@ -583,8 +596,8 @@ var AuctionSell =
 //                        na.restart(); 
   //                      na.toggleCC();
                         
-                        userSales.push(auctionGen(ad));   //uncommenting this breaks game now...
-						var TIM = 0; 								//Test for Breakpoints
+  //                      userSales.push(auctionGen(ad));   //uncommenting this breaks game now...
+						var TIM = 0;
                     }
                 }
             }
