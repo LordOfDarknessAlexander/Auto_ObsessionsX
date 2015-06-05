@@ -551,9 +551,9 @@ var AuctionSell =
                 
                 if(userSales[i].isExpired() ){  //this._curTime >= this.MAX_AUCTION_TIME){
                     //continue to update until time runs out
-					for(var i = 0; i < userSales[i]._ai.length; ++i){
-						if(userSales[i]._ai[i].winningBid){
-							console.log('AI ' + i + ' has won the bid for the ' + this._car.getFullName() + ' for (' + Math.round(this._ai[i].currBid) + '), Original Price (' + this._car.getPrice() + ')');
+					for(var j = 0; j < userSales[i]._ai.length; ++j){
+						if(userSales[i]._ai[j].winningBid){
+							console.log('AI ' + j.toString() + ' at auction ' + i.toString() + ' has won the bid for the ' + this._car.getFullName() + ' for (' + Math.round(this._ai[j].currBid) + '), Original Price (' + this._car.getPrice() + ')');
 						}
 					}
 					console.log('Ending auction');
