@@ -66,6 +66,9 @@ function auctionGen(args){
                     console.log('user has already sold car with id (' + car.id.toString() + ')');
                 }
 			}
+			else{
+				this._initAI();
+			}
             //else entry sell screen without posting an auction
             //jq.AuctionSell.show();
 		},
@@ -190,19 +193,7 @@ function auctionGen(args){
 				this.enemyBidding();
 				this.currentBidder();
 				this.checkCurrentWinner();
-				
-				if(this.isExpired() ){  //this._curTime >= this.MAX_AUCTION_TIME){
-                    //continue to update until time runs out
-					for(var i = 0; i < this._ai.length; ++i){
-						if(this._ai[i].winningBid){
-							console.log('AI ' + i + ' has won the bid for the ' + this._car.getFullName() + ' for (' + Math.round(this._ai[i].currBid) + '), Original Price (' + this._car.getPrice() + ')');
-						}
-					}
-					console.log('Ending auction');
-					this.endAuction();
-					this.close();
-                    return;
-				}
+			
                 //close auction here!
                 //console.log('Ending auction');
                 //this.endAuction();
