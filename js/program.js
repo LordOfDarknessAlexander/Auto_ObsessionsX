@@ -173,6 +173,7 @@ function(){
 			}  
 			timer++;
 			ticker++;
+			var CHECK = 0;
 		}	
 	}
 //Load the splash screen first

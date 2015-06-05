@@ -188,7 +188,7 @@ function auctionGen(args){
 					}
 					console.log('Ending auction');
 					this.endAuction();
-					this.close();
+//					this.close();
 				}
                 //close auction here!
                 //console.log('Ending auction');
@@ -519,7 +519,7 @@ var AuctionSell =
                 userSales.push(as);
 				var TOM = 0;
                 //console.log(JSON.stringify(userSales) );
-                AuctionSell.save();
+               AuctionSell.save(); //overwrites the array that is just made
             }
             jq.AuctionSell.toggle();
             return;
@@ -565,8 +565,8 @@ var AuctionSell =
 //                        na.restart(); 
   //                      na.toggleCC();
                         
-  //                      userSales.push(auctionGen(ad));   //uncommenting this breaks game now...
-						var TIM = 0;
+                        userSales.push(auctionGen(ad));   //uncommenting this breaks game now...
+						var TIM = 0; 								//Test for Breakpoints
                     }
                 }
             }
