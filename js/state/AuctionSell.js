@@ -59,7 +59,7 @@ function auctionGen(args){
                     this._currentBid = this._car.getPrice() * 0.05;
                     
                     this._initAI();
-                    //AuctionSell.save();
+                    AuctionSell.save();
                 }
                 else{
                     console.log('user has already sold car with id (' + car.id.toString() + ')');
@@ -514,11 +514,12 @@ var AuctionSell =
 			if(as._car !== null){
                 as.addButton();
                 
-                as.toggleCC();
+        //        as.toggleCC();
                 
-                //userSales.push(as);
+                userSales.push(as);
+				var TOM = 0;
                 //console.log(JSON.stringify(userSales) );
-                //AuctionSell.save();
+                AuctionSell.save();
             }
             jq.AuctionSell.toggle();
             return;
@@ -561,10 +562,11 @@ var AuctionSell =
                         var ad = sd[i], //auction data
                             na = auctionGen(ad);    //new auction
                     
-                        na.restart(); 
-                        na.toggleCC();
+//                        na.restart(); 
+  //                      na.toggleCC();
                         
-                        //userSales.push(na);   //uncommenting this breaks game now...
+  //                      userSales.push(auctionGen(ad));   //uncommenting this breaks game now...
+						var TIM = 0;
                     }
                 }
             }
