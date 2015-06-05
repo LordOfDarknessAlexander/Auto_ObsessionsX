@@ -320,6 +320,7 @@ var Repair = {
                 //alert(funcName + ', ajax response success! ' + JSON.stringify(data) );
                 //do stuff
                 Garage.save();    //save updates to user cars in local storage
+                //setMoney(data.funds);
             },
             function(jqxhr){
                 //call will fail if result is not properly formated JSON!
@@ -327,6 +328,7 @@ var Repair = {
                 console.log('failed to save vehicle upgrades to database!');
             },
             {
+                //newFunds:userStats.money
                 carID:car.id,
                 dt:car._dt !== null ? car._dt.getBits() : 0,
                 body:car._body !== null ? car._body.getBits() : 0,
@@ -340,6 +342,7 @@ var Repair = {
 //else{?>
         //save to userGarage in local storage
         //temporary, vehicles are loaded from database when navigating to it
+        //setMoney();
         //Garage.save();    //save updates to user vehicles
 //<php
 //}

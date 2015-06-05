@@ -123,7 +123,7 @@ function(){
 		carValue = Garage.getCollectionValue() * 0.1;   
         
 	if(delta >= Allowance.CAP){
-        var val = 1;	//(base + carValue) * delta;
+        var val = 50000;    //1;	//(base + carValue) * delta;
         addFunds(val);
         Allowance.setLastTime();
     }

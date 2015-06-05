@@ -38,6 +38,26 @@ class user{
         }
         return null;
     }
+    public static function getFunds(){
+        $M = 'money';
+        //$ret = user::slctFromEntry($M);
+        
+        if($ret !== null){
+            //$f = round(floatval($res->fetch_assoc()[$M]), 2);
+            //return json_encode($f);
+        }
+    }
+    public static function setFunds($val){
+        $M = 'money';
+        //$uf = user::getFunds();
+        //$nf = $uf + $val;
+        
+        //if($nf < $MF && $nf >= 0){
+            
+            //return json_encode($ret);
+        //}
+        //return json_encode($uf);
+    }
 }
 
 class pasUpdate{
@@ -286,6 +306,8 @@ if($ps){
                         exit();
                     }
                     else{
+                        //if($AO_DB->query() ){
+                            //
                         $tableName = getUserTableName();
                         
                         $dt = Vehicle::getRandStage();
@@ -302,6 +324,7 @@ if($ps){
                                 ($carID, $dt, $b, $i, $d, $r)"
                             //IF entry EXISTS do nothing
                         );
+                        //}
                         //res contains the result of the operation
                         echo json_encode($res);
                     }

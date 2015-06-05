@@ -2,7 +2,7 @@
 var AutoObessesions = {};
 
 var Allowance = {
-    CAP:3000,//( (1000 * 60) * 60) * 24;  //86400000,
+    CAP:( (1000 * 60) * 60) * 24,  //86400000,  //3000,
     getDelta:function(){
         //get diffrence between last time and now        
         return Date.now() - Allowance.getLastTime();
