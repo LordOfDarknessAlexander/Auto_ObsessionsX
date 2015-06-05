@@ -68,8 +68,18 @@ function carPart(carPrice, partType){   //partType
             if(!this._repaired){
                 var p = this.getRepairPrice();
                 
+                //jq.post('pas/update.php?op=cump',
+                    //function(){
+                        
+                    //},
+                    //function(){
+                        
+                    //},
+                    //{price:p}
+                //);
                 if(userStats.money >= p){
                     userStats.money -= p;   //take money first
+                    setMoney();
                     this._repaired = true;  //then repair, 'cause we're like that
                     //console.log('purchasing repairs for part of type: ' + this._type.toString() + ', for: $' + p.toString() );
                 }
@@ -95,6 +105,7 @@ function carPart(carPrice, partType){   //partType
             if(userStats.money >= p){
                 if(this._stage != carPart.STAGE.pro){
                     userStats.money -= p;
+                    setMoney();
                     
                     if(this._stage == carPart.STAGE.stock){
                         this._stage = carPart.STAGE.amateur;
