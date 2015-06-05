@@ -45,6 +45,7 @@ function auctionGen(args){
 			end:null
 		},
 		_expired:false,
+		_closed:false,
         _cashedIn:false,    //has user received cash for this sale
 		_curTime:0.0,
         RAISE_PERC : 0.08,   //percentage of vehicle price the next bid is raised by
@@ -162,7 +163,8 @@ function auctionGen(args){
 			//this._expired = true;
             this.toggleCC();
 			this._date.end = Date.now() * 0.0001;
-			this._curTime = 0.0;
+			this._closed = true;
+			//this._curTime = 0.0;
             //while loops are bad practice, prone to misuse and infinite loops.
             //using array.pop() method is bad, is slow as the array must be
             //reallocated when the array is resized and can cause memory fragmentation issues!
@@ -548,8 +550,8 @@ var AuctionSell =
 			for(; i < len; i++){
 				//if(!userSales[i]._expired){
                 userSales[i].update(dt);
-                
-                if(userSales[i].isExpired() ){  //this._curTime >= this.MAX_AUCTION_TIME){
+                var b = userSales[i].isExpired() && !userSales[i]._closed;
+                if(b){  //this._curTime >= this.MAX_AUCTION_TIME){
                     //continue to update until time runs out
 					for(var j = 0; j < userSales[i]._ai.length; ++j){
 						if(userSales[i]._ai[j].winningBid){
