@@ -83,6 +83,10 @@ function auctionGen(args){
                 console.log(i + ' bid cap = ' + this._ai[i].bidCap);
             }
         },
+        isExpired:function(){
+            //auction expires when timer cap is reached
+            return this._curTime >= this.MAX_AUCTION_TIME;
+        },
         getRaise:function(){
             //returns the current bid plus and additional increase, based on a percentage
             var b = this._currentBid,
@@ -152,7 +156,7 @@ function auctionGen(args){
         },
 		close:function(){
             //auction end
-			this._expired = true;
+			//this._expired = true;
             this.toggleCC();
 			this._date.end = Date.now() * 0.0001;
 			this._curTime = 0.0;
@@ -160,7 +164,7 @@ function auctionGen(args){
             //using array.pop() method is bad, is slow as the array must be
             //reallocated when the array is resized and can cause memory fragmentation issues!
             //use this._ai = [], or delete _ai to reset or delete the memory, respectfully
-			while(this._ai.length) { this._ai.pop(); }
+			//while(this._ai.length) { this._ai.pop(); }
             
 //if(loggedIn() ){>
             //jq.post('pas/sales.php?op=sua',
@@ -178,7 +182,7 @@ function auctionGen(args){
 		},
 		update:function(dt){
             //
-			if(!this._expired){
+			if(!this.isExpired() ){
 				//console.log('Running');
 				//console.log(this._currentBid);
 				this._curTime += dt;
@@ -187,7 +191,7 @@ function auctionGen(args){
 				this.currentBidder();
 				this.checkCurrentWinner();
 				
-				if(this._curTime >= this.MAX_AUCTION_TIME){
+				if(this.isExpired() ){  //this._curTime >= this.MAX_AUCTION_TIME){
                     //continue to update until time runs out
 					for(var i = 0; i < this._ai.length; ++i){
 						if(this._ai[i].winningBid){
@@ -197,6 +201,7 @@ function auctionGen(args){
 					console.log('Ending auction');
 					this.endAuction();
 					this.close();
+                    return;
 				}
                 //close auction here!
                 //console.log('Ending auction');
@@ -264,12 +269,12 @@ function auctionGen(args){
                 //this._initAI();
             //}
             //else{
-                this._expired = true;
+                //this._expired = true;
                 //this._curTime = this._date.end - this._date.start;
             //}
             this.addButton();
             
-            if(this._expired){  // && this.bid == 0){
+            if(this.isExpired() ){  // && this.bid == 0){
                 //this.disable();
             }
         },
@@ -281,7 +286,7 @@ function auctionGen(args){
                 bid:this._currentBid,   //current highest bid
                 time:this._curTime, //time remaining on auction, 0 if expired
                 //date:this._date   //start and end dates,
-                expired:this._expired,
+                expired:this.isExpired(),
                 cashedIn:this._cashedIn
 			};
 		},
@@ -376,7 +381,7 @@ function auctionGen(args){
                     btnID = divID + ' div#btns button#cc',
                     btn = $(btnID);
                     
-                if(t._expired){
+                if(t.isExpired() ){
                     //set cash button, for user to recieve funds
                     var data = {
                         caller:t,
@@ -545,17 +550,14 @@ var AuctionSell =
         jq.AuctionSell.menu.toggle();
 	},
 	update : function(dt){
-		var i,
+		var i = 0,
             len = userSales.length;
         
-		if(len > 0){
-			i = 0;
-            
-			while(i < len){
-				if(!userSales[i]._expired){
-					userSales[i].update(dt);
-					++i;
-				}
+		if(len > 0){            
+			for(; i < len; i++){
+				//if(!userSales[i]._expired){
+                userSales[i].update(dt);
+				//}
 				//else{
 					//userSales.splice(i, 1);
 				//}
