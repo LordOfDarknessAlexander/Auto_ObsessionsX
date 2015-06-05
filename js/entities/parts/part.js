@@ -79,7 +79,7 @@ function carPart(carPrice, partType){   //partType
                 //);
                 if(userStats.money >= p){
                     userStats.money -= p;   //take money first
-                    setMoney();
+                    //setMoney();
                     this._repaired = true;  //then repair, 'cause we're like that
                     //console.log('purchasing repairs for part of type: ' + this._type.toString() + ', for: $' + p.toString() );
                 }
@@ -105,7 +105,7 @@ function carPart(carPrice, partType){   //partType
             if(userStats.money >= p){
                 if(this._stage != carPart.STAGE.pro){
                     userStats.money -= p;
-                    setMoney();
+                    //setMoney();
                     
                     if(this._stage == carPart.STAGE.stock){
                         this._stage = carPart.STAGE.amateur;
