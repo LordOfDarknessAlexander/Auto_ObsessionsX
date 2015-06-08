@@ -586,10 +586,11 @@ var AuctionSell =
                         var ad = sd[i], //auction data
                             na = auctionGen(ad);    //new auction
                     
+							na.addButton();
 //                        na.restart(); 
-  //                      na.toggleCC();
+							na.toggleCC();
                         
-  //                      userSales.push(auctionGen(ad));   //uncommenting this breaks game now...
+						userSales.push(na);//auctionGen(ad));   //uncommenting this breaks game now...
 						var TIM = 0;
                     }
                 }
