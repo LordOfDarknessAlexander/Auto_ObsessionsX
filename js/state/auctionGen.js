@@ -37,7 +37,7 @@ function auctionGen(args){
         ct = isValid ? args._curTime : 0.0;
         
     console.log('creating auction with vars: ' + JSON.stringify(args) );
-        
+    
 	return {
 		//_vehiclePrice : 20000,
 		MAX_AUCTION_TIME : 1000,    //how many units of time is thins?
@@ -257,7 +257,8 @@ function auctionGen(args){
 //>
 		},
         restart:function(data){
-            //continue a previously started auction(which has not already expired);
+            //continue a previously started auction
+            //which has not already expired!
             //this._car = Garage.getCarByID(data.id);
             //this._currentBid = data.bid;
             //this._date = data.date;
@@ -277,8 +278,8 @@ function auctionGen(args){
                 //this.disable();
             }
         },
-		toJSON : function()
-		{	//called by JSON.stringify to conver this object into a json string,
+		toJSON : function(){
+            //called by JSON.stringify to conver this object into a json string,
 			//this is called by JSON.stringify and will be serialized
 			return {
                 id:this._car.id,
@@ -476,9 +477,12 @@ function auctionGen(args){
         payUser:function(obj){
             var val = obj.data.price;
                 t = obj.data.caller;
+            
             console.log('won auction! user gets (' + val.toFixed(2) + ') funds!');
+            
             //t = this;
-            //if(t._expired && !t._cashedIn){
+            
+            //if(t.isExpired() && t._closed && !t._cashedIn){
                 //if( (userStats.money + val) <= Number.MAX_VALUE){
 //<php if(loggedIn() ){>
                 //call pasUpdate!
@@ -487,7 +491,7 @@ function auctionGen(args){
                         //userStats.money = data;
                         //t.disable();  //user received funds, disable div
                         t._cashedIn = true;
-                        setStatBar();
+                        //setStatBar();
                         //AuctionSell.save();
                     //},
                     //function(jqxhr){
@@ -499,6 +503,8 @@ function auctionGen(args){
 //}
 //else{>
                 userStats.money += val;
+                setMoney();
+                t.disable();  //user received funds, disable div
                 //save user!
                 //t.toggleCC();
                 //AucionSell.save();
