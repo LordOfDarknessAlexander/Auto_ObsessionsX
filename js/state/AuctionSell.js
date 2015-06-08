@@ -25,8 +25,7 @@ var AuctionSell = {
             
 			if(as._car !== null){
                 as.addButton();
-                
-        //        as.toggleCC();
+                as.toggleCC();
                 
                 userSales.push(as);
 				var TOM = 0;
