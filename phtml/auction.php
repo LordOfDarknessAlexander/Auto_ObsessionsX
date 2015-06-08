@@ -152,7 +152,7 @@ function outputCar($args){
     homeBtn();
 ?>
     <div id='carView'>
-        <!--ul id='auctionCars'>
+        <!--ul id='auctionCars'>-->
             <!--populated by application with format:
             <img><label></><button></>>
         </ul-->

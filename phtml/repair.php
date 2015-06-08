@@ -50,13 +50,15 @@ function statBar($id){
         statBar('');
         //statBar('Chasis');
         //statBar('Panels');
-        //statBar('Paint');?><!--
+        //statBar('Paint');?>
+<!--
 Chrome:
 <button id='ubPH0' class='ub'></button>
 <button id='rbPH0' class='rb'></button>
 <br>
 <progress id='pbPH0' value='0.0'></progress>
 <br>
+-->
 <!--PLACEHOLDER:-->
     </div>
     <div id='cid2'>
@@ -89,6 +91,7 @@ Chrome:
 <?php //ub(''); br(); pb('pb'); br();?>
 <progress id='pbPH0' value='0.0'></progress>
 <br>
+-->
 <!--PLACEHOLDER:-->
     </div>
 </div>

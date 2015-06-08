@@ -590,7 +590,7 @@ var AuctionSell =
 //                        na.restart(); 
 							na.toggleCC();
                         
-						userSales.push(na);//auctionGen(ad));   //uncommenting this breaks game now...
+						userSales.push(na);//push new auction
 						var TIM = 0;
                     }
                 }

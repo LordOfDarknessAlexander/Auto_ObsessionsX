@@ -34,7 +34,7 @@ if($isSlots)
 ?>
 		<div id='slots' style='margin-top: 32%; height: 22%; width: 30%; left: 2%;' >
 		<!--	<a id ='slots' style='margin-top: -26%; height: 18%; width: 40%;' href='Slots/index.html' target="_blank">Slots</a><br/>  -->
-		<!--	<a id ='slots' style='margin-top: -26%; height: 18%; width: 40%;' class='button playSlots'>Slots</a><br/>  --->
+		<!--	<a id ='slots' style='margin-top: -26%; height: 18%; width: 40%;' class='button playSlots'>Slots</a><br/>  -->
 			<a id ='slots'  href='slots.php' target="_blank">Slots</a>
 			
 		</div>

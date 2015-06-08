@@ -78,7 +78,7 @@ function getUserName(){
     <div id='reg-navigation'>
         <a id='home' class='tooltip' href='<?php
             echo rootURL() . 'Users/index.php';
-        ?>'>Home<!--span><!--img src=''>Tooltip!</span--></a><br>
+        ?>'>Home<!--span><img src=''>Tooltip!</span--></a><br>
         <a id='addFunds' class='tooltip'>Store</a><br>
 		
 <?php
