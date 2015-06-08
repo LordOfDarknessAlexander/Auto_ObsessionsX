@@ -422,7 +422,7 @@ function auctionGen(args){
             var t = obj.data.caller;     //alias of this(auction object), since using this inside the current function refrences the jq object, button#cc
                 //id = obj.cid, //car id
                 //p = obj.price;    //sale price of car
-            if(!t.expired){
+            if(!t.isExpired() ){
 //<php if(loggedIn() ){
                 //make ajax call to pasRemove>
                 /*
