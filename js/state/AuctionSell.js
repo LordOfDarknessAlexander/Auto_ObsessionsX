@@ -31,6 +31,10 @@ function auctionGen(args){
     
     var car = isValid ? Garage.getCarByID(args.id) : null,
         bid = isValid ? args.bid : 0;
+        //start = isValid ? args.date.end : Date.now() * 0.0001;
+        //end = isValid ? args.date.end : null;
+        //ci = isValid ? args._cashedIn : false;
+        //ct = isValid ? args._curTime : 0.0;
         
 	return {
 		//_vehiclePrice : 20000,
