@@ -481,10 +481,8 @@ function auctionGen(args){
             
             console.log('won auction! user gets (' + val.toFixed(2) + ') funds!');
             
-            //t = this;
-            
-            //if(t.isExpired() && t._closed && !t._cashedIn){
-                //if( (userStats.money + val) <= Number.MAX_VALUE){
+            if(t.isExpired() && t._closed && !t._cashedIn){
+                if( (userStats.money + val) <= Number.MAX_VALUE){
 //<php if(loggedIn() ){>
                 //call pasUpdate!
                 //jq.post('pas/sale.php',
@@ -511,11 +509,11 @@ function auctionGen(args){
                 AuctionSell.save();
 //<php
 //}>
-                //}
-            //}
-            //else{
-                //jq.Err('', 'Maximum funds reached');
-            //}
+                }
+            }
+            else{
+                jq.Err('', 'Maximum funds reached');
+            }
         }
 	};
 }
