@@ -30,11 +30,13 @@ function auctionGen(args){
     var isValid = (args === null || args === undefined) ? false : true;
     
     var car = isValid ? Garage.getCarByID(args.id) : null,
-        bid = isValid ? args.bid : 0;
-        //start = isValid ? args.date.end : Date.now() * 0.0001;
-        //end = isValid ? args.date.end : null;
-        //ci = isValid ? args._cashedIn : false;
-        //ct = isValid ? args._curTime : 0.0;
+        bid = isValid ? args.bid : 0,
+        //start = isValid ? args._date.start : Date.now() * 0.0001;
+        //end = isValid ? args._date.end : null;
+        ci = isValid ? args._cashedIn : false,
+        ct = isValid ? args._curTime : 0.0;
+        
+    console.log('creating auction with vars: ' + JSON.stringify(args) );
         
 	return {
 		//_vehiclePrice : 20000,
@@ -48,10 +50,10 @@ function auctionGen(args){
 			start:Date.now() * 0.0001,
 			end:null
 		},
-		_expired:false,
+		//_expired:false,
 		_closed:false,
-        _cashedIn:false,    //has user received cash for this sale
-		_curTime:0.0,
+        _cashedIn:ci,    //has user received cash for this sale
+		_curTime:ct,
         RAISE_PERC : 0.08,   //percentage of vehicle price the next bid is raised by
 		//
 		init:function(index){
@@ -281,10 +283,10 @@ function auctionGen(args){
 			return {
                 id:this._car.id,
                 bid:this._currentBid,   //current highest bid
-                time:this._curTime, //time remaining on auction, 0 if expired
+                _curTime:this._curTime, //time remaining on auction, 0 if expired
                 //date:this._date   //start and end dates,
-                expired:this.isExpired(),
-                cashedIn:this._cashedIn
+                //expired:this.isExpired(),
+                _cashedIn:this._cashedIn
 			};
 		},
 		enemyBidding : function(){
