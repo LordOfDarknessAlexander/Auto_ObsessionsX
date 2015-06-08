@@ -39,6 +39,7 @@ $paths = array(
     //'state/Auction/main',
     //'state/Auction/select',
     //'state/Auction/sell',
+    'state/auctionGen',
     'state/Auction',
     //'state/AuctionSelect',
     'state/AuctionSell',
