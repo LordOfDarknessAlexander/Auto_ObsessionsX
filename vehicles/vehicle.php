@@ -147,7 +147,7 @@ class Vehicle
     public static function getRandRepairs(){
         //
         $ret = rand(0, 16);
-        echo $ret;
+        //echo $ret;
         return $ret;
     }
 }

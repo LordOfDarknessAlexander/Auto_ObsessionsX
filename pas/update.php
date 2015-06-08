@@ -299,6 +299,8 @@ if($ps){
                     //returns true if the INSERTion is successful,
                     //false if user has the vehicle already or any other reason the vehicle could not be added
                     $hasCar = hasCar($carID);
+                    //echo json_encode(false);
+                    //exit();
                     
                     if($hasCar){
                         //user has already bought this car, exit with false!
