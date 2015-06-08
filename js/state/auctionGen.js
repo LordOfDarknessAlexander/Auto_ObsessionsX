@@ -58,6 +58,7 @@ function auctionGen(args){
 		//
 		init:function(index){
 			if(index !== null && index !== undefined){
+                //
                 var car = Garage.getCarByIndex(index);
                 
                 if(car !== null && !hasSoldCar(car.id)){
@@ -132,9 +133,9 @@ function auctionGen(args){
                 
                 jq.AuctionSell.carView.append(btnStr);
                 
-                //if(this.expired && this.bid == 0){
-                    //this.disable();            
-                //}
+                if(this.isExpired() && this._cashedIn){
+                    this.disable();            
+                }
             }
         },
         disable:function(){
@@ -507,7 +508,7 @@ function auctionGen(args){
                 t.disable();  //user received funds, disable div
                 //save user!
                 //t.toggleCC();
-                //AucionSell.save();
+                AuctionSell.save();
 //<php
 //}>
                 //}
