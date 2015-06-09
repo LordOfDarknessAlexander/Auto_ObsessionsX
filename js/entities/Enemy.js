@@ -62,7 +62,6 @@
                         this.winningBid = true;
                         this._bidTimer = 0;
                         Enemy.resetTimer();
-                        //Auction.setBidBtnText();
                         //assetLoader.sounds.bidder.play();
                         //console.log(JSON.stringify(this) + ', bidding: ' + raise.toFixed(2) );
                         return true;

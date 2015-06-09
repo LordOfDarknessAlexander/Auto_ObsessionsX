@@ -7,6 +7,8 @@ jq.Auction.cdpb2 = $('progress#ai2', jq.Auction.divPB);
 jq.Auction.cdpb3 = $('progress#ai3', jq.Auction.divPB);
 jq.Auction.pbUser = $('progress#user', jq.Auction.divPB);
 jq.Auction.going = $('progress#going', jq.Auction.divPB);
+
+jq.Auction.bidBtn = $('button#bid', jq.Auction.menu);
 //
 var playerBoughtOut = false; //temporary for our dev button "buyout"
 
@@ -502,6 +504,7 @@ var Auction = {
                         this.enemyWinning = true;
                         this.playerWinning = false;
                         assetLoader.sounds.bidder.play();
+                        Auction.setBidBtnText();
                         break;
                     }
                 }
@@ -617,11 +620,12 @@ var Auction = {
 		}
 	},
 	setBidBtnText:function(){
-		$('#bid').text('Bid: $' + this.currentBid.toFixed(2) );
+        var r = this.getRaise();
+		jq.Auction.bidBtn.text('Bid: $' + r.toFixed(2) );
 	}
 };
 //Auction jQuery bindings
-$('#bid').click(
+jq.Auction.bidBtn.click(
 function(){
 	Auction.playerBidding();
 	playerDidBid = true;
