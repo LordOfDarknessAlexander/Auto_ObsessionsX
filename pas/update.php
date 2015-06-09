@@ -58,6 +58,57 @@ class user{
         //}
         //return json_encode($uf);
     }
+    public static function getCarByID($id){
+        //returns a user's upgraded vehicle
+        global $aoUsersDB;
+        
+        if(intval($id) && $id > 0){
+            $ut = getUserTableName();
+            $CID = ao::CID;
+            $DT = 'drivetrain';
+            $B = 'body';
+            $I = 'interior';
+            $D = 'docs';
+            $r = 'repairs';
+            
+            $res = $aoUsersDB->query(
+                "SELECT * FROM $ut WHERE $CID = $id"
+            );
+            
+            if($res){
+                $r = $res->fetch_assoc();
+                
+                return array(
+                    $CID=>$r[$CID],
+                    $DT=>$r[$DT],
+                    $B=>$r[$B],
+                    $I=>$r[$I],
+                    $D=>$r[$D],
+                    $R=>$r[$R]
+                );
+            }
+            //echo 'sql query failed';
+        }
+        return null;
+    }
+    public static function removeCarByID($id){
+        //
+        global $aoUsersDB;
+        
+        if(intval($id) && $id > 0){
+            //if(hasCar($id) ){
+                //$ut = getUserTableName();
+                //$ret = $aoUsersDB->query(
+                    //"DELETE FROM $ut WHERE $CID = $cid"
+                );
+                
+                //if($res){
+                    
+                //}
+            //}
+        }
+        return null;
+    }
 }
 
 class pasUpdate{

@@ -166,7 +166,7 @@ class pasRemove
         $CID = ao::CID;
         $uid = getUserTableName();    //$_SESSION['user_id'];
         
-        $ret = $aoUSersDB->query(
+        $ret = $aoUsersDB->query(
             "DELETE FROM $uid WHERE $CID = $carID"
         );
         
