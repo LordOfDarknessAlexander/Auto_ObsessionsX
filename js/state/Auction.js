@@ -304,6 +304,7 @@ var Auction = {
 //<php
 //}
 //>
+        this.going();
         /*var highestBid = this.currentBid,
             bids = [],
             hi = 0; //highest index
@@ -418,7 +419,6 @@ var Auction = {
 		//call crowd for the player winning
 		//this.playerGoing();
 		
-		this.going();
 		//current bid HUD
 		//var gorguts;
 		//gorguts =  context.fillText('Condition :  ' + this.vcondition.toFixed(2)  ,left, 262);
@@ -553,7 +553,7 @@ var Auction = {
 					
 					if(this.playerWinning){
 						this.playerWon = true;
-						this.buyOut();
+						//this.buyOut();
 						console.log('Player won');
 						context.fillText('Sold to player!', x, 310);
 					}
@@ -591,7 +591,7 @@ var Auction = {
                 auctionEnded = true;
                 //push vehicle to garage
                 //auctionStop = true;
-                this.sold();
+                //this.sold();
                 assetLoader.sounds.bidder.pause();
                 assetLoader.sounds.sold.play();
             }
@@ -610,7 +610,7 @@ var Auction = {
                 //console.log('Player won ' + this.playerWon);
                 //push vehicle to garage
                 //auctionStop = true;
-                this.sold();
+                //this.sold();
                 assetLoader.sounds.bidder.pause();
                 assetLoader.sounds.sold.play();
             }
