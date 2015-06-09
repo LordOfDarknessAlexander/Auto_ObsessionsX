@@ -108,6 +108,7 @@ else{?>
         
         <div id='main'>		
 			<h1><?php echo 'Welcome ' . getUserName();?></h1>
+			<h1><?php echo 'Beta Version ' ;?></h1
             <ul>
 <?php
 if(!loggedIn() ){?>
