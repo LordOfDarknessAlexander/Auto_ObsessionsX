@@ -96,16 +96,19 @@ class user{
         global $aoUsersDB;
         
         if(intval($id) && $id > 0){
-            //if(hasCar($id) ){
+            if(hasCar($id) ){
+                //$car = user::getCarByID($id);
                 //$ut = getUserTableName();
-                //$ret = $aoUsersDB->query(
+                
+                //$res = $aoUsersDB->query(
                     //"DELETE FROM $ut WHERE $CID = $cid"
-                );
+                //);
                 
                 //if($res){
-                    
+                    //user::addSale($car);
+                    //return $car->toJSON();
                 //}
-            //}
+            }
         }
         return null;
     }
@@ -417,6 +420,11 @@ if($ps){
                     $res = pasUpdate::userCurrentCar($carID);
                     
                     echo json_encode($res);
+                    exit();
+                }
+                elseif($op == 'pucs'){
+                    //$res = user::postCarSale($carID);
+                    //echo json_encode($res);
                     exit();
                 }
                 //else switch to other calls

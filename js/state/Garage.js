@@ -566,6 +566,9 @@ var CarView = {
             jq.CarView.carName.text(car.getFullName() );
 			jq.CarView.carInfo.text(car.getInfo() ) ;
 			jq.CarView.sellBtn.off().click({i:selCarIndex}, AuctionSell.init);
+            //function(data){
+                //AuctionSell.init(selCarIndex);
+            //});
             //set dt progress bars
             for(var i = Drivetrain.TYPE.engine; i <= Drivetrain.TYPE.exhaust; i++){ 
                 var part = car._dt.getPartType(i),
