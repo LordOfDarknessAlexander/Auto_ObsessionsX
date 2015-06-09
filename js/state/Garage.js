@@ -208,6 +208,26 @@ var Garage = {
         
         return null;
 	},
+	removeCarByID:function(id)
+	{   //id is an int > 0
+        //returns a vehicle with matching id or null
+		var len = userGarage.length;
+        
+        if(len == 0){
+            return null;
+        }
+        
+        for(var i = 0; i < len; i++){
+            var car = userGarage[i];
+            
+            if(id == car.id){
+				userGarage.splice(i, 1);
+                return car;
+            }
+        }
+        
+        return null;
+	},
 	exit : function()
 	{	//remove resources, effectivly 'closing' the state
 		//appState = GAME_MODE.MAIN;
