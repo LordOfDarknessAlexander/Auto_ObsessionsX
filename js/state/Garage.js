@@ -738,7 +738,8 @@ function(){
 	}
 });
 jq.CarView.backBtn.click(
-function(){
+function () {
+    Garage.initCarView();
     jq.CarView.menu.hide();//toggle();
     jq.Garage.menu.show();
     jq.carImg.hide();
