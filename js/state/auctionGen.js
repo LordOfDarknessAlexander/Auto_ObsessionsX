@@ -100,10 +100,13 @@ function auctionGen(args){
         },
         getRaise:function(){
             //returns the current bid plus and additional increase, based on a percentage
-            var b = this._currentBid,
-                cv = this._car.getPrice();
-            
-            return b + (cv * this.RAISE_PERC);
+            if(this._car !== null){
+                var b = this._currentBid,
+                    cv = this._car.getPrice();
+                
+                return b + (cv * this.RAISE_PERC);
+            }
+            return 0.0;
         },
         addButton:function(){
             //add this auction entry to the div
@@ -140,17 +143,18 @@ function auctionGen(args){
         },
         disable:function(){
             //disable the div
-            var car = this._car,
-                cidStr = (car.id).toString(),
-                //btnID = 'as' + cidStr,
-                liID = 'div#asd' + cidStr,
-                div = $(liID, jq.AuctionSell.carView);
-                ccBtn = $('div#btns button#cc', div),
-                viewBtn = $('div#btns button#view', div);
+            if(this._car === null){
+                var car = this._car,
+                    cidStr = (car.id).toString(),
+                    //btnID = 'as' + cidStr,
+                    liID = 'div#asd' + cidStr,
+                    div = $(liID, jq.AuctionSell.carView);
+                    ccBtn = $('div#btns button#cc', div),
+                    viewBtn = $('div#btns button#view', div);
 
-            div.css({'opacity':'0.45'});
-            ccBtn.off().css({'cursor':'default'});
-            viewBtn.off().css({'cursor':'default'});
+                div.css({'opacity':'0.45'});
+                ccBtn.off().css({'cursor':'default'});
+                viewBtn.off().css({'cursor':'default'});
 //if(loggedIn() ){>
             //jq.post('pas/sales.php?op=rus',
                 //function(){},
@@ -164,6 +168,7 @@ function auctionGen(args){
 //<php
 //}
 //>
+            }
         },
 		close:function(){
             //auction end
@@ -203,25 +208,36 @@ function auctionGen(args){
 				this.currentBidder();
 				this.checkCurrentWinner();
 			
-                //close auction here!
-                //console.log('Ending auction');
-                //this.endAuction();
-                //this.close();
+                var b = this.isExpired() && !this._closed;
+                
+                if(b){
+                    //continue to update until time runs out
+					for(var j = 0; j < this._ai.length; ++j){
+						if(this._ai[j].winningBid){
+							console.log('AI ' + j.toString() + ' has won the bid for the ' + this._car.getFullName() + ' for (' + Math.round(this._ai[j].currBid) + '), Original Price (' + this._car.getPrice() + ')');
+						}
+					}
+					console.log('Ending auction');
+					this.endAuction();
+					this.close();
+				}
 			}
 		},
 		endAuction:function(){
             //auction has ended updates garage and _sales
-			var i = this._carIndex,
-                btnID = 'as' + (i).toString(),
-				liID = 'div#asd' + (this._car.id).toString(),
-                cleanBtn = $(liID + ' button#' + btnID),
-                moneyBtn = $(liID + ' div#btns button#cc');
-                
-			cleanBtn.text('Sold!');
-			//cleanBtn.off().click({i:this._carIndex, amt:this._currentBid}, this.cleanUpAuction);
-            //this._currentBid = 0;
-			//AucionSell.save();
-            Garage.save();
+            if(this._car === null){
+                var i = this._carIndex,
+                    btnID = 'as' + (i).toString(),
+                    liID = 'div#asd' + (this._car.id).toString(),
+                    cleanBtn = $(liID + ' button#' + btnID),
+                    moneyBtn = $(liID + ' div#btns button#cc');
+                    
+                cleanBtn.text('Sold!');
+                //cleanBtn.off().click({i:this._carIndex, amt:this._currentBid}, this.cleanUpAuction);
+                //this._currentBid = 0;
+                //AucionSell.save();
+                Garage.save();
+            }
 		},
 		cleanUpAuction:function(index){
             //
@@ -283,7 +299,7 @@ function auctionGen(args){
             //called by JSON.stringify to conver this object into a json string,
 			//this is called by JSON.stringify and will be serialized
 			return {
-                id:this._car.id,
+                id:this._car !== null ? this._car.id : 0,
                 bid:this._currentBid,   //current highest bid
                 _curTime:this._curTime, //time remaining on auction, 0 if expired
                 //date:this._date   //start and end dates,

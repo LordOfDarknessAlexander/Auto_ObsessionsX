@@ -27,6 +27,7 @@ var AuctionSell = {
                 as.addButton();
                 as.toggleCC();
                 
+                //
                 userSales.push(as);
 				var TOM = 0;
                 //console.log(JSON.stringify(userSales) );
@@ -46,18 +47,18 @@ var AuctionSell = {
 			for(; i < len; i++){
 				//if(!userSales[i]._expired){
                 userSales[i].update(dt);
-                var b = userSales[i].isExpired() && !userSales[i]._closed;
-                if(b){  //this._curTime >= this.MAX_AUCTION_TIME){
+                //var b = userSales[i].isExpired() && !userSales[i]._closed;
+                //if(b){  //this._curTime >= this.MAX_AUCTION_TIME){
                     //continue to update until time runs out
-					for(var j = 0; j < userSales[i]._ai.length; ++j){
-						if(userSales[i]._ai[j].winningBid){
-							console.log('AI ' + j.toString() + ' at auction ' + i.toString() + ' has won the bid for the ' + this._car.getFullName() + ' for (' + Math.round(this._ai[j].currBid) + '), Original Price (' + this._car.getPrice() + ')');
-						}
-					}
-					console.log('Ending auction');
-					userSales[i].endAuction();
-					userSales[i].close();
-				}
+					//for(var j = 0; j < userSales[i]._ai.length; ++j){
+						//if(userSales[i]._ai[j].winningBid){
+							//console.log('AI ' + j.toString() + ' at auction ' + i.toString() + ' has won the bid for the ' + this._car.getFullName() + ' for (' + Math.round(this._ai[j].currBid) + '), Original Price (' + this._car.getPrice() + ')');
+						//}
+					//}
+					//console.log('Ending auction');
+					//userSales[i].endAuction();
+					//userSales[i].close();
+				//}
 				//}
 				//else{
 					//userSales.splice(i, 1);

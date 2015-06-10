@@ -567,17 +567,20 @@ var CarView = {
 			jq.CarView.carInfo.text(car.getInfo() ) ;
 			jq.CarView.sellBtn.off().click( 
 				function(){		
-				jq.post("pas/update.php?op=pucs", 
-					function(data){
-						//return data  argument is valid
-						console.log(JSON.stringify(data));
-					}, 
-					function(jqxhr){ 
-						jq.setErr("carView.Init", "error happened: " + jqxhr.responseText);
-					}, 
-					{carID:selCarIndex})
+                    jq.post(
+                        "pas/update.php?op=pucs", 
+                        function(data){
+                            //return data  argument is valid
+                            console.log(JSON.stringify(data));
+                        }, 
+                        function(jqxhr){ 
+                            jq.setErr("carView.Init", "error happened: " + jqxhr.responseText);
+                        }, 
+                        {carID:selCarIndex}
+                    );
 				}
-			);//{i:selCarIndex}, AuctionSell.init);
+                //{i:selCarIndex}, AuctionSell.init
+			);
             //function(data){
                 //AuctionSell.init(selCarIndex);
             //});
