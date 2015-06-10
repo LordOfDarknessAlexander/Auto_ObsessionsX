@@ -64,42 +64,38 @@ var //Garage._curCarIndex = null,	//user's currect car index
 //
 function VehicleFromDB(obj){
     //creates an unupgraded/repaired car from the database  
-    //var jqxhr = 
+//<php
     var funcName = 'Garage.js pas::VehicleFromDB()';
-    //return jq.post('pas/query.php',
-    //);
-    return $.ajax({
-        type:'POST',
-        //async:false,
-        url:getHostPath() + 'pas/query.php',
-        dataType:'json',
-        data:{carID:obj.carID}
-    }).done(function(data){
-        //the response string is converted by jquery into a Javascript object!
-        if(data === null){
-            alert(funcName + ', Error:ajax response returned null!');
-            //finished = true;
-            return;
-        }
+//?>
+    return jq.post(
+        'pas/query.php',
+        function(data){
+            //the response string is converted by jquery into a Javascript object!
+            if(data === null){
+                alert(funcName + ', Error:ajax response returned null!');
+                //finished = true;
+                return;
+            }
 //<php
     //if(DEBUG){?>
-        //log vars for debugging
-        //alert('VehicleFromDB():ajax response recieved: ' + JSON.stringify(obj) + ' ' + JSON.stringify(data) );
-        var car = Vehicle.fromDB(data, obj);
-        //console.log('creating car from database: ' + JSON.stringify(car) );
+            //log vars for debugging
+            //alert('VehicleFromDB():ajax response recieved: ' + JSON.stringify(obj) + ' ' + JSON.stringify(data) );
+            var car = Vehicle.fromDB(data, obj);
+            //console.log('creating car from database: ' + JSON.stringify(car) );
 //<php
 //}
 //else{?>
-        userGarage.push(car);//Vehicle.fromDB(data, obj);
+            userGarage.push(car);   //Vehicle.fromDB(data, obj);
 //<php
 //}
 //>
-    }).fail(function(jqxhr){
-        //call will fail if result is not properly formated JSON!
-        alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
-        console.log(funcName + ', loading game resources failed, abort!');
-        //finished = true;
-    });
+        },
+        function(jqxhr){
+            //call will fail if result is not properly formated JSON!
+            jq.Err(funcName, 'ajax call failed! Reason: ' + jqxhr.responseText);
+        },
+        {carID:obj.carID}
+    );
 }
 //ao.state.Garage =
 var Garage = {
