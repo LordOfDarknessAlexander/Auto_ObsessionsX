@@ -69,7 +69,7 @@ class user{
             $B = 'body';
             $I = 'interior';
             $D = 'docs';
-            $r = 'repairs';
+            $R = 'repairs';
             
             $res = $aoUsersDB->query(
                 "SELECT * FROM $ut WHERE $CID = $id"
@@ -117,7 +117,7 @@ class user{
         global $aoCarSalesDB;
         
         $ut = getUserTableName();
-        $car = user::getCarByID($id);
+        $car = user::getCarByID($carID);
         
         if(user::removeCarByID($carID) ){
             //$res = $aoCarSalesDB->query(
