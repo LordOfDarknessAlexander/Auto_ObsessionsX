@@ -556,7 +556,7 @@ var Garage = {
 var CarView = {
 	//carView state object
 	init : function(index){
-        //
+        
 		if(selCarIndex !== null && userGarage.length != 0){
             //
 			var car = userGarage[selCarIndex];
@@ -565,7 +565,19 @@ var CarView = {
 			//jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
             jq.CarView.carName.text(car.getFullName() );
 			jq.CarView.carInfo.text(car.getInfo() ) ;
-			jq.CarView.sellBtn.off().click({i:selCarIndex}, AuctionSell.init);
+			jq.CarView.sellBtn.off().click( 
+				function(){		
+				jq.post("pas/update.php?op=pucs", 
+					function(data){
+						//return data  argument is valid
+						console.log(JSON.stringify(data));
+					}, 
+					function(jqxhr){ 
+						jq.setErr("carView.Init", "error happened: " + jqxhr.responseText);
+					}, 
+					{carID:selCarIndex})
+				}
+			);//{i:selCarIndex}, AuctionSell.init);
             //function(data){
                 //AuctionSell.init(selCarIndex);
             //});

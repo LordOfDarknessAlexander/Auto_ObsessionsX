@@ -423,8 +423,10 @@ if($ps){
                     exit();
                 }
                 elseif($op == 'pucs'){
-                    //$res = user::postCarSale($carID);
-                    //echo json_encode($res);
+                    $res = 117;
+					//user::postCarSale($carID);
+                    echo json_encode($res);
+				
                     exit();
                 }
                 //else switch to other calls
