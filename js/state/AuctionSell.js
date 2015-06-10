@@ -66,6 +66,37 @@ var AuctionSell = {
 			}
 		}
 	},
+    addVehicleFromDB:function(obj){
+//<php
+        var funcName = 'Garage.js pas::VehicleFromDB()';
+//?>
+        return jq.post(
+            'pas/query.php',
+            function(data){
+                //the response string is converted by jquery into a Javascript object!
+                if(data === null){
+                    alert(funcName + ', Error:ajax response returned null!');
+                    return;
+                }
+//<php
+//if(DEBUG){?>
+                //log vars for debugging
+                //alert('VehicleFromDB():ajax response recieved: ' + JSON.stringify(obj) + ' ' + JSON.stringify(data) );
+                var car = Vehicle.fromDB(data, obj);
+                //console.log('creating car from database: ' + JSON.stringify(car) );
+//<php
+//}
+//else{?>
+                //userSales.push(na);   //Vehicle.fromDB(data, obj);
+//<php}>
+            },
+            function(jqxhr){
+                //call will fail if result is not properly formated JSON!
+                jq.Err(funcName, 'ajax call failed! Reason: ' + jqxhr.responseText);
+            },
+            {carID:obj.carID}
+        );
+    },
     load:function(data){
         if(data === null || data === undefined){
             //playing as guest, use local storage?>
