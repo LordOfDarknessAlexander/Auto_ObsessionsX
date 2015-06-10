@@ -96,6 +96,7 @@ class user{
         global $aoUsersDB;
         
         if(intval($id) && $id > 0){
+            //echo $id;
             $CID = ao::CID;
             $car = user::getCarByID($id);
             //if($car !== null){

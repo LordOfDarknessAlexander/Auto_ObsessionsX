@@ -555,68 +555,71 @@ var CarView = {
         
 		if(selCarIndex !== null && userGarage.length != 0){
             //
-			var car = userGarage[selCarIndex];
-            setHomeImg(car.getFullPath() );
-            jq.carImg.show();
-			//jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
-            jq.CarView.carName.text(car.getFullName() );
-			jq.CarView.carInfo.text(car.getInfo() ) ;
-			jq.CarView.sellBtn.off().click( 
-				function(){		
-                    jq.post(
-                        "pas/update.php?op=pucs", 
-                        function(data){
-                            //return data  argument is valid
-                            console.log(JSON.stringify(data));
-                        }, 
-                        function(jqxhr){ 
-                            jq.setErr("carView.Init", "error happened: " + jqxhr.responseText);
-                        }, 
-                        {carID:selCarIndex}
-                    );
-				}
-                //{i:selCarIndex}, AuctionSell.init
-			);
-            //function(data){
-                //AuctionSell.init(selCarIndex);
-            //});
-            //set dt progress bars
-            for(var i = Drivetrain.TYPE.engine; i <= Drivetrain.TYPE.exhaust; i++){ 
-                var part = car._dt.getPartType(i),
-                    str = 'div#CarView div#drivetrain progress#pb' + Drivetrain.strFromType(i),
-                    p = part.getPercent(),
-                    pb = $(str);    //progress bar
-                
-                pbSetColor(pb, p);
-            }
-            //set interior progress bars
-            for(var i = Interior.TYPE.seats; i <= Interior.TYPE.panels; i++){ 
-                var part = car._interior.getPartType(i),
-                    str = 'div#CarView div#interior progress#pb' + Interior.strFromType(i),
-                    p = part.getPercent(),
-                    pb = $(str);
-                
-                pbSetColor(pb, p);
-            }
-            //set body progress bars
-            for(var i = Body.TYPE.chasis; i <= Body.TYPE.ph0; i++){ 
-                var part = car._body.getPartType(i),
-                    str = 'div#CarView div#body progress#pb' + Body.strFromType(i),
-                    p = part.getPercent(),
-                    pb = $(str);
-
-                pbSetColor(pb, p);
-            }
-            //set docs progress bars
-            for(var i = Documents.TYPE.ownership; i <= Documents.TYPE.ph0; i++){ 
-                var part = car._docs.getPartType(i),                    
-                    str = 'div#CarView div#docs progress#pb' + Documents.strFromType(i),
-                    p = part.getPercent(),
-                    pb = $(str);    //progress bar
+			var car = Garage.getCarByIndex(selCarIndex);   //userGarage[selCarIndex];
+            
+            if(car !== null && car !== undefined){
+                setHomeImg(car.getFullPath() );
+                jq.carImg.show();
+                //jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
+                jq.CarView.carName.text(car.getFullName() );
+                jq.CarView.carInfo.text(car.getInfo() ) ;
+                jq.CarView.sellBtn.off().click( 
+                    function(){		
+                        jq.post(
+                            "pas/update.php?op=pucs", 
+                            function(data){
+                                //return data  argument is valid
+                                console.log(JSON.stringify(data));
+                            }, 
+                            function(jqxhr){ 
+                                jq.setErr("carView.Init", "error happened: " + jqxhr.responseText);
+                            }, 
+                            {carID:car.id}
+                        );
+                    }
+                    //{i:selCarIndex}, AuctionSell.init
+                );
+                //function(data){
+                    //AuctionSell.init(selCarIndex);
+                //});
+                //set dt progress bars
+                for(var i = Drivetrain.TYPE.engine; i <= Drivetrain.TYPE.exhaust; i++){ 
+                    var part = car._dt.getPartType(i),
+                        str = 'div#CarView div#drivetrain progress#pb' + Drivetrain.strFromType(i),
+                        p = part.getPercent(),
+                        pb = $(str);    //progress bar
                     
-                pbSetColor(pb, p);
+                    pbSetColor(pb, p);
+                }
+                //set interior progress bars
+                for(var i = Interior.TYPE.seats; i <= Interior.TYPE.panels; i++){ 
+                    var part = car._interior.getPartType(i),
+                        str = 'div#CarView div#interior progress#pb' + Interior.strFromType(i),
+                        p = part.getPercent(),
+                        pb = $(str);
+                    
+                    pbSetColor(pb, p);
+                }
+                //set body progress bars
+                for(var i = Body.TYPE.chasis; i <= Body.TYPE.ph0; i++){ 
+                    var part = car._body.getPartType(i),
+                        str = 'div#CarView div#body progress#pb' + Body.strFromType(i),
+                        p = part.getPercent(),
+                        pb = $(str);
+
+                    pbSetColor(pb, p);
+                }
+                //set docs progress bars
+                for(var i = Documents.TYPE.ownership; i <= Documents.TYPE.ph0; i++){ 
+                    var part = car._docs.getPartType(i),                    
+                        str = 'div#CarView div#docs progress#pb' + Documents.strFromType(i),
+                        p = part.getPercent(),
+                        pb = $(str);    //progress bar
+                        
+                    pbSetColor(pb, p);
+                }
             }
-		}
+        }
 	}
 	//update, ender, exit?
 };
