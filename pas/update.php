@@ -96,21 +96,37 @@ class user{
         global $aoUsersDB;
         
         if(intval($id) && $id > 0){
-            if(hasCar($id) ){
-                //$car = user::getCarByID($id);
-                //$ut = getUserTableName();
-                
-                //$res = $aoUsersDB->query(
-                    //"DELETE FROM $ut WHERE $CID = $cid"
-                //);
-                
-                //if($res){
-                    //user::addSale($car);
-                    //return $car->toJSON();
-                //}
+            $CID = ao::CID;
+            $car = user::getCarByID($id);
+            //if($car !== null){
+            $ut = getUserTableName();
+            $cid = $car[$CID];
+            
+            $res = $aoUsersDB->query(
+                "DELETE FROM $ut WHERE $CID = $cid"
+            );
+            
+            if($res){
+                return true;
             }
         }
-        return null;
+        return false;
+    }
+    public static function postCarSale($carID){
+        //
+        global $aoCarSalesDB;
+        
+        $ut = getUserTableName();
+        $car = user::getCarByID($id);
+        
+        if(user::removeCarByID($carID) ){
+            //$res = $aoCarSalesDB->query(
+                //"INSERT () INTO $ut"
+            //);
+            return true;
+            //return $car->toJSON();
+        }
+        return false;
     }
 }
 
@@ -423,8 +439,8 @@ if($ps){
                     exit();
                 }
                 elseif($op == 'pucs'){
-                    $res = 117;
-					//user::postCarSale($carID);
+                    //$res = 117;
+					$res = user::postCarSale($carID);
                     echo json_encode($res);
 				
                     exit();

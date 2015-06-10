@@ -107,20 +107,26 @@ class pasCreate
         $uint = 'int unsigned';
         $defaultCharset = 'DEFAULT CHARSET = latin1';
         $defaultEngine = 'ENGINE = InnoDB';
+        $CID = ao::CID;
+        $DT = 'drivetrain';
+        $B = 'body';
+        $I = 'interior';
+        $D = 'docs';
+        $T = '_time';
         
         $res = true;    /*$aoCarSalesDB->query(
            "CREATE TABLE IF NOT EXISTS $tableName(
-                car_id $uint NOT NULL PRIMARY KEY,
+                $CID $uint NOT NULL PRIMARY KEY,
                 price float,    //0 if the auction has not completed, else the total sale price of the car
                 bid float,    //the current highest bid until the auction has completed and the user receives the funds, else 0
-                drivetrain $uint,
-                body $uint,
-                interior $uint,
-                docs $uint,
-                repairs $uint,
-                start datetime NOT NULL,
-                end datetime,
-                time float  //0 if end date is not null, else the time left on the auction
+                $DT $uint,
+                $B $uint,
+                $I $uint,
+                $D $uint,
+                $R $uint,
+                //start datetime NOT NULL,
+                //end datetime,
+                $T float  //0 if end date is not null, else the time left on the auction
             )$defaultEngine $defaultCharset"
         );*/
          
