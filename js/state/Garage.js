@@ -110,7 +110,7 @@ var Garage = {
 		selCarIndex = null;
         
         //var list = $('div#carListView ul#carBtns');
-		Garage._carViewList.empty();	//remove any buttons if there were any previously
+//		Garage._carViewList.empty();	//remove any buttons if there were any previously
 		
 		//init cars from local storage, or parsed from database on server
 		//add buttons for each car avaiable in garage
@@ -491,13 +491,13 @@ var Garage = {
 		//btn.children('label#year').text(car.year);
 		//btn.children('label#name').text(car.name);
 	},
-    initCarView:function(){
+	initCarView: function () {
+	    Garage._carViewList.empty();
         //displays cars in the users garage 
         if(userGarage.length == 0)
 		{	//empty grage so display img instead of buttons
 			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
-			Garage._carViewList.empty();
-	
+			
 			$('div#Garage #select').hide();
 			$('div#Garage #viewCar').hide();
 		}
@@ -570,6 +570,12 @@ var CarView = {
                             function(data){
                                 
                                 console.log(JSON.stringify(data));
+
+                                //if(data.carID === _curCarID)
+                                //{
+                                //    _curCarID = 0;
+                                //}
+
                             }, 
                             function(jqxhr){ 
                                 jq.setErr("carView.Init", "error happened: " + jqxhr.responseText);
@@ -739,12 +745,66 @@ function(){
 });
 jq.CarView.backBtn.click(
 function () {
-//    Garage.load();
+   
+    //<php
+    var funcName = 'Garage.js jq.CarView.backBtn.click()';
+    //>
+    //<php
+    //if(loggedIn()){>
+    //userGarage = [];    //clear previous entries
+    //jq.get('pas/query.php?op=gug',
+    //    function (data) {
+    //        //the response string is converted by jquery into a Javascript object!
+    //        if (data === null) {
+    //            alert(funcName + ', Error:ajax response returned null!');
+    //            return;
+    //        }
+    //        //alert('ajax response recieved:' + JSON.stringify(data) );
 
+    //        if (data.length == 0) {
+    //            //exit early is user has no cars
+    //            console.log(funcName + ', user has no cars!, Buy some, right now!');
+    //            return;
+    //        }
+
+    //        for (var i = 0; i < data.length; i++) {
+    //            var obj = data[i];
+    //            var args = [obj];//Check ID
+    //            args.push(VehicleFromDB(obj)); //adds ajax request object to array
+    //        }
+
+    //        $.when.apply($, args).done(
+    //            function () {
+    //                //the UI is dependant on the users garage being loaded,
+    //                //so init ui after all ajax calls have completed
+    //                Garage.initUI();
+    //                jq.CarView.menu.hide();//toggle();
+    //                jq.Garage.menu.show();
+    //                jq.carImg.hide();
+    //                jq.setErr();    //clear error when changing pages
+    //            }
+    //        ).fail(
+    //            function () {
+    //                jq.setErr(funcName, 'loading game resources failed, abort!');
+    //            }
+    //        );
+    //    },
+    //    function (jqxhr) {
+    //        //call will fail if result is not properly formated JSON!
+    //        jq.setErr(funcName, 'ajax call failed! Reason: ' + jqxhr.responseText);
+    //    }
+    //);
+    //<php
+    //}
+    //else{>
+    Garage.initCarView();
     jq.CarView.menu.hide();//toggle();
     jq.Garage.menu.show();
     jq.carImg.hide();
     jq.setErr();    //clear error when changing pages
+    //<php
+    //}
+    //>
 });
 jq.CarView.homeBtn.click(
 function(){
