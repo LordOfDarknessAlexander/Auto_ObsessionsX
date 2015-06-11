@@ -13,9 +13,9 @@ var AuctionSell = {
         //start them and begin updates
         jq.carImg.hide();
         
-		if(index !== null && index !== undefined){
-			//call to start an auction for car
-			var i = index.data.i;
+		if(index !== null && index !== undefined && typeof index === 'number'){
+			//call to start an auction for car            
+			var i = parseInt(index);  //.data.i;
                 //Garage.getCarByIndex(i);
             
             //jq.AuctionSell.carView.clear();
@@ -38,6 +38,14 @@ var AuctionSell = {
         }
         //entering the state without posting a new car
         jq.AuctionSell.menu.toggle();
+	},
+    initCB:function(obj){
+        //call this when initializing the state from a button.click callback!     
+		if(obj !== null && obj !== undefined){            
+			var i = obj.data.i;
+            
+            AuctionSell.init(i);
+        }
 	},
 	update : function(dt){
 		var i = 0,
