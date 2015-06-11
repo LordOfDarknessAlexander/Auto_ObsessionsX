@@ -528,7 +528,7 @@ function(){
 $('.sound').click(
 function(){
     //references the jq object calling .click, not the function!
-    var $this = $(this);
+    var $this = $(this),
         ae = audioEnabled();
         
     if($this.hasClass('sound-on')){
