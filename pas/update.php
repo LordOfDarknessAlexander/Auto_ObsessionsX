@@ -119,8 +119,19 @@ class user{
         
         $ut = getUserTableName();
         $car = user::getCarByID($carID);
-        
-        if(user::removeCarByID($carID) ){
+        $CID = ao::CID;
+		
+		if(user::removeCarByID($carID) ){
+			$res = user::slctFromEntry("$CID");
+		
+			if($res){
+				$cid = intval($res->fetch_assoc()[$CID]);
+				//echo $cid;
+				if($cid == $carID){
+					pasUpdate::userCurrentCar();
+				}
+				//else vehicles are different, no change
+			}
             //$res = $aoCarSalesDB->query(
                 //"INSERT () INTO $ut"
             //);
@@ -154,14 +165,14 @@ class pasUpdate{
         
         return $res ? true : false;
     }
-    public static function userCurrentCar($carID){
+    public static function userCurrentCar($carID = 0){
         //global $AO_DB;
         $CID = ao::CID;
         //$UID = ao::UID;
         //$users = 'users';
         //$uid = strval(getUID() );
         
-        return hasCar($carID)?
+        return ($carID == 0 || hasCar($carID))?
             (user::updateEntry("$CID = $carID")?
                 $carID : 0
             ) : 0;

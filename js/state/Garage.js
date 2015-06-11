@@ -568,7 +568,7 @@ var CarView = {
                         jq.post(
                             "pas/update.php?op=pucs", 
                             function(data){
-                                //return data  argument is valid
+                                
                                 console.log(JSON.stringify(data));
                             }, 
                             function(jqxhr){ 
