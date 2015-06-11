@@ -138,7 +138,7 @@ cmntHeader('Repair Screen Styles');
 <?php divRepair();?> div#switch button#dt:hover{
 <?php
     //mouse over
-    css::defaultBG('../images/defaultBtn2.png');
+    css::defaultBG('../images/drivetrain_hover.png');
     css::bgSize('100%', '100%');
 	css::left('0%');
     css::top('0%');
@@ -160,7 +160,7 @@ cmntHeader('Repair Screen Styles');
 	
 <?php
 	 //mouse over
-    css::defaultBG('../images/defaultBtn2.png');
+    css::defaultBG('../images/body_hover.png');
     css::bgSize('100%', '100%');
     css::left('0%');
     css::bottom('0%');
@@ -179,7 +179,7 @@ cmntHeader('Repair Screen Styles');
 <?php divRepair();?> div#switch button#inter:hover{
 <?php
 	 //mouse over
-    css::defaultBG('../images/defaultBtn2.png');
+    css::defaultBG('../images/interior_hover.png');
     css::bgSize('100%', '100%');
     css::right('0%');
     css::top('0%');
@@ -199,7 +199,7 @@ cmntHeader('Repair Screen Styles');
 	
 <?php
 	 //mouse over
-    css::defaultBG('../images/defaultBtn2.png');
+    css::defaultBG('../images/documents_hover.png');
     css::bgSize('100%', '100%');
     css::right('0%');
     css::bottom('0%');
