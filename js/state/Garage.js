@@ -570,6 +570,12 @@ var CarView = {
                             function(data){
                                 
                                 console.log(JSON.stringify(data));
+
+                                //if(data.carID === _curCarID)
+                                //{
+                                //    _curCarID = 0;
+                                //}
+
                                 //AuctionSell.init(data);
                             }, 
                             function(jqxhr){ 
