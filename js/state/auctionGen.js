@@ -528,7 +528,7 @@ function auctionGen(args){
                 }
             }
             else{
-                jq.Err('', 'Maximum funds reached');
+                jq.setErr('', 'Maximum funds reached');
             }
         }
 	};
