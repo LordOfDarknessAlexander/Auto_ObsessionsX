@@ -120,25 +120,31 @@ class user{
         $ut = getUserTableName();
         $car = user::getCarByID($carID);
         $CID = ao::CID;
+		$P = 'price';
 		
 		if(user::removeCarByID($carID) ){
 			$res = user::slctFromEntry("$CID");
-		
+			
 			if($res){
 				$cid = intval($res->fetch_assoc()[$CID]);
 				//echo $cid;
 				if($cid == $carID){
 					pasUpdate::userCurrentCar();
 				}
-				//else vehicles are different, no change
+				//else vehicles are different, no change	
 			}
-            //$res = $aoCarSalesDB->query(
-                //"INSERT () INTO $ut"
-            //);
-            return true;
-            //return $car->toJSON();
+			
+			$temp = $aoCarSalesDB->query(
+				"INSERT INTO $ut ($CID, $P) VALUES ($carID, 0.0)"
+			);
+			if($temp){
+				return array(
+					$CID => $carID
+				);
+			}
+					
         }
-        return false;
+        return null;
     }
 }
 
