@@ -14,7 +14,10 @@ function hasSoldCar(carID){
     }
     
     for(var i = 0; i < len; i++){
-        if(userSales[i]._car.id == carID){
+        var car = userSales[i]._car,
+            exists = (car !== null && car !== undefined);
+        
+        if(exists && car.id == carID){
             return true;
         }
     }
