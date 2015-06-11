@@ -316,14 +316,13 @@ Auction.sold = function(){
 	stop = true;
 	auctionStop = true;
 	goingTimer = 0;
-	//startEndBids = [false,false,false,false];
-	//endBidTimers = [0,0,0,0];
+	startEndBids = [false,false,false,false];
+	endBidTimers = [0,0,0,0];
 	
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
 	
 	jq.Sold.menu.show();
-    
 	//if(audioEnabled() ){
         //var s = assetLoader.sounds;
         assetLoader.sounds.bg.pause();
@@ -344,16 +343,13 @@ Auction.sold = function(){
             sl = $('div#sold label');
         
         if(Auction.playerWon){
-            if(userStats.money >= Auction.currentBid){
-                userStats.money = userStats.money - Auction.currentBid;
-                auctionEnded = true;
-
-                jq.Sold.menu.show();
-                sl.html('Congratulations!<br>You won the auction for the ' + n + '<br>Go to the garage to view your prize!');
+     //not the right object!?
+            jq.Sold.menu.show();
+            sl.html('Congratulations!<br>You won the auction for the ' + n + '<br>Go to the garage to view your prize!');
 //<php if(loggedIn){>
-                //Auction._car.repairs == Auction.vcondition;
-                pas.insertCar(Auction._car.id);
-                //pas.insertCar(Auction._car.repairs);
+			//Auction._car.repairs == Auction.vcondition;
+            pas.insertCar(Auction._car.id);
+			pas.insertCar(Auction._car.repairs);
 //<php
 //}
 //else{?>
@@ -374,8 +370,7 @@ Auction.sold = function(){
             //Garage.save();
 //<php
 //}?>
-                setStatBar();
-            }
+            setStatBar();
         }
         else{
             //jq.Sold.menu.show();
