@@ -387,6 +387,7 @@ var Garage = {
 			 //$('button#con', div).text(car.getRandCondition().toString() );
 			
         }
+        //else hide div!
     },
     setCurrentIndex:function(){
         if(selCarIndex === null){
