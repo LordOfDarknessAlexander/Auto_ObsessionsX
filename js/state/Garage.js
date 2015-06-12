@@ -572,13 +572,15 @@ var CarView = {
                 //jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
                 jq.CarView.carName.text(car.getFullName() );
                 jq.CarView.carInfo.text(car.getInfo() ) ;
-                jq.CarView.sellBtn.off().click( 
+                jq.CarView.sellBtn.off().click(
+//<php
+//if(loggedIn() ){>
                     function(){		
                         jq.post(
                             "pas/update.php?op=pucs", 
                             function(data){
                                 
-                                if (data === null || data === undefined){
+                                if(data === null || data === undefined){
                                     return;
                                 }
 
@@ -587,13 +589,19 @@ var CarView = {
                                 //}
 
                                //console.log(JSON.stringify(data));
-
-                                if (data.car_id === _curCarID)
-                                {
+                                var cid = data.car_id;
+                                
+                                if(cid == _curCarID){
                                     _curCarID = 0;
+                                    //hideDiv
                                 }
+                                
+                                //if(data.car_id === selCarIndex){
+                                    //selCarIndex = 0;
+                                    //Garage.setSelect Car Div
+                                //}
 
-                                //AuctionSell.init(data);
+                                AuctionSell.init(data.car_id);
                             }, 
                             function(jqxhr){ 
                                 jq.setErr("carView.Init", "error happened: " + jqxhr.responseText);
@@ -601,7 +609,13 @@ var CarView = {
                             {carID:car.id}
                         );
                     }
-                    //{i:selCarIndex}, AuctionSell.initCB
+//<php
+//}
+//else{>
+                    //{i:car.id}, AuctionSell.initCB
+//<php
+//}
+//>
                 );
                 //function(data){
                     //AuctionSell.init(selCarIndex);

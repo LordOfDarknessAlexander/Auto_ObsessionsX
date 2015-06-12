@@ -62,7 +62,7 @@ function auctionGen(args){
 		init:function(index){
 			if(index !== null && index !== undefined){
                 //
-                var car = Garage.getCarByIndex(index);
+                var car = Garage.getCarByID(index);
                 
                 if(car !== null && !hasSoldCar(car.id)){
                     //this car has not been previously sold!
