@@ -442,19 +442,21 @@ function auctionGen(args){
                 //id = obj.cid, //car id
                 //p = obj.price;    //sale price of car
             if(!t.isExpired() ){
+				//uncomment and call pas function cancelcarSales
 //<php if(loggedIn() ){
                 //make ajax call to pasRemove>
-                /*
-                jq.post('pas/remove.php?op=ucs',    //user cancel sale
+                
+                //jq.post('pas/remove.php?op=ucs',    //user cancel sale
+				 jq.post('pas/update.php?op=ucs',    //user cancel sale
                     function(data){
                         //refresh AuctionSell div
                     },
                     function(jqxhr){
                         
                     },
-                    {cid:id, price:p}
+                    {carID:0}
                 );
-                */
+                
 //<php
 //}
 //else{>

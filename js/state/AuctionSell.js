@@ -13,9 +13,9 @@ var AuctionSell = {
         //start them and begin updates
         jq.carImg.hide();
         
-		if(index !== null && index !== undefined){
+		if(index !== null && index !== undefined && typeof index === 'number'){
 			//call to start an auction for car            
-			var i =  Math.floor(typeof index === 'number' ? index : parseInt(index) );  //.data.i;
+			var i = parseInt(index);  //.data.i;
                 //Garage.getCarByIndex(i);
             
             //jq.AuctionSell.carView.clear();
@@ -45,6 +45,7 @@ var AuctionSell = {
 			var i = obj.data.i;
             
             AuctionSell.init(i);
+			//AuctionSell.render();
         }
 	},
 	update : function(dt){

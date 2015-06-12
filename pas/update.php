@@ -113,6 +113,29 @@ class user{
         }
         return false;
     }
+	
+	 /*public static function removeCarSaleByID($id){
+        //
+        global $aoSalesDB;
+        
+        if(intval($id) && $id > 0){
+            //echo $id;
+            $CID = ao::CID;
+            $car = user::getCarByID($id);
+            //if($car !== null){
+            $ut = getUserTableName();
+            $cid = $car[$CID];
+            
+            $res = $aoUsersDB->query(
+                "DELETE FROM $ut WHERE $CID = $cid"
+            );
+            
+            if($res){
+                return true;
+            }
+        }
+        return false;
+    }*/
     public static function postCarSale($carID){
         //
         global $aoCarSalesDB;
@@ -196,6 +219,52 @@ class user{
         return null;
     }
 }
+
+/*
+ public static function cancelCarSale($carID){
+        //
+        global $aoUsersDB;
+        
+        $ut = getUserTableName();
+        $car = user::getCarByID($carID);
+        $CID = ao::CID;
+		$P = 'price';
+		$p = 0.0;
+		
+		if(user::removeCarSaleByID($carID) ){
+			$res = user::slctFromEntry("$CID");
+			
+			if($res){
+				$cid = intval($res->fetch_assoc()[$CID]);
+              
+               echo 'BiddyBoop';
+				
+                //echo $cid;
+				//if($cid == $carID){
+					//pasUpdate::userCurrentCar();
+				//}
+                //else vehicles are different, no change
+              //  $temp = $aoUsersDB->query(
+				//    "INSERT INTO $ut ($CID, $P) VALUES ($carID, )"
+			   // );
+                
+                //echo json_encode($temp);
+                
+                if($temp){               
+                    return array(
+                        $CID => $carID
+                    );
+                }
+			}
+			
+			
+					
+        }
+        return null;
+    }
+}
+
+*/
 
 class pasUpdate{
     public static function soldCar($carID, $price){
@@ -508,6 +577,13 @@ if($ps){
                 elseif($op == 'pucs'){
                     //$res = 117;
 					$res = user::postCarSale($carID);
+                    echo json_encode($res);
+				
+                    exit();
+                }
+				elseif($op == 'cucs'){
+                    //$res = 117;
+					$res = user::cancelCarSale($carID);
                     echo json_encode($res);
 				
                     exit();
