@@ -476,7 +476,9 @@ function auctionGen(args){
                         var cidStr = (sCar.id).toString(),
                             liID = 'div#asd' + cidStr,
                             div = $(liID, jq.AuctionSell.carView);
-                            
+                        
+                        console.log("Cancel Hit");
+                        
                         div.remove();   //from element from DOM
                         //remove car from array
                         //remove sales;
