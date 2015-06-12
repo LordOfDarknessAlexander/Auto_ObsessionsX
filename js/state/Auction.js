@@ -9,6 +9,7 @@ jq.Auction.pbUser = $('progress#user', jq.Auction.divPB);
 jq.Auction.going = $('progress#going', jq.Auction.divPB);
 
 jq.Auction.bidBtn = $('button#bid', jq.Auction.menu);
+jq.Auction.buyoutBtn = $('button#buyout', jq.Auction.menu);
 //
 var playerBoughtOut = false; //temporary for our dev button "buyout"
 
@@ -576,6 +577,8 @@ var Auction = {
 		}
 	},	
 	buyOut : function(){
+//<php
+//if($DEBUG){>
         //user 'buys out' the auction, placing the max bid,
 		//bidding continues until only 1 bidder remains
 		//
@@ -584,47 +587,39 @@ var Auction = {
 		//btn.click(function(){playerBoughtOut = true;});
 		//btn.css('opacity', '0.65');
 		
-		if(this.playerWon){
+		//if(this.playerWon){
             //
-            if(userStats.money >= this.currentBid){
-                userStats.money = userStats.money - this.currentBid;
+            //if(userStats.money >= this.currentBid){
+                //userStats.money = userStats.money - this.currentBid;
                 auctionEnded = true;
                 //push vehicle to garage
                 //auctionStop = true;
-                //this.sold();
                 assetLoader.sounds.bidder.pause();
                 assetLoader.sounds.sold.play();
-            }
-            else{
+                Auction.playerWon = true;
+                Auction.sold();
+            //}
+            //else{
                 //user does not have enough money!
-            }
-		}
-		else if(playerBoughtOut){
-            //
-            if(userStats.money >= vehiclePrice){
-                //
-                //console.log('Enemy winning ' + this.enemyWinning);
-                //userStats.money -= vehiclePrice;
-                auctionEnded = true;
-                this.playerWon = true;
-                //console.log('Player won ' + this.playerWon);
-                //push vehicle to garage
-                //auctionStop = true;
-                //this.sold();
-                assetLoader.sounds.bidder.pause();
-                assetLoader.sounds.sold.play();
-            }
-            else{
-                //not enought money, play fail sound
-            }
-		}
+            //}
+		//}
+		//}
+//<php
+//}
+//>
 	},
 	setBidBtnText:function(){
         var r = this.getRaise();
 		jq.Auction.bidBtn.text('Bid: $' + r.toFixed(2) );
 	}
 };
+//
 //Auction jQuery bindings
+//
+jq.Auction.buyoutBtn.click(
+    Auction.buyOut
+);
+
 jq.Auction.bidBtn.click(
 function(){
 	Auction.playerBidding();

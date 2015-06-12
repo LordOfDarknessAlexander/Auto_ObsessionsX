@@ -564,7 +564,7 @@ var CarView = {
                 jq.CarView.carName.text(car.getFullName() );
                 jq.CarView.carInfo.text(car.getInfo() ) ;
                 jq.CarView.sellBtn.off().click( 
-                    /*function(){		
+                    function(){		
                         jq.post(
                             "pas/update.php?op=pucs", 
                             function(data){
@@ -583,8 +583,8 @@ var CarView = {
                             }, 
                             {carID:car.id}
                         );
-                    }*/
-                    {i:selCarIndex}, AuctionSell.initCB
+                    }
+                    //{i:selCarIndex}, AuctionSell.initCB
                 );
                 //function(data){
                     //AuctionSell.init(selCarIndex);
