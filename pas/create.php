@@ -113,24 +113,27 @@ class pasCreate
         $I = 'interior';
         $D = 'docs';
         $T = '_time';
+        $P = 'price';
+        $T = '_time';
         
-        $res = true;    /*$aoCarSalesDB->query(
+        $res = $aoCarSalesDB->query(
            "CREATE TABLE IF NOT EXISTS $tableName(
                 $CID $uint NOT NULL PRIMARY KEY,
-                price float,    //0 if the auction has not completed, else the total sale price of the car
-                bid float,    //the current highest bid until the auction has completed and the user receives the funds, else 0
-                $DT $uint,
-                $B $uint,
-                $I $uint,
-                $D $uint,
-                $R $uint,
-                //start datetime NOT NULL,
-                //end datetime,
-                $T float  //0 if end date is not null, else the time left on the auction
+                $P float
             )$defaultEngine $defaultCharset"
-        );*/
+        );
+        //bid float,    //the current highest bid until the auction has completed and the user receives the funds, else 0
+        //$DT $uint,
+        //$B $uint,
+        //$I $uint,
+        //$D $uint,
+        //$R $uint,
+        //start datetime NOT NULL,
+        //end datetime,
+        //$T float  //0 if end date is not null, else the time left on the auction
          
-        if($res){   //returns true if execute preformed successfully, false on failure
+        if($res){
+            //returns true if execute preformed successfully, false on failure
             return true;
         }
         //else false, output error
@@ -148,14 +151,16 @@ class pasCreate
         $uint = 'int unsigned';
         $defaultCharset = 'DEFAULT CHARSET = latin1';
         $defaultEngine = 'ENGINE = InnoDB';
+        $CID = ao::CID;
         
         $res = $aoAuctionLossDB->query(
            "CREATE TABLE IF NOT EXISTS $tableName(
-                car_id $uint NOT NULL PRIMARY KEY
+                $CID $uint NOT NULL PRIMARY KEY
             )$defaultEngine $defaultCharset"
         );
          
-        if($res){   //returns true if execute preformed successfully, false on failure
+        if($res){
+            //returns true if execute preformed successfully, false on failure
             return true;
         }
         //else false, output error

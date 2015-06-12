@@ -144,18 +144,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 "INSERT INTO $users(
                     $UID, uname, title, fname, lname,
                     $CID, money, tokens, prestige, m_marker,
-                    user_level, email, email_code, psword,
+                    user_level, email, psword,
                     registration_date, confirm
                 )VALUES(
                     '', '$uname', '$title', '$fn', '$ln',
                     0, 50000, 0,0,0,
-                    0, '$e', '$email_code', SHA1('$p'),
+                    0, '$e', SHA1('$p'),
                     NOW(), 0
                 )"
             );	
 			
 			$register_email = '$e';
-			
+			//echo json_encode($result);
             if($result) 
 			{ // If the query ran OK
                 //user successfully registered, create other database tables
@@ -189,20 +189,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     $res->close();
                 }
                 else{
-                    echo "query failed for user name ($uname)";
+                    echo "query failed for user name ($uname)," . PHP_EOL . mysqli_error($AO_DB->con) . PHP_EOL;
                 }
                 //$result->close();
                 //sucess! send email from no-reply@851entertainment.com for user to confirm
 				//header("location: register-thanks.php"); 
 				exit();
 			} 
-			else{ 
+			else{
 				// If the query did not run OK
 				// Message
 				echo "<h2>System Error</h2>
-				<p class='error'>You could not be registered due to a system error. We apologize for the inconvenience.</p>"; 
+				<p class='error'>You could not be registered due to a system error. We apologize for the inconvenience.</p>";
 				// Debugging message:
-				echo '<p>' . mysqli_error($AO_DB->con) . '<br><br>Query: ' . $q . '</p>';
+				echo mysqli_error($AO_DB->con) . PHP_EOL;
 			} // End of if ($result)
 			// Include the footer and stop the script
             require '../phtml/legal.php';
@@ -219,7 +219,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		echo "<h2>Error!</h2>
 		<p class='error'>The following error(s) occurred:<br>";
         // Display each error
-        foreach ($errors as $msg){
+        foreach($errors as $msg){
 			echo " - $msg<br>\n";
 		}
 		echo '</p><h3>Please try again.</h3><p><br></p>';
@@ -230,7 +230,8 @@ function ep($str){
     //safely echos the entry in $_POST
     if(isset($_POST[$str])){
         //trim removes access whitespace around start and end of entry,
-        echo trim($_POST[$str]);
+        $t = trim($_POST[$str]);
+        echo html::escape($t);
     }
 }*/
 function fl($name, $text){
@@ -243,8 +244,9 @@ function fl($name, $text){
 function itb($name, $size, $maxlength){
     //generates an html input text box
     //name:string identifier for the tag
-    //size & maxlength, positive integer values?>
-<input id='<?php echo $name;?>' type='text' name='<?php echo $name;?>' size='<?php echo strval($size);?>' maxlength='<?php echo strval($maxlength);?>' value='<?php ep($name);?>'><br>
+    //size & maxlength, positive integer values
+    $n = html::escape($name);?>
+<input id='<?php echo $n;?>' type='text' name='<?php echo $n;?>' size='<?php echo strval($size);?>' maxlength='<?php echo strval($maxlength);?>' value='<?php echo $n?>'><br>
 <?php
 }
 function flti($name, $text, $size, $maxlength){
@@ -268,16 +270,16 @@ function flti($name, $text, $size, $maxlength){
         </select-->
 		<!--label class='label' for='title'>Title*</label><br-->
         <?php fl('title', 'Title*');?>
-        <input id='title' type='text' name='title' size='15' maxlength='12' value='<?php ep('title'); ?>'>
+        <input id='title' type='text' name='title' size='15' maxlength='12' value='<?php html::ep('title'); ?>'>
 		<br>
         <?php
         flti('fname', 'First Name*', 30, 30);
         flti('lname', 'Last Name*', 30, 30);
         flti('email', 'Email Address*', 30, 60);        
         fl('psword1', 'Password*');?>        
-        <input id='psword1' type='password' name='psword1' size='12' maxlength='12' value='<?php ep('psword1');?>'>&nbsp;8 to 12 characters<br>
+        <input id='psword1' type='password' name='psword1' size='12' maxlength='12' value='<?php html::ep('psword1');?>'>&nbsp;8 to 12 characters<br>
         <?php fl('psword2', 'Confirm Password*');?>
-        <input id='psword2' type='password' name='psword2' size='12' maxlength='12' value='<?php ep('psword2');?>'>
+        <input id='psword2' type='password' name='psword2' size='12' maxlength='12' value='<?php html::ep('psword2');?>'>
 		<br>
         <?php flti('uname', 'User Name', 12, 12);?>
 		<input id='submit' type='submit' name='submit' value='Register'>

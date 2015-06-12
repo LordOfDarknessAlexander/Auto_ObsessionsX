@@ -106,5 +106,16 @@ class html
 <?php
         //devs add page content after this call
     }
+    public static function escape($str){
+        return htmlspecialchars($str);
+    }
+    public static function ep($str){
+        //safely echos the entry in $_POST
+        if(isset($_POST) && isset($_POST[$str])){
+            //trim removes access whitespace around start and end of entry,
+            $t = trim($_POST[$str]);
+            echo html::escape($t);
+        }
+    }
 }
 ?>

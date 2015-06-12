@@ -1,12 +1,12 @@
 <?php
-class ao{
+/*class ao{
     /*public static CONST NAMES = array(
         'OWNER'=>'Adam Glazer',
         'SITE'=>'Auto-Obsessions',
         'AS'=>'Alexander Sanchez',
         'TD'=>'Tyler Drury',
         'AB'=>'Andrew Best'
-    );*/
+    );
 }
 function rootURL(){
     //returns the root url for the executing application
@@ -17,5 +17,5 @@ function rootURL(){
         :
         'http://851entertainment.com/Auto_ObsessionsX/';
         //'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/'
-}
+}*/
 ?>	

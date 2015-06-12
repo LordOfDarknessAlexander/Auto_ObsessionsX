@@ -343,7 +343,7 @@ Auction.sold = function(){
             sl = $('div#sold label');
         
         if(Auction.playerWon){
-     //not the right object!?
+            //not the right object!?
             jq.Sold.menu.show();
             sl.html('Congratulations!<br>You won the auction for the ' + n + '<br>Go to the garage to view your prize!');
 //<php if(loggedIn){>
