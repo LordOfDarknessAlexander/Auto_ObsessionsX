@@ -121,6 +121,7 @@ class user{
         $car = user::getCarByID($carID);
         $CID = ao::CID;
 		$P = 'price';
+		$p = 0.0;
 		
 		if(user::removeCarByID($carID) ){
 			$res = user::slctFromEntry("$CID");
@@ -135,7 +136,7 @@ class user{
 			}
 			
 			$temp = $aoCarSalesDB->query(
-				"INSERT INTO $ut ($CID, $P) VALUES ($carID, 0.0)"
+				"INSERT INTO $ut ($CID, $P) VALUES ($carID, $p)"
 			);
 			if($temp){
 				return array(
