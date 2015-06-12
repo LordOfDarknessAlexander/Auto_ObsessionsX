@@ -128,21 +128,28 @@ class user{
 			
 			if($res){
 				$cid = intval($res->fetch_assoc()[$CID]);
-				//echo $cid;
+              
+               //echo 'Boop';
+				
+                //echo $cid;
 				if($cid == $carID){
 					pasUpdate::userCurrentCar();
 				}
-				//else vehicles are different, no change	
+                //else vehicles are different, no change
+                $temp = $aoCarSalesDB->query(
+				    "INSERT INTO $ut ($CID, $P) VALUES ($carID, $p)"
+			    );
+                
+                //echo json_encode($temp);
+                
+                if($temp){               
+                    return array(
+                        $CID => $carID
+                    );
+                }
 			}
 			
-			$temp = $aoCarSalesDB->query(
-				"INSERT INTO $ut ($CID, $P) VALUES ($carID, $p)"
-			);
-			if($temp){
-				return array(
-					$CID => $carID
-				);
-			}
+			
 					
         }
         return null;

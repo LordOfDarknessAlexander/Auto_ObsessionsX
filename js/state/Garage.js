@@ -442,9 +442,10 @@ var Garage = {
 	},
 	setSelectCar : function(index){
         //
-		var i = index.data.index;
+	    var i = typeof index === 'number' ? Math.floor(index) : parseInt(index);
+
 	
-		if(i < userGarage.length){
+		if(i >= 0 && i < userGarage.length){
             //
 			var div = $('div#Garage div#selectedCar');
 			var src = $('#carSelBtn' + i);
@@ -480,6 +481,13 @@ var Garage = {
             
 			div.show();
 		}
+	},
+	setSelectCarCB : function(obj){
+	    if (obj !== null && obj !== undefined) {
+	        var i = obj.data.index;
+
+	        Garage.setSelectCar(i);
+	    }
 	},
 	setCarBtnText : function(index){
         //
@@ -532,7 +540,7 @@ var Garage = {
 				"</li>"); //+ (i > 0 && i % 4 == 0) ? "<br>" : "");
 				
                 //$(Garrage._carViewList, 'li#' + i.toString() + ' button').click({index:i}, this.setSelectCar);	//this.setSelectedCar);
-				$('#carSelBtn' + i).click({index:i}, this.setSelectCar);	//this.setSelectedCar);
+				$('#carSelBtn' + i).click({index:i}, this.setSelectCarCB);	//this.setSelectedCar);
 			}
 		}
     },
@@ -570,12 +578,20 @@ var CarView = {
                             "pas/update.php?op=pucs", 
                             function(data){
                                 
-                                console.log(JSON.stringify(data));
+                                if (data === null || data === undefined){
+                                    return;
+                                }
 
-                                //if(data.carID === _curCarID)
-                                //{
-                                //    _curCarID = 0;
+                                //if (data.length == 0){
+                                //    return;
                                 //}
+
+                               //console.log(JSON.stringify(data));
+
+                                if (data.car_id === _curCarID)
+                                {
+                                    _curCarID = 0;
+                                }
 
                                 //AuctionSell.init(data);
                             }, 
@@ -753,49 +769,51 @@ function () {
     //>
     //<php
     //if(loggedIn()){>
-    //userGarage = [];    //clear previous entries
-    //jq.get('pas/query.php?op=gug',
-    //    function (data) {
-    //        //the response string is converted by jquery into a Javascript object!
-    //        if (data === null) {
-    //            alert(funcName + ', Error:ajax response returned null!');
-    //            return;
-    //        }
-    //        //alert('ajax response recieved:' + JSON.stringify(data) );
+    userGarage = [];    //clear previous entries
+    jq.get('pas/query.php?op=gug',
+        function (data) {
+            //the response string is converted by jquery into a Javascript object!
+            if (data === null) {
+                alert(funcName + ', Error:ajax response returned null!');
+                return;
+            }
+            //alert('ajax response recieved:' + JSON.stringify(data) );
 
-    //        if (data.length == 0) {
-    //            //exit early is user has no cars
-    //            console.log(funcName + ', user has no cars!, Buy some, right now!');
-    //            return;
-    //        }
+            if (data.length == 0) {
+                //exit early is user has no cars
+                console.log(funcName + ', user has no cars!, Buy some, right now!');
+                return;
+            }
 
-    //        for (var i = 0; i < data.length; i++) {
-    //            var obj = data[i];
-    //            var args = [obj];//Check ID
-    //            args.push(VehicleFromDB(obj)); //adds ajax request object to array
-    //        }
+            var args = [];//Check ID
 
-    //        $.when.apply($, args).done(
-    //            function () {
-    //                //the UI is dependant on the users garage being loaded,
-    //                //so init ui after all ajax calls have completed
-    //                Garage.initUI();
-    //                jq.CarView.menu.hide();//toggle();
-    //                jq.Garage.menu.show();
-    //                jq.carImg.hide();
-    //                jq.setErr();    //clear error when changing pages
-    //            }
-    //        ).fail(
-    //            function () {
-    //                jq.setErr(funcName, 'loading game resources failed, abort!');
-    //            }
-    //        );
-    //    },
-    //    function (jqxhr) {
-    //        //call will fail if result is not properly formated JSON!
-    //        jq.setErr(funcName, 'ajax call failed! Reason: ' + jqxhr.responseText);
-    //    }
-    //);
+            for (var i = 0; i < data.length; i++) {
+                var obj = data[i];
+
+                args.push(VehicleFromDB(obj)); //adds ajax request object to array
+            }
+
+            $.when.apply($, args).done(
+                function () {
+                    //the UI is dependant on the users garage being loaded,
+                    //so init ui after all ajax calls have completed
+                    Garage.initUI();
+                    jq.CarView.menu.hide();//toggle();
+                    jq.Garage.menu.show();
+                    jq.carImg.hide();
+                    jq.setErr();    //clear error when changing pages
+                }
+            ).fail(
+                function () {
+                    jq.setErr(funcName, 'loading game resources failed, abort!');
+                }
+            );
+        },
+        function (jqxhr) {
+            //call will fail if result is not properly formated JSON!
+            jq.setErr(funcName, 'ajax call failed! Reason: ' + jqxhr.responseText);
+        }
+    );
     //<php
     //}
     //else{>
