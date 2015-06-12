@@ -80,7 +80,7 @@ Main Game Menu Styles
 {
 <?php
     posAbs();
-    css::defaultBG('../images/body.png');
+    css::defaultBG('../images/slots.png');
     css::bgSize('100%', '100%');
     css::txtAlignCntr();
 	css::bottom('12%');
@@ -96,7 +96,7 @@ Main Game Menu Styles
 {
 <?php
     posAbs();
-    css::defaultBG('../images/logo.png');
+    css::defaultBG('../images/slots_hover.png');
     css::bgSize('100%', '100%');
     css::txtAlignCntr();
 	css::bottom('12%');

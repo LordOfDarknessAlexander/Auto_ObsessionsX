@@ -21,14 +21,9 @@ SET time_zone = "+00:00";
 -- Database: `aoCarSales`
 -- --------------------------------------------------------
 --
-CREATE TABLE IF NOT EXISTS `user0`(
+CREATE TABLE IF NOT EXISTS `user3`(
     `car_id` int unsigned NOT NULL PRIMARY KEY,
-    `price` float NOT NULL,
-    --`_cashedIn` bool,
-    --`_time` float,
-    `drivetrain` int unsigned,
-    `body` int unsigned,
-    `interior` int unsigned,
-    `docs` int unsigned,
-    `repairs` int unsigned
+    `price` float NOT NULL
+
+ 
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
