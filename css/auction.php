@@ -71,7 +71,7 @@ Auction Screen
 	width:12%;
 	height:5%;
 	left:5%;
-	bottom:56%;
+	bottom:23%;
 }
 /*<php divAuction();> label#carPrice
 {<php
