@@ -152,7 +152,7 @@ class user{
     }
 	public static function removeCarSaleByID($id){
         //
-        global $aoSalesDB;
+        global $aoCarSalesDB;
         $i = is_int($id) ? $id : intval($id);
         
         if($i > 0){
@@ -163,7 +163,7 @@ class user{
             $ut = getUserTableName();
             $cid = $car[$CID];
             
-            $res = $aoSalesDB->query(
+            $res = $aoCarSalesDB->query(
                 "DELETE FROM $ut WHERE $CID = $cid"
             );
             
