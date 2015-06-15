@@ -450,9 +450,13 @@ function auctionGen(args){
 				 jq.post('pas/update.php?op=ucs',    //user cancel sale
                     function(data){
                         //refresh AuctionSell div
+                        if(data === null || data === undefined){
+                            jq.setErr(funcName, 'Error:ajax response returned null!');
+                            return;
+                        }
                     },
                     function(jqxhr){
-                        
+                        jq.setErr(funcName, 'Ajax call failed, Reason: ' + jqxhr.responseText);
                     },
                     {carID:0}
                 );

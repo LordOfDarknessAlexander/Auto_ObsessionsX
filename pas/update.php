@@ -107,7 +107,7 @@ class user{
             $R = 'repairs';
             
             $res = $aoCarSalesDB->query(
-                "SELECT * FROM $ut WHERE $CID = $id"
+                "SELECT * FROM $ut WHERE $CID = $i"
             );
             
             if($res){
@@ -132,10 +132,10 @@ class user{
         
         $i = is_int($id) ? $id : intval($id);
         
-        if($id > 0){
+        if($i > 0){
             //echo $id;
             $CID = ao::CID;
-            $car = user::getCarByID($id);
+            $car = user::getCarByID($i);
             //if($car !== null){
             $ut = getUserTableName();
             $cid = $car[$CID];
@@ -158,7 +158,7 @@ class user{
         if($i > 0){
             //echo $id;
             $CID = ao::CID;
-            $car = user::getCarSaleByID($id);
+            $car = user::getCarSaleByID($i);
             //if($car !== null){
             $ut = getUserTableName();
             $cid = $car[$CID];
@@ -188,10 +188,14 @@ class user{
 		$P = 'price';
 		$p = 0.0;
 		
+        //return 0;
+        
 		if(user::removeCarByID($carID) ){
+            //return true;
 			$res = user::slctFromEntry("$CID");
 			
 			if($res){
+                //return true;
                 $a = $res->fetch_assoc();
 				$cid = intval($a[$CID]);
                 $dt = 0;    //intval($a[$DT]);
@@ -201,6 +205,7 @@ class user{
                 $r = 0;     //intval($a[$R]);
 				
                 //echo $cid;
+                
 				if($cid == $carID){
 					pasUpdate::userCurrentCar();
 				}
@@ -208,9 +213,9 @@ class user{
                 //else vehicles are different, no change
                 $temp = $aoCarSalesDB->query(
 				    "INSERT INTO $ut
-                        ($CID, $P, $D, $B, $I, $D, $R)
+                        ($CID, $P, $DT, $B, $I, $D, $R)
                     VALUES
-                        ($carID, $p, $d, $b, $i, $d, $r)"
+                        ($carID, $p, $dt, $b, $i, $d, $r)"
 			    );
                 
                 //echo json_encode($temp);
@@ -226,9 +231,6 @@ class user{
                     );
                 }
 			}
-			
-			
-					
         }
         return null;
     }
@@ -239,7 +241,11 @@ class user{
         $ut = getUserTableName();
         $car = user::getCarSaleByID($carID);
         $CID = ao::CID;
-		$P = 'price';
+        $DT = 'drivetrain';
+        $B = 'body';
+        $I = 'interior';
+        $D = 'docs';
+        $R = 'repairs';
 		$s = 0; //$sale[$S];    //start
         $e = 0; //$sale[$E];    //end
         //$delta = $e - $s;
@@ -247,40 +253,39 @@ class user{
         
         //if($delta < $AT){
             if(user::removeCarSaleByID($carID) ){
-                    $cid = intval($car[$CID]);
-                    $dt = 0;    //intval($car[$DT]);
-                    $b = 0;     //intval($car[$B]);
-                    $i = 0;     //intval($car[$I]);
-                    $d = 0;     //intval($car[$D]);
-                    $r = 0;     //intval($car[$R]);
-                    //$s = $car[$S];  //start
-                    //$e = $car[$E];  //end
-                    
-                    //echo $cid;
-                    
-                    //else vehicles are different, no change
-                    $temp = $aoUsersDB->query(
-                        "INSERT INTO $ut
-                            ($CID, $D, $B, $I, $D, $R)
-                        VALUES
-                            ($carID, $d, $b, $i, $d, $r)"
+                $cid = intval($car[$CID]);
+                $dt = 0;    //intval($car[$DT]);
+                $b = 0;     //intval($car[$B]);
+                $i = 0;     //intval($car[$I]);
+                $d = 0;     //intval($car[$D]);
+                $r = 0;     //intval($car[$R]);
+                //$s = $car[$S];  //start
+                //$e = $car[$E];  //end
+                
+                //echo $cid;
+                
+                //else vehicles are different, no change
+                $temp = $aoUsersDB->query(
+                    "INSERT INTO $ut
+                        ($CID, $D, $B, $I, $D, $R)
+                    VALUES
+                        ($carID, $d, $b, $i, $d, $r)"
+                );
+                
+                //echo json_encode($temp);
+                
+                /*if($temp){
+                    return array(
+                        $CID => $carID
+                        //$DT,
+                        //$B,
+                        //$I,
+                        //$D,
+                        //$R
                     );
-                    
-                    //echo json_encode($temp);
-                    
-                    /*if($temp){
-                        return array(
-                            $CID => $carID
-                            //$DT,
-                            //$B,
-                            //$I,
-                            //$D,
-                            //$R
-                        );
-                    }*/
-                }
-            //}
-        }
+                }*/
+            }
+        //}
         return null;
     }
 }

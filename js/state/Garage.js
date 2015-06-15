@@ -265,7 +265,7 @@ var Garage = {
             function(data){
                 //the response string is converted by jquery into a Javascript object!
                 if(data === null){
-                    alert(funcName + ', Error:ajax response returned null!');
+                    jq.setErr(funcName, 'Error:ajax response returned null!');
                     return;
                 }
                 //alert('ajax response recieved:' + JSON.stringify(data) );
@@ -567,6 +567,8 @@ var CarView = {
 			var car = Garage.getCarByIndex(selCarIndex);   //userGarage[selCarIndex];
             
             if(car !== null && car !== undefined){
+                var funcName = 'CarView::init(index)';
+                
                 setHomeImg(car.getFullPath() );
                 jq.carImg.show();
                 //jq.CarView.carImg.attr('src', car.getFullPath() );	//'images\\vehicle.jpg');
@@ -581,6 +583,7 @@ var CarView = {
                             function(data){
                                 
                                 if(data === null || data === undefined){
+                                    jq.setErr(funcName, 'Error:ajax response returned null!');
                                     return;
                                 }
 
@@ -604,7 +607,7 @@ var CarView = {
                                 AuctionSell.init(data.car_id);
                             }, 
                             function(jqxhr){ 
-                                jq.setErr("carView.Init", "error happened: " + jqxhr.responseText);
+                                jq.setErr('carView.Init', 'error happened: ' + jqxhr.responseText);
                             }, 
                             {carID:car.id}
                         );
