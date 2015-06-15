@@ -88,6 +88,7 @@ $funcName = "$fileName, pas::postUserCarSale(carid)";
                 //
                 if(data === null || data === undefined){
                     jq.setErr(funcName, 'Error:ajax response returned null!');
+				
                     return;
                 }
 
