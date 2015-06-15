@@ -228,7 +228,7 @@ function auctionGen(args){
 		},
 		endAuction:function(){
             //auction has ended updates garage and _sales
-            if(this._car === null){
+            if(this._car !== null){
                 var i = this._carIndex,
                     btnID = 'as' + (i).toString(),
                     liID = 'div#asd' + (this._car.id).toString(),
@@ -401,20 +401,20 @@ function auctionGen(args){
                     btnID = divID + ' div#btns button#cc',
                     btn = $(btnID);
                     
-                if(t.isExpired() ){
-                    //set cash button, for user to recieve funds
-                    var data = {
-                        caller:t,
-                        cid:this._car.id,
-                        price:this._currentBid
-                    };
-                    btn.css({
-                        'background':"url('images/icons/money.png') no-repeat 0 0",
-                        'background-size':"100% 100%",
-                    });
-                    btn.off().click(data, this.payUser);
-                }
-                else{
+                // if(t.isExpired() ){
+                    // //set cash button, for user to recieve funds
+                    // var data = {
+                        // caller:t,
+                        // cid:this._car.id,
+                        // price:this._currentBid
+                    // };
+                    // //btn.css({
+                    // //    'background':"url('images/icons/money.png') no-repeat 0 0",
+                    // //    'background-size':"100% 100%",
+                    // //});
+                    // //btn.off().click(data, this.payUser);
+                // }
+                // else{
                     //auction still active, allow user the chance to cancel
                     var data = {
                         caller:t,
@@ -426,7 +426,7 @@ function auctionGen(args){
                         'background-size':"100% 100%",
                     });
                     btn.off().click(data, this.cancelAuction);
-                }
+                //}
 			
             }
         },
@@ -438,28 +438,30 @@ function auctionGen(args){
             //user has decided to not sell car, removing it from userSales
             //user pays a penalty
             //alert('To cancel this auction the House will require a cancelation fee of ...');
-            var t = obj.data.caller;     //alias of this(auction object), since using this inside the current function refrences the jq object, button#cc
-                //id = obj.cid, //car id
+            var t = obj.data.caller,     //alias of this(auction object), since using this inside the current function refrences the jq object, button#cc
+                id = obj.data.cid; //car id
                 //p = obj.price;    //sale price of car
             if(!t.isExpired() ){
 				//uncomment and call pas function cancelcarSales
 //<php if(loggedIn() ){
                 //make ajax call to pasRemove>
-                
+                var funcName = 'js/state auctionGen.js, auctionGen.cancelAuction(obj)';
                 //jq.post('pas/remove.php?op=ucs',    //user cancel sale
-				 jq.post('pas/update.php?op=ucs',    //user cancel sale
+				 jq.post('pas/update.php?op=cucs',    //user cancel sale
                     function(data){
                         //refresh AuctionSell div
                         if(data === null || data === undefined){
                             jq.setErr(funcName, 'Error:ajax response returned null!');
                             return;
                         }
+						console.log(JSON.stringify(data));
                     },
                     function(jqxhr){
                         jq.setErr(funcName, 'Ajax call failed, Reason: ' + jqxhr.responseText);
                     },
-                    {carID:0}
+                    {carID:id}
                 );
+				Garage.load();
                 
 //<php
 //}

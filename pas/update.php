@@ -153,10 +153,11 @@ class user{
 	public static function removeCarSaleByID($id){
         //
         global $aoCarSalesDB;
+		//return $id;
         $i = is_int($id) ? $id : intval($id);
         
         if($i > 0){
-            //echo $id;
+            //echo $i;
             $CID = ao::CID;
             $car = user::getCarSaleByID($i);
             //if($car !== null){
@@ -252,7 +253,10 @@ class user{
         //$AT = //auction max time
         
         //if($delta < $AT){
+			//return true;
+			//return $carID;
             if(user::removeCarSaleByID($carID) ){
+				//return true;
                 $cid = intval($car[$CID]);
                 $dt = 0;    //intval($car[$DT]);
                 $b = 0;     //intval($car[$B]);
@@ -267,14 +271,15 @@ class user{
                 //else vehicles are different, no change
                 $temp = $aoUsersDB->query(
                     "INSERT INTO $ut
-                        ($CID, $D, $B, $I, $D, $R)
+                        ($CID, $DT, $B, $I, $D, $R)
                     VALUES
-                        ($carID, $d, $b, $i, $d, $r)"
+                        ($carID, $dt, $b, $i, $d, $r)"
                 );
                 
                 //echo json_encode($temp);
                 
-                /*if($temp){
+                if($temp){
+					//return true;
                     return array(
                         $CID => $carID
                         //$DT,
@@ -283,7 +288,7 @@ class user{
                         //$D,
                         //$R
                     );
-                }*/
+                }
             }
         //}
         return null;
