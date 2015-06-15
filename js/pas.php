@@ -77,13 +77,17 @@ $funcName = "$fileName, pas::insertLoss(vehicleID)";
             {carID:vehicleID}
         );
     },
+
     postUserCarSale:function(carid){
+<?php
+$funcName = "$fileName, pas::postUserCarSale(carid)";
+?>  
         jq.post(
             "pas/update.php?op=pucs", 
             function(data){
                 //
                 if(data === null || data === undefined){
-                    jq.setErr(funcName, 'Error:ajax response returned null!');
+                    jq.setErr($funcName, 'Error:ajax response returned null!');
                     return;
                 }
 
@@ -178,7 +182,7 @@ $funcName = "$fileName, pas::set::userFunds()";
                     jq.Profile.toggle();
                 },
                 function(jqxhr){
-<?php//if($DEBUG){?>
+//<?php//if($DEBUG){?>
                     jq.setErr("<?php echo $funcName;?>", jqxhr.responseText);
 <?php
 //}
