@@ -237,49 +237,50 @@ class user{
         global $aoUsersDB;
         
         $ut = getUserTableName();
-        $car = user::getCarByID($carID);
+        $car = user::getCarSaleByID($carID);
         $CID = ao::CID;
 		$P = 'price';
-		$p = 0.0;
-		
-        /*if(user::removeCarSaleByID($carID) ){
-        //    $res = user::slctFromEntry("$CID");
-			
-            if($res){
-                $a = $res->fetch_assoc();
-				$cid = intval($a[$CID]);
-                $dt = 0;    //intval($a[$DT]);
-                $b = 0;     //intval($a[$B]);
-                $i = 0;     //intval($a[$I]);
-                $d = 0;     //intval($a[$D]);
-                $r = 0;     //intval($a[$R]);
-                //$s = $a[$S];  //start
-                //$e = $a[$E];  //end
-				
-                //echo $cid;
-				
-                //else vehicles are different, no change
-                $temp = $aoUsersDB->query(
-				    "INSERT INTO $ut
-                        ($CID, $D, $B, $I, $D, $R)
-                    VALUES
-                        ($carID, $d, $b, $i, $d, $r)"
-			    );
-                
-                //echo json_encode($temp);
-                
-                if($temp){               
-                    return array(
-                        $CID => $carID
-                        //$DT,
-                        //$B,
-                        //$I,
-                        //$D,
-                        //$R
+		$s = 0; //$sale[$S];    //start
+        $e = 0; //$sale[$E];    //end
+        //$delta = $e - $s;
+        //$AT = //auction max time
+        
+        //if($delta < $AT){
+            if(user::removeCarSaleByID($carID) ){
+                    $cid = intval($car[$CID]);
+                    $dt = 0;    //intval($car[$DT]);
+                    $b = 0;     //intval($car[$B]);
+                    $i = 0;     //intval($car[$I]);
+                    $d = 0;     //intval($car[$D]);
+                    $r = 0;     //intval($car[$R]);
+                    //$s = $car[$S];  //start
+                    //$e = $car[$E];  //end
+                    
+                    //echo $cid;
+                    
+                    //else vehicles are different, no change
+                    $temp = $aoUsersDB->query(
+                        "INSERT INTO $ut
+                            ($CID, $D, $B, $I, $D, $R)
+                        VALUES
+                            ($carID, $d, $b, $i, $d, $r)"
                     );
+                    
+                    //echo json_encode($temp);
+                    
+                    /*if($temp){
+                        return array(
+                            $CID => $carID
+                            //$DT,
+                            //$B,
+                            //$I,
+                            //$D,
+                            //$R
+                        );
+                    }*/
                 }
-            }
-        }*/
+            //}
+        }
         return null;
     }
 }
