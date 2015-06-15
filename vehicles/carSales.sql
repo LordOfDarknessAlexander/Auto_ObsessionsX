@@ -24,9 +24,9 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `user3`(
     `car_id` int unsigned NOT NULL PRIMARY KEY,
     `price` float NOT NULL,
-    `drivetrain` int unsigned,
-    `body` int unsigned,
-    `interior` int unsigned,
-    `docs` int unsigned,
-    `repairs` int unsigned 
+    `drivetrain` int unsigned NOT NULL,
+    `body` int unsigned NOT NULL,
+    `interior` int unsigned NOT NULL,
+    `docs` int unsigned NOT NULL,
+    `repairs` int unsigned  NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
