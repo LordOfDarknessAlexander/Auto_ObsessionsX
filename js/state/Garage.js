@@ -8,6 +8,11 @@
     //return true;
 //}
 //?>
+//jq.Garage.userCar = {
+    //div:$('div#Garage div#userCar');
+//}
+//jq.Garage.divSelectCar = $('div#Garage div#selectedCar');
+
 var userGarage = [
 	//Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969'),
 	//Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969'),
@@ -48,14 +53,6 @@ function getCar(carID){
     return null;
 }
 
-//userGarage.push(xdbCars[0]);
-//userGarage.push(xdbCars[1]);
-//userGarage.push(xdbCars[3]);
-//userGarage.push(xdbCars[1]);
-//userGarage.push(xdbCars[0]);
-//userGarage.push(xdbCars[1]);
-//userGarage.push(xdbCars[3]);
-//userGarage.push(xdbCars[1]);
 //copy constructed car, altering currentCar doesn't change usergarage[0],
 //retain the index instead and access directly to mdoify.
 //value of null means no selection
@@ -289,14 +286,13 @@ var Garage = {
                     }
                 ).fail(
                     function(){
-                        console.log(funcName + ', loading game resources failed, abort!');
+                        jq.setErr(funcName, 'loading game resources failed, abort!');
                     }
                 );
             },
             function(jqxhr){
                 //call will fail if result is not properly formated JSON!
-                alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
-                console.log(funcName + ', loading game resources failed, abort!');
+                jq.setErr(funcName, 'ajax call failed! Reason: ' + jqxhr.responseText);
             }
         );
 //<php
@@ -444,7 +440,6 @@ var Garage = {
         //
 	    var i = typeof index === 'number' ? Math.floor(index) : parseInt(index);
 
-	
 		if(i >= 0 && i < userGarage.length){
             //
 			var div = $('div#Garage div#selectedCar');
@@ -503,23 +498,27 @@ var Garage = {
 	initCarView: function () {
 	    Garage._carViewList.empty();
         //displays cars in the users garage 
+        var sel = jq.Garage.selectBtn,  //$('div#Garage #select'),
+            view = jq.Garage.viewBtn;   //$('div#Garage #viewCar');
+        
         if(userGarage.length == 0)
 		{	//empty grage so display img instead of buttons
 			src = "<li><img id=\'GarageEmpty\' src =\'images\\garageEmpty.png\'></li>";
 			
-			$('div#Garage #select').hide();
-			$('div#Garage #viewCar').hide();
+			sel.hide();
+			view.hide();
 		}
 		else{
         	//$('div#Garage #userCar').show();
 			//$('div#selectedCar').show();
             //if(Garge.getUserCar() )
-			$('div#Garage #select').show();
-			$('div#Garage #viewCar').show();
+			sel.show();
+			view.show();
 
-			for(var i = 0; i < userGarage.length; i++)
-			{	//add buttons to list
+			for(var i = 0; i < userGarage.length; i++){
+                //add buttons to list
 				var car = userGarage[i];
+                
 				src = car.getFullPath();	//"\'images/vehicle.jpg\'";
 				this._carViewList.append("<li>" +	//id = \'" + i "\'>"
 				"<button id=\'carSelBtn" + i + "\'>" +
@@ -578,39 +577,7 @@ var CarView = {
 //<php
 //if(loggedIn() ){>
                     function(){		
-                        jq.post(
-                            "pas/update.php?op=pucs", 
-                            function(data){
-                                
-                                if(data === null || data === undefined){
-                                    jq.setErr(funcName, 'Error:ajax response returned null!');
-                                    return;
-                                }
-
-                                //if (data.length == 0){
-                                //    return;
-                                //}
-
-                               //console.log(JSON.stringify(data));
-                                var cid = data.car_id;
-                                
-                                if(cid == _curCarID){
-                                    _curCarID = 0;
-                                    //hideDiv
-                                }
-                                
-                                //if(data.car_id === selCarIndex){
-                                    //selCarIndex = 0;
-                                    //Garage.setSelect Car Div
-                                //}
-
-                                AuctionSell.init(data.car_id);
-                            }, 
-                            function(jqxhr){ 
-                                jq.setErr('carView.Init', 'error happened: ' + jqxhr.responseText);
-                            }, 
-                            {carID:car.id}
-                        );
+                        pas.postUserCarSale(car.id);
                     }
 //<php
 //}
@@ -620,9 +587,7 @@ var CarView = {
 //}
 //>
                 );
-                //function(data){
-                    //AuctionSell.init(selCarIndex);
-                //});
+                
                 //set dt progress bars
                 for(var i = Drivetrain.TYPE.engine; i <= Drivetrain.TYPE.exhaust; i++){ 
                     var part = car._dt.getPartType(i),
@@ -633,6 +598,7 @@ var CarView = {
                     pbSetColor(pb, p);
                 }
                 //set interior progress bars
+                //
                 for(var i = Interior.TYPE.seats; i <= Interior.TYPE.panels; i++){ 
                     var part = car._interior.getPartType(i),
                         str = 'div#CarView div#interior progress#pb' + Interior.strFromType(i),

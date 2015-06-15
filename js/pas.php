@@ -77,6 +77,41 @@ $funcName = "$fileName, pas::insertLoss(vehicleID)";
             {carID:vehicleID}
         );
     },
+    postUserCarSale:function(carid){
+        jq.post(
+            "pas/update.php?op=pucs", 
+            function(data){
+                //
+                if(data === null || data === undefined){
+                    jq.setErr(funcName, 'Error:ajax response returned null!');
+                    return;
+                }
+
+                //if (data.length == 0){
+                //    return;
+                //}
+
+               //console.log(JSON.stringify(data));
+                var cid = data.car_id;
+                
+                if(cid == _curCarID){
+                    _curCarID = 0;
+                    //hideDiv
+                }
+                
+                //if(data.car_id === selCarIndex){
+                    //selCarIndex = 0;
+                    //Garage.setSelect Car Div
+                //}
+
+                AuctionSell.init(data.car_id);
+            }, 
+            function(jqxhr){ 
+                jq.setErr('pas.postUserCarSale', 'error happened: ' + jqxhr.responseText);
+            }, 
+            {carID:carid}
+        );
+    },
     //pushCar:function(carID){
         //pushes a car from finalpost[aoCarsDB] to aoUsersDB[userTable]
     //}
@@ -106,7 +141,7 @@ $funcName = "$fileName, pas::set::userUserProfileData()";
 ?>
             jq.post('pas/profile.php',
                 function(data){
-                    if(data === null || data == undefined){
+                    if(data === null || data === undefined){
                         return;
                     }
                     //alert(JSON.stringify(data));
@@ -124,6 +159,30 @@ $funcName = "$fileName, pas::set::userUserProfileData()";
                     //do not show screen transition,
                     //play failure sound
                     jq.setErr("<?php echo $funcName;?>", jqxhr.responseText);
+                }
+            );
+        },
+        userFunds:function(funds){
+<?php
+$funcName = "$fileName, pas::set::userFunds()";
+?>
+            jq.post('pas/update.php?op=puf',
+                function(data){
+                    if(data === null || data === undefined){
+                        return;
+                    }
+                    //
+                    jq.Profile.stats.set(data.stats);
+                    jq.Profile.sales.set(data.income)
+                    //
+                    jq.Profile.toggle();
+                },
+                function(jqxhr){
+<?php//if($DEBUG){?>
+                    jq.setErr("<?php echo $funcName;?>", jqxhr.responseText);
+<?php
+//}
+?>
                 }
             );
         }
