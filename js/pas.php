@@ -86,17 +86,18 @@ $funcName = "$fileName, pas::postUserCarSale(carid)";
             "pas/update.php?op=pucs", 
             function(data){
                 //
-                if(data === null || data === undefined){
+                //if(data === null || data === undefined){
+					<?php isValidData();?>
                     jq.setErr('<?php eFN();?>', 'Error:ajax response returned null!');
 				
                     return;
-                }
+                //}
 
                 //if (data.length == 0){
                 //    return;
                 //}
 
-               //console.log(JSON.stringify(data));
+               console.log(JSON.stringify(data));
                 var cid = data.car_id;
                 
                 if(cid == _curCarID){
