@@ -205,7 +205,7 @@ class user{
                 $d = 0;     //intval($a[$D]);
                 $r = 0;     //intval($a[$R]);
 				
-                //echo $cid;
+                echo $cid;
                 
 				if($cid == $carID){
 					pasUpdate::userCurrentCar();
