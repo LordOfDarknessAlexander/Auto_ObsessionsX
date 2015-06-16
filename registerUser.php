@@ -2,7 +2,7 @@
 
 require_once 'include/html.php';
 require_once 'include/dbConnect.php';
-require_once 'pas/create.php';
+require_once 'create.php';
 require_once 're.php';
 //require_once '../users.php';
 
