@@ -77,7 +77,7 @@ function getUserName(){
    
     <div id='reg-navigation'>
         <a id='home' class='tooltip' href='<?php
-            echo rootURL() . 'Users/index.php';
+            echo rootURL() . 'index.php';
         ?>'>Home<!--span><img src=''>Tooltip!</span--></a><br>
         <a id='addFunds' class='tooltip'>Store</a><br>
 		
@@ -89,7 +89,7 @@ if(loggedIn() ){?>
 <?php
 }
 else{?>
-        <a id='reg' href='<?php echo rootURL() . 'Users/registerUser.php';?>'>Register</a><br>
+        <a id='reg' href='<?php echo rootURL() . 'registerUser.php';?>'>Register</a><br>
 <?php
 }
 ?>
@@ -113,7 +113,7 @@ else{?>
 <?php
 if(!loggedIn() ){?>
                 <li><a id='reg' class='button Register' href='<?php
-                    echo rootURL() . 'Users/registerUser.php';
+                    echo rootURL() . 'registerUser.php';
                 ?>'>Register</a></li>
 <?php
 }?>

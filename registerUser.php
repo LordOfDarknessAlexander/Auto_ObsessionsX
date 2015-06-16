@@ -1,8 +1,9 @@
 <?php
-require_once '../include/html.php';
-require_once '../include/dbConnect.php';
-require_once '../pas/create.php';
-require_once '../re.php';
+
+require_once 'include/html.php';
+require_once 'include/dbConnect.php';
+require_once 'pas/create.php';
+require_once 're.php';
 //require_once '../users.php';
 
 html::doctype();
@@ -13,13 +14,13 @@ html::doctype();
 html::title('Register');
 html::charset();
 ?>
-<link rel='stylesheet' type='text/css' href='includes.css'>
+<link rel='stylesheet' type='text/css' href='Users/includes.css'>
 </head>
 <body>
 <div id='container'>
 <?php
-require 'includes/register-header.php';
-require 'includes/nav.php';
+require 'Users/includes/register-header.php';
+require 'include/nav.php';
 ?>
 <div id='content'><!-- Start of the login page content. -->
 <?php
@@ -205,7 +206,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo mysqli_error($AO_DB->con) . PHP_EOL;
 			} // End of if ($result)
 			// Include the footer and stop the script
-            require '../phtml/legal.php';
+            require 'phtml/legal.php';
             html::footer();
 			exit();
 		} 
@@ -289,6 +290,6 @@ function flti($name, $text, $size, $maxlength){
 </div><!--content-->
 </div><!--container-->
 <?php
-require '../phtml/legal.php';
+require 'phtml/legal.php';
 html::footer();
 ?>
