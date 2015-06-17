@@ -79,12 +79,12 @@ class user{
                 $r = $res->fetch_assoc();
                 
                 return array(
-                    $CID=>$r[$CID],
-                    $DT=>$r[$DT],
-                    $B=>$r[$B],
-                    $I=>$r[$I],
-                    $D=>$r[$D],
-                    $R=>$r[$R]
+                    $CID=>intval($r[$CID]),
+                    $DT=>intval($r[$DT]),
+                    $B=>intval($r[$B]),
+                    $I=>intval($r[$I]),
+                    $D=>intval($r[$D]),
+                    $R=>intval($r[$R])
                 );
             }
             //echo 'sql query failed';
@@ -114,12 +114,12 @@ class user{
                 $r = $res->fetch_assoc();
                 
                 return array(
-                    $CID=>$r[$CID],
-                    $DT=>$r[$DT],
-                    $B=>$r[$B],
-                    $I=>$r[$I],
-                    $D=>$r[$D],
-                    $R=>$r[$R]
+                    $CID=>intval($r[$CID]),
+                    $DT=>intval($r[$DT]),
+                    $B=>intval($r[$B]),
+                    $I=>intval($r[$I]),
+                    $D=>intval($r[$D]),
+                    $R=>intval($r[$R])
                 );
             }
             //echo 'sql query failed';
@@ -131,7 +131,7 @@ class user{
         global $aoUsersDB;
         
         $i = is_int($id) ? $id : intval($id);
-        
+        //echo $id;
         if($i > 0){
             //echo $id;
             $CID = ao::CID;
@@ -177,7 +177,7 @@ class user{
     public static function postCarSale($carID){
         //
         global $aoCarSalesDB;
-        
+        //echo "var argument carID ($carID)";
         $ut = getUserTableName();
         $car = user::getCarByID($carID);
         $CID = ao::CID;
@@ -187,56 +187,54 @@ class user{
         $I = 'interior';
         $D = 'docs';
         $R = 'repairs';
-		//$p = 0.0;
-		//echo "Hello";
+		$P = 'price';
+		$p = 0.0;
         //return 0;
-		        
-		if(user::removeCarByID($carID) ){
-            //return true;
-			//$res = user::slctFromEntry("$CID, $P, $DT, $B, $R, $D, $I");
-			$res = $aoCarSalesDB->query(
-                "SELECT * FROM $ut WHERE $CID = $carID"
-            );
+		//returns current user card id in an array       
+		$res = user::slctFromEntry("$CID");
+		
+		if($res){
+			//
+			$a = $res->fetch_assoc();
+			$cid = intval($a[$CID]);
+			//echo json_encode($a);
+			//echo "var argument cid ($cid)";
 			
-			if($res){
-                //return true;
-				$a = $res->fetch_assoc();
-				$cid = intval($a[$CID]);
-				$p = round(floatval($a[$P]), 2);
-                $dt = intval($a[$DT]);
-                $b = intval($a[$B]);
-                $i = intval($a[$I]);
-                $d = intval($a[$D]);
-                $r = intval($a[$R]);
-				                
+			if(user::removeCarByID($carID) ){
+				//return true;
+				$dt = $car[$DT];
+				$b = $car[$B];
+				$i = $car[$I];
+				$d = $car[$D];
+				$r = $car[$R];
+
 				if($cid == $carID){
 					pasUpdate::userCurrentCar();
 				}
 
-                //else vehicles are different, no change
-                $temp = $aoCarSalesDB->query(
-				    "INSERT INTO $ut
-                        ($CID, $P, $DT, $B, $I, $D, $R)
-                    VALUES
-                        ($carID, $p, $dt, $b, $i, $d, $r)"
-			    );
-                
-                //echo json_encode($temp);
-                
-                if($temp){               				
+				//else vehicles are different, no change
+				$temp = $aoCarSalesDB->query(
+					"INSERT INTO $ut
+						($CID, $P, $DT, $B, $I, $D, $R)
+					VALUES
+						($carID, $p, $dt, $b, $i, $d, $r)"
+				);
+				
+				//echo json_encode($temp);
+				
+				if($temp){
 					return array(
 						$CID=>$carID,
-						$P=>$p,
 						$DT=>$dt,
 						$B=>$b,
 						$I=>$i,
 						$D=>$d,
 						$R=>$r
 					);
-                }
-                else{
-                    $aoCarSalesDB->eErr();
-                }
+				}
+				else{
+					$aoCarSalesDB->eErr();
+				}
 			}
         }
         return null;
@@ -263,12 +261,12 @@ class user{
 			//return $carID;
             if(user::removeCarSaleByID($carID) ){
 				//return true;
-                $cid = intval($car[$CID]);
-                $dt = intval($car[$DT]);
-                $b = intval($car[$B]);
-                $i = intval($car[$I]);
-                $d = intval($car[$D]);
-                $r = intval($car[$R]);
+                $cid = $car[$CID];
+                $dt = $car[$DT];
+                $b = $car[$B];
+                $i = $car[$I];
+                $d = $car[$D];
+                $r = $car[$R];
                 //$s = $car[$S];  //start
                 //$e = $car[$E];  //end
                 
@@ -283,7 +281,7 @@ class user{
                 );
                 
                 //echo json_encode($temp);
-                
+
                 if($temp){              			
 					return array(
 						$CID=>$carID,
