@@ -1,5 +1,5 @@
 <?php
-require_once '../include/html.php';
+require_once 'include/html.php';
 html::doctype();
 ?>
 <html lang="en">
@@ -21,9 +21,9 @@ html::charset();
 <body>
 <div id="container">
 <?php
-require 'includes/header-thanks.php';
+require 'Users/includes/header-thanks.php';
 require 'includes/nav.php';
-require 'includes/info-col-cards.php';
+require 'Users/includes/info-col-cards.php';
 ?>
 <div id="content"><!-- Start of the thank you page content. -->
     <div id="midcol">
@@ -34,6 +34,6 @@ require 'includes/info-col-cards.php';
 </div>
 	<!-- End of the thank you page content. -->
 <?php
-require '../phtml/legal.php';
+require 'phtml/legal.php';
 html::footer();
 ?>
