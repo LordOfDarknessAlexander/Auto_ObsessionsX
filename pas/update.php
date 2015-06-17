@@ -187,24 +187,23 @@ class user{
         $D = 'docs';
         $R = 'repairs';
 		$P = 'price';
-		//$p = 0.0;
+		$p = 0.0;
 		
         //return 0;
         
 		if(user::removeCarByID($carID) ){
             //return true;
-			$res = user::slctFromEntry("$CID, $P, $DT, $B, $I, $D, $R");
+			$res = user::slctFromEntry("$CID");
 			
 			if($res){
                 //return true;
-				$a = $res->fetch_assoc();
+                $a = $res->fetch_assoc();
 				$cid = intval($a[$CID]);
-				$p = round(floatval($a[$P]), 2);
-                $dt = intval($a[$DT]);
-                $b = intval($a[$B]);
-                $i = intval($a[$I]);
-                $d = intval($a[$D]);
-                $r = intval($a[$R]);
+                $dt = 0;    //intval($a[$DT]);
+                $b = 0;     //intval($a[$B]);
+                $i = 0;     //intval($a[$I]);
+                $d = 0;     //intval($a[$D]);
+                $r = 0;     //intval($a[$R]);
 				
                 //echo $cid;
                 
@@ -223,16 +222,14 @@ class user{
                 //echo json_encode($temp);
                 
                 if($temp){               
-                    				
-					return array(
-						$CID=>$cid,
-						$P=>$p,
-						$DT=>$dt,
-						$B=>$b,
-						$I=>$i,
-						$D=>$d,
-						$R=>$r
-					);
+                    return array(
+                        $CID => $carID
+                        //$DT,
+                        //$B,
+                        //$I,
+                        //$D,
+                        //$R
+                    );
                 }
                 else{
                     $aoCarSalesDB->eErr();
@@ -264,11 +261,11 @@ class user{
             if(user::removeCarSaleByID($carID) ){
 				//return true;
                 $cid = intval($car[$CID]);
-                $dt = intval($car[$DT]);
-                $b = intval($car[$B]);
-                $i = intval($car[$I]);
-                $d = intval($car[$D]);
-                $r = intval($car[$R]);
+                $dt = 0;    //intval($car[$DT]);
+                $b = 0;     //intval($car[$B]);
+                $i = 0;     //intval($car[$I]);
+                $d = 0;     //intval($car[$D]);
+                $r = 0;     //intval($car[$R]);
                 //$s = $car[$S];  //start
                 //$e = $car[$E];  //end
                 
@@ -284,17 +281,17 @@ class user{
                 
                 //echo json_encode($temp);
                 
-                if($temp){              			
-					return array(
-						$CID=>$cid,
-						$P=>$p,
-						$DT=>$dt,
-						$B=>$b,
-						$I=>$i,
-						$D=>$d,
-						$R=>$r
-					);
-				}
+                if($temp){
+					//return true;
+                    return array(
+                        $CID => $carID
+                        //$DT,
+                        //$B,
+                        //$I,
+                        //$D,
+                        //$R
+                    );
+                }
             }
         //}
         return null;
