@@ -59,6 +59,16 @@ class dbConnect
         //escapes str for use in an sql query!
         return mysqli_real_escape_string($this->con, strip_tags($str) );
     }
+    public function getErr(){
+        return (mysqli_connect_errno()?
+            'Failed to connect to MySQL: ' . mysqli_connect_error()
+        :
+            mysqli_error($this->con)
+        ) . PHP_EOL;
+    }
+    public function eErr(){
+        echo $this->getErr();
+    }
 }
 $AO_DB = new dbConnect();    //main database connection
 $aoUsersDB = new dbConnect('aoUsersDB');    //user database

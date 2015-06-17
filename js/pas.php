@@ -113,7 +113,7 @@ $funcName = "$fileName, pas::postUserCarSale(carid)";
                 AuctionSell.init(data.car_id);
             }, 
             function(jqxhr){ 
-                jq.setErr('pas.postUserCarSale', 'error happened: ' + jqxhr.responseText);
+                jq.setErr('<?php eFN();?>', 'error happened: ' + jqxhr.responseText);
             }, 
             {carID:carid}
         );

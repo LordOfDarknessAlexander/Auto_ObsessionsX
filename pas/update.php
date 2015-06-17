@@ -205,7 +205,7 @@ class user{
                 $d = 0;     //intval($a[$D]);
                 $r = 0;     //intval($a[$R]);
 				
-                echo $cid;
+                //echo $cid;
                 
 				if($cid == $carID){
 					pasUpdate::userCurrentCar();
@@ -214,9 +214,9 @@ class user{
                 //else vehicles are different, no change
                 $temp = $aoCarSalesDB->query(
 				    "INSERT INTO $ut
-                        ($CID, $P, $D, $B, $I, $D, $R)
+                        ($CID, $P, $DT, $B, $I, $D, $R)
                     VALUES
-                        ($carID, $p, $d, $b, $i, $d, $r)"
+                        ($carID, $p, $dt, $b, $i, $d, $r)"
 			    );
                 
                 //echo json_encode($temp);
@@ -230,6 +230,9 @@ class user{
                         //$D,
                         //$R
                     );
+                }
+                else{
+                    $aoCarSalesDB->eErr();
                 }
 			}
         }
