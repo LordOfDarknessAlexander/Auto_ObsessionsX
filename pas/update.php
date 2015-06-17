@@ -181,19 +181,22 @@ class user{
         $ut = getUserTableName();
         $car = user::getCarByID($carID);
         $CID = ao::CID;
+		$P = 'price';
         $DT = 'drivetrain';
         $B = 'body';
         $I = 'interior';
         $D = 'docs';
         $R = 'repairs';
-		$P = 'price';
 		//$p = 0.0;
-		
+		//echo "Hello";
         //return 0;
-        
+		        
 		if(user::removeCarByID($carID) ){
             //return true;
-			$res = user::slctFromEntry("$CID, $P, $DT, $B, $I, $D, $R");
+			//$res = user::slctFromEntry("$CID, $P, $DT, $B, $R, $D, $I");
+			$res = $aoCarSalesDB->query(
+                "SELECT * FROM $ut WHERE $CID = $carID"
+            );
 			
 			if($res){
                 //return true;
@@ -205,9 +208,7 @@ class user{
                 $i = intval($a[$I]);
                 $d = intval($a[$D]);
                 $r = intval($a[$R]);
-				
-                //echo $cid;
-                
+				                
 				if($cid == $carID){
 					pasUpdate::userCurrentCar();
 				}
@@ -222,10 +223,9 @@ class user{
                 
                 //echo json_encode($temp);
                 
-                if($temp){               
-                    				
+                if($temp){               				
 					return array(
-						$CID=>$cid,
+						$CID=>$carID,
 						$P=>$p,
 						$DT=>$dt,
 						$B=>$b,
@@ -286,8 +286,7 @@ class user{
                 
                 if($temp){              			
 					return array(
-						$CID=>$cid,
-						$P=>$p,
+						$CID=>$carID,
 						$DT=>$dt,
 						$B=>$b,
 						$I=>$i,
