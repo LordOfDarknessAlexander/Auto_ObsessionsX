@@ -238,7 +238,7 @@ function auctionGen(args){
                 cleanBtn.text('Sold!');
                 //cleanBtn.off().click({i:this._carIndex, amt:this._currentBid}, this.cleanUpAuction);
                 //this._currentBid = 0;
-                //AucionSell.save();
+                //AuctionSell.save();
                 Garage.save();
             }
 		},
@@ -455,47 +455,18 @@ function auctionGen(args){
                             return;
                         }
 						console.log(JSON.stringify(data));
+						t.removeSale(t._car.id);
                     },
                     function(jqxhr){
                         jq.setErr(funcName, 'Ajax call failed, Reason: ' + jqxhr.responseText);
                     },
                     {carID:id}
                 );
-				Garage.load();
-                
+				Garage.load();                
 //<php
 //}
 //else{>
-                var len = userSales.length;
-                
-                if(len == 0){
-                    console.log('user sales has length of 0, can not remove sale');
-                    return;
-                }
-                
-                var i = 0;
-                
-                for(; i < len; i++){
-                    var sCar = userSales[i]._car;
-                    
-                    if( (sCar !== null) && (sCar.id == t._car.id) ){
-                        console.log('cancel auction!');
-                        
-                        var cidStr = (sCar.id).toString(),
-                            liID = 'div#asd' + cidStr,
-                            div = $(liID, jq.AuctionSell.carView);
-                        
-                        console.log("Cancel Hit");
-                        
-                        div.remove();   //from element from DOM
-                        //remove car from array
-                        //remove sales;
-                        //var rm = userSales.splice(i, 1);  //returns items removed from array
-                        //place car back in user garage!
-                        //userGarage.push(car(rm));
-                        break;
-                    }
-                }
+                //this.renoveSale(t._car.id);
 //<php
 //}
 //?>
@@ -504,6 +475,51 @@ function auctionGen(args){
             //can not cancel auction for which the user has already been paid
                 
         },
+		removeSale:function(cid){
+			if(Storage.local !== null){
+				var k = 'AuctionSell',
+					us = k in Storage.local ? JSON.parse(Storage.local[k]) : null;
+				
+				if(us !== null){
+				
+					var len = us.length;
+						
+					if(len == 0){
+						console.log('user sales has length of 0, can not remove sale');
+						return;
+					}
+					
+					var i = 0;
+					
+					for(; i < len; i++){
+						var id = us[i].id;
+						
+						if(id == cid){
+							console.log('cancel auction!');
+							
+							var cidStr = (id).toString(),
+								liID = 'div#asd' + cidStr,
+								div = $(liID, jq.AuctionSell.carView);
+							
+							console.log("Cancel Hit");
+							
+							div.remove();   //from element from DOM
+							//remove car from array
+							//remove sales;
+							us.splice(i, 1);  //returns items removed from array
+							Storage.local[k] = JSON.stringify(us);
+							
+						//place car back in user garage!
+//<php if(loggedIn() ){>
+						//userGarage.push(car(rm));
+//<php					
+	//}>
+							break;
+						}
+					}
+				}
+			}
+		},
         payUser:function(obj){
             var val = obj.data.price;
                 t = obj.data.caller;

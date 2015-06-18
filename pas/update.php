@@ -284,12 +284,12 @@ class user{
 
                 if($temp){              			
 					return array(
-						$CID=>$carID,
-						$DT=>$dt,
-						$B=>$b,
-						$I=>$i,
-						$D=>$d,
-						$R=>$r
+						$CID=>$carID
+						//$DT=>$dt,
+						//$B=>$b,
+						//$I=>$i,
+						//$D=>$d,
+						//$R=>$r
 					);
 				}
             }
