@@ -8,7 +8,7 @@ html::doctype();
 html::title('Registration thank you page');
 html::charset();
 ?>
-    <link rel="stylesheet" type="text/css" href="includes.css">
+    <link rel="stylesheet" type="text/css" href="Users/includes.css">
     <style type="text/css">
     p { text-align:center; }
     table, tr, td, form { margin:auto;	width:180px; text-align:center; border:0; }
@@ -20,10 +20,25 @@ html::charset();
 </head>
 <body>
 <div id="container">
+<div id="header">
+<h1>Auto-Obsessions Thank you</h1>
+<div id="reg-navigation">
+	<p>&nbsp;</p>
+	<ul>
+		<li><a href="index.php">Cancel</a></li>
+	</ul>
+</div>
+</div>
+<div id='nav'><!--The side menu column contains the vertical menu-->
+    <a href='tutorial.php' title='Tutorial'>Tutorial</a><br>
+    <a href='credits.php' title='Credits'>Credits</a><br>
+    <a href='profiles.php' title='Player Profile'>Profile</a><br>
+    <a href='index.php' title='Home Page'>Home</a><br>
+</div><!--end of side column and menu -->
 <?php
-require 'includes/header-thanks.php';
-require 'includes/nav.php';
-require 'includes/info-col-cards.php';
+//require 'Users/includes/header-thanks.php';
+//require 'include/nav.php';
+//require 'Users/includes/info-col-cards.php';
 ?>
 <div id="content"><!-- Start of the thank you page content. -->
     <div id="midcol">
@@ -34,6 +49,6 @@ require 'includes/info-col-cards.php';
 </div>
 	<!-- End of the thank you page content. -->
 <?php
-require '../phtml/legal.php';
+require 'phtml/legal.php';
 html::footer();
 ?>
