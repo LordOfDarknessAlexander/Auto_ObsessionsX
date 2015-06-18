@@ -94,9 +94,9 @@ class pasCreate
         );
         
         if(!$res){
-            $erno = $aoUsersDB->con->errno;
-            $err = $aoUsersDB->con->error;
-            echo "createUserTable($userID), prepare failed:($erno), reason: $err<br>";
+            //$erno = $aoUsersDB->con->errno;
+            //$err = $aoUsersDB->con->error;
+            echo "createUserTable($userID), failed:($erno), reason: $err<br>";
             return false;
         }
         return true;
@@ -138,9 +138,9 @@ class pasCreate
             //returns true if execute preformed successfully, false on failure
             return true;
         }
-        //else false, output error
-        //$erno = $aoCarSalesDB->errno;
-        //$err = $aoCarSalesDB->error;
+        else{
+            $aoCarSalesDB->eErr();
+        } false, output error
         //echo "pasCreate::carSalesTable($userID), failed:($erno), reason: $err";
         
         return false;

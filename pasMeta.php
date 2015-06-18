@@ -75,19 +75,26 @@ class sql{
         //$fields is a comma seperated list of row names
         return sql::slctFrom('*', $table);
     }
-    //public static function slctFromCars($fields){
-        //global $AO_DB;
+    public static function slctFromCarDB($fields){
+        global $AO_DB;
+        //        
+        if(is_string($fields) ){
+            $f = mysqli_real_escape_string($AO_DB->con, $fields);
+            return sql::slctFrom($f, ao::CARS);
+        }
+        return '';
+    }
+    public static function slctAllFromCarDB(){
+        return sql::slctFromCarDB('*');
+    }
+    public static function slctFromUserTable($fields){
+        $tn = getUserTableName();
         
-        //if(is_string($fields) ){
-            //$aoCars = ao::CARS;
-            //$f = mysqli_real_escape_string($AO_DB->con, $fields);
-            //return "SELECT $f FROM $aoCars";
-        //}
-        //return '';
-    //}
-    //public static function slctAllFromCars(){
-        //return sql::slctFromCars('*');
-    //}
+        return sql::slctFrom($fields, $tn);
+    }
+    public static function slctAllFromUserTable(){        
+        return sql::slctFromUserTable('*');
+    }
 }
 //class user{
     function getUID(){
@@ -145,9 +152,11 @@ class sql{
         
         $CID = ao::CID;
         $ret = false;
-        $tableName = getUserTableName();
+        //$tableName = getUserTableName();
 
-        $res = $aoAuctionLossDB->query("SELECT * FROM $tableName WHERE $CID = $id");
+        $res = $aoAuctionLossDB->query(
+            sql::slctAllFromUserTable() . " WHERE $CID = $id"
+        );
         
         if($res){
             //user has car
@@ -155,8 +164,6 @@ class sql{
             $res->close();
         }
         else{
-			
-			
             //query failed, user has no entry in database
             //$er = sqlError($aoUsersDB);
             //echo "pas/meta.php hasLostCar($id), sql query failed:($er->no), reason: $er->info";
@@ -170,9 +177,10 @@ class sql{
         //global $aoCarSalesDB;
         $CID = ao::CID;
         $ret = false;
-        $tableName = getUserTableName();
        
-        $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $cid");
+        $res = $aoUsersDB->query(
+            sql::slctAllFromUserTable() . " WHERE $CID = $cid"
+        );
         
         if($res){
             //user has car
@@ -203,7 +211,7 @@ function getCarFromID($carID){
     //prepare!
     //$res = pasGet::allCarIDs();
     $res = $AO_DB->query(
-        "SELECT * FROM $aoCars WHERE $CID = $carID"
+        sql::slctAllFromCarDB() . " WHERE $CID = $carID"
     );
     if($res){
         if(mysqli_num_rows($res) != 0){

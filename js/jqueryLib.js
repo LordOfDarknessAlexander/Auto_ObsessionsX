@@ -291,26 +291,53 @@ $('#addFunds').click(function()
 //
 //User Stat Bar interface!
 //
-function setName()
-{
+function setName(){
 	//$('div#statBar label#fname').text('User: ' + userStats.fn.toString() );
 }	
-function setMoney(val)
-{
-    if(val !== null && val !== undefined){
-        userStats.money = val;  //if an argument is passed, assign value to money
-    }
-    //assign value to html element
-	$('div#statBar label#money').text('Money: ' + userStats.money.toFixed(2) );
-	
-	if(userStats.money <= 0)
-	{
-		//userStats.money = 0;
-		//alert("You are out of money! Refresh Money?");
-		$('div#statBar label#money').text('Refresh Dough???: ' + userStats.money.toFixed(2) );
-	}	
+function setMoney(val){
+    //sends a request to the server to set money to a specific value,
+    //updating the html
+    function sf(data){
+        //sets user funds to data,
+        //which may be an optional argument,
+        //or null is returned when using as a cb,
+        //which the ui is then appropriately updated
+        if(data !== null && data !== undefined){
+            userStats.money = data;  //if an argument is passed, assign value to money
+        }
+        
+        var mstr = userStats.money.toFixed(2),
+            jqm = $('div#statBar label#money');
+        //assign value to html element
+        
+        if(userStats.money <= 0){
+            //userStats.money = 0;  //can't have less than no money
+            jqm.text('Refresh Dough???: ' + mstr);
+        }
+        else{
+            jqm.text('Money: ' +  mstr);
+        }
+    };
+//<php
+//if(loggedIn() ){>
+    //jq.get(
+        //'pas/update.php?op=suf',
+        //sf,
+        //function(jqxhr){
+            
+        //}
+    //);
+//<php
+//else{>
+    sf(val);
+//<php
+//}
+//>
 }
 function setTokens(val){
+//<php
+//if(loggedIn() ){>
+    //jq.get(
     if(val !== null &&
         val !== undefined &&
         val >= 0 &&
@@ -339,11 +366,27 @@ function setMarkers(){
 }
 function setStatBar(){
     jq.statBar.show();
-	setName();
+//<php
+//if(loggedIn() ){>
+	//jq.post(
+        //'pas/get.php?op=gus',
+        //function(data){
+            
+        //},
+        //function(jqxhr){
+            
+        //}
+    //);
+//<php
+//else{>
+    setName();
 	setMoney();
 	setTokens();
 	setPrestige();
 	setMarkers();
+//<php
+//}
+//>
 }
 //
 //Garage State interface

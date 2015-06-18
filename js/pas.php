@@ -121,6 +121,40 @@ $funcName = "$fileName, pas::postUserCarSale(carid)";
     //pushCar:function(carID){
         //pushes a car from finalpost[aoCarsDB] to aoUsersDB[userTable]
     //}
+    get:{
+        user:{
+            funds:function(){
+<?php
+$funcName = "$fileName, pas.get.user.funds()";
+?>
+                /*jq.post('pas/update.php?op=guf',
+                    function(data){
+                        //
+                        <?php isValidData();?>
+                        //userStats.money = typeof data == 'number' ? data : parseInt(data);
+                        //jq.setFunds();
+                    },
+                    function(jqxhr){
+                        //call will fail if result is not properly formated JSON!
+                        jq.setErr('<?php eFN();?>', jqxhr.responseText);
+                    }
+                );
+                */
+            },
+            tokens:function(){
+                
+            },
+            prestige:function(){
+                
+            },
+            markers:function(){
+                
+            },
+            stats:function(){
+                //get all user stats, setting it to global userStats
+            }
+        }
+    },
     set:{
         userCar:function(vehicleID){
             //set user's current car ID

@@ -250,7 +250,7 @@ class pasGet{
         //echo 'car data!';
         
         $res = $AO_DB->query(
-            "SELECT * FROM $aoCars"
+            sql::slctAllFromCarDB()//"SELECT * FROM $aoCars"
         );
         
         if($res){   
@@ -317,7 +317,7 @@ class pasGet{
         //if is str(carType)
         //echo "carType" . json_encode($carType);
         //echo "CT:" . json_encode($ct);
-        $q = "SELECT * FROM $aoCars";
+        $q = sql::slctAllFromCarDB();   //"SELECT * FROM $aoCars";
         
         if($ct != 'all'){
             $q .= " WHERE $T = '$ct'";
@@ -370,7 +370,7 @@ class pasGet{
         }
         
         $res = $AO_DB->query(
-            "SELECT * FROM $aoCars WHERE $P >= $gt AND $P < $lt"
+            sql::slctAllFromCarDB() . " WHERE $P >= $gt AND $P < $lt"
         );
         
         if($res){
@@ -420,7 +420,7 @@ class pasGet{
             return $ret;
         }
         //if(!empty($r) ){
-        $q = "SELECT * FROM $aoCars WHERE $P >= $gt AND $P < $lt";
+        $q = sql::slctAllFromCarDB() . " WHERE $P >= $gt AND $P < $lt";
         
         if($ct != 'all'){
             $q .= " AND $T = '$ct'";
@@ -455,8 +455,7 @@ class pasGet{
             return $ret;
         }
         else{
-            //query failed, user has no entry in database
-            //echo sql error
+            $AO_DB->eErr();
         }
         return 0;
     }
@@ -504,31 +503,19 @@ class pasGet{
         //selects all vehicles from the primary AutoObsession vehicle table(in finalpost),
         //returning them as a JSON array
         global $AO_DB;
-        $aoCars = ao::CARS;
-        $CID = ao::CID;
+
         $cars = array();
         //$N = 'name';
         //$P = 'price';
         //$S = 'src';
        
-        $res = pasGet::allCarData(); //returns an array, containing an array for each row/car entry
+       //returns an array, containing an array for each row/car entry
+        $res = pasGet::allCarData();
         
         if(!empty($res)){
             foreach($res as $row){
-                //echo json_encode($row);
-                //$car = Vehicle::fromArray($row);
-                //$cid = $row[$CID];
-                
+                //echo json_encode($row);                
                 $cars[] = auctionCarInfoFromArray($row);//array(
-                    //'carID'=>$cid,
-                    //$S=>$row[$S],
-                    //$N=>$row[$N],
-                    //$P=>$row[$P],
-                    //
-                    //'hasCar' => hasCar($cid),   //does user have this car?
-                    //'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
-                    //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
-                //);
             }
         }
         /*$res = $AO_DB->query(
@@ -568,16 +555,7 @@ class pasGet{
         if(!empty($res)){
             foreach($res as $row){
                 //echo json_encode($row);
-                //$cid = $row[$CID];
                 $cars[] = auctionCarInfoFromArray($row);    //array(
-                    //'carID'=>$cid,
-                    //$S=>$row[$S],
-                    //$N=>$row[$N],
-                    //$P=>$row[$P],
-                    //'hasCar' => hasCar($cid),   //does user have this car?
-                    //'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
-                    //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
-               // );
             }
         }
         echo json_encode($cars);
@@ -596,17 +574,8 @@ class pasGet{
         $res = pasGet::carIDsByPriceRange($range);
         
         if(!empty($res)){
-            foreach($res as $row){
-                //$cid = $row[$CID];                
-                $cars[] = auctionCarInfoFromArray($row);    //array(
-                    //'carID'=>$cid,
-                    //$S=>$row[$S],
-                    //$N=>$row[$N],
-                    //$P=>$row[$P],
-                    //'hasCar' => hasCar($cid),   //does user have this car?
-                    //'hasLostCar' => hasLostCar($cid)   //did the user lose the auction for this car
-                    //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
-                //);
+            foreach($res as $row){               
+                $cars[] = auctionCarInfoFromArray($row);
             }
         }
         echo json_encode($cars);
@@ -625,18 +594,8 @@ class pasGet{
         $res = pasGet::carIDsByTypeRange($type, $range);
         
         if(!empty($res)){
-            foreach($res as $row){
-                //$cid = $row[$CID];                
-                $cars[] = auctionCarInfoFromArray($row);    //array(
-                    //'carID'=>$cid,
-                    //$S=>$row[$S],
-                    //$N=>$row[$N],
-                    //$P=>$row[$P],
-                    //
-                    //'hasCar'=>hasCar($cid),   //does user have this car?
-                    //'hasLostCar'=>hasLostCar($cid)   //did the user lose the auction for this car
-                    //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
-                //);
+            foreach($res as $row){              
+                $cars[] = auctionCarInfoFromArray($row);
             }
         }
         echo json_encode($cars);
@@ -644,7 +603,7 @@ class pasGet{
     public static function auctionCarsCount(){
         //returns the number of entries in vehicle database(aoCars in $AO_DB)
         global $AO_DB;
-        $aoCars = ao::CARS;
+        //$aoCars = ao::CARS;
         //$count is initialized when this is called for the first time
         static $count = 0;
         //static $getCars = $AO_DB->prepare(
@@ -656,7 +615,7 @@ class pasGet{
                 //"SELECT * FROM $aoCars"
             //);
             $res = $AO_DB->query(
-                "SELECT * FROM $aoCars"
+                sql::slctAllFromCarDB() //"SELECT * FROM $aoCars"
             );
             
             if($res){
@@ -669,6 +628,7 @@ class pasGet{
             }
             else{   //select failed, no vehicles
                 echo 'error! no entries in vehicle database';
+                $AO_DB->eErr();
                 //exit();
             }
         }
@@ -739,7 +699,8 @@ class pasGet{
         else{
             //echo "No Results";
             // If there was a problem.
-            echo "<p class='error'>Query failed, Please try again.</p>";
+            //echo "<p class='error'>Query failed, Please try again.</p>";
+            $AO_DB->eErr();
             //exit();
         }
         return array();
@@ -763,7 +724,11 @@ class pasGet{
             //}
             $res->close();
         }
-        //else{query failed, no entries in table}
+        else{
+            //query failed, no entries in table
+            $aoUsersDB->eErr();
+        }
+        
         return $count;
     }
     //public static function getAuctionWins(){
@@ -773,11 +738,11 @@ class pasGet{
     public static function auctionLosses(){
         //returns how many auctions the user has lost
         global $aoAuctionLossDB;
-        $uid = getUserTableName();
+        //$uid = getUserTableName();
         $count = 0;
         
         $res = $aoAuctionLossDB->query(
-            "SELECT * FROM $uid"
+            sql::slctAllFromUserTable() //"SELECT * FROM $uid"
         );
         
         if($res){
@@ -798,11 +763,11 @@ class pasGet{
     public static function userSales(){
         //returns the user's total active and expired actions
         global $aoCarSalesDB;
-        $uid = getUserTableName();
+        //$uid = getUserTableName();
         $sales = array();
         //$count is initialized when this is called for the first time
         $res = $aoCarSalesDB->query(
-            "SELECT * FROM $uid"
+            sql::slctAllFromUserTable()     //"SELECT * FROM $uid"
         );
         
         if($res){
@@ -825,11 +790,11 @@ class pasGet{
     public static function userSalesCount(){
         //returns the number cars sold by the user
         global $aoCarSalesDB;
-        $uid = getUserTableName();
+        //$uid = getUserTableName();
         //$count is initialized when this is called for the first time
         $count = 0;
         $res = $aoCarSalesDB->query(
-            "SELECT * FROM $uid"
+            sql::slctAllFromUserTable()     //"SELECT * FROM $uid"
         );
         
         if($res){
