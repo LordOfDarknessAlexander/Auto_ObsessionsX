@@ -8,7 +8,7 @@ html::doctype();
 html::title('Registration thank you page');
 html::charset();
 ?>
-    <link rel="stylesheet" type="text/css" href="Users/includes.css">
+    <link rel="stylesheet" type="text/css" href="includes.css">
     <style type="text/css">
     p { text-align:center; }
     table, tr, td, form { margin:auto;	width:180px; text-align:center; border:0; }
@@ -21,9 +21,9 @@ html::charset();
 <body>
 <div id="container">
 <?php
-require 'Users/includes/header-thanks.php';
-require 'include/nav.php';
-require 'Users/includes/info-col-cards.php';
+require 'includes/header-thanks.php';
+require 'includes/nav.php';
+require 'includes/info-col-cards.php';
 ?>
 <div id="content"><!-- Start of the thank you page content. -->
     <div id="midcol">
@@ -34,6 +34,6 @@ require 'Users/includes/info-col-cards.php';
 </div>
 	<!-- End of the thank you page content. -->
 <?php
-require 'phtml/legal.php';
+require '../phtml/legal.php';
 html::footer();
 ?>
