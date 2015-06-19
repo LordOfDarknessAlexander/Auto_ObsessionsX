@@ -1,6 +1,6 @@
 <?php
 //require_once '../include/security.php'
-require_once './include/dbConnect.php';
+require_once './dbConnect.php';
 require_once './vehicles/vehicle.php';
 require_once 'AO_UI.php';
 

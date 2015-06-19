@@ -4,7 +4,7 @@
 //header('Access-Control-Allow-Origin: *');
 //
 require_once 'vehicles/vehicle.php';
-require_once 'include/dbConnect.php';  //sql database connections
+require_once 'dbConnect.php';  //sql database connections
 //require_once '../include/secure.php';
 require_once 'ao.php';
 //

@@ -1,5 +1,5 @@
 <?php 
-require_once 'include/dbConnect.php';
+require_once 'dbConnect.php';
 require_once 'pasMeta.php';
 //
 //session_start();

@@ -1,6 +1,6 @@
 <?php
-require_once 'include/html.php';
-require_once 'include/dbConnect.php';
+require_once 'html.php';
+require_once 'dbConnect.php';
 //require_once 'pas/get.php';
 html::docType();
 ?>

@@ -1,6 +1,6 @@
 
 <?php
-require_once 'include/html.php';
+require_once 'html.php';
 html::doctype();
 ?>
 <html lang="en">
@@ -37,7 +37,7 @@ html::charset();
     <a href='index.php' title='Home Page'>Home</a><br>
 </div><!--end of side column and menu -->
 <?php
-require 'include/dbConnect.php';
+require 'dbConnect.php';
 $msg='';
 
 if(isset($_GET['email']) && isset($_GET['email_code']))

@@ -1,5 +1,5 @@
 <?php
-require_once 'include/html.php';
+require_once 'html.php';
 html::doctype();
 ?>
 <html lang="en">

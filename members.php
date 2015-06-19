@@ -1,6 +1,6 @@
 <?php
-require 'include/html.php';
-require 'include/dbConnect.php';
+require 'html.php';
+require 'dbConnect.php';
 //require 'secure.php';
 session_start();
 //secureLogin();

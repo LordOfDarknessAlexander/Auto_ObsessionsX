@@ -1,6 +1,6 @@
 <?php
-require_once 'include/html.php';
-require_once 'include/dbConnect.php';
+require_once 'html.php';
+require_once 'dbConnect.php';
 html::doctype();
 ?>
 <html lang=en>
@@ -17,10 +17,7 @@ html::charset();
 </head>
 <body>
 <div id='container'>
-<?php
-//require 'include/header.php';
 
-?>
 	<div id='Slots'><!-- Start of the page-specific content. -->
         <h2>Slots</h2>
 		
@@ -80,12 +77,6 @@ html::charset();
 				
 		<script type='text/javascript' src='js/slots/miniSlots.js'></script>				
 	</body>
-		
-		
-		
-		
-		
-		
 		<li><a href='index.php' title='Home Page'>Home</a><br></li>
         <!-- End of the page-specific content. -->
     </div>

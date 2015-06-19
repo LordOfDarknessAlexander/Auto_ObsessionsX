@@ -17,8 +17,8 @@
 //}
 //
 require_once 're.php';
-require_once 'include/html.php';
-require_once 'include/dbConnect.php';
+require_once 'html.php';
+require_once 'dbConnect.php';
 require_once 'pas/remove.php';
 html::docType();
 ?>
@@ -34,7 +34,13 @@ html::title('Account Disband Page');
 
 <div id='container'>
 <h1>Disband User Account</h1>
-<?php require 'includes/nav.php';?>
+
+<div id='nav'><!--The side menu column contains the vertical menu-->
+    <a href='tutorial.php' title='Tutorial'>Tutorial</a><br>
+    <a href='credits.php' title='Credits'>Credits</a><br>
+    <a href='profiles.php' title='Player Profile'>Profile</a><br>
+    <a href='index.php' title='Home Page'>Home</a><br>
+</div><!--end of side column and menu -->
     <div id='reg-navigation'>
         <a href='members.php'>Cancel</a><br>
     </div>
