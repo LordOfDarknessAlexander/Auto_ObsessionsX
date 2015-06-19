@@ -382,10 +382,15 @@ class pasUpdate{
         //$users = 'users';
         //$uid = strval(getUID() );
         
-        return ($carID == 0 || hasCar($carID))?
-            (user::updateEntry("$CID = $carID")?
-                $carID : 0
-            ) : 0;
+        if($carID == 0 || hasCar($carID)){
+            //$res = user::updateEntry("$CID = $carID");
+			user::updateEntry("$CID = $carID");
+			if(user::updateEntry("$CID = $carID")){
+				return $carID;
+				//$id = intval($res->fetch_assoc()[$CID]);
+			}
+		}
+		return 0;
         //return hasCar($carID) ? ($AO_DB->query(
             //"UPDATE $users SET
                 //$CID = $carID
@@ -571,11 +576,12 @@ if($ps){
 
     if(isset($_POST['carID'])){
         //
-        $carID = $_POST['carID'];   //is_int($_POST['carID']) ? intval($_POST['carID']) : 0;
+        $carID = isUINT($_POST['carID']) ? intval($_POST['carID']) : exit('_POST at carID invalid value');   //is_int($_POST['carID']) ? intval($_POST['carID']) : 0;
 		//$carCon = $_POST['repairs']; 
         //validate value, must be an int!
         //echo json_encode($carID);
-
+		//echo $carID;
+		//exit();
         //switch the operation besed on value passed in url
         if($gs){
             //args being passed via the url

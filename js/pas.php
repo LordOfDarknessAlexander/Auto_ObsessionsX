@@ -105,8 +105,8 @@ $funcName = "$fileName, pas::postUserCarSale(carid)";
                     //hideDiv
                 }
                 
-                //if(data.car_id === selCarIndex){
-                    //selCarIndex = 0;
+                //if(data.car_id === _selCID){
+                    //_selCID = 0;
                     //Garage.setSelect Car Div
                 //}
 

@@ -33,12 +33,12 @@ function isWord($str){
     //is a singular word, containing only letters,
     //no special characters, whitespace or symbols
     return preg_match('/^[[:word:]]+$/', $str);
-}
-function isNumber($str){
+}*/
+function isUINT($str){
     //is string a continuous series of integer digits(no commas or periods)
     //no special characters, letters, whitespace or symbols
-    return preg_match('/^[[:digit:]]+/$', $str);
-}*/
+    return preg_match('/^[[:digit:]]+$/', $str);
+}
 function isPassword($str){
     //validates a series of {8-12} characters of digits and/or letters
     //no special characters, whitespace or symbols

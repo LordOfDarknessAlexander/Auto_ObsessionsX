@@ -57,7 +57,7 @@ function getCar(carID){
 //retain the index instead and access directly to mdoify.
 //value of null means no selection
 var //Garage._curCarIndex = null,	//user's currect car index
-	selCarIndex = null;
+	_selCID = null;
 //
 function VehicleFromDB(obj){
     //creates an unupgraded/repaired car from the database  
@@ -98,13 +98,13 @@ function VehicleFromDB(obj){
 var Garage = {
 	_curCarIndex : null,
     _carViewList: $('div#carListView ul#carBtns'),
-	//_selCarIndex : null,	//user's selected car index
+	//__selCID : null,	//user's selected car index
 	//toJSON:function(){//serialize Garage._curCarIndex},
 	//fromJSON:function(){this._curCarIndex = index;},
 	init : function()
 	{	//called to load assests and initialize private vars
 		//delete userGarage;
-		selCarIndex = null;
+		_selCID = null;
         
         //var list = $('div#carListView ul#carBtns');
 //		Garage._carViewList.empty();	//remove any buttons if there were any previously
@@ -113,7 +113,7 @@ var Garage = {
 		//add buttons for each car avaiable in garage
 		//var carList = $('#Garage'.children('ul#carBtns');
 		//carList.clear();	//remove previous values, otherwise cars will be repeated
-		//this._selCarIndex = null;
+		//this.__selCID = null;
 		//if(Garage._curCarIndex === null && userGarage.length != 0){
 			//Garage._curCarIndex = 0;
 		//}
@@ -144,11 +144,11 @@ var Garage = {
                 Garage.setCurrentCar();
             }
             
-            if(selCarIndex === null){
+            if(_selCID === null){
                 $('div#selectedCar').hide();
             }
             else{
-                this.setSelectCar({index:selCarIndex});
+                this.setSelectCar({index:_selCID});
             }
             this.initCarView();
             //setHomeImg();
@@ -332,17 +332,17 @@ var Garage = {
 //else{?> //playing locally as guest
 		if(Storage.local !== null)
 		{
-            if(Garage._curCarIndex !== null){
-                Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
+            //if(_curCarIndex !== null){
+            //Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
                 //var car = Garage.getCurrentCar();
                 //Storage.local['_carID'] = JSON.stringify(car === null ? 0 : car.id);
-            }
-            //var car = Garage.getCurrentCar();
-            //Storage.local['_carID'] = JSON.stringify(car === null ? 0 : car.id);
+            //}
+            var car = Garage.getCurrentCar();
+            Storage.local['_curCarID'] = JSON.stringify(car === null ? 0 : car.id);
 			//var array = [];
-            if(userGarage.length != 0){
-                Storage.local['userGarage'] = JSON.stringify(userGarage); //array);
-            }
+            //if(userGarage.length != 0){
+            Storage.local['userGarage'] = JSON.stringify(userGarage); //array);
+            //}
 		}
 //}
 //?>
@@ -351,7 +351,7 @@ var Garage = {
 	//{	//sets and displays 
 		//set jq values
 		//if(obj !== null && !== 'undefined')
-			//selCarIndex = obj.data.index;
+			//_selCID = obj.data.index;
 	//},
     setCurrentCarStats:function(){
         if(_curCarID !== 0){
@@ -386,13 +386,13 @@ var Garage = {
         //else hide div!
     },
     setCurrentIndex:function(){
-        if(selCarIndex === null){
+        if(!_selCID){
 			return;	//no selected car, do nothing
         }
-		if(selCarIndex < userGarage.length){
-            Garage._curCarIndex = selCarIndex;	//maintain index, instead of copying a car
-            var car = Garage.getCarByIndex(selCarIndex);
-            _curCarID = (car === null) ? 0 : car.id;
+		//if(_selCID < userGarage.length){
+           // Garage._curCarIndex = _selCID;	//maintain index, instead of copying a car
+            //var car = Garage.getCarByIndex(_selCID);
+            _curCarID = _selCID;//(car === null) ? 0 : car.id;
 //<php if(loggedIn() ){>
             pas.set.userCar(_curCarID);
 //<?php
@@ -402,15 +402,15 @@ var Garage = {
 //<?php  
 //}
 //?>
-        }
+        //}
     },
 	setCurrentCar : function(){
         var div = $('div#Garage div#userCar');
         
         this.setCurrentIndex();
         
-		if(this._curCarIndex !== null){
-            var i = this._curCarIndex,
+		if(_curCarID){
+            var i = _curCarID.toString(),
                 //btn = $('#userCar'),
                 src = $('#carSelBtn' + i);
 
@@ -418,9 +418,9 @@ var Garage = {
             if(Storage.local !== null){
                 Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
                 //alert("current car is at index:" + Garage._curCarIndex.toString() 
-                //var car = Garage.getCurrentCar();
+                var car = Garage.getCurrentCar();
                 
-                //Storage.local['_carID'] = JSON.stringify(car !== null car.id : 0););
+                Storage.local['_curCarID'] = JSON.stringify(car !== null ? car.id : 0);
             }
 			//
 			div.children('label#carName').text(src.children('label#carName').text() );
@@ -439,21 +439,24 @@ var Garage = {
 	setSelectCar : function(index){
         //
 	    var i = typeof index === 'number' ? Math.floor(index) : parseInt(index);
-
-		if(i >= 0 && i < userGarage.length){
+		
+		_selCID = i > 0 ? i : 0;	//maintain index, instead of copying a car
+		
+		var car = Garage.getCarByID(i);
+		
+		if(car != null){ //&& i < userGarage.length){
+			//userGarage[i],
+			var	stats = car.getStats(),
             //
-			var div = $('div#Garage div#selectedCar');
-			var src = $('#carSelBtn' + i);
+			div = $('div#Garage div#selectedCar'),
+			src = $('#carSelBtn' + i.toString());
 		
 			//show user car stats div
-			selCarIndex = i;	//maintain index, instead of copying a car
+			
 			//
 			div.children('label#carName').text(src.children('label#carName').text() );
 			div.children('label#carInfo').text(src.children('label#carInfo').text() );
 			//div.children('label#name').text(src.children('label#name').text() );
-			
-			var car = Garage.getCarByIndex(i); //userGarage[i],
-				stats = car.getStats();
 			
 			//$('div#userCar img#carImg').attr('src', car.getFullPath() );
 			//$('div#userCar label#carName').text(car.getFullName() );;
@@ -476,6 +479,9 @@ var Garage = {
             
 			div.show();
 		}
+		//else{
+			//hide selected car div
+		//}
 	},
 	setSelectCarCB : function(obj){
 	    if (obj !== null && obj !== undefined) {
@@ -517,11 +523,12 @@ var Garage = {
 
 			for(var i = 0; i < userGarage.length; i++){
                 //add buttons to list
-				var car = userGarage[i];
+				var car = userGarage[i],
+					idStr = car.id.toString();
                 
 				src = car.getFullPath();	//"\'images/vehicle.jpg\'";
 				this._carViewList.append("<li>" +	//id = \'" + i "\'>"
-				"<button id=\'carSelBtn" + i + "\'>" +
+				"<button id=\'carSelBtn" + idStr + "\'>" +
 				//"<label id=\'carName\'>" + car.getFullName() + "</label>" +
 				//"<label id=\'year\'></label>" +
 				//"<label id=\'name\'></label>" +
@@ -539,7 +546,7 @@ var Garage = {
 				"</li>"); //+ (i > 0 && i % 4 == 0) ? "<br>" : "");
 				
                 //$(Garrage._carViewList, 'li#' + i.toString() + ' button').click({index:i}, this.setSelectCar);	//this.setSelectedCar);
-				$('#carSelBtn' + i).click({index:i}, this.setSelectCarCB);	//this.setSelectedCar);
+				$('#carSelBtn' + idStr).click({index:car.id}, this.setSelectCarCB);	//this.setSelectedCar);
 			}
 		}
     },
@@ -561,9 +568,9 @@ var CarView = {
 	//carView state object
 	init : function(index){
         //
-		if(selCarIndex !== null && userGarage.length != 0){
+		if(_selCID && userGarage.length != 0){
             //
-			var car = Garage.getCarByIndex(selCarIndex);   //userGarage[selCarIndex];
+			var car = Garage.getCarByID(_selCID);   //userGarage[_selCID];
             
             if(car !== null && car !== undefined){
                 var funcName = 'CarView::init(index)';
@@ -703,13 +710,13 @@ function(){
 });
 /*jq.Garage.selectBtn.click(function()
 {
-	if(selCarIndex !== null)
-		Garage.setCurrentCar(selCarIndex);
+	if(_selCID !== null)
+		Garage.setCurrentCar(_selCID);
 });*/
 jq.Garage.viewBtn.click(
 function(){
     //
-	if(selCarIndex !== null){
+	if(_selCID){
         jq.AuctionSell.backBtn.off().click(
         function(){
             jq.AuctionSell.menu.hide();
@@ -728,7 +735,7 @@ function(){
 jq.Garage.selectBtn.click(
 function(){
     //selects the vehicle the user is currently viewing
-	if(selCarIndex !== null){
+	if(_selCID){
 		Garage.setCurrentCar();
 
         setHomeImg();	//set home car image
@@ -739,7 +746,7 @@ function(){
 //
 jq.CarView.selectBtn.click(
 function(){
-    if(selCarIndex !== null){
+    if(_selCID){
 		Garage.setCurrentCar();
         setHomeImg();	//set home car image
 	}
