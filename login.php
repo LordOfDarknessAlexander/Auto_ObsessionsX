@@ -18,7 +18,14 @@ html::title('Login Page');
 <div id="container">
 
 <div id="content"><!-- Start of the login page content. -->
-
+<div id='header'>
+    <h1>Auto-Obsessions Login</h1>
+    <div id='reg-navigation'>
+        <a href='safer-register-page.php'>Register</a><br>
+        <a href='index.php'>Cancel</a><br>
+        <a href='logout.php'>Logout</a><br>
+    </div>
+</div>
 <?php 
 // This section processes submissions from the login form.
 // Check if the form has been submitted:

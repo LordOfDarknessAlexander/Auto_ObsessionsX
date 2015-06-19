@@ -63,7 +63,6 @@ class user{
         global $aoUsersDB;
         
         if(intval($id) && $id > 0){
-            $ut = getUserTableName();
             $CID = ao::CID;
             $DT = 'drivetrain';
             $B = 'body';
@@ -72,7 +71,7 @@ class user{
             $R = 'repairs';
             
             $res = $aoUsersDB->query(
-                "SELECT * FROM $ut WHERE $CID = $id"
+                sql::slctAllFromUserTable() . " WHERE $CID = $id"
             );
             
             if($res){
@@ -87,7 +86,9 @@ class user{
                     $R=>intval($r[$R])
                 );
             }
-            //echo 'sql query failed';
+            else{
+                $aoUsersDB->eErr();
+            }
         }
         return null;
     }
@@ -98,7 +99,6 @@ class user{
         $i = is_int($id) ? $id : intval($id);
         
         if($i > 0){
-            $ut = getUserTableName();
             $CID = ao::CID;
             $DT = 'drivetrain';
             $B = 'body';
@@ -107,7 +107,7 @@ class user{
             $R = 'repairs';
             
             $res = $aoCarSalesDB->query(
-                "SELECT * FROM $ut WHERE $CID = $i"
+                sql::slctAllFromUserTable() . " WHERE $CID = $i"
             );
             
             if($res){
@@ -122,7 +122,9 @@ class user{
                     $R=>intval($r[$R])
                 );
             }
-            //echo 'sql query failed';
+            else{
+                $aoCarSalesDB->eErr();
+            }
         }
         return null;
     }
@@ -236,6 +238,9 @@ class user{
 					$aoCarSalesDB->eErr();
 				}
 			}
+            //else{
+                
+            //}
         }
         return null;
     }
@@ -281,17 +286,20 @@ class user{
                 );
                 
                 //echo json_encode($temp);
-
-                if($temp){              			
-					return array(
-						$CID=>$carID
-						//$DT=>$dt,
-						//$B=>$b,
-						//$I=>$i,
-						//$D=>$d,
-						//$R=>$r
-					);
-				}
+                if($temp){
+					//return true;
+                    return array(
+                        $CID => $carID
+                        //$DT,
+                        //$B,
+                        //$I,
+                        //$D,
+                        //$R
+                    );
+                }
+                else{
+                    $aoUsersDB->eErr();
+                }
             }
         //}
         return null;
@@ -426,9 +434,6 @@ class purchase{
                 $rm->close();
                 echo json_encode($uf);
             }
-            //else
-            //echo 'sql error, select query failed!';
-            //return;
         }
         //$f = json_encode($funds);
         //echo "purchase::funds(), invalid value $f, purchase::failed";
@@ -593,7 +598,7 @@ if($ps){
                     }
                     else{
                         //if($AO_DB->query() ){
-                            //
+                        //
                         $tableName = getUserTableName();
                         
                         $dt = Vehicle::getRandStage();

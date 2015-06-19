@@ -14,6 +14,11 @@
         $this->info = $dbCon->con->error;
     }
 }*/
+function dbg(){
+    //true for release
+    //false for debug
+    return false;
+}
 class dbConnect
 { 
 	//class constants and vars don't need to be prefixed with '$' when accessed!
@@ -63,11 +68,15 @@ class dbConnect
         return (mysqli_connect_errno()?
             'Failed to connect to MySQL: ' . mysqli_connect_error()
         :
-            mysqli_error($this->con)
+            'Error: (' . mysqli_errno($this->con) . '), ' . mysqli_error($this->con)
         ) . PHP_EOL;
     }
     public function eErr(){
-        echo $this->getErr();
+        //only output server error messages
+        //when debugging
+        if(dbg()){
+            echo $this->getErr();
+        }
     }
 }
 $AO_DB = new dbConnect();    //main database connection

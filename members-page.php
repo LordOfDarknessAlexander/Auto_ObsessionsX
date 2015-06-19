@@ -2,7 +2,7 @@
 require 'include/html.php';
 require 'include/dbConnect.php';
 //require 'includes/secure.php';
-session_start();
+//session_start();
 //secureLogin();
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 {
@@ -35,10 +35,22 @@ html::doctype();
 </head>
 <body>
 <div id='container'>
+
+<div id="header-members">
+<h1>Auto-Obsessions Members</h1>
+
+<div id='nav'><!--The side menu column contains the vertical menu-->
+    <a href='tutorial.php' title='Tutorial'>Tutorial</a><br>
+    <a href='credits.php' title='Credits'>Credits</a><br>
+    <a href='profiles.php' title='Player Profile'>Profile</a><br>
+    <a href='index.php' title='Home Page'>Home</a><br>
+	
+</div><!--end of side column and menu -->
 <?php
-require 'include/nav.php';
+//require 'include/nav.php';
 require 'Users/includes/info-col.php';
-require 'Users/my_parse_file.php';
+//require 'Users/my_parse_file.php';
+require 'my_parse_file.php';
 ?>
 	<div id='content'><!-- Start of the member's page content. -->
         <h2>Welcome to the Members' Page 
@@ -88,7 +100,7 @@ else
  <div id='reg-navigation'>
         <ul>
             <li><a href='index.php' title='Play Game'>Play Game</a></li>
-            <li><a href='Users/logout.php'>Logout</a></li>
+            <li><a href='logout.php'>Logout</a></li>
         </ul>
     </div>
      <div id='mid-left-col'>

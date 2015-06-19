@@ -41,7 +41,7 @@ function echoUserCars(){
     global $aoUsersDB;
     
     $cars = array();
-    $userID = getUserTableName();
+    //$userID = getUserTableName();
     
     //$DT = 'drivetrain';
     //$CID = ao::CID;
@@ -51,28 +51,19 @@ function echoUserCars(){
     //$D = 'docs';
     
     $res = $aoUsersDB->query(
-        "SELECT * FROM $userID"
+        sql::slctAllFromUserTable() //"SELECT * FROM $userID"
     );
 
     if($res){
         while($row = mysqli_fetch_array($res) ){
             //insert an new array representing a car at the end of $cars
             $cars[] = getCarStatsFromArray($row);
-                //array(
-                //'carID'=>intval($row[$CID]),
-                //$DT=>intval($row[$DT]),
-                //$B=>intval($row[$B]),
-                //$IN=>intval($row[$IN]),
-                //$D=>intval($row[$D]),
-                //$R=>intval($row[$R])
-                //'info'=>$row['info']
-            //);
         }
-        mysqli_free_result($res);
+        $res->close();
         //echo json_encode($cars);
     }
     else{   //The vehicle is already registered
-        echo "<p class='error'>Query failed, Table: $userID, in aoUsersDB has no entries</p>";
+        $aoUsersDB->eErr();
     }
     //echo 'WIN!';
     //exit();
@@ -83,40 +74,24 @@ function eLoadUser(){
     //loads all the user's data from a single ajax call!
     global $aoUsersDB;
     
-    //$CID = ao::CID;
-    
-    //$DT = 'drivetrain';
-    //$B = 'body';
-    //$IN = 'interior';
-    //$R = 'repairs';
-    //$D = 'docs';
-    
     $cars = array();
-    $userID = getUserTableName();
+    //$userID = getUserTableName();
     
     $res = $aoUsersDB->query(
-        "SELECT * FROM $userID"
+        sql::slctAllFromUserTable() //"SELECT * FROM $userID"
     );
 
     if($res){
         while($row = mysqli_fetch_array($res) ){
             //insert an new array representing a car at the end of $cars
             $cars[] = getCarStatsFromArray($row);
-            //array(
-                //'carID'=>intval($row[$CID]),
-                //$DT=>intval($row[$DT]),
-                //$B=>intval($row[$B]),
-                //$IN=>intval($row[$IN]),
-                //$D=>intval($row[$D]),
-                //$R=>intval($row[$R])
-                //info=>$row['info']
-            //);
         }
-        mysqli_free_result($res);
+        $res->close();
         //echo json_encode($cars);
     }
     else{
-        echo "<p class='error'>Query failed, Table: $userID, in aoUsersDB has no entries</p>";
+        //echo "<p class='error'>Query failed, Table: $userID, in aoUsersDB has no entries</p>";
+        $aoUsersDB->eErr();
     }
     echo json_encode(array(
         'stats'=>pasGet::userStats(),
@@ -129,11 +104,11 @@ function getUserSoldCars(){
     //selects all vehicles sold by the currently logged-in user
     //returning them as a JSON array
     global $aoCarSalesDB;
-    $user = getUserTableName();
+    //$user = getUserTableName();
     $cars = array();
 
     //$res = $aoCarSalesDB->query(
-        //"SELECT * FROM $user"
+        //sql::slctAllFromUserTable()
     //);
     
     //if($res){        

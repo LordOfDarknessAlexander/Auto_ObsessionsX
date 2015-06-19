@@ -18,9 +18,22 @@ html::charset();
 </head>
 <body>
 <div id='container'>
+<div id="header">
+    <h1>Registration</h1>
+    <div id="reg-navigation">
+        <a href="index.php">Cancel</a><br>
+    </div>
+</div>
+<div id='nav'><!--The side menu column contains the vertical menu-->
+    <a href='tutorial.php' title='Tutorial'>Tutorial</a><br>
+    <a href='credits.php' title='Credits'>Credits</a><br>
+    <a href='profiles.php' title='Player Profile'>Profile</a><br>
+    <a href='index.php' title='Home Page'>Home</a><br>
+</div><!--end of side column and menu -->
+
 <?php
-require 'Users/includes/register-header.php';
-require 'include/nav.php';
+//require 'Users/includes/register-header.php';
+//require 'include/nav.php';
 ?>
 <div id='content'><!-- Start of the login page content. -->
 <?php

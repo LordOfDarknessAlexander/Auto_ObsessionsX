@@ -19,7 +19,7 @@ $_SESSION = array('dur'=>0);    //must log in to set session vars!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
 
 //slots
-$isSlots = false;
+//$isSlots = false;
 function hrefVoid(){
     //standard javascript for linking a document to itself,
     //causing a page refresh
@@ -108,7 +108,7 @@ else{?>
         
         <div id='main'>		
 			<h1><?php echo 'Welcome ' . getUserName();?></h1>
-			<h1><?php echo 'Beta Version ' ;?></h1
+			<h1><?php echo 'Beta Version ' ;?></h1>
             <ul>
 <?php
 if(!loggedIn() ){?>

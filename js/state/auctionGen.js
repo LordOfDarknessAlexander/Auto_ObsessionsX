@@ -166,7 +166,6 @@ function auctionGen(args){
 
                 if (this.isExpired() && this._cashedIn) {
                     this.disable();
-                        
                 }
             }
         },
