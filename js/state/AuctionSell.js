@@ -119,13 +119,15 @@ var AuctionSell = {
                 if(len != 0){
                     userSales = [];
                     
-                    for(var i = 0; i < len; i++){
+                    for (var i = 0; i < len; i++) {
+
                         var ad = sd[i], //auction data
-                            na = auctionGen(ad);    //new auction
-                    
-							na.addButton();
-//                        na.restart(); 
-							na.toggleCC();
+                            na = auctionGen();    //new auction
+                            
+                        na.initWithData(ad);
+                        na.addButton();
+//                      na.restart(); 
+					    na.toggleCC();
                         
 						userSales.push(na);//push new auction
 						var TIM = 0;

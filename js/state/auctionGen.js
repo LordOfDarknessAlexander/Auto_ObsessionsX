@@ -1,4 +1,6 @@
-﻿//<php
+﻿//line 99 Car is null
+
+//<php
 //function loggedIn(){
     //return true;
 //}
@@ -46,7 +48,7 @@ function auctionGen(args){
 		MAX_AUCTION_TIME : 1000,    //how many units of time is thins?
 		//AI cooldown timer
 		_car:car,
-		_carIndex : 0,
+		//_carIndex : 0,
 		_currentBid:bid,
 		_ai:[],
 		_date:{
@@ -61,20 +63,20 @@ function auctionGen(args){
 		//
 		init:function(index){
 			if(index !== null && index !== undefined){
-                //
-                var car = Garage.getCarByID(index);
+			    //               
+			    var car = Garage.getCarByID(index);
                 
-                if(car !== null && !hasSoldCar(car.id)){
-                    //this car has not been previously sold!
-                    this._car = car;
-                    this._carIndex = index;
-                    this._currentBid = this._car.getPrice() * 0.05;
-                    
+			    if (car !== null) {
+			        if (!hasSoldCar(car.id))
+			        {
+			            //this car has not been previously sold!
+			            this._car = car;
+			            //this._carIndex = index;
+			            this._currentBid = this._car.getPrice() * 0.05;
+			        }
+			        
                     this._initAI();
                     AuctionSell.save();
-                }
-                else{
-                    console.log('user has already sold car with id (' + car.id.toString() + ')');
                 }
 			}
 			else{
@@ -82,6 +84,25 @@ function auctionGen(args){
 			}
             //else entry sell screen without posting an auction
             //jq.AuctionSell.show();
+		},
+		initWithData: function (data) {//if vehicle is null
+		    //no carID to access
+		    //create new car
+		    //this car has not been previously sold!
+		    console.log(data);
+		    if (data !== null && data !== undefined)
+		    {
+		        if (this._car === null) {
+		            // var tData = data.car;
+                    
+		            this._car = Vehicle(data._car.name, data._car.make, data._car.year, data._car._price, data._car.id, ''/*, parts, repairs*/);
+		            this._currentBid = this._car.getPrice() * 0.05;
+                    
+		            this._initAI();
+		            AuctionSell.save();
+		        }
+		    }
+		       
 		},
         _initAI:function(){
             var p = this._car.getPrice();
@@ -119,28 +140,33 @@ function auctionGen(args){
                 console.log('could not set up html button for car');
             }
             else{
-                var car = this._car,
-                    cidStr = (car.id).toString(),
-                    btnID = 'as' + cidStr,
-                    liID = 'asd' + cidStr;
-                    
-                var btnStr = "<div id='" + liID + "'>" + 
-                    "<img src='" + car.getFullPath() + "'>" +
-                    "<label id='carInfo'>" + car.getFullName() + "</label>" +
-                    "<label id='" + btnID + "'>" + 
-                        "<label id='price'>Price: $" + (car.getPrice() ).toString() + "</label><br>" +
-                        "<label id='expireTime'>Auction expires: </label>" +
-                    "</label>" +
-                    "<div id='btns'>" +
-                        "<button id='view'></button>" +
-                        "<button id='cc'></button>" +
-                    "</div>" +
-                "</div><br>";
-                
-                jq.AuctionSell.carView.append(btnStr);
-                
-                if(this.isExpired() && this._cashedIn){
-                    this.disable();            
+                var car = this._car;
+
+                if (car !== null) {
+                    var cidStr = (car.id).toString(),
+                        btnID = 'as' + cidStr,
+                        liID = 'asd' + cidStr;
+
+                    var btnStr = "<div id='" + liID + "'>" +
+                        "<img src='" + car.getFullPath() + "'>" +
+                        "<label id='carInfo'>" + car.getFullName() + "</label>" +
+                        "<label id='" + btnID + "'>" +
+                            "<label id='price'>Price: $" + (car.getPrice()).toString() + "</label><br>" +
+                            "<label id='expireTime'>Auction expires: </label>" +
+                        "</label>" +
+                        "<div id='btns'>" +
+                            "<button id='view'></button>" +
+                            "<button id='cc'></button>" +
+                        "</div>" +
+                        "</div><br>";
+
+                    jq.AuctionSell.carView.append(btnStr);
+
+                }
+
+                if (this.isExpired() && this._cashedIn) {
+                    this.disable();
+                        
                 }
             }
         },
@@ -229,7 +255,7 @@ function auctionGen(args){
 		endAuction:function(){
             //auction has ended updates garage and _sales
             if(this._car !== null){
-                var i = this._carIndex,
+                var i = this._car.id,
                     btnID = 'as' + (i).toString(),
                     liID = 'div#asd' + (this._car.id).toString(),
                     cleanBtn = $(liID + ' button#' + btnID),
@@ -307,7 +333,8 @@ function auctionGen(args){
                 _curTime:this._curTime, //time remaining on auction, 0 if expired
                 //date:this._date   //start and end dates,
                 //expired:this.isExpired(),
-                _cashedIn:this._cashedIn
+                _cashedIn: this._cashedIn,
+                _car: this._car
 			};
 		},
 		enemyBidding : function(){

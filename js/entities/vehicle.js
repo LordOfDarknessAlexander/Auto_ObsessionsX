@@ -45,7 +45,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
             Interior.make(Price, parts.interior, (parts.repairs >> 4) & 0x000F)
             :
             Interior.make(Price),    
-        docs = (parts !== null && parts.interior)?
+        docs = (parts !== null && parts.docs) ?
             Documents.make(Price, parts.docs)
             :
             Documents.make(Price);
