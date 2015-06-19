@@ -104,7 +104,7 @@ var Garage = {
 	init : function()
 	{	//called to load assests and initialize private vars
 		//delete userGarage;
-		_selCID = null;
+		_selCID = 0;
         
         //var list = $('div#carListView ul#carBtns');
 //		Garage._carViewList.empty();	//remove any buttons if there were any previously
@@ -141,10 +141,10 @@ var Garage = {
                 $('div#Garage #userCar').hide();
             }
             else{
-                Garage.setCurrentCar();
+                Garage.setCurrentCarNoSwap();
             }
             
-            if(_selCID === null){
+            if(_selCID == 0){
                 $('div#selectedCar').hide();
             }
             else{
@@ -416,7 +416,37 @@ var Garage = {
 
             //playing as guest, save to local storage
             if(Storage.local !== null){
-                Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
+                //Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
+                //alert("current car is at index:" + Garage._curCarIndex.toString() 
+                var car = Garage.getCurrentCar();
+                
+                Storage.local['_curCarID'] = JSON.stringify(car !== null ? car.id : 0);
+            }
+			//
+			div.children('label#carName').text(src.children('label#carName').text() );
+			div.children('label#carInfo').text(src.children('label#carInfo').text() );
+			//div.children('label#name').text(src.children('label#name').text() );
+			
+			this.setCurrentCarStats();
+			
+			div.show();
+		}
+        else{
+            //no current car
+            div.hide();
+        }
+	},
+	setCurrentCarNoSwap : function(){
+		var div = $('div#Garage div#userCar');
+        
+		if(_curCarID){
+            var i = _curCarID.toString(),
+                //btn = $('#userCar'),
+                src = $('#carSelBtn' + i);
+
+            //playing as guest, save to local storage
+            if(Storage.local !== null){
+                //Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
                 //alert("current car is at index:" + Garage._curCarIndex.toString() 
                 var car = Garage.getCurrentCar();
                 
@@ -448,8 +478,8 @@ var Garage = {
 			//userGarage[i],
 			var	stats = car.getStats(),
             //
-			div = $('div#Garage div#selectedCar'),
-			src = $('#carSelBtn' + i.toString());
+				div = $('div#Garage div#selectedCar'),
+				src = $('#carSelBtn' + i.toString());
 		
 			//show user car stats div
 			
