@@ -9,7 +9,7 @@ html::doctype();
 html::title('Registration thank you page');
 html::charset();
 ?>
-    <link rel="stylesheet" type="text/css" href="Users/includes.css">
+    <link rel="stylesheet" type="text/css" href="includes.css">
     <style type="text/css">
     p { text-align:center; }
     table, tr, td, form { margin:auto;	width:180px; text-align:center; border:0; }

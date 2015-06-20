@@ -14,7 +14,7 @@ html::doctype();
 html::title('Register');
 html::charset();
 ?>
-<link rel='stylesheet' type='text/css' href='Users/includes.css'>
+<link rel='stylesheet' type='text/css' href='includes.css'>
 </head>
 <body>
 <div id='container'>

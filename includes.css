@@ -91,7 +91,7 @@ div#container {
     margin:auto;
     text-align:left;
     margin-left: 0%; 
-    background: url('../images/Splash.png') no-repeat 0 0;
+    background: url('images/Splash.png') no-repeat 0 0;
     background-size : 100% 100%;
     top:0%;
     left:0%;

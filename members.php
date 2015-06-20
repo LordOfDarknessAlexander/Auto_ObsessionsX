@@ -22,7 +22,7 @@ html::doctype();
 <head>
     <title>Member's page</title>
     <meta charset=utf-8>
-    <link rel='stylesheet' type='text/css' href='Users/includes.css'>
+    <link rel='stylesheet' type='text/css' href='includes.css'>
     <!-- Include JS File Here -->
 </head>
 <body>

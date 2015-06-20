@@ -12,7 +12,7 @@ html::docType();
 html::charset();
 html::title('Administrators Page');
 ?>
-    <link rel="stylesheet" type="text/css" href="Users/includes.css">
+    <link rel="stylesheet" type="text/css" href="includes.css">
 </head>
 <body>
 <div id="container">

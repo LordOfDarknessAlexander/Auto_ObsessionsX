@@ -28,7 +28,7 @@ html::docType();
 html::charset();
 html::title('Account Disband Page');
 ?>
-    <link rel='stylesheet' type='text/css' href='includes/includes.css'>
+    <link rel='stylesheet' type='text/css' href='includes.css'>
 </head>
 <body>
 

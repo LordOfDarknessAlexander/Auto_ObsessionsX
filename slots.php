@@ -9,7 +9,7 @@ html::doctype();
 html::title('Slots');
 html::charset();
 ?>
-<link rel='stylesheet' type='text/css' href='Users/includes.css'>
+<link rel='stylesheet' type='text/css' href='includes.css'>
 
 <link rel = 'stylesheet' href = 'css/gameStyleSheet.css'>
 <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
