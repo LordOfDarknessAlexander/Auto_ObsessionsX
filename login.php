@@ -8,6 +8,7 @@ html::docType();
 <?php
 //html::charset();
 //html::title('Login Page');
+ 
 
 ?>
  <!--   <link rel="stylesheet" type="text/css" href="Users/includes.css">
@@ -30,7 +31,7 @@ html::docType();
 <?php 
 // This section processes submissions from the login form.
 // Check if the form has been submitted:
-$loggedIn = false;
+//$loggedIn = false;
 //$uname = 'uname';
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {	// Validate the email address:
@@ -69,15 +70,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			//echo "uname";?><br><?php
 			 //The user input matched the database record
 			// Start the session, fetch the record and insert the three values in an array
-			session_start();
+			//session_start();
 			$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
 		
-			//$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'members-page.php'; // Ternary operation to set the URL
-			$url = ($_SESSION['user_level'] === 1) ? 'index.php' : 'index.php'; // Ternary operation to set the URL
-			//$loggedIn = true;
-			$uname = $_SESSION['uname'];
-			echo 'Scks';
+			$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'members-page.php'; // Ternary operation to set the URL
+			//$url = ($_SESSION['user_level'] === 1) ? 'index.php' : 'index.php'; // Ternary operation to set the URL
+			$loggedIn = true;
+			//$uname = $_SESSION['uname'];
+			//echo 'Scks';
 			mysqli_free_result($result);
 			header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
 			//ob_end_clean(); // Delete the buffer.

@@ -9,6 +9,7 @@ $AO_NAME = 'Auto Obsessions';
 $TD_NAME = 'Tyler Drury';
 $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
+
 //this is not working on site without a new session
 session_start();
 
@@ -20,7 +21,16 @@ session_start();
 $_SESSION = array('dur'=>0);    //must log in to set session vars!
 //userLoggin!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
-
+//$loggedIn = false;
+if(isset($_SESSION) OR isset($_SESSION['uname']) ){
+                $uname = $_SESSION['uname'];
+				$loggedIn = true;
+				
+			}
+			else{
+				$loggedIn = false;
+				$uname = 'guest';
+			}
 //slots
 //$isSlots = false;
 function hrefVoid(){
@@ -34,12 +44,15 @@ function eS(){
     //Note:hostile programs and user may attempt to modify
     //session variables for malicious purposes!
     global $ss;
+	global $loggedIn;
+	
     
     echo 'session info:' . json_encode(
         array(
             'set'=>$ss,
             'id'=>session_id(),
-            'status'=>session_status()
+            'status'=>session_status(),
+			'logged In '=>$loggedIn
         )
     ) . PHP_EOL;
     
@@ -52,6 +65,7 @@ function loggedIn(){
     //a valid email/username and pasword
     global $ss;
     return $ss && isset($_SESSION['uname']) ? true : false;
+
 }
 function getUserName(){    
     return loggedIn()?
@@ -86,7 +100,7 @@ eS();
         <a id='addFunds' class='tooltip'>Store</a><br>
 		
 <?php
-if(loggedIn() ){?>
+if(loggedIn() || $loggedIn ){?>
         <a id='mem' href='members-page.php'>Members</a><br>
         <a id='logout' href='logout.php'>Logout</a><br>	
 		
