@@ -95,6 +95,13 @@ class sql{
     public static function slctAllFromUserTable(){        
         return sql::slctFromUserTable('*');
     }
+    //public static function createTable($tbl, $args){
+        //$t = ;
+        //$r = ;
+//        return "CREATE TABLE IF NOT EXISTS $tbl(
+            //$args
+        //)$defEngine $defCharset";
+    //}
 }
 //class user{
     function getUID(){

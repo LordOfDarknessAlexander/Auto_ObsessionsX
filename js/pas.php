@@ -41,6 +41,7 @@ $funcName = "$fileName, pas::insertCar(vehicleID)";
                 //userGarage.push(Auction._car);
                 //Garage.save();    //not needed as data in maintained by DB
                 ajax_post();    //get user info from server
+                //pas.get.user.stats();
                 Auction.close();
                 init(); //this exists only within the scope of document.ready()
             },
@@ -151,7 +152,20 @@ $funcName = "$fileName, pas.get.user.funds()";
                 
             },
             stats:function(){
-                //get all user stats, setting it to global userStats
+<?php $funcName = "$fileName, pas.get.user.stats()";?>
+                /*jq.post('pas/update.php?op=gus',
+                    function(data){
+                        //
+                        <?php isValidData();?>
+                        //userStats.money = typeof data == 'number' ? data : parseInt(data);
+                        //jq.setFunds();
+                    },
+                    function(jqxhr){
+                        //call will fail if result is not properly formated JSON!
+                        jq.setErr('<?php eFN();?>', jqxhr.responseText);
+                    }
+                );
+                */
             }
         }
     },

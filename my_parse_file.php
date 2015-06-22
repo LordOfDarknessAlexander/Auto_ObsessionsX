@@ -14,9 +14,10 @@ if (isset($_SESSION['uname']))
 				$prestige = $_POST["prestige"];
 				$marker = $_POST["m_marker"];
 				$q = "UPDATE users SET money='$money', tokens='$tokens' ,prestige='$prestige', m_marker='$marker' WHERE   uname = '$_SESSION[uname]'";
-				echo "Awesome";
+				//echo "Awesome";
 				$result = mysqli_query ($AO_DB->con, $q);
-				if(!$result )
+				
+                if(!$result )
 				{
 				  die('Could not update data: ' . mysql_error());
 				}
