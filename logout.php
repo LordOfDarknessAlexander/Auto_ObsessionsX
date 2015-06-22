@@ -6,7 +6,7 @@ session_start();//access the current session.
 //Must logged in to logout, else redirect to login
 if(!isset($_SESSION['user_id']) ){
     //user not logged in, redirect to loggin
-	header("location:login.php");
+	header("location:index.php");
 	exit();
 }
 else{ 

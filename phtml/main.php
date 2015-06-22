@@ -3,6 +3,7 @@
 //array cast to an object, to encapsulate developer names and those who contributed
 //to this project
 require_once 'ao.php';
+require_once 'html.php';
 //
 $OWNER_NAME = 'Adam Glazer';
 $AO_NAME = 'Auto Obsessions';
@@ -11,7 +12,7 @@ $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
 
 //this is not working on site without a new session
-session_start();
+//session_start();
 
 
 //Login
@@ -22,15 +23,17 @@ $_SESSION = array('dur'=>0);    //must log in to set session vars!
 //userLoggin!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
 //$loggedIn = false;
-if(isset($_SESSION) OR isset($_SESSION['uname']) ){
-                $uname = $_SESSION['uname'];
-				$loggedIn = true;
+if(isset($_SESSION) OR isset($_SESSION['uname']) )
+{
+    $uname = $_SESSION['uname'];
+	$loggedIn = true;
 				
-			}
-			else{
-				$loggedIn = false;
-				$uname = 'guest';
-			}
+}
+else
+{
+	$loggedIn = false;
+	$uname = 'guest';
+}
 //slots
 //$isSlots = false;
 function hrefVoid(){
@@ -64,12 +67,15 @@ function loggedIn(){
     //session started and the user has provided
     //a valid email/username and pasword
     global $ss;
-    return $ss && isset($_SESSION['uname']) ? true : false;
+	global $loggedIn;
+	 
+    return $ss && $loggedIn &&isset($_SESSION['uname']) ? true : false;
 
 }
 function getUserName(){    
     return loggedIn()?
         $_SESSION['uname'] : 'guest';
+	 
 }
 //
 
@@ -130,12 +136,13 @@ else{?>
 			
             <ul>
 <?php
-if(!loggedIn() ){?>
+if(!loggedIn() || $loggedIn = false){?>
                 <li><a id='reg' class='button Register' href='<?php
                     echo rootURL() . 'registerUser.php';
                 ?>'>Register</a></li>
 <?php
 }?>
+
                 <li><a class='button credits' <?php hrefVoid();?>>Credits</a></li>				
 				<li><a class='button play' <?php hrefVoid();?>>Play <?php
                     echo loggedIn()? 'Game' : 'as Guest';

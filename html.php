@@ -85,6 +85,7 @@ class html
         html::charset();
         html::title($title);
 		global $loggedIn;
+		global $uname;
 ?>
     <style>
         body{

@@ -159,7 +159,7 @@ function ajax_post()
         $('div#auctionStatBar label#m_marker').text(data.m_marker);
     }).fail(function(jqxhr){
         //call will fail if result is not properly formatted JSON!
-        alert('ajax call failed! Reason: ' + jqxhr.responseText);
+        alert('ajax call failed! Reason : ' + jqxhr.responseText);
         //throw exception, game can't work without user stats
     });
     

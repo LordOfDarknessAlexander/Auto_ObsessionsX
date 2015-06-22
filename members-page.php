@@ -2,7 +2,7 @@
 require 'html.php';
 require 'dbConnect.php';
 //require 'includes/secure.php';
-//session_start();
+session_start();
 //secureLogin();
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 {
@@ -12,7 +12,7 @@ if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
     echo 'session vars:<br>';
     echo json_encode($_SESSION);
     echo 'not logged in, navigating to login page';
-    header("Location: login.php");
+    header("Location: index.php");
 
    exit();
 }

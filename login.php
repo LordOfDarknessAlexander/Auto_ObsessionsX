@@ -77,7 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'members-page.php'; // Ternary operation to set the URL
 			//$url = ($_SESSION['user_level'] === 1) ? 'index.php' : 'index.php'; // Ternary operation to set the URL
 			$loggedIn = true;
-			//$uname = $_SESSION['uname'];
+			$uname = $_SESSION['uname'];
 			//echo 'Scks';
 			mysqli_free_result($result);
 			header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
