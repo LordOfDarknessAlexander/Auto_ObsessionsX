@@ -159,8 +159,31 @@ function carPart(carPrice, partType){   //partType
         }*/
 	};
 }
-
-carPart.getRandStage = function(){}
+function ri(){
+    var r = Math.random(),
+        i = Math.floor(r * 4);
+        
+    return i == 0 ? 0 : 0x1 << (i);
+}
+carPart.getRandStage = function(){
+    //(0000 | 0000 | 0000 | 0000), [0, ]
+    var r0 = ri(),
+        r1 = ri() << (4 * 1),
+        r2 = ri() << (4 * 2),
+        r3 = ri() << (4 * 3),
+        ret = (r3 | r2 | r1 | r0);
+    //console.log(ret);
+    return $ret;
+};
+carPart.getRandRepairs = function(){
+    //(XXXX 0000 | 0000 | 0000), [0,]
+    var r0 = ri(),
+        r1 = ri() << (4 * 1),
+        r2 = ri() << (4 * 2),
+        ret = (r2 | r1 | r0);
+    //console.log(ret);
+    return ret;
+};
 carPart.type = {
     interior:1,
     engine:2,

@@ -5,6 +5,23 @@ require_once '../re.php';
 //
 //secure::loggin();
 //
+function carDataFromArray($a){
+    $CID = ao::CID;
+    $DT = 'drivetrain';
+    $B = 'body';
+    $I = 'interior';
+    $D = 'docs';
+    $R = 'repairs';
+  
+    return array(
+        $CID=>intval($a[$CID]),
+        $DT=>intval($a[$DT]),
+        $B=>intval($a[$B]),
+        $I=>intval($a[$I]),
+        $D=>intval($a[$D]),
+        $R=>intval($a[$R])
+    );
+}
 class user{
     //
     const
@@ -71,7 +88,7 @@ class user{
             $t = intval($a[$T]);
             $p = intval($a[$P]);
             $mm = intval($a[$MM]);
-            $cid = intval($a[$CID];
+            $cid = intval($a[$CID]);
             
             return array(
                 $M=>$m,
@@ -124,14 +141,15 @@ class user{
             if($res){
                 $r = $res->fetch_assoc();
                 
-                return array(
-                    $CID=>intval($r[$CID]),
-                    $DT=>intval($r[$DT]),
-                    $B=>intval($r[$B]),
-                    $I=>intval($r[$I]),
-                    $D=>intval($r[$D]),
-                    $R=>intval($r[$R])
-                );
+                return carDataFromArray($r);
+                    // array(
+                    // $CID=>intval($r[$CID]),
+                    // $DT=>intval($r[$DT]),
+                    // $B=>intval($r[$B]),
+                    // $I=>intval($r[$I]),
+                    // $D=>intval($r[$D]),
+                    // $R=>intval($r[$R])
+                // );
             }
             else{
                 $aoUsersDB->eErr();
@@ -160,14 +178,14 @@ class user{
             if($res){
                 $r = $res->fetch_assoc();
                 
-                return array(
-                    $CID=>intval($r[$CID]),
-                    $DT=>intval($r[$DT]),
-                    $B=>intval($r[$B]),
-                    $I=>intval($r[$I]),
-                    $D=>intval($r[$D]),
-                    $R=>intval($r[$R])
-                );
+                return carDataFromArray($r);    //array(
+                    //$CID=>intval($r[$CID]),
+                    //$DT=>intval($r[$DT]),
+                    //$B=>intval($r[$B]),
+                    //$I=>intval($r[$I]),
+                    //$D=>intval($r[$D]),
+                    //$R=>intval($r[$R])
+                //);
             }
             else{
                 $aoCarSalesDB->eErr();
