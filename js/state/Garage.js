@@ -103,8 +103,15 @@ var Garage = {
 	//fromJSON:function(){this._curCarIndex = index;},
 	init : function()
 	{	//called to load assests and initialize private vars
-		//delete userGarage;
-		_selCID = 0;
+	    //delete userGarage;
+//	    if (_selCID !== null || _selCID !== undefined)
+//	    {
+//	        _selCID = _selCID;
+//	    }
+//	    else {
+	        _selCID = 0;
+//	    }
+		
         
         //var list = $('div#carListView ul#carBtns');
 //		Garage._carViewList.empty();	//remove any buttons if there were any previously
@@ -137,19 +144,21 @@ var Garage = {
         //function(data){
 //<php}>
         //pas.query.userCar();
-            if(_curCarID == 0){
-                $('div#Garage #userCar').hide();
-            }
-            else{
-                Garage.setCurrentCarNoSwap();
-            }
+        _selCID = 0;
+
+        if(_curCarID == 0){
+            $('div#Garage #userCar').hide();
+        }
+        else{
+            Garage.setCurrentCarNoSwap();
+        }
             
-            if(_selCID == 0){
-                $('div#selectedCar').hide();
-            }
-            else{
-                this.setSelectCar({index:_selCID});
-            }
+        //if(_selCID == 0){
+            $('div#selectedCar').hide();
+        //}
+        //else{
+            //this.setSelectCar({index:_selCID});
+        //}
             this.initCarView();
             //setHomeImg();
 //<php if(loggedIn()){
@@ -847,7 +856,7 @@ function () {
     //>
 });
 jq.CarView.homeBtn.click(
-function(){
+function () {
 	jq.Game.menu.show();
 	jq.CarView.menu.hide();
     setHomeImg();
