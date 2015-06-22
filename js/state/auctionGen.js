@@ -504,9 +504,9 @@ function auctionGen(args){
 		removeSale:function(cid){
 			var k = 'AuctionSell';
 			if((Storage.local !== null) && (k in Storage.local)){
-			console.log(userSales);
+			//console.log(userSales);
 			var us = userSales;//k in Storage.local ? JSON.parse(Storage.local[k]) : null;
-			console.log(us);
+			//console.log(us);
 				if(us !== null){
 				
 					var len = us.length;
