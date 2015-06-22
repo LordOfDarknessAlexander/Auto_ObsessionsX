@@ -10,7 +10,9 @@ class ao{
     //constant database names
     const
         USERS = 'users',  //table containing all registered users
-        CARS = 'aoCars',   //database containing all core vehicle data
+        CARS = 'aoCars',  
+		MEMBERS = 'aoMembers',
+		//database containing all core vehicle data
         //sql column names
         CID = 'car_id',
         UID = 'user_id';

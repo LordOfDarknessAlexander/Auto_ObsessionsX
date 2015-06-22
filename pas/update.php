@@ -1,12 +1,13 @@
-<?php
+  <?php
 //this script INSERTs or UPDATEs Database values with sql
 //used by javascript ajax requests
 require_once '../pasMeta.php';
 require_once '../re.php';
-//require_once '../include/secure.php';
+//require_once '../secure.php';
 require_once 'user.php';
 //
 //secure::loggin();
+//secure::memberLogin();
 //
 $ps = isset($_POST) && !empty($_POST) ? true : false;
 $gs = isset($_GET) && !empty($_GET) ? true : false;

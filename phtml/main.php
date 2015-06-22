@@ -107,8 +107,10 @@ eS();
 		
 <?php
 if(loggedIn() || $loggedIn ){?>
-        <a id='mem' href='members-page.php'>Members</a><br>
-        <a id='logout' href='logout.php'>Logout</a><br>	
+        <a id='mem' href='<?php
+            echo rootURL() .'members-page.php'; ?>'>Members</a><br>
+        <a id='logout' href='<?php
+            echo rootURL() .'logout.php'; ?>'>Logout</a><br>	
 		
 <?php
 }
