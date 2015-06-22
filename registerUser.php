@@ -30,11 +30,6 @@ html::charset();
     <a href='profiles.php' title='Player Profile'>Profile</a><br>
     <a href='index.php' title='Home Page'>Home</a><br>
 </div><!--end of side column and menu -->
-
-<?php
-//require 'Users/includes/register-header.php';
-//require 'include/nav.php';
-?>
 <div id='content'><!-- Start of the login page content. -->
 <?php
 // This code inserts a record into the users table

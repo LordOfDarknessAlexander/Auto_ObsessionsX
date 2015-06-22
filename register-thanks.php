@@ -35,11 +35,6 @@ html::charset();
     <a href='profiles.php' title='Player Profile'>Profile</a><br>
     <a href='index.php' title='Home Page'>Home</a><br>
 </div><!--end of side column and menu -->
-<?php
-//require 'Users/includes/header-thanks.php';
-//require 'include/nav.php';
-//require 'Users/includes/info-col-cards.php';
-?>
 <div id="content"><!-- Start of the thank you page content. -->
     <div id="midcol">
         <h2>Thank you for registering</h2>

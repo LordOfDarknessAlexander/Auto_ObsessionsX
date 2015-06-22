@@ -107,11 +107,7 @@ class sql{
     function getUID(){
         //returns the user if logged in, else echo error and force user to redirect to login
         $UID = ao::UID;
-          /*
-        if(isset($_SESSION) && isset($_SESSION[$uid]) ){
-            return intval($_SESSION[$uid]);
-        }*/
-		
+      
         if(isset($_SESSION) && isset($_SESSION[$UID]) ){
             return intval($_SESSION[$UID]);
         }

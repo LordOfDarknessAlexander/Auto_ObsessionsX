@@ -200,7 +200,7 @@ div#playerData
 }
 div#imog 
 {
-    background: url('../images/polo.png') no-repeat 0 0;
+    background: url('images/polo.png') no-repeat 0 0;
 	background-size:100% 100%;
 	width : 280px;
 	height : 207px;

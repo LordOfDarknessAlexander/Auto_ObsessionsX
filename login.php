@@ -1,17 +1,18 @@
 <?php
 require_once 'html.php';
 require_once 'dbConnect.php';
+require_once 'secure.php';
 html::docType();
 ?>
 <html lang=en>
 <head>
 <?php
-//html::charset();
-//html::title('Login Page');
+html::charset();
+html::title('Login Page');
  
 
 ?>
- <!--   <link rel="stylesheet" type="text/css" href="Users/includes.css">
+  <link rel="stylesheet" type="text/css" href="includes.css">
 </head>
 <body>
 
@@ -19,7 +20,7 @@ html::docType();
 
 <div id="content"><!-- Start of the login page content. -->
 
-<!--
+
 <div id='header'>
     <h1>Auto-Obsessions Login</h1>
     <div id='reg-navigation'>
@@ -27,7 +28,7 @@ html::docType();
         <a href='index.php'>Cancel</a><br>
         <a href='logout.php'>Logout</a><br>
     </div>
-</div>    ---->
+</div>   
 <?php 
 // This section processes submissions from the login form.
 // Check if the form has been submitted:
@@ -81,6 +82,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			//echo 'Scks';
 			mysqli_free_result($result);
 			header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
+			secure::login();
 			//ob_end_clean(); // Delete the buffer.
 			exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;       
 			

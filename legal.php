@@ -4,8 +4,8 @@
 require_once 'include/html.php';
 require 'ao.php';
 require_once 're.php';
-//require_once './secure.php';
-//secureLogin();    //this allows for a single call to secure login across multiple pages!
+//require_once 'secure.php';
+//secure::Login();    //this allows for a single call to secure login across multiple pages!
 $AO_NAME = 'Auto Obsessions';
 
 function subheader($title){
