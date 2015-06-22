@@ -427,20 +427,20 @@ function auctionGen(args){
                     btnID = divID + ' div#btns button#cc',
                     btn = $(btnID);
                     
-                // if(t.isExpired() ){
-                    // //set cash button, for user to recieve funds
-                    // var data = {
-                        // caller:t,
-                        // cid:this._car.id,
-                        // price:this._currentBid
-                    // };
-                    // //btn.css({
-                    // //    'background':"url('images/icons/money.png') no-repeat 0 0",
-                    // //    'background-size':"100% 100%",
-                    // //});
-                    // //btn.off().click(data, this.payUser);
-                // }
-                // else{
+					if(t.isExpired() ){
+						//set cash button, for user to recieve funds
+						var data = {
+							caller:t,
+							cid:this._car.id,
+							price:this._currentBid
+						};
+						btn.css({
+						   'background':"url('images/icons/money.png') no-repeat 0 0",
+						   'background-size':"100% 100%",
+						});
+						btn.off().click(data, this.payUser);
+					}
+					else{
                     //auction still active, allow user the chance to cancel
                     var data = {
                         caller:t,
@@ -452,7 +452,7 @@ function auctionGen(args){
                         'background-size':"100% 100%",
                     });
                     btn.off().click(data, this.cancelAuction);
-                //}
+                }
 			
             }
         },
@@ -502,10 +502,11 @@ function auctionGen(args){
                 
         },
 		removeSale:function(cid){
-			if(Storage.local !== null){
-				var k = 'AuctionSell',
-					us = k in Storage.local ? JSON.parse(Storage.local[k]) : null;
-				
+			var k = 'AuctionSell';
+			if((Storage.local !== null) && (k in Storage.local)){
+			console.log(userSales);
+			var us = userSales;//k in Storage.local ? JSON.parse(Storage.local[k]) : null;
+			console.log(us);
 				if(us !== null){
 				
 					var len = us.length;
@@ -518,7 +519,7 @@ function auctionGen(args){
 					var i = 0;
 					
 					for(; i < len; i++){
-						var id = us[i].id;
+						var id = us[i]._car.id;
 						
 						if(id == cid){
 							console.log('cancel auction!');
@@ -534,7 +535,8 @@ function auctionGen(args){
 							//remove sales;
 							us.splice(i, 1);  //returns items removed from array
 							Storage.local[k] = JSON.stringify(us);
-							
+							console.log(us);
+							//ActionSell.save();
 						//place car back in user garage!
 //<php if(loggedIn() ){>
 						//userGarage.push(car(rm));
