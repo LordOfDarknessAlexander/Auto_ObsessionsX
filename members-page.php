@@ -12,7 +12,7 @@ if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
     echo 'session vars:<br>';
     echo json_encode($_SESSION);
     echo 'not logged in, navigating to login page';
-    header("Location: index.php");
+    header("Location: login.php");
 
    exit();
 }
