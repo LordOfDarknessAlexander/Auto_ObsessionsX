@@ -27,6 +27,44 @@ class ao{
         //usersDB = dbConnect('aoUsersDB'),
         //carSalesDB = dbConnect('aoCarSalesDB');
 }
+function isSetP(){
+    //are post vars set
+    return isset($_POST);    //&& !empty();
+}
+function isSetG(){
+    //are get vars set
+    return isset($_GET);    //&& !empty();
+}
+function isSetS(){
+    //is sessesion vars sets
+    return isset($_SESSION);    //&& !empty();
+}
+function eP(){
+    //echo's variables submitted to a script via _POST
+    echo (isSetP()?
+        json_encode($_POST)
+    :
+        '_POST not set!');
+}
+function eG(){
+    //echo's variables submitted to a script via _GET
+    echo (isSetG() ?
+        json_encode($_GET)
+    :
+        '_GET not set!');
+}
+function eS(){
+    //echo's _SESSION variables(when user logged in)    
+    echo json_encode(
+        array(
+            'set'=>isSetS(),
+            'id'=>session_id(),
+            'status'=>session_status(),
+			'logged In '=>loggedIn(),
+            'sessionVars'=>isSetS() ? $_SESSION : array()
+        )
+    ) . PHP_EOL;
+}
 function rootURL(){
     //returns the root url for the executing application
     //change to false for execution on server

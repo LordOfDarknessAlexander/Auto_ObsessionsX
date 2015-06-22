@@ -158,10 +158,9 @@ function auctionGen(args){
                             "<button id='view'></button>" +
                             "<button id='cc'></button>" +
                         "</div>" +
-                        "</div><br>";
+                        "</div>";
 
                     jq.AuctionSell.carView.append(btnStr);
-
                 }
 
                 if (this.isExpired() && this._cashedIn) {

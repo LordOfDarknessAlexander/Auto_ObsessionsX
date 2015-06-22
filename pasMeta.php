@@ -10,27 +10,6 @@ require_once 'ao.php';
 //
 //secure::loggin();
 //
-function eP(){
-    //echo's variables submitted to a script via _POST
-    echo (isset($_POST)?
-        json_encode($_POST)
-    :
-        '_POST not set!');
-}
-function eG(){
-    //echo's variables submitted to a script via _GET
-    echo (isset($_GET)?
-        json_encode($_GET)
-    :
-        '_GET not set!');
-}
-function eS(){
-    //echo's _SESSION variables(when user logged in)
-    echo (isset($_SESSION)?
-        json_encode($_SESSION)
-    :
-        '_SESSION not set! Please log in.');
-}
 class sql{
     /*public static function insert($table, $valStr){
         //check using regex that $valStr contains a
@@ -47,15 +26,27 @@ class sql{
         //check using regex that $rowStr and $valStr contain
         //comma seperated list of identifiers
         if(is_string($table) && && is_string($rowStr) && is_string($valStr) ){
-            $t = mysqli::real_escape_string($table);
-            $r = mysqli::real_escape_string($rowStr);
             $v = mysqli::real_escape_string($valStr);
             //if(debug() ){
-                //$ret = "INSERT INTO $t ($r) VALUES ($v)";
+                //$ret = sql::insert($table, $rowStr) . " VALUES ($v)";
                 //echo $ret;
                 //return $ret;
             //}
-            return "INSERT INTO $t ($r) VALUES ($v)";
+            return sql::insert($table, $rowStr) . " VALUES ($v)";
+        }
+        return '';
+    }
+    public static function insertOnDuplicateUpdate($table, $rowStr, $valStr, $updateStr){
+        //check using regex that $rowStr and $valStr contain
+        //comma seperated list of identifiers
+        if(is_string($updateStr) ){
+            $u = mysqli::real_escape_string($updateStr);
+            //if(debug() ){
+                //$ret = sql::insertVal($table, $rowStr, $valStr) . " ON DUPLICATE KEY UPDATE ($u)";
+                //echo $ret;
+                //return $ret;
+            //}
+            return sql::insertVal($table, $rowStr, $valStr) . " ON DUPLICATE KEY UPDATE ($u)";
         }
         return '';
     }*/
@@ -127,10 +118,10 @@ class sql{
         
         $ret = false;
         $CID = ao::CID;
-        $tableName = getUserTableName();
+        //$tableName = getUserTableName();
        
         $res = $aoUsersDB->query(
-            "SELECT * FROM $tableName WHERE $CID = $id"
+            sql::slctAllFromUserTable() . " WHERE $CID = $id"
         );
         
         if($res){
@@ -209,13 +200,14 @@ function getCarFromID($carID){
     //selects a vehicle from the car database($AO_DB),
     //returning it as a an instance of a php class
     global $AO_DB;
-    $aoCars = ao::CARS;
+    //$aoCars = ao::CARS;
     $CID = ao::CID;
     //prepare!
     //$res = pasGet::allCarIDs();
     $res = $AO_DB->query(
         sql::slctAllFromCarDB() . " WHERE $CID = $carID"
     );
+    
     if($res){
         if(mysqli_num_rows($res) != 0){
             //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		

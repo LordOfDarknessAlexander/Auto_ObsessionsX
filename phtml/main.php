@@ -42,34 +42,10 @@ function hrefVoid(){
     ?>href='javascript:void(0)'<?php
 }
 
-function eS(){
-    //echo session stats, for debug only!
-    //Note:hostile programs and user may attempt to modify
-    //session variables for malicious purposes!
-    global $ss;
-	global $loggedIn;
-	
-    
-    echo 'session info:' . json_encode(
-        array(
-            'set'=>$ss,
-            'id'=>session_id(),
-            'status'=>session_status(),
-			'logged In '=>$loggedIn
-        )
-    ) . PHP_EOL;
-    
-    echo 'session data:' . PHP_EOL;
-    echo json_encode($ss ? $_SESSION : array() ) . PHP_EOL;
-}
-
 function loggedIn(){
     //session started and the user has provided
-    //a valid email/username and pasword
-    global $ss;
-	global $loggedIn;
-	 
-    return $ss && $loggedIn &&isset($_SESSION['uname']) ? true : false;
+    //a valid email/username and pasword	 
+    return isSetS() && isset($_SESSION['uname']) ? true : false;
 
 }
 function getUserName(){    

@@ -4,6 +4,7 @@
 //header('Access-Control-Allow-Origin: *');
 //
 require_once '../pasMeta.php';
+require_once 'user.php';
 //require_once '../include/secure.php';
 //
 //secure::loggin();
@@ -439,20 +440,23 @@ class pasGet{
     public static function currentCarID(){
         //returns the user's currently selected vehicle
         global $AO_DB;
-        $id = getUID();  //$_SESSION['user_id'];
-        $users = ao::USERS;
+        //$id = getUID();  //$_SESSION['user_id'];
+        //$users = ao::USERS;
         $CID = ao::CID;
-        $UID = ao::UID;
+        //$UID = ao::UID;
         
-        $res = $AO_DB->query(
-            "SELECT $CID FROM $users WHERE $UID = $id"
-        );
+        $res = user::slctFromEntry("$CID");
+        //$AO_DB->query(
+            //"SELECT $CID FROM $users WHERE $UID = $id"
+        //);
         
         if($res){
             //user has car
+            //$ret = $res->fetch_assoc()[$CID];
+            //$i = isUINT($ret) ? intval($ret) : 0;
             $ret = intval($res->fetch_assoc()[$CID]);
             $res->close();
-            return $ret;
+            return $ret;    //$i;
         }
         else{
             $AO_DB->eErr();
@@ -545,9 +549,6 @@ class pasGet{
         //$type = pasGet::userStage();
         $cars = array();
         $CID = ao::CID;
-        //$N = 'name';
-        //$P = 'price';
-        //$S = 'src';
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
         $res = pasGet::carIDsByType($carType);
@@ -555,7 +556,7 @@ class pasGet{
         if(!empty($res)){
             foreach($res as $row){
                 //echo json_encode($row);
-                $cars[] = auctionCarInfoFromArray($row);    //array(
+                $cars[] = auctionCarInfoFromArray($row);
             }
         }
         echo json_encode($cars);
@@ -565,10 +566,6 @@ class pasGet{
         //returning them as a JSON array
         $type = pasGet::userStage();
         $cars = array();
-        //$CID = 'car_id';
-        //$N = 'name';
-        //$P = 'price';
-        //$S = 'src';
         //returns an array, containing an array for each row/car entry,
         //or an empty arry on failure
         $res = pasGet::carIDsByPriceRange($range);
@@ -670,18 +667,17 @@ class pasGet{
         //returns the user's stats from SQL database as an assossiative array
         global $AO_DB;
         
-        $id = getUID();
-        $UID = ao::UID;
-        $users = ao::USERS;
+        $CID = ao::CID;
         $M = 'money';
         $T = 'tokens';
         $P = 'prestige';
         $MM = 'm_marker';
         
-        $res = $AO_DB->query(
+        $res = user::slctFromEntry("$M, $T, $P, $MM, $CID");
+        //$AO_DB->query(
             //"SELECT $M, $T, $P, $MM FROM $users WHERE $UID = $id"
-            "SELECT * FROM $users WHERE $UID = $id"
-        );
+            //"SELECT * FROM $users WHERE $UID = $id"
+        //);
         //Count the returned rows
         if($res){
             $rows = $res->fetch_assoc();
@@ -691,7 +687,7 @@ class pasGet{
                 $T=>intval($rows[$T]),
                 $P=>intval($rows[$P]),
                 $MM=>intval($rows[$MM]),
-                'cid'=>intval($rows['car_id'])
+                'cid'=>intval($rows[$CID])
             );
             $res->close();
             return $ret;
