@@ -414,7 +414,7 @@ if($ps){
                     //echo json_encode(gettype($_POST['udv'])); //returns a string
                     //exit();
                     if($op == 'puf'){
-                        purchase::funds(floatval($_POST['udv']) );
+                        user::incFunds(floatval($_POST['udv']) );
                         exit();
                     }
                     if($op == 'put'){
