@@ -312,6 +312,9 @@ if($ps){
                     else{
                         //if($AO_DB->query() ){
                         //
+                        //$p = isFloat($_POST[$P]) ? floatval($_POST[$P]) : exit;
+                        //$uf = user::getFunds();  //current user funds
+                        
                         $tableName = getUserTableName();
                         
                         $dt = Vehicle::getRandStage();
@@ -415,6 +418,10 @@ if($ps){
                     //exit();
                     if($op == 'puf'){
                         user::incFunds(floatval($_POST['udv']) );
+                        exit();
+                    }
+                    if($op == 'duf'){
+                        user::decFunds(floatval($_POST['udv']) );
                         exit();
                     }
                     if($op == 'put'){

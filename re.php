@@ -39,6 +39,9 @@ function isUINT($str){
     //no special characters, letters, whitespace or symbols
     return preg_match('/^[[:digit:]]+$/', $str);
 }
+function isFloat($str){
+    return preg_match('/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/', $str);
+}
 function isPassword($str){
     //validates a series of {8-12} characters of digits and/or letters
     //no special characters, whitespace or symbols

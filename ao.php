@@ -44,14 +44,14 @@ function eP(){
     echo (isSetP()?
         json_encode($_POST)
     :
-        '_POST not set!');
+        '_POST not set!') . PHP_EOL;
 }
 function eG(){
     //echo's variables submitted to a script via _GET
     echo (isSetG() ?
         json_encode($_GET)
     :
-        '_GET not set!');
+        '_GET not set!') . PHP_EOL;
 }
 function eS(){
     //echo's _SESSION variables(when user logged in)    
@@ -64,6 +64,12 @@ function eS(){
             'sessionVars'=>isSetS() ? $_SESSION : array()
         )
     ) . PHP_EOL;
+}
+function eSG(){
+    //echo super global vars, get post and session
+    eG();
+    eP();
+    eS();
 }
 function rootURL(){
     //returns the root url for the executing application
