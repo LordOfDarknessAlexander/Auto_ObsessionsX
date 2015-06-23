@@ -67,16 +67,7 @@ function carPart(carPrice, partType){   //partType
             //console.log('repair part!');
             if(!this._repaired){
                 var p = this.getRepairPrice();
-                
-                //jq.post('pas/update.php?op=cump',
-                    //function(){
-                        
-                    //},
-                    //function(){
-                        
-                    //},
-                    //{price:p}
-                //);
+
                 if(userStats.money >= p){
                     userStats.money -= p;   //take money first
                     //setMoney();
@@ -86,6 +77,19 @@ function carPart(carPrice, partType){   //partType
                 else{
                     console.log('Insufficent funds! Can not purchase repair for part of type: ' + this._type.toString() );
                 }
+//<php if(loggedIn()){>
+                //jq.post('pas/update.php?op=cump',
+                    //function(){
+                        
+                    //},
+                    //function(){
+                        
+                    //},
+                    //{price:p}
+                //);
+//<php
+//}
+//>
             }
             //else already repaired, do nothing
             return this._repaired;

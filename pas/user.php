@@ -61,6 +61,11 @@ class user{
             $q = "UPDATE $U SET $v WHERE $UID = $uid";
             //echo $q;
             return $AO_DB->query($q);
+            //$ret = $AO_DB->query($q);
+            //if($ret){
+                //return $ret;
+            //}
+            //$AO_DB->eErr();
         }
         return null;
     }
@@ -73,6 +78,61 @@ class user{
             return $f;    //json_encode($f);
         }
         return 0.0;
+    }
+    static public function incFunds($funds){
+        //increment funds to loggedin user's account
+        //$funds:float, value to increment user's current funds
+        if(is_float($funds) && $funds > 0.0){
+            $f = round($funds, 2);  //round currency to 2 decimal places
+            $M = 'money';            
+            $uf = user::slctFromEntry($m);  //previous user funds
+
+            $MF = PHP_INT_MAX;
+            $nf = $uf + $f;   //new funds
+            //echo $nf;
+            if($nf < $MF){
+                //echo $nf;
+                $res = user::updateEntry("$M = $nf");
+                //echo json_encode($res);
+                if($res){
+                    $res->close();
+                    echo json_encode($nf);
+                    return;
+                }
+            }
+            echo 'Operation failed, could not purchase more funds, cap reached!';
+            $rm->close();
+            echo json_encode($uf);
+        }
+        //echo "purchase::funds(), invalid value $f, purchase::failed";
+        return user::getFunds();
+    }
+    static public function decFunds($funds){
+        //decrement funds to loggedin user's account
+        //$funds:float, value to decrement user's current funds
+        if(is_float($funds) && $funds > 0.0){
+            $f = round($funds, 2);  //round currency to 2 decimal places
+            $M = 'money';            
+            $uf = user::slctFromEntry($m);  //previous user funds
+
+            $MF = PHP_INT_MAX;
+            $nf = $uf + $f;   //new funds
+            //echo $nf;
+            if($nf < $MF){
+                //echo $nf;
+                $res = user::updateEntry("$M = $nf");
+                //echo json_encode($res);
+                if($res){
+                    $res->close();
+                    return $nf;
+                }
+            }
+            //echo 'Operation failed, not enough funds!';
+            $rm->close();
+            return $uf;
+        }
+        //echo "purchase::funds(), invalid value $f, purchase::failed";
+        return user::getFunds();
     }
     public static function getStats(){
         $CID = ao::CID;
@@ -107,7 +167,6 @@ class user{
         if($ret){
             $t = intval($res->fetch_assoc()[$T]);
             return $t;
-            //json_encode($f);
         }
         return 0;
     }
@@ -128,11 +187,11 @@ class user{
         
         if(intval($id) && $id > 0){
             $CID = ao::CID;
-            $DT = 'drivetrain';
-            $B = 'body';
-            $I = 'interior';
-            $D = 'docs';
-            $R = 'repairs';
+            //$DT = 'drivetrain';
+            //$B = 'body';
+            //$I = 'interior';
+            //$D = 'docs';
+            //$R = 'repairs';
             
             $res = $aoUsersDB->query(
                 sql::slctAllFromUserTable() . " WHERE $CID = $id"

@@ -86,13 +86,31 @@ class sql{
     public static function slctAllFromUserTable(){        
         return sql::slctFromUserTable('*');
     }
+    //
+    //create
+    //
     //public static function createTable($tbl, $args){
         //$t = ;
         //$r = ;
 //        return "CREATE TABLE IF NOT EXISTS $tbl(
             //$args
         //)$defEngine $defCharset";
+
     //}
+    //
+    //Delete
+    //
+    public static function dltFrom($table){
+        //$fields is a comma seperated list of row names
+        global $AO_DB;
+        //
+        if(is_string($table) ){
+            $t = mysqli_real_escape_string($AO_DB->con, $table);
+
+            return "DELETE FROM $t";
+        }
+        return '';
+    }
 }
 //class user{
     function getUID(){

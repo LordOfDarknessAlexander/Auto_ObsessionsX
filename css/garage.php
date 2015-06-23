@@ -85,15 +85,20 @@ User Garage div Stylings
     font-size:1.5vw;
     font-weight:bold;
 }
+<?php divCarListView();?> ul{
+    position:absolute;
+    left:0%;
+    top:0%;
+    margin: 0% 1%;
+}
 <?php divGarage();?> li 
 {	/*styles all list items of node with id RepairShop*/
-	/*margin: 6% 2%;*/
+	margin: 1% 1%;
 	display:inline;
 }
 <?php divGarage();?> li button
 {	/*styling for list items*/
 	color: white;
-	margin: 2% 2%;
 	background-size: 100% 100%;
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 	position: relative;
@@ -112,7 +117,7 @@ User Garage div Stylings
 }
 <?php divCarListView();?>
 {
-	background: url('../images/defaultBG.jpg') no-repeat 0 0;
+	background: url('../images/icons/divTile.png') repeat 0 0;
 <?php posAbs();
     scrollY();
     css::size('35%', '60.5%');
@@ -125,29 +130,29 @@ current user car stylings
 */
 <?php divUserCar();?>{
 	/*display:inline;*/
-	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
+	background: url('../images/icons/divTile.png') repeat 0 0;
 <?php
     posAbs();
     css::top('30%');
-    css::size('25%', '68%');
+    css::size('26%', '68%');
 ?>
 	text-align::left;
 
-	left:45%;/*2%;*/
+	left:46%;/*2%;*/
 
 	display:inline;
 }
 <?php divSelectedCar();?>{
 	/*display:inline;*/
-	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
+	background: url('../images/icons/divTile.png') repeat 0 0;
 <?php
     posAbs();
     css::top('30%');
-    css::size('25%', '68%');
+    css::size('26%', '68%');
 ?>
 	text-align::left;
 
-	right:2%;
+	right:1%;
 
 	display:inline;
 }

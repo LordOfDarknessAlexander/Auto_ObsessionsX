@@ -90,7 +90,7 @@ class pasUpdate{
         
         if($carID == 0 || hasCar($carID)){
             //$res = user::updateEntry("$CID = $carID");
-			user::updateEntry("$CID = $carID");
+
 			if(user::updateEntry("$CID = $carID")){
 				return $carID;
 				//$id = intval($res->fetch_assoc()[$CID]);

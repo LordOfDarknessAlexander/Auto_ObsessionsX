@@ -49,10 +49,12 @@ Profile DIV User Stats
 */
 <?php dpus();?>{
     left:2%;
+    background: url('../images/icons/divTile.png') repeat 0 0;
 }
 /*
 Profile DIV Sales info
 */
 <?php dpsi();?>{
     right:2%;
+    background: url('../images/icons/divTile.png') repeat 0 0;
 }

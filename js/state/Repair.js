@@ -594,10 +594,11 @@ Drivetrain.upgrade = function(obj){
             //}
         }
         else{    //upgrade existing part
+            //var dt = car._dt;
             if(car._dt.upgradePart(type) ){
                 var part = car._dt.getPartType(type);
                 //if part is upgraded to max, unbind and make unclickable
-                if(part !== null){    
+                if(part !== null){
                     var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
                     
                     upgradePartUpdate(
