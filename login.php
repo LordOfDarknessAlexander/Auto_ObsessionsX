@@ -62,6 +62,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		// Check the result:
         
 		//if(@mysqli_num_rows($result) != 0) 
+		
 		if (@mysqli_num_rows($result) == 1) 
 		{	
 			//echo "uname";?><br><?php
@@ -75,10 +76,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			//$url = ($_SESSION['user_level'] === 1) ? 'index.php' : 'index.php'; // Ternary operation to set the URL
 			$loggedIn = true;
 			$uname = $_SESSION['uname'];
+			secure::validate();
 			//echo 'Scks';
 			mysqli_free_result($result);
 			header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
-			secure::login();
+			//secure::login();
 			//ob_end_clean(); // Delete the buffer.
 			exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;       
 			
@@ -88,11 +90,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             //echo 'error: ' . mysqli_error($AO_DB->con);
 			echo "<p class='error'>The email address and password do not match our records.If you need to register, click the Register button on the header menu</p>";
 		}
+		//secure::validate();
 	} 
+	
 	else 
 	{ // If there was a problem.
 		echo "<p class='error'>Please try again.</p>";
-	}
+	}  
+	
+	
 } // End of SUBMIT conditional.
 ?>
 <!-- Display the form fields-->

@@ -11,7 +11,7 @@ class ao{
     const
         USERS = 'users',  //table containing all registered users
         CARS = 'aoCars',  
-		MEMBERS = 'aoMembers',
+		MEMBERS = 'aoMembersDB',
 		//database containing all core vehicle data
         //sql column names
         CID = 'car_id',

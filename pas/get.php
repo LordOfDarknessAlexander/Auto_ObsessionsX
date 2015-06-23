@@ -45,26 +45,27 @@ class aoPriceRange{
         return $ret;
     }
 }*/
-/*class sql{
+/*
+class sql{
     public static function selectAll($tableName){
-        //$str = mysql_real_escape_string($tableName);
+        $str = mysql_real_escape_string($tableName);
         return "SELECT * FROM $str";
     }
-    //public static function selectAll($tableName, $rows){
-        //single identifier, or comma seperated list of identifiers
+    public static function selectAll($tableName, $rows){
+        //single identifier, or comma separated list of identifiers
         //isArgList($rows)
-        //return "SELECT $rows FROM $tableName";
-    //}
-    //public static function selectWhere($tableName, $rows, $cond){
+        return "SELECT $rows FROM $tableName";
+    }
+    public static function selectWhere($tableName, $rows, $cond){
         //single identifier, or comma seperated list of identifiers
-        //$r = mysql_real_escape_string($rows);
-        //return "SELECT $rows FROM $tableName WHERE $cond";
-    //}
-    //public static function selectAllFromUser(){
+        $r = mysql_real_escape_string($rows);
+        return "SELECT $rows FROM $tableName WHERE $cond";
+    }
+    public static function selectAllFromUser(){
         //selects all entries in database with a user table entry
         $userID = getUserTableName();
         return "SELECT * FROM $userID";
-    //}
+    }
 }*/
 function asCarInfoFromArray($r){
     //returns data to display elements in Auction Select
@@ -103,7 +104,7 @@ function auctionCarInfoFromArray($r){
 class pasGet{
     private static
         $_allCars,
-		// $_login,
+		 $_login,
         //$_allCarData,
         $_allAuctionsCID;
         //$_allUsers ,
@@ -120,27 +121,33 @@ class pasGet{
             $_stats,
             $_login,
         public static userInit(){}
-    }
+    }*/
 		
 	
 	public static function userInit ()
 	{
-		global $finalPost;
-		
-		$finalPost = 'finalPost';	
+		//global $aoMembersDB;
+		global $AO_DB;
+	
+		$aoMembersDB = ao::MEMBERS;
 		$e = 'email';
 		$p = 'psword';
 		
 		$UID = 'user_id';
-        $CID = 'car_id';
-			//$finalPost users
+			//$aoMembersDB users
 		
 		self::$_login =  $AO_DB->con->prepare(
             "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
+			
+			
+			
+			
+			
+			
         );
-		//self::$_allUsers = $AO_DB->con->prepare(
-         //"SELECT * FROM $users"    //returns an array of all user data
-        //);
+	//	self::$_allUsers = $AO_DB->con->prepare(
+     //    "SELECT * FROM $users"    //returns an array of all user data
+      //  );
       
         //self::$_userCar = $AO_DB->con->prepare(
             //"SELECT car_id FROM $users WHERE $UID = ?"     //returns an array of all user id's
@@ -162,7 +169,7 @@ class pasGet{
         //);
         //self::$_userStats = $AO_DB->con->prepare(
             //"SELECT money, tokens, prestige, m_marker FROM $users WHERE $UID = ?"
-	}*/
+	}
 	
     public static function init(){
         global $AO_DB;
@@ -186,9 +193,9 @@ class pasGet{
         //
         //$AO_DB users
         //
-        //self::$_allUsers = $AO_DB->con->prepare(
-            //"SELECT * FROM $users"    //returns an array of all user data
-        //);
+      /*  self::$_allUsers = $AO_DB->con->prepare(
+            "SELECT * FROM $users"    //returns an array of all user data
+        );
         //self::$_allUIDs = $AO_DB->con->prepare(
             //"SELECT $UID FROM $users"  //returns an array of all user id's
         //);
@@ -215,9 +222,9 @@ class pasGet{
         //);   
         //self::$_userLogin = $AO_DB->con->prepare(
             //"SELECT $UID, user_level FROM $users WHERE (email ='?' AND uname = '?')"
-        //);
+        //);*/
     }
-    public static function userStage(){
+   /* public static function userStage(){
         //returns the user's current stage in the Auction Select screen
         global $AO_DB;
         
@@ -235,8 +242,8 @@ class pasGet{
             $ret = $res->fetch_assoc()[$T];
             $res->close();
         }*/
-        return $ret;
-    }
+       // return $ret;
+   // }
     public static function allCarData(){
         //
         global $AO_DB;
@@ -821,5 +828,5 @@ class pasGet{
     }	
 }
 pasGet::init();
-//pasGet::userInit();
+pasGet::userInit();
 ?>

@@ -15,19 +15,23 @@ $AB_NAME = 'Andrew Best';
 //this is not working on site without a new session
 //session_start();
 
-
+//isLoggedIn();
+secure::validate();
 //Login
 //session set, has the session be started and initialized
 //if $_SESSION is an empty array,
 //user is using guest account and not currenlty logged in
-$_SESSION = array('dur'=>0);    //must log in to set session vars!
+
+//$_SESSION = array('dur'=>0);    //must log in to set session vars!
 //userLoggin!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
 //$loggedIn = false;
-if(isset($_SESSION) OR isset($_SESSION['uname']) )
+
+if(isset($_SESSION) OR isset($_SESSION['uname']) )	
 {
     $uname = $_SESSION['uname'];
 	$loggedIn = true;
+	
 				
 }
 else
@@ -83,7 +87,10 @@ eS();
         <a id='addFunds' class='tooltip'>Store</a><br>
 		
 <?php
-if(loggedIn() || $loggedIn ){?>
+//secure::validate();
+
+if( $loggedIn ){?>
+
         <a id='mem' href='<?php
             echo rootURL() .'members-page.php'; ?>'>Members</a><br>
         <a id='logout' href='<?php
@@ -115,7 +122,7 @@ else{?>
 			
             <ul>
 <?php
-if(!loggedIn() || $loggedIn = false){?>
+if($loggedIn = false){?>
                 <li><a id='reg' class='button Register' href='<?php
                     echo rootURL() . 'registerUser.php';
                 ?>'>Register</a></li>
