@@ -26,7 +26,7 @@ secure::validate();
 //userLoggin!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
 //$loggedIn = false;
-/*
+
 if(isset($_SESSION) OR isset($_SESSION['uname']) )	
 {
     $uname = $_SESSION['uname'];
@@ -38,7 +38,7 @@ else
 {
 	$loggedIn = false;
 	$uname = 'guest';
-}*/
+}
 //slots
 //$isSlots = false;
 function hrefVoid(){
@@ -87,7 +87,7 @@ eS();
         <a id='addFunds' class='tooltip'>Store</a><br>
 		
 <?php
-secure::validate();
+//secure::validate();
 
 if( loggedIn() ){?>
 

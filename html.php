@@ -84,8 +84,8 @@ class html
 <?php
         html::charset();
         html::title($title);
-		global $loggedIn;
-		global $uname;
+		//global $loggedIn;
+		///global $uname;
 ?>
     <style>
         body{

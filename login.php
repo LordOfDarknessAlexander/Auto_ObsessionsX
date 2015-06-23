@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		
 		if (@mysqli_num_rows($result) == 1) 
 		{	
-			//echo "uname";?><br><?php
+			echo "uname";?><br><?php
 			 //The user input matched the database record
 			// Start the session, fetch the record and insert the three values in an array
 			//session_start();
@@ -76,7 +76,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			//$url = ($_SESSION['user_level'] === 1) ? 'index.php' : 'index.php'; // Ternary operation to set the URL
 			$loggedIn = true;
 			$uname = $_SESSION['uname'];
-			secure::validate();
+			//secure::validate();
 			//echo 'Scks';
 			mysqli_free_result($result);
 			header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
