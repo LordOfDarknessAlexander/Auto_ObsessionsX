@@ -3,7 +3,7 @@
 //This page is PRIVATE, not accessible on the server, FOR DEV USE ONLY
 //This script should only exist in your local project and should only be
 //on the server for the brief moments when the database must be updatedds
-require_once '../../include/dbConnect.php';
+require_once '../../dbConnect.php';
 require_once '../../secure.php';
 //secure::adminLogin();
 echo 'executing script in directory: ' . __DIR__;
