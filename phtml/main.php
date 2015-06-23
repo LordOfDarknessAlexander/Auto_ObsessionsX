@@ -4,6 +4,7 @@
 //to this project
 require_once 'ao.php';
 require_once 'html.php';
+require_once './secure.php';
 //
 $OWNER_NAME = 'Adam Glazer';
 $AO_NAME = 'Auto Obsessions';

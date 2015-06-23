@@ -17,8 +17,6 @@ html::title('Login Page');
 <div id="container">
 
 <div id="content"><!-- Start of the login page content. -->
-
-
 <div id='header'>
     <h1>Auto-Obsessions Login</h1>
     <div id='reg-navigation'>
