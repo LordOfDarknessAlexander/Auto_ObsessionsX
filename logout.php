@@ -1,7 +1,5 @@
 <?php
 //
-//
-//
 session_start();//access the current session.
 //Must logged in to logout, else redirect to login
 if(!isset($_SESSION['user_id']) ){

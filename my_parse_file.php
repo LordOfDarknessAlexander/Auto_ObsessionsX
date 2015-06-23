@@ -1,6 +1,6 @@
 <?php 
 require_once 'dbConnect.php';
-//session_start();
+session_start();
 
 if (isset($_SESSION['uname']))
 {

@@ -1,5 +1,5 @@
 <?php
-//session_start();  //the inclusion of this page starts the session if not started, else resume current session
+session_start();  //the inclusion of this page starts the session if not started, else resume current session
 require_once 'dbConnect.php';
 function isLoggedIn(){
     return (isset($_SESSION) AND isset($_SESSION['user_level']) ) ? true : false;

@@ -13,10 +13,10 @@ $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
 
 //this is not working on site without a new session
-//session_start();
+session_start();
 
 //isLoggedIn();
-secure::validate();
+//secure::validate();
 //Login
 //session set, has the session be started and initialized
 //if $_SESSION is an empty array,
@@ -26,7 +26,7 @@ secure::validate();
 //userLoggin!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
 //$loggedIn = false;
-
+/*
 if(isset($_SESSION) OR isset($_SESSION['uname']) )	
 {
     $uname = $_SESSION['uname'];
@@ -38,7 +38,7 @@ else
 {
 	$loggedIn = false;
 	$uname = 'guest';
-}
+}*/
 //slots
 //$isSlots = false;
 function hrefVoid(){
@@ -60,7 +60,7 @@ function getUserName(){
 }
 //
 
-eS();
+//eS();
 //exit();
 ?>	
 <div class='wrapper'>
