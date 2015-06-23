@@ -1,5 +1,5 @@
 <?php 
-//require_once 'includes/dbConnect.php';
+require_once 'Users/includes/dbConnect.php';
 //session_start();
 
 if (isset($_SESSION['uname']))

@@ -123,7 +123,7 @@ class pasGet{
         public static userInit(){}
     }*/
 		
-	
+	/*
 	public static function userInit ()
 	{
 		//global $aoMembersDB;
@@ -169,7 +169,7 @@ class pasGet{
         //);
         //self::$_userStats = $AO_DB->con->prepare(
             //"SELECT money, tokens, prestige, m_marker FROM $users WHERE $UID = ?"
-	}
+	}*/
 	
     public static function init(){
         global $AO_DB;
@@ -828,5 +828,5 @@ class pasGet{
     }	
 }
 pasGet::init();
-pasGet::userInit();
+//pasGet::userInit();
 ?>

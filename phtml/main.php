@@ -26,7 +26,7 @@ secure::validate();
 //userLoggin!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
 //$loggedIn = false;
-
+/*
 if(isset($_SESSION) OR isset($_SESSION['uname']) )	
 {
     $uname = $_SESSION['uname'];
@@ -38,7 +38,7 @@ else
 {
 	$loggedIn = false;
 	$uname = 'guest';
-}
+}*/
 //slots
 //$isSlots = false;
 function hrefVoid(){
@@ -87,9 +87,9 @@ eS();
         <a id='addFunds' class='tooltip'>Store</a><br>
 		
 <?php
-//secure::validate();
+secure::validate();
 
-if( $loggedIn ){?>
+if( loggedIn() ){?>
 
         <a id='mem' href='<?php
             echo rootURL() .'members-page.php'; ?>'>Members</a><br>
@@ -122,7 +122,7 @@ else{?>
 			
             <ul>
 <?php
-if($loggedIn = false){?>
+if(!loggedIn() ){?>
                 <li><a id='reg' class='button Register' href='<?php
                     echo rootURL() . 'registerUser.php';
                 ?>'>Register</a></li>
