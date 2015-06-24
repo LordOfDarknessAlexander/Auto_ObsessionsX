@@ -134,7 +134,7 @@ Car View Screen
     css::txtAlignL();
     css::bgColor('grey');
 ?>
-    background: url('../images/defaultBG.jpg') no-repeat 0 0;
+    background: url('../images/icons/divTile.png') repeat 0 0;
     
     font-size:1.5vw;
 }

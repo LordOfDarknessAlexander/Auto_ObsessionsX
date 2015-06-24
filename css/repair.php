@@ -67,7 +67,7 @@ cmntHeader('Repair Screen Styles');
     //scrollY();
     css::txtAlignL();
 ?>
-    background:url('../images/defaultBG.jpg') no-repeat 0 0;
+    background: url('../images/icons/divTile.png') repeat 0 0;
     /*background-color:grey;*/
     
     font-size:1.25vw;
