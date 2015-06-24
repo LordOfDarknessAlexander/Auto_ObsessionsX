@@ -57,6 +57,20 @@ var jq = {
         jq.error.text(funcName + ',\nError:' + info);
         jq.error.show();
     },
+    enableBtn:function(jqo){
+        var def = {
+            opacity:'1.0',
+            cursor:'pointer'
+        };
+        return jqo.off().css(def);
+    },
+    disableBtn:function(jqo){
+        var tc = {
+            opacity:'0.45',
+            cursor:'default'
+        };
+        return jqo.off().css(tc);
+    },
     //ajaxFail:function(jqxhr){
         //default failure message when an Ajax call fails
         //jq.setErr('<?php echo $funcName;?>', 'ajax call failed! Reason: ' + jqxhr.responseText);
@@ -107,10 +121,6 @@ var jq = {
 	},
 	Garage : {
 		menu : $('div#Garage'),
-		backBtn : $('div#Garage button#backBtn'),
-		selectBtn:$('div#Garage button#select'),
-		viewBtn:$('div#Garage button#viewCar'),
-        shopBtn:$('div#Garage button#shop'),
 		//
         toggle : function()
 		{	//from game menu to garage, or vice versa

@@ -12,6 +12,10 @@
     //div:$('div#Garage div#userCar');
 //}
 //jq.Garage.divSelectCar = $('div#Garage div#selectedCar');
+jq.Garage.backBtn = $('div#Garage button#backBtn');
+jq.Garage.selectBtn = $('div#Garage button#select');
+jq.Garage.viewBtn = $('div#Garage button#viewCar');
+jq.Garage.shopBtn = $('div#Garage button#shop');
 
 var userGarage = [
 	//Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969'),
@@ -52,7 +56,57 @@ function getCar(carID){
     }
     return null;
 }
-
+//
+//jq callbacks
+//
+function setCurCar(){
+    //selects the vehicle the user is currently viewing
+	if(_selCID){
+		Garage.setCurrentCar();
+        setHomeImg();	//set home car image
+	}
+}
+function viewCar(){
+    //
+	if(_selCID){
+        jq.AuctionSell.backBtn.off().click(
+        function(){
+            jq.AuctionSell.menu.hide();
+            jq.CarView.menu.show();
+            jq.carImg.show();
+            jq.setErr();    //clear error when changing pages
+            //appState = GAME_MODE.CAR_VIEW;
+        });
+		jq.CarView.menu.toggle();
+        jq.Garage.menu.hide();
+		CarView.init(); 
+        jq.setErr();    //clear error when changing pages        
+	}
+	//else, do nothing, user has not clicked on a car
+}
+function toRepairShop(){
+    //transition from garage to repair
+    if(_curCarID != 0){
+        //rebind repair back button to return us to this page
+        jq.RepairShop.backBtn.off().click(
+            function(){
+                jq.RepairShop.menu.hide();
+                setStatBar();
+                jq.Garage.menu.show();
+                Garage.init();
+                jq.carImg.hide();
+                jq.adBar.hide();
+                jq.setErr();
+            }
+        );
+        jq.Garage.menu.hide();
+        Repair.init();
+        
+        jq.carImg.show();
+        setAdBG();
+        jq.setErr();    //clear error when changing pages
+    }
+}
 //copy constructed car, altering currentCar doesn't change usergarage[0],
 //retain the index instead and access directly to mdoify.
 //value of null means no selection
@@ -101,8 +155,8 @@ var Garage = {
 	//__selCID : null,	//user's selected car index
 	//toJSON:function(){//serialize Garage._curCarIndex},
 	//fromJSON:function(){this._curCarIndex = index;},
-	init : function()
-	{	//called to load assests and initialize private vars
+	init : function(){
+        //called to load assests and initialize private vars
 	    //delete userGarage;
 //	    if (_selCID !== null || _selCID !== undefined)
 //	    {
@@ -139,6 +193,12 @@ var Garage = {
         //init user interface elements, current and selected cars and the car buttons
         console.log('calling initUI()');
         var funcName = 'Garage.js Garage::initUI()';
+        
+        var sel = jq.Garage.selectBtn,
+            view = jq.Garage.viewBtn,
+            shopBtn = jq.Garage.shopBtn,
+            opa = {opacity:'1.0', cursor:'pointer'},
+            trans = {opacity:'0.45', cursor:'default'};
 //<php if(loggedIn()){
         //$.when(pas.query.userCar() ).done(
         //function(data){
@@ -148,13 +208,19 @@ var Garage = {
 
         if(_curCarID == 0){
             $('div#Garage #userCar').hide();
+            shopBtn.off().css(trans);
         }
         else{
             Garage.setCurrentCarNoSwap();
+            shopBtn.off().css(opa).click(toRepairShop);
         }
             
         //if(_selCID == 0){
+            //sel.off().css(trans);
+            //view.off().css(trans);
             $('div#selectedCar').hide();
+            jq.disableBtn(sel);
+            jq.disableBtn(view);
         //}
         //else{
             //this.setSelectCar({index:_selCID});
@@ -167,13 +233,13 @@ var Garage = {
         //});
 //<php}>
     },
-	getCurrentCar : function()
-	{	//returns a vehicle, if one is selected or null
+	getCurrentCar : function(){
+        //returns a vehicle, if one is selected or null
 		//return (Garage._curCarIndex !== null && userGarage.length != 0) ? userGarage[Garage._curCarIndex] : null;
         return _curCarID != 0 ? Garage.getCarByID(_curCarID) : null;
 	},
-    getCarByIndex:function(index)
-	{	//returns a vehicle at a specific index, or null or failure
+    getCarByIndex:function(index){
+        //returns a vehicle at a specific index, or null or failure
         //this can potetially be a diffrent car when called,
         //as when using $.ajax to initialize the car list, they may be out of order
 		var len = userGarage.length;
@@ -191,8 +257,8 @@ var Garage = {
         
         return null;
 	},
-    getCarByID:function(id)
-	{   //id is an int > 0
+    getCarByID:function(id){
+        //id is an int > 0
         //returns a vehicle with matching id or null
 		var len = userGarage.length;
         
@@ -210,8 +276,8 @@ var Garage = {
         
         return null;
 	},
-	removeCarByID:function(id)
-	{   //id is an int > 0
+	removeCarByID:function(id){
+        //id is an int > 0
         //returns a vehicle with matching id or null
 		var len = userGarage.length;
         
@@ -331,16 +397,15 @@ var Garage = {
     //toJSON:function(){
         //{Garage:"_curCarID":0, "cars":[]}
     //}
-	save : function()
-	{	//saves garage and current car to local storage
+	save : function(){
+        //saves garage and current car to local storage
 		//
 //<?php
 //if(loggedIn){
         //post user garage to php page to save user cars to sql database
 //}
 //else{?> //playing locally as guest
-		if(Storage.local !== null)
-		{
+		if(Storage.local !== null){
             //if(_curCarIndex !== null){
             //Storage.local['_curCarIndex'] = JSON.stringify(Garage._curCarIndex);
                 //var car = Garage.getCurrentCar();
@@ -418,7 +483,8 @@ var Garage = {
         //}
     },
 	setCurrentCar : function(){
-        var div = $('div#Garage div#userCar');
+        var div = $('div#Garage div#userCar'),
+            shop = jq.Garage.shopBtn;
         
         this.setCurrentIndex();
         
@@ -441,11 +507,14 @@ var Garage = {
 			//div.children('label#name').text(src.children('label#name').text() );
 			
 			this.setCurrentCarStats();
+            
+            jq.enableBtn(shop).click(toRepairShop);
 			
 			div.show();
 		}
         else{
             //no current car
+            jq.disableBtn(shop);
             div.hide();
         }
 	},
@@ -485,7 +554,9 @@ var Garage = {
 		
 		_selCID = i > 0 ? i : 0;	//maintain index, instead of copying a car
 		
-		var car = Garage.getCarByID(i);
+		var car = Garage.getCarByID(i),
+            sel = jq.Garage.selectBtn,
+            view = jq.Garage.viewBtn;
 		
 		if(car != null){ //&& i < userGarage.length){
 			//userGarage[i],
@@ -521,10 +592,15 @@ var Garage = {
             $('button#con', div).text(car.getCondition().toString() );
             
 			div.show();
+            
+            jq.enableBtn(sel).click(setCurCar);
+            jq.enableBtn(view).click(viewCar);
 		}
-		//else{
+		else{
 			//hide selected car div
-		//}
+            jq.disableBtn(sel);
+            jq.disableBtn(view);
+		}
 	},
 	setSelectCarCB : function(obj){
 	    if (obj !== null && obj !== undefined) {
@@ -704,29 +780,7 @@ function setHomeImg(path){
         homeImg.attr('src', path);
     }
 }
-jq.Garage.shopBtn.click(
-function(){
-    if(_curCarID != 0){
-        //rebind repair back button to return us to this page
-        jq.RepairShop.backBtn.off().click(
-            function(){
-                jq.RepairShop.menu.hide();
-                setStatBar();
-                jq.Garage.menu.show();
-                Garage.init();
-                jq.carImg.hide();
-                jq.adBar.hide();
-                jq.setErr();
-            }
-        );
-        jq.Garage.menu.hide();
-        Repair.init();
-        
-        jq.carImg.show();
-        setAdBG();
-        jq.setErr();    //clear error when changing pages
-    }
-});
+jq.Garage.shopBtn.click(toRepairShop);
 $('div#Garage button#sales').click(
 function(){
 	jq.Garage.menu.hide();
@@ -756,53 +810,21 @@ function(){
 	if(_selCID !== null)
 		Garage.setCurrentCar(_selCID);
 });*/
-jq.Garage.viewBtn.click(
-function(){
-    //
-	if(_selCID){
-        jq.AuctionSell.backBtn.off().click(
-        function(){
-            jq.AuctionSell.menu.hide();
-            jq.CarView.menu.show();
-            jq.carImg.show();
-            jq.setErr();    //clear error when changing pages
-            //appState = GAME_MODE.CAR_VIEW;
-        });
-		jq.CarView.menu.toggle();
-        jq.Garage.menu.hide();
-		CarView.init(); 
-        jq.setErr();    //clear error when changing pages        
-	}
-	//else, do nothing, user has not clicked on a car
-});
-jq.Garage.selectBtn.click(
-function(){
-    //selects the vehicle the user is currently viewing
-	if(_selCID){
-		Garage.setCurrentCar();
-
-        setHomeImg();	//set home car image
-	}
-});
+jq.Garage.viewBtn.click(viewCar);
+jq.Garage.selectBtn.click(setCurCar);
 //
 //Car view jq bindings
 //
-jq.CarView.selectBtn.click(
-function(){
-    if(_selCID){
-		Garage.setCurrentCar();
-        setHomeImg();	//set home car image
-	}
-});
+jq.CarView.selectBtn.click(setCurCar);
 jq.CarView.backBtn.click(
-function () {
-   
-    //<php
+function(){   
+//<php
     var funcName = 'Garage.js jq.CarView.backBtn.click()';
-    //>
-    //<php
-    //if(loggedIn()){>
+//>
+//<php
+//if(loggedIn()){>
     userGarage = [];    //clear previous entries
+    
     jq.get('pas/query.php?op=gug',
         function (data) {
             //the response string is converted by jquery into a Javascript object!
