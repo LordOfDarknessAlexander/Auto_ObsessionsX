@@ -116,6 +116,7 @@ var AuctionSelect = {
             srcLocal = data.src,
             path = /*getHostPath() +*/ 'images/cars/' + srcLocal,
             hasCar = data.hasCar,
+            hasSoldCar = data.hasSoldCar,
             hasLostCar = data.hasLostCar,
             liID = 'asli' + (i).toString(),
             //btnID = "as" + (i).toString(),
@@ -138,7 +139,7 @@ var AuctionSelect = {
             div = $(liName),
             btn = $('button', div);
 
-        if(hasCar){
+        if(hasCar || hasSoldCar){
         	//display but disable user from entering auction
             div.css(tc).addClass('owned');
             btn.off().click(this.denyAuction).css(defCrsr);

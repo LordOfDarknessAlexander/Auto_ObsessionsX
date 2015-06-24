@@ -272,7 +272,7 @@ function incMarkers(){
     //else no valid get args!
     //exit();
 //}
-if($ps){
+if(isSetP() ){
     $CID = ao::CID;
     $OP = 'op';
     $DT = 'drivetrain';
@@ -281,6 +281,8 @@ if($ps){
     $D = 'docs';
     $R = 'repairs';
 
+    //eP();
+    
     if(isset($_POST['carID'])){
         //
         $carID = isUINT($_POST['carID']) ? intval($_POST['carID']) : exit('_POST at carID invalid value');   //is_int($_POST['carID']) ? intval($_POST['carID']) : 0;
@@ -290,7 +292,8 @@ if($ps){
 		//echo $carID;
 		//exit();
         //switch the operation besed on value passed in url
-        if($gs){
+        if(isSetG() ){
+            //eG();
             //args being passed via the url
             if(isset($_GET[$OP]) ){
                 $op = isAlpha($_GET[$OP]) ? $_GET[$OP] : '';
@@ -314,7 +317,9 @@ if($ps){
                         //
                         //$p = isFloat($_POST[$P]) ? floatval($_POST[$P]) : exit;
                         //$uf = user::getFunds();  //current user funds
-                        
+                        //$nf = user::decFunds($p);
+                        //$delta = $uf - nf;
+                        //if($delta > 0.0000008){
                         $tableName = getUserTableName();
                         
                         $dt = Vehicle::getRandStage();

@@ -363,18 +363,20 @@ var Garage = {
 			//_selCID = obj.data.index;
 	//},
     setCurrentCarStats:function(){
-        if(_curCarID !== 0){
-            var div = $('div#Garage div#userCar'),
-                car = Garage.getCurrentCar(); //userGarage[this._curCarIndex],
-                stats = car.getStats();
-            
+        //if(_curCarID !== 0){
+        var div = $('div#Garage div#userCar'),
+            car = Garage.getCurrentCar(); //userGarage[this._curCarIndex],
+        
+        if(car !== null){
+            var stats = car.getStats();
+        
             $('img#carImg', div).attr('src', car.getFullPath() );
             $('label#carName', div).text(car.getFullName() );
             $('label#carInfo', div).text(car.getInfo() );
 //<php
 //function pbSetColor($str){
-    //sets the color of an html progress bar (using jQuery) named pb$str based on the property stats._$str;?>
-    //pbSetColor($('progress#pb<?php echo $str;?>', div), stats.<php echo $str;?>);
+//sets the color of an html progress bar (using jQuery) named pb$str based on the property stats._$str;?>
+//pbSetColor($('progress#pb<?php echo $str;?>', div), stats.<php echo $str;?>);
 //<?php
 //}
 //pbSetColor('Drivetrain');
@@ -382,17 +384,19 @@ var Garage = {
 //pbSetColor('Interior');
 //pbSetColor('Docs');
 //?>
-            //set progress bar
+        //set progress bar
             pbSetColor($('progress#pbDrivetrain', div), stats._driveterrain);
             pbSetColor($('progress#pbBody', div), stats._body);
             pbSetColor($('progress#pbInterior', div), stats._interior);
             pbSetColor($('progress#pbDocuments', div), stats._docs);
             
             $('button#con', div).text(car.getCondition().toString() );
-			 //$('button#con', div).text(car.getRandCondition().toString() );
-			
+         //$('button#con', div).text(car.getRandCondition().toString() );
+            div.show();
         }
-        //else hide div!
+        else{
+            div.hide();
+        }
     },
     setCurrentIndex:function(){
         if(!_selCID){
@@ -468,7 +472,7 @@ var Garage = {
 			
 			this.setCurrentCarStats();
 			
-			div.show();
+			//div.show();
 		}
         else{
             //no current car

@@ -23,7 +23,7 @@ function getUserPurchases(){
     
     return array(
         'carsOwned'=>pasGet::userCarCount(),
-        'carsPurch'=>0,
+        'carsPurch'=>pasGet::getTotalUserCarCount(),
         'urPurch'=>0,
         'carsSold'=>pasGet::userSalesCount(),
         'remain'=>pasGet::getRemainingCarCount(),

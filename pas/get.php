@@ -97,8 +97,8 @@ function auctionCarInfoFromArray($r){
         $P=>floatval($r[$P]),       //unmodified price of vehicle
         //
         'hasCar'=>hasCar($cid),   //does user have this car?
-        'hasLostCar'=>hasLostCar($cid)   //did the user lose the auction for this car
-        //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
+        'hasLostCar'=>hasLostCar($cid),   //did the user lose the auction for this car
+        'hasSoldCar'=>hasSoldCar($cid)   //does user have this car?
     );
 }
 class pasGet{
@@ -138,12 +138,6 @@ class pasGet{
 		
 		self::$_login =  $AO_DB->con->prepare(
             "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
-			
-			
-			
-			
-			
-			
         );
 	//	self::$_allUsers = $AO_DB->con->prepare(
      //    "SELECT * FROM $users"    //returns an array of all user data

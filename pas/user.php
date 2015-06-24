@@ -57,8 +57,8 @@ class user{
             $U = 'users';
             $UID = ao::UID;
             $uid = strval(getUID() );
-            $v = mysqli_real_escape_string($AO_DB->con, $values);
-            $q = "UPDATE $U SET $v WHERE $UID = $uid";
+            //$v = mysqli_real_escape_string($AO_DB->con, $values);
+            $q = sql::update($U, $values) . " WHERE $UID = $uid";
             //echo $q;
             return $AO_DB->query($q);
             //$ret = $AO_DB->query($q);

@@ -1,7 +1,7 @@
 <?php
 //The contents of this document is for 851 Entertainment staff and authorized affiliates
 //It's content is subject to trade secret and not to be publicly accessed!
-require_once '../include/html.php';
+require_once '../html.php';
 //
 function br(){?>
 <br>

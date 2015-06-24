@@ -111,6 +111,17 @@ class sql{
         }
         return '';
     }
+    public static function update($table, $vals){
+        global $AO_DB;
+        
+        if(is_string($table) && is_string($vals) ){
+            $t = mysqli_real_escape_string($AO_DB->con, $table);
+            $v = mysqli_real_escape_string($AO_DB->con, $vals);
+            
+            return "UPDATE $t SET $v";
+        }
+        return '';
+    }
 }
 //class user{
     function getUID(){
@@ -179,6 +190,27 @@ class sql{
             //query failed, user has no entry in database
             //$er = sqlError($aoUsersDB);
             //echo "pas/meta.php hasLostCar($id), sql query failed:($er->no), reason: $er->info";
+        }
+        
+        return $ret;
+    }
+    function hasSoldCar($id){
+        //does the user's table in aoUsersDB already have an entry with car_id '$id'
+        global $aoCarSalesDB;
+        
+        $ret = false;
+        $CID = ao::CID;
+       
+        $res = $aoCarSalesDB->query(
+            sql::slctAllFromUserTable() . " WHERE $CID = $id"
+        );
+        
+        if($res){
+            $ret = $res->num_rows != 0 ? true : false;
+            $res->close();
+        }
+        else{
+            $aoCarSalesDB->eErr();
         }
         
         return $ret;

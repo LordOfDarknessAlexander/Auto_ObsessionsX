@@ -222,6 +222,23 @@ pre#info{
     /*opacity:50%;*/
 }
 /*
+Divs
+*/
+div#filter{
+    font-size:1.5vw;
+<?php
+    posAbs();
+    css::txtAlignL();
+?>
+	left:1%;
+    top:30%;
+	width:8%;
+}
+div#filter div button{
+    width:100%;
+<?php css::txtAlignCntr();?>
+}
+/*
 Document root
 */
 .wrapper{

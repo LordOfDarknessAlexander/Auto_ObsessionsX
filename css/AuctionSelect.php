@@ -38,21 +38,6 @@ Action Select UI stylings
     bottom:0%;
     left:10%;
 }
-<?php divAS();?> div#filter
-{
-    font-size:1.5vw;
-<?php
-    posAbs();
-    css::txtAlignL();
-?>
-	left:1%;
-    top:30%;
-	width:8%;
-}
-<?php divAS();?> div#filter div button{
-    width:100%;
-<?php css::txtAlignCntr();?>
-}
 /*
 Tint divs different colours for different classes
 */

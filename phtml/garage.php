@@ -32,7 +32,8 @@ cvStatBar('Documents');
    <!-- <h1>Garage</h1>  -->
 <?php
     backBtn();
-    selectBtn();	
+    selectBtn();
+    carFilter();
 ?>
     <!--div id='filter'>Filters<hr>
         <div id='stage'>stage<br>
