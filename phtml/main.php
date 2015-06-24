@@ -134,7 +134,8 @@ if(!loggedIn() ){?>
                     echo loggedIn()? 'Game' : 'as Guest';
                 ?></a></li>
             </ul>
-   
+<?php
+if(!loggedIn() ){?>   
 			<div id="loginfields">
 				<h2>Login</h2>
 				<form action="login.php" method="post">
@@ -145,7 +146,8 @@ if(!loggedIn() ){?>
 					<p><input id="submit" type="submit" name="submit" value="Login"></p>
 				</form>
 			</div>
-			
+<?php
+}?>			
             <?php require 'phtml/legal.php';?>
 		</div>
 	
