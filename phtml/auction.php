@@ -87,7 +87,7 @@ function outputCar($args){
     homeBtn();
 ?>
     <button id='bid'>Bid:money</button>
-    <button id='buyout'>Buyout</button>
+  <button id='buyout'>Buyout</button> 
     <!--auctionCar will be <img id=userCar'>.
     The code can be streamlined with jQuery in JS-->	
     <!--label id='carPrice'></label-->
@@ -101,7 +101,7 @@ function outputCar($args){
         <progress id='ai3'></progress>
         <progress id='user'></progress>
         <progress id='going'></progress>
-    </div>
+    </div> 
     <!--div id='bids'>
         <label id='b0'></label>
         <label id='b1'></label>
