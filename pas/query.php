@@ -174,7 +174,12 @@ if($gs){
         pasGet::auctionCars();
         exit();
     }
-
+    
+    if($op == 'gus'){
+        //get user stats
+        echo json_encode(user::getStats() );
+        exit();
+    }
     if($op == 'gucc'){
         //echo json_encode(pasGet::currentCar() );
         exit();

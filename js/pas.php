@@ -35,13 +35,12 @@ $funcName = "$fileName, pas::insertCar(auction)";
             function(data){
                 //the response string is converted by jquery into a Javascript object!
                 <?php isValidData();?>
-                alert('<?php echo "$funcName, Inserting Car into user database! ajax response success!";?>' + JSON.stringify(data) );
+                //alert('<?php //echo "$funcName, Inserting Car into user database! ajax response success!";?>' + JSON.stringify(data) );
                 //car added remove from Auction
                 Auction._car = null;
                 //userGarage.push(Auction._car);
                 //Garage.save();    //not needed as data in maintained by DB
-                ajax_post();    //get user info from server
-                //pas.get.user.stats();
+                pas.get.user.stats();
                 Auction.close();
                 init(); //this exists only within the scope of document.ready()
             },
@@ -128,7 +127,7 @@ $funcName = "$fileName, pas::postUserCarSale(carid)";
 <?php
 $funcName = "$fileName, pas.get.user.funds()";
 ?>
-                /*jq.post('pas/update.php?op=guf',
+                /*jq.post('pas/query.php?op=guf',
                     function(data){
                         //
                         <?php isValidData();?>
@@ -153,11 +152,12 @@ $funcName = "$fileName, pas.get.user.funds()";
             },
             stats:function(){
 <?php $funcName = "$fileName, pas.get.user.stats()";?>
-                /*jq.post('pas/update.php?op=gus',
+                jq.post('pas/query.php?op=gus',
                     function(data){
                         //
                         <?php isValidData();?>
                         //userStats.money = typeof data == 'number' ? data : parseInt(data);
+                        console.log(JSON.stringify(data));
                         //jq.setFunds();
                     },
                     function(jqxhr){
@@ -165,7 +165,6 @@ $funcName = "$fileName, pas.get.user.funds()";
                         jq.setErr('<?php eFN();?>', jqxhr.responseText);
                     }
                 );
-                */
             }
         }
     },

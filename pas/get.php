@@ -17,28 +17,28 @@ class aoPriceRange{
         ELITE = 'elite',
         ALL = 'all';
 }
-/*function aoPriceFromRange($range){
+/*function aoPriceFromRange($range, &$gt, &$lt){
     $ret = array();
 
     if($range == aoPriceRange::LOW){
         $ret[] = 10000.00;
-        $ret[] = 30000.00;
+        $lt = 30000.00;
     }
     elseif($range == aoPriceRange::MID){
         $ret[] = 30000.00;
-        $ret[] = 75000.00;
+        $lt = 75000.00;
     }
     elseif($range == aoPriceRange::HIGH){
         $ret[] = 7.5e4;    //75000
-        $ret[] = 1.5e5;
+        $lt] = 1.5e5;
     }
     elseif($range == aoPriceRange::ELITE){
         $ret[] = 1.5e5;    //150000.00
-        $ret[] = 1.0e16;    //cap of 10 trillion, no car should ever be this expensive
+        $lt = 1.0e16;    //cap of 10 trillion, no car should ever be this expensive
     }
     elseif($range == aoPriceRange::ALL){
         $ret[] = 0.0;
-        $ret[] = 1.0e16;
+        $lt = 1.0e16;
     }
     else{
         echo "invalid value ($range)";
@@ -744,12 +744,12 @@ class pasGet{
         //echo $ret
         return pasGet::auctionCarsCount() - user::getTotalCarCount();
     }
-    public static function gameCompletion(){
+    //public static function gameCompletion(){
         //percentage of cars bought and sold by the user
-        $acCount = pasGet::auctionCarsCount();
+        //$acCount = pasGet::auctionCarsCount();
         
-        return $acCount != 0 ? user::getTotalCarCount() / $acCount : 0.0;
-    }	
+        //return $acCount != 0 ? user::getTotalCarCount() / $acCount : 0.0;
+    //}	
 }
 pasGet::init();
 //pasGet::userInit();

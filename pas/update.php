@@ -319,28 +319,39 @@ if(isSetP() ){
                         $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : exit;
                         //echo $p;
                         $uf = user::getFunds();  //current user funds
-                        //$nf = user::decFunds($p);
-                        //$delta = $uf - nf;
-                        //if($delta > 0.0000008){
-                        $tableName = getUserTableName();
+                        $nf = user::decFunds($p);
+                        $delta = $uf - $nf;
                         
-                        $dt = Vehicle::getRandStage();
-                        $b = Vehicle::getRandStage();
-                        $i = Vehicle::getRandStage();
-                        $d = Vehicle::getRandStage();
-                        $r = Vehicle::getRandRepairs();
+                        //due to floating point (in)percision,
+                        //float are not safe to equate directly
+                        //instead, check if delta is less than an
+                        //epsilon value
+                        if($delta > 0.000008){
+                            //echo 'bought car';
+                            //echo $delta;
                         
-                        //echo "dt:$dt, body:$b, interior:$i, documents:$d, repairs:$r";
-                        $res = $aoUsersDB->query(
-                            "INSERT INTO $tableName
-                                ($CID, $DT, $B, $I, $D, $R)
-                            VALUES
-                                ($carID, $dt, $b, $i, $d, $r)"
-                            //IF entry EXISTS do nothing
-                        );
-                        //}
-                        //res contains the result of the operation
-                        echo json_encode($res);
+                            $tableName = getUserTableName();
+                            
+                            $dt = Vehicle::getRandStage();
+                            $b = Vehicle::getRandStage();
+                            $i = Vehicle::getRandStage();
+                            $d = Vehicle::getRandStage();
+                            $r = Vehicle::getRandRepairs();
+                            
+                            //echo "dt:$dt, body:$b, interior:$i, documents:$d, repairs:$r";
+                            $res = $aoUsersDB->query(
+                                "INSERT INTO $tableName
+                                    ($CID, $DT, $B, $I, $D, $R)
+                                VALUES
+                                    ($carID, $dt, $b, $i, $d, $r)"
+                                //IF entry EXISTS do nothing
+                            );
+                            //res contains the result of the operation
+                            echo json_encode($res);
+                        }
+                        else{
+                            echo 'insufficient funds to purchase vehicle';
+                        }
                     }
                     exit();
                 }

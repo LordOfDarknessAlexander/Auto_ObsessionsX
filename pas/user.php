@@ -46,7 +46,18 @@ class user{
         $UID = ao::UID;
         $q = sql::slctFrom($fields, ao::USERS);
         //echo $q;
-        return $q == '' ? null : $AO_DB->query($q . " WHERE $UID = $uid");
+        if($q != ''){
+            //echo $q;
+            $res = $AO_DB->query($q . " WHERE $UID = $uid");
+            
+            if($res){
+                return $res;
+            }
+            else{
+                $AO_DB->eErr();
+            }
+        }
+        return null;
     }
     public static function updateEntry($values){
         //updates the user's entry in database 'AO_DB' in table 'users'
@@ -75,6 +86,7 @@ class user{
         
         if($res){
             $f = round(floatval($res->fetch_assoc()[$M]), 2);
+            $res->close();
             return $f;    //json_encode($f);
         }
         return 0.0;
@@ -101,7 +113,6 @@ class user{
                 }
             }
             echo 'Operation failed, could not purchase more funds, cap reached!';
-            $rm->close();
             echo json_encode($uf);
         }
         //echo "purchase::funds(), invalid value $f, purchase::failed";
@@ -113,17 +124,16 @@ class user{
         if(is_float($funds) && $funds > 0.0){
             $f = round($funds, 2);  //round currency to 2 decimal places
             $M = user::M;            
-            $uf = user::slctFromEntry($m);  //previous user funds
+            $uf = user::getFunds();  //previous user funds
 
-            $MF = PHP_INT_MAX;
-            $nf = $uf + $f;   //new funds
+            //$MF = PHP_INT_MAX;
+            $nf = $uf - $f;   //new funds
             //echo $nf;
-            if($nf < $MF){
+            if($nf >= 0){
                 //echo $nf;
                 $res = user::updateEntry("$M = $nf");
                 //echo json_encode($res);
                 if($res){
-                    $res->close();
                     return $nf;
                 }
             }
@@ -135,6 +145,7 @@ class user{
         return user::getFunds();
     }
     public static function getStats(){
+        global $AO_DB;
         $CID = ao::CID;
         $M = user::M;
         $T = user::T;
@@ -282,6 +293,12 @@ class user{
     public static function getTotalCarCount(){
         return user::getCarCount() + pasGet::userSalesCount();
     }
+    public static function getGameCompletion(){
+        //percentage of cars bought and sold by the user
+        $acCount = pasGet::auctionCarsCount();
+        
+        return $acCount != 0 ? user::getTotalCarCount() / $acCount : 0.0;
+    }	
     public static function removeCarByID($id){
         //
         global $aoUsersDB;
