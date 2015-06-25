@@ -6,7 +6,7 @@ require_once 'ui.php';
 //
 css::header();
 //
-function divAuction(){?>div#Auction<?php
+function divAuctionSellView(){?>div#AuctionSellView.php
 }
 ?>
 /*
