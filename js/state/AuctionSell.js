@@ -26,7 +26,7 @@ var AuctionSell = {
 			if(as._car !== null){
                 as.addButton();
                 as.toggleCC();
-                
+                as.bindViewBtn();
                 //
                 userSales.push(as);
 				var TOM = 0;
@@ -128,7 +128,8 @@ var AuctionSell = {
                         na.addButton();
 //                      na.restart(); 
 					    na.toggleCC();
-                        
+                        na.bindViewBtn();
+						
 						userSales.push(na);//push new auction
 						var TIM = 0;
                     }
@@ -147,7 +148,7 @@ var AuctionSell = {
                 
                     //na.restart(); 
                     na.toggleCC();
-                    
+                    na.bindViewBtn();
                     //userSales.push(na);
                 }
             }

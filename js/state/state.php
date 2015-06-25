@@ -8,6 +8,7 @@ header('Content-type: application/javascript; charset: UTF-8');
 //require_once 'carView.php';
 require_once 'store.php';
 require_once 'AuctionSelect.php';
+require_once 'SaleView.php';
 require_once 'profile.php';
 //require_once 'AuctionSell.php';
 //require_once 'AuctionSelect.php';

@@ -10,39 +10,15 @@ $tableName =  getUserTableName();
 $fileName = 'js/state/AuctionSelect.php';//__FILE__;
 $funcName = '';
 //
-function das(){?>div#SaleView<?php
+function dsv(){?>div#SaleView<?php
 }
-function eFN(){
-    global $funcName;
-    echo $funcName;
-}
-function isValidData(){
-    //determine if an object(data) is valid,
-    //use to check return from ajax call and output an error to the page
-?>if(data === null || data === undefined){
-    jq.setErr("<?php eFN();?>", 'Ajax response returned null!');
-    return;
-}
-<?php
-
 ?>
+
 jq.SaleView = {
 	menu : $('div#SaleView'),
 	backBtn : $('div#SaleView button#backBtn'),
 	homeBtn : $('div#SaleView button#homeBtn'),
 	carPrice : $('div#SaleView label#carPrice')
-//<php if(debug() ){>,
-	// divPB : $('div#SaleView div#pbCD'),
-	// cdpbG : $('progress#gcd', jq.Auction.divPB),
-	// cdpb0 : $('progress#ai0', jq.Auction.divPB),
-	// cdpb1 : $('progress#ai1', jq.Auction.divPB),
-	// cdpb2 : $('progress#ai2', jq.Auction.divPB),
-	// cdpb3 : $('progress#ai3', jq.Auction.divPB),
-	// going : $('progress#going', jq.Auction.divPB)
-
-//<php
-//}>
-	;
 };
 var SaleView = {
 	_auction : null,
