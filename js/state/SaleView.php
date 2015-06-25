@@ -47,7 +47,14 @@ var SaleView = {
         //}
         auctionStop = false;
 		
+		jq.AuctionSell.menu.hide();
+		jq.SaleView.menu.show();
+		
+		setHomeImg();
+		
         var funcName = 'Auction.js, Auction::init()';
+		
+		console.log("Hello");
         
         // $.when(
             // //jq.post(
