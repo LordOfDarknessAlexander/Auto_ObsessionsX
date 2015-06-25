@@ -6,13 +6,13 @@ require_once 'ui.php';
 //
 css::header();
 //
-function divAuctionSellView(){?>div#AuctionSellView.php
+function divSaleView(){?>div#SaleView.php
 }
 ?>
 /*
 Auction Screen
 */
-<?php divAuctionSellView();?>
+<?php divSaleView();?>
 {	/*Auction page stylings*/ 
 	/*background: url('../images/defaultBG.jpg') no-repeat 0 0;*/
 <?php
@@ -27,12 +27,12 @@ Auction Screen
 	height: 100%;
 }
 
-<?php divAuctionSellView();?> li 
+<?php divSaleView();?> li 
 {
 	padding: 5px 0;
 }
 
-<?php divAuctionSellView();?> button#auctionBackButton
+<?php divSaleView();?> button#saleViewButton
 {<?php
     posAbs();
     css::fontBold();
@@ -47,7 +47,7 @@ Auction Screen
 
 
 
-/*<php divAuctionSellView();> label#carPrice
+/*<php divSaleView();> label#carPrice
 {<php
     posAbs();
 >
@@ -61,24 +61,8 @@ Auction Screen
 	top:20%;
 }*/
 
-<?php divAuctionSellView();?> label#carInfo
-{<?php
-    css::fontBold();
-    defaultColor();
-    posAbs();
-    scrollY();
-    //css::size();
-?>
-    display:block;
-	background-image:url('../images/checkers.png');
 
-	width:60%;
-	height:12%;
-
-	left:20%;
-	bottom:0%;
-}
-<?php divAuctionSellView();?> label#carName
+<?php divSaleView();?> label#carName
 {<?php
     css::fontBold();
     defaultColor();
