@@ -5,7 +5,7 @@ $PAGE_TITLE = "Auto Obsessions";
 //$AO_OWNER = "Adam glazer";
 $AO_COPYRIGHT = "Auto Obsessions, C 2014, All Rights Reserved";
 $ROOT_DIR = $_SERVER["DOCUMENT_ROOT"];	//root path on server
-require_once './html.php';
+require_once 'html.php';
 //'session_start();
 //login, query user database to determine current car ID
 
