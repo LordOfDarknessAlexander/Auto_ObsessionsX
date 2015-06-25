@@ -1,4 +1,5 @@
 ﻿//
+//<php if(debug() ){>
 jq.Auction.divPB = $('div#Auction div#pbCD');
 jq.Auction.cdpbG = $('progress#gcd', jq.Auction.divPB);
 jq.Auction.cdpb0 = $('progress#ai0', jq.Auction.divPB);
@@ -8,8 +9,10 @@ jq.Auction.cdpb3 = $('progress#ai3', jq.Auction.divPB);
 jq.Auction.pbUser = $('progress#user', jq.Auction.divPB);
 jq.Auction.going = $('progress#going', jq.Auction.divPB);
 
-jq.Auction.bidBtn = $('button#bid', jq.Auction.menu);
 jq.Auction.buyoutBtn = $('button#buyout', jq.Auction.menu);
+//<php
+//}>
+jq.Auction.bidBtn = $('button#bid', jq.Auction.menu);
 //
 var playerBoughtOut = false; //temporary for our dev button "buyout"
 

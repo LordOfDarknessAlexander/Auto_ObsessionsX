@@ -45,28 +45,6 @@ class aoPriceRange{
         return $ret;
     }
 }*/
-/*
-class sql{
-    public static function selectAll($tableName){
-        $str = mysql_real_escape_string($tableName);
-        return "SELECT * FROM $str";
-    }
-    public static function selectAll($tableName, $rows){
-        //single identifier, or comma separated list of identifiers
-        //isArgList($rows)
-        return "SELECT $rows FROM $tableName";
-    }
-    public static function selectWhere($tableName, $rows, $cond){
-        //single identifier, or comma seperated list of identifiers
-        $r = mysql_real_escape_string($rows);
-        return "SELECT $rows FROM $tableName WHERE $cond";
-    }
-    public static function selectAllFromUser(){
-        //selects all entries in database with a user table entry
-        $userID = getUserTableName();
-        return "SELECT * FROM $userID";
-    }
-}*/
 function asCarInfoFromArray($r){
     //returns data to display elements in Auction Select
     $CID = ao::CID;
@@ -523,25 +501,7 @@ class pasGet{
                 $cars[] = auctionCarInfoFromArray($row);//array(
             }
         }
-        /*$res = $AO_DB->query(
-            "SELECT * FROM $aoCars"
-        );
         
-        if($res){        
-            while($row = mysqli_fetch_array($res) ){
-                $carID = intval($row['car_id']);
-                $cars[] = array(
-                    'carID' => $carID,
-                    'hasCar' => hasCar($carID)   //does user have this car?
-                    //'hasLostCar' => hasLostCar($carID)   //did the user lose the auction for this car
-                    //'hasSoldCar' => hasSoldCar($carID)   //does user have this car?
-                );
-            }
-            $res->close();
-        }
-        else{   //The no entries in table
-            //echo "<p class='error'>User: has no entries in database</p>";
-        }*/
         echo json_encode($cars);
     }
     public static function auctionCarsByType($carType){
@@ -702,32 +662,6 @@ class pasGet{
         }
         return array();
     }
-    public static function userCarCount(){
-        //returns the number of entries in user's database(garage)
-        global $aoUsersDB;
-        $uid = getUserTableName();
-        //$count is initialized when this is called for the first time
-        $count = 0;
-        //this should only execute once
-        $res = $aoUsersDB->query(
-            "SELECT * FROM $uid"
-        );
-        
-        if($res){  
-            $count = $res->num_rows;
-            //fetch each entry until there are no more
-            //while($row = mysqli_fetch_array($res) ){
-                //$count += 1;
-            //}
-            $res->close();
-        }
-        else{
-            //query failed, no entries in table
-            $aoUsersDB->eErr();
-        }
-        
-        return $count;
-    }
     //public static function getAuctionWins(){
         //returns how many auctions the user has won
         //carCount + salesCount();
@@ -750,7 +684,7 @@ class pasGet{
     }
     public static function auctionAvg(){
         //returns aver ratio of wins/losses
-        $wins = pasGet::getTotalUserCarCount();
+        $wins = user::getTotalCarCount();
         $loss = pasGet::auctionLosses();
         $diff = $wins - $loss;
         $total = $wins + $loss;
@@ -804,21 +738,17 @@ class pasGet{
     //public static function getRemainingCars(){
         //returns an array of cars the user still has to purchase
     //}
-    public static function getTotalUserCarCount(){
-        //total cars ever purchased by the user
-        return pasGet::userCarCount() + pasGet::userSalesCount();
-    }
     public static function getRemainingCarCount(){
         //returns the number of cars the user still has to purchase
         //$ret = getAuctionCarsCount() - (getUserCarCount() + getUserSalesCount() );
         //echo $ret
-        return pasGet::auctionCarsCount() - pasGet::getTotalUserCarCount();
+        return pasGet::auctionCarsCount() - user::getTotalCarCount();
     }
     public static function gameCompletion(){
         //percentage of cars bought and sold by the user
         $acCount = pasGet::auctionCarsCount();
         
-        return $acCount != 0 ? pasGet::getTotalUserCarCount() / $acCount : 0.0;
+        return $acCount != 0 ? user::getTotalCarCount() / $acCount : 0.0;
     }	
 }
 pasGet::init();

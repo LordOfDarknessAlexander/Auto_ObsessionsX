@@ -168,7 +168,10 @@ if(isset($_POST) && !empty($_POST) ){
                         $res = false;
                        
                         $res = $aoUsersDB->query(
-                            "INSERT INTO $tableName (car_id, drivetrain, body, interior, docs, repairs) VALUES ($carID, 0,0,0,0,0)"
+                            "INSERT INTO $tableName
+                                (car_id, drivetrain, body, interior, docs, repairs)
+                            VALUES
+                                ($carID, 0,0,0,0,0)"
                             //IF entry EXISTS do nothing
                         );
                         echo json_encode($res);

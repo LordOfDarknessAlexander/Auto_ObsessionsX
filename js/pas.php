@@ -27,9 +27,9 @@ function isValidData(){
 ?>
 var pas = {
     //namespace encapsulating AJAX requests calling SQL commands via a php page
-    insertCar:function(vehicleID){
+    insertCar:function(auction){
 <?php
-$funcName = "$fileName, pas::insertCar(vehicleID)";
+$funcName = "$fileName, pas::insertCar(auction)";
 ?>        
         jq.post('pas/update.php?op=insert',
             function(data){
@@ -54,7 +54,7 @@ $funcName = "$fileName, pas::insertCar(vehicleID)";
                 Auction.close();
                 //init(); //this exists only within the scope of document.ready()
             },
-            {carID:vehicleID}
+            {carID:auction._car.id, price:auction.currentBid}
         );      
     },
     insertLoss:function(vehicleID){

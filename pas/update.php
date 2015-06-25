@@ -315,8 +315,10 @@ if(isSetP() ){
                     else{
                         //if($AO_DB->query() ){
                         //
-                        //$p = isFloat($_POST[$P]) ? floatval($_POST[$P]) : exit;
-                        //$uf = user::getFunds();  //current user funds
+                        $P = 'price';
+                        $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : exit;
+                        //echo $p;
+                        $uf = user::getFunds();  //current user funds
                         //$nf = user::decFunds($p);
                         //$delta = $uf - nf;
                         //if($delta > 0.0000008){

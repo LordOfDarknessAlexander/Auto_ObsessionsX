@@ -348,7 +348,7 @@ Auction.sold = function(){
             sl.html('Congratulations!<br>You won the auction for the ' + n + '<br>Go to the garage to view your prize!');
 //<php if(loggedIn){>
 			//Auction._car.repairs == Auction.vcondition;
-            pas.insertCar(Auction._car.id);
+            pas.insertCar(Auction);
 //<php
 //}
 //else{?>

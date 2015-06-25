@@ -70,7 +70,7 @@ class user{
         return null;
     }
     public static function getFunds(){
-        $M = 'money';
+        $M = user::M;
         $ret = user::slctFromEntry($M);
         
         if($ret){
@@ -84,7 +84,7 @@ class user{
         //$funds:float, value to increment user's current funds
         if(is_float($funds) && $funds > 0.0){
             $f = round($funds, 2);  //round currency to 2 decimal places
-            $M = 'money';            
+            $M = user::M;            
             $uf = user::slctFromEntry($m);  //previous user funds
 
             $MF = PHP_INT_MAX;
@@ -112,7 +112,7 @@ class user{
         //$funds:float, value to decrement user's current funds
         if(is_float($funds) && $funds > 0.0){
             $f = round($funds, 2);  //round currency to 2 decimal places
-            $M = 'money';            
+            $M = user::M;            
             $uf = user::slctFromEntry($m);  //previous user funds
 
             $MF = PHP_INT_MAX;
@@ -171,7 +171,7 @@ class user{
         return 0;
     }
     public static function setFunds($val){
-        $M = 'money';
+        $M = user::M;
         //$uf = user::getFunds();
         //$nf = $uf + $val;
         
@@ -251,6 +251,36 @@ class user{
             }
         }
         return null;
+    }
+    public static function getCarCount(){
+        //returns the number of entries in user's database(garage)
+        global $aoUsersDB;
+        $uid = getUserTableName();
+        $CID = ao::CID;
+        //$count is initialized when this is called for the first time
+        $count = 0;
+        //this should only execute once
+        $res = $aoUsersDB->query(
+            "SELECT $CID FROM $uid"
+        );
+        
+        if($res){  
+            $count = $res->num_rows;
+            //fetch each entry until there are no more
+            //while($row = mysqli_fetch_array($res) ){
+                //$count += 1;
+            //}
+            $res->close();
+        }
+        else{
+            //query failed, no entries in table
+            $aoUsersDB->eErr();
+        }
+        
+        return $count;
+    }
+    public static function getTotalCarCount(){
+        return user::getCarCount() + pasGet::userSalesCount();
     }
     public static function removeCarByID($id){
         //

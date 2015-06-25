@@ -18,10 +18,10 @@ html::charset();
 </head>
 <body>
 <div id='container'>
-<div id="header">
+<div id='header'>
     <h1>Registration</h1>
-    <div id="reg-navigation">
-        <a href="index.php">Cancel</a><br>
+    <div id='reg-navigation'>
+        <a href='index.php'>Cancel</a><br>
     </div>
 </div>
 <div id='nav'><!--The side menu column contains the vertical menu-->
@@ -136,24 +136,31 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$users = ao::USERS;
         $UID = ao::UID;
         $CID = ao::CID;
-       // $getUID = $AO_DB->prepare(
-          //  "SELECT user_id FROM $users WHERE email = '$e' "
-      //  );
+        $E = 'email';
+        //
+        $UN = 'uname';
+        $FN = 'fname';
+        $LN = 'lname';
         
 		$result = $AO_DB->query(
-            "SELECT $UID FROM $users WHERE email = '$e' "
+            "SELECT $UID FROM $users WHERE $E = '$e' "
         ); 	
 		
         if(mysqli_num_rows($result) == 0){
 			//The mail address was not already registered therefore register the user in the users table
 			//pasCreate::userAccount($userInfo);
-            $email_code = md5($_POST['uname'] + microtime());
+            $M = 'money';
+            $T = 'tokens';
+            $P = 'prestige';
+            $MM = 'm_marker';
+            
+            $email_code = md5($_POST[$UN] + microtime());
             //$addNewUser = $AO_DB->con->prepare();
 			$result = $AO_DB->query(
                 "INSERT INTO $users(
-                    $UID, uname, title, fname, lname,
-                    $CID, money, tokens, prestige, m_marker,
-                    user_level, email, psword,
+                    $UID, $UN, title, $FN, $LN,
+                    $CID, $M, $T, $P, $MM,
+                    user_level, $E, psword,
                     registration_date, confirm
                 )VALUES(
                     '', '$uname', '$title', '$fn', '$ln',
@@ -171,12 +178,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                // register_User($register_email,$uname,$email_code);
 			   $sender = 'From: auto_obsessions@851entertainment.com';
 			   $subject = 'Auto-Obsessions Registration';
-			   $body = "thanks for registering " .$uname. " \n\n click the link below to activate your account :\n\n http://851entertainment.com/Auto_ObsessionsX/activate.php?email=" .$e. "&email_code= " .$email_code. "\n\n - auto-obsessions;";
+			   $body = "thanks for registering $uname \n\n click the link below to activate your account :\n\n http://851entertainment.com/Auto_ObsessionsX/activate.php?email=$e&email_code=$email_code \n\n - auto-obsessions;";
 			   mail($e, $subject, $body, $sender);
                 //res = pasGet::userLogin($e, $uname);
                 
                 $res = $AO_DB->query(
-                    "SELECT $UID FROM $users WHERE (email ='$e' AND uname = '$uname')"
+                    "SELECT $UID FROM $users WHERE ($E ='$e' AND $UN = '$uname')"
                 );
                 
                 if($res){
@@ -211,7 +218,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				echo "<h2>System Error</h2>
 				<p class='error'>You could not be registered due to a system error. We apologize for the inconvenience.</p>";
 				// Debugging message:
-				echo mysqli_error($AO_DB->con) . PHP_EOL;
+				$AO_DB->eErr();
 			} // End of if ($result)
 			// Include the footer and stop the script
             require 'phtml/legal.php';
