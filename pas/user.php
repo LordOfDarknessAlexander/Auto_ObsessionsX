@@ -71,9 +71,9 @@ class user{
     }
     public static function getFunds(){
         $M = user::M;
-        $ret = user::slctFromEntry($M);
+        $res = user::slctFromEntry($M);
         
-        if($ret){
+        if($res){
             $f = round(floatval($res->fetch_assoc()[$M]), 2);
             return $f;    //json_encode($f);
         }
