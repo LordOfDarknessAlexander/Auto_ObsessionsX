@@ -30,7 +30,7 @@ function getUserPurchases(){
         'wins'=>user::getTotalCarCount(),
         'losses'=>pasGet::auctionLosses(),
         'avg'=>pasGet::auctionAvg(),
-        'comp'=>user::gameCompletion()
+        'comp'=>user::getGameCompletion()
     );
 }
 
