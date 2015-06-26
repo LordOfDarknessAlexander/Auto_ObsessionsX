@@ -9,6 +9,7 @@ $paths = array(
     'auction',
     'AuctionSell',
     'LoseAuction',
+    'SaleView',
     //'garage',
     //'profile',
     //'register'

@@ -49,18 +49,16 @@ var SaleView = {
 			
 			jq.AuctionSell.menu.hide();
 			jq.SaleView.menu.show();
-			Auction.init();
+            setHomeImg(index._car.getFullPath() );
+            jq.carImg.show();
+			//Auction.init();
 			
 		//	this.render();
 			
-		
-
   //var funcName = 'Auction.js, Auction::init()';
-   var funcName = 'SaleView.php, Auction::init()';
+        var funcName = 'SaleView.php, Auction::init()';
         console.log('snappers');
-        $.when(
-		
-
+ /*       $.when(
             //jq.post(
                 //'pas/query.php',
                 //{carID:index}
@@ -69,7 +67,7 @@ var SaleView = {
                 type:'POST',
                 url:getHostPath() + 'pas/query.php',
                 dataType:'json',
-                data:{carID:index}
+                data:{carID:index._car.id}
             }).done(function(data){
                 //the response string is converted by jquery into a Javascript object!
                 if(data === null){
@@ -128,7 +126,7 @@ var SaleView = {
             //alert(
             jq.setErr(funcName, 'calling $.when failed! Reason: ' + jqxhr.responseText);
             //console.log('loading game resources failed, abort!');
-        });
+        });*/
         
 		
 		
@@ -247,6 +245,8 @@ function(){
 	//Auction.close();
 	jq.SaleView.menu.hide();
 	jq.AuctionSell.menu.show();
+    //echo "Spit";
+    console.log ("Spit");
     jq.carImg.hide();
     jq.setErr();    //clear error when changing pages	
 });
@@ -255,7 +255,7 @@ jq.SaleView.homeBtn.click(
 function(){
 	//Auction.close();
 	jq.SaleView.menu.hide();
-	jq.GameMenu.menu.show();
+	jq.Game.menu.show();
 	setHomeImg();
     jq.setErr();    //clear error when changing pages	
 });

@@ -483,9 +483,9 @@ function auctionGen(args){
 				}
             }
 		},
-        viewAuction:function(){
+        viewAuction:function(obj){
             //view an auction while it is still active!
-            SaleView.init(this);
+            SaleView.init(obj.data.caller);
         },
         cancelAuction:function(obj){
             //user has decided to not sell car, removing it from userSales
