@@ -138,7 +138,7 @@ class user{
                 }
             }
             //echo 'Operation failed, not enough funds!';
-            $rm->close();
+            //$rm->close();
             return $uf;
         }
         //echo "purchase::funds(), invalid value $f, purchase::failed";
