@@ -1,5 +1,5 @@
 <?php //header('Content-type: application/javascript; charset: UTF-8');
-//Action Select State Object
+//SaleView State Object
 require_once '../../dbConnect.php';
 require_once '../../vehicles/vehicle.php';
 require_once '../../pasMeta.php';
@@ -7,7 +7,7 @@ require_once '../../pasMeta.php';
 $userID = getUID();
 $tableName =  getUserTableName();
 //
-$fileName = 'js/state/AuctionSelect.php';//__FILE__;
+$fileName = 'js/state/SaleView.php';//__FILE__;
 $funcName = '';
 //
 function dsv(){?>div#SaleView<?php
@@ -46,14 +46,17 @@ var SaleView = {
             assetLoader.sounds.bg.play();
         //}
         auctionStop = false;
-		
+			
 			jq.AuctionSell.menu.hide();
-			//jq.SaleView.menu.show();
+			jq.SaleView.menu.show();
+			Auction.init();
+			
 		//	this.render();
 			
 		
 
-  var funcName = 'Auction.js, Auction::init()';
+  //var funcName = 'Auction.js, Auction::init()';
+   var funcName = 'SaleView.php, Auction::init()';
         console.log('snappers');
         $.when(
 		
@@ -81,10 +84,8 @@ var SaleView = {
                     //console.log(Auction._car.getFullName());
                     var p = Auction._car.getPrice();
 				   //vehiclePrice = Auction._car.getAdjustedConditionPrice();
-					//vcondition = Auction._car.getRandCondition();
-					vcondition = Auction._car.getRandCondition();
-					//vcondition = Auction._car.getSelection();
 					
+					vcondition = Auction._car.getRandCondition();
 					vehiclePrice = Auction._car.getPrice() * vcondition/100 ;
 					//vcondition2 = Auction._car.getCondition();
 					//vehiclePrice = Auction._car.getPrice() ;

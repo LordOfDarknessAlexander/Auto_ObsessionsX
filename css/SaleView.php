@@ -14,7 +14,7 @@ Auction Screen
 */
 <?php divSaleView();?>
 {	/*Auction page stylings*/ 
-	/*background: url('../images/defaultBG.jpg') no-repeat 0 0;*/
+/*	background: url('../images/defaultBG.jpg') no-repeat 0 0;*/
 <?php
     posAbs();
     //css::size('100%, '100%');
