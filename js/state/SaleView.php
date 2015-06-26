@@ -22,13 +22,13 @@ jq.SaleView = {
 };
 var SaleView = {
 	_auction : null,
+	ai : [],
 	imgX : 10,
+	currentBid : 0,
 	winningImgY : 34,
-	playerBid : 0,
 	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
 	winningTimerCap : 100.0, //Max amount of time the winningTimer will run for before activating the going timer
 	goingTimer: 0.0, //Timer forcountdown to final sale: going once, going twice, sold
-	playerBidTimer: 0.0, //Slight delay after the player bids to prevent the player from spam bidding
     bidTimerCap: 50, //Max time the bidTimer can go to
 	enemyWinning : false,
 	init:function(index){
@@ -47,93 +47,89 @@ var SaleView = {
         //}
         auctionStop = false;
 		
-		jq.AuctionSell.menu.hide();
-		jq.SaleView.menu.show();
+			jq.AuctionSell.menu.hide();
+			//jq.SaleView.menu.show();
+		//	this.render();
+			
 		
-		setHomeImg();
-		
-        var funcName = 'Auction.js, Auction::init()';
-		
-		console.log("Hello");
-        
-        // $.when(
-            // //jq.post(
-                // //'pas/query.php',
-                // //{carID:index}
-            // //);
-            // $.ajax({
-                // type:'POST',
-                // url:getHostPath() + 'pas/query.php',
-                // dataType:'json',
-                // data:{carID:index}
-            // }).done(function(data){
-                // //the response string is converted by jquery into a Javascript object!
-                // if(data === null){
-                    // alert(funcName + ', Error:ajax response returned null!');
-                    // return;
-                // }
-                // //alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
-                // //do stuff                
-                // Auction._car = Vehicle(data.name, data.make, data.year, data.price, data.id, data.info);
-				
-                // if(Auction._car !== null){
-                    // //console.log(Auction._car.getFullName());
-                    // var p = Auction._car.getPrice();
-				   // //vehiclePrice = Auction._car.getAdjustedConditionPrice();
-					// //vcondition = Auction._car.getRandCondition();
-					// vcondition = Auction._car.getRandCondition();
-					// //vcondition = Auction._car.getSelection();
-					
-					// vehiclePrice = Auction._car.getPrice() * vcondition/100 ;
-					// //vcondition2 = Auction._car.getCondition();
-					// //vehiclePrice = Auction._car.getPrice() ;
-					// //35,200 
-				// //	vcondition2 = vcondition + vcondition2;
-					// //Auction._car.getCondition == vcondition2;
-					
-					// Auction.ai = [
-                        // Enemy(price(p)),
-                        // Enemy(price(p)),
-                        // Enemy(price(p)),
-                        // Enemy(price(p))
-                    // ];
-					// //Auction.currentBid = vehiclePrice * 0.1;
-                    // Auction.currentBid = vehiclePrice * Auction.raisePerc;
-                    // //jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
-            
-                    // context.font = '26px arial, sans-serif';  
 
-                    // jq.Auction.menu.show();		//$('#Auction').show();
-                    // jq.carImg.show();
-                    // setHomeImg(Auction._car.getFullPath() );
-                    
-                    // Auction.setBidBtnText();
-                    
-                    // //$('div#Auction img#auctionCar').attr('src', Auction._car.getFullPath() );
-                   // // $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + Auction._car.getPriceStr() );
-				   // //display vehicle current value based on current random condition
-				  // // $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + vehiclePrice.toFixed(0) + '<br>' + 'condition  ' + vcondition.toFixed(0) + 'condition2  ' + vcondition2 );
-				    // $('div#Auction label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + vehiclePrice.toFixed(0) + '<br>' + 'condition  ' + vcondition.toFixed(0));
-                    // $('div#Auction label#carInfo').text(Auction._car.getInfo() );
-                    // //$('#menu').removeClass('gameMenu');
-                    // //$('#menu').addClass('Auction');
-                    // $('.sound').show();
-                // }
-            // }).fail(function(jqxhr){
-                // //call will fthis.ail if result is not properly formated JSON!
-                // //alert
-                // jq.setErr(funcName, 'ajax call failed! Reason: ' + jqxhr.responseText);
-                // //console.log('loading game resources failed, abort!');
-                // //finished = true;
-            // })
-        // ).done(function(){
-            // //init visuals and display page after state has loaded
-            // Auction.setup();
-        // }).fail(function(){
-            // //alert(
-            // jq.setErr(funcName, 'calling $.when failed! Reason: ' + jqxhr.responseText);
-            // //console.log('loading game resources failed, abort!');
-        // });
+  var funcName = 'Auction.js, Auction::init()';
+        console.log('snappers');
+        $.when(
+		
+
+            //jq.post(
+                //'pas/query.php',
+                //{carID:index}
+            //);
+            $.ajax({
+                type:'POST',
+                url:getHostPath() + 'pas/query.php',
+                dataType:'json',
+                data:{carID:index}
+            }).done(function(data){
+                //the response string is converted by jquery into a Javascript object!
+                if(data === null){
+                    alert(funcName + ', Error:ajax response returned null!');
+                    return;
+                }
+                alert('AuctionSelect::init(), ajax response success!' + JSON.stringify(data) );
+                //do stuff                
+                Auction._car = Vehicle(data.name, data.make, data.year, data.price, data.id, data.info);
+				
+                if(Auction._car !== null){
+                    //console.log(Auction._car.getFullName());
+                    var p = Auction._car.getPrice();
+				   //vehiclePrice = Auction._car.getAdjustedConditionPrice();
+					//vcondition = Auction._car.getRandCondition();
+					vcondition = Auction._car.getRandCondition();
+					//vcondition = Auction._car.getSelection();
+					
+					vehiclePrice = Auction._car.getPrice() * vcondition/100 ;
+					//vcondition2 = Auction._car.getCondition();
+					//vehiclePrice = Auction._car.getPrice() ;
+					//35,200 
+				//	vcondition2 = vcondition + vcondition2;
+					//Auction._car.getCondition == vcondition2;
+					
+					Auction.ai = [
+                        Enemy(price(p)),
+                        Enemy(price(p)),
+                        Enemy(price(p)),
+                        Enemy(price(p))
+                    ];
+					//Auction.currentBid = vehiclePrice * 0.1;
+                    Auction.currentBid = vehiclePrice * Auction.raisePerc;
+                    //jq.Auction.carPrice.text('car value:\n' + Auction._car.getPrice().toFixed(2) );
+            
+                    //context.font = '26px arial, sans-serif';  
+					jq.AuctionSell.menu.hide();
+                    jq.SaleView.menu.show();		//$('#Auction').show();
+                    jq.carImg.show();
+                    setHomeImg(SaleView._car.getFullPath() );
+                   
+				    $('div#SaleView label#carName').html(Auction._car.getFullName() + '<br>' + 'value:' + vehiclePrice.toFixed(0) + '<br>' + 'condition  ' + vcondition.toFixed(0));
+                    $('div#SaleView label#carInfo').text(Auction._car.getInfo() );
+            
+                    $('.sound').show();
+                }
+            }).fail(function(jqxhr){
+                //call will fthis.ail if result is not properly formated JSON!
+                //alert
+                jq.setErr(funcName, 'ajax call failed! Reason: ' + jqxhr.responseText);
+                //console.log('loading game resources failed, abort!');
+                //finished = true;
+            })
+        ).done(function(){
+            //init visuals and display page after state has loaded
+            Auction.setup();
+        }).fail(function(){
+            //alert(
+            jq.setErr(funcName, 'calling $.when failed! Reason: ' + jqxhr.responseText);
+            //console.log('loading game resources failed, abort!');
+        });
+        
+		
 		
 		//this.setup();
 	},
@@ -161,25 +157,25 @@ var SaleView = {
         var btc = this.bidTimerCap;
         
         //static call, to update global enemy bid cooldown counter
-		//Enemy.update();
-		//this._auction.update();
+		Enemy.update();
+		this._auction.update();
         
-		//this.going();
+		this.going();
         
-		// if(auctionEnded){
-			// this.close();		
-		// }
-		// if(endGame){
-			// this.close();					
-		// }
+		 if(auctionEnded){
+			 this.close();		
+		 }
+		 if(endGame){
+			 this.close();					
+		 }
 		
-		//if(!auctionStop){
+		if(!auctionStop){
 		  	this.render();
-		//}
-		//else{
+		}
+		else{
 			//clear drawing when auction stops
-			//context.clearRect(0, 0, canvas.width, canvas.height);
-		//}
+			context.clearRect(0, 0, canvas.width, canvas.height);
+		}
 	  //	Auction.buyOut();
 	},
 	render : function(){
@@ -198,7 +194,7 @@ var SaleView = {
             left = 10;  //left offset to draw the image from
             //bid = this.ai[i].currBid,
             //str = 'Player Bid : $' + this.playerBid.toFixed(2);
-            
+            console.log('drawing bitches');
 		context.drawImage(backgroundImage, 0, 0);
 		context.font = '14px arial, sans-serif';
 		
