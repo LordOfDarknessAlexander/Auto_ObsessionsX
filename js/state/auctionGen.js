@@ -201,6 +201,7 @@ function auctionGen(args){
             //auction end
 			//this._expired = true;
             this.toggleCC();
+			this.bindViewBtn();
 			this._date.end = Date.now() * 0.0001;
 			this._closed = true;
 			//this._curTime = 0.0;
@@ -455,9 +456,36 @@ function auctionGen(args){
 			
             }
         },
-        viewAuction:function(carID){
+		bindViewBtn:function(){
+			 //toggles the cancel/cash button
+            var t = this;   //owning object, not this function
+            
+            if(t._car !== null){
+                var divID = 'div#asd' + (t._car.id).toString(),
+                    btnID = divID + ' div#btns button#view',
+                    btn = $(btnID);
+                    
+				if(!t.isExpired() ){
+					//set cash button, for user to recieve funds
+					var data = {
+						caller:t
+						//cid:this._car.id,
+						//price:this._currentBid
+					};
+					//btn.css({
+					   //'background':"url('images/icons/money.png') no-repeat 0 0",
+					   //'background-size':"100% 100%",
+					//});
+					btn.off().click(data, this.viewAuction);
+				}
+				else{
+					jq.disableBtn(btn);
+				}
+            }
+		},
+        viewAuction:function(){
             //view an auction while it is still active!
-            //Auction.init(carID);
+            SaleView.init(this);
         },
         cancelAuction:function(obj){
             //user has decided to not sell car, removing it from userSales

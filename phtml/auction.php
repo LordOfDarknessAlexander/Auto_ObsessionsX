@@ -158,3 +158,14 @@ function outputCar($args){
         </ul-->
     </div>
 </div>
+<div id='SaleView'>
+    <label id='carName'>--Name--</label>
+<?php
+    backBtn();
+    homeBtn();
+?>
+  
+
+    <label id='carInfo'></label>
+    
+    </div> 
