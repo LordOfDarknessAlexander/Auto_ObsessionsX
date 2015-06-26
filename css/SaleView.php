@@ -17,12 +17,13 @@ Auction Screen
 /*	background: url('../images/defaultBG.jpg') no-repeat 0 0;*/
 <?php
     posAbs();
+	css::defaultTileBG();
     //css::size('100%, '100%');
 ?>
 	display: none;
 	text-align: center;
 	padding-top: 92px;
-	z-index: 10;
+	z-index: 0;
 	width: 100%;
 	height: 100%;
 }
@@ -44,8 +45,6 @@ Auction Screen
 	bottom:0%;
 	left:5%;
 }
-
-
 
 /*<php divSaleView();> label#carPrice
 {<php
@@ -77,4 +76,22 @@ Auction Screen
 	left:20%;
 	top:18%;
     font-size:2vw;
+}
+
+<?php divSaleView();?> label#svCarInfo
+{<?php
+    css::fontBold();
+    defaultColor();
+    posAbs();
+    scrollY();
+    //css::size();
+?>
+    display:block;
+	background-image:url('../images/checkers.png');
+
+	width:60%;
+	height:12%;
+
+	left:20%;
+	bottom:0%;
 }

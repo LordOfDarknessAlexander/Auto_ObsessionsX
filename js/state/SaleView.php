@@ -18,7 +18,8 @@ jq.SaleView = {
 	menu : $('div#SaleView'),
 	backBtn : $('div#SaleView button#backBtn'),
 	homeBtn : $('div#SaleView button#homeBtn'),
-	carPrice : $('div#SaleView label#carPrice')
+	carPrice : $('div#SaleView label#carPrice'),
+	carInfo : $('div#SaleView label#svCarInfo')
 };
 var SaleView = {
 	_auction : null,
@@ -45,15 +46,17 @@ var SaleView = {
             assetLoader.sounds.bg.loop = true;
             assetLoader.sounds.bg.play();
         //}
-        auctionStop = false;
+			//auctionStop = false;
+			this._auction = index;
 			
 			jq.AuctionSell.menu.hide();
 			jq.SaleView.menu.show();
             setHomeImg(index._car.getFullPath() );
             jq.carImg.show();
+			this.setCarInfo();
 			//Auction.init();
 			
-		//	this.render();
+		//this.render();
 			
   //var funcName = 'Auction.js, Auction::init()';
         var funcName = 'SaleView.php, Auction::init()';
@@ -143,7 +146,11 @@ var SaleView = {
         
         jq.carImg.hide();
 	},
-   
+	setCarInfo : function(){
+		var str = this._auction._car !== null ? this._auction._car.getInfo() : '';
+		jq.SaleView.carInfo.text(str);
+		jq.SaleView.carInfo.show();
+	},
     getRaise:function(){
         //returns the current bid plus and additional increase, based on a percentage
         var b = this.currentBid,

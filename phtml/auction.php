@@ -166,6 +166,6 @@ function outputCar($args){
 ?>
   
 
-    <label id='carInfo'></label>
+    <label id='svCarInfo'></label>
     
     </div> 
