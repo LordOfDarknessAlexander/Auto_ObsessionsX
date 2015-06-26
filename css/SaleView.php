@@ -6,7 +6,7 @@ require_once 'ui.php';
 //
 css::header();
 //
-function divSaleView(){?>div#SaleView.php
+function divSaleView(){?>div#SaleView.php<?php
 }
 ?>
 /*
@@ -32,7 +32,7 @@ Auction Screen
 	padding: 5px 0;
 }
 
-<?php divSaleView();?> button#saleViewButton
+<?php divSaleView();?> button#SaleViewButton
 {<?php
     posAbs();
     css::fontBold();
