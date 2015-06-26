@@ -95,3 +95,49 @@ Auction Screen
 	left:20%;
 	bottom:0%;
 }
+
+<?php divSaleView();?> div#_ai
+{<?php
+    posAbs();
+    css::size('18%','10%');
+    css::left('1%');
+    css::top('35%');
+?>
+    background-image:url('../images/slime.png');
+}
+
+<?php divSaleView();?> div#_ai div{
+	width:100%;
+	height:25%;
+	position:absolute;
+}
+
+<?php divSaleView();?> div#_ai div.first{
+	top:0%;
+}
+
+<?php divSaleView();?> div#_ai div.second{
+	top:25%;
+}
+
+<?php divSaleView();?> div#_ai div.third{
+	top:50%;
+}
+
+<?php divSaleView();?> div#_ai div.fourth{
+	top:75%;
+}
+
+<?php divSaleView();?> div#_ai div label{
+	width:50%;
+	text-align:center;
+}
+
+<?php divSaleView();?> div#_ai div label#name{
+	left:0%;
+}
+
+<?php divSaleView();?> div#_ai div label#bid{
+	right:0%;
+}
+

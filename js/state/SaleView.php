@@ -19,7 +19,14 @@ jq.SaleView = {
 	backBtn : $('div#SaleView button#backBtn'),
 	homeBtn : $('div#SaleView button#homeBtn'),
 	carPrice : $('div#SaleView label#carPrice'),
-	carInfo : $('div#SaleView label#svCarInfo')
+	carInfo : $('div#SaleView label#svCarInfo'),
+	_ai : {
+		div : $('div#SaleView div#_ai'),
+		_0 : $('div#SaleView div#_ai div#ai0'),
+		_1 : $('div#SaleView div#_ai div#ai1'),
+		_2 : $('div#SaleView div#_ai div#ai2'),
+		_3 : $('div#SaleView div#_ai div#ai3')	
+	}
 };
 var SaleView = {
 	_auction : null,
@@ -54,6 +61,7 @@ var SaleView = {
             setHomeImg(index._car.getFullPath() );
             jq.carImg.show();
 			this.setCarInfo();
+			this.sortAI();
 			//Auction.init();
 			
 		//this.render();
@@ -81,7 +89,43 @@ var SaleView = {
 	setCarInfo : function(){
 		var str = this._auction._car !== null ? this._auction._car.getInfo() : '';
 		jq.SaleView.carInfo.text(str);
+		//jq.SaleView.carName = this._auction._car.name;
 		jq.SaleView.carInfo.show();
+	},
+	sortAI : function(){
+		
+		
+		var ai = jq.SaleView._ai,
+			ai0 = ai._0,
+			ai3 = ai._3;
+			cb = SaleView._auction._currentBid;
+		
+		var c0 = "first",
+			c1 = "second",
+			c2 = "third",
+			c3 = "fourth";
+		
+		// ai.div.filter(
+			// function(index, element){
+				// console.log("index :" + index.toString() + "element :" + JSON.stringify(element));
+				// var jqo = element.index(index),
+					// label = $("label#bid", jqo),
+					// bid = parseFloat(label.text()),
+					// i = 0,
+					
+					// //return bid == cb;
+				
+			// }
+		// )
+			
+			ai0.removeClass().addClass(c3);
+			ai3.removeClass().addClass(c0);
+			
+		// var css0 = ai0.css(),
+			// css3 = ai3.css();
+		
+		// ai0.animate(css3);
+		// ai3.animate(css0);
 	},
     getRaise:function(){
         //returns the current bid plus and additional increase, based on a percentage
@@ -184,8 +228,6 @@ function(){
 	//Auction.close();
 	jq.SaleView.menu.hide();
 	jq.AuctionSell.menu.show();
-    //echo "Spit";
-    console.log ("Spit");
     jq.carImg.hide();
     jq.setErr();    //clear error when changing pages	
 });
