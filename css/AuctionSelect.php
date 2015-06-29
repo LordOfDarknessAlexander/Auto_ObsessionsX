@@ -41,6 +41,9 @@ Action Select UI stylings
 /*
 Tint divs different colours for different classes
 */
+<?php divAS();?> div#carView div:hover{
+    border:2px green solid;
+}
 <?php divAS();?> div.classic label#infoLabel{
 <?php css::bgColor('yellow');?>
 }

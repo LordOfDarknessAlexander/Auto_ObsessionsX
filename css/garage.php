@@ -100,12 +100,32 @@ User Garage div Stylings
 {	/*styling for list items*/
 	color: white;
 	background-size: 100% 100%;
-	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 	position: relative;
 	width:80px;
 	height:60px;
 	cursor:pointer;
 }
+<?php divGarage();?> li button:hover
+{	/*styling for list items*/
+	color: white;
+	background-size: 100% 100%;
+	position: relative;
+	width:80px;
+	height:60px;
+	cursor:pointer;
+    border: 2px red solid;
+}
+<?php divGarage();?> li button:focus
+{	/*styling for list items*/
+	color: white;
+	background-size: 100% 100%;
+	position: relative;
+	width:80px;
+	height:60px;
+	cursor:pointer;
+    border: 2px green solid;
+}
+
 <?php divGarage();?> li button img{
 <?php
     posAbs();

@@ -47,8 +47,9 @@ class user{
         $q = sql::slctFrom($fields, ao::USERS);
         //echo $q;
         if($q != ''){
-            //echo $q;
+            echo $q . PHP_EOL;
             $res = $AO_DB->query($q . " WHERE $UID = $uid");
+            echo json_encode($res);
             
             if($res){
                 return $res;
@@ -152,7 +153,7 @@ class user{
         $P = user::P;
         $MM = user::MM;
         $ret = user::slctFromEntry("$M, $T, $P, $MM, $CID");
-        
+        //echo json_encode($ret);
         if($ret){
             $a = $res->fetch_assoc();
             $f = round(floatval($a[$M]), 2);
@@ -168,6 +169,9 @@ class user{
                 $MM=>$mm,
                 $CID=>$cid
             );
+        }
+        else{
+            $AO_DB->eErr();
         }
         return null;
     }

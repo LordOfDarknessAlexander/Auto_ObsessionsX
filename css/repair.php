@@ -88,7 +88,9 @@ cmntHeader('Repair Screen Styles');
     left:0%;
 }
 
-
+<?php divRepair();?> div button:hover{
+    border:2px green solid;
+}
 
 <?php divRepair();?> div button.rb{
     background:url('../images/icons/repair.png') no-repeat 0 0;
