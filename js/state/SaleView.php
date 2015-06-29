@@ -18,7 +18,7 @@ jq.SaleView = {
 	menu : $('div#SaleView'),
 	backBtn : $('div#SaleView button#backBtn'),
 	homeBtn : $('div#SaleView button#homeBtn'),
-	carPrice : $('div#SaleView label#carPrice'),
+	carName : $('div#SaleView label#carName'),
 	carInfo : $('div#SaleView label#svCarInfo'),
 	_ai : {
 		div : $('div#SaleView div#_ai'),
@@ -87,45 +87,69 @@ var SaleView = {
         jq.carImg.hide();
 	},
 	setCarInfo : function(){
-		var str = this._auction._car !== null ? this._auction._car.getInfo() : '';
-		jq.SaleView.carInfo.text(str);
-		//jq.SaleView.carName = this._auction._car.name;
-		jq.SaleView.carInfo.show();
+		if(this._auction !== null){
+			var info = this._auction._car !== null ? this._auction._car.getInfo() : '',
+				name = this._auction._car !== null ? this._auction._car.getFullName() : '';
+				
+			jq.SaleView.carInfo.text(info);
+			jq.SaleView.carName.text(name);
+			jq.SaleView.carInfo.show();
+		}
 	},
 	sortAI : function(){
 		
-		
-		var ai = jq.SaleView._ai,
-			ai0 = ai._0,
-			ai3 = ai._3;
-			cb = SaleView._auction._currentBid;
-		
-		var c0 = "first",
-			c1 = "second",
-			c2 = "third",
-			c3 = "fourth";
-		
-		ai.div.filter(
-			function(index, element){
-				console.log("index :" + index.toString() + "element :" + JSON.stringify(element));
-				var jqo = element.index(index),
-					label = $("label#bid", jqo),
-					bid = parseFloat(label.text()),
-					i = 0;
-					
-					return bid == cb;
+		if(SaleView._auction !== null){	
+			var ai = jq.SaleView._ai,
+				child = ai.div.children(),
+				ai0 = ai._0,
+				ai3 = ai._3,
+				cb = SaleView._auction._currentBid;
+			
+			var c0 = 'first',
+				c1 = 'second',
+				c2 = 'third',
+				c3 = 'fourth';
 				
+			
+			var tmpBid = 0.0,
+				i = 0;
+			
+			// for(var e = 0; e < child.length; e++){			
+				// // var c = child[e],
+					// // label = $('label#bid', c),
+					// // bid = parseFloat(label.text());
+				
+				// // if((bid >= tmpBid) && (bid >= cb)){
+					// // tmpBid = bid;
+					// // i = e;
+				// // }	
+			// }
+			var pai = $('div.first', ai.div),
+				cai = child.eq(i);
+				
+			var	pid = pai.attr('id');
+			
+			var	cid = cai.attr('id');
+			
+			if(pid == cid){
+				return;
 			}
-		);
+			var ccls = pai.attr('class');
 			
-			ai0.removeClass().addClass(c3);
-			ai3.removeClass().addClass(c0);
-			
-		// var css0 = ai0.css(),
-			// css3 = ai3.css();
-		
-		// ai0.animate(css3);
-		// ai3.animate(css0);
+			if(ccls == c2){
+				var s = $('div.second', ai.div);
+				s.removeClass().addClass(c2);
+			}
+			else if(ccls == c3){
+				var s = $('div.second', ai.div),
+					t = $('div.third', ai.div);
+					
+				s.removeClass().addClass(c2);	//move second to third
+				t.removeClass().addClass(c3);	//move third to fourth
+			}
+			pai.removeClass().addClass(c1);	//move first to second
+			cai.removeClass().addClass(c0);	//move bidder to first
+		}	
 	},
     getRaise:function(){
         //returns the current bid plus and additional increase, based on a percentage
@@ -225,6 +249,7 @@ var SaleView = {
 
 jq.SaleView.backBtn.click(
 function(){
+	console.log("hit");
 	//Auction.close();
 	jq.SaleView.menu.hide();
 	jq.AuctionSell.menu.show();

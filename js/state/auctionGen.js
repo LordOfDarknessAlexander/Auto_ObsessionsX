@@ -345,8 +345,10 @@ function auctionGen(args){
 			
             for(var i = 0; i < this._ai.length; i++){					
 				if(!this._ai[i].winningBid){	//global cooldown timer has refreshed, bidding now available
-                    this._ai[i].bid(raise);
-                    break;
+                    if(this._ai[i].bid(raise)){
+						//SaleView.sortAI();
+						break;
+					}
                     //if AI can bid and is not currently the top bidder
                     //if( (this._ai[i].currBid < cb) && (!this._ai[i].leftAuction) ){
 						//this._ai[i].currBid = cb + upPerc;
