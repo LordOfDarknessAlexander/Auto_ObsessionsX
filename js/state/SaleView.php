@@ -105,18 +105,18 @@ var SaleView = {
 			c2 = "third",
 			c3 = "fourth";
 		
-		// ai.div.filter(
-			// function(index, element){
-				// console.log("index :" + index.toString() + "element :" + JSON.stringify(element));
-				// var jqo = element.index(index),
-					// label = $("label#bid", jqo),
-					// bid = parseFloat(label.text()),
-					// i = 0,
+		ai.div.filter(
+			function(index, element){
+				console.log("index :" + index.toString() + "element :" + JSON.stringify(element));
+				var jqo = element.index(index),
+					label = $("label#bid", jqo),
+					bid = parseFloat(label.text()),
+					i = 0;
 					
-					// //return bid == cb;
+					return bid == cb;
 				
-			// }
-		// )
+			}
+		);
 			
 			ai0.removeClass().addClass(c3);
 			ai3.removeClass().addClass(c0);
