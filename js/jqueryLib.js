@@ -374,29 +374,25 @@ function setPrestige(val){
 function setMarkers(){
 	$('label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
 }
-function setStatBar(){
+function setStatBar(args){
+    //pass args in to set userStats to values,
+    //otherwise sets values to ones already set to userStats
     jq.statBar.show();
-//<php
-//if(loggedIn() ){>
-	//jq.post(
-        //'pas/get.php?op=gus',
-        //function(data){
-            
-        //},
-        //function(jqxhr){
-            
-        //}
-    //);
-//<php
-//else{>
-    setName();
-	setMoney();
-	setTokens();
-	setPrestige();
-	setMarkers();
-//<php
-//}
-//>
+
+    if(args !== null && args !== undefined){
+        //setName();
+        setMoney(args.money);
+        setTokens(args.tokens);
+        setPrestige(args.prestige);
+        setMarkers(args.m_marker);
+    }
+    else{
+        //setName();
+        setMoney();
+        setTokens();
+        setPrestige();
+        setMarkers();
+    }
 }
 //
 //Garage State interface

@@ -94,7 +94,7 @@ function eLoadUser(){
         $aoUsersDB->eErr();
     }
     echo json_encode(array(
-        'stats'=>pasGet::userStats(),
+        'stats'=>user::getStats(),
         'garage'=>$cars,
         'sales'=>pasGet::userSales()
     ));

@@ -157,8 +157,9 @@ $funcName = "$fileName, pas.get.user.funds()";
                         //
                         <?php isValidData();?>
                         //userStats.money = typeof data == 'number' ? data : parseInt(data);
-                        console.log(JSON.stringify(data));
+                        //console.log(JSON.stringify(data));
                         //jq.setFunds();
+                        setStatBar(data);
                     },
                     function(jqxhr){
                         //call will fail if result is not properly formated JSON!

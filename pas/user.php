@@ -28,7 +28,7 @@ class user{
         M = 'money',
         T = 'tokens',
         P = 'prestige',
-        MM = 'm_markers';
+        MM = 'm_marker';
         //
         //
         // DT = 'drivetrain',
@@ -47,9 +47,9 @@ class user{
         $q = sql::slctFrom($fields, ao::USERS);
         //echo $q;
         if($q != ''){
-            echo $q . PHP_EOL;
-            $res = $AO_DB->query($q . " WHERE $UID = $uid");
-            echo json_encode($res);
+            //echo $q . PHP_EOL;
+            $res = $AO_DB->query("$q WHERE $UID = $uid");
+            //echo json_encode($res);
             
             if($res){
                 return $res;
@@ -155,7 +155,7 @@ class user{
         $ret = user::slctFromEntry("$M, $T, $P, $MM, $CID");
         //echo json_encode($ret);
         if($ret){
-            $a = $res->fetch_assoc();
+            $a = $ret->fetch_assoc();
             $f = round(floatval($a[$M]), 2);
             $t = intval($a[$T]);
             $p = intval($a[$P]);
@@ -163,7 +163,7 @@ class user{
             $cid = intval($a[$CID]);
             
             return array(
-                $M=>$m,
+                $M=>$f,
                 $T=>$t,
                 $P=>$p,
                 $MM=>$mm,

@@ -624,44 +624,44 @@ class pasGet{
             echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
         }
     }*/
-    public static function userStats(){
-        //returns the user's stats from SQL database as an assossiative array
-        global $AO_DB;
+    // public static function userStats(){
+        // //returns the user's stats from SQL database as an assossiative array
+        // global $AO_DB;
         
-        $CID = ao::CID;
-        $M = 'money';
-        $T = 'tokens';
-        $P = 'prestige';
-        $MM = 'm_marker';
+        // $CID = ao::CID;
+        // $M = 'money';
+        // $T = 'tokens';
+        // $P = 'prestige';
+        // $MM = 'm_marker';
         
-        $res = user::slctFromEntry("$M, $T, $P, $MM, $CID");
-        //$AO_DB->query(
-            //"SELECT $M, $T, $P, $MM FROM $users WHERE $UID = $id"
-            //"SELECT * FROM $users WHERE $UID = $id"
-        //);
-        //Count the returned rows
-        if($res){
-            $rows = $res->fetch_assoc();
-            //NOTE:sql retrives data as strings, so must conver to numeric type before sending(strings are bulky)
-            $ret = array(
-                $M=>floatval($rows[$M]),
-                $T=>intval($rows[$T]),
-                $P=>intval($rows[$P]),
-                $MM=>intval($rows[$MM]),
-                'cid'=>intval($rows[$CID])
-            );
-            $res->close();
-            return $ret;
-        }
-        else{
-            //echo "No Results";
-            // If there was a problem.
-            //echo "<p class='error'>Query failed, Please try again.</p>";
-            $AO_DB->eErr();
-            //exit();
-        }
-        return array();
-    }
+        // $res = user::slctFromEntry("$M, $T, $P, $MM, $CID");
+        // //$AO_DB->query(
+            // //"SELECT $M, $T, $P, $MM FROM $users WHERE $UID = $id"
+            // //"SELECT * FROM $users WHERE $UID = $id"
+        // //);
+        // //Count the returned rows
+        // if($res){
+            // $rows = $res->fetch_assoc();
+            // //NOTE:sql retrives data as strings, so must conver to numeric type before sending(strings are bulky)
+            // $ret = array(
+                // $M=>floatval($rows[$M]),
+                // $T=>intval($rows[$T]),
+                // $P=>intval($rows[$P]),
+                // $MM=>intval($rows[$MM]),
+                // 'cid'=>intval($rows[$CID])
+            // );
+            // $res->close();
+            // return $ret;
+        // }
+        // else{
+            // //echo "No Results";
+            // // If there was a problem.
+            // //echo "<p class='error'>Query failed, Please try again.</p>";
+            // $AO_DB->eErr();
+            // //exit();
+        // }
+        // return array();
+    // }
     //public static function getAuctionWins(){
         //returns how many auctions the user has won
         //carCount + salesCount();

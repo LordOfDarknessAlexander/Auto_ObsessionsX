@@ -481,7 +481,8 @@ function(){
 	jq.Game.menu.show();
     jq.carImg.show();
 	//jq.Game.menu.children().toggle();	//hides/showns all child elements
-	ajax_post();
+	//ajax_post();
+    pas.get.user.stats();
     setStatBar();
 	setAdBG();
     setHomeImg();
