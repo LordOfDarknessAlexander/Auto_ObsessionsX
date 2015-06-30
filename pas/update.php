@@ -104,6 +104,17 @@ class pasUpdate{
                //$UID = $uid"
         //) ? $carID : 0) : 0;
     }
+	public static function updateSale($carID, $bid, $curTime){
+		global $aoCarSalesDB;
+        $CID = ao::CID;
+		$T = '_time';
+		$P = 'price';
+		$b = is_numeric($bid) ? floatval($bid);
+		$t = is_numeric($curTime) ? floatval($curTime);
+        $q = sql::update(getUserTableName(), "$P = $b, $T = $t") . "WHERE $CID = $carID";
+          
+        return $aoCarSalesDB->query($q);
+	}
 }
 /*if($gs){
     //args being passed vai the url
@@ -286,6 +297,7 @@ if(isSetP() ){
     if(isset($_POST['carID'])){
         //
         $carID = isUINT($_POST['carID']) ? intval($_POST['carID']) : exit('_POST at carID invalid value');   //is_int($_POST['carID']) ? intval($_POST['carID']) : 0;
+		
 		//$carCon = $_POST['repairs']; 
         //validate value, must be an int!
         //echo json_encode($carID);
@@ -396,7 +408,6 @@ if(isSetP() ){
                     exit();
                 }
                 elseif($op == 'pucs'){
-                    //$res = 117;
 					$res = user::postCarSale($carID);
                     echo json_encode($res);
 				
@@ -405,6 +416,15 @@ if(isSetP() ){
 				elseif($op == 'cucs'){
                     //$res = 117;
 					$res = user::cancelCarSale($carID);
+                    echo json_encode($res);
+				
+                    exit();
+                }
+				elseif($op == 'psu'){
+					//post sale update
+					$bid = isFloat($_POST['price']) ? round(floatval($_POST['price']), 2) : exit('_POST at price invalid value');
+					$curTime = isFloat($_POST['_time']) ? floatval($_POST['_time']) : exit('_POST at _time invalid value');
+					$res = pasUpdate::updateSale($carID, $bid, $curTime);
                     echo json_encode($res);
 				
                     exit();
