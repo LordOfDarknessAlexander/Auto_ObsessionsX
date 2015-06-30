@@ -371,7 +371,14 @@ function setPrestige(val){
     }
 	$('div#statBar label#prestige').text('Prestige: ' + userStats.prestige.toString() );
 }
-function setMarkers(){
+function setMarkers(val){
+    if(val !== null &&
+        val !== undefined &&
+        val >= 0 &&
+        val != userStats.m_marker
+    ){
+        userStats.m_marker = val;  //if an argument is passed, assign value to money
+    }
 	$('label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
 }
 function setStatBar(args){

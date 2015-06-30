@@ -83,16 +83,17 @@ function load(){
             //
             //set user data
             //
-            //var s = data.stats;
-            userStats = {
-                money:data.stats.money,
-                tokens:data.stats.tokens,
-                prestige:data.stats.prestige,
-                marker:data.stats.m_marker
-            };
-            _curCarID = data.stats.cid;
+            var s = data.stats;
+            
+            //userStats = {
+                //money:s.money,
+                //tokens:s.tokens,
+                //prestige:s.prestige,
+                //marker:s.m_marker
+            //};
+            _curCarID = s.cid;
             //console.log('cur car id:' + _curCarID.toString() );
-            setStatBar();
+            setStatBar(s);
             //
             //set user garage
             //
@@ -302,13 +303,13 @@ function startGame(){
 	setStatBar();
 	switchStates();
 	
-    //if(audioEnabled() ){
+    if(audioEnabled() ){
         //var s = assetLoader.sounds;
         assetLoader.sounds.gameOver.pause();
         assetLoader.sounds.bg.currentTime = 0;
         assetLoader.sounds.bg.loop = true;
         assetLoader.sounds.bg.play();
-    //}    
+    }    
 }
 
 Auction.sold = function(){
@@ -484,7 +485,7 @@ function(){
 	//jq.Game.menu.children().toggle();	//hides/showns all child elements
 	//ajax_post();
     pas.get.user.stats();
-    setStatBar();
+    //setStatBar();
 	setAdBG();
     setHomeImg();
     jq.setErr();    //clear error when changing pages
