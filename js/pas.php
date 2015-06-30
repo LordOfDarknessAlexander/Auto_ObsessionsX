@@ -51,6 +51,16 @@ $funcName = "$fileName, pas::insertCar(auction)";
                 //call will fail if result is not properly formated JSON!
                 jq.setErr('<?php eFN();?>', 'ajax call failed!\nReason: ' + jqxhr.responseText);
 
+//                var n = Auction._car.getFullName(),
+//                    sl = $('div#sold label');
+
+//                <?php 
+//                $hasLostCar = hasLostCar($carID);
+//                if($hasLostCar)?>
+//                {
+//                    sl.html('Hey,<br> you have lost this auction for the ' + n + '<br>already.');
+//                }
+                
                 sl.html('Unfortunately,<br> you lost the auction for the ' + n + '<br>Better luck next time!');
 
                 Auction._car = null;
