@@ -189,7 +189,7 @@ $funcName = "$fileName, AuctionSelect::loadView(data)";
         }
         //filter results, display only cars
         //
-        var hideInactive = false;
+        var hideInactive = true;
         
         if(hideInactive){
             var c = AuctionSelect.list.children(),

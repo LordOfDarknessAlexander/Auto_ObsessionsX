@@ -261,7 +261,25 @@ function pbSetColor(jqPB, value){
     }
     jqPB.attr('value', value);
 }
-
+function strToDate(str){
+    //convert a string of the format [Y-M-D H:M:S]
+    //into a javascript date object
+    //TODO:check, with re, that str is of proper format!
+    //mySQL date month range is [1-12]
+    //while javascript range is [0-11]
+    var a = str.split(/[- :]/);
+//<php if(debug()){
+//>
+    //console.log(JSON.stringify(a));
+    //var d = new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
+    //console.log(JSON.stringify(d));
+    //return d;
+//<php
+//}
+//else{>
+    return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
+//<php
+}
 function audioEnabled(){
     return (Storage.local !== null && '_audioEnabled' in Storage.local)?
         Boolean(JSON.parse(Storage.local._audioEnabled) ) : true;

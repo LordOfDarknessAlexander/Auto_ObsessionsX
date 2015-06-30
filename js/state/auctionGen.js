@@ -66,13 +66,12 @@ function auctionGen(args){
 			    //               
 			    var car = Garage.getCarByID(index);
                 
-			    if (car !== null) {
-			        if (!hasSoldCar(car.id))
-			        {
+			    if(car !== null){
+			        if(!hasSoldCar(car.id)){
 			            //this car has not been previously sold!
 			            this._car = car;
 			            //this._carIndex = index;
-			            this._currentBid = this._car.getPrice() * 0.05;
+			            this._currentBid = this._car.getPrice() * this.RAISE_PERC;
 			        }
 			        
                     this._initAI();
@@ -90,19 +89,19 @@ function auctionGen(args){
 		    //create new car
 		    //this car has not been previously sold!
 		    console.log(data);
-		    if (data !== null && data !== undefined)
-		    {
-		        if (this._car === null) {
+		    
+            if(data !== null && data !== undefined){
+		        if(this._car === null){
 		            // var tData = data.car;
                     
 		            this._car = Vehicle(data._car.name, data._car.make, data._car.year, data._car._price, data._car.id, ''/*, parts, repairs*/);
-		            this._currentBid = this._car.getPrice() * 0.05;
+		            this._currentBid = data.bid;
+                    //this._curTime = data._curTime;
                     
 		            this._initAI();
 		            AuctionSell.save();
 		        }
 		    }
-		       
 		},
         _initAI:function(){
             var p = this._car.getPrice();

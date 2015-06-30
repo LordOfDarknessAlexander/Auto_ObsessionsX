@@ -581,14 +581,20 @@ class pasGet{
         
         if($res){
             $CID = ao::CID;
+            $T = '_time';
+            $S = '_start';
+            $E = '_end';
+            $P = 'price';
             
-            while($row = $res->fetch_assoc() ){
+            while($a = $res->fetch_assoc() ){
                 //mysqli retuns values as strings, so convert them
                 //to proper types, for faster transfer back to server!
                 $sales[] = array(
-                    'id'=>intval($row[$CID])
-                    //'bid'=>floatval($row['bid']),
-                    //'time'=>
+                    'id'=>intval($a[$CID]),
+                    'bid'=>floatval($a[$P]),
+                    $T=>floatval($a[$T]),
+                    $S=>$a[$S],
+                    $E=>$a[$E]
                 );
             }
             $res->close();
