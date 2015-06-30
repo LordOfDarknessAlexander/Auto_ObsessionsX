@@ -17,6 +17,32 @@ jq.Garage.selectBtn = $('div#Garage button#select');
 jq.Garage.viewBtn = $('div#Garage button#viewCar');
 jq.Garage.shopBtn = $('div#Garage button#shop');
 
+jq.Garage.filter = {
+    div:$('div#Garage div#filter'),
+    stage:$('divGarage div#filter div#stage'),
+    tier:$('divGarage div#filter div#tier'),
+    /*slctStage:function(str){
+        var t = $('div#filter div#stage'),
+            s = t.children('button.select');
+        
+        s.removeClass();
+        $(str, t).addClass('select');
+    },
+    function slctTier(str){
+        var p = $('div#filter div#tier'),
+            s = p.children('button.select');
+        
+        s.removeClass();
+        $(str, p).addClass('select');
+    }*/
+};
+//$('button#slctAllF', jq.Garage.filter.stage).click(
+//function(){
+    // var c = AuctionSelect.list.children(),
+        // f = c.filter('.owned, .lost, .isf');
+    // f.hide();
+// });
+
 var userGarage = [
 	//Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969'),
 	//Vehicle('Camaro RS/Z28 Sport Coupe', 'Chevrolet','1969'),

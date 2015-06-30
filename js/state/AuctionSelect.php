@@ -188,6 +188,14 @@ $funcName = "$fileName, AuctionSelect::loadView(data)";
             AuctionSelect.setCarBtn(i, data[i]);  
         }
         //filter results, display only cars
+        //
+        var hideInactive = false;
+        
+        if(hideInactive){
+            var c = AuctionSelect.list.children(),
+                f = c.filter('.owned, .lost, .isf');
+            f.hide();
+        }
     },
     loadViewFailed:function(jqxhr){
         //called when loading the div fails,
