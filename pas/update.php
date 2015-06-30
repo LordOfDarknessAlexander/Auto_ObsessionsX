@@ -304,10 +304,10 @@ if(isSetP() ){
                     //returns true if the INSERTion is successful,
                     //false if user has the vehicle already or any other reason the vehicle could not be added
                     $hasCar = hasCar($carID);
+                    //$hasLostCar = hasLostCar($carID);
                     //echo json_encode(false);
-                    //exit();
-                    
-                    if($hasCar){
+                    //exit();                    
+                    if($hasCar){// || $hasLostCar){
                         //user has already bought this car, exit with false!
                         //echo json_encode(false);
                         exit();

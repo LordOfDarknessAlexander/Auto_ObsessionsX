@@ -345,7 +345,7 @@ Auction.sold = function(){
         if(Auction.playerWon){
             //not the right object!?
             jq.Sold.menu.show();
-            sl.html('Congratulations!<br>You won the auction for the ' + n + '<br>Go to the garage to view your prize!');
+            
 //<php if(loggedIn){>
 			//Auction._car.repairs == Auction.vcondition;
             pas.insertCar(Auction);
@@ -362,6 +362,7 @@ Auction.sold = function(){
                 //}
             //}
             //if(!hasCar){
+                //sl.html('Congratulations!<br>You won the auction for the ' + n + '<br>Go to the garage to view your prize!');
                 //userGarage.push(Auction._car);	//creates a copy of car, giving it to user
                 //Auction._car = null;	//no more car to sell
             //}

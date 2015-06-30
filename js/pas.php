@@ -30,28 +30,31 @@ var pas = {
     insertCar:function(auction){
 <?php
 $funcName = "$fileName, pas::insertCar(auction)";
-?>        
-        jq.post('pas/update.php?op=insert',
+?>       
+    
+        var n = Auction._car !== null ? Auction._car.getFullName() : '',
+            sl = $('div#sold label');
+ 
+        jq.post('pas/update.php?op=insert',          
             function(data){
-                //the response string is converted by jquery into a Javascript object!
-                <?php isValidData();?>
-                //alert('<?php //echo "$funcName, Inserting Car into user database! ajax response success!";?>' + JSON.stringify(data) );
+                <?php isValidData();?>  
+                
+                sl.html('Congratulations!<br>You won the auction for the ' + n + '<br>Go to the garage to view your prize!');
+
                 //car added remove from Auction
                 Auction._car = null;
-                //userGarage.push(Auction._car);
-                //Garage.save();    //not needed as data in maintained by DB
                 pas.get.user.stats();
                 Auction.close();
                 init(); //this exists only within the scope of document.ready()
             },
-            function(jqxhr){
+            function(jqxhr){ 
                 //call will fail if result is not properly formated JSON!
                 jq.setErr('<?php eFN();?>', 'ajax call failed!\nReason: ' + jqxhr.responseText);
+
+                sl.html('Unfortunately,<br> you lost the auction for the ' + n + '<br>Better luck next time!');
+
                 Auction._car = null;
-                //ajax_loadUser();
-                //ajax_post();    //get user info from server
                 Auction.close();
-                //init(); //this exists only within the scope of document.ready()
             },
             {carID:auction._car.id, price:auction.currentBid}
         );      
