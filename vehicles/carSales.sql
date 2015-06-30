@@ -28,5 +28,8 @@ CREATE TABLE IF NOT EXISTS `user3`(
     `body` int unsigned NOT NULL,
     `interior` int unsigned NOT NULL,
     `docs` int unsigned NOT NULL,
-    `repairs` int unsigned  NOT NULL
+    `repairs` int unsigned  NOT NULL,
+    `_time` float NOT NULL,
+    `start` datetime NOT NULL,
+    `end` datetime,
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;

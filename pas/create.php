@@ -113,9 +113,10 @@ class pasCreate
         $B = 'body';
         $I = 'interior';
         $D = 'docs';
-        $T = '_time';
         $P = 'price';
         $T = '_time';
+        $S = '_start';
+        $E = '_end';
         $NN = 'NOT NULL';
         
         $res = $aoCarSalesDB->query(
@@ -126,7 +127,10 @@ class pasCreate
                 $B $uint $NN,
                 $I $uint $NN,
                 $D $uint $NN,
-                $R $uint $NN
+                $R $uint $NN,
+                $T float $NN,
+                $S datetime $NN,
+                $E datetime
             )$defaultEngine $defaultCharset"
         );
         //bid float,    //the current highest bid until the auction has completed and the user receives the funds, else 0

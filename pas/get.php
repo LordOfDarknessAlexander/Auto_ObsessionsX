@@ -80,69 +80,12 @@ function auctionCarInfoFromArray($r){
     );
 }
 class pasGet{
-    private static
-        $_allCars,
-		 $_login,
+    //private static
+        //$_allCars,
+		//$_login,
         //$_allCarData,
-        $_allAuctionsCID;
-        //$_allUsers ,
-        //$_allUIDs,
-		/*
-    public class user{
-        private static
-            $_curCar,
-            $_cash,
-            $_tokens,
-            $_prest,
-            $_markers,
-            $_info,
-            $_stats,
-            $_login,
-        public static userInit(){}
-    }*/
-		
-	/*
-	public static function userInit ()
-	{
-		//global $aoMembersDB;
-		global $AO_DB;
-	
-		$aoMembersDB = ao::MEMBERS;
-		$e = 'email';
-		$p = 'psword';
-		
-		$UID = 'user_id';
-			//$aoMembersDB users
-		
-		self::$_login =  $AO_DB->con->prepare(
-            "SELECT user_id, fname,uname, user_level FROM users WHERE (email='$e' AND psword=SHA1('$p') )"
-        );
-	//	self::$_allUsers = $AO_DB->con->prepare(
-     //    "SELECT * FROM $users"    //returns an array of all user data
-      //  );
-      
-        //self::$_userCar = $AO_DB->con->prepare(
-            //"SELECT car_id FROM $users WHERE $UID = ?"     //returns an array of all user id's
-        //);
-        //self::$_userCash = $AO_DB->con->prepare(
-            //"SELECT money FROM $users WHERE $UID = ?"
-        //);
-        //self::$_userCash = $AO_DB->con->prepare(
-            //"SELECT tokens FROM $users WHERE $UID = ?"
-        //);
-        //self::$_userCash = $AO_DB->con->prepare(
-            //"SELECT prestige FROM $users WHERE $UID = ?"
-        //);
-        //self::$_userCash = $AO_DB->con->prepare(
-            //"SELECT m_marker FROM $users WHERE $UID = ?"
-        //);
-        //self::$_userInfo = $AO_DB->con->prepare(
-            //"SELECT fname, lname, uname, user_level FROM $users WHERE $UID = ?"
-        //);
-        //self::$_userStats = $AO_DB->con->prepare(
-            //"SELECT money, tokens, prestige, m_marker FROM $users WHERE $UID = ?"
-	}*/
-	
+        //$_allAuctionsCID;
+    
     public static function init(){
         global $AO_DB;
         
@@ -153,48 +96,15 @@ class pasGet{
         //
         //AO_DB aoCars
         //
-        self::$_allCars = $AO_DB->con->prepare(
-            "SELECT * FROM $aoCars" //select all data, from all rows
-        );
+        //self::$_allCars = $AO_DB->con->prepare(
+            //"SELECT * FROM $aoCars" //select all data, from all rows
+        //);
         //self::$_allCarData = $AO_DB->con->prepare(
             //"SELECT $CID, price FROM $aoCars"
         //);
-        self::$_allAuctionsCID = $AO_DB->con->prepare(
-            "SELECT $CID FROM $aoCars"  //select the car id from each row
-        );
-        //
-        //$AO_DB users
-        //
-      /*  self::$_allUsers = $AO_DB->con->prepare(
-            "SELECT * FROM $users"    //returns an array of all user data
-        );
-        //self::$_allUIDs = $AO_DB->con->prepare(
-            //"SELECT $UID FROM $users"  //returns an array of all user id's
+        //self::$_allAuctionsCID = $AO_DB->con->prepare(
+            //"SELECT $CID FROM $aoCars"  //select the car id from each row
         //);
-        //self::$_userCar = $AO_DB->con->prepare(
-            //"SELECT $CID FROM $users WHERE $UID = ?"     //returns an array of all user id's
-        //);
-        //self::$_userCash = $AO_DB->con->prepare(
-            //"SELECT money FROM $users WHERE $UID = ?"
-        //);
-        //self::$_userCash = $AO_DB->con->prepare(
-            //"SELECT tokens FROM $users WHERE $UID = ?"
-        //);
-        //self::$_userCash = $AO_DB->con->prepare(
-            //"SELECT prestige FROM $users WHERE $UID = ?"
-        //);
-        //self::$_userCash = $AO_DB->con->prepare(
-            //"SELECT m_marker FROM $users WHERE $UID = ?"
-        //);
-        //self::$_userInfo = $AO_DB->con->prepare(
-            //"SELECT fname, lname, uname, user_level FROM $users WHERE $UID = ?"
-        //);
-        //self::$_userStats = $AO_DB->con->prepare(
-            //"SELECT money, tokens, prestige, m_marker FROM $users WHERE $UID = ?"
-        //);   
-        //self::$_userLogin = $AO_DB->con->prepare(
-            //"SELECT $UID, user_level FROM $users WHERE (email ='?' AND uname = '?')"
-        //);*/
     }
    /* public static function userStage(){
         //returns the user's current stage in the Auction Select screen
@@ -244,29 +154,7 @@ class pasGet{
     }
     public static function allCarIDs(){
         global $AO_DB;
-        /*if(self::$_allAuctionsCID){
-            if(pasGet::$_allAuctionsCID->execute() ){
-                $res = pasGet::$_allAuctionsCID->get_result();  //only available when using mysqlnd in the site's webspace
-                //pasGet::$_allAuctionsCID->bind_result($res);
-                //pasGet::$_allAuctionsCID->fetch();
-                
-                if(!$res){
-                    echo 'error! no result!';
-                    return array();
-                }
-                //$ret = array();
-                //while($row = $res->fetch();){
-                    //$ret[] = $row;
-                //}
-                $ret = $res->fetch_all(MYSQLI_ASSOC); //returns all rows(and their columns) as an associative array
-                $res->close();
-                return $ret;
-            }
-            echo 'error! execute failed';
-            return array();
-        }*/
-        //else bind failed,
-        //default to regular query
+        
         $aoCars = ao::CARS;
         $CID = ao::CID;
         $ret = array();
@@ -307,12 +195,7 @@ class pasGet{
         
         if($res){
             while($row = $res->fetch_assoc() ){                
-                $ret[] = asCarInfoFromArray($row);    //array(
-                    //$CID=>$car->getID(),
-                    //$S=>$car->getLocalPath(),
-                    //$N=>$car->getFullName(),
-                    //$P=>$car->getPrice()
-                //);               
+                $ret[] = asCarInfoFromArray($row);
             }            
             $res->close();
         }
@@ -419,15 +302,10 @@ class pasGet{
     public static function currentCarID(){
         //returns the user's currently selected vehicle
         global $AO_DB;
-        //$id = getUID();  //$_SESSION['user_id'];
-        //$users = ao::USERS;
+        
         $CID = ao::CID;
-        //$UID = ao::UID;
         
         $res = user::slctFromEntry("$CID");
-        //$AO_DB->query(
-            //"SELECT $CID FROM $users WHERE $UID = $id"
-        //);
         
         if($res){
             //user has car

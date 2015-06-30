@@ -364,7 +364,9 @@ class user{
         $I = 'interior';
         $D = 'docs';
         $R = 'repairs';
-		$P = 'price';
+        $T = '_time';
+        $S = '_start';
+        $E = '_end';
 		$p = 0.0;
         //return 0;
 		//returns current user card id in an array       
@@ -392,9 +394,9 @@ class user{
 				//else vehicles are different, no change
 				$temp = $aoCarSalesDB->query(
 					"INSERT INTO $ut
-						($CID, $P, $DT, $B, $I, $D, $R)
+						($CID, $P, $DT, $B, $I, $D, $R, $T, $S, $E)
 					VALUES
-						($carID, $p, $dt, $b, $i, $d, $r)"
+						($carID, $p, $dt, $b, $i, $d, $r, 0, NOW(), NULL)"
 				);
 				
 				//echo json_encode($temp);
