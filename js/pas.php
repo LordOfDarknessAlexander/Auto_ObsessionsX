@@ -110,7 +110,7 @@ $funcName = "$fileName, pas::postUserCarSale(carid)";
                 //    return;
                 //}
 
-               console.log(JSON.stringify(data));
+                console.log(JSON.stringify(data));
                 var cid = data.car_id;
                 
                 if(cid == _curCarID){
