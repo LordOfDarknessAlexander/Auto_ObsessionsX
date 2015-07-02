@@ -65,14 +65,9 @@ var SaleView = {
 			//Auction.init();
 			
 		//this.render();
-			
 
         var funcName = 'SaleView.php, Auction::init()';
         console.log('snappers');
-
-        
-		
-		
 		//this.setup();
 	},
 	close : function(){
@@ -201,7 +196,7 @@ var SaleView = {
             bid = this.ai[i].currBid,
            
             console.log('drawing bitches');
-		context.drawImage(backgroundImage, 0, 0);
+		//context.drawImage(backgroundImage, 0, 0);
 		context.font = '14px arial, sans-serif';
 		
         //draw enemies

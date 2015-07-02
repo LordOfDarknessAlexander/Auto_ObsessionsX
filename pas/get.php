@@ -140,7 +140,7 @@ class pasGet{
         //echo 'car data!';
         
         $res = $AO_DB->query(
-            sql::slctAllFromCarDB()//"SELECT * FROM $aoCars"
+            sql::slctAllFromCarDB()
         );
         
         if($res){   

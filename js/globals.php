@@ -24,7 +24,23 @@ var width = canvas.getAttribute('width'),
         return (height == 0) ? 0 : width / height;
     }
 };*/
+function getTimestamp(){
+    //gets the current system time(in milliseconds)
+    return (window.performance && window.performance.now) ? window.performance.now() : new Date().getTime();
+}
 
+var aoTimer = {
+    _prevTime:getTimestamp(), //time since last
+    getDT:function(){
+        //get delta time between frames
+        var now = getTimestamp();
+        var dt = (now - this._prevTime);
+        this._prevTime = now;
+        //console.log(dt);
+        //console.log(this._prevTime);
+        return dt;   
+    }
+};
 var _curCarID = 0;
     
 var player, stop, ticker;
@@ -44,7 +60,7 @@ var logos = [
 ];
 var userStats = {
 	fn:'',
-	money:50000 ,
+	money:50000,
 	tokens:2,
 	prestige:0,
 	marker:0
@@ -52,24 +68,8 @@ var userStats = {
 
 function saveUser()
 {	//saves user stats as a JSON string to the browsers local storage
-<?php if(loggedIn() ){
-    $funcName = 'js/gloabals.php pas::saveUser()';?>
-    /*jq.post('pas/update.php?op=sus',
-        function(data){
-            if(data === null){
-                alert(funcName + ', Error:ajax response returned null!');
-                return;
-            }
-            alert(funcName + ', ajax response received:' + JSON.stringify(data) );
-            //data saved to database!
-        },
-        function(jqxhr){
-            //call will fail if result is not properly formatted JSON!
-            alert(funcName + ', ajax call failed! Reason: ' + jqxhr.responseText);
-            //throw exception, game can't work without user stats
-        },
-        {stats:userStats, carID: _curCarID}
-    );*/
+<?php if(loggedIn() ){?>
+    //pas.saveUser();
 <?php
 }
 //else{
@@ -89,8 +89,7 @@ function loadUser()
     pas.query.loadUser();
 <?php
 }
-else{
-?>
+else{?>
 	if(Storage.local !== null){
         if('_carID' in Storage.local){
 			_curCarID = (int)JSON.parse(Storage.local._carID);
@@ -103,12 +102,14 @@ else{
 		if('_stats' in Storage.local){
 			userStats = JSON.parse(Storage.local._stats);
 		}
-		else{	//no previous save data
+		else{
+            //no previous save data in local storage,
+            //set to default values
 			userStats = {
 				//fn:(data.uname),
 				money:50000,
-				tokens:2,
-				prestige:1,
+				tokens:0,
+				prestige:0,
 				marker:0
 			};
 		}
@@ -118,53 +119,6 @@ else{
 ?>
 }
 
-
-var amoney;
-var atokens;
-var aprestige;
-var amarkers;
-
-function ajax_post()
-{
-    // Create our XMLHttpRequest object
-    //var dataStr = ''; //args to pass to script
-	amoney = userStats.money;
-	atokens = userStats.tokens;
-	aprestige = userStats.prestige;
-	amarkers = userStats.marker;
-
-    var jqxhr = $.ajax({
-        type:'POST',
-        url:getHostPath() + 'my_parse_file.php',
-        dataType:'json',
-        //data:userStats
-		 data:{money:amoney,tokens:atokens,prestige:aprestige,m_marker:amarkers}
-    }).done(function(data){
-        //the response string is converted by jquery into a Javascript object!
-        if(data === null){
-            alert('Error:ajax response returned null!');
-            return;
-        }
-     //   alert('ajax response received:' + JSON.stringify(data) );
-        //access and set values in the document's html page
-		//$('div#statBar label#fname').text(data.uname);
-        $('div#statBar label#money').text(data.money);
-        $('div#statBar label#tokens').text(data.tokens);
-        $('div#statBar label#prestige').text(data.prestige);
-        $('div#statBar label#m_marker').text(data.m_marker);
-		
-		$('div#auctionStatBar label#money').text(data.money);
-        $('div#auctionStatBar label#tokens').text(data.tokens);
-        $('div#auctionStatBar label#prestige').text(data.prestige);
-        $('div#auctionStatBar label#m_marker').text(data.m_marker);
-    }).fail(function(jqxhr){
-        //call will fail if result is not properly formatted JSON!
-        alert('ajax call failed! Reason : ' + jqxhr.responseText);
-        //throw exception, game can't work without user stats
-    });
-    
-}
-
 //States
 var REPAIR;
 var ADD_FUNDS;
@@ -172,16 +126,11 @@ var RUNNING;
 var SPLASH;
 var MAIN_MENU;
 
-
-
-
 var playSound;
 var splashTimer = 600.00;
 //InMenu UI Constants
 
 var buttonsPlaceY = 200;
-//Enemy Bid Timer check
-var BID_THRESHOLD = 200;
 //Player Pos, should be local in Player class
 //Bidder Pos
 var BIDDER_XPOS = 650;
@@ -238,9 +187,7 @@ var appState = GAME_MODE.SPLASH;
 
 var userLogged = false;
 
-
-function resetStates()
-{
+function resetStates(){
 	appState = GAME_MODE.RUNNING;
 }
 function getHostPath(){
@@ -260,10 +207,6 @@ function pbSetColor(jqPB, value){
         jqPB.attr('class', '');
     }
     jqPB.attr('value', value);
-}
-function getTimestamp(){
-    //gets the current system time(in milliseconds)
-    return (window.performance && window.performance.now) ? window.performance.now() : new Date().getTime();
 }
 function strToDate(str){
     //convert a string of the format [Y-M-D H:M:S]

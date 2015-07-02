@@ -40,8 +40,10 @@ function garageDoor(){
 	}
 }
 function update(deltaTime){
-    	//should splash update
-    //userLogged = true;
+    //main update loog for game
+    //var d = aoTimer.getDT();  //strToDate('2012-06-12 7:08:32');
+    //console.log(JSON.stringify(d));
+    
 	if(auctionOver){
 		restarted = true;
 	}

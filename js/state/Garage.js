@@ -736,8 +736,7 @@ var CarView = {
 //else{>
                     //{i:car.id}, AuctionSell.initCB
 //<php
-//}
-//>
+//}>
                 );
                 
                 //set dt progress bars
