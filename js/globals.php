@@ -224,6 +224,22 @@ function strToDate(str){
     return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
 //<php
 }
+function strFromCurrentDate(){
+	var d = new Date,
+		dformat = [
+			d.getFullYear(),
+		    d.getMonth()+1,
+		    d.getDate()
+		].join('-') + ' ' +
+		[
+			d.getHours(),
+			d.getMinutes(),
+			d.getSeconds()
+		].join(':');
+		
+	console.log(dformat);
+	return dformat;
+}		
 function audioEnabled(){
     return (Storage.local !== null && '_audioEnabled' in Storage.local)?
         Boolean(JSON.parse(Storage.local._audioEnabled) ) : true;
