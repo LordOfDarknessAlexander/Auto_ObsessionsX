@@ -10,10 +10,7 @@ function eFN(){
     global $funcName;
     echo $funcName;
 }
-function loggedIn(){
-    return isset($_SESSION) ? true : false;
-   // return true;
-}
+
 //defines JavaScript Ajax interface for common API calls for site
 function isValidData(){
     //determine if an object(data) is valid,

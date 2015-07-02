@@ -1,10 +1,7 @@
 <?php
 header('Content-type: application/javascript; charset: UTF-8');
 require_once '../ao.php';
-function loggedIn(){
-    //return isset($_SESSION) ? true : false;
-    return true;
-}
+
 ?>
 // define variables
 var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
@@ -92,7 +89,7 @@ function loadUser()
 else{?>
 	if(Storage.local !== null){
         if('_carID' in Storage.local){
-			_curCarID = (int)JSON.parse(Storage.local._carID);
+			_curCarID = JSON.parse(Storage.local._carID);
 			
 		}
 		else{	//no previous save data

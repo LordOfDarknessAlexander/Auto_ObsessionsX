@@ -39,6 +39,11 @@ function isSetS(){
     //is sessesion vars sets
     return isset($_SESSION);    //&& !empty();
 }
+function loggedIn(){
+    //session started and the user has provided
+    //a valid email/username and pasword	 
+    return isSetS() && isset($_SESSION['uname']) ? true : false;
+}
 function eP(){
     //echo's variables submitted to a script via _POST
     echo (isSetP()?

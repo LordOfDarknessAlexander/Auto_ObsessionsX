@@ -13,7 +13,7 @@ $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
 
 //this is not working on site without a new session
-session_start();
+//session_start();
 
 //isLoggedIn();
 //secure::validate();
@@ -21,7 +21,7 @@ session_start();
 //session set, has the session be started and initialized
 //if $_SESSION is an empty array,
 //user is using guest account and not currenlty logged in
-
+eS();
 //$_SESSION = array('dur'=>0);    //must log in to set session vars!
 //userLoggin!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
@@ -45,13 +45,6 @@ function hrefVoid(){
     //standard javascript for linking a document to itself,
     //causing a page refresh
     ?>href='javascript:void(0)'<?php
-}
-
-function loggedIn(){
-    //session started and the user has provided
-    //a valid email/username and pasword	 
-    return isSetS() && isset($_SESSION['uname']) ? true : false;
-
 }
 function getUserName(){    
     return loggedIn()?

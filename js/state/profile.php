@@ -1,9 +1,4 @@
-<?php
-function loggedIn(){
-    //return isset($_SESSION) && isset($_SESSION[ao::UID]);
-    return true;
-}
-?>
+
 //
 //User Profile jQuery interface bindings
 //
