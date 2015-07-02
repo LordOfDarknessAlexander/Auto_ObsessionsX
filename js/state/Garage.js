@@ -112,7 +112,7 @@ function viewCar(){
 }
 function toRepairShop(){
     //transition from garage to repair
-    if(_curCarID != 0){
+    if (_curCarID != 0){// && _curCarID !== undefined && _curCarID !== null) {
         //rebind repair back button to return us to this page
         jq.RepairShop.backBtn.off().click(
             function(){

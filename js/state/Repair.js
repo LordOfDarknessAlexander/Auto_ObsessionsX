@@ -76,46 +76,56 @@ var Repair = {
 	{   //initializes the state, enabling ui and core logic of this screen
 		//appState = GAME_MODE.Repair;
         
-        jq.RepairShop.menu.show();
-        
-        var div = $('div#RepairShop');
-        //if(carID == null || carID == undefined){
-		if(_curCarID !== 0){
-			var car = Garage.getCurrentCar(),
-                img = $('img#userCar', div);
-            
-            img.attr('src', car === null ? 'images\\garageEmpty.png' : car.getFullPath() );
-			
-			this._initButtons();
+	    jq.RepairShop.menu.show();
 
-			//$('div#RepairShop div#upgrades').show();
-			//$('div#RepairShop div#repairs').show();
-            
-            jq.RepairShop.dt.show();
-			jq.RepairShop.cid1.show();
-            jq.RepairShop.cid2.show();
-            jq.RepairShop.cid3.show();
-            
-            //$('h2#dt', div).show();
-			//$('h2#body', div).show();
-            //$('h2#interior', div).show();
-            //$('h2#docs', div).show();
-            
-            //$('label#info').text('');
-            //$('div#RepairShop p#error').hide();
+	    var car = Garage.getCurrentCar();
+
+        if (car !== null && car !== undefined) {
+            var div = $('div#RepairShop');
+            //if(carID == null || carID == undefined){
+            //if (_curCarID !== 0) {
+                //var car = Garage.getCurrentCar(),
+                  var img = $('img#userCar', div);
+
+                img.attr('src', car === null ? 'images\\garageEmpty.png' : car.getFullPath());
+
+                this._initButtons();
+
+                //$('div#RepairShop div#upgrades').show();
+                //$('div#RepairShop div#repairs').show();
+
+                jq.RepairShop.dt.show();
+                jq.RepairShop.cid1.show();
+                jq.RepairShop.cid2.show();
+                jq.RepairShop.cid3.show();
+
+                //$('h2#dt', div).show();
+                //$('h2#body', div).show();
+                //$('h2#interior', div).show();
+                //$('h2#docs', div).show();
+
+                //$('label#info').text('');
+                //$('div#RepairShop p#error').hide();
+            //}
 		}
 		else{
 			//show empty garage, please purchase a car
 			$('img#userCar', div).attr('src', 'images/garageEmpty.png');
             //TODO:display message in browser saying user must select a vehicle
 			//$('div#RepairShop div#upgrades').hide();
-			//$('div#RepairShop div#repairs').hide();
+            //$('div#RepairShop div#repairs').hide();
             
             jq.RepairShop.dt.hide();
 			jq.RepairShop.cid1.hide();
             jq.RepairShop.cid2.hide();
             jq.RepairShop.cid3.hide();
             
+            jq.RepairShop.pSwitch.hide();
+            //jq.RepairShop.sDT.hide();
+            //jq.RepairShop.sBody.hide();
+            //jq.RepairShop.sInter.hide();
+            //jq.RepairShop.sDocs.hide();
+
             //$('h2#dt', div).hide();
 			//$('h2#body', div).hide();
             //$('h2#interior', div).hide();
@@ -129,7 +139,7 @@ var Repair = {
         //
 		var car = Garage.getCurrentCar();
        
-        if(car !== null){
+        if(car !== null && car !== undefined){
             //var parts = car._parts
 
             //for each upgrade, buttons must be refreshed each time, as the cars or upgrades may change
