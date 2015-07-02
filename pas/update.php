@@ -105,15 +105,15 @@ class pasUpdate{
         //) ? $carID : 0) : 0;
     }
 	public static function updateSale($carID, $bid, $curTime){
-		global $aoCarSalesDB;
-        $CID = ao::CID;
-		$T = '_time';
-		$P = 'price';
-		$b = is_numeric($bid) ? floatval($bid);
-		$t = is_numeric($curTime) ? floatval($curTime);
-        $q = sql::update(getUserTableName(), "$P = $b, $T = $t") . "WHERE $CID = $carID";
+		// global $aoCarSalesDB;
+        // $CID = ao::CID;
+		// $T = '_time';
+		// $P = 'price';
+		// $b = is_numeric($bid) ? floatval($bid);
+		// $t = is_numeric($curTime) ? floatval($curTime);
+        // $q = sql::update(getUserTableName(), "$P = $b, $T = $t") . "WHERE $CID = $carID";
           
-        return $aoCarSalesDB->query($q);
+        // return $aoCarSalesDB->query($q);
 	}
 }
 /*if($gs){
