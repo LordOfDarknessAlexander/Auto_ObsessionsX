@@ -163,6 +163,9 @@ function(){
 	//jq.setErr('Welcome home, ' + user.name);
 	
 	function init(){
+        //var now = getTimestamp(), //in milliseconds
+            //dt = now - prev;
+            
 		if(!stop){
 			requestAnimFrame(init);			
 			update(0.33);
@@ -174,7 +177,6 @@ function(){
 			}  
 			timer++;
 			ticker++;
-			var CHECK = 0;
 		}	
 	}
 //Load the splash screen first
@@ -299,7 +301,7 @@ function startGame(){
 	// Fill with gradient
 	context.fillStyle = gradient;
 	//temp
-	userStats.money += 0;
+	//userStats.money += 0;
 	setStatBar();
 	switchStates();
 	
@@ -324,6 +326,7 @@ Auction.sold = function(){
 	//jq.Auction.menu.children().hide();
 	
 	jq.Sold.menu.show();
+    
 	//if(audioEnabled() ){
         //var s = assetLoader.sounds;
         assetLoader.sounds.bg.pause();
@@ -347,7 +350,7 @@ Auction.sold = function(){
             //not the right object!?
             jq.Sold.menu.show();
             
-//<php if(loggedIn){>
+//<php if(loggedIn() ){>
 			//Auction._car.repairs == Auction.vcondition;
             pas.insertCar(Auction);
 //<php
@@ -367,7 +370,6 @@ Auction.sold = function(){
                 //userGarage.push(Auction._car);	//creates a copy of car, giving it to user
                 //Auction._car = null;	//no more car to sell
             //}
-            //userSave();
             //Garage.save();
 //<php
 //}?>

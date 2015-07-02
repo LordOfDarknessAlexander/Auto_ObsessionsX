@@ -261,6 +261,10 @@ function pbSetColor(jqPB, value){
     }
     jqPB.attr('value', value);
 }
+function getTimestamp(){
+    //gets the current system time(in milliseconds)
+    return (window.performance && window.performance.now) ? window.performance.now() : new Date().getTime();
+}
 function strToDate(str){
     //convert a string of the format [Y-M-D H:M:S]
     //into a javascript date object
