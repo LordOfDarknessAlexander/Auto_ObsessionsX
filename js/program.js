@@ -40,14 +40,14 @@ function garageDoor(){
 		backgroundY = -1000;
 	}
 }
-function update(deltaTime){
+function update(dTime){
     //main update loog for game
-    
+    console.log(dTime.toString());
 	if(auctionOver){
 		restarted = true;
 	}
     //update active user's auctions
-	AuctionSell.update(deltaTime);
+	AuctionSell.update(dTime);
 
 	timer++;
 }
@@ -164,8 +164,9 @@ function(){
 	//jq.setErr('Welcome home, ' + user.name);
 	
 	function init(){
-        //var now = getTimestamp(), //in milliseconds
-            //dt = now - prev;
+		aoTimer.update();
+        var now = getTimestamp(), //in milliseconds
+			dt = aoTimer.getDT();
             
 		if(!stop){
 			requestAnimFrame(init);			
@@ -173,8 +174,7 @@ function(){
             
 			if( (timer >= 300.00) && (timer <= 900.00)){
 				appState = GAME_MODE.MAIN_MENU;
-				mainMenu();
-			  
+				mainMenu();  
 			}  
 			timer++;
 			ticker++;
@@ -314,7 +314,17 @@ function startGame(){
         assetLoader.sounds.bg.play();
     }    
 }
-
+Auction.BackOutofAuction = function(){
+	//stops deltatime timer
+	// stop = true;
+	// // auctionStop = true;
+	// // goingTimer = 0;
+	// startEndBids = [false,false,false,false];
+	// endBidTimers = [0,0,0,0];
+	// auctionEnded = true;
+	// auctionOver = true;
+	// endGame = true;
+}
 Auction.sold = function(){
     //end of auction, car goes to highest bidder
 	stop = true;

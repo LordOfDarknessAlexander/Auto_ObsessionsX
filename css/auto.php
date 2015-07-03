@@ -22,7 +22,7 @@ css::header();
 
 body{
     font-family: arial, sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -123,15 +123,15 @@ progress.med::-moz-progress-bar{
 /*
 Forms
 */
-#loginfields
+div#loginfields
 {
 	font-size:0.75em;
     color:white;
-    position:relative;
-    bottom:40%;
+    position:absolute;
+    top:22%;
     right:40%;
-	margin-left :60%;
-	margin-top: 4%;
+	/*margin-left :60%;
+	margin-top: 4%;*/
 }
 #progress 
 {
@@ -396,7 +396,12 @@ div#menu{
 }
 div#main
 {
- margin-top : 6%;
+<?php
+    css::size('100%', '100%');
+	posAbs();
+?>
+	top: 0; 
+	left: 0;
 }
 /*
 credits page UI stylings

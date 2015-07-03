@@ -199,6 +199,7 @@ var Auction = {
     },
 	update : function(){
 		//main update logic, called per frame
+		//console.log("Sparta!");
         var btc = this.bidTimerCap;
         
         //static call, to update global enemy bid cooldown counter

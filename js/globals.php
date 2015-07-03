@@ -28,15 +28,18 @@ function getTimestamp(){
 
 var aoTimer = {
     _prevTime:getTimestamp(), //time since last
-    getDT:function(){
+	_dt:0.0,
+	getDT:function(){
+		return this._dt;
+	},
+    update:function(){
         //get delta time between frames
-        var now = getTimestamp(),   //in milliseconds
-            dt = (now - this._prevTime);
-            
+        var now = getTimestamp();   //in milliseconds
+		
+        this._dt = (now - this._prevTime);   
         this._prevTime = now;
         //console.log(dt);
-        //console.log(this._prevTime);
-        return dt;   
+        //console.log(this._prevTime);   
     }
 };
 var _curCarID = 0;
