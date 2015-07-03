@@ -3,6 +3,7 @@ var AutoObessesions = {};
 
 var Allowance = {
     CAP:( (1000 * 60) * 60) * 24,  //86400000,  //3000,
+    //INV_CAP:1.0 / CAP,    //inverse cap, multiply by this instead of dividing by CAP!
     getDelta:function(){
         //get diffrence between last time and now        
         return Date.now() - Allowance.getLastTime();
@@ -41,8 +42,6 @@ function garageDoor(){
 }
 function update(deltaTime){
     //main update loog for game
-    //var d = aoTimer.getDT();  //strToDate('2012-06-12 7:08:32');
-    //console.log(JSON.stringify(d));
     
 	if(auctionOver){
 		restarted = true;
@@ -155,7 +154,7 @@ function(){
 	//loadUser();
     //Garage.load();  //load user garage!
     //AuctionSell.load(); //load user sales, after garage!
-   
+
     //jq.Game.setHomeImg();
     setHomeImg();   //in Garage.js
     setAdBG();

@@ -30,8 +30,9 @@ var aoTimer = {
     _prevTime:getTimestamp(), //time since last
     getDT:function(){
         //get delta time between frames
-        var now = getTimestamp();
-        var dt = (now - this._prevTime);
+        var now = getTimestamp(),   //in milliseconds
+            dt = (now - this._prevTime);
+            
         this._prevTime = now;
         //console.log(dt);
         //console.log(this._prevTime);
