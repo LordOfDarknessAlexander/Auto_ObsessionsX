@@ -9,6 +9,8 @@ class ao{
     );*/
     //constant database names
     const
+        NAME = 'Auto-Obsessions',
+        SITE_NAME = 'Auto_ObsessionsX',
         USERS = 'users',  //table containing all registered users
         CARS = 'aoCars',  
 		//MEMBERS = 'aoMembersDB',
@@ -26,6 +28,12 @@ class ao{
         //db = dbConnect('aoUsersDB'),
         //usersDB = dbConnect('aoUsersDB'),
         //carSalesDB = dbConnect('aoCarSalesDB');
+    public static function eName(){
+        echo ao::NAME;
+    }
+    public static function eSiteName(){
+        echo ao::SITE_NAME;
+    }
 }
 function isSetP(){
     //are post vars set
@@ -81,7 +89,7 @@ function rootURL(){
     //change to false for execution on server
     static $localExecution = true;
     return $localExecution?
-        'http://localhost/Auto_ObsessionsX/'    //clone your loccal copy from Git into C:/xampp/htdocs/
+        'http://localhost/Auto_ObsessionsX/'    //clone your local copy from Git into C:/xampp/htdocs/
         :
         'http://851entertainment.com/Auto_ObsessionsX/';
         //'http://triosdevelopers.com/A.Sanchez/Assets/AutoObsessionsGame/'

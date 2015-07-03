@@ -89,7 +89,7 @@ class html
 ?>
     <style>
         body{
-            background:url('http://851entertainment.com/AutoObsessionsGameX/images/Splash.png'); no-repeat 0 0;
+            background:#000000 url('./images/bgTile.png') repeat 0 0;
             font-family:Arial, Helvetica, sans-serif;
             font-size:13px;
             color: red;
