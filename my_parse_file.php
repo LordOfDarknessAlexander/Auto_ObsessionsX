@@ -2,9 +2,10 @@
 require_once 'dbConnect.php';
 session_start();
 
-if (isset($_SESSION['uname']))
+//if (isset($_SESSION['uname']))
+if (isset($_SESSION['user_id']))
 {
-	echo "{$_SESSION['uname']}";
+	echo "{$_SESSION['user_id']}";
 	if( isset( $_POST) )
 	{
 		if ( !empty($_POST['money']) || !empty($_POST['tokens']) || !empty($_POST['prestige']) || !empty($_POST['m_marker']))
@@ -13,7 +14,7 @@ if (isset($_SESSION['uname']))
 				$tokens = $_POST["tokens"];
 				$prestige = $_POST["prestige"];
 				$marker = $_POST["m_marker"];
-				$q = "UPDATE users SET money='$money', tokens='$tokens' ,prestige='$prestige', m_marker='$marker' WHERE   uname = '$_SESSION[uname]'";
+				$q = "UPDATE users SET money='$money', tokens='$tokens' ,prestige='$prestige', m_marker='$marker' WHERE   user_id = '$_SESSION[user_id]'";
 				//echo "Awesome";
 				$result = mysqli_query ($AO_DB->con, $q);
 				
