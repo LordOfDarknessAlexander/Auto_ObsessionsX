@@ -128,8 +128,8 @@ div#loginfields
 	font-size:0.75em;
     color:white;
     position:absolute;
-    top:22%;
-    right:40%;
+    top:32%;
+    right:30%;
 	/*margin-left :60%;
 	margin-top: 4%;*/
 }
