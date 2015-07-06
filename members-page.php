@@ -1,9 +1,11 @@
 <?php
 require 'html.php';
 require 'dbConnect.php';
-//require 'includes/secure.php';
-session_start();
+require_once 'ao.php';
+eS();
+//session_start();
 //secureLogin();
+/*
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
 {
     //tmp, untill session vars issues are resolved
@@ -15,7 +17,7 @@ if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
     header("Location: login.php");
 
    exit();
-}
+}*/
 html::doctype();
 ?>
 <html lang=en>
@@ -49,7 +51,6 @@ html::doctype();
 <?php
 //require 'include/nav.php';
 require 'Users/includes/info-col.php';
-//require 'Users/my_parse_file.php';
 require 'my_parse_file.php';
 ?>
 	<div id='content'><!-- Start of the member's page content. -->
