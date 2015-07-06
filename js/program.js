@@ -43,9 +43,9 @@ function garageDoor(){
 function update(dTime){
     //main update loog for game
     console.log(dTime.toString());
-	if(auctionOver){
-		restarted = true;
-	}
+	// if(auctionOver){
+		//restarted = true;
+	//}
     //update active user's auctions
 	AuctionSell.update(dTime);
 
@@ -291,7 +291,7 @@ function startGame(){
 	ticker = 0;
 	stop = false;
 	auctionStop = true;
-	restarted = false;
+	//restarted = false;
 	playerBid = 0;
 	context.font = '26px arial, sans-serif';
 	// Create gradient
@@ -316,7 +316,7 @@ function startGame(){
 }
 Auction.BackOutofAuction = function(){
 	//stops deltatime timer
-	// stop = true;
+	stop = true;
 	// // auctionStop = true;
 	// // goingTimer = 0;
 	// startEndBids = [false,false,false,false];
@@ -348,8 +348,9 @@ Auction.sold = function(){
     //}
     
 	auctionEnded = true;
-	auctionOver = true;
+	//auctionOver = true;
 	endGame = true;
+	Auction._ended = true;
 	
 	//disable user from entering an auction for this car again
 	//in case of unintended bugs, make sure user doesn't already own car
@@ -528,7 +529,7 @@ function(){
 	
 	auctionEnded = false;
 	endGame = false;
-	restarted = true;	
+	//restarted = true;	
     setAdBG();
     jq.setErr();    //clear error when changing pages
     

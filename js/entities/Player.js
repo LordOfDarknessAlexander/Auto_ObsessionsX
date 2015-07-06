@@ -19,13 +19,8 @@ var player = (function(player){
 
     //update
     player.update = function(){
-        player.anim = player.walkAnim;
-        player.anim.update();
-        
-        if(Auction.playerWinning){
-            player.anim = player.jumpAnim;
-            player.anim.update();
-        }
+        player.anim = Auction.isPlayerHighestBidder() ? player.jumpAnim : player.walkAnim;
+		player.anim.update();
     };
     
     player.draw = function(){

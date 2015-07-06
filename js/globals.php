@@ -179,8 +179,8 @@ timer += deltaTime;
 
 var endGame = false;
 var auctionEnded = false;
-var restarted = false;
-var auctionOver = false;
+//var restarted = false;
+//var auctionOver = false;
 var restartTimer = 0;
 
 var appState = GAME_MODE.SPLASH;	

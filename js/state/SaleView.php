@@ -76,7 +76,7 @@ var SaleView = {
 		auctionStop = true;
 		auctionEnded = false;
 		endGame = false;
-		this.enemyWinning = false;
+		//this.enemyWinning = false;
 		stop = false;
         
         jq.carImg.hide();

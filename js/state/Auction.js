@@ -52,6 +52,7 @@ var Auction = {
 	playerWon : false, //Whether or not the player won the auction
 	raisePerc : 0.08, //How much the AI and player will raise each bid by
 	vcondition: 0,
+	_ended: false,
 	init:function(index){
         //call to start an auction for car		
         //console.log(index);
@@ -69,6 +70,7 @@ var Auction = {
         
         appState = GAME_MODE.AUCTION;
         auctionStop = false;
+		Auction._ended = false;
 		this.playerBid = 0;
         
         var funcName = 'Auction.js, Auction::init()';
@@ -170,14 +172,15 @@ var Auction = {
 		//this.currentBid = vehiclePrice * 0.1;
 		
 		//BidTImers Booleans
-		this.playerWinning = false;
-		this.enemyWinning = false;
+		//this.playerWinning = false;
+		//this.enemyWinning = false;
 		this.playerWon = false;
 		playerBoughtOut = false;
 		this.goingTimer = 0;
 		this.winningTimer = 0;
 		player.reset();
 		stop = false;
+		Auction._ended = false;
         
         jq.carImg.hide();
 	},
@@ -212,7 +215,7 @@ var Auction = {
 		this.going();
 		
         //Increment timer if either ai or player is winning
-        if(this.playerWinning){
+        if(Auction.isPlayerHighestBidder()){//this.playerWinning){
             this.winningTimer++;
         }
         else{
@@ -269,7 +272,7 @@ var Auction = {
 		context.font = '14px arial, sans-serif';
 		player.draw();
 		
-		if(this.playerWinning){
+		if(Auction.isPlayerHighestBidder()){//this.playerWinning){
 			player.y = 177;
 			context.fillText(str, ENEMY_X, 200);
 		}
@@ -443,7 +446,7 @@ var Auction = {
             (PB > this.ai[2].currBid) &&
             (PB > this.ai[3].currBid) ){
 			//this.playerGoing();
-			this.playerWinning = true;
+			//this.playerWinning = true;
 		}
 	},
 	bidTimers:function(){
@@ -456,14 +459,14 @@ var Auction = {
 	},
 	playerBidding:function(){
         //user bidding logic
-	    if(!this.playerWinning && this.canPlayerBid()){
+	    if(!Auction.isPlayerHighestBidder() && this.canPlayerBid()){//this.playerWinning
             //
             var raise = this.getRaise();    //currentBid + this.raisePerc;
             
             if(userStats.money >= raise){
                 //only let user bid if they have enough funds to back it up!
-                this.playerWinning = true;
-                this.enemyWinning = false;
+                //this.playerWinning = true;
+                //this.enemyWinning = false;
                 this.playerBidTimer = 0;
                 this.goingTimer = 0;
                 //Setting the enemy's ability to bid to false so that as soon as the player bids the enemy is unable to
@@ -506,8 +509,8 @@ var Auction = {
                         this.currentBid = raise;
                         this.winningTimer = 0;
                         this.goingTimer = 0;
-                        this.enemyWinning = true;
-                        this.playerWinning = false;
+                        //this.enemyWinning = true;
+                        //this.playerWinning = false;
                         assetLoader.sounds.bidder.play();
                         Auction.setBidBtnText();
                         break;
@@ -517,7 +520,31 @@ var Auction = {
                 //can afford, so disable
 			}
 		 }
-	},	
+	},
+	isAIHighestBidder:function(){
+		var ai = Auction.ai;
+		
+		for(var i = 0; i < ai.length; i++){
+			var e = ai[i],
+			    delta = Math.abs(Auction.currentBid - e.currBid);
+				
+			if(delta < 0.000001){
+				console.log('Ai Bidder ' + i.toString() + ' ' + e.getBidStr());
+				return true;
+			}
+			continue;
+		}
+		return false;
+	},
+	isPlayerHighestBidder:function(){
+		var delta = Math.abs(Auction.currentBid - Auction.playerBid );
+		
+		if(delta < 0.000001){
+			//console.log('Player highest bidder');
+			return true;	
+		}
+		return false;
+	},
 	going:function(){
         //begin sale count down after a wthis.aiting period if no other bids are offered
 		//Going crowd roars someone is about to win the bid
@@ -532,7 +559,7 @@ var Auction = {
                 first = 320, //32 * 5,
                 second = 640; //32 * 7,
             
-			while( (this.playerWinning || this.enemyWinning) && (t < 660) && (!auctionStop) ){
+			while( ( Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()) && (t < 660) && (!auctionStop) ){//this.playerWinning
 				this.goingTimer++;
                 t = this.goingTimer;    //reset t after increment!
 				
@@ -556,14 +583,14 @@ var Auction = {
 					endGame = true;
 					this.goingTimer = 0;
 					
-					if(this.playerWinning){
+					if(Auction.isPlayerHighestBidder()){//this.playerWinning){
 						this.playerWon = true;
 						//this.buyOut();
 						console.log('Player won');
 						context.fillText('Sold to player!', x, 310);
 					}
-					else if(this.enemyWinning){
-						this.playerWinning = false;
+					else if(Auction.isAIHighestBidder()){//this.enemyWinning){
+						//this.playerWinning = false;
 						this.playerWon = false;
 						
                         for(var i = 0; i < this.ai.length; ++i){
@@ -635,6 +662,7 @@ function(){
 jq.Auction.backBtn.click(
 function(){
 	Auction.close();
+	//Auction.BackOutofAuction();
 	jq.Auction.menu.hide();
 	jq.AuctionSelect.menu.show();
     jq.carImg.hide();
