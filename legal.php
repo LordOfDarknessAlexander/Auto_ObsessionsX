@@ -20,50 +20,34 @@ if($page == 'terms'){
     html::simpleHead('Terms of Service');
 ?>
 <h1><?php ao::eName()?> Terms of Service</h1>
-By using or accessing the AutoObsessions.com web site ("Service"), or any services of <?php ao::eName();?>, Inc ("<?php ao::eName();?>"), you are agreeing to be bound by the following terms and conditions ("Terms of Service").
-<br><br>
+By using or accessing the <?php ao::eName();?> web site ("Service"), or any services of <?php eCompanyName();?>, ("<?php ao::eName();?>"), you are agreeing to be bound by the following terms and conditions ("Terms of Service").
+<?php subheader('Intellectual Property');?>
 <ul>
-Intellectual Property
 <li>The Site and all of its original content are the sole property of <?php ao::eName();?> and are, as such, fully protected by the appropriate international copyright and other intellectual property rights laws.</li>
-<li>All other content (ex. Images of vehicles) being used has been provided to us along with the permissions to use them. The items on the site (images, code, etc) are not to be redistributed by you (the user) for </li>
-<li>commercial purposes, or for any other reason without our explicit written consent.</li>
-</ul>
-<br>
+<li>All other content (ex. Images of vehicles) being used has been provided to us along with the permissions to use them. 
+<li>The items on the site (images, code, etc) are not to be redistributed by you (the user) for commercial purposes, or for any other reason without our explicit written consent.</li>
 
-<br><br>
-Termination
-<br>
+</ul>
+<?php subheader('Termination');?>
 <?php ao::eName();?> reserves the right to terminate your access to the Site, without any advance notice, but will do it's best to provide you with information of your termination upon request. 
-<br>
 One such reason may be:
-<br>
 By violating this terms of service will result in warning, with continued misuse resulting in the termination of your account and possible ban.
-<br><br>
-Governing Law
-<br>
+
+<?php subheader('Governing Law');?>
 This Agreement is governed in accordance with the laws of Ontario, Canada.
-<br><br>
-Changes to This Agreement
-<br>
+
+<?php subheader('Changes to This Agreement');?>
 <?php ao::eName();?> reserves the right to modify these Terms of Service at any time. This can be done a number of ways including email notifications. Your decision to continue to visit and 
-<br>
 make use of the Site after such changes have been made constitutes your formal acceptance of the new Terms of Service.
-<br>
 Therefore, we ask that you check and review this Agreement for such changes on an occasional basis. Should you not agree to any provision of this Agreement or any changes we make to this 
-<br>
 Agreement, we ask and advise that you do not use or continue to access the <?php ao::eName();?> site immediately.
-<br><br>
-Security
-<br>
+
+<?php subheader('Security');?>
 Our servers are used by a third party service, and we adhere to it's standards and practices in terms of web security.
-<br><br>
-Contact Us
-<br>
+
+<?php subheader('Contact Us');?>
 If you have any questions about this Agreement, please feel free to contact us at eEmail
-<br><br>
-<?php
-subheader('')
-?>
+<?php subheader('') ?>
 Policy and Terms updated: 07/03/2015
 
 
@@ -100,26 +84,26 @@ Internal Uses
 <br>
 We may use your personal information within <?php ao::eName();?>: 
 <ul>
-    <li>(1) to provide you with the services and products you request; </li>
-    <li>(2) to answer questions about our services; billing, payment methods or use of our website; </li>
-    <li>(3) to process or collect payments for our services,</li>
-    <li>(4) to contact you about the products and services that we offer.</li>
+    <li>to provide you with the services and products you request; </li>
+    <li>to answer questions about our services; billing, payment methods or use of our website; </li>
+    <li>to process or collect payments for our services,</li>
+    <li>to contact you about the products and services that we offer.</li>
 </ul>
 <br>
 Disclosure of Personal Information to Third Parties
 <br>
 We will not disclose any personal information to any third party (excluding our contractors to whom we may provide such information for the limited purpose of providing services to us and who are obligated to keep the information confidential), unless 
 <ul>
-    <li>(1) you have authorized us to do so; </li>
-    <li>(2) we are legally required to do so, for example, in response to a subpoena, court order or other legal process and/or, </li>
-    <li>(3) it is necessary to protect our property rights related to this website.</li>
+    <li>you have authorized us to do so; </li>
+    <li>we are legally required to do so, for example, in response to a subpoena, court order or other legal process and/or, </li>
+    <li>it is necessary to protect our property rights related to this website.</li>
 </ul>
 We also may share aggregate, non-personal information about website usage with unaffiliated third parties. This aggregate information does not contain any personal information about our users.
 
 <?php 
 subheader('How to Review and Change Your Personal Information');
 ?>
-If you register for a <?php ao::eName();?> account, you may review and change your personal information by logging into Sit<?php ao::eName();?>, then clicking on "Member" in the small menu near the top right and then clicking on "Profile".
+If you register for a <?php ao::eName();?> account, you may review and change your personal information by logging into <?php ao::eName();?>, then clicking on "Member" in the small menu near the top right and then clicking on "Profile".
 
 <?php
 subheader('How We Protect Information Online')
@@ -173,10 +157,10 @@ else if($page == 'contact'){
 <h1>Contact <?php ao::eName();?></h1>
 Questions, Concerns or Comments.
 <form action='' method='post'>
-    Name:<input type='text' name='name' size='16' maxlength='18'/><br>
-    Email:<input type='text' name='email' size='30' maxlength="100"/><br>
-    Subject:<input type='text' name='subject' size='30' maxlength='30'><br>
-    Content:<input type='text' name='content' size='30' maxlength='30'><br>
+    Name:<input type='text' name='name' size='16' maxlength='32'/><br>
+    Email:<input type='text' name='email' size='32' maxlength="64"/><br>
+    Subject:<input type='text' name='subject' size='32' maxlength='32'><br>
+    Content:<textarea name='Content' rows='8'  maxlength='256' cols="32"></textarea><br>
     <input type='submit' value='Send'>
 </form>
 <?php
