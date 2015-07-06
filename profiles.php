@@ -1,10 +1,11 @@
 <?php
 require_once 'html.php';
 require_once 'ao.php';
+require_once 're.php';
+require_once 'phtml/AO_UI.php';
 html::doctype();
 ?>
 <html lang=en>
-<link rel='stylesheet' type='text/css' href='includes.css'> 
 
 <head>
 <?php
@@ -20,8 +21,8 @@ require 'Users/includes/info-col.php';
 eS();
 
 ?>
+<div id="Members">
 
-<div id='members'>
 <div id="reg-navigation">
 	<a href="login.php">Login</a><br>
 	<a href="registerUser.php">Register</a><br>
@@ -39,7 +40,7 @@ eS();
             <!-- End of page five content. -->
     </div>
 </div>	
-
+</div>	
 <?php
 require 'phtml/legal.php';
 html::footer();
