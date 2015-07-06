@@ -23,11 +23,21 @@ if(isset($_GET) ){
     elseif($p == 'register'){
         $h1 .= ' Registration';
     }
+	elseif($p == 'profiles'){
+        $h1 .= ' Profiles';
+    }
+	 elseif($p == 'Tutorial'){
+        $h1 .= ' Tutorial';
+    }
+	 elseif($p == 'credits'){
+        $h1 .= ' Credits';
+    }
     //elseif($p == 'closeAccount'){}
 }
 //if get not used, display empty page!
 ?>
 <h1><?php echo $h1;?></h1>
+
     <div id='reg-navigation'>
 <?php
 if(isset($_GET) AND isset($_GET['page']) ){
@@ -35,34 +45,34 @@ if(isset($_GET) AND isset($_GET['page']) ){
     $p = isAlpha($_GET['page']) ? $_GET['page'] : '';
 
     if($p == 'login'){?>
-<!--a href='index.php?page=logout'>Logout</a><br>
-<a href='index.php?page=cancel'>Cancel</a><br-->
+<a href='index.php?page=logout'>Logout</a><br>
+<a href='index.php?page=cancel'>Cancel</a><br>
 <?php
     }
     elseif($p == 'logout'){
-        //$h1 .= ' Logout';
+        $h1 .= ' Logout';
     }
     elseif($p == 'members'){?>
-<!--a href='index.php?page=logout'>Logout</a><br>
-<a href='register-password.php'>New Password</a><br-->
+<a href='index.php?page=logout'>Logout</a><br>
+<a href='register-password.php'>New Password</a><br>
 <?php
     }
     elseif($p == 'admin'){?>
-<!--a href='index.php?page=logout'>Logout</a><br>
+<a href='index.php?page=logout'>Logout</a><br>
 <a href='admin_view_users.php'>View Members</a><br>
 <a href='upload_images.php'>Upload Images</a><br>
 <a href='search_users.php'>Usernames</a><br>
 <a href='search_users.php'>Disband</a><br>
-<a href='register-password.php'>New Password</a><br-->
+<a href='register-password.php'>New Password</a><br>
 <?php
     }
     elseif($p == 'register'){?>
-<!--a href='index.php?page=cancel'>Cancel</a><br-->
+<a href='index.php?page=cancel'>Cancel</a><br>
 <?php
     }
-    //elseif($p == 'disband'){
+    elseif($p == 'disband'){
         
-    //}
+    }
 }
 //if get not used, display empty page!
 ?>
