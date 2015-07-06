@@ -18,12 +18,7 @@ html::charset();
 require_once 'metaHeader.php';
 require 'Users/includes/info-col.php';
 eS();
-$page = (isset($_GET['page']) && isAlpha($_GET['page']) ) ? $_GET['page'] : '';
-//this conditional means only passing specific params to the url
-//will display a functional page
-if($page == 'Dante'){
-    html::simpleHead('Dante');
-}
+
 ?>
 
 <div id='members'>
