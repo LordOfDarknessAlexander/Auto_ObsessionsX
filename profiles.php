@@ -4,7 +4,8 @@ require_once 'ao.php';
 html::doctype();
 ?>
 <html lang=en>
-<link rel='stylesheet' type='text/css' href='includes.css'>
+<link rel='stylesheet' type='text/css' href='includes.css'> 
+
 <head>
 <?php
 html::title('Profiles');
@@ -14,12 +15,18 @@ html::charset();
 <body>
 <div id='container'>
 <?php
-//require_once 'metaHeader.php';
+require_once 'metaHeader.php';
 require 'Users/includes/info-col.php';
 eS();
+$page = (isset($_GET['page']) && isAlpha($_GET['page']) ) ? $_GET['page'] : '';
+//this conditional means only passing specific params to the url
+//will display a functional page
+if($page == 'Dante'){
+    html::simpleHead('Dante');
+}
 ?>
 
-
+<div id='members'>
 <div id="reg-navigation">
 	<a href="login.php">Login</a><br>
 	<a href="registerUser.php">Register</a><br>
@@ -37,6 +44,7 @@ eS();
             <!-- End of page five content. -->
     </div>
 </div>	
+
 <?php
 require 'phtml/legal.php';
 html::footer();
