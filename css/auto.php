@@ -85,6 +85,10 @@ p#legal
     bottom:0%;
     left:0%;
 }
+textarea#comment-form
+{
+    resize: none;
+}
 /*
 Proress bar styles
 */

@@ -6,7 +6,7 @@ html::doctype();
 <html lang=en>
 <head>
 <?php
-html::title('Login Page');
+html::title('Tutorial Page');
 html::charset();
 ?>
 <link rel='stylesheet' type='text/css' href='includes.css'>

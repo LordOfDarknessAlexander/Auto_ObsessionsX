@@ -4,6 +4,7 @@
 require_once 'html.php';
 require 'ao.php';
 require_once 're.php';
+require_once 'dbConnect.php';
 //require_once 'secure.php';
 //secure::Login();    //this allows for a single call to secure login across multiple pages!
 //$AO_NAME = 'Auto Obsessions';
@@ -155,13 +156,22 @@ else if($page == 'contact'){
     html::simpleHead('Contact');
 ?>
 <h1>Contact <?php ao::eName();?></h1>
+<?php 
+    if(isSetP() && !empty($_POST)){
+        //$n = $_POST['name'];
+        //$e = $_POST['email'];
+        //$s = $AO_DB->strip('subject');
+       // $c =$AO_DB->strip('content');
+        echo $s;
+    }
+?>
 Questions, Concerns or Comments.
 <form action='' method='post'>
-    Name:<input type='text' name='name' size='16' maxlength='32'/><br>
-    Email:<input type='text' name='email' size='32' maxlength="64"/><br>
-    Subject:<input type='text' name='subject' size='32' maxlength='32'><br>
-    Content:<textarea name='Content' rows='8'  maxlength='256' cols="32"></textarea><br>
-    <input type='submit' value='Send'>
+    Name:<input id='name' type='text' name='name' size='16' maxlength='32'/><br>
+    Email:<input id='email' type='text' name='email' size='32' maxlength="64"/><br>
+    Subject:<input id='subject' type='text' name='subject' size='32' maxlength='32'><br>
+    Content:<br><textarea id='content' name='Content' rows='8'  maxlength='256' cols='32'></textarea><br>
+    <input type='submit' value='Send'>    
 </form>
 <?php
 }

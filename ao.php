@@ -13,9 +13,10 @@ class ao{
         'AB'=>'Andrew Best'
     );*/
     //constant database names
-    const
-    NAME = 'Auto-Obsessions&#153;',
+    const   
+        NAME = 'Auto-Obsessions&#153;',
         SITE_NAME = 'Auto_ObsessionsX',
+        EMAIL = 'auto_obsessions@851entertainment.com',
         USERS = 'users',  //table containing all registered users
         CARS = 'aoCars',  
 		//MEMBERS = 'aoMembersDB',
