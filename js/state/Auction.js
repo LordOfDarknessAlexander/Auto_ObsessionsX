@@ -40,7 +40,7 @@ var Auction = {
 	winningImgY : 34,
 	playerBid : 0,
 	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
-	winningTimerCap : 100.0, //Max amount of time the winningTimer will run for before activating the going timer
+	WIN_TIMER_CAP : 100.0, //Max amount of time the winningTimer will run for before activating the going timer
 	goingTimer: 0.0, //Timer forcountdown to final sale: going once, going twice, sold
 	//enemyBidTimer: 0.0, //Slight delay after the player bids to prevent the AI from spam bidding
     playerBidTimer: 0.0, //Slight delay after the player bids to prevent the player from spam bidding
@@ -72,6 +72,7 @@ var Auction = {
         auctionStop = false;
 		Auction._ended = false;
 		this.playerBid = 0;
+		this.resetTimers();
         
         var funcName = 'Auction.js, Auction::init()';
         
@@ -163,26 +164,30 @@ var Auction = {
 	close : function(){
         //End the auction
         //closing bidding and clearing local vars
+		console.log('Auction close');
 		auctionStop = true;
-		auctionEnded = false;
+		//auctionEnded = false;
 		endGame = false;
 		
 		this.playerBid = 0;		
 		this.currentBid = 0;
 		//this.currentBid = vehiclePrice * 0.1;
-		
+		this.resetTimers();
 		//BidTImers Booleans
 		//this.playerWinning = false;
 		//this.enemyWinning = false;
 		this.playerWon = false;
 		playerBoughtOut = false;
-		this.goingTimer = 0;
-		this.winningTimer = 0;
+		
 		player.reset();
 		stop = false;
-		Auction._ended = false;
+		Auction._ended = true;
         
         jq.carImg.hide();
+	},
+	resetTimers : function(){
+		this.goingTimer = 0;
+		this.winningTimer = 0;
 	},
     getGoingPerc:function(){
         return 0.0;
@@ -200,7 +205,7 @@ var Auction = {
         
         return b + (cv * this.raisePerc);
     },
-	update : function(){
+	update : function(deltaTime){
 		//main update logic, called per frame
 		//console.log("Sparta!");
         var btc = this.bidTimerCap;
@@ -212,24 +217,26 @@ var Auction = {
 		this.enemyBidding();
 		//this.currentBidder();
 		this.updatePlayer();
-		this.going();
 		
         //Increment timer if either ai or player is winning
-        if(Auction.isPlayerHighestBidder()){//this.playerWinning){
+        if(Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()){//this.playerWinning){
             this.winningTimer++;
         }
-        else{
-            for(var i = 0; i < this.ai.length; ++i){
-                if(this.ai[i].winningBid){
-                    this.winningTimer++;
-                    break;
-                }
-            }
-        }
+		
+		this.going();
+        // else if(){
+			// this.winningTimer++;
+            // // for(var i = 0; i < this.ai.length; ++i){
+                // // if(this.ai[i].winningBid){
+                    // // this.winningTimer++;
+                    // // break;
+                // // }
+            // // }
+        // }
         
-		if(auctionEnded){
-			this.close();		
-		}
+		// if(auctionEnded){
+			// this.close();		
+		// }
 		if(endGame){
 			this.close();					
 		}
@@ -468,7 +475,7 @@ var Auction = {
                 //this.playerWinning = true;
                 //this.enemyWinning = false;
                 this.playerBidTimer = 0;
-                this.goingTimer = 0;
+                this.resetTimers();
                 //Setting the enemy's ability to bid to false so that as soon as the player bids the enemy is unable to
                 //this.playerCanBid = false;
                 this.playerBid = raise;
@@ -507,8 +514,7 @@ var Auction = {
                         Enemy.resetTimer();
                         
                         this.currentBid = raise;
-                        this.winningTimer = 0;
-                        this.goingTimer = 0;
+                        this.resetTimers();
                         //this.enemyWinning = true;
                         //this.playerWinning = false;
                         assetLoader.sounds.bidder.play();
@@ -529,7 +535,7 @@ var Auction = {
 			    delta = Math.abs(Auction.currentBid - e.currBid);
 				
 			if(delta < 0.000001){
-				console.log('Ai Bidder ' + i.toString() + ' ' + e.getBidStr());
+				//console.log('Ai Bidder ' + i.toString() + ' ' + e.getBidStr());
 				return true;
 			}
 			continue;
@@ -552,30 +558,31 @@ var Auction = {
 		//breaks out of the while loop and enemyWinning becomes false
 		context.font = '20px arial, sans-serif';
 		
-        if(this.winningTimer >= this.winningTimerCap){
+        if(this.winningTimer >= this.WIN_TIMER_CAP){
             //
             var t = this.goingTimer,
                 f = 32,   //number of frames required to make purchase(32 frames == 1 second)
                 first = 320, //32 * 5,
                 second = 640; //32 * 7,
             
-			while( ( Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()) && (t < 660) && (!auctionStop) ){//this.playerWinning
+			if( ( Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()) && (t < 660) && (!auctionStop) ){//this.playerWinning
 				this.goingTimer++;
                 t = this.goingTimer;    //reset t after increment!
+				//console.log(t.toString());
 				
                 if( (t > 0) && (t < first)){
                     var x = ENEMY_X + 715;
 					//console.log('Going once');
 					context.fillText('Going Once', x, 270);
 					assetLoader.sounds.going.play();
-					break;
+					//break;
 					
 				}
 				else if( (t >= first) && (t < second) ){
 					//console.log('Going twice');
 					context.fillText('Going Twice', x, 290);
 					assetLoader.sounds.going.play();
-					break;		
+					//break;		
 				}
 				else if(t >= second){
                     //a single user has held the top bid the to reuired count,
@@ -598,11 +605,11 @@ var Auction = {
 								console.log('AI won');
 								context.fillText('Sold to ' + this.ai[i], x, 310);
 							}
-						}
+						}	
 					}
 					this.sold();
 					//$('div#loss label').text(Auction._car.getFullName() );
-					break;
+					//break;
 				}
 			}
 		}
@@ -622,7 +629,7 @@ var Auction = {
             //
             //if(userStats.money >= this.currentBid){
                 //userStats.money = userStats.money - this.currentBid;
-                auctionEnded = true;
+                //auctionEnded = true;
                 //push vehicle to garage
                 //auctionStop = true;
                 assetLoader.sounds.bidder.pause();

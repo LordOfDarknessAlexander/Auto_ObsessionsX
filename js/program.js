@@ -42,7 +42,7 @@ function garageDoor(){
 }
 function update(dTime){
     //main update loog for game
-    console.log(dTime.toString());
+    //console.log(dTime.toString());
 	// if(auctionOver){
 		//restarted = true;
 	//}
@@ -58,7 +58,7 @@ Auction.setup = function(){
 	if(!auctionStop){
 		window.requestAnimFrame(Auction.setup);	//recursive call, bad
 		
-		Auction.update();
+		Auction.update(deltaTime);
 	}
 }
 function auctionMode(deltaTime){
@@ -202,7 +202,7 @@ function switchStates(GAME_MODE){
 		break;  
 		//do not need auction select
 		case AUCTION:
-			Auction.update();
+			Auction.update(deltaTime);
 			setStatBar();
 		break;
 
@@ -347,7 +347,7 @@ Auction.sold = function(){
         assetLoader.sounds.sold.play();
     //}
     
-	auctionEnded = true;
+	//auctionEnded = true;
 	//auctionOver = true;
 	endGame = true;
 	Auction._ended = true;
@@ -527,7 +527,7 @@ function(){
     setHomeImg();
     jq.carImg.show();
 	
-	auctionEnded = false;
+	//auctionEnded = false;
 	endGame = false;
 	//restarted = true;	
     setAdBG();

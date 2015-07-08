@@ -74,7 +74,7 @@ var SaleView = {
         //End the auction
         //closing bidding and clearing local vars
 		auctionStop = true;
-		auctionEnded = false;
+		//auctionEnded = false;
 		endGame = false;
 		//this.enemyWinning = false;
 		stop = false;
@@ -163,9 +163,9 @@ var SaleView = {
         
 		this.going();
         
-		 if(auctionEnded){
-			 this.close();		
-		 }
+		 // if(auctionEnded){
+			 // this.close();		
+		 // }
 		 if(endGame){
 			 this.close();					
 		 }
@@ -244,7 +244,6 @@ var SaleView = {
 
 jq.SaleView.backBtn.click(
 function(){
-	console.log("hit");
 	//Auction.close();
 	jq.SaleView.menu.hide();
 	jq.AuctionSell.menu.show();
