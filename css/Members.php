@@ -33,15 +33,26 @@ members pages
 	padding: 5px 0;
 }
 
-<?php divMembers();?> button#SaleViewButton
-{<?php
+<?php divMembers();?>div#nav {
+<?php
     posAbs();
     css::fontBold();
     defaultBtnBG();
 ?>
 	width:150px;
 	height:50px;
-	
+	bottom:0%;
+	left:5%;
+}
+
+<?php divMembers();?>div#nav ul{
+<?php
+    posAbs();
+    css::fontBold();
+    defaultBtnBG();
+?>
+	width:150px;
+	height:50px;
 	bottom:0%;
 	left:5%;
 }
@@ -78,8 +89,16 @@ members pages
 	padding : 2%;
 	top : 19%;
 }
-
-
+<?php divMembers();?>div#playerData{
+	
+	top:0%;
+    left:10%;
+    color:red;
+    width:90%;
+    height:10%;
+    text-align:left;
+    position:absolute;
+}
 
 
 
