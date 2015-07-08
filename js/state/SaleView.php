@@ -44,7 +44,7 @@ var SaleView = {
         //console.log(index);
         //disable/enable sounds before ajax call
         
-        //if(audioEnabled() ){
+        if(audioEnabled() ){
             //var s = assetLoader.sounds;
             assetLoader.sounds.gameOver.pause();
             assetLoader.sounds.going.pause();
@@ -52,7 +52,7 @@ var SaleView = {
             assetLoader.sounds.bg.currentTime = 0;
             assetLoader.sounds.bg.loop = true;
             assetLoader.sounds.bg.play();
-        //}
+        }
 			//auctionStop = false;
 			this._auction = index;
 			

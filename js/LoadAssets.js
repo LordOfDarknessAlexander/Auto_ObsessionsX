@@ -1,14 +1,14 @@
 ﻿// set the sound preference
-if(canUseLocalStorage){
-    playSound = (localStorage.getItem('kandi.playSound') === "true")
+//if(canUseLocalStorage){
+var playSound = audioEnabled();//(localStorage.getItem('kandi.playSound') === "true")
 
-    if(playSound){
-        $('.sound').addClass('sound-on').removeClass('sound-off');
-    }
-    else{
-        $('.sound').addClass('sound-off').removeClass('sound-on');
-    }
+if(playSound){
+    $('.sound').addClass('sound-on').removeClass('sound-off');
 }
+else{
+    $('.sound').addClass('sound-off').removeClass('sound-on');
+}
+//}
 
 //Asset pre-loader object. Loads all images
 var assetLoader = (function(){

@@ -244,15 +244,18 @@ function strFromCurrentDate(){
 	console.log(dformat);
 	return dformat;
 }		
+
+function setAudio(enabled){
+    var b = Boolean(enabled);
+    Storage.local._audioEnabled = JSON.stringify(b);
+}
 function audioEnabled(){
     return (Storage.local !== null && '_audioEnabled' in Storage.local)?
         Boolean(JSON.parse(Storage.local._audioEnabled) ) : true;
 }
 function toggleAudio(){
-    var b = !audioEnabled();
-    Storage.local._audioEnabled = JSON.stringify(b);
+    setAudio(!audioEnabled());
 }
-
 var html = {
     _entityMap : {
         '&' : '&amp;',

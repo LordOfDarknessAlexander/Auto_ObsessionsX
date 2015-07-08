@@ -545,17 +545,19 @@ function(){
     if($this.hasClass('sound-on')){
         //disable audio
         $this.removeClass('sound-on').addClass('sound-off');
+        setAudio(false);
         playSound = false;
     }
     else{
         //enable audio
         $this.removeClass('sound-off').addClass('sound-on');
+        setAudio(true);
         playSound = true;
     }
     
-    if(canUseLocalStorage){
-        localStorage.setItem('kandi.playSound', playSound);
-    }
+    //if(canUseLocalStorage){
+    //    localStorage.setItem('kandi.playSound', playSound);
+    //}
     // mute or unmute all sounds
     for(var sound in assetLoader.sounds){
         if(assetLoader.sounds.hasOwnProperty(sound)){
