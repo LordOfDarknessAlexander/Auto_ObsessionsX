@@ -3,9 +3,9 @@
     //Math.floor rounds down to the nearest integer,
     //this ensures no ai starts ready to bid,
     //so that there is a gap
-    var BCD = 32,
-        BID_CAP = BCD * 8.0,
-        r = Math.floor(Math.random() * (BID_CAP * 0.65) );
+    var BCD = 1.0,//32,
+        BID_CAP = BCD * 4.0,
+        r = Math.random() * (BID_CAP * 0.65);
     
 	return {
 		bidCap : bidCap, //The most the enemy will bid
@@ -75,7 +75,7 @@
             }            
             return false;
         },
-		update : function(){
+		update : function(dt){
             //console.log('update!' + JSON.stringify(this) );
             //if(!this.leftAuction){
             if(!this.leftAuction){
@@ -86,13 +86,11 @@
                 //If the enemy can bid and is still active in the auction increment the bid timer
                 if(!this.canBid() ){
                     //console.log('update timmer!');
-                    this._bidTimer++;
+                    this._bidTimer += dt;
                     //Once the _bidTimer has reached the timer cap, allow the enemy to bid again and reset the bid timer
-                    //if(this._bidTimer >= this.BID_TIMER_CAP){
-                        //this.canBid = true;
-                        //this._bidTimer = 0;
-                        //this.bid();
-                    //}
+                    if(this._bidTimer > this.BID_TIMER_CAP){
+                       this._bidTimer = this.BID_TIMER_CAP;
+                    }
                 }
             }
 		}
@@ -103,7 +101,7 @@
 //Time the AI has to wait to bid again
 //modern browser refresh at roughly 32 fps
 //32 fps at 16 frames is ~0.5 seconds
-Enemy.BID_CD = 32;
+Enemy.BID_CD = 1.0;
 //Enemy.BID_TIMER_CAP = (1.0 / 32.0) * 8, //Max wait time between bids, wait 8 frames(at 32fps)
 Enemy._bidTimer = 0;
 
@@ -115,9 +113,12 @@ Enemy.canBid = function(){
 Enemy.resetTimer = function(){
     Enemy._bidTimer = 0;
 }
-Enemy.update = function(){
+Enemy.update = function(dt){
     if(!Enemy.canBid() ){
-        Enemy._bidTimer++;
+        Enemy._bidTimer += dt;
+		if( Enemy._bidTimer > Enemy.BID_CD){
+			Enemy._bidTimer = Enemy.BID_CD;
+		}
     }
     //console.log('can bid!');
     //_bidTimer is reset when an individual places a bid

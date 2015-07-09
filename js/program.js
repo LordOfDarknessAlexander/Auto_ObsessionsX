@@ -53,15 +53,19 @@ function update(dTime){
 }
 Auction.setup = function(){
     //
+	aoTimer.update();
+    var now = getTimestamp(), //in milliseconds
+		dt = aoTimer.getDT();
+		
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	
 	if(!auctionStop){
 		window.requestAnimFrame(Auction.setup);	//recursive call, bad
 		
-		Auction.update(deltaTime);
+		Auction.update(dt);
 	}
 }
-function auctionMode(deltaTime){
+function auctionMode(dt){
     //in-Auction update, core of game logic
     ticker = 0;
     stop = true;
@@ -202,7 +206,7 @@ function switchStates(GAME_MODE){
 		break;  
 		//do not need auction select
 		case AUCTION:
-			Auction.update(deltaTime);
+			Auction.update();
 			setStatBar();
 		break;
 

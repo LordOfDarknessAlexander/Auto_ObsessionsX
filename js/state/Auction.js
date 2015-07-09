@@ -205,15 +205,21 @@ var Auction = {
         
         return b + (cv * this.raisePerc);
     },
-	update : function(deltaTime){
+	update : function(dt){
 		//main update logic, called per frame
 		//console.log("Sparta!");
+		//console.log(dt);
         var btc = this.bidTimerCap;
         
         //static call, to update global enemy bid cooldown counter
-		Enemy.update();
+		Enemy.update(dt);
         
-		this.bidTimers();
+		for(var i = 0; i < this.ai.length; ++i){
+			if(!this.ai[i].leftauction){
+				this.ai[i].update(dt);
+			}
+		}
+		
 		this.enemyBidding();
 		//this.currentBidder();
 		this.updatePlayer();
@@ -292,7 +298,7 @@ var Auction = {
         
         function draw(){
             var bid = Auction.ai[i].currBid;
-                str = bidders[i] + '$' + bid.toFixed(2);
+                str = bidders[i] + Auction.ai[i].getBidStr();
             
             if(bid >= cb){
                 context.drawImage(curBidImage, left, ewinPos);
@@ -456,14 +462,14 @@ var Auction = {
 			//this.playerWinning = true;
 		}
 	},
-	bidTimers:function(){
-        //updates this.ai bidding timers	
-		for(var i = 0; i < this.ai.length; ++i){
-			if(!this.ai[i].leftAuction){
-				this.ai[i].update();
-			}
-		}
-	},
+	// bidTimers:function(){
+        // //updates this.ai bidding timers	
+		// for(var i = 0; i < this.ai.length; ++i){
+			// if(!this.ai[i].leftAuction){
+				// this.ai[i].update();
+			// }
+		// }
+	// },
 	playerBidding:function(){
         //user bidding logic
 	    if(!Auction.isPlayerHighestBidder() && this.canPlayerBid()){//this.playerWinning
