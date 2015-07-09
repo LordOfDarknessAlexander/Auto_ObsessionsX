@@ -32,6 +32,12 @@
                 ) : 0.0;
             return p;
         },
+		setBidTimer:function(){
+			var BCD = 1.0,//32,
+				BID_CAP = BCD * 4.0,
+				r = Math.random() * (BID_CAP * 0.65);
+				_bidTimer = r;
+		},
         getBidStr:function(){
             return '$' + this.currBid.toFixed(2);
         },
@@ -60,8 +66,8 @@
                     if(this.canBid() ){
                         this.currBid = raise;
                         this.winningBid = true;
-                        this._bidTimer = 0;
-                        Enemy.resetTimer();
+                        this._bidTimer = 0.0;
+                        //Enemy.resetTimer();
                         //assetLoader.sounds.bidder.play();
                         //console.log(JSON.stringify(this) + ', bidding: ' + raise.toFixed(2) );
                         return true;
@@ -82,7 +88,7 @@
                 if(this.currBid >= this.bidCap){
                     this.leftAuction = true;
                     return;
-                }			
+                }	
                 //If the enemy can bid and is still active in the auction increment the bid timer
                 if(!this.canBid() ){
                     //console.log('update timmer!');
@@ -111,11 +117,12 @@ Enemy.canBid = function(){
     return Enemy._bidTimer >= Enemy.BID_CD;
 }
 Enemy.resetTimer = function(){
-    Enemy._bidTimer = 0;
+    Enemy._bidTimer = 0.0;
 }
 Enemy.update = function(dt){
     if(!Enemy.canBid() ){
         Enemy._bidTimer += dt;
+		
 		if( Enemy._bidTimer > Enemy.BID_CD){
 			Enemy._bidTimer = Enemy.BID_CD;
 		}

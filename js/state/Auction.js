@@ -149,7 +149,7 @@ var Auction = {
             })
         ).done(function(){
             //init visuals and display page after state has loaded
-            Auction.setup();
+            Auction.initialSetup();
         }).fail(function(){
             //alert(
             jq.setErr(funcName, 'calling $.when failed! Reason: ' + jqxhr.responseText);

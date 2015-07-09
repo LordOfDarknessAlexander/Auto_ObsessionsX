@@ -160,7 +160,7 @@ var SaleView = {
         
         //static call, to update global enemy bid cooldown counter
 		Enemy.update();
-		this._auction.update();
+		this._auction.update(dt);
         
 		this.going();
         

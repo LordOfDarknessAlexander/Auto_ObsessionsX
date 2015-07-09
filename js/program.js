@@ -49,13 +49,21 @@ function update(dTime){
     //update active user's auctions
 	AuctionSell.update(dTime);
 
-	timer++;
+	//timer++;
+}
+Auction.initialSetup = function(){
+	//called as initial update
+	//to bypass the delay due to ajax calls when auction is initialized
+	aoTimer.update();
+		
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	
+	window.requestAnimFrame(Auction.setup);	
 }
 Auction.setup = function(){
-    //
+	//this is called every frame
 	aoTimer.update();
-    var now = getTimestamp(), //in milliseconds
-		dt = aoTimer.getDT();
+    var dt = aoTimer.getDT();
 		
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	
@@ -67,7 +75,7 @@ Auction.setup = function(){
 }
 function auctionMode(dt){
     //in-Auction update, core of game logic
-    ticker = 0;
+    //ticker = 0;
     stop = true;
 
     //$('#money').html(money);
@@ -164,7 +172,8 @@ function(){
     setAdBG();
     jq.adBar.hide();
     jq.nav.hide();
-	
+	appState = GAME_MODE.MAIN_MENU;
+	mainMenu();  
 	//jq.setErr('Welcome home, ' + user.name);
 	
 	function init(){
@@ -176,12 +185,12 @@ function(){
 			requestAnimFrame(init);			
 			update(0.33);
             
-			if( (timer >= 300.00) && (timer <= 900.00)){
-				appState = GAME_MODE.MAIN_MENU;
-				mainMenu();  
-			}  
-			timer++;
-			ticker++;
+			// if( (timer >= 300.00) && (timer <= 900.00)){
+				// appState = GAME_MODE.MAIN_MENU;
+				// mainMenu();  
+			// }  
+			//timer++;
+			//ticker++;
 		}	
 	}
 //Load the splash screen first
@@ -206,7 +215,7 @@ function switchStates(GAME_MODE){
 		break;  
 		//do not need auction select
 		case AUCTION:
-			Auction.update();
+			Auction.update(dt);
 			setStatBar();
 		break;
 
@@ -252,7 +261,7 @@ function mainMenu()
             assetLoader.sounds[sound].muted = !playSound;
         }
     }
-    delete splash;
+    //delete splash;
 
     $('#progress').hide();
     $('#splash').hide();
@@ -292,7 +301,7 @@ function startGame(){
     
 	appState = GAME_MODE.RUNNING;
 	player.reset();
-	ticker = 0;
+	//ticker = 0;
 	stop = false;
 	auctionStop = true;
 	//restarted = false;
@@ -417,19 +426,19 @@ Auction.sold = function(){
 $('.play').click(
 function(){
     $('#menu').hide();
-    $('#gameMenu').show();
+    jq.Game.menu.show();
 	$('#gameMenu').removeClass('#Slots');
 	$('#Slots').hide();
     //can no longer navigate to credits or the root menus anymore
-    delete credits;
-    delete mainMenu;
+    // delete credits;
+    // delete mainMenu;
     //delete menu image, since the game can not navigate back to this screen after clicking
     startGame();
 });
 //Slots
 $('.playSlots').click(
 function(){
-    $('#gameMenu').hide();
+    jq.Game.menu.hide();
 	$('#Slots').show();
     //delete menu image, since the game can not navigate back to this screen after clicking
 	callSlots();
