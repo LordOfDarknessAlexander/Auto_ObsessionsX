@@ -4,6 +4,7 @@ function eCompanyName(){
     ?>8.5:1 Entertainment Inc<?php
 }
 //require 'dbConnect.php';
+//$AO_DB = dbConnect('aoMembersDB');
 class ao{
     /*public static CONST NAMES = array(
         'OWNER'=>'Adam Glazer',
@@ -20,12 +21,12 @@ class ao{
         EMAIL = 'auto_obsessions@851entertainment.com',
         USERS = 'users',  //table containing all registered users
         CARS = 'aoCars',  
-		//MEMBERS = 'aoMembersDB',
+		MEMBERS = 'aoMembersDB',
 		//database containing all core vehicle data
         //sql column names
         CID = 'car_id',
         UID = 'user_id';
-		
+		//$AO_DB = dbConnect(MEMBERS);
         //vehicle parts
         //PRICE = 'price',
         //
@@ -35,6 +36,7 @@ class ao{
        // db = dbConnect('aoUsersDB'),
         //usersDB = dbConnect('aoUsersDB'),
         //carSalesDB = dbConnect('aoCarSalesDB');
+			
     public static function eName(){
         echo ao::NAME;
     }
@@ -87,6 +89,7 @@ function eS(){
 }
 
 function sec_session_start() {
+	
     $session_name = 'sec_session_id';   // Set a custom session name
     $secure = SECURE;
     // This stops JavaScript being able to access the session id.
@@ -114,12 +117,13 @@ function sec_session_start() {
 
 function login() {
 	
+	
     // This section processes submissions from the login form.
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		// checking the user
-		$email = mysqli_real_escape_string($AO_DB->con,$_POST['email']);
-		$pass = mysqli_real_escape_string($AO_DB->con,$_POST['psword']);
+		$email = mysqli_real_escape_string(dbg(),$_POST['email']);
+		$pass = mysqli_real_escape_string(dbg(),$_POST['psword']);
 
 		 echo "email:$email";?><br><?php
 		 echo "password:$pass";?><br><?php
@@ -127,7 +131,7 @@ function login() {
 		if($email && $pass)
 		{
 			$sel_user = "SELECT user_id, fname,uname,confirm,user_level FROM users WHERE (email='$email' AND psword=SHA1('$pass') AND confirm = '1')";
-			$run_user = $AO_DB->query($sel_user);
+			$run_user = dbg()->query($sel_user);
 			$check_user = mysqli_num_rows($run_user);
 
 			if($check_user == 1){
