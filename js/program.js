@@ -310,7 +310,8 @@ function startGame(){
 	setStatBar();
 	switchStates();
 	
-    if(audioEnabled() ){
+	if (audioEnabled()) {
+	    console.log('audio enabled--Start Game');
         //var s = assetLoader.sounds;
         assetLoader.sounds.gameOver.pause();
         assetLoader.sounds.bg.currentTime = 0;
@@ -342,14 +343,15 @@ Auction.sold = function(){
 	
 	jq.Sold.menu.show();
     
-	//if(audioEnabled() ){
+    if(audioEnabled() ){
+	    console.log('audio enabled--Auction.sold');
         //var s = assetLoader.sounds;
         assetLoader.sounds.bg.pause();
         assetLoader.sounds.gameOver.currentTime = 0;
         assetLoader.sounds.gameOver.play();
         assetLoader.sounds.bidder.pause();
         assetLoader.sounds.sold.play();
-    //}
+    }
     
 	//auctionEnded = true;
 	//auctionOver = true;

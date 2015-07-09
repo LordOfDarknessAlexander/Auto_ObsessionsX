@@ -45,6 +45,7 @@ var SaleView = {
         //disable/enable sounds before ajax call
         
         if(audioEnabled() ){
+            console.log('audio enabled-Saleview');
             //var s = assetLoader.sounds;
             assetLoader.sounds.gameOver.pause();
             assetLoader.sounds.going.pause();

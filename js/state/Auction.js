@@ -58,7 +58,8 @@ var Auction = {
         //console.log(index);
         //disable/enable sounds before ajax call
         
-        //if(audioEnabled() ){
+	    if(audioEnabled() ){
+	        console.log('audio enabled--Auction');
             //var s = assetLoader.sounds;
             assetLoader.sounds.gameOver.pause();
             assetLoader.sounds.going.pause();
@@ -66,7 +67,7 @@ var Auction = {
             assetLoader.sounds.bg.currentTime = 0;
             assetLoader.sounds.bg.loop = true;
             assetLoader.sounds.bg.play();
-        //}
+        }
         
         appState = GAME_MODE.AUCTION;
         auctionStop = false;
@@ -163,7 +164,9 @@ var Auction = {
 	},
 	close : function(){
         //End the auction
-        //closing bidding and clearing local vars
+	    //closing bidding and clearing local vars
+	    //turn off the Auction Audio
+	    assetLoader.sounds.bidder.pause();
 		console.log('Auction close');
 		auctionStop = true;
 		//auctionEnded = false;
