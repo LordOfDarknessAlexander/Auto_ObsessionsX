@@ -32,6 +32,7 @@ html::title('Login Page');
 // Check if the form has been submitted:
 //$loggedIn = false;
 //$uname = 'uname';
+/*
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {	// Validate the email address:
 	if(!empty($_POST['email'])){
@@ -70,7 +71,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			 //The user input matched the database record
 			// Start the session, fetch the record and insert the three values in an array
 			session_start();
-			
+			//sec_session_start();
 			$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
 			$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
 			eS();
@@ -100,6 +101,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	
 	
 } // End of SUBMIT conditional.
+*/
+login();
 ?>
 <!-- Display the form fields-->
 <div id="loginfields">
