@@ -117,13 +117,13 @@ function sec_session_start() {
 
 function login() {
 	
-	
+	 global $AO_DB;
     // This section processes submissions from the login form.
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		// checking the user
-		$email = mysqli_real_escape_string(dbg(),$_POST['email']);
-		$pass = mysqli_real_escape_string(dbg(),$_POST['psword']);
+		$email = mysqli_real_escape_string($AO_DB->con,$_POST['email']);
+		$pass = mysqli_real_escape_string($AO_DB->con,$_POST['psword']);
 
 		 echo "email:$email";?><br><?php
 		 echo "password:$pass";?><br><?php
@@ -131,7 +131,7 @@ function login() {
 		if($email && $pass)
 		{
 			$sel_user = "SELECT user_id, fname,uname,confirm,user_level FROM users WHERE (email='$email' AND psword=SHA1('$pass') AND confirm = '1')";
-			$run_user = dbg()->query($sel_user);
+			$run_user = $AO_DB->con->query($sel_user);
 			$check_user = mysqli_num_rows($run_user);
 
 			if($check_user == 1){
@@ -154,12 +154,9 @@ function login() {
 		}
 
 	}
+
+	
 }
-
-
-
-
-
 
 function eSG(){
     //echo super global vars, get post and session
