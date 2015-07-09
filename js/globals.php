@@ -44,7 +44,7 @@ var aoTimer = {
 };
 var _curCarID = 0;
     
-var player, stop, ticker;
+var player, stop;	//, ticker;
 
 var Storage = {
 	//canUseLocal:,
@@ -170,12 +170,12 @@ var vehiclePrice = 20000;
 var playerWon = false;
 
 //Global frame timer
-var timer = 0;
+//var timer = 0;
 var previousTime = Date.now();
 
 var deltaTime = (Date.now() - previousTime) / 1000;
 previousTime = Date.now();
-timer += deltaTime;
+//timer += deltaTime;
 
 var endGame = false;
 var auctionEnded = false;
