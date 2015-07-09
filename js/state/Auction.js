@@ -167,6 +167,7 @@ var Auction = {
 	    //closing bidding and clearing local vars
 	    //turn off the Auction Audio
 	    assetLoader.sounds.bidder.pause();
+	    assetLoader.sounds.going.pause();
 		console.log('Auction close');
 		auctionStop = true;
 		//auctionEnded = false;
