@@ -40,6 +40,25 @@ function garageDoor(){
 		backgroundY = -1000;
 	}
 }
+function init(){
+	//console.log('Program.init called');
+	aoTimer.update();
+	var now = getTimestamp(), //in milliseconds
+		dt = aoTimer.getDT();
+		console.log('init, dt ' + dt.toString());
+		
+	if(!stop){
+		frameID = requestAnimFrame(init);	
+		update(0.33);
+		
+		// if( (timer >= 300.00) && (timer <= 900.00)){
+			// appState = GAME_MODE.MAIN_MENU;
+			// mainMenu();  
+		// }  
+		//timer++;
+		//ticker++;
+	}	
+}
 function update(dTime){
     //main update loog for game
     //console.log(dTime.toString());
@@ -54,23 +73,26 @@ function update(dTime){
 Auction.initialSetup = function(){
 	//called as initial update
 	//to bypass the delay due to ajax calls when auction is initialized
+	//console.log('initial setup called');
 	aoTimer.update();
 		
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	
-	window.requestAnimFrame(Auction.setup);	
+	cancelAnimFrame();
+	frameID = requestAnimFrame(Auction.setup);	
 }
 Auction.setup = function(){
 	//this is called every frame
+	console.log('Auction.setup called');
 	aoTimer.update();
     var dt = aoTimer.getDT();
 		
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	
 	if(!auctionStop){
-		window.requestAnimFrame(Auction.setup);	//recursive call, bad
+		frameID = requestAnimFrame(Auction.setup);	//recursive call, bad
 		
 		Auction.update(dt);
+		//appState = GAME_MODE.AUCTION;
 	}
 }
 function auctionMode(dt){
@@ -176,23 +198,7 @@ function(){
 	mainMenu();  
 	//jq.setErr('Welcome home, ' + user.name);
 	
-	function init(){
-		aoTimer.update();
-        var now = getTimestamp(), //in milliseconds
-			dt = aoTimer.getDT();
-            
-		if(!stop){
-			requestAnimFrame(init);			
-			update(0.33);
-            
-			// if( (timer >= 300.00) && (timer <= 900.00)){
-				// appState = GAME_MODE.MAIN_MENU;
-				// mainMenu();  
-			// }  
-			//timer++;
-			//ticker++;
-		}	
-	}
+	
 //Load the splash screen first
 assetLoader.finished = function(){
     //executed when assetLoader finalizes resource creation
@@ -212,11 +218,13 @@ function switchStates(GAME_MODE){
 		
 		case MAIN_MENU:
 			mainMenu();
+			console.log('main menu switch');
 		break;  
 		//do not need auction select
 		case AUCTION:
 			Auction.update(dt);
 			setStatBar();
+			console.log('auction switch');
 		break;
 
 		case REPAIR:
@@ -243,7 +251,7 @@ function switchStates(GAME_MODE){
 
 function splash(){
     //Show the splash after loading all assets 
-    init();
+    //init();
     garageDoor();
     $('#progress').hide();
     $('#splash').show();
@@ -503,28 +511,6 @@ function initGuest()
 		Storage.local.guest = JSON.stringify({money:50000, garage:[]});
 	}
 }
-jq.Auction.homeBtn.click(
-function(){
-	//Auction.cancel();	//stop the auction, aborting the sale
-	Auction.close();
-	//$('#Auction').hide();
-	jq.Auction.menu.hide();
-	jq.Game.menu.show();
-    jq.carImg.show();
-	//jq.Game.menu.children().toggle();	//hides/showns all child elements
-	//ajax_post();
-    pas.get.user.stats();
-    //setStatBar();
-	setAdBG();
-    setHomeImg();
-    jq.setErr();    //clear error when changing pages
-	//var car = Garage.getCurrentCar();
-	$('#Slots').hide();
-	//if(car !== null){
-		//jq.Game.homeImg.attr('src', car.getFullPath() );
-	//}	
-});
-
 //restart GameOver /sold button
 jq.Sold.garageBtn.click(
 function(){
@@ -581,5 +567,6 @@ function(){
     }
 });
 
-assetLoader.downloadAll();
+	assetLoader.downloadAll();
+	init();
 });

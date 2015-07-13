@@ -5,7 +5,7 @@ require_once '../ao.php';
 ?>
 // define variables
 var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
-
+var frameID = 0;
 var canvas = document.getElementById('canvas');	//$("#canvas")?
 var context = canvas.getContext('2d');
 //aspect ratio

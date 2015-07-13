@@ -125,9 +125,21 @@ Auction Screen
     posAbs();
     css::size('20%','30%');
     css::right('0%');
-    css::top('35%');
+    css::top('55%');
 ?>
 }
 <?php divAuction();?> div#pbCD progress{
     width:100%;
+}
+<?php divAuction();?> label#going
+{<?php
+    css::fontBold();
+    defaultColor();
+    posAbs();
+	css::size('20%','5%');
+    css::right('0%');
+    css::top('35%');
+	css::txtAlignCntr();
+?>
+	background-image:url('../images/checkers.png');
 }

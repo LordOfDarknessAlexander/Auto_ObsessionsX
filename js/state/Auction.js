@@ -40,7 +40,7 @@ var Auction = {
 	winningImgY : 34,
 	playerBid : 0,
 	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
-	WIN_TIMER_CAP : 100.0, //Max amount of time the winningTimer will run for before activating the going timer
+	WIN_TIMER_CAP : 0.75,//100.0, //Max amount of time the winningTimer will run for before activating the going timer
 	goingTimer: 0.0, //Timer forcountdown to final sale: going once, going twice, sold
 	//enemyBidTimer: 0.0, //Slight delay after the player bids to prevent the AI from spam bidding
     playerBidTimer: 0.0, //Slight delay after the player bids to prevent the player from spam bidding
@@ -57,7 +57,7 @@ var Auction = {
         //call to start an auction for car		
         //console.log(index);
         //disable/enable sounds before ajax call
-        
+        console.log('Auction.init called');
 	    if(audioEnabled() ){
 	        console.log('audio enabled--Auction');
             //var s = assetLoader.sounds;
@@ -74,6 +74,7 @@ var Auction = {
 		Auction._ended = false;
 		this.playerBid = 0;
 		this.resetTimers();
+		jq.Auction.goingLabel.text('');
         
         var funcName = 'Auction.js, Auction::init()';
         
@@ -188,6 +189,8 @@ var Auction = {
 		Auction._ended = true;
         
         jq.carImg.hide();
+		cancelAnimFrame();
+		requestAnimFrame(init);
 	},
 	resetTimers : function(){
 		this.goingTimer = 0;
@@ -213,14 +216,17 @@ var Auction = {
 		//main update logic, called per frame
 		//console.log("Sparta!");
 		//console.log(dt);
-        var btc = this.bidTimerCap;
+        var btc = this.bidTimerCap,
+			ai = this.ai;
         
         //static call, to update global enemy bid cooldown counter
 		Enemy.update(dt);
         
-		for(var i = 0; i < this.ai.length; ++i){
-			if(!this.ai[i].leftauction){
-				this.ai[i].update(dt);
+		for(var i = 0; i < ai.length; ++i){
+			var e = ai[i];
+			
+			if(!e.leftauction){
+				e.update(dt);
 			}
 		}
 		
@@ -230,10 +236,12 @@ var Auction = {
 		
         //Increment timer if either ai or player is winning
         if(Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()){//this.playerWinning){
-            this.winningTimer++;
+			if(this.winningTimer < this.WIN_TIMER_CAP){
+				this.winningTimer += dt;
+			}	
         }
 		
-		this.going();
+		this.going(dt);
         // else if(){
 			// this.winningTimer++;
             // // for(var i = 0; i < this.ai.length; ++i){
@@ -244,12 +252,12 @@ var Auction = {
             // // }
         // }
         
-		// if(auctionEnded){
+		//if(auctionEnded){
 			// this.close();		
 		// }
-		if(endGame){
-			this.close();					
-		}
+		// if(endGame){
+			// this.close();					
+		// }
 
 		if(!this.canPlayerBid()){
 		    if(this.playerBidTimer < btc){
@@ -267,7 +275,7 @@ var Auction = {
 			//clear drawing when auction stops
 			context.clearRect(0, 0, canvas.width, canvas.height);
 		}
-	  //	Auction.buyOut();
+	  	//Auction.buyOut();
 	},
 	render : function(){
         //draw scene specific content to canvas
@@ -328,129 +336,7 @@ var Auction = {
         pbSetColor(jq.Auction.going, this.getGoingPerc() );
 //<php
 //}
-//>
-        this.going();
-        /*var highestBid = this.currentBid,
-            bids = [],
-            hi = 0; //highest index
-        
-        for(var i = 0; i < this.ai.length; i++){
-            var bid = this.ai[i].currBid;
-            if(bid > highestBid){
-                highestBid = bid;
-                hi = i;
-            }
-        }
-        bids.push({bid:highestBid, index:hi});
-        //set second highest bidder
-        var sb = 0, //second highest bid
-            si = 0; //second highest index
-        
-        for(var i = 0; i < this.ai.length; i++){
-            if(i != hi){
-                var bid = this.ai[i].currBid;
-                if(bid < highestBid && bid > sb){
-                    sb = bid;
-                    si = i;
-                }
-            }
-        }
-        bids.push({bid:sb, index:si});
-        //set third highest
-        var tb = 0, //second highest bid
-            ti = 0; //second highest index
-        
-        for(var i = 0; i < this.ai.length; i++){
-            if(i != hi && i != si){
-                var bid = this.ai[i].currBid;
-                if(bid < sb && bid > tb){
-                    tb = bid;
-                    ti = i;
-                }
-            }
-        }
-        bids.push({bid:tb, index:ti});
-        
-        var lb = 0,
-            li = 0;
-            
-        for(var i = 0; i < this.ai.length; i++){
-            if(i != hi && i != si && i != ti){
-                lb = this.ai[i].currBid;
-                li = i;
-                break;
-            }
-        }
-        bids.push({bid:lb, index:li});
-
-        var top = 190;
-        for(var i = 0; i < bids.length; i++){
-            var index = bids[i].index,
-                e = this.ai[index];
-                
-            if(e.currBid >= highestBid){
-                context.drawImage(curBidImage,left,ewinPos) + '/n' + context.fillText( bidders[index] + '$'+ e.currBid.toFixed(2), tx, top);
-            }
-            else{
-                context.drawImage(slimer,left, 202 + (20 * i) ) + context.fillText(bidders[index] + '$' + e.currBid.toFixed(2), tx, top + 30 + (20 * i) );
-            }
-        }
-        */
-		
-        /*str = bidders[i] + '$' + bid.toFixed(2);
-        
-		if(bid >= cb){
-			//enemy1 = 
-            context.drawImage(curBidImage, left, ewinPos);
-            context.fillText(str, tx, t1);
-		}
-		else{
-			context.drawImage(slimer, left, t0 + (h * i) );
-            context.fillText(str, tx, t2 + (h * i));
-		}
-		//Enemy 2
-        i++;
-        bid = this.ai[i].currBid;
-        str = bidders[i] + '$' + bid.toFixed(2);
-        
-		if(bid >= cb){
-			enemy2 = context.drawImage(curBidImage, left, ewinPos) + context.fillText(str, tx, t1);		
-		}
-		else{
-			enemy2 = context.drawImage(slimer, left, t0 + (h * i) ) + context.fillText(str, tx, t2 + (h * i) );
-		}
-		//Enemy3
-        i++;
-        bid = this.ai[i].currBid;
-        str = bidders[i] + '$' + bid.toFixed(2);
-        
-		if(bid >= cb){
-			enemy3 = context.drawImage(curBidImage, left, ewinPos) + context.fillText(str, tx, t1);
-		}
-		else{
-			enemy3 = context.drawImage(slimer, left, t0 + (h * i) ) + context.fillText(str, tx, t2 + (h * i) );
-		}
-		//Enemy4
-        i++;
-        bid = this.ai[i].currBid;
-        str = bidders[i] + '$' + bid.toFixed(2);
-        
-		if(bid >= cb){
-			enemy4 = context.drawImage(curBidImage, left, ewinPos) + context.fillText(str, tx, t1);
-		}
-		else{
-			enemy4 = context.drawImage(slimer, left, t0 + (h * i) ) + context.fillText(str, tx, t2 + (h * i) );
-		}*/
-		//call crowd for the player winning
-		//this.playerGoing();
-		
-		//current bid HUD
-		//var gorguts;
-		//gorguts =  context.fillText('Condition :  ' + this.vcondition.toFixed(2)  ,left, 262);
-		
-		//these could be HTML elements in the Auction div
-		//context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
-		//context.fillText('Money :  ' + '$'+ money.toFixed(2)  , canvas.width - 240, 66);
+//>  
 	},
 	updatePlayer:function(){
         //
@@ -535,7 +421,7 @@ var Auction = {
                 //else the raise has become more than the ai
                 //can afford, so disable
 			}
-		 }
+		}
 	},
 	isAIHighestBidder:function(){
 		var ai = Auction.ai;
@@ -561,36 +447,38 @@ var Auction = {
 		}
 		return false;
 	},
-	going:function(){
+	going:function(dt){
         //begin sale count down after a wthis.aiting period if no other bids are offered
 		//Going crowd roars someone is about to win the bid
 		//break out of while if someone outbids current bidder or if player does,
 		//breaks out of the while loop and enemyWinning becomes false
 		context.font = '20px arial, sans-serif';
-		
+		//console.log(dt);
         if(this.winningTimer >= this.WIN_TIMER_CAP){
             //
             var t = this.goingTimer,
                 f = 32,   //number of frames required to make purchase(32 frames == 1 second)
-                first = 320, //32 * 5,
-                second = 640; //32 * 7,
-            
+                first = 1.0,	//320, //32 * 5,
+                second = 2.0;	//640; //32 * 7,
+				jq.Auction.goingLabel.text('Default');
+				
 			if( ( Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()) && (t < 660) && (!auctionStop) ){//this.playerWinning
-				this.goingTimer++;
+				this.goingTimer += dt;
                 t = this.goingTimer;    //reset t after increment!
 				//console.log(t.toString());
-				
                 if( (t > 0) && (t < first)){
                     var x = ENEMY_X + 715;
 					//console.log('Going once');
-					context.fillText('Going Once', x, 270);
+					jq.Auction.goingLabel.text('Going Once');
+					//context.fillText('Going Once', x, 270);
 					assetLoader.sounds.going.play();
 					//break;
 					
 				}
 				else if( (t >= first) && (t < second) ){
 					//console.log('Going twice');
-					context.fillText('Going Twice', x, 290);
+					jq.Auction.goingLabel.text('Going Twice');
+					//context.fillText('Going Twice', x, 290);
 					assetLoader.sounds.going.play();
 					//break;		
 				}
@@ -604,7 +492,8 @@ var Auction = {
 						this.playerWon = true;
 						//this.buyOut();
 						console.log('Player won');
-						context.fillText('Sold to player!', x, 310);
+						jq.Auction.goingLabel.text('Sold to User');
+						//context.fillText('Sold to player!', x, 310);
 					}
 					else if(Auction.isAIHighestBidder()){//this.enemyWinning){
 						//this.playerWinning = false;
@@ -613,10 +502,12 @@ var Auction = {
                         for(var i = 0; i < this.ai.length; ++i){
 							if(this.ai[i].winningBid){
 								console.log('AI won');
-								context.fillText('Sold to ' + this.ai[i], x, 310);
+								jq.Auction.goingLabel.text('Sold to ai');
+								//context.fillText('Sold to ' + this.ai[i], x, 310);
 							}
 						}	
 					}
+					//yesterdays issue!!!
 					this.sold();
 					//$('div#loss label').text(Auction._car.getFullName() );
 					//break;
@@ -684,6 +575,28 @@ function(){
 	jq.AuctionSelect.menu.show();
     jq.carImg.hide();
     jq.setErr();    //clear error when changing pages	
+});
+
+jq.Auction.homeBtn.click(
+function(){
+	//Auction.cancel();	//stop the auction, aborting the sale
+	Auction.close();
+	//$('#Auction').hide();
+	jq.Auction.menu.hide();
+	jq.Game.menu.show();
+    jq.carImg.show();
+	//jq.Game.menu.children().toggle();	//hides/showns all child elements
+	//ajax_post();
+    pas.get.user.stats();
+    //setStatBar();
+	setAdBG();
+    setHomeImg();
+    jq.setErr();    //clear error when changing pages
+	//var car = Garage.getCurrentCar();
+	$('#Slots').hide();
+	//if(car !== null){
+		//jq.Game.homeImg.attr('src', car.getFullPath() );
+	//}	
 });
 /*function shuffleArray(array) 
 {	//sort array items

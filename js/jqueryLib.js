@@ -139,8 +139,8 @@ var jq = {
 		menu : $('div#Auction'),
 		backBtn : $('div#Auction button#backBtn'),
 		homeBtn : $('div#Auction button#homeBtn'),
-		carPrice : $('div#Auction label#carPrice')
-		//cashLabel:$('#myCash'),
+		carPrice : $('div#Auction label#carPrice'),
+		goingLabel : $('label#going')
         //carPrice:$('#carPrice');
 	},
 	CarView : {

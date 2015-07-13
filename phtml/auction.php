@@ -124,7 +124,7 @@ function outputCar($args){
     <!--auctionCar will be <img id=userCar'>.
     The code can be streamlined with jQuery in JS-->	
     <!--label id='carPrice'></label-->
-    <label id='carInfo'></label>
+	<label id='going'><?php //going once, twice text?></label>
 <?php //FOR DEV USE ONLY, not in the final release?>
     <div id='pbCD'>
         <progress id='gcd'><!--global cooldown--></progress>
@@ -135,6 +135,7 @@ function outputCar($args){
         <progress id='user'></progress>
         <progress id='going'></progress>
     </div> 
+	<label id='carInfo'></label>
     <!--div id='bids'>
         <label id='b0'></label>
         <label id='b1'></label>
