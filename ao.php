@@ -87,7 +87,7 @@ function eS(){
         )
     ) . PHP_EOL;
 }
-
+/*
 function sec_session_start() {
 	
     $session_name = 'sec_session_id';   // Set a custom session name
@@ -113,7 +113,7 @@ function sec_session_start() {
 	echo '$session_name';
 	// Start the PHP session 
     session_regenerate_id(true);    // regenerated the session, delete the old one. 
-}
+}*/
 
 function login() {
 	

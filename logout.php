@@ -16,6 +16,8 @@ else{
 	setcookie('PHPSESSID', ", time()-3600,'/', ", 0, 0);//Destroy the cookie
 	header("location:index.php");*/
 	session_destroy();
+	//unset($_SESSION['user_id']);
+	//unset($_SESSION['uname']);
 	header("location:index.php");
 	exit();
 }

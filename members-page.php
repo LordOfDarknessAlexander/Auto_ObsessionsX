@@ -76,7 +76,7 @@ echo $un;
 $result = $AO_DB->query("SELECT * FROM users WHERE uname = '$un'");
 echo json_encode($result);
 //Count the returned rows
-if(mysqli_num_rows($result) != 0){
+if(mysqli_num_rows($result) == 1){
 	//Turn the results in to an array
 	$rows = $result->fetch_assoc();
 	$uname = floatval($rows['uname']);

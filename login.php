@@ -1,7 +1,8 @@
 <?php
 require_once 'html.php';
 require_once 'dbConnect.php';
-require_once 'ao.php';
+//require_once 'ao.php';
+require_once 'secure.php';
 
 //require_once 'secure.php';
 html::docType();
@@ -31,7 +32,8 @@ html::title('Login Page');
 // This section processes submissions from the login form.
 // Check if the form has been submitted:
 
-login();
+//login();
+Secure::userLogin();
 ?>
 <!-- Display the form fields-->
 <div id="loginfields">
