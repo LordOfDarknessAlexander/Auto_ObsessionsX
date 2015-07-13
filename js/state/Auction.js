@@ -60,13 +60,13 @@ var Auction = {
         
 	    if(audioEnabled() ){
 	        console.log('audio enabled--Auction');
-            //var s = assetLoader.sounds;
-            assetLoader.sounds.gameOver.pause();
-            assetLoader.sounds.going.pause();
-            assetLoader.sounds.sold.pause();
-            assetLoader.sounds.bg.currentTime = 0;
-            assetLoader.sounds.bg.loop = true;
-            assetLoader.sounds.bg.play();
+            var s = assetLoader.sounds;
+            s.gameOver.pause();
+            s.going.pause();
+            s.sold.pause();
+            s.bg.currentTime = 0;
+            s.bg.loop = true;
+            s.bg.play();
         }
         
         appState = GAME_MODE.AUCTION;
@@ -166,8 +166,11 @@ var Auction = {
         //End the auction
 	    //closing bidding and clearing local vars
 	    //turn off the Auction Audio
-	    assetLoader.sounds.bidder.pause();
-	    assetLoader.sounds.going.pause();
+	    if (audioEnabled()) {
+	        var s = assetLoader.sounds;
+	        s.bidder.pause();
+	        s.going.pause();
+	    }
 		console.log('Auction close');
 		auctionStop = true;
 		//auctionEnded = false;
@@ -501,7 +504,7 @@ var Auction = {
 	},
 	enemyBidding:function(){
         //iterates over enemies
-        //placing a bid if able to do so
+	    //placing a bid if able to do so
 	    if(!this.playerWon){
             //
             //TODO:sort by which enemy has the highest bid Timer,
@@ -527,7 +530,9 @@ var Auction = {
                         this.resetTimers();
                         //this.enemyWinning = true;
                         //this.playerWinning = false;
-                        assetLoader.sounds.bidder.play();
+                        if (audioEnabled()) {
+                            assetLoader.sounds.bidder.play();
+                        }
                         Auction.setBidBtnText();
                         break;
                     }
@@ -570,7 +575,9 @@ var Auction = {
 		
         if(this.winningTimer >= this.WIN_TIMER_CAP){
             //
-            var t = this.goingTimer,
+            var ae = audioEnabled(),
+                s = assetLoader.sounds,
+                t = this.goingTimer,
                 f = 32,   //number of frames required to make purchase(32 frames == 1 second)
                 first = 320, //32 * 5,
                 second = 640; //32 * 7,
@@ -583,15 +590,19 @@ var Auction = {
                 if( (t > 0) && (t < first)){
                     var x = ENEMY_X + 715;
 					//console.log('Going once');
-					context.fillText('Going Once', x, 270);
-					assetLoader.sounds.going.play();
+                    context.fillText('Going Once', x, 270);
+                    if (ae){
+                        s.going.play();
+                    }
 					//break;
 					
 				}
 				else if( (t >= first) && (t < second) ){
 					//console.log('Going twice');
-					context.fillText('Going Twice', x, 290);
-					assetLoader.sounds.going.play();
+				    context.fillText('Going Twice', x, 290);
+				    if (ae) {
+				        s.going.play();
+				    }
 					//break;		
 				}
 				else if(t >= second){
@@ -641,11 +652,15 @@ var Auction = {
                 //userStats.money = userStats.money - this.currentBid;
                 //auctionEnded = true;
                 //push vehicle to garage
-                //auctionStop = true;
-                assetLoader.sounds.bidder.pause();
-                assetLoader.sounds.sold.play();
-                Auction.playerWon = true;
-                Auction.sold();
+	    //auctionStop = true;
+	    if (audioEnabled()) {
+	        var s = assetLoader.sounds;
+
+	        s.bidder.pause();
+	        s.sold.play();
+	    }
+        Auction.playerWon = true;
+        Auction.sold();
             //}
             //else{
                 //user does not have enough money!

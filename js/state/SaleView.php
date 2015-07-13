@@ -46,13 +46,13 @@ var SaleView = {
         
         if(audioEnabled() ){
             console.log('audio enabled-Saleview');
-            //var s = assetLoader.sounds;
-            assetLoader.sounds.gameOver.pause();
-            assetLoader.sounds.going.pause();
-            assetLoader.sounds.sold.pause();
-            assetLoader.sounds.bg.currentTime = 0;
-            assetLoader.sounds.bg.loop = true;
-            assetLoader.sounds.bg.play();
+            var s = assetLoader.sounds;
+            s.gameOver.pause();
+            s.going.pause();
+            s.sold.pause();
+            s.bg.currentTime = 0;
+            s.bg.loop = true;
+            s.bg.play();
         }
 			//auctionStop = false;
 			this._auction = index;

@@ -1,8 +1,8 @@
 ﻿// set the sound preference
 //if(canUseLocalStorage){
-var playSound = audioEnabled();//(localStorage.getItem('kandi.playSound') === "true")
+//var playSound = audioEnabled();//(localStorage.getItem('kandi.playSound') === "true")
 
-if(playSound){
+if (audioEnabled()) {
     $('.sound').addClass('sound-on').removeClass('sound-off');
 }
 else{
@@ -110,13 +110,21 @@ var assetLoader = (function(){
                 })(_this, sound);
             }
         }
-    }
-  
+    }  
     return {
         images:this.images,
         sounds:this.sounds,
         totalAssest:this.totalAssest,
-        downloadAll:this.downloadAll
+        downloadAll: this.downloadAll,
+        toggleAudioMuted: function () {
+            var s = assetLoader.sounds;
+
+            for(var sound in s){
+                if(s.hasOwnProperty(sound)){
+                    s[sound].muted = !audioEnabled();
+                }
+            }
+        }
     };
 })();
 //Show asset loading progress

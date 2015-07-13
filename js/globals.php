@@ -127,7 +127,7 @@ var RUNNING;
 var SPLASH;
 var MAIN_MENU;
 
-var playSound;
+//var playSound;
 var splashTimer = 600.00;
 //InMenu UI Constants
 
@@ -247,11 +247,17 @@ function strFromCurrentDate(){
 
 function setAudio(enabled){
     var b = Boolean(enabled);
-    Storage.local._audioEnabled = JSON.stringify(b);
+    if(Storage.local !== null ){
+        Storage.local._audioEnabled = JSON.stringify(b);
+    }
 }
 function audioEnabled(){
-    return (Storage.local !== null && '_audioEnabled' in Storage.local)?
+    var b = (Storage.local !== null && '_audioEnabled' in Storage.local)?
         Boolean(JSON.parse(Storage.local._audioEnabled) ) : true;
+        
+    console.log("audio " + b);
+        
+    return b;
 }
 function toggleAudio(){
     setAudio(!audioEnabled());
