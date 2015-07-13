@@ -71,7 +71,7 @@ class secure
 					echo "uname";?><br><?php
 					session_start();
 					//sec_session_start();
-		
+					
 					$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
 					$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
 					eS();
