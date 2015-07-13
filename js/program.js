@@ -257,18 +257,22 @@ function splash(){
     $('#splash').show();
 	$('#splash').removeClass('#Slots');
 	 $('#Slots').hide();
-    $('.sound').show();  
-    assetLoader.sounds.engine.play();
+	 $('.sound').show();
+
+	 if (audioEnabled()) {
+	     assetLoader.sounds.engine.play();
+	 }
 }
 
 //Main Menu  
 function mainMenu() 
-{ 
-    for(var sound in assetLoader.sounds){
-        if(assetLoader.sounds.hasOwnProperty(sound)){
-            assetLoader.sounds[sound].muted = !playSound;
-        }
-    }
+{
+    assetLoader.toggleAudioMuted();
+//   for(var sound in assetLoader.sounds){
+//        if(assetLoader.sounds.hasOwnProperty(sound)){
+//            assetLoader.sounds[sound].muted = !audioEnabled();
+//        }
+//    }
     //delete splash;
 
     $('#progress').hide();
@@ -329,11 +333,11 @@ function startGame(){
 	
 	if (audioEnabled()) {
 	    console.log('audio enabled--Start Game');
-        //var s = assetLoader.sounds;
-        assetLoader.sounds.gameOver.pause();
-        assetLoader.sounds.bg.currentTime = 0;
-        assetLoader.sounds.bg.loop = true;
-        assetLoader.sounds.bg.play();
+        var s = assetLoader.sounds;
+        s.gameOver.pause();
+        s.bg.currentTime = 0;
+        s.bg.loop = true;
+        s.bg.play();
     }    
 }
 Auction.BackOutofAuction = function(){
@@ -362,12 +366,12 @@ Auction.sold = function(){
     
     if(audioEnabled() ){
 	    console.log('audio enabled--Auction.sold');
-        //var s = assetLoader.sounds;
-        assetLoader.sounds.bg.pause();
-        assetLoader.sounds.gameOver.currentTime = 0;
-        assetLoader.sounds.gameOver.play();
-        assetLoader.sounds.bidder.pause();
-        assetLoader.sounds.sold.play();
+        var s = assetLoader.sounds;
+        s.bg.pause();
+        s.gameOver.currentTime = 0;
+        s.gameOver.play();
+        s.bidder.pause();
+        s.sold.play();
     }
     
 	//auctionEnded = true;
@@ -543,28 +547,28 @@ function(){
     var $this = $(this),
         ae = audioEnabled();
         
-    if($this.hasClass('sound-on')){
+    if(ae){//$this.hasClass('sound-on')){
         //disable audio
         $this.removeClass('sound-on').addClass('sound-off');
         setAudio(false);
-        playSound = false;
+        //playSound = false;
     }
     else{
         //enable audio
         $this.removeClass('sound-off').addClass('sound-on');
         setAudio(true);
-        playSound = true;
+        //playSound = true;
     }
-    
+    assetLoader.toggleAudioMuted();
     //if(canUseLocalStorage){
     //    localStorage.setItem('kandi.playSound', playSound);
     //}
     // mute or unmute all sounds
-    for(var sound in assetLoader.sounds){
-        if(assetLoader.sounds.hasOwnProperty(sound)){
-            assetLoader.sounds[sound].muted = !playSound;
-        }
-    }
+    //for(var sound in assetLoader.sounds){
+        //if(assetLoader.sounds.hasOwnProperty(sound)){
+            //assetLoader.sounds[sound].muted = !ae;
+        //}
+    //}
 });
 
 	assetLoader.downloadAll();

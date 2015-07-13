@@ -45,7 +45,7 @@ var player = (function(player){
             this.bidTimer = 0;
             Enemy.resetTimer();
             //Auction.setBidBtnText();
-            //assetLoader.sounds.bidder.play();
+            //s.bidder.play();
             //console.log(JSON.stringify(this) + ', bidding: ' + raise.toFixed(2) );
             return;
         }

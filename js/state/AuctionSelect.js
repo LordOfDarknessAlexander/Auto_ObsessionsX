@@ -79,7 +79,7 @@ var AuctionSelect =
 	},
 	denyAuction : function()
 	{
-		//if(assetLoader.sounds.denyAuction is not playing)
+		//if(s.denyAuction is not playing)
 			//play deny auction
 		//visual alert as well to notify user?
 	},

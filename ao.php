@@ -87,7 +87,7 @@ function eS(){
         )
     ) . PHP_EOL;
 }
-
+/*
 function sec_session_start() {
 	
     $session_name = 'sec_session_id';   // Set a custom session name
@@ -113,51 +113,40 @@ function sec_session_start() {
 	echo '$session_name';
 	// Start the PHP session 
     session_regenerate_id(true);    // regenerated the session, delete the old one. 
-}
+}*/
 
-function login() {
+function loadUser() {
 	
-	 global $AO_DB;
-    // This section processes submissions from the login form.
-	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-		// checking the user
-		$email = mysqli_real_escape_string($AO_DB->con,$_POST['email']);
-		$pass = mysqli_real_escape_string($AO_DB->con,$_POST['psword']);
-
-		 echo "email:$email";?><br><?php
-		 echo "password:$pass";?><br><?php
-
-		if($email && $pass)
-		{
-			$sel_user = "SELECT user_id, fname,uname,confirm,user_level FROM users WHERE (email='$email' AND psword=SHA1('$pass') AND confirm = '1')";
-			$run_user = $AO_DB->con->query($sel_user);
-			$check_user = mysqli_num_rows($run_user);
-
-			if($check_user == 1){
-				echo "uname";?><br><?php
-				$_SESSION['email']=$email;
-				session_start();
-				echo '<script>succes</script>';
-				$_SESSION = mysqli_fetch_array($run_user, MYSQLI_ASSOC);
-				$_SESSION['user_level'] = (int) $_SESSION['user_level']; 
-				$url = ($_SESSION['user_level'] === 1) ? 'members-page.php' : 'members-page.php'; // Ternary operation to set the URL
-				header('Location: ' . $url); 
-			
-			}
-		}
-		
-		else {
-
-			echo '<script>alert(‘Email or password is not correct, try again!’)</script>';
-
-		}
-
-	}
-
-	
+	global $AO_DB;
+	$uid = getUID();
+    //Quick edit to squish some bugs, Cheers and good luck with the rest!
+    //user ID's are unique, making a select query will only returns
+    //the fields for a single match, where as user names are not unique and my return multiple sets of fields
+    //TODO: make user names unique(only 1 user should match a signle user name in the sql)
+    $q = "SELECT * FROM users WHERE user_id = $uid";	
+   // $q = "SELECT * FROM users WHERE uname = 'Dante'";	
+    $result = $AO_DB->query($q);
+    //Count the returned rows
+    if($result) //mysqli_num_rows($result) != 0)
+    {
+        $rows = $result->fetch_assoc();
+        //json_encode will implicitly convert the array to an object
+        //NOTE:sql retrives data as strings, so must conver to numeric type before sending(strings are bulky)
+        echo json_encode(array(
+            'money' => floatval($rows['money']),
+            'tokens' => intval($rows['tokens']),
+            'prestige' => intval($rows['prestige']),
+            'm_marker' => intval($rows['m_marker']),
+            'cid' =>intval($rows['car_id'])
+        ));
+    }
+    else{
+        //echo "No Results";
+        // If there was a problem.
+            echo "<p class='error'>Query failed, Please try again.</p>";
+        //exit();
+    }
 }
-
 function eSG(){
     //echo super global vars, get post and session
     eG();
