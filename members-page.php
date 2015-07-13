@@ -2,6 +2,7 @@
 require 'html.php';
 require 'dbConnect.php';
 require_once 'ao.php';
+require_once 'pasMeta.php';
 eS();
 session_start();
 //secureLogin();
@@ -60,7 +61,7 @@ html::doctype();
 <?php
 //require 'include/nav.php';
 require 'Users/includes/info-col.php';
-require 'my_parse_file.php';    //rename and change as this can also modifies the user's values
+loadUser();  //rename and change as this can also modifies the user's values
 ?>
 	<div id='content'><!-- Start of the member's page content. -->
         <h2>Welcome to the Members' Page <?php 
@@ -78,9 +79,9 @@ echo json_encode($result);
 if(mysqli_num_rows($result) != 0){
 	//Turn the results in to an array
 	$rows = $result->fetch_assoc();
-	$uname = $rows['uname'];
+	$uname = floatval($rows['uname']);
 	$money = floatval($rows['money']);
-	$m_marker = intval($rows['m_markers']);
+	$m_marker = intval($rows['m_marker']);
 	$tokens = intval($rows['tokens']);
 	$prest = intval($rows['prestige']);
     $loggedIn = true;
@@ -95,7 +96,7 @@ if(mysqli_num_rows($result) != 0){
 <?php
 }
 else{
-	//$AO_DB->eErr();
+	$AO_DB->eErr();
 	//If there was a problem.
     ?>
         <p class='error'>Please try again.</p><?php
