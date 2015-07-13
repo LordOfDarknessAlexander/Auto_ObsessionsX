@@ -3,7 +3,7 @@ require 'html.php';
 require 'dbConnect.php';
 require_once 'ao.php';
 eS();
-//session_start();
+session_start();
 //secureLogin();
 /*
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
@@ -79,10 +79,10 @@ if(mysqli_num_rows($result) != 0){
 	//Turn the results in to an array
 	$rows = $result->fetch_assoc();
 	$uname = $rows['uname'];
-	$money = $rows['money'];
-	$m_marker = $rows['m_markers'];
-	$tokens = $rows['tokens'];
-	$prest = $rows['prestige'];
+	$money = floatval($rows['money']);
+	$m_marker = intval($rows['m_markers']);
+	$tokens = intval($rows['tokens']);
+	$prest = intval($rows['prestige']);
     $loggedIn = true;
 ?>	
             <div id ='playerData'>

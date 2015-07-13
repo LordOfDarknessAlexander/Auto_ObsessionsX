@@ -151,11 +151,14 @@ function login() {
 		
 			if (@mysqli_num_rows($result) == 1) 
 			{	
-				echo "uname";?><br><?php
+				
 				 //The user input matched the database record
 				// Start the session, fetch the record and insert the three values in an array
+				$_SESSION['uname']=$uname; 
+				echo "uname";?><br><?php
 				session_start();
 				//sec_session_start();
+	
 				$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
 				$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
 				eS();
@@ -163,7 +166,7 @@ function login() {
 				$url = ($_SESSION['user_level'] === 1) ? 'index.php' : 'index.php'; // Ternary operation to set the URL
 				mysqli_free_result($result);
 				header('Location: ' . $url); // Makes the actual page jump. Keep in mind that $url is a relative path.
-				//ob_end_clean(); // Delete the buffer.
+				ob_end_clean(); // Delete the buffer.
 				exit(); //Cancels the rest of the script, NOTE: the execution ends here, the cleanup code will never be called and cause memory issues;       
 			} 
 			else 
