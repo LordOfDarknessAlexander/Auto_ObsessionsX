@@ -69,12 +69,13 @@ class secure
 					// Start the session, fetch the record and insert the three values in an array
 				 
 					echo "uname";?><br><?php
-					session_start();
+					//session_start();
 					//sec_session_start();
 					
 					$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
 					$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.
 					eS();
+					isLoggedIn();
 					//$url = ($_SESSION['user_level'] === 1) ? 'admin.php' : 'members-page.php'; // Ternary operation to set the URL
 					$url = ($_SESSION['user_level'] === 1) ? 'index.php' : 'index.php'; // Ternary operation to set the URL
 					mysqli_free_result($result);
@@ -87,7 +88,6 @@ class secure
 					//echo 'error: ' . mysqli_error($AO_DB->con);
 					echo "<p class='error'>The email address and password do not match our records.If you need to register, click the Register button on the header menu</p>";
 				}
-				//secure::validate();
 			} 
 			else 
 			{ // If there was a problem.

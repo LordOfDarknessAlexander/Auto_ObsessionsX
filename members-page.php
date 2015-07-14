@@ -31,12 +31,7 @@ html::doctype();
     <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     <!-- Include JS File Here -->
-    <style type='text/css'>
-#mid-right-col { text-align:center; margin:auto;margin-right: 25%; margin-top: -10%
-}
-#midcol h3 { font-size:130%; margin-top:0; margin-bottom:0; 
-}
-    </style>
+
 </head>
 <body>
 <div id='container'>
@@ -60,7 +55,7 @@ html::doctype();
     </div>
 <?php
 //require 'include/nav.php';
-require 'Users/includes/info-col.php';
+//require 'Users/includes/info-col.php';
 loadUser();  //rename and change as this can also modifies the user's values
 ?>
 	<div id='content'><!-- Start of the member's page content. -->
@@ -101,13 +96,13 @@ else{
     ?>
         <p class='error'>Please try again.</p><?php
 }
-?>     
+?>     <!--
             <div id='mid-left-col'>
                 <h3>Member's Events</h3>
                 <p>Welcome to the members area.<br>
                 <br>Browse the many portals here: Play as a guest or log in and save your progress.<br>
                 Enter one of our events to win prizes.<br>Get a hold of our Merchandise today!</p>
-            </div><!--end mid-left-col-->
+            </div><!--end mid-left-col-->  
     
             <div id='mid-right-col'>
                 <h3>Special offers to Members only.</h3>

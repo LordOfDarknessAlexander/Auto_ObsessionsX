@@ -16,34 +16,28 @@ body{
     position:absolute;
     margin:0%;
 }
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 1px solid black;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background-size : 100% 100%;
-}
+
 /*Headers*/
 h1 {
     color: white;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    margin-left: 10%;
-    position: relative; 
+    left: 10%;
+    position: absolute; 
 }
 h2 {
     font-size:150%;
     color:red;
     text-align:left;
     top:40%;
+	left:30%;
     position: abosolute;
 }
 h3 {
     font-size:110%;
     color:white;
     text-align:center;
+	top:60%;
+	left:30%;
     position: abosolute;
 }
 table {
@@ -67,18 +61,19 @@ form {
     position: relative;
 }
 ul {
-    position:relative;
-    top:40%;
+    position:abosolute;
+    top:60%;
     left:58%;
     color:#52005C;
-    width:60%;
     text-align:center;
     margin:0;
+	 width:100%;
+    height:100%;
 }
 /* set general side button styles */
 li {
     width:100%;
-    height:60px;
+    height:100%;
     list-style-type :none;
     /*margin-bottom: 1px;*/
     text-align: center;
@@ -89,8 +84,7 @@ div#container {
     width:100%;
     height: 100%;
     margin:auto;
-    text-align:left;
-    margin-left: 0%; 
+    text-align:left; 
     background: url('images/Splash.png') no-repeat 0 0;
     background-size : 100% 100%;
     top:0%;
@@ -98,49 +92,22 @@ div#container {
 }
 div#nav{
     position:absolute;
-    top:10%;
+    top:30%;
     left:2%;
-    width:15%;
+   
 	padding : 2%;
     /*background-color:grey;*/
 }
-div#reg-navigation{
- 
-    position:absolute;
-    top:10%;
-    right:0%;
-    width:15%;
-    /*background-color:grey;*/
-}
-div#nav ul {
-    position:abosolute;
-    top:0%;
-    left:0%;
-    color:navy;
-    width:100%;
-    text-align:center;
-    margin:0;
-    /*background-color:navy;*/
-}
-#reg-navigation ul{
-    /*margin-right: 60%;*/
-	font-size:medium;
-    width:10%;
-    /*margin:10% 15px 0 88s%;*/
-    bottom: 30%;
-    position: abosolute;
-	padding : 2%;
-}
+
 /*Page Content*/
 div#content{
-    position:absolute;
-    left:15%;
-    top:10%;
-    height:90%;
-    width:70%;
+    position:abosolute;
+	top: -30%;
+	left: -10%;
 }
 div#content h2{
-    position:absolute:
+    position:relative;
+	margin: 30%;
     left:0%;
     top:0%;
 }
@@ -148,29 +115,28 @@ div#content h2{
     width:80%;
     margin:auto;
     position: abosolute;
-    top: 0%;
+    top: 70%;
     margin-top: 40%;
 }
 #midcol2{
     width:80%;
     margin:auto;
     position:absolute;
-    top:0%;
+    top:70%;
     left:2%;
 	padding : 2%;
 }
 #mid-left-col{
     width:36%;
-    float:left;
+    left : 30%;
     text-align:left;
     position:absolute;
-    top:20%;
-    left:0%;
+    top:70%;
 	padding : 2%;
 }
 #mid-right-col{
     width:16%;
-    float:right;
+    right: 30%;
     text-align:left;
     position:absolute;
     right:0%;
@@ -180,7 +146,7 @@ div#content h2{
 #info-col 
 { 
 	position:abosolute;
-    top:48%;
+    bottom:28%;
 	margin-top : 25%;
     right:33%;
     color:navy;
@@ -190,10 +156,10 @@ div#content h2{
 }
 div#playerData
 {
-	top:0%;
+	top:30%;
     left:10%;
     color:red;
-    width:90%;
+    width:60%;
     height:10%;
     text-align:left;
     position:absolute;
@@ -207,33 +173,40 @@ div#imog
 
 	position : abosolute;
 }
-label#cash{
-    position:abosolute;
-    width:25%;
-    left:0%;
-}
-label#tokens{
-    position:abosolute;
-    width:25%;
-    left:25%;
-}
-label#prest{
-    position:abosolute;
-    width:25%;
-    left:50%;
-}
-label#markser{
-    position:abosolute;
-    width:25%;
-    left:75%;
-}
+
 /* setting anchor styles */
+div#reg-navigation{
+ 
+    position:absolute;
+    top:30%;
+    left:30%;
+    
+    /*background-color:grey;*/
+}
+div#nav ul {
+    position:abosolute;
+    top:0%;
+    left:0%;
+    color:navy;
+    text-align:center;
+    margin:0;
+    /*background-color:navy;*/
+}
+#reg-navigation ul{
+    /*margin-right: 60%;*/
+	font-size:medium;
+   
+    /*margin:10% 15px 0 88s%;*/
+    top:30%;
+    right:20%;
+    position: abosolute;
+	padding : 2%;
+}
+
 li a,
 div#nav a,
 div#reg-navigation a{
     display:block;
-    width:128px;
-    height:32px;
     color: red;
     font-weight: bold;
     text-decoration: none;
@@ -241,7 +214,7 @@ div#reg-navigation a{
 	padding : 2%;
     background: url('images/defaultBtn.png') no-repeat 0 0;
     background-size:100% 100%;
-    position: relative;
+    position: abosolute;
 }
 /* mouseover */
 li a:hover,
@@ -262,13 +235,6 @@ div#reg-navigation a:active {
 	color: blue;
 }
 
-#footer {
-    margin:auto;
-    text-align:center;
-    margin-left: 10%;
-    position: relative;
-    bottom : 2%;
-}
 p.error {
     color:red;
     font-size:75%;
