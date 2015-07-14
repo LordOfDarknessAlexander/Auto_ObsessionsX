@@ -28,10 +28,10 @@ if(isset($_GET) ){
     elseif($p == 'register'){
         $h1 .= ' Registration';
     }
-	elseif($p == 'Profiles'){
+	elseif($p == 'profiles'){
         $h1 .= ' Profiles';
     }
-	 elseif($p == 'Tutorial'){
+	 elseif($p == 'tutorial'){
         $h1 .= ' Tutorial';
     }
 	 elseif($p == 'credits'){

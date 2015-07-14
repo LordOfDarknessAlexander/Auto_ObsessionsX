@@ -24,6 +24,7 @@ html::doctype();
 <html lang=en>
 <head>
 <?php
+	html::simpleHead('Members');
     html::title("Members' page");
     html::charset();
  ?>
@@ -40,19 +41,7 @@ html::doctype();
         <h1>Auto-Obsessions Members</h1>
     </div>
 
-    <div id='nav'><!--The side menu column contains the vertical menu-->
-        <a href='tutorial.php' title='Tutorial'>Tutorial</a><br>
-        <a href='credits.php' title='Credits'>Credits</a><br>
-        <a href='profiles.php' title='Player Profile'>Profile</a><br>
-        <a href='index.php' title='Home Page'>Home</a><br>	
-    </div><!--end of side column and menu -->
     
-    <div id='reg-navigation'>
-        <ul>
-            <li><a href='index.php' title='Play Game'>Play Game</a></li>
-            <li><a href='logout.php'>Logout</a></li>
-        </ul>
-    </div>
 <?php
 //require 'include/nav.php';
 //require 'Users/includes/info-col.php';
@@ -118,6 +107,18 @@ else{
         </div><!--end mid-col-->
     </div><!-- End Div Content -->
 </div><!--end container-->
+<div id='nav'><!--The side menu column contains the vertical menu-->
+        <a href='tutorial.php' title='Tutorial'>Tutorial</a><br>
+        <a href='credits.php' title='Credits'>Credits</a><br>
+        <a href='index.php' title='Home Page'>Home</a><br>	
+    </div><!--end of side column and menu -->
+    
+    <div id='reg-navigation'>
+        <ul>
+            <li><a href='index.php' title='Play Game'>Play Game</a></li>
+            <li><a href='logout.php'>Logout</a></li>
+        </ul>
+    </div>
 <?php
 require 'phtml/legal.php';
 html::footer();
