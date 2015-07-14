@@ -1,16 +1,14 @@
 <?php
 require_once 'html.php';
 require_once 'dbConnect.php';
-//require_once 'ao.php';
 require_once 'secure.php';
-
-//require_once 'secure.php';
 html::docType();
 ?>
 <html lang=en>
 <head>
 <?php
 html::charset();
+html::simpleHead('Members');
 html::title('Login Page');
 ?>
   <link rel="stylesheet" type="text/css" href="includes.css">
@@ -25,14 +23,11 @@ html::title('Login Page');
     <div id='reg-navigation'>
         <a href="registerUser.php">Register</a><br>
         <a href='index.php'>Cancel</a><br>
-        <a href='logout.php'>Logout</a><br>
     </div>
 </div>   
 <?php 
 // This section processes submissions from the login form.
 // Check if the form has been submitted:
-
-//login();
 Secure::userLogin();
 ?>
 <!-- Display the form fields-->

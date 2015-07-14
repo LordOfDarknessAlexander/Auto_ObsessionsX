@@ -11,6 +11,7 @@ html::doctype();
 <html lang=en>
 <head>
 <?php
+html::simpleHead('Members');
 html::title('Register');
 html::charset();
 ?>
