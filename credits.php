@@ -5,8 +5,8 @@ html::doctype();
 <html lang=en>
 <head>
 <?php
-html::title('Credits Page');
 html::simpleHead('Members');
+html::title('Credits Page');
 html::charset();
 ?>
 <link rel='stylesheet' type='text/css' href='includes.css'>
