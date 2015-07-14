@@ -45,7 +45,7 @@ function init(){
 	aoTimer.update();
 	var now = getTimestamp(), //in milliseconds
 		dt = aoTimer.getDT();
-		console.log('init, dt ' + dt.toString());
+		//console.log('init, dt ' + dt.toString());
 		
 	if(!stop){
 		frameID = requestAnimFrame(init);	
@@ -74,6 +74,7 @@ Auction.initialSetup = function(){
 	//called as initial update
 	//to bypass the delay due to ajax calls when auction is initialized
 	//console.log('initial setup called');
+	console.log('Auction.initialSetup called');
 	aoTimer.update();
 		
 	context.clearRect(0, 0, canvas.width, canvas.height);
@@ -82,16 +83,15 @@ Auction.initialSetup = function(){
 }
 Auction.setup = function(){
 	//this is called every frame
-	console.log('Auction.setup called');
 	aoTimer.update();
     var dt = aoTimer.getDT();
+	console.log(dt.toString());
 		
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	
 	if(!auctionStop){
-		frameID = requestAnimFrame(Auction.setup);	//recursive call, bad
-		
 		Auction.update(dt);
+		frameID = requestAnimFrame(Auction.setup);	//recursive call, bad
 		//appState = GAME_MODE.AUCTION;
 	}
 }
@@ -391,7 +391,7 @@ Auction.sold = function(){
             
 //<php if(loggedIn() ){>
 			//Auction._car.repairs == Auction.vcondition;
-            pas.insertCar(Auction);
+           // pas.insertCar(Auction);
 //<php
 //}
 //else{?>

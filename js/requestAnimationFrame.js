@@ -1,15 +1,13 @@
 ﻿//Request Animation Polyfill
-var requestAnimFrame = (function()
-{
-  return  window.requestAnimationFrame       ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          window.oRequestAnimationFrame      ||
-          window.msRequestAnimationFrame     ||
-          function(callback, element){
-            window.setTimeout(callback, aoTimer.getDT());
-          };
-})();
+var requestAnimFrame = window.requestAnimationFrame ||
+	window.webkitRequestAnimationFrame ||
+	window.mozRequestAnimationFrame    ||
+	window.oRequestAnimationFrame      ||
+	window.msRequestAnimationFrame     ||
+	function(callback, element){
+		window.setTimeout(callback, aoTimer.getDT());
+	};
+
 
 function cancelAnimFrame(){		
 	if(frameID)	{	

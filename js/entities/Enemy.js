@@ -3,9 +3,9 @@
     //Math.floor rounds down to the nearest integer,
     //this ensures no ai starts ready to bid,
     //so that there is a gap
-    var BCD = 1.0,//32,
-        BID_CAP = BCD * 4.0,
-        r = Math.random() * (BID_CAP * 0.65);
+    var BCD = 1000.0,//32,
+        BID_CAP = BCD * 5.0,
+        r = Math.random() * (BID_CAP * 0.85);
     
 	return {
 		bidCap : bidCap, //The most the enemy will bid
@@ -33,7 +33,7 @@
             return p;
         },
 		setBidTimer:function(){
-			var BCD = 1.0,//32,
+			var BCD = 1000.0,//32,
 				BID_CAP = BCD * 4.0,
 				r = Math.random() * (BID_CAP * 0.65);
 				_bidTimer = r;
@@ -107,7 +107,7 @@
 //Time the AI has to wait to bid again
 //modern browser refresh at roughly 32 fps
 //32 fps at 16 frames is ~0.5 seconds
-Enemy.BID_CD = 1.0;
+Enemy.BID_CD = 500.0; //in miliseconds
 //Enemy.BID_TIMER_CAP = (1.0 / 32.0) * 8, //Max wait time between bids, wait 8 frames(at 32fps)
 Enemy._bidTimer = 0;
 

@@ -42,7 +42,7 @@ $funcName = "$fileName, pas::insertCar(auction)";
                 Auction._car = null;
                 pas.get.user.stats();
                 Auction.close();
-                init(); //this exists only within the scope of document.ready()
+                //init(); //this exists only within the scope of document.ready()
             },
             function(jqxhr){ 
                 //call will fail if result is not properly formated JSON!
@@ -78,11 +78,11 @@ $funcName = "$fileName, pas::insertLoss(vehicleID)";
                 //alert(funcName + ', User lost auction! Ajax response success!' + JSON.stringify(data) );
                 
                 Auction.close();
-                //init(); //this exists only within the scope of document.ready()
             },
             function(jqxhr){
                 //call will fail if result is not properly formated JSON!
                 jq.setErr('<?php eFN();?>', 'ajax call failed!\nReason: ' + jqxhr.responseText);
+				Auction.close();
             },
             {carID:vehicleID}
         );

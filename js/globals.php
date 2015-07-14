@@ -30,16 +30,22 @@ var aoTimer = {
     _prevTime:getTimestamp(), //time since last
 	_dt:0.0,
 	getDT:function(){
-		return this._dt;
+		//console.log(this._dt.toString() + ' miliseconds');
+		return this._dt;	
+	},
+	init:function(){
+		this._prevTime = getTimestamp(); //time since last
+		this._dt = 0.0;
 	},
     update:function(){
         //get delta time between frames
         var now = getTimestamp();   //in milliseconds
 		
-        this._dt = (now - this._prevTime);   
+        this._dt = (now - this._prevTime);  
+		//console.log('Now: ' + now.toString());   
         this._prevTime = now;
-        //console.log(dt);
-        //console.log(this._prevTime);   
+        console.log('deltaTime: ' + this._dt.toString());
+       // console.log('prevTime: ' + this._prevTime.toString());   
     }
 };
 var _curCarID = 0;

@@ -8,6 +8,7 @@ jq.Auction.cdpb2 = $('progress#ai2', jq.Auction.divPB);
 jq.Auction.cdpb3 = $('progress#ai3', jq.Auction.divPB);
 jq.Auction.pbUser = $('progress#user', jq.Auction.divPB);
 jq.Auction.going = $('progress#going', jq.Auction.divPB);
+jq.Auction.winning = $('progress#winning', jq.Auction.divPB);
 
 jq.Auction.buyoutBtn = $('button#buyout', jq.Auction.menu);
 //<php
@@ -40,7 +41,7 @@ var Auction = {
 	winningImgY : 34,
 	playerBid : 0,
 	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
-	WIN_TIMER_CAP : 0.75,//100.0, //Max amount of time the winningTimer will run for before activating the going timer
+	WIN_TIMER_CAP : 1000,//100.0, //Max amount of time the winningTimer will run for before activating the going timer
 	goingTimer: 0.0, //Timer forcountdown to final sale: going once, going twice, sold
 	//enemyBidTimer: 0.0, //Slight delay after the player bids to prevent the AI from spam bidding
     playerBidTimer: 0.0, //Slight delay after the player bids to prevent the player from spam bidding
@@ -75,6 +76,7 @@ var Auction = {
 		this.playerBid = 0;
 		this.resetTimers();
 		jq.Auction.goingLabel.text('');
+		aoTimer.init();
         
         var funcName = 'Auction.js, Auction::init()';
         
@@ -198,9 +200,13 @@ var Auction = {
 	resetTimers : function(){
 		this.goingTimer = 0;
 		this.winningTimer = 0;
+		jq.Auction.goingLabel.text('');
 	},
     getGoingPerc:function(){
         return 0.0;
+    },
+	getWinningPerc:function(){
+        return (this.winningTimer < this.WIN_TIMER_CAP) ? (this.winningTimer / this.WIN_TIMER_CAP) : 1.0;
     },
     canPlayerBid:function(){
         return this.playerBidTimer >= this.bidTimerCap;
@@ -336,6 +342,7 @@ var Auction = {
         pbSetColor(jq.Auction.cdpb2, this.ai[2].getTimerPerc() );
         pbSetColor(jq.Auction.cdpb3, this.ai[3].getTimerPerc() );
         pbSetColor(jq.Auction.pbUser, this.getPlayerTimerPerc() );    //player.getTimerPerc() );
+		pbSetColor(jq.Auction.winning, this.getWinningPerc() );
         pbSetColor(jq.Auction.going, this.getGoingPerc() );
 //<php
 //}
@@ -463,13 +470,15 @@ var Auction = {
             //
             var ae = audioEnabled(),
                 s = assetLoader.sounds,
+				gLabel = jq.Auction.goingLabel,
                 t = this.goingTimer,
                 f = 32,   //number of frames required to make purchase(32 frames == 1 second)
-                first = 1.0,	//320, //32 * 5,
-                second = 2.0;	//640; //32 * 7,
-				jq.Auction.goingLabel.text('Default');
+				//time in miliseconds
+                first = 1250.0,	//320, //32 * 5,
+                second = 2250.0;	//640; //32 * 7,
+				//gLabel.text('Default');
 				
-			if( ( Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()) && (t < 660) && (!auctionStop) ){//this.playerWinning
+			if( ( Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()) && (t <= second) && (!auctionStop) ){//this.playerWinning
 				this.goingTimer += dt;
                 t = this.goingTimer;    //reset t after increment!
 				//console.log(t.toString());
@@ -477,7 +486,7 @@ var Auction = {
                     var x = ENEMY_X + 715;
 					//console.log('Going once');
 
-					jq.Auction.goingLabel.text('Going Once');
+					gLabel.text('Going Once');
 					assetLoader.sounds.going.play();
 					
                     if (ae){
@@ -487,7 +496,7 @@ var Auction = {
 				}
 				else if( (t >= first) && (t < second) ){
 					//console.log('Going twice');
-					jq.Auction.goingLabel.text('Going Twice');
+					gLabel.text('Going Twice');
 					//context.fillText('Going Twice', x, 290);
 					assetLoader.sounds.going.play();
 					
@@ -506,7 +515,7 @@ var Auction = {
 						this.playerWon = true;
 						//this.buyOut();
 						console.log('Player won');
-						jq.Auction.goingLabel.text('Sold to User');
+						gLabel.text('Sold to User');
 						//context.fillText('Sold to player!', x, 310);
 					}
 					else if(Auction.isAIHighestBidder()){//this.enemyWinning){
@@ -516,7 +525,7 @@ var Auction = {
                         for(var i = 0; i < this.ai.length; ++i){
 							if(this.ai[i].winningBid){
 								console.log('AI won');
-								jq.Auction.goingLabel.text('Sold to ai');
+								gLabel.text('Sold to ai');
 								//context.fillText('Sold to ' + this.ai[i], x, 310);
 							}
 						}	
