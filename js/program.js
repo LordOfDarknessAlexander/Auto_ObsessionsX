@@ -391,7 +391,7 @@ Auction.sold = function(){
             
 //<php if(loggedIn() ){>
 			//Auction._car.repairs == Auction.vcondition;
-           // pas.insertCar(Auction);
+            pas.insertCar(Auction);
 //<php
 //}
 //else{?>

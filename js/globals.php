@@ -44,7 +44,7 @@ var aoTimer = {
         this._dt = (now - this._prevTime);  
 		//console.log('Now: ' + now.toString());   
         this._prevTime = now;
-        console.log('deltaTime: ' + this._dt.toString());
+        //console.log('deltaTime: ' + this._dt.toString());
        // console.log('prevTime: ' + this._prevTime.toString());   
     }
 };
