@@ -133,7 +133,7 @@ class sql{
         }
         //echo "<p class='error'>User not logged in, could not access user session, Please try again.</p>";
         //header('location: login.php');
-        //return 3;   //for testing
+        return 3;   //for testing
     }
     function getUserTableName(){
         //returns the name of the table used by the currently logged in user
