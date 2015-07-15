@@ -4,7 +4,7 @@ require 'dbConnect.php';
 require_once 'ao.php';
 require_once 'pasMeta.php';
 
-session_start();
+//session_start();
 //secureLogin();
 /*
 if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
