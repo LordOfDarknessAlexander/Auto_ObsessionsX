@@ -5,7 +5,7 @@
 //
 require_once 'vehicles/vehicle.php';
 require_once 'dbConnect.php';  //sql database connections
-//require_once '../include/secure.php';
+require_once 'secure.php';
 require_once 'ao.php';
 //
 //secure::loggin();
@@ -128,7 +128,7 @@ class sql{
         //returns the user if logged in, else echo error and force user to redirect to login
         $UID = ao::UID;
       
-        if(isset($_SESSION) && isset($_SESSION[$UID]) ){
+        if(isset($_SESSION['uname']) && isset($_SESSION[$UID]) ){
             return intval($_SESSION[$UID]);
         }
         //echo "<p class='error'>User not logged in, could not access user session, Please try again.</p>";

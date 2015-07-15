@@ -3,7 +3,7 @@ require 'html.php';
 require 'dbConnect.php';
 require_once 'ao.php';
 require_once 'pasMeta.php';
-eS();
+
 session_start();
 //secureLogin();
 /*
@@ -27,6 +27,7 @@ html::doctype();
 	html::simpleHead('Members');
     html::title("Members' page");
     html::charset();
+	eS();
  ?>
     <link rel='stylesheet' type='text/css' href='includes.css'>
     <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
