@@ -128,12 +128,12 @@ class sql{
         //returns the user if logged in, else echo error and force user to redirect to login
         $UID = ao::UID;
       
-        if(isset($_SESSION['uname']) && isset($_SESSION[$UID]) ){
+        if(isset($_SESSION) && isset($_SESSION[$UID]) ){
             return intval($_SESSION[$UID]);
         }
         //echo "<p class='error'>User not logged in, could not access user session, Please try again.</p>";
         //header('location: login.php');
-        return 3;   //for testing
+        //return 3;   //for testing
     }
     function getUserTableName(){
         //returns the name of the table used by the currently logged in user
