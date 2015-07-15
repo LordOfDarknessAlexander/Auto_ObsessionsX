@@ -2,6 +2,7 @@
 //
 require_once '../pasMeta.php';
 require_once '../re.php';
+require_once '../secure.php';
 //
 //secure::loggin();
 //

@@ -7,7 +7,7 @@ require_once '../pasMeta.php';
 require_once 'update.php';
 require_once 'query.php';
 require_once 'remove.php';
-//require_once '../include/secure.php';
+require_once '..secure.php';
 //
 //secure::loggin();
 //

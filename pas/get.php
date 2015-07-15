@@ -5,7 +5,7 @@
 //
 require_once '../pasMeta.php';
 require_once 'user.php';
-//require_once '../include/secure.php';
+require_once '../secure.php';
 //
 //secure::loggin();
 //

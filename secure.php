@@ -69,7 +69,7 @@ class secure
 					// Start the session, fetch the record and insert the three values in an array
 				 
 					echo "uname";?><br><?php
-					session_start();
+					//session_start();
 					//sec_session_start();
 					
 					$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);

@@ -6,6 +6,7 @@
 //
 require_once 'get.php';
 require_once '../re.php';
+require_once '../secure.php';
 //php namespaces require PHP 5.0 or greater, but server only runs v4 :(
 //use \pas\get as pg;
 //use pas\get\user as pgu;
