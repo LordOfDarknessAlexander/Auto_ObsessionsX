@@ -26,6 +26,7 @@ html::charset();
     <a href='tutorial.php' title='Tutorial'>Tutorial</a><br>
     <a href='credits.php' title='Credits'>Credits</a><br>
     <a href='index.php' title='Home Page'>Home</a><br>
+	 <a href='Members.php' title='Members'>Members</a><br>
 </div><!--end of side column and menu -->
 <?php
 eS();
