@@ -26,7 +26,10 @@ var assetLoader = (function(){
         'bidder'    : 'sounds/bidders.mp3',
         'going'		: 'sounds/cheer.mp3',
         'sold'		: 'sounds/sold.mp3',
-        'engine'	: 'sounds/engine.wav'
+        //'engine': 'sounds/engine.wav',
+        'engine': 'sounds/ferrari_engine_roar.mp3',
+        'repair': 'sounds/car_fix.mp3'
+
     };
 
     var assetsLoaded = 0,                               // how many assets have been loaded

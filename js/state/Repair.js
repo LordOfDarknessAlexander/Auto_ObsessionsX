@@ -25,6 +25,13 @@ jq.RepairShop = {
     }*/
 };
 //
+function playRepairAudio(){
+    if (audioEnabled()) {
+        assetLoader.sounds.repair.pause();
+        console.log('Repair Audio Play');
+        assetLoader.sounds.repair.play();
+    }
+}
 function disable(jqo){
     //disables the jquery object passed
     jqo.css(
@@ -551,7 +558,8 @@ function repairPartUpdate(part, jqBtn, jqPB){
     //
     if(part !== null){
         disable(jqBtn);
-        pbSetColor(jqPB, part.getPercent() );
+        pbSetColor(jqPB, part.getPercent());
+        playRepairAudio();
     }
 }
 Drivetrain.getDivURSlot = function(carType){
