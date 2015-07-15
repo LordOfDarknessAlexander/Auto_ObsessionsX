@@ -476,7 +476,7 @@ var Auction = {
 				//time in miliseconds
                 first = 1250.0,	//320, //32 * 5,
                 second = 2250.0;	//640; //32 * 7,
-				//gLabel.text('Default');
+            //gLabel.css({color: 'green'}).text('Default');
 				
 			if( ( Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()) && (t <= second) && (!auctionStop) ){//this.playerWinning
 				this.goingTimer += dt;
@@ -484,9 +484,10 @@ var Auction = {
 				//console.log(t.toString());
                 if( (t > 0) && (t < first)){
                     var x = ENEMY_X + 715;
-					//console.log('Going once');
+                    //console.log('Going once');
 
-					gLabel.text('Going Once');
+                    //style.verticalAlign = "top"
+                    gLabel.css({color:'red'}).text('Going Once');
 					assetLoader.sounds.going.play();
 					
                     if (ae){
@@ -496,7 +497,7 @@ var Auction = {
 				}
 				else if( (t >= first) && (t < second) ){
 					//console.log('Going twice');
-					gLabel.text('Going Twice');
+				    gLabel.css({color:'green'}).text('Going Twice');
 					//context.fillText('Going Twice', x, 290);
 					assetLoader.sounds.going.play();
 					
@@ -515,7 +516,7 @@ var Auction = {
 						this.playerWon = true;
 						//this.buyOut();
 						console.log('Player won');
-						gLabel.text('Sold to User');
+						gLabel.css({ color:'yellow'}).text('Sold to User');
 						//context.fillText('Sold to player!', x, 310);
 					}
 					else if(Auction.isAIHighestBidder()){//this.enemyWinning){
@@ -525,7 +526,7 @@ var Auction = {
                         for(var i = 0; i < this.ai.length; ++i){
 							if(this.ai[i].winningBid){
 								console.log('AI won');
-								gLabel.text('Sold to ai');
+								gLabel.css({ color:'blue'}).text('Sold to ai');
 								//context.fillText('Sold to ' + this.ai[i], x, 310);
 							}
 						}	

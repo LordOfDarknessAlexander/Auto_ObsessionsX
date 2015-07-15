@@ -106,6 +106,8 @@ var Repair = {
                 jq.RepairShop.cid2.show();
                 jq.RepairShop.cid3.show();
 
+                jq.RepairShop.pSwitch.show();
+
                 //$('h2#dt', div).show();
                 //$('h2#body', div).show();
                 //$('h2#interior', div).show();

@@ -126,7 +126,7 @@ function load(){
                 //prestige:s.prestige,
                 //marker:s.m_marker
             //};
-            _curCarID = s.cid;
+            _curCarID = s.car_id;
             //console.log('cur car id:' + _curCarID.toString() );
             setStatBar(s);
             //
@@ -353,6 +353,7 @@ Auction.BackOutofAuction = function(){
 }
 Auction.sold = function(){
     //end of auction, car goes to highest bidder
+    var ae = audioEnabled();
 	stop = true;
 	auctionStop = true;
 	goingTimer = 0;
@@ -364,14 +365,13 @@ Auction.sold = function(){
 	
 	jq.Sold.menu.show();
     
-    if(audioEnabled() ){
+    if(ae){
 	    console.log('audio enabled--Auction.sold');
         var s = assetLoader.sounds;
         s.bg.pause();
         s.gameOver.currentTime = 0;
         s.gameOver.play();
         s.bidder.pause();
-        s.sold.play();
     }
     
 	//auctionEnded = true;
@@ -388,6 +388,11 @@ Auction.sold = function(){
         if(Auction.playerWon){
             //not the right object!?
             jq.Sold.menu.show();
+
+            if (ae) {
+                s.sold.play();
+            }
+           
             
 //<php if(loggedIn() ){>
 			//Auction._car.repairs == Auction.vcondition;
@@ -418,6 +423,11 @@ Auction.sold = function(){
             //jq.Sold.menu.show();
             //setHomeImg();
             sl.html('Unfortunately,<br> you lost the auction for the ' + n + '<br>Better luck next time!');
+
+            if (ae) {
+                //failure noise
+            }
+
 //<php if(loggedIn){>
             pas.insertLoss(Auction._car.id);
 //<php

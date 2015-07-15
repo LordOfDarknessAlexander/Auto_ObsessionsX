@@ -22,7 +22,7 @@ var assetLoader = (function(){
         //sounds dictionary
         'bg'        : 'sounds/D.mp3',
         'jump'      : 'sounds/jump.mp3',
-        'gameOver'  : 'sounds/gameOver.mp3',
+        'gameOver'  : 'sounds/gameOver.mp3',//this needs to change
         'bidder'    : 'sounds/bidders.mp3',
         'going'		: 'sounds/cheer.mp3',
         'sold'		: 'sounds/sold.mp3',
