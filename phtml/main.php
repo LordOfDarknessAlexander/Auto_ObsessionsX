@@ -72,7 +72,7 @@ if( loggedIn() ){?>
             echo rootURL() .'logout.php'; ?>'>Logout</a><br>	
 		
 <?php
-isLoggedIn();
+//isLoggedIn();
 }
 else{?>
         <a id='reg' href='<?php echo rootURL() . 'registerUser.php';?>'>Register</a><br>

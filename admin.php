@@ -2,7 +2,7 @@
 require_once 'include/html.php';
 require_once 'include/secure.php';
 //
-session_start();
+//session_start();
 secure::adminLogin();
 html::docType();
 ?>

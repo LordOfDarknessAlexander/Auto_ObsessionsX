@@ -1,7 +1,7 @@
 <?php
 header('Content-type: application/javascript; charset: UTF-8');
 require_once '../ao.php';
-
+//require_once '../secure.php';
 ?>
 // define variables
 var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
