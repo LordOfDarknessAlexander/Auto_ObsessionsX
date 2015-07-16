@@ -4,21 +4,6 @@ require 'dbConnect.php';
 require_once 'ao.php';
 require_once 'pasMeta.php';
 
-//session_start();
-//secureLogin();
-/*
-if(!isset($_SESSION['user_level']) or ($_SESSION['user_level'] != 0))
-{
-    //tmp, untill session vars issues are resolved
-    //session vars are not persistsing from login.php,
-    //one fix could says to change session.path entry in php.ini
-    echo 'session vars:<br>';
-    echo json_encode($_SESSION);
-    echo 'not logged in, navigating to login page';
-    header("Location: login.php");
-
-   exit();
-}*/
 html::doctype();
 ?>
 <html lang=en>
@@ -44,8 +29,6 @@ html::doctype();
 
     
 <?php
-//require 'include/nav.php';
-//require 'Users/includes/info-col.php';
 loadUser();  //rename and change as this can also modifies the user's values
 ?>
 	<div id='content'><!-- Start of the member's page content. -->

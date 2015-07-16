@@ -4,10 +4,10 @@
 header('Access-Control-Allow-Origin: *');
 //
 require_once 'pasMeta.php';
-//require_once '../re.php';
+require_once 're.php';
 //require_once '../vehicles/vehicle.php';
 require_once 'dbConnect.php';  //sql database connection
-//require_once '../include/secure.php';
+require_once 'secure.php';
 //
 //secure::loggin();
 //

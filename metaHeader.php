@@ -1,5 +1,6 @@
 <?php //this script includes headers for the main pages of the site
 require_once 're.php';
+require_once 'secure.php';
 ?>
 <div id='header'>
 <?php

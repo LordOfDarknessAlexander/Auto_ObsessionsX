@@ -33,6 +33,7 @@ function getUserName(){
         $_SESSION['uname'] : 'guest';
 	 
 }
+
 //
 //eS();
 //exit();
@@ -61,7 +62,7 @@ function getUserName(){
         <a id='addFunds' class='tooltip'>Store</a><br>
 		
 <?php
-//secure::validate();
+//secureLogin();
 
 if( loggedIn() ){?>
 
@@ -71,6 +72,7 @@ if( loggedIn() ){?>
             echo rootURL() .'logout.php'; ?>'>Logout</a><br>	
 		
 <?php
+isLoggedIn();
 }
 else{?>
         <a id='reg' href='<?php echo rootURL() . 'registerUser.php';?>'>Register</a><br>
@@ -101,6 +103,7 @@ if(!loggedIn() ){?>
                     echo rootURL() . 'registerUser.php';
                 ?>'>Register</a></li>
 <?php
+
 }?>
 
                 <li><a class='button credits' <?php hrefVoid();?>>Credits</a></li>				

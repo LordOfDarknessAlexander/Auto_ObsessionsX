@@ -1,4 +1,5 @@
 <?php
+require_once 'secure.php';
 function eCompanyName(){
     //echos out the name of the company wherever the function is called
     ?>8.5:1 Entertainment Inc<?php
