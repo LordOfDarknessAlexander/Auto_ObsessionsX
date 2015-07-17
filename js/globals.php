@@ -261,7 +261,7 @@ function audioEnabled(){
     var b = (Storage.local !== null && '_audioEnabled' in Storage.local)?
         Boolean(JSON.parse(Storage.local._audioEnabled) ) : true;
         
-    console.log("audio " + b);
+    //console.log("audio " + b);
         
     return b;
 }

@@ -85,7 +85,7 @@ Auction.setup = function(){
 	//this is called every frame
 	aoTimer.update();
     var dt = aoTimer.getDT();
-	console.log(dt.toString());
+	//console.log(dt.toString());
 		
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	
