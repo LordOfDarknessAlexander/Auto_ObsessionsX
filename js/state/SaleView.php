@@ -39,6 +39,7 @@ var SaleView = {
 	goingTimer: 0.0, //Timer forcountdown to final sale: going once, going twice, sold
     bidTimerCap: 50, //Max time the bidTimer can go to
 	enemyWinning : false,
+
 	init:function(index){
         //call to start an auction for car		
         //console.log(index);
@@ -54,7 +55,7 @@ var SaleView = {
             s.bg.loop = true;
             s.bg.play();
         }
-			//auctionStop = false;
+			auctionStop = false;
 			this._auction = index;
 			
 			jq.AuctionSell.menu.hide();
@@ -63,12 +64,12 @@ var SaleView = {
             jq.carImg.show();
 			this.setCarInfo();
 			this.sortAI();
+			aoTimer.init();
 			//Auction.init();
 			
 		//this.render();
 
         var funcName = 'SaleView.php, Auction::init()';
-        console.log('snappers');
 		//this.setup();
 	},
 	close : function(){
@@ -92,6 +93,7 @@ var SaleView = {
 			jq.SaleView.carInfo.show();
 		}
 	},
+	
 	sortAI : function(){
 		
 		if(SaleView._auction !== null){	
@@ -99,7 +101,7 @@ var SaleView = {
 				child = ai.div.children(),
 				ai0 = ai._0,
 				ai3 = ai._3,
-				cb = SaleView._auction._currentBid;
+				cb = SaleView.getRaise();
 			
 			var c0 = 'first',
 				c1 = 'second',
@@ -108,18 +110,19 @@ var SaleView = {
 				
 			
 			var tmpBid = 0.0,
+				c = child[e],
+				label = $('label#bid', c),
+				bid = parseFloat(label.text()),
 				i = 0;
 			
-			// for(var e = 0; e < child.length; e++){			
-				// // var c = child[e],
-					// // label = $('label#bid', c),
-					// // bid = parseFloat(label.text());
-				
-				// // if((bid >= tmpBid) && (bid >= cb)){
-					// // tmpBid = bid;
-					// // i = e;
-				// // }	
-			// }
+			for(var e = 0; e < child.length; e++)
+			{
+				if(bid >= cb){
+					tmpBid = bid;
+					i = e;
+				}	
+			}		
+			
 			var pai = $('div.first', ai.div),
 				cai = child.eq(i);
 				
@@ -147,32 +150,55 @@ var SaleView = {
 			cai.removeClass().addClass(c0);	//move bidder to first
 		}	
 	},
+	enemyBidding : function(){
+        //iterates over enemies
+	    //placing a bid if able to do so
+	           
+		// for(var i = 0; i < this.ai.length; i++){
+			// if(this.ai[i].currBid < this.currentBid){
+				// //is the ai's last bid the current highest?
+				// var raise = this.getRaise(); 
+				// //if ai doesn't have enough, no bid
+				// if(this.ai[i].bid(raise) ){
+//<php if($DEBUG){>
+					//console.log('ai ' + i + ' bidding ' + this.ai[i].getBidStr() + ' and cap is ' + this.ai[i].getBidCapStr() );
+//<php}>			
+					// this.currentBid = raise;
+					// break;
+				// }
+			// }
+		// }
+	},
     getRaise:function(){
         //returns the current bid plus and additional increase, based on a percentage
         var b = this.currentBid,
-            cv = Auction._car.getPrice();
+            cv = this._auction._car.getPrice();
         
-        return b + (cv * this.raisePerc);
+        return b + cv;
     },
 	update : function(){
 		//main update logic, called per frame
         var btc = this.bidTimerCap;
         
         //static call, to update global enemy bid cooldown counter
-		Enemy.update();
 		this._auction.update(dt);
+        Enemy.update(dt);
         
+		for(var i = 0; i < ai.length; ++i){
+			var e = ai[i];
+			e.update(dt);	
+		}
+		
 		this.going();
         
-		 // if(auctionEnded){
-			 // this.close();		
-		 // }
+		
 		 if(endGame){
 			 this.close();					
 		 }
 		
 		if(!auctionStop){
-		  	this.render();
+			this.sortAI();
+		  	//this.render();
 		}
 		else{
 			//clear drawing when auction stops
