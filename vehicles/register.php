@@ -1,8 +1,9 @@
 <?php
 //interface and html page for adding, deleting or modifying entries in the vehicle database on the server
-require_once '../include/html.php';
-require_once '../include/dbConnect.php';
+require_once '../html.php';
+require_once '../dbConnect.php';
 require_once 'vehicle.php';
+require_once '../secure.php';
 
 html::simpleHead('Vehicle Registration');
 ?>

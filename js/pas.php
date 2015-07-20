@@ -2,7 +2,7 @@
 header('Content-type: application/javascript; charset: UTF-8');
 //
 require_once '../ao.php';
-//require_once '../secure.php';
+require_once '../secure.php';
 //
 $fileName = 'js/pas.php';//__FILE__;
 $funcName = '';
