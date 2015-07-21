@@ -32,6 +32,9 @@
                 ) : 0.0;
             return p;
         },
+		getCurBid:function(){
+			return (!this.leftAuction && this.currBid !== null) ? this.currBid : 0.0;
+		},
 		setBidTimer:function(){
 			var BCD = 1000.0,//32,
 				BID_CAP = BCD * 4.0,
@@ -57,7 +60,7 @@
         },
         canBid:function(){
             //has the enemy's personal bid cooldown refreshed
-            return Enemy.canBid() && (this._bidTimer >= this.BID_TIMER_CAP) && !this.leftAuction; //&& this._bidTimer >= Enemy.BID_CD
+            return (this._bidTimer >= this.BID_TIMER_CAP) && !this.leftAuction; //&& this._bidTimer >= Enemy.BID_CD
         },
         bid:function(raise){
             //place a bid, setting local state
@@ -107,34 +110,34 @@
 //Time the AI has to wait to bid again
 //modern browser refresh at roughly 32 fps
 //32 fps at 16 frames is ~0.5 seconds
-Enemy.BID_CD = 500.0; //in miliseconds
-//Enemy.BID_TIMER_CAP = (1.0 / 32.0) * 8, //Max wait time between bids, wait 8 frames(at 32fps)
-Enemy._bidTimer = 0;
+// Enemy.BID_CD = 500.0; //in miliseconds
+// //Enemy.BID_TIMER_CAP = (1.0 / 32.0) * 8, //Max wait time between bids, wait 8 frames(at 32fps)
+// Enemy._bidTimer = 0;
 
-Enemy.canBid = function(){
-    //static function regulating global bid cooldown
-    //console.log('enemy can bid');
-    return Enemy._bidTimer >= Enemy.BID_CD;
-}
-Enemy.resetTimer = function(){
-    Enemy._bidTimer = 0.0;
-}
-Enemy.update = function(dt){
-    if(!Enemy.canBid() ){
-        Enemy._bidTimer += dt;
+// Enemy.canBid = function(){
+    // //static function regulating global bid cooldown
+    // //console.log('enemy can bid');
+    // return Enemy._bidTimer >= Enemy.BID_CD;
+// }
+// Enemy.resetTimer = function(){
+    // Enemy._bidTimer = 0.0;
+// }
+// Enemy.update = function(dt){
+    // if(!Enemy.canBid() ){
+        // Enemy._bidTimer += dt;
 		
-		if( Enemy._bidTimer > Enemy.BID_CD){
-			Enemy._bidTimer = Enemy.BID_CD;
-		}
-    }
-    //console.log('can bid!');
-    //_bidTimer is reset when an individual places a bid
-}
-Enemy.getTimerPerc = function(){
-    //from [0-BID_CD], return the current percent of completion in range [0.0-1.0]
-    //to be displayed with a progress bar
-    return Enemy._bidTimer < Enemy.BID_CD ? Enemy._bidTimer / Enemy.BID_CD : 1.0;
-}
+		// if( Enemy._bidTimer > Enemy.BID_CD){
+			// Enemy._bidTimer = Enemy.BID_CD;
+		// }
+    // }
+    // //console.log('can bid!');
+    // //_bidTimer is reset when an individual places a bid
+// }
+// Enemy.getTimerPerc = function(){
+    // //from [0-BID_CD], return the current percent of completion in range [0.0-1.0]
+    // //to be displayed with a progress bar
+    // return Enemy._bidTimer < Enemy.BID_CD ? Enemy._bidTimer / Enemy.BID_CD : 1.0;
+// }
 function price(vehiclePrice, bias){
     //generates a random vehicle value between,
     //bias is an optional param, if not provided 1.0 is the default value,

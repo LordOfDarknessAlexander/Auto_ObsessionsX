@@ -60,6 +60,9 @@ function auctionGen(args){
         _cashedIn:ci,    //has user received cash for this sale
 		_curTime:ct,
         RAISE_PERC : 0.08,   //percentage of vehicle price the next bid is raised by
+		BID_GCD: 500.0, //in miliseconds
+		//Enemy.BID_TIMER_CAP = (1.0 / 32.0) * 8, //Max wait time between bids, wait 8 frames(at 32fps)
+		_bidTimer: 0,
 		//
 		init:function(index){
 			if(index !== null && index !== undefined){
@@ -90,7 +93,7 @@ function auctionGen(args){
 		    //this car has not been previously sold!
 		    console.log(data);
 		    
-            if(data !== null && data !== undefined){
+            if(data !== null || typeof data !== 'undefined'){
 		        if(this._car === null){
 		            // var tData = data.car;
                     
@@ -98,25 +101,62 @@ function auctionGen(args){
 		            this._currentBid = data.bid;
                     //this._curTime = data._curTime;
                     
-		            this._initAI();
+		            this._initAI(data);
 		            AuctionSell.save();
 		        }
 		    }
 		},
-        _initAI:function(){
-            var p = this._car.getPrice();
-            
-            this._ai = [
-                Enemy(price(p)),
-                Enemy(price(p)),
-                Enemy(price(p)),
-                Enemy(price(p))
-            ];
-
-            for(var i = 0; i < this._ai.length; ++i){
-                console.log(i + ' bid cap = ' + this._ai[i].bidCap);
-            }
+        _initAI:function(data){
+			//pass enemy bids into this
+			var p = this._car !== null ? this._car.getPrice() : 0.0;
+			
+			if(p > 0.000001){
+			
+				this._ai = [
+					Enemy(price(p)),
+					Enemy(price(p)),
+					Enemy(price(p)),
+					Enemy(price(p))
+				];
+				
+				if(data !== null && typeof data !== 'undefined'){
+					//console.log('hkgjhjfhgfhggh');
+					this._ai[0].currBid = data._bid0;
+					this._ai[1].currBid = data._bid1;
+					this._ai[2].currBid = data._bid2;
+					this._ai[3].currBid = data._bid3;
+				}
+				
+				for(var i = 0; i < this._ai.length; ++i){
+					console.log(i + ' bid cap = ' + this._ai[i].bidCap);	
+				}
+			}
         },
+		
+		canBid:function(){
+			//static function regulating global bid cooldown
+			//console.log('enemy can bid');
+			return this._bidTimer >= this.BID_GCD;
+		},
+		resetTimer: function(){
+			this._bidTimer = 0.0;
+		},
+		updateTimers: function(dt){
+			if(!this.canBid() ){
+				this._bidTimer += dt;
+				
+				if(this._bidTimer > this.BID_GCD){
+					this._bidTimer = this.BID_GCD;
+				}
+			}
+			//console.log('can bid!');
+			//_bidTimer is reset when an individual places a bid
+		},
+		getTimerPerc: function(){
+			//from [0-BID_CD], return the current percent of completion in range [0.0-1.0]
+			//to be displayed with a progress bar
+			return this._bidTimer < this.BID_GCD ? this._bidTimer / this.BID_GCD : 1.0;
+		},
         isExpired:function(){
             //auction expires when timer cap is reached
             return this._curTime >= this.MAX_AUCTION_TIME;
@@ -227,10 +267,17 @@ function auctionGen(args){
 		update:function(dt){
             //
 			if(!this.isExpired()){
+				var ai = this._ai;
 				//console.log('Running');
 				//console.log(this._currentBid);
 				this._curTime += dt;
-				this.bidTimers();
+				this.updateTimers(dt);
+				//this.bidTimers();
+				for(var i = 0; i < ai.length; ++i){
+					if(!ai[i].leftAuction){
+						ai[i].update(dt);
+					}
+				}
 				this.enemyBidding();
 				this.currentBidder();
 				this.checkCurrentWinner();
@@ -239,9 +286,9 @@ function auctionGen(args){
                 
                 if(b){
                     //continue to update until time runs out
-					for(var j = 0; j < this._ai.length; ++j){
-						if(this._ai[j].winningBid){
-							console.log('AI ' + j.toString() + ' has won the bid for the ' + this._car.getFullName() + ' for (' + Math.round(this._ai[j].currBid) + '), Original Price (' + this._car.getPrice() + ')');
+					for(var j = 0; j < ai.length; ++j){
+						if(ai[j].winningBid){
+							console.log('AI ' + j.toString() + ' has won the bid for the ' + this._car.getFullName() + ' for (' + Math.round(ai[j].getCurBid()) + '), Original Price (' + this._car.getPrice() + ')');
 						}
 					}
 					console.log('Ending auction');
@@ -334,42 +381,45 @@ function auctionGen(args){
                 //date:this._date   //start and end dates,
                 //expired:this.isExpired(),
                 _cashedIn: this._cashedIn,
-                _car: this._car
+                _car: this._car,
+				_bid0: this._ai[0].currBid,
+				_bid1: this._ai[1].currBid,
+				_bid2: this._ai[2].currBid,
+				_bid3: this._ai[3].currBid
 			};
 		},
 		enemyBidding : function(){
             //determine 
 			//upPercentage of vehicle for next bid
-            var raise = this.getRaise();
-//            var cb = this._currentBid;
-                //upPerc =  0.06 * cb;
-			
-            for(var i = 0; i < this._ai.length; i++){					
-				if(!this._ai[i].winningBid){	//global cooldown timer has refreshed, bidding now available
-                    if(this._ai[i].bid(raise)){
-						//SaleView.sortAI();
-						break;
+			if(this.canBid()){
+				var ai = this._ai,
+				    raise = this.getRaise();
+	//            var cb = this._currentBid;
+					//upPerc =  0.06 * cb;
+				
+				for(var i = 0; i < ai.length; i++){					
+					if(!ai[i].winningBid){	//global cooldown timer has refreshed, bidding now available
+						if(ai[i].bid(raise)){
+							//SaleView.sortAI();
+							break;
+						}
+						//if AI can bid and is not currently the top bidder
+						//if( (this._ai[i].currBid < cb) && (!this._ai[i].leftAuction) ){
+							//this._ai[i].currBid = cb + upPerc;
+							//this._ai[i].winningBid = true;
+							//break;
+						//}
+						//else{
+							//this._ai[i].winningBid = false;
+						//}
 					}
-                    //if AI can bid and is not currently the top bidder
-                    //if( (this._ai[i].currBid < cb) && (!this._ai[i].leftAuction) ){
-						//this._ai[i].currBid = cb + upPerc;
-						//this._ai[i].winningBid = true;
-						//break;
-					//}
-                    //else{
-                        //this._ai[i].winningBid = false;
-                    //}
 				}
 			}
 			//if the bidders bid is at o or less than the current bid player wins bid
 		},	
 		bidTimers : function(){
             //updates this._ai bidding timers	
-			for(var i = 0; i < this._ai.length; ++i){
-				if(!this._ai[i].leftAuction){
-					this._ai[i].update();
-				}
-			}
+			
 		},
 		bidFinder : function(){
 			//determine bidder
@@ -388,7 +438,7 @@ function auctionGen(args){
             //check if the enemy at the current index has a higher bid than the other this._ai's            
 			for(var i = 0; i < this._ai.length; i++){
 				if(index != i){
-					if(this._ai[index].currBid > this._ai[i].currBid){
+					if(this._ai[index].getCurBid() > this._ai[i].getCurBid()){
 						continue;
 					}
                     return false;
@@ -418,7 +468,7 @@ function auctionGen(args){
 		checkCurrentWinner : function(){
             //determine which ai has the highest bid
 			for(var i = 0; i < this._ai.length; ++i){
-				this._ai[i].winningBid = (this._ai[i].currBid === this._currentBid ? true : false);
+				this._ai[i].winningBid = (this._ai[i].getCurBid() === this._currentBid ? true : false);
 			}
 		},
         toggleCC:function(){

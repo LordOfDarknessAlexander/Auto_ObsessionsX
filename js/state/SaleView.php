@@ -26,19 +26,20 @@ jq.SaleView = {
 		_1 : $('div#SaleView div#_ai div#ai1'),
 		_2 : $('div#SaleView div#_ai div#ai2'),
 		_3 : $('div#SaleView div#_ai div#ai3')	
+	},
+	timers : {
+		div : $('div#SaleView div#pbCD'),
+		cdpbG : $('div#SaleView div#pbCD progress#gcd'),
+		cdpb0 : $('div#SaleView div#pbCD progress#ai0'),
+		cdpb1 : $('div#SaleView div#pbCD progress#ai1'),
+		cdpb2 : $('div#SaleView div#pbCD progress#ai2'),
+		cdpb3 : $('div#SaleView div#pbCD progress#ai3'),
+		going : $('div#SaleView div#pbCD progress#going'),
+		winning : $('div#SaleView div#pbCD progress#winning')
 	}
 };
 var SaleView = {
 	_auction : null,
-	ai : [],
-	imgX : 10,
-	currentBid : 0,
-	winningImgY : 34,
-	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
-	winningTimerCap : 100.0, //Max amount of time the winningTimer will run for before activating the going timer
-	goingTimer: 0.0, //Timer forcountdown to final sale: going once, going twice, sold
-    bidTimerCap: 50, //Max time the bidTimer can go to
-	enemyWinning : false,
 
 	init:function(index){
         //call to start an auction for car		
@@ -55,32 +56,36 @@ var SaleView = {
             s.bg.loop = true;
             s.bg.play();
         }
-			auctionStop = false;
-			this._auction = index;
+		this._auction = index;
+		
+		jq.AuctionSell.menu.hide();
+		jq.SaleView.menu.show();
+		setHomeImg(index._car.getFullPath() );
+		jq.carImg.show();
+		this.setCarInfo();
+		var ai = this._auction._ai,
+			divAI = jq.SaleView._ai,
+			child = divAI.div.children();
+		
+		
+		for(var i = 0; i < ai.length; i++)
+		{
+			var c = child[i],
+				label = $('label#bid', c),
+				bid = ai[i].getCurBid();
+				
+			label.text(bid.toString());
 			
-			jq.AuctionSell.menu.hide();
-			jq.SaleView.menu.show();
-            setHomeImg(index._car.getFullPath() );
-            jq.carImg.show();
-			this.setCarInfo();
-			this.sortAI();
-			aoTimer.init();
-			//Auction.init();
+		}
+		
+		this.sortAI();
 			
 		//this.render();
 
         var funcName = 'SaleView.php, Auction::init()';
-		//this.setup();
+		
 	},
 	close : function(){
-        //End the auction
-        //closing bidding and clearing local vars
-		auctionStop = true;
-		//auctionEnded = false;
-		endGame = false;
-		//this.enemyWinning = false;
-		stop = false;
-        
         jq.carImg.hide();
 	},
 	setCarInfo : function(){
@@ -93,7 +98,6 @@ var SaleView = {
 			jq.SaleView.carInfo.show();
 		}
 	},
-	
 	sortAI : function(){
 		
 		if(SaleView._auction !== null){	
@@ -101,7 +105,7 @@ var SaleView = {
 				child = ai.div.children(),
 				ai0 = ai._0,
 				ai3 = ai._3,
-				cb = SaleView.getRaise();
+				cb =  this._auction._currentBid;
 			
 			var c0 = 'first',
 				c1 = 'second',
@@ -110,13 +114,14 @@ var SaleView = {
 				
 			
 			var tmpBid = 0.0,
-				c = child[e],
-				label = $('label#bid', c),
-				bid = parseFloat(label.text()),
 				i = 0;
 			
 			for(var e = 0; e < child.length; e++)
 			{
+				var c = child[e],
+				    label = $('label#bid', c),
+					bid = parseFloat(label.text());
+				
 				if(bid >= cb){
 					tmpBid = bid;
 					i = e;
@@ -150,61 +155,23 @@ var SaleView = {
 			cai.removeClass().addClass(c0);	//move bidder to first
 		}	
 	},
-	enemyBidding : function(){
-        //iterates over enemies
-	    //placing a bid if able to do so
-	           
-		// for(var i = 0; i < this.ai.length; i++){
-			// if(this.ai[i].currBid < this.currentBid){
-				// //is the ai's last bid the current highest?
-				// var raise = this.getRaise(); 
-				// //if ai doesn't have enough, no bid
-				// if(this.ai[i].bid(raise) ){
-//<php if($DEBUG){>
-					//console.log('ai ' + i + ' bidding ' + this.ai[i].getBidStr() + ' and cap is ' + this.ai[i].getBidCapStr() );
-//<php}>			
-					// this.currentBid = raise;
-					// break;
-				// }
-			// }
-		// }
-	},
-    getRaise:function(){
-        //returns the current bid plus and additional increase, based on a percentage
-        var b = this.currentBid,
-            cv = this._auction._car.getPrice();
-        
-        return b + cv;
-    },
 	update : function(){
-		//main update logic, called per frame
-        var btc = this.bidTimerCap;
-        
-        //static call, to update global enemy bid cooldown counter
-		this._auction.update(dt);
-        Enemy.update(dt);
-        
-		for(var i = 0; i < ai.length; ++i){
-			var e = ai[i];
-			e.update(dt);	
-		}
-		
-		this.going();
-        
-		
-		 if(endGame){
-			 this.close();					
-		 }
-		
-		if(!auctionStop){
-			this.sortAI();
-		  	//this.render();
-		}
-		else{
-			//clear drawing when auction stops
-			context.clearRect(0, 0, canvas.width, canvas.height);
-		}
-	  
+		this.sortAI(); 
+		var ai = this._auction._ai,
+			timers = jq.SaleView.timers;
+		//<php
+//if(DEBUG){>
+        pbSetColor(timers.cdpbG, this.getTimerPerc() );
+        pbSetColor(timers.cdpb0, ai[0].getTimerPerc() );
+        pbSetColor(timers.cdpb1, ai[1].getTimerPerc() );
+        pbSetColor(timers.cdpb2, ai[2].getTimerPerc() );
+        pbSetColor(timers.cdpb3, ai[3].getTimerPerc() );
+		//pbSetColor(timers.winning, this.getWinningPerc() );
+        //pbSetColor(timers.going, this.getGoingPerc() );
+//<php
+//}
+//>  
+		//this.render();		
 	},
 	render : function(){
         //draw scene specific content to canvas
@@ -220,9 +187,9 @@ var SaleView = {
             ewinPos = 174,  //enemy win position
             tx = ENEMY_X + 12,  //text x offset
             left = 10;  //left offset to draw the image from
-            bid = this.ai[i].currBid,
+            bid = this.ai[i].getCurBid(),
            
-            console.log('drawing bitches');
+            //console.log('drawing bitches');
 		//context.drawImage(backgroundImage, 0, 0);
 		context.font = '14px arial, sans-serif';
 		
@@ -257,13 +224,8 @@ var SaleView = {
 //<php
 //}
 //>
-        //this.going();
 	},
 	
-	// setBidBtnText:function(){
-        // var r = this.getRaise();
-		// jq.Auction.bidBtn.text('Bid: $' + r.toFixed(2) );
-	// }
 };
 //
 //Auction jQuery bindings

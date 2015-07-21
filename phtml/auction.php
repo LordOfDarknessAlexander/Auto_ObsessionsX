@@ -184,7 +184,19 @@ function outputCar($args){
 			<label id='bid'>4</label>
 		</div>
 	</div>
-    <label id='svCarInfo'></label>
-
-    
+	
+	<label id='going'><?php //going once, twice text?></label>
+	
+	<?php //FOR DEV USE ONLY, not in the final release?>
+    <div id='pbCD'>
+        <progress id='gcd'><!--global cooldown--></progress>
+        <progress id='ai0'></progress>
+        <progress id='ai1'></progress>
+        <progress id='ai2'></progress>
+        <progress id='ai3'></progress>
+		<progress id='winning'></progress>
+        <progress id='going'></progress>
+    </div> 
+	
+    <label id='svCarInfo'></label>  
 </div> 

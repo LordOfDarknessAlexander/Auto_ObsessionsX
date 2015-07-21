@@ -54,6 +54,8 @@ var Auction = {
 	raisePerc : 0.08, //How much the AI and player will raise each bid by
 	vcondition: 0,
 	_ended: false,
+	BID_GCD: 500.0, //in miliseconds
+	_bidTimer: 0,
 	init:function(index){
         //call to start an auction for car		
         //console.log(index);
@@ -221,6 +223,30 @@ var Auction = {
         
         return b + (cv * this.raisePerc);
     },
+	canBid:function(){
+		//static function regulating global bid cooldown
+		//console.log('enemy can bid');
+		return this._bidTimer >= this.BID_GCD;
+	},
+	resetGCDTimer: function(){
+		this._bidTimer = 0.0;
+	},
+	updateTimer: function(dt){
+		if(!this.canBid() ){
+			this._bidTimer += dt;
+			
+			if(this._bidTimer > this.BID_GCD){
+				this._bidTimer = this.BID_GCD;
+			}
+		}
+		//console.log('can bid!');
+		//_bidTimer is reset when an individual places a bid
+	},
+	getTimerPerc: function(){
+		//from [0-BID_CD], return the current percent of completion in range [0.0-1.0]
+		//to be displayed with a progress bar
+		return this._bidTimer < this.BID_GCD ? this._bidTimer / this.BID_GCD : 1.0;
+	},
 	update : function(dt){
 		//main update logic, called per frame
 		//console.log("Sparta!");
@@ -229,7 +255,7 @@ var Auction = {
 			ai = this.ai;
         
         //static call, to update global enemy bid cooldown counter
-		Enemy.update(dt);
+		this.updateTimer(dt);
         
 		for(var i = 0; i < ai.length; ++i){
 			var e = ai[i];
@@ -299,7 +325,7 @@ var Auction = {
             ewinPos = 174,  //enemy win position
             tx = ENEMY_X + 12,  //text x offset
             left = 10,  //left offset to draw the image from
-            bid = this.ai[i].currBid,
+            bid = this.ai[i].getCurBid(),
             str = 'Player Bid : $' + this.playerBid.toFixed(2);
             
 		context.drawImage(backgroundImage, 0, 0);
@@ -318,7 +344,7 @@ var Auction = {
         var i = 0;
         
         function draw(){
-            var bid = Auction.ai[i].currBid;
+            var bid = Auction.ai[i].getCurBid();
                 str = bidders[i] + Auction.ai[i].getBidStr();
             
             if(bid >= cb){
@@ -336,7 +362,7 @@ var Auction = {
         }
 //<php
 //if(DEBUG){>
-        pbSetColor(jq.Auction.cdpbG, Enemy.getTimerPerc() );
+        pbSetColor(jq.Auction.cdpbG, this.getTimerPerc() );
         pbSetColor(jq.Auction.cdpb0, this.ai[0].getTimerPerc() );
         pbSetColor(jq.Auction.cdpb1, this.ai[1].getTimerPerc() );
         pbSetColor(jq.Auction.cdpb2, this.ai[2].getTimerPerc() );
@@ -354,10 +380,10 @@ var Auction = {
 		
         var PB = this.playerBid;
         
-        if( (PB > this.ai[0].currBid) &&
-            (PB > this.ai[1].currBid) &&
-            (PB > this.ai[2].currBid) &&
-            (PB > this.ai[3].currBid) ){
+        if( (PB > this.ai[0].getCurBid()) &&
+            (PB > this.ai[1].getCurBid()) &&
+            (PB > this.ai[2].getCurBid()) &&
+            (PB > this.ai[3].getCurBid()) ){
 			//this.playerGoing();
 			//this.playerWinning = true;
 		}
@@ -398,7 +424,7 @@ var Auction = {
 	enemyBidding:function(){
         //iterates over enemies
 	    //placing a bid if able to do so
-	    if(!this.playerWon){
+	    if(!this.playerWon && this.canBid()){
             //
             //TODO:sort by which enemy has the highest bid Timer,
             //then execute in that order. This approach ensures
@@ -409,7 +435,7 @@ var Auction = {
                 
                 //can bid and still participating
                 //console.log('ai active');
-                if(this.ai[i].currBid < this.currentBid){
+                if(this.ai[i].getCurBid() < this.currentBid){
                     //is the ai's last bid the current highest?
                     var raise = this.getRaise();    //currentBid + this.raisePerc;
                     //if ai doesn't have enough, no bid
@@ -417,7 +443,7 @@ var Auction = {
 //<php if($DEBUG){>
                         console.log('ai ' + i + ' bidding ' + this.ai[i].getBidStr() + ' and cap is ' + this.ai[i].getBidCapStr() );
 //<php}>
-                        Enemy.resetTimer();
+                        this.resetGCDTimer();
                         
                         this.currentBid = raise;
                         this.resetTimers();
@@ -440,7 +466,7 @@ var Auction = {
 		
 		for(var i = 0; i < ai.length; i++){
 			var e = ai[i],
-			    delta = Math.abs(Auction.currentBid - e.currBid);
+			    delta = Math.abs(Auction.currentBid - e.getCurBid());
 				
 			if(delta < 0.000001){
 				//console.log('Ai Bidder ' + i.toString() + ' ' + e.getBidStr());

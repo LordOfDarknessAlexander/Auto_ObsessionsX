@@ -141,3 +141,28 @@ Auction Screen
 	right:0%;
 }
 
+<?php divSaleView();?> div#pbCD{
+<?php
+    posAbs();
+    css::size('18%','30%');
+    css::right('1%');
+    css::top('55%');
+?>
+}
+<?php divSaleView();?> div#pbCD progress{
+    width:100%;
+}
+
+<?php divSaleView();?> label#going
+{<?php
+    css::fontBold();
+    defaultColor();
+    posAbs();
+	css::size('18%','5%');
+    css::right('1%');
+    css::top('35%');
+	css::txtAlignCntr();
+?>
+	background-image:url('../images/checkers.png');
+}
+

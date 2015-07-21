@@ -49,6 +49,7 @@ var AuctionSell = {
         }
 	},
 	update : function(dt){
+		//console.log('AuctionSell.update called');
 		var i = 0,
             len = userSales.length;
         
