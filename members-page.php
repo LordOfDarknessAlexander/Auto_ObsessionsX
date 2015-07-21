@@ -136,7 +136,15 @@ else if($page == 'tutorial'){
     loadUser();  //rename and change as this can also modifies the user's values
 ?>
 	<div id='content'><!-- Start of the tutorial page content. -->
-            <h2>Tutorial Page <?php 
+            <h2>Tutorial Page 
+            <div id='content'><!-- Start of the page-specific content. -->
+        <h2>Tutorial</h2>
+        <p>Auto-Obsessions the game . Easy to play impossible to break the obsession. 
+        <br>Win cars in an acution.
+        <br>Repair and upgrade them.
+        <br>Sell them. ... Yay.</p>
+        <!-- End of the page-specific content. -->
+    </div><?php 
     $un = isSetS() ? strval($_SESSION['uname']) : '';
     //echo $un; 
 ?></h2>
@@ -144,6 +152,20 @@ else if($page == 'tutorial'){
 		<div id='midcol'>
 <?php
 	require 'phtml/legal.php';
+    html::footer();
+}
+else if($page == 'credits'){
+    require 'Users/includes/info-col.php';
+    ?>
+	    <div id='content'><!-- Start of the page-specific content. -->
+            <h2>Credits</h2>
+            <p>Development Team : Alexander Sanchez, Tyler Drury<br>
+            </p>
+	    <!-- End of the Credits content. -->
+        </div>
+    </div>	
+    <?php
+    require 'phtml/legal.php';
     html::footer();
 }
 
@@ -156,7 +178,7 @@ else{ //if page name does not match
 }
 ?>     
             <div id='mid-left-col'>
-                <h3>HErdurloup</h3>
+                <h3></h3>
                 
             </div><!--end mid-left-col-->         
         </div><!--end mid-col-->
