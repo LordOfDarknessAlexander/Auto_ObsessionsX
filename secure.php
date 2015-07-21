@@ -1,5 +1,5 @@
 <?php
-session_start();  //the inclusion of this page starts the session if not started, else resume current session
+//session_start();  //the inclusion of this page starts the session if not started, else resume current session
 require_once 'dbConnect.php';
 require_once 'ao.php';
 function isLoggedIn(){
@@ -67,10 +67,8 @@ class secure
 					
 					 //The user input matched the database record
 					// Start the session, fetch the record and insert the three values in an array
-				 
+					session_start();
 					echo "uname";?><br><?php
-					//session_start();
-					//sec_session_start();
 					
 					$_SESSION = mysqli_fetch_array($result, MYSQLI_ASSOC);
 					$_SESSION['user_level'] = (int) $_SESSION['user_level']; // Changes the 1 or 2 user level to an integer.

@@ -13,7 +13,7 @@ $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
 
 //this is not working on site without a new session
-//session_start();
+session_start();
 
 //session set, has the session be started and initialized
 //if $_SESSION is an empty array,
