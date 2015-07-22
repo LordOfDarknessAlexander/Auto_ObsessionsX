@@ -20,7 +20,7 @@ jq.SaleView = {
 	homeBtn : $('div#SaleView button#homeBtn'),
 	carName : $('div#SaleView label#carName'),
 	carInfo : $('div#SaleView label#svCarInfo'),
-	goingLabel : $('label#going'),
+	goingLabel : $('div#SaleView label#going'),
 	_ai : {
 		div : $('div#SaleView div#_ai'),
 		_0 : $('div#SaleView div#_ai div#ai0'),
@@ -81,12 +81,25 @@ var SaleView = {
 		}
 		jq.SaleView.goingLabel.text('');
 		this.sortAI();
+		//this.resetAIbidDiv();
 			
 		//this.render();
 
         var funcName = 'SaleView.php, Auction::init()';
 		appState = GAME_MODE.SALE_VIEW;
 		
+	},
+	resetAIbidDiv : function(){
+		var ai = jq.SaleView._ai,
+			child = ai.div.children();
+		
+		for(var e = 0; e < child.length; e++)
+		{
+			var c = child[e],
+				label = $('label#bid', c);
+				
+			label.text('0.00');
+		}		
 	},
 	close : function(){
         jq.carImg.hide();
@@ -141,8 +154,12 @@ var SaleView = {
 			if(pid == cid){
 				return;
 			}
-			var ccls = pai.attr('class');
+			var ccls = cai.attr('class');
 			
+			// if(ccls == c1){
+				// pai.removeClass().addClass(c1);	//move first to second
+				// cai.removeClass().addClass(c0);	//move bidder to first
+			// }
 			if(ccls == c2){
 				var s = $('div.second', ai.div);
 				s.removeClass().addClass(c2);
@@ -170,7 +187,7 @@ var SaleView = {
         pbSetColor(timers.cdpb1, ai[1].getTimerPerc() );
         pbSetColor(timers.cdpb2, ai[2].getTimerPerc() );
         pbSetColor(timers.cdpb3, ai[3].getTimerPerc() );
-		//pbSetColor(timers.winning, this.getWinningPerc() );
+		pbSetColor(timers.winning, this._auction._timer.getWinningPerc() );
         pbSetColor(timers.going, this._auction.getGoingPerc() );
 		pbSetColor(timers.endTime,  this._auction.getExpiredPerc());
 //<php

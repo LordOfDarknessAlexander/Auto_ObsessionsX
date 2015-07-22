@@ -47,6 +47,7 @@ function auctionGen(args){
 		//_vehiclePrice : 20000,
 		MAX_AUCTION_TIME : (1000 * 60) * 0.75,    //how many units of time is thins?
 		//AI cooldown timer
+		_timer : auctionCountdownTimer(),
 		_car:car,
 		//_carIndex : 0,
 		_currentBid:bid,
@@ -62,9 +63,11 @@ function auctionGen(args){
         RAISE_PERC : 0.08,   //percentage of vehicle price the next bid is raised by
 		BID_GCD: 500.0, //in miliseconds
 		//Enemy.BID_TIMER_CAP = (1.0 / 32.0) * 8, //Max wait time between bids, wait 8 frames(at 32fps)
-		_bidTimer: 0,
+		_bidTimer: 0.0,
 		//
 		init:function(index){
+			this._timer.reset();
+			
 			if(index !== null && index !== undefined){
 			    //               
 			    var car = Garage.getCarByID(index);
@@ -91,8 +94,9 @@ function auctionGen(args){
 		    //no carID to access
 		    //create new car
 		    //this car has not been previously sold!
-		    console.log(data);
-		    
+		    //console.log(data);
+		    this._timer.reset();
+			
             if(data !== null || typeof data !== 'undefined'){
 		        if(this._car === null){
 		            // var tData = data.car;
@@ -177,6 +181,65 @@ function auctionGen(args){
 		getGoingPerc:function(){
 			return 0.0;
 		},
+		going:function(dt){
+			//begin sale count down after a wthis.aiting period if no other bids are offered
+			//Going crowd roars someone is about to win the bid
+			//break out of while if someone outbids current bidder or if player does,
+			//breaks out of the while loop and enemyWinning becomes false
+			context.font = '20px arial, sans-serif';
+			//console.log(dt);
+			if(this._timer.isWinning()){
+				//
+				var ae = audioEnabled(),
+					s = assetLoader.sounds,
+					gLabel = jq.SaleView.goingLabel,
+					t = this._timer.going,
+					f = 32,   //number of frames required to make purchase(32 frames == 1 second)
+					//time in miliseconds
+					first = this._timer.GOING_FIRST,	//320, //32 * 5,
+					second = this._timer.GOING_SECOND;	//640; //32 * 7,
+				//gLabel.css({color: 'green'}).text('Default');
+					
+				if(t <= second){//this.playerWinning
+					this._timer.going += dt;
+					t = this._timer.going;    //reset t after increment!
+					//console.log(t.toString());
+					if( (t > 0) && (t < first)){
+						//var x = ENEMY_X + 715;
+						//console.log('Going once');
+
+						//style.verticalAlign = "top"
+						gLabel.css({color:'red'}).text('Going Once');
+						assetLoader.sounds.going.play();
+						
+						if (ae){
+							s.going.play();
+						}
+						//break;	
+					}
+					else if((t >= first) && (t < second) ){
+						//console.log('Going twice');
+						gLabel.css({color:'green'}).text('Going Twice');
+						//context.fillText('Going Twice', x, 290);
+						assetLoader.sounds.going.play();
+						
+						if (ae) {
+							s.going.play();
+						}
+						//break;		
+					}
+					else if(t >= second){		
+						for(var i = 0; i < this._ai.length; ++i){
+							if(this._ai[i].winningBid){
+								console.log('AI won');
+								gLabel.css({ color:'blue'}).text('Sold to ai');
+								//context.fillText('Sold to ' + this.ai[i], x, 310);
+							}
+						}	
+					}
+				}
+			}
+		},	
         addButton:function(){
             //add this auction entry to the div
             if(this._car === null){
@@ -250,6 +313,7 @@ function auctionGen(args){
 			this.bindViewBtn();
 			this._date.end = Date.now() * 0.0001;
 			this._closed = true;
+			this._timer.reset();
 			//this._curTime = 0.0;
             //while loops are bad practice, prone to misuse and infinite loops.
             //using array.pop() method is bad, is slow as the array must be
@@ -278,6 +342,7 @@ function auctionGen(args){
 				//console.log('Running');
 				//console.log(this._currentBid);
 				this._curTime += dt;
+				
 				this.updateTimers(dt);
 				//this.bidTimers();
 				for(var i = 0; i < ai.length; ++i){
@@ -286,8 +351,10 @@ function auctionGen(args){
 					}
 				}
 				this.enemyBidding();
+				this._timer.updateWinning(dt);
 				this.currentBidder();
 				this.checkCurrentWinner();
+				this.going(dt);
 			
                 var b = this.isExpired() && !this._closed;
                 
@@ -404,9 +471,19 @@ function auctionGen(args){
 	//            var cb = this._currentBid;
 					//upPerc =  0.06 * cb;
 				
-				for(var i = 0; i < ai.length; i++){					
-					if(!ai[i].winningBid){	//global cooldown timer has refreshed, bidding now available
-						if(ai[i].bid(raise)){
+				for(var i = 0; i < ai.length; i++){
+					var e = ai[i];
+					
+					if(!e.winningBid){	//global cooldown timer has refreshed, bidding now available
+						if(e.bid(raise)){
+							var b = e.currBid;
+							console.log('auctionGen enemybidding ' + e.getBidStr());
+							this._currentBid = raise;
+							this._timer.reset();
+							jq.SaleView.goingLabel.text('');
+							this.resetTimer();
+							var l = $('div#ai' + i.toString() + ' label#bid', jq.SaleView._ai.div);
+							l.text(e.currBid.toFixed(2));
 							//SaleView.sortAI();
 							break;
 						}

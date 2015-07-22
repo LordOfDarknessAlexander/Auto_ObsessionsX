@@ -28,15 +28,16 @@ function auctionCountdownTimer(){
         GOING_SECOND : 2250.0,  //640; //32 * 7,
 		//
 		reset : function(){
-			this.going = 0;
-			this.winning = 0;
+			this.going = 0.0;
+			this.winning = 0.0;
 		},
 		getGoingPerc:function(){
 			return 0.0;
+			//return (this.going < this.WIN_CAP) ? (this.winning / this.WIN_CAP) : 1.0
 		},
 		isWinning:function(){
 			//true if bid has been held for a duration
-			return this.winningTimer >= this.WIN_TIMER_CAP; 
+			return this.winning >= this.WIN_CAP; 
 		},
 		getWinningPerc:function(){
 			return (this.winning < this.WIN_CAP) ? (this.winning / this.WIN_CAP) : 1.0;
@@ -45,7 +46,7 @@ function auctionCountdownTimer(){
 			if(this.winning < this.WIN_CAP){
 				this.winning += dt;
 			}
-		},		
+		}	
 	};	
 }
 //ao.state.Auction =
@@ -71,10 +72,10 @@ var Auction = {
 	imgX : 10,
 	winningImgY : 34,
 	playerBid : 0,
-	//_timer : auctionCountdownTimer(),
-	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
-	WIN_TIMER_CAP : 1000,//100.0, //Max amount of time the winningTimer will run for before activating the going timer
-	goingTimer: 0.0, //Timer forcountdown to final sale: going once, going twice, sold
+	_timer : auctionCountdownTimer(),
+	//winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
+	//WIN_TIMER_CAP : 1000,//100.0, //Max amount of time the winningTimer will run for before activating the going timer
+	//goingTimer: 0.0, //Timer forcountdown to final sale: going once, going twice, sold
 	//enemyBidTimer: 0.0, //Slight delay after the player bids to prevent the AI from spam bidding
     playerBidTimer: 0.0, //Slight delay after the player bids to prevent the player from spam bidding
     bidTimerCap: 50, //Max time the bidTimer can go to
@@ -108,7 +109,7 @@ var Auction = {
         auctionStop = false;
 		Auction._ended = false;
 		this.playerBid = 0;
-		this.resetTimers();
+		this._timer.reset();
 		jq.Auction.goingLabel.text('');
 		aoTimer.init();
         
@@ -216,8 +217,8 @@ var Auction = {
 		this.playerBid = 0;		
 		this.currentBid = 0;
 		//this.currentBid = vehiclePrice * 0.1;
-		this.resetTimers();
-		//this._timer.reset();
+		this._timer.reset();
+		jq.Auction.goingLabel.text('');
 		//BidTImers Booleans
 		//this.playerWinning = false;
 		//this.enemyWinning = false;
@@ -232,17 +233,17 @@ var Auction = {
 		cancelAnimFrame();
 		requestAnimFrame(init);
 	},
-	resetTimers : function(){
-		this.goingTimer = 0;
-		this.winningTimer = 0;
-		jq.Auction.goingLabel.text('');
-	},
+	// resetTimers : function(){
+		// //this.goingTimer = 0;
+		// //this.winningTimer = 0;
+		// jq.Auction.goingLabel.text('');
+	// },
     getGoingPerc:function(){
         return 0.0;
     },
-	getWinningPerc:function(){
-        return (this.winningTimer < this.WIN_TIMER_CAP) ? (this.winningTimer / this.WIN_TIMER_CAP) : 1.0;
-    },
+	// getWinningPerc:function(){
+        // return (this.winningTimer < this.WIN_TIMER_CAP) ? (this.winningTimer / this.WIN_TIMER_CAP) : 1.0;
+    // },
     canPlayerBid:function(){
         return this.playerBidTimer >= this.bidTimerCap;
     },
@@ -304,9 +305,7 @@ var Auction = {
 		
         //Increment timer if either ai or player is winning
         if(Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()){//this.playerWinning){
-			if(this.winningTimer < this.WIN_TIMER_CAP){
-				this.winningTimer += dt;
-			}	
+			this._timer.updateWinning(dt);
         }
 		
 		this.going(dt);
@@ -401,7 +400,7 @@ var Auction = {
         pbSetColor(jq.Auction.cdpb2, this.ai[2].getTimerPerc() );
         pbSetColor(jq.Auction.cdpb3, this.ai[3].getTimerPerc() );
         pbSetColor(jq.Auction.pbUser, this.getPlayerTimerPerc() );    //player.getTimerPerc() );
-		pbSetColor(jq.Auction.winning, this.getWinningPerc() );
+		pbSetColor(jq.Auction.winning, this._timer.getWinningPerc() );
         pbSetColor(jq.Auction.going, this.getGoingPerc() );
 //<php
 //}
@@ -440,7 +439,8 @@ var Auction = {
                 //this.playerWinning = true;
                 //this.enemyWinning = false;
                 this.playerBidTimer = 0;
-                this.resetTimers();
+                this._timer.reset();
+				jq.Auction.goingLabel.text('');
                 //Setting the enemy's ability to bid to false so that as soon as the player bids the enemy is unable to
                 //this.playerCanBid = false;
                 this.playerBid = raise;
@@ -479,7 +479,8 @@ var Auction = {
                         this.resetGCDTimer();
                         
                         this.currentBid = raise;
-                        this.resetTimers();
+                        this._timer.reset();
+						jq.Auction.goingLabel.text('');
 						//this._timers.reset();
                         //this.enemyWinning = true;
                         //this.playerWinning = false;
@@ -526,21 +527,21 @@ var Auction = {
 		//breaks out of the while loop and enemyWinning becomes false
 		context.font = '20px arial, sans-serif';
 		//console.log(dt);
-        if(this.winningTimer >= this.WIN_TIMER_CAP){
+        if(this._timer.isWinning()){
             //
             var ae = audioEnabled(),
                 s = assetLoader.sounds,
 				gLabel = jq.Auction.goingLabel,
-                t = this.goingTimer,
+                t = this._timer.going,
                 f = 32,   //number of frames required to make purchase(32 frames == 1 second)
 				//time in miliseconds
-                first = 1250.0,	//320, //32 * 5,
-                second = 2250.0;	//640; //32 * 7,
+                first = this._timer.GOING_FIRST,	//320, //32 * 5,
+                second = this._timer.GOING_SECOND;	//640; //32 * 7,
             //gLabel.css({color: 'green'}).text('Default');
 				
 			if( ( Auction.isPlayerHighestBidder() || Auction.isAIHighestBidder()) && (t <= second) && (!auctionStop) ){//this.playerWinning
-				this.goingTimer += dt;
-                t = this.goingTimer;    //reset t after increment!
+				this._timer.going += dt;
+                t = this._timer.going;    //reset t after increment!
 				//console.log(t.toString());
                 if( (t > 0) && (t < first)){
                     var x = ENEMY_X + 715;
