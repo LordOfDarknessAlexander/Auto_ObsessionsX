@@ -111,6 +111,14 @@ Auction Select Car View
     font-size:1.25vw;
     display:block;
 }
+<?php dcv();?> div progress#endTime{
+<?php
+    posAbs();
+    css::size('20%','30%');
+    css::right('0%');
+    css::top('55%');
+?>
+}
 <?php dcv();?> div#btns button#view
 {
     background: url('../images/icons/view.png') no-repeat 0 0;

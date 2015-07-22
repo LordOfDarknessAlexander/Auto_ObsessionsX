@@ -20,6 +20,7 @@ jq.SaleView = {
 	homeBtn : $('div#SaleView button#homeBtn'),
 	carName : $('div#SaleView label#carName'),
 	carInfo : $('div#SaleView label#svCarInfo'),
+	goingLabel : $('label#going'),
 	_ai : {
 		div : $('div#SaleView div#_ai'),
 		_0 : $('div#SaleView div#_ai div#ai0'),
@@ -35,7 +36,8 @@ jq.SaleView = {
 		cdpb2 : $('div#SaleView div#pbCD progress#ai2'),
 		cdpb3 : $('div#SaleView div#pbCD progress#ai3'),
 		going : $('div#SaleView div#pbCD progress#going'),
-		winning : $('div#SaleView div#pbCD progress#winning')
+		winning : $('div#SaleView div#pbCD progress#winning'),
+		endTime : $('div#SaleView div#pbCD progress#endTime')
 	}
 };
 var SaleView = {
@@ -77,12 +79,13 @@ var SaleView = {
 			label.text(bid.toString());
 			
 		}
-		
+		jq.SaleView.goingLabel.text('');
 		this.sortAI();
 			
 		//this.render();
 
         var funcName = 'SaleView.php, Auction::init()';
+		appState = GAME_MODE.SALE_VIEW;
 		
 	},
 	close : function(){
@@ -157,21 +160,30 @@ var SaleView = {
 	},
 	update : function(){
 		this.sortAI(); 
+		this.endAuction();
 		var ai = this._auction._ai,
 			timers = jq.SaleView.timers;
 		//<php
 //if(DEBUG){>
-        pbSetColor(timers.cdpbG, this.getTimerPerc() );
+        pbSetColor(timers.cdpbG, this._auction.getTimerPerc() );
         pbSetColor(timers.cdpb0, ai[0].getTimerPerc() );
         pbSetColor(timers.cdpb1, ai[1].getTimerPerc() );
         pbSetColor(timers.cdpb2, ai[2].getTimerPerc() );
         pbSetColor(timers.cdpb3, ai[3].getTimerPerc() );
 		//pbSetColor(timers.winning, this.getWinningPerc() );
-        //pbSetColor(timers.going, this.getGoingPerc() );
+        pbSetColor(timers.going, this._auction.getGoingPerc() );
+		pbSetColor(timers.endTime,  this._auction.getExpiredPerc());
 //<php
 //}
 //>  
 		//this.render();		
+	},
+	endAuction : function(){
+		context.font = '20px arial, sans-serif';
+		
+		if(this._auction.isExpired()){
+			jq.SaleView.goingLabel.text('Sold!');
+		}
 	},
 	render : function(){
         //draw scene specific content to canvas

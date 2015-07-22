@@ -17,6 +17,37 @@ jq.Auction.bidBtn = $('button#bid', jq.Auction.menu);
 //
 var playerBoughtOut = false; //temporary for our dev button "buyout"
 
+function auctionCountdownTimer(){
+	//object that controls the sales counter
+	return {
+		//values are in miliseconds
+		winning : 0.0,
+		going : 0.0,
+		WIN_CAP : 1000,
+		GOING_FIRST : 1250.0,	//320, //32 * 5,
+        GOING_SECOND : 2250.0,  //640; //32 * 7,
+		//
+		reset : function(){
+			this.going = 0;
+			this.winning = 0;
+		},
+		getGoingPerc:function(){
+			return 0.0;
+		},
+		isWinning:function(){
+			//true if bid has been held for a duration
+			return this.winningTimer >= this.WIN_TIMER_CAP; 
+		},
+		getWinningPerc:function(){
+			return (this.winning < this.WIN_CAP) ? (this.winning / this.WIN_CAP) : 1.0;
+		},
+		updateWinning:function(dt){
+			if(this.winning < this.WIN_CAP){
+				this.winning += dt;
+			}
+		},		
+	};	
+}
 //ao.state.Auction =
 var Auction = {
 	//manages the state for purchasing cars
@@ -40,6 +71,7 @@ var Auction = {
 	imgX : 10,
 	winningImgY : 34,
 	playerBid : 0,
+	//_timer : auctionCountdownTimer(),
 	winningTimer : 0.0, //Timer that starts when the highest bid is made, once it elapses the going timer will begin
 	WIN_TIMER_CAP : 1000,//100.0, //Max amount of time the winningTimer will run for before activating the going timer
 	goingTimer: 0.0, //Timer forcountdown to final sale: going once, going twice, sold
@@ -185,6 +217,7 @@ var Auction = {
 		this.currentBid = 0;
 		//this.currentBid = vehiclePrice * 0.1;
 		this.resetTimers();
+		//this._timer.reset();
 		//BidTImers Booleans
 		//this.playerWinning = false;
 		//this.enemyWinning = false;
@@ -447,6 +480,7 @@ var Auction = {
                         
                         this.currentBid = raise;
                         this.resetTimers();
+						//this._timers.reset();
                         //this.enemyWinning = true;
                         //this.playerWinning = false;
                         if (audioEnabled()) {
@@ -536,7 +570,7 @@ var Auction = {
                     //a single user has held the top bid the to reuired count,
                     //sell the car
 					endGame = true;
-					this.goingTimer = 0;
+					//this.goingTimer = 0;
 					
 					if(Auction.isPlayerHighestBidder()){//this.playerWinning){
 						this.playerWon = true;

@@ -45,7 +45,7 @@ function auctionGen(args){
     
 	return {
 		//_vehiclePrice : 20000,
-		MAX_AUCTION_TIME : 1000,    //how many units of time is thins?
+		MAX_AUCTION_TIME : (1000 * 60) * 0.75,    //how many units of time is thins?
 		//AI cooldown timer
 		_car:car,
 		//_carIndex : 0,
@@ -171,6 +171,12 @@ function auctionGen(args){
             }
             return 0.0;
         },
+		getExpiredPerc: function(){
+			return this.isExpired() ? 1.0 :  this._curTime / this.MAX_AUCTION_TIME;
+		},
+		getGoingPerc:function(){
+			return 0.0;
+		},
         addButton:function(){
             //add this auction entry to the div
             if(this._car === null){
@@ -189,6 +195,7 @@ function auctionGen(args){
                     var btnStr = "<div id='" + liID + "'>" +
                         "<img src='" + car.getFullPath() + "'>" +
                         "<label id='carInfo'>" + car.getFullName() + "</label>" +
+						//"<progress id='endTime'></progress>" +
                         "<label id='" + btnID + "'>" +
                             "<label id='price'>Price: $" + (car.getPrice()).toString() + "</label><br>" +
                             "<label id='expireTime'>Auction expires: </label>" +
@@ -538,7 +545,7 @@ function auctionGen(args){
 		},
         viewAuction:function(obj){
             //view an auction while it is still active!
-            SaleView.init(obj.data.caller);
+            SaleView.init(obj.data.caller);	
         },
         cancelAuction:function(obj){
             //user has decided to not sell car, removing it from userSales

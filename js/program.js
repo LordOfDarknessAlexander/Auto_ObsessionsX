@@ -47,9 +47,12 @@ function init(){
 		dt = aoTimer.getDT();
 		//console.log('init, dt ' + dt.toString());
 		
+	AuctionSell.update(dt);	
+	switchStates();
+	
 	if(!stop){
 		frameID = requestAnimFrame(init);	
-		update(0.33);
+		//update(0.33);
 		
 		// if( (timer >= 300.00) && (timer <= 900.00)){
 			// appState = GAME_MODE.MAIN_MENU;
@@ -66,8 +69,7 @@ function update(dTime){
 		//restarted = true;
 	//}
     //update active user's auctions
-	AuctionSell.update(dTime);
-
+	
 	//timer++;
 }
 Auction.initialSetup = function(){
@@ -171,6 +173,51 @@ function load(){
 //}
 //?>
 }
+//app may only exist in one state at a time
+function switchStates(){
+    //call various update based on appState
+	var dt = 16.0;
+	switch (appState){
+		// case GAME_MODE.SPLASH:
+			// splash();
+			// garageDoor();
+		// break;
+		
+		case GAME_MODE.MAIN_MENU:
+			//mainMenu();
+			//console.log('main menu switch');
+		break;  
+		case GAME_MODE.SALE_VIEW:
+			SaleView.update(dt);
+		break;
+		//do not need auction select
+		// case GAME_MODE.AUCTION:
+			// Auction.update(dt);
+			// setStatBar();
+			// console.log('auction switch');
+		// break;
+
+		// case GAME_MODE.REPAIR:
+			// Repair.update();
+			// setStatBar();
+		// break;
+		
+		// case GAME_MODE.ADD_FUNDS:
+			// Store.update();
+		// break;
+		
+		// case GAME_MODE.SLOTS:
+			// //Slots.update();
+			// callSlots();
+			// setStatBar();
+		// break;
+			
+		default:
+			GAME_MODE.RUNNING; 
+			
+		// etc...
+	}
+}
 //$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed
 $(document).ready(
@@ -205,48 +252,6 @@ assetLoader.finished = function(){
 	$('#splash').removeClass('#Slots');
   	$('#Slots').hide();
   	switchStates();  
-}	
-
-//app may only exist in one state at a time
-function switchStates(GAME_MODE){
-    //call various update based on appState
-	switch (GAME_MODE){
-		case SPLASH:
-			splash();
-			garageDoor();
-		break;
-		
-		case MAIN_MENU:
-			mainMenu();
-			console.log('main menu switch');
-		break;  
-		//do not need auction select
-		case AUCTION:
-			Auction.update(dt);
-			setStatBar();
-			console.log('auction switch');
-		break;
-
-		case REPAIR:
-			Repair.update();
-			setStatBar();
-		break;
-		
-		case ADD_FUNDS:
-			Store.update();
-		break;
-		
-		case SLOTS:
-			//Slots.update();
-			callSlots();
-			setStatBar();
-		break;
-			
-		default:
-			RUNNING; 
-			
-		// etc...
-	}
 }
 
 function splash(){
@@ -356,9 +361,9 @@ Auction.sold = function(){
     var ae = audioEnabled();
 	stop = true;
 	auctionStop = true;
-	goingTimer = 0;
-	startEndBids = [false,false,false,false];
-	endBidTimers = [0,0,0,0];
+	//goingTimer = 0;
+	//startEndBids = [false,false,false,false];
+	//endBidTimers = [0,0,0,0];
 	
 	jq.Auction.menu.hide();
 	//jq.Auction.menu.children().hide();
@@ -366,7 +371,7 @@ Auction.sold = function(){
 	jq.Sold.menu.show();
     
     if(ae){
-	    console.log('audio enabled--Auction.sold');
+	    //console.log('audio enabled--Auction.sold');
         var s = assetLoader.sounds;
         s.bg.pause();
         s.gameOver.currentTime = 0;

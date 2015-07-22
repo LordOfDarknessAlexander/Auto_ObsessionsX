@@ -196,6 +196,7 @@ function outputCar($args){
         <progress id='ai3'></progress>
 		<progress id='winning'></progress>
         <progress id='going'></progress>
+		<progress id='endTime'></progress>
     </div> 
 	
     <label id='svCarInfo'></label>  

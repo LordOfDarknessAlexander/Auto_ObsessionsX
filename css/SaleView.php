@@ -146,7 +146,7 @@ Auction Screen
     posAbs();
     css::size('18%','30%');
     css::right('1%');
-    css::top('55%');
+    css::top('45%');
 ?>
 }
 <?php divSaleView();?> div#pbCD progress{

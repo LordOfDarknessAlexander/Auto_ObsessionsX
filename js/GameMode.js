@@ -7,5 +7,6 @@
 	REPAIR : 5,
 	ADD_FUNDS : 6,
 	AUCTION_SELECT : 7,
-	SLOTS	:8
+	SALE_VIEW : 8,
+	SLOTS	:9
 };
