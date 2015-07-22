@@ -4,7 +4,7 @@ require_once '../html.php';
 require_once '../dbConnect.php';
 require_once 'vehicle.php';
 require_once '../secure.php';
-
+session_start();
 html::simpleHead('Vehicle Registration');
 ?>
 <h2>Vehicle Registration</h2>

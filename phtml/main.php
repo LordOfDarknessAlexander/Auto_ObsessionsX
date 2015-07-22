@@ -14,7 +14,7 @@ $AB_NAME = 'Andrew Best';
 
 //this is not working on site without a new session
 session_start();
-
+isLoggedIn();
 //session set, has the session be started and initialized
 //if $_SESSION is an empty array,
 //user is using guest account and not currenlty logged in
@@ -72,7 +72,7 @@ if( loggedIn() ){?>
             echo rootURL() .'logout.php'; ?>'>Logout</a><br>	
 		
 <?php
-//isLoggedIn();
+
 }
 else{?>
         <a id='reg' href='<?php echo rootURL() . 'registerUser.php';?>'>Register</a><br>
