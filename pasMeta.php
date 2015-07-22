@@ -7,7 +7,7 @@ require_once 'vehicles/vehicle.php';
 require_once 'dbConnect.php';  //sql database connections
 require_once 'secure.php';
 require_once 'ao.php';
-//session_start();
+session_start();
 //
 //secure::loggin();
 //
