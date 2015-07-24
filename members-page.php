@@ -5,7 +5,7 @@ require_once 'ao.php';
 require_once 'pasMeta.php';
 require_once 're.php';
 require_once 'secure.php';
-session_start();
+//session_start();
 html::doctype();
 ?>
 <html lang=en>

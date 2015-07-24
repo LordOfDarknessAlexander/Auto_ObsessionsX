@@ -425,6 +425,16 @@ Auction.sold = function(){
 //<php
 //}?>
             setStatBar();
+			
+			if (audioEnabled()) {
+				console.log('audio enabled--Start Game');
+				var s = assetLoader.sounds;
+				s.sold.pause();
+				s.bg.currentTime = 0;
+				s.bg.loop = true;
+				s.bg.play();
+				//s.engine.play();
+			}
         }
         else{
             //jq.Sold.menu.show();
