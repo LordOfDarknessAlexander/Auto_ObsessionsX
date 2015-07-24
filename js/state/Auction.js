@@ -24,8 +24,8 @@ function auctionCountdownTimer(){
 		winning : 0.0,
 		going : 0.0,
 		WIN_CAP : 1000,
-		GOING_FIRST : 1250.0,	//320, //32 * 5,
-        GOING_SECOND : 2250.0,  //640; //32 * 7,
+		GOING_FIRST : 1500.0,	//320, //32 * 5,
+        GOING_SECOND : 3000.0,  //640; //32 * 7,
 		//
 		reset : function(){
 			this.going = 0.0;

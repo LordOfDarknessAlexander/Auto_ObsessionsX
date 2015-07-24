@@ -178,22 +178,7 @@ var SaleView = {
 	update : function(){
 		this.sortAI(); 
 		this.endAuction();
-		var ai = this._auction._ai,
-			timers = jq.SaleView.timers;
-		//<php
-//if(DEBUG){>
-        pbSetColor(timers.cdpbG, this._auction.getTimerPerc() );
-        pbSetColor(timers.cdpb0, ai[0].getTimerPerc() );
-        pbSetColor(timers.cdpb1, ai[1].getTimerPerc() );
-        pbSetColor(timers.cdpb2, ai[2].getTimerPerc() );
-        pbSetColor(timers.cdpb3, ai[3].getTimerPerc() );
-		pbSetColor(timers.winning, this._auction._timer.getWinningPerc() );
-        pbSetColor(timers.going, this._auction.getGoingPerc() );
-		pbSetColor(timers.endTime,  this._auction.getExpiredPerc());
-//<php
-//}
-//>  
-		//this.render();		
+		this.render();		
 	},
 	endAuction : function(){
 		context.font = '20px arial, sans-serif';
@@ -203,57 +188,25 @@ var SaleView = {
 		}
 	},
 	render : function(){
-        //draw scene specific content to canvas
-		var imgOffset = 20;
-        //The block below can be cleaned up, thinking of how to do it
-        var i = 0,
-            h = 20,     //height(in pixels) of element
-            cb = this._auction._currentBid,
-            t0 = 202,    //top, where the upper most element is rendered
-            t1 = 190,
-            t2 = 220,
-			ai = this._auction._ai,
-            ewinPos = 174,  //enemy win position
-            tx = ENEMY_X + 12,  //text x offset
-            left = 10;  //left offset to draw the image from
-            bid = this.ai[i].getCurBid(),
-           
-            //console.log('drawing bitches');
-		//context.drawImage(backgroundImage, 0, 0);
-		context.font = '14px arial, sans-serif';
-		
-        //draw enemies
-        var i = 0;
-        
-        function draw(){
-            var bid = ai[i]._currentBid;
-                str = bidders[i] + '$' + bid.toFixed(2);
-            
-            if(bid >= cb){
-                context.drawImage(curBidImage, left, ewinPos);
-                context.fillText(str, tx, t1);		
-            }
-            else{
-                context.drawImage(slimer, left, t0 + (h * i) );
-                context.fillText(str, tx, t2 + (h * i) );
-            }
-            //i++;
-        }
-        for(; i < ai.length; i++){
-            draw();
-        }
-//<php
+		//<php
 //if(DEBUG){>
-        // pbSetColor(jq.SaleView.cdpbG, Enemy.getTimerPerc() );
-        // pbSetColor(jq.SaleView.cdpb0, ai[0].getTimerPerc() );
-        // pbSetColor(jq.SaleView.cdpb1, ai[1].getTimerPerc() );
-        // pbSetColor(jq.SaleView.cdpb2, ai[2].getTimerPerc() );
-        // pbSetColor(jq.SaleView.cdpb3, ai[3].getTimerPerc() );
-        // pbSetColor(jq.SaleView.going, this.getGoingPerc() );
+		var ai = this._auction._ai,
+			timers = jq.SaleView.timers;
+			
+		if(!this._auction.isExpired()){
+			pbSetColor(timers.cdpbG, this._auction.getTimerPerc() );
+			pbSetColor(timers.cdpb0, ai[0].getTimerPerc() );
+			pbSetColor(timers.cdpb1, ai[1].getTimerPerc() );
+			pbSetColor(timers.cdpb2, ai[2].getTimerPerc() );
+			pbSetColor(timers.cdpb3, ai[3].getTimerPerc() );
+			pbSetColor(timers.winning, this._auction._timer.getWinningPerc() );
+			pbSetColor(timers.going, this._auction.getGoingPerc() );
+			pbSetColor(timers.endTime,  this._auction.getExpiredPerc());
+		}
 //<php
 //}
-//>
-	},
+//>  
+	}
 	
 };
 //

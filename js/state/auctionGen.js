@@ -182,10 +182,6 @@ function auctionGen(args){
 			return 0.0;
 		},
 		going:function(dt){
-			//begin sale count down after a wthis.aiting period if no other bids are offered
-			//Going crowd roars someone is about to win the bid
-			//break out of while if someone outbids current bidder or if player does,
-			//breaks out of the while loop and enemyWinning becomes false
 			context.font = '20px arial, sans-serif';
 			//console.log(dt);
 			if(this._timer.isWinning()){
@@ -228,9 +224,12 @@ function auctionGen(args){
 					}
 					else if(t >= second){		
 						for(var i = 0; i < this._ai.length; ++i){
-							if(this._ai[i].winningBid){
+							var ai = this._ai;
+							
+							if(ai[i].winningBid){
 								console.log('AI won');
 								gLabel.css({ color:'blue'}).text('Sold to ai');
+								//ai.splice(0, ai.length);
 								//context.fillText('Sold to ' + this.ai[i], x, 310);
 							}
 						}	
@@ -256,10 +255,10 @@ function auctionGen(args){
                     var btnStr = "<div id='" + liID + "'>" +
                         "<img src='" + car.getFullPath() + "'>" +
                         "<label id='carInfo'>" + car.getFullName() + "</label>" +
-						//"<progress id='endTime'></progress>" +
+						//"<progress id='endTime'></progress>" + 
                         "<label id='" + btnID + "'>" +
                             "<label id='price'>Price: $" + (car.getPrice()).toString() + "</label><br>" +
-                            "<label id='expireTime'>Auction expires: </label>" +
+                            "<label id='expireTime'>Auction expires: " + (this.getExpiredPerc()).toString() + " </label>" +
                         "</label>" +
                         "<div id='btns'>" +
                             "<button id='view'></button>" +
@@ -353,6 +352,7 @@ function auctionGen(args){
 				this.currentBidder();
 				this.checkCurrentWinner();
 				this.going(dt);
+				this.render();
 			
                 var b = this.isExpired() && !this._closed;
                 
@@ -749,6 +749,9 @@ function auctionGen(args){
             else{
                 jq.setErr('', 'Maximum funds reached');
             }
-        }
+        },
+		render:function(){
+			//pbSetColor(jq.AuctionSell.carView.append(btnStr),  this.getExpiredPerc());
+		}
 	};
 }

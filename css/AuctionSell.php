@@ -114,10 +114,10 @@ Auction Select Car View
 <?php dcv();?> div progress#endTime{
 <?php
     posAbs();
-    css::size('20%','30%');
-    css::right('0%');
-    css::top('55%');
+    css::size('70%','5%');
 ?>
+	left:15%;
+	top:25%;
 }
 <?php dcv();?> div#btns button#view
 {

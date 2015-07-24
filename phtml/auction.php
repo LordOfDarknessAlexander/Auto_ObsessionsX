@@ -168,19 +168,19 @@ function outputCar($args){
 ?>
 	<div id='_ai'>
 		<div id='ai0' class="first">
-			<label id='name'>0</label>
+			<label id='name'>Wrex</label>
 			<label id='bid'>1</label>
 		</div>
 		<div id='ai1' class="second">
-			<label id='name'>1</label>
+			<label id='name'>Sabre</label>
 			<label id='bid'>2</label>
 		</div>
 		<div id='ai2' class="third">
-			<label id='name'>2</label>
+			<label id='name'>Shepard</label>
 			<label id='bid'>3</label>
 		</div>
 		<div id='ai3' class="fourth">
-			<label id='name'>3</label>
+			<label id='name'>Cortana</label>
 			<label id='bid'>4</label>
 		</div>
 	</div>

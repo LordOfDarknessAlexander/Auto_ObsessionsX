@@ -99,7 +99,7 @@ Auction Screen
 <?php divSaleView();?> div#_ai
 {<?php
     posAbs();
-    css::size('18%','10%');
+    css::size('18%','12%');
     css::left('1%');
     css::top('35%');
 ?>
