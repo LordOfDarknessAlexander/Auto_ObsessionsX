@@ -5,42 +5,42 @@ require_once 'dbConnect.php';
 require_once 'create.php';
 require_once 're.php';
 //require_once '../users.php';
-
-html::doctype();
-?>
+//
+html::doctype();?>
 <html lang=en>
 <head>
 <?php
-html::simpleHead('Members');
-html::title('Register');
-html::charset();
+html::simpleHead('Register');
 ?>
 <link rel='stylesheet' type='text/css' href='includes.css'>
 </head>
 <body>
-<div id='container'>
-<div id='header'>
-    <h1>Registration</h1>
-    <div id='reg-navigation'>
-        <a href='index.php'>Cancel</a><br>
-    </div>
+<h1>Registration</h1>
+<div id='reg-navigation'>
+    <a href='index.php'>Cancel</a>
 </div>
+
 <div id='nav'><!--The side menu column contains the vertical menu-->
-    <a href='tutorial.php' title='Tutorial'>Tutorial</a><br>
-    <a href='credits.php' title='Credits'>Credits</a><br>
-    <a href='profiles.php' title='Player Profile'>Profile</a><br>
-    <a href='index.php' title='Home Page'>Home</a><br>
+    <a href='tutorial.php' title='Tutorial'>Tutorial</a>
+    <a href='credits.php' title='Credits'>Credits</a>
+    <a href='profiles.php' title='Player Profile'>Profile</a>
+    <a href='index.php' title='Home Page'>Home</a>
 </div><!--end of side column and menu -->
-<div id='content'><!-- Start of the login page content. -->
+
+<div id='container'>
 <?php
 // This code inserts a record into the users table
 // Has the form been submitted?
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
+if($_SERVER['REQUEST_METHOD'] == 'POST'){    
 //$str = '\n|\t|\r|\v|\f';
 //echo stripWS($str);
 //echo removeWS($str);
 //exit();
+    $FN = 'fname';
+    $LN = 'lname';
+    $UN = 'uname';
+    $E = 'email';
+    
 	$errors = array(); // Start an array named errors 
 
 	$stripped = $AO_DB->strip('title');
@@ -52,7 +52,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $errors[] = 'You forgot to enter your title.';
 	}
     
-	$stripped = $AO_DB->strip('fname');
+	$stripped = $AO_DB->strip($FN);
 
     if(isAlpha($stripped) ){
         if(mb_strlen($stripped, 'utf8') ){
@@ -66,7 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $errors[] = 'First Name must not contain numbers, whitespace or special characters.';
     }
 
-	$stripped = $AO_DB->strip('lname');
+	$stripped = $AO_DB->strip($LN);
 
     if(isAlpha($stripped) ){
         if(mb_strlen($stripped, 'utf8') ){
@@ -82,13 +82,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	//Set the email variable to FALSE
 	$e = FALSE;									
 	// Check that an email address has been entered				
-	if(empty($_POST['email'])){
+	if(empty($_POST[$E])){
 		$errors[] = 'You forgot to enter your email address.';
 	}
 	//remove spaces from beginning and end of the email address and validate it	
-	if(filter_var((trim($_POST['email'])), FILTER_VALIDATE_EMAIL)){	
+	if(filter_var((trim($_POST[$E])), FILTER_VALIDATE_EMAIL)){	
 		//A valid email address is then registered
-		$e = mysqli_real_escape_string($AO_DB->con, (trim($_POST['email'])));
+		$e = mysqli_real_escape_string($AO_DB->con, (trim($_POST[$E])));
 	}
 	else{									
 		$errors[] = 'Your  email address is invalid or you forgot to enter your email address';
@@ -117,7 +117,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
 	}
 
-	$stripped = $AO_DB->strip('uname');
+	$stripped = $AO_DB->strip($UN);
 
     if(isAlpha($stripped) ){
         if(mb_strlen($stripped, 'utf8') ){
@@ -137,11 +137,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$users = ao::USERS;
         $UID = ao::UID;
         $CID = ao::CID;
-        $E = 'email';
         //
-        $UN = 'uname';
-        $FN = 'fname';
-        $LN = 'lname';
         
 		$result = $AO_DB->query(
             "SELECT $UID FROM $users WHERE $E = '$e' "
@@ -272,10 +268,8 @@ function flti($name, $text, $size, $maxlength){
     itb($name, $size, $maxlength);
 }
 ?>
-<div id='midcol2'>
-    <h2>Membership Registration</h2>
     <h3 class='content'>Items marked with an asterisk * are essential</h3>
-	<form action='registerUser.php' method='post'>
+	<form id='reg' action='registerUser.php' method='post'>
 <?php
 //there are only so many title options, have the user select from list, instead of add text, which has to be validated
 ?>
@@ -302,8 +296,6 @@ function flti($name, $text, $size, $maxlength){
 		<input id='submit' type='submit' name='submit' value='Register'>
 
 	</form>
-</div>
-</div><!--content-->
 </div><!--container-->
 <?php
 require 'phtml/legal.php';

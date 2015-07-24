@@ -325,8 +325,7 @@ if(isSetP() ){
                     if($hasCar || $hasLostCar){
                         //user has already bought this car, exit with false!
                         //echo json_encode(false);
-                        if($hasLostCar)
-                        {
+                        if($hasLostCar){
                             echo "You've already lost this auction before.";
                         }
                         exit();

@@ -35,11 +35,11 @@ function addFunds(funds){
                 setMoney(data);
             }
             else{
-                //alert(<?php echo "$funcName, ajax call failed! Reason: invalid return from server: ";?>' + JSON.stringify(data) );
+                //alert(<?php echo $funcName;?>, ajax call failed! Reason: invalid return from server: ' + JSON.stringify(data) );
             }
         },
         function(jqxhr){
-            alert('<?php echo "$funcName, ajax call failed! Reason: ";?>' + jqxhr.responseText);
+            alert('<?php echo $funcName;?>, ajax call failed! Reason: ' + jqxhr.responseText);
             //jq.setMsg();
         },
         {udv:funds}
@@ -57,11 +57,11 @@ function addTokens(tokens){
                 setTokens(data);
             }
             else{
-                alert('<?php echo "$funcName, ajax call failed! Reason: invalid return from server: ";?>' + JSON.stringify(data) );
+                alert('<?php echo $funcName;?>, ajax call failed! Reason: invalid return from server: ' + JSON.stringify(data) );
             }
         },
         function(jqxhr){
-            alert('<?php echo "$funcName, ajax call failed! Reason: ";?>' + jqxhr.responseText);
+            alert('<?php echo $funcName;?>, ajax call failed! Reason: ' + jqxhr.responseText);
             //jq.setMsg();
         },
         {udv:tokens}

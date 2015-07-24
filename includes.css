@@ -88,15 +88,25 @@ div#container {
     background-size : 100% 100%;
 	height: 60%;
 	width: 100%;
-    top:20%;
+    top:10%;
+    left:10%;
+}
+div#loginfields{
+    position:absolute;
+    top:25%;
+    left:25%;
+    width:50%;
+    height:50%;
+    text-align:center;
+}
+form#reg{
+    position:absolute;
     left:0%;
 }
 div#nav{
     position:absolute;
-    top:30%;
-    left:2%;
-   
-	padding : 2%;
+    top:0%;
+    left:0%;
     /*background-color:grey;*/
 }
 
@@ -178,31 +188,12 @@ div#imog
 div#reg-navigation{
  
     position:absolute;
-    top:30%;
-    left:30%;
+    top:0%;
+    right:0%;
     
+    z-index:5;
     /*background-color:grey;*/
 }
-div#nav ul {
-    position:abosolute;
-    top:0%;
-    left:0%;
-    color:navy;
-    text-align:center;
-    margin:0;
-    /*background-color:navy;*/
-}
-#reg-navigation ul{
-    /*margin-right: 60%;*/
-	font-size:medium;
-   
-    /*margin:10% 15px 0 88s%;*/
-    top:30%;
-    right:20%;
-    position: abosolute;
-	padding : 2%;
-}
-
 li a,
 div#nav a,
 div#reg-navigation a{
@@ -211,7 +202,7 @@ div#reg-navigation a{
     font-weight: bold;
     text-decoration: none;
     text-align:center;
-	padding : 2%;
+	/*padding : 2%;*/
     background: url('images/defaultBtn.png') no-repeat 0 0;
     background-size:100% 100%;
     position: abosolute;
@@ -223,7 +214,9 @@ div#reg-navigation a:hover{
     background: url('images/defaultBtn2.png') no-repeat 0 0;
 	background-size:100% 100%;
 	color:green;
-	padding : 2%;
+    border: 2px green solid;
+    
+	/*padding : 2%;*/
 }
 /* onmousedown */
 li a:active,
@@ -231,7 +224,7 @@ div#nav a:active,
 div#reg-navigation a:active {
     background:#aecbff;
     border: 4px inset #aecbff;
-	padding : 2%;
+	/*padding : 2%;*/
 	color: blue;
 }
 
@@ -241,9 +234,8 @@ p.error {
     font-weight:bold;
     text-align:left;
     
-    position:absolute;
+    position:relative;
     right:0%;
-    top:30%;
     height:70%;
     width:50%;
 }
