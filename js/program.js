@@ -1,6 +1,6 @@
 //Application main
 var AutoObessesions = {};
-
+var engnRv = true;
 var Allowance = {
     CAP:( (1000 * 60) * 60) * 24,  //86400000,  //3000,
     //INV_CAP:1.0 / CAP,    //inverse cap, multiply by this instead of dividing by CAP!
@@ -52,7 +52,7 @@ function init(){
 	
 	if(!stop){
 		frameID = requestAnimFrame(init);	
-		//update(0.33);
+		//update(0.33);assetLoader.sounds.engine.play();
 		
 		// if( (timer >= 300.00) && (timer <= 900.00)){
 			// appState = GAME_MODE.MAIN_MENU;
@@ -60,7 +60,12 @@ function init(){
 		// }  
 		//timer++;
 		//ticker++;
-	}	
+	}
+    
+	if (audioEnabled() && engnRv == true) {
+	    assetLoader.sounds.engine.play();
+	    engnRv = false;
+	}
 }
 function update(dTime){
     //main update loog for game
@@ -263,10 +268,6 @@ function splash(){
 	$('#splash').removeClass('#Slots');
 	 $('#Slots').hide();
 	 $('.sound').show();
-
-	 if (audioEnabled()) {
-	     assetLoader.sounds.engine.play();
-	 }
 }
 
 //Main Menu  
@@ -342,6 +343,7 @@ function startGame(){
         s.gameOver.pause();
         s.bg.currentTime = 0;
         s.bg.loop = true;
+        //s.engine.play();
         s.bg.play();
     }    
 }

@@ -210,7 +210,6 @@ function auctionGen(args){
 
 						//style.verticalAlign = "top"
 						gLabel.css({color:'red'}).text('Going Once');
-						assetLoader.sounds.going.play();
 						
 						if (ae){
 							s.going.play();
@@ -221,7 +220,6 @@ function auctionGen(args){
 						//console.log('Going twice');
 						gLabel.css({color:'green'}).text('Going Twice');
 						//context.fillText('Going Twice', x, 290);
-						assetLoader.sounds.going.play();
 						
 						if (ae) {
 							s.going.play();
