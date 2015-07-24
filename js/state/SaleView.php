@@ -54,9 +54,9 @@ var SaleView = {
             s.gameOver.pause();
             s.going.pause();
             s.sold.pause();
-            s.bg.currentTime = 0;
-            s.bg.loop = true;
-            s.bg.play();
+            //s.bg.currentTime = 0;
+            //s.bg.loop = true;
+            //s.bg.play();
         }
 		this._auction = index;
 		

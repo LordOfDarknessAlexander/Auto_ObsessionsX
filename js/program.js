@@ -343,8 +343,8 @@ function startGame(){
         s.gameOver.pause();
         s.bg.currentTime = 0;
         s.bg.loop = true;
-        //s.engine.play();
         s.bg.play();
+        //s.engine.play();
     }    
 }
 Auction.BackOutofAuction = function(){
@@ -558,21 +558,23 @@ function(){
     appState = GAME_MODE.MAIN_MENU;
 });
 //Sound Button
-$('.sound').click(
+jq.sound.click(
 function(){
     //references the jq object calling .click, not the function!
     var $this = $(this),
-        ae = audioEnabled();
+        ae = audioEnabled(),
+        on = 'sound-on',
+        off = 'sound-off';
         
     if(ae){//$this.hasClass('sound-on')){
         //disable audio
-        $this.removeClass('sound-on').addClass('sound-off');
+        $this.removeClass(on).addClass(off);
         setAudio(false);
         //playSound = false;
     }
     else{
         //enable audio
-        $this.removeClass('sound-off').addClass('sound-on');
+        $this.removeClass(off).addClass(on);
         setAudio(true);
         //playSound = true;
     }

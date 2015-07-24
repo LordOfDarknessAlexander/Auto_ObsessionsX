@@ -93,16 +93,17 @@ var Auction = {
         //call to start an auction for car		
         //console.log(index);
         //disable/enable sounds before ajax call
-        console.log('Auction.init called');
+        //console.log('Auction.init called');
+        
 	    if(audioEnabled() ){
-	        console.log('audio enabled--Auction');
+	        //console.log('audio enabled--Auction');
             var s = assetLoader.sounds;
             s.gameOver.pause();
             s.going.pause();
             s.sold.pause();
-            s.bg.currentTime = 0;
-            s.bg.loop = true;
-            s.bg.play();
+            //s.bg.currentTime = 0;
+            //s.bg.loop = true;
+            //s.bg.play();
         }
         
         appState = GAME_MODE.AUCTION;

@@ -2,11 +2,17 @@
 //if(canUseLocalStorage){
 //var playSound = audioEnabled();//(localStorage.getItem('kandi.playSound') === "true")
 
-if (audioEnabled()) {
-    $('.sound').addClass('sound-on').removeClass('sound-off');
+if(audioEnabled()) {
+    var on = 'sound-on',
+        off = 'sound-off';
+        
+    $('div.sound').addClass(on).removeClass(off);
 }
 else{
-    $('.sound').addClass('sound-off').removeClass('sound-on');
+    var on = 'sound-on',
+        off = 'sound-off';
+        
+    $('div.sound').addClass(off).removeClass(on);
 }
 //}
 
@@ -29,7 +35,6 @@ var assetLoader = (function(){
         //'engine': 'sounds/engine.wav',
         'engine': 'sounds/ferrari_engine_roar.mp3',
         'repair': 'sounds/car_fix.mp3'
-
     };
 
     var assetsLoaded = 0,                               // how many assets have been loaded
@@ -43,11 +48,13 @@ var assetLoader = (function(){
     // datatype {number} name - Asset name in the dictionary
     function assetLoaded(dic, name){
         // don't count assets that have already loaded
-        if(this[dic][name].status !== 'loading'){
+        var res = this[dic][name];  //resource
+        
+        if(res.status !== 'loading'){
             return;
         }
 
-        this[dic][name].status = 'loaded';
+        res.status = 'loaded';
         assetsLoaded++;
 
         // progress callback
@@ -62,55 +69,69 @@ var assetLoader = (function(){
     //Check the ready state of an Audio file.
     //datatype {object} sound - Name of the audio asset that was loaded.
     function _checkAudioState(sound){
-        if(this.sounds[sound].status === 'loading' && this.sounds[sound].readyState === 4){
+        var s = this.sounds[sound];
+        
+        if(s.status === 'loading' && s.readyState === 4){
             assetLoaded.call(this, 'sounds', sound);
         }
     }
     //Create assets, set callback for asset loading, set asset source
     this.downloadAll = function(){
-        var _this = this;
-        var src;
+        var _this = this,
+            imgs = this.images,
+            audio = this.sounds;
+            
+        var src = '';
 
         //Load images
-        for(var image in this.images){
+        function _loadImg(image){
+            _this.images[image] = new Image();
+            
+            var img = _this.images[image];
+            
+            img.status = 'loading';
+            img.name = image;
+            img.onload = function(){
+                assetLoaded.call(_this, 'images', image)
+            };
+            img.src = src;
+        };
+        
+        for(var k in imgs){
             //
-            if(this.images.hasOwnProperty(image)){
+            if(imgs.hasOwnProperty(k)){
                 //
-                src = this.images[image];
-
+                src = imgs[k];
                 // create a closure for event binding
-                (function(_this, image){
-                    _this.images[image] = new Image();
-                    _this.images[image].status = 'loading';
-                    _this.images[image].name = image;
-                    _this.images[image].onload = function(){
-                        assetLoaded.call(_this, 'images', image)
-                    };
-                    _this.images[image].src = src;
-                })(_this, image);
+                _loadImg(k);
             }
         }
         //Load sounds
-        for(var sound in this.sounds){
+        function _loadAudio(key){
+            _this.sounds[key] = new Audio();
+            
+            var s = _this.sounds[key];
+            
+            s.status = 'loading';
+            s.name = key;
+            s.addEventListener(
+                'canplay',
+                function(){
+                    _checkAudioState.call(_this, key);
+                }
+            );
+            s.src = src;
+            s.preload = 'auto';
+            s.load();
+        };
+        
+        for(var k in audio){
             //
-            if(this.sounds.hasOwnProperty(sound) ){
+            if(audio.hasOwnProperty(k) ){
                 //
-                src = this.sounds[sound];
-                // create a closure for event binding
-                (function(_this, sound){
-                    _this.sounds[sound] = new Audio();
-                    _this.sounds[sound].status = 'loading';
-                    _this.sounds[sound].name = sound;
-                    _this.sounds[sound].addEventListener(
-                        'canplay',
-                        function(){
-                            _checkAudioState.call(_this, sound);
-                        }
-                    );
-                    _this.sounds[sound].src = src;
-                    _this.sounds[sound].preload = 'auto';
-                    _this.sounds[sound].load();
-                })(_this, sound);
+                src = audio[k];
+
+                _loadAudio(k);
             }
         }
     }  
@@ -125,6 +146,42 @@ var assetLoader = (function(){
             for(var sound in s){
                 if(s.hasOwnProperty(sound)){
                     s[sound].muted = !audioEnabled();
+                }
+            }
+        },
+        pauseAll:function(){
+            if(audioEnabled() ){
+                var s = assetLoader.sounds;
+
+                for(var key in s){
+                    if(s.hasOwnProperty(key)){
+                        s[key].pause();
+                    }
+                }
+            }
+        },
+        togglePauseAll:function(){
+            //if audio is playing, pause, if paused, play
+            if(audioEnabled() ){
+                var s = assetLoader.sounds;
+
+                for(var key in s){
+                    if(s.hasOwnProperty(key)){
+                        var p = s[key].paused;
+                        s[key].paused = !p;
+                    }
+                }
+            }
+        },
+        resetAll:function(){
+            if(audioEnabled() ){
+                var s = assetLoader.sounds;
+
+                for(var key in s){
+                    if(s.hasOwnProperty(key)){
+                        s[key].pause();
+                        s[key].currentTime = 0;
+                    }
                 }
             }
         }

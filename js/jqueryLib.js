@@ -11,6 +11,7 @@ var jq = {
     statBar:$('div#statBar'),
     error:$('pre#info'),
     nav:$('div#reg-navigation'),
+    sound:$('div.sound'),
     //statBar:{
         //div:$('div#statBar'),
         //money:$('div#statBar label#money'),
