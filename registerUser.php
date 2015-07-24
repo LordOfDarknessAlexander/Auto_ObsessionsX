@@ -185,16 +185,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 
                 if($res){
                     $uid = $res->fetch_assoc()[$UID];    //return type is string
-                    //echo "registered user with id:$uid<br> type:" . gettype($uid);
+                    echo "registered user with username:$uname<br> Please check your email to activate your account" ;
                     if(pasCreate::userTable($uid) ){    //cars the user owns
                         if(pasCreate::auctionLossTable($uid) ){     //table for maintaining the user's losses
                             if(pasCreate::carSaleTable($uid) ){        //vehicles the user has sold                       
-                                //header("location: reg-confirm.php");
+                                
+								header("location: register-thanks.php");
                             }
                             //else code succeeded
+							header("location: register-thanks.php");
                         }
                         //could not create car sale table
-                        header("location: register-thanks.php");
+                        
                     }
                     else{
                         echo "could not create additional tables for user with id:$uid<br>";
