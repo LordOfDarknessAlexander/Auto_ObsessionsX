@@ -125,7 +125,7 @@ else if($page == 'tutorial'){
 ?>
     </head>
     <body>
-<div id='container'>
+
 
         <div id="header-tutorial">
             <h1>Auto-Obsessions Tutorial</h1>
@@ -135,7 +135,8 @@ else if($page == 'tutorial'){
 <?php
     loadUser();  //rename and change as this can also modifies the user's values
 ?>
-	<div id='content'><!-- Start of the tutorial page content. -->
+	<div id='content'>
+	<!-- Start of the tutorial page content. -->
             <h2>Tutorial Page 
             <div id='content'><!-- Start of the page-specific content. -->
         <h2>Tutorial</h2>
