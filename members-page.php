@@ -12,8 +12,6 @@ html::doctype();
 <head>
 <?php
 	html::simpleHead('Members');
-    html::title("Members' page");
-    html::charset();
 	//eS();
  ?>
     <link rel='stylesheet' type='text/css' href='includes.css'>
@@ -36,30 +34,39 @@ else if($page == 'tutorial'){
 else{
     echo $page;
 }
-
-html::simpleHead($title);
-html::charset();
-?>
-    
+?>    
 </head>
 <body>
-<div id='container'>
-   
+<!-- Nav div-->
+<div id='nav'><!--The side menu column contains the vertical menu-->
+    <a href='members-page.php?page=members' title='Members'>Members</a>
+    <a href='members-page.php?page=tutorial' title='Tutorial'>Tutorial</a>
+    <a href='members-page.php?page=credits' title='Credits'>Credits</a>
+    <a href='index.php' title='Home Page'>Home</a>
+</div><!--end of side column and menu -->
+    
+<div id='reg-navigation'>
+    <ul>
+        <li><a href='index.php' title='Play Game'>Play Game</a></li>
+        <li><a href='logout.php'>Logout</a></li>
+    </ul>
+</div>
+<div id='container'> 
+    <div id='header-members'>
+        <h1><?php echo $title;?></h1> <!-- <?php //'$title' ?> </h1>-->
+    </div>
+	
+	<div id='content'><!-- Start of the member's page content. --> 
 <?php
 //require 'Users/includes/info-col.php';
 if($page == 'members'){
     loadUser();  //rename and change as this can also modifies the user's values
-?>
-	<div id="header-members">
-        <h1>Auto-Obsessions Members</h1> <!-- <?php //'$title' ?> </h1>-->
-    </div>
-	
-	<div id='content'><!-- Start of the member's page content. -->
+?>	
         <h2>Welcome to the Members' Page <?php 
     $un = isSetS() ? strval($_SESSION['uname']) : '';
     echo $un; 
 ?></h2>
-    <div id='midcol'>
+        <div id='midcol'>
 <?php
     //Query the database		
     //Call fails if user not logged in
@@ -85,121 +92,62 @@ if($page == 'members'){
             </div>	-->
 <?php
     }
-
     else{
+        //If there was a problem.
 	    $AO_DB->eErr();
-	    //If there was a problem.
         ?>
             <p class='error'>Please try again.</p><?php
     }
-?>     <!--
-                <div id='mid-left-col'>
-                    <h3>Member's Events</h3>
-                    <p>Welcome to the members area.<br>
-                    <br>Browse the many portals here: Play as a guest or log in and save your progress.<br>
-                    Enter one of our events to win prizes.<br>Get a hold of our Merchandise today!</p>
-                </div><!--end mid-left-col-->  
-    
-                <div id='mid-right-col'>
-                    <h3>Special offers to Members only.</h3>
-		            <div id='imog'>
-		                <p>Auto-Obsessions</p>
-		            </div>
-                    <br>
-                    <p><b>T-Shirts &pound;25.00</b></p>
-                    <!-- <img alt='Polo shirt' title='Polo shirt' height='207' src='Users/images/polo.png' width='280'><br>-->
-		            <br>
-                </div><!--end  mid-rid-col-->
-        
-            </div><!--end mid-col-->
-        </div><!-- End Div Content -->
-    </div><!--end container-->
+?>          <!--
+            <div id='mid-left-col'>
+                <h3>Member's Events</h3>
+                <p>Welcome to the members area.<br>
+                <br>Browse the many portals here: Play as a guest or log in and save your progress.<br>
+                Enter one of our events to win prizes.<br>Get a hold of our Merchandise today!</p>
+            </div><!--end mid-left-col-->  
 
-
+            <div id='mid-right-col'>
+                <h3>Special offers to Members only.</h3>
+                <div id='imog'>
+                    <p>Auto-Obsessions</p>
+                </div>
+                <br>
+                <p><b>T-Shirts &pound;25.00</b></p>
+                <!-- <img alt='Polo shirt' title='Polo shirt' height='207' src='Users/images/polo.png' width='280'><br>-->
+                <br>
+            </div><!--end  mid-rid-col-->
 <?php
-    require 'phtml/legal.php';
-    html::footer();
 }
-else if($page == 'tutorial'){
-?>
-    </head>
-    <body>
-
-
-        <div id="header-tutorial">
-            <h1>Auto-Obsessions Tutorial</h1>
-        </div>
-
-    
-<?php
-  //  loadUser();  //rename and change as this can also modifies the user's values
-?>
-	<div id='content'>
+else if($page == 'tutorial'){?>
 	<!-- Start of the tutorial page content. -->
-            <h2>Tutorial Page 
-            <div id='content'><!-- Start of the page-specific content. -->
-        <h2>Tutorial</h2>
         <p>Auto-Obsessions the game . Easy to play impossible to break the obsession. 
         <br>Win cars in an acution.
         <br>Repair and upgrade them.
         <br>Sell them. ... Yay.</p>
         <!-- End of the page-specific content. -->
-    </div><?php 
+<?php 
     $un = isSetS() ? strval($_SESSION['uname']) : '';
     //echo $un; 
 ?></h2>
-    
-		<div id='midcol'>
 <?php
-	require 'phtml/legal.php';
-    html::footer();
 }
 else if($page == 'credits'){
    // require 'Users/includes/info-col.php';
     ?>
-	 <div id="header-tutorial">
-            <h1>Auto-Obsessions Credits</h1>
-        </div>
-	    <div id='content'><!-- Start of the page-specific content. -->
-            <h2>Credits</h2>
-            <p>Development Team : Alexander Sanchez, Tyler Drury<br>
-            </p>
-	    <!-- End of the Credits content. -->
-        </div>
-    </div>	
-    <?php
-    require 'phtml/legal.php';
-    html::footer();
+        <p>Development Team : Alexander Sanchez, Tyler Drury<br></p>
+<?php
 }
-
 else{ //if page name does not match
 	$AO_DB->eErr();
     echo $page;
 	//If there was a problem.
     ?>
         <p class='error'>Please try again.</p><?php
-}
-?>     
-            <div id='mid-left-col'>
-                <h3></h3>
-                
-            </div><!--end mid-left-col-->         
+}?>     
         </div><!--end mid-col-->
     </div><!-- End Div Content -->
 </div><!--end container-->
-
-
-<!-- Nav div-->
-<div id='nav'><!--The side menu column contains the vertical menu-->
-    <a href='members-page.php?page=members' title='Members'>Members</a><br/>
-    <a href='members-page.php?page=tutorial' title='Tutorial'>Tutorial</a><br>
-    <a href='members-page.php?page=credits' title='Credits'>Credits</a><br>
-    <a href='index.php' title='Home Page'>Home</a><br>	
-</div><!--end of side column and menu -->
-    
-<div id='reg-navigation'>
-    <ul>
-        <li><a href='index.php' title='Play Game'>Play Game</a></li>
-        <li><a href='logout.php'>Logout</a></li>
-    </ul>
-</div>
+<?php
+require 'phtml/legal.php';
+html::footer();
+?>

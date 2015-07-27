@@ -16,13 +16,13 @@ var jq = {
         //div:$('div#statBar'),
         //money:$('div#statBar label#money'),
         //tokens:$('div#statBar label#tokens'),
-        //prest:,
+        //prest:$('div#statBar label#prestige'),
         //markers:,
         //Setters
-        //setMoney()
-        //setTokens(),
-        //setPrestige(),
-        //setMarkers(),
+        //setMoney():function(),
+        //setTokens:function(),
+        //setPrestige:function(),
+        //setMarkers:function(),
         //
         //function setStatBar(){
             //jq.statBar.show();

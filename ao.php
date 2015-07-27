@@ -97,21 +97,26 @@ function loadUser() {
     //user ID's are unique, making a select query will only returns
     //the fields for a single match, where as user names are not unique and my return multiple sets of fields
     //TODO: make user names unique(only 1 user should match a signle user name in the sql)
-    $q = "SELECT * FROM users WHERE user_id = $uid";	
+    $U = 'users';
+    $UID = 'user_id';
+    $M = 'money';
+    $T = 'tokens';
+    $P = 'prestige';
+    $MM = 'm_marker';
+    $q = "SELECT * FROM $U WHERE $UID = $uid";	
    // $q = "SELECT * FROM users WHERE uname = 'Dante'";	
     $result = $AO_DB->query($q);
     //Count the returned rows
-    if($result) //mysqli_num_rows($result) != 0)
-    {
+    if($result){
         $rows = $result->fetch_assoc();
         //json_encode will implicitly convert the array to an object
         //NOTE:sql retrives data as strings, so must conver to numeric type before sending(strings are bulky)
         echo json_encode(array(
-            'money' => floatval($rows['money']),
-            'tokens' => intval($rows['tokens']),
-            'prestige' => intval($rows['prestige']),
-            'm_marker' => intval($rows['m_marker']),
-            'cid' =>intval($rows['car_id'])
+            $M=>round(floatval($rows[$M]), 2),
+            $T=>intval($rows[$T]),
+            $P=>intval($rows[$P]),
+            $M=>intval($rows['m_marker']),
+            'cid'=>intval($rows['car_id'])
         ));
     }
     else{
