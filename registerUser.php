@@ -16,7 +16,7 @@ html::simpleHead('Register');
 </head>
 <body>
 <h1>Registration</h1>
-<div id='nav'><!--The side menu column contains the vertical menu-->
+<div id='reg-navigation'><!--The side menu column contains the vertical menu-->
 	 <a href='index.php'>Cancel</a>
 </div><!--end of side column and menu -->
 
