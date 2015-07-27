@@ -21,14 +21,16 @@ body{
 h1 {
     color: white;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    left: 10%;
-    position: absolute; 
+    left: 4%;
+	top: -2%;
+    position: absolute;
+	
 }
 h2 {
     font-size:150%;
     color:red;
     text-align:left;
-    top:-20%;
+    top:30%;
 	left:30%;
     position: abosolute;
 }

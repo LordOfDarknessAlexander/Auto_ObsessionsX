@@ -14,7 +14,7 @@ html::doctype();
 	html::simpleHead('Members');
     html::title("Members' page");
     html::charset();
-	eS();
+	//eS();
  ?>
     <link rel='stylesheet' type='text/css' href='includes.css'>
     <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
@@ -75,7 +75,7 @@ if($page == 'members'){
 	    $m_marker = intval($rows['m_marker']);
 	    $tokens = intval($rows['tokens']);
 	    $prest = intval($rows['prestige']);
-        $loggedIn = true;
+       // $loggedIn = true;
 ?>	
             <div id ='playerData'>
                 <label>Player: $uname</label>
@@ -157,6 +157,9 @@ else if($page == 'tutorial'){
 else if($page == 'credits'){
     require 'Users/includes/info-col.php';
     ?>
+	 <div id="header-tutorial">
+            <h1>Auto-Obsessions Credits</h1>
+        </div>
 	    <div id='content'><!-- Start of the page-specific content. -->
             <h2>Credits</h2>
             <p>Development Team : Alexander Sanchez, Tyler Drury<br>
