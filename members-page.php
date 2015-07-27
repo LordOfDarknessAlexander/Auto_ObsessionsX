@@ -46,7 +46,6 @@ html::charset();
 <div id='container'>
    
 <?php
-//require 'include/nav.php';
 //require 'Users/includes/info-col.php';
 if($page == 'members'){
     loadUser();  //rename and change as this can also modifies the user's values
@@ -77,13 +76,13 @@ if($page == 'members'){
 	    $prest = intval($rows['prestige']);
        // $loggedIn = true;
 ?>	
-            <div id ='playerData'>
+       <!--     <div id ='playerData'>
                 <label>Player: $uname</label>
                 <label id='cash'>Money: $money</label>
                 <label id='tokens'>Tokens: $tokens</label>
                 <label id='prest'>Prestige: $prest</label>
                 <label id='markers'>Mile Markers: $m_marker</label>
-            </div>	
+            </div>	-->
 <?php
     }
 
@@ -133,7 +132,7 @@ else if($page == 'tutorial'){
 
     
 <?php
-    loadUser();  //rename and change as this can also modifies the user's values
+  //  loadUser();  //rename and change as this can also modifies the user's values
 ?>
 	<div id='content'>
 	<!-- Start of the tutorial page content. -->
@@ -156,7 +155,7 @@ else if($page == 'tutorial'){
     html::footer();
 }
 else if($page == 'credits'){
-    require 'Users/includes/info-col.php';
+   // require 'Users/includes/info-col.php';
     ?>
 	 <div id="header-tutorial">
             <h1>Auto-Obsessions Credits</h1>
