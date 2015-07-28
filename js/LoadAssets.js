@@ -33,7 +33,7 @@ var assetLoader = (function(){
         'going'		: 'sounds/cheer.mp3',
         'sold'		: 'sounds/sold.mp3',
         //'engine': 'sounds/engine.wav',
-        'engine': 'sounds/ferrari_engine_roar.mp3', //make this a Mustang Engine
+        'engine': 'sounds/ferrari_engine_roar.mp3',
         'repair': 'sounds/car_fix.mp3'
     };
 

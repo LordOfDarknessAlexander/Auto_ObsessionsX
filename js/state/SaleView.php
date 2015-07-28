@@ -52,7 +52,7 @@ var SaleView = {
             console.log('audio enabled-Saleview');
             var s = assetLoader.sounds;
             s.gameOver.pause();
-            //s.going.pause();
+            s.going.pause();
             s.sold.pause();
             //s.bg.currentTime = 0;
             //s.bg.loop = true;
