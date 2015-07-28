@@ -12,7 +12,7 @@ html::doctype();
 <head>
 <?php
 	html::simpleHead('Members');
-	//eS();
+//	eS();
  ?>
     <link rel='stylesheet' type='text/css' href='includes.css'>
     <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
@@ -83,13 +83,13 @@ if($page == 'members'){
 	    $prest = intval($rows['prestige']);
        // $loggedIn = true;
 ?>	
-       <!--     <div id ='playerData'>
+            <div id ='playerData'>
                 <label>Player: $uname</label>
                 <label id='cash'>Money: $money</label>
                 <label id='tokens'>Tokens: $tokens</label>
                 <label id='prest'>Prestige: $prest</label>
                 <label id='markers'>Mile Markers: $m_marker</label>
-            </div>	-->
+            </div>	
 <?php
     }
     else{
