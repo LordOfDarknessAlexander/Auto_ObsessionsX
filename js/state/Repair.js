@@ -596,11 +596,12 @@ Drivetrain.upgrade = function(obj){
     var car = Garage.getCurrentCar();
     
     if(car !== null){
-        var type = obj.data.type;
+        var type = obj.data.type,
+            dt = car._dt;
             //str = Drivetrain.strFromType(type);
         //console.log('upgrading part of type: ' + str);
         
-        if(car._dt === null){
+        if(dt === null || typeof dt == 'undefined'){
             //var bp = Drivetrain.getInstallPrice(car.getBasePrice();
             //if(usreStats.moeny >= bp) ){
                 //install part
@@ -614,9 +615,33 @@ Drivetrain.upgrade = function(obj){
             //}
         }
         else{    //upgrade existing part
-            //var dt = car._dt;
-            if(car._dt.upgradePart(type) ){
-                var part = car._dt.getPartType(type);
+            var part = dt.getPartType(type);
+//<php if(loggedIn() ){>
+            //jq.post("pas/updateDT.php",
+                // function(obj){
+                    
+                    // if(part !== null){
+                        // var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
+                        
+                        // upgradePartUpdate(
+                            // part,
+                            // $('button#ub', div),
+                            // $('progress#pb', div)
+                        // );
+                        // //jq.user.setStats();
+                    // }
+                // }.
+                // function(jqxhr){
+                    // jq.setErr('Drivetrain.upgrade Repair.js', 'purchase upgrade failed, reason: ' + jqxhr.responseText);
+                // },
+                //{cid:car.id,
+                //price:p,
+                //type:type}
+            //);
+//<php
+//}
+//else{>
+            if(dt.upgradePart(type) ){
                 //if part is upgraded to max, unbind and make unclickable
                 if(part !== null){
                     var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
@@ -628,10 +653,12 @@ Drivetrain.upgrade = function(obj){
                     );
                 }
             }
+//<php } >
         }
         Repair.save();
     }
     //else no car, do nothing
+    //jq.setErr('Drivetrain::upgrade Repair.js', 'purchase upgrade failed, reason: user does not have a valid vehicle, please select one');
 };
 
 Drivetrain.repair = function(obj){

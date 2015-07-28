@@ -43,6 +43,7 @@ function garageDoor(){
 function init(){
 	//console.log('Program.init called');
 	aoTimer.update();
+    
 	var now = getTimestamp(), //in milliseconds
 		dt = aoTimer.getDT();
 		//console.log('init, dt ' + dt.toString());
