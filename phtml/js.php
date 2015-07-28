@@ -35,7 +35,7 @@ $paths = array(
     //'state/Garage/carView',
     //Auction and Repair states is dependant upon userGarage in Garage.js
     //to push cars or modify cars in the users garage, so parse first
-    'state/Repair',
+    //'state/Repair',
     //'state/Auction/main',
     //'state/Auction/select',
     //'state/Auction/sell',

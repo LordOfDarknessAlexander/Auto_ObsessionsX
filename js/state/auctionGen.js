@@ -208,7 +208,7 @@ function auctionGen(args){
 						gLabel.css({color:'red'}).text('Going Once');
 						
 						if (ae){
-							s.going.play();
+							//s.going.play();
 						}
 						//break;	
 					}
@@ -218,7 +218,7 @@ function auctionGen(args){
 						//context.fillText('Going Twice', x, 290);
 						
 						if (ae) {
-							s.going.play();
+							//s.going.play();
 						}
 						//break;		
 					}
