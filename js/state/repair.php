@@ -616,43 +616,44 @@ Drivetrain.upgrade = function(obj){
         }
         else{    //upgrade existing part
             var part = dt.getPartType(type);
-//<php if(loggedIn() ){>
-            //jq.post("pas/updateDT.php",
-                // function(obj){
-                    
-                    // if(part !== null){
-                        // var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
+<?php //if(loggedIn() ){ ?>
+    jq.post("pas/drivetrain.php",
+        function(obj){
+            console.log(JSON.stringify(obj));
+            
+            //if(part !== null){
+                // var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
                         
-                        // upgradePartUpdate(
-                            // part,
-                            // $('button#ub', div),
-                            // $('progress#pb', div)
-                        // );
-                        // //jq.user.setStats();
-                    // }
-                // }.
-                // function(jqxhr){
-                    // jq.setErr('Drivetrain.upgrade Repair.js', 'purchase upgrade failed, reason: ' + jqxhr.responseText);
-                // },
-                //{cid:car.id,
-                //price:p,
-                //type:type}
-            //);
-//<php
-//}
+                // upgradePartUpdate(
+                    // part,
+                    // $('button#ub', div),
+                    // $('progress#pb', div)
+                // );
+                // //jq.user.setStats();
+            // }
+        },
+        function(jqxhr){
+			jq.setErr('Drivetrain.upgrade Repair.js', 'purchase upgrade failed, reason: ' + jqxhr.responseText);
+        },
+        {cid:car.id,
+        //price:p,
+        partType:type}
+    );
+    <?php
+//} ?>
 //else{>
-            if(dt.upgradePart(type) ){
+            //if(dt.upgradePart(type) ){
                 //if part is upgraded to max, unbind and make unclickable
-                if(part !== null){
-                    var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
+                //if(part !== null){
+                    //var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
                     
-                    upgradePartUpdate(
-                        part,
-                        $('button#ub', div),
-                        $('progress#pb', div)
-                    );
-                }
-            }
+                    //upgradePartUpdate(
+                        //part,
+                        //$('button#ub', div),
+                        //$('progress#pb', div)
+                    //);
+                //}
+            //}
 //<php } >
         }
         Repair.save();
