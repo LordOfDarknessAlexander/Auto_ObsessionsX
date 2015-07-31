@@ -1,4 +1,4 @@
-  <?php
+<?php
 //this script INSERTs or UPDATEs Database values with sql
 //used by javascript ajax requests
 require_once '../pasMeta.php';
@@ -81,29 +81,6 @@ class pasUpdate{
         );
         
         return $res ? true : false;
-    }
-    public static function userCurrentCar($carID = 0){
-        //global $AO_DB;
-        $CID = ao::CID;
-        //$UID = ao::UID;
-        //$users = 'users';
-        //$uid = strval(getUID() );
-        
-        if($carID == 0 || hasCar($carID)){
-            //$res = user::updateEntry("$CID = $carID");
-
-			if(user::updateEntry("$CID = $carID")){
-				return $carID;
-				//$id = intval($res->fetch_assoc()[$CID]);
-			}
-		}
-		return 0;
-        //return hasCar($carID) ? ($AO_DB->query(
-            //"UPDATE $users SET
-                //$CID = $carID
-            //WHERE
-               //$UID = $uid"
-        //) ? $carID : 0) : 0;
     }
 	public static function updateSale($carID, $bid, $curTime){
 		global $aoCarSalesDB;
@@ -404,7 +381,7 @@ if(isSetP() ){
                 }
                 elseif($op == 'succ'){
                     //set user current car
-                    $res = pasUpdate::userCurrentCar($carID);
+                    $res = user::setCurrentCar($carID);
                     
                     echo json_encode($res);
                     exit();

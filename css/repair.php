@@ -6,15 +6,21 @@ css::header();
 //
 require_once 'funds.php';
 //
-function divRepair(){?>
+function drs(){?>
 div#RepairShop<?php
 }
-function cid0(){divRepair();?> div#cid0<?php
+function drsSwitch(){
+drs();?> div#switch<?php
+}
+function drsSwitchBtn(){
+drsSwitch();?> button<?php
+}
+function cid0(){drs();?> div#cid0<?php
 }
 cmntHeader('Repair Screen Styles');
 ?>
 
-<?php divRepair();?>{
+<?php drs();?>{
 <?php
     posAbs();
     //defaultBG();
@@ -26,7 +32,7 @@ cmntHeader('Repair Screen Styles');
 	padding-top: 92px;
 	z-index: 1;
 }
-<?php divRepair();?> p#error{
+<?php drs();?> p#error{
 <?php
     posAbs();
     css::size('100%', '20%');
@@ -34,7 +40,7 @@ cmntHeader('Repair Screen Styles');
     left:0%;
     top:0%;
 }
-<?php divRepair();?> h2{
+<?php drs();?> h2{
 <?php
     posAbs();
     css::size('14%', '5%');
@@ -46,7 +52,7 @@ cmntHeader('Repair Screen Styles');
     background:url('../images/label.jpg');
     margin:0%;    
 }
-<?php divRepair();?> button#addFunds{
+<?php drs();?> button#addFunds{
 <?php
     posAbs();
     css::size('12%', '4%');
@@ -56,11 +62,11 @@ cmntHeader('Repair Screen Styles');
     font-size:1.5vw;
     font-weight:bold;
 }
-<?php divRepair();?> li 
+<?php drs();?> li 
 {	/*styles all list items of node with id RepairShop*/
 	padding: 5px 0;
 }
-<?php divRepair();?> div{
+<?php drs();?> div{
 <?php
     posAbs();
     css::size('14%', '29%');
@@ -72,7 +78,7 @@ cmntHeader('Repair Screen Styles');
     
     font-size:1.25vw;
 }
-<?php divRepair();?> div button{
+<?php drs();?> div button{
 <?php
     //posAbs();
     css::size('49%', '20%');
@@ -80,7 +86,7 @@ cmntHeader('Repair Screen Styles');
     font-size:0.65rem;
     /*font-weight:bold;*/
 }
-<?php divRepair();?> div button.ub{
+<?php drs();?> div button.ub{
     background:url('../images/icons/upgrade.png') no-repeat 0 0;
     background-size:100% 100%;
     bottom:10%;
@@ -88,25 +94,28 @@ cmntHeader('Repair Screen Styles');
     left:0%;
 }
 
-<?php divRepair();?> div button:hover{
+<?php drs();?> div button:hover{
     border:2px green solid;
 }
 
-<?php divRepair();?> div button.rb{
+<?php drs();?> div button.rb{
     background:url('../images/icons/repair.png') no-repeat 0 0;
     background-size:100% 100%;
     bottom:10%;
     position:absolute;
     right:0%;
 }
-<?php divRepair();?> div progress{
+<?php drs();?> div progress{
 <?php
     //posAbs();
 ?>
     width:100%;
     height:10%;
 }
-<?php divRepair();?> div#switch{
+/*
+Page Switch, for different components
+*/
+<?php drsSwitch();?>{
 <?php
     posAbs();
     css::size('18%', '10%');
@@ -119,7 +128,7 @@ cmntHeader('Repair Screen Styles');
     /*background-color:grey;*/
     display:block;
 }
-<?php divRepair();?> div#switch button{
+<?php drsSwitchBtn();?>{
 <?php
     posAbs();
     css::size('49%', '49%');
@@ -128,7 +137,7 @@ cmntHeader('Repair Screen Styles');
     padding:0% 0%;*/
     /*background-color:grey;*/
 }
-<?php divRepair();?> div#switch button#dt {
+<?php drsSwitchBtn();?>#dt{
 <?php
 	css::defaultBG('../images/drivetrain.png');
     css::bgSize('100%', '100%');
@@ -136,8 +145,7 @@ cmntHeader('Repair Screen Styles');
     css::top('0%');
 ?>
 }
-
-<?php divRepair();?> div#switch button#dt:hover{
+<?php drsSwitchBtn();?>#dt:hover{
 <?php
     //mouse over
     css::defaultBG('../images/drivetrain_hover.png');
@@ -146,11 +154,8 @@ cmntHeader('Repair Screen Styles');
     css::top('0%');
 ?>  
 	color:green;
-	
 }
-
-<?php divRepair();?> div#switch button#body{
-	
+<?php drsSwitchBtn();?>#body{
 <?php
 	css::defaultBG('../images/body.png');
     css::bgSize('100%', '100%');
@@ -158,18 +163,15 @@ cmntHeader('Repair Screen Styles');
     css::bottom('0%');
 ?>
 }
-<?php divRepair();?> div#switch button#body:hover{
-	
+<?php drsSwitchBtn();?>#body:hover{
 <?php
-	 //mouse over
     css::defaultBG('../images/body_hover.png');
     css::bgSize('100%', '100%');
     css::left('0%');
     css::bottom('0%');
 ?>
 }
-
-<?php divRepair();?> div#switch button#inter{
+<?php drsSwitchBtn();?>#inter{
 <?php
 	css::defaultBG('../images/interior.png');
     css::bgSize('100%', '100%');
@@ -177,19 +179,15 @@ cmntHeader('Repair Screen Styles');
     css::top('0%');
 ?>
 }
-
-<?php divRepair();?> div#switch button#inter:hover{
+<?php drsSwitchBtn();?>#inter:hover{
 <?php
-	 //mouse over
     css::defaultBG('../images/interior_hover.png');
     css::bgSize('100%', '100%');
     css::right('0%');
     css::top('0%');
 ?>
 }
-
-<?php divRepair();?> div#switch button#docs{
-	
+<?php drsSwitchBtn();?>#docs{	
 <?php
 	css::defaultBG('../images/documents.png');
     css::bgSize('100%', '100%');
@@ -197,18 +195,14 @@ cmntHeader('Repair Screen Styles');
     css::bottom('0%');
 ?>
 }
-<?php divRepair();?> div#switch button#docs:hover{
-	
+<?php drsSwitchBtn();?>#docs:hover{	
 <?php
-	 //mouse over
     css::defaultBG('../images/documents_hover.png');
     css::bgSize('100%', '100%');
     css::right('0%');
     css::bottom('0%');
 ?>
 }
-
-
 /*
 left div
 */
@@ -216,13 +210,13 @@ left div
     //lStatView('dt', '28%', '33%');
     //lStatView('body', '60%', '65%');
 ?>
-<?php divRepair();?> div#cid0{
+<?php drs();?> div#cid0{
 <?php
     css::lm();
     css::top('28%');
 ?>
 }
-<?php divRepair();?> div img{
+<?php drs();?> div img{
 <?php
     //posAbs();
     css::top('15%');
@@ -230,7 +224,7 @@ left div
     css::bgSize('100%', '100%');
 ?>
 }
-<?php divRepair();?> div h2{
+<?php drs();?> div h2{
 <?php
     css::top('0%');
     css::width('100%');
@@ -238,7 +232,7 @@ left div
 ?>
 }
 
-<?php divRepair();?> div progress{
+<?php drs();?> div progress{
 <?php
     posAbs();
     css::bottom('0%');
@@ -246,13 +240,13 @@ left div
     css::width('100%');
 ?>
 }
-<?php divRepair();?> div#cid1 h2{
+<?php drs();?> div#cid1 h2{
     <?php
     //css::lm();
     //css::top('60%');
 ?>
 }
-<?php divRepair();?> div#cid1{
+<?php drs();?> div#cid1{
 <?php
     css::lm();
     css::top('59%');
@@ -265,25 +259,25 @@ right div
     //rStatView('interior', '28%', '33%');
     //rStatView('docs', '60%', '65%');
 ?>
-<?php divRepair();?> div#cid2 h2{
+<?php drs();?> div#cid2 h2{
 <?php
     //css::rm();
     //css::top('28%');
 ?>
 }
-<?php divRepair();?> div#cid2{
+<?php drs();?> div#cid2{
 <?php
     css::rm();
     css::top('28%');
 ?>
 }
-<?php divRepair();?> div#cid3 h2{
+<?php drs();?> div#cid3 h2{
 <?php
     //css::rm();
     //css::top('60%');
 ?>
 }
-<?php divRepair();?> div#cid3{
+<?php drs();?> div#cid3{
 <?php
     css::rm();
     css::top('59%');

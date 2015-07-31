@@ -197,6 +197,23 @@ class user{
         //}
         //return json_encode($uf);
     }
+    public static function setCurrentCar($carID = 0){
+        //global $AO_DB;
+        $CID = ao::CID;
+        //$UID = ao::UID;
+        //$users = 'users';
+        //$uid = strval(getUID() );
+        
+        if($carID == 0 || hasCar($carID)){
+            //$res = user::updateEntry("$CID = $carID");
+
+			if(user::updateEntry("$CID = $carID")){
+				return $carID;
+				//$id = intval($res->fetch_assoc()[$CID]);
+			}
+		}
+		return 0;
+    }
     public static function getCarByID($id){
         //returns a user's upgraded vehicle
         global $aoUsersDB;
