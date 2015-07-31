@@ -14,9 +14,8 @@ class aoDrivetrain
 	    AXEL = 2,
 	    EXHAUST = 3;
 
-    static function upgradeEngine($cID){
-        
-		
+    static function upgradeEngine($cID){	
+		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
         return $cID;       
     }
 }
@@ -41,6 +40,7 @@ if(isSetP() ){
             $r = $res->fetch_assoc();
             $CID=intval($r[$CID]);
             $dt = intval($r[$DT]);
+			//$price = intval($r[$STAGE]);
         }           
         else{
             $aoUsersDB->eErr();
@@ -51,6 +51,7 @@ if(isSetP() ){
 	if($pt == aoDrivetrain::ENGINE){
 		//return this.upgrade(eng);
 		//echo 'engine';
+		
 		$res = aoDrivetrain::upgradeEngine($_cid);
         //aoDrivetrain::upgradeEngine($_cid);
 		echo json_encode($res); 
