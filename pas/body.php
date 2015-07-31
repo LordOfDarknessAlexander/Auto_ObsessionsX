@@ -47,7 +47,7 @@ class aoBody{
         // }
         //exit();
     }
-    public static function upgradeChasis($cid){
+    public static function upgradeChasis($cid, $price){
         global $aoUsersDB;
         
         $offset = 12;   //number of bits
@@ -94,7 +94,7 @@ class aoBody{
         }
         echo 'could not upgrade part, already fully upgraded';
     }
-    public static function upgradePanels($cid){
+    public static function upgradePanels($cid, $price){
         global $aoUsersDB;
         
         $offset = 8;   //number of bits
@@ -139,7 +139,7 @@ class aoBody{
         }
         echo 'could not upgrade part, already fully upgraded';
     }
-    public static function upgradePaint($cid){
+    public static function upgradePaint($cid, $price){
        global $aoUsersDB;
         
         $offset = 4;   //number of bits
@@ -184,7 +184,7 @@ class aoBody{
         }
         echo 'could not upgrade part, already fully upgraded';
     }
-    public static function upgradeChrome($cid){
+    public static function upgradeChrome($cid, $price){
         global $aoUsersDB;
         
         $b = aoBody::getBody($cid);
