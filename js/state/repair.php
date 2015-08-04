@@ -640,29 +640,6 @@ Drivetrain.upgrade = function(obj){
         partType:type}
     );
     
-    jq.post("pas/body.php",
-        function(obj){
-            console.log(JSON.stringify(obj));
-            
-            //if(part !== null){
-                // var div = Body.getDivURSlot(type);   //$('div#RepairShop div#body');
-                        
-                // upgradePartUpdate(
-                    // part,
-                    // $('button#ub', div),
-                    // $('progress#pb', div)
-                // );
-                // //jq.user.setStats();
-            // }
-        },
-        function(jqxhr){
-			jq.setErr('Body.upgrade Repair.php', 'purchase upgrade failed, reason: ' + jqxhr.responseText);
-        },
-        {cid:car.id,
-        //price:p,
-        partType:type}
-    );
-    
     <?php
 //} ?>
 //else{>
