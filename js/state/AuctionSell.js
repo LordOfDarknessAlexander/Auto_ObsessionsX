@@ -29,7 +29,7 @@ var AuctionSell = {
                 as.bindViewBtn();
                 //
                 userSales.push(as);
-				var TOM = 0;
+				//var TOM = 0;
                 //console.log(JSON.stringify(userSales) );
                 AuctionSell.save();
             }
@@ -127,17 +127,18 @@ var AuctionSell = {
                             
                         na.initWithData(ad);
                         na.addButton();
-//                      na.restart(); 
+                        //na.restart(ad); 
 					    na.toggleCC();
                         na.bindViewBtn();
 						
 						userSales.push(na);//push new auction
-						var TIM = 0;
+						//var TIM = 0;
                     }
                 }
             }
         }
         else{
+			//console.log('Hello Bitch');
             var len = data.length;
             
             if(len != 0){

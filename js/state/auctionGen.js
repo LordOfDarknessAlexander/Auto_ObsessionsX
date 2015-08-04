@@ -37,6 +37,7 @@ function auctionGen(args){
     var car = isValid ? Garage.getCarByID(args.id) : null,
         bid = isValid ? args.bid : 0,
         s = isValid ? args._start : strFromCurrentDate(),
+		//st = isValid ? args._startTime : +new Date(), //temp
         e = isValid ? args._end : null,
         ci = isValid ? args._cashedIn : false,
         ct = isValid ? args._time : 0.0;   
@@ -45,7 +46,7 @@ function auctionGen(args){
     
 	return {
 		//_vehiclePrice : 20000,
-		MAX_AUCTION_TIME : (1000 * 60) * 0.75,    //how many units of time is thins?
+		MAX_AUCTION_TIME : (1000 * 60) * 0.75, //450000
 		//AI cooldown timer
 		_timer : auctionCountdownTimer(),
 		_car:car,
@@ -64,6 +65,8 @@ function auctionGen(args){
 		BID_GCD: 500.0, //in miliseconds
 		//Enemy.BID_TIMER_CAP = (1.0 / 32.0) * 8, //Max wait time between bids, wait 8 frames(at 32fps)
 		_bidTimer: 0.0,
+		_hasLeft: 0.0,
+		_time: Date.now(),
 		//
 		init:function(index){
 			this._timer.reset();
@@ -419,27 +422,58 @@ function auctionGen(args){
 //}
 //>
 		},
-        restart:function(data){
+       restart:function(data){
             //continue a previously started auction
             //which has not already expired!
             //this._car = Garage.getCarByID(data.id);
             //this._currentBid = data.bid;
             //this._date = data.date;
+            //if(data === null || data === undefined){
+				// var k = 'AuctionSell';
             
-            //if(this._date.end === null){
-                //this._expired = false,
-                //_curTime:0.0;
-                //this._initAI();
-            //}
-            //else{
-                //this._expired = true;
-                //this._curTime = this._date.end - this._date.start;
-            //}
+				// if(Storage.local !== null && k in Storage.local){
+					// var sd = JSON.parse(Storage.local[k]),
+						// len = sd.length;
+					
+					// if(len != 0){
+						// userSales = [];
+						
+						// for (var i = 0; i < len; i++) {
+							// console.log('Restart');
+							// var ad = sd[i], //auction data
+							
+						var prevTime = data._time, //time the auction was paused
+							//startDate = data._start,
+							currDate = Date.now(),//(Date.now() / 1000), //need currentTime
+							timeElapsed = currDate - prevTime; //time that has passed since the auction was paused
+							//timeLeft = prevTime + timeElapsed; //calculate how much time is left in the auction
+							
+							//console.log(timeElapsed.toString());
+						
+							if(timeElapsed >= this.MAX_AUCTION_TIME){
+								this.disable();
+								//end auction
+							}
+							else{
+								this._curTime = timeElapsed;
+								//continue auction
+							}
+						//}
+					//}
+				//}
+			//}
+				// if(data[i]._time != 0.0){
+					// this._curTime = data[i]._time;	
+				// }
+				// else{				
+					// this.disable();
+				// }
+            // else{
+                // this._expired = true;
+                // //this._curTime = this._date.end - this._date.start;
+				// //this.sold crap
+            // }
             this.addButton();
-            
-            if(this.isExpired() ){  // && this.bid == 0){
-                //this.disable();
-            }
         },
 		toJSON : function(){
             //called by JSON.stringify to conver this object into a json string,
