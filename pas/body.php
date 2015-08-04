@@ -5,13 +5,20 @@ require_once '../re.php';
 require_once '../secure.php';
 require_once 'user.php';
 //
+class aoStage{
+    const
+        STOCK = 0x0,      //0000
+        AMATEUR = 0x1,    //0001
+        SPORT = 0x2,      //0010
+        RACING = 0x4,     //0100
+        PRO = 0x8;        //1000
+}
 class aoBody{
     //const
-        //CHASIS = ,
-        //PANELS = ,
-        //PAINT = ,
-        //CHROME = 0;
-    
+        //CHASIS = 0,
+        //PANELS = 1,
+        //PAINT = 2,
+        //CHROME = 3;    
     
     public static function getBody($cid){
         global $aoUsersDB;
@@ -28,6 +35,7 @@ class aoBody{
             return $ret;
         }
         //exit();
+        return 0;
     }
     public static function setBody($cid, $b){
         global $aoUsersDB;
@@ -52,9 +60,8 @@ class aoBody{
         $b = aoBody::getBody($cid);
         $chas = ($b & 0xF000) >> $offset;
         //echo $chas;
-        $PRO = 4;   //reassing from enum
         
-        if($chas < $PRO){
+        if($chas < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
@@ -94,8 +101,10 @@ class aoBody{
             //else, new funds and user's funds are the same,
             //purchase not successful
             echo 'could not purchase upgrade, insufficient funds';
+            exit();
         }
         echo 'could not upgrade part, already fully upgraded';
+        exit();
     }
     public static function upgradePanels($cid, $price){
         global $aoUsersDB;
@@ -105,7 +114,7 @@ class aoBody{
         $pan = ($b & 0x0F00) >> $offset;
         $PRO = 4;   //reassing from enum
         
-        if($pan < $PRO){
+        if($pan < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
@@ -122,7 +131,7 @@ class aoBody{
                 $nb = ($b & 0xF0FF) | $shift;   //clear last bits, setting new value
                 //echo $nb;
                 //set new values
-               if(aoBody::setBody($cid, $nb) ){
+                if(aoBody::setBody($cid, $nb) ){
                     $ret = array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
@@ -134,17 +143,18 @@ class aoBody{
                 }
             }
             echo 'could not purchase upgrade, insufficient funds';
+            exit();
         }
         echo 'could not upgrade part, already fully upgraded';
+        exit();
     }
     public static function upgradePaint($cid, $price){
         //
         $offset = 4;   //number of bits
         $b = aoBody::getBody($cid);
         $paint = ($b & 0x00F0) >> $offset;
-        $PRO = 4;   //reassing from enum
         
-        if($paints < $PRO){
+        if($paint < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
@@ -173,6 +183,7 @@ class aoBody{
                 }
             }
             echo 'could not purchase upgrade, insufficient funds';
+            exit();
         }
         echo 'could not upgrade part, already fully upgraded';
         exit();
@@ -181,9 +192,8 @@ class aoBody{
         //
         $b = aoBody::getBody($cid);
         $chrome = ($b & 0x000F) >> 0;
-        $PRO = 4;   //reassing from enum
         
-        if($chrome < 4){
+        if($chrome < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
@@ -213,8 +223,10 @@ class aoBody{
             //else, new funds and user's funds are the same,
             //purchase not successful
             echo 'could not purchase upgrade, insufficient funds';
+            exit();
         }
         echo 'could not upgrade part, already fully upgraded';
+        exit();
     }
 }
 ?>

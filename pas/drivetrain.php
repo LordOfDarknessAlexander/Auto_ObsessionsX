@@ -27,18 +27,18 @@ if(isSetP() ){
     $DT = 'drivetrain';
     
 	//echo 'butternuts';
-	$pt = isUINT($_POST['partType']) ? intVal($_POST['partType']) : ''; 
-	$_cid = isUINT($_POST['cid']) ? intVal($_POST['cid']) : '';
+	$pt = isUINT($_POST['partType']) ? intVal($_POST['partType']) : 0; 
+	$_cid = isUINT($_POST['cid']) ? intVal($_POST['cid']) : 0;
         
     if($_cid > 0){
         $CID = ao::CID;
         $res = $aoUsersDB->query(
-                sql::slctAllFromUserTable() . " WHERE $CID = $_cid"
-            );
-            
+            sql::slctAllFromUserTable() . " WHERE $CID = $_cid"
+        );
+        
         if($res){
             $r = $res->fetch_assoc();
-            $CID=intval($r[$CID]);
+            $CID = intval($r[$CID]);
             $dt = intval($r[$DT]);
 			//$price = intval($r[$STAGE]);
         }           
