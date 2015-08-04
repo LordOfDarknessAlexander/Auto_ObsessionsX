@@ -92,8 +92,8 @@ class aoBody{
                 }
             }
             //else, new funds and user's funds are the same,
-            //purchase not succussful
-            echo 'could not purchase upgrade, insufficent funds';
+            //purchase not successful
+            echo 'could not purchase upgrade, insufficient funds';
         }
         echo 'could not upgrade part, already fully upgraded';
     }
@@ -114,7 +114,6 @@ class aoBody{
                 
             if($dif > 0.000008){
                 //if purchase is successful, $dif > 1
-                $tableName = getUserTableName();
                 //
                 //mask and shift values here
                 $np = ($pan == 0 ? 1 : $pan << 1);   //new chrome value
@@ -134,7 +133,7 @@ class aoBody{
                     exit();
                 }
             }
-            echo 'could not purchase upgrade, insufficent funds';
+            echo 'could not purchase upgrade, insufficient funds';
         }
         echo 'could not upgrade part, already fully upgraded';
     }
@@ -151,7 +150,7 @@ class aoBody{
             $uf = user::getFunds(); //user funds
             $nf = user::decFunds($price);
             $dif = $uf - $nf;
-                
+            
             if($dif > 0.000008){
                 //if purchase is successful, $dif > 1
                 //
@@ -173,7 +172,7 @@ class aoBody{
                     exit();
                 }
             }
-            echo 'could not purchase upgrade, insufficent funds';
+            echo 'could not purchase upgrade, insufficient funds';
         }
         echo 'could not upgrade part, already fully upgraded';
         exit();
@@ -212,8 +211,8 @@ class aoBody{
                 }
             }
             //else, new funds and user's funds are the same,
-            //purchase not succussful
-            echo 'could not purchase upgrade, insufficent funds';
+            //purchase not successful
+            echo 'could not purchase upgrade, insufficient funds';
         }
         echo 'could not upgrade part, already fully upgraded';
     }
