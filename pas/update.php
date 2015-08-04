@@ -82,6 +82,25 @@ class pasUpdate{
         
         return $res ? true : false;
     }
+	
+	public static function userCurrentCar($carID ){
+	//global $AO_DB;
+		$CID = ao::CID;
+		//$UID = ao::UID;
+		//$users = 'users';
+		//$uid = strval(getUID() );
+		
+		if($carID == 0 || hasCar($carID)){
+			//$res = user::updateEntry("$CID = $carID");
+
+			if(user::updateEntry("$CID = $carID")){
+				return $carID;
+				//$id = intval($res->fetch_assoc()[$CID]);
+			}
+		}
+		return 0;
+	
+}
 	public static function updateSale($carID, $bid, $curTime){
 		global $aoCarSalesDB;
         $CID = ao::CID;
@@ -180,6 +199,9 @@ class purchase{
         //echo "purchase::funds(), invalid value $f, purchase::failed";
     }
 }
+
+
+
 function addPrestige($val){
     //$val must be an unsigned int greater than 0    
     if(is_int($val) && $val > 0){
