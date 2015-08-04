@@ -83,8 +83,8 @@ class pasUpdate{
         return $res ? true : false;
     }
 	
-	public static function userCurrentCar($carID,$dt ){
-	//global $AO_DB;
+	public static function userCurrentCar($carID,$curTime ){
+	global $AO_DB;
 		$CID = ao::CID;
 		//$UID = ao::UID;
 		//$users = 'users';
