@@ -1,10 +1,7 @@
 <?php
-
-require_once '../pasMeta.php';
-require_once '../dbConnect.php';  //sql database connection
-require_once '../secure.php';
-require_once '../re.php';
-
+//
+require_once 'part.php';
+//
 class aoDrivetrain
 {
 	//ints match those in the drivetrain.js TYPE enum
@@ -45,7 +42,6 @@ if(isSetP() ){
         else{
             $aoUsersDB->eErr();
         }
-		
     }
 
 	if($pt == aoDrivetrain::ENGINE){
