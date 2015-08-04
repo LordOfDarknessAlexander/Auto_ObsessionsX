@@ -24,6 +24,7 @@ class aoBody{
         global $aoUsersDB;
         
         $B = 'body';
+        $CID = ao::CID;
         
         $res = $aoUsersDB->query(
             sql::slctAllFromUserTable() . " WHERE $CID = $cid"
@@ -42,6 +43,7 @@ class aoBody{
         
         $TN = getUserTableName();
         $B = 'body';
+        $CID = ao::CID;
         
         $res = $aoUsersDB->query(
             "UPDATE $TN SET $B = $b WHERE $CID = $cid"
