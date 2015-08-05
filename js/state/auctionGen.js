@@ -356,7 +356,7 @@ function auctionGen(args){
 				this.checkCurrentWinner();
 				this.going(dt);
 				this.render();
-			
+				
                 var b = this.isExpired() && !this._closed;
                 
                 if(b){
@@ -370,7 +370,26 @@ function auctionGen(args){
 					this.endAuction();
 					this.close();
 				}
-			}
+				
+				//<php if(loggedIn() ){>
+				var funcName = 'js/auctionGen.js update()';
+				jq.post(
+					"pas/update.php?op=psu", 
+					function(data){
+						//
+						if(data === null || data === undefined){
+							jq.setErr('<?php eFN();?>', 'Error:ajax response returned null!');
+							return;
+						}
+						
+					}, 
+					function(jqxhr){ 
+						jq.setErr('<?php eFN();?>', 'error happened: ' + jqxhr.responseText);
+					}, 
+					{carID:this._car.id, bid:this._currentBid, _time:this._curTime}
+				);
+				//<?php
+			}	
 		},
 		endAuction:function(){
             //auction has ended updates garage and _sales
@@ -442,9 +461,9 @@ function auctionGen(args){
 							// console.log('Restart');
 							// var ad = sd[i], //auction data
 							
-						var prevTime = data._time, //time the auction was paused
+						var prevTime = this._time, //time auction was started in miliseconds
 							//startDate = data._start,
-							currDate = Date.now(),//(Date.now() / 1000), //need currentTime
+							currDate = Date.now(),//(Date.now() / 1000), //currentTime at restart execution
 							timeElapsed = currDate - prevTime; //time that has passed since the auction was paused
 							//timeLeft = prevTime + timeElapsed; //calculate how much time is left in the auction
 							
@@ -473,7 +492,7 @@ function auctionGen(args){
                 // //this._curTime = this._date.end - this._date.start;
 				// //this.sold crap
             // }
-            this.addButton();
+            //this.addButton();
         },
 		toJSON : function(){
             //called by JSON.stringify to conver this object into a json string,

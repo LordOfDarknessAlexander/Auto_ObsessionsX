@@ -423,7 +423,7 @@ if(isSetP() ){
                 }
 				elseif($op == 'psu'){
 					//post sale update
-					$bid = isFloat($_POST['price']) ? round(floatval($_POST['price']), 2) : exit('_POST at price invalid value');
+					$bid = isFloat($_POST['bid']) ? round(floatval($_POST['bid']), 2) : exit('_POST at bid invalid value');
 					$curTime = isFloat($_POST['_time']) ? floatval($_POST['_time']) : exit('_POST at _time invalid value');
 					$res = pasUpdate::updateSale($carID, $bid, $curTime);
                     echo json_encode($res);

@@ -386,6 +386,7 @@ class user{
         $S = '_start';
         $E = '_end';
 		$p = 0.0;
+		$t = 0.0;
         //return 0;
 		//returns current user card id in an array       
 		$res = user::slctFromEntry("$CID");
@@ -414,7 +415,7 @@ class user{
 					"INSERT INTO $ut
 						($CID, $P, $DT, $B, $I, $D, $R, $T, $S, $E)
 					VALUES
-						($carID, $p, $dt, $b, $i, $d, $r, 0, NOW(), NULL)"
+						($carID, $p, $dt, $b, $i, $d, $r, $t, NOW(), NULL)"
 				);
 				
 				//echo json_encode($temp);

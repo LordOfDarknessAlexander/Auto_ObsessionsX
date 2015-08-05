@@ -127,7 +127,7 @@ var AuctionSell = {
                             
                         na.initWithData(ad);
                         na.addButton();
-                        //na.restart(ad); 
+                        //na.restart(); 
 					    na.toggleCC();
                         na.bindViewBtn();
 						
