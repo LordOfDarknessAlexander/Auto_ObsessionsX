@@ -407,7 +407,8 @@ class user{
 				$r = $car[$R];
 
 				if($cid == $carID){
-					pasUpdate::userCurrentCar();
+					//pasUpdate::userGetCurrentCar();
+					user::removeCarByID($cid);
 				}
 
 				//else vehicles are different, no change
