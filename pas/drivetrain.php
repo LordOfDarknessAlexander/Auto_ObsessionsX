@@ -13,7 +13,7 @@ class aoDrivetrain
         
     public static function getDrivetrain($cid){
         global $aoUsersDB;
-        
+		
         $DT = 'drivetrain';
         $CID = ao::CID;
         
@@ -29,6 +29,8 @@ class aoDrivetrain
     }
     
     public static function setDrivetrain($cid, $dt){
+        global $aoUsersDB;
+        
         $TN = getUserTableName();
         $DT = 'drivetrain';
         $CID = ao::CID;
@@ -38,7 +40,7 @@ class aoDrivetrain
         );
         
         if($res){
-            echo json_encode($res);
+            //echo json_encode($res);
             return $res;
         }
         return null;
@@ -47,8 +49,9 @@ class aoDrivetrain
     public static function upgradeEngine($cid, $price){	
 		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
         global $aoUsersDB;
-        
+		//echo 'UP';
         $offset = 12;   //number of bits
+        
         $dt = aoDrivetrain::getDrivetrain($cid);
         $engine = ($dt & 0xF000) >> $offset;  
          if($engine < aoStage::PRO){
@@ -100,46 +103,37 @@ class aoDrivetrain
 }
 //eSG(); //echo superGlobals
 //aoDrivetrain::upgradePart(333333, 0);//engine upgrade
-
-/*if(isSetP() ){
+if(isSetP() ){
     global $aoUsersDB;
+	$P = 'price';
     $DT = 'drivetrain';
-    
+	
+    $engine = aoDrivetrain::ENGINE;
+	$transmission = aoDrivetrain::TRASMISSION;
+	$axel = aoDrivetrain::AXEL;
+	$exhaust = aoDrivetrain::EXHAUST;
+	
 	//echo 'butternuts';
-	$pt = isUINT($_POST['partType']) ? intVal($_POST['partType']) : ''; 
-	$_cid = isUINT($_POST['cid']) ? intVal($_POST['cid']) : '';
+	$pt = isUINT($_POST['partType']) ? intval($_POST['partType']) : null; 
+	$cid = isUINT($_POST['cid']) ? intval($_POST['cid']) : 0;
+	$price = isFloat($_POST[$P]) ? floatval($_POST[$P]) : 0;
+	//$carPrice = isFloat($_POST['price']) ? floatval($_POST['price']) : 0;
+	
         
-    if($_cid > 0){
-        $CID = ao::CID;
-        $res = $aoUsersDB->query(
-                sql::slctAllFromUserTable() . " WHERE $CID = $_cid"
-            );
-            
-        if($res){
-            $r = $res->fetch_assoc();
-            $CID=intval($r[$CID]);
-            $dt = intval($r[$DT]);
-			//$price = intval($r[$STAGE]);
-        }           
-        else{
-            $aoUsersDB->eErr();
-        }
-		
-    }
-
-	if($pt == aoDrivetrain::ENGINE){
+    if($cid > 0){
+        if($pt == aoDrivetrain::ENGINE){
 		//return this.upgrade(eng);
 		//echo 'engine';
 		
-		$res = aoDrivetrain::upgradeEngine($_cid);
-        //aoDrivetrain::upgradeEngine($_cid);
+		$res = aoDrivetrain::upgradeEngine($cid, $price);
+        //aoDrivetrain::upgradeEngine($cid);
 		echo json_encode($res); 
 		exit();
 	}
 	elseif($pt == aoDrivetrain::TRASMISSION){
 		//return this.upgrade(tra);
 		//echo 'transmission';
-		//$res = aoDrivetrain::upgradeEngine($_cid);
+		//$res = aoDrivetrain::upgradeEngine($cid);
 		echo json_encode($res);    
 		exit();
 	}
@@ -155,7 +149,52 @@ class aoDrivetrain
 		//console.log('attempting to upgrade unknown type: ' + partType.toString() );
 		echo 'attempting to upgrade unknown type: ';
 	}
+    
+        /*$CID = ao::CID;
+        $res = $aoUsersDB->query(
+            sql::slctAllFromUserTable() . " WHERE $CID = $cid"
+        );
+            
+        if($res){
+            $r = $res->fetch_assoc();
+            $CID=intval($r[$CID]);
+            $dt = intval($r[$DT]);
+			//$price = intval($r[$STAGE]);
+        }           
+        else{
+            $aoUsersDB->eErr();
+        }*/
+		
+    }
 
-}*/
+	/*if($pt == aoDrivetrain::ENGINE){
+		//return this.upgrade(eng);
+		//echo 'engine';
+		
+		$res = aoDrivetrain::upgradeEngine($cid);
+        //aoDrivetrain::upgradeEngine($cid);
+		echo json_encode($res); 
+		exit();
+	}
+	elseif($pt == aoDrivetrain::TRASMISSION){
+		//return this.upgrade(tra);
+		//echo 'transmission';
+		//$res = aoDrivetrain::upgradeEngine($cid);
+		echo json_encode($res);    
+		exit();
+	}
+	elseif($pt == aoDrivetrain::AXEL){
+		//return this.upgrade(axe);
+		//echo 'axel';
+	}
+	elseif($pt == aoDrivetrain::EXHAUST){
+		//return this.upgrade(exh);
+		//echo 'exhaust';
+	}
+	else{
+		//console.log('attempting to upgrade unknown type: ' + partType.toString() );
+		echo 'attempting to upgrade unknown type: ';
+	}*/
 
+}
 ?>
