@@ -409,8 +409,8 @@ class user{
 				if($cid == $carID){
 					//pasUpdate::userGetCurrentCar();
 					user::getCarByID($cid);
-					return $cid;
-					//echo "shigt";
+				//	return $cid;
+					echo "user car";
 				}
 
 				//else vehicles are different, no change
