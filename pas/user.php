@@ -408,7 +408,8 @@ class user{
 
 				if($cid == $carID){
 					//pasUpdate::userGetCurrentCar();
-					user::removeCarByID($cid);
+					user::getCarByID($carID);
+					//echo "shigt";
 				}
 
 				//else vehicles are different, no change
