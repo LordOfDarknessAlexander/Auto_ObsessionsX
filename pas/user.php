@@ -407,7 +407,7 @@ class user{
 				$r = $car[$R];
 
 				if($cid == $carID){
-					//pasUpdate::userGetCurrentCar();
+					//pasUpdate::userCurrentCar();
 					user::getCarByID($cid);
 				//	return $cid;
 					echo "user car";
