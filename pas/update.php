@@ -83,18 +83,18 @@ class pasUpdate{
         return $res ? true : false;
     }
 	
-	public static function userCurrentCar($carID,$curTime ){
+	public static function userCurrentCar($carID ){
 	global $AO_DB;
 		$CID = ao::CID;
 		//$UID = ao::UID;
 		//$users = 'users';
 		//$uid = strval(getUID() );
 		
-		if($carID == 0 || hasCar($carID)){
+		if($carID == $CID || hasCar($carID)){
 			//$res = user::updateEntry("$CID = $carID");
 
 			if(user::updateEntry("$CID = $carID")){
-				return $carID;
+				return $CID;
 				//$id = intval($res->fetch_assoc()[$CID]);
 			}
 		}
