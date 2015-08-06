@@ -748,12 +748,12 @@ Body.upgrade = function(obj){
                     if(part !== null){
                         var div = Body.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
                         
-                        if(part._stage == carPart.STAGE.stock){
-                            part._stage = carPart.STAGE.amateur;
-                        }
-                        else if(part._stage < carPart.STAGE.PRO){
-                            part._stage = part._stage << 1;
-                        }
+                        //if(part._stage == carPart.STAGE.stock){
+                            //part._stage = carPart.STAGE.amateur;
+                        //}
+                        //else if(part._stage < carPart.STAGE.pro){
+                        part._stage = obj.value;    //part._stage << 1;
+                        //}
                         
                         upgradePartUpdate(
                             part,

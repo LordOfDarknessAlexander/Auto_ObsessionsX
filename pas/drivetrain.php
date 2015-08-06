@@ -54,7 +54,8 @@ class aoDrivetrain
         
         $dt = aoDrivetrain::getDrivetrain($cid);
         $engine = ($dt & 0xF000) >> $offset;  
-         if($engine < aoStage::PRO){
+        
+        if($engine < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds

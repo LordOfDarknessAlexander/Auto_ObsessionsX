@@ -34,17 +34,17 @@ class aoBody{
         $B = 'body';
         $CID = ao::CID;
         
-        //$res = $aoUsersDB->query(
-            //"UPDATE $TN SET $B = $b WHERE $CID = $cid"
-        //);
-        return true;
+        $res = $aoUsersDB->query(
+            "UPDATE $TN SET $B = $b WHERE $CID = $cid"
+        );
+        //return true;
         if($res){
             //echo json_encode($res);
             return $res;
         }
         return null;
     }
-    public static function upgradeCHASSIS($cid, $price){
+    public static function upgradeChassis($cid, $price){
         global $aoUsersDB;
         
         $offset = 12;   //number of bits
@@ -80,11 +80,13 @@ class aoBody{
                 //
                 if(aoBody::setBody($cid, $nb) ){
                     $B = 'body';
+                    $V = 'value';
                     
                     return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $B=>$nb
+                        $B=>$nb,
+                        $V=>$nc
                     );        
                     //echo json_encode($ret);
                     //exit();
@@ -125,12 +127,14 @@ class aoBody{
                 //echo $nb;
                 //set new values
                 if(aoBody::setBody($cid, $nb) ){
-                    $B = 'body';
+                    $B = 'val';
+                    $V = 'value';
                     
                     return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $B=>$nb
+                        $B=>$nb,
+                        $V=>$np
                     );
         
                     //echo json_encode($ret);
@@ -168,11 +172,13 @@ class aoBody{
                 //set new values
                 if(aoBody::setBody($cid, $nb) ){
                     $B = 'body';
-                    
+                    $V = 'value';
+                        
                     return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $B=>$nb
+                        $B=>$nb,
+                        $V=>$np
                     );
         
                     //echo json_encode($ret);
@@ -208,11 +214,13 @@ class aoBody{
                 //set new values
                 if(aoBody::setBody($cid, $nb) ){
                     $B = 'body';
+                    $V = 'value';
                     
                     return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $B=>$nb
+                        $B=>$nb,
+                        $V=>$nc
                     );
         
                     //echo json_encode($ret);
@@ -233,6 +241,7 @@ if(isSetP()){
     $P = 'price';
     $CID = ao::CID;
     $PT = 'partType';
+    
     $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
     //echo $p;
     $cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
@@ -244,7 +253,7 @@ if(isSetP()){
         $ret = null;
         
         if($pt == aoBody::CHASSIS){
-            $ret = aoBody::upgradeCHASSIS($cid, $p);
+            $ret = aoBody::upgradeChassis($cid, $p);
         }
         else if($pt == aoBody::PANELS){
             $ret = aoBody::upgradePanels($cid, $p);
@@ -255,7 +264,11 @@ if(isSetP()){
         else if($pt == aoBody::CHROME){
             $ret = aoBody::upgradeChrome($cid, $p);
         }
-        echo json_encode($ret);
+        if($ret !== null){
+            echo json_encode($ret);
+            exit();
+        }
+        echo "invalid value ret:$ret, could not complete purchase";
         exit();
     }
     echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase";
