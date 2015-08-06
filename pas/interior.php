@@ -1,8 +1,8 @@
 <?php
 //
-require_once '../part.php';
+require_once 'part.php';
 //
-class aoBody{
+class aoInterior{
     const
         CHASSIS = 0x1,
         PANELS = 0x2,
@@ -236,41 +236,41 @@ class aoBody{
         return null;
     }
 }
-if(isSetP()){
-    //echo 'blah';
-    $P = 'price';
-    $CID = ao::CID;
-    $PT = 'partType';
+// if(isSetP()){
+    // //echo 'blah';
+    // $P = 'price';
+    // $CID = ao::CID;
+    // $PT = 'partType';
     
-    $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
-    //echo $p;
-    $cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
-    //echo $cid;
-    $pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null;
-    //echo $pt;
+    // $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
+    // //echo $p;
+    // $cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
+    // //echo $cid;
+    // $pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null;
+    // //echo $pt;
     
-    if($cid != 0 && $p > 1.0 && $pt !== null){
-        $ret = null;
+    // if($cid != 0 && $p > 1.0 && $pt !== null){
+        // $ret = null;
         
-        if($pt == aoBody::CHASSIS){
-            $ret = aoBody::upgradeChassis($cid, $p);
-        }
-        else if($pt == aoBody::PANELS){
-            $ret = aoBody::upgradePanels($cid, $p);
-        }
-        else if($pt == aoBody::PAINT){
-            $ret = aoBody::upgradePaint($cid, $p);
-        }
-        else if($pt == aoBody::CHROME){
-            $ret = aoBody::upgradeChrome($cid, $p);
-        }
-        if($ret !== null){
-            echo json_encode($ret);
-            exit();
-        }
-        echo "invalid value ret:$ret, could not complete purchase";
-        exit();
-    }
-    echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase";
-}
+        // if($pt == aoBody::CHASSIS){
+            // $ret = aoBody::upgradeChassis($cid, $p);
+        // }
+        // else if($pt == aoBody::PANELS){
+            // $ret = aoBody::upgradePanels($cid, $p);
+        // }
+        // else if($pt == aoBody::PAINT){
+            // $ret = aoBody::upgradePaint($cid, $p);
+        // }
+        // else if($pt == aoBody::CHROME){
+            // $ret = aoBody::upgradeChrome($cid, $p);
+        // }
+        // if($ret !== null){
+            // echo json_encode($ret);
+            // exit();
+        // }
+        // echo "invalid value ret:$ret, could not complete purchase";
+        // exit();
+    // }
+    // echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase";
+// }
 ?>

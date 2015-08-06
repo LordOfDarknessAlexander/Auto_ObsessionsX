@@ -151,7 +151,7 @@ class user{
         $nf = user::decFunds($price);   //$nf should be less when successful
         //$dif = $uf - $nf;
         //echo $dif;
-        $ret = ($uf - $nf > 0.000008);
+        //$ret = ($uf - $nf > 0.000008);
         //echo $ret;
         return ($uf - $nf > 0.000008);
     }
