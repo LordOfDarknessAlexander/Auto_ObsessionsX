@@ -1,20 +1,20 @@
 <?php
 require_once 'part.php';
 
-class aoDrivetrain
+class aoInterior
 {
-	//ints match those in the drivetrain.js TYPE enum
+	//ints match those in the interior.js TYPE enum
     const
-	    ENGINE = 0,
-	    TRANSMISSION = 1,
-	    AXEL = 2,
-	    EXHAUST = 3;
+	    SEATS = 0,
+	    CARPET = 1,
+	    DASH = 2,
+	    PANELS = 3;
     
         
-    public static function getDrivetrain($cid){
+    public static function getInterior($cid){
         global $aoUsersDB;
 		
-        $DT = 'drivetrain';
+        $IN = 'interior';
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
@@ -22,7 +22,7 @@ class aoDrivetrain
         );
         
         if($res){
-            $ret = intval($res->fetch_assoc()[$DT]);
+            $ret = intval($res->fetch_assoc()[$IN]);
             //echo $ret;
             return $ret;
         }
@@ -30,15 +30,15 @@ class aoDrivetrain
         return 0;
     }
     
-    public static function setDrivetrain($cid, $dt){
+    public static function setInterior($cid, $in){
         global $aoUsersDB;
         
         $TN = getUserTableName();
-        $DT = 'drivetrain';
+        $IN = 'interior';
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
-            "UPDATE $TN SET $DT = $dt WHERE $CID = $cid"
+            "UPDATE $TN SET $IN = $in WHERE $CID = $cid"
         );
         
         if($res){
@@ -48,16 +48,16 @@ class aoDrivetrain
         return null;
     }
     
-    public static function upgradeEngine($cid, $price){	
+    public static function upgradeSeats($cid, $price){	
 		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
         global $aoUsersDB;
 		//echo 'UP';
         $offset = 12;   //number of bits
         
-        $dt = aoDrivetrain::getDrivetrain($cid);
-        $engine = ($dt & 0xF000) >> $offset;  
+        $in = aoInterior::getInterior($cid);
+        $seats = ($in & 0xF000) >> $offset;  
         
-        if($engine < aoStage::PRO){
+        if($seats < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
@@ -69,28 +69,28 @@ class aoDrivetrain
                 //$tableName = getUserTableName();
                 //
                 //mask and shift values here
-                $nc = ($engine == 0 ? 1 : $engine << 1);   //new part value
+                $nc = ($seats == 0 ? 1 : $seats << 1);   //new part value
                 $shift = $nc << $offset;
                 //echo $nc;
-                $nb = ($dt & 0x0FFF) | $shift;   //clear last bits, setting new value
+                $nb = ($in & 0x0FFF) | $shift;   //clear last bits, setting new value
                 //echo $nb;
                 //set new values
                 
                 //$res = $aoUsersDB->query(
                     //"UPDATE $tableName SET
-                        //$dt=$nb
+                        //$in=$nb
                     //WHERE
                         //$CID = $carID"
                 //);
                 //
-                if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrian';
+                if(aoInterior::setInterior($cid, $nb) ){
+                    $IN = 'drivetrian';
                     $V = 'value';
                     
                     $ret = array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $DT=>$nb,
+                        $IN=>$nb,
                         $V=>$nc
                     );
         
@@ -108,16 +108,16 @@ class aoDrivetrain
         return null;
     }
     
-    public static function upgradeTransmission($cid, $price){	
+    public static function upgradeCarpet($cid, $price){	
 		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
         global $aoUsersDB;
 		//echo 'UP';
         $offset = 8;   //number of bits
         
-        $dt = aoDrivetrain::getDrivetrain($cid);
-        $tranny = ($dt & 0x0F00) >> $offset;  
+        $in = aoInterior::getInterior($cid);
+        $carpet = ($in & 0x0F00) >> $offset;  
         
-        if($tranny < aoStage::PRO){
+        if($carpet < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
@@ -129,28 +129,28 @@ class aoDrivetrain
                 //$tableName = getUserTableName();
                 //
                 //mask and shift values here
-                $nc = ($tranny == 0 ? 1 : $tranny << 1);   //new part value
+                $nc = ($carpet == 0 ? 1 : $carpet << 1);   //new part value
                 $shift = $nc << $offset;
                 //echo $nc;
-                $nb = ($dt & 0xF0FF) | $shift;   //clear last bits, setting new value
+                $nb = ($in & 0xF0FF) | $shift;   //clear last bits, setting new value
                 //echo $nb;
                 //set new values
                 
                 //$res = $aoUsersDB->query(
                     //"UPDATE $tableName SET
-                        //$dt=$nb
+                        //$in=$nb
                     //WHERE
                         //$CID = $carID"
                 //);
                 //
-                if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrian';
+                if(aoInterior::setInterior($cid, $nb) ){
+                    $IN = 'drivetrian';
                     $V = 'value';
                     
                     $ret = array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $DT=>$nb,
+                        $IN=>$nb,
                         $V=>$nc
                     );
         
@@ -174,10 +174,10 @@ class aoDrivetrain
 		//echo 'UP';
         $offset = 4;   //number of bits
         
-        $dt = aoDrivetrain::getDrivetrain($cid);
-        $axel = ($dt & 0x00F0) >> $offset;  
+        $in = aoInterior::getInterior($cid);
+        $dash = ($in & 0x00F0) >> $offset;  
         
-        if($axel < aoStage::PRO){
+        if($dash < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
@@ -189,28 +189,28 @@ class aoDrivetrain
                 //$tableName = getUserTableName();
                 //
                 //mask and shift values here
-                $nc = ($axel == 0 ? 1 : $axel << 1);   //new part value
+                $nc = ($dash == 0 ? 1 : $dash << 1);   //new part value
                 $shift = $nc << $offset;
                 //echo $nc;
-                $nb = ($dt & 0xFF0F) | $shift;   //clear last bits, setting new value
+                $nb = ($in & 0xFF0F) | $shift;   //clear last bits, setting new value
                 //echo $nb;
                 //set new values
                 
                 //$res = $aoUsersDB->query(
                     //"UPDATE $tableName SET
-                        //$dt=$nb
+                        //$in=$nb
                     //WHERE
                         //$CID = $carID"
                 //);
                 //
-                if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrian';
+                if(aoInterior::setInterior($cid, $nb) ){
+                    $IN = 'drivetrian';
                     $V = 'value';
                     
                     $ret = array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $DT=>$nb,
+                        $IN=>$nb,
                         $V=>$nc
                     );
         
@@ -228,14 +228,14 @@ class aoDrivetrain
         return null;
     }
     
-    public static function upgradeExhaust($cid, $price){	
+    public static function upgradePanels($cid, $price){	
 		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
         global $aoUsersDB;
 		//echo 'UP';
         $offset = 0;   //number of bits
         
-        $dt = aoDrivetrain::getDrivetrain($cid);
-        $exhaust = ($dt & 0x000F) >> $offset;  
+        $in = aoInterior::getInterior($cid);
+        $exhaust = ($in & 0x000F) >> $offset;  
         
         if($exhaust < aoStage::PRO){
             //check if part is already fully upgraded
@@ -252,25 +252,25 @@ class aoDrivetrain
                 $nc = ($exhaust == 0 ? 1 : $exhaust << 1);   //new part value
                 $shift = $nc << $offset;
                 //echo $nc;
-                $nb = ($dt & 0xFFF0) | $shift;   //clear last bits, setting new value
+                $nb = ($in & 0xFFF0) | $shift;   //clear last bits, setting new value
                 //echo $nb;
                 //set new values
                 
                 //$res = $aoUsersDB->query(
                     //"UPDATE $tableName SET
-                        //$dt=$nb
+                        //$in=$nb
                     //WHERE
                         //$CID = $carID"
                 //);
                 //
-                if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrian';
+                if(aoInterior::setInterior($cid, $nb) ){
+                    $IN = 'drivetrian';
                     $V = 'value';
                     
                     $ret = array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $DT=>$nb,
+                        $IN=>$nb,
                         $V=>$nc
                     );
         
@@ -290,7 +290,7 @@ class aoDrivetrain
     
 }
 //eSG(); //echo superGlobals
-//aoDrivetrain::upgradePart(333333, 0);//engine upgrade
+//aoInterior::upgradePart(333333, 0);//seats upgrade
 if(isSetP() ){
 	$P = 'price';
     $CID = ao::CID;
@@ -305,23 +305,23 @@ if(isSetP() ){
     if($cid != 0 && $p > 1.0 && $pt !== null){
         $ret = null;
         
-        if($pt == aoDrivetrain::ENGINE){
-		    $ret = aoDrivetrain::upgradeEngine($cid, $p);
+        if($pt == aoInterior::SEATS){
+		    $ret = aoInterior::upgradeSeats($cid, $p);
 		    echo json_encode($ret); 
 		    exit();
 	    }
-	    elseif($pt == aoDrivetrain::TRANSMISSION){
-		    $ret = aoDrivetrain::upgradeTransmission($cid, $p);
+	    elseif($pt == aoInterior::CARPET){
+		    $ret = aoInterior::upgradeCarpet($cid, $p);
 		    echo json_encode($ret);    
 		    exit();
 	    }
-	    elseif($pt == aoDrivetrain::AXEL){
-            $ret = aoDrivetrain::upgradeAxel($cid, $p);
+	    elseif($pt == aoInterior::DASH){
+            $ret = aoInterior::upgradeAxel($cid, $p);
             echo json_encode($ret);    
 		    exit();
 	    }
-	    elseif($pt == aoDrivetrain::EXHAUST){
-            $ret = aoDrivetrain::upgradeExhaust($cid, $p);
+	    elseif($pt == aoInterior::PANELS){
+            $ret = aoInterior::upgradePanels($cid, $p);
             echo json_encode($ret);    
 		    exit();
 	    }

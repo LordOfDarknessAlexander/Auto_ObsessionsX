@@ -64,7 +64,7 @@ class aoBody{
                 //$tableName = getUserTableName();
                 //
                 //mask and shift values here
-                $nc = ($b == 0 ? 1 : $chas << 1);   //new chrome value
+                $nc = ($chas == 0 ? 1 : $chas << 1);   //new chrome value
                 $shift = $nc << $offset;
                 //echo $nc;
                 $nb = ($b & 0x0FFF) | $shift;   //clear last bits, setting new value

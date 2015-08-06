@@ -593,51 +593,48 @@ Drivetrain.getDivURSlot = function(carType){
 };
 Drivetrain.upgrade = function(obj){
     //
-    var car = Garage.getCurrentCar();
+	var funcName = 'Drivetrain.upgrade Repair.js',
+        car = Garage.getCurrentCar();
     
     if(car !== null){
         var type = obj.data.type,
             dt = car._dt;
-            //str = Drivetrain.strFromType(type);
+			//str = Drivetrain.strFromType(type);
         //console.log('upgrading part of type: ' + str);
         
         if(dt === null || typeof dt == 'undefined'){
-            //var bp = Drivetrain.getInstallPrice(car.getBasePrice();
-            //if(usreStats.moeny >= bp) ){
-                //install part
-                //car._dt = Drivetrain.make(bp)
-                //userStats.money -= bp;
-                //return;
-            //}
-            //else{
-                //play purchase denied sound
-                //return;
-            //}
+            
         }
         else{    //upgrade existing part
-            var part = dt.getPartType(type);
+            var part = dt.getPartType(type),
+			p = part.getPrice();
 <?php //if(loggedIn() ){ ?>
     jq.post("pas/drivetrain.php",
         function(obj){
             console.log(JSON.stringify(obj));
+			 if(obj === null || typeof obj === 'undefined'){
+					jq.setErr(funcName, 'purchase upgrade failed,\n invalid data returned from server');
+					return;
+				}
             
-            //if(part !== null){
-                // var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
-                        
-                // upgradePartUpdate(
-                    // part,
-                    // $('button#ub', div),
-                    // $('progress#pb', div)
-                // );
-                // //jq.user.setStats();
-            // }
+            if(part !== null){
+                var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
+                 
+				part._stage = obj.value;    //part._stage << 1;
+				 
+                upgradePartUpdate(
+					part,
+                    $('button#ub', div),
+                    $('progress#pb', div)
+                );
+				setMoney(obj.userFunds);
+                //jq.user.setStats();
+            }
         },
         function(jqxhr){
 			jq.setErr('Drivetrain.upgrade Repair.php', 'purchase upgrade failed, reason: ' + jqxhr.responseText);
         },
-        {cid:car.id,
-        //price:p,
-        partType:type}
+        {car_id:car.id, price:p, partType:type}
     );
     
     <?php
