@@ -110,7 +110,7 @@ class pasUpdate{
 		$t = is_numeric($curTime) ? $curTime : floatval($curTime);
 		$t = $t >= 0.0 ? $t : 0.0;
 		//time should never be less then 0
-        $q = sql::update(getUserTableName(), "$P = $b, $T = $t") . "WHERE $CID = $carID";
+        $q = sql::update(getUserTableName(), "$P = $b, $T = $t") . " WHERE $CID = $carID";
           
         return $aoCarSalesDB->query($q);
 	}

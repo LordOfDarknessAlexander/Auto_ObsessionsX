@@ -124,16 +124,18 @@ var AuctionSell = {
 
                         var ad = sd[i], //auction data
                             na = auctionGen();    //new auction
-                            
-                        na.initWithData(ad);
-                        na.addButton();
-                        //na.restart(); 
-					    na.toggleCC();
-                        na.bindViewBtn();
-						
-						userSales.push(na);//push new auction
-						//var TIM = 0;
-                    }
+							
+                        if(ad._end === null || ad._end === undefined){    
+							na.initWithData(ad);
+							na.restart(ad);
+							na.addButton();
+							na.toggleCC();
+							na.bindViewBtn();
+							
+							userSales.push(na);//push new auction
+							//var TIM = 0;
+						}
+					}
                 }
             }
         }

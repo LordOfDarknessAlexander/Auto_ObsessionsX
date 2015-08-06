@@ -146,15 +146,7 @@ class user{
         //echo "purchase::funds(), invalid value $f, purchase::failed";
         return user::getFunds();
     }
-    public static function makePurchase($price){
-        $uf = user::getFunds(); //user funds
-        $nf = user::decFunds($price);   //$nf should be less when successful
-        //$dif = $uf - $nf;
-        //echo $dif;
-        $ret = ($uf - $nf > 0.000008);
-        //echo $ret;
-        return ($uf - $nf > 0.000008);
-    }
+   
     public static function getStats(){
         global $AO_DB;
         $CID = ao::CID;

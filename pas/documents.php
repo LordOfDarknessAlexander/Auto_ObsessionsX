@@ -1,18 +1,18 @@
 <?php
 //
-require_once '../part.php';
+require_once 'part.php';
 //
-class aoBody{
+class aoDocs{
     const
         CHASSIS = 0x1,
         PANELS = 0x2,
         PAINT = 0x3,
         CHROME = 0x4;    
     
-    public static function getBody($cid){
+    public static function getDocs($cid){
         global $aoUsersDB;
         
-        $B = 'body';
+        $B = 'docs';
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
@@ -27,11 +27,11 @@ class aoBody{
         //exit();
         return 0;
     }
-    public static function setBody($cid, $b){
+    public static function setDocs($cid, $b){
         global $aoUsersDB;
         
         $TN = getUserTableName();
-        $B = 'body';
+        $B = 'docs';
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
@@ -48,7 +48,7 @@ class aoBody{
         global $aoUsersDB;
         
         $offset = 12;   //number of bits
-        $b = aoBody::getBody($cid);
+        $b = aoDocs::getDocs($cid);
         $chas = ($b & 0xF000) >> $offset;
         //echo $chas;
         
@@ -64,7 +64,7 @@ class aoBody{
                 //$tableName = getUserTableName();
                 //
                 //mask and shift values here
-                $nc = ($chas == 0 ? 1 : $chas << 1);   //new chrome value
+                $nc = ($b == 0 ? 1 : $chas << 1);   //new chrome value
                 $shift = $nc << $offset;
                 //echo $nc;
                 $nb = ($b & 0x0FFF) | $shift;   //clear last bits, setting new value
@@ -78,7 +78,7 @@ class aoBody{
                         //$CID = $carID"
                 //);
                 //
-                if(aoBody::setBody($cid, $nb) ){
+                if(aoDocs::setDocs($cid, $nb) ){
                     $B = 'body';
                     $V = 'value';
                     
@@ -105,7 +105,7 @@ class aoBody{
         global $aoUsersDB;
         
         $offset = 8;   //number of bits
-        $b = aoBody::getBody($cid);
+        $b = aoDocs::getDocs($cid);
         $pan = ($b & 0x0F00) >> $offset;
         $PRO = 4;   //reassing from enum
         
@@ -126,7 +126,7 @@ class aoBody{
                 $nb = ($b & 0xF0FF) | $shift;   //clear last bits, setting new value
                 //echo $nb;
                 //set new values
-                if(aoBody::setBody($cid, $nb) ){
+                if(aoDocs::setDocs($cid, $nb) ){
                     $B = 'val';
                     $V = 'value';
                     
@@ -150,7 +150,7 @@ class aoBody{
     public static function upgradePaint($cid, $price){
         //
         $offset = 4;   //number of bits
-        $b = aoBody::getBody($cid);
+        $b = aoDocs::getDocs($cid);
         $paint = ($b & 0x00F0) >> $offset;
         
         if($paint < aoStage::PRO){
@@ -170,7 +170,7 @@ class aoBody{
                 $nb = ($b & 0xFF0F) | $shift;   //clear last bits, setting new value
                 //echo $nb;
                 //set new values
-                if(aoBody::setBody($cid, $nb) ){
+                if(aoDocs::setDocs($cid, $nb) ){
                     $B = 'body';
                     $V = 'value';
                         
@@ -193,7 +193,7 @@ class aoBody{
     }
     public static function upgradeChrome($cid, $price){
         //
-        $b = aoBody::getBody($cid);
+        $b = aoDocs::getDocs($cid);
         $chrome = ($b & 0x000F) >> 0;
         
         if($chrome < aoStage::PRO){
@@ -212,7 +212,7 @@ class aoBody{
                 $nb = ($b & 0xFFF0) | $nc;   //clear last bits, setting new value
                 //echo $nb;
                 //set new values
-                if(aoBody::setBody($cid, $nb) ){
+                if(aoDocs::setDocs($cid, $nb) ){
                     $B = 'body';
                     $V = 'value';
                     
@@ -236,41 +236,41 @@ class aoBody{
         return null;
     }
 }
-if(isSetP()){
-    //echo 'blah';
-    $P = 'price';
-    $CID = ao::CID;
-    $PT = 'partType';
+// if(isSetP()){
+    // //echo 'blah';
+    // $P = 'price';
+    // $CID = ao::CID;
+    // $PT = 'partType';
     
-    $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
-    //echo $p;
-    $cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
-    //echo $cid;
-    $pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null;
-    //echo $pt;
+    // $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
+    // //echo $p;
+    // $cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
+    // //echo $cid;
+    // $pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null;
+    // //echo $pt;
     
-    if($cid != 0 && $p > 1.0 && $pt !== null){
-        $ret = null;
+    // if($cid != 0 && $p > 1.0 && $pt !== null){
+        // $ret = null;
         
-        if($pt == aoBody::CHASSIS){
-            $ret = aoBody::upgradeChassis($cid, $p);
-        }
-        else if($pt == aoBody::PANELS){
-            $ret = aoBody::upgradePanels($cid, $p);
-        }
-        else if($pt == aoBody::PAINT){
-            $ret = aoBody::upgradePaint($cid, $p);
-        }
-        else if($pt == aoBody::CHROME){
-            $ret = aoBody::upgradeChrome($cid, $p);
-        }
-        if($ret !== null){
-            echo json_encode($ret);
-            exit();
-        }
-        echo "invalid value ret:$ret, could not complete purchase";
-        exit();
-    }
-    echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase";
-}
+        // if($pt == aoDocs::CHASSIS){
+            // $ret = aoDocs::upgradeChassis($cid, $p);
+        // }
+        // else if($pt == aoDocs::PANELS){
+            // $ret = aoDocs::upgradePanels($cid, $p);
+        // }
+        // else if($pt == aoDocs::PAINT){
+            // $ret = aoDocs::upgradePaint($cid, $p);
+        // }
+        // else if($pt == aoDocs::CHROME){
+            // $ret = aoDocs::upgradeChrome($cid, $p);
+        // }
+        // if($ret !== null){
+            // echo json_encode($ret);
+            // exit();
+        // }
+        // echo "invalid value ret:$ret, could not complete purchase";
+        // exit();
+    // }
+    // echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase";
+// }
 ?>
