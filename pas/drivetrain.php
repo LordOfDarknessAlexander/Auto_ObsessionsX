@@ -82,6 +82,7 @@ class aoDrivetrain
                 //);
                 //
                 if(aoDrivetrain::setDrivetrain($cid, $nb) ){
+                    $DT = 'drivetrian';
                     $ret = array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
@@ -94,11 +95,12 @@ class aoDrivetrain
             }
             //else, new funds and user's funds are the same,
             //purchase not successful
-            echo 'could not purchase upgrade, insufficient funds';
-            exit();
+            //echo 'could not purchase upgrade, insufficient funds';
+            //exit();
         }
-        echo 'could not upgrade part, already fully upgraded';
-        exit();
+       // echo 'could not upgrade part, already fully upgraded';
+        //exit();
+        return null;
     }
     
 }
@@ -107,95 +109,43 @@ class aoDrivetrain
 if(isSetP() ){
     global $aoUsersDB;
 	$P = 'price';
-    $DT = 'drivetrain';
-	
-    $engine = aoDrivetrain::ENGINE;
-	$transmission = aoDrivetrain::TRASMISSION;
-	$axel = aoDrivetrain::AXEL;
-	$exhaust = aoDrivetrain::EXHAUST;
-	
+    $CID = ao::CID;
+    $PT = 'partType';
+    $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
+		
 	//echo 'butternuts';
-	$pt = isUINT($_POST['partType']) ? intval($_POST['partType']) : null; 
-	$cid = isUINT($_POST['cid']) ? intval($_POST['cid']) : 0;
-	$price = isFloat($_POST[$P]) ? floatval($_POST[$P]) : 0;
-	//$carPrice = isFloat($_POST['price']) ? floatval($_POST['price']) : 0;
+	$pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null; 
+	$cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
 	
         
-    if($cid > 0){
+    if($cid != 0 && $p > 1.0 && $pt !== null){
+        $ret = null;
+        
         if($pt == aoDrivetrain::ENGINE){
-		//return this.upgrade(eng);
-		//echo 'engine';
-		
-		$res = aoDrivetrain::upgradeEngine($cid, $price);
-        //aoDrivetrain::upgradeEngine($cid);
-		echo json_encode($res); 
-		exit();
-	}
-	elseif($pt == aoDrivetrain::TRASMISSION){
-		//return this.upgrade(tra);
-		//echo 'transmission';
-		//$res = aoDrivetrain::upgradeEngine($cid);
-		echo json_encode($res);    
-		exit();
-	}
-	elseif($pt == aoDrivetrain::AXEL){
-		//return this.upgrade(axe);
-		//echo 'axel';
-	}
-	elseif($pt == aoDrivetrain::EXHAUST){
-		//return this.upgrade(exh);
-		//echo 'exhaust';
-	}
-	else{
-		//console.log('attempting to upgrade unknown type: ' + partType.toString() );
-		echo 'attempting to upgrade unknown type: ';
-	}
-    
-        /*$CID = ao::CID;
-        $res = $aoUsersDB->query(
-            sql::slctAllFromUserTable() . " WHERE $CID = $cid"
-        );
-            
-        if($res){
-            $r = $res->fetch_assoc();
-            $CID=intval($r[$CID]);
-            $dt = intval($r[$DT]);
-			//$price = intval($r[$STAGE]);
-        }           
-        else{
-            $aoUsersDB->eErr();
-        }*/
-		
+		    $ret = aoDrivetrain::upgradeEngine($cid, $p);
+		    echo json_encode($ret); 
+		    exit();
+	    }
+	    elseif($pt == aoDrivetrain::TRASMISSION){
+		    //$ret = aoDrivetrain::upgradeEngine($cid, $p);
+		    echo json_encode($ret);    
+		    exit();
+	    }
+	    elseif($pt == aoDrivetrain::AXEL){
+		    //return this.upgrade(axe);
+		    //echo 'axel';
+	    }
+	    elseif($pt == aoDrivetrain::EXHAUST){
+		    //return this.upgrade(exh);
+		    //echo 'exhaust';
+	    }
+	    else{
+		    //console.log('attempting to upgrade unknown type: ' + partType.toString() );
+		    echo 'attempting to upgrade unknown type: ';
+	    }	
+        echo json_encode($ret);
+        exit();
     }
-
-	/*if($pt == aoDrivetrain::ENGINE){
-		//return this.upgrade(eng);
-		//echo 'engine';
-		
-		$res = aoDrivetrain::upgradeEngine($cid);
-        //aoDrivetrain::upgradeEngine($cid);
-		echo json_encode($res); 
-		exit();
-	}
-	elseif($pt == aoDrivetrain::TRASMISSION){
-		//return this.upgrade(tra);
-		//echo 'transmission';
-		//$res = aoDrivetrain::upgradeEngine($cid);
-		echo json_encode($res);    
-		exit();
-	}
-	elseif($pt == aoDrivetrain::AXEL){
-		//return this.upgrade(axe);
-		//echo 'axel';
-	}
-	elseif($pt == aoDrivetrain::EXHAUST){
-		//return this.upgrade(exh);
-		//echo 'exhaust';
-	}
-	else{
-		//console.log('attempting to upgrade unknown type: ' + partType.toString() );
-		echo 'attempting to upgrade unknown type: ';
-	}*/
-
+    echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase"; 
 }
 ?>
