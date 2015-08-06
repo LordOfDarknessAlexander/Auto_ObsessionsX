@@ -127,7 +127,6 @@ function auctionGen(args){
 				];
 				
 				if(data !== null && typeof data !== 'undefined'){
-					//console.log('hkgjhjfhgfhggh');
 					this._ai[0].currBid = data._bid0;
 					this._ai[1].currBid = data._bid1;
 					this._ai[2].currBid = data._bid2;
@@ -314,6 +313,21 @@ function auctionGen(args){
 			this._date.end = Date.now() * 0.0001;
 			this._closed = true;
 			this._timer.reset();
+			
+			// var funcName = 'js/auctionGen.js close()';
+				// jq.post(
+					// "pas/update.php?op=psu", 
+					// function(data){
+						// if(data === null || data === undefined){
+							// jq.setErr(funcName, 'Error:ajax response returned null!');
+							// return;
+						// }	
+					// }, 
+					// function(jqxhr){ 
+						// jq.setErr(funcName, 'error happened: ' + jqxhr.responseText);
+					// }, 
+					// {_end:this._date.end}
+				// );
 			//this._curTime = 0.0;
             //while loops are bad practice, prone to misuse and infinite loops.
             //using array.pop() method is bad, is slow as the array must be
@@ -369,27 +383,29 @@ function auctionGen(args){
 					console.log('Ending auction');
 					this.endAuction();
 					this.close();
-				}
-				
-				//<php if(loggedIn() ){>
+					return;
+				}	
+			}	
+		},
+		updateServerSales:function(){
+			
+			console.log('updateServerSales called ');
+			//<php if(loggedIn() ){>
 				var funcName = 'js/auctionGen.js update()';
 				jq.post(
 					"pas/update.php?op=psu", 
 					function(data){
-						//
 						if(data === null || data === undefined){
-							jq.setErr('<?php eFN();?>', 'Error:ajax response returned null!');
+							jq.setErr(funcName, 'Error:ajax response returned null!');
 							return;
-						}
-						
+						}	
 					}, 
 					function(jqxhr){ 
-						jq.setErr('<?php eFN();?>', 'error happened: ' + jqxhr.responseText);
+						jq.setErr(funcName, 'error happened: ' + jqxhr.responseText);
 					}, 
 					{carID:this._car.id, bid:this._currentBid, _time:this._curTime}
 				);
-				//<?php
-			}	
+			//<?php
 		},
 		endAuction:function(){
             //auction has ended updates garage and _sales
@@ -442,57 +458,24 @@ function auctionGen(args){
 //>
 		},
        restart:function(data){
-            //continue a previously started auction
-            //which has not already expired!
-            //this._car = Garage.getCarByID(data.id);
-            //this._currentBid = data.bid;
-            //this._date = data.date;
-            //if(data === null || data === undefined){
-				// var k = 'AuctionSell';
-            
-				// if(Storage.local !== null && k in Storage.local){
-					// var sd = JSON.parse(Storage.local[k]),
-						// len = sd.length;
-					
-					// if(len != 0){
-						// userSales = [];
-						
-						// for (var i = 0; i < len; i++) {
-							// console.log('Restart');
-							// var ad = sd[i], //auction data
-							
-						var prevTime = this._time, //time auction was started in miliseconds
-							//startDate = data._start,
-							currDate = Date.now(),//(Date.now() / 1000), //currentTime at restart execution
-							timeElapsed = currDate - prevTime; //time that has passed since the auction was paused
-							//timeLeft = prevTime + timeElapsed; //calculate how much time is left in the auction
-							
-							//console.log(timeElapsed.toString());
-						
-							if(timeElapsed >= this.MAX_AUCTION_TIME){
-								this.disable();
-								//end auction
-							}
-							else{
-								this._curTime = timeElapsed;
-								//continue auction
-							}
-						//}
-					//}
-				//}
-			//}
-				// if(data[i]._time != 0.0){
-					// this._curTime = data[i]._time;	
-				// }
-				// else{				
-					// this.disable();
-				// }
-            // else{
-                // this._expired = true;
-                // //this._curTime = this._date.end - this._date.start;
-				// //this.sold crap
-            // }
-            //this.addButton();
+           	
+			if(!this.isExpired()){
+				var prevTime = data._time, //time auction was started in miliseconds
+					currDate = Date.now(), //currentTime at restart execution
+					timeElapsed = currDate - prevTime; //time that has passed since the auction was paused
+								
+					if(timeElapsed <= this.MAX_AUCTION_TIME){
+						this._curTime = timeElapsed;
+						this._ai[0].currBid = data._bid0;
+						this._ai[1].currBid = data._bid1;
+						this._ai[2].currBid = data._bid2;
+						this._ai[3].currBid = data._bid3;
+					}
+			}
+			else{
+				this.Disable();
+			}
+			
         },
 		toJSON : function(){
             //called by JSON.stringify to conver this object into a json string,
@@ -535,6 +518,8 @@ function auctionGen(args){
 							this.resetTimer();
 							var l = $('div#ai' + i.toString() + ' label#bid', jq.SaleView._ai.div);
 							l.text(e.currBid.toFixed(2));
+							
+							this.updateServerSales();
 							//SaleView.sortAI();
 							break;
 						}

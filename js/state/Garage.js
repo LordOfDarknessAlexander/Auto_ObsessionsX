@@ -729,6 +729,7 @@ var CarView = {
 //<php
 //if(loggedIn() ){>
                     function(){		
+						console.log('sell btn clicky');
                         pas.postUserCarSale(car.id);
                     }
 //<php
