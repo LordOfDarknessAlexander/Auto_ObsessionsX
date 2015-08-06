@@ -3,11 +3,11 @@
 require_once 'part.php';
 //
 class aoBody{
-    //const
-        //CHASIS = 0,
-        //PANELS = 1,
-        //PAINT = 2,
-        //CHROME = 3;    
+    const
+        CHASSIS = 0x1,
+        PANELS = 0x2,
+        PAINT = 0x3,
+        CHROME = 0x4;    
     
     public static function getBody($cid){
         global $aoUsersDB;
@@ -34,17 +34,17 @@ class aoBody{
         $B = 'body';
         $CID = ao::CID;
         
-        $res = $aoUsersDB->query(
-            "UPDATE $TN SET $B = $b WHERE $CID = $cid"
-        );
-        
+        //$res = $aoUsersDB->query(
+            //"UPDATE $TN SET $B = $b WHERE $CID = $cid"
+        //);
+        return true;
         if($res){
             //echo json_encode($res);
             return $res;
         }
         return null;
     }
-    public static function upgradeChasis($cid, $price){
+    public static function upgradeCHASSIS($cid, $price){
         global $aoUsersDB;
         
         $offset = 12;   //number of bits
@@ -79,23 +79,25 @@ class aoBody{
                 //);
                 //
                 if(aoBody::setBody($cid, $nb) ){
-                    $ret = array(
+                    $B = 'body';
+                    
+                    return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
                         $B=>$nb
-                    );
-        
-                    echo json_encode($ret);
-                    exit();
+                    );        
+                    //echo json_encode($ret);
+                    //exit();
                 }
             }
             //else, new funds and user's funds are the same,
             //purchase not successful
-            echo 'could not purchase upgrade, insufficient funds';
-            exit();
+            //echo 'could not purchase upgrade, insufficient funds';
+            //exit();
         }
-        echo 'could not upgrade part, already fully upgraded';
-        exit();
+        //echo 'could not upgrade part, already fully upgraded';
+        //exit();
+        return null;
     }
     public static function upgradePanels($cid, $price){
         global $aoUsersDB;
@@ -123,21 +125,23 @@ class aoBody{
                 //echo $nb;
                 //set new values
                 if(aoBody::setBody($cid, $nb) ){
-                    $ret = array(
+                    $B = 'body';
+                    
+                    return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
                         $B=>$nb
                     );
         
-                    echo json_encode($ret);
-                    exit();
+                    //echo json_encode($ret);
+                    //exit();
                 }
             }
             echo 'could not purchase upgrade, insufficient funds';
-            exit();
+            return null;
         }
         echo 'could not upgrade part, already fully upgraded';
-        exit();
+        return null;
     }
     public static function upgradePaint($cid, $price){
         //
@@ -163,21 +167,23 @@ class aoBody{
                 //echo $nb;
                 //set new values
                 if(aoBody::setBody($cid, $nb) ){
-                    $ret = array(
+                    $B = 'body';
+                    
+                    return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
                         $B=>$nb
                     );
         
-                    echo json_encode($ret);
-                    exit();
+                    //echo json_encode($ret);
+                    //exit();
                 }
             }
             echo 'could not purchase upgrade, insufficient funds';
-            exit();
+            return null;
         }
         echo 'could not upgrade part, already fully upgraded';
-        exit();
+        return null;
     }
     public static function upgradeChrome($cid, $price){
         //
@@ -201,23 +207,57 @@ class aoBody{
                 //echo $nb;
                 //set new values
                 if(aoBody::setBody($cid, $nb) ){
-                    $ret = array(
+                    $B = 'body';
+                    
+                    return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
                         $B=>$nb
                     );
         
-                    echo json_encode($ret);
-                    exit();
+                    //echo json_encode($ret);
+                    //exit();
                 }
             }
             //else, new funds and user's funds are the same,
             //purchase not successful
             echo 'could not purchase upgrade, insufficient funds';
-            exit();
+            return null;
         }
         echo 'could not upgrade part, already fully upgraded';
+        return null;
+    }
+}
+if(isSetP()){
+    //echo 'blah';
+    $P = 'price';
+    $CID = ao::CID;
+    $PT = 'partType';
+    $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
+    //echo $p;
+    $cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
+    //echo $cid;
+    $pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null;
+    //echo $pt;
+    
+    if($cid != 0 && $p > 1.0 && $pt !== null){
+        $ret = null;
+        
+        if($pt == aoBody::CHASSIS){
+            $ret = aoBody::upgradeCHASSIS($cid, $p);
+        }
+        else if($pt == aoBody::PANELS){
+            $ret = aoBody::upgradePanels($cid, $p);
+        }
+        else if($pt == aoBody::PAINT){
+            $ret = aoBody::upgradePaint($cid, $p);
+        }
+        else if($pt == aoBody::CHROME){
+            $ret = aoBody::upgradeChrome($cid, $p);
+        }
+        echo json_encode($ret);
         exit();
     }
+    echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase";
 }
 ?>
