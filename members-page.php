@@ -123,7 +123,7 @@ else if($page == 'tutorial'){?>
         <p>Auto-Obsessions the game . Easy to play impossible to break the obsession. 
         <br>Win cars in an acution.
         <br>Repair and upgrade them.
-        <br>Sell them your upgraded and repaired cars in your own auctions!</p>
+        <br>Sell your upgraded and repaired cars in your own auctions!</p>
         <!-- End of the page-specific content. -->
 <?php 
     $un = isSetS() ? strval($_SESSION['uname']) : '';
