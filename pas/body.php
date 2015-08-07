@@ -1,6 +1,6 @@
 <?php
 //
-require_once '../part.php';
+require_once 'part.php';
 //
 class aoBody{
     const

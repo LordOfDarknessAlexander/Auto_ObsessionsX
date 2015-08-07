@@ -84,7 +84,7 @@ class aoDrivetrain
                 //);
                 //
                 if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrian';
+                    $DT = 'drivetrain';
                     $V = 'value';
                     
                     $ret = array(
@@ -144,7 +144,7 @@ class aoDrivetrain
                 //);
                 //
                 if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrian';
+                    $DT = 'drivetrain';
                     $V = 'value';
                     
                     $ret = array(
@@ -204,7 +204,7 @@ class aoDrivetrain
                 //);
                 //
                 if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrian';
+                    $DT = 'drivetrain';
                     $V = 'value';
                     
                     $ret = array(
@@ -264,7 +264,7 @@ class aoDrivetrain
                 //);
                 //
                 if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrian';
+                    $DT = 'drivetrain';
                     $V = 'value';
                     
                     $ret = array(

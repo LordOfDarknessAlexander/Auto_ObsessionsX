@@ -84,7 +84,7 @@ class aoInterior
                 //);
                 //
                 if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = 'drivetrian';
+                    $IN = 'interior';
                     $V = 'value';
                     
                     $ret = array(
@@ -144,7 +144,7 @@ class aoInterior
                 //);
                 //
                 if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = 'drivetrian';
+                    $IN = 'interior';
                     $V = 'value';
                     
                     $ret = array(
@@ -168,7 +168,7 @@ class aoInterior
         return null;
     }
     
-    public static function upgradeAxel($cid, $price){	
+    public static function upgradeDash($cid, $price){	
 		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
         global $aoUsersDB;
 		//echo 'UP';
@@ -204,7 +204,7 @@ class aoInterior
                 //);
                 //
                 if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = 'drivetrian';
+                    $IN = 'interior';
                     $V = 'value';
                     
                     $ret = array(
@@ -235,9 +235,9 @@ class aoInterior
         $offset = 0;   //number of bits
         
         $in = aoInterior::getInterior($cid);
-        $exhaust = ($in & 0x000F) >> $offset;  
+        $panels = ($in & 0x000F) >> $offset;  
         
-        if($exhaust < aoStage::PRO){
+        if($panels < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
@@ -249,7 +249,7 @@ class aoInterior
                 //$tableName = getUserTableName();
                 //
                 //mask and shift values here
-                $nc = ($exhaust == 0 ? 1 : $exhaust << 1);   //new part value
+                $nc = ($panels == 0 ? 1 : $panels << 1);   //new part value
                 $shift = $nc << $offset;
                 //echo $nc;
                 $nb = ($in & 0xFFF0) | $shift;   //clear last bits, setting new value
@@ -264,7 +264,7 @@ class aoInterior
                 //);
                 //
                 if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = 'drivetrian';
+                    $IN = 'interior';
                     $V = 'value';
                     
                     $ret = array(
@@ -316,7 +316,7 @@ if(isSetP() ){
 		    exit();
 	    }
 	    elseif($pt == aoInterior::DASH){
-            $ret = aoInterior::upgradeAxel($cid, $p);
+            $ret = aoInterior::upgradeDash($cid, $p);
             echo json_encode($ret);    
 		    exit();
 	    }
