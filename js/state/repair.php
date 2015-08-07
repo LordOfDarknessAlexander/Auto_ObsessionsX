@@ -887,6 +887,7 @@ Interior.upgrade = function(obj){
                     $('button#ub', div),
                     $('progress#pb', div)
                 );
+				setMoney(obj.userFunds);
             }
         }
         Repair.save();
@@ -989,6 +990,7 @@ Documents.upgrade = function(obj){
                     $('button#ub', div),
                     $('progress#pb', div)
                 );
+				setMoney(obj.userFunds);
             }
             Repair.save();
         }
