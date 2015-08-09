@@ -12,9 +12,9 @@ html::doctype();
 <head>
 <?php
 	html::simpleHead('Members');
+	html::memberStyles('Members');
 //	eS();
  ?>
-    <link rel='stylesheet' type='text/css' href='includes.css'>
     <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     <!-- Include JS File Here -->
