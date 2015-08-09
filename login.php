@@ -3,13 +3,15 @@ require_once 'html.php';
 require_once 'dbConnect.php';
 require_once 'secure.php';
 html::docType();
+html::memberStyles('Members');
 ?>
 <html lang=en>
 <head>
 <?php
+
 html::simpleHead('Login');
 ?>
-  <link rel='stylesheet' type='text/css' href='includes.css'>
+  
 </head>
 <body>
 <div id='header'>

@@ -5,14 +5,16 @@ require_once 'dbConnect.php';
 require_once 'create.php';
 require_once 're.php';
 //require_once '../users.php';
+html::memberStyles('Members');
 //
 html::doctype();?>
 <html lang=en>
 <head>
 <?php
+
 html::simpleHead('Register');
 ?>
-<link rel='stylesheet' type='text/css' href='includes.css'>
+
 </head>
 <body>
 <h1>Registration</h1>
@@ -263,6 +265,7 @@ function flti($name, $text, $size, $maxlength){
     itb($name, $size, $maxlength);
 }
 ?>
+	<h1>Registration</h1>
     <h3 class='content'>Items marked with an asterisk * are essential</h3>
 	<form id='reg' action='registerUser.php' method='post'>
 <?php

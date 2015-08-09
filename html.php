@@ -128,9 +128,7 @@ class html
 <head>
 <?php
         html::charset();
-        html::title($title);
-		//global $loggedIn;
-		///global $uname;
+        
 ?>
     <style>
 	 *, *:before, *:after {
@@ -156,7 +154,7 @@ class html
 		color: white;
 		text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 		left: 4%;
-		top: -2%;
+		top: -18%;
 		position: absolute;
 		
 	}
@@ -223,8 +221,8 @@ class html
 		background: url('images/Splash.png') no-repeat 0 0;
 		background-size : 100% 100%;
 		height: 60%;
-		width: 100%;
-		top:10%;
+		width: 80%;
+		top:20%;
 		left:10%;
 	}
 	div#loginfields{
@@ -243,7 +241,6 @@ class html
 		position:absolute;
 		top:0%;
 		left:0%;
-		/*background-color:grey;*/
 	}
 
 	/*Page Content*/
