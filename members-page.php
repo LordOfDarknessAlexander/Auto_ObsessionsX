@@ -134,6 +134,7 @@ else if($page == 'tutorial'){?>
 else if($page == 'credits'){
    // require 'Users/includes/info-col.php';
     ?>
+		<h1>Credits</h1>
         <p>Development Team : Alexander Sanchez, Tyler Drury<br></p>
 <?php
 }
