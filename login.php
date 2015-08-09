@@ -3,7 +3,7 @@ require_once 'html.php';
 require_once 'dbConnect.php';
 require_once 'secure.php';
 html::docType();
-html::memberStyles('Members');
+html::memberStyles();
 ?>
 <html lang=en>
 <head>

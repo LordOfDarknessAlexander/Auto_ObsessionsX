@@ -5,7 +5,7 @@ require_once 'dbConnect.php';
 require_once 'create.php';
 require_once 're.php';
 //require_once '../users.php';
-html::memberStyles('Members');
+html::memberStyles();
 //
 html::doctype();?>
 <html lang=en>

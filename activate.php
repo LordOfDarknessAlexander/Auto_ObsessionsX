@@ -7,7 +7,7 @@ html::doctype();
 <html lang='en'>
 <head>
 <?php
-html::memberStyles('Members');
+html::memberStyles();
 html::simpleHead('Members');
 html::title('Registration thank you page');
 html::charset();

@@ -11,8 +11,8 @@ html::doctype();
 <html lang=en>
 <head>
 <?php
+	html::memberStyles();
 	html::simpleHead('Members');
-	html::memberStyles('Members');
 //	eS();
  ?>
     <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
