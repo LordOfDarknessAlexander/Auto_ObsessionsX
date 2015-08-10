@@ -457,7 +457,7 @@ function auctionGen(args){
 //}
 //>
 		},
-       restart:function(data){
+        restart:function(data){
            	
 			if(!this.isExpired()){
 				var prevTime = data._time, //time auction was started in miliseconds
@@ -465,6 +465,7 @@ function auctionGen(args){
 					timeElapsed = currDate - prevTime; //time that has passed since the auction was paused
 								
 					if(timeElapsed <= this.MAX_AUCTION_TIME){
+						//if the auction has not expired set the auction timer and continue ai bidding
 						this._curTime = timeElapsed;
 						this._ai[0].currBid = data._bid0;
 						this._ai[1].currBid = data._bid1;

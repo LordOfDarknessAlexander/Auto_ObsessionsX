@@ -125,7 +125,7 @@ var AuctionSell = {
                         var ad = sd[i], //auction data
                             na = auctionGen();    //new auction
 							
-                        if(ad._end === null || ad._end === undefined){    
+                        if(ad._end === null){    
 							na.initWithData(ad);
 							na.restart(ad);
 							na.addButton();
@@ -140,20 +140,22 @@ var AuctionSell = {
             }
         }
         else{
-			//console.log('Hello Bitch');
             var len = data.length;
             
             if(len != 0){
                 userSales = [];
                 
                 for(var i = 0; i < len; i++){
+					
                     var ad = data[i],   //auction data
                         na = auctionGen(ad);  //new auction
-                
-                    //na.restart(); 
-                    na.toggleCC();
-                    na.bindViewBtn();
-                    //userSales.push(na);
+						
+					if(ad._end === null){
+						na.restart(ad); 
+						na.toggleCC();
+						na.bindViewBtn();
+						//userSales.push(na);
+					}
                 }
             }
         }
