@@ -178,12 +178,22 @@ class user{
         return null;
     }
     public static function getTokens(){
-        $T = 'tokens';
+        $T = user::T;
         $ret = user::slctFromEntry($T);
         
         if($ret){
             $t = intval($res->fetch_assoc()[$T]);
             return $t;
+        }
+        return 0;
+    }
+    public static function getMarkers(){
+        $MM = user::MM;
+        $ret = user::slctFromEntry($MM);
+        
+        if($ret){
+            $mm = intval($res->fetch_assoc()[$MM]);
+            return $mm;
         }
         return 0;
     }
