@@ -5,6 +5,7 @@ class aoInterior
 {
 	//ints match those in the interior.js TYPE enum
     const
+        KEY = 'interior',
 	    SEATS = 0,
 	    CARPET = 1,
 	    DASH = 2,
@@ -34,7 +35,7 @@ class aoInterior
         global $aoUsersDB;
         
         $TN = getUserTableName();
-        $IN = 'interior';
+        $IN = aoInterior::KEY;
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
@@ -84,7 +85,7 @@ class aoInterior
                 //);
                 //
                 if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = 'interior';
+                    $IN = aoInterior::KEY;
                     $V = 'value';
                     
                     $ret = array(
@@ -144,18 +145,18 @@ class aoInterior
                 //);
                 //
                 if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = 'interior';
+                    $IN = aoInterior::KEY;
                     $V = 'value';
                     
-                    $ret = array(
+                   return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
                         $IN=>$nb,
                         $V=>$nc
                     );
         
-                    echo json_encode($ret);
-                    exit();
+                    //echo json_encode($ret);
+                    //exit();
                 }
             }
             //else, new funds and user's funds are the same,
@@ -204,18 +205,18 @@ class aoInterior
                 //);
                 //
                 if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = 'interior';
+                    $IN = aoInterior::KEY;
                     $V = 'value';
                     
-                    $ret = array(
+                    return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
                         $IN=>$nb,
                         $V=>$nc
                     );
         
-                    echo json_encode($ret);
-                    exit();
+                    //echo json_encode($ret);
+                    //exit();
                 }
             }
             //else, new funds and user's funds are the same,
@@ -246,7 +247,6 @@ class aoInterior
                 
             if($dif > 0.000008){
                 //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
                 //
                 //mask and shift values here
                 $nc = ($panels == 0 ? 1 : $panels << 1);   //new part value
@@ -254,37 +254,28 @@ class aoInterior
                 //echo $nc;
                 $nb = ($in & 0xFFF0) | $shift;   //clear last bits, setting new value
                 //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$in=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
+                //set new values           
                 //
                 if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = 'interior';
+                    $IN = aoInterior::KEY;
                     $V = 'value';
                     
-                    $ret = array(
+                    return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
                         $IN=>$nb,
                         $V=>$nc
                     );
         
-                    echo json_encode($ret);
-                    exit();
+                    //echo json_encode($ret);
+                    //exit();
                 }
             }
             //else, new funds and user's funds are the same,
             //purchase not successful
             //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
         }
         //echo 'could not upgrade part, already fully upgraded';
-        //exit();
         return null;
     }
     
@@ -295,40 +286,33 @@ if(isSetP() ){
 	$P = 'price';
     $CID = ao::CID;
     $PT = 'partType';
+    
     $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
-		
 	//echo 'butternuts';
-	$pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null; 
+	$pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null;
+    //echo $pt;
 	$cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
-	
+	//echo $cid;
         
-    if($cid != 0 && $p > 1.0 && $pt !== null){
+    if( ($cid != 0) && ($p > 1.0) && ($pt !== null) ){
         $ret = null;
         
         if($pt == aoInterior::SEATS){
 		    $ret = aoInterior::upgradeSeats($cid, $p);
-		    echo json_encode($ret); 
-		    exit();
 	    }
 	    elseif($pt == aoInterior::CARPET){
 		    $ret = aoInterior::upgradeCarpet($cid, $p);
-		    echo json_encode($ret);    
-		    exit();
 	    }
 	    elseif($pt == aoInterior::DASH){
             $ret = aoInterior::upgradeDash($cid, $p);
-            echo json_encode($ret);    
-		    exit();
 	    }
 	    elseif($pt == aoInterior::PANELS){
             $ret = aoInterior::upgradePanels($cid, $p);
-            echo json_encode($ret);    
-		    exit();
 	    }
 	    else{
 		    //console.log('attempting to upgrade unknown type: ' + partType.toString() );
 		    echo 'attempting to upgrade unknown type: ';
-	    }	
+	    }
         echo json_encode($ret);
         exit();
     }

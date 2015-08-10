@@ -45,8 +45,7 @@ Auction Select Car View
     width:80%;
     height:70%;
 }
-<?php dcv();?> div
-{
+<?php dcv();?> div{
 	margin:0 0 0% 0;	/*top right bottom left*/
 	/*padding: 50px 50px;
 	display:inline;*/
@@ -55,16 +54,14 @@ Auction Select Car View
    background:url('../images/label.jpg');
     display:block;
 }
-<?php dcv();?> div div#btns
-{
+<?php dcv();?> div div#btns{
     position:absolute;
     width:10%;
     right:0%;
     height:15%;
     display:block;
 }
-<?php dcv();?> div label#carInfo
-{
+<?php dcv();?> div label#carInfo{
 	/*background-color:green;*/
 	text-align:center;
 <?php
@@ -77,8 +74,7 @@ Auction Select Car View
     font-weight:bold;
     font-size:1.8vw;
 }
-<?php dcv();?> div label
-{
+<?php dcv();?> div label{
 	/*background: url('../images/defaultBtn.png') no-repeat 0 0;*/
 	background-size : 100% 100%;
     /*background-color:blue;*/
@@ -111,6 +107,14 @@ Auction Select Car View
     font-size:1.25vw;
     display:block;
 }
+<?php dcv();?> div progress#time{
+<?php
+    posAbs();
+    css::size('50%','5%');
+    css::left('15%');
+    //css::top('0%');
+?>
+}
 <?php dcv();?> div progress#endTime{
 <?php
     posAbs();
@@ -119,8 +123,7 @@ Auction Select Car View
 	left:15%;
 	top:25%;
 }
-<?php dcv();?> div#btns button#view
-{
+<?php dcv();?> div#btns button#view{
     background: url('../images/icons/view.png') no-repeat 0 0;
     background-size:100% 100%;
     position:absolute;
@@ -130,8 +133,7 @@ Auction Select Car View
     height:50%;
     padding:0% 0%;
 }
-<?php dcv();?> div#btns button#cc
-{
+<?php dcv();?> div#btns button#cc{
     background: url('../images/icons/cancel.png') no-repeat 0 0;
     background-size:100% 100%;
     position:absolute;
@@ -141,8 +143,7 @@ Auction Select Car View
     height:50%;
     padding:0% 0%;
 }
-<?php divAS();?> div button label
-{
+<?php divAS();?> div button label{
 	font-size:1.25em;
 	background-size: 100% 100%;
 	/*font-family::;
@@ -151,8 +152,7 @@ Auction Select Car View
 	text-align::center;
 	color:red;
 }
-<?php dcv();?> div img
-{
+<?php dcv();?> div img{
 <?php posAbs();?>
 	left:0%;
 	width:15%;

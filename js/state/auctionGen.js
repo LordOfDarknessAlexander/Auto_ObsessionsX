@@ -258,6 +258,7 @@ function auctionGen(args){
                         "<img src='" + car.getFullPath() + "'>" +
                         "<label id='carInfo'>" + car.getFullName() + "</label>" +
 						//"<progress id='endTime'></progress>" + 
+                        "<progress id='time'></progress>" +
                         "<label id='" + btnID + "'>" +
                             "<label id='price'>Price: $" + (car.getPrice()).toString() + "</label><br>" +
                             "<label id='expireTime'>Auction expires: " + (this.getExpiredPerc()).toString() + " </label>" +
@@ -346,8 +347,7 @@ function auctionGen(args){
 //else{>
             AuctionSell.save();
 //<php
-//}
-//>
+//}>
 		},
 		update:function(dt){
             //
@@ -474,7 +474,7 @@ function auctionGen(args){
 					}
 			}
 			else{
-				this.Disable();
+				this.disable();
 			}
 			
         },
@@ -631,7 +631,7 @@ function auctionGen(args){
             }
         },
 		bindViewBtn:function(){
-			 //toggles the cancel/cash button
+			//toggles the cancel/cash button
             var t = this;   //owning object, not this function
             
             if(t._car !== null){

@@ -5,6 +5,7 @@ class aoDocuments
 {
 	//ints match those in the interior.js TYPE enum
     const
+        KEY = 'docs',
 	    OWNERSHIP = 0,
 	    BUILD = 1,
 	    HISTORY = 2,
@@ -14,7 +15,7 @@ class aoDocuments
     public static function getDocuments($cid){
         global $aoUsersDB;
 		
-        $IN = 'interior';
+        $D = aoDocuments::KEY;
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
@@ -22,7 +23,7 @@ class aoDocuments
         );
         
         if($res){
-            $ret = intval($res->fetch_assoc()[$IN]);
+            $ret = intval($res->fetch_assoc()[$D]);
             //echo $ret;
             return $ret;
         }
@@ -34,11 +35,11 @@ class aoDocuments
         global $aoUsersDB;
         
         $TN = getUserTableName();
-        $IN = 'interior';
+        $D = aoDocuments::KEY;
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
-            "UPDATE $TN SET $IN = $in WHERE $CID = $cid"
+            "UPDATE $TN SET $D = $in WHERE $CID = $cid"
         );
         
         if($res){
@@ -84,18 +85,15 @@ class aoDocuments
                 //);
                 //
                 if(aoDocuments::setDocuments($cid, $nb) ){
-                    $IN = 'drivetrian';
+                    $D = aoDocuments::KEY;
                     $V = 'value';
                     
-                    $ret = array(
+                    return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $IN=>$nb,
+                        $D=>$nb,
                         $V=>$nc
                     );
-        
-                    echo json_encode($ret);
-                    exit();
                 }
             }
             //else, new funds and user's funds are the same,
@@ -135,27 +133,20 @@ class aoDocuments
                 $nb = ($in & 0xF0FF) | $shift;   //clear last bits, setting new value
                 //echo $nb;
                 //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$in=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
                 //
                 if(aoDocuments::setDocuments($cid, $nb) ){
-                    $IN = 'drivetrian';
+                    $D = aoDocuments::KEY;
                     $V = 'value';
                     
-                    $ret = array(
+                    return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $IN=>$nb,
+                        $D=>$nb,
                         $V=>$nc
                     );
         
-                    echo json_encode($ret);
-                    exit();
+                    //echo json_encode($ret);
+                    //exit();
                 }
             }
             //else, new funds and user's funds are the same,
@@ -175,7 +166,7 @@ class aoDocuments
         $offset = 4;   //number of bits
         
         $in = aoDocuments::getDocuments($cid);
-        $dash = ($in & 0x00F0) >> $offset;  
+        $dash = ($in & 0x00F0) >> $offset;
         
         if($dash < aoStage::PRO){
             //check if part is already fully upgraded
@@ -204,13 +195,13 @@ class aoDocuments
                 //);
                 //
                 if(aoDocuments::setDocuments($cid, $nb) ){
-                    $IN = 'drivetrian';
+                    $D = aoDocuments::KEY;
                     $V = 'value';
                     
                     $ret = array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $IN=>$nb,
+                        $D=>$nb,
                         $V=>$nc
                     );
         
@@ -264,18 +255,15 @@ class aoDocuments
                 //);
                 //
                 if(aoDocuments::setDocuments($cid, $nb) ){
-                    $IN = 'drivetrian';
+                    $D = aoDocuments::KEY;
                     $V = 'value';
                     
-                    $ret = array(
+                    return array(
                         'userFunds'=>$nf,
                         'cid'=>$cid,
-                        $IN=>$nb,
+                        $D=>$nb,
                         $V=>$nc
                     );
-        
-                    echo json_encode($ret);
-                    exit();
                 }
             }
             //else, new funds and user's funds are the same,
@@ -295,35 +283,28 @@ if(isSetP() ){
 	$P = 'price';
     $CID = ao::CID;
     $PT = 'partType';
+    
     $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
-		
-	//echo 'butternuts';
+	//echo $p;
 	$pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null; 
+    //$echo $pt;
 	$cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
+    //echo $cid;
 	
-        
-    if($cid != 0 && $p > 1.0 && $pt !== null){
+    if( ($cid != 0) && ($p > 1.0) && ($pt !== null) ){
         $ret = null;
         
         if($pt == aoDocuments::OWNERSHIP){
 		    $ret = aoDocuments::upgradeOwnership($cid, $p);
-		    echo json_encode($ret); 
-		    exit();
 	    }
 	    elseif($pt == aoDocuments::BUILD){
 		    $ret = aoDocuments::upgradeBuild($cid, $p);
-		    echo json_encode($ret);    
-		    exit();
 	    }
 	    elseif($pt == aoDocuments::HISTORY){
             $ret = aoDocuments::upgradeHistory($cid, $p);
-            echo json_encode($ret);    
-		    exit();
 	    }
 	    elseif($pt == aoDocuments::RESTORATION){
             $ret = aoDocuments::upgradeRestoration($cid, $p);
-            echo json_encode($ret);    
-		    exit();
 	    }
 	    else{
 		    //console.log('attempting to upgrade unknown type: ' + partType.toString() );
