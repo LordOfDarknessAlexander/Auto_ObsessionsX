@@ -48,6 +48,8 @@ class aoBody{
     public static function upgradeChassis($cid, $price){
         global $aoUsersDB;
         
+        //$FN = __DIR__ . ', ' . __FUNCTION__;
+        
         $offset = 12;   //number of bits
         $b = aoBody::getBody($cid);
         $chas = ($b & 0xF000) >> $offset;
@@ -244,9 +246,7 @@ if(isSetP()){
     $PT = 'partType';
     
     $p = getPriceFromPost();
-    //echo $p;
     $cid = getCIDFromPost();
-    //echo $cid;
     $pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null;
     //echo $pt;
     

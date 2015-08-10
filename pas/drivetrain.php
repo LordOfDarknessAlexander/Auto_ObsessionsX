@@ -296,11 +296,10 @@ if(isSetP() ){
 	$P = 'price';
     $CID = ao::CID;
     $PT = 'partType';
-    $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
-		
-	//echo 'butternuts';
+    
+    $p = getPriceFromPost();
+    $cid = getCIDFromPost();
 	$pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null; 
-	$cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
 	
         
     if($cid != 0 && $p > 1.0 && $pt !== null){
