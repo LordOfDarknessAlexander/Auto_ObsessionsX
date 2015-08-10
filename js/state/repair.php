@@ -1,6 +1,15 @@
 //Repair State interface, mod your ride and upgrade parts
 //Dependant on state\Garage.js, for userGarage and car index
 //and js/entities/ for Vehicle and Parts
+//<php
+//function drs(){>div#RepairShop<php
+//}
+//function drsDiv(){
+    //drs()> div<php
+//}
+//function drsSwitch(){
+    //drsDiv()>#switch<php
+//}
 jq.RepairShop = {
     //jquery html bindings
     menu : $('div#RepairShop'),
@@ -327,6 +336,9 @@ var Repair = {
         var car = Garage.getCurrentCar();
 //<php
         var funcName = 'js/Repair.js Repair::save()';
+        //function getBits(part){
+            //return part !== null ? part.getBits() : 0;
+        //}
 //if(loggedIn() ){?>
         //sends the car data to the server        
         jq.post('pas/update.php?op=update',

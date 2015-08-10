@@ -4,6 +4,7 @@ require_once 'part.php';
 //
 class aoBody{
     const
+        KEY = 'body',
         CHASSIS = 0x1,
         PANELS = 0x2,
         PAINT = 0x3,
@@ -12,7 +13,7 @@ class aoBody{
     public static function getBody($cid){
         global $aoUsersDB;
         
-        $B = 'body';
+        $B = aoBody::KEY;
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
@@ -31,7 +32,7 @@ class aoBody{
         global $aoUsersDB;
         
         $TN = getUserTableName();
-        $B = 'body';
+        $B = aoBody::KEY;
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
@@ -79,7 +80,7 @@ class aoBody{
                 //);
                 //
                 if(aoBody::setBody($cid, $nb) ){
-                    $B = 'body';
+                    $B = aoBody::KEY;
                     $V = 'value';
                     
                     return array(
@@ -127,7 +128,7 @@ class aoBody{
                 //echo $nb;
                 //set new values
                 if(aoBody::setBody($cid, $nb) ){
-                    $B = 'val';
+                    $B = aoBody::KEY;
                     $V = 'value';
                     
                     return array(
@@ -171,7 +172,7 @@ class aoBody{
                 //echo $nb;
                 //set new values
                 if(aoBody::setBody($cid, $nb) ){
-                    $B = 'body';
+                    $B = aoBody::KEY;
                     $V = 'value';
                         
                     return array(
@@ -213,7 +214,7 @@ class aoBody{
                 //echo $nb;
                 //set new values
                 if(aoBody::setBody($cid, $nb) ){
-                    $B = 'body';
+                    $B = aoBody::KEY;
                     $V = 'value';
                     
                     return array(
@@ -238,13 +239,13 @@ class aoBody{
 }
 if(isSetP()){
     //echo 'blah';
-    $P = 'price';
+    //$P = 'price';
     $CID = ao::CID;
     $PT = 'partType';
     
-    $p = isFloat($_POST[$P]) ? round(floatval($_POST[$P]), 2) : 0.0;
+    $p = getPriceFromPost();
     //echo $p;
-    $cid = isUINT($_POST[$CID]) ? intval($_POST[$CID]) : 0;
+    $cid = getCIDFromPost();
     //echo $cid;
     $pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null;
     //echo $pt;
@@ -271,6 +272,6 @@ if(isSetP()){
         echo "invalid value ret:$ret, could not complete purchase";
         exit();
     }
-    echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase";
+    echo "invalid value(s), ($CID:$cid, price:$p, $PT:$pt) could not complete purchase";
 }
 ?>

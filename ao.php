@@ -20,6 +20,7 @@ class ao{
         NAME = 'Auto-Obsessions&#153;',
         SITE_NAME = 'Auto_ObsessionsX',
         EMAIL = 'auto_obsessions@851entertainment.com',
+        //mySQL database names
         USERS = 'users',  //table containing all registered users
         CARS = 'aoCars',  
 		MEMBERS = 'aoMembersDB',

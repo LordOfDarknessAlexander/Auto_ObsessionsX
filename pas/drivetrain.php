@@ -5,6 +5,7 @@ class aoDrivetrain
 {
 	//ints match those in the drivetrain.js TYPE enum
     const
+        KEY = 'drivetrain',
 	    ENGINE = 0,
 	    TRANSMISSION = 1,
 	    AXEL = 2,
