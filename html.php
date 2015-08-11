@@ -84,8 +84,7 @@ class html
 <?php
         html::charset();
         html::title($title);
-		//global $loggedIn;
-		///global $uname;
+		
 ?>
     <style>
         body{
@@ -119,9 +118,8 @@ class html
             echo html::escape($t);
         }
     }
-	
 	public static function memberStyles(){
-               //outputs default, non-secure page header
+               //outputs members pages styles
         html::docType();
 ?>
 <html>
@@ -224,6 +222,7 @@ class html
 		width: 80%;
 		top:20%;
 		left:10%;
+		z-index : 1%;
 	}
 	div#loginfields{
 		position:absolute;
@@ -239,8 +238,10 @@ class html
 	}
 	div#nav{
 		position:absolute;
-		top:0%;
+		top:8%;
 		left:0%;
+		z-index : 10%;
+		
 	}
 
 	/*Page Content*/
@@ -319,11 +320,9 @@ class html
 
 	/* setting anchor styles */
 	div#reg-navigation{
-	 
 		position:absolute;
-		top:0%;
+		top:8%;
 		right:0%;
-		
 		z-index:5;
 		/*background-color:grey;*/
 	}
@@ -335,7 +334,6 @@ class html
 		font-weight: bold;
 		text-decoration: none;
 		text-align:center;
-		/*padding : 2%;*/
 		background: url('images/defaultBtn.png') no-repeat 0 0;
 		background-size:100% 100%;
 		position: abosolute;
@@ -348,8 +346,6 @@ class html
 		background-size:100% 100%;
 		color:green;
 		border: 2px green solid;
-		
-		/*padding : 2%;*/
 	}
 	/* onmousedown */
 	li a:active,
@@ -357,7 +353,6 @@ class html
 	div#reg-navigation a:active {
 		background:#aecbff;
 		border: 4px inset #aecbff;
-		/*padding : 2%;*/
 		color: blue;
 	}
 
@@ -366,7 +361,6 @@ class html
 		font-size:75%;
 		font-weight:bold;
 		text-align:left;
-		
 		position:relative;
 		right:0%;
 		height:70%;
@@ -387,7 +381,6 @@ class html
 	{
 		font-size:0.65em;
 		color:white;
-		
 		position:absolute;
 		bottom:0%;
 		left:0%;
@@ -397,10 +390,6 @@ class html
 <body>
 <?php
         //devs add page content after this call
-		
     }
-    
-	
-	
 }
 ?>
