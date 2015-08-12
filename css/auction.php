@@ -27,13 +27,12 @@ Auction Screen
 	height: 100%;
 }
 
-<?php divAuction();?> li 
-{
+<?php divAuction();?> li{
 	padding: 5px 0;
 }
 
-<?php divAuction();?> button#auctionBackButton
-{<?php
+<?php divAuction();?> button#auctionBackButton{
+<?php
     posAbs();
     css::fontBold();
     defaultBtnBG();
@@ -53,7 +52,7 @@ Auction Screen
     //css::left();
     //css::bottom();
 ?>
-	width:19%;
+	width:18%;
 	height:5%;
 	left:1%;
 	bottom:30%;
@@ -123,8 +122,8 @@ Auction Screen
 <?php divAuction();?> div#pbCD{
 <?php
     posAbs();
-    css::size('20%','30%');
-    css::right('0%');
+    css::size('18%', '30%');
+    css::right('1%');
     css::top('55%');
 ?>
 }

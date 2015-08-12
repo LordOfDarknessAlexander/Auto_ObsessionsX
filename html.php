@@ -83,8 +83,7 @@ class html
 <head>
 <?php
         html::charset();
-        html::title($title);
-		
+        html::title($title);		
 ?>
     <style>
         body{

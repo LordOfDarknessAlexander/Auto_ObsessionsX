@@ -9,9 +9,8 @@ function divAS(){?>div#AuctionSelect<?php
 function lih(){?>   height:64px;
 <?php
 }
-//function dasCV(){
-    //echo 'div#AuctionSelect div#carView';
-//}
+function dasCV(){divAS();?> div#carView<?php
+}
 ?>
 /*
 Action Select UI stylings
@@ -29,7 +28,7 @@ Action Select UI stylings
 	padding-top: 92px;
 	z-index: 1;
 }
-<?php divAS();?> div#carView{
+<?php dasCV();?>{
 <?php
     posAbs();
     css::size('90%', '70%');
@@ -41,7 +40,7 @@ Action Select UI stylings
 /*
 Tint divs different colours for different classes
 */
-<?php divAS();?> div#carView div:hover{
+<?php dasCV();?> div:hover{
     border:2px green solid;
 }
 <?php divAS();?> div.classic label#infoLabel{
@@ -70,46 +69,47 @@ Tint divs different colours for different classes
 <?php css::bgColor('green');?>
 }
 
-<?php divAS();?> div#carView div button
-{
+<?php dasCV();?> div button{
 	background: url('../images/defaultBtn2.png') no-repeat 0 0;
 	background-size : 100% 100%;
 <?php
     posAbs();
     //rz();
+    lih();
 ?>
 	right:0%;
-<?php lih();?>
 	width:15%;
 	color:red;
     /*z-index:5;*/
 }
 /**/
-<?php divAS();?> div#carView div
-{
+<?php dasCV();?> div{
+<?php lih();?>
 	/*margin:35px 0% 35px 0%;	*/
 	/*top right bottom left   this line should cause the code to break, invalid css*/
 	/*padding: 50px 50px;
 	display:inline;*/
-	/*margin : 2%;*/
     background: url('../images/label.jpg');
-<?php lih();?>
 }
-<?php divAS();?> div#carView div img
-{
-<?php posAbs();?>
-	left:0%;
+<?php dasCV();?> div img{
+<?php
+    posAbs();
+    lih();
+    css::left('0%');
+?>
 	width:128px;
-<?php lih();?>
 }
-<?php divAS();?> div#carView div label#infoLabel
-{
+<?php dasCV();?> div label#infoLabel{
+<?php
+    posAbs();
+    lih();
+    fontBold();
+    css::txtAlignCntr();
+    css::width('70%');
+    css::left('128px');
+    //margin:2.5% 0% 0% 0%;
+?>
 	opacity:0.70;
-	text-align:center;
-<?php posAbs();?>
-	left:128px;
-	width:70%;
-<?php lih();?>
 }
 /*
 <php divAS();> ul

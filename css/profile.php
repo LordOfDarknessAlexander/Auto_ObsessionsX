@@ -48,13 +48,13 @@ User Profile Screen Styles
 Profile DIV User Stats
 */
 <?php dpus();?>{
-    left:2%;
+    left:1%;
     background: url('../images/icons/divTile.png') repeat 0 0;
 }
 /*
 Profile DIV Sales info
 */
 <?php dpsi();?>{
-    right:2%;
+    right:1%;
     background: url('../images/icons/divTile.png') repeat 0 0;
 }

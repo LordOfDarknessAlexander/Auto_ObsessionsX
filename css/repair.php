@@ -122,7 +122,7 @@ Page Switch, for different components
     //scrollY();
     css::txtAlignCntr();
 ?>
-    top:15%;
+    top:16%;
     left:1%;
     background:url('../images/defaultBG.jpg') no-repeat 0 0;
     /*background-color:grey;*/

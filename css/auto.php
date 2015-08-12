@@ -43,8 +43,7 @@ canvas{
 
 <?php //default element stylings for the entire page?>
 /* Auctions America Banner  */
-#aAmerica
-{
+div#aAmerica{
 	/*height : 200px;*/
 	font-weight: bold;
 	margin-left : 28%;
@@ -76,8 +75,7 @@ a{
     color:blue;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
-p#legal
-{
+p#legal{
     font-size:0.65em;
     color:white;
     
@@ -85,15 +83,13 @@ p#legal
     bottom:0%;
     left:0%;
 }
-textarea#comment-form
-{
+textarea#comment-form{
     resize: none;
 }
 /*
 Proress bar styles
 */
-progress
-{
+progress{
     /*display:none;
     appearance:none;*/
     -moz-appearance:none;
@@ -127,8 +123,7 @@ progress.med::-moz-progress-bar{
 /*
 Forms
 */
-div#loginfields
-{
+div#loginfields{
 	font-size:0.75em;
     color:white;
     position:absolute;
@@ -150,20 +145,18 @@ div#loginfields
   font-weight: bold;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
-#progress-bar 
-{
+#progress-bar{
   width: 200px;
 }
 /*
 Button styles
 */
-button
-{	/*all button elements will share this background (and other properties) unless otherwise specified*/
+button{
+    /*all button elements will share this background (and other properties) unless otherwise specified*/
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
     background-size:100% 100%;
 	color:red;
     cursor:pointer;	
-	
 }
 button:hover {
     /*mouse over*/
@@ -181,18 +174,18 @@ button:active {
     /*mouse pressed*/
     color:yellow;
 }
-button#backBtn
-{   /*sets properties for all button tags with id backBtn*/
+button#backBtn{
+    /*sets properties for all button tags with id backBtn*/
 <?php
     posAbs();
     css::size('5%', '7.5%');
     //lm();
+    css::marginBtm();
 ?>
 	background: url('../images/backBtn.png') no-repeat 0 0;
 	background-size : 100% 100%;
 
 	left:5%;
-<?php css::marginBtm();?>
 }
 button#homeBtn{
 <?php
@@ -215,10 +208,11 @@ pre styles(preformated text)
 pre#info{
 <?php
     posAbs();
-    css::lm();
-    css::size('90%', '10%');
+    css::left('20%');
+    css::size('60%', '10%');
     css::bgColor('grey');
     css::txtAlignCntr();
+    scrollY();
 ?>
     bottom:72%;
     font-size:1vw;
@@ -317,12 +311,8 @@ div#statBar label#money{left:0%;top:75%;}
 div#statBar label#tokens{left:25%;top:75%;}
 div#statBar label#prestige{left:50%;top:75%;}
 div#statBar label#m_marker{left:75%;top:75%;}
-
-
-	
-	
-	
-
+/*
+*/
 img#mainCar{
 <?php
     posAbs();
@@ -341,9 +331,11 @@ div#reg-navigation{
     defaultBtnBG();
     css::txtAlignCntr();
 ?>
-    right:0%;
+    right:1%;
+    /*width:18%;*/
+    height:10%;
     z-index:3;
-	top : 19%;
+	top : 16%;
 	
 }
 
