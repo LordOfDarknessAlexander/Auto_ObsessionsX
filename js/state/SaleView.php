@@ -176,9 +176,11 @@ var SaleView = {
 		}	
 	},
 	update : function(){
-		this.sortAI(); 
-		this.endAuction();
-		this.render();		
+		if(!this._auction.isExpired()){
+			this.sortAI(); 
+			this.endAuction();
+			this.render();
+		}		
 	},
 	endAuction : function(){
 		context.font = '20px arial, sans-serif';

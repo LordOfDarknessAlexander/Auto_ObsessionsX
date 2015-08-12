@@ -40,7 +40,7 @@ function auctionGen(args){
 		//st = isValid ? args._startTime : +new Date(), //temp
         e = isValid ? args._end : null,
         ci = isValid ? args._cashedIn : false,
-        ct = isValid ? args._time : 0.0;   
+        ct = isValid ? args._time : 0.0;
     
 	console.log('creating auction with vars: ' + JSON.stringify(args) );
     
@@ -67,6 +67,7 @@ function auctionGen(args){
 		_bidTimer: 0.0,
 		_hasLeft: 0.0,
 		_time: Date.now(),
+		
 		//
 		init:function(index){
 			this._timer.reset();
@@ -106,7 +107,7 @@ function auctionGen(args){
                     
 		            this._car = Vehicle(data._car.name, data._car.make, data._car.year, data._car._price, data._car.id, ''/*, parts, repairs*/);
 		            this._currentBid = data.bid;
-                    //this._curTime = data._curTime;
+                    //this._curTime = data._time;
                     
 		            this._initAI(data);
 		            AuctionSell.save();
@@ -261,7 +262,6 @@ function auctionGen(args){
                         "<progress id='time'></progress>" +
                         "<label id='" + btnID + "'>" +
                             "<label id='price'>Price: $" + (car.getPrice()).toString() + "</label><br>" +
-                            "<label id='expireTime'>Auction expires: " + (this.getExpiredPerc()).toString() + " </label>" +
                         "</label>" +
                         "<div id='btns'>" +
                             "<button id='view'></button>" +
@@ -275,6 +275,10 @@ function auctionGen(args){
                 if (this.isExpired() && this._cashedIn) {
                     this.disable();
                 }
+				
+				var prog =  $('div#' + liID + ' progress#time',  jq.AuctionSell.carView);
+				pbSetColor(prog, this.getExpiredPerc());
+				
             }
         },
         disable:function(){
@@ -389,7 +393,7 @@ function auctionGen(args){
 		},
 		updateServerSales:function(){
 			
-			console.log('updateServerSales called ');
+			//console.log('updateServerSales called ');
 			//<php if(loggedIn() ){>
 				var funcName = 'js/auctionGen.js update()';
 				jq.post(
@@ -459,23 +463,46 @@ function auctionGen(args){
 		},
         restart:function(data){
            	
-			if(!this.isExpired()){
-				var prevTime = data._time, //time auction was started in miliseconds
-					currDate = Date.now(), //currentTime at restart execution
-					timeElapsed = currDate - prevTime; //time that has passed since the auction was paused
-								
-					if(timeElapsed <= this.MAX_AUCTION_TIME){
-						//if the auction has not expired set the auction timer and continue ai bidding
-						this._curTime = timeElapsed;
-						this._ai[0].currBid = data._bid0;
-						this._ai[1].currBid = data._bid1;
-						this._ai[2].currBid = data._bid2;
-						this._ai[3].currBid = data._bid3;
-					}
-			}
-			else{
-				this.disable();
-			}
+			var prevTime = data._time, //time auction was started in miliseconds
+				currDate = Date.now(), //currentTime at restart execution
+				timeElapsed = currDate - prevTime; //time that has passed since the auction was paused
+							
+			//if(timeElapsed <= this.MAX_AUCTION_TIME){
+				//if the auction has not expired set the auction timer and continue ai bidding
+				this._curTime = timeElapsed;
+				
+				var ai0 = this._ai[0],
+					ai1 = this._ai[1],
+					ai2 = this._ai[2],
+					ai3 = this._ai[3]
+				
+				ai0.currBid = data._bid0;
+				ai1.currBid = data._bid1;
+				ai2.currBid = data._bid2;
+				ai3.currBid = data._bid3;
+				
+				//console.log(ai0.leftAuction, ai1.leftAuction, ai2.leftAuction, ai3.leftAuction);
+				
+				ai0.bidCap = data._bidcap0;
+				ai1.bidCap = data._bidcap1;
+				ai2.bidCap = data._bidcap2;
+				ai3.bidCap = data._bidcap3;
+				
+				// if(ai0.currBid >= ai0.bidCap){
+					// ai0.leave();
+				// }
+				// if(ai1.currBid >= ai1.bidCap){
+					// ai1.leave();
+				// }
+				// if(ai2.currBid >= ai2.bidCap){
+					// ai2.leave();
+				// }
+				// if(ai3.currBid >= ai3.bidCap){
+					// ai3.leave();
+				// }
+				AuctionSell.save();
+				//SaleView.sortAI();
+			//}
 			
         },
 		toJSON : function(){
@@ -494,7 +521,12 @@ function auctionGen(args){
 				_bid0: this._ai[0].currBid,
 				_bid1: this._ai[1].currBid,
 				_bid2: this._ai[2].currBid,
-				_bid3: this._ai[3].currBid
+				_bid3: this._ai[3].currBid,
+				_bidcap0: this._ai[0].bidCap,
+				_bidcap1: this._ai[1].bidCap,
+				_bidcap2: this._ai[2].bidCap,
+				_bidcap3: this._ai[3].bidCap
+				
 			};
 		},
 		enemyBidding : function(){
@@ -519,7 +551,7 @@ function auctionGen(args){
 							this.resetTimer();
 							var l = $('div#ai' + i.toString() + ' label#bid', jq.SaleView._ai.div);
 							l.text(e.currBid.toFixed(2));
-							
+							AuctionSell.save();
 							this.updateServerSales();
 							//SaleView.sortAI();
 							break;
@@ -791,6 +823,10 @@ function auctionGen(args){
         },
 		render:function(){
 			//pbSetColor(jq.AuctionSell.carView.append(btnStr),  this.getExpiredPerc());
+			var cidStr = (this._car.id).toString(),
+				liID = 'asd' + cidStr,
+				prog = $('div#' + liID + ' progress#time',  jq.AuctionSell.carView);
+				pbSetColor(prog, this.getExpiredPerc());
 		}
 	};
 }

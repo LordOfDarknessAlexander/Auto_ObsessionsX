@@ -57,7 +57,7 @@ Auction Select Car View
 <?php dcv();?> div div#btns{
     position:absolute;
     width:10%;
-    right:0%;
+	right:0%;
     height:15%;
     display:block;
 }
@@ -92,10 +92,11 @@ Auction Select Car View
 <?php dcv();?> div label#price{
 <?php
     css::txtAlignL();
-    css::size('100%', '50%');
+    css::size('100%', '25%');
 ?>
     left:0%;
-    font-size:1.25vw;
+	top:5%;
+    font-size:2vw;
     display:block;
 }
 <?php dcv();?> div label#expireTime{
@@ -109,19 +110,14 @@ Auction Select Car View
 }
 <?php dcv();?> div progress#time{
 <?php
-    posAbs();
-    css::size('50%','5%');
-    css::left('15%');
-    //css::top('0%');
+    css::size('65%','20%');
+    //css::left('0%');
+    //css::top('30%');
 ?>
-}
-<?php dcv();?> div progress#endTime{
-<?php
-    posAbs();
-    css::size('70%','5%');
-?>
-	left:15%;
-	top:25%;
+	position:relative;
+	top:70%;
+	left:0%;
+	right:0%;
 }
 <?php dcv();?> div#btns button#view{
     background: url('../images/icons/view.png') no-repeat 0 0;

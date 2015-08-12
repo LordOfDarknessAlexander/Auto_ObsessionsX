@@ -124,14 +124,14 @@ var AuctionSell = {
 
                         var ad = sd[i], //auction data
                             na = auctionGen();    //new auction
-							
-                        if(ad._end === null){    
+						
+												
+                        if(ad._end === null){  
 							na.initWithData(ad);
 							na.restart(ad);
 							na.addButton();
 							na.toggleCC();
 							na.bindViewBtn();
-							
 							userSales.push(na);//push new auction
 							//var TIM = 0;
 						}
