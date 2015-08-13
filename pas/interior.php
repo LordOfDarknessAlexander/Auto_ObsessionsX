@@ -11,10 +11,10 @@ class aoInterior
 	//ints match those in the interior.js TYPE enum
     const
         KEY = 'interior',
-	    SEATS = 0,
-	    CARPET = 1,
-	    DASH = 2,
-	    PANELS = 3;
+	    SEATS = 1,
+	    CARPET = 2,
+	    DASH = 3,
+	    PANELS = 4;
     
         
     public static function getInterior($cid){
@@ -110,10 +110,10 @@ class aoInterior
     public static function upgradeCarpet(){	
 		return aoInterior::upgrade(8);
     }    
-    public static function upgradeDash($cid, $price){	
+    public static function upgradeDash(){	
 		return aoInterior::upgrade(4);
     }    
-    public static function upgradePanels($cid, $price){	
+    public static function upgradePanels(){	
 		return aoInterior::upgrade(0);
     }    
 }
@@ -128,16 +128,16 @@ if(isSetP() ){
         $ret = null;
         
         if($pt == aoInterior::SEATS){
-		    $ret = aoInterior::upgradeSeats($cid, $p);
+		    $ret = aoInterior::upgradeSeats();
 	    }
 	    elseif($pt == aoInterior::CARPET){
-		    $ret = aoInterior::upgradeCarpet($cid, $p);
+		    $ret = aoInterior::upgradeCarpet();
 	    }
 	    elseif($pt == aoInterior::DASH){
-            $ret = aoInterior::upgradeDash($cid, $p);
+            $ret = aoInterior::upgradeDash();
 	    }
 	    elseif($pt == aoInterior::PANELS){
-            $ret = aoInterior::upgradePanels($cid, $p);
+            $ret = aoInterior::upgradePanels();
 	    }
 	    else{
 		    //console.log('attempting to upgrade unknown type: ' + partType.toString() );

@@ -118,7 +118,7 @@ Page Switch, for different components
 <?php drsSwitch();?>{
 <?php
     posAbs();
-    css::size('18%', '10%');
+    css::size('18%', '11%');
     //scrollY();
     css::txtAlignCntr();
 ?>

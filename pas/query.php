@@ -96,7 +96,7 @@ function eLoadUser(){
     echo json_encode(array(
         'stats'=>user::getStats(),
         'garage'=>$cars,
-        'sales'=>pasGet::userSales()
+        'sales'=>user::getSales()
     ));
 }
 

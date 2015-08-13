@@ -623,7 +623,7 @@ Drivetrain.upgrade = function(obj){
         else{    //upgrade existing part
             var part = dt.getPartType(type),
 			p = part.getPrice();
-<?php //if(loggedIn() ){ ?>
+<?php //if(loggedIn() ){?>
     jq.post("pas/drivetrain.php",
         function(obj){
             console.log(JSON.stringify(obj));
@@ -650,10 +650,9 @@ Drivetrain.upgrade = function(obj){
 			jq.setErr('Drivetrain.upgrade Repair.php', 'purchase upgrade failed, reason: ' + jqxhr.responseText);
         },
         {car_id:car.id, price:p, partType:type}
-    );
-    
-    <?php
-//} ?>
+    );    
+<?php
+//}
 //else{>
             //if(dt.upgradePart(type) ){
                 //if part is upgraded to max, unbind and make unclickable
@@ -667,7 +666,8 @@ Drivetrain.upgrade = function(obj){
                     //);
                 //}
             //}
-//<php } >
+//<php }
+?>
         }
         Repair.save();
     }
@@ -682,14 +682,18 @@ Drivetrain.repair = function(obj){
     if(car !== null){
         var type = obj.data.type;
             //str = Drivetrain.strFromType(type);
-        
+//<php //if(loggedIn() ){?>
+        //jq.post();
+//<php
+//}
+//else{>
         if(car._dt.repairPart(type) ){
             //console.log('repaired part!');
             //part has been repaired, disable button
             var part = car._dt.getPartType(type);
             
             if(part !== null){
-                var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
+                var div = Drivetrain.getDivURSlot(type);
                 
                 repairPartUpdate(
                     part,
@@ -698,6 +702,9 @@ Drivetrain.repair = function(obj){
                 );
             }
         }
+//<php
+//}
+//>
         Repair.save();
     }
     //else no car, do nothing
@@ -732,7 +739,7 @@ Body.getDivURSlot = function(carType){
 };
 Body.upgrade = function(obj){
     //
-    var funcName = 'Body.upgrade Repair.js',
+    var FN = 'Body.upgrade Repair.js',
         car = Garage.getCurrentCar();
     
     if(car !== null){
@@ -753,7 +760,7 @@ Body.upgrade = function(obj){
                 function(obj){
                     //console.log(JSON.stringify(obj));
                     if(obj === null || typeof obj === 'undefined'){
-                        jq.setErr(funcName, 'purchase upgrade failed,\n invalid data returned from server');
+                        jq.setErr(FN, 'purchase upgrade failed,\n invalid data returned from server');
                         return;
                     }
                     
@@ -777,7 +784,7 @@ Body.upgrade = function(obj){
                     }
                 },
                 function(jqxhr){
-                    jq.setErr(funcName, 'purchase upgrade failed, reason:\n' + jqxhr.responseText);
+                    jq.setErr(FN, 'purchase upgrade failed, reason:\n' + jqxhr.responseText);
                 },
                 {car_id:car.id, price:p, partType:type}
             );
@@ -818,6 +825,11 @@ Body.repair = function(obj){
             //add part
         }
         else{
+//<php //if(loggedIn() ){>
+            //jq.post();
+//<php
+//}
+//else{>
             if(car._body.repairPart(type) ){
                 //console.log('repaired part!');
                 //part has been repaired, disable button
@@ -833,6 +845,9 @@ Body.repair = function(obj){
                     );
                 }
             }
+//<php
+//}
+//>
         }
         Repair.save();
     }
@@ -868,14 +883,16 @@ Interior.getDivURSlot = function(carType){
 };
 Interior.upgrade = function(obj){
     //
-    var car = Garage.getCurrentCar();
+    var FN = 'Interior.upgrade Repair.js',
+        car = Garage.getCurrentCar();
     
     if(car !== null){
-        var type = obj.data.type;
+        var type = obj.data.type,
+            inter = car._interior;
             //str = Interior.strFromType(type);
         //console.log('upgrading part of type: ' + str);
         
-        if(car._interior === null){
+        if(inter === null){
             //var bp = Drivetrain.getInstallPrice(car.getBasePrice();
             //if(usreStats.moeny >= bp) ){
                 //install part
@@ -889,21 +906,55 @@ Interior.upgrade = function(obj){
             //}
         }
         else{
+            var part = inter.getPartType(type),
+                p = part.getPrice();
+<?php //if(loggedIn() ){?>                
+            jq.post("pas/interior.php",
+                function(obj){
+                    //console.log(JSON.stringify(obj));
+                    if(obj === null || typeof obj === 'undefined'){
+                        jq.setErr(FN, 'purchase upgrade failed,\n invalid data returned from server');
+                        return;
+                    }
+                    
+                    if(part !== null){
+                        var div = Interior.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
+                       
+                        part._stage = obj.value;
+                        
+                        upgradePartUpdate(
+                            part,
+                            $('button#ub', div),
+                            $('progress#pb', div)
+                        );
+                        setMoney(obj.userFunds);
+                    }
+                },
+                function(jqxhr){
+                    jq.setErr(FN, 'purchase upgrade failed, reason:\n' + jqxhr.responseText);
+                },
+                {car_id:car.id, price:p, partType:type}
+            );
+<?php
+//}
+//else{>
             //upgrade existing part
-            car._interior.upgradePart(type);
+            // inter.upgradePart(type);
             
-            var part = car._interior.getPartType(type);
-            //if part is upgraded to max, unbind and make unclickable
-            if(part !== null){         
-                var div = Interior.getDivURSlot(type);  //$('div#RepairShop div#interior');
+            // //if part is upgraded to max, unbind and make unclickable
+            // if(part !== null){         
+                // var div = Interior.getDivURSlot(type);  //$('div#RepairShop div#interior');
                 
-                upgradePartUpdate(
-                    part,
-                    $('button#ub', div),
-                    $('progress#pb', div)
-                );
-				setMoney(obj.userFunds);
-            }
+                // upgradePartUpdate(
+                    // part,
+                    // $('button#ub', div),
+                    // $('progress#pb', div)
+                // );
+				// setMoney(obj.userFunds);
+            // }
+//<php
+//}
+?>
         }
         Repair.save();
     }
@@ -911,7 +962,8 @@ Interior.upgrade = function(obj){
 };
 Interior.repair = function(obj){
 //    console.log('repair part!');
-    var car = Garage.getCurrentCar();
+    var FN = 'Interior.upgrade Repair.js',
+        car = Garage.getCurrentCar();
     
     if(car !== null){
         var type = obj.data.type;  
@@ -921,6 +973,11 @@ Interior.repair = function(obj){
             //add part
         }
         else{
+//<php //if(loggedIn() ){?>
+        //jq.post();
+//<php
+//}
+//else{>
             if(car._interior.repairPart(type) ){
                 //console.log('repaired part!');
                 //part has been repaired, disable button
@@ -936,6 +993,9 @@ Interior.repair = function(obj){
                     );
                 }
             }
+//<php
+//}
+//>
         }
         Repair.save();
     }
@@ -971,14 +1031,16 @@ Documents.getDivURSlot = function(carType){
 };
 Documents.upgrade = function(obj){
     //
-    var car = Garage.getCurrentCar();
+    var FN = 'Body.upgrade Repair.js',
+        car = Garage.getCurrentCar();
     
     if(car !== null){
-        var type = obj.data.type;
+        var type = obj.data.type,
+            d = car._docs;
             //str = Documents.strFromType(type);
         //console.log('upgrading part of type: ' + str);
         
-        if(car._docs === null){
+        if(d === null){
             //var bp = Drivetrain.getInstallPrice(car.getBasePrice();
             //if(usreStats.moeny >= bp) ){
                 //install part
@@ -992,21 +1054,54 @@ Documents.upgrade = function(obj){
             //}
         }
         else{    //upgrade existing part
-            car._docs.upgradePart(type);
+            var part = d.getPartType(type),
+                p = part.getPrice();
+<?php //if(loggedIn() ){?>
+            jq.post("pas/documents.php",
+                function(obj){
+                    //console.log(JSON.stringify(obj));
+                    if(obj === null || typeof obj === 'undefined'){
+                        jq.setErr(FN, 'purchase upgrade failed,\n invalid data returned from server');
+                        return;
+                    }
+                    
+                    if(part !== null){
+                        var div = Interior.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
+                       
+                        part._stage = obj.value;
+                        
+                        upgradePartUpdate(
+                            part,
+                            $('button#ub', div),
+                            $('progress#pb', div)
+                        );
+                        setMoney(obj.userFunds);
+                    }
+                },
+                function(jqxhr){
+                    jq.setErr(FN, 'purchase upgrade failed, reason:\n' + jqxhr.responseText);
+                },
+                {car_id:car.id, price:p, partType:type}
+            );
+<?php
+//}
+//else{>
+            // d.upgradePart(type);
             
-            var part = car._docs.getPartType(type);
-            //if part is upgraded to max, unbind and make unclickable
-            if(part !== null){
-                var div = Documents.getDivURSlot(type);//$('div#RepairShop div#docs');
-                    //str = Documents.strFromType(type),
+            // //if part is upgraded to max, unbind and make unclickable
+            // if(part !== null){
+                // var div = Documents.getDivURSlot(type);
                 
-                upgradePartUpdate(
-                    part,
-                    $('button#ub', div),
-                    $('progress#pb', div)
-                );
-				setMoney(obj.userFunds);
-            }
+                // upgradePartUpdate(
+                    // part,
+                    // $('button#ub', div),
+                    // $('progress#pb', div)
+                // );
+				// setMoney(obj.userFunds);
+            // }
+//<php
+//}
+?>
             Repair.save();
         }
     }

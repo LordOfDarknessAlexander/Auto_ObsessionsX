@@ -208,6 +208,67 @@ class user{
         //}
         //return json_encode($uf);
     }
+    public static function getCurCarID(){
+        //returns the user's currently selected vehicle
+        global $AO_DB;
+        
+        $CID = ao::CID;
+        
+        $res = user::slctFromEntry("$CID");
+        
+        if($res){
+            //user has car
+            //$ret = $res->fetch_assoc()[$CID];
+            //$i = isUINT($ret) ? intval($ret) : 0;
+            $ret = intval($res->fetch_assoc()[$CID]);
+            $res->close();
+            return $ret;    //$i;
+        }
+        else{
+            $AO_DB->eErr();
+        }
+        return 0;
+    }
+    public static function getCurCar(){
+        //returns the user's currently selected vehicle
+        global $AO_DB;
+        global $aoUsersDB;
+        //$id = 2;  //$_SESSION['user_id'];
+        $users = ao::USERS;
+        $CID = ao::CID;
+        $UID = ao::UID;    
+        
+        /*$result = $AO_DB->query(
+            //"SELECT $CID FROM $users WHERE $UID = $id"
+        //);
+        
+        if($result){
+            //user has car
+            $cid = intval($res->fetch_assoc()[$CID]);
+            
+            if($cid != 0){
+                $tableName = getUserTableName();
+                $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $cid");
+                
+                if($res){
+                    $ret = Vehicle::fromArray($res->fetch_assoc() );
+                    $res->close();
+                    return $ret;
+                }        
+                $res->close();
+            }
+            else{   //user does not have a car selected
+                return null;
+            }
+            $result->close();
+        }
+        else{
+            //query failed, user has no entry in database
+            //echo sql error
+            return null;
+        }*/
+        return null;
+    }
     public static function setCurrentCar($carID = 0){
         //global $AO_DB;
         $CID = ao::CID;
@@ -259,6 +320,56 @@ class user{
             }
         }
         return null;
+    }
+        public static function getSales(){
+        //returns the user's total active and expired actions
+        global $aoCarSalesDB;
+        
+        $sales = array();
+
+        $res = $aoCarSalesDB->query(
+            sql::slctAllFromUserTable()
+        );
+        
+        if($res){
+            $CID = ao::CID;
+            $T = '_time';
+            $S = '_start';
+            $E = '_end';
+            $P = 'price';
+            
+            while($a = $res->fetch_assoc() ){
+                //mysqli retuns values as strings, so convert them
+                //to proper types, for faster transfer back to server!
+                $sales[] = array(
+                    'id'=>intval($a[$CID]),
+                    'bid'=>floatval($a[$P]),
+                    $T=>floatval($a[$T]),
+                    $S=>$a[$S],
+                    $E=>$a[$E]
+                );
+            }
+            $res->close();
+        }
+        //else{user has no entries in table, count is 0;}
+        return $sales;
+    }
+    public static function getSalesCount(){
+        //returns the number cars sold by the user
+        global $aoCarSalesDB;
+        //$uid = getUserTableName();
+        //$count is initialized when this is called for the first time
+        $count = 0;
+        $res = $aoCarSalesDB->query(
+            sql::slctAllFromUserTable()     //"SELECT * FROM $uid"
+        );
+        
+        if($res){
+            $count = $res->num_rows;
+            $res->close();
+        }
+        //else{user has no entries in table, count is 0;}
+        return $count;
     }
     public static function getCarSaleByID($id){
         //returns a user's upgraded vehicle
@@ -324,7 +435,7 @@ class user{
         return $count;
     }
     public static function getTotalCarCount(){
-        return user::getCarCount() + pasGet::userSalesCount();
+        return user::getCarCount() + user::getSalesCount();
     }
     public static function getGameCompletion(){
         //percentage of cars bought and sold by the user

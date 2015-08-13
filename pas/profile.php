@@ -26,7 +26,7 @@ function getUserPurchases(){
         'carsOwned'=>user::getCarCount(),
         'carsPurch'=>user::getTotalCarCount(),
         'urPurch'=>0,
-        'carsSold'=>pasGet::userSalesCount(),
+        'carsSold'=>user::getSalesCount(),
         'remain'=>pasGet::getRemainingCarCount(),
         'wins'=>user::getTotalCarCount(),
         'losses'=>pasGet::auctionLosses(),
@@ -153,7 +153,7 @@ if($gs){
         exit();
     }
     if($op == 'gcid'){
-        //echo json_encode(pasGet::currentCarID() );
+        //echo json_encode(user::getCurCarID() );
         exit();
     }
     elseif($op == 'gug'){

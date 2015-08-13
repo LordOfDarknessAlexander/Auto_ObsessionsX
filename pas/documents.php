@@ -11,10 +11,10 @@ class aoDocuments
 	//ints match those in the interior.js TYPE enum
     const
         KEY = 'docs',
-	    OWNERSHIP = 0,
-	    BUILD = 1,
-	    HISTORY = 2,
-	    RESTORATION = 3;
+	    OWNERSHIP = 1,
+	    BUILD = 2,
+	    HISTORY = 3,
+	    RESTORATION = 4;
     
     public static function getDocs($cid){
         global $aoUsersDB;
@@ -92,7 +92,7 @@ class aoDocuments
                     return array(
                         'userFunds'=>$nf,
                         ao::CID=>$cid,
-                        aoInterior::KEY=>$nb,
+                        aoDocuments::KEY=>$nb,
                         'value'=>$nv
                     );
                 }
@@ -103,16 +103,16 @@ class aoDocuments
         //echo 'could not upgrade part, already fully upgraded';
         return null;
     }
-    public static function upgradeOwnership($cid, $price){	
+    public static function upgradeOwnership(){	
 		return aoDocuments::upgrade(12);
     }    
-    public static function upgradeBuild($cid, $price){	
+    public static function upgradeBuild(){	
 		return aoDocuments::upgrade(8);
     }    
-    public static function upgradeHistory($cid, $price){	
+    public static function upgradeHistory(){	
 		return aoDocuments::upgrade(4);
     }    
-    public static function upgradeRestoration($cid, $price){	
+    public static function upgradeRestoration(){	
 		return aoDocuments::upgrade(0);
     }    
 }

@@ -6,7 +6,6 @@
 require_once '../pasMeta.php';
 require_once 'user.php';
 require_once '../secure.php';
-
 //
 //secure::loggin();
 //
@@ -470,77 +469,7 @@ class pasGet{
             }
         }
         return $count;
-    }/*
-    public static function userCarFromID($carID){
-        //selects all vehicles the user owns, returning it as a JSON array
-        global $aoUsersDB;
-        $userID = getUserTableName();
-        
-        $res = $aoUsersDB->query(
-            "SELECT * FROM $userID WHERE car_id = $carID"
-        );
-        if($res){
-            if(mysqli_num_rows($res) != 0){
-                //$q = "INSERT INTO vehicles (car_id, make, model, year, info) VALUES (' ', '$make', '$model', '$year', '$info')";		
-                $data = $res->fetch_assoc();//@mysqli_query($CARS.$con, $q); // Run the query
-                //if(DEBUG){
-                    //$car = Vehicle::fromArray($data);
-                    //echo '{"data":"this is data!"}';
-                    //echo $car->toJSON();
-                //}
-                //else{
-                    //echo Vehicle::fromArray($result->fetch_assoc() )->toJSON();
-                //}
-            } 
-            else{ 
-                echo "<h2>System Error</h2>
-                <p class='error'>Vehicle could not be registered due to a system error. Please try again later</p>";
-                //echo '<p>'.mysqli_error($CARS.$con).'<br><br>Query: '.$q.'</p>';
-            } 
-            mysqli_free_result($res);
-        }
-        else{   //The vehicle is already registered
-            echo "<p class='error'>The email address is not acceptable because it is already registered</p>";
-        }
-    }*/
-    // public static function userStats(){
-        // //returns the user's stats from SQL database as an assossiative array
-        // global $AO_DB;
-        
-        // $CID = ao::CID;
-        // $M = 'money';
-        // $T = 'tokens';
-        // $P = 'prestige';
-        // $MM = 'm_marker';
-        
-        // $res = user::slctFromEntry("$M, $T, $P, $MM, $CID");
-        // //$AO_DB->query(
-            // //"SELECT $M, $T, $P, $MM FROM $users WHERE $UID = $id"
-            // //"SELECT * FROM $users WHERE $UID = $id"
-        // //);
-        // //Count the returned rows
-        // if($res){
-            // $rows = $res->fetch_assoc();
-            // //NOTE:sql retrives data as strings, so must conver to numeric type before sending(strings are bulky)
-            // $ret = array(
-                // $M=>floatval($rows[$M]),
-                // $T=>intval($rows[$T]),
-                // $P=>intval($rows[$P]),
-                // $MM=>intval($rows[$MM]),
-                // 'cid'=>intval($rows[$CID])
-            // );
-            // $res->close();
-            // return $ret;
-        // }
-        // else{
-            // //echo "No Results";
-            // // If there was a problem.
-            // //echo "<p class='error'>Query failed, Please try again.</p>";
-            // $AO_DB->eErr();
-            // //exit();
-        // }
-        // return array();
-    // }
+    }
     //public static function getAuctionWins(){
         //returns how many auctions the user has won
         //carCount + salesCount();
@@ -569,56 +498,6 @@ class pasGet{
         $total = $wins + $loss;
         
         return 0.0;//$total != 0 ? ($diff / $total) : 0.0;
-    }
-    public static function userSales(){
-        //returns the user's total active and expired actions
-        global $aoCarSalesDB;
-        //$uid = getUserTableName();
-        $sales = array();
-        //$count is initialized when this is called for the first time
-        $res = $aoCarSalesDB->query(
-            sql::slctAllFromUserTable()     //"SELECT * FROM $uid"
-        );
-        
-        if($res){
-            $CID = ao::CID;
-            $T = '_time';
-            $S = '_start';
-            $E = '_end';
-            $P = 'price';
-            
-            while($a = $res->fetch_assoc() ){
-                //mysqli retuns values as strings, so convert them
-                //to proper types, for faster transfer back to server!
-                $sales[] = array(
-                    'id'=>intval($a[$CID]),
-                    'bid'=>floatval($a[$P]),
-                    $T=>floatval($a[$T]),
-                    $S=>$a[$S],
-                    $E=>$a[$E]
-                );
-            }
-            $res->close();
-        }
-        //else{user has no entries in table, count is 0;}
-        return $sales;
-    }
-    public static function userSalesCount(){
-        //returns the number cars sold by the user
-        global $aoCarSalesDB;
-        //$uid = getUserTableName();
-        //$count is initialized when this is called for the first time
-        $count = 0;
-        $res = $aoCarSalesDB->query(
-            sql::slctAllFromUserTable()     //"SELECT * FROM $uid"
-        );
-        
-        if($res){
-            $count = $res->num_rows;
-            $res->close();
-        }
-        //else{user has no entries in table, count is 0;}
-        return $count;
     }
     //public static function getRemainingCars(){
         //returns an array of cars the user still has to purchase

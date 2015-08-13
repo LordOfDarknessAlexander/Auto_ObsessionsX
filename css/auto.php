@@ -209,7 +209,7 @@ pre#info{
 <?php
     posAbs();
     css::left('20%');
-    css::size('60%', '10%');
+    css::size('60%', '11%');
     css::bgColor('grey');
     css::txtAlignCntr();
     scrollY();
