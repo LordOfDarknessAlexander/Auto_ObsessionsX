@@ -1,4 +1,9 @@
 <?php
+//
+//drivetrain.phph
+//Created by Tyler R. Drury, 01-08-2015
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
 require_once 'part.php';
 
 class aoInterior
@@ -29,8 +34,7 @@ class aoInterior
         }
         
         return 0;
-    }
-    
+    }    
     public static function setInterior($cid, $in){
         global $aoUsersDB;
         
@@ -48,251 +52,79 @@ class aoInterior
         }
         return null;
     }
-    
-    public static function upgradeSeats($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 12;   //number of bits
+    protected static function upgrade($bitOffset){
+         //echo 'UP';
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
         
-        $in = aoInterior::getInterior($cid);
-        $seats = ($in & 0xF000) >> $offset;  
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        if($p < 1.0){
+            exit("$FN, invalid part price:$p");
+        }        
+        if(!is_int($bitOffset) || ($bitOffset > 12 || $bitOffset < 0) ){
+            exit("$FN, passing invalid value $bitOffset, must in range [0,12]");
+        }
         
-        if($seats < aoStage::PRO){
+        $b = aoInterior::getInterior($cid);
+        //mask and shift to occupy 4 left most bits(bits 1-8)
+        $mask = 0x000F << $bitOffset;
+        $bits = ($b & $mask) >> $bitOffset;  
+        
+        if($bits < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
+            $nf = user::decFunds($p);
             $dif = $uf - $nf;
                 
             if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($seats == 0 ? 1 : $seats << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($in & 0x0FFF) | $shift;   //clear last bits, setting new value
+                $nv = ($bits == 0 ? 1 : $bits << 1);   //new part value
+                //echo $nv;
+                $shift = $nv << $bitOffset;    //shift back
+                //echo $shift;
+                $im = !$mask;   //bitwise inverse
+                //echo $im;
+                $nb = ($b & $im) | $shift;   //clear bits, setting new value
                 //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$in=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = aoInterior::KEY;
-                    $V = 'value';
-                    
-                    $ret = array(
+                if(aoInterior::setInterior($cid, $nb) ){                    
+                    return array(
                         'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $IN=>$nb,
-                        $V=>$nc
+                        ao::CID=>$cid,
+                        aoInterior::KEY=>$nb,
+                        'value'=>$nv
                     );
-        
-                    echo json_encode($ret);
-                    exit();
                 }
             }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
             //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
+            return null;
         }
         //echo 'could not upgrade part, already fully upgraded';
-        //exit();
         return null;
     }
-    
-    public static function upgradeCarpet($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 8;   //number of bits
-        
-        $in = aoInterior::getInterior($cid);
-        $carpet = ($in & 0x0F00) >> $offset;  
-        
-        if($carpet < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($carpet == 0 ? 1 : $carpet << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($in & 0xF0FF) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$in=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = aoInterior::KEY;
-                    $V = 'value';
-                    
-                   return array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $IN=>$nb,
-                        $V=>$nc
-                    );
-        
-                    //echo json_encode($ret);
-                    //exit();
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
-        }
-        //echo 'could not upgrade part, already fully upgraded';
-        //exit();
-        return null;
-    }
-    
+    public static function upgradeSeats(){	
+		return aoInterior::upgrade(12);
+    }    
+    public static function upgradeCarpet(){	
+		return aoInterior::upgrade(8);
+    }    
     public static function upgradeDash($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 4;   //number of bits
-        
-        $in = aoInterior::getInterior($cid);
-        $dash = ($in & 0x00F0) >> $offset;  
-        
-        if($dash < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($dash == 0 ? 1 : $dash << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($in & 0xFF0F) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$in=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = aoInterior::KEY;
-                    $V = 'value';
-                    
-                    return array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $IN=>$nb,
-                        $V=>$nc
-                    );
-        
-                    //echo json_encode($ret);
-                    //exit();
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
-        }
-        //echo 'could not upgrade part, already fully upgraded';
-        //exit();
-        return null;
-    }
-    
+		return aoInterior::upgrade(4);
+    }    
     public static function upgradePanels($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 0;   //number of bits
-        
-        $in = aoInterior::getInterior($cid);
-        $panels = ($in & 0x000F) >> $offset;  
-        
-        if($panels < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //
-                //mask and shift values here
-                $nc = ($panels == 0 ? 1 : $panels << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($in & 0xFFF0) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values           
-                //
-                if(aoInterior::setInterior($cid, $nb) ){
-                    $IN = aoInterior::KEY;
-                    $V = 'value';
-                    
-                    return array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $IN=>$nb,
-                        $V=>$nc
-                    );
-        
-                    //echo json_encode($ret);
-                    //exit();
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            //echo 'could not purchase upgrade, insufficient funds';
-        }
-        //echo 'could not upgrade part, already fully upgraded';
-        return null;
-    }
-    
+		return aoInterior::upgrade(0);
+    }    
 }
 //eSG(); //echo superGlobals
 //aoInterior::upgradePart(333333, 0);//seats upgrade
-if(isSetP() ){
-	$P = 'price';
-    $CID = ao::CID;
-    $PT = 'partType';
-    
-    $p = getPriceFromPost();
-    $cid = getCIDFromPost();
-	$pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null;
+$pt = getPartTypeFromPost();
+
+if(isSetP() ){    
     //echo $pt;
         
-    if( ($cid != 0) && ($p > 1.0) && ($pt !== null) ){
+    if($pt !== null){
         $ret = null;
         
         if($pt == aoInterior::SEATS){
@@ -314,6 +146,6 @@ if(isSetP() ){
         echo json_encode($ret);
         exit();
     }
-    echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase"; 
+    echo "invalid value(s), (partType:$pt) could not complete purchase"; 
 }
 ?>

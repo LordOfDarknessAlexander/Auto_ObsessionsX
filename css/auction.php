@@ -108,7 +108,9 @@ Auction Screen
     css::fontBold();
     defaultColor();
     posAbs();
-    //css::size();
+    //css::size('60%', '10%');
+    //css::left();
+    //css::top();
 ?>
 	background-image:url('../images/checkers.png');
 

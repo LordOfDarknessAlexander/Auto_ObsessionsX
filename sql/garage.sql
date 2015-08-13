@@ -1,5 +1,8 @@
 -- 
---Created by Tyler R. Drury, (C) 8.5:1 Entertainment
+--drivetrain.phph
+--reated by Tyler R. Drury, 01-08-2015
+--(C) 8.5:1 Entertainment, All Rights Reserved
+--
 --Auto Obsessions sql utility functions, for dev use ONLY
 --This file is for documentation purposes and should NOT be executed directly
 --Replace (tableName) with the user you wish to reset

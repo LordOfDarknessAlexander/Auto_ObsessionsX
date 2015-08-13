@@ -1,31 +1,31 @@
 //Repair State interface, mod your ride and upgrade parts
 //Dependant on state\Garage.js, for userGarage and car index
 //and js/entities/ for Vehicle and Parts
-//<php
-//function drs(){>div#RepairShop<php
-//}
-//function drsDiv(){
-    //drs()> div<php
-//}
-//function drsSwitch(){
-    //drsDiv()>#switch<php
-//}
+<?php
+function drs(){?>div#RepairShop<?php
+}
+function drsDiv(){
+    drs();?> div<?php
+}
+function drsSwitch(){
+    drsDiv();?>#switch<?php
+}?>
 jq.RepairShop = {
     //jquery html bindings
-    menu : $('div#RepairShop'),
-    backBtn : $('div#RepairShop button#backBtn'),
+    menu : $('<?php drs();?>'),
+    backBtn : $('<?php drs();?> button#backBtn'),
     //upgrades : $('div#RepairShop div#upgrades'),
     //repairs : $('div#RepairShop div#repairs'),
-    pSwitch:$('div#RepairShop div#switch'),
-    sDT:$('div#RepairShop div#switch button#dt'),
-    sBody:$('div#RepairShop div#switch button#body'),
-    sInter:$('div#RepairShop div#switch button#inter'),
-    sDocs:$('div#RepairShop div#switch button#docs'),
+    pSwitch:$('<?php drsSwitch();?>'),
+    sDT:$('<?php drsSwitch();?> button#dt'),
+    sBody:$('<?php drsSwitch();?> button#body'),
+    sInter:$('<?php drsSwitch();?> button#inter'),
+    sDocs:$('<?php drsSwitch();?> button#docs'),
     //cid, car info div
-    dt:$('div#RepairShop div#cid0'),
-    cid1:$('div#RepairShop div#cid1'),
-    cid2:$('div#RepairShop div#cid2'),
-    cid3:$('div#RepairShop div#cid3'),
+    dt:$('<?php drsDiv();?>#cid0'),
+    cid1:$('<?php drsDiv();?>#cid1'),
+    cid2:$('<?php drsDiv();?>#cid2'),
+    cid3:$('<?php drsDiv();?>#cid3'),
     /*toggle : function()
     {	//from game menu to funds or vice versa
         jq.Funds.menu.toggle();
@@ -97,41 +97,44 @@ var Repair = {
 	    var car = Garage.getCurrentCar();
 
         if (car !== null && car !== undefined) {
-            var div = $('div#RepairShop');
+            var div = jq.RepairShop.menu;
             //if(carID == null || carID == undefined){
             //if (_curCarID !== 0) {
                 //var car = Garage.getCurrentCar(),
-                  var img = $('img#userCar', div);
+            //var img = $('img#userCar', div);
 
-                img.attr('src', car === null ? 'images\\garageEmpty.png' : car.getFullPath());
+            //img.attr('src', car === null ? 'images\\garageEmpty.png' : car.getFullPath());
+            setHomeImg(car.getFullPath());
 
-                this._initButtons();
+            this._initButtons();
 
-                //$('div#RepairShop div#upgrades').show();
-                //$('div#RepairShop div#repairs').show();
+            //$('div#RepairShop div#upgrades').show();
+            //$('div#RepairShop div#repairs').show();
 
-                jq.RepairShop.dt.show();
-                jq.RepairShop.cid1.show();
-                jq.RepairShop.cid2.show();
-                jq.RepairShop.cid3.show();
+            jq.RepairShop.dt.show();
+            jq.RepairShop.cid1.show();
+            jq.RepairShop.cid2.show();
+            jq.RepairShop.cid3.show();
 
-                jq.RepairShop.pSwitch.show();
+            jq.RepairShop.pSwitch.show();
 
-                //$('h2#dt', div).show();
-                //$('h2#body', div).show();
-                //$('h2#interior', div).show();
-                //$('h2#docs', div).show();
+            //$('h2#dt', div).show();
+            //$('h2#body', div).show();
+            //$('h2#interior', div).show();
+            //$('h2#docs', div).show();
 
-                //$('label#info').text('');
-                //$('div#RepairShop p#error').hide();
+            //$('label#info').text('');
+            //$('div#RepairShop p#error').hide();
             //}
 		}
 		else{
 			//show empty garage, please purchase a car
-			$('img#userCar', div).attr('src', 'images/garageEmpty.png');
+			//$('img#userCar', div).attr('src', 'images/garageEmpty.png');
             //TODO:display message in browser saying user must select a vehicle
 			//$('div#RepairShop div#upgrades').hide();
             //$('div#RepairShop div#repairs').hide();
+            //jq.setErr('', 'Select a vehicle from the garage to restore');
+            setHomeImg();
             
             jq.RepairShop.dt.hide();
 			jq.RepairShop.cid1.hide();

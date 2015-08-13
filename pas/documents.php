@@ -1,4 +1,9 @@
 <?php
+//
+//drivetrain.phph
+//Created by Tyler R. Drury, 01-08-2015
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
 require_once 'part.php';
 
 class aoDocuments
@@ -11,8 +16,7 @@ class aoDocuments
 	    HISTORY = 2,
 	    RESTORATION = 3;
     
-        
-    public static function getDocuments($cid){
+    public static function getDocs($cid){
         global $aoUsersDB;
 		
         $D = aoDocuments::KEY;
@@ -29,9 +33,8 @@ class aoDocuments
         }
         
         return 0;
-    }
-    
-    public static function setDocuments($cid, $in){
+    }    
+    public static function setDocs($cid, $in){
         global $aoUsersDB;
         
         $TN = getUserTableName();
@@ -48,269 +51,99 @@ class aoDocuments
         }
         return null;
     }
-    
+    protected static function upgrade($bitOffset){
+         //echo 'UP';
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        if($p < 1.0){
+            exit("$FN, invalid part price:$p");
+        }        
+        if(!is_int($bitOffset) || ($bitOffset > 12 || $bitOffset < 0) ){
+            exit("$FN, passing invalid value $bitOffset, must in range [0,12]");
+        }
+        
+        $b = aoDocuments::getDocs($cid);
+        //mask and shift to occupy 4 left most bits(bits 1-8)
+        $mask = 0x000F << $bitOffset;
+        $bits = ($b & $mask) >> $bitOffset;  
+        
+        if($bits < aoStage::PRO){
+            //check if part is already fully upgraded
+            //then see if user have enough funds for purchase
+            $uf = user::getFunds(); //user funds
+            $nf = user::decFunds($p);
+            $dif = $uf - $nf;
+                
+            if($dif > 0.000008){
+                $nv = ($bits == 0 ? 1 : $bits << 1);   //new part value
+                //echo $nv;
+                $shift = $nv << $bitOffset;    //shift back
+                //echo $shift;
+                $im = !$mask;   //bitwise inverse
+                //echo $im;
+                $nb = ($b & $im) | $shift;   //clear bits, setting new value
+                //echo $nb;
+                if(aoDocuments::setDocs($cid, $nb) ){                    
+                    return array(
+                        'userFunds'=>$nf,
+                        ao::CID=>$cid,
+                        aoInterior::KEY=>$nb,
+                        'value'=>$nv
+                    );
+                }
+            }
+            //echo 'could not purchase upgrade, insufficient funds';
+            return null;
+        }
+        //echo 'could not upgrade part, already fully upgraded';
+        return null;
+    }
     public static function upgradeOwnership($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 12;   //number of bits
-        
-        $in = aoDocuments::getDocuments($cid);
-        $seats = ($in & 0xF000) >> $offset;  
-        
-        if($seats < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($seats == 0 ? 1 : $seats << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($in & 0x0FFF) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$in=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoDocuments::setDocuments($cid, $nb) ){
-                    $D = aoDocuments::KEY;
-                    $V = 'value';
-                    
-                    return array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $D=>$nb,
-                        $V=>$nc
-                    );
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
-        }
-        //echo 'could not upgrade part, already fully upgraded';
-        //exit();
-        return null;
-    }
-    
+		return aoDocuments::upgrade(12);
+    }    
     public static function upgradeBuild($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 8;   //number of bits
-        
-        $in = aoDocuments::getDocuments($cid);
-        $carpet = ($in & 0x0F00) >> $offset;  
-        
-        if($carpet < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($carpet == 0 ? 1 : $carpet << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($in & 0xF0FF) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                //
-                if(aoDocuments::setDocuments($cid, $nb) ){
-                    $D = aoDocuments::KEY;
-                    $V = 'value';
-                    
-                    return array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $D=>$nb,
-                        $V=>$nc
-                    );
-        
-                    //echo json_encode($ret);
-                    //exit();
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
-        }
-        //echo 'could not upgrade part, already fully upgraded';
-        //exit();
-        return null;
-    }
-    
+		return aoDocuments::upgrade(8);
+    }    
     public static function upgradeHistory($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 4;   //number of bits
-        
-        $in = aoDocuments::getDocuments($cid);
-        $dash = ($in & 0x00F0) >> $offset;
-        
-        if($dash < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($dash == 0 ? 1 : $dash << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($in & 0xFF0F) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$in=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoDocuments::setDocuments($cid, $nb) ){
-                    $D = aoDocuments::KEY;
-                    $V = 'value';
-                    
-                    $ret = array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $D=>$nb,
-                        $V=>$nc
-                    );
-        
-                    echo json_encode($ret);
-                    exit();
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
-        }
-        //echo 'could not upgrade part, already fully upgraded';
-        //exit();
-        return null;
-    }
-    
+		return aoDocuments::upgrade(4);
+    }    
     public static function upgradeRestoration($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 0;   //number of bits
-        
-        $in = aoDocuments::getDocuments($cid);
-        $exhaust = ($in & 0x000F) >> $offset;  
-        
-        if($exhaust < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($exhaust == 0 ? 1 : $exhaust << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($in & 0xFFF0) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$in=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoDocuments::setDocuments($cid, $nb) ){
-                    $D = aoDocuments::KEY;
-                    $V = 'value';
-                    
-                    return array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $D=>$nb,
-                        $V=>$nc
-                    );
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
-        }
-        //echo 'could not upgrade part, already fully upgraded';
-        //exit();
-        return null;
-    }
-    
+		return aoDocuments::upgrade(0);
+    }    
 }
 //eSG(); //echo superGlobals
-//aoDocuments::upgradePart(333333, 0);//seats upgrade
+$pt = getPartTypeFromPost();
+
 if(isSetP() ){
-	$P = 'price';
-    $CID = ao::CID;
-    $PT = 'partType';
-    
-    $p = getPriceFromPost();
-    $cid = getCIDFromPost();
-	$pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null; 
     //$echo $pt;
 	
-    if( ($cid != 0) && ($p > 1.0) && ($pt !== null) ){
+    if($pt !== null){
         $ret = null;
         
         if($pt == aoDocuments::OWNERSHIP){
-		    $ret = aoDocuments::upgradeOwnership($cid, $p);
+		    $ret = aoDocuments::upgradeOwnership();
 	    }
 	    elseif($pt == aoDocuments::BUILD){
-		    $ret = aoDocuments::upgradeBuild($cid, $p);
+		    $ret = aoDocuments::upgradeBuild();
 	    }
 	    elseif($pt == aoDocuments::HISTORY){
-            $ret = aoDocuments::upgradeHistory($cid, $p);
+            $ret = aoDocuments::upgradeHistory();
 	    }
 	    elseif($pt == aoDocuments::RESTORATION){
-            $ret = aoDocuments::upgradeRestoration($cid, $p);
+            $ret = aoDocuments::upgradeRestoration();
 	    }
 	    else{
 		    //console.log('attempting to upgrade unknown type: ' + partType.toString() );
-		    echo 'attempting to upgrade unknown type: ';
+		    echo 'attempting to upgrade unknown type: '. json_encode($pt);
 	    }	
         echo json_encode($ret);
         exit();
     }
-    echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase"; 
+    echo "invalid value (partType:$pt), could not complete purchase"; 
 }
 ?>

@@ -6,19 +6,21 @@ require_once 'user.php';
 //
 function getPriceFromPost(){
     //return the parameter at $P, converting to a float
+    $FN = __FUNCTION__;
     $P = 'price';
     
     if(isSetP() ){
         $ret = isFloat($_POST[$P])?
             round(floatval($_POST[$P]), 2)
             :
-            exit("execution terminating. Invalid value of POST at $P, expecting a float");
+            exit("$FN execution terminating. Invalid value of POST at $P, expecting a float");
         //echo $ret;
         return $ret;
     }
-    exit("execution terminating. POST not set, can not return value at index $P");
+    exit("$FN execution terminating. POST not set, can not return value at index $P");
 }
 function getCIDFromPost(){
+    $FN = __FUNCTION__;
     $CID = ao::CID;
     
     if(isSetP() ){
@@ -26,24 +28,27 @@ function getCIDFromPost(){
         $ret = isUINT($_POST[$CID])?
             intval($_POST[$CID])
             :
-            exit("execution terminating. Invalid value of POST at $CID, script expecting an unsigned integer");
+            exit("$FN execution terminating. Invalid value of POST at $CID, script expecting an unsigned integer");
         //echo $ret;
         return $ret;
     }
-    exit("execution terminating. POST not set, can not return value at index $CID");
+    //echo "$FN execution terminating. POST not set, can not return value at index $CID";
+    return 0;
 }
 function getPartTypeFromPost(){
-    $PT = 'partTyle';
+    $FN = __FUNCTION__;
+    $PT = 'partType';
     
     if(isSetP() ){
-        //$ret = isUINT($_POST[$CID])?
-            //intval($_POST[$CID])
-            //:
-            //exit("execution terminating. Invalid value of POST at $PT, script expecting an unsigned integer");
+        $ret = isUINT($_POST[$PT])?
+            intval($_POST[$PT])
+            :
+            exit("$FN execution terminating. Invalid value of POST at $PT, script expecting an unsigned integer");
         //echo $ret;
-        //return $ret;
+        return $ret;
     }
-    //exit("execution terminating. POST not set, can not return value at index $PT");
+    //echo "$FN execution terminating. POST not set, can not return value at index $PT";
+    return null;
 }
 class aoStage{
     const

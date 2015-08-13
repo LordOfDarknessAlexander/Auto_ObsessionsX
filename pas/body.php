@@ -1,5 +1,9 @@
 <?php
 //
+//drivetrain.phph
+//Created by Tyler R. Drury, 01-08-2015
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
 require_once 'part.php';
 //
 class aoBody{
@@ -45,226 +49,92 @@ class aoBody{
         }
         return null;
     }
-    public static function upgradeChassis($cid, $price){
-        global $aoUsersDB;
+    protected static function upgrade($bitOffset){
+         //echo 'UP';
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
         
-        //$FN = __DIR__ . ', ' . __FUNCTION__;
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        if($p < 1.0){
+            exit("$FN, invalid part price:$p");
+        }        
+        if(!is_int($bitOffset) || ($bitOffset > 12 || $bitOffset < 0) ){
+            exit("$FN, passing invalid value $bitOffset, must in range [0,12]");
+        }
         
-        $offset = 12;   //number of bits
         $b = aoBody::getBody($cid);
-        $chas = ($b & 0xF000) >> $offset;
-        //echo $chas;
+        //mask and shift to occupy 4 left most bits(bits 1-8)
+        $mask = 0x000F << $bitOffset;
+        $bits = ($b & $mask) >> $bitOffset;  
         
-        if($chas < aoStage::PRO){
+        if($bits < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
+            $nf = user::decFunds($p);
             $dif = $uf - $nf;
                 
             if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($chas == 0 ? 1 : $chas << 1);   //new chrome value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($b & 0x0FFF) | $shift;   //clear last bits, setting new value
+                $nv = ($bits == 0 ? 1 : $bits << 1);   //new part value
+                //echo $nv;
+                $shift = $nv << $bitOffset;    //shift back
+                //echo $shift;
+                $im = !$mask;   //bitwise inverse
+                //echo $im;
+                $nb = ($b & $im) | $shift;   //clear bits, setting new value
                 //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$B=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoBody::setBody($cid, $nb) ){
-                    $B = aoBody::KEY;
-                    $V = 'value';
-                    
+                if(aoBody::setBody($cid, $nb) ){                    
                     return array(
                         'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $B=>$nb,
-                        $V=>$nc
-                    );        
-                    //echo json_encode($ret);
-                    //exit();
+                        ao::CID=>$cid,
+                        aoBody::KEY=>$nb,
+                        'value'=>$nv
+                    );
                 }
             }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
             //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
+            return null;
         }
         //echo 'could not upgrade part, already fully upgraded';
-        //exit();
         return null;
     }
-    public static function upgradePanels($cid, $price){
-        global $aoUsersDB;
-        
-        $offset = 8;   //number of bits
-        $b = aoBody::getBody($cid);
-        $pan = ($b & 0x0F00) >> $offset;
-        $PRO = 4;   //reassing from enum
-        
-        if($pan < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //
-                //mask and shift values here
-                $np = ($pan == 0 ? 1 : $pan << 1);   //new chrome value
-                $shift = $np << $offset;
-                //echo $nc;
-                $nb = ($b & 0xF0FF) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                if(aoBody::setBody($cid, $nb) ){
-                    $B = aoBody::KEY;
-                    $V = 'value';
-                    
-                    return array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $B=>$nb,
-                        $V=>$np
-                    );
-        
-                    //echo json_encode($ret);
-                    //exit();
-                }
-            }
-            echo 'could not purchase upgrade, insufficient funds';
-            return null;
-        }
-        echo 'could not upgrade part, already fully upgraded';
-        return null;
+    public static function upgradeChassis(){
+        return aoBody::upgrade(12);
     }
-    public static function upgradePaint($cid, $price){
-        //
-        $offset = 4;   //number of bits
-        $b = aoBody::getBody($cid);
-        $paint = ($b & 0x00F0) >> $offset;
-        
-        if($paint < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-            
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //
-                //mask and shift values here
-                $np = ($paint == 0 ? 1 : $paint << 1);   //new chrome value
-                $shift = $np << $offset;
-                //echo $nc;
-                $nb = ($b & 0xFF0F) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                if(aoBody::setBody($cid, $nb) ){
-                    $B = aoBody::KEY;
-                    $V = 'value';
-                        
-                    return array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $B=>$nb,
-                        $V=>$np
-                    );
-        
-                    //echo json_encode($ret);
-                    //exit();
-                }
-            }
-            echo 'could not purchase upgrade, insufficient funds';
-            return null;
-        }
-        echo 'could not upgrade part, already fully upgraded';
-        return null;
+    public static function upgradePanels(){
+       return aoBody::upgrade(8);
     }
-    public static function upgradeChrome($cid, $price){
-        //
-        $b = aoBody::getBody($cid);
-        $chrome = ($b & 0x000F) >> 0;
-        
-        if($chrome < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //
-                //mask and shift values here
-                $nc = ($chrome == 0 ? 1 : $chrome << 1);   //new chrome value
-                //echo $nc;
-                $nb = ($b & 0xFFF0) | $nc;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                if(aoBody::setBody($cid, $nb) ){
-                    $B = aoBody::KEY;
-                    $V = 'value';
-                    
-                    return array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $B=>$nb,
-                        $V=>$nc
-                    );
-        
-                    //echo json_encode($ret);
-                    //exit();
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            echo 'could not purchase upgrade, insufficient funds';
-            return null;
-        }
-        echo 'could not upgrade part, already fully upgraded';
-        return null;
+    public static function upgradePaint(){
+        return aoBody::upgrade(4);
+    }
+    public static function upgradeChrome(){
+        return aoBody::upgrade(0);
     }
 }
+$pt = getPartTypeFromPost();
+
 if(isSetP()){
-    //echo 'blah';
-    //$P = 'price';
-    $CID = ao::CID;
-    $PT = 'partType';
-    
-    $p = getPriceFromPost();
-    $cid = getCIDFromPost();
-    $pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null;
     //echo $pt;
     
-    if($cid != 0 && $p > 1.0 && $pt !== null){
+    if($pt !== null){
         $ret = null;
         
         if($pt == aoBody::CHASSIS){
-            $ret = aoBody::upgradeChassis($cid, $p);
+            $ret = aoBody::upgradeChassis();
         }
         else if($pt == aoBody::PANELS){
-            $ret = aoBody::upgradePanels($cid, $p);
+            $ret = aoBody::upgradePanels();
         }
         else if($pt == aoBody::PAINT){
-            $ret = aoBody::upgradePaint($cid, $p);
+            $ret = aoBody::upgradePaint();
         }
         else if($pt == aoBody::CHROME){
-            $ret = aoBody::upgradeChrome($cid, $p);
+            $ret = aoBody::upgradeChrome();
         }
+        
         if($ret !== null){
             echo json_encode($ret);
             exit();
@@ -272,6 +142,6 @@ if(isSetP()){
         echo "invalid value ret:$ret, could not complete purchase";
         exit();
     }
-    echo "invalid value(s), ($CID:$cid, price:$p, $PT:$pt) could not complete purchase";
+    echo "invalid value (partType:$pt), could not complete purchase";
 }
 ?>

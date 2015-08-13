@@ -1,4 +1,9 @@
 <?php
+//
+//drivetrain.phph
+//Created by Tyler R. Drury, 01-08-2015
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
 require_once 'part.php';
 
 class aoDrivetrain
@@ -10,12 +15,11 @@ class aoDrivetrain
 	    TRANSMISSION = 1,
 	    AXEL = 2,
 	    EXHAUST = 3;
-    
         
     public static function getDrivetrain($cid){
         global $aoUsersDB;
 		
-        $DT = 'drivetrain';
+        $DT = aoDrivetrain::KEY;
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
@@ -29,13 +33,12 @@ class aoDrivetrain
         }
         
         return 0;
-    }
-    
-    public static function setDrivetrain($cid, $dt){
+    }    
+    protected static function setDrivetrain($cid, $dt){
         global $aoUsersDB;
         
         $TN = getUserTableName();
-        $DT = 'drivetrain';
+        $DT = aoDrivetrain::KEY;
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
@@ -48,290 +51,105 @@ class aoDrivetrain
         }
         return null;
     }
-    
-    public static function upgradeEngine($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 12;   //number of bits
+    protected static function upgrade($bitOffset){
+        //echo 'UP';
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        
+        if(!is_int($bitOffset) && ($bitOffset > 12 || $bitOffset < 0) ){
+            exit("$FN, passing invalid value $bitOffset, must in range [0,12]");
+        }
         
         $dt = aoDrivetrain::getDrivetrain($cid);
-        $engine = ($dt & 0xF000) >> $offset;  
+        //mask and shift to occupy 4 left most bits(bits 1-8)
+        $mask = 0x000F << $bitOffset;
+        $bits = ($dt & $mask) >> $bitOffset;  
         
-        if($engine < aoStage::PRO){
+        if($bits < aoStage::PRO){
             //check if part is already fully upgraded
             //then see if user have enough funds for purchase
             $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
+            $nf = user::decFunds($p);
             $dif = $uf - $nf;
                 
             if($dif > 0.000008){
                 //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
                 //
                 //mask and shift values here
-                $nc = ($engine == 0 ? 1 : $engine << 1);   //new part value
-                $shift = $nc << $offset;
+                $nv = ($bits == 0 ? 1 : $bits << 1);   //new part value
+                $shift = $nv << $bitOffset;    //shift back
+                $im = !$mask;   //bitwise inverse
+                //echo $im;
                 //echo $nc;
-                $nb = ($dt & 0x0FFF) | $shift;   //clear last bits, setting new value
+                $nb = ($dt & $im) | $shift;   //clear bits, setting new value
                 //echo $nb;
                 //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$dt=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrain';
-                    $V = 'value';
-                    
-                    $ret = array(
+                if(aoDrivetrain::setDrivetrain($cid, $nb) ){                    
+                    return array(
                         'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $DT=>$nb,
-                        $V=>$nc
+                        ao::CID=>$cid,
+                        aoDrivetrain::KEY=>$nb,
+                        'value'=>$nv
                     );
-        
-                    echo json_encode($ret);
-                    exit();
                 }
             }
             //else, new funds and user's funds are the same,
             //purchase not successful
             //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
+            return null;
         }
         //echo 'could not upgrade part, already fully upgraded';
-        //exit();
         return null;
     }
-    
-    public static function upgradeTransmission($cid, $price){	
+    public static function upgradeEngine(){	
 		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
 		//echo 'UP';
-        $offset = 8;   //number of bits
-        
-        $dt = aoDrivetrain::getDrivetrain($cid);
-        $tranny = ($dt & 0x0F00) >> $offset;  
-        
-        if($tranny < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($tranny == 0 ? 1 : $tranny << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($dt & 0xF0FF) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$dt=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrain';
-                    $V = 'value';
-                    
-                    $ret = array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $DT=>$nb,
-                        $V=>$nc
-                    );
-        
-                    echo json_encode($ret);
-                    exit();
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
-        }
-        //echo 'could not upgrade part, already fully upgraded';
-        //exit();
-        return null;
-    }
-    
-    public static function upgradeAxel($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 4;   //number of bits
-        
-        $dt = aoDrivetrain::getDrivetrain($cid);
-        $axel = ($dt & 0x00F0) >> $offset;  
-        
-        if($axel < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($axel == 0 ? 1 : $axel << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($dt & 0xFF0F) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$dt=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrain';
-                    $V = 'value';
-                    
-                    $ret = array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $DT=>$nb,
-                        $V=>$nc
-                    );
-        
-                    echo json_encode($ret);
-                    exit();
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
-        }
-        //echo 'could not upgrade part, already fully upgraded';
-        //exit();
-        return null;
-    }
-    
-    public static function upgradeExhaust($cid, $price){	
-		//$price = isFloat($_POST[''])? intVal($_POST['']) : 0;
-        global $aoUsersDB;
-		//echo 'UP';
-        $offset = 0;   //number of bits
-        
-        $dt = aoDrivetrain::getDrivetrain($cid);
-        $exhaust = ($dt & 0x000F) >> $offset;  
-        
-        if($exhaust < aoStage::PRO){
-            //check if part is already fully upgraded
-            //then see if user have enough funds for purchase
-            $uf = user::getFunds(); //user funds
-            $nf = user::decFunds($price);
-            $dif = $uf - $nf;
-                
-            if($dif > 0.000008){
-                //if purchase is successful, $dif > 1
-                //$tableName = getUserTableName();
-                //
-                //mask and shift values here
-                $nc = ($exhaust == 0 ? 1 : $exhaust << 1);   //new part value
-                $shift = $nc << $offset;
-                //echo $nc;
-                $nb = ($dt & 0xFFF0) | $shift;   //clear last bits, setting new value
-                //echo $nb;
-                //set new values
-                
-                //$res = $aoUsersDB->query(
-                    //"UPDATE $tableName SET
-                        //$dt=$nb
-                    //WHERE
-                        //$CID = $carID"
-                //);
-                //
-                if(aoDrivetrain::setDrivetrain($cid, $nb) ){
-                    $DT = 'drivetrain';
-                    $V = 'value';
-                    
-                    $ret = array(
-                        'userFunds'=>$nf,
-                        'cid'=>$cid,
-                        $DT=>$nb,
-                        $V=>$nc
-                    );
-        
-                    echo json_encode($ret);
-                    exit();
-                }
-            }
-            //else, new funds and user's funds are the same,
-            //purchase not successful
-            //echo 'could not purchase upgrade, insufficient funds';
-            //exit();
-        }
-        //echo 'could not upgrade part, already fully upgraded';
-        //exit();
-        return null;
-    }
-    
+        //$offset = 12;   //number of bits
+        return aoDrivetrain::upgrade(12);
+    }    
+    public static function upgradeTransmission(){	
+		return aoDrivetrain::upgrade(8);
+    }    
+    public static function upgradeAxel(){	
+		return aoDrivetrain::upgrade(4);
+    }    
+    public static function upgradeExhaust(){	
+		return aoDrivetrain::upgrade(0);
+    }    
 }
-//eSG(); //echo superGlobals
-//aoDrivetrain::upgradePart(333333, 0);//engine upgrade
+//
+$pt = getPartTypeFromPost();
+
 if(isSetP() ){
-	$P = 'price';
-    $CID = ao::CID;
-    $PT = 'partType';
-    
-    $p = getPriceFromPost();
-    $cid = getCIDFromPost();
-	$pt = isUINT($_POST[$PT]) ? intval($_POST[$PT]) : null; 
-	
-        
-    if($cid != 0 && $p > 1.0 && $pt !== null){
+    //
+    if($pt !== null){
         $ret = null;
         
         if($pt == aoDrivetrain::ENGINE){
-		    $ret = aoDrivetrain::upgradeEngine($cid, $p);
-		    echo json_encode($ret); 
-		    exit();
+		    $ret = aoDrivetrain::upgradeEngine();
 	    }
 	    elseif($pt == aoDrivetrain::TRANSMISSION){
-		    $ret = aoDrivetrain::upgradeTransmission($cid, $p);
-		    echo json_encode($ret);    
-		    exit();
+		    $ret = aoDrivetrain::upgradeTransmission();
 	    }
 	    elseif($pt == aoDrivetrain::AXEL){
-            $ret = aoDrivetrain::upgradeAxel($cid, $p);
-            echo json_encode($ret);    
-		    exit();
+            $ret = aoDrivetrain::upgradeAxel();
 	    }
 	    elseif($pt == aoDrivetrain::EXHAUST){
-            $ret = aoDrivetrain::upgradeExhaust($cid, $p);
-            echo json_encode($ret);    
-		    exit();
+            $ret = aoDrivetrain::upgradeExhaust();
 	    }
 	    else{
 		    //console.log('attempting to upgrade unknown type: ' + partType.toString() );
-		    echo 'attempting to upgrade unknown type: ';
+		    echo 'attempting to upgrade unknown type: ' . json_encode($pt);
+            exit();
 	    }	
         echo json_encode($ret);
         exit();
     }
-    echo "invalid value(s), ($CID:$cid, $P:$p, $PT:$pt) could not complete purchase"; 
+    echo "invalid value(s), (partType:$pt) could not complete purchase"; 
 }
 ?>
