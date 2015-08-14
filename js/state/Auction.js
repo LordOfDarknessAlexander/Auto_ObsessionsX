@@ -421,15 +421,15 @@ var Auction = {
         //
 	    player.update();
 		
-        var PB = this.playerBid;
+        //var PB = this.playerBid;
         
-        if( (PB > this.ai[0].getCurBid()) &&
-            (PB > this.ai[1].getCurBid()) &&
-            (PB > this.ai[2].getCurBid()) &&
-            (PB > this.ai[3].getCurBid()) ){
+        //if( (PB > this.ai[0].getCurBid()) &&
+            //(PB > this.ai[1].getCurBid()) &&
+            //(PB > this.ai[2].getCurBid()) &&
+            //(PB > this.ai[3].getCurBid()) ){
 			//this.playerGoing();
 			//this.playerWinning = true;
-		}
+		//}
 	},
 	// bidTimers:function(){
         // //updates this.ai bidding timers	
@@ -475,17 +475,18 @@ var Auction = {
             //the first enemy always has bidding preference!            
 			for(var i = 0; i < this.ai.length; i++){
                 //foreach ai
-                //var e = this.ai[i];
+                var e = this.ai[i], //enemy at i
+                    bid = e.getCurBid();   //
                 
                 //can bid and still participating
                 //console.log('ai active');
-                if(this.ai[i].getCurBid() < this.currentBid){
+                if( (bid !== null) && (bid < this.currentBid) ){
                     //is the ai's last bid the current highest?
                     var raise = this.getRaise();    //currentBid + this.raisePerc;
                     //if ai doesn't have enough, no bid
-                    if(this.ai[i].bid(raise) ){
+                    if(e.bid(raise) ){
 //<php if($DEBUG){>
-                        console.log('ai ' + i + ' bidding ' + this.ai[i].getBidStr() + ' and cap is ' + this.ai[i].getBidCapStr() );
+                        console.log('ai ' + i.toString() + ' bidding ' + e.getBidStr() + ' and cap is ' + e.getBidCapStr() );
 //<php}>
                         this.resetGCDTimer();
                         
@@ -495,12 +496,15 @@ var Auction = {
 						//this._timers.reset();
                         //this.enemyWinning = true;
                         //this.playerWinning = false;
-                        if (audioEnabled()) {
+                        if(audioEnabled()) {
                             assetLoader.sounds.bidder.play();
                         }
                         Auction.setBidBtnText();
                         break;
                     }
+                }
+                else if(bid === null){
+                    //ai left auction
                 }
                 //else the raise has become more than the ai
                 //can afford, so disable
@@ -512,12 +516,16 @@ var Auction = {
 		
 		for(var i = 0; i < ai.length; i++){
 			var e = ai[i],
-			    delta = Math.abs(Auction.currentBid - e.getCurBid());
+                bid = e.getCurBid();
+            
+            if(bid !== null){
+			    delta = Math.abs(Auction.currentBid - bid);
 				
-			if(delta < 0.000001){
-				//console.log('Ai Bidder ' + i.toString() + ' ' + e.getBidStr());
-				return true;
-			}
+                if(delta < 0.000001){
+                    //console.log('Ai Bidder ' + i.toString() + ' ' + e.getBidStr());
+                    return true;
+                }
+            }
 			continue;
 		}
 		return false;

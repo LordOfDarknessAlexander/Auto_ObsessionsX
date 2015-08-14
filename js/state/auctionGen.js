@@ -589,15 +589,23 @@ function auctionGen(args){
 		},
 		checkBid : function(index){
             //check if the enemy at the current index has a higher bid than the other this._ai's            
-			for(var i = 0; i < this._ai.length; i++){
+            var ai = this._ai;
+            
+			for(var i = 0; i < ai.length; i++){
 				if(index != i){
-					if(this._ai[index].getCurBid() > this._ai[i].getCurBid()){
-						continue;
-					}
-                    return false;
+                    //don't check against self
+                    bid0 = ai[index].getCurBid(),
+                    bid1 = ai[i].getCurBid();
+					
+                    if( (bid0 !== null) && (bid1 !== null) ){
+                        if(bid1 > bid0){
+                            return true;
+                        }
+                    }
+                    continue;
 				}
 			}
-			return true;
+			return false;
 		},
 		setBid : function(index){
             var ai = this._ai[index];   //temporary val is useful when not setting object values
@@ -620,8 +628,15 @@ function auctionGen(args){
 		},
 		checkCurrentWinner : function(){
             //determine which ai has the highest bid
-			for(var i = 0; i < this._ai.length; ++i){
-				this._ai[i].winningBid = (this._ai[i].getCurBid() === this._currentBid ? true : false);
+            var ai = this._ai;
+            
+			for(var i = 0; i < ai.length; ++i){
+                var e = ai[i],
+                    bid = e.getCurBid();
+                
+                if(bid !== null){
+                    e.winningBid = (bid == this._currentBid ? true : false);
+                }
 			}
 		},
         toggleCC:function(){
