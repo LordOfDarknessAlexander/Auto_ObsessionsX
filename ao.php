@@ -133,6 +133,16 @@ function eSG(){
     eP();
     eS();
 }
+function getOpFromGET(){
+    //if 
+    //paramaters passed to GET and POST are always string values
+    $OP = 'op';
+    $v = (isSetG() && isset($_GET[$OP]) ) ? $_GET[$OP] : exit("invalid paramater supplied for _GET at argument ($OP)");
+    //echo$ v;
+    //filter string before returning,
+    //if value contain only letters return, else return harmless empty string
+    return isAlphaSmall($v) ? $v : '';
+}
 function rootURL(){
     //returns the root url for the executing application
     //change to false for execution on server

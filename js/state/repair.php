@@ -909,7 +909,7 @@ Interior.upgrade = function(obj){
             var part = inter.getPartType(type),
                 p = part.getPrice();
 <?php //if(loggedIn() ){?>                
-            jq.post("pas/interior.php",
+            jq.post("pas/interior.php?op=update",
                 function(obj){
                     //console.log(JSON.stringify(obj));
                     if(obj === null || typeof obj === 'undefined'){

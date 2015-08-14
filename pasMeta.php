@@ -52,6 +52,7 @@ class sql{
         return '';
     }*/
     public static function slctFrom($fields, $table){
+        //generates the string for an SQL SELECT command
         //$fields is a comma seperated list of row names
         global $AO_DB;
         //

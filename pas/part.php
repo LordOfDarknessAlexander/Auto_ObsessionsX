@@ -58,4 +58,21 @@ class aoStage{
         RACING = 0x4,     //0100
         PRO = 0x8;        //1000
 }
+function getRepairs($cid){
+    global $aoUsersDB;
+    
+    $R = 'repair';
+    $CID = ao::CID;
+    
+    $res = $aoUsersDB->query(
+        sql::slctFromUserTable($R) . " WHERE $CID = $cid"
+    );
+    
+    if($res){
+        $rStr = $res->fetch_assoc()[$R];
+        $bits = isUINT($rStr) ? intval($rStr) : 0;
+        //echo $bits;
+        return $bits;
+    }
+    return 0;
 ?>

@@ -35,7 +35,7 @@ class aoInterior
         
         return 0;
     }    
-    public static function setInterior($cid, $in){
+    protected static function setInterior($cid, $in){
         global $aoUsersDB;
         
         $TN = getUserTableName();
@@ -74,6 +74,27 @@ class aoInterior
             return $ret;
         }        
         return 0;
+    }
+    protected static function setRepairBits($bits){
+        global $aoUsersDB;
+        
+        if($bits >= 0 && $bits <= 4){
+            $TN = getUserTableName();
+            $IN = aoInterior::KEY;
+            $CID = ao::CID;
+            
+            $r = 0;
+            $rm = ($r & 0xFF0F);
+            $v = ($bits << 4) | $rm;
+        
+            //$res = $aoUsersDB->query(
+                //"UPDATE $TN SET $IN = $in WHERE $CID = $cid"
+            //);
+            
+            //if($res){
+                //return $v;
+            //}
+        }
     }
     protected static function upgrade($bitOffset){
          //echo 'UP';
@@ -127,21 +148,6 @@ class aoInterior
         //echo 'could not upgrade part, already fully upgraded';
         return null;
     }
-    //protected static function repair($bits){
-        //
-    //}
-    // public static function upgradeSeats(){	
-		// return aoInterior::upgrade(12);
-    // }    
-    // public static function upgradeCarpet(){	
-		// return aoInterior::upgrade(8);
-    // }    
-    // public static function upgradeDash(){	
-		// return aoInterior::upgrade(4);
-    // }    
-    // public static function upgradePanels(){	
-		// return aoInterior::upgrade(0);
-    // }    
 }
 class aoSeats extends aoInterior{
     public static function upgrade(){
@@ -150,6 +156,7 @@ class aoSeats extends aoInterior{
     public static function repair(){
         $bits = parent::getRepairBits();
         //echo $bits;
+        //parent::setRepairBits($bits);
         return;
     }
 }
@@ -160,6 +167,7 @@ class aoCarpet extends aoInterior{
     public static function repair(){
         $bits = parent::getRepairBits();
         //echo $bits;
+        //parent::setRepairBits($bits);
         return;
     }
 }
@@ -170,6 +178,7 @@ class aoDash extends aoInterior{
     public static function repair(){
         $bits = parent::getRepairBits();
         //echo $bits;
+        //parent::setRepairBits($bits);
         return;
     }
 }
@@ -180,6 +189,7 @@ class aoPanels extends aoInterior{
     public static function repair(){
         $bits = parent::getRepairBits();
         //echo $bits;
+        //parent::setRepairBits($bits);
         return;
     }
 }
@@ -187,31 +197,49 @@ class aoPanels extends aoInterior{
 //aoInterior::upgradePart(333333, 0);//seats upgrade
 $pt = getPartTypeFromPost();
 
-if(isSetP() ){    
+if(isSetP() ){
     //echo $pt;
         
     if($pt !== null){
         $ret = null;
+        //if(isSetG() ){
+        $op = getOpFromGET();
+        //echo $op;
         
-        if($pt == aoInterior::SEATS){
-		    $ret = aoSeats::upgrade();
-	    }
-	    elseif($pt == aoInterior::CARPET){
-		    $ret = aoCarpet::upgrade();
-	    }
-	    elseif($pt == aoInterior::DASH){
-            $ret = aoDash::upgrade();
-	    }
-	    elseif($pt == aoInterior::PANELS){
-            $ret = aoPanels::upgrade();
-	    }
-	    else{
-		    //console.log('attempting to upgrade unknown type: ' + partType.toString() );
-		    echo 'attempting to upgrade unknown type: ';
-	    }
+        if($op == 'update'){
+            if($pt == aoInterior::SEATS){
+                $ret = aoSeats::upgrade();
+            }
+            elseif($pt == aoInterior::CARPET){
+                $ret = aoCarpet::upgrade();
+            }
+            elseif($pt == aoInterior::DASH){
+                $ret = aoDash::upgrade();
+            }
+            elseif($pt == aoInterior::PANELS){
+                $ret = aoPanels::upgrade();
+            }
+        }
+        else if($op == 'repair'){
+            if($pt == aoInterior::SEATS){
+                $ret = aoSeats::repair();
+            }
+            elseif($pt == aoInterior::CARPET){
+                $ret = aoCarpet::repair();
+            }
+            elseif($pt == aoInterior::DASH){
+                $ret = aoDash::repair();
+            }
+            elseif($pt == aoInterior::PANELS){
+                $ret = aoPanels::repair();
+            }
+        }
+        else{
+            exit("invalid argument supplied for index (op) in GET, could not preform purchase");
+        }
         echo json_encode($ret);
         exit();
     }
-    echo "invalid value(s), (partType:$pt) could not complete purchase"; 
+    exit("invalid value, (partType:$pt) could not complete purchase");
 }
 ?>

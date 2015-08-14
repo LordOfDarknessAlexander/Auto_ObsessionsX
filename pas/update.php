@@ -82,9 +82,8 @@ class pasUpdate{
         
         return $res ? true : false;
     }
-	
 	public static function userCurrentCar($carID ){
-	global $AO_DB;
+        global $AO_DB;
 		$CID = ao::CID;
 		//$UID = ao::UID;
 		//$users = 'users';
@@ -99,8 +98,7 @@ class pasUpdate{
 			}
 		}
 		return 0;
-	
-}
+    }
 	public static function updateSale($carID, $bid, $curTime){
 		global $aoCarSalesDB;
         $CID = ao::CID;

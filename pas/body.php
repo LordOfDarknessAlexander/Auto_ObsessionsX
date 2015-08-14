@@ -49,6 +49,56 @@ class aoBody{
         }
         return null;
     }
+    public static function getRepairBits($cid){
+        //returns the 4 bits representing the Drivetrain's
+        //repair state from mySql for a specific vehicle
+        global $aoUsersDB;
+		
+        $R = 'repair';
+        $CID = ao::CID;
+        
+        $res = $aoUsersDB->query(
+            sql::slctFromUserTable($R) . " WHERE $CID = $cid"
+        );
+        
+        if($res){
+            $rStr = $res->fetch_assoc()[$R];
+            //double check the type is correct and someone didn't hack into database
+            //to change values to an inappropriate type
+            $bits = isUINT($rStr) ? intval($rStr) : 0;
+            $ret = ($bits & 0x0F000) >> 8;
+            //echo $ret;
+            return $ret;
+        }        
+        return 0;
+    }
+    protected static function setRepairBits($bits){
+        global $aoUsersDB;
+        
+        if(!is_inv($bits) || $bits > 4 || $bits < 0){
+            exit("invalid value for bits:$bits, must be between 0x0 and 0x4");
+        }
+        else{
+            $TN = getUserTableName();
+            $IN = aoBody::KEY;
+            $CID = ao::CID;
+            
+            $r = 0;
+            $rm = ($r & 0xF0FF);
+            $shift = ($bits << 8);
+            //echo $shift;
+            $v = $shift | $rm;
+            //echo $v;
+            
+            //$res = $aoUsersDB->query(
+                //"UPDATE $TN SET $IN = $in WHERE $CID = $cid"
+            //);
+            
+            //if($res){
+                //return $v;
+            //}
+        }
+    }
     protected static function upgrade($bitOffset){
          //echo 'UP';
         $FN = __DIR__ . ', ' . __METHOD__;
@@ -101,47 +151,103 @@ class aoBody{
         //echo 'could not upgrade part, already fully upgraded';
         return null;
     }
-    public static function upgradeChassis(){
-        return aoBody::upgrade(12);
+}
+class aoChassis extends aoBody{
+    public static function upgrade(){
+        return parent::upgrade(12);
     }
-    public static function upgradePanels(){
-       return aoBody::upgrade(8);
+    public static function repair(){
+        //$bits = parent::getRepairBits();
+        //echo $bits;
+        //parent::setRepairBits($bits);
+        return;
     }
-    public static function upgradePaint(){
-        return aoBody::upgrade(4);
+}
+class aoPanels extends aoBody{
+    public static function upgrade(){
+        return parent::upgrade(8);
     }
-    public static function upgradeChrome(){
-        return aoBody::upgrade(0);
+    public static function repair(){
+        //$bits = parent::getRepairBits();
+        //echo $bits;
+        //parent::setRepairBits($bits);
+        return;
+    }
+}
+class aoPaint extends aoBody{
+    public static function upgrade(){
+        return parent::upgrade(8);
+    }
+    public static function repair(){
+        //$bits = parent::getRepairBits();
+        //echo $bits;
+        //parent::setRepairBits($bits);
+        return;
+    }
+}
+class aoChrome extends aoBody{
+    public static function upgrade(){
+        return parent::upgrade(0);
+    }
+    public static function repair(){
+        //$bits = parent::getRepairBits();
+        //echo $bits;
+        //parent::setRepairBits($bits);
+        return;
     }
 }
 $pt = getPartTypeFromPost();
 
 if(isSetP()){
-    //echo $pt;
-    
+    //echo $pt;    
     if($pt !== null){
+        $op = getOpFromGET();
         $ret = null;
         
-        if($pt == aoBody::CHASSIS){
-            $ret = aoBody::upgradeChassis();
+        if($op == 'update'){
+            if($pt == aoBody::CHASSIS){
+                $ret = aoChassis::upgrade();
+            }
+            else if($pt == aoBody::PANELS){
+                $ret = aoPanels::upgrade();
+            }
+            else if($pt == aoBody::PAINT){
+                $ret = aoPaint::upgrade();
+            }
+            else if($pt == aoBody::CHROME){
+                $ret = aoChrome::upgrade();
+            }
+            else{
+                exit('attempting to upgrade unknown type: ' . json_encode($pt) . 'could not complete purchase');
+            }
         }
-        else if($pt == aoBody::PANELS){
-            $ret = aoBody::upgradePanels();
+        else if($op == 'repair'){
+            if($pt == aoBody::CHASSIS){
+                $ret = aoChassis::repair();
+            }
+            else if($pt == aoBody::PANELS){
+                $ret = aoPanels::repair();
+            }
+            else if($pt == aoBody::PAINT){
+                $ret = aoPaint::repair();
+            }
+            else if($pt == aoBody::CHROME){
+                $ret = aoChrome::repair();
+            }
+            else{
+                exit('attempting to repair unknown type: ' . json_encode($pt) . ', could not complete purchase');
+            }
         }
-        else if($pt == aoBody::PAINT){
-            $ret = aoBody::upgradePaint();
-        }
-        else if($pt == aoBody::CHROME){
-            $ret = aoBody::upgradeChrome();
+        else{
+            exit("invalid argument supplied for index (op) in GET, could not preform purchase");
         }
         
         if($ret !== null){
             echo json_encode($ret);
             exit();
         }
-        echo "invalid value ret:$ret, could not complete purchase";
-        exit();
+        exit("invalid value ret:$ret, could not complete purchase");
     }
-    echo "invalid value (partType:$pt), could not complete purchase";
+    exit("invalid value (partType:$pt), could not complete purchase");
 }
 ?>
