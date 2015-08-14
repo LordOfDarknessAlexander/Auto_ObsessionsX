@@ -76,13 +76,7 @@ var SaleView = {
 				label = $('label#bid', c),
 				bid = ai[i].getCurBid();
 				
-			if(bid !== null){	
-				label.text(bid.toString());
-			}
-			else{
-				label.text("");
-			}
-			
+            label.text(bid !== null ? bid.toString() : '');
 		}
 		jq.SaleView.goingLabel.text('');
 		this.sortAI();
@@ -135,18 +129,27 @@ var SaleView = {
 				
 			
 			var tmpBid = 0.0,
-				i = 0;
+				i = 0,
+                l = 0;  //left counter
 			
 			for(var e = 0; e < child.length; e++)
 			{
 				var c = child[e],
 				    label = $('label#bid', c),
-					bid = parseFloat(label.text());
+                    txt = label.text(),
+					bid = txt != '' ? parseFloat(bid) : null;
 				
-				if(bid >= cb){
-					tmpBid = bid;
-					i = e;
-				}	
+                if(bid !== null){
+                    if(bid >= cb){
+                        tmpBid = bid;
+                        i = e;
+                    }	
+                }
+                else{
+                    //draw ai which have left in reverse order
+                    l++;
+                    continue;
+                }
 			}		
 			
 			var pai = $('div.first', ai.div),

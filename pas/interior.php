@@ -61,16 +61,18 @@ class aoInterior
         $CID = ao::CID;
         
         $res = $aoUsersDB->query(
-            sql::slctAllFromUserTable() . " WHERE $CID = $cid"
+            sql::slctFromUserTable($R) . " WHERE $CID = $cid"
         );
         
         if($res){
             $rStr = $res->fetch_assoc()[$R];
-            $ret = isUINT($rStr) ? intval($rStr) : 0;
+            //double check the type is correct and someone didn't hack into database
+            //to change values to an inappropriate type
+            $bits = isUINT($rStr) ? intval($rStr) : 0;
+            $ret = ($bits & 0x00F0) >> 4;
             //echo $ret;
             return $ret;
-        }
-        
+        }        
         return 0;
     }
     protected static function upgrade($bitOffset){
@@ -146,6 +148,8 @@ class aoSeats extends aoInterior{
         return parent::upgrade(12);
     }
     public static function repair(){
+        $bits = parent::getRepairBits();
+        //echo $bits;
         return;
     }
 }
@@ -154,7 +158,9 @@ class aoCarpet extends aoInterior{
         return parent::upgrade(8);
     }
     public static function repair(){
-        
+        $bits = parent::getRepairBits();
+        //echo $bits;
+        return;
     }
 }
 class aoDash extends aoInterior{
@@ -162,7 +168,9 @@ class aoDash extends aoInterior{
         return parent::upgrade(4);
     }
     public static function repair(){
-        
+        $bits = parent::getRepairBits();
+        //echo $bits;
+        return;
     }
 }
 class aoPanels extends aoInterior{
@@ -170,7 +178,9 @@ class aoPanels extends aoInterior{
         return parent::upgrade(0);
     }
     public static function repair(){
-        
+        $bits = parent::getRepairBits();
+        //echo $bits;
+        return;
     }
 }
 //eSG(); //echo superGlobals
