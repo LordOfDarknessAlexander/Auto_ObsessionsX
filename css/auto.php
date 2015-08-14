@@ -356,7 +356,7 @@ div#reg-navigation a:hover{
 	top : 19%;
 }
 
-/* visited link */
+/* visited link yar*/
 #div#main a:visited {
     color: #00FFFF;
 }
