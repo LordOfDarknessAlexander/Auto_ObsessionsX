@@ -52,6 +52,27 @@ class aoInterior
         }
         return null;
     }
+    public static function getRepairBits($cid){
+        //returns the 4 bits representing the Interior's
+        //repair state from mySql for a specific vehicle
+        global $aoUsersDB;
+		
+        $R = 'repair';
+        $CID = ao::CID;
+        
+        $res = $aoUsersDB->query(
+            sql::slctAllFromUserTable() . " WHERE $CID = $cid"
+        );
+        
+        if($res){
+            $rStr = $res->fetch_assoc()[$R];
+            $ret = isUINT($rStr) ? intval($rStr) : 0;
+            //echo $ret;
+            return $ret;
+        }
+        
+        return 0;
+    }
     protected static function upgrade($bitOffset){
          //echo 'UP';
         $FN = __DIR__ . ', ' . __METHOD__;
@@ -104,18 +125,53 @@ class aoInterior
         //echo 'could not upgrade part, already fully upgraded';
         return null;
     }
-    public static function upgradeSeats(){	
-		return aoInterior::upgrade(12);
-    }    
-    public static function upgradeCarpet(){	
-		return aoInterior::upgrade(8);
-    }    
-    public static function upgradeDash(){	
-		return aoInterior::upgrade(4);
-    }    
-    public static function upgradePanels(){	
-		return aoInterior::upgrade(0);
-    }    
+    //protected static function repair($bits){
+        //
+    //}
+    // public static function upgradeSeats(){	
+		// return aoInterior::upgrade(12);
+    // }    
+    // public static function upgradeCarpet(){	
+		// return aoInterior::upgrade(8);
+    // }    
+    // public static function upgradeDash(){	
+		// return aoInterior::upgrade(4);
+    // }    
+    // public static function upgradePanels(){	
+		// return aoInterior::upgrade(0);
+    // }    
+}
+class aoSeats extends aoInterior{
+    public static function upgrade(){
+        return parent::upgrade(12);
+    }
+    public static function repair(){
+        return;
+    }
+}
+class aoCarpet extends aoInterior{
+    public static function upgrade(){
+        return parent::upgrade(8);
+    }
+    public static function repair(){
+        
+    }
+}
+class aoDash extends aoInterior{
+    public static function upgrade(){
+        return parent::upgrade(4);
+    }
+    public static function repair(){
+        
+    }
+}
+class aoPanels extends aoInterior{
+    public static function upgrade(){
+        return parent::upgrade(0);
+    }
+    public static function repair(){
+        
+    }
 }
 //eSG(); //echo superGlobals
 //aoInterior::upgradePart(333333, 0);//seats upgrade
@@ -128,16 +184,16 @@ if(isSetP() ){
         $ret = null;
         
         if($pt == aoInterior::SEATS){
-		    $ret = aoInterior::upgradeSeats();
+		    $ret = aoSeats::upgrade();
 	    }
 	    elseif($pt == aoInterior::CARPET){
-		    $ret = aoInterior::upgradeCarpet();
+		    $ret = aoCarpet::upgrade();
 	    }
 	    elseif($pt == aoInterior::DASH){
-            $ret = aoInterior::upgradeDash();
+            $ret = aoDash::upgrade();
 	    }
 	    elseif($pt == aoInterior::PANELS){
-            $ret = aoInterior::upgradePanels();
+            $ret = aoPanels::upgrade();
 	    }
 	    else{
 		    //console.log('attempting to upgrade unknown type: ' + partType.toString() );

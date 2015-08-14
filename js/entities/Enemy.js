@@ -33,16 +33,18 @@
             return p;
         },
 		getCurBid:function(){
-			return (!this.leftAuction && this.currBid !== null) ? this.currBid : 0.0;
+            //if enemy at auction, return bid, else return null
+			return (!this.leftAuction && this.currBid !== null) ? this.currBid : null;
 		},
 		setBidTimer:function(){
 			var BCD = 1000.0,//32,
 				BID_CAP = BCD * 4.0,
 				r = Math.random() * (BID_CAP * 0.65);
-				_bidTimer = r;
+            
+            this._bidTimer = r;
 		},
         getBidStr:function(){
-            return '$' + this.currBid.toFixed(2);
+            return this.currBid !== null ? '$' + this.currBid.toFixed(2) : '';
         },
         getBidCapStr:function(){
             return '$' + this.bidCap.toFixed(2);
@@ -57,6 +59,7 @@
         leave:function(){
             this.winningBid = false;
             this.leftAuction = true;
+            //this.currBid = null;
         },
         canBid:function(){
             //has the enemy's personal bid cooldown refreshed
@@ -64,7 +67,7 @@
         },
         bid:function(raise){
             //place a bid, setting local state
-            if(!this.leftAuction){
+            if(!this.leftAuction && (this.currBid !== null) ){
                 if(raise <= this.bidCap){
                     if(this.canBid() ){
                         this.currBid = raise;
@@ -81,13 +84,14 @@
                 //the raised bid is higher than this enemy's cap,
                 //no more money, so leave auction
                 this.leave();
-            }            
+            }
+            //not at auction, ai can't bid
             return false;
         },
 		update : function(dt){
             //console.log('update!' + JSON.stringify(this) );
             //if(!this.leftAuction){
-            if(!this.leftAuction){
+            if(!this.leftAuction && (this.currBid !== null) ){
                 if(this.currBid >= this.bidCap){
                     this.leftAuction = true;
                     return;
@@ -101,7 +105,9 @@
                        this._bidTimer = this.BID_TIMER_CAP;
                     }
                 }
+                //bid timer still on cooldown
             }
+            //else ai not at auction, don't update
 		}
 	};
 }

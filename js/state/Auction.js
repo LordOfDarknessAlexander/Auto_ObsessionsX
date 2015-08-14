@@ -374,25 +374,35 @@ var Auction = {
             context.fillText(str, ENEMY_X, 300);
 		}
         //draw enemies
-        var i = 0;
+        var i = 0,
+            l = 0;  //index of ai which have left the auction
         
         function draw(){
             var bid = Auction.ai[i].getCurBid();
-                str = bidders[i] + Auction.ai[i].getBidStr();
             
-            if(bid >= cb){
-                context.drawImage(curBidImage, left, ewinPos);
-                context.fillText(str, tx, t1);		
+            if(bid !== null){
+                var str = bidders[i] + Auction.ai[i].getBidStr();
+            
+                if(bid >= cb){
+                    context.drawImage(curBidImage, left, ewinPos);
+                    context.fillText(str, tx, t1);		
+                }
+                else{
+                    context.drawImage(slimer, left, t0 + (h * i) );
+                    context.fillText(str, tx, t2 + (h * i) );
+                }
             }
             else{
-                context.drawImage(slimer, left, t0 + (h * i) );
-                context.fillText(str, tx, t2 + (h * i) );
+                //ai not at auction, reduce opacity of element
+                //and draw at botton of list
+                l++;
             }
             //i++;
         }
         for(; i < Auction.ai.length; i++){
             draw();
         }
+        console.log('number of ai to leave auction: ' + l.toString() );
 //<php
 //if(DEBUG){>
         pbSetColor(jq.Auction.cdpbG, this.getTimerPerc() );
