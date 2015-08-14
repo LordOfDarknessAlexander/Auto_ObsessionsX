@@ -132,19 +132,19 @@ div#loginfields{
 	/*margin-left :60%;
 	margin-top: 4%;*/
 }
-#progress 
-{
+#progress{
   height: 12%;
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
 }
-#percent 
-{
+
+#percent{
   color: white;
   font-weight: bold;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
+
 #progress-bar{
   width: 200px;
 }
@@ -264,8 +264,7 @@ img#adBar{
     z-index:3;
 }
 <?php //Game Screen/State stylings?>
-#Register
-{
+#Register{
   background-image: url('../images/Splash.png')no-repeat 0 0;
   color: white;
   background-size : 100% 100%;
@@ -274,17 +273,13 @@ img#adBar{
   z-index: 20;
 }
 
-#splash
-{
+#splash{
   background-image: url('../images/logo.png')no-repeat 0 0;
   background-size : 100% 100%;
   width: 100%;
   height: 100%;
   z-index: 20;
-
 }
-
-
 <?php //Stat Bar Game HUD?>
 div#statBar{
 <?php
@@ -303,6 +298,7 @@ div#statBar{
 	z-index : 2;
 	font-size:2.0vw;
 }
+
 div#statBar label{
     position:absolute;
     width:25%;
@@ -336,7 +332,6 @@ div#reg-navigation{
     height:10%;
     z-index:3;
 	top : 16%;
-	
 }
 
 div#reg-navigation a{
@@ -360,8 +355,6 @@ div#reg-navigation a:hover{
 	padding : 2%;
 	top : 19%;
 }
-
-
 
 /* visited link */
 #div#main a:visited {
@@ -390,8 +383,7 @@ div#menu{
 	display: inline;
     z-index: 2;
 }
-div#main
-{
+div#main{
 <?php
     css::size('100%', '100%');
 	posAbs();
@@ -402,16 +394,15 @@ div#main
 /*
 credits page UI stylings
 */
-#credits 
-{
+#credits{
     display: none;
     line-height: 30px;
     margin: auto;
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
 }
-#credits li 
-{	/*styling for all li(list item) in div element with id credits*/
+
+#credits li{	/*styling for all li(list item) in div element with id credits*/
     padding: 5px 0;
 	display:navigation;
 }
