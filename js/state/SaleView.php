@@ -76,7 +76,12 @@ var SaleView = {
 				label = $('label#bid', c),
 				bid = ai[i].getCurBid();
 				
-			label.text(bid.toString());
+			if(bid !== null){	
+				label.text(bid.toString());
+			}
+			else{
+				label.text("");
+			}
 			
 		}
 		jq.SaleView.goingLabel.text('');
