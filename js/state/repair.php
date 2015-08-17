@@ -624,7 +624,7 @@ Drivetrain.upgrade = function(obj){
             var part = dt.getPartType(type),
                 p = part.getPrice();
 <?php //if(loggedIn() ){?>
-            jq.post("pas/drivetrain.php",
+            jq.post("pas/drivetrain.php?op=update",
                 function(obj){
                     console.log(JSON.stringify(obj));
                      if(obj === null || typeof obj === 'undefined'){
@@ -703,7 +703,7 @@ Drivetrain.repair = function(obj){
                         jq.setErr(FN, 'purchase upgrade failed,\n invalid data returned from server');
                         return;
                     }
-                    
+                    console.log(JSON.stringify(obj) );
                     if(part !== null){
                         var div = Drivetrain.getDivURSlot(type);   //$('div#RepairShop div#drivetrain');
                        
@@ -794,7 +794,7 @@ Body.upgrade = function(obj){
             var part = b.getPartType(type),
                 p = part.getPrice();
 <?php //if(loggedIn() ){ ?>
-            jq.post("pas/body.php",
+            jq.post("pas/body.php?op=update",
                 function(obj){
                     //console.log(JSON.stringify(obj));
                     if(obj === null || typeof obj === 'undefined'){
@@ -1095,7 +1095,7 @@ Documents.upgrade = function(obj){
             var part = d.getPartType(type),
                 p = part.getPrice();
 <?php //if(loggedIn() ){?>
-            jq.post("pas/documents.php",
+            jq.post("pas/documents.php?op=update",
                 function(obj){
                     //console.log(JSON.stringify(obj));
                     if(obj === null || typeof obj === 'undefined'){
