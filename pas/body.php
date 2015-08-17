@@ -157,6 +157,13 @@ class aoChassis extends aoBody{
         return parent::upgrade(12);
     }
     public static function repair(){
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
         //$bits = parent::getRepairBits();
         //echo $bits;
         //parent::setRepairBits($bits);
@@ -168,6 +175,13 @@ class aoPanels extends aoBody{
         return parent::upgrade(8);
     }
     public static function repair(){
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
         //$bits = parent::getRepairBits();
         //echo $bits;
         //parent::setRepairBits($bits);
@@ -179,6 +193,13 @@ class aoPaint extends aoBody{
         return parent::upgrade(8);
     }
     public static function repair(){
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
         //$bits = parent::getRepairBits();
         //echo $bits;
         //parent::setRepairBits($bits);
@@ -190,6 +211,13 @@ class aoChrome extends aoBody{
         return parent::upgrade(0);
     }
     public static function repair(){
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
         //$bits = parent::getRepairBits();
         //echo $bits;
         //parent::setRepairBits($bits);

@@ -154,7 +154,15 @@ class aoSeats extends aoInterior{
         return parent::upgrade(12);
     }
     public static function repair(){
-        $bits = parent::getRepairBits();
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
@@ -176,7 +184,15 @@ class aoDash extends aoInterior{
         return parent::upgrade(4);
     }
     public static function repair(){
-        $bits = parent::getRepairBits();
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
@@ -187,7 +203,15 @@ class aoPanels extends aoInterior{
         return parent::upgrade(0);
     }
     public static function repair(){
-        $bits = parent::getRepairBits();
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
         //parent::setRepairBits($bits);
         return;

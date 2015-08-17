@@ -150,31 +150,39 @@ class aoEngine extends aoDrivetrain{
         $FN = __DIR__ . ', ' . __METHOD__;
         $p = getPriceFromPost();    //price of part to upgrade
         $cid = getCIDFromPost();    //car id to upgrade
+        $EPS = 0.01;   //purchase epsilon, to determine change in
         
         if($cid == 0){
-            exit("$FN, invalid car ID:$cid");
+            exit("$FN, invalid car ID:$cid, could not complete purchase");
         }
         
         $bits = parent::getRepairBits($cid);
         //echo $bits;
         $m = 0xF000;
         $b = ($bits & $m) >> 12; //masked bits
-        return $b;
-        //$uf = user::getFunds(); //user funds
-        //$nf = user::decFunds($p);
-        $dif = 0;// $uf - $nf;
-        
-        if($dif > 0.000008){
-            $nb = $b | 0x8; //engine is first bit in character, (1000)
-            //parent::setRepairBits($cid, $nb);
-            
-            return array(
-                //'userFunds'=>$nf,
-                ao::CID=>$cid,
-                'repair'=>$nb,
-                'value'=>$nv
-            );
+        //return $bits;
+        if(!($b & 0x8) ){
+            //part not repaired
+            $uf = user::getFunds(); //user funds
+            //$nf = user::decFunds($p);
+            $dif = 0;// $uf - $nf;
+            //return $b;
+            if($dif > 0.008){
+                $nv = true; //$b | 0x8;
+                $nb = 0;  //$nv << 12;
+                $nr = ($bits & 0x0FFF) | $nb;   //new repair bits
+                //parent::setRepairBits($cid, $nr);
+                
+                return array(
+                    //'userFunds'=>$nf,
+                    ao::CID=>$cid,
+                    'repair'=>$nb,
+                    'value'=>$nv
+                );
+            }
+            exit("$FN, could not complete purchase,\n insufficient funds");
         }
+        exit("$FN, could not complete purchase,\n part is already repaired");
     }
 }
 class aoTransmission extends aoDrivetrain{
@@ -182,7 +190,15 @@ class aoTransmission extends aoDrivetrain{
         return parent::upgrade(8);
     }
     public static function repair(){
-        $bits = parent::getRepairBits();
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
@@ -193,7 +209,15 @@ class aoAxel extends aoDrivetrain{
         return parent::upgrade(4);
     }
     public static function repair(){
-        $bits = parent::getRepairBits();
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
@@ -204,7 +228,15 @@ class aoExhaust extends aoDrivetrain{
         return parent::upgrade(0);
     }
     public static function repair(){
-        $bits = parent::getRepairBits();
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
