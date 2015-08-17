@@ -1,6 +1,6 @@
 <?php
 //
-//drivetrain.phph
+//drivetrain.php
 //Created by Tyler R. Drury, 01-08-2015
 //(C) 8.5:1 Entertainment, All Rights Reserved
 //
@@ -89,6 +89,10 @@ class aoDrivetrain
     protected static function upgrade($bitOffset){
         //echo 'UP';
         $FN = __DIR__ . ', ' . __METHOD__;
+        //purchase epsilon, to determine change if
+        //a change in the user's currency has occurred,
+        $EPS = 0.01;
+        
         $p = getPriceFromPost();    //price of part to upgrade
         $cid = getCIDFromPost();    //car id to upgrade
         
@@ -112,7 +116,7 @@ class aoDrivetrain
             $nf = user::decFunds($p);
             $dif = $uf - $nf;
                 
-            if($dif > 0.000008){
+            if($dif > $EPS){
                 //if purchase is successful, $dif > 1
                 //
                 //mask and shift values here
@@ -148,9 +152,12 @@ class aoEngine extends aoDrivetrain{
     }
     public static function repair(){
         $FN = __DIR__ . ', ' . __METHOD__;
+        //purchase epsilon, to determine change if
+        //a change in the user's currency has occurred,
+        $EPS = 0.01;
+        
         $p = getPriceFromPost();    //price of part to upgrade
         $cid = getCIDFromPost();    //car id to upgrade
-        $EPS = 0.01;   //purchase epsilon, to determine change in
         
         if($cid == 0){
             exit("$FN, invalid car ID:$cid, could not complete purchase");
@@ -167,7 +174,7 @@ class aoEngine extends aoDrivetrain{
             //$nf = user::decFunds($p);
             $dif = 0;// $uf - $nf;
             //return $b;
-            if($dif > 0.008){
+            if($dif > $EPS){
                 $nv = true; //$b | 0x8;
                 $nb = 0;  //$nv << 12;
                 $nr = ($bits & 0x0FFF) | $nb;   //new repair bits
@@ -191,6 +198,8 @@ class aoTransmission extends aoDrivetrain{
     }
     public static function repair(){
         $FN = __DIR__ . ', ' . __METHOD__;
+        $EPS = 0.01;
+        
         $p = getPriceFromPost();    //price of part to upgrade
         $cid = getCIDFromPost();    //car id to upgrade
         
@@ -229,8 +238,11 @@ class aoExhaust extends aoDrivetrain{
     }
     public static function repair(){
         $FN = __DIR__ . ', ' . __METHOD__;
+        $EPS = 0.01;
+        
         $p = getPriceFromPost();    //price of part to upgrade
         $cid = getCIDFromPost();    //car id to upgrade
+        
         
         if($cid == 0){
             exit("$FN, invalid car ID:$cid");

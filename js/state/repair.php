@@ -1095,7 +1095,7 @@ Documents.upgrade = function(obj){
             var part = d.getPartType(type),
                 p = part.getPrice();
 <?php //if(loggedIn() ){?>
-            jq.post("pas/documents.php?op=update",
+            jq.post("pas/documents.php",
                 function(obj){
                     //console.log(JSON.stringify(obj));
                     if(obj === null || typeof obj === 'undefined'){

@@ -1,6 +1,6 @@
 <?php
 //
-//drivetrain.phph
+//documents.php
 //Created by Tyler R. Drury, 01-08-2015
 //(C) 8.5:1 Entertainment, All Rights Reserved
 //
@@ -54,6 +54,8 @@ class aoDocuments
     protected static function upgrade($bitOffset){
          //echo 'UP';
         $FN = __DIR__ . ', ' . __METHOD__;
+        $EPS = 0.01;
+        
         $p = getPriceFromPost();    //price of part to upgrade
         $cid = getCIDFromPost();    //car id to upgrade
         
@@ -79,7 +81,7 @@ class aoDocuments
             $nf = user::decFunds($p);
             $dif = $uf - $nf;
                 
-            if($dif > 0.000008){
+            if($dif > $EPS){
                 $nv = ($bits == 0 ? 1 : $bits << 1);   //new part value
                 //echo $nv;
                 $shift = $nv << $bitOffset;    //shift back
