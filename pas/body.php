@@ -194,7 +194,7 @@ class aoPanels extends aoBody{
 }
 class aoPaint extends aoBody{
     public static function upgrade(){
-        return parent::upgrade(8);
+        return parent::upgrade(4);
     }
     public static function repair(){
         $FN = __DIR__ . ', ' . __METHOD__;

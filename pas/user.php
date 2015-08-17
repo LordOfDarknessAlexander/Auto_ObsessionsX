@@ -82,6 +82,12 @@ class user{
         }
         return null;
     }
+    public static function slctFromCar($fields){
+        global $aoUsersDB;
+        
+        //$aoUsersDB->query()
+        return null;
+    }
     public static function getFunds(){
         $M = user::M;
         $res = user::slctFromEntry($M);

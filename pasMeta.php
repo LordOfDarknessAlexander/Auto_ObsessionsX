@@ -88,6 +88,13 @@ class sql{
     public static function slctAllFromUserTable(){        
         return sql::slctFromUserTable('*');
     }
+    public static function slctFromCar($cid, $fields){
+        //select
+        $CID = ao::CID;
+        $str = sql::slctFromUserTable($fields);
+        
+        return  $str !== '' ? "$str WHERE $CID = $cid" : '';
+    }
     //
     //create
     //
