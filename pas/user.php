@@ -82,12 +82,33 @@ class user{
         }
         return null;
     }
-    public static function slctFromCar($fields){
+    public static function slctFromCar($cid, $fields){
         global $aoUsersDB;
         
-        //$aoUsersDB->query()
-        return null;
+        $q = sql::slctFromCar($cid, $fields);
+        $r = ($q !== '' ? $aoUsersDB->query($q) : null);
+        $ret = null;
+        
+        if($r){
+            $ret = $r->fetch_assoc();
+            $r->close();
+        }
+        
+        return $ret;
     }
+    public static function updateCar($cid, $fields){
+        global $aoUsersDB;
+        
+        $TN = getUserTableName();
+        $CID = ao::CID;
+        //calls to UPDATE return TRUE on success and FALSE on failure
+        $ret = $aoUsersDB->query(
+            "UPDATE $TN SET $fields WHERE $CID = $cid"
+        );
+        
+        return $ret;
+    }
+    
     public static function getFunds(){
         $M = user::M;
         $res = user::slctFromEntry($M);

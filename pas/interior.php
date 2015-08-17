@@ -17,18 +17,13 @@ class aoInterior
 	    PANELS = 4;
     
         
-    public static function getInterior($cid){
-        global $aoUsersDB;
-		
+    public static function getInterior($cid){		
         $IN = 'interior';
-        $CID = ao::CID;
         
-        $res = $aoUsersDB->query(
-            sql::slctAllFromUserTable() . " WHERE $CID = $cid"
-        );
+        $res = user::slctFromCar($cid, $IN);
         
         if($res){
-            $ret = intval($res->fetch_assoc()[$IN]);
+            $ret = intval($res[$IN]);
             //echo $ret;
             return $ret;
         }
@@ -36,44 +31,17 @@ class aoInterior
         return 0;
     }    
     protected static function setInterior($cid, $in){
-        global $aoUsersDB;
-        
-        $TN = getUserTableName();
         $IN = aoInterior::KEY;
-        $CID = ao::CID;
         
-        $res = $aoUsersDB->query(
-            "UPDATE $TN SET $IN = $in WHERE $CID = $cid"
-        );
-        
-        if($res){
-            //echo json_encode($res);
-            return $res;
-        }
-        return null;
+        return user::updateCar($cid, "$IN = $in");
     }
     public static function getRepairBits($cid){
         //returns the 4 bits representing the Interior's
         //repair state from mySql for a specific vehicle
-        global $aoUsersDB;
-		
-        $R = 'repair';
-        $CID = ao::CID;
-        
-        $res = $aoUsersDB->query(
-            sql::slctFromUserTable($R) . " WHERE $CID = $cid"
-        );
-        
-        if($res){
-            $rStr = $res->fetch_assoc()[$R];
-            //double check the type is correct and someone didn't hack into database
-            //to change values to an inappropriate type
-            $bits = isUINT($rStr) ? intval($rStr) : 0;
-            $ret = ($bits & 0x00F0) >> 4;
-            //echo $ret;
-            return $ret;
-        }        
-        return 0;
+        $r = getRepairs($cid);
+        //$ret = ($r & 0x000F) >> 0;
+        //echo $ret;
+        return 0;   //$ret;
     }
     protected static function setRepairBits($bits){
         global $aoUsersDB;

@@ -16,18 +16,13 @@ class aoDrivetrain
 	    AXEL = 2,
 	    EXHAUST = 3;
         
-    public static function getDrivetrain($cid){
-        global $aoUsersDB;
-		
+    public static function getDrivetrain($cid){		
         $DT = aoDrivetrain::KEY;
-        $CID = ao::CID;
         
-        $res = $aoUsersDB->query(
-            sql::slctAllFromUserTable() . " WHERE $CID = $cid"
-        );
+        $res = user::slctFromCar($cid, $DT);
         
         if($res){
-            $ret = intval($res->fetch_assoc()[$DT]);
+            $ret = intval($res[$DT]);
             //echo $ret;
             return $ret;
         }
@@ -35,21 +30,8 @@ class aoDrivetrain
         return 0;
     }    
     protected static function setDrivetrain($cid, $dt){
-        global $aoUsersDB;
-        
-        $TN = getUserTableName();
         $DT = aoDrivetrain::KEY;
-        $CID = ao::CID;
-        
-        $res = $aoUsersDB->query(
-            "UPDATE $TN SET $DT = $dt WHERE $CID = $cid"
-        );
-        
-        if($res){
-            //echo json_encode($res);
-            return $res;
-        }
-        return null;
+        return user::updateCar($cid, "$DT = $dt");
     }
     public static function getRepairBits($cid){
         //returns the 4 bits representing the Drivetrain's

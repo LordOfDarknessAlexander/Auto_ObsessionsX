@@ -14,63 +14,28 @@ class aoBody{
         PAINT = 0x3,
         CHROME = 0x4;    
     
-    public static function getBody($cid){
-        global $aoUsersDB;
-        
+    public static function getBody($cid){        
         $B = aoBody::KEY;
-        $CID = ao::CID;
         
-        $res = $aoUsersDB->query(
-            sql::slctAllFromUserTable() . " WHERE $CID = $cid"
-        );
+       $res = user::slctFromCar($cid, $B);
         
         if($res){
-            $ret = intval($res->fetch_assoc()[$B]);
+            $ret = intval($res[$B]);
             //echo $ret;
             return $ret;
         }
         //exit();
         return 0;
     }
-    public static function setBody($cid, $b){
-        global $aoUsersDB;
-        
-        $TN = getUserTableName();
+    public static function setBody($cid, $b){        
         $B = aoBody::KEY;
-        $CID = ao::CID;
-        
-        $res = $aoUsersDB->query(
-            "UPDATE $TN SET $B = $b WHERE $CID = $cid"
-        );
-        //return true;
-        if($res){
-            //echo json_encode($res);
-            return $res;
-        }
-        return null;
+        return user::updateCar($cid, "$B = $b");
     }
     public static function getRepairBits($cid){
-        //returns the 4 bits representing the Drivetrain's
-        //repair state from mySql for a specific vehicle
-        global $aoUsersDB;
-		
-        $R = 'repair';
-        $CID = ao::CID;
-        
-        $res = $aoUsersDB->query(
-            sql::slctFromUserTable($R) . " WHERE $CID = $cid"
-        );
-        
-        if($res){
-            $rStr = $res->fetch_assoc()[$R];
-            //double check the type is correct and someone didn't hack into database
-            //to change values to an inappropriate type
-            $bits = isUINT($rStr) ? intval($rStr) : 0;
-            $ret = ($bits & 0x0F000) >> 8;
-            //echo $ret;
-            return $ret;
-        }        
-        return 0;
+        $r = getRepairs($cid);
+        $ret = ($r & 0x0F00) >> 8;
+        //echo $ret;
+        return 0;   //$ret;
     }
     protected static function setRepairBits($bits){
         global $aoUsersDB;
@@ -166,7 +131,8 @@ class aoChassis extends aoBody{
         if($cid == 0){
             exit("$FN, invalid car ID:$cid");
         }
-        //$bits = parent::getRepairBits();
+        
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
@@ -186,7 +152,8 @@ class aoPanels extends aoBody{
         if($cid == 0){
             exit("$FN, invalid car ID:$cid");
         }
-        //$bits = parent::getRepairBits();
+        
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
@@ -206,7 +173,7 @@ class aoPaint extends aoBody{
         if($cid == 0){
             exit("$FN, invalid car ID:$cid");
         }
-        //$bits = parent::getRepairBits();
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
@@ -226,7 +193,8 @@ class aoChrome extends aoBody{
         if($cid == 0){
             exit("$FN, invalid car ID:$cid");
         }
-        //$bits = parent::getRepairBits();
+        
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
         //parent::setRepairBits($bits);
         return;

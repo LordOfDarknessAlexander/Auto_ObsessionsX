@@ -16,40 +16,23 @@ class aoDocuments
 	    HISTORY = 3,
 	    RESTORATION = 4;
     
-    public static function getDocs($cid){
-        global $aoUsersDB;
-		
+    public static function getDocs($cid){		
         $D = aoDocuments::KEY;
-        $CID = ao::CID;
         
-        $res = $aoUsersDB->query(
-            sql::slctAllFromUserTable() . " WHERE $CID = $cid"
-        );
+        $res = user::slctFromCar($cid, $D);
         
         if($res){
-            $ret = intval($res->fetch_assoc()[$D]);
+            $ret = intval($res[$D]);
             //echo $ret;
             return $ret;
         }
         
         return 0;
     }    
-    public static function setDocs($cid, $in){
-        global $aoUsersDB;
-        
-        $TN = getUserTableName();
+    public static function setDocs($cid, $d){
         $D = aoDocuments::KEY;
-        $CID = ao::CID;
         
-        $res = $aoUsersDB->query(
-            "UPDATE $TN SET $D = $in WHERE $CID = $cid"
-        );
-        
-        if($res){
-            //echo json_encode($res);
-            return $res;
-        }
-        return null;
+        return user::updateCar($cid, "$D = $d");
     }
     protected static function upgrade($bitOffset){
          //echo 'UP';
