@@ -59,6 +59,7 @@ class aoStage{
         PRO = 0x8;        //1000
 }
 function getRepairs($cid){
+    //selects the repairs from a user's vehicle
     global $aoUsersDB;
     
     $R = 'repair';
@@ -75,4 +76,5 @@ function getRepairs($cid){
         return $bits;
     }
     return 0;
+}
 ?>

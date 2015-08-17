@@ -46,7 +46,8 @@ function carPart(carPrice, partType){   //partType
         },
         getRepairPrice:function(){
             //price the user pays for repairs
-            var ret = this._price * 0.75;
+            //if already repaired, price is zero
+            var ret = this._price * (this._repaired ? 0.0 : 0.37);
             //console.log(ret);
             return ret;
         },

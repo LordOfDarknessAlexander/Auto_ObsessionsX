@@ -103,18 +103,26 @@ class aoDocuments
         //echo 'could not upgrade part, already fully upgraded';
         return null;
     }
-    public static function upgradeOwnership(){	
-		return aoDocuments::upgrade(12);
-    }    
-    public static function upgradeBuild(){	
-		return aoDocuments::upgrade(8);
-    }    
-    public static function upgradeHistory(){	
-		return aoDocuments::upgrade(4);
-    }    
-    public static function upgradeRestoration(){	
-		return aoDocuments::upgrade(0);
-    }    
+}
+class aoOwnership extends aoDocuments{
+    public static function upgrade(){
+        return parent::upgrade(12);
+    }
+}
+class aoBuild extends aoDocuments{
+    public static function upgrade(){
+        return parent::upgrade(8);
+    }
+}
+class aoHistory extends aoDocuments{
+    public static function upgrade(){
+        return parent::upgrade(4);
+    }
+}
+class aoRestoration extends aoDocuments{
+    public static function upgrade(){
+        return parent::upgrade(0);
+    }
 }
 //eSG(); //echo superGlobals
 $pt = getPartTypeFromPost();
@@ -126,16 +134,16 @@ if(isSetP() ){
         $ret = null;
         
         if($pt == aoDocuments::OWNERSHIP){
-		    $ret = aoDocuments::upgradeOwnership();
+		    $ret = aoOwnership::upgrade();
 	    }
 	    elseif($pt == aoDocuments::BUILD){
-		    $ret = aoDocuments::upgradeBuild();
+		    $ret = aoBuild::upgrade();
 	    }
 	    elseif($pt == aoDocuments::HISTORY){
-            $ret = aoDocuments::upgradeHistory();
+            $ret = aoHistory::upgrade();
 	    }
 	    elseif($pt == aoDocuments::RESTORATION){
-            $ret = aoDocuments::upgradeRestoration();
+            $ret = aoRestoration::upgrade();
 	    }
 	    else{
 		    //console.log('attempting to upgrade unknown type: ' + partType.toString() );

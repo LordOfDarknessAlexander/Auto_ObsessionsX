@@ -54,18 +54,10 @@ class aoDrivetrain
     public static function getRepairBits($cid){
         //returns the 4 bits representing the Drivetrain's
         //repair state from mySql for a specific vehicle
-        $r = getRepairs();
-        
-        if($res){
-            $rStr = $res->fetch_assoc()[$R];
-            //double check the type is correct and someone didn't hack into database
-            //to change values to an inappropriate type
-            $bits = isUINT($rStr) ? intval($rStr) : 0;
-            $ret = ($bits & 0xF000) >> 12;
-            //echo $ret;
-            return $ret;
-        }        
-        return 0;
+        $r = getRepairs($cid);
+        $ret = ($r & 0xF000) >> 12;
+        //echo $ret;
+        return 0;   //$ret;
     }
     protected static function setRepairBits($bits){
         global $aoUsersDB;
@@ -78,11 +70,11 @@ class aoDrivetrain
             $IN = aoDrivetrain::KEY;
             $CID = ao::CID;
             
-            $r = 0;
-            $rm = ($r & 0x0FFF);
-            $shift = ($bits << 12);
+            //$r = 0;
+            //$rm = ($r & 0x0FFF);
+            //$shift = ($bits << 12);
             //echo $shift;
-            $v = $shift | $rm;
+            //$v = $shift | $rm;
             //echo $v;
             
             //$res = $aoUsersDB->query(
@@ -155,10 +147,34 @@ class aoEngine extends aoDrivetrain{
         return parent::upgrade(12);
     }
     public static function repair(){
-        //$bits = parent::getRepairBits();
+        $FN = __DIR__ . ', ' . __METHOD__;
+        $p = getPriceFromPost();    //price of part to upgrade
+        $cid = getCIDFromPost();    //car id to upgrade
+        
+        if($cid == 0){
+            exit("$FN, invalid car ID:$cid");
+        }
+        
+        $bits = parent::getRepairBits($cid);
         //echo $bits;
-        //parent::setRepairBits($bits);
-        return;
+        $m = 0xF000;
+        $b = ($bits & $m) >> 12; //masked bits
+        return $b;
+        //$uf = user::getFunds(); //user funds
+        //$nf = user::decFunds($p);
+        $dif = 0;// $uf - $nf;
+        
+        if($dif > 0.000008){
+            $nb = $b | 0x8; //engine is first bit in character, (1000)
+            //parent::setRepairBits($cid, $nb);
+            
+            return array(
+                //'userFunds'=>$nf,
+                ao::CID=>$cid,
+                'repair'=>$nb,
+                'value'=>$nv
+            );
+        }
     }
 }
 class aoTransmission extends aoDrivetrain{
@@ -166,7 +182,7 @@ class aoTransmission extends aoDrivetrain{
         return parent::upgrade(8);
     }
     public static function repair(){
-        //$bits = parent::getRepairBits();
+        $bits = parent::getRepairBits();
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
@@ -177,7 +193,7 @@ class aoAxel extends aoDrivetrain{
         return parent::upgrade(4);
     }
     public static function repair(){
-        //$bits = parent::getRepairBits();
+        $bits = parent::getRepairBits();
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
@@ -188,7 +204,7 @@ class aoExhaust extends aoDrivetrain{
         return parent::upgrade(0);
     }
     public static function repair(){
-        //$bits = parent::getRepairBits();
+        $bits = parent::getRepairBits();
         //echo $bits;
         //parent::setRepairBits($bits);
         return;
@@ -201,7 +217,7 @@ if(isSetP() ){
     //
     if($pt !== null){
         $ret = null;
-        $op = 'update'; //getOpFromGET();
+        $op = getOpFromGET();
         
         if($op == 'update'){
             if($pt == aoDrivetrain::ENGINE){
@@ -220,18 +236,18 @@ if(isSetP() ){
                 exit('attempting to upgrade unknown type: ' . json_encode($pt) . 'could not complete purchase');
             }
         }
-        else if($op == 'repair'){
+        else if($op == 'repair'){            
             if($pt == aoDrivetrain::ENGINE){
-                $ret = aoEngine::upgrade();
+                $ret = aoEngine::repair();
             }
             elseif($pt == aoDrivetrain::TRANSMISSION){
-                $ret = aoTransmission::upgrade();
+                $ret = aoTransmission::repair();
             }
             elseif($pt == aoDrivetrain::AXEL){
-                $ret = aoAxel::upgrade();
+                $ret = aoAxel::repair();
             }
             elseif($pt == aoDrivetrain::EXHAUST){
-                $ret = aoExhaust::upgrade();
+                $ret = aoExhaust::repair();
             }
             else{
                 exit('attempting to repair unknown type: ' . json_encode($pt) . ', could not complete purchase');
