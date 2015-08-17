@@ -57,25 +57,25 @@
 			this.leftAuction = false;
 		},
         leave:function(){
-			var ai = jq.SaleView._ai,
-				child = ai.div.children();
+			// var ai = jq.SaleView._ai,
+				// child = ai.div.children();
 				
-			for(var e = 0; e < child.length; e++)
-			{
-				var c = child[e],
-				    label = $('label#bid', c),
-                    txt = label.text(),
-					bid = txt != '' ? parseFloat(txt) : null;
+			// for(var e = 0; e < child.length; e++)
+			// {
+				// var c = child[e],
+				    // label = $('label#bid', c),
+                    // txt = label.text(),
+					// bid = txt != '' ? parseFloat(txt) : null;
 					
-				if(bid === null){
-					continue;
-				}
+				// if(bid === null){
+					// continue;
+				// }
 				
-				var dif = Math.abs(bid - this.currBid);
-				if(dif <= 0.00001){
-					label.text('');
-				}	
-			}
+				// var dif = Math.abs(bid - this.currBid);
+				// if(dif <= 0.00001){
+					// label.text('');
+				// }	
+			// }
 			
             this.winningBid = false;
             this.leftAuction = true;
