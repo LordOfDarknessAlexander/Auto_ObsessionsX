@@ -4,7 +4,7 @@
 //to this project
 require_once 'ao.php';
 require_once 'html.php';
-require_once './secure.php';
+//require_once './secure.php';
 //
 $OWNER_NAME = 'Adam Glazer';
 $AO_NAME = 'Auto Obsessions';
@@ -13,7 +13,7 @@ $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
 
 //this is not working on site without a new session
-session_start();
+//session_start();
 isLoggedIn();
 //session set, has the session be started and initialized
 //if $_SESSION is an empty array,
