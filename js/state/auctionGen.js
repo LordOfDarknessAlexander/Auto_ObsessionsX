@@ -541,9 +541,11 @@ function auctionGen(args){
 				for(var i = 0; i < ai.length; i++){
 					var e = ai[i];
 					
-					if(!e.winningBid){	//global cooldown timer has refreshed, bidding now available
+					if(!e.winningBid){ //global cooldown timer has refreshed, bidding now available
+						var b = e.currBid;
+						
 						if(e.bid(raise)){
-							var b = e.currBid;
+							b = e.currBid;
 							console.log('auctionGen enemybidding ' + e.getBidStr());
 							this._currentBid = raise;
 							this._timer.reset();
@@ -555,6 +557,62 @@ function auctionGen(args){
 							this.updateServerSales();
 							//SaleView.sortAI();
 							break;
+						}
+						if(b !== null && e.currBid === null){
+							b = null;
+							// var jqAI = jq.SaleView._ai,
+								// child = jqAI.div.children();
+				
+							// for(var e = 0; e < child.length; e++)
+							// {
+								// var c = child[e],
+									// label = $('label#bid', c),
+									// txt = label.text(),
+									// bid = txt != '' ? parseFloat(txt) : null;
+									
+								// if(bid === null ){
+									// continue;
+								// }
+								
+								// var dif = Math.abs(b - bid);
+								// if(dif <= 0.01){
+									// label.text('');
+									
+									// var lf = $('div.leftFirst', jqAI.div); //leftfirst
+									
+									// if(lf.length){
+										// var ls = $('div.leftSecond', jqAI.div); // leftsecond
+										// if(ls.length){
+											// var lt = $('div.leftThird', jqAI.div); // leftthird
+											// if(lt.length){
+												// //c.removeClass().addClass('leftFourth');
+												// console.log('leftFourth');
+												// break;
+											// }
+											// else{
+												// console.log('leftThird');
+												// //c.removeClass().addClass('leftThird');
+												// break;
+											// }	
+										// }
+										// else{
+											// console.log('leftSecond');
+											// //c.removeClass().addClass('leftSecond');
+											// break;
+										// }
+									// }
+									// else{
+										// //c.removeClass().addClass('leftFirst');
+										// console.log('leftFirst');
+										// break;
+									// }
+									
+								// }	
+							// }
+							
+						}
+						else if(b === null && e.currBid === null){
+							continue;
 						}
 						//if AI can bid and is not currently the top bidder
 						//if( (this._ai[i].currBid < cb) && (!this._ai[i].leftAuction) ){

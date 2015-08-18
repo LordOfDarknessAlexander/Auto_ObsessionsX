@@ -131,6 +131,44 @@ var SaleView = {
 			var tmpBid = 0.0,
 				i = 0,
                 l = 0;  //left counter
+				
+			function _sortLeftAI(jqo){
+				console.log('sortaileft');
+				var jqAI = jq.SaleView._ai,
+					label = $('label#bid', jqo),
+					txt = label.text(),
+					bid = txt != '' ? parseFloat(txt) : null;
+						
+				if(bid === null ){
+					return;
+				}
+				label.text('');
+				
+				var lf = $('div.leftFirst', jqAI.div); //leftfirst
+				
+				if(lf.length){
+					// var ls = $('div.leftSecond', jqAI.div); // leftsecond
+					// if(ls.length){
+						// var lt = $('div.leftThird', jqAI.div); // leftthird
+						// if(lt.length){
+							// //c.removeClass().addClass('leftFourth');
+							// console.log('leftFourth');
+						// }
+						// else{
+							// console.log('leftThird');
+							// //c.removeClass().addClass('leftThird');
+						// }	
+					// }
+					// else{
+						// console.log('leftSecond');
+						// //c.removeClass().addClass('leftSecond');
+					// }
+				}
+				else{
+					//c.removeClass().addClass('leftFirst');
+					console.log('leftFirst');
+				}
+			}
 			
 			for(var e = 0; e < child.length; e++)
 			{
@@ -145,40 +183,6 @@ var SaleView = {
                         i = e;
                     }	
                 }
-                //else{
-					//console.log('my crap');
-                    //draw ai which have left in reverse order
-					// var pai = $('div.leftFirst', ai.div),
-					    // cai = child.eq(i),
-						// ccls = cai.attr('class');
-						
-					// if(pai === null || typeof pai == 'undefined'){
-						// cai.removeClass().addClass('leftFirst');
-					// }
-					// else{
-						
-						// // if(ccls == c1){
-							// // var s = $('div.first', ai.div);
-							// // s.removeClass().addClass(c0);	
-						// // }
-						// // else if(ccls == c2){
-							// // var s = $('div.second', ai.div);
-							// // s.removeClass().addClass(c1);	
-						// // }
-						// // else if(ccls == c3){
-							// // var s = $('div.second', ai.div),
-								// // t = $('div.third', ai.div);
-						
-							// // s.removeClass().addClass(c1);	
-							// // t.removeClass().addClass(c2);
-						// // }
-						// // pai.removeClass().addClass(c0);	
-						// // //cai.removeClass().addClass(c);
-					// }					
-					
-                    // l++;
-                    // continue;
-                //}
 			}		
 			
 			var pai = $('div.first', ai.div),
@@ -205,8 +209,7 @@ var SaleView = {
 					t.removeClass().addClass(c2);	//move third to second
 					f.removeClass().addClass(c3);	//move fourth to third
 						
-					cai.removeClass().addClass('leftFirst');
-					$('label#bid', cai).text('');
+					_sortLeftAI(cai);
 				}
 			}
 			else if(ccls == c2){
@@ -221,8 +224,7 @@ var SaleView = {
 					t.removeClass().addClass(c2);	//move third to second
 					f.removeClass().addClass(c3);	//move fourth to third
 					
-					cai.removeClass().addClass('leftFirst');
-					$('label#bid', cai).text('');
+					_sortLeftAI(cai);
 				}
 			}
 			else if(ccls == c3){
@@ -238,8 +240,7 @@ var SaleView = {
 						
 					f.removeClass().addClass(c3);	//move fourth to third
 					
-					cai.removeClass().addClass('leftFirst');
-					$('label#bid', cai).text('');
+					_sortLeftAI(cai);
 				}
 			}
 			if(bid !== null){
