@@ -559,7 +559,12 @@ function auctionGen(args){
 							break;
 						}
 						if(b !== null && e.currBid === null){
-							b = null;
+							
+							var l = $('div#ai' + i.toString() + ' label#bid', jq.SaleView._ai.div);
+							l.text('');
+							
+							// this._timer.reset();
+							// this.resetTimer();
 							// var jqAI = jq.SaleView._ai,
 								// child = jqAI.div.children();
 				

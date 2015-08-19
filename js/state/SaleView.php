@@ -97,7 +97,7 @@ var SaleView = {
 			var c = child[e],
 				label = $('label#bid', c);
 				
-			label.text('0.00');
+			label.text('');
 		}		
 	},
 	close : function(){
@@ -120,7 +120,8 @@ var SaleView = {
 				child = ai.div.children(),
 				ai0 = ai._0,
 				ai3 = ai._3,
-				cb =  this._auction._currentBid;
+				cb =  this._auction._currentBid,
+				AI = this._auction._ai;
 			
 			var c0 = 'first',
 				c1 = 'second',
@@ -137,70 +138,132 @@ var SaleView = {
 				var jqAI = jq.SaleView._ai,
 					label = $('label#bid', jqo),
 					txt = label.text(),
-					bid = txt != '' ? parseFloat(txt) : null;
-						
-				if(bid === null ){
-					return;
-				}
-				label.text('');
+					bid = txt != '' ? parseFloat(txt) : null,
+					cls = jqo.attr('class');					
+				// if(bid === null ){
+					// return;
+				// }
+				//label.text('');
 				
 				var lf = $('div.leftFirst', jqAI.div); //leftfirst
 				
 				if(lf.length){
-					// var ls = $('div.leftSecond', jqAI.div); // leftsecond
-					// if(ls.length){
-						// var lt = $('div.leftThird', jqAI.div); // leftthird
-						// if(lt.length){
-							// //c.removeClass().addClass('leftFourth');
-							// console.log('leftFourth');
-						// }
-						// else{
-							// console.log('leftThird');
-							// //c.removeClass().addClass('leftThird');
-						// }	
-					// }
-					// else{
-						// console.log('leftSecond');
-						// //c.removeClass().addClass('leftSecond');
-					// }
+					var ls = $('div.leftSecond', jqAI.div); // leftsecond
+					if(ls.length){
+						var lt = $('div.leftThird', jqAI.div); // leftthird
+						if(lt.length){
+							//jqo.removeClass().addClass('leftFourth');
+							//console.log('leftFourth');
+							return;
+						}
+						else{
+							
+							if(cls == c0){
+						
+							}
+							else if(cls == c1){
+								
+							}
+							else if(cls == c2){
+								
+							}
+							else if(cls == c3){
+								
+							}
+							//console.log('leftThird');
+							//jqo.removeClass().addClass('leftThird');
+							return;
+						}	
+					}
+					else{
+						
+						if(cls == c0){
+						
+						}
+						else if(cls == c1){
+							
+						}
+						else if(cls == c2){
+							
+						}
+						else if(cls == c3){
+							
+						}
+						//console.log('leftSecond');
+						//jqo.removeClass().addClass('leftSecond');
+						return;
+					}
 				}
 				else{
-					//c.removeClass().addClass('leftFirst');
-					console.log('leftFirst');
+					if(cls == c0){
+						var s = $('div.second', ai.div),
+							t = $('div.third', ai.div),
+							f = $('div.fourth', ai.div);
+							
+						s.removeClass().addClass(c0);	//move fourth to third	
+						t.removeClass().addClass(c1);	//move fourth to third
+						f.removeClass().addClass(c2);	//move fourth to third
+					}
+					else if(cls == c1){
+						var t = $('div.third', ai.div),
+							f = $('div.fourth', ai.div);	
+							
+						t.removeClass().addClass(c1);	//move fourth to third
+						f.removeClass().addClass(c2);	//move fourth to third
+						
+					}
+					else if(cls == c2){
+						var f = $('div.third', ai.div);
+				
+						f.removeClass().addClass(c1);	//move fourth to third
+					}
+					jqo.removeClass().addClass('leftFirst');
+					//console.log('leftFirst');
+					return;
+				}
+			}
+			var pai = $('div.first', ai.div),		
+				pid = pai.attr('id');
+		
+			for(var e = 0; e < child.length; e++)
+			{
+				var c = child.eq(e),
+					label = $('label#bid', c),
+					txt = label.text(),
+					bid = (txt != '' ? parseFloat(txt) : null);
+					
+				
+					
+				if(bid !== null){
+					if(bid >= cb){
+						tmpBid = bid;
+						i = e;
+					}
+					else{
+						//current bid is not higher highest bid so no need to sort
+						continue;
+					}						
+				}
+				else{
+					_sortLeftAI(c);
+					continue;
 				}
 			}
 			
-			for(var e = 0; e < child.length; e++)
-			{
-				var c = child[e],
-				    label = $('label#bid', c),
-                    txt = label.text(),
-					bid = txt != '' ? parseFloat(txt) : null;
-				
-                if(bid !== null){
-                    if(bid >= cb){
-                        tmpBid = bid;
-                        i = e;
-                    }	
-                }
-			}		
 			
-			var pai = $('div.first', ai.div),
-				cai = child.eq(i);
-				
-			var	pid = pai.attr('id');
-			
-			var	cid = cai.attr('id');
-			
+			var cai = child.eq(i),
+				cid = cai.attr('id');
+					
 			if(pid == cid){
 				return;
 			}
+						
 			var ccls = cai.attr('class');
 			
 			if(ccls == c1){
 				// pai.removeClass().addClass(c1);	//move first to second
 				// cai.removeClass().addClass(c0);	//move bidder to first
-				if(bid === null){
+				if(bid !== null){
 					var s = $('div.second', ai.div),
 						t = $('div.third', ai.div),
 						f = $('div.fourth', ai.div);
@@ -209,7 +272,7 @@ var SaleView = {
 					t.removeClass().addClass(c2);	//move third to second
 					f.removeClass().addClass(c3);	//move fourth to third
 						
-					_sortLeftAI(cai);
+					//_sortLeftAI(cai);
 				}
 			}
 			else if(ccls == c2){
@@ -224,7 +287,7 @@ var SaleView = {
 					t.removeClass().addClass(c2);	//move third to second
 					f.removeClass().addClass(c3);	//move fourth to third
 					
-					_sortLeftAI(cai);
+					//_sortLeftAI(cai);
 				}
 			}
 			else if(ccls == c3){
@@ -240,7 +303,7 @@ var SaleView = {
 						
 					f.removeClass().addClass(c3);	//move fourth to third
 					
-					_sortLeftAI(cai);
+					//_sortLeftAI(cai);
 				}
 			}
 			if(bid !== null){
