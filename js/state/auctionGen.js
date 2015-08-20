@@ -560,8 +560,100 @@ function auctionGen(args){
 						}
 						if(b !== null && e.currBid === null){
 							
-							var l = $('div#ai' + i.toString() + ' label#bid', jq.SaleView._ai.div);
+							var aid = jq.SaleView._ai.div,
+								div = $('div#ai' + i.toString(), aid ),
+								l = $('label#bid', div),
+								cls = div.attr('class');
+
+							var c0 = 'first',
+								c1 = 'second',
+								c2 = 'third',
+								c3 = 'fourth';
+								
 							l.text('');
+							
+							div.removeClass();
+							if(cls == c0){
+								var s = $('div.second', aid),
+									t = $('div.third', aid),
+									f = $('div.fourth', aid);
+									
+								if(s.length == 1){
+									s.removeClass().addClass(c0);	//move second to first
+								}
+								else{
+									
+								}
+								
+								if(t.length == 1){
+									t.removeClass().addClass(c1);	//move third to second
+								}
+								else{
+									
+								}
+								
+								if(f.length == 1){
+									f.removeClass().addClass(c2);	//move fourth to third
+								}
+								else{
+									
+								}
+								//where to check what other elements have left
+							}
+							else if(cls == c1){
+								var	t = $('div.third', aid),
+									f = $('div.fourth', aid);
+									
+								if(t.length == 1){
+									t.removeClass().addClass(c1);	//move third to second
+								}
+								
+								if(f.length == 1){
+									f.removeClass().addClass(c2);	//move fourth to third
+								}
+							}
+							else if(cls == c2){
+								var	t = $('div.third', aid),
+									f = $('div.fourth', aid);
+									
+								if(t.length == 1){
+									t.removeClass().addClass(c3);	//move third to second
+								}
+								
+								if(f.length == 1){
+									f.removeClass().addClass(c2);	//move fourth to third
+								}
+							}
+							else if(cls == c3){
+								//fuck the shit
+							}
+							
+							var lf = $('div.leftFirst', aid); //leftfirst
+				
+							if(lf.length == 1){
+								var ls = $('div.leftSecond', aid); //leftSecond
+								
+								if(ls.length == 1){
+									var lt = $('div.leftThird', aid); //leftThird
+									
+									if(lt.length == 1){
+										var lfor = $('div.leftFourth', aid); //leftThird
+										
+										if(lfor.length == 1){
+											div.addClass('leftFourth');
+										}
+									}
+									else{
+										div.addClass('leftThird');
+									}
+								}
+								else{
+									div.addClass('leftSecond');
+								}
+							}
+							else{
+								div.addClass('leftFirst');
+							}
 							
 							// this._timer.reset();
 							// this.resetTimer();
@@ -799,7 +891,7 @@ function auctionGen(args){
                     },
                     {carID:id}
                 );
-				Garage.load();                
+				Garage.load();         
 //<php
 //}
 //else{>

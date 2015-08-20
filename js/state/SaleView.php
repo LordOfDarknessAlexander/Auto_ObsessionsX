@@ -159,17 +159,31 @@ var SaleView = {
 						else{
 							
 							if(cls == c0){
-						
+								var s = $('div.second', ai.div),
+									t = $('div.third', ai.div),
+									f = $('div.fourth', ai.div);
+							
+								s.removeClass().addClass(c0);	//move second to first
+								t.removeClass().addClass(c1);	//move third to second
+								f.removeClass().addClass(c2);	//move fourth to third
 							}
-							else if(cls == c1){
-								
-							}
-							else if(cls == c2){
-								
-							}
-							else if(cls == c3){
-								
-							}
+							// else if(cls == c1){
+								// var t = $('div.third', ai.div),
+									// f = $('div.fourth', ai.div);	
+							
+								// t.removeClass().addClass(c1);	//move third to second
+								// f.removeClass().addClass(c2);	//move fourth to third
+							// }
+							// else if(cls == c2){
+								// var f = $('div.third', ai.div);
+				
+									// f.removeClass().addClass(c1);	//move thrid to second
+							// }
+							// else if(cls == c3){
+								// var	f = $('div.fourth', ai.div);	
+							
+									// f.removeClass().addClass(c2);	//move fourth to third
+							// }
 							//console.log('leftThird');
 							//jqo.removeClass().addClass('leftThird');
 							return;
@@ -178,16 +192,34 @@ var SaleView = {
 					else{
 						
 						if(cls == c0){
-						
+							var s = $('div.second', ai.div),
+								t = $('div.third', ai.div),
+								f = $('div.fourth', ai.div);
+							
+							s.removeClass().addClass(c0);	//move second to first
+							t.removeClass().addClass(c1);	//move third to second
+							f.removeClass().addClass(c2);	//move fourth to third
 						}
 						else if(cls == c1){
-							
-						}
-						else if(cls == c2){
-							
-						}
+							var t = $('div.third', ai.div),
+								f = $('div.fourth', ai.div);	
+								
+							t.removeClass().addClass(c1);	//move third to second
+							f.removeClass().addClass(c2);	//move fourth to third
+							}
+						// else if(cls == c2){
+							// var t = $('div.third', ai.div);
+							   
+							// t.removeClass().addClass(c1);	//move thrid to second
+						// }
 						else if(cls == c3){
+							var s = $('div.second', ai.div),
+								t = $('div.third', ai.div),
+								f = $('div.fourth', ai.div);
 							
+							s.removeClass().addClass(c0);	//move second to first
+							t.removeClass().addClass(c1);	//move thrid to second
+							f.removeClass().addClass(c2);	//move fourth to third
 						}
 						//console.log('leftSecond');
 						//jqo.removeClass().addClass('leftSecond');
@@ -200,22 +232,22 @@ var SaleView = {
 							t = $('div.third', ai.div),
 							f = $('div.fourth', ai.div);
 							
-						s.removeClass().addClass(c0);	//move fourth to third	
-						t.removeClass().addClass(c1);	//move fourth to third
+						s.removeClass().addClass(c0);	//move second to first
+						t.removeClass().addClass(c1);	//move third to second
 						f.removeClass().addClass(c2);	//move fourth to third
 					}
 					else if(cls == c1){
 						var t = $('div.third', ai.div),
 							f = $('div.fourth', ai.div);	
 							
-						t.removeClass().addClass(c1);	//move fourth to third
+						t.removeClass().addClass(c1);	//move third to second
 						f.removeClass().addClass(c2);	//move fourth to third
 						
 					}
 					else if(cls == c2){
-						var f = $('div.third', ai.div);
+						var t = $('div.third', ai.div);
 				
-						f.removeClass().addClass(c1);	//move fourth to third
+						t.removeClass().addClass(c1);	//move thrid to second
 					}
 					jqo.removeClass().addClass('leftFirst');
 					//console.log('leftFirst');

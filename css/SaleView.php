@@ -136,16 +136,19 @@ Auction Screen
 <?php divSaleView();?> div#_ai div.leftSecond{
 	top:50%;
 	opacity: 0.5;
+	background-color:red;
 }
 
 <?php divSaleView();?> div#_ai div.leftThird{
 	top:25%;
 	opacity: 0.5;
+	background-color:red;
 }
 
 <?php divSaleView();?> div#_ai div.leftFourth{
 	top:0%;
 	opacity: 0.5;
+	background-color:red;
 }
 
 <?php divSaleView();?> div#_ai div label{
