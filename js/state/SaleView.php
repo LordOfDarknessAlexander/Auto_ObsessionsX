@@ -97,7 +97,7 @@ var SaleView = {
 			var c = child[e],
 				label = $('label#bid', c);
 				
-			label.text('0.00');
+			label.text('');
 		}		
 	},
 	close : function(){
@@ -120,7 +120,8 @@ var SaleView = {
 				child = ai.div.children(),
 				ai0 = ai._0,
 				ai3 = ai._3,
-				cb =  this._auction._currentBid;
+				cb =  this._auction._currentBid,
+				AI = this._auction._ai;
 			
 			var c0 = 'first',
 				c1 = 'second',
@@ -131,72 +132,170 @@ var SaleView = {
 			var tmpBid = 0.0,
 				i = 0,
                 l = 0;  //left counter
-			
+				
+			function _sortLeftAI(jqo){
+				console.log('sortaileft');
+				var jqAI = jq.SaleView._ai,
+					label = $('label#bid', jqo),
+					txt = label.text(),
+					bid = txt != '' ? parseFloat(txt) : null,
+					cls = jqo.attr('class');					
+				// if(bid === null ){
+					// return;
+				// }
+				//label.text('');
+				
+				var lf = $('div.leftFirst', jqAI.div); //leftfirst
+				
+				if(lf.length){
+					var ls = $('div.leftSecond', jqAI.div); // leftsecond
+					if(ls.length){
+						var lt = $('div.leftThird', jqAI.div); // leftthird
+						if(lt.length){
+							//jqo.removeClass().addClass('leftFourth');
+							//console.log('leftFourth');
+							return;
+						}
+						else{
+							
+							if(cls == c0){
+								var s = $('div.second', ai.div),
+									t = $('div.third', ai.div),
+									f = $('div.fourth', ai.div);
+							
+								s.removeClass().addClass(c0);	//move second to first
+								t.removeClass().addClass(c1);	//move third to second
+								f.removeClass().addClass(c2);	//move fourth to third
+							}
+							// else if(cls == c1){
+								// var t = $('div.third', ai.div),
+									// f = $('div.fourth', ai.div);	
+							
+								// t.removeClass().addClass(c1);	//move third to second
+								// f.removeClass().addClass(c2);	//move fourth to third
+							// }
+							// else if(cls == c2){
+								// var f = $('div.third', ai.div);
+				
+									// f.removeClass().addClass(c1);	//move thrid to second
+							// }
+							// else if(cls == c3){
+								// var	f = $('div.fourth', ai.div);	
+							
+									// f.removeClass().addClass(c2);	//move fourth to third
+							// }
+							//console.log('leftThird');
+							//jqo.removeClass().addClass('leftThird');
+							return;
+						}	
+					}
+					else{
+						
+						if(cls == c0){
+							var s = $('div.second', ai.div),
+								t = $('div.third', ai.div),
+								f = $('div.fourth', ai.div);
+							
+							s.removeClass().addClass(c0);	//move second to first
+							t.removeClass().addClass(c1);	//move third to second
+							f.removeClass().addClass(c2);	//move fourth to third
+						}
+						else if(cls == c1){
+							var t = $('div.third', ai.div),
+								f = $('div.fourth', ai.div);	
+								
+							t.removeClass().addClass(c1);	//move third to second
+							f.removeClass().addClass(c2);	//move fourth to third
+							}
+						// else if(cls == c2){
+							// var t = $('div.third', ai.div);
+							   
+							// t.removeClass().addClass(c1);	//move thrid to second
+						// }
+						else if(cls == c3){
+							var s = $('div.second', ai.div),
+								t = $('div.third', ai.div),
+								f = $('div.fourth', ai.div);
+							
+							s.removeClass().addClass(c0);	//move second to first
+							t.removeClass().addClass(c1);	//move thrid to second
+							f.removeClass().addClass(c2);	//move fourth to third
+						}
+						//console.log('leftSecond');
+						//jqo.removeClass().addClass('leftSecond');
+						return;
+					}
+				}
+				else{
+					if(cls == c0){
+						var s = $('div.second', ai.div),
+							t = $('div.third', ai.div),
+							f = $('div.fourth', ai.div);
+							
+						s.removeClass().addClass(c0);	//move second to first
+						t.removeClass().addClass(c1);	//move third to second
+						f.removeClass().addClass(c2);	//move fourth to third
+					}
+					else if(cls == c1){
+						var t = $('div.third', ai.div),
+							f = $('div.fourth', ai.div);	
+							
+						t.removeClass().addClass(c1);	//move third to second
+						f.removeClass().addClass(c2);	//move fourth to third
+						
+					}
+					else if(cls == c2){
+						var t = $('div.third', ai.div);
+				
+						t.removeClass().addClass(c1);	//move thrid to second
+					}
+					jqo.removeClass().addClass('leftFirst');
+					//console.log('leftFirst');
+					return;
+				}
+			}
+			var pai = $('div.first', ai.div),		
+				pid = pai.attr('id');
+		
 			for(var e = 0; e < child.length; e++)
 			{
-				var c = child[e],
-				    label = $('label#bid', c),
-                    txt = label.text(),
-					bid = txt != '' ? parseFloat(txt) : null;
-				
-                if(bid !== null){
-                    if(bid >= cb){
-                        tmpBid = bid;
-                        i = e;
-                    }	
-                }
-                //else{
-					//console.log('my crap');
-                    //draw ai which have left in reverse order
-					// var pai = $('div.leftFirst', ai.div),
-					    // cai = child.eq(i),
-						// ccls = cai.attr('class');
-						
-					// if(pai === null || typeof pai == 'undefined'){
-						// cai.removeClass().addClass('leftFirst');
-					// }
-					// else{
-						
-						// // if(ccls == c1){
-							// // var s = $('div.first', ai.div);
-							// // s.removeClass().addClass(c0);	
-						// // }
-						// // else if(ccls == c2){
-							// // var s = $('div.second', ai.div);
-							// // s.removeClass().addClass(c1);	
-						// // }
-						// // else if(ccls == c3){
-							// // var s = $('div.second', ai.div),
-								// // t = $('div.third', ai.div);
-						
-							// // s.removeClass().addClass(c1);	
-							// // t.removeClass().addClass(c2);
-						// // }
-						// // pai.removeClass().addClass(c0);	
-						// // //cai.removeClass().addClass(c);
-					// }					
+				var c = child.eq(e),
+					label = $('label#bid', c),
+					txt = label.text(),
+					bid = (txt != '' ? parseFloat(txt) : null);
 					
-                    // l++;
-                    // continue;
-                //}
-			}		
-			
-			var pai = $('div.first', ai.div),
-				cai = child.eq(i);
 				
-			var	pid = pai.attr('id');
+					
+				if(bid !== null){
+					if(bid >= cb){
+						tmpBid = bid;
+						i = e;
+					}
+					else{
+						//current bid is not higher highest bid so no need to sort
+						continue;
+					}						
+				}
+				else{
+					_sortLeftAI(c);
+					continue;
+				}
+			}
 			
-			var	cid = cai.attr('id');
 			
+			var cai = child.eq(i),
+				cid = cai.attr('id');
+					
 			if(pid == cid){
 				return;
 			}
+						
 			var ccls = cai.attr('class');
 			
 			if(ccls == c1){
 				// pai.removeClass().addClass(c1);	//move first to second
 				// cai.removeClass().addClass(c0);	//move bidder to first
-				if(bid === null){
+				if(bid !== null){
 					var s = $('div.second', ai.div),
 						t = $('div.third', ai.div),
 						f = $('div.fourth', ai.div);
@@ -205,8 +304,7 @@ var SaleView = {
 					t.removeClass().addClass(c2);	//move third to second
 					f.removeClass().addClass(c3);	//move fourth to third
 						
-					cai.removeClass().addClass('leftFirst');
-					$('label#bid', cai).text('');
+					//_sortLeftAI(cai);
 				}
 			}
 			else if(ccls == c2){
@@ -221,8 +319,7 @@ var SaleView = {
 					t.removeClass().addClass(c2);	//move third to second
 					f.removeClass().addClass(c3);	//move fourth to third
 					
-					cai.removeClass().addClass('leftFirst');
-					$('label#bid', cai).text('');
+					//_sortLeftAI(cai);
 				}
 			}
 			else if(ccls == c3){
@@ -238,8 +335,7 @@ var SaleView = {
 						
 					f.removeClass().addClass(c3);	//move fourth to third
 					
-					cai.removeClass().addClass('leftFirst');
-					$('label#bid', cai).text('');
+					//_sortLeftAI(cai);
 				}
 			}
 			if(bid !== null){

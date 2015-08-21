@@ -541,9 +541,11 @@ function auctionGen(args){
 				for(var i = 0; i < ai.length; i++){
 					var e = ai[i];
 					
-					if(!e.winningBid){	//global cooldown timer has refreshed, bidding now available
+					if(!e.winningBid){ //global cooldown timer has refreshed, bidding now available
+						var b = e.currBid;
+						
 						if(e.bid(raise)){
-							var b = e.currBid;
+							b = e.currBid;
 							console.log('auctionGen enemybidding ' + e.getBidStr());
 							this._currentBid = raise;
 							this._timer.reset();
@@ -555,6 +557,159 @@ function auctionGen(args){
 							this.updateServerSales();
 							//SaleView.sortAI();
 							break;
+						}
+						if(b !== null && e.currBid === null){
+							
+							var aid = jq.SaleView._ai.div,
+								div = $('div#ai' + i.toString(), aid ),
+								l = $('label#bid', div),
+								cls = div.attr('class');
+
+							var c0 = 'first',
+								c1 = 'second',
+								c2 = 'third',
+								c3 = 'fourth';
+								
+							l.text('');
+							
+							div.removeClass();
+							if(cls == c0){
+								var s = $('div.second', aid),
+									t = $('div.third', aid),
+									f = $('div.fourth', aid);
+									
+								if(s.length == 1){
+									s.removeClass().addClass(c0);	//move second to first
+								}
+								else{
+									
+								}
+								
+								if(t.length == 1){
+									t.removeClass().addClass(c1);	//move third to second
+								}
+								else{
+									
+								}
+								
+								if(f.length == 1){
+									f.removeClass().addClass(c2);	//move fourth to third
+								}
+								else{
+									
+								}
+								//where to check what other elements have left
+							}
+							else if(cls == c1){
+								var	t = $('div.third', aid),
+									f = $('div.fourth', aid);
+									
+								if(t.length == 1){
+									t.removeClass().addClass(c1);	//move third to second
+								}
+								
+								if(f.length == 1){
+									f.removeClass().addClass(c2);	//move fourth to third
+								}
+							}
+							else if(cls == c2){
+								var	t = $('div.third', aid),
+									f = $('div.fourth', aid);
+									
+								if(t.length == 1){
+									t.removeClass().addClass(c3);	//move third to second
+								}
+								
+								if(f.length == 1){
+									f.removeClass().addClass(c2);	//move fourth to third
+								}
+							}
+							else if(cls == c3){
+								//fuck the shit
+							}
+							
+							var lf = $('div.leftFirst', aid); //leftfirst
+				
+							if(lf.length == 1){
+								var ls = $('div.leftSecond', aid); //leftSecond
+								
+								if(ls.length == 1){
+									var lt = $('div.leftThird', aid); //leftThird
+									
+									if(lt.length == 1){
+										var lfor = $('div.leftFourth', aid); //leftThird
+										
+										if(lfor.length == 1){
+											div.addClass('leftFourth');
+										}
+									}
+									else{
+										div.addClass('leftThird');
+									}
+								}
+								else{
+									div.addClass('leftSecond');
+								}
+							}
+							else{
+								div.addClass('leftFirst');
+							}
+							
+							// this._timer.reset();
+							// this.resetTimer();
+							// var jqAI = jq.SaleView._ai,
+								// child = jqAI.div.children();
+				
+							// for(var e = 0; e < child.length; e++)
+							// {
+								// var c = child[e],
+									// label = $('label#bid', c),
+									// txt = label.text(),
+									// bid = txt != '' ? parseFloat(txt) : null;
+									
+								// if(bid === null ){
+									// continue;
+								// }
+								
+								// var dif = Math.abs(b - bid);
+								// if(dif <= 0.01){
+									// label.text('');
+									
+									// var lf = $('div.leftFirst', jqAI.div); //leftfirst
+									
+									// if(lf.length){
+										// var ls = $('div.leftSecond', jqAI.div); // leftsecond
+										// if(ls.length){
+											// var lt = $('div.leftThird', jqAI.div); // leftthird
+											// if(lt.length){
+												// //c.removeClass().addClass('leftFourth');
+												// console.log('leftFourth');
+												// break;
+											// }
+											// else{
+												// console.log('leftThird');
+												// //c.removeClass().addClass('leftThird');
+												// break;
+											// }	
+										// }
+										// else{
+											// console.log('leftSecond');
+											// //c.removeClass().addClass('leftSecond');
+											// break;
+										// }
+									// }
+									// else{
+										// //c.removeClass().addClass('leftFirst');
+										// console.log('leftFirst');
+										// break;
+									// }
+									
+								// }	
+							// }
+							
+						}
+						else if(b === null && e.currBid === null){
+							continue;
 						}
 						//if AI can bid and is not currently the top bidder
 						//if( (this._ai[i].currBid < cb) && (!this._ai[i].leftAuction) ){
@@ -736,7 +891,7 @@ function auctionGen(args){
                     },
                     {carID:id}
                 );
-				Garage.load();                
+				Garage.load();         
 //<php
 //}
 //else{>
