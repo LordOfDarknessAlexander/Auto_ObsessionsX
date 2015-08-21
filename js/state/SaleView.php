@@ -344,8 +344,43 @@ var SaleView = {
 			}
 		}	
 	},
+	resetElements: function(){
+		var ai = this._auction._ai,
+		    jqAI = jq.SaleView._ai,
+			child = jqAI.div.children();
+			
+		for(var i = 0; i < ai.length; i++){
+			
+			div = $('div#ai' + i.toString(), jqAI.div );
+			div.removeClass();
+		}
+		
+		for(var e = 0; e < child.length; e++)
+		{	
+			var c0 = child.eq(0),
+				c1 = child.eq(1),
+				c2 = child.eq(2),
+				c3 = child.eq(3);
+			
+			c0.addClass('first');
+			c1.addClass('second');
+			c2.addClass('third');
+			c3.addClass('fourth');
+		}
+		
+		// jqAI.div.addClass('first');
+		// jqAI.div.addClass('second');
+		// jqAI.div.addClass('third');
+		// jqAI.div.addClass('fourth');
+	},
+	cleanUpAuction: function(){
+		if(SaleView._auction !== null){
+			SaleView.resetElements();
+			SaleView._auction = null;
+		}
+	},
 	update : function(){
-		if(!this._auction.isExpired()){
+		if(SaleView._auction !== null && !this._auction.isExpired()){
 			this.sortAI(); 
 			this.endAuction();
 			this.render();
@@ -364,7 +399,7 @@ var SaleView = {
 		var ai = this._auction._ai,
 			timers = jq.SaleView.timers;
 			
-		if(!this._auction.isExpired()){
+		if(SaleView._auction !== null && !this._auction.isExpired()){
 			pbSetColor(timers.cdpbG, this._auction.getTimerPerc() );
 			pbSetColor(timers.cdpb0, ai[0].getTimerPerc() );
 			pbSetColor(timers.cdpb1, ai[1].getTimerPerc() );
@@ -387,6 +422,7 @@ var SaleView = {
 jq.SaleView.backBtn.click(
 function(){
 	//Auction.close();
+	//SaleView.resetElements();
 	jq.SaleView.menu.hide();
 	jq.AuctionSell.menu.show();
     jq.carImg.hide();

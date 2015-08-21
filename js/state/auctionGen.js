@@ -885,6 +885,7 @@ function auctionGen(args){
                         }
 						console.log(JSON.stringify(data));
 						t.removeSale(t._car.id);
+						SaleView.cleanUpAuction();
                     },
                     function(jqxhr){
                         jq.setErr(funcName, 'Ajax call failed, Reason: ' + jqxhr.responseText);
@@ -939,7 +940,7 @@ function auctionGen(args){
 							us.splice(i, 1);  //returns items removed from array
 							Storage.local[k] = JSON.stringify(us);
 							console.log(us);
-							//ActionSell.save();
+							AuctionSell.save();
 						//place car back in user garage!
 //<php if(loggedIn() ){>
 						//userGarage.push(car(rm));
