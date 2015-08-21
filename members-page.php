@@ -128,6 +128,8 @@ else if($page == 'tutorial'){?>
 <?php 
     $un = isSetS() ? strval($_SESSION['uname']) : '';
     //echo $un; 
+	echo 
+		   '<img src="images/Buttons/stopButton.png"  hspace="5" width="65" height="65" title="Bronze Banker: you got your first achievement!"">';
 ?></h2>
 <?php
 }

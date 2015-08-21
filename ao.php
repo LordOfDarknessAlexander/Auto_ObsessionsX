@@ -24,10 +24,13 @@ class ao{
         USERS = 'users',  //table containing all registered users
         CARS = 'aoCars',  
 		MEMBERS = 'aoMembersDB',
+		ACHIEVEMENTS = 'achievements.,',
 		//database containing all core vehicle data
         //sql column names
         CID = 'car_id',
+		AID = 'achievement_id',
         UID = 'user_id';
+		
 		//$AO_DB = dbConnect(MEMBERS);
         //vehicle parts
         //PRICE = 'price',

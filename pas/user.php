@@ -198,6 +198,8 @@ class user{
                 $MM=>$mm,
                 $CID=>$cid
             );
+			//temp constant check for achievements update game
+			user::checkAchievements();
         }
         else{
             $AO_DB->eErr();
@@ -250,52 +252,14 @@ class user{
             $ret = intval($res->fetch_assoc()[$CID]);
             $res->close();
             return $ret;    //$i;
+			
         }
         else{
             $AO_DB->eErr();
         }
         return 0;
     }
-    public static function getCurCar(){
-        //returns the user's currently selected vehicle
-        global $AO_DB;
-        global $aoUsersDB;
-        //$id = 2;  //$_SESSION['user_id'];
-        $users = ao::USERS;
-        $CID = ao::CID;
-        $UID = ao::UID;    
-        
-        /*$result = $AO_DB->query(
-            //"SELECT $CID FROM $users WHERE $UID = $id"
-        //);
-        
-        if($result){
-            //user has car
-            $cid = intval($res->fetch_assoc()[$CID]);
-            
-            if($cid != 0){
-                $tableName = getUserTableName();
-                $res = $aoUsersDB->query("SELECT * FROM $tableName WHERE $CID = $cid");
-                
-                if($res){
-                    $ret = Vehicle::fromArray($res->fetch_assoc() );
-                    $res->close();
-                    return $ret;
-                }        
-                $res->close();
-            }
-            else{   //user does not have a car selected
-                return null;
-            }
-            $result->close();
-        }
-        else{
-            //query failed, user has no entry in database
-            //echo sql error
-            return null;
-        }*/
-        return null;
-    }
+
     public static function setCurrentCar($carID = 0){
         //global $AO_DB;
         $CID = ao::CID;
@@ -644,6 +608,7 @@ class user{
                         //$D,
                         //$R
                     );
+					
                 }
                 else{
                     $aoUsersDB->eErr();
@@ -652,4 +617,107 @@ class user{
         //}
         return null;
     }
+	 public static function getAchievements($fields){
+        //Retrieves correct integer value of achievement in table
+        global $AO_DB;
+        //$fields is a comma seperated list of row names
+        $uid = strval(getUID() );
+		$aid = strval('achievement_id');
+        $UID = ao::UID;
+		$AID = ao::AID;
+		$achievements = 'achievements';
+		
+        $q = sql::slctFrom($fields, ao::ACHIEVEMENTS);
+        //echo $q;
+        if($q != ''){
+            //echo $q . PHP_EOL;
+            $res = $AO_DB->query("$q WHERE $UID = $uid AND $AID = $aid");
+            echo json_encode($res);
+            
+            if($res){
+                return $res;
+            }
+            else{
+                $AO_DB->eErr();
+            }
+        }
+        return null;
+    }
+	
+	public static function checkAchievements($carID){
+		
+		  //Retrieves correct integer value of achievement in table
+			//And then to view the achievement badge -
+		global $aoUsersDB;
+		global $AO_DB;
+		 
+		$ut = getUserTableName();
+        $car = user::getCarByID($carID);
+        $CID = ao::CID;
+		$achievements = 'achievements';
+		
+		if($carID > 0)
+		{
+			"UPDATE table SET `achievements` = 1";
+			user::displayAchievements();
+		}
+      
+		/*	
+		if ( $userp['bank_account'] >= 100000 )
+		{
+		   "UPDATE table SET `achievements` = 4"
+		} 
+		elseif ( $userp['bank_account'] >= 50000  )
+		{
+		   "UPDATE table SET `achievements` = 3";
+		}
+		elseif ( $userp['bank_account'] >= 1000 )
+		{
+		   "UPDATE table SET `achievements` = 2";
+		}
+		elseif ( $userp['bank_account'] >= 1 )
+		{
+		   "UPDATE table SET `achievements` = 1";
+		} */
+		echo "Shit";
+		//echo '<img src="images/achievements/Diamond-Bank.png"  hspace="5" width="65" height="65" title="Diamond Banker: Made a deposit of $100,000 or more!"">';
+     
+    }
+	public static function displayAchievements(){
+        //Retrieves correct integer value of achievement in table
+			//And then to view the achievement badge -
+			
+		global $aoUsersDB;
+		global $AO_DB;
+		 
+		$ut = getUserTableName();
+        $car = user::getCarByID($carID);
+        $CID = ao::CID;
+		$achievements = 'achievements';
+		
+		
+		if ( $userp['achievements'] = 4 )
+		{
+		   echo 
+		   '<img src="images/achievements/Diamond-Bank.png"  hspace="5" width="65" height="65" title="Diamond Banker: Made a deposit of $100,000 or more!"">';
+		} 
+		elseif ( $userp['achievements'] = 3  )
+		{
+		   echo 
+		   '<img src="images/achievements/Gold-Bank.png"  hspace="5" width="65" height="65" title="Golden Banker: Made a deposit of $50,000 of more."">';
+		}
+		elseif ( $userp['achievements'] = 2 )
+		{
+		   echo 
+		   '<img src="images/achievements/Silver-Bank.png"  hspace="5" width="65" height="65" title="Silver Banker: Made a deposit of $1,000 or more."">';
+		}
+		elseif ( $userp['achievements'] = 1 )
+		{
+		   echo 
+		   '<img src="images/Buttons/stopButton.png"  hspace="5" width="65" height="65" title="Bronze Banker: Opened a bank account!"">';
+		}
+     
+    }
+	
+	
 }
