@@ -119,7 +119,7 @@ function loadUser() {
             $M=>round(floatval($rows[$M]), 2),
             $T=>intval($rows[$T]),
             $P=>intval($rows[$P]),
-            $M=>intval($rows['m_marker']),
+            $MM=>intval($rows[$MM]),
             'cid'=>intval($rows['car_id'])
         ));
     }

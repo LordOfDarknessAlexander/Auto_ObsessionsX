@@ -103,9 +103,15 @@ Car View Screen
 ?>
 	background-image:url('../images/checkers.png');
 
-	top:20%;
-    
+	top:18%;
+
     font-size:2vw;
+    /*align text to middle of label
+    line-height:10%;
+    
+    display:inline-block;
+    vertical-align: middle;*/
+    
 }
 <?php divCarView();?> label#carInfo{
 <?php
