@@ -70,6 +70,18 @@ html::docType();
 </head>
 <body>
 <div id='AddFunds'>
+    <div id='statBar'>  
+        <div id ='aAmerica'> PHOTOS COURTESY OF AUCTIONS AMERICA</div>
+        <!--this stat bar will be visible across all pages/divs-->
+        <label id='money'>Money: </label>
+        <label id='tokens'>Tokens:</label>
+        <label id='prestige'>Prestige:</label>
+        <label id='m_marker'>Mile Markers:</label>
+    </div>
+    
+    <img id='mainCar' src='images\\garageEmpty.png'>
+    <pre id='info'></pre>
+    <img id='adBar'>
 <?php
     //backBtn();
 	//homeBtn();
