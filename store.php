@@ -41,10 +41,18 @@ function hostBtn($id){
 function ppAttr(){
     //paypal form attributes
 }
-function ppImg($src){
-    //escape source
-    ?><input type="image" src='https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif' name="submit" alt="PayPal - The safer, easier way to pay online!">
-    <?php
+// function ppImg($src){
+    // //escape source
+     ?><input type="image" src='https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif' name="submit" alt="PayPal - The safer, easier way to pay online!">
+     <?php
+// }
+function ppImg($str){
+    //form input button
+	$s = html::escape($str);
+	?><input type='image' name='submit' src="images/store/<?php
+        echo $s;
+    ?>.png" alt='PayPal - The safer, easier way to pay online!'>
+<?php
 }
 //function ppf($id){
     //paypal form
@@ -94,28 +102,28 @@ html::docType();
 <?php
             hb();
             hostBtn('FL8LXKLA32L7L');
-            ppImg("https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif");
+            ppImg("cash/fifty");
 ?>
         </form>
         <form id='c200' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <?php
             hb();
             hostBtn('67Y652AAYHX2N');
-            ppImg("https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif");
+            ppImg("cash/twoHundred");
 ?>
         </form>
         <form id='c500' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <?php
             hb();
             hostBtn('KMZPZHDR3RVYQ');
-            ppImg("https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif");
+            ppImg("cash/fiveHundred");
 ?>
         </form>
         <form id='c1000' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <?php
             hb();
             hostBtn('KC3TWE84J7S42');
-            ppImg("https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif");
+            ppImg("cash/oneMil");
 ?>
         </form>
     </div>
@@ -123,26 +131,46 @@ html::docType();
     <div id='tokens'>
         <!--user purchases tokens-->
         <form id='t3' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <?php hb();?>
+            <!--
             <input type="hidden" name="hosted_button_id" value="XZCKNKNJHAA2S">
-            <input type="image" src='https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif' name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <input type="image" src='https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif' name="submit" alt="PayPal - The safer, easier way to pay online!">-->
+<?php
+            hb();
+            hostBtn('XZCKNKNJHAA2S');
+            ppImg("tokens/three");
+?>
         </form>
         <form id='t5' action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'>
-            <?php hb();?>
-            <input type="hidden" name="hosted_button_id" value="NCPWY2FWXBD9L">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+           
+            <!--<input type="hidden" name="hosted_button_id" value="NCPWY2FWXBD9L">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">-->
+<?php
+            hb();
+            hostBtn('NCPWY2FWXBD9L');
+            ppImg("tokens/five");
+?>
         </form>
         
         <form id='t10' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <?php hb();?>
-            <input type="hidden" name="hosted_button_id" value="FM7WWV76Q54YG">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<?php
+            hb();
+            hostBtn('FM7WWV76Q54YG');
+            ppImg("tokens/ten");
+?>
+          
+           <!-- <input type="hidden" name="hosted_button_id" value="FM7WWV76Q54YG">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">-->
         </form>
 
         <form id='t20' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <?php hb();?>
-            <input type="hidden" name="hosted_button_id" value="KTV2Q8T8MMY5U">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<?php
+            hb();
+            hostBtn('KTV2Q8T8MMY5U');
+            ppImg("tokens/twenty");
+?>
+           
+            <!--<input type="hidden" name="hosted_button_id" value="KTV2Q8T8MMY5U">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">-->
         </form>
     </div>
 </div>
