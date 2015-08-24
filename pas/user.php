@@ -244,6 +244,7 @@ class user{
         $CID = ao::CID;
         
         $res = user::slctFromEntry("$CID");
+	
         
         if($res){
             //user has car
@@ -632,7 +633,7 @@ class user{
         if($q != ''){
             //echo $q . PHP_EOL;
             $res = $AO_DB->query("$q WHERE $UID = $uid AND $AID = $aid");
-            echo json_encode($res);
+            //echo json_encode($res);
             
             if($res){
                 return $res;
@@ -654,14 +655,20 @@ class user{
 		$ut = getUserTableName();
         $car = user::getCarByID($carID);
         $CID = ao::CID;
+		$M = user::M;  
+		
 		$achievements = 'achievements';
 		
-		if($carID > 0)
+		if($carID != 0)
 		{
 			"UPDATE table SET `achievements` = 1";
 			user::displayAchievements();
 		}
-      
+		if($M > 50000)
+		{
+			"UPDATE table SET `achievements` = 2";
+			user::displayAchievements();
+		}
 		/*	
 		if ( $userp['bank_account'] >= 100000 )
 		{
@@ -695,7 +702,7 @@ class user{
         $CID = ao::CID;
 		$achievements = 'achievements';
 		
-		
+		/*
 		if ( $userp['achievements'] = 4 )
 		{
 		   echo 
@@ -709,13 +716,13 @@ class user{
 		elseif ( $userp['achievements'] = 2 )
 		{
 		   echo 
-		   '<img src="images/achievements/Silver-Bank.png"  hspace="5" width="65" height="65" title="Silver Banker: Made a deposit of $1,000 or more."">';
+		   '<img src="images/Buttons/stopButton.png"  hspace="5" width="65" height="65" title="Silver Banker: Made a deposit of $1,000 or more."">';
 		}
 		elseif ( $userp['achievements'] = 1 )
 		{
 		   echo 
 		   '<img src="images/Buttons/stopButton.png"  hspace="5" width="65" height="65" title="Bronze Banker: Opened a bank account!"">';
-		}
+		}*/
      
     }
 	

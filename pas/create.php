@@ -176,22 +176,78 @@ class pasCreate
         
         return false;
     }
+	 public static function achievementsTable($uid){
+        //creates an empty table in aoAuctionLossDB
+        global $AO_DB;
+        $aoAchievements = 'achievements';
+
+        $tableName = "achievements$uid";    //getUserTableName();
+        $uint = 'int unsigned';
+        $defaultCharset = 'DEFAULT CHARSET = latin1';
+        $defaultEngine = 'ENGINE = InnoDB';
+        $AID = ao::AID;
+        
+        $res = $AO_DB->query(
+           "CREATE TABLE IF NOT EXISTS $tableName(
+                $AID $uint NOT NULL PRIMARY KEY
+            )$defaultEngine $defaultCharset"
+        );
+         
+        if($res){
+            //returns true if execute preformed successfully, false on failure
+            return true;
+        }
+        //else false, output error
+        $erno = $AO_DB->con->errno;
+
+        echo "pasCreate::achievementsTable($uid), failed:($erno), reason: $err. <br> Could not create account.";
+        
+        return false;
+    }
+	public static function userAchievementsTable($uid){
+        //creates an empty table in aoAuctionLossDB
+        global $AO_DB;
+        $aoUserAchievements = 'user_achievements';
+
+        $tableName = "users_achievements$uid";    //getUserTableName();
+        $uint = 'int unsigned';
+        $defaultCharset = 'DEFAULT CHARSET = latin1';
+        $defaultEngine = 'ENGINE = InnoDB';
+        $AID = ao::AID;
+        
+        $res = $AO_DB->query(
+           "CREATE TABLE IF NOT EXISTS $tableName(
+                $AID $uint NOT NULL PRIMARY KEY
+            )$defaultEngine $defaultCharset"
+        );
+         
+        if($res){
+            //returns true if execute preformed successfully, false on failure
+            return true;
+        }
+        //else false, output error
+        $erno = $AO_DB->con->errno;
+
+        echo "pasCreate::user_achievementsTable($uid), failed:($erno), reason: $err. <br> Could not create account.";
+        
+        return false;
+    }
     function userAccount($uid){
         //create entry in finalpost
-        //if(pasCreate::userEntry($uid) ){
+        if(pasCreate::userEntry($uid) ){
             //get userID from final post for the 
-            //if(pasCreae::userTable($uid) {
-                //if(pasCreate::userSalesTable($uid) ){
-                    //if(pasCreate::auctionLossTable($uid) ){
-                        //return true;
-                    //}
-                    //echo '';
-                //}
-                //echo '';
-            //}
-            //echo '';
-        //}
-        //return false;
+            if(pasCreate::userTable($uid) {
+                if(pasCreate::userSalesTable($uid) ){
+                    if(pasCreate::auctionLossTable($uid) ){
+                        return true;
+                    }
+                    echo 'Could not create Auction Loss Table';
+                }
+                echo 'Could not create user sales table';
+            }
+            echo 'Could not create user table';
+        }
+        return false;
     }
 }
 

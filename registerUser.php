@@ -184,14 +184,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     if(pasCreate::userTable($uid) ){    //cars the user owns
                         if(pasCreate::auctionLossTable($uid) ){     //table for maintaining the user's losses
                             if(pasCreate::carSaleTable($uid) ){        //vehicles the user has sold                       
-                                
-								header("location: register-thanks.php");
+								if(pasCreate::achievementsTable($uid) ){        //achievements table   
+									if(pasCreate::userAchievementsTable($uid) ){ 
+										//else code succeeded
+										header("location: register-thanks.php");
+									}
+								}
+								
                             }
-                            //else code succeeded
-							header("location: register-thanks.php");
+                            
                         }
                         //could not create car sale table
-                        
                     }
                     else{
                         echo "could not create additional tables for user with id:$uid<br>";
