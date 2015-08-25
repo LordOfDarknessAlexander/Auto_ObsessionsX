@@ -2,25 +2,9 @@
 require_once 'ao.php';
 require_once 're.php';
 require_once 'html.php';
-    //function paypalBtn($id, $val){
-    //inserts a button into a form implementing the 'PayPal' api
-    //<input type='image' id='<echo $id>' value='<echo $val>'><br>
-    //}
-    // function paypalPath(){>'https://www.sandbox.paypal.com/webapps/adaptivepayment/flow/pay'<php
-    // }
-// class pp{
-    // //encapsulates variables and functions related to the paypal store API
-    // const SANDBOX = true; 
-    
-    // function storePath(){
-        // //FALSE on server AND when live,
-        // //TRUE when site's under developement or testing locally(with xampp)
-        // >https://www.<php
-        // //if(pp::SANDBOX){
-            // ><!--sandbox.--><php
-        // }>paypal.com/cgi-bin/webscr<php
-    // }
-// }
+//
+html::docType();
+//
 function ic(){
     ?><input type="hidden" name="cmd" value="_s-xclick">
 <?php
@@ -69,15 +53,17 @@ $URL = rootURL();
     
 //}
 //
-html::docType();
 ?>
 <html>
 <head>
 <?php
     html::charset();
     html::title('AO Store');
+    //css
     html::incPHPCSS('auto');
     html::incPHPCSS('store');
+    //js
+    html::incJS('jquery.2.1.1.min');
 ?>
 </head>
 <body>
@@ -93,13 +79,13 @@ html::docType();
     
     <img id='mainCar' src='images\\garageEmpty.png'>
     <pre id='info'><?php
-//if(false){?>  You do not have full access to this page,
+if(!loggedIn() ){?>  You do not have full access to this page,
 Please <a href='<?php
     echo $URL . 'registerUser.php';
 ?>'>register</a> and <a href='<?php
     echo $URL .'login.php';
 ?>'>log in</a> to access the store<?php
-//}
+}
     ?></pre>
     <img id='adBar'>
 <?php
@@ -127,8 +113,7 @@ else{?>
 }
 ?>
     </div>
-    <!--button id='addFundsBackButton'>Back</button-->
-	<!--a href='<php //pp::minorFundsPath();>'><input type='image' id='addMinorFundsBtn' value='chump change'></a-->
+    
     <div id='cash'>
         <!--user purchases funds-->
         <form id='c50' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -207,4 +192,9 @@ else{?>
         </form>
     </div>
 </div>
+<script>
+$(function(){
+    $('pre#info').hide();
+});
+</script>
 <?php html::footer();?>
