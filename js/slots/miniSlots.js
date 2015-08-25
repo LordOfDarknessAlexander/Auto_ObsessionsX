@@ -64,6 +64,7 @@ $(document).ready(function()
 		spinButton.addEventListener("mousedown", spinButtonHandler, false);
 		document.addEventListener("keyup",keyUpHandler, false);
 		turnOffLights();
+		
 	}
 	function update()
 	{
@@ -102,7 +103,7 @@ $(document).ready(function()
 			slot3spin = false;
 			gameFinished = true;
 			reelsSpinning.pause();
-			reelSpinning.currTeime == 0.0;
+			reelSpinning.currTime == 0.0;
 		}
 		
 		if(gameFinished == false)
@@ -223,7 +224,7 @@ $(document).ready(function()
 			slot1spin = true;
 			slot2spin = true;
 			slot3spin = true;
-			//gameFinished = false;
+			
 		}
 		else
 		{
@@ -241,13 +242,13 @@ $(document).ready(function()
 			turnOffLights();
 			//playReelSpin();
 			startSpin();
-			gameFinished = false;
+			
 		}
 		
 	}
 	function spinButtonHandler(event)
 	{
-		if(money < 0)
+		if(gameFinished == false)
 		{
 			winnings = 0;
 			turnOffLights();
@@ -261,10 +262,11 @@ $(document).ready(function()
 			slot2spin = true;
 			slot3spin = true;
 			//gameFinished = false;
+			
 		
 		}
 		update();
-	
+		
 	}
 	
 	
@@ -384,21 +386,24 @@ $(document).ready(function()
 		if(slot1spin == true)
 		{
 			slot1curr = randomNum();//slot1[randomNum()];
+			playReelSpin();
 		}
 		if(slot2spin == true)
 		{
 			slot2curr = randomNum();//slot2[randomNum()];
+			playReelSpin();
 		}
 		if(slot3spin == true)
 		{
 			slot3curr = randomNum();//slot3[randomNum()];
+			playReelSpin();
 		}
+		
 		if((slot1spin == true)&& (slot2spin == true) && (slot3spin == true))
 		{
 			gameFinished == true;
 			
 		}
-		playReelSpin();
 		
 	}
 	function randomNum()
