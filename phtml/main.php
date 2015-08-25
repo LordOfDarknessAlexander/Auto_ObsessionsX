@@ -37,6 +37,7 @@ function getUserName(){
 //
 //eS();
 //exit();
+$URL = rootURL();   //absolute url of executing site/folder
 ?>	
 <div class='wrapper'>
 	<!--root div element of web page!-->
@@ -57,25 +58,26 @@ function getUserName(){
    
     <div id='reg-navigation'>
         <a id='home' class='tooltip' href='<?php
-            echo rootURL() . 'index.php';
+            echo $URL . 'index.php';
         ?>'>Home<!--span><img src=''>Tooltip!</span--></a><br>
-        <a id='addFunds' class='tooltip'>Store</a><br>
-		
+        <a id='addFunds' class='tooltip'>Store</a><br>		
 <?php
-//secureLogin();
-
-if( loggedIn() ){?>
-
+if(loggedIn() ){?>
         <a id='mem' href='<?php
-            echo rootURL() .'members-page.php'; ?>'>Members</a><br>
+            echo $URL .'members-page.php';
+        ?>'>Members</a><br>
         <a id='logout' href='<?php
-            echo rootURL() .'logout.php'; ?>'>Logout</a><br>	
-		
+            echo $URL .'logout.php';
+        ?>'>Logout</a><br>		
 <?php
-
 }
 else{?>
-        <a id='reg' href='<?php echo rootURL() . 'registerUser.php';?>'>Register</a><br>
+        <a id='reg' href='<?php
+            echo $URL . 'registerUser.php';
+        ?>'>Register</a><br>
+        <a id='login' href='<?php
+            echo $URL .'login.php';
+        ?>'>Login</a><br>
 <?php
 }
 ?>

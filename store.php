@@ -54,14 +54,13 @@ function ppImg($str){
     ?>.png" alt='PayPal - The safer, easier way to pay online!'>
 <?php
 }
+
+$URL = rootURL();
 //function ppf($id){
     //paypal form
     //>
 //}
 //
-//if(!loggedIn() ){
-    //exit('You are not a registered user and do not have permission to view this page');
-//}
 
 //$us = user::getStats();
 
@@ -93,12 +92,41 @@ html::docType();
     </div>
     
     <img id='mainCar' src='images\\garageEmpty.png'>
-    <pre id='info'></pre>
+    <pre id='info'><?php
+//if(false){?>  You do not have full access to this page,
+Please <a href='<?php
+    echo $URL . 'registerUser.php';
+?>'>register</a> and <a href='<?php
+    echo $URL .'login.php';
+?>'>log in</a> to access the store<?php
+//}
+    ?></pre>
     <img id='adBar'>
 <?php
     //backBtn();
 	//homeBtn();
 ?>
+    <div id='reg-navigation'>
+        <a id='home' class='tooltip' href='<?php
+            echo $URL . 'index.php';
+        ?>'>Home<!--span><img src=''>Tooltip!</span--></a><br>		
+<?php
+if(loggedIn() ){?>
+        <a id='mem' href='<?php
+            echo $URL .'members-page.php';?>'>Members</a><br>
+        <a id='logout' href='<?php
+            echo $URL .'logout.php';?>'>Logout</a><br>
+<?php
+}
+else{?>
+        <a id='reg' href='<?php
+            echo $URL . 'registerUser.php';?>'>Register</a><br>
+        <a id='login' href='<?php
+            echo $URL .'login.php';?>'>Login</a><br>
+<?php
+}
+?>
+    </div>
     <!--button id='addFundsBackButton'>Back</button-->
 	<!--a href='<php //pp::minorFundsPath();>'><input type='image' id='addMinorFundsBtn' value='chump change'></a-->
     <div id='cash'>
