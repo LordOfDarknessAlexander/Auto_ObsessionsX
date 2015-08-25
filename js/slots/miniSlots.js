@@ -44,7 +44,7 @@ $(document).ready(function()
 	var reelsSpinning = document.getElementById('reelSpinning');
 	var noWin = document.getElementById('youLose');
 	var youWin = document.getElementById('winSound');
-
+	var spins = false;
 	
 	function init()
 	{
@@ -83,6 +83,10 @@ $(document).ready(function()
 			startSpinSound.pause();
 			startSpinSound.loop = false;
 			stop();
+		}
+		if(spins == true)
+		{
+			spinTimer --;
 		}
 		
 	}
@@ -246,6 +250,7 @@ $(document).ready(function()
 		}
 		
 	}
+	
 	function spinButtonHandler(event)
 	{
 		if(gameFinished == false)
@@ -263,7 +268,6 @@ $(document).ready(function()
 			slot3spin = true;
 			//gameFinished = false;
 			
-		
 		}
 		update();
 		
@@ -272,9 +276,47 @@ $(document).ready(function()
 	
 	function stopButtonHandler(event)
 	{
+		spinTimer = 200;
+		spins = true;
+		update();
+		
+		console.log(spinTimer);
+		if((slot1spin == true)&& (spinTimer < 200))
+		{
+			slot1curr = randomNum();//slot1[randomNum()];
+			playReelSpin();
+			slot1spin = false;
+			spins = true;
+			//spinTimer --;
+			update();
+			
+		}
+		else if((slot2spin == true) && (spinTimer < 100))
+		{
+			slot2curr = randomNum();//slot2[randomNum()];
+			playReelSpin();
+			slot2spin = false;
+			spins = true;
+			spinTimer --;
+			update();
+		}
+		else if((slot3spin == true)&& (spinTimer < 50))
+		{
+			slot3curr = randomNum();//slot3[randomNum()];
+			playReelSpin();
+			slot3spin = false;
+			spins = true;
+			//spinTimer --;
+			update();
+		}
+		
 		if(gameFinished == false)
 		{
-			stop();
+			//stop();
+			checkForWin();
+			slot1spin = false;
+			slot2spin = false;
+			slot3spin = false; 
 		}
 		else
 		{
@@ -380,6 +422,7 @@ $(document).ready(function()
 							  slotImage3.width * 1.5, 
 							  slotImage3.height * 1.5);
 	}
+	
 	function spinReels()
 	{
 		
@@ -387,8 +430,9 @@ $(document).ready(function()
 		{
 			slot1curr = randomNum();//slot1[randomNum()];
 			playReelSpin();
+			
 		}
-		if(slot2spin == true)
+		if(slot2spin == true) 
 		{
 			slot2curr = randomNum();//slot2[randomNum()];
 			playReelSpin();

@@ -23,10 +23,7 @@ html::charset();
 
 	<div id='Slots'><!-- Start of the page-specific content. -->
         <h2>Slots</h2>
-		
-		
-		<body>
-						
+		<body>	
 		<!--The Sound files-->
 		<audio id = 'youLose' src = 'sounds/car_skid_and_crash.mp3'></audio>
 		<audio id = 'reelSpinning' src = 'sounds/single_race_car_passing_by_1.mp3'></audio>
@@ -43,8 +40,6 @@ html::charset();
 					<div id = 'resultsTextDiv'></div>
 					<div id = 'bankValue'></div>
 					<div id = 'wonTextDiv'></div>
-				
-					
 		<!--Buttons-->
 					<button id = 'slotStop'></button>
 					<button id = 'spinButton'></button>
