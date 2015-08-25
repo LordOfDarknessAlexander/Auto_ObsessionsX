@@ -44,14 +44,14 @@ $(document).ready(function()
 	var reelsSpinning = document.getElementById('reelSpinning');
 	var noWin = document.getElementById('youLose');
 	var youWin = document.getElementById('winSound');
-	//var betting = document.getElementById('betSound');
+
 	
 	function init()
 	{
 		
 		//initialize bank
 		//will need accsess to the mamber datbase so that this can be set according to the clients information
-		money  = 1000;//for testing
+		money  = 100;//for testing
 		
 		//initialize text
 		$('div#welcomeTextDiv').text("Welcome to the Auto Obsessions Slots");
@@ -74,7 +74,7 @@ $(document).ready(function()
 		slot3Context.clearRect ( 0 , 0 , slot3Canvas.width, slot3Canvas.height);
 		drawReels();
  		spinReels();
-		playReelSpin();
+		
 		if(gameFinished == true)
 		{
 			reelsSpinning.pause();
@@ -241,7 +241,7 @@ $(document).ready(function()
 			turnOffLights();
 			//playReelSpin();
 			startSpin();
-			//gameFinished = false;
+			gameFinished = false;
 		}
 		
 	}
@@ -398,7 +398,7 @@ $(document).ready(function()
 			gameFinished == true;
 			
 		}
-		
+		playReelSpin();
 		
 	}
 	function randomNum()
