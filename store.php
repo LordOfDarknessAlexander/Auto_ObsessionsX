@@ -64,6 +64,11 @@ function ppImg($str){
 //}
 
 //$us = user::getStats();
+
+//if(isSetP() ){
+    //$op = getOpFromGET();
+    
+//}
 //
 html::docType();
 ?>

@@ -3,9 +3,9 @@
 //if this script is executed nothing will happen, as it only contains function definitions
 //header('Access-Control-Allow-Origin: *');
 //
-require_once '../pasMeta.php';
-require_once 'user.php';
-require_once '../secure.php';
+//require_once '../pasMeta.php';
+require_once '../user.php';
+//require_once '../secure.php';
 //
 //secure::loggin();
 //

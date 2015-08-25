@@ -284,12 +284,7 @@ class user{
         
         if(intval($id) && $id > 0){
             $CID = ao::CID;
-            //$DT = 'drivetrain';
-            //$B = 'body';
-            //$I = 'interior';
-            //$D = 'docs';
-            //$R = 'repairs';
-            
+
             $res = $aoUsersDB->query(
                 sql::slctAllFromUserTable() . " WHERE $CID = $id"
             );

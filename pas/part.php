@@ -1,8 +1,8 @@
 <?php
 //
-require_once '../pasMeta.php';
+//require_once '../pasMeta.php';
+require_once '../user.php';
 require_once '../re.php';
-require_once 'user.php';
 //
 function getPriceFromPost(){
     //return the parameter at $P, converting to a float

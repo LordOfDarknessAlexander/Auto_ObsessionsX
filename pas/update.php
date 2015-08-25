@@ -1,11 +1,10 @@
 <?php
 //this script INSERTs or UPDATEs Database values with sql
 //used by javascript ajax requests
-require_once '../pasMeta.php';
+//require_once '../pasMeta.php';
+require_once '../user.php';
 require_once '../re.php';
-require_once '../secure.php';
-require_once 'user.php';
-
+//require_once '../secure.php';
 //
 //secure::loggin();
 //secure::memberLogin();
