@@ -25,11 +25,7 @@ function hostBtn($id){
 function ppAttr(){
     //paypal form attributes
 }
-// function ppImg($src){
-    // //escape source
-     ?><input type="image" src='https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif' name="submit" alt="PayPal - The safer, easier way to pay online!">
-     <?php
-// }
+
 function ppImg($str){
     //form input button
 	$s = html::escape($str);
@@ -194,7 +190,12 @@ else{?>
 </div>
 <script>
 $(function(){
+    //script to be executed after page loads
+<?php
+if(loggedIn() ){?>
     $('pre#info').hide();
+<?php
+}?>
 });
 </script>
 <?php html::footer();?>
