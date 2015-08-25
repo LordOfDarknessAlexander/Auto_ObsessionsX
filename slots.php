@@ -6,6 +6,8 @@ html::doctype();
 <html lang=en>
 <head>
 <?php
+html::memberStyles();
+html::simpleHead('Slots');
 html::title('Slots');
 html::charset();
 ?>
@@ -16,6 +18,9 @@ html::charset();
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 </head>
 <body>
+<div id='nav'>
+<li><a href='index.php' title='Home Page'>Home</a><br></li>
+</div>
 <div id='container'>
 
 	<div id='Slots'><!-- Start of the page-specific content. -->
@@ -77,7 +82,7 @@ html::charset();
 				
 		<script type='text/javascript' src='js/slots/miniSlots.js'></script>				
 	</body>
-		<li><a href='index.php' title='Home Page'>Home</a><br></li>
+		
         <!-- End of the page-specific content. -->
     </div>
 </div>	

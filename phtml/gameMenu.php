@@ -32,10 +32,10 @@ if($isSlots)
 }*/
 
 ?>
-	<!--	<div id='slots' style='margin-top: 32%; height: 22%; width: 30%; left: 2%;' >
-			<a id ='slots'  href='slots.php'>Slots</a>  -->
+		<div id='slots' style='top: 72%; height: 22%; width: 30%; left: 2%;' >
+			<a id ='slots'  href='slots.php'>Slots</a>  
 			
-	<!--	</div> -->
+		</div> 
     <!--Root Game Menu, hub for page navigation-->
     <!--img id='homeImg' src='images\\garageEmpty.png'-->
 	
