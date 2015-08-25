@@ -11,8 +11,6 @@ html::simpleHead('Slots');
 html::title('Slots');
 html::charset();
 ?>
-<link rel='stylesheet' type='text/css' href='includes.css'>
-
 <link rel = 'stylesheet' href = 'css/gameStyleSheet.css'>
 <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
@@ -33,7 +31,6 @@ html::charset();
 		<audio id = 'youLose' src = 'sounds/car_skid_and_crash.mp3'></audio>
 		<audio id = 'reelSpinning' src = 'sounds/single_race_car_passing_by_1.mp3'></audio>
 		<audio id = 'startSpin' src = 'sounds/auto_car_pull_away_squealing_tyres.mp3'></audio>
-		<audio id = 'betSound'	src = 'sounds/coin_drop.mp3'></audio>
 		<audio id = 'winSound' src = 'sounds/gold_coins.mp3'></audio>
 		
 		<!--Main Canvas-->
@@ -46,17 +43,11 @@ html::charset();
 					<div id = 'resultsTextDiv'></div>
 					<div id = 'bankValue'></div>
 					<div id = 'wonTextDiv'></div>
-					<div id = 'betText'></div>
-					<div id = 'betValue'></div>
-					<div id = 'placeBetText'></div>
+				
 					
 		<!--Buttons-->
 					<button id = 'slotStop'></button>
 					<button id = 'spinButton'></button>
-					<button id = 'raiseBetButton'></button>
-					<button id = 'lowerBetButton'></button>
-					<button id = 'maxBetButton'></button>
-					<button id = 'minBetButton'></button>
 					<button id = 'payPalButton'></button>
 					
 		<!--Slot Windows-->
