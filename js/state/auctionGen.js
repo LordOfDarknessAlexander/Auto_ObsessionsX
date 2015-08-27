@@ -127,6 +127,8 @@ function auctionGen(args){
 					Enemy(price(p))
 				];
 				
+				//this.resetBidCap();
+				
 				if(data !== null && typeof data !== 'undefined'){
 					this._ai[0].currBid = data._bid0;
 					this._ai[1].currBid = data._bid1;
@@ -139,7 +141,53 @@ function auctionGen(args){
 				}
 			}
         },
-		
+		resetBidCap:function(){
+			for(var i = 0; i < this._ai.length; ++i){
+				var ai = this._ai[i],
+					ai0 = this._ai[0],
+					ai1 = this._ai[1],
+					ai2 = this._ai[2],
+					ai3 = this._ai[3],
+					
+					diff1 = ai.bidCap - ai0.bidCap,
+					diff2 = ai.bidCap - ai1.bidCap,
+					diff3 = ai.bidCap - ai2.bidCap,
+					diff4 = ai.bidCap - ai3.bidCap,
+					
+					bid0 = ai0.bidCap * 0.1,
+					bid1 = ai1.bidCap * 0.1,
+					bid2 = ai2.bidCap * 0.1,
+					bid3 = ai3.bidCap * 0.1;
+				
+				if(diff1 >= -bid0){
+					ai0.bidCap += (diff1 * -0.5);
+				}
+				else if(diff1 <= bid0){
+					ai0.bidCap += (diff1 * 0.5);
+				}
+				
+				if(diff2 <= -bid1){
+					ai1.bidCap += (diff2 * -0.5);
+				}
+				else if(diff2 >= bid1){
+					ai1.bidCap += (diff2 * 0.5);
+				}
+				
+				if(diff3 <= -bid2){
+					ai2.bidCap += (diff3 * -0.5);
+				}
+				else if(diff3 >= bid2){
+					ai2.bidCap += (diff3 * 0.5);
+				}
+				
+				if(diff4 <= -bid3){
+					ai3.bidCap += (diff4 * -0.5);
+				}
+				else if(diff4 >= bid3){
+					ai3.bidCap += (diff4 * 0.5);
+				}
+			}
+		},
 		canBid:function(){
 			//static function regulating global bid cooldown
 			//console.log('enemy can bid');
@@ -653,73 +701,11 @@ function auctionGen(args){
 							}
 							else{
 								div.addClass('leftFirst');
-							}
-							
-							// this._timer.reset();
-							// this.resetTimer();
-							// var jqAI = jq.SaleView._ai,
-								// child = jqAI.div.children();
-				
-							// for(var e = 0; e < child.length; e++)
-							// {
-								// var c = child[e],
-									// label = $('label#bid', c),
-									// txt = label.text(),
-									// bid = txt != '' ? parseFloat(txt) : null;
-									
-								// if(bid === null ){
-									// continue;
-								// }
-								
-								// var dif = Math.abs(b - bid);
-								// if(dif <= 0.01){
-									// label.text('');
-									
-									// var lf = $('div.leftFirst', jqAI.div); //leftfirst
-									
-									// if(lf.length){
-										// var ls = $('div.leftSecond', jqAI.div); // leftsecond
-										// if(ls.length){
-											// var lt = $('div.leftThird', jqAI.div); // leftthird
-											// if(lt.length){
-												// //c.removeClass().addClass('leftFourth');
-												// console.log('leftFourth');
-												// break;
-											// }
-											// else{
-												// console.log('leftThird');
-												// //c.removeClass().addClass('leftThird');
-												// break;
-											// }	
-										// }
-										// else{
-											// console.log('leftSecond');
-											// //c.removeClass().addClass('leftSecond');
-											// break;
-										// }
-									// }
-									// else{
-										// //c.removeClass().addClass('leftFirst');
-										// console.log('leftFirst');
-										// break;
-									// }
-									
-								// }	
-							// }
-							
+							}	
 						}
 						else if(b === null && e.currBid === null){
 							continue;
 						}
-						//if AI can bid and is not currently the top bidder
-						//if( (this._ai[i].currBid < cb) && (!this._ai[i].leftAuction) ){
-							//this._ai[i].currBid = cb + upPerc;
-							//this._ai[i].winningBid = true;
-							//break;
-						//}
-						//else{
-							//this._ai[i].winningBid = false;
-						//}
 					}
 				}
 			}

@@ -134,7 +134,7 @@ var SaleView = {
                 l = 0;  //left counter
 				
 			function _sortLeftAI(jqo){
-				console.log('sortaileft');
+				//console.log('sortaileft');
 				var jqAI = jq.SaleView._ai,
 					label = $('label#bid', jqo),
 					txt = label.text(),
