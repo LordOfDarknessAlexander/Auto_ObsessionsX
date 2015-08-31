@@ -4,13 +4,21 @@ require_once 'ui.php';
 //
 css::header();
 //
-function divFunds(){?>div#AddFunds<?php
+function ds(){?>div#AddFunds<?php
+}
+function dsc(){
+    //div store cash
+    ds();?> div#cash<?php
+}
+function dst(){
+    //div store tokens
+    ds();?> div#tokens<?php
 }
 ?>
 /*
 ao Store page styles
 */
-<?php divFunds();?>
+<?php ds();?>
 {
 <?php
     posAbs();
@@ -21,14 +29,16 @@ ao Store page styles
 	z-index: 1;
 }
 
-<?php divFunds();?> #addAllowanceBtn{<?php
+<?php ds();?> #addAllowanceBtn{<?php
     defaultBtnBG();
 ?>
 	height:50px;	
 }
 
-<?php divFunds();?> div form{
-    position:absolute;
+<?php ds();?> div form{
+<?php
+    posAbs();
+?>
     height:25%;
     width:100%;
     
@@ -38,54 +48,55 @@ ao Store page styles
     font-weight:bold;
     background-color:grey;
 }
-<?php divFunds();?> div form input{
+<?php ds();?> div form input{
     width:100%;
     height:100%;
 }
 /*
 Token Div
 */
-<?php divFunds();?> div#tokens{
+<?php dst();?>{
 <?php
     posAbs();
 ?>
+    left:1%;
     top:30%;
     height:50%;
-    width:20%;
+    width:18%;
 }
-<?php divFunds();?> div#tokens form#t3{
+<?php dst();?> form#t3{
     top:0%;
 }
-<?php divFunds();?> div#tokens form#t5{
+<?php dst();?> form#t5{
     top:25%;
 }
-<?php divFunds();?> div#tokens form#t10{
+<?php dst();?> form#t10{
     top:50%;
 }
-<?php divFunds();?> div#tokens form#t20{
+<?php dst();?> form#t20{
     top:75%;
 }
 /*
 Cash Div
 */
-<?php divFunds();?> div#cash{
+<?php dsc();?>{
 <?php
     posAbs();
 ?>
-    right:0%;
+    right:1%;
 	top:30%;
     height:50%;
-    width:20%;
+    width:18%;
 }
-<?php divFunds();?> div#cash form#c50{
+<?php dsc();?> form#c50{
     top:0%;
 }
-<?php divFunds();?> div#cash form#c200{
+<?php dsc();?> form#c200{
     top:25%;
 }
-<?php divFunds();?> div#cash form#c500{
+<?php dsc();?> form#c500{
     top:50%;
 }
-<?php divFunds();?> div#cash form#c1000{
+<?php dsc();?> form#c1000{
     top:75%;
 }

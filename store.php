@@ -54,13 +54,39 @@ function ppSrc(){
         echo $URL . 'store.php';
     }
 }
-//$us = user::getStats();
 
 //if(isSetP() ){
-    //$op = getOpFromGET();
+    //$op = //getOpFromGET();
     
+    //if($op == ' c50'){
+        
+    //}
+    // else if($op == 'c200'){
+        
+    // }
+    // else if($op == 'c500'){
+        
+    // }
+    // else if($op == 'c1000'){
+        
+    // }
+    //tokens
+    //if($op == ' t3'){
+        
+    //}
+    // else if($op == 't5'){
+        
+    // }
+    // else if($op == 't10'){
+        
+    // }
+    // else if($op == 't20'){
+        
+    // }    
 //}
 //
+//if a purcahse has been made, get user stats will get the new values
+//$us = user::getStats();
 ?>
 <html>
 <head>
@@ -230,6 +256,7 @@ if($LI){?>
     tokensDiv.css({opacity:'1.0'});
     dci.css({cursor:'pointer'});
     dti.css({cursor:'pointer'});
+    //setHomeImg();
 <?php
 }
 else{?>
@@ -242,6 +269,7 @@ else{?>
     dti.css(c);
 <?php
 }?>
+//setStats();
 });
 </script>
 <?php html::footer();?>
