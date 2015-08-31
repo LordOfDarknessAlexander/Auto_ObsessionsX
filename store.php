@@ -121,6 +121,7 @@ Please <a href='<?php
 ?>'>log in</a> to access the full store<?php
 }
     ?></pre>
+    <button id='allowance'></button>
     <img id='adBar'>
 <?php
     //backBtn();

@@ -29,10 +29,14 @@ ao Store page styles
 	z-index: 1;
 }
 
-<?php ds();?> #addAllowanceBtn{<?php
+<?php ds();?> button#allowance{<?php
+    posAbs();
     defaultBtnBG();
 ?>
-	height:50px;	
+	width:16%;
+    height:10%;
+    left:1%;
+    top:16%;
 }
 
 <?php ds();?> div form{
