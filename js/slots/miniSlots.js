@@ -312,7 +312,7 @@ $(document).ready(function()
 		
 		if(gameFinished == false)
 		{
-			//stop();
+			stop();
 			checkForWin();
 			slot1spin = false;
 			slot2spin = false;
