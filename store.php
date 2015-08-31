@@ -252,11 +252,14 @@ $(function(){
         dti = $('div#tokens input');
 <?php
 if($LI){?>
+    var o = {opacity:'1.0'},
+        c = {cursor:'pointer'};
+    
     $('pre#info').hide();
-    cashDiv.css({opacity:'1.0'});
-    tokensDiv.css({opacity:'1.0'});
-    dci.css({cursor:'pointer'});
-    dti.css({cursor:'pointer'});
+    cashDiv.css(o);
+    tokensDiv.css(o);
+    dci.css(c);
+    dti.css(c);
     //setHomeImg();
 <?php
 }
