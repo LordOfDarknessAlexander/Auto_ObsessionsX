@@ -28,7 +28,7 @@ function ppAttr(){
 
 function ppImg($str){
     //form input button
-	$s = html::escape($str);
+	$s = html::escape($str);    //escapeURL
 	?><input type='image' name='submit' src="images/store/<?php
         echo $s;
     ?>.png" alt='PayPal - The safer, easier way to pay online!'>
@@ -36,12 +36,24 @@ function ppImg($str){
 }
 
 $URL = rootURL();
+$LI = loggedIn();
 //function ppf($id){
     //paypal form
     //>
 //}
 //
-
+function ppSrc(){
+    //returns the paypal source URL if logged in and able
+    //to make transactions, else returns nothing,
+    //effectively liking user back to this page
+    global $URL;
+    if(loggedIn() ){
+        ?>https://www.paypal.com/cgi-bin/webscr<?php
+    }
+    else{
+        echo $URL . 'store.php';
+    }
+}
 //$us = user::getStats();
 
 //if(isSetP() ){
@@ -75,12 +87,12 @@ $URL = rootURL();
     
     <img id='mainCar' src='images\\garageEmpty.png'>
     <pre id='info'><?php
-if(!loggedIn() ){?>  You do not have full access to this page,
+if(!$LI){?>  You do not have full access to this page,
 Please <a href='<?php
     echo $URL . 'registerUser.php';
 ?>'>register</a> and <a href='<?php
     echo $URL .'login.php';
-?>'>log in</a> to access the store<?php
+?>'>log in</a> to access the full store<?php
 }
     ?></pre>
     <img id='adBar'>
@@ -93,7 +105,7 @@ Please <a href='<?php
             echo $URL . 'index.php';
         ?>'>Home<!--span><img src=''>Tooltip!</span--></a><br>		
 <?php
-if(loggedIn() ){?>
+if($LI){?>
         <a id='mem' href='<?php
             echo $URL .'members-page.php';?>'>Members</a><br>
         <a id='logout' href='<?php
@@ -112,31 +124,39 @@ else{?>
     
     <div id='cash'>
         <!--user purchases funds-->
-        <form id='c50' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <form id='c50' action="<?php ppSrc();?>" method="post" target="_top">
 <?php
+if($LI){
             hb();
             hostBtn('FL8LXKLA32L7L');
+}
             ppImg("cash/fifty");
 ?>
         </form>
-        <form id='c200' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <form id='c200' action="<?php ppSrc();?>" method="post" target="_top">
 <?php
+if($LI){
             hb();
             hostBtn('67Y652AAYHX2N');
+}
             ppImg("cash/twoHundred");
 ?>
         </form>
-        <form id='c500' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <form id='c500' action="<?php ppSrc();?>" method="post" target="_top">
 <?php
+if($LI){
             hb();
             hostBtn('KMZPZHDR3RVYQ');
+}
             ppImg("cash/fiveHundred");
 ?>
         </form>
-        <form id='c1000' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <form id='c1000' action="<?php ppSrc();?>" method="post" target="_top">
 <?php
+if($LI){
             hb();
             hostBtn('KC3TWE84J7S42');
+}
             ppImg("cash/oneMil");
 ?>
         </form>
@@ -144,31 +164,37 @@ else{?>
     
     <div id='tokens'>
         <!--user purchases tokens-->
-        <form id='t3' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <form id='t3' action="<?php ppSrc();?>" method="post" target="_top">
             <!--
             <input type="hidden" name="hosted_button_id" value="XZCKNKNJHAA2S">
             <input type="image" src='https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif' name="submit" alt="PayPal - The safer, easier way to pay online!">-->
 <?php
+if($LI){
             hb();
             hostBtn('XZCKNKNJHAA2S');
+}
             ppImg("tokens/three");
 ?>
         </form>
-        <form id='t5' action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'>
+        <form id='t5' action="<?php ppSrc();?>" method='post' target='_top'>
            
             <!--<input type="hidden" name="hosted_button_id" value="NCPWY2FWXBD9L">
             <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">-->
 <?php
+if($LI){
             hb();
             hostBtn('NCPWY2FWXBD9L');
+}
             ppImg("tokens/five");
 ?>
         </form>
         
-        <form id='t10' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <form id='t10' action="<?php ppSrc();?>" method="post" target="_top">
 <?php
+if($LI){
             hb();
             hostBtn('FM7WWV76Q54YG');
+}
             ppImg("tokens/ten");
 ?>
           
@@ -176,10 +202,12 @@ else{?>
             <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">-->
         </form>
 
-        <form id='t20' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <form id='t20' action="<?php ppSrc();?>" method="post" target="_top">
 <?php
+if($LI){
             hb();
             hostBtn('KTV2Q8T8MMY5U');
+}
             ppImg("tokens/twenty");
 ?>
            
@@ -191,9 +219,27 @@ else{?>
 <script>
 $(function(){
     //script to be executed after page loads
+    var cashDiv = $('div#cash'),
+        tokenDiv = $('div#tokens'),
+        dci = $('div#cash input'),  //div cash input
+        dti = $('div#tokens input');
 <?php
-if(loggedIn() ){?>
+if($LI){?>
     $('pre#info').hide();
+    cashDiv.css({opacity:'1.0'});
+    tokensDiv.css({opacity:'1.0'});
+    dci.css({cursor:'pointer'});
+    dti.css({cursor:'pointer'});
+<?php
+}
+else{?>
+    var o = {opacity:'0.5'},
+        c = {cursor:'default'};
+        
+    cashDiv.css(o);
+    tokenDiv.css(o);
+    dci.css(c);
+    dti.css(c);
 <?php
 }?>
 });
