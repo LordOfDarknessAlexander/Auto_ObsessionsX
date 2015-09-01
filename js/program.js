@@ -211,7 +211,6 @@ function(){
     //Garage.load();  //load user garage!
     //AuctionSell.load(); //load user sales, after garage!
 
-    //jq.Game.setHomeImg();
     setHomeImg();   //in Garage.js
     setAdBG();
     jq.adBar.hide();

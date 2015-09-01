@@ -95,11 +95,21 @@ function ppSrc(){
     html::charset();
     html::title('AO Store');
     //css
-    html::incPHPCSS('auto');
-    html::incPHPCSS('store');
-    //js
-    html::incJS('jquery.2.1.1.min');
-	 html::incJS('allowance');
+    $css = array(
+        'auto',
+        'store'
+    );
+    
+    foreach($css as $p)
+        html::incPHPCSS($p);
+    $js = array(
+        'jquery.2.1.1.min',
+        'GameMode'
+    );
+    
+    foreach($js as $p)
+        html::incJS($p);
+
 ?>
 </head>
 <body>
@@ -150,6 +160,11 @@ else{?>
 }
 ?>
     </div>
+    
+    <canvas id='canvas' width='900' height='600'>
+        <p>You're browser does not support the required functionality to play this game.</p>
+        <p>Please update to a modern browser such as <a href='www.google.com/chrome/‎'>Google Chrome</a> to play.</p>
+    </canvas>   
     
     <div id='cash'>
         <!--user purchases funds-->
@@ -245,6 +260,15 @@ if($LI){
         </form>
     </div>
 </div>
+<?php
+function addPHPJS($str){?>
+<script type='text/javascript' src='<?php echo "js/$str.php";?>'></script>
+<?php
+}
+addPHPJS('globals');
+html::incJS('jqueryLib');
+html::incJS('jqStatBar');
+?>
 <script>
 $(function(){
     //script to be executed after page loads
@@ -254,11 +278,14 @@ $(function(){
         dti = $('div#tokens input');
 <?php
 if($LI){?>
+    var o = {opacity:'1.0'},
+        c = {cursor:'pointer'};
+    
     $('pre#info').hide();
-    cashDiv.css({opacity:'1.0'});
-    tokensDiv.css({opacity:'1.0'});
-    dci.css({cursor:'pointer'});
-    dti.css({cursor:'pointer'});
+    cashDiv.css(o);
+    tokensDiv.css(o);
+    dci.css(c);
+    dti.css(c);
     //setHomeImg();
 <?php
 }
@@ -285,6 +312,7 @@ else{?>
 		}
 	});//function(){console.log('click');});//);
 //setStats();
+//jq.statBar.set.stats();
 });
 </script>
 <?php html::footer();?>

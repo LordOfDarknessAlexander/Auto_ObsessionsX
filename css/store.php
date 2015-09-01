@@ -18,6 +18,15 @@ function dst(){
 /*
 ao Store page styles
 */
+canvas{
+    position: absolute;
+    top: 0;
+    left: 0;
+    border:none;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
 <?php ds();?>
 {
 <?php
@@ -25,6 +34,8 @@ ao Store page styles
     css::size('100%', '100%');
     css::defaultTileBG();
 ?>
+    left:0%;
+    top:0%;
 	text-align: center;
 	z-index: 1;
 }
@@ -64,8 +75,8 @@ Token Div
     posAbs();
 ?>
     left:1%;
-    top:30%;
-    height:50%;
+    top:28%;
+    height:60%;
     width:18%;
 }
 <?php dst();?> form#t3{
@@ -88,8 +99,8 @@ Cash Div
     posAbs();
 ?>
     right:1%;
-	top:30%;
-    height:50%;
+	top:28%;
+    height:60%;
     width:18%;
 }
 <?php dsc();?> form#c50{
