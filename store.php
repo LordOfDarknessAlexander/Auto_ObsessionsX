@@ -309,14 +309,7 @@ else{?>
 			 	
 		if(delta >= 117){//Allowance.CAP){
 			var val = 50000;    //1;	//(base + carValue) * delta;
-<?php		if($LI){?>
-				Allowance.addFundsLoggedIn(val);
-			<?php
-			}
-			else{?>
-				Allowance.addFundsLocal(val);
-			<?php
-			}?>
+			Allowance.addFundsLoggedIn(val);
 			Allowance.setLastTime();
 		}
 	});//function(){console.log('click');});//);

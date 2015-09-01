@@ -41,6 +41,7 @@ var Allowance = {
 					return;
 				}	
 				console.log('addFunds logged in');
+				jq.statBar.set.money(data);
 				// if(data != userStats.money && typeof data === 'number'){
 				  
 				// }
@@ -58,7 +59,12 @@ var Allowance = {
 			
 			var userStats = JSON.parse(Storage.local._stats);
 			console.log(userStats.money);
-			userStats.money += funds;
+			
+			if(userStats.money < 1000000000){
+				userStats.money += funds;
+			}
+			
+			Storage.local = JSON.stringify(userStats);
 			console.log('Allowance added total ' + userStats.money);
 		}	
 	}

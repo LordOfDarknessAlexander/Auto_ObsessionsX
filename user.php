@@ -128,11 +128,12 @@ class user{
         //increment funds to loggedin user's account
         //$funds:float, value to increment user's current funds
         if(is_float($funds) && $funds > 0.0){
-            $f = round($funds, 2);  //round currency to 2 decimal places
-            $M = user::M;            
-            $uf = user::slctFromEntry($m);  //previous user funds
+			$M = user::M;
+			$MF = PHP_INT_MAX;
+			
+            $f = round($funds, 2);  //round currency to 2 decimal places            
+            $uf = user::getFunds();  //previous user funds
 
-            $MF = PHP_INT_MAX;
             $nf = $uf + $f;   //new funds
             //echo $nf;
             if($nf < $MF){
@@ -140,13 +141,12 @@ class user{
                 $res = user::updateEntry("$M = $nf");
                 //echo json_encode($res);
                 if($res){
-                    $res->close();
-                    echo json_encode($nf);
-                    return;
+                    //$res->close();
+                    return $nf;
                 }
             }
             echo 'Operation failed, could not purchase more funds, cap reached!';
-            echo json_encode($uf);
+            return $uf;
         }
         //echo "purchase::funds(), invalid value $f, purchase::failed";
         return user::getFunds();
