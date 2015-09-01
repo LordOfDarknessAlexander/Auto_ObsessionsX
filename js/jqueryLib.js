@@ -97,13 +97,6 @@ var jq = {
         toSearchBtn:$('div#gameMenu button#search'),
         toBuisnessBtn:$('div#gameMenu button#buyBusiness'),
         //toFAQBtn:$(''),
-		setHomeImg : function()
-		{
-            //var car = Garage.getCurrentCar();
-            //if(car !== null){
-                //this.homeImg.attr('src', car.getFullPath() );
-            //}
-        }
 	},
 	Credits : {
 		//menu:$('#credits'),

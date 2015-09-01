@@ -94,10 +94,21 @@ function ppSrc(){
     html::charset();
     html::title('AO Store');
     //css
-    html::incPHPCSS('auto');
-    html::incPHPCSS('store');
+    $css = array(
+        'auto',
+        'store'
+    );
+    
+    foreach($css as $p)
+        html::incPHPCSS($p);
     //js
-    html::incJS('jquery.2.1.1.min');
+    $js = array(
+        'jquery.2.1.1.min',
+        'GameMode'
+    );
+    
+    foreach($js as $p)
+        html::incJS($p);
 ?>
 </head>
 <body>
@@ -148,6 +159,11 @@ else{?>
 }
 ?>
     </div>
+    
+    <canvas id='canvas' width='900' height='600'>
+        <p>You're browser does not support the required functionality to play this game.</p>
+        <p>Please update to a modern browser such as <a href='www.google.com/chrome/‎'>Google Chrome</a> to play.</p>
+    </canvas>   
     
     <div id='cash'>
         <!--user purchases funds-->
@@ -243,6 +259,15 @@ if($LI){
         </form>
     </div>
 </div>
+<?php
+function addPHPJS($str){?>
+<script type='text/javascript' src='<?php echo "js/$str.php";?>'></script>
+<?php
+}
+addPHPJS('globals');
+html::incJS('jqueryLib');
+html::incJS('jqStatBar');
+?>
 <script>
 $(function(){
     //script to be executed after page loads
@@ -273,7 +298,7 @@ else{?>
     dti.css(c);
 <?php
 }?>
-//setStats();
+//jq.statBar.set.stats();
 });
 </script>
 <?php html::footer();?>
