@@ -44,7 +44,6 @@ $paths = array(
     //'state/AuctionSelect',
     'state/AuctionSell',
     //'state/Add_Funds',
-	'allowance',
     //
     'program'	//main javascript program
 );

@@ -204,7 +204,7 @@ function(){
 	//Storage.local.clear();
 	//alert('doc ready!');
 	//pas.query.loadUser();   //load user stats!
-	Allowance.getLastTime();
+	//Allowance.getLastTime();
 	//setStatBar();
     load();
 	//loadUser();

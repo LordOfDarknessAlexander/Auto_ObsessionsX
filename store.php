@@ -250,7 +250,6 @@ $(function(){
         tokenDiv = $('div#tokens'),
         dci = $('div#cash input'),  //div cash input
         dti = $('div#tokens input');
-		
 <?php
 if($LI){?>
     $('pre#info').hide();
@@ -271,19 +270,7 @@ else{?>
     dti.css(c);
 <?php
 }?>
-	var btn = $('div#AddFunds button#allowance');	
-	btn.off().click(function(){
-		//allowance accumulates every few seconds
-		var delta = Allowance.getDelta(),
-			carValue = Garage.getCollectionValue() * 0.1;   
-			
-		if(delta >= Allowance.CAP){
-			var val = 50000;    //1;	//(base + carValue) * delta;
-			addFunds(val);
-			Allowance.setLastTime();
-		}
-	});//function(){console.log('click');});//);
-	//setStats();
+//setStats();
 });
 </script>
 <?php html::footer();?>
