@@ -18,6 +18,14 @@ jq.Auction.bidBtn = $('button#bid', jq.Auction.menu);
 var playerBoughtOut = false; //temporary for our dev button "buyout"
 
 var ENEMY_X = 10;
+var vehiclePrice = 20000;
+//Enemy Avatars
+//Sad enemy avatars
+var slimer = new Image();
+slimer.src = 'images/slime.png';
+//Happy Enemies
+var curBidImage = new Image();
+curBidImage.src = 'images/slime2.png';
 
 function auctionCountdownTimer(){
 	//object that controls the sales counter

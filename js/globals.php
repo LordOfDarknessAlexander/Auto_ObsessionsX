@@ -100,7 +100,6 @@ else{?>
 	if(Storage.local !== null){
         if('_carID' in Storage.local){
 			_curCarID = JSON.parse(Storage.local._carID);
-			
 		}
 		else{	//no previous save data
 			_curCarID = 0;
@@ -154,21 +153,12 @@ backgroundImage.src = "images/inventoryMenu.png";
 //Menu velocity 
 var backgroundY = 0;
 var speed = 0.7;
-//Enemy Avatars
-//Sad enemy avatars
-var slimer = new Image();
-slimer.src = 'images/slime.png';
-//Happy Enemies
-var curBidImage = new Image();
-curBidImage.src = 'images/slime2.png';
 //
 //AI
 //Create an empty array of Bidders
 //php funtions/generators can be used create user names
 var bidders = ["Bidder_990 ", "Bidder_1090 " ,"Bidder_3490 ", "Bidder_320 " ,"Bidder_465 " ,"Bidder_2490 ", "Bidder_2190 " ,"Bidder_7890 ", "Bidder_90 ","Bidder_66990 ","Bidder_1090 ", "Bidder_2332 ","Bidder_4390 ","Bidder_890 ","Bidder_8720 ","Bidder_8976 ","Bidder_220 ","Bidder_1196 ","Bidder_8976 ",
 "Bidder_6690 ","Bidder_4490 ","Bidder_6790 ","Bidder_8790 ","Bidder_10 ","Bidder_40 ","Bidder_430 ","Bidder_3390 ","Bidder_9 ","Bidder_621 ","Bidder_21430 ","Bidder_23450 ","Bidder_32345 ","Bidder_46574 ","Bidder_4597 ","Bidder_78765 ","Bidder_8765 ","Bidder_608 ","Sparkles King ","Bidder_7890 "];
-
-var vehiclePrice = 20000;
 
 var playerWon = false;
 
@@ -248,6 +238,7 @@ function strFromCurrentDate(){
 
 function setAudio(enabled){
     var b = Boolean(enabled);
+    
     if(Storage.local !== null ){
         Storage.local._audioEnabled = JSON.stringify(b);
     }

@@ -106,7 +106,7 @@ jq.statBar = {
         stats:function(args){
             //pass args in to set userStats to values,
             //otherwise sets values to ones already set to userStats
-            jq.statBar.show();
+            jq.statBar.div.show();
             
             var s = jq.statBar.set;
 

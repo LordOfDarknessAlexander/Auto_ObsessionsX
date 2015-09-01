@@ -306,7 +306,7 @@ div#statBar label{
 div#statBar label#money{left:0%;top:75%;}
 div#statBar label#tokens{left:25%;top:75%;}
 div#statBar label#prestige{left:50%;top:75%;}
-div#statBar label#m_marker{left:75%;top:75%;}
+div#statBar label#markers{left:75%;top:75%;}
 /*
 */
 img#mainCar{

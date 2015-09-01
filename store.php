@@ -121,7 +121,7 @@ function ppSrc(){
         <label id='money'>Money: </label>
         <label id='tokens'>Tokens:</label>
         <label id='prestige'>Prestige:</label>
-        <label id='m_marker'>Mile Markers:</label>
+        <label id='markers'>Mile Markers:</label>
     </div>
     
     <img id='mainCar' src='images\\garageEmpty.png'>
@@ -319,7 +319,8 @@ else{?>
 		}
 	});//function(){console.log('click');});//);
 //setStats();
-//jq.statBar.set.stats();
+loadUser();
+jq.statBar.set.stats();
 });
 </script>
 <?php html::footer();?>
