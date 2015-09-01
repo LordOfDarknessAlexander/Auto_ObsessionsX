@@ -27,7 +27,6 @@ var Allowance = {
     },
     getRefreshPerc:function(){
         return Allowance.getDelta() / Allowance.CAP;
-    }
-	//allowance.getLastTime();
+    },
 };
 

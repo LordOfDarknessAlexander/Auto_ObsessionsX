@@ -2,6 +2,7 @@
 require_once 'ao.php';
 require_once 're.php';
 require_once 'html.php';
+
 //
 html::docType();
 //
@@ -98,6 +99,7 @@ function ppSrc(){
     html::incPHPCSS('store');
     //js
     html::incJS('jquery.2.1.1.min');
+	 html::incJS('allowance');
 ?>
 </head>
 <body>
@@ -270,6 +272,18 @@ else{?>
     dti.css(c);
 <?php
 }?>
+	var btn = $('div#AddFunds button#allowance');	
+	btn.off().click(function(){
+		//allowance accumulates every few seconds
+		var delta = Allowance.getDelta(),
+			carValue = Garage.getCollectionValue() * 0.1;   
+			
+		if(delta >= Allowance.CAP){
+			var val = 50000;    //1;	//(base + carValue) * delta;
+			addFunds(val);
+			Allowance.setLastTime();
+		}
+	});//function(){console.log('click');});//);
 //setStats();
 });
 </script>
