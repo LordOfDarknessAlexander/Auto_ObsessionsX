@@ -102,14 +102,15 @@ function ppSrc(){
     
     foreach($css as $p)
         html::incPHPCSS($p);
-    $js = array(
+	
+	$js = array(
         'jquery.2.1.1.min',
         'GameMode'
     );
     
-    foreach($js as $p)
+    foreach($js as $p){
         html::incJS($p);
-
+	}
 ?>
 </head>
 <body>
@@ -160,11 +161,10 @@ else{?>
 }
 ?>
     </div>
-    
-    <canvas id='canvas' width='900' height='600'>
+	<canvas id='canvas' width='900' height='600'>
         <p>You're browser does not support the required functionality to play this game.</p>
         <p>Please update to a modern browser such as <a href='www.google.com/chrome/‎'>Google Chrome</a> to play.</p>
-    </canvas>   
+    </canvas> 
     
     <div id='cash'>
         <!--user purchases funds-->
@@ -266,6 +266,7 @@ function addPHPJS($str){?>
 <?php
 }
 addPHPJS('globals');
+html::incJS('allowance');
 html::incJS('jqueryLib');
 html::incJS('jqStatBar');
 ?>
@@ -302,12 +303,11 @@ else{?>
 	var btn = $('div#AddFunds button#allowance');	
 	btn.off().click(function(){
 		//allowance accumulates every few seconds
-		var delta = Allowance.getDelta(),
-			carValue = Garage.getCollectionValue() * 0.1;   
-			
+		var delta = Allowance.getDelta();
+			 	
 		if(delta >= Allowance.CAP){
 			var val = 50000;    //1;	//(base + carValue) * delta;
-			addFunds(val);
+			//addFunds(val);
 			Allowance.setLastTime();
 		}
 	});//function(){console.log('click');});//);

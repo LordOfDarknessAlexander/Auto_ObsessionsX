@@ -5,6 +5,9 @@ var Allowance = {
         //get diffrence between last time and now        
         return Date.now() - Allowance.getLastTime();
     },
+	toJSON:function(){
+		_lastAllowanceTime: 0;
+	},
     getLastTime:function(){
         //the last time the user collected their allowance
         if(Storage.local !== null){
@@ -27,6 +30,6 @@ var Allowance = {
     },
     getRefreshPerc:function(){
         return Allowance.getDelta() / Allowance.CAP;
-    },
+    }
 };
 

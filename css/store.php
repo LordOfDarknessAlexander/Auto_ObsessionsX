@@ -23,7 +23,7 @@ canvas{
     top: 0;
     left: 0;
     border:none;
-    z-index: 1;
+    z-index: -1;
     width: 100%;
     height: 100%;
 }
@@ -40,7 +40,8 @@ canvas{
 	z-index: 1;
 }
 
-<?php ds();?> button#allowance{<?php
+<?php ds();?> button#allowance{
+<?php
     posAbs();
     defaultBtnBG();
 ?>
