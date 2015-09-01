@@ -1,8 +1,10 @@
 <?php
 //
-require_once '../pasMeta.php';
-require_once '../re.php';
-require_once '../secure.php';
+define('ROOT_DIR', dirname(__FILE__) . '/');
+//exit();
+require_once ROOT_DIR . 'pasMeta.php';
+require_once ROOT_DIR . 're.php';
+//require_once '../secure.php';
 //
 //secure::loggin();
 //
@@ -38,6 +40,8 @@ class user{
         // D = 'docs',
         // R = 'repairs',
 		// P = 'price';
+        
+    //db = $aoUsersDB;  //database
         
     public static function slctFromEntry($fields){
         //select column(s) from a user's row entry in database 'AO_DB' in table 'users'
@@ -308,7 +312,39 @@ class user{
         }
         return null;
     }
-        public static function getSales(){
+    public static function getCurCar(){
+        //returns the user's current vehicle,
+        //else null if one is not selected
+        global $aoUsersDB;
+        
+        $cid = user::getCurCarID();
+        
+        if($id > 0){
+            $CID = ao::CID;
+
+            $res = $aoUsersDB->query(
+                sql::slctAllFromUserTable() . " WHERE $CID = $cid"
+            );
+            
+            if($res){
+                $r = $res->fetch_assoc();
+                //echo json_encode($r);
+                return null; //Vehicle::fromArray($r);
+
+            }
+            else{
+                $aoUsersDB->eErr();
+            }
+        }
+        return null;
+    }
+    // public static function getCurCarImgPath(){
+        // //returns the image path of the current car is selected,
+        // //else returns an image path to an empty garage
+        // $c = user::getCurCar();
+        // return $c !== null ? $c->getFullPath() : rootURL() . 'images\\garageEmpty.png';
+    // }
+    public static function getSales(){
         //returns the user's total active and expired actions
         global $aoCarSalesDB;
         

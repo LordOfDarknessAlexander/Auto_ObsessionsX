@@ -1,5 +1,8 @@
 <?php
 require_once 'secure.php';
+//
+//define('ROOT_DIR', dirname(__FILE__) . '/');
+//
 function eCompanyName(){
     //echos out the name of the company wherever the function is called
     ?>8.5:1 Entertainment Inc<?php
@@ -146,9 +149,11 @@ function getOpFromGET(){
     //if value contain only letters return, else return harmless empty string
     return isAlphaSmall($v) ? $v : '';
 }
+//ROOT_URL = '<php dirname(__FILE__);>';
 function rootURL(){
     //returns the root url for the executing application
     //change to false for execution on server
+    //return '<php dirname(__FILE__);>';
     static $localExecution = true;
     return $localExecution?
         'http://localhost/Auto_ObsessionsX/'    //clone your local copy from Git into C:/xampp/htdocs/

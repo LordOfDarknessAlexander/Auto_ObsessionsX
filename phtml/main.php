@@ -49,7 +49,7 @@ $URL = rootURL();   //absolute url of executing site/folder
         <label id='money'>Money: </label>
         <label id='tokens'>Tokens:</label>
         <label id='prestige'>Prestige:</label>
-        <label id='m_marker'>Mile Markers:</label>
+        <label id='markers'>Mile Markers:</label>
     </div>
 	
     <img id='mainCar' src='images\\garageEmpty.png'>
@@ -115,14 +115,14 @@ if(!loggedIn() ){?>
             </ul>
 <?php
 if(!loggedIn() ){?>   
-			<div id="loginfields">
+			<div id='loginfields'>
 				<h2>Login</h2>
-				<form action="login.php" method="post">
-					<p><label class="label" for="email">Email Address:</label><br>
-					<input id="email" type="text" name="email" size="30" maxlength="60" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" > </p>
-					<p><label class="label" for="psword">Password:</label><br>
-					<input id="psword" type="password" name="psword" size="12" maxlength="12" value="<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>" ></p>
-					<p><input id="submit" type="submit" name="submit" value="Login"></p>
+				<form action="login.php" method='post'>
+					<p><label class='label' for='email'>Email Address:</label><br>
+					<input id='email' type='text' name='email' size='30' maxlength='60' value='<?php if (isset($_POST['email'])) echo $_POST['email']; ?>' > </p>
+					<p><label class='label' for='psword'>Password:</label><br>
+					<input id='psword' type='password' name='psword' size='12' maxlength='12' value='<?php if (isset($_POST['psword'])) echo $_POST['psword']; ?>' ></p>
+					<p><input id='submit' type='submit' name='submit' value='Login'></p>
 				</form>
 			</div>
 <?php

@@ -67,6 +67,7 @@ class Vehicle
     }
     public function getLocalPath(){
         //local path in project
+        //rawurlencode();
         return $this->_make . '/' . $this->_year . '/' . $this->_model . '.jpg';
     }
     public function getFullPath(){

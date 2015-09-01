@@ -373,7 +373,7 @@ function setMarkers(val){
     ){
         userStats.m_marker = val;  //if an argument is passed, assign value to money
     }
-	$('label#m_marker').text('Mile Markers: ' + userStats.marker.toString() );
+	$('label#markers').text('Mile Markers: ' + userStats.marker.toString() );
 }
 function setStatBar(args){
     //pass args in to set userStats to values,

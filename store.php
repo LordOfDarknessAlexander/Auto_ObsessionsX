@@ -2,7 +2,8 @@
 require_once 'ao.php';
 require_once 're.php';
 require_once 'html.php';
-
+require_once 'user.php';
+//require_once 'dbConnect.php';
 //
 html::docType();
 //
@@ -269,6 +270,7 @@ addPHPJS('globals');
 html::incJS('allowance');
 html::incJS('jqueryLib');
 html::incJS('jqStatBar');
+html::incJS('state/Garage');
 ?>
 <script>
 $(function(){
@@ -287,7 +289,6 @@ if($LI){?>
     tokensDiv.css(o);
     dci.css(c);
     dti.css(c);
-    //setHomeImg();
 <?php
 }
 else{?>
@@ -301,7 +302,8 @@ else{?>
 <?php
 }?>
 	var btn = $('div#AddFunds button#allowance');	
-	btn.off().click(function(){
+	
+    btn.off().click(function(){
 		//allowance accumulates every few seconds
 		var delta = Allowance.getDelta();
 			 	
@@ -318,8 +320,8 @@ else{?>
 			Allowance.setLastTime();
 		}
 	});//function(){console.log('click');});//);
-//setStats();
 loadUser();
+//setHomeImg();
 jq.statBar.set.stats();
 });
 </script>

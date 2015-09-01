@@ -98,8 +98,8 @@ function loadUser()
 }
 else{?>
 	if(Storage.local !== null){
-        if('_carID' in Storage.local){
-			_curCarID = JSON.parse(Storage.local._carID);
+        if('_curCarID' in Storage.local){
+			_curCarID = JSON.parse(Storage.local._curCarID);
 		}
 		else{	//no previous save data
 			_curCarID = 0;
