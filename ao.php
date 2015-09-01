@@ -154,7 +154,7 @@ function rootURL(){
     //returns the root url for the executing application
     //change to false for execution on server
     //return '<php dirname(__FILE__);>';
-    static $localExecution = true;
+    static $localExecution = false;
     return $localExecution?
         'http://localhost/Auto_ObsessionsX/'    //clone your local copy from Git into C:/xampp/htdocs/
         :

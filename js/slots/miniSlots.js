@@ -112,7 +112,7 @@ function(){
         
 		if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1){
 			winnings = bet * 10;
-			res..text('Jackpot');
+			//res..text('Jackpot');
 			$('div#wonTextDiv').text('You Won ' + winnings);
 			//Play sound
 			playWinSound();
