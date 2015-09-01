@@ -17,6 +17,8 @@ jq.Auction.bidBtn = $('button#bid', jq.Auction.menu);
 //
 var playerBoughtOut = false; //temporary for our dev button "buyout"
 
+var ENEMY_X = 10;
+
 function auctionCountdownTimer(){
 	//object that controls the sales counter
 	return {

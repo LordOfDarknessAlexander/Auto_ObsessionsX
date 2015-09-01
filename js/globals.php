@@ -140,11 +140,8 @@ var splashTimer = 600.00;
 var buttonsPlaceY = 200;
 //Player Pos, should be local in Player class
 //Bidder Pos
-var BIDDER_XPOS = 650;
-var BIDDER_YPOS = 250;
-var ENEMY_X = 10;
-var VEHICLE_XPOS = 690;
-var VEHICLE_YPOS = 850;
+//var BIDDER_XPOS = 650;
+//var BIDDER_YPOS = 250;
  
 //background images
 //garage doors
@@ -185,8 +182,6 @@ previousTime = Date.now();
 
 var endGame = false;
 var auctionEnded = false;
-//var restarted = false;
-//var auctionOver = false;
 var restartTimer = 0;
 
 var appState = GAME_MODE.SPLASH;	

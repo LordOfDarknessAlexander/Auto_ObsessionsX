@@ -4,7 +4,9 @@
 //values are between 00 and FF, allowing for 255x255x255 unique vehicles
 //ID's can be procedurally generated!
 //ao.car.create =
-
+var VEHICLE_XPOS = 690;
+var VEHICLE_YPOS = 850;
+//
 function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 {
     if(carID === null || carID === undefined){
@@ -71,10 +73,10 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
         _repairs:0, //bitfield representing which upgrades have been repaired
 		condition:0,
 		originality:0,
-		name : html.escapeStr(Name),	////node.attr('name'),
-		make : html.escapeStr(Make),	//node.attr('make'),
-		year : Year,	//parseInt(node.attr('year') ),
-		id : carID,	//node.attr('id'),
+		name:html.escapeStr(Name),	////node.attr('name'),
+		make:html.escapeStr(Make),	//node.attr('make'),
+		year:Year,	//parseInt(node.attr('year') ),
+		id:carID,	//node.attr('id'),
 		//_info: node.text(),
 		//_parts : [],	//obsolete, only retain currently upgraded parts, array is copied
         //_parts:{
@@ -360,7 +362,12 @@ Vehicle.makeRandom = function(name, price){
         
     return Vehicle( );
 };
-
+Vehicle.PART_TYPE = {
+    DT:0,
+    BODY:1,
+    INTER:2,
+    DOCS:3
+};
 //TEMPORARY
 //xml data base of cars, loaded from server!
 //This should work!!!!
@@ -393,14 +400,14 @@ var xmlDoc = $.parseHTML(dbStr);	//parseXML doesn't work
 	
 var cn = $('#0x00DA86B0', carDoc);
 */
-var xdbCars = [
-	Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969', 25000),
-	//Vehicle(cn.attr("name"), 'Chevrolet','1969', parseInt(cn.attr('_price') ) ),
-	Vehicle('Camaro RS-Z28 Sport Coupe', 'Chevrolet','1969', 18000),
-	Vehicle('Sierra', 'GMC', '1997', 12000),
-	Vehicle('S5 Coupe', 'Audi', '2013', 57000)
-	//...etc
-];
+// var xdbCars = [
+	// Vehicle('E-Type Series II 4.2 Roadster', 'Jaguar', '1969', 25000),
+	// //Vehicle(cn.attr("name"), 'Chevrolet','1969', parseInt(cn.attr('_price') ) ),
+	// Vehicle('Camaro RS-Z28 Sport Coupe', 'Chevrolet','1969', 18000),
+	// Vehicle('Sierra', 'GMC', '1997', 12000),
+	// Vehicle('S5 Coupe', 'Audi', '2013', 57000)
+	// //...etc
+// ];
 
 /*
 var Vehicle = function(imgSrc)	//xmlNode)
@@ -454,9 +461,3 @@ var Vehicle = function(imgSrc)	//xmlNode)
 	}
 };
 */
-Vehicle.PART_TYPE = {
-    DT:0,
-    BODY:1,
-    INTER:2,
-    DOCS:3
-};

@@ -44,7 +44,7 @@ canvas{
     posAbs();
     defaultBtnBG();
 ?>
-	width:16%;
+	width:18%;
     height:10%;
     left:1%;
     top:16%;

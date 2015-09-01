@@ -1,298 +1,257 @@
-$(document).ready(function()
-{
+$(document).ready(
+function(){
+    //update to use jQuery
 	//Reels 
-	var slot1Canvas = document.getElementById('slot1');
-	var slot1Context = slot1Canvas.getContext('2d');
-	var slot2Canvas = document.getElementById('slot2');
-	var slot2Context = slot2Canvas.getContext('2d');
-	var slot3Canvas = document.getElementById('slot3');
-	var slot3Context = slot3Canvas.getContext('2d');
-	
+	var slot1Canvas = document.getElementById('slot1'),
+        slot1Context = slot1Canvas.getContext('2d'),
+        slot2Canvas = document.getElementById('slot2'),
+        slot2Context = slot2Canvas.getContext('2d'),
+        slot3Canvas = document.getElementById('slot3'),
+        slot3Context = slot3Canvas.getContext('2d');
 	//Buttons
-
-	var slotStopButton = document.getElementById('slotStop');
-	var spinButton = document.getElementById('spinButton');
+	var slotStopButton = document.getElementById('slotStop'),
+        spinButton = document.getElementById('spinButton');
 	
 	//Play data
 	var slot1 = [];
 	var slot2 = [];
 	var slot3 = [];
-	var slot1spin = true;
-	var slot2spin = true;
-	var slot3spin = true;
+    //
+	var slot1spin = true,
+        slot2spin = true,
+        slot3spin = true;
+    //
 	var gameFinished = false;
-	var slot1curr = currFrame;
-	var slot2curr = currFrame;
-	var slot3curr = currFrame;
-	var randSlot1 = 0; 
-	var randSlot2 = 0;
-	var randSlot3 = 0;
+    //
+	var slot1curr = currFrame,
+        slot2curr = currFrame,
+        slot3curr = currFrame;
+    //
+	var randSlot1 = 0,
+        randSlot2 = 0,
+        randSlot3 = 0;
+    //
 	var rand = 0;
-	var currFrame = 0;
-	
+	var currFrame = 0;	
 	//Values
 	var money = 0;
-	var winnings = 0;
-	
+	var winnings = 0;	
 	//Images
-	var slotImage1 = new Image();
-	var slotImage2 = new Image();
-	var slotImage3 = new Image();
-	
+	var slotImage1 = new Image(),
+        slotImage2 = new Image(),
+        slotImage3 = new Image();	
 	//Sounds
-	var startSpinSound = document.getElementById('startSpin');
-	var reelsSpinning = document.getElementById('reelSpinning');
-	var noWin = document.getElementById('youLose');
-	var youWin = document.getElementById('winSound');
+	var startSpinSound = document.getElementById('startSpin'),
+        reelsSpinning = document.getElementById('reelSpinning'),
+        noWin = document.getElementById('youLose'),
+        youWin = document.getElementById('winSound');
+    //
 	var spins = false;
 	
-	function init()
-	{
-		
+	function init(){		
 		//initialize bank
 		//will need accsess to the mamber datbase so that this can be set according to the clients information
 		money  = 100;//for testing
 		
 		//initialize text
-		$('div#welcomeTextDiv').text("Welcome to the Auto Obsessions Slots");
-		$('div#bankValue').text("You have $" + money);
+		$('div#welcomeTextDiv').text('Welcome to the Auto Obsessions Slots');
+		$('div#bankValue').text('You have $' + money.toFixed(2) );
 	
-		
 		//initialize handlers
-		
-		slotStopButton.addEventListener("mousedown", stopButtonHandler, false);
-		spinButton.addEventListener("mousedown", spinButtonHandler, false);
-		document.addEventListener("keyup",keyUpHandler, false);
+		slotStopButton.addEventListener('mousedown', stopButtonHandler, false);
+		spinButton.addEventListener('mousedown', spinButtonHandler, false);
+		document.addEventListener('keyup',keyUpHandler, false);
 		turnOffLights();
-		
 	}
-	function update()
-	{
+	function update(){
 		window.requestAnimationFrame(update, $('canvas#slot1Canvas'));
 		
-		slot1Context.clearRect ( 0 , 0 , slot1Canvas.width, slot1Canvas.height);
-		slot2Context.clearRect ( 0 , 0 , slot2Canvas.width, slot2Canvas.height);
-		slot3Context.clearRect ( 0 , 0 , slot3Canvas.width, slot3Canvas.height);
+		slot1Context.clearRect(0, 0, slot1Canvas.width, slot1Canvas.height);
+		slot2Context.clearRect(0, 0, slot2Canvas.width, slot2Canvas.height);
+		slot3Context.clearRect(0, 0, slot3Canvas.width, slot3Canvas.height);
 		drawReels();
  		spinReels();
 		
-		if(gameFinished == true)
-		{
+		if(gameFinished == true){
 			reelsSpinning.pause();
 			reelSpinning.loop = false;
 			startSpinSound.pause();
 			startSpinSound.loop = false;
 			stop();
 		}
-		if(spins == true)
-		{
+		if(spins == true){
 			spinTimer --;
 		}
-		
 	}
-	function stop()
-	{
-		if(slot1spin == true)
-		{
+	function stop(){
+        //stop reel from spinning
+		if(slot1spin == true){
 			slot1spin = false;
 			return;
 		}
-		if(slot2spin == true && slot1spin == false)
-		{
+		if(slot2spin == true && slot1spin == false){
 			slot2spin = false;
 			return;
 		}
-		if(slot3spin == true && slot2spin == false && slot1spin == false)
-		{
+		if(slot3spin == true && slot2spin == false && slot1spin == false){
 			slot3spin = false;
 			gameFinished = true;
 			reelsSpinning.pause();
 			reelSpinning.currTime == 0.0;
 		}
 		
-		if(gameFinished == false)
-		{
+		if(gameFinished == false){
 			console.log(slot1curr, slot2curr, slot3curr);
 			console.log(slotImage1, slotImage2, slotImage3);
 			checkForWin();
 		}
-		
 	}
-	function checkForWin()
-	{
-		if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1)
-		{
+	function checkForWin(){
+        //
+        var res = $('div#resultsTextDiv');
+        
+		if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1){
 			winnings = bet * 10;
-			$('div#resultsTextDiv').text("Jackpot");
-			$('div#wonTextDiv').text("You Won " + winnings);
+			res..text('Jackpot');
+			$('div#wonTextDiv').text('You Won ' + winnings);
 			//Play sound
 			playWinSound();
 			startSpinSound();
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
-		{
-			
-			$('div#resultsTextDiv').text("Congratulations, You win!");
-			$('div#wonTextDiv').text("You Won " + winnings);
+		else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2){
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + winnings);
 			//Play sound
 			playWinSound();
 			//Play Lights
 			turnOnLights();	
 		}
-		else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
-		{
+		else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3){
 			winnings = bet * 5;
-			$('div#resultsTextDiv').text("Congratulations, You win!");
-			$('div#wonTextDiv').text("You Won " + winnings);
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + winnings);
 			//Play sound
 			playWinSound();
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
-		{
-			
-			$('div#resultsTextDiv').text("Uhh pinata");
-			$('div#wonTextDiv').text("You Won " + winnings);
+		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4){
+			res.text('Uhh pinata');
+			$('div#wonTextDiv').text('You Won ' + winnings);
 			//Play sound
 			playWinSound();
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
-		{
-		
-			$('div#resultsTextDiv').text("Congratulations, You win!");
-			$('div#wonTextDiv').text("You Won " + winnings);
+		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5){
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + winnings);
 			//Play sound
 			playWinSound();
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 5 && slot2curr == 5  || slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
-		{
-			
-			$('div#resultsTextDiv').text("Congratulations, You win!");
-			$('div#wonTextDiv').text("You Won " + winnings);
+		else if( (slot1curr == 5 && slot2curr == 5)  || (slot1curr == 6 && slot2curr == 6 && slot3curr == 6) ){
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + winnings);
 			//Play sound
 			playWinSound();
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 5 || slot1curr == 6 && slot2curr == 6)
-		{
+		else if( (slot1curr == 5 || slot1curr == 6) && slot2curr == 6){
 			//winnings = bet * 1.75;
-			$('div#resultsTextDiv').text("Congratulations, You win!");
-			$('div#wonTextDiv').text("You Won " + winnings);
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + winnings);
 			//Set volume and play sound
 			playWinSound();
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 6  || slot2curr == 6 || slot3curr == 6)
-		{
+		else if(slot1curr == 6  || slot2curr == 6 || slot3curr == 6){
 			//winnings = bet * 1.5;
-			$('div#resultsTextDiv').text("Congratulations, You win!");
-			$('div#wonTextDiv').text("You Won " + winnings);
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + winnings);
 			//Set volume and play sound
 			playWinSound();
 			//Play Lights
 			turnOnLights();
-
 		}
-		else //losing spin
-		{
-			$('div#resultsTextDiv').text("You have lost");
-			$('div#wonTextDiv').text("You Won nothing");
+		else{   //losing spin
+			res.text('You have lost');
+			$('div#wonTextDiv').text('You Won nothing');
 			//set volume and play sound
 			playLossSound();
 		}
 		//money += winnings;
-			$('div#bankValue').text("You have $" + money);
+        $('div#bankValue').text('You have $' + money);
 		console.log(winnings);
 	}
 
-	function startSpin()
-	{
-		
-		if(gameFinished == false)
-		{
+	function startSpin(){
+		if(gameFinished == false){
 			winnings = 0;
 			
-			$('div#bankValue').text("You have $" + money);
-			$('div#resultsTextDiv').text("");
-			$('div#wonTextDiv').text("");
+			$('div#bankValue').text('You have $' + money);
+			$('div#resultsTextDiv').text('');
+			$('div#wonTextDiv').text('');
 			
 			slot1spin = true;
 			slot2spin = true;
 			slot3spin = true;
-			
 		}
-		else
-		{
+		else{
 			stop();
 			
 		}
 		update();
-		
 	}
-	function keyUpHandler(event)
-	{
+	function keyUpHandler(event){
 		var keyPressed = event.keyCode;
-		if (keyPressed == 32)
-		{
+		
+        if (keyPressed == 32){
 			turnOffLights();
 			//playReelSpin();
 			startSpin();
-			
 		}
-		
 	}
 	
-	function spinButtonHandler(event)
-	{
-		if(gameFinished == false)
-		{
+	function spinButtonHandler(event){
+		if(gameFinished == false){
 			winnings = 0;
 			turnOffLights();
 			//playReelSpin();
 			
-			$('div#bankValue').text("You have $" + money);
-			$('div#resultsTextDiv').text("");
-			$('div#wonTextDiv').text("");
+			$('div#bankValue').text('You have $' + money);
+			$('div#resultsTextDiv').text('');
+			$('div#wonTextDiv').text('');
 			
 			slot1spin = true;
 			slot2spin = true;
 			slot3spin = true;
-			//gameFinished = false;
-			
+			//gameFinished = false;			
 		}
-		update();
-		
-	}
+		update();		
+	}	
 	
-	
-	function stopButtonHandler(event)
-	{
+	function stopButtonHandler(event){
+        //
 		spinTimer = 200;
 		spins = true;
 		update();
 		
 		console.log(spinTimer);
-		if((slot1spin == true)&& (spinTimer < 200))
-		{
+		if((slot1spin == true) && (spinTimer < 200)){
 			slot1curr = randomNum();//slot1[randomNum()];
 			playReelSpin();
 			slot1spin = false;
 			spins = true;
 			//spinTimer --;
 			update();
-			
 		}
-		else if((slot2spin == true) && (spinTimer < 100))
-		{
+		else if((slot2spin == true) && (spinTimer < 100)){
 			slot2curr = randomNum();//slot2[randomNum()];
 			playReelSpin();
 			slot2spin = false;
@@ -300,8 +259,7 @@ $(document).ready(function()
 			spinTimer --;
 			update();
 		}
-		else if((slot3spin == true)&& (spinTimer < 50))
-		{
+		else if((slot3spin == true)&& (spinTimer < 50)){
 			slot3curr = randomNum();//slot3[randomNum()];
 			playReelSpin();
 			slot3spin = false;
@@ -310,204 +268,170 @@ $(document).ready(function()
 			update();
 		}
 		
-		if(gameFinished == false)
-		{
+		if(gameFinished == false){
 			stop();
 			checkForWin();
 			slot1spin = false;
 			slot2spin = false;
 			slot3spin = false; 
 		}
-		else
-		{
+		else{
 			return;
 		}
 	}
-	function drawReels()
-	{
+	function drawReels(){
 		//slot 1
-		if(slot1curr == 1)
-		{
-			slotImage1.src = 'images/ReelImages/carImage.png';
+        src = 'images/ReelImages/';
+        
+		if(slot1curr == 1){
+			slotImage1.src = src + 'carImage.png';
 		}
-		else if(slot1curr == 2)
-		{
-			slotImage1.src = 'images/ReelImages/sevenImage.png';
+		else if(slot1curr == 2){
+			slotImage1.src = src + 'sevenImage.png';
 		}
-		else if(slot1curr == 3)
-		{
-			slotImage1.src = 'images/ReelImages/tripleBar.png';
+		else if(slot1curr == 3){
+			slotImage1.src = src + 'tripleBar.png';
 		}
-		else if(slot1curr == 4)
-		{
-			slotImage1.src = 'images/ReelImages/doubleBar.png';
+		else if(slot1curr == 4){
+			slotImage1.src = src + 'doubleBar.png';
 		}
-		else if(slot1curr == 5)
-		{
-			slotImage1.src = 'images/ReelImages/singleBar.png';
+		else if(slot1curr == 5){
+			slotImage1.src = src + 'singleBar.png';
 		}
-		else if(slot1curr == 6)
-		{
-			slotImage1.src = 'images/ReelImages/cherry.png';
-		}
-		
-		slot1Context.drawImage(slotImage1, 
-					  (slot1Canvas.width / 2) - (slotImage1.width / 2), 
-					  (slot1Canvas.height / 2) - (slotImage1.height / 2), 
-					  slotImage1.width * 1.5, 
-					  slotImage1.height * 1.5);
-
+		else if(slot1curr == 6){
+			slotImage1.src = src + 'cherry.png';
+		}		
+		slot1Context.drawImage(
+            slotImage1, 
+            (slot1Canvas.width / 2) - (slotImage1.width / 2), 
+            (slot1Canvas.height / 2) - (slotImage1.height / 2), 
+            slotImage1.width * 1.5,
+            slotImage1.height * 1.5
+        );
 		
 		//slot two
-		if(slot2curr == 1)
-		{
-			slotImage2.src = 'images/ReelImages/carImage.png';
+		if(slot2curr == 1){
+			slotImage2.src = src + 'carImage.png';
 		}
-		else if(slot2curr == 2)
-		{
-			slotImage2.src = 'images/ReelImages/sevenImage.png';
+		else if(slot2curr == 2){
+			slotImage2.src = src + 'sevenImage.png';
 		}
-		else if(slot2curr == 3)
-		{
-			slotImage2.src = 'images/ReelImages/tripleBar.png';
+		else if(slot2curr == 3){
+			slotImage2.src = src + 'tripleBar.png';
 		}
-		else if(slot2curr == 4)
-		{
-			slotImage2.src = 'images/ReelImages/doubleBar.png';
+		else if(slot2curr == 4){
+			slotImage2.src = src + 'doubleBar.png';
 		}
-		else if(slot2curr == 5)
-		{
-			slotImage2.src = 'images/ReelImages/singleBar.png';
+		else if(slot2curr == 5){
+			slotImage2.src = src + 'singleBar.png';
 		}
-		else if(slot2curr == 6)
-		{
-			slotImage2.src = 'images/ReelImages/cherry.png';
+		else if(slot2curr == 6){
+			slotImage2.src = src + 'cherry.png';
 		}
 		
-		slot2Context.drawImage(slotImage2, 
-					  (slot2Canvas.width / 2) - (slotImage2.width / 2), 
-					  (slot2Canvas.height / 2) - (slotImage2.height / 2), 
-					  slotImage2.width * 1.5, 
-					  slotImage2.height * 1.5);
+		slot2Context.drawImage(
+            slotImage2, 
+            (slot2Canvas.width / 2) - (slotImage2.width / 2), 
+            (slot2Canvas.height / 2) - (slotImage2.height / 2), 
+            slotImage2.width * 1.5, 
+            slotImage2.height * 1.5
+        );
 
 		//slot3
-		if(slot3curr == 1)
-		{
-			slotImage3.src = 'images/ReelImages/carImage.png';
+		if(slot3curr == 1)		{
+			slotImage3.src = src + 'carImage.png';
 		}
-		else if(slot3curr == 2)
-		{
-			slotImage3.src = 'images/ReelImages/sevenImage.png';
+		else if(slot3curr == 2)		{
+			slotImage3.src = src + 'sevenImage.png';
 		}
-		else if(slot3curr == 3)
-		{
-			slotImage3.src = 'images/ReelImages/tripleBar.png';
+		else if(slot3curr == 3)		{
+			slotImage3.src = src + 'tripleBar.png';
 		}
-		else if(slot3curr == 4)
-		{
-			slotImage3.src = 'images/ReelImages/doubleBar.png';
+		else if(slot3curr == 4)		{
+			slotImage3.src = src + 'doubleBar.png';
 		}
-		else if(slot3curr == 5)
-		{
-			slotImage3.src = 'images/ReelImages/singleBar.png';
+		else if(slot3curr == 5)		{
+			slotImage3.src = src + 'singleBar.png';
 		}
-		else if(slot3curr == 6)
-		{
-			slotImage3.src = 'images/ReelImages/cherry.png';
+		else if(slot3curr == 6){
+			slotImage3.src = src + 'cherry.png';
 		}
 		
-		slot3Context.drawImage(slotImage3, 
-							  (slot3Canvas.width / 2) - (slotImage3.width / 2), 
-							  (slot3Canvas.height / 2) - (slotImage3.height / 2), 
-							  slotImage3.width * 1.5, 
-							  slotImage3.height * 1.5);
+		slot3Context.drawImage(
+            slotImage3, 
+            (slot3Canvas.width / 2) - (slotImage3.width / 2), 
+            (slot3Canvas.height / 2) - (slotImage3.height / 2), 
+            slotImage3.width * 1.5, 
+            slotImage3.height * 1.5
+        );
 	}
 	
-	function spinReels()
-	{
+	function spinReels(){
 		
-		if(slot1spin == true)
-		{
+		if(slot1spin == true){
 			slot1curr = randomNum();//slot1[randomNum()];
-			playReelSpin();
-			
+			playReelSpin();			
 		}
-		if(slot2spin == true) 
-		{
+        
+		if(slot2spin == true){
 			slot2curr = randomNum();//slot2[randomNum()];
 			playReelSpin();
 		}
-		if(slot3spin == true)
-		{
+        
+		if(slot3spin == true){
 			slot3curr = randomNum();//slot3[randomNum()];
 			playReelSpin();
 		}
 		
-		if((slot1spin == true)&& (slot2spin == true) && (slot3spin == true))
-		{
+		if((slot1spin == true)&& (slot2spin == true) && (slot3spin == true)){
 			gameFinished == true;
-			
 		}
-		
 	}
-	function randomNum()
-	{
+	function randomNum(){
 		rand = Math.floor(Math.random() * 100);
 		var num = 0;
 		
-		if(rand <= 30)
-		{
+		if(rand <= 30){
 			num = 6;
 		}
-		else if(rand < 53 && rand > 30)
-		{
+		else if(rand < 53 && rand > 30){
 			num = 5;
 		}
-		else if(rand < 71 && rand > 52)
-		{
+		else if(rand < 71 && rand > 52){
 			num = 4;
 		}
-		else if(rand < 85 && rand > 70)
-		{
+		else if(rand < 85 && rand > 70){
 			num = 3;
 		}
-		else if(rand < 95 && rand > 84)
-		{
+		else if(rand < 95 && rand > 84){
 			num = 2;
 		}
-		else if(rand <= 100 && rand > 94)
-		{
+		else if(rand <= 100 && rand > 94){
 			num = 1;
 		}
 		return num;
 	}
 	
-	function playWinSound()
-	{
+	function playWinSound(){
 		//stop other sounds
 		startSpinSound.pause();
-		reelSpinning.pause();
-	
+		reelSpinning.pause();	
 		//Set volume and play sound
 		youWin.currTime = 0.0;
 		youWin.volume = 0.5;
 		youWin.play();
 	}
-	function playLossSound()
-	{
+	function playLossSound(){
 		//stop othe sounds
 		startSpinSound .pause();
-		reelSpinning.pause();
-		
+		reelSpinning.pause();		
 		//set volume and play sound
 		noWin.currTime = 0.0;
 		noWin.volume = 0.5;
 		noWin.play();
 	}
-	function playReelSpin()
-	{
-		//stop all other sound
-		
+	function playReelSpin(){
+		//stop all other sound		
 		noWin.pause();
 		youWin.pause();
 	
@@ -519,93 +443,43 @@ $(document).ready(function()
 		reelSpinning.currTime == 0.0;
 		reelsSpinning.volume = 0.5;
 		reelsSpinning.play();
-		//reelSpinning.loop = true;
-		
+		//reelSpinning.loop = true;		
 	}
 	
-	function turnOnLights()
-	{
-		$('div#leftHead').css({'display':'block', 'moz-animation-play-state':'running',
-								'-webkit-animation-play-state':'running',
-								'-ms-animation-play-state':'running',
-								'animation-play-state':'running'});
-		
-		$('div#upperLeftSmall').css({'display':'block', 'moz-animation-play-state':'running',
-								'-webkit-animation-play-state':'running',
-								'-ms-animation-play-state':'running',
-								'animation-play-state':'running'});
-
-		$('div#lowerLeftSmall').css({'display':'block', 'moz-animation-play-state':'running',
-								'-webkit-animation-play-state':'running',
-								'-ms-animation-play-state':'running',
-								'animation-play-state':'running'});
-
-		$('div#LeftFog').css({'display':'block', 'moz-animation-play-state':'running',
-								'-webkit-animation-play-state':'running',
-								'-ms-animation-play-state':'running',
-								'animation-play-state':'running'});
-
-		$('div#rightHead').css({'display':'block', 'moz-animation-play-state':'running',
-								'-webkit-animation-play-state':'running',
-								'-ms-animation-play-state':'running',
-								'animation-play-state':'running'});
-		
-		$('div#upperRightSmall').css({'display':'block', 'moz-animation-play-state':'running',
-								'-webkit-animation-play-state':'running',
-								'-ms-animation-play-state':'running',
-								'animation-play-state':'running'});
-		
-		$('div#lowerRightSmall').css({'display':'block', 'moz-animation-play-state':'running',
-								'-webkit-animation-play-state':'running',
-								'-ms-animation-play-state':'running',
-								'animation-play-state':'running'});
-
-		$('div#RightFog').css({'display':'block', 'moz-animation-play-state':'running',
-								'-webkit-animation-play-state':'running',
-								'-ms-animation-play-state':'running',
-								'animation-play-state':'running'});
+	function turnOnLights(){
+        var state = {
+            'display':'block',
+            'moz-animation-play-state':'running',
+            '-webkit-animation-play-state':'running',
+            '-ms-animation-play-state':'running',
+            'animation-play-state':'running'
+        };
+        
+		$('div#leftHead').css(state);		
+		$('div#upperLeftSmall').css(state);
+		$('div#lowerLeftSmall').css(state);
+		$('div#LeftFog').css(state);
+		$('div#rightHead').css(state);		
+		$('div#upperRightSmall').css(state);		
+		$('div#lowerRightSmall').css(state);
+		$('div#RightFog').css(state);
 	}
-	function turnOffLights()
-	{	
-		$('div#leftHead').css({'display':'none', 'moz-animation-play-state':'paused',
-								'-webkit-animation-play-state':'paused',
-								'-ms-animation-play-state':'paused',
-								'animation-play-state':'paused'});
-		
-		$('div#upperLeftSmall').css({'moz-animation-play-state':'paused',
-								'-webkit-animation-play-state':'paused',
-								'-ms-animation-play-state':'paused',
-								'animation-play-state':'paused'});
-
-		$('div#lowerLeftSmall').css({'display':'none', 'moz-animation-play-state':'paused',
-								'-webkit-animation-play-state':'paused',
-								'-ms-animation-play-state':'paused',
-								'animation-play-state':'paused'});
-
-		$('div#LeftFog').css({'display':'none', 'moz-animation-play-state':'paused',
-								'-webkit-animation-play-state':'paused',
-								'-ms-animation-play-state':'paused',
-								'animation-play-state':'paused'});
-
-		$('div#rightHead').css({'display':'none', 'moz-animation-play-state':'paused',
-								'-webkit-animation-play-state':'paused',
-								'-ms-animation-play-state':'paused',
-								'animation-play-state':'paused'});
-		
-		$('div#upperRightSmall').css({'display':'none', 'moz-animation-play-state':'paused',
-								'-webkit-animation-play-state':'paused',
-								'-ms-animation-play-state':'paused',
-								'animation-play-state':'paused'});
-		
-		$('div#lowerRightSmall').css({'display':'none', 'moz-animation-play-state':'paused',
-								'-webkit-animation-play-state':'paused',
-								'-ms-animation-play-state':'paused',
-								'animation-play-state':'paused'});
-
-		$('div#RightFog').css({'display':'none', 'moz-animation-play-state':'paused',
-								'-webkit-animation-play-state':'paused',
-								'-ms-animation-play-state':'paused',
-								'animation-play-state':'paused'});
+	function turnOffLights(){
+        var state = {
+            'display':'none', 'moz-animation-play-state':'paused',
+            '-webkit-animation-play-state':'paused',
+            '-ms-animation-play-state':'paused',
+            'animation-play-state':'paused'
+        };
+        
+		$('div#leftHead').css(state);		
+		$('div#upperLeftSmall').css(state);
+		$('div#lowerLeftSmall').css(state);
+		$('div#LeftFog').css(state);
+		$('div#rightHead').css(state);		
+		$('div#upperRightSmall').css(state);		
+		$('div#lowerRightSmall').css(state);
+		$('div#RightFog').css(state);
 	}	
 
 	init();
