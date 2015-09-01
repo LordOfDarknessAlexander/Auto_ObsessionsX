@@ -75,8 +75,8 @@ Token Div
     posAbs();
 ?>
     left:1%;
-    top:30%;
-    height:50%;
+    top:28%;
+    height:60%;
     width:18%;
 }
 <?php dst();?> form#t3{
@@ -99,8 +99,8 @@ Cash Div
     posAbs();
 ?>
     right:1%;
-	top:30%;
-    height:50%;
+	top:28%;
+    height:60%;
     width:18%;
 }
 <?php dsc();?> form#c50{
