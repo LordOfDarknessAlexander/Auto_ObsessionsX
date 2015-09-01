@@ -30,6 +30,37 @@ var Allowance = {
     },
     getRefreshPerc:function(){
         return Allowance.getDelta() / Allowance.CAP;
-    }
+    },
+	addFundsLoggedIn:function(funds){
+		var funcName = 'allowance.js addFunds(funds)';
+		jq.post('pas/update.php?op=puf',
+			function(data){
+				//data is the user's new funds after the purchase has been completed
+				if(data === null || data === undefined){
+					jq.setErr(funcName, 'Error:ajax response returned null!');
+					return;
+				}	
+				console.log('addFunds logged in');
+				// if(data != userStats.money && typeof data === 'number'){
+				  
+				// }
+			},
+			function(jqxhr){
+				jq.setErr(funcName, 'error happened: ' + jqxhr.responseText);
+			},
+			{udv:funds}
+		);	
+	},
+	addFundsLocal:function(funds){	
+		var s = '_stats';
+		
+		if(Storage.local !== null && s in Storage.local){
+			
+			var userStats = JSON.parse(Storage.local._stats);
+			console.log(userStats.money);
+			userStats.money += funds;
+			console.log('Allowance added total ' + userStats.money);
+		}	
+	}
 };
 
