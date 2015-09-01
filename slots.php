@@ -9,9 +9,10 @@ html::doctype();
 html::memberStyles();
 html::simpleHead('Slots');
 html::title('Slots');
-html::charset();
+html::slotStyles();
+
 ?>
-<link rel = 'stylesheet' href = 'css/gameStyleSheet.css'>
+
 <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 </head>
