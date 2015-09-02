@@ -5,9 +5,6 @@ var Allowance = {
         //get diffrence between last time and now        
         return Date.now() - Allowance.getLastTime();
     },
-	toJSON:function(){
-		_lastAllowanceTime: 0;
-	},
     getLastTime:function(){
         //the last time the user collected their allowance
         if(Storage.local !== null){
@@ -64,8 +61,9 @@ var Allowance = {
 				userStats.money += funds;
 			}
 			
-			Storage.local = JSON.stringify(userStats);
-			console.log('Allowance added total ' + userStats.money);
+			Storage.local._stats = JSON.stringify(userStats);
+			jq.statBar.set.money(userStats.money);
+			console.log('Allowance added total ' + userStats.money);	
 		}	
 	}
 };
