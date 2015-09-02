@@ -14,12 +14,12 @@ $paths = array(
     'jqueryLib',
     //'pas',
     //
-    //'2D/2D',
+    //'2D/meta',
     '2D/SpriteSheet',
     '2D/Animation',
     '2D/Sprite',
     //game entities
-    //'entities/entities',
+    //'entities/meta',
     'entities/player',
     'entities/enemy',
     //'entities/part',
@@ -30,6 +30,7 @@ $paths = array(
     'entities/parts/docs',
     'entities/vehicle',
     //game states
+    //'state/meta'
     'state/Garage',
     //'state/Garage/main',
     //'state/Garage/carView',

@@ -57,7 +57,7 @@
 			this.leftAuction = false;
 		},
         leave:function(){
-			
+			//ai no longer participates in auction
             this.winningBid = false;
             this.leftAuction = true;
             this.currBid = null;
@@ -112,6 +112,27 @@
 		}
 	};
 }
+function price(vehiclePrice, bias){
+    //generates a random vehicle value between,
+    //bias is an optional param, if not provided 1.0 is the default value,
+    //providing no additional interpolation
+	var b = (typeof(bias) === 'undefined' || bias === null) ? 1.0 : bias;
+	
+    function lerp(Min, Max, t){
+		if(Min > Max){
+			var tmp = Min;
+			Min = Max;
+			Max = tmp;
+		}
+        //var ret = Min + (Max - Min) * t;
+        //console.log(ret);
+		return Min + (Max - Min) * t;
+	};
+    var l = lerp(Math.random(0.85, 1.85), b, Math.random(0.0,1.0));
+    //console.log('lerp:' + (vehiclePrice * l).toString() );
+  	return vehiclePrice * l;
+}
+//
 //static class constants
 //individual cooldown,
 //Time the AI has to wait to bid again
@@ -145,23 +166,3 @@
     // //to be displayed with a progress bar
     // return Enemy._bidTimer < Enemy.BID_CD ? Enemy._bidTimer / Enemy.BID_CD : 1.0;
 // }
-function price(vehiclePrice, bias){
-    //generates a random vehicle value between,
-    //bias is an optional param, if not provided 1.0 is the default value,
-    //providing no additional interpolation
-	var b = (typeof(bias) === 'undefined' || bias === null) ? 1.0 : bias;
-	
-    function lerp(Min, Max, t){
-		if(Min > Max){
-			var tmp = Min;
-			Min = Max;
-			Max = tmp;
-		}
-        //var ret = Min + (Max - Min) * t;
-        //console.log(ret);
-		return Min + (Max - Min) * t;
-	};
-    var l = lerp(Math.random(0.85, 1.85), b, Math.random(0.0,1.0));
-    //console.log('lerp:' + (vehiclePrice * l).toString() );
-  	return vehiclePrice * l;
-}

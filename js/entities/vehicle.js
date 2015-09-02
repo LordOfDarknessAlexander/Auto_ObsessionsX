@@ -162,8 +162,7 @@ function Vehicle(Name, Make, Year, Price, carID, carInfo, parts, repairs)
 			) * 0.25;
 			return Math.random(Math.floor( ret * 100.0) ,1,100) * 100;*/
 			 
-		},
-		
+		},		
 		getFullName : function(){
             //returns a string representing the 'proper' car name
 			return this.year + ' ' + this.make + ' ' + this.name;

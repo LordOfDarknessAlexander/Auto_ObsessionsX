@@ -1,6 +1,8 @@
 <?php
 //
-define('ROOT_DIR', dirname(__FILE__) . '/');
+if(!defined('ROOT_DIR') ){
+    define('ROOT_DIR', dirname(__FILE__) . '/');
+}
 //exit();
 require_once ROOT_DIR . 'pasMeta.php';
 require_once ROOT_DIR . 're.php';
@@ -32,6 +34,7 @@ class user{
         T = 'tokens',
         P = 'prestige',
         MM = 'm_marker';
+        //MF = 10e9;    //max funds, 1,000,000,000
         //
         //
         // DT = 'drivetrain',
@@ -41,7 +44,7 @@ class user{
         // R = 'repairs',
 		// P = 'price';
         
-    //db = $aoUsersDB;  //database
+    //$db = $aoUsersDB;  //database
         
     public static function slctFromEntry($fields){
         //select column(s) from a user's row entry in database 'AO_DB' in table 'users'
@@ -129,7 +132,7 @@ class user{
         //$funds:float, value to increment user's current funds
         if(is_float($funds) && $funds > 0.0){
             $f = round($funds, 2);  //round currency to 2 decimal places
-            $M = user::M;            
+            $M = user::M;
             $uf = user::slctFromEntry($m);  //previous user funds
 
             $MF = PHP_INT_MAX;
@@ -215,7 +218,8 @@ class user{
         $ret = user::slctFromEntry($T);
         
         if($ret){
-            $t = intval($res->fetch_assoc()[$T]);
+            //$str = $res->fetch_assoc()[$T];
+            $t = intval($res->fetch_assoc()[$T]);   //isUINT($str) ? intval($str) : 0;
             return $t;
         }
         return 0;
@@ -247,8 +251,7 @@ class user{
         
         $CID = ao::CID;
         
-        $res = user::slctFromEntry("$CID");
-	
+        $res = user::slctFromEntry("$CID");	
         
         if($res){
             //user has car
@@ -256,8 +259,7 @@ class user{
             //$i = isUINT($ret) ? intval($ret) : 0;
             $ret = intval($res->fetch_assoc()[$CID]);
             $res->close();
-            return $ret;    //$i;
-			
+            return $ret;    //$i;			
         }
         else{
             $AO_DB->eErr();
@@ -319,7 +321,7 @@ class user{
         
         $cid = user::getCurCarID();
         
-        if($id > 0){
+        if($cid > 0){
             $CID = ao::CID;
 
             $res = $aoUsersDB->query(
@@ -338,12 +340,30 @@ class user{
         }
         return null;
     }
-    // public static function getCurCarImgPath(){
-        // //returns the image path of the current car is selected,
-        // //else returns an image path to an empty garage
-        // $c = user::getCurCar();
-        // return $c !== null ? $c->getFullPath() : rootURL() . 'images\\garageEmpty.png';
-    // }
+    public static function getCurCarImgPath(){
+        global $AO_DB;
+        
+        $cid = user::getCurCarID();
+        
+        if($cid > 0){
+            $CID = ao::CID;
+
+            $res = $AO_DB->query(
+                "SELECT * FROM aoCars WHERE $CID = $cid"
+            );
+            
+            if($res){
+                $r = $res->fetch_assoc();
+                //echo json_encode($r);
+                $c = Vehicle::fromArray($r);
+
+            }
+            else{
+                $AO_DB->eErr();
+            }
+        }
+        return $c !== null ? $c->getFullPath() : "images\garageEmpty.png";
+    }
     public static function getSales(){
         //returns the user's total active and expired actions
         global $aoCarSalesDB;

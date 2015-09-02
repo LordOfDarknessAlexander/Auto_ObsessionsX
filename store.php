@@ -49,6 +49,7 @@ function ppSrc(){
     //to make transactions, else returns nothing,
     //effectively liking user back to this page
     global $URL;
+    
     if(loggedIn() ){
         ?>https://www.paypal.com/cgi-bin/webscr<?php
     }
@@ -93,25 +94,26 @@ function ppSrc(){
 <html>
 <head>
 <?php
-    html::charset();
-    html::title('AO Store');
-    //css
-    $css = array(
-        'auto',
-        'store'
-    );
-    
-    foreach($css as $p)
-        html::incPHPCSS($p);
-	
-	$js = array(
-        'jquery.2.1.1.min',
-        'GameMode'
-    );
-    
-    foreach($js as $p){
-        html::incJS($p);
-	}
+html::charset();
+html::title('AO Store');
+//css
+$css = array(
+    'auto',
+    'store'
+);
+
+foreach($css as $p){
+    html::incPHPCSS($p);
+}
+
+$js = array(
+    'jquery.2.1.1.min',
+    'GameMode'
+);
+
+foreach($js as $p){
+    html::incJS($p);
+}
 ?>
 </head>
 <body>
@@ -124,8 +126,10 @@ function ppSrc(){
         <label id='prestige'>Prestige:</label>
         <label id='markers'>Mile Markers:</label>
     </div>
-    
-    <img id='mainCar' src='images\\garageEmpty.png'>
+<?php
+$path = $LI ? user::getCurCarImgPath() : "images\garageEmpty.png";//user.get.curCarPath();
+?>
+    <img id='mainCar' src='<?php echo $path;?>'>
     <pre id='info'><?php
 if(!$LI){?>  You do not have full access to this page,
 Please <a href='<?php
@@ -262,17 +266,72 @@ if($LI){
     </div>
 </div>
 <?php
-function addPHPJS($str){?>
+function addPHPJS($str){
+    //TODO:$str needs to be escaped, as its being used as
+    //a component of an html href URL?>
 <script type='text/javascript' src='<?php echo "js/$str.php";?>'></script>
 <?php
 }
 addPHPJS('globals');
+$js = array(
+    'entities/parts/part',
+    'entities/parts/drivetrain',
+    'entities/parts/body',
+    'entities/parts/interior',
+    'entities/parts/docs',
+    'entities/vehicle',
+);
 html::incJS('allowance');
 html::incJS('jqueryLib');
 html::incJS('jqStatBar');
+foreach($js as $p){
+    html::incJS($p);
+}
 html::incJS('state/Garage');
 ?>
 <script>
+// var user = {
+    // //interface for accessing values in local storage
+    // //money
+    // //tokens
+    // //etc...
+    // get:{
+        // //stats
+        // curCarID:function(){
+            // if(Storage.local !== null){
+                // if('_curCarID' in Storage.local){
+                    // var ret = JSON.parse(Storage.local._curCarID);
+                    // //console.log(ret);
+                    // return ret;
+                // }
+            // }
+        // },
+        // //stage:function(){},
+        // //teir:function(){}
+    // }
+// };
+var userGarage = [];
+
+if(Storage.local !== null && 'userGarage' in Storage.local){
+    var data = JSON.parse(Storage.local.userGarage),
+        l = data.length;
+    
+    for(var i = 0; i < l; i++){
+        var e = data[i],
+            car = Vehicle(
+                e.name, e.make, e.year, e._price,
+                e.id
+                //{drivetrain:e._dt,
+                //body:e._body,
+                //interior:e._interior,
+                //docs:e._docs,
+                //repairs:e._repairs}
+            );
+            
+        userGarage.push(car);
+    }
+}
+
 $(function(){
     //script to be executed after page loads
     var cashDiv = $('div#cash'),
@@ -301,27 +360,33 @@ else{?>
     dti.css(c);
 <?php
 }?>
-	var btn = $('div#AddFunds button#allowance');	
+	var btn = $('div#AddFunds button#allowance');
 	
     btn.off().click(function(){
 		//allowance accumulates every few seconds
 		var delta = Allowance.getDelta();
-			 	
+
 		if(delta >= 117){//Allowance.CAP){
 			var val = 50000;    //1;	//(base + carValue) * delta;
-<?php		if($LI){?>
+<?php
+if($LI){?>
 				Allowance.addFundsLoggedIn(val);
-			<?php
-			}
-			else{?>
+<?php
+}
+else{?>
 				Allowance.addFundsLocal(val);
-			<?php
-			}?>
+<?php
+}?>
 			Allowance.setLastTime();
 		}
 	});//function(){console.log('click');});//);
 loadUser();
-//setHomeImg();
+<?php
+if(!$LI){
+    //user not logged in, set image using user's garage?>
+    setHomeImg();
+<?php
+}?>
 jq.statBar.set.stats();
 });
 </script>

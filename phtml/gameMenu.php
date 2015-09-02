@@ -41,12 +41,11 @@ if($isSlots)
 	
 	
     <div id='menuLeft'>
-        <button id ='myCars'>My Garage</button><br/>
-        <button id='toAuctionBtn'>Go to Auction</button><br/>
-		
+        <button id ='myCars'>My Garage</button>
+        <button id='toAuctionBtn'>Go to Auction</button>		
     </div>
     <div id='menuRight'>
-	   <button id='profile'>My Profile</button><br/>
+	   <button id='profile'>My Profile</button>
        <button id='buyUpgradesBtn'>Buy Upgrades</button><!--link to another/separate page?-->
     </div>
 	

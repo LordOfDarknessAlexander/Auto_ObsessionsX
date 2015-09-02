@@ -181,8 +181,7 @@ if($gs){
         exit();
     }
     if($op == 'gucc'){
-        //echo json_encode(pasGet::currentCar() );
-        exit();
+        exit();//json_encode(pasGet::currentCar() );
     }
     if($op == 'gcid'){
         //get currect user car id
