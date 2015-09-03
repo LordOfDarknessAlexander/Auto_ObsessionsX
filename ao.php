@@ -58,7 +58,7 @@ function isSetP(){
 }
 function isSetG(){
     //are get vars set
-    return isset($_GET);    //&& !empty();
+    return isset($_GET) && !empty($_GET);
 }
 function isSetS(){
     //is sessesion vars sets
