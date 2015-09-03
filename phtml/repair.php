@@ -28,10 +28,10 @@ function statBar($id){
 ?>
 	<!--<button id='addFunds'>Store</button> -->
     <div id='switch'>
-        <button id='dt'>DT</button>
-        <button id='body'>B</button>
-        <button id='inter'>I</button>
-        <button id='docs'>D</button>
+        <button id='dt' title='drivetrain'></button>
+        <button id='body' title='body'></button>
+        <button id='inter' title='interior'></button>
+        <button id='docs' title='documents'></button>
     </div>
     <!--a id='addFunds' href='<php echo rootURL() . 'state/funds.php';?>'>Add Funds</a-->
     <!--cid for car info div-->

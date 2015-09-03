@@ -1,0 +1,11 @@
+#disable external directory browsing(still enables the site to access folders/files within itself)
+Options -Indexes
+
+RewriteEngine on
+
+RewriteRule ^pas/query$     pas/query.php [NC]
+#RewriteRule ^pas/get$       pas/get.php [NC]
+#RewriteRule ^pas/update$     pas/update.php [NC]
+RewriteRule ^pas/query/([[:alpha:]]{1,8})?$     pas/query.php?op=$1 [NC]
+RewriteRule ^pas/get/([[:alpha:]]{1,8})?$     pas/get.php?op=$1 [NC]
+RewriteRule ^pas/update/([[:alpha:]]{1,8})?$     pas/update.php?op=$1 [NC]

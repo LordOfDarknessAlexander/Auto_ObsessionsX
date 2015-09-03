@@ -94,10 +94,6 @@ cmntHeader('Repair Screen Styles');
     left:0%;
 }
 
-<?php drs();?> div button:hover{
-    border:2px green solid;
-}
-
 <?php drs();?> div button.rb{
     background:url('../images/icons/repair.png') no-repeat 0 0;
     background-size:100% 100%;
@@ -153,7 +149,7 @@ Page Switch, for different components
 	css::left('0%');
     css::top('0%');
 ?>  
-	color:green;
+	/*color:green;*/
 }
 <?php drsSwitchBtn();?>#body{
 <?php

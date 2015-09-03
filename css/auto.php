@@ -163,6 +163,7 @@ button:hover {
 	background: url('../images/defaultBtn2.png') no-repeat 0 0;
 	background-size:100% 100%;
     color:yellow;
+    border: 2px yellow solid;
 }
 button.select{
     /*mouse clicked and active*/

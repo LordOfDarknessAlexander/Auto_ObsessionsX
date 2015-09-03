@@ -33,7 +33,7 @@ $funcName = "$fileName, pas::insertCar(auction)";
         var n = Auction._car !== null ? Auction._car.getFullName() : '',
             sl = $('div#sold label');
  
-        jq.post('pas/update.php?op=insert',          
+        jq.post('pas/update/insert',          
             function(data){
                 <?php isValidData();?>  
                 
@@ -72,7 +72,7 @@ $funcName = "$fileName, pas::insertCar(auction)";
 <?php
 $funcName = "$fileName, pas::insertLoss(vehicleID)";
 ?>        
-        jq.post('pas/update.php?op=iul',
+        jq.post('pas/update/iul',
             function(data){
                 //the response string is converted by jquery into a Javascript object!
                 <?php isValidData();?>
@@ -94,7 +94,7 @@ $funcName = "$fileName, pas::insertLoss(vehicleID)";
 $funcName = "$fileName, pas::postUserCarSale(carid)";
 ?>  
         jq.post(
-            "pas/update.php?op=pucs", 
+            "pas/update/pucs", 
             function(data){
                 //
                 if(data === null || data === undefined){
@@ -138,7 +138,7 @@ $funcName = "$fileName, pas::postUserCarSale(carid)";
 <?php
 $funcName = "$fileName, pas.get.user.funds()";
 ?>
-                /*jq.post('pas/query.php?op=guf',
+                /*jq.post('pas/query/guf',
                     function(data){
                         //
                         <?php isValidData();?>
@@ -163,7 +163,7 @@ $funcName = "$fileName, pas.get.user.funds()";
             },
             stats:function(){
 <?php $funcName = "$fileName, pas.get.user.stats()";?>
-                jq.post('pas/query.php?op=gus',
+                jq.post('pas/query/gus',
                     function(data){
                         //
                         <?php isValidData();?>
@@ -186,7 +186,7 @@ $funcName = "$fileName, pas.get.user.funds()";
 <?php
 $funcName = "$fileName, pas::set::userCar(vehicleID)";
 ?>
-            jq.post('pas/update.php?op=succ',
+            jq.post('pas/update/succ',
                 function(data){
                     //the response string is converted by jquery into a Javascript object!
                     <?php isValidData();?>
@@ -231,7 +231,7 @@ $funcName = "$fileName, pas::set::userUserProfileData()";
 <?php
 $funcName = "$fileName, pas::set::userFunds()";
 ?>
-            jq.post('pas/update.php?op=puf',
+            jq.post('pas/update/puf',
                 function(data){
                     if(data === null || data === undefined){
                         return;
@@ -258,7 +258,7 @@ $funcName = "$fileName, pas::set::userFunds()";
 <?php
 $funcName = "$fileName, pas::query::userCar(vehicleID)";
 ?>            
-            return jq.get('pas/query.php?op=gcid',
+            return jq.get('pas/query/gcid',
                 function(data){
                     //the response string is converted by jquery into a Javascript object!
                     <?php isValidData();?>
