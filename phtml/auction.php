@@ -8,7 +8,7 @@ function sqlSelectAll($tableName, $callbackStr){
     //$tableName: string name of the table in the database to query
     //$callbackStr: string name of a user defined function to be called!
     //queries the data base, selecting all elements and preforming callback on each
-     global $AO_DB;
+    global $AO_DB;
     $s = 'stage';
     $users = ao::USERS;
     $UID = ao::UID;
@@ -95,9 +95,8 @@ function outputCar($args){
             <option value='elite'>elite</option>
         </select-->
         </div>
-        <br>
-        <!--input id='showDisabled' type='checkbox' value=''>
-        display unavailable auctions-->
+        Hide Unavailable Auctions
+        <input id='hideUnav' type='checkbox' value=''>
         <!--input id='submit' type='submit' value='submit'-->
     </div>
     <div id='carView'>

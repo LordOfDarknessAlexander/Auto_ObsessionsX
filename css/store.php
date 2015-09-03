@@ -50,7 +50,14 @@ canvas{
     left:1%;
     top:16%;
 }
-
+<?php ds();?> button#allowance progress{
+<?php
+    posAbs();
+    css::size('100%', '100%');
+?>
+    left:0%;
+    top:0%;
+}
 <?php ds();?> div form{
 <?php
     posAbs();

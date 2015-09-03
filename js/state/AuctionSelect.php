@@ -29,6 +29,8 @@ function isValidData(){
 <?php
 }
 ?>
+jq.AuctionSelect.hideUnav = $('input#showUnav');
+
 ao = {
     STAGE:{
         all:'all',
@@ -165,6 +167,19 @@ var AuctionSelect = {
         }
         //li.hide();
     },
+    toggleInactive:function(){
+        var hideInactive = jq.AuctionSelect.hideUnav.is(':checked'),
+            c = AuctionSelect.list.children();
+        
+        if(hideInactive){
+            f = c.filter('.owned, .lost, .isf');
+            f.hide();
+        }
+        else{
+            //display all child elements
+            c.show();
+        }
+    },
     loadView:function(data){
         //validates data, then proceeds to add a
         //new element to the carView div for each entry in data
@@ -189,13 +204,7 @@ $funcName = "$fileName, AuctionSelect::loadView(data)";
         }
         //filter results, display only cars
         //
-        var hideInactive = true;
-        
-        if(hideInactive){
-            var c = AuctionSelect.list.children(),
-                f = c.filter('.owned, .lost, .isf');
-            f.hide();
-        }
+        AuctionSelect.toggleInactive();
     },
     loadViewFailed:function(jqxhr){
         //called when loading the div fails,
@@ -444,3 +453,6 @@ function(){
         {range:'elite'}
     );
 });
+jq.AuctionSelect.hideUnav.click(
+    AuctionSelect.toggleInactive
+)
