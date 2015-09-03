@@ -457,8 +457,10 @@ if(isSetP() ){
                     //echo json_encode(gettype($_POST['udv'])); //returns a string
                     //exit();
                     if($op == 'puf'){
-                        user::incFunds(floatval($_POST['udv']) );
-                        exit();
+						$f = round(floatval($_POST['udv']), 2);
+                        $str = json_encode(user::incFunds($f));
+						//echo $str;
+                        exit($str);
                     }
                     if($op == 'duf'){
                         user::decFunds(floatval($_POST['udv']) );

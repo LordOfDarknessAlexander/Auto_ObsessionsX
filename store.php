@@ -366,7 +366,7 @@ else{?>
 		//allowance accumulates every few seconds
 		var delta = Allowance.getDelta();
 
-		if(delta >= 117){//Allowance.CAP){
+		if(delta >= Allowance.CAP){
 			var val = 50000;    //1;	//(base + carValue) * delta;
 <?php
 if($LI){?>
@@ -379,7 +379,7 @@ else{?>
 }?>
 			Allowance.setLastTime();
 		}
-	});//function(){console.log('click');});//);
+	});
 loadUser();
 <?php
 if(!$LI){

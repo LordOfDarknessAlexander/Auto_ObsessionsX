@@ -2,7 +2,7 @@
 require_once 'html.php';
 require_once 'dbConnect.php';
 //
-html::doctype();
+//html::doctype();
 ?>
 <html lang=en>
 <head>

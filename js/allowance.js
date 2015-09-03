@@ -5,9 +5,6 @@ var Allowance = {
         //get diffrence between last time and now        
         return Date.now() - Allowance.getLastTime();
     },
-	toJSON:function(){
-		_lastAllowanceTime: 0;
-	},
     getLastTime:function(){
         //the last time the user collected their allowance
         if(Storage.local !== null){
@@ -41,6 +38,7 @@ var Allowance = {
 					return;
 				}	
 				console.log('addFunds logged in');
+				jq.statBar.set.money(data);
 				// if(data != userStats.money && typeof data === 'number'){
 				  
 				// }
@@ -58,8 +56,14 @@ var Allowance = {
 			
 			var userStats = JSON.parse(Storage.local._stats);
 			console.log(userStats.money);
-			userStats.money += funds;
-			console.log('Allowance added total ' + userStats.money);
+			
+			if(userStats.money < 1000000000){
+				userStats.money += funds;
+			}
+			
+			Storage.local._stats = JSON.stringify(userStats);
+			jq.statBar.set.money(userStats.money);
+			console.log('Allowance added total ' + userStats.money);	
 		}	
 	}
 };
