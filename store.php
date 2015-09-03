@@ -345,7 +345,7 @@ if($LI){?>
     
     $('pre#info').hide();
     cashDiv.css(o);
-    tokensDiv.css(o);
+    tokenDiv.css(o);
     dci.css(c);
     dti.css(c);
 <?php

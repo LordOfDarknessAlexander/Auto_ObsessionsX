@@ -41,7 +41,7 @@ if($isSlots)
 	
 	
     <div id='menuLeft'>
-        <button id ='myCars'>My Garage</button>
+        <button id ='myCars' title='My Garage is friggin amazing man'>My Garage</button>
         <button id='toAuctionBtn'>Go to Auction</button>		
     </div>
     <div id='menuRight'>
