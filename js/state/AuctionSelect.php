@@ -29,7 +29,7 @@ function isValidData(){
 <?php
 }
 ?>
-jq.AuctionSelect.hideUnav = $('input#showUnav');
+jq.AuctionSelect.hideUnav = $('input#hideUnav');
 
 ao = {
     STAGE:{

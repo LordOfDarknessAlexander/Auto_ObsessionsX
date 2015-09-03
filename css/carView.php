@@ -157,6 +157,8 @@ Car View left div
 <?php divCarView();?> h2#dt{<?php
     css::lm();
     css::top('28%');
+    css::defaultBG('../images/drivetrain.png');
+    css::bgSize('100%', '100%');
 ?>
 }
 <?php divCarView();?> div#drivetrain{<?php
@@ -167,6 +169,8 @@ Car View left div
 <?php divCarView();?> h2#body{<?php
     css::lm();
     css::top('59%');
+    css::defaultBG('../images/body.png');
+    css::bgSize('100%', '100%');
 ?>
 }
 <?php divCarView();?> div#body{<?php
@@ -180,6 +184,8 @@ Car View right div
 <?php divCarView();?> h2#interior{<?php
     css::rm();
     css::top('28%');
+    css::defaultBG('../images/interior.png');
+    css::bgSize('100%', '100%');
 ?>
 }
 <?php divCarView();?> div#interior{<?php
@@ -190,6 +196,8 @@ Car View right div
 <?php divCarView();?> h2#docs{<?php
     css::rm();
     css::top('59%');
+    css::defaultBG('../images/documents.png');
+    css::bgSize('100%', '100%');
 ?>;
 }
 <?php divCarView();?> div#docs{<?php
