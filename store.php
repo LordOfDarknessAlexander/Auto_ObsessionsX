@@ -58,35 +58,56 @@ function ppSrc(){
     }
 }
 
-//if(isSetP() ){
-    //$op = //getOpFromGET();
+if(isSetP() ){
+    $op = '';//getOpFromGET();
+	$completed = false;
+	$funds = 0.0;
+	$amount = 0;
     
-    //if($op == ' c50'){
-        
-    //}
-    // else if($op == 'c200'){
-        
-    // }
-    // else if($op == 'c500'){
-        
-    // }
-    // else if($op == 'c1000'){
-        
-    // }
+    if($op == ' c50'){
+		$funds = 50000.0;
+		user::incFunds($funds);
+		$completed = true;
+		//jq.statBar.set.money($funds);
+    }
+    else if($op == 'c200'){
+        $funds = 200000.0;
+		user::incFunds($funds);
+		$completed = true;
+    }
+    else if($op == 'c500'){
+        $funds = 500000.0;
+		user::incFunds($funds);
+		$completed = true;
+    }
+    else if($op == 'c1000'){
+        $funds = 1000000.0;
+		user::incFunds($funds);
+		$completed = true;
+    }
     //tokens
-    //if($op == ' t3'){
-        
-    //}
-    // else if($op == 't5'){
-        
-    // }
-    // else if($op == 't10'){
-        
-    // }
-    // else if($op == 't20'){
-        
-    // }    
-//}
+    if($op == 't3'){
+		$amount = 3;
+        purchase::tokens($amount);
+		$completed = true;
+		//jq.statBar.set.tokens($amount);
+    }
+    else if($op == 't5'){
+        $amount = 5;
+		purchase::tokens($amount);
+		$completed = true;
+    }
+    else if($op == 't10'){
+        $amount = 10;
+		purchase::tokens($amount);
+		$completed = true;
+    }
+    else if($op == 't20'){
+        $amount = 20;
+		purchase::tokens($amount);
+		$completed = true;
+    }    
+}
 //
 //if a purcahse has been made, get user stats will get the new values
 //$us = user::getStats();
@@ -137,8 +158,14 @@ Please <a href='<?php
 ?>'>register</a> and <a href='<?php
     echo $URL .'login.php';
 ?>'>log in</a> to access the full store<?php
-}
-    ?></pre>
+	}
+	else if(isSetG() && $completed){?> 
+	Your purchase has completed successfully.	
+<?php } 
+	else if(!isSetG && !$completed){ ?>
+	Your purchase did not complete successfully.
+<?php } ?>
+    </pre>
     <button id='allowance'></button>
     <img id='adBar'>
 <?php
