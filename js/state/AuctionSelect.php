@@ -49,6 +49,32 @@ ao = {
         elite:'elite'
     }
 };
+// function getHideUnavailable(){
+    // if(Storage.local !== null && 'hideUnavailable' in Storage.local){
+        // var val = JSON.parse(Storage.local.hideUnavailable);
+		
+        // if(typeof val == 'boolean'){
+            // return val;
+        // }
+    // }
+    // return false;
+// }
+// function toggleHideUnavailable(){
+    // if(Storage.local !== null){
+        // if('hideUnavailable' in Storage.local){
+            // var val = JSON.parse(Storage.local.hideUnavailable);
+		
+            // if(typeof val == 'boolean'){
+                // //Storage.local.hideUnavailable = !val;
+            // }
+        // }
+        // else{
+            // //Storage.local.hideUnavailable = true;
+        // }
+        // //return Storage.local.hideUnavailable;
+    // }
+    // return false;
+// }
 function getUserStage(){
     if(Storage.local !== null && '_stage' in Storage.local){
         var str = JSON.parse(Storage.local._stage).toLowerCase();

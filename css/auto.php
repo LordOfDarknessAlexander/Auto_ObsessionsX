@@ -571,7 +571,11 @@ div#business
     left:0%;
     z-index:1;
 }*/
+
 /*
+a[title]:hover{
+    color:grey;
+}
 a.tooltip{outline:none; }
 a.tooltip strong{line-height:30px;}
 a.tooltip:hover{text-decoration:none;} 
