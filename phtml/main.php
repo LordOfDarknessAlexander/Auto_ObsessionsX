@@ -60,19 +60,19 @@ $URL = rootURL();   //absolute url of executing site/folder
         <a id='home' class='tooltip' href='<?php
             echo $URL . 'index.php';
         ?>'>Home<!--span><img src=''>Tooltip!</span--></a><br>
-        <a id='addFunds' class='tooltip'>Store</a><br>		
+        <a id='addFunds' class='tooltip'  title='Store'>Store</a><br>		
 <?php
 if(loggedIn() ){?>
-        <a id='mem' href='<?php
+        <a id='mem'  title='Members Page' href='<?php
             echo $URL .'members-page.php';
         ?>'>Members</a><br>
-        <a id='logout' href='<?php
+        <a id='logout'  title='Logout' href='<?php
             echo $URL .'logout.php';
         ?>'>Logout</a><br>		
 <?php
 }
 else{?>
-        <a id='reg' href='<?php
+        <a id='reg' title='Register an account with us' href='<?php
             echo $URL . 'registerUser.php';
         ?>'>Register</a><br>
         <a id='login' href='<?php
