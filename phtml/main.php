@@ -11,6 +11,8 @@ $AO_NAME = 'Auto Obsessions';
 $TD_NAME = 'Tyler Drury';
 $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
+$BM_NAME = 'Brendan McCracken';
+$JM_NAME = 'Johnathan McLaughlin';
 
 //this is not working on site without a new session
 //session_start();
@@ -140,7 +142,7 @@ if(!loggedIn() ){?>
             </ul>
             <ul>
                 <li class='artwork'>Programming Crew: <?php
-                echo "$AS_NAME, $TD_NAME, $AB_NAME";
+                echo "$AS_NAME, $TD_NAME, $AB_NAME , $BM_NAME , $JM_NAME";
                 ?></li>
             </ul>
              
