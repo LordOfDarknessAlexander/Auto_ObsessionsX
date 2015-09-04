@@ -58,55 +58,78 @@ function ppSrc(){
     }
 }
 
-if(isSetP() ){
-    $op = '';//getOpFromGET();
-	$completed = false;
-	$funds = 0.0;
-	$amount = 0;
+$completed = false;
+$msg = '';
     
-    if($op == ' c50'){
-		$funds = 50000.0;
-		user::incFunds($funds);
-		$completed = true;
-		//jq.statBar.set.money($funds);
-    }
-    else if($op == 'c200'){
-        $funds = 200000.0;
-		user::incFunds($funds);
-		$completed = true;
-    }
-    else if($op == 'c500'){
-        $funds = 500000.0;
-		user::incFunds($funds);
-		$completed = true;
-    }
-    else if($op == 'c1000'){
-        $funds = 1000000.0;
-		user::incFunds($funds);
-		$completed = true;
-    }
-    //tokens
-    if($op == 't3'){
-		$amount = 3;
-        purchase::tokens($amount);
-		$completed = true;
-		//jq.statBar.set.tokens($amount);
-    }
-    else if($op == 't5'){
-        $amount = 5;
-		purchase::tokens($amount);
-		$completed = true;
-    }
-    else if($op == 't10'){
-        $amount = 10;
-		purchase::tokens($amount);
-		$completed = true;
-    }
-    else if($op == 't20'){
-        $amount = 20;
-		purchase::tokens($amount);
-		$completed = true;
-    }    
+if(isSetG() ){
+	$op = getOpFromGET();
+	$val = '';
+	
+	if($op == 'cash'){
+		$funds = 0.0;
+		
+		if($val == 'c50'){
+			$funds = 50000.0;
+			user::incFunds($funds);
+			$completed = true;
+		}
+		else if($val == 'c200'){
+			$funds = 200000.0;
+			user::incFunds($funds);
+			$completed = true;
+		}
+		else if($val == 'c500'){
+			$funds = 500000.0;
+			user::incFunds($funds);
+			$completed = true;
+		}
+		else if($val == 'c1000'){
+			$funds = 1000000.0;
+			user::incFunds($funds);
+			$completed = true;
+		}
+		
+		if($completed){
+			$msg = "Your purchase of \$$funds completed successfully.";
+		}
+		else{
+			$msg = "Your purchase of \$$funds was unsuccessful.";
+		}
+	}
+	else if($op == 'tokens'){
+		$amount = 0;
+		
+		if($val == 't3'){
+			$amount = 3;
+			purchase::tokens($amount);
+			$completed = true;
+		}
+		else if($val == 't5'){
+			$amount = 5;
+			purchase::tokens($amount);
+			$completed = true;
+		}
+		else if($val == 't10'){
+			$amount = 10;
+			purchase::tokens($amount);
+			$completed = true;
+		}
+		else if($val == 't20'){
+			$amount = 20;
+			purchase::tokens($amount);
+			$completed = true;
+		}
+
+		if($completed){
+			$msg = "Your purchase of $amount tokens completed successfully.";
+		}
+		else{
+			$msg = "Your purchase of $amount tokens was unsuccessful.";
+		}
+	}
+	else{
+		$msg = "Invalid operation, unrecognized argument passed to get.";
+	}		
 }
 //
 //if a purcahse has been made, get user stats will get the new values
@@ -158,14 +181,11 @@ Please <a href='<?php
 ?>'>register</a> and <a href='<?php
     echo $URL .'login.php';
 ?>'>log in</a> to access the full store<?php
-	}
-	else if(isSetG() && $completed){?> 
-	Your purchase has completed successfully.	
-<?php } 
-	else if(!isSetG && !$completed){ ?>
-	Your purchase did not complete successfully.
-<?php } ?>
-    </pre>
+}
+else {
+	echo $msg;
+}
+?></pre>
     <button id='allowance'></button>
     <img id='adBar'>
 <?php
@@ -368,9 +388,15 @@ $(function(){
 <?php
 if($LI){?>
     var o = {opacity:'1.0'},
-        c = {cursor:'pointer'};
+        c = {cursor:'pointer'},
+		info = $('pre#info');
     
-    $('pre#info').hide();
+	if(info.text() == ''){
+		info.hide();
+	}
+	else{
+		info.show();
+	}
     cashDiv.css(o);
     tokenDiv.css(o);
     dci.css(c);
