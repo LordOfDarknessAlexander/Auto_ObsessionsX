@@ -737,7 +737,7 @@ class user{
 		{
 		   "UPDATE table SET `achievements` = 1";
 		} */
-		echo "Shit";
+		echo "No achievement";
 		//echo '<img src="images/achievements/Diamond-Bank.png"  hspace="5" width="65" height="65" title="Diamond Banker: Made a deposit of $100,000 or more!"">';
      
     }
@@ -752,6 +752,8 @@ class user{
         $car = user::getCarByID($carID);
         $CID = ao::CID;
 		$achievements = 'achievements';
+		
+		echo "No achievement";
 		
 		/*
 		if ( $userp['achievements'] = 4 )

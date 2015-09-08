@@ -35,7 +35,8 @@ function(){
 	var currFrame = 0;	
 	//Values
 	var money = 0;
-	var winnings = 0;	
+	var winnings = 0;
+	var tokens = 0;
 	//Images
 	var slotImage1 = new Image(),
         slotImage2 = new Image(),
@@ -51,11 +52,12 @@ function(){
 	function init(){		
 		//initialize bank
 		//will need accsess to the mamber datbase so that this can be set according to the clients information
-		money  = 100;//for testing
+		money  = 1;//for testing
+		tokens = 3;
 		
 		//initialize text
 		$('div#welcomeTextDiv').text('Welcome to the Auto Obsessions Slots');
-		$('div#bankValue').text('You have $' + money.toFixed(2) );
+		$('div#bankValue').text('You have ' + tokens + ' tokens');
 	
 		//initialize handlers
 		slotStopButton.addEventListener('mousedown', stopButtonHandler, false);
@@ -81,6 +83,11 @@ function(){
 		}
 		if(spins == true){
 			spinTimer --;
+			//tokens --;
+		}
+		if( tokens < 1)
+		{
+			gameFinished = true;
 		}
 	}
 	function stop(){
@@ -113,7 +120,7 @@ function(){
 		if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1){
 			winnings = bet * 10;
 			//res..text('Jackpot');
-			$('div#wonTextDiv').text('You Won ' + winnings);
+			$('div#wonTextDiv').text('You Won ' + tokens);
 			//Play sound
 			playWinSound();
 			startSpinSound();
@@ -122,7 +129,7 @@ function(){
 		}
 		else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2){
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + winnings);
+			$('div#wonTextDiv').text('You Won ' + tokens);
 			//Play sound
 			playWinSound();
 			//Play Lights
@@ -131,7 +138,7 @@ function(){
 		else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3){
 			winnings = bet * 5;
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + winnings);
+			$('div#wonTextDiv').text('You Won ' + tokens);
 			//Play sound
 			playWinSound();
 			//Play Lights
@@ -139,7 +146,7 @@ function(){
 		}
 		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4){
 			res.text('Uhh pinata');
-			$('div#wonTextDiv').text('You Won ' + winnings);
+			$('div#wonTextDiv').text('You Won ' + tokens);
 			//Play sound
 			playWinSound();
 			//Play Lights
@@ -147,7 +154,7 @@ function(){
 		}
 		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5){
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + winnings);
+			$('div#wonTextDiv').text('You Won ' + tokens);
 			//Play sound
 			playWinSound();
 			//Play Lights
@@ -155,7 +162,7 @@ function(){
 		}
 		else if( (slot1curr == 5 && slot2curr == 5)  || (slot1curr == 6 && slot2curr == 6 && slot3curr == 6) ){
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + winnings);
+			$('div#wonTextDiv').text('You Won ' + tokens);
 			//Play sound
 			playWinSound();
 			//Play Lights
@@ -164,7 +171,7 @@ function(){
 		else if( (slot1curr == 5 || slot1curr == 6) && slot2curr == 6){
 			//winnings = bet * 1.75;
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + winnings);
+			$('div#wonTextDiv').text('You Won ' + tokens);
 			//Set volume and play sound
 			playWinSound();
 			//Play Lights
@@ -173,7 +180,7 @@ function(){
 		else if(slot1curr == 6  || slot2curr == 6 || slot3curr == 6){
 			//winnings = bet * 1.5;
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + winnings);
+			$('div#wonTextDiv').text('You Won ' + tokens);
 			//Set volume and play sound
 			playWinSound();
 			//Play Lights
@@ -186,21 +193,24 @@ function(){
 			playLossSound();
 		}
 		//money += winnings;
-        $('div#bankValue').text('You have $' + money);
+        $('div#bankValue').text('You have $' + tokens);
 		console.log(winnings);
 	}
 
 	function startSpin(){
 		if(gameFinished == false){
 			winnings = 0;
+			//tokens = 0;
 			
-			$('div#bankValue').text('You have $' + money);
+			$('div#bankValue').text('You have $' + tokens);
 			$('div#resultsTextDiv').text('');
 			$('div#wonTextDiv').text('');
 			
 			slot1spin = true;
 			slot2spin = true;
 			slot3spin = true;
+			
+			
 		}
 		else{
 			stop();
@@ -221,10 +231,11 @@ function(){
 	function spinButtonHandler(event){
 		if(gameFinished == false){
 			winnings = 0;
+			tokens --;
 			turnOffLights();
 			//playReelSpin();
 			
-			$('div#bankValue').text('You have $' + money);
+			$('div#bankValue').text('You have $' + tokens);
 			$('div#resultsTextDiv').text('');
 			$('div#wonTextDiv').text('');
 			
@@ -233,6 +244,7 @@ function(){
 			slot3spin = true;
 			//gameFinished = false;			
 		}
+		
 		update();		
 	}	
 	
@@ -386,6 +398,7 @@ function(){
 		if((slot1spin == true)&& (slot2spin == true) && (slot3spin == true)){
 			gameFinished == true;
 		}
+		//tokens = tokens - 1;
 	}
 	function randomNum(){
 		rand = Math.floor(Math.random() * 100);

@@ -513,34 +513,6 @@ class html
 		z-index: 3;
 	}
 
-	div#betText
-	{
-		position:absolute;
-		left:0%;
-		top:53.5%;
-		width:7%;
-		height:6%;
-		background-image:url('images/Buttons/betTxt.png');
-		background-repeat:no-repeat;
-		background-size:100% 100%;
-		z-index: 3;
-
-	}
-
-	div#betValue
-	{
-		position:absolute;
-		left:10%;
-		top:52.5%;
-		width:4%;
-		height:5%;
-		font-family:Digifit;
-		font-size:large;
-		color:antiquewhite;
-		text-align:center;
-		z-index: 3;
-	}
-
 	div#bankValue
 	{
 		position:absolute;
@@ -559,8 +531,8 @@ class html
 	button#spinButton
 	{
 		position:absolute;
-		left:70%;
-		top:85%;
+		left:7%;
+		top:65%;
 		width:16%;
 		height:9%;
 		background-image:url('images/SpinButton.png');
@@ -570,15 +542,11 @@ class html
 		z-index: 3;
 	}
 
-
-
-
-
 	button#slotStop
 	{
 		position:absolute;
-		left:40%;
-		top:75%;
+		left:71%;
+		top:65%;
 		width:21%;
 		height:12.5%;
 		background-image:url('images/stopButton.png');

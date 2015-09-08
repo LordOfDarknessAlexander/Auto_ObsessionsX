@@ -310,6 +310,23 @@ div#statBar label#prestige{left:50%;top:75%;}
 div#statBar label#markers{left:75%;top:75%;}
 /*
 */
+div#achievement{
+<?php
+    posAbs();
+    css::size('100%', '15%');
+    css::txtAlignL();
+?>
+	background: url('../images/stop.png');
+	top:0%;
+	left:0%;
+	
+	/*child elements inherit values, unless otherwise specified*/
+	font-family:"Kozuka Gothic Pro B";
+	color:red;
+	font-weight: bold;
+	z-index : 2;
+	font-size:2.0vw;
+}
 img#mainCar{
 <?php
     posAbs();
