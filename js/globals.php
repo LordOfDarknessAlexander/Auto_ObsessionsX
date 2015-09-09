@@ -8,6 +8,7 @@ var canUseLocalStorage = 'localStorage' in window && window.localStorage !== nul
 var frameID = 0;
 var canvas = document.getElementById('canvas');	//$("#canvas")?
 var context = canvas.getContext('2d');
+
 //aspect ratio
 var width = canvas.getAttribute('width'),
 	height = canvas.getAttribute('height');
@@ -178,6 +179,10 @@ var appState = GAME_MODE.SPLASH;
 //Users login counts
 
 var userLogged = false;
+
+
+
+
 
 function resetStates(){
 	appState = GAME_MODE.RUNNING;

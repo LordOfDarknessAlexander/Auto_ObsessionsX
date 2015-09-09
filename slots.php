@@ -17,7 +17,8 @@ html::slotStyles();
 </head>
 <body>
 <div id='nav'>
-<li><a href='index.php' title='Home Page'>Home</a><br></li>
+
+ 	
 </div>
 <div id='container'>
 
@@ -39,9 +40,13 @@ html::slotStyles();
                 <div id = 'bankValue'></div>
                 <div id = 'wonTextDiv'></div>
                 <!--Buttons-->
-                <button id = 'slotStop'></button>
-                <button id = 'spinButton'></button>
-                <button id = 'payPalButton'></button>	
+				<div id='nav'>
+               <!-- <button id = 'slotStop'></button> -->
+				<li><a class='button spinButton' >Spin</li></a>
+				<li><a href='index.php' title='Home Page'>Home</a><br></li>
+				</div>
+                <!--<button id = 'spinButton'></button> -->
+               
                 <!--Slot Windows-->
                 <canvas id = 'slot1'></canvas>
                 <canvas id = 'slot2'></canvas>

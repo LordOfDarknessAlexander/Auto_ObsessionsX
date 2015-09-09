@@ -2,20 +2,21 @@ $(document).ready(
 function(){
     //update to use jQuery
 	//Reels 
+//slots
+
 	var slot1Canvas = document.getElementById('slot1'),
-        //slot1Context = slot1Canvas.getContext('2d'),
-		slot1Context = $("slot1").get(0);
+        slot1Context = slot1Canvas.getContext('2d'),
+		//slot1Context = $("slot1").get(0);
         slot2Canvas = document.getElementById('slot2'),
-        //slot2Context = slot2Canvas.getContext('2d'),
-		slot2Context = $("slot2").get(0);
+        slot2Context = slot2Canvas.getContext('2d'),
+		//slot2Context = $("slot2").get(0);
         slot3Canvas = document.getElementById('slot3'),
-		slot3Context = $("slot3").get(0);
-       // slot3Context = slot3Canvas.getContext('2d');
+		//slot3Context = $("slot3").get(0);
+        slot3Context = slot3Canvas.getContext('2d');
 	//Buttons
-	var slotStopButton = document.getElementById('slotStop'),
-        spinButton = document.getElementById('spinButton');
+
+    var spinButton = document.getElementById('spinButton');
 	
-	//Play data
 	var slot1 = [];
 	var slot2 = [];
 	var slot3 = [];
@@ -23,21 +24,18 @@ function(){
 	var slot1spin = true,
         slot2spin = true,
         slot3spin = true;
-    //
-	var gameFinished = false;
-    //
+
 	var slot1curr = currFrame,
         slot2curr = currFrame,
         slot3curr = currFrame;
-    //
+   
 	var randSlot1 = 0,
         randSlot2 = 0,
         randSlot3 = 0;
-    //
+		
 	var rand = 0;
 	var currFrame = 0;	
 	//Values
-	var money = 0;
 	var winnings = 0;
 	var tokens = 0;
 	//Images
@@ -49,9 +47,10 @@ function(){
         reelsSpinning = document.getElementById('reelSpinning'),
         noWin = document.getElementById('youLose'),
         youWin = document.getElementById('winSound');
-    //
-	var spins = false;
 	
+	var gameFinished = false;
+	
+		
 	function init(){		
 		//initialize bank
 		//will need accsess to the mamber datbase so that this can be set according to the clients information
@@ -71,9 +70,9 @@ function(){
 	function update(){
 		window.requestAnimationFrame(update, $('canvas#slot1Canvas'));
 		
-		slot1Context.clearRect(0, 0, slot1Canvas.width, slot1Canvas.height);
-		slot2Context.clearRect(0, 0, slot2Canvas.width, slot2Canvas.height);
-		slot3Context.clearRect(0, 0, slot3Canvas.width, slot3Canvas.height);
+		//this.slot1Context.clearRect(0, 0, slot1Canvas.width, slot1Canvas.height);
+		//this.slot2Context.clearRect(0, 0, slot2Canvas.width, slot2Canvas.height);
+		//this.slot3Context.clearRect(0, 0, slot3Canvas.width, slot3Canvas.height);
 		drawReels();
  		spinReels();
 		
@@ -209,7 +208,7 @@ function(){
 	}
 
 	function startSpin(){
-		if(gameFinished == false){
+		if(this.gameFinished == false){
 			winnings = 0;
 			//tokens = 0;
 			
@@ -246,7 +245,7 @@ function(){
 			turnOffLights();
 			//playReelSpin();
 			
-			$('div#bankValue').text('You have $' + tokens);
+			$('div#bankValue').text('You have ' + tokens);
 			$('div#resultsTextDiv').text('');
 			$('div#wonTextDiv').text('');
 			
@@ -505,6 +504,28 @@ function(){
 		$('div#lowerRightSmall').css(state);
 		$('div#RightFog').css(state);
 	}	
+	
+	$('.spinButton').click(
+	function(){
+		startSpin();
+		if(gameFinished == false){
+			winnings = 0;
+			tokens --;
+			turnOffLights();
+			//playReelSpin();
+			
+			$('div#bankValue').text('You have ' + tokens);
+			$('div#resultsTextDiv').text('');
+			$('div#wonTextDiv').text('');
+			
+			slot1spin = true;
+			slot2spin = true;
+			slot3spin = true;
+			//gameFinished = false;			
+		}
+		
+		update();
+	});
 
 	init();
 });

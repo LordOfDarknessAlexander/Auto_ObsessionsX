@@ -51,6 +51,7 @@ $paths = array(
 	
     //
     'program'	//main javascript program
+	
 );
 addPHPJS('globals');
 addPHPJS('pas');
