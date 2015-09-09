@@ -66,18 +66,15 @@ function(){
 		$('div#welcomeTextDiv').text('Welcome to the Auto Obsessions Slots');
 		$('div#bankValue').text('You have ' + tokens + ' tokens');
 	
-		//initialize handlers
-		//slotStopButton.addEventListener('mousedown', stopButtonHandler, false);
-		//spinButton.addEventListener('mousedown', spinButtonHandler, false);
 		document.addEventListener('keyup',keyUpHandler, false);
 		turnOffLights();
 	}
 	function update(){
 		window.requestAnimationFrame(update, $('canvas#slot1Canvas'));
 		
-		//this.slot1Context.clearRect(0, 0, slot1Canvas.width, slot1Canvas.height);
-		//this.slot2Context.clearRect(0, 0, slot2Canvas.width, slot2Canvas.height);
-		//this.slot3Context.clearRect(0, 0, slot3Canvas.width, slot3Canvas.height);
+		this.slot1Context.clearRect(0, 0, slot1Canvas.width, slot1Canvas.height);
+		this.slot2Context.clearRect(0, 0, slot2Canvas.width, slot2Canvas.height);
+		this.slot3Context.clearRect(0, 0, slot3Canvas.width, slot3Canvas.height);
 		drawReels();
  		spinReels();
 		
