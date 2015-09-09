@@ -44,6 +44,8 @@ html::slotStyles();
 				<div id='nav'>
                <!-- <button id = 'slotStop'></button> -->
 				<li><a class='button spinButton' >Spin</li></a>
+				<!--temp stop button ---->
+				<li><a class='button slotStop' >Stop</li></a>
 				<li><a href='index.php' title='Home Page'>Home</a><br></li>
 				</div>
                 <!--<button id = 'spinButton'></button> -->

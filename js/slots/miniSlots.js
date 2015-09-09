@@ -221,8 +221,7 @@ function(){
 			slot1spin = true;
 			slot2spin = true;
 			slot3spin = true;
-			
-			
+		
 		}
 		else{
 			stop();
@@ -240,69 +239,6 @@ function(){
 		}
 	}
 	
-	function spinButtonHandler(event){
-		if(gameFinished == false){
-			winnings = 0;
-			tokens --;
-			turnOffLights();
-			//playReelSpin();
-			
-			$('div#bankValue').text('You have ' + tokens);
-			$('div#resultsTextDiv').text('');
-			$('div#wonTextDiv').text('');
-			
-			slot1spin = true;
-			slot2spin = true;
-			slot3spin = true;
-			//gameFinished = false;			
-		}
-		
-		update();		
-	}	
-	
-	function stopButtonHandler(event){
-        //
-		spinTimer = 200;
-		spins = true;
-		update();
-		
-		console.log(spinTimer);
-		if((slot1spin == true) && (spinTimer < 200)){
-			slot1curr = randomNum();//slot1[randomNum()];
-			playReelSpin();
-			slot1spin = false;
-			spins = true;
-			//spinTimer --;
-			update();
-		}
-		else if((slot2spin == true) && (spinTimer < 100)){
-			slot2curr = randomNum();//slot2[randomNum()];
-			playReelSpin();
-			slot2spin = false;
-			spins = true;
-			spinTimer --;
-			update();
-		}
-		else if((slot3spin == true)&& (spinTimer < 50)){
-			slot3curr = randomNum();//slot3[randomNum()];
-			playReelSpin();
-			slot3spin = false;
-			spins = true;
-			//spinTimer --;
-			update();
-		}
-		
-		if(gameFinished == false){
-			stop();
-			checkForWin();
-			slot1spin = false;
-			slot2spin = false;
-			slot3spin = false; 
-		}
-		else{
-			return;
-		}
-	}
 	function drawReels(){
 		//slot 1
         src = 'images/ReelImages/';
@@ -527,6 +463,52 @@ function(){
 		}
 		
 		update();
+	});
+	
+	$('.slotStop').click(
+	function(){
+		
+		spinTimer = 200;
+		spins = true;
+		update();
+		
+		console.log(spinTimer);
+		if((slot1spin == true) && (spinTimer < 200)){
+			slot1curr = randomNum();//slot1[randomNum()];
+			playReelSpin();
+			slot1spin = false;
+			spins = true;
+			//spinTimer --;
+			update();
+		}
+		else if((slot2spin == true) && (spinTimer < 100)){
+			slot2curr = randomNum();//slot2[randomNum()];
+			playReelSpin();
+			slot2spin = false;
+			spins = true;
+			spinTimer --;
+			update();
+		}
+		else if((slot3spin == true)&& (spinTimer < 50)){
+			slot3curr = randomNum();//slot3[randomNum()];
+			playReelSpin();
+			slot3spin = false;
+			spins = true;
+			//spinTimer --;
+			update();
+		}
+		
+		if(gameFinished == false){
+			stop();
+			checkForWin();
+			slot1spin = false;
+			slot2spin = false;
+			slot3spin = false; 
+		}
+		else{
+			return;
+		}
+	
 	});
 
 	init();
