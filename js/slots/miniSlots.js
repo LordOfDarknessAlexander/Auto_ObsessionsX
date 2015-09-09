@@ -63,8 +63,8 @@ function(){
 		$('div#bankValue').text('You have ' + tokens + ' tokens');
 	
 		//initialize handlers
-		slotStopButton.addEventListener('mousedown', stopButtonHandler, false);
-		spinButton.addEventListener('mousedown', spinButtonHandler, false);
+		//slotStopButton.addEventListener('mousedown', stopButtonHandler, false);
+		//spinButton.addEventListener('mousedown', spinButtonHandler, false);
 		document.addEventListener('keyup',keyUpHandler, false);
 		turnOffLights();
 	}
