@@ -6,6 +6,30 @@ RewriteEngine on
 RewriteRule ^pas/query$     pas/query.php [NC]
 #RewriteRule ^pas/get$       pas/get.php [NC]
 #RewriteRule ^pas/update$     pas/update.php [NC]
+#
 RewriteRule ^pas/query/([[:alpha:]]{1,8})?$     pas/query.php?op=$1 [NC]
 RewriteRule ^pas/get/([[:alpha:]]{1,8})?$     pas/get.php?op=$1 [NC]
 RewriteRule ^pas/update/([[:alpha:]]{1,8})?$     pas/update.php?op=$1 [NC]
+#
+#Rewrite url for PAYPAL store interface
+#
+#RewriteRule ^store/cash/([[:digit:]]{1,4})?$     store.php?op=cash?val=$1 [NC]
+#RewriteRule ^store/tokens/([[:digit:]]{1,2})?$     store.php?op=tokens?val=$1 [NC]
+
+#Prevent users not originating from this site from POSTing to script
+#RewriteCond %{REQUEST_METHOD} POST
+#RewriteCond %{HTTP_REFERER} !^http://urltoyoursite.com [NC]
+#RewriteRule .* - [F]
+
+#Caching behaviour is set by default, changing doesn't seem
+#to have a huge influence
+#Cache all static file resources(images, audio, etc)
+#once a day, decreasing bandwidth consumed by navigating pages
+#<FilesMatch "\.(jpg|jpeg|png|gif|mp3|mp4)$">
+    #Header set Cache-Control "max-age=7200"
+#</FilesMatch>
+#dynamic
+#<FilesMatch "\.(js|css)$">
+    #SetOutputFilter DEFLATE
+    #Header set Cache-Control "max-age=7200"
+#</FilesMatch>
