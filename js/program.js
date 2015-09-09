@@ -165,20 +165,7 @@ function switchStates(){
 		case GAME_MODE.SALE_VIEW:
 			SaleView.update(dt);
 		break;
-		//do not need auction select
-		// case GAME_MODE.AUCTION:
-			// Auction.update(dt);
-			// setStatBar();
-			// console.log('auction switch');
-		// break;
-
-		// case GAME_MODE.REPAIR:
-			// Repair.update();
-			// setStatBar();
-		// break;
-		
-		// case GAME_MODE.ADD_FUNDS:
-			// Store.update();
+		re.update();
 		// break;
 		
 		// case GAME_MODE.SLOTS:

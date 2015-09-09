@@ -22,6 +22,7 @@ $paths = array(
     //'entities/meta',
     'entities/player',
     'entities/enemy',
+	
     //'entities/part',
     'entities/parts/part',
     'entities/parts/drivetrain',
@@ -46,6 +47,8 @@ $paths = array(
     'state/AuctionSell',
     //'state/Add_Funds',
 	'allowance',
+	'slots/miniSlots',
+	
     //
     'program'	//main javascript program
 );

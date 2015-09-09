@@ -3,11 +3,14 @@ function(){
     //update to use jQuery
 	//Reels 
 	var slot1Canvas = document.getElementById('slot1'),
-        slot1Context = slot1Canvas.getContext('2d'),
+        //slot1Context = slot1Canvas.getContext('2d'),
+		slot1Context = $("slot1").get(0);
         slot2Canvas = document.getElementById('slot2'),
-        slot2Context = slot2Canvas.getContext('2d'),
+        //slot2Context = slot2Canvas.getContext('2d'),
+		slot2Context = $("slot2").get(0);
         slot3Canvas = document.getElementById('slot3'),
-        slot3Context = slot3Canvas.getContext('2d');
+		slot3Context = $("slot3").get(0);
+       // slot3Context = slot3Canvas.getContext('2d');
 	//Buttons
 	var slotStopButton = document.getElementById('slotStop'),
         spinButton = document.getElementById('spinButton');
