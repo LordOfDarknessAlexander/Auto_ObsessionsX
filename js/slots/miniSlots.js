@@ -1,9 +1,3 @@
-$(document).ready(
-function(){
-    //update to use jQuery
-	//Reels 
-//slots
-
 	var slot1Canvas = document.getElementById('slot1'),
         slot1Context = slot1Canvas.getContext('2d'),
 		//slot1Context = $("slot1").get(0);
@@ -13,6 +7,14 @@ function(){
         slot3Canvas = document.getElementById('slot3'),
 		//slot3Context = $("slot3").get(0);
         slot3Context = slot3Canvas.getContext('2d');
+
+$(document).ready(
+function(){
+    //update to use jQuery
+	//Reels 
+//slots
+
+
 	//Buttons
 
     var spinButton = document.getElementById('spinButton');
@@ -54,7 +56,10 @@ function(){
 	function init(){		
 		//initialize bank
 		//will need accsess to the mamber datbase so that this can be set according to the clients information
-		money  = 1;//for testing
+		//aoTimer.update();
+    
+		//var now = getTimestamp(), //in milliseconds
+		//dt = aoTimer.getDT();
 		tokens = 3;
 		
 		//initialize text

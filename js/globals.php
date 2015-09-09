@@ -181,9 +181,6 @@ var appState = GAME_MODE.SPLASH;
 var userLogged = false;
 
 
-
-
-
 function resetStates(){
 	appState = GAME_MODE.RUNNING;
 }
