@@ -49,7 +49,7 @@ function(){
         youWin = document.getElementById('winSound');
 	
 	var gameFinished = false;
-	
+	var spins = false;
 		
 	function init(){		
 		//initialize bank
