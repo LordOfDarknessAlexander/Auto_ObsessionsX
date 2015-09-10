@@ -35,7 +35,6 @@ function getUserName(){
     
     return loggedIn()?
         $_SESSION[$UN] : 'guest';
-	 
 }
 
 //

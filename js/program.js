@@ -315,7 +315,6 @@ Auction.BackOutofAuction = function(){
 	// // goingTimer = 0;
 	// startEndBids = [false,false,false,false];
 	// endBidTimers = [0,0,0,0];
-	// auctionEnded = true;
 	// auctionOver = true;
 	// endGame = true;
 }
@@ -342,7 +341,6 @@ Auction.sold = function(){
         s.bidder.pause();
     }
     
-	//auctionEnded = true;
 	//auctionOver = true;
 	endGame = true;
 	Auction._ended = true;
@@ -520,7 +518,6 @@ function(){
     setHomeImg();
     jq.carImg.show();
 	
-	//auctionEnded = false;
 	endGame = false;
 	//restarted = true;	
     setAdBG();

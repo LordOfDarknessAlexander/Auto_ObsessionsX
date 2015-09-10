@@ -1,28 +1,26 @@
 <?php
-//this php script commands the server to generate meta includes(CSS and JS) of the application
+//this php script commands the server to generate
+//meta includes(CSS and JS) of the application
 require_once 'html.php';
 //css to be included in the <head> element of the html document
-$paths = array(
+$css = array(
     'auto',
     //
     'main',   //'gameMenu',
-    'auction',
+    //'auction',
     'AuctionSell',
-    'LoseAuction',
-    'SaleView',
-	
-    //'garage',
-    //'profile',
-    //'register'
+    'LoseAuction'
+    //'SaleView'
 );
-foreach($paths as $p){html::incPHPCSS($p);}
-//html::incCSS('register');
+foreach($css as $p){
+    html::incPHPCSS($p);
+}
 //include meta javascripts
 ?>
 <script type="text/javascript" src="https://www.paypalobjects.com/js/external/dg.js"></script>
 <?php
 //global javascripts, to be included in the <head> element of the html document
-$paths = array(
+$js = array(
 	'jquery.2.1.1.min',
 	'payRequest',
 	'Vector',
@@ -30,5 +28,7 @@ $paths = array(
 	//'Users',
 	'requestAnimationFrame'
 );
-foreach($paths as $p){html::incJS($p);}
+foreach($js as $p){
+    html::incJS($p);
+}
 ?>

@@ -230,7 +230,6 @@ var Auction = {
 	    }
 		console.log('Auction close');
 		auctionStop = true;
-		//auctionEnded = false;
 		endGame = false;
 		
 		this.playerBid = 0;		
@@ -337,13 +336,6 @@ var Auction = {
                 // // }
             // // }
         // }
-        
-		//if(auctionEnded){
-			// this.close();		
-		// }
-		// if(endGame){
-			// this.close();					
-		// }
 
 		if(!this.canPlayerBid()){
 		    if(this.playerBidTimer < btc){
@@ -650,7 +642,6 @@ var Auction = {
             //
             //if(userStats.money >= this.currentBid){
                 //userStats.money = userStats.money - this.currentBid;
-                //auctionEnded = true;
                 //push vehicle to garage
 	    //auctionStop = true;
 	    if (audioEnabled()) {

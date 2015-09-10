@@ -10,7 +10,8 @@ css::header();
     //user's garage div
     //echo 'div#Garage';
 //}
-function divGarage(){?>div#Garage<?php
+function divGarage(){
+    ?>div#Garage<?php
 }
 function divCarListView(){divGarage();?> div#carListView<?php
 }
@@ -180,6 +181,7 @@ current user car stylings
 <?php
     css::size('100%', '25%');
 ?>
+    object-fit:contain;
 }
 <?php divUserCar();?> label,
 <?php divSelectedCar();?> label

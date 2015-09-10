@@ -4,7 +4,8 @@ require_once 'ui.php';
 //
 css::header();
 //    
-function divAS(){?>div#AuctionSelect<?php
+function divAS(){
+    ?>div#AuctionSelect<?php
 }
 function lih(){?>   height:64px;
 <?php
@@ -98,6 +99,7 @@ Tint divs different colours for different classes
     css::left('0%');
 ?>
 	width:128px;
+    object-fit:contain;
 }
 <?php dasCV();?> div label#infoLabel{
 <?php

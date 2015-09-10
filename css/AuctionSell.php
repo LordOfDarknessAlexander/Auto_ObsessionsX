@@ -5,15 +5,15 @@ require_once 'ui.php';
 //
 css::header();
 //
-function divAS(){?>div#AuctionSell<?php
+function dASell(){?>div#AuctionSell<?php
 }
-function dcv(){divAS();?> div#carView<?php
+function dcv(){dASell();?> div#carView<?php
 }
 ?>
 /*
 Auction Sales Screen Styles
 */
-<?php divAS();?>{
+<?php dASell();?>{
 <?php
     posAbs();
     css::size('100%', '100%');
@@ -26,7 +26,7 @@ Auction Sales Screen Styles
 	text-align: center;
 	z-index: 1;
 }
-<?php divAS();?> ul
+<?php dASell();?> ul
 {
 	margin:0;
 	padding:0;
@@ -138,7 +138,7 @@ Auction Select Car View
     height:50%;
     padding:0% 0%;
 }
-<?php divAS();?> div button label{
+<?php dASell();?> div button label{
 	font-size:1.25em;
 	background-size: 100% 100%;
 	/*font-family::;

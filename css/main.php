@@ -8,10 +8,12 @@ css::header();
 //using php require should be faster than css @import
 $css = array(
     'AuctionSelect',
+    'auction',
     'profile',
     'repair',
     'garage',
     'carView',
+    'SaleView',
     'profile'
 );
 foreach($css as $p){

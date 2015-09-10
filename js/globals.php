@@ -166,15 +166,12 @@ var bidders = ["Bidder_990 ", "Bidder_1090 " ,"Bidder_3490 ", "Bidder_320 " ,"Bi
 var playerWon = false;
 
 //Global frame timer
-//var timer = 0;
 var previousTime = Date.now();
 
 var deltaTime = (Date.now() - previousTime) / 1000;
 previousTime = Date.now();
-//timer += deltaTime;
 
 var endGame = false;
-var auctionEnded = false;
 var restartTimer = 0;
 
 var appState = GAME_MODE.SPLASH;	

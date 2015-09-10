@@ -6,7 +6,8 @@ require_once 'ui.php';
 //
 css::header();
 //
-function divSaleView(){?>div#SaleView<?php
+function divSaleView(){
+    ?>div#SaleView<?php
 }
 ?>
 /*

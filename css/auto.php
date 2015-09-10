@@ -335,6 +335,7 @@ img#mainCar{
 	left:20%;
 	bottom:12%;
     z-index:2;
+    /*object-fit:contain;*/
 }
 /*
 nav bar
