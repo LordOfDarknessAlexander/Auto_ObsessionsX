@@ -25,8 +25,10 @@ $paths = array(
     'state/AuctionSell',
     //
 	'allowance',
+	'slots/miniSlots',	
     //
     'program'	//main javascript program
+	
 );
 addPHPJS('globals');
 addPHPJS('pas');

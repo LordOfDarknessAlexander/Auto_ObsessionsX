@@ -1,5 +1,6 @@
 <?php
 require_once 'html.php';
+require_once 'ao.php';
 require_once 'dbConnect.php';
 //
 //html::doctype();
@@ -17,7 +18,8 @@ html::slotStyles();
 </head>
 <body>
 <div id='nav'>
-<li><a href='index.php' title='Home Page'>Home</a><br></li>
+
+ 	
 </div>
 <div id='container'>
 
@@ -39,9 +41,15 @@ html::slotStyles();
                 <div id = 'bankValue'></div>
                 <div id = 'wonTextDiv'></div>
                 <!--Buttons-->
-                <button id = 'slotStop'></button>
-                <button id = 'spinButton'></button>
-                <button id = 'payPalButton'></button>	
+				<div id='nav'>
+               <!-- <button id = 'slotStop'></button> -->
+				<li><a class='button spinButton' >Spin</li></a>
+				<!--temp stop button ---->
+				<li><a class='button slotStop' >Stop</li></a>
+				<li><a href='index.php' title='Home Page'>Home</a><br></li>
+				</div>
+                <!--<button id = 'spinButton'></button> -->
+               
                 <!--Slot Windows-->
                 <canvas id = 'slot1'></canvas>
                 <canvas id = 'slot2'></canvas>

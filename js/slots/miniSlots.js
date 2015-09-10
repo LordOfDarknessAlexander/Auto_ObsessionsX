@@ -1,18 +1,24 @@
+	var slot1Canvas = document.getElementById('slot1'),
+        slot1Context = slot1Canvas.getContext('2d'),
+		//slot1Context = $("slot1").get(0);
+        slot2Canvas = document.getElementById('slot2'),
+        slot2Context = slot2Canvas.getContext('2d'),
+		//slot2Context = $("slot2").get(0);
+        slot3Canvas = document.getElementById('slot3'),
+		//slot3Context = $("slot3").get(0);
+        slot3Context = slot3Canvas.getContext('2d');
+
 $(document).ready(
 function(){
     //update to use jQuery
 	//Reels 
-	var slot1Canvas = document.getElementById('slot1'),
-        slot1Context = slot1Canvas.getContext('2d'),
-        slot2Canvas = document.getElementById('slot2'),
-        slot2Context = slot2Canvas.getContext('2d'),
-        slot3Canvas = document.getElementById('slot3'),
-        slot3Context = slot3Canvas.getContext('2d');
+//slots
+
+
 	//Buttons
-	var slotStopButton = document.getElementById('slotStop'),
-        spinButton = document.getElementById('spinButton');
+
+    var spinButton = document.getElementById('spinButton');
 	
-	//Play data
 	var slot1 = [];
 	var slot2 = [];
 	var slot3 = [];
@@ -20,21 +26,18 @@ function(){
 	var slot1spin = true,
         slot2spin = true,
         slot3spin = true;
-    //
-	var gameFinished = false;
-    //
+
 	var slot1curr = currFrame,
         slot2curr = currFrame,
         slot3curr = currFrame;
-    //
+   
 	var randSlot1 = 0,
         randSlot2 = 0,
         randSlot3 = 0;
-    //
+		
 	var rand = 0;
 	var currFrame = 0;	
 	//Values
-	var money = 0;
 	var winnings = 0;
 	var tokens = 0;
 	//Images
@@ -46,31 +49,32 @@ function(){
         reelsSpinning = document.getElementById('reelSpinning'),
         noWin = document.getElementById('youLose'),
         youWin = document.getElementById('winSound');
-    //
-	var spins = false;
 	
+	var gameFinished = false;
+	var spins = false;
+		
 	function init(){		
 		//initialize bank
 		//will need accsess to the mamber datbase so that this can be set according to the clients information
-		money  = 1;//for testing
+		//aoTimer.update();
+    
+		//var now = getTimestamp(), //in milliseconds
+		//dt = aoTimer.getDT();
 		tokens = 3;
 		
 		//initialize text
 		$('div#welcomeTextDiv').text('Welcome to the Auto Obsessions Slots');
 		$('div#bankValue').text('You have ' + tokens + ' tokens');
 	
-		//initialize handlers
-		slotStopButton.addEventListener('mousedown', stopButtonHandler, false);
-		spinButton.addEventListener('mousedown', spinButtonHandler, false);
 		document.addEventListener('keyup',keyUpHandler, false);
 		turnOffLights();
 	}
 	function update(){
 		window.requestAnimationFrame(update, $('canvas#slot1Canvas'));
 		
-		slot1Context.clearRect(0, 0, slot1Canvas.width, slot1Canvas.height);
-		slot2Context.clearRect(0, 0, slot2Canvas.width, slot2Canvas.height);
-		slot3Context.clearRect(0, 0, slot3Canvas.width, slot3Canvas.height);
+		this.slot1Context.clearRect(0, 0, slot1Canvas.width, slot1Canvas.height);
+		this.slot2Context.clearRect(0, 0, slot2Canvas.width, slot2Canvas.height);
+		this.slot3Context.clearRect(0, 0, slot3Canvas.width, slot3Canvas.height);
 		drawReels();
  		spinReels();
 		
@@ -206,7 +210,7 @@ function(){
 	}
 
 	function startSpin(){
-		if(gameFinished == false){
+		if(this.gameFinished == false){
 			winnings = 0;
 			//tokens = 0;
 			
@@ -217,8 +221,7 @@ function(){
 			slot1spin = true;
 			slot2spin = true;
 			slot3spin = true;
-			
-			
+		
 		}
 		else{
 			stop();
@@ -236,69 +239,6 @@ function(){
 		}
 	}
 	
-	function spinButtonHandler(event){
-		if(gameFinished == false){
-			winnings = 0;
-			tokens --;
-			turnOffLights();
-			//playReelSpin();
-			
-			$('div#bankValue').text('You have $' + tokens);
-			$('div#resultsTextDiv').text('');
-			$('div#wonTextDiv').text('');
-			
-			slot1spin = true;
-			slot2spin = true;
-			slot3spin = true;
-			//gameFinished = false;			
-		}
-		
-		update();		
-	}	
-	
-	function stopButtonHandler(event){
-        //
-		spinTimer = 200;
-		spins = true;
-		update();
-		
-		console.log(spinTimer);
-		if((slot1spin == true) && (spinTimer < 200)){
-			slot1curr = randomNum();//slot1[randomNum()];
-			playReelSpin();
-			slot1spin = false;
-			spins = true;
-			//spinTimer --;
-			update();
-		}
-		else if((slot2spin == true) && (spinTimer < 100)){
-			slot2curr = randomNum();//slot2[randomNum()];
-			playReelSpin();
-			slot2spin = false;
-			spins = true;
-			spinTimer --;
-			update();
-		}
-		else if((slot3spin == true)&& (spinTimer < 50)){
-			slot3curr = randomNum();//slot3[randomNum()];
-			playReelSpin();
-			slot3spin = false;
-			spins = true;
-			//spinTimer --;
-			update();
-		}
-		
-		if(gameFinished == false){
-			stop();
-			checkForWin();
-			slot1spin = false;
-			slot2spin = false;
-			slot3spin = false; 
-		}
-		else{
-			return;
-		}
-	}
 	function drawReels(){
 		//slot 1
         src = 'images/ReelImages/';
@@ -502,6 +442,74 @@ function(){
 		$('div#lowerRightSmall').css(state);
 		$('div#RightFog').css(state);
 	}	
+	
+	$('.spinButton').click(
+	function(){
+		startSpin();
+		if(gameFinished == false){
+			winnings = 0;
+			tokens --;
+			turnOffLights();
+			//playReelSpin();
+			
+			$('div#bankValue').text('You have ' + tokens);
+			$('div#resultsTextDiv').text('');
+			$('div#wonTextDiv').text('');
+			
+			slot1spin = true;
+			slot2spin = true;
+			slot3spin = true;
+			//gameFinished = false;			
+		}
+		
+		update();
+	});
+	
+	$('.slotStop').click(
+	function(){
+		
+		spinTimer = 200;
+		spins = true;
+		update();
+		
+		console.log(spinTimer);
+		if((slot1spin == true) && (spinTimer < 200)){
+			slot1curr = randomNum();//slot1[randomNum()];
+			playReelSpin();
+			slot1spin = false;
+			spins = true;
+			//spinTimer --;
+			update();
+		}
+		else if((slot2spin == true) && (spinTimer < 100)){
+			slot2curr = randomNum();//slot2[randomNum()];
+			playReelSpin();
+			slot2spin = false;
+			spins = true;
+			spinTimer --;
+			update();
+		}
+		else if((slot3spin == true)&& (spinTimer < 50)){
+			slot3curr = randomNum();//slot3[randomNum()];
+			playReelSpin();
+			slot3spin = false;
+			spins = true;
+			//spinTimer --;
+			update();
+		}
+		
+		if(gameFinished == false){
+			stop();
+			checkForWin();
+			slot1spin = false;
+			slot2spin = false;
+			slot3spin = false; 
+		}
+		else{
+			return;
+		}
+	
+	});
 
 	init();
 });
