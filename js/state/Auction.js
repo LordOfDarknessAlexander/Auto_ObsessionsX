@@ -1,6 +1,14 @@
 ﻿//
 //<php if(debug() ){>
-jq.Auction.divPB = $('div#Auction div#pbCD');
+jq.Auction = {
+    menu:$('div#Auction'),
+    backBtn:$('div#Auction button#backBtn'),
+    homeBtn:$('div#Auction button#homeBtn'),
+    carPrice:$('div#Auction label#carPrice'),
+    goingLabel:$('label#going'),
+    divPB:$('div#Auction div#pbCD')
+    //carPrice:$('#carPrice');
+}
 jq.Auction.cdpbG = $('progress#gcd', jq.Auction.divPB);
 jq.Auction.cdpb0 = $('progress#ai0', jq.Auction.divPB);
 jq.Auction.cdpb1 = $('progress#ai1', jq.Auction.divPB);

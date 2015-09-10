@@ -1,4 +1,7 @@
-<?php //header('Content-type: application/javascript; charset: UTF-8');
+<?php
+if(!headers_sent() ){
+    header('Content-type: application/javascript; charset: UTF-8');
+}
 //Action Select State Object
 require_once '../../dbConnect.php';
 require_once '../../vehicles/vehicle.php';

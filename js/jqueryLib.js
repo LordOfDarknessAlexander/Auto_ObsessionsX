@@ -1,8 +1,6 @@
 ﻿//This file contains jQuery functions for manipulation of the application's 'index.html'
 //functions and objects are visable to any file linking this document
 //<php function divGame(){return 'div#gameMenu'}?>
-//<php function divGarage(){return 'div#garage'}?>
-//<php function divGarage(){return 'div#garage'}?>
 var jq = {
 	//namespace containing application bindings for jquery,
 	//preforms qjery call one then stores the result as an object
@@ -12,38 +10,17 @@ var jq = {
     error:$('pre#info'),
     nav:$('div#reg-navigation'),
     sound:$('div.sound'),
-    //statBar:{
-        //div:$('div#statBar'),
-        //money:$('div#statBar label#money'),
-        //tokens:$('div#statBar label#tokens'),
-        //prest:$('div#statBar label#prestige'),
-        //markers:,
-        //Setters
-        //setMoney():function(),
-        //setTokens:function(),
-        //setPrestige:function(),
-        //setMarkers:function(),
-        //
-        //function setStatBar(){
-            //jq.statBar.show();
-            //jq.statBar.setName();
-            //jq.statBar.setMoney();
-            //jq.statBar.setTokens();
-            //jq.statBar.setPrestige();
-            //jq.statBar.setMarkers();
-        //}
-    //}
 	userCash:$('label#userCash'),
     //msg:$('p#msg'),   //a label for sending messages to the user
     carImg:$('img#mainCar'),   //a label for sending messages to the user
-	setCash : function(val)
-	{	//set the html for the userCash label, to be displayed in browser
+	setCash : function(val){
+        //set the html for the userCash label, to be displayed in browser
 		this.userCash.html(val.toString());
 	},
     setErr:function(funcName, info){
         //
-        //sets the jq.error info box, to inform the user an error occured
-        //clear error            
+        //sets the jq.error info box, to inform the user an error occured,
+        //or clears the error in info is not supplied
         if(funcName === null || funcName === undefined){
             jq.error.text('');
             jq.error.hide();
@@ -95,7 +72,7 @@ var jq = {
 		toMsgBtn:$('div#gameMenu button#messages'),
 		toRankingsBtn:$('div#gameMenu button#rankings'),
         toSearchBtn:$('div#gameMenu button#search'),
-        toBuisnessBtn:$('div#gameMenu button#buyBusiness'),
+        toBuisnessBtn:$('div#gameMenu button#buyBusiness')
         //toFAQBtn:$(''),
 	},
 	Credits : {
@@ -124,19 +101,6 @@ var jq = {
 			//$('#Garage').toggle();
 		}
 	},
-	// AuctionSelect : {
-		// menu : $('div#AuctionSelect'),
-		// backBtn : $('div#AuctionSelect button#backBtn')
-        // //carView : $('div#AuctionSelect div#carView'),
-	// },
-	Auction : {
-		menu : $('div#Auction'),
-		backBtn : $('div#Auction button#backBtn'),
-		homeBtn : $('div#Auction button#homeBtn'),
-		carPrice : $('div#Auction label#carPrice'),
-		goingLabel : $('label#going')
-        //carPrice:$('#carPrice');
-	},
 	CarView : {
 		menu : $('div#CarView'),
 		backBtn : $('div#CarView button#backBtn'),
@@ -147,8 +111,8 @@ var jq = {
         carName : $('div#CarView label#carName'),
 		carInfo : $('div#CarView label#carInfo'),
 		//
-        toggle:function()
-		{	//go from (my cars to car view) || (car view to my cars)
+        toggle:function(){
+            //go from (my cars to car view) || (car view to my cars)
 			//jq.Garage.menu.toggle();
 			//this.menu.toggle();
 			jq.Garage.menu.toggle();
@@ -183,15 +147,14 @@ var jq = {
             jq.setErr();    //clear error when changing pages
 		}
 	},
-    Sold : {
-        menu : $('div#sold'),
-        homeBtn:$('div#sold button#homeBtn'),
-        garageBtn:$('div#sold button#garageBtn'),
-    },
+    // Sold : {
+        // menu : $('div#sold'),
+        // homeBtn:$('div#sold button#homeBtn'),
+        // garageBtn:$('div#sold button#garageBtn'),
+    // },
 	Loss : {
         menu : $('div#loss'),
-        homeBtn:$('div#loss button#homeBtn'),
-       
+        homeBtn:$('div#loss button#homeBtn')       
     },
     /*Messages:{
         menu:$('div#messages'),
@@ -229,6 +192,11 @@ var jq = {
 			jq.Business.menu.toggle();
 		}        
     },*/
+    //high level interface for short hand calls
+    //to jquery's http Ajax protocol
+    //all functions return JSON formatted text,
+    //which the browser will intrinsically convert
+    //to javascript object(s) for use in browser-side operations
     get:function(localPath, doneCB, failedCB){
         //get does not pass arguments to the script,
         //embed any optional params in localPath!
@@ -266,9 +234,6 @@ function setAdBG(){
 	jq.adBar.attr('src', src);
 	jq.adBar.show();
 }
-
-$('.credits').click(jq.Credits.toggle);
-$('.back').click(jq.Credits.toggle);
 //
 //Game Menu Add funds portal button
 //

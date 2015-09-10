@@ -1,5 +1,7 @@
 <?php
-header('Content-type: application/javascript; charset: UTF-8');
+if(!headers_sent() ){
+    header('Content-type: application/javascript; charset: UTF-8');
+}
 //
 require_once '../ao.php';
 require_once '../secure.php';

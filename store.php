@@ -466,6 +466,7 @@ if(!$LI){
 <?php
 }?>
 jq.statBar.set.stats();
+setAdBG();
 //TODO: bind update every frame to update a visual cooldown for the 
 //allowance button's refresh
 //

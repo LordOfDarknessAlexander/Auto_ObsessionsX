@@ -1,6 +1,5 @@
 <?php
 //auction sale state stylings
-//header("Content-type: text/css; charset: UTF-8");
 //    
 require_once 'ui.php';
 //
@@ -12,7 +11,7 @@ function dcv(){divAS();?> div#carView<?php
 }
 ?>
 /*
-Auction Select Screen
+Auction Sales Screen Styles
 */
 <?php divAS();?>{
 <?php

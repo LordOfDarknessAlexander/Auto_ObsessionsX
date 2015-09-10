@@ -1,7 +1,7 @@
 <?php
 require_once 'ui.php';
 //
-//css::header();
+css::header();
 //    
 function divPro(){?>div#profile<?php
 }

@@ -1,9 +1,8 @@
 <?php
-//header("Content-type: text/css; charset: UTF-8");
 //garage UI stylings as php commands
 require_once 'ui.php';
 //
-//css::header();
+css::header();
 //
 //require_once 'carView.php';
 // 

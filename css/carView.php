@@ -2,22 +2,23 @@
 //Car View UI stylings
 //header("Content-type: text/css; charset: UTF-8");
 require_once 'ui.php';
-//css::header();
+//
+css::header();
 //
 $fs = '1.5vw';  //font size
 $btnW = '8.75%';
 $btnH = '7.5%';
 //
-function divCarView(){?>div#CarView<?php
+function dCV(){?>div#CarView<?php
 }
 function rStatView($id, $hTop, $dTop){
-    divCarView(); echo "h2#$id";?>{<?php
+    dCV(); echo "h2#$id";?>{<?php
     css::rm();
     css::top($hTop);
 ?>
 }
 <?php
-    divCarView(); echo "div#$id";?>{<?php
+    dCV(); echo "div#$id";?>{<?php
     css::rm();
     css::top($dTop);
 ?>
@@ -25,13 +26,13 @@ function rStatView($id, $hTop, $dTop){
 }
 
 function lStatView($id, $hTop, $dTop){
-    divCarView(); echo "h2#$id";?>{<?php
+    dCV(); echo "h2#$id";?>{<?php
     css::lm();
     css::top($hTop);
 ?>
 }
 <?php
-    divCarView(); echo "div#$id";?>{<?php
+    dCV(); echo "div#$id";?>{<?php
     css::rm();
     css::top($dTop);
 ?>
@@ -41,7 +42,7 @@ function lStatView($id, $hTop, $dTop){
 /*
 Car View Screen
 */
-<?php divCarView();?>
+<?php dCV();?>
 {<?php
     //defaultBG();
     css::size('100%', '100%');
@@ -53,10 +54,10 @@ Car View Screen
 /*	padding-top: 92px;*/
 	z-index: 1;
 }
-<?php divCarView();?> progress{
+<?php dCV();?> progress{
     width:100%;
 }
-<?php divCarView();?> button{<?php
+<?php dCV();?> button{<?php
 	//rule for all button in CarView div
 	defaultColor();
     css::fontBold();
@@ -64,7 +65,7 @@ Car View Screen
     posAbs();
 ?>
 }
-<?php divCarView();?> button#select{
+<?php dCV();?> button#select{
 <?php
     posAbs();
     css::marginBtm();
@@ -73,7 +74,7 @@ Car View Screen
 ?>	
     font-size:1.5vw;
 }
-<?php divCarView();?> button#sell{
+<?php dCV();?> button#sell{
 <?php
     css::marginBtm();
     css::size($btnW, $btnH);
@@ -85,7 +86,7 @@ Car View Screen
 
     font-size:1.5vw;
 }
-<?php divCarView();?> label
+<?php dCV();?> label
 {<?php
     defaultColor();
     posAbs();
@@ -96,7 +97,7 @@ Car View Screen
 
 	left:20%;
 }
-<?php divCarView();?> label#carName
+<?php dCV();?> label#carName
 {<?php
     css::fontBold();
     //css::top('20%');
@@ -113,7 +114,7 @@ Car View Screen
     vertical-align: middle;*/
     
 }
-<?php divCarView();?> label#carInfo{
+<?php dCV();?> label#carInfo{
 <?php
     css::marginBtm();
     css::txtAlignL();
@@ -122,7 +123,7 @@ Car View Screen
     font-size:1.5vw;
     display:block;
 }
-<?php divCarView();?> h2{
+<?php dCV();?> h2{
 <?php
     posAbs();
     css::size('14%', '5%');
@@ -132,7 +133,7 @@ Car View Screen
     /*background:url('../headerBG.jpg');*/
     margin:0%;    
 }
-<?php divCarView();?> div{
+<?php dCV();?> div{
 <?php
     posAbs();
     scrollY();
@@ -154,26 +155,26 @@ Car View left div
     //rStatView('interior', '28%', '33%');
     //rStatView('docs', '60%', '65%');
 ?>
-<?php divCarView();?> h2#dt{<?php
+<?php dCV();?> h2#dt{<?php
     css::lm();
     css::top('28%');
     css::defaultBG('../images/drivetrain.png');
     css::bgSize('100%', '100%');
 ?>
 }
-<?php divCarView();?> div#drivetrain{<?php
+<?php dCV();?> div#drivetrain{<?php
     css::lm();
     css::top('33%');
 ?>	
 }
-<?php divCarView();?> h2#body{<?php
+<?php dCV();?> h2#body{<?php
     css::lm();
     css::top('59%');
     css::defaultBG('../images/body.png');
     css::bgSize('100%', '100%');
 ?>
 }
-<?php divCarView();?> div#body{<?php
+<?php dCV();?> div#body{<?php
     css::lm();
     css::top('64%');
 ?>
@@ -181,26 +182,26 @@ Car View left div
 /*
 Car View right div
 */
-<?php divCarView();?> h2#interior{<?php
+<?php dCV();?> h2#interior{<?php
     css::rm();
     css::top('28%');
     css::defaultBG('../images/interior.png');
     css::bgSize('100%', '100%');
 ?>
 }
-<?php divCarView();?> div#interior{<?php
+<?php dCV();?> div#interior{<?php
     css::rm();
     css::top('33%');
 ?>
 }
-<?php divCarView();?> h2#docs{<?php
+<?php dCV();?> h2#docs{<?php
     css::rm();
     css::top('59%');
     css::defaultBG('../images/documents.png');
     css::bgSize('100%', '100%');
 ?>;
 }
-<?php divCarView();?> div#docs{<?php
+<?php dCV();?> div#docs{<?php
     css::rm();
     css::top('64%');
 ?>

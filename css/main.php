@@ -6,12 +6,17 @@ require_once 'ui.php';
 //
 css::header();
 //using php require should be faster than css @import
-require_once 'AuctionSelect.php';
-require_once 'profile.php';
-require_once 'repair.php';
-require_once 'garage.php';
-require_once 'carView.php';
-require_once 'profile.php';
+$css = array(
+    'AuctionSelect',
+    'profile',
+    'repair',
+    'garage',
+    'carView',
+    'profile'
+);
+foreach($css as $p){
+    require_once "$p.php";
+}
 //    
 function dgm(){?>div#gameMenu<?php
 }
@@ -105,8 +110,7 @@ Main Game Menu Styles
 	color:green;
 	margin-top: -26%;
     left:10%;
-    z-index:2;
-	
+    z-index:2;	
 }
 
 <?php dgm();?> li{
@@ -124,8 +128,7 @@ Main Game Menu Styles
     //rule for all div elements inside Main
     posAbs();
     defaultColor();
-    css::size('15%', '60%');
-	
+    css::size('15%', '60%');	
 ?>
 }
 <?php dml();?>{

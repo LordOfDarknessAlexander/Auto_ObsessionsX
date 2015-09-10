@@ -1,4 +1,8 @@
-
+<?php
+if(!headers_sent() ){
+    header('Content-type: application/javascript; charset: UTF-8');
+}
+?>
 //
 //User Profile jQuery interface bindings
 //

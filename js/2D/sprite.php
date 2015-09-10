@@ -4,6 +4,9 @@
 //Created by Tyler R. Drury, 10-09-2015
 //(C) 8.5:1 Entertainment, All Rights Reserved
 //
+if(!headers_sent() ){
+    header('Content-type: application/javascript; charset: UTF-8');
+}
 ?>
 //
 function Sprite(x, y, type){

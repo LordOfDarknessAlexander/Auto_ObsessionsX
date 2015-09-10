@@ -1,7 +1,7 @@
-//Repair State interface, mod your ride and upgrade parts
-//Dependant on state\Garage.js, for userGarage and car index
-//and js/entities/ for Vehicle and Parts
 <?php
+if(!headers_sent() ){
+    header('Content-type: application/javascript; charset: UTF-8');
+}
 function drs(){?>div#RepairShop<?php
 }
 function drsDiv(){
@@ -10,6 +10,10 @@ function drsDiv(){
 function drsSwitch(){
     drsDiv();?>#switch<?php
 }?>
+//Repair State interface, mod your ride and upgrade parts
+//Dependant on state\Garage.js, for userGarage and car index
+//and js/entities/ for Vehicle and Parts
+//
 jq.RepairShop = {
     //jquery html bindings
     menu : $('<?php drs();?>'),

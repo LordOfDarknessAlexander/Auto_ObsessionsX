@@ -1,8 +1,9 @@
 <?php
 //Lose Auction UI stylings
-header("Content-type: text/css; charset: UTF-8");
 //
 require_once 'ui.php';
+//
+css::header();
 //
 function divSold(){
     echo 'div#sold';

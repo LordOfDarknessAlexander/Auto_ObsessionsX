@@ -1,6 +1,5 @@
 <?php
 //auction state stylings
-//header("Content-type: text/css; charset: UTF-8");
 //    
 require_once 'ui.php';
 //

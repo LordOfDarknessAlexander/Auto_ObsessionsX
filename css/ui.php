@@ -75,7 +75,13 @@ class css{
 <?php
     }
     public static function header(){
-        header("Content-type: text/css; charset: UTF-8");
+        //if headers have not already been sent,
+        //mark calling file as CSS
+        if(!headers_sent() ){
+            header("Content-type: text/css; charset: UTF-8");
+        }
+        //else file include the one executing this function
+        //should already have its header marked as CSS
     }
     //Margins, Boarders and Off-sets
     public static function right($str){?>

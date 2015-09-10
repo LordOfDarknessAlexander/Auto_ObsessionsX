@@ -195,37 +195,43 @@ function switchStates(){
 }
 //$(function()	//shorthand for $(document).ready(
 //executed after the html document is processed
-$(document).ready(
-function(){
-	//Declare functions and objects dependant on the html
-	//document being loaded within this callback,
-	//such as jQuery/ui callback bindings,
-	//loading assets and 'core' game logic
-	//Storage.local.clear();
-	//alert('doc ready!');
-	//pas.query.loadUser();   //load user stats!
-	Allowance.getLastTime();
-	//setStatBar();
-    load();
-	//loadUser();
-    //Garage.load();  //load user garage!
-    //AuctionSell.load(); //load user sales, after garage!
+$(function(){
+//Declare functions and objects dependant on the html
+//document being loaded within this callback,
+//such as jQuery/ui callback bindings,
+//loading assets and 'core' game logic
+//Storage.local.clear();
+//alert('doc ready!');
+//pas.query.loadUser();   //load user stats!
+Allowance.getLastTime();
+//setStatBar();
+load();
+//loadUser();
+//Garage.load();  //load user garage!
+//AuctionSell.load(); //load user sales, after garage!
 
-    setHomeImg();   //in Garage.js
-    setAdBG();
-    jq.adBar.hide();
-    jq.nav.hide();
-	appState = GAME_MODE.MAIN_MENU;
-	mainMenu();  
-	//jq.setErr('Welcome home, ' + user.name);
-	
-	
+setHomeImg();   //in Garage.js
+setAdBG();
+jq.adBar.hide();
+jq.nav.hide();
+appState = GAME_MODE.MAIN_MENU;
+mainMenu();  
+//jq.setErr('Welcome home, ' + user.name);
+$('.credits').click(jq.Credits.toggle);
+$('.back').click(jq.Credits.toggle);
+//
+jq.Sold = {
+    menu:$('div#sold'),
+    homeBtn:$('div#sold button#homeBtn'),
+    garageBtn:$('div#sold button#garageBtn')
+    //asBtn:$('div#sold button#auctionSelect')
+};
 //Load the splash screen first
 assetLoader.finished = function(){
     //executed when assetLoader finalizes resource creation
-	$('#splash').removeClass('#Slots');
-  	$('#Slots').hide();
-  	switchStates();  
+    $('#splash').removeClass('#Slots');
+    $('#Slots').hide();
+    switchStates();  
 }
 
 function splash(){
@@ -234,14 +240,13 @@ function splash(){
     garageDoor();
     $('#progress').hide();
     $('#splash').show();
-	$('#splash').removeClass('#Slots');
-	 $('#Slots').hide();
-	 $('.sound').show();
+    $('#splash').removeClass('#Slots');
+    $('#Slots').hide();
+    $('.sound').show();
 }
 
-//Main Menu  
-function mainMenu() 
-{
+function mainMenu(){
+    //Main Menu
     assetLoader.toggleAudioMuted();
 //   for(var sound in assetLoader.sounds){
 //        if(assetLoader.sounds.hasOwnProperty(sound)){
@@ -262,17 +267,17 @@ function mainMenu()
 
 function callSlots(){
     //change to slots
-	stop = true;
-	auctionStop = true;
-	context.clearRect(0, 0, canvas.width, canvas.height);
-	$('#Slots').show();
+    stop = true;
+    auctionStop = true;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    $('#Slots').show();
 
-	appState = GAME_MODE.SLOTS;
-	if(appState == GAME_MODE.SLOTS)
-	{
-		console.log("Register THis Slot Action");
-	
-	}
+    appState = GAME_MODE.SLOTS;
+    if(appState == GAME_MODE.SLOTS)
+    {
+        console.log("Register THis Slot Action");
+    
+    }
 }
 
 //money = 50000;

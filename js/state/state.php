@@ -1,4 +1,9 @@
 <?php
+//
+//state\meta.php
+//Created by Tyler R. Drury,
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
 header('Content-type: application/javascript; charset: UTF-8');
 //js/state meta header, including all js into a single source file,
 //less code is repeated as this header call needs to be made only once,

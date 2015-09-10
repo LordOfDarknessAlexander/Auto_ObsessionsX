@@ -2,7 +2,7 @@
 //auction state stylings
 require_once 'ui.php';
 //
-//css::header();
+css::header();
 //    
 function divAS(){?>div#AuctionSelect<?php
 }
