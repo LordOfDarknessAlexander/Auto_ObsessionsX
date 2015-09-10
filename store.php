@@ -60,76 +60,103 @@ function ppSrc(){
 
 $completed = false;
 $msg = '';
-    
+
+function isCashVal($str){
+    //is string a continuous series of integer digits(no commas or periods)
+    //no special characters, letters, whitespace or symbols
+    return preg_match('/^(50|200|500|1000)$/', $str);
+}
+function isTokenVal($str){
+    //is string a continuous series of integer digits(no commas or periods)
+    //no special characters, letters, whitespace or symbols
+    return preg_match('/^(3|5|10|20)$/', $str);
+}
 if(isSetG() ){
+    //op and val would have be checked against a reg-ex
+    //by apache(see .htaccess), assuming the user navigates
+    //via expected means, yet if a user/hacker where to type
+    //the url in it whole, these values would still need to be
+    //checked here for additional safety
 	$op = getOpFromGET();
 	$val = '';
-	
-	if($op == 'cash'){
-		$funds = 0.0;
-		
-		if($val == 'c50'){
-			$funds = 50000.0;
-			user::incFunds($funds);
-			$completed = true;
-		}
-		else if($val == 'c200'){
-			$funds = 200000.0;
-			user::incFunds($funds);
-			$completed = true;
-		}
-		else if($val == 'c500'){
-			$funds = 500000.0;
-			user::incFunds($funds);
-			$completed = true;
-		}
-		else if($val == 'c1000'){
-			$funds = 1000000.0;
-			user::incFunds($funds);
-			$completed = true;
-		}
-		
-		if($completed){
-			$msg = "Your purchase of \$$funds completed successfully.";
-		}
-		else{
-			$msg = "Your purchase of \$$funds was unsuccessful.";
-		}
-	}
-	else if($op == 'tokens'){
-		$amount = 0;
-		
-		if($val == 't3'){
-			$amount = 3;
-			purchase::tokens($amount);
-			$completed = true;
-		}
-		else if($val == 't5'){
-			$amount = 5;
-			purchase::tokens($amount);
-			$completed = true;
-		}
-		else if($val == 't10'){
-			$amount = 10;
-			purchase::tokens($amount);
-			$completed = true;
-		}
-		else if($val == 't20'){
-			$amount = 20;
-			purchase::tokens($amount);
-			$completed = true;
-		}
+    $f = false; //isset($_GET['failed']);
 
-		if($completed){
-			$msg = "Your purchase of $amount tokens completed successfully.";
-		}
-		else{
-			$msg = "Your purchase of $amount tokens was unsuccessful.";
-		}
-	}
-	else{
-		$msg = "Invalid operation, unrecognized argument passed to get.";
-	}		
+    if($f){
+        $msg = "purchase failed. Try again later or visit the contacts page for technical assistance";
+    }
+    else{    
+        if($op == 'cash'){
+            //$str = $_GET['val'];
+            #$val = isCashVal($str) ? intval($str) : '';
+        }
+        else if($op == 'tokens'){
+            //$str = $_GET['val'];
+            //$val = isTokenVal($str) ? intval($str) : '';
+        }
+        
+        if($op == 'cash'){
+            $funds = 0.0;
+            
+            if($val == 50){
+                $funds = 50000.0;
+                user::incFunds($funds);
+                $completed = true;
+            }
+            else if($val == 200){
+                $funds = 200000.0;
+                user::incFunds($funds);
+                $completed = true;
+            }
+            else if($val == 500){
+                $funds = 500000.0;
+                user::incFunds($funds);
+                $completed = true;
+            }
+            else if($val == 1000){
+                $funds = 1000000.0;
+                user::incFunds($funds);
+                $completed = true;
+            }
+            else{
+                //$msg = "unable to complete purchase, unexpected URL parameter";   // ($val)";
+            }
+            
+            if($completed){
+                $msg = "Your purchase of \$$funds completed successfully.";
+            }
+            else{
+                $msg = "Your purchase of \$$funds was unsuccessful.";
+            }
+        }
+        else if($op == 'tokens'){		
+            if($val == 3){
+                purchase::tokens($val);
+                $completed = true;
+            }
+            else if($val == 5){
+                purchase::tokens($val);
+                $completed = true;
+            }
+            else if($val == 10){
+                purchase::tokens($val);
+                $completed = true;
+            }
+            else if($val == 20){
+                purchase::tokens($val);
+                $completed = true;
+            }
+
+            if($completed){
+                $msg = "Your purchase of $amount tokens completed successfully.";
+            }
+            else{
+                $msg = "Your purchase of $amount tokens was unsuccessful.";
+            }
+        }
+        else{
+            $msg = "Invalid operation, unrecognized argument passed to get.";
+        }	
+    }        
 }
 //
 //if a purcahse has been made, get user stats will get the new values
@@ -321,6 +348,10 @@ function addPHPJS($str){
 }
 addPHPJS('globals');
 $js = array(
+    'jqueryLib',
+    'jqStatBar',
+    'allowance',
+    //'entities/parts/meta'
     'entities/parts/part',
     'entities/parts/drivetrain',
     'entities/parts/body',
@@ -328,13 +359,11 @@ $js = array(
     'entities/parts/docs',
     'entities/vehicle',
 );
-html::incJS('allowance');
-html::incJS('jqueryLib');
-html::incJS('jqStatBar');
+
 foreach($js as $p){
     html::incJS($p);
 }
-html::incJS('state/Garage');
+addPHPJS('state/Garage');
 ?>
 <script>
 // var user = {
@@ -365,14 +394,11 @@ if(Storage.local !== null && 'userGarage' in Storage.local){
     
     for(var i = 0; i < l; i++){
         var e = data[i],
+            //just need basic infor to make vehicle's
+            //image path for setHomeImg()
             car = Vehicle(
                 e.name, e.make, e.year, e._price,
                 e.id
-                //{drivetrain:e._dt,
-                //body:e._body,
-                //interior:e._interior,
-                //docs:e._docs,
-                //repairs:e._repairs}
             );
             
         userGarage.push(car);
@@ -421,15 +447,14 @@ else{?>
 
 		if(delta >= Allowance.CAP){
 			var val = 50000;    //1;	//(base + carValue) * delta;
-<?php
-if($LI){?>
-				Allowance.addFundsLoggedIn(val);
-<?php
+            Allowance.<?php
+if($LI){
+    ?>addFundsLoggedIn<?php
 }
-else{?>
-				Allowance.addFundsLocal(val);
-<?php
-}?>
+else{
+    ?>addFundsLocal<?php
+}?>(val);
+
 			Allowance.setLastTime();
 		}
 	});
@@ -441,6 +466,9 @@ if(!$LI){
 <?php
 }?>
 jq.statBar.set.stats();
+//TODO: bind update every frame to update a visual cooldown for the 
+//allowance button's refresh
+//
 });
 </script>
 <?php html::footer();?>

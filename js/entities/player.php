@@ -1,4 +1,11 @@
-﻿// The player object
+<?php
+//
+//player.php
+//Created by Tyler R. Drury, 9-09-2015
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
+?>
+// The player object
 var PLAYER_XPOS = 10;
 var PLAYER_YPOS = 20;
 
@@ -88,4 +95,5 @@ user._tokens = 0;
 user._prest = 0;
 user._markers = 0;
 */
+
 

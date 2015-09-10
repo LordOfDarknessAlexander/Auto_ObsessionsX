@@ -357,7 +357,7 @@ Vehicle.getRandomRepairs = function(){
 };
 Vehicle.makeRandom = function(name, price){
     var part = Vehicle.getRandomParts(),
-     rep = Vehicle.getRandomRepairs();
+        rep = Vehicle.getRandomRepairs();
         
     return Vehicle( );
 };

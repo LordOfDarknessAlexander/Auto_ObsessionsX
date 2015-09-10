@@ -1,13 +1,15 @@
+<?php
+function dug(){
+    //div user garage
+    ?>div#Garage<?php
+}
+?>
 //
 //Garage State interface
 //
 //test, user ca select between 3 cars
 //var currentCar = null;
-//<php
-//function loggedIn(){
-    //return true;
-//}
-//?>
+
 //jq.Garage.userCar = {
     //div:$('div#Garage div#userCar');
 //}
@@ -347,7 +349,7 @@ var Garage = {
     },
     load:function(){
         //loads user's car data, from database onserver, or local storage if playing locally
-//<?php
+//<php
 //if(loggedIn){
         //make server calls(using ajax) to serialize
         //user vehicles saved to database, so that vehicles
@@ -426,7 +428,7 @@ var Garage = {
 	save : function(){
         //saves garage and current car to local storage
 		//
-//<?php
+//<php
 //if(loggedIn){
         //post user garage to php page to save user cars to sql database
 //}
@@ -467,14 +469,14 @@ var Garage = {
 //<php
 //function pbSetColor($str){
 //sets the color of an html progress bar (using jQuery) named pb$str based on the property stats._$str;?>
-//pbSetColor($('progress#pb<?php echo $str;?>', div), stats.<php echo $str;?>);
-//<?php
+//pbSetColor($('progress#pb<php echo $str;>', div), stats.<php echo $str;?>);
+//<php
 //}
 //pbSetColor('Drivetrain');
 //pbSetColor('Body');
 //pbSetColor('Interior');
 //pbSetColor('Docs');
-//?>
+//>
         //set progress bar
             pbSetColor($('progress#pbDrivetrain', div), stats._driveterrain);
             pbSetColor($('progress#pbBody', div), stats._body);
@@ -499,13 +501,13 @@ var Garage = {
             _curCarID = _selCID;//(car === null) ? 0 : car.id;
 //<php if(loggedIn() ){>
             pas.set.userCar(_curCarID);
-//<?php
+//<php
 //}
 //else{
             //local storage
-//<?php  
+//<php  
 //}
-//?>
+//>
         //}
     },
 	setCurrentCar : function(){

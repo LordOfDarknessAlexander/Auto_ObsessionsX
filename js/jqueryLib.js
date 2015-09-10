@@ -124,11 +124,11 @@ var jq = {
 			//$('#Garage').toggle();
 		}
 	},
-	AuctionSelect : {
-		menu : $('div#AuctionSelect'),
-		backBtn : $('div#AuctionSelect button#backBtn')
-        //carView : $('div#AuctionSelect div#carView'),
-	},
+	// AuctionSelect : {
+		// menu : $('div#AuctionSelect'),
+		// backBtn : $('div#AuctionSelect button#backBtn')
+        // //carView : $('div#AuctionSelect div#carView'),
+	// },
 	Auction : {
 		menu : $('div#Auction'),
 		backBtn : $('div#Auction button#backBtn'),

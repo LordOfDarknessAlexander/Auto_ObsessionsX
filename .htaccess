@@ -1,4 +1,9 @@
-#disable external directory browsing(still enables the site to access folders/files within itself)
+#this is a system resource file, used by the apache server(or xampp)
+
+#disable external directory browsing,
+#resource folders like audio, images, or css should not
+#be viewable in a user's browser
+#still enables the site to access folders/files within itself
 Options -Indexes
 
 RewriteEngine on
@@ -7,16 +12,21 @@ RewriteRule ^pas/query$     pas/query.php [NC]
 #RewriteRule ^pas/get$       pas/get.php [NC]
 #RewriteRule ^pas/update$     pas/update.php [NC]
 #
+#scripts in pas (generally) only take a single argument,
+#being a 2-8 letter identifier representing
+#a change in functional behaviour of the script,
+#other arguments may be passed through $_POST
 RewriteRule ^pas/query/([[:alpha:]]{1,8})?$     pas/query.php?op=$1 [NC]
 RewriteRule ^pas/get/([[:alpha:]]{1,8})?$     pas/get.php?op=$1 [NC]
 RewriteRule ^pas/update/([[:alpha:]]{1,8})?$     pas/update.php?op=$1 [NC]
 #
 #Rewrite url for PAYPAL store interface
 #
-#RewriteRule ^store/cash/([[:digit:]]{1,4})?$     store.php?op=cash?val=$1 [NC]
-#RewriteRule ^store/tokens/([[:digit:]]{1,2})?$     store.php?op=tokens?val=$1 [NC]
+RewriteRule ^store-cash-(50|200|500|1000)?$     store.php?op=cash?val=$1 [NC]
+#RewriteRule ^store-tokens-(3|5|10|20)?$     store.php?op=tokens?val=$1 [NC]
 
 #Prevent users not originating from this site from POSTing to script
+#allows jquery javascript originating from this source to work
 #RewriteCond %{REQUEST_METHOD} POST
 #RewriteCond %{HTTP_REFERER} !^http://urltoyoursite.com [NC]
 #RewriteRule .* - [F]

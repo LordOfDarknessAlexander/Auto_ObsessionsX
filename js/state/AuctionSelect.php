@@ -29,7 +29,12 @@ function isValidData(){
 <?php
 }
 ?>
-jq.AuctionSelect.hideUnav = $('input#hideUnav');
+jq.AuctionSelect = {
+    menu:$('<?php das();?>'),
+    backBtn:$('<?php das();?> button#backBtn'),
+    //carView : $('<?php das();?> div#carView'),
+    hideUnav:$('input#hideUnav')
+};
 
 ao = {
     STAGE:{
@@ -163,31 +168,32 @@ var AuctionSelect = {
         
         this.list.append(btnStr);
         
-        var liName = '<?php asCarView();?> div#' + liID,
+        var t = 'title',
+            liName = '<?php asCarView();?> div#' + liID,
             div = $(liName),
             btn = $('button', div);
 
         if(hasCar || hasSoldCar){
         	//display but disable user from entering auction
-            div.css(tc).addClass('owned');
+            div.css(tc).addClass('owned').attr(t, 'owned');
             btn.off().click(this.denyAuction).css(defCrsr);
         }
         else if(hasLostCar){
         	//user has previously loss, fade and highlight red!
-            div.css(tc).addClass('lost');
+            div.css(tc).addClass('lost').attr(t, 'lost');
             //li.css('background-color', 'red');
             btn.off().click(this.denyAuction).css(defCrsr);
         }
         else if(price > userStats.money){
             //make temporarily unavailable auctions which the user does
             //not have the necessary funds to partake in
-            div.css(tc).addClass('isf');
+            div.css(tc).addClass('isf').attr(t, 'insufficient funds');
             btn.off().click(this.denyAuction).css(defCrsr);
         }
         else{
             //enable auction
             //var carID = btn.attr('id');
-            div.removeClass();
+            div.removeClass().attr(t, '');
             btn.off().click({index:i}, this.initAuction);
             //btn.css('background-image', "url(\'..\\images\\vehicle.jpg");	//car.getFullPath());
         }

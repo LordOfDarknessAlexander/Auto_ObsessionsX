@@ -64,6 +64,10 @@ function isSetS(){
     //is sessesion vars sets
     return isset($_SESSION);    //&& !empty();
 }
+//function isSetC(){
+    //is sessesion vars sets
+    //return isset($_COOKIES);    //&& !empty();
+//}
 function loggedIn(){
     //session started and the user has provided
     //a valid email/username and pasword	 
@@ -95,7 +99,47 @@ function eS(){
         )
     ) . PHP_EOL;
 }
-
+function getServerInfo(){
+    //This should only be used for developer and/or debug purposes,
+    //the end user should never have access to viewing the server config
+    return array(
+        'gatewayInterface'=>$_SERVER['GATEWAY_INTERFACE'],
+        'addr'=>$_SERVER['SERVER_ADDR'],
+        'name'=>$_SERVER['SERVER_NAME'],
+        'software'=>$_SERVER['SERVER_SOFTWARE'],
+        'protocol'=>$_SERVER['SERVER_PROTOCOL']
+    );
+}
+function getVistitorInfo(){
+    //$S = $_SERVER;    //allias server, because screw having to type
+    return array(
+        //visitor's ip
+        'ip'=>$_SERVER['REMOTE_ADDR'],
+        //The query string, if any, via which the page was accessed.
+        'query'=>$_SERVER['QUERY_STRING'],
+        //the page address(if any) which referred
+        //the user agent to this current page
+        'referer'=>$_SERVER['HTTP_REFERER'],
+        //'user'=>$_SERVER['REMOTE_USER'],  //authenticated user
+        //string denoting the header from current request, 
+        //if there is one., can be used with 'get_browser()'
+        //to get info on browser version, settings, etc
+        'userAgent'=>$_SERVER['HTTP_USER_AGENT']
+    );
+}
+function eVisitorInfo(){
+    echo json_encode(getVisitorInfo() );
+}
+function eServerInfo(){
+    echo json_encode(getServerInfo() );
+}
+//function eC(){
+    //echo's variables submitted to a script via _GET
+    //echo (isSetC() ?
+        //json_encode($_COOKIES)
+    //:
+        //'_COOKIES not set') . PHP_EOL;
+//}
 function loadUser() {
 	
 	global $AO_DB;

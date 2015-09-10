@@ -30,9 +30,11 @@ function hrefVoid(){
     //causing a page refresh
     ?>href='javascript:void(0)'<?php
 }
-function getUserName(){    
+function getUserName(){   
+    $UN = 'uname';
+    
     return loggedIn()?
-        $_SESSION['uname'] : 'guest';
+        $_SESSION[$UN] : 'guest';
 	 
 }
 
@@ -61,8 +63,8 @@ $URL = rootURL();   //absolute url of executing site/folder
     <div id='reg-navigation'>
         <a id='home' class='tooltip' href='<?php
             echo $URL . 'index.php';
-        ?>'>Home<!--span><img src=''>Tooltip!</span--></a><br>
-        <a id='addFunds' class='tooltip'  title='Store'>Store</a><br>		
+        ?>'>Home</a><br>
+        <a id='addFunds' title='Store'>Store</a><br>		
 <?php
 if(loggedIn() ){?>
         <a id='mem'  title='Members Page' href='<?php
@@ -109,7 +111,6 @@ if(!loggedIn() ){?>
 <?php
 
 }?>
-
                 <li><a class='button credits' <?php hrefVoid();?>>Credits</a></li>				
 				<li><a class='button play' <?php hrefVoid();?>>Play <?php
                     echo loggedIn()? 'Game' : 'as Guest';
@@ -148,7 +149,7 @@ if(!loggedIn() ){?>
              
             <ul>
                 <li class='developer'>Developer: <?php
-                echo $OWNER_NAME
+                echo $OWNER_NAME;
                 ?></li>
             </ul>
 			<br>
@@ -189,31 +190,6 @@ foreach($scripts as $val){
     //then finally the local folder which THIS script is located
     require_once($val . '.php');
 }
+//include all javascript html tags at end of document
+require_once 'js.php';
 ?>
-    <!--div id='messages'>
-        <button id='backBtn'>Back</button>
-    </div>
-    <div id='ranks'>
-        <button id='backBtn'>Back</button>
-        
-    </div>
-    <div id='search'>
-        <button id='backBtn'>Back</button>
-        <form action='search.php' method='POST'>
-            <input id='filter'>
-                <option 'vehicle'>
-                <option 'business'>
-                <option 'user'>
-            <input type='text'
-            <input submit>
-        </form>
-    </div>
-    <div id='business'>
-        <button id='backBtn'>Back</button>
-    </div>
-    <div id='faq'>
-        <button id='backBtn'>Back</button>
-    </div-->
-	<!--placing adBar here should allow it to be visable across all pages
-</div><!--end wrapper, include javascript at end of body-->
-<?php require_once 'js.php';?>

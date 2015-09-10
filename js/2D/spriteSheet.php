@@ -1,4 +1,11 @@
-﻿//
+<?php
+//
+//entities\meta.php
+//Created by Tyler R. Drury, 9-09-2015
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
+?>
+//
 function SpriteSheet(path, frameWidth, frameHeight){
     //Creates a Spritesheet
     //datatype {string} - Path to the image.

@@ -1,4 +1,11 @@
-﻿function Enemy(bidCap){
+<?php
+//
+//enemy.php
+//Created by Tyler R. Drury, 9-09-2015
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
+?>
+function Enemy(bidCap){
 	//enemy class
     //Math.floor rounds down to the nearest integer,
     //this ensures no ai starts ready to bid,

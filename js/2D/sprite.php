@@ -1,4 +1,11 @@
-﻿//
+<?php
+//
+//entities\meta.php
+//Created by Tyler R. Drury, 10-09-2015
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
+?>
+//
 function Sprite(x, y, type){
     //Sprites are anything drawn to the screen (ground, enemies, etc.)
     //

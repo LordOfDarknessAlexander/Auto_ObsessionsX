@@ -1,4 +1,9 @@
-﻿//vehicle 'class' and any other api
+﻿//
+//drivetrain.js
+//Created by Tyler R. Drury
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
+//vehicle 'class' and any other api
 //the vehicle ID property is a string representation of a bitfield with the sturcture:
 //	0x{DA, 0086, 0A}:{make, year, model}
 //values are between 00 and FF, allowing for 255x255x255 unique vehicles

@@ -1,4 +1,11 @@
-﻿function Animation(spritesheet, frameSpeed, startFrame, endFrame){
+<?php
+//
+//entities\meta.php
+//Created by Tyler R. Drury, 10-09-2015
+//(C) 8.5:1 Entertainment, All Rights Reserved
+//
+?>
+function Animation(spritesheet, frameSpeed, startFrame, endFrame){
     //
     var animationSequence = [];  // array holding the order of the animation
     var currentFrame = 0;        // the current frame to draw

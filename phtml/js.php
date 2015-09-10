@@ -12,17 +12,7 @@ $paths = array(
     'LoadAssets',
     //jquery bindings
     'jqueryLib',
-    //'pas',
     //
-    //'2D/meta',
-    '2D/SpriteSheet',
-    '2D/Animation',
-    '2D/Sprite',
-    //game entities
-    //'entities/meta',
-    'entities/player',
-    'entities/enemy',
-    //'entities/part',
     'entities/parts/part',
     'entities/parts/drivetrain',
     'entities/parts/body',
@@ -30,28 +20,21 @@ $paths = array(
     'entities/parts/docs',
     'entities/vehicle',
     //game states
-    //'state/meta'
-    'state/Garage',
-    //'state/Garage/main',
-    //'state/Garage/carView',
-    //Auction and Repair states is dependant upon userGarage in Garage.js
-    //to push cars or modify cars in the users garage, so parse first
-    //'state/Repair',
-    //'state/Auction/main',
-    //'state/Auction/select',
-    //'state/Auction/sell',
     'state/auctionGen',
     'state/Auction',
-    //'state/AuctionSelect',
     'state/AuctionSell',
-    //'state/Add_Funds',
+    //
 	'allowance',
     //
     'program'	//main javascript program
 );
 addPHPJS('globals');
 addPHPJS('pas');
+addPHPJS('2D/meta');
+addPHPJS('entities/meta');
 //addPHPJS('jqLib');
-foreach($paths as $p){addJS($p);}
+foreach($paths as $p){
+    addJS($p);
+}
 addPHPJS('state/state');
 ?>
