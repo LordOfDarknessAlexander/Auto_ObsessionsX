@@ -8,9 +8,10 @@ require_once 'dbConnect.php';
 <html lang=en>
 <head>
 <?php
+html::slotStyles();
 html::memberStyles();
 html::simpleHead('Slots');
-html::slotStyles();
+
 ?>
 
 <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>

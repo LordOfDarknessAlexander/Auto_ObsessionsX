@@ -144,7 +144,7 @@ function(){
 		else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3){
 			winnings = bet * 5;
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + tokens);
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
 			tokens = tokens + 1;
 			//Play sound
 			playWinSound();
@@ -153,7 +153,7 @@ function(){
 		}
 		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4){
 			res.text('Uhh pinata');
-			$('div#wonTextDiv').text('You Won ' + tokens);
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
 			tokens = tokens + 1;
 			//Play sound
 			playWinSound();
@@ -162,7 +162,7 @@ function(){
 		}
 		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5){
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + tokens);
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
 			tokens = tokens + 1;
 			//Play sound
 			playWinSound();
@@ -171,7 +171,7 @@ function(){
 		}
 		else if( (slot1curr == 5 && slot2curr == 5)  || (slot1curr == 6 && slot2curr == 6 && slot3curr == 6) ){
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + tokens);
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
 			tokens = tokens + 1;
 			//Play sound
 			playWinSound();
@@ -181,7 +181,7 @@ function(){
 		else if( (slot1curr == 5 || slot1curr == 6) && slot2curr == 6){
 			//winnings = bet * 1.75;
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + tokens);
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
 			tokens = tokens + 4;
 			//Set volume and play sound
 			playWinSound();
@@ -191,7 +191,7 @@ function(){
 		else if(slot1curr == 6  || slot2curr == 6 || slot3curr == 6){
 			//winnings = bet * 1.5;
 			res.text('Congratulations, You win!');
-			$('div#wonTextDiv').text('You Won ' + tokens);
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
 			//Set volume and play sound
 			tokens = tokens + 1;
 			playWinSound();
@@ -205,7 +205,7 @@ function(){
 			playLossSound();
 		}
 		//money += winnings;
-        $('div#bankValue').text('You have $' + tokens);
+        $('div#bankValue').text('You have ' + tokens + ' tokens');
 		console.log(winnings);
 	}
 
@@ -214,7 +214,7 @@ function(){
 			winnings = 0;
 			//tokens = 0;
 			
-			$('div#bankValue').text('You have $' + tokens);
+			$('div#bankValue').text('You have ' + tokens + ' tokens');
 			$('div#resultsTextDiv').text('');
 			$('div#wonTextDiv').text('');
 			
