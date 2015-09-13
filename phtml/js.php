@@ -23,11 +23,10 @@ $paths = array(
     'state/auctionGen',
     'state/Auction',
     'state/AuctionSell',
-    //
 	'allowance',
 	'slots/miniSlots',	
-    //
     'program'	//main javascript program
+	
 	
 );
 addPHPJS('globals');

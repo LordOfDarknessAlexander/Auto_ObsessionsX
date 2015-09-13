@@ -115,6 +115,7 @@ function(){
 			console.log(slot1curr, slot2curr, slot3curr);
 			console.log(slotImage1, slotImage2, slotImage3);
 			checkForWin();
+
 		}
 	}
 	function checkForWin(){
@@ -479,7 +480,7 @@ function(){
 			slot1spin = false;
 			spins = true;
 			//spinTimer --;
-			update();
+			//update();
 		}
 		else if((slot2spin == true) && (spinTimer < 100)){
 			slot2curr = randomNum();//slot2[randomNum()];
@@ -487,7 +488,7 @@ function(){
 			slot2spin = false;
 			spins = true;
 			spinTimer --;
-			update();
+			//update();
 		}
 		else if((slot3spin == true)&& (spinTimer < 50)){
 			slot3curr = randomNum();//slot3[randomNum()];
@@ -495,7 +496,7 @@ function(){
 			slot3spin = false;
 			spins = true;
 			//spinTimer --;
-			update();
+			//update();
 		}
 		
 		if(gameFinished == false){
