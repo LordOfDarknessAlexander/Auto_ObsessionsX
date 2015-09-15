@@ -558,6 +558,6 @@ function(){
     //}
 });
 
-	assetLoader.downloadAll();
-	init();
+assetLoader.downloadAll();
+init();
 });

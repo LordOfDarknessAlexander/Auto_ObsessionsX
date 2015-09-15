@@ -114,8 +114,7 @@ Tint divs different colours for different classes
 	opacity:0.70;
 }
 /*
-<php divAS();> ul
-{
+<php divAS();> ul{
     /*position:absolute;
     top:0%;
     left:0%;
@@ -133,15 +132,13 @@ Tint divs different colours for different classes
     background: url('../images/label.jpg');
 <php lih();>
 }
-<php divAS();> li img
-{
+<php divAS();> li img{
 <php posAbs();>
 	left:0%;
 	width:128px;
 <php lih();>
 }
-<php divAS();> li label#infoLabel
-{
+<php divAS();> li label#infoLabel{
 	opacity:0.70;
 	text-align:center;
 <php posAbs();>

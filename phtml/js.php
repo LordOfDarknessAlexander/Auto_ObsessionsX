@@ -25,14 +25,17 @@ $paths = array(
     'state/AuctionSell',
 	'allowance',
 	'slots/miniSlots',	
-    'program'	//main javascript program
-	
-	
+    'program'	//main javascript program	
 );
-addPHPJS('globals');
-addPHPJS('pas');
-addPHPJS('2D/meta');
-addPHPJS('entities/meta');
+$php = array(
+    'globals',
+    'pas',
+    '2D/meta',
+    'entities/meta'
+);
+foreach($php as $p){
+    addPHPJS($p);
+}
 //addPHPJS('jqLib');
 foreach($paths as $p){
     addJS($p);

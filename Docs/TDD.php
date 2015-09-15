@@ -171,6 +171,14 @@ This document describes the technical standards used in the development of the A
     <li>
         <a href='#security'>Security</a>
         <ol>
+            <li><a href='#httpVars'>HTTP Variables</a></li>
+            <ol>
+                <li><a href='#get'>$_GET</a></li>
+                <li><a href='#post'>$_POST</a></li>
+                <li><a href='#session'>$_SESSION</a></li>
+                <li><a href='#cookie'>$_COOKIE</a></li>
+            </ol>
+            <li><a href='#ssl'>Secure Sockets Layer(SSL)</a></li>
             <li><a href='#xss'>Cross-Site Attacks(XSS)</a></li>
             <li><a href='#sqlInj'>SQL Injection</a></li>
         </ol>
@@ -629,7 +637,7 @@ $obj = array('val0'=>0,'val1'=>'second');
 $jsonStr = json_encode($obj);
 ?&gt;</pre></code>
 
-<h3 id='security'>Security</h3>
+<h3 id='security'>Security</h3><hr>
 <pre>   On-line, security is a major concern.
 Users expect their private data to remain that way,
 especially when maintaining a database including,
@@ -645,8 +653,7 @@ that the majority of users will attempt to exploit the site.
 seeking to interact legitimately with the site,
 consuming its services and contributing,
 a single individual can execute many hostile programs(or bots),
-which continually search the web for vulnerable sites
-autonomously.
+which continually search the web for vulnerable sites autonomously.
 <p class='tip'>    When referring to an 'untrusted source',
 it is commonly meant as ANY external source of data,
 which is not self contained(locally declared) within the currently executing script.
@@ -654,13 +661,112 @@ which is not self contained(locally declared) within the currently executing scr
 Even though the source is known and trusted, there is still
 the potential that (either due to programmer error or a malicious attack),
 returned values could be embedded with hazardous data.</p>
-    Cross-Site Scripting, SQL Injection
+</pre>
+    <h4 id='httpVars'>HTTP Variables</h4>
+<pre>
+</pre>
+    <h5 id='get'><a href="http://php.net/manual/en/reserved.variables.get.php">$_GET</a></h5>
+<pre>   Variables can be passed to a script's $_GET superglobal via the browser's URL,
+as a series of name value pairs following the script's extension,
+beginning with (?) and values separated with by (=).
+<p class='tip'>Sensitive Data, such as usernames, passwords, credit card info
+should NEVER be passed via the URL, as these values are NOT encrypted
+and are visual accessible simply by viewing the URL and can be easily intercepted by malicious entities</p>
+<code>
+    LocalHost/myscript.php?arg0=val?arg1=976
+</code>
+    Variables passed to the script are likewise accessed in
+the script using $_GET, passing the same identifier expressed in the URL.
+
+<code class='php'>&lt;?php
+//all vars will be UTF-8 encoded string literals
+if(isset($_GET) && !empty($_GET) ){
+    $a0 = $_GET['arg0'];    //'val'
+    $a1 = $_GET['arg1'];    //'976' NOT the integer 967
+    //validation/filtering should be preformed appropriately
+    //before using these values!
+}
+//else no args being passed to the script
+?&gt;</code>
+<p class='tip'>Pro tip:
+    With .htaccess files, using URL rewritting can use RegExes
+to validate input parameters and to restrict the format of the URL,
+which prevents the user from brute forcing additional arguments
+should the presented url not match the expected pattern,
+immediately navigating the user to a 404 error page(or custom error page),
+preventing all execution of the script, before anything bad happens</p>
+    Since any string may be entered into the URL of a browser,
+malicious entities can brute force hostile values(via bots or manually),
+simply by embedding unescaped characters into the URL.
+    Variables passed via $_GET should ALWAYS be validated when access by the script receiving the arguments,
+before the values are used in a script. Should validation(using PHP built in validation, or custom Regular Expressions) fail of any arguments,
+scripts should gracefully and safely terminate execution, WITHOUT further access or use of the invalid data.
+</pre>
+    <h5 id='post'><a href="http://php.net/manual/en/reserved.variables.post.php">$_POST</a></h5>
+<pre>   $_POST variables are passed to a script, via a jQuery Ajax HTTP request
+as an object containing generic javascript variables.
+    Variables passed via $_POST should ALWAYS be validated when access by the script receiving the arguments,
+These arguments are encrypted upon transmission and is not externally visible.
+</pre>
+    <h5 id='session'><a href="http://php.net/manual/en/reserved.variables.session.php">$_SESSION</a></h5>
+<pre>   $_SESSION is an array of data unique to a managed by the server,
+with each visitor having a (bound to the session ID of the visitor).
+    Before accessing $_SESSION variables, the PHP function <i>session_start()</i> must be called.
+    $_SESSION may contain user specific data, such as entries pulled from the database
+containing user data which(due to the overhead over continually making SQL calls),
+is more convenient to get the values once and store in memory to be quickly accessed until the browser leaves the page.
+<code class='php'>&lt;?php
+require_once 'dbConnect.php';
+//
+session_start();
+//
+$res = $AO_DB->query(
+    "SELECT user_id, fname, uname FROM $U WHERE ($E = '$e' AND $PW = SHA1('$p') )"
+);
+
+if($res->num_rows == 1){
+    $a = $res->fetch_assoc();   //associative array of name:value pairs
+    //convert id from string to int, also saves space
+    $a['user_id'] = int($a['user_id']);
+    $SESSION = $a;
+    $res->close();
+    exit();
+} 
+?&gt;</code>
+</pre>
+    <h5 id='cookie'><a href="http://php.net/manual/en/reserved.variables.cookies.php">$_COOKIE</a></h5>
+<pre>   Like $_SESSION variables, $_COOKIEs are unique to a visitor and only accessible to that user.
+<p class='tip'>$_COOKIEs are a popular target of bots and hackers,
+care should be taken NOT to store sensitive user information as cookies.</p>
+
+</pre>
+    <h4 id='ssl'>Secure Sockets Layer(SSL)</h4>
+<pre>   The Secure Sockets Layer is a standard security feature which
+provides a secure connection between browsers(client) and websites(server),
+allowing the secure transmission of private client data online.
+    Site secured with SSl display a padlock in the browser's URL bar
+and possibly a green address bar, if secured by an EV Certificate.
+    This technology provides protection for customers,
+ensuring their online transaction information remains confidential,
+such as credit card details, passwords or any personal information
+which much be passed from browser to server.
+    
+<p class='tip'>    All personal information transferred online
+is a target for malicious entities which scour the web for intimate
+information, proper protection must be ensured at all levels in order
+to protect the integrity and confidentiality of customer information.
+If a website is NOT encrypted with SSL, any moderately skilled hacker
+can intercept traffic and steal personal information.</p>
+    SSL may be managed via web host(goDaddy).
 </pre>
     <h4 id='xss'>Cross-Site Attacks(XSS)</h4>
-<pre>   When malicious scripts are ,
-which are then executed.
-    This small js object is all that is needed to properly
-escape strings being add to the html.
+<pre>   A type of injection attack, where malicious data
+supplied by a user is incorrectly filtered then
+inserted into a webpage through a form, hyperlink, or other user input,
+which are then executed, causing the browser to re-navigate to a hostile page,
+or to access secure PHP variables(such as SESSION and COOKIE superglobals).
+    This small JavaScript object is all that is needed to properly
+escape strings being add to the html dynamically.
 
 #1 Escape HTML before inserting data into element's content<hr>
 <code class='html'>
@@ -840,11 +946,16 @@ if($uid > 0){
 <ol>
     <li><a href='http://phpsecurity.readthedocs.org/en/latest/Injection-Attacks.html#disclosure-of-stored-data'>SQL Injection</a></li>
 </ol>
+<hr>
 <h4>Regular Expressions</h4>
 <pre>
-    Both PHP and <a href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp">JavaScript</a> support expressing and manipulating string data using Regular Expressions.
+    Both <a href="http://php.net/manual/en/reference.pcre.pattern.syntax.php">PHP</a> and <a href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp">JavaScript</a> support expressing and manipulating string data using Regular Expressions.
 Regular Expressions describe patterns within a sequence of characters.
 The most common use is to preform pattern-matching and search-and-replace operations on text.
+    RegEx's are most commonly used to validate the structure of data passed to a script via GET or POST,
+as the server converts all parameters passed to it into strings,
+for transfer over the web. These strings must re-validated by the script before use,
+to ensure malicious entities haven't embedded hostile data into the parameters.
 </pre>
 <hr><h2 id='aoGM'>Game Mechanics</h2><hr>
 <pre>   Auto-Obsessions implements several high level API to simulate the experience of owning, moding and auctioning cars.
