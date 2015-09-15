@@ -29,13 +29,12 @@ Auction Screen
 	height: 100%;
 }
 
-<?php divSaleView();?> li 
-{
+<?php divSaleView();?> li{
 	padding: 5px 0;
 }
 
-<?php divSaleView();?> button#SaleViewButton
-{<?php
+<?php divSaleView();?> button#SaleViewButton{
+<?php
     posAbs();
     css::fontBold();
     defaultBtnBG();

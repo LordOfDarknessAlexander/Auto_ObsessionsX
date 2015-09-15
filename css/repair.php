@@ -219,6 +219,7 @@ left div
     css::size('100%', '50%');
     css::bgSize('100%', '100%');
 ?>
+    object-fit:contain;
 }
 <?php drs();?> div h2{
 <?php

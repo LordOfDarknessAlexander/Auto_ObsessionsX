@@ -90,7 +90,7 @@ cvStatBar('Documents');
     backBtn();
     homeBtn();
 ?>	
-    <h2 id='dt'>Drivetrain</h2>	
+    <img id='dt' title='Drivetrain' src='images/drivetrain.png'>Drivetrain</h2>	
     <div id='drivetrain'>	
 <?php
 cvStatBar('Engine');
@@ -100,7 +100,7 @@ Drive Axel:<br>
 <progress id='pbAxel' value='0.0'></progress>
 <br><?php cvStatBar('Exhaust');?>
     </div>
-    <h2 id='body'>Body</h2>
+    <img id='body' title='Body' src='images/body.png'>Body</h2>
     <div id='body'>
 <?php
 cvStatBar('Chasis');
@@ -112,7 +112,7 @@ Chrome:<br>
 <progress id='pbPH0' value='0.0'></progress>
 <br>
     </div>
-    <h2 id='interior'>Interior</h2>
+    <img id='interior' title='Interior' src='images/interior.png'>Interior</h2>
     <div id='interior'>
 <?php
 cvStatBar('Seats');
@@ -123,7 +123,7 @@ Door Panels:<br>
 <progress id='pbPanels' value='0.0'></progress>
 <br>
     </div>
-    <h2 id='docs'>Documentation</h2>
+    <img id='docs' title='Documentation' src='images/documents.png'>Documentation</h2>
     <div id='docs'>
 <?php
 cvStatBar('Ownership');

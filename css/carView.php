@@ -123,15 +123,15 @@ Car View Screen
     font-size:1.5vw;
     display:block;
 }
-<?php dCV();?> h2{
+<?php dCV();?> img{
 <?php
     posAbs();
     css::size('14%', '5%');
-    css::bgColor('grey');
+    //css::bgColor('grey');
 ?>
-    font-size:1.85vw;/*size element relative to viewport width!*/
-    /*background:url('../headerBG.jpg');*/
-    margin:0%;    
+    /*font-size:1.85vw;/*size element relative to viewport width!*/
+    background:url('../headerBG.jpg');*/
+    margin:0%;  
 }
 <?php dCV();?> div{
 <?php
@@ -155,11 +155,11 @@ Car View left div
     //rStatView('interior', '28%', '33%');
     //rStatView('docs', '60%', '65%');
 ?>
-<?php dCV();?> h2#dt{<?php
+<?php dCV();?> img#dt{<?php
     css::lm();
     css::top('28%');
-    css::defaultBG('../images/drivetrain.png');
-    css::bgSize('100%', '100%');
+    //css::defaultBG('../images/drivetrain.png');
+    //css::bgSize('100%', '100%');
 ?>
 }
 <?php dCV();?> div#drivetrain{<?php
@@ -167,11 +167,11 @@ Car View left div
     css::top('33%');
 ?>	
 }
-<?php dCV();?> h2#body{<?php
+<?php dCV();?> img#body{<?php
     css::lm();
     css::top('59%');
-    css::defaultBG('../images/body.png');
-    css::bgSize('100%', '100%');
+   // css::defaultBG('../images/body.png');
+    //css::bgSize('100%', '100%');
 ?>
 }
 <?php dCV();?> div#body{<?php
@@ -182,11 +182,11 @@ Car View left div
 /*
 Car View right div
 */
-<?php dCV();?> h2#interior{<?php
+<?php dCV();?> img#interior{<?php
     css::rm();
     css::top('28%');
-    css::defaultBG('../images/interior.png');
-    css::bgSize('100%', '100%');
+    //css::defaultBG('../images/interior.png');
+    //css::bgSize('100%', '100%');
 ?>
 }
 <?php dCV();?> div#interior{<?php
@@ -194,11 +194,11 @@ Car View right div
     css::top('33%');
 ?>
 }
-<?php dCV();?> h2#docs{<?php
+<?php dCV();?> img#docs{<?php
     css::rm();
     css::top('59%');
-    css::defaultBG('../images/documents.png');
-    css::bgSize('100%', '100%');
+    //css::defaultBG('../images/documents.png');
+    //css::bgSize('100%', '100%');
 ?>;
 }
 <?php dCV();?> div#docs{<?php

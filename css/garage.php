@@ -134,6 +134,7 @@ User Garage div Stylings
 	/*position element in to left corner of parent*/
 	top:0%;
 	left:0%;
+    object-fit:contain;
 }
 <?php divCarListView();?>
 {
