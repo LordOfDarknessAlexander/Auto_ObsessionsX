@@ -37,12 +37,9 @@ var assetLoader = (function(){
 		 'car9'	: 'images/ReelImages/superbee.png',
 		 'car0'	: 'images/ReelImages/torino.png',     
 		 //Buttons
-		'slotStop': 'images/Buttons/stopButton.png',
-		'spinButton': 'images/Buttons/SpinButton.png',
-		'raiseBetButton': 'images/Buttons/up_Arrow.png',
-		'lowerBetButton': 'images/Buttons/down_Arrow.png',
-		'maxBetButton': 'images/Buttons/MaxBetButton.png',
-		'minBetButton': 'images/Buttons/minBetButton.png',
+		//'slotStop': 'images/Buttons/stopButton.png',
+		//'spinButton': 'images/Buttons/SpinButton.png',
+
 		//Lights	
 		//Left
 		'lowerLeftHead' : 'images/Lights/leftLowerHeadon.png',

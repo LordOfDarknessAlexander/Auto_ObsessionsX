@@ -10,7 +10,7 @@ require_once 'user.php';
 <?php
 html::memberStyles();
 html::slotStyles();
-html::simpleHead('Slots');
+html::simpleHead('Auto-Obsessions Slots');
 
 ?>
 
