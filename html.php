@@ -198,18 +198,19 @@ class html
 		color:#52005C;
 		text-align:center;
 		margin:0;
-		 width:100%;
-		height:100%;
+		height: 20px;
+		width :80px;
 	}
 	/* set general side button styles */
 
 	li {
-		width:100%;
-		height:100%;
+		
 		list-style-type :none;
 		/*margin-bottom: 1px;*/
 		text-align: center;
 		position: abosolute;
+		height: 20px;
+		width :80px;
 	}
 
 	div#container {
@@ -240,7 +241,10 @@ class html
 		position:absolute;
 		top:8%;
 		left:0%;
-		z-index : 10%;
+		z-index : 3;
+		/*background-size:100% 100%;*/
+		height: 20px;
+		width :80px;
 		
 	}
 	div#nav : hover{
@@ -327,8 +331,9 @@ class html
 	/* setting anchor styles */
 	div#reg-navigation{
 		position:absolute;
+		background-size:100% 100%;
 		top:8%;
-		right:0%;
+		right:6%;
 		z-index:5;
 		/*background-color:grey;*/
 	}
@@ -360,6 +365,7 @@ class html
 		background:#aecbff;
 		border: 4px inset yellow;
 		color: blue;
+		background-size:100% 100%;
 	}
 
 	p.error {
