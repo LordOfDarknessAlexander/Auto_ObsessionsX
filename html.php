@@ -484,7 +484,7 @@ class html
 		left:0%;
 		top: 0%;
 		width:100%;
-		height:2%;
+		height:8%;
 		font-family:Digifit;
 		font-size:medium;
 		text-align:center;
@@ -498,7 +498,7 @@ class html
 		left:20%;
 		top:15%;
 		width:60%;
-		height:2%;
+		height:8%;
 		font-family:Digifit;
 		font-size:medium;
 		text-align:center;	
@@ -512,7 +512,7 @@ class html
 		left:25%;
 		top:45%;
 		width:50%;
-		height:3%;
+		height:8%;
 		font-family:Digifit;
 		font-size:medium;
 		text-align:center;
@@ -526,7 +526,7 @@ class html
 		left:0%;
 		top:5%;
 		width:20%;
-		height:5%;
+		height:8%;
 		font-family:Georgia, "Times New Roman", Times, serif;
 		font-size:large;
 		text-align:center;
@@ -562,19 +562,7 @@ class html
 		background-size:100% 100%;
 		z-index: 3;
 	}
-	button#payPalButton
-	{
-		position:absolute;
-		left:0%;
-		top:20%;
-		width:17.3%;
-		height:7.6%;
-		background-image:url('images/TempPayPalButton.png');
-		background-repeat:no-repeat;
-		background-size:100% 100%;
-		z-index: 3;
-
-	}
+	
 
 
 	/*Light Anim*/

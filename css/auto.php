@@ -380,9 +380,10 @@ div#reg-navigation a:hover{
     css::defaultBG('../images/defaultBtn2.png');
     css::bgSize('100%', '100%');
 ?>  
-	color:green;
+	color:yellow;
 	padding : 2%;
 	top : 19%;
+	border: 2px solid yellow;
 }
 
 /* visited link */
