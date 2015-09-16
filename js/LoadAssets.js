@@ -21,7 +21,41 @@ var assetLoader = (function(){
     //
     this.images = {
         //images dictionary
-        'avatar_normal' : 'images/normal_walk.png'     //player
+        'avatar_normal' : 'images/normal_walk.png'   ,  //player
+		 	 //background
+			 
+		 'background_normal'  : 'images/slotbody.png',
+		 //Slots Reel images
+		 'car1' : 'images/ReelImages/38coupe.png',
+		 'car2'	: 'images/ReelImages/baracuda.png',
+		 'car3'	: 'images/ReelImages/charger.png',
+		 'car4'	: 'images/ReelImages/cobra.png',
+		 'car5'	: 'images/ReelImages/judgeGTO.png',
+		 'car6'	: 'images/ReelImages/lilredexpress.png',
+		 'car7'	: 'images/ReelImages/mustang.png',
+		 'car8'	: 'images/ReelImages/shelby500.png',
+		 'car9'	: 'images/ReelImages/superbee.png',
+		 'car0'	: 'images/ReelImages/torino.png',     
+		 //Buttons
+		'slotStop': 'images/Buttons/stopButton.png',
+		'spinButton': 'images/Buttons/SpinButton.png',
+		'raiseBetButton': 'images/Buttons/up_Arrow.png',
+		'lowerBetButton': 'images/Buttons/down_Arrow.png',
+		'maxBetButton': 'images/Buttons/MaxBetButton.png',
+		'minBetButton': 'images/Buttons/minBetButton.png',
+		//Lights	
+		//Left
+		'lowerLeftHead' : 'images/Lights/leftLowerHeadon.png',
+		'lowerLeftRunning' : 'images/Lights/leftLowerRunningon.png',
+		'upperLeftHead' : 'images/Lights/leftUpperHeadon.png',
+		'upperLeftRunning' : 'images/Lights/leftUpperRunningon.png',
+		'leftSignal' : 'images/Lights/leftsignalon.png',
+		//Right
+		'rightSignal' : 'images/Lights/RightSignalOn.png',
+		'lowerRightHead' : 'images/Lights/lowerRightHeadON.png',
+		'lowerRightRunning' : 'images/Lights/upperRightRunningOn.png',
+		'upperRightHead' : 'images/Lights/lowerRightHeadON.png',
+		'upperRightRunning' : 'images/Lights/upperRightRunningOn.png'
     };
 
     this.sounds = {
@@ -34,7 +68,11 @@ var assetLoader = (function(){
         'sold'		: 'sounds/sold.mp3',
         //'engine': 'sounds/engine.wav',
         'engine': 'sounds/ferrari_engine_roar.mp3', //replace with a mustang engine
-        'repair': 'sounds/car_fix.mp3'
+        'repair': 'sounds/car_fix.mp3',
+		'youLose' : 'sounds/car_skid_and_crash.mp3',
+		'reelSpinning' : 'sounds/single_race_car_passing_by_1.mp3',
+		'startSpin' : 'sounds/auto_car_pull_away_squealing_tyres.mp3',
+		'winSound' : 'sounds/gold_coins.mp3'
     };
 
     var assetsLoaded = 0,                               // how many assets have been loaded
