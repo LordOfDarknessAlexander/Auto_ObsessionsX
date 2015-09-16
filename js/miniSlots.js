@@ -471,8 +471,8 @@ function(){
 	});
 	//jq.statBar();
 	//jq.setStatBar();
-	jq.setStatBar.setTokens();
-/*
+	//jq.setStatBar.setTokens();
+
 	function setTokens(val){
 	//<php
 	//if(loggedIn() ){>
@@ -490,7 +490,7 @@ function(){
 			//jq.Msg('No more tokens, go to the store to purchase more!')
 			console.log('No more tokens , go to the store to purchase more');
 		}
-	}*/
+	}
 	
 	$('.slotStop').click(
 	function(){

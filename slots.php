@@ -2,14 +2,14 @@
 require_once 'html.php';
 require_once 'ao.php';
 require_once 'user.php';
-//require_once 'pas/Update.php';
+//require_once 'pasMeta.php';
 //html::doctype();
 ?>
 <html lang=en>
 <head>
 <?php
-html::slotStyles();
 html::memberStyles();
+html::slotStyles();
 html::simpleHead('Slots');
 
 ?>
@@ -22,11 +22,11 @@ html::simpleHead('Slots');
 <div id='container'>
 
 	<div id='Slots'><!-- Start of the page-specific content. -->
-        <h2>Slots</h2>
+       
 		    
 		
 		<body>	
-
+		 <h2>Slots</h2>
             <!--The Sound files-->
             <audio id = 'youLose' src = 'sounds/car_skid_and_crash.mp3'></audio>
             <audio id = 'reelSpinning' src = 'sounds/single_race_car_passing_by_1.mp3'></audio>
