@@ -42,7 +42,7 @@ html::simpleHead('Auto-Obsessions Slots');
                 <div id = 'bankValue'></div>
                 <div id = 'wonTextDiv'></div>
                 <!--Buttons-->
-				<div id='nav'>
+				<div id='reg-navigation'>
                <!-- <button id = 'slotStop'></button> -->
 				<li><a class='button spinButton' ><?php user::addTokens(); ?>Spin</li></a>
 				<!--temp stop button ---->

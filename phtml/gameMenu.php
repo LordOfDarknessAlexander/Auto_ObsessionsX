@@ -32,7 +32,7 @@ if($isSlots)
 }*/
 
 ?>
-		<div id='slots' style='top: 72%; height: 22%; width: 34%; left: 2%;' >
+		<div id='slots' title='Big Jims Crazy Slots' style='top: 72%; height: 22%; width: 34%; left: 2%;' >
 			<a id ='slots'  href='slots.php'>Slots</a>  
 			
 		</div> 
