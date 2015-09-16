@@ -76,7 +76,7 @@ li:hover{
 	/*margin-bottom : 2%;*/
 	margin-top: 2%;
 	
-	border: 6px solid yellow;
+	
 }
 
 a{
