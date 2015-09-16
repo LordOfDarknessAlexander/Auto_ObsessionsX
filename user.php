@@ -778,6 +778,41 @@ class user{
 		}*/
      
     }
-	
+	public static function addTokens(){
+		global $AO_DB;
+		$toki = "tokens";
+		$T = user::T;
+        $ret = user::slctFromEntry($T);
+		//user::getTokens();
+		if (isset($_SESSION['user_id']))
+		{
+			echo "{$_SESSION['user_id']}";
+			if( isset( $_POST) )
+			{
+				if ( !empty($_POST['tokens']))
+				{
+						//update tokens
+						$tokens = $_POST["tokens"];
+						$q = "UPDATE users SET  tokens='$tokens' WHERE   user_id = '$_SESSION[user_id]'";
+						//echo "Awesome";
+						$result = mysqli_query ($AO_DB->con, $q);
+						
+						if(!$result )
+						{
+						  die('Could not update data: ' . mysql_error());
+						}
+						else
+						{
+						  echo '{ Shitake $toki:"' . $tokens  .'"}';
+						}
+				}
+				
+			}
+			else
+			{
+				echo "Goody try";
+			}
+		}
+}
 	
 }

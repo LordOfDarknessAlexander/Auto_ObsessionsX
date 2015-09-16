@@ -1,5 +1,6 @@
 	var slot1Canvas = document.getElementById('slot1'),
         slot1Context = slot1Canvas.getContext('2d'),
+		
 		//slot1Context = $("slot1").get(0);
         slot2Canvas = document.getElementById('slot2'),
         slot2Context = slot2Canvas.getContext('2d'),
@@ -471,7 +472,7 @@ function(){
 	//jq.statBar();
 	//jq.setStatBar();
 	jq.setStatBar.setTokens();
-	/*
+/*
 	function setTokens(val){
 	//<php
 	//if(loggedIn() ){>
@@ -489,8 +490,8 @@ function(){
 			//jq.Msg('No more tokens, go to the store to purchase more!')
 			console.log('No more tokens , go to the store to purchase more');
 		}
-	}
-	*/
+	}*/
+	
 	$('.slotStop').click(
 	function(){
 		

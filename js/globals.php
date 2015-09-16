@@ -136,7 +136,7 @@ var SPLASH;
 var MAIN_MENU;
 
 //var playSound;
-var splashTimer = 600.00;
+//var splashTimer = 600.00;
 //InMenu UI Constants
 
 var buttonsPlaceY = 200;

@@ -176,6 +176,7 @@ $scripts = array(
     'garage',
     
     'profile'
+	//'miniSlots'
     //messages
     //ranks
     //search

@@ -36,6 +36,7 @@ if($isSlots)
 			<a id ='slots'  href='slots.php'>Slots</a>  
 			
 		</div> 
+		
     <!--Root Game Menu, hub for page navigation-->
     <!--img id='homeImg' src='images\\garageEmpty.png'-->
 	

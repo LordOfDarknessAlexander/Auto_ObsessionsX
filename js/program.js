@@ -1,5 +1,5 @@
 //Application main
-var AutoObessesions = {};
+//var AutoObessesions = {};
 var engnRv = true;
 
 function garageDoor(){
