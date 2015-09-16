@@ -211,6 +211,7 @@ class html
 		text-align: center;
 		position: abosolute;
 	}
+
 	div#container {
 		position:absolute; 
 		margin:auto;
@@ -242,7 +243,13 @@ class html
 		z-index : 10%;
 		
 	}
-
+	div#nav : hover{
+		position:absolute;
+		top:8%;
+		left:0%;
+		z-index : 10%;
+		border: 2px solid yellow;
+	}
 	/*Page Content*/
 	div#content{
 		position:abosolute;
@@ -343,15 +350,15 @@ class html
 	div#reg-navigation a:hover{
 		background: url('images/defaultBtn2.png') no-repeat 0 0;
 		background-size:100% 100%;
-		color:green;
-		border: 2px green solid;
+		color:yellow;
+		border: 2px solid yellow;
 	}
 	/* onmousedown */
 	li a:active,
 	div#nav a:active,
 	div#reg-navigation a:active {
 		background:#aecbff;
-		border: 4px inset #aecbff;
+		border: 4px inset yellow;
 		color: blue;
 	}
 
