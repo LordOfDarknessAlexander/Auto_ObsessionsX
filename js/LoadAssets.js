@@ -26,16 +26,7 @@ var assetLoader = (function(){
 			 
 		 'background_normal'  : 'images/slotbody.png',
 		 //Slots Reel images
-		 'car1' : 'images/ReelImages/38coupe.png',
-		 'car2'	: 'images/ReelImages/baracuda.png',
-		 'car3'	: 'images/ReelImages/charger.png',
-		 'car4'	: 'images/ReelImages/cobra.png',
-		 'car5'	: 'images/ReelImages/judgeGTO.png',
-		 'car6'	: 'images/ReelImages/lilredexpress.png',
-		 'car7'	: 'images/ReelImages/mustang.png',
-		 'car8'	: 'images/ReelImages/shelby500.png',
-		 'car9'	: 'images/ReelImages/superbee.png',
-		 'car0'	: 'images/ReelImages/torino.png',     
+
 		 //Buttons
 		//'slotStop': 'images/Buttons/stopButton.png',
 		//'spinButton': 'images/Buttons/SpinButton.png',
