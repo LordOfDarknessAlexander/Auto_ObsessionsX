@@ -91,7 +91,9 @@ Main Game Menu Styles
     css::bgSize('100%', '100%');
     css::txtAlignCntr();
 	css::bottom('12%');
+	lz();
 ?>
+	
 	width: 40%;
 	color:red;
     left:10%;
@@ -107,12 +109,17 @@ Main Game Menu Styles
     css::bgSize('100%', '100%');
     css::txtAlignCntr();
 	css::bottom('12%');
+	defaultColor();
+	//cursorPtr();
+	css::color();
+	 lz();
 ?>
 	width: 40%;
-	color:green;
+	color:yellow;
 	margin-top: -26%;
     left:10%;
     z-index:2;	
+	border: 2px solid yellow;
 }
 
 <?php dgm();?> li{

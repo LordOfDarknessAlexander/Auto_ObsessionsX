@@ -67,6 +67,16 @@ li{
 	margin: 2%;
 	/*margin-bottom : 2%;*/
 	margin-top: 2%;
+	border-box : yellow;
+}
+li:hover{
+    /*padding: 10px 0;*/
+	display:inline;
+	margin: 2%;
+	/*margin-bottom : 2%;*/
+	margin-top: 2%;
+	
+	border: 6px solid yellow;
 }
 
 a{
