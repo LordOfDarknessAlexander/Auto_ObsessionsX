@@ -24,7 +24,7 @@ $paths = array(
     'state/Auction',
     'state/AuctionSell',
 	'allowance',
-	'slots/miniSlots',	
+	'miniSlots',	
     'program'	//main javascript program	
 );
 $php = array(
