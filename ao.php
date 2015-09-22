@@ -27,7 +27,7 @@ class ao{
         USERS = 'users',  //table containing all registered users
         CARS = 'aoCars',  
 		MEMBERS = 'aoMembersDB',
-		ACHIEVEMENTS = 'achievements.,',
+		ACHIEVEMENTS = 'achievements',
 		//database containing all core vehicle data
         //sql column names
         CID = 'car_id',

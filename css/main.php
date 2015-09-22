@@ -122,7 +122,7 @@ Main Game Menu Styles
 	defaultColor();
 	//cursorPtr();
 	css::color();
-	 lz();
+	lz();
 ?>
 	width: 40%;
 	color:yellow;

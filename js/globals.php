@@ -135,15 +135,9 @@ var RUNNING;
 var SPLASH;
 var MAIN_MENU;
 
-//var playSound;
-//var splashTimer = 600.00;
 //InMenu UI Constants
 
 var buttonsPlaceY = 200;
-//Player Pos, should be local in Player class
-//Bidder Pos
-//var BIDDER_XPOS = 650;
-//var BIDDER_YPOS = 250;
  
 //background images
 //garage doors

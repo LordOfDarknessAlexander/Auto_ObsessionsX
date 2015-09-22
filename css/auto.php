@@ -263,6 +263,13 @@ Document root
 /*
 img styles
 */
+img#aoLogo{
+    position:absolute;
+    left:12%;
+    bottom:5%;
+    width:80%;
+    object-fit:contain;
+}
 img#adBar{
 	/*background:url('../images/logos/AutoZone.png') no-repeat 0 0;*/
 <?php
@@ -406,8 +413,8 @@ div#menu{
     css::txtAlignCntr();
     css::size('100%', '100%');
 ?>
-    background-image:url('../images/AbsuMenu.png');
-    background-size : 100% 100%;
+    /*background-image:url('../images/AbsuMenu.png');
+    background-size : 100% 100%;*/
     position: absolute;
     border: 1px solid black;
 	display: inline;
@@ -416,6 +423,16 @@ div#menu{
 div#main{
 <?php
     css::size('100%', '100%');
+	posAbs();
+?>
+	top: 0; 
+	left: 0;
+}
+div#main img#drapes{
+<?php
+    css::size('100%', '100%');
+    css::defaultBG('../images/drapes.png');
+    css::bgSize('100%', '100%');
 	posAbs();
 ?>
 	top: 0; 

@@ -7,10 +7,9 @@
 Options -Indexes
 
 RewriteEngine on
+ServerSignature Off
 
 RewriteRule ^pas/query$     pas/query.php [NC]
-#RewriteRule ^pas/get$       pas/get.php [NC]
-#RewriteRule ^pas/update$     pas/update.php [NC]
 #
 #scripts in pas (generally) only take a single argument,
 #being a 2-8 letter identifier representing
@@ -29,10 +28,19 @@ RewriteRule ^store-cash-(50|200|500|1000)?$     store.php?op=cash?val=$1 [NC]
 #allows jquery javascript originating from this source to work
 #RewriteCond %{REQUEST_METHOD} POST
 #RewriteCond %{HTTP_REFERER} !^http://urltoyoursite.com [NC]
-#RewriteRule .* - [F]
-
-#Caching behaviour is set by default, changing doesn't seem
-#to have a huge influence
+#RewriteRule .* - [F,L]
+#
+#FILTER REQUEST METHODS
+#prevent external TRACE and DELETE requests,
+#used to trace the request message, or delete resources from server
+#
+#<IfModule mod_rewrite.c>
+    #RewriteCond %{REQUEST_METHOD} ^(TRACE|DELETE) [NC]
+    #RewriteRule ^(.*)$ - [F,L]
+#</IfModule>
+#
+#NOTE:Caching behaviour is set by default,
+#changing doesn't seem to have a huge influence.
 #Cache all static file resources(images, audio, etc)
 #once a day, decreasing bandwidth consumed by navigating pages
 #<FilesMatch "\.(jpg|jpeg|png|gif|mp3|mp4)$">
@@ -45,7 +53,7 @@ RewriteRule ^store-cash-(50|200|500|1000)?$     store.php?op=cash?val=$1 [NC]
 #</FilesMatch>
 
 #
-#Common user agents associated with hostile bots
+#Common user agents associated with hostile bots, spammer, leaches, rippers, etc
 #
 #RewriteCond %{HTTP_USER_AGENT} ADSARobot|ah-ha|almaden|Anarchie|amzn_assoc|ASPSeek|ASSORT|ATHENS|Atomz|attach|attache|autoemailspider [OR]
 #RewriteCond %{HTTP_USER_AGENT} BackWeb|Bandit|BatchFTP|bdfetch|big.brother|BlackWidow|bmclient|Boston\ Project|BravoBrian\ SpiderEngine\ MarcoPoloBot\ mailto:craftbot@yahoo.com|Buddy|bumblebee [OR]

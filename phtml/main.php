@@ -16,11 +16,11 @@ $JM_NAME = 'Johnathan McLaughlin';
 
 //this is not working on site without a new session
 //session_start();
-isLoggedIn();
+//isLoggedIn();
 //session set, has the session be started and initialized
 //if $_SESSION is an empty array,
 //user is using guest account and not currenlty logged in
-eS();
+//eS();
 //$_SESSION = array('dur'=>0);    //must log in to set session vars!
 //userLoggin!
 $ss = isset($_SESSION) && !empty($_SESSION) ? true : false;
@@ -100,7 +100,8 @@ else{?>
         <div id='main'>		
 			<h1><?php echo 'Beta Version ' ;?></h1>
 			<h1><?php echo 'Welcome ' . getUserName();?></h1>
-			
+			<img id='aoLogo' src='images/aoLogo.png'>
+            <img id='drapes' src='images/drapes.png'>
             <ul>
 <?php
 if(!loggedIn() ){?>
