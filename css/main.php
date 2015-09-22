@@ -1,6 +1,5 @@
 <?php
 //main menu.php, uses php to generate CSS, previously GameMenu.css
-//header("Content-type: text/css; charset: UTF-8");
 //
 require_once 'ui.php';
 //
@@ -17,14 +16,28 @@ $css = array(
     'profile'
 );
 foreach($css as $p){
+    //include other sources here, instead of with HTML
     require_once "$p.php";
 }
 //    
-function dgm(){?>div#gameMenu<?php
+function dgm(){
+    ?>div#gameMenu<?php
 }
-function dml(){dgm();?> div#menuLeft<?php
+function dml(){
+    //div gameMenu left
+    dgm();?> div#menuLeft<?php
 }
-function dmr(){dgm();?> div#menuRight<?php
+function dmr(){
+    //div game menu right
+    dgm();?> div#menuRight<?php
+}
+function dmlBtn(){
+    //div gameMenu left
+    dml();?> button<?php
+}
+function dmrBtn(){
+    //div game menu right
+    dmr();?> button<?php
 }
 function top($str){?>
 top:<?php echo $str;?>;
@@ -83,8 +96,7 @@ Main Game Menu Styles
 	padding-top: 92px;
 	z-index: 1;
 }
-<?php dgm();?> div#slots a
-{
+<?php dgm();?> div#slots a{
 <?php
     posAbs();
     css::defaultBG('../images/slots.png');
@@ -92,8 +104,7 @@ Main Game Menu Styles
     css::txtAlignCntr();
 	css::bottom('12%');
 	lz();
-?>
-	
+?>	
 	width: 40%;
 	color:red;
     left:10%;
@@ -101,8 +112,7 @@ Main Game Menu Styles
 	margin-top: -26%;
 	
 }
-<?php dgm();?> div#slots a:hover
-{
+<?php dgm();?> div#slots a:hover{
 <?php
     posAbs();
     css::defaultBG('../images/slots_hover.png');
@@ -152,15 +162,15 @@ Main Game Menu Styles
     css::bottom('12%');
 ?>
 }
-<?php dml();?> button,
-<?php dmr();?> button{
+<?php dmlBtn();?>,
+<?php dmrBtn();?>{
 <?php
     posAbs();
     css::size('95%', '49%');
     //css::bgSize('100%', '100%');
 ?>
 }
-<?php dml();?> button#myCars{
+<?php dmlBtn();?>#myCars{
 <?php
     css::defaultBG('../images/garageBtn.jpg');
     css::bgSize('100%', '100%');
@@ -168,7 +178,7 @@ Main Game Menu Styles
     css::top('0%');
 ?>
 }
-<?php dml();?> button#toAuctionBtn{
+<?php dmlBtn();?>#toAuctionBtn{
 <?php
     css::defaultBG('../images/auctionBtn.jpg');
     css::bgSize('100%', '100%');
@@ -177,7 +187,7 @@ Main Game Menu Styles
 ?>
 }
 
-<?php dmr();?> button#profile{
+<?php dmrBtn();?>#profile{
 <?php
     css::defaultBG('../images/profileBtn.jpg');
     css::bgSize('100%', '100%');
@@ -185,8 +195,8 @@ Main Game Menu Styles
     css::top('0%');
 ?>
 }
-<?php dmr();?> button#buyUpgradesBtn
-{<?php
+<?php dmrBtn();?>#buyUpgradesBtn{
+<?php
     css::defaultBG('../images/repairBtn.jpg');
     css::bgSize('100%', '100%');
     rz();

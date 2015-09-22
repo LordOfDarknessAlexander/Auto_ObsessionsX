@@ -77,6 +77,7 @@ if(isSetG() ){
     //via expected means, yet if a user/hacker where to type
     //the url in it whole, these values would still need to be
     //checked here for additional safety
+    //eC();
 	$op = getOpFromGET();
 	$val = '';
     $f = false; //isset($_GET['failed']);
@@ -84,78 +85,86 @@ if(isSetG() ){
     if($f){
         $msg = "purchase failed. Try again later or visit the contacts page for technical assistance";
     }
-    else{    
-        if($op == 'cash'){
-            //$str = $_GET['val'];
-            #$val = isCashVal($str) ? intval($str) : '';
-        }
-        else if($op == 'tokens'){
-            //$str = $_GET['val'];
-            //$val = isTokenVal($str) ? intval($str) : '';
-        }
-        
-        if($op == 'cash'){
-            $funds = 0.0;
+    else{
+        if(isSetP() ){
             
-            if($val == 50){
-                $funds = 50000.0;
-                user::incFunds($funds);
-                $completed = true;
-            }
-            else if($val == 200){
-                $funds = 200000.0;
-                user::incFunds($funds);
-                $completed = true;
-            }
-            else if($val == 500){
-                $funds = 500000.0;
-                user::incFunds($funds);
-                $completed = true;
-            }
-            else if($val == 1000){
-                $funds = 1000000.0;
-                user::incFunds($funds);
-                $completed = true;
-            }
-            else{
-                //$msg = "unable to complete purchase, unexpected URL parameter";   // ($val)";
-            }
-            
-            if($completed){
-                $msg = "Your purchase of \$$funds completed successfully.";
-            }
-            else{
-                $msg = "Your purchase of \$$funds was unsuccessful.";
-            }
-        }
-        else if($op == 'tokens'){		
-            if($val == 3){
-                purchase::tokens($val);
-                $completed = true;
-            }
-            else if($val == 5){
-                purchase::tokens($val);
-                $completed = true;
-            }
-            else if($val == 10){
-                purchase::tokens($val);
-                $completed = true;
-            }
-            else if($val == 20){
-                purchase::tokens($val);
-                $completed = true;
-            }
-
-            if($completed){
-                $msg = "Your purchase of $amount tokens completed successfully.";
-            }
-            else{
-                $msg = "Your purchase of $amount tokens was unsuccessful.";
-            }
+            // if($op == 'pc'){
+                // //user initializes cash purchase before being renavigated to paypal store
+            // }
+            // else if($op == 'pt'){
+                // //user initializes token purchase before being renavigated to paypal store
+            // }
         }
         else{
-            $msg = "Invalid operation, unrecognized argument passed to get.";
-        }	
+            if($op == 'cash'){
+                //user has been navigated back to site after paypal has
+                //completed transaction
+                //$str = $_GET['val'];
+                #$val = isCashVal($str) ? intval($str) : '';
+                $funds = 0.0;
+                
+                if($val == 50){
+                    $funds = 50000.0;
+                    user::incFunds($funds);
+                    $completed = true;
+                }
+                else if($val == 200){
+                    $funds = 200000.0;
+                    user::incFunds($funds);
+                    $completed = true;
+                }
+                else if($val == 500){
+                    $funds = 500000.0;
+                    user::incFunds($funds);
+                    $completed = true;
+                }
+                else if($val == 1000){
+                    $funds = 1000000.0;
+                    user::incFunds($funds);
+                    $completed = true;
+                }
+                else{
+                    //$msg = "unable to complete purchase, unexpected URL parameter";   // ($val)";
+                }
+                
+                if($completed){
+                    $msg = "Your purchase of \$$funds completed successfully.";
+                }
+                else{
+                    $msg = "Your purchase of \$$funds was unsuccessful.";
+                }
+            }
+            else if($op == 'tokens'){	
+                //$str = $_GET['val'];
+                //$val = isTokenVal($str) ? intval($str) : '';        
+                if($val == 3){
+                    purchase::tokens($val);
+                    $completed = true;
+                }
+                else if($val == 5){
+                    purchase::tokens($val);
+                    $completed = true;
+                }
+                else if($val == 10){
+                    purchase::tokens($val);
+                    $completed = true;
+                }
+                else if($val == 20){
+                    purchase::tokens($val);
+                    $completed = true;
+                }
+
+                if($completed){
+                    $msg = "Your purchase of $amount tokens completed successfully.";
+                }
+                else{
+                    $msg = "Your purchase of $amount tokens was unsuccessful.";
+                }
+            }
+            else{
+                $msg = "Invalid operation, unrecognized argument passed to get.";
+            }
+        }
     }        
 }
 //
@@ -389,6 +398,7 @@ addPHPJS('state/Garage');
 var userGarage = [];
 
 if(Storage.local !== null && 'userGarage' in Storage.local){
+    //load vehicles, to set img
     var data = JSON.parse(Storage.local.userGarage),
         l = data.length;
     
@@ -458,6 +468,51 @@ else{
 			Allowance.setLastTime();
 		}
 	});
+    function cash(val){
+        return {
+            _val:val,
+            _div:null,
+            _called:false,
+            suc:function(data){
+                //this initializes a purchase entry in
+                //the user's paypal transaction database
+                //and sets up cookie for verification
+                this._called = false;
+                //
+                //jq.Err('transaction initialization successful');
+            },
+            fail:function(jqxhr){
+                //transaction could not be initialized,
+                //user still navigates to paypal
+                this._called = false;
+                //jq.Err('transaction initialization failed!');
+            },
+            click:function(){
+                if(!this._called){
+                    jq.post(
+                        'pas/create.php?op=pc',
+                        this.suc,
+                        this.fail,
+                        {val:this._val}
+                    );
+                }
+            }
+        };
+    }
+    function tokens(){
+        
+    }
+    //{
+    var c50 = cash(50);
+        //c200 = cash(200),
+        //c500 = cash(500),
+        //c1000 = cash(1000);
+        
+    //$('form#c50').click(c50.click);
+    //$('form#c200').click(c200.click);
+    //$('form#c500').click(c500.click);
+    //$('form#c1000').click(c1000.click);
+    //}
 loadUser();
 <?php
 if(!$LI){

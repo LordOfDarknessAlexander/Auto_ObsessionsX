@@ -64,14 +64,21 @@ function isSetS(){
     //is sessesion vars sets
     return isset($_SESSION);    //&& !empty();
 }
-//function isSetC(){
+function isSetC(){
     //is sessesion vars sets
-    //return isset($_COOKIES);    //&& !empty();
-//}
+    return isset($_COOKIE);    //&& !empty($_COOKIE);
+}
 function loggedIn(){
     //session started and the user has provided
     //a valid email/username and pasword	 
     return isSetS() && isset($_SESSION['uname']) ? true : false;
+}
+function eG(){
+    //echo's variables submitted to a script via _GET
+    echo (isSetG() ?
+        json_encode($_GET)
+    :
+        '_GET not set!') . PHP_EOL;
 }
 function eP(){
     //echo's variables submitted to a script via _POST
@@ -80,12 +87,14 @@ function eP(){
     :
         '_POST not set!') . PHP_EOL;
 }
-function eG(){
-    //echo's variables submitted to a script via _GET
-    echo (isSetG() ?
-        json_encode($_GET)
+function eC(){
+    //echo's user's $_COOKIEs
+    //For secuirty purposes, DO NOT use this in the live version,
+    //as cookies contain secure user data, which should only be displayed while developing
+    echo (isSetC() ?
+        json_encode($_COOKIE)
     :
-        '_GET not set!') . PHP_EOL;
+        '_COOKIE array not set!') . PHP_EOL;
 }
 function eS(){
     //echo's _SESSION variables(when user logged in)    
@@ -133,13 +142,7 @@ function eVisitorInfo(){
 function eServerInfo(){
     echo json_encode(getServerInfo() );
 }
-//function eC(){
-    //echo's variables submitted to a script via _GET
-    //echo (isSetC() ?
-        //json_encode($_COOKIES)
-    //:
-        //'_COOKIES not set') . PHP_EOL;
-//}
+
 function loadUser() {
 	
 	global $AO_DB;
@@ -182,6 +185,7 @@ function eSG(){
     eG();
     eP();
     eS();
+    //eC();
 }
 function getOpFromGET(){
     //if 

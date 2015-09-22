@@ -736,9 +736,13 @@ if($res->num_rows == 1){
 </pre>
     <h5 id='cookie'><a href="http://php.net/manual/en/reserved.variables.cookies.php">$_COOKIE</a></h5>
 <pre>   Like $_SESSION variables, $_COOKIEs are unique to a visitor and only accessible to that user.
+They differ in that cookies are a mechanism for storing data in the remote browser,
+allowing to track and identify return users. Unlike $_SESSION variables which are deallocated when
+the user naviagtes to a new page or closes a browser/tab, cookies can perssist indefinetly
+until the user returns or clears their cookies.
 <p class='tip'>$_COOKIEs are a popular target of bots and hackers,
 care should be taken NOT to store sensitive user information as cookies.</p>
-
+    
 </pre>
     <h4 id='ssl'>Secure Sockets Layer(SSL)</h4>
 <pre>   The Secure Sockets Layer is a standard security feature which

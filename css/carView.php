@@ -86,8 +86,8 @@ Car View Screen
 
     font-size:1.5vw;
 }
-<?php dCV();?> label
-{<?php
+<?php dCV();?> label{
+<?php
     defaultColor();
     posAbs();
     css::size('60%', '10%');
@@ -97,8 +97,8 @@ Car View Screen
 
 	left:20%;
 }
-<?php dCV();?> label#carName
-{<?php
+<?php dCV();?> label#carName{
+<?php
     css::fontBold();
     //css::top('20%');
 ?>

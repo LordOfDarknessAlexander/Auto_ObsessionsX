@@ -98,7 +98,8 @@ class sql{
     //
     //create
     //
-    //public static function createTable($tbl, $args){
+    //public static function createDefaultTable($tbl, $args){
+        //$engine = 'InnoDB', $charset = 'latin1'
         //$t = ;
         //$r = ;
 //        return "CREATE TABLE IF NOT EXISTS $tbl(

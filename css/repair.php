@@ -26,9 +26,9 @@ cmntHeader('Repair Screen Styles');
     //defaultBG();
     css::size('100%', '100%');
     css::defaultTileBG();
+    css::txtAlignCntr();
 ?>
 	display: none;
-	text-align: center;
 	padding-top: 92px;
 	z-index: 1;
 }
@@ -62,8 +62,8 @@ cmntHeader('Repair Screen Styles');
     font-size:1.5vw;
     font-weight:bold;
 }
-<?php drs();?> li 
-{	/*styles all list items of node with id RepairShop*/
+<?php drs();?> li{
+	/*styles all list items of node with id RepairShop*/
 	padding: 5px 0;
 }
 <?php drs();?> div{
