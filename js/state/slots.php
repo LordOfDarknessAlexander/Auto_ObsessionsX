@@ -35,9 +35,50 @@ var slot1Canvas = document.getElementById('slot1'),
 		//slot3Context = $("slot3").get(0);
         slot3Context = slot3Canvas.getContext('2d');
 		
+		var spinButton = document.getElementById('spinButton');
+	
+		var slot1 = [];
+		var slot2 = [];
+		var slot3 = [];
+		//var jq;
+		//
+		var userStats = [];
+		var slot1spin = true,
+			slot2spin = true,
+			slot3spin = true;
+
+		var slot1curr = currFrame,
+			slot2curr = currFrame,
+			slot3curr = currFrame;
+
+		var randSlot1 = 0,
+			randSlot2 = 0,
+			randSlot3 = 0;
+			
+		var rand = 0;
+		var currFrame = 0;	
+		//Values
+		var tokens = 0;
+		//Images
+		var slotImage1 = new Image(),
+			slotImage2 = new Image(),
+			slotImage3 = new Image();	
+		//Sounds
+		var startSpinSound = document.getElementById('startSpin'),
+			reelsSpinning = document.getElementById('reelSpinning'),
+			noWin = document.getElementById('youLose'),
+			youWin = document.getElementById('winSound');
+
+		var gameFinished = false;
+		var spins = false;
+		var val = 0;
+		
 var Slots = {
 	_slots : null,
-
+	
+	
+	
+	
 	init:function(index){
         //call to start an auction for car		
         //console.log(index);
@@ -53,13 +94,18 @@ var Slots = {
             //s.bg.loop = true;
             //s.bg.play();
         }
+		//dt = aoTimer.getDT();
+		tokens = 3;
 		
+		//initialize text
+		$('div#welcomeTextDiv').text('Welcome to the Auto Obsessions Slots');
+		$('div#bankValue').text('You have ' + tokens + ' tokens');
+	
+		document.addEventListener('keyup',keyUpHandler, false);
+		turnOffLights();
 		
 		jq.Slots.menu.hide();
 		jq.Slots.menu.show();
-		
-		
-		
 		
 
         var funcName = 'Slots.php, Auction::init()';
@@ -70,311 +116,394 @@ var Slots = {
 	close : function(){
         jq.carImg.hide();
 	},
-	setCarInfo : function(){
-		if(this._auction !== null){
-			var info = this._auction._car !== null ? this._auction._car.getInfo() : '',
-				name = this._auction._car !== null ? this._auction._car.getFullName() : '';
-				
-			jq.SaleView.carInfo.text(info);
-			jq.SaleView.carName.text(name);
-			jq.SaleView.carInfo.show();
+	stop : function(){
+		
+		//stop reel from spinning
+		if(slot1spin == true){
+			slot1spin = false;
+			return;
+		}
+		if(slot2spin == true && slot1spin == false){
+			slot2spin = false;
+			return;
+		}
+		if(slot3spin == true && slot2spin == false && slot1spin == false){
+			slot3spin = false;
+			gameFinished = true;
+			reelsSpinning.pause();
+			reelSpinning.currTime == 0.0;
+		}
+		
+		if(gameFinished == false){
+			console.log(slot1curr, slot2curr, slot3curr);
+			console.log(slotImage1, slotImage2, slotImage3);
+			checkForWin();
+
 		}
 	},
-	sortAI : function(){
+	checkForWin : function(){
 		
-		if(SaleView._auction !== null){	
-			var ai = jq.SaleView._ai,
-				child = ai.div.children(),
-				ai0 = ai._0,
-				ai3 = ai._3,
-				cb =  this._auction._currentBid,
-				AI = this._auction._ai;
+		 var res = $('div#resultsTextDiv');
+        
+		if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1){
+			tokens ++;
+			//tokens ++;
+			//res..text('Jackpot');
+			$('div#wonTextDiv').text('You Won ' + tokens);
+			//Play sound
+			playWinSound();
+			startSpinSound();
+			//Play Lights
+			turnOnLights();
+		}
+		else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2){
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + tokens);
+			tokens ++;
 			
-			var c0 = 'first',
-				c1 = 'second',
-				c2 = 'third',
-				c3 = 'fourth';
-				
-			
-			var tmpBid = 0.0,
-				i = 0,
-                l = 0;  //left counter
-				
-			function _sortLeftAI(jqo){
-				//console.log('sortaileft');
-				var jqAI = jq.SaleView._ai,
-					label = $('label#bid', jqo),
-					txt = label.text(),
-					bid = txt != '' ? parseFloat(txt) : null,
-					cls = jqo.attr('class');					
-				// if(bid === null ){
-					// return;
-				// }
-				//label.text('');
-				
-				var lf = $('div.leftFirst', jqAI.div); //leftfirst
-				
-				if(lf.length){
-					var ls = $('div.leftSecond', jqAI.div); // leftsecond
-					if(ls.length){
-						var lt = $('div.leftThird', jqAI.div); // leftthird
-						if(lt.length){
-							//jqo.removeClass().addClass('leftFourth');
-							//console.log('leftFourth');
-							return;
-						}
-						else{
-							
-							if(cls == c0){
-								var s = $('div.second', ai.div),
-									t = $('div.third', ai.div),
-									f = $('div.fourth', ai.div);
-							
-								s.removeClass().addClass(c0);	//move second to first
-								t.removeClass().addClass(c1);	//move third to second
-								f.removeClass().addClass(c2);	//move fourth to third
-							}
-							// else if(cls == c1){
-								// var t = $('div.third', ai.div),
-									// f = $('div.fourth', ai.div);	
-							
-								// t.removeClass().addClass(c1);	//move third to second
-								// f.removeClass().addClass(c2);	//move fourth to third
-							// }
-							// else if(cls == c2){
-								// var f = $('div.third', ai.div);
-				
-									// f.removeClass().addClass(c1);	//move thrid to second
-							// }
-							// else if(cls == c3){
-								// var	f = $('div.fourth', ai.div);	
-							
-									// f.removeClass().addClass(c2);	//move fourth to third
-							// }
-							//console.log('leftThird');
-							//jqo.removeClass().addClass('leftThird');
-							return;
-						}	
-					}
-					else{
-						
-						if(cls == c0){
-							var s = $('div.second', ai.div),
-								t = $('div.third', ai.div),
-								f = $('div.fourth', ai.div);
-							
-							s.removeClass().addClass(c0);	//move second to first
-							t.removeClass().addClass(c1);	//move third to second
-							f.removeClass().addClass(c2);	//move fourth to third
-						}
-						else if(cls == c1){
-							var t = $('div.third', ai.div),
-								f = $('div.fourth', ai.div);	
-								
-							t.removeClass().addClass(c1);	//move third to second
-							f.removeClass().addClass(c2);	//move fourth to third
-							}
-						// else if(cls == c2){
-							// var t = $('div.third', ai.div);
-							   
-							// t.removeClass().addClass(c1);	//move thrid to second
-						// }
-						else if(cls == c3){
-							var s = $('div.second', ai.div),
-								t = $('div.third', ai.div),
-								f = $('div.fourth', ai.div);
-							
-							s.removeClass().addClass(c0);	//move second to first
-							t.removeClass().addClass(c1);	//move thrid to second
-							f.removeClass().addClass(c2);	//move fourth to third
-						}
-						//console.log('leftSecond');
-						//jqo.removeClass().addClass('leftSecond');
-						return;
-					}
-				}
-				else{
-					if(cls == c0){
-						var s = $('div.second', ai.div),
-							t = $('div.third', ai.div),
-							f = $('div.fourth', ai.div);
-							
-						s.removeClass().addClass(c0);	//move second to first
-						t.removeClass().addClass(c1);	//move third to second
-						f.removeClass().addClass(c2);	//move fourth to third
-					}
-					else if(cls == c1){
-						var t = $('div.third', ai.div),
-							f = $('div.fourth', ai.div);	
-							
-						t.removeClass().addClass(c1);	//move third to second
-						f.removeClass().addClass(c2);	//move fourth to third
-						
-					}
-					else if(cls == c2){
-						var t = $('div.third', ai.div);
-				
-						t.removeClass().addClass(c1);	//move thrid to second
-					}
-					jqo.removeClass().addClass('leftFirst');
-					//console.log('leftFirst');
-					return;
-				}
-			}
-			var pai = $('div.first', ai.div),		
-				pid = pai.attr('id');
+			//Play sound
+			playWinSound();
+			//Play Lights
+			turnOnLights();	
+		}
+		else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3){
+			//winnings = bet * 5;
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
+			//tokens = tokens + 1;
+			tokens ++;
+			//Play sound
+			playWinSound();
+			//Play Lights
+			turnOnLights();
+		}
+		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4){
+			res.text('Uhh pinata');
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
+			//tokens = tokens + 1;
+			tokens ++;
+			//Play sound
+			playWinSound();
+			//Play Lights
+			turnOnLights();
+		}
+		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5){
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
+			//tokens = tokens + 1;
+			tokens ++;
+			//Play sound
+			playWinSound();
+			//Play Lights
+			turnOnLights();
+		}
+		else if( (slot1curr == 5 && slot2curr == 5)  || (slot1curr == 6 && slot2curr == 6 && slot3curr == 6) ){
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
+			//tokens = tokens + 1;
+			tokens ++;
+			//Play sound
+			playWinSound();
+			//Play Lights
+			turnOnLights();
+		}
+		else if( (slot1curr == 5 || slot1curr == 6) && slot2curr == 6){
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
+			//tokens = tokens + 1;
+			tokens ++;
+			//Set volume and play sound
+			playWinSound();
+			//Play Lights
+			turnOnLights();
+		}
+		else if(slot1curr == 6  || slot2curr == 6 || slot3curr == 6){
+			//winnings = bet * 1.5;
+			res.text('Congratulations, You win!');
+			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
+			//Set volume and play sound
+			//tokens = tokens + 1;
+			tokens ++;
+			playWinSound();
+			//Play Lights
+			turnOnLights();
+		}
+		else{   //losing spin
+			res.text('You have lost');
+			$('div#wonTextDiv').text('You Won nothing');
+			//set volume and play sound
+			playLossSound();
+		}
 		
-			for(var e = 0; e < child.length; e++)
-			{
-				var c = child.eq(e),
-					label = $('label#bid', c),
-					txt = label.text(),
-					bid = (txt != '' ? parseFloat(txt) : null);
-					
-				
-					
-				if(bid !== null){
-					if(bid >= cb){
-						tmpBid = bid;
-						i = e;
-					}
-					else{
-						//current bid is not higher highest bid so no need to sort
-						continue;
-					}						
-				}
-				else{
-					_sortLeftAI(c);
-					continue;
-				}
-			}
-			
-			
-			var cai = child.eq(i),
-				cid = cai.attr('id');
-					
-			if(pid == cid){
-				return;
-			}
-						
-			var ccls = cai.attr('class');
-			
-			if(ccls == c1){
-				// pai.removeClass().addClass(c1);	//move first to second
-				// cai.removeClass().addClass(c0);	//move bidder to first
-				if(bid !== null){
-					var s = $('div.second', ai.div),
-						t = $('div.third', ai.div),
-						f = $('div.fourth', ai.div);
-					
-					s.removeClass().addClass(c1);
-					t.removeClass().addClass(c2);	//move third to second
-					f.removeClass().addClass(c3);	//move fourth to third
-						
-					//_sortLeftAI(cai);
-				}
-			}
-			else if(ccls == c2){
-				if(bid !== null){
-					var s = $('div.second', ai.div);
-					s.removeClass().addClass(c2);
-				}
-				else{
-					var f = $('div.fourth', ai.div),
-						t = $('div.third', ai.div);
-						
-					t.removeClass().addClass(c2);	//move third to second
-					f.removeClass().addClass(c3);	//move fourth to third
-					
-					//_sortLeftAI(cai);
-				}
-			}
-			else if(ccls == c3){
-				if(bid !== null){
-					var s = $('div.second', ai.div),
-						t = $('div.third', ai.div);
-						
-					s.removeClass().addClass(c2);	//move second to third
-					t.removeClass().addClass(c3);	//move third to fourth
-				}
-				else{
-					var f = $('div.fourth', ai.div);
-						
-					f.removeClass().addClass(c3);	//move fourth to third
-					
-					//_sortLeftAI(cai);
-				}
-			}
-			if(bid !== null){
-				pai.removeClass().addClass(c1);	//move first to second
-				cai.removeClass().addClass(c0);	//move bidder to first
-			}
-		}	
+        $('div#bankValue').text('You have ' + tokens + ' tokens');
+		console.log(tokens);
 	},
-	resetElements: function(){
-		var ai = this._auction._ai,
-		    jqAI = jq.SaleView._ai,
-			child = jqAI.div.children();
+	startSpin: function(){
+		if(this.gameFinished == false){
+			//winnings = 0;
+			//tokens = 0;
 			
-		for(var i = 0; i < ai.length; i++){
+			$('div#bankValue').text('You have ' + tokens + ' tokens');
+			$('div#resultsTextDiv').text('');
+			$('div#wonTextDiv').text('');
 			
-			div = $('div#ai' + i.toString(), jqAI.div );
-			div.removeClass();
-		}
+			slot1spin = true;
+			slot2spin = true;
+			slot3spin = true;
 		
-		for(var e = 0; e < child.length; e++)
-		{	
-			var c0 = child.eq(0),
-				c1 = child.eq(1),
-				c2 = child.eq(2),
-				c3 = child.eq(3);
-			
-			c0.addClass('first');
-			c1.addClass('second');
-			c2.addClass('third');
-			c3.addClass('fourth');
 		}
-		
-		// jqAI.div.addClass('first');
-		// jqAI.div.addClass('second');
-		// jqAI.div.addClass('third');
-		// jqAI.div.addClass('fourth');
+		else{
+			stop();
+			
+		}
+		update();
 	},
-	cleanUpAuction: function(){
-		if(SaleView._auction !== null){
-			SaleView.resetElements();
-			SaleView._auction = null;
+	keyUpHandler: function(event){
+		var keyPressed = event.keyCode;
+		
+        if (keyPressed == 32){
+			turnOffLights();
+			//playReelSpin();
+			startSpin();
 		}
+	},
+	spinReels: function(){
+		if(slot1spin == true){
+			slot1curr = randomNum();//slot1[randomNum()];
+			playReelSpin();			
+		}
+        
+		if(slot2spin == true){
+			slot2curr = randomNum();//slot2[randomNum()];
+			playReelSpin();
+		}
+        
+		if(slot3spin == true){
+			slot3curr = randomNum();//slot3[randomNum()];
+			playReelSpin();
+		}
+		
+		if((slot1spin == true)&& (slot2spin == true) && (slot3spin == true)){
+			gameFinished == true;
+		}
+	},
+	playWinSound: function(){
+		//stop other sounds
+		startSpinSound.pause();
+		reelSpinning.pause();	
+		//Set volume and play sound
+		youWin.currTime = 0.0;
+		youWin.volume = 0.5;
+		youWin.play();
+	},
+	playLossSound: function(){
+		//stop othe sounds
+		startSpinSound .pause();
+		reelSpinning.pause();		
+		//set volume and play sound
+		noWin.currTime = 0.0;
+		noWin.volume = 0.5;
+		noWin.play();
+	},
+	playReelSpin: function(){
+		//stop all other sound		
+		noWin.pause();
+		youWin.pause();
+	
+		//set volume and play sound
+		startSpinSound.currTime = 0.0;
+		startSpinSound.volume = 0.5;
+		startSpinSound.play();
+		
+		reelSpinning.currTime == 0.0;
+		reelsSpinning.volume = 0.5;
+		reelsSpinning.play();
+		//reelSpinning.loop = true;	
+	},
+	
+	randomNum: function(){
+		rand = Math.floor(Math.random() * 100);
+		var num = 0;
+		
+		if(rand <= 30){
+			num = 6;
+		}
+		else if(rand < 53 && rand > 30){
+			num = 5;
+		}
+		else if(rand < 71 && rand > 52){
+			num = 4;
+		}
+		else if(rand < 85 && rand > 70){
+			num = 3;
+		}
+		else if(rand < 95 && rand > 84){
+			num = 2;
+		}
+		else if(rand <= 100 && rand > 94){
+			num = 1;
+		}
+		return num;
 	},
 	update : function(){
-		if(SaleView._auction !== null && !this._auction.isExpired()){
-			this.sortAI(); 
-			this.endAuction();
-			this.render();
-		}		
-	},
-	endAuction : function(){
-		context.font = '20px arial, sans-serif';
-		
-		if(this._auction.isExpired()){
-			jq.SaleView.goingLabel.text('Sold!');
+		window.requestAnimationFrame(update, $('canvas#slot1Canvas'));
+		this.slot1Context.clearRect(0, 0, slot1Canvas.width, slot1Canvas.height);
+		this.slot2Context.clearRect(0, 0, slot2Canvas.width, slot2Canvas.height);
+		this.slot3Context.clearRect(0, 0, slot3Canvas.width, slot3Canvas.height);
+		drawReels();
+ 		spinReels();
+		tokens == val;
+		if(gameFinished == true){
+			reelsSpinning.pause();
+			reelSpinning.loop = false;
+			startSpinSound.pause();
+			startSpinSound.loop = false;
+			stop();
+		}
+		if(spins == true){
+			spinTimer --;
+		}
+		if( tokens <= 0)
+		{
+			gameFinished = true;
 		}
 	},
-	render : function(){
+	drawReels : function(){
+		//slot 1
+        src = 'images/ReelImages/';
+        
+		if(slot1curr == 1){
+			slotImage1.src = src + 'carImage.png';
+		}
+		else if(slot1curr == 2){
+			slotImage1.src = src + 'sevenImage.png';
+		}
+		else if(slot1curr == 3){
+			slotImage1.src = src + 'tripleBar.png';
+		}
+		else if(slot1curr == 4){
+			slotImage1.src = src + 'doubleBar.png';
+		}
+		else if(slot1curr == 5){
+			slotImage1.src = src + 'singleBar.png';
+		}
+		else if(slot1curr == 6){
+			slotImage1.src = src + 'cherry.png';
+		}		
+		slot1Context.drawImage(
+            slotImage1, 
+            (slot1Canvas.width / 2) - (slotImage1.width / 2), 
+            (slot1Canvas.height / 2) - (slotImage1.height / 2), 
+            slotImage1.width * 1.5,
+            slotImage1.height * 1.5
+        );
+		
+		//slot two
+		if(slot2curr == 1){
+			slotImage2.src = src + 'carImage.png';
+		}
+		else if(slot2curr == 2){
+			slotImage2.src = src + 'sevenImage.png';
+		}
+		else if(slot2curr == 3){
+			slotImage2.src = src + 'tripleBar.png';
+		}
+		else if(slot2curr == 4){
+			slotImage2.src = src + 'doubleBar.png';
+		}
+		else if(slot2curr == 5){
+			slotImage2.src = src + 'singleBar.png';
+		}
+		else if(slot2curr == 6){
+			slotImage2.src = src + 'cherry.png';
+		}
+		
+		slot2Context.drawImage(
+            slotImage2, 
+            (slot2Canvas.width / 2) - (slotImage2.width / 2), 
+            (slot2Canvas.height / 2) - (slotImage2.height / 2), 
+            slotImage2.width * 1.5, 
+            slotImage2.height * 1.5
+        );
+
+		//slot3
+		if(slot3curr == 1)		{
+			slotImage3.src = src + 'carImage.png';
+		}
+		else if(slot3curr == 2)		{
+			slotImage3.src = src + 'sevenImage.png';
+		}
+		else if(slot3curr == 3)		{
+			slotImage3.src = src + 'tripleBar.png';
+		}
+		else if(slot3curr == 4)		{
+			slotImage3.src = src + 'doubleBar.png';
+		}
+		else if(slot3curr == 5)		{
+			slotImage3.src = src + 'singleBar.png';
+		}
+		else if(slot3curr == 6){
+			slotImage3.src = src + 'cherry.png';
+		}
+		
+		slot3Context.drawImage(
+            slotImage3, 
+            (slot3Canvas.width / 2) - (slotImage3.width / 2), 
+            (slot3Canvas.height / 2) - (slotImage3.height / 2), 
+            slotImage3.width * 1.5, 
+            slotImage3.height * 1.5
+        );
+	},
+	turnOnLights: function(){
+		 var state = {
+            'display':'block',
+            'moz-animation-play-state':'running',
+            '-webkit-animation-play-state':'running',
+            '-ms-animation-play-state':'running',
+            'animation-play-state':'running'
+        };
+        
+		$('div#leftHead').css(state);		
+		$('div#upperLeftSmall').css(state);
+		$('div#lowerLeftSmall').css(state);
+		$('div#LeftFog').css(state);
+		$('div#rightHead').css(state);		
+		$('div#upperRightSmall').css(state);		
+		$('div#lowerRightSmall').css(state);
+		$('div#RightFog').css(state);
+	},
+	turnOffLights: function(){
+		var state = {
+            'display':'none', 'moz-animation-play-state':'paused',
+            '-webkit-animation-play-state':'paused',
+            '-ms-animation-play-state':'paused',
+            'animation-play-state':'paused'
+        };
+        
+		$('div#leftHead').css(state);		
+		$('div#upperLeftSmall').css(state);
+		$('div#lowerLeftSmall').css(state);
+		$('div#LeftFog').css(state);
+		$('div#rightHead').css(state);		
+		$('div#upperRightSmall').css(state);		
+		$('div#lowerRightSmall').css(state);
+		$('div#RightFog').css(state);
+	},
+	setTokens : function(){
 		//<php
 //if(DEBUG){>
-		var ai = this._auction._ai,
-			timers = jq.SaleView.timers;
-			
-		if(SaleView._auction !== null && !this._auction.isExpired()){
-			pbSetColor(timers.cdpbG, this._auction.getTimerPerc() );
-			pbSetColor(timers.cdpb0, ai[0].getTimerPerc() );
-			pbSetColor(timers.cdpb1, ai[1].getTimerPerc() );
-			pbSetColor(timers.cdpb2, ai[2].getTimerPerc() );
-			pbSetColor(timers.cdpb3, ai[3].getTimerPerc() );
-			pbSetColor(timers.winning, this._auction._timer.getWinningPerc() );
-			pbSetColor(timers.going, this._auction.getGoingPerc() );
-			pbSetColor(timers.endTime,  this._auction.getExpiredPerc());
+		if(val !== null &&
+			val !== undefined &&
+			val >= 0 &&
+			val != userStats.tokens
+		){
+			userStats.tokens = val;  //if an argument is passed, assign value to money
+		}
+		$('div#statBar label#tokens').text('Tokens: ' + userStats.tokens.toString() );
+		
+		if(userStats.tokens == 0){
+			//jq.Msg('No more tokens, go to the store to purchase more!')
+			console.log('No more tokens , go to the store to purchase more');
 		}
 //<php
 //}
@@ -383,23 +512,22 @@ var Slots = {
 	
 };
 //
-//Auction jQuery bindings
+//Slots jQuery bindings
 //
 
-jq.SaleView.backBtn.click(
+jq.Slots.backBtn.click(
 function(){
-	//Auction.close();
-	//SaleView.resetElements();
-	jq.SaleView.menu.hide();
+	
+	jq.Slots.menu.hide();
 	jq.AuctionSell.menu.show();
-    jq.carImg.hide();
+    
     jq.setErr();    //clear error when changing pages	
 });
 
-jq.SaleView.homeBtn.click(
+jq.Slots.homeBtn.click(
 function(){
 	//Auction.close();
-	jq.SaleView.menu.hide();
+	jq.Slots.menu.hide();
 	jq.Game.menu.show();
 	setHomeImg();
     jq.setErr();    //clear error when changing pages	
