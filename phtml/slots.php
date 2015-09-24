@@ -2,23 +2,21 @@
 require_once 'html.php';
 require_once 'ao.php';
 require_once 'user.php';
-//require_once 'pasMeta.php';
-//html::doctype();
+require_once 'phtml/AO_UI.php';
+
 ?>
 <html lang=en>
 <head>
 <?php
-html::memberStyles();
+
 html::slotStyles();
 html::simpleHead('Auto-Obsessions Slots');
 
 ?>
-
 <script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-</head>
-<body>
 
+</head>
 <div id='container'>
 
 	<div id='Slots'><!-- Start of the page-specific content. -->
@@ -66,13 +64,14 @@ html::simpleHead('Auto-Obsessions Slots');
                 <div id="upperRightSmall"></div>
                 <div id="lowerRightSmall"></div>
                 <div id="RightFog"></div>	
-            </div>				
+            </div>	
+					
             <script type='text/javascript' src='js/miniSlots.js'></script>				
         </body>		
         <!-- End of the page-specific content. -->
     </div>
-</div>	
+</div>	<!-- End of the slots container content. -->
 <?php
 require 'phtml/legal.php';
-html::footer();
 ?>
+	

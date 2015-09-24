@@ -175,8 +175,9 @@ $scripts = array(
     'sold',
     'funds',
     'garage',
-    
-    'profile'
+    'slots',
+    'profile',
+	
 	//'miniSlots'
     //messages
     //ranks

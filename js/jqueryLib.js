@@ -156,6 +156,11 @@ var jq = {
         menu : $('div#loss'),
         homeBtn:$('div#loss button#homeBtn')       
     },
+	/*
+	Slots : {
+        menu : $('div#Slots'),
+        homeBtn:$('div#Slots button#homeBtn')       
+    },*/
     /*Messages:{
         menu:$('div#messages'),
         backBtn:$('div#messages button#backBtn'),

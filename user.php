@@ -781,6 +781,7 @@ class user{
 	public static function addTokens(){
 		global $AO_DB;
 		$toki = "tokens";
+		$UID = 'user_id';
 		$T = user::T;
         $ret = user::slctFromEntry($T);
 		//user::getTokens();
@@ -792,8 +793,8 @@ class user{
 				if ( !empty($_POST['tokens']))
 				{
 						//update tokens
-						$tokens = $_POST["tokens"];
-						$q = "UPDATE users SET  tokens='$tokens' WHERE   user_id = '$_SESSION[user_id]'";
+						$tokens = $_POST[$toki];
+						$q = "UPDATE users SET  tokens='$tokens' WHERE   $UID = '$_SESSION[$UID]'";
 						//echo "Awesome";
 						$result = mysqli_query ($AO_DB->con, $q);
 						

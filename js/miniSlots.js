@@ -123,7 +123,7 @@ function(){
         var res = $('div#resultsTextDiv');
         
 		if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1){
-			tokens = tokens + 1;
+			tokens ++;
 			//tokens ++;
 			//res..text('Jackpot');
 			$('div#wonTextDiv').text('You Won ' + tokens);
@@ -136,8 +136,8 @@ function(){
 		else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2){
 			res.text('Congratulations, You win!');
 			$('div#wonTextDiv').text('You Won ' + tokens);
-			tokens = tokens + 1;
-			//tokens ++;
+			tokens ++;
+			
 			//Play sound
 			playWinSound();
 			//Play Lights
@@ -147,8 +147,8 @@ function(){
 			//winnings = bet * 5;
 			res.text('Congratulations, You win!');
 			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
-			tokens = tokens + 1;
-			//tokens ++;
+			//tokens = tokens + 1;
+			tokens ++;
 			//Play sound
 			playWinSound();
 			//Play Lights
@@ -157,8 +157,8 @@ function(){
 		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4){
 			res.text('Uhh pinata');
 			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
-			tokens = tokens + 1;
-			//tokens ++;
+			//tokens = tokens + 1;
+			tokens ++;
 			//Play sound
 			playWinSound();
 			//Play Lights
@@ -167,8 +167,8 @@ function(){
 		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5){
 			res.text('Congratulations, You win!');
 			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
-			tokens = tokens + 1;
-			//tokens ++;
+			//tokens = tokens + 1;
+			tokens ++;
 			//Play sound
 			playWinSound();
 			//Play Lights
@@ -177,19 +177,18 @@ function(){
 		else if( (slot1curr == 5 && slot2curr == 5)  || (slot1curr == 6 && slot2curr == 6 && slot3curr == 6) ){
 			res.text('Congratulations, You win!');
 			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
-			tokens = tokens + 1;
-			//tokens ++;
+			//tokens = tokens + 1;
+			tokens ++;
 			//Play sound
 			playWinSound();
 			//Play Lights
 			turnOnLights();
 		}
 		else if( (slot1curr == 5 || slot1curr == 6) && slot2curr == 6){
-			//winnings = bet * 1.75;
 			res.text('Congratulations, You win!');
 			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
-			tokens = tokens + 1;
-			//tokens ++;
+			//tokens = tokens + 1;
+			tokens ++;
 			//Set volume and play sound
 			playWinSound();
 			//Play Lights
@@ -200,8 +199,8 @@ function(){
 			res.text('Congratulations, You win!');
 			$('div#wonTextDiv').text('You Won ' + tokens + ' tokens');
 			//Set volume and play sound
-			tokens = tokens + 1;
-			//tokens ++;
+			//tokens = tokens + 1;
+			tokens ++;
 			playWinSound();
 			//Play Lights
 			turnOnLights();
@@ -354,7 +353,6 @@ function(){
 		if((slot1spin == true)&& (slot2spin == true) && (slot3spin == true)){
 			gameFinished == true;
 		}
-		//tokens = tokens - 1;
 	}
 	function randomNum(){
 		rand = Math.floor(Math.random() * 100);
@@ -455,9 +453,9 @@ function(){
 	function(){
 		startSpin();
 		if(gameFinished == false){
-		//	winnings = 0;
 			tokens --;
 			turnOffLights();
+			setTokens(val);
 			//playReelSpin();
 			
 			$('div#bankValue').text('You have ' + tokens);

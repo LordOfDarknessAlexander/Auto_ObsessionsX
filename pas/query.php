@@ -69,7 +69,43 @@ function echoUserCars(){
     //exit();
     echo json_encode($cars);
 }
-
+function addTokens(){
+	global $AO_DB;
+	$toki = "tokens";
+	$UID = 'user_id';
+	$T = user::T;
+	$ret = user::slctFromEntry($T);
+	//user::getTokens();
+	if (isset($_SESSION['user_id']))
+	{
+		echo "{$_SESSION['user_id']}";
+		if( isset( $_POST) )
+		{
+			if ( !empty($_POST['tokens']))
+			{
+					//update tokens
+					$tokens = $_POST[$toki];
+					$q = "UPDATE users SET  tokens='$tokens' WHERE   $UID = '$_SESSION[$UID]'";
+					//echo "Awesome";
+					$result = mysqli_query ($AO_DB->con, $q);
+					
+					if(!$result )
+					{
+					  die('Could not update data: ' . mysql_error());
+					}
+					else
+					{
+					  echo '{ Shitake $toki:"' . $tokens  .'"}';
+					}
+			}
+			
+		}
+		else
+		{
+			echo "Goody try";
+		}
+	}
+}
 function eLoadUser(){
     //loads all the user's data from a single ajax call!
     global $aoUsersDB;

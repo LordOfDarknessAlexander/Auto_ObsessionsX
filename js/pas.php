@@ -308,3 +308,32 @@ $funcName = "$fileName, pas::query::loadUser()";
         }
     }
 }
+/*
+<?php
+$funcName = "$fileName, pas::update::tokens()";
+?>            
+           return jq.get('pas/query/addTokens',
+                function(data){
+                    //the response string is converted by jquery into a Javascript object!
+                    <?php isValidData();?>
+                    //alert('ajax response received:' + JSON.stringify(data) );
+                    //access and set values in the document's html page
+                   
+                    userStats = {
+                       
+                        tokens:data.tokens
+                    
+                    };
+                 
+                    setStatBar();
+                   
+                },
+                function(jqxhr){
+                    //call will fail if result is not properly formatted JSON!
+                    jq.setErr('<?php eFN();?>', 'ajax call failed!\nReason: ' + jqxhr.responseText);
+                    //throw exception, game can't work without user stats
+                }
+            );
+        }
+    }
+}*/
