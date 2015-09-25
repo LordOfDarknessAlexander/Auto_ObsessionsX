@@ -392,6 +392,42 @@ div#reg-navigation a:hover{
 	top : 19%;
 	border: 2px solid yellow;
 }
+div#navigation{
+<?php
+    posAbs();
+    defaultBtnBG();
+    css::txtAlignCntr();
+?>
+    left:1%;
+    /*width:18%;*/
+    height:10%;
+    z-index:3;
+	top : 16%;
+}
+
+div#navigation a{
+<?php
+    defaultBtnBG();
+    //css::bgSize('100%', '100%');
+?>
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+	padding : 2%;
+	top : 19%;
+}
+div#navigation a:hover{
+<?php
+    //mouse over
+    css::defaultBG('../images/defaultBtn2.png');
+    css::bgSize('100%', '100%');
+?>  
+	color:yellow;
+	padding : 2%;
+	top : 19%;
+	border: 2px solid yellow;
+}
+
 
 /* visited link */
 #div#main a:visited {
