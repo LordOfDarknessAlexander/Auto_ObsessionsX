@@ -101,6 +101,37 @@ class pasCreate
         }
         return true;
     }
+    public static function userPurchase($userID){
+        //creates an empty table in aoUsersDB upon user registration,
+        //user id should be 
+        global $aoPurchasesDB;
+        //escape and sanitize input string, incase someone tries an sql injection attack
+        $tableName = "user$userID";  //getUserTableName();
+        $PID = 'pid';
+        $uint = 'int unsigned';
+
+        $defaultCharset = 'DEFAULT CHARSET = utf8';
+        $defaultEngine = 'ENGINE = InnoDB';
+        //table names can not be used as variables(?) in prepared statements,
+        //so must use reqular queries
+        $res = $aoPurchasesDB->query(
+           "CREATE TABLE IF NOT EXISTS $tableName(
+                $PID $uint NOT NULL PRIMARY KEY
+            )$defaultEngine $defaultCharset"
+            //auto-increment id
+        );
+        //$SD $date,
+        //$ED $date,
+        //$C $B
+    
+        if(!$res){
+            //$erno = $aoUsersDB->con->errno;
+            //$err = $aoUsersDB->con->error;
+            echo "createUserTable($userID), failed:($erno), reason: $err<br>";
+            return false;
+        }
+        return true;
+    }
     public static function carSaleTable($uid){
         //creates an empty table in aoUsersDB upon user registration
         global $aoCarSalesDB;

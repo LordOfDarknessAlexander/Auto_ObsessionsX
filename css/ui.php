@@ -15,16 +15,20 @@ function cmntHeader($str){?>
 <?php echo "$str\n";?>
 */<?php
 }
-function defaultColor($color = 'red'){?>    color:<?php echo $color;?>;
+function defaultColor($color = 'red'){
+    ?>    color:<?php echo $color;?>;
 <?php
 }
-function fontBold(){?>    font-weight:bold;
+function fontBold(){
+    ?>    font-weight:bold;
 <?php
 }
-function posAbs(){?>    position:absolute;
+function posAbs(){
+    ?>    position:absolute;
 <?php
 }
-function cursorPtr(){?>    cursor:pointer;
+function cursorPtr(){
+    ?>    cursor:pointer;
 <?php
 }
 function displayNone(){
@@ -34,7 +38,8 @@ function displayInline(){
     echo 'display:inline;';
 }
 //enable y scrolling
-function scrollY(){?>    overflow-y:scroll;
+function scrollY(){
+    ?>    overflow-y:scroll;
 <?php
 }
 
@@ -114,25 +119,30 @@ class css{
         css::bottom(strval($v) . '%');
     }
     //Text and Font
-    public static function fontBold(){?>    font-weight:bold;
+    public static function fontBold(){
+        ?>    font-weight:bold;
 <?php
     }
-    public static function txtAlignL(){?>    text-align:left;
+    public static function txtAlignL(){
+        ?>    text-align:left;
 <?php
     }
-    public static function txtAlignR(){?>    text-align:right;
+    public static function txtAlignR(){
+        ?>    text-align:right;
 <?php
     }
-    public static function txtAlignCntr(){?>    text-align:center;
+    public static function txtAlignCntr(){
+        ?>    text-align:center;
 <?php
     }
     //Colors
     public static function color($color = 'red'){
         //string representing hex, word(ie red, white, blue), or rbga
-    ?>    color:<?php echo $color;?>;
+        ?>    color:<?php echo $color;?>;
 <?php
     }
-    public static function bgColor($str = 'grey'){?>    background-color:<?php echo $str;?>;
+    public static function bgColor($str = 'grey'){
+        ?>    background-color:<?php echo $str;?>;
 <?php
     }
 }

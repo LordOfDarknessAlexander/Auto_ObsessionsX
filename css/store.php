@@ -4,7 +4,8 @@ require_once 'ui.php';
 //
 css::header();
 //
-function ds(){?>div#AddFunds<?php
+function ds(){
+    ?>div#AddFunds<?php
 }
 function dsc(){
     //div store cash
@@ -14,28 +15,44 @@ function dst(){
     //div store tokens
     ds();?> div#tokens<?php
 }
+function dstForm(){
+    dst();?> form<?php
+}
+function dscForm(){
+    dsc();?> form<?php
+}
+function l0(){
+    //left, 0%
+    css::left('0%');
+}
+function t0(){
+    css::top('0%');
+}
+//function wh100(){
+    //css::size('100%', '100%');
+//}
 ?>
 /*
 ao Store page styles
 */
 canvas{
-    position: absolute;
-    top: 0;
-    left: 0;
+<?php
+    posAbs();
+    css::size('100%', '100%');
+    l0();
+    t0();
+?>
     border:none;
     z-index: -1;
-    width: 100%;
-    height: 100%;
 }
-<?php ds();?>
-{
+<?php ds();?>{
 <?php
     posAbs();
     css::size('100%', '100%');
     css::defaultTileBG();
+    l0();
+    t0();
 ?>
-    left:0%;
-    top:0%;
 	text-align: center;
 	z-index: 1;
 }
@@ -44,36 +61,34 @@ canvas{
 <?php
     posAbs();
     defaultBtnBG();
+    css::left('1%');
+    css::top('16%');
+    css::size('18%', '10%');
 ?>
-	width:18%;
-    height:10%;
-    left:1%;
-    top:16%;
 }
 <?php ds();?> button#allowance progress{
 <?php
     posAbs();
     css::size('100%', '100%');
+    l0();
+    t0();
 ?>
-    left:0%;
-    top:0%;
 }
 <?php ds();?> div form{
 <?php
     posAbs();
-?>
-    height:25%;
-    width:100%;
-    
-    color:red;
+    css::size('100%', '25%');
+    css::fontBold();
+    css::bgColor(); //default is grey
+    css::color();   //default is red
+?>    
     text-align:center;
     font-size:1.2vw;
-    font-weight:bold;
-    background-color:grey;
 }
 <?php ds();?> div form input{
-    width:100%;
-    height:100%;
+<?php
+    css::size('100%', '100%');
+?>
 }
 /*
 Token Div
@@ -81,22 +96,21 @@ Token Div
 <?php dst();?>{
 <?php
     posAbs();
+    css::left('1%');
+    css::top('28%');
+    css::size('18%', '60%');
 ?>
-    left:1%;
-    top:28%;
-    height:60%;
-    width:18%;
 }
-<?php dst();?> form#t3{
-    top:0%;
+<?php dstForm();?>#t3{
+<?php t0();?>
 }
-<?php dst();?> form#t5{
+<?php dstForm();?>#t5{
     top:25%;
 }
-<?php dst();?> form#t10{
+<?php dstForm();?>#t10{
     top:50%;
 }
-<?php dst();?> form#t20{
+<?php dstForm();?>#t20{
     top:75%;
 }
 /*
@@ -105,21 +119,20 @@ Cash Div
 <?php dsc();?>{
 <?php
     posAbs();
+    css::right('1%');
+    css::top('28%');
+    css::size('18%', '60%');
 ?>
-    right:1%;
-	top:28%;
-    height:60%;
-    width:18%;
 }
-<?php dsc();?> form#c50{
-    top:0%;
+<?php dscForm();?>#c50{
+<?php t0();?>
 }
-<?php dsc();?> form#c200{
+<?php dscForm();?>#c200{
     top:25%;
 }
-<?php dsc();?> form#c500{
+<?php dscForm();?>#c500{
     top:50%;
 }
-<?php dsc();?> form#c1000{
+<?php dscForm();?>#c1000{
     top:75%;
 }
