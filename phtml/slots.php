@@ -70,6 +70,6 @@ html::simpleHead('Auto-Obsessions Slots');
 </div>	<!-- End of the slots container content. -->
 <?php
 //require './legal.php';
-require_once './js/state/slots.php';
+//require_once './js/state/slots.php';
 ?>
 	
