@@ -65,6 +65,7 @@ var jq = {
 		//toProjBtn : $(''),
 		//toGarageBtn : $(''),
 		toAuctionBtn : $('#toAuctionBtn'),
+		toSlotsBtn : $('#toSlotsBtn'),
         //toPartsSupply:$(""),
 		repairBtn : $('#buyUpgradesBtn'),
 		//right menu
@@ -159,7 +160,8 @@ var jq = {
 	/*
 	Slots : {
         menu : $('div#Slots'),
-        homeBtn:$('div#Slots button#homeBtn')       
+        homeBtn:$('div#Slots button#homeBtn'),
+		backBtn : $('div#AddFunds button#backBtn'),
     },*/
     /*Messages:{
         menu:$('div#messages'),

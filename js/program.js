@@ -166,13 +166,13 @@ function switchStates(){
 			SaleView.update(dt);
 		break;
 		re.update();
-		// break;
+		break;
 		
-		// case GAME_MODE.SLOTS:
-			// //Slots.update();
-			// callSlots();
-			// setStatBar();
-		// break;
+		case GAME_MODE.SLOTS:
+			Slots.update();
+			slots();
+			 setStatBar();
+		 break;
 			
 		default:
 			GAME_MODE.RUNNING; 
@@ -252,7 +252,7 @@ function mainMenu(){
     //jq.adBar.show();
 }
 
-function callSlots(){
+function slots(){
     //change to slots
     stop = true;
     auctionStop = true;
@@ -439,7 +439,7 @@ function(){
     jq.Game.menu.hide();
 	$('#Slots').show();
     //delete menu image, since the game can not navigate back to this screen after clicking
-	callSlots();
+	slots();
 });
 //
 //Main Menu button bindings

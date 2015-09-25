@@ -3,9 +3,9 @@ if(!headers_sent() ){
     header('Content-type: application/javascript; charset: UTF-8');
 }
 //SaleView State Object
-require_once '../../dbConnect.php';
-require_once '../../vehicles/vehicle.php';
-require_once '../../pasMeta.php';
+//require_once '../../dbConnect.php';
+//require_once '../../vehicles/vehicle.php';
+//require_once '../pasMeta.php';
 //
 $userID = getUID();
 $tableName =  getUserTableName();
@@ -34,6 +34,10 @@ var slot1Canvas = document.getElementById('slot1'),
         slot3Canvas = document.getElementById('slot3'),
 		//slot3Context = $("slot3").get(0);
         slot3Context = slot3Canvas.getContext('2d');
+		
+		
+$(document).ready(
+function(){
 		
 		var spinButton = document.getElementById('spinButton');
 	
@@ -514,6 +518,52 @@ var Slots = {
 //
 //Slots jQuery bindings
 //
+$('.slotStop').click(
+	function(){
+		
+		spinTimer = 200;
+		spins = true;
+		update();
+		setTokens(val);
+		console.log(spinTimer);
+		if((slot1spin == true) && (spinTimer < 200)){
+			slot1curr = randomNum();//slot1[randomNum()];
+			playReelSpin();
+			slot1spin = false;
+			spins = true;
+			//spinTimer --;
+			update();
+		}
+		else if((slot2spin == true) && (spinTimer < 100)){
+			slot2curr = randomNum();//slot2[randomNum()];
+			playReelSpin();
+			slot2spin = false;
+			spins = true;
+			spinTimer --;
+			update();
+		}
+		else if((slot3spin == true)&& (spinTimer < 50)){
+			slot3curr = randomNum();//slot3[randomNum()];
+			playReelSpin();
+			slot3spin = false;
+			spins = true;
+			//spinTimer --;
+			update();
+		}
+		
+		if(gameFinished == false){
+			stop();
+			checkForWin();
+			slot1spin = false;
+			slot2spin = false;
+			slot3spin = false; 
+		}
+		else{
+			return;
+		}
+	
+	stop();
+});
 
 jq.Slots.backBtn.click(
 function(){
@@ -532,4 +582,4 @@ function(){
 	setHomeImg();
     jq.setErr();    //clear error when changing pages	
 });
-
+init();

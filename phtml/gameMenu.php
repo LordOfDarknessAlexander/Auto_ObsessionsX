@@ -32,12 +32,16 @@ if($isSlots)
 }*/
 
 ?>
-
+ 
+<!--
 		<div id='slots' title='Big Jims Crazy Slots' style='top: 72%; height: 22%; width: 34%; left: 2%;' >
-			<a id ='slots'  href='slots.php'>Slots</a> 
+			<!--<a id ='slots'  href='slots.php'>Slots</a> -->
 			
-		</div>  
-		
+	<!--	</div>  -->
+	<div id='toSlotsBtn' title='Big Jims Crazy Slots' style='top: 72%; height: 22%; width: 34%; left: 2%;' >
+	<!--<button id='toSlotsBtn' title='Slots'>Crazy Slots</button>	-->
+	<a id ='toSlotsBtn' class='button playSlots'  >Slots</a>
+	</div>
     <!--Root Game Menu, hub for page navigation-->
     <!--img id='homeImg' src='images\\garageEmpty.png'-->
 	
@@ -45,6 +49,7 @@ if($isSlots)
     <div id='menuLeft'>
         <button id ='myCars' title='My Garage'>My Garage</button>
         <button id='toAuctionBtn'  title='Live Auctions'>Go to Auction</button>		
+		
     </div>
     <div id='menuRight'>
 	   <button id='profile' title='My Profile'>My Profile</button>

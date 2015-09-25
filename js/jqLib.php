@@ -162,7 +162,7 @@ function jqBind($objName, $tag){
     },/*
 	Slots : {
         menu : $('div#Slots'),
-        homeBtn:$('div#Slots button#homeBtn')       
+        homeBtn:$('div#Slots button#homeBtn'),       
     },*/
     Profile:{
         menu:$('div#profile'),

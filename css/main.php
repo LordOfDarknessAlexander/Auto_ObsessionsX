@@ -96,7 +96,7 @@ Main Game Menu Styles
 	padding-top: 92px;
 	z-index: 1;
 }
-<?php dgm();?> div#slots a{
+<?php dgm();?> div#toSlotsBtn a{
 <?php
     posAbs();
     css::defaultBG('../images/slots.png');
@@ -112,7 +112,7 @@ Main Game Menu Styles
 	margin-top: -26%;
 	
 }
-<?php dgm();?> div#slots a:hover{
+<?php dgm();?> div#toSlotsBtn a:hover{
 <?php
     posAbs();
     css::defaultBG('../images/slots_hover.png');

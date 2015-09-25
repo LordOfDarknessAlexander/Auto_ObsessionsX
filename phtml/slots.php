@@ -1,8 +1,8 @@
 <?php
-require_once 'html.php';
-require_once 'ao.php';
-require_once 'user.php';
-require_once 'phtml/AO_UI.php';
+require_once './html.php';
+require_once './ao.php';
+require_once './user.php';
+
 
 ?>
 <html lang=en>
@@ -20,9 +20,7 @@ html::simpleHead('Auto-Obsessions Slots');
 <div id='container'>
 
 	<div id='Slots'><!-- Start of the page-specific content. -->
-       
-		    
-		
+      
 		<body>	
 		 <h2>Slots</h2>
             <!--The Sound files-->
@@ -66,12 +64,13 @@ html::simpleHead('Auto-Obsessions Slots');
                 <div id="RightFog"></div>	
             </div>	
 					
-            <script type='text/javascript' src='js/miniSlots.js'></script>				
+          <!-- <script type='text/javascript' src='js/miniSlots.js'></script>	-->	
         </body>		
         <!-- End of the page-specific content. -->
     </div>
 </div>	<!-- End of the slots container content. -->
 <?php
-require 'phtml/legal.php';
+//require './legal.php';
+require_once './js/state/slots.php';
 ?>
 	
