@@ -159,11 +159,11 @@ function jqBind($objName, $tag){
         menu : $('div#loss'),
         homeBtn:$('div#loss button#homeBtn'),
        
-    },/*
+    },
 	Slots : {
         menu : $('div#Slots'),
         homeBtn:$('div#Slots button#homeBtn'),       
-    },*/
+    },
     Profile:{
         menu:$('div#profile'),
         backBtn:$('div#profile button#backBtn'),

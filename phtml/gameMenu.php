@@ -38,9 +38,9 @@ if($isSlots)
 			<!--<a id ='slots'  href='slots.php'>Slots</a> -->
 			
 	<!--	</div>  -->
-	<div id='toSlotsBtn' title='Big Jims Crazy Slots' style='top: 72%; height: 22%; width: 34%; left: 2%;' >
+	<div id='toSlotsBtn' title='Big Jims Crazy Slots' style='top: 56%; height: 42%; width: 34%; left: 2%;' >
 	<!--<button id='toSlotsBtn' title='Slots'>Crazy Slots</button>	-->
-	<a id ='toSlotsBtn' class='button playSlots'  >Slots</a>
+	<a id ='toSlotsBtn' class='button playSlots'  ></a>
 	</div>
     <!--Root Game Menu, hub for page navigation-->
     <!--img id='homeImg' src='images\\garageEmpty.png'-->
