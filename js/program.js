@@ -438,7 +438,9 @@ $('.playSlots').click(
 function(){
     jq.Game.menu.hide();
 	$('#Slots').show();
-    //delete menu image, since the game can not navigate back to this screen after clicking
+	jq.carImg.hide();
+	//jq.adBar.hide();
+    jq.setErr();
 	slots();
 });
 //
