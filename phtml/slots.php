@@ -38,11 +38,9 @@ html::simpleHead('Auto-Obsessions Slots');
                 <div id = 'bankValue'></div>
                 <div id = 'wonTextDiv'></div>
                 <!--Buttons-->
-				<div id='navigation'>
-               <!-- <button id = 'slotStop'></button> -->
-				<li><a class='button spinButton' ><?php user::addTokens(); ?>Spin</li></a>
-				<!--temp stop button ---->
-				<li><a class='button slotStop' >Stop</li></a>
+		
+				<button id = 'slotStop' class='button slotStop' ><?php user::addTokens(); ?></button>
+				<button id = 'spinButton' class='button spinButton'></button>
 				</div>
                 <!--<button id = 'spinButton'></button> -->
                

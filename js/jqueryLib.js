@@ -162,6 +162,10 @@ var jq = {
         menu : $('div#Slots'),
         homeBtn:$('div#Slots button#homeBtn'),
 		backBtn : $('div#AddFunds button#backBtn'),
+		toggle:function(){
+			jq.Game.menu.toggle();
+			jq.Slots.menu.toggle();
+		}
     },
     /*Messages:{
         menu:$('div#messages'),

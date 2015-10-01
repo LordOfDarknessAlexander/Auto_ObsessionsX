@@ -436,6 +436,7 @@ function(){
 //Slots
 $('.playSlots').click(
 function(){
+	$('#gameMenu').addClass('#Slots');
     jq.Game.menu.hide();
 	$('#Slots').show();
 	jq.carImg.hide();
@@ -527,6 +528,36 @@ function(){
     
     appState = GAME_MODE.MAIN_MENU;
 });
+jq.Slots.homeBtn.click(
+function(){
+	jq.Slots.menu.hide();
+	jq.Game.menu.show();
+    setHomeImg();
+    jq.carImg.show();
+	
+	endGame = false;
+	//restarted = true;	
+    setAdBG();
+    jq.setErr();    //clear error when changing pages
+    
+    appState = GAME_MODE.MAIN_MENU;
+});
+
+jq.Slots.backBtn.click(
+function(){
+	jq.Slots.menu.hide();
+	jq.Game.menu.show();
+    setHomeImg();
+    jq.carImg.show();
+	
+	endGame = false;
+	//restarted = true;	
+    setAdBG();
+    jq.setErr();    //clear error when changing pages
+    
+    appState = GAME_MODE.MAIN_MENU;
+});
+
 //Sound Button
 jq.sound.click(
 function(){

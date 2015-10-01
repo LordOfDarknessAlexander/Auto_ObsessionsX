@@ -162,7 +162,12 @@ function jqBind($objName, $tag){
     },
 	Slots : {
         menu : $('div#Slots'),
-        homeBtn:$('div#Slots button#homeBtn'),       
+        homeBtn:$('div#Slots button#homeBtn'),  
+		backBtn : $('div#Slots button#backBtn'),		
+		toggle:function(){
+			jq.Game.menu.toggle();
+			jq.Slots.menu.toggle();
+		}
     },
     Profile:{
         menu:$('div#profile'),
@@ -228,6 +233,7 @@ $('#addFunds').click(function()
 	jq.Funds.toggle();
     //jq.RepairShop.toggle();
     //$('#menu').addClass('AddFunds');
+	
 	//addFundsMode();	//is ok to call external functions, as long as they are defined in program.js
 });
 //
@@ -243,6 +249,8 @@ jq.Profile.backBtn.click(jq.Profile.toggle);
 jq.Ranks.backBtn.click(jq.Ranks.toggle);
 jq.Messages.backBtn.click(jq.Messages.toggle);
 jq.Search.backBtn.click(jq.Search.toggle);
+jq.Slots.backBtn.click(jq.Slots.toggle);
+jq.Slots.homeBtn.click(jq.Slots.toggle);
 jq.Business.backBtn.click(jq.Business.toggle);
 //jq.Garage.backBtn.click(jq.Garage.toggle);
 
@@ -255,6 +263,17 @@ jq.AuctionSell.homeBtn.click(function(){
     jq.AuctionSell.menu.toggle();
     jq.Game.menu.toggle();
     //appState = GAME_MODE.MAIN;
+});
+
+jq.Slots.backBtn.click(function(){
+    jq.Slots.toggle();
+   
+});
+jq.Slots.homeBtn.click(function(){
+    //AuctionSell.close();
+    jq.Slots.menu.toggle();
+    jq.Game.menu.toggle();
+    
 });
 //
 //Garage State interface
