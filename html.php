@@ -437,7 +437,7 @@ class html
 	{
 		position:absolute;
 		left:0%;
-		top:0%;
+		top:10%;
 		width:100%;
 		height:100%;
 		background-image:url('images/SlotMachine.png');
@@ -579,7 +579,7 @@ class html
 		width:8%;
 		height:11.5%;
 		left:85.83%;
-		top:33.5%;
+		top:43.5%;
 		
 		-moz-transition:all 0.25s ease-in-out;
 		-webkit-transition:all 0.25s ease-in-out;
@@ -609,7 +609,7 @@ class html
 		width:3.5%;
 		height:5%;
 		left:80%;
-		top:37.5%;
+		top:47.5%;
 		
 		-moz-transition:all 0.25s ease-in-out;
 		-webkit-transition:all 0.25s ease-in-out;
@@ -639,7 +639,7 @@ class html
 		width:3.5%;
 		height:5%;
 		left:75%;
-		top:57.5%;
+		top:67.5%;
 
 		-moz-transition:all 0.25s ease-in-out;
 		-webkit-transition:all 0.25s ease-in-out;
@@ -669,7 +669,7 @@ class html
 		width:8%;
 		height:11.75%;
 		left:52.5%;
-		top:56%;
+		top:66%;
 
 		-moz-transition:all 0.25s ease-in-out;
 		-webkit-transition:all 0.25s ease-in-out;
@@ -701,7 +701,7 @@ class html
 		width:8%;
 		height:11.5%;
 		left:5%;
-		top:33.5%;
+		top:43.5%;
 
 		-moz-transition:all 0.25s ease-in-out;
 		-webkit-transition:all 0.25s ease-in-out;
@@ -731,7 +731,7 @@ class html
 		width:3.5%;
 		height:5%;
 		left:15.8%;
-		top:37.5%;
+		top:47.5%;
 
 		-moz-transition:all 0.25s ease-in-out;
 		-webkit-transition:all 0.25s ease-in-out;
@@ -761,7 +761,7 @@ class html
 		width:3.5%;
 		height:5%;
 		left:21.5%;
-		top:57.5%;
+		top:67.5%;
 
 		-moz-transition:all 0.25s ease-in-out;
 		-webkit-transition:all 0.25s ease-in-out;
@@ -791,7 +791,7 @@ class html
 		width:8%;
 		height:11.75%;
 		left:39.3%;
-		top:56%;
+		top:66%;
 
 		-moz-transition:all 0.25s ease-in-out;
 		-webkit-transition:all 0.25s ease-in-out;
