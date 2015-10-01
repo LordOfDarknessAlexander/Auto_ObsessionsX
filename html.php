@@ -212,7 +212,23 @@ class html
 		height: 20px;
 		width :80px;
 	}
-
+	div#nav{
+		position:absolute;
+		top:8%;
+		left:0%;
+		z-index : 3;
+		/*background-size:100% 100%;*/
+		height: 20px;
+		width :80px;
+		
+	}
+	div#nav : hover{
+		position:absolute;
+		top:8%;
+		left:0%;
+		z-index : 10%;
+		border: 2px solid yellow;
+	}
 	div#container {
 		position:absolute; 
 		margin:auto;
