@@ -443,7 +443,7 @@ class html
 		background-image:url('images/SlotMachine.png');
 		background-repeat:no-repeat;
 		/*background-position:center center;*/
-		background-color:black;
+		/*background-color:black;*/
 		background-size:100% 100%;
 		margin:0%;
 		z-index:0;
@@ -488,11 +488,11 @@ class html
 	{
 		position:absolute;
 		left:0%;
-		top: 0%;
+		top: 16%;
 		width:100%;
 		height:8%;
 		font-family:Digifit;
-		font-size:medium;
+		font-size:large;
 		text-align:center;
 		color:red;
 		z-index: 3;
@@ -502,11 +502,11 @@ class html
 	{
 		position:absolute;
 		left:20%;
-		top:15%;
+		top:35%;
 		width:60%;
-		height:8%;
+		height:18%;
 		font-family:Digifit;
-		font-size:medium;
+		font-size:large;
 		text-align:center;	
 		color:teal;
 		z-index: 3;
@@ -544,7 +544,7 @@ class html
 	button#spinButton
 	{
 		position:absolute;
-		left:7%;
+		left:6%;
 		top:65%;
 		width:16%;
 		height:9%;
@@ -558,10 +558,10 @@ class html
 	button#slotStop
 	{
 		position:absolute;
-		left:71%;
+		left:78%;
 		top:65%;
-		width:21%;
-		height:12.5%;
+		width:16%;
+		height:9%;
 		background-image:url('images/stopButton.png');
 		/*background-position:center;*/
 		background-repeat:no-repeat;

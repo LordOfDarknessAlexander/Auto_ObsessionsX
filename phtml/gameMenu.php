@@ -38,10 +38,12 @@ if($isSlots)
 			<!--<a id ='slots'  href='slots.php'>Slots</a> -->
 			
 	<!--	</div>  -->
+	
+	<!--
 	<div id='toSlotsBtn' title='Big Jims Crazy Slots' style='top: 56%; height: 42%; width: 34%; left: 2%;' >
 	<!--<button id='toSlotsBtn' title='Slots'>Crazy Slots</button>	-->
-	<a id ='toSlotsBtn' class='button playSlots'  ></a>
-	</div>
+	<!--<a id ='toSlotsBtn' class='button playSlots'  ></a>
+	</div> -->
     <!--Root Game Menu, hub for page navigation-->
     <!--img id='homeImg' src='images\\garageEmpty.png'-->
 	
@@ -49,6 +51,7 @@ if($isSlots)
     <div id='menuLeft'>
         <button id ='myCars' title='My Garage'>My Garage</button>
         <button id='toAuctionBtn'  title='Live Auctions'>Go to Auction</button>		
+		<button id = 'toSlotsBtn' class='button playSlots' style='bottom: -17%; height: 14%; width: 80%; left: 2%;' >Slots</button>
 		
     </div>
     <div id='menuRight'>
