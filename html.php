@@ -488,11 +488,11 @@ class html
 	{
 		position:absolute;
 		left:0%;
-		top: 16%;
+		top: 8%;
 		width:100%;
 		height:8%;
 		font-family:Digifit;
-		font-size:large;
+		font-size:medium;
 		text-align:center;
 		color:red;
 		z-index: 3;
@@ -504,9 +504,9 @@ class html
 		left:20%;
 		top:35%;
 		width:60%;
-		height:18%;
+		height:8%;
 		font-family:Digifit;
-		font-size:large;
+		font-size:medium;
 		text-align:center;	
 		color:teal;
 		z-index: 3;
