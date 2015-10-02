@@ -221,14 +221,15 @@ button#toSlotsBtn{
 ?>
 	background: url('../images/slots.png') no-repeat 0 0;
     background-size : 100% 100%;
-    
-	left:5%;
+    height : 7%;
+	bottom: -17%;
+	left:0%;
 <?php css::marginBtm();?>
     margin:0%;
     
     /*font-weight: bold;*/
 }
-button#toSlotsBtn : a hover{
+button#toSlotsBtn :  hover{
 <?php
     posAbs();
     css::size('5%', '7.5%');
