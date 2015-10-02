@@ -51,7 +51,7 @@ if($isSlots)
     <div id='menuLeft'>
         <button id ='myCars' title='My Garage'>My Garage</button>
         <button id='toAuctionBtn'  title='Live Auctions'>Go to Auction</button>		
-		<button id = 'toSlotsBtn' class='button playSlots' style='bottom: -17%; height: 14%; width: 80%; left: 2%;' >Slots</button>
+		<button id = 'toSlotsBtn' class='button playSlots' style='bottom: -17%; height: 14%;  left: 0%;' >Slots</button>
 		
     </div>
     <div id='menuRight'>
