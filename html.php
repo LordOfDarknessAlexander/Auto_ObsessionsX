@@ -502,7 +502,7 @@ class html
 	{
 		position:absolute;
 		left:20%;
-		top:35%;
+		top:15%;
 		width:60%;
 		height:8%;
 		font-family:Digifit;

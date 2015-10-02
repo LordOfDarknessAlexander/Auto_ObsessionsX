@@ -213,37 +213,7 @@ button#homeBtn{
     
     /*font-weight: bold;*/
 }
-button#toSlotsBtn{
-<?php
-    posAbs();
-    css::size('5%', '7.5%');
-    //rm();
-?>
-	background: url('../images/slots.png') no-repeat 0 0;
-    background-size : 100% 100%;
-    height : 7%;
-	bottom: -17%;
-	left:0%;
-<?php css::marginBtm();?>
-    margin:0%;
-    
-    /*font-weight: bold;*/
-}
-button#toSlotsBtn :  hover{
-<?php
-    posAbs();
-    css::size('5%', '7.5%');
-    //rm();
-?>
-	background: url('../images/slots_hover.png') no-repeat 0 0;
-    background-size : 100% 100%;
-    
-	left:5%;
-<?php css::marginBtm();?>
-    margin:0%;
-    
-    /*font-weight: bold;*/
-}
+
 /*
 pre styles(preformated text)
 */

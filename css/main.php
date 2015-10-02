@@ -142,6 +142,38 @@ Main Game Menu Styles
 	margin-top : 12em;*/
 	/*top: 20%;*/
 }
+button#toSlotsBtn {
+<?php
+    posAbs();
+    css::size('5%', '7.5%');
+    //rm();
+	css::top('102%');
+?>
+	background: url('../images/slots.png') no-repeat 0 0;
+    background-size : 100% 100%;
+    height : 7%;
+	bottom: -17%;
+	left:0%;
+<?php css::marginBtm();?>
+    margin:0%;
+    
+    /*font-weight: bold;*/
+}
+button#toSlotsBtn :hover{
+<?php
+    posAbs();
+    css::size('5%', '7.5%');
+    //rm();
+?>
+	background: url('../images/slots_hover.png') no-repeat 0 0;
+    background-size : 100% 100%;
+    
+	left:5%;
+<?php css::marginBtm();?>
+    margin:0%;
+    border: 2px solid yellow;
+    /*font-weight: bold;*/
+}
 <?php dgm();?> div{
 <?php
     //rule for all div elements inside Main
