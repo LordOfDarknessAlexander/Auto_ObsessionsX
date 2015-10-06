@@ -210,51 +210,51 @@ This document describes the technical standards used in the development of the A
     </li>
 </ol>
 <hr><h2 id='standards'>Standards and Conventions</h2><hr>
-<pre>   <p class='good'>GREEN</p> code segments and text adhere to standard pratices and conventions, which should be used.
+<pre>   <p class='good'>GREEN</p> code segments and text adhere to standard practices and conventions, which should be used.
 <p class='bad'>RED</p> segments are examples which styles, formats, safe coding conduct are broken and <i>should not</i> be used in code,
 the author will be responsible for making sure the code they write is in-line with this standard,
 else be subjected to gruesome torture and horrific other various crimes against both humanity and nature until they comply :)
 <h3>TIP</h3><p class='tip'>Helpful tips or tricks are displayed in a grey box with white text like this!<br></p></pre>
     <h2 id='fileFormats'>File Formats</h2><hr>
     <pre>    While programs may be written in a single language, in the industry it is rare.
-In many web application(or in general most computer programs) require several diffrent languages and resource types
+In many web application(or in general most computer programs) require several different languages and resource types
 interacting together to bring the user a fully immersive experience.
 This can quickly become confusing and overwhelming when switching between 3 or more in a large project,
-    This project employes 5 text, 2 image and 1 audio file formats to accomplish the desired user experience.</pre>
+    This project employs 5 text, 2 image and 1 audio file formats to accomplish the desired user experience.</pre>
     <h3 id='text'>Text</h3><hr>
 <pre>    In web development there are several layers of various languages, each has its own (independent) standard and specific purpose.
 Thus consistency in style across all file types is important for the readability and maintainability of code.
 <p class='tip'>All text files (unless otherwise specified) should be encoded using UTF-8, without BOM</p>
 </pre>
-<pre id='textHTML'><?php a::html5();?>-Expresses raw (strucutred) data(does not DO anything!), extension (.html),
+<pre id='textHTML'><?php a::html5();?>-Expresses raw (structured) data(does not DO anything!), extension (.html),
 pages should be embedded within PHP(this project does not use raw HTML files),
 as PHP is more powerful and flexible than HTML on its own
 </pre>
 <pre id='textXML'><?php a::xml();?>-extension (.xml), is purely a markup language (with no functionality),
 intended for the expression of an application's data.
 As xml closely adheres to html(with subtly yet important differences),
-xml files should follow the same styles/formating as html pages.
+xml files should follow the same styles/formatting as html pages.
 </pre>
 <pre id='textJS'>
 <?php a::javascript();?>-Controls local browser functionality,
 MIME type application/javascript, extension (.js).
-May be embeded within a php page, to allow for server side off-load of
+May be embedded within a php page, to allow for server side off-load of
 processing or file/database io and textual replacement when dispatched to a browser.
-The inclusion of jQuery allows for the dynamic manipulation of the page's DOM at run-time by the brwoser,
+The inclusion of jQuery allows for the dynamic manipulation of the page's DOM at run-time by the browser,
 Changes made this way are to the version existing within the browser, not the source on the server!
 </pre>
 <pre id='textCSS'><?php a::css();?>-For the display/styling/animating of HTML elements displayed by a browser.
 MIME type text/css, extension (.css).
-As with js files, may be embeded within a php page,
+As with js files, may be embedded within a php page,
 to take advantage of server-side data transforms upon page dispatched.
-This can be useful (for example) to bind jQuery selectors by providing an interface across the (3)seperate file types,
+This can be useful (for example) to bind jQuery selectors by providing an interface across the (3)separate file types,
 which reduce typing and spelling/syntax errors in the jQuery selector strings.
 </pre>
 <pre id='textPHP'><?php a::php();?>-Sever-side scripting language, which provides:
 database(<?php a::phpMySQLi();?>) and <?php a::phpDOM();?>(x[ht]ml) interfaces,
 preprocessing facilities for html(as well as other text file types, .js, .css, etc),
 allows for a file include mechanism(include/require) in other languages(which do not natively support this mechanism),
-the ability to express(easily) functions, classes and objects in aconventional OOP manner,
+the ability to express(easily) functions, classes and objects in a conventional OOP manner,
 which may be a feature the processed file does not natively support!
 and provides an interface from which javascript may asynchronously request server processes,
 using <?php a::jQuery();?> AJAX($.ajax), or with the higher level interface using jq.get and jq.post(located in js/jqLib.php)
@@ -280,24 +280,24 @@ root\
 <h4 id='cfn'>Variables, Operators, Functions, Classes and Namespaces</h4><hr>
 <pre>   As Object Oriented Programming(OOP) is not everyone's background,
 it can be difficult to make sense of the various mechanism,
-especially when various object oriented languages impliment diffrent features.
+especially when various object oriented languages implement different features.
 Before discussing how to express code,
-it is usefull to understand the concepts involded and how to
-visually and logically seperate these concepts,
+it is useful to understand the concepts involved and how to
+visually and logically separate these concepts,
 so that developers can instictually read/write code without
-having to first desipher it physical for and the authors intent,
+having to first decipher it physical for and the authors intent,
 as it should <b>intrinsic to the form expressed</b> in the code itself.
 
 First, some definitions:
     Variable(data/POD)-this is not always the same for all languages,
         as some (like Obj-C, Javascript and Python) implement plain old data as being derived
         from a base class/object proto type.
-    Operator-built in(some time can be overrided) constructs,
+    Operator-built in(some time can be overriden) constructs,
         which differ from functions in syntax and semantics,
-        commonly repressenting arithmetic and logical expressions,
+        commonly representing arithmetic and logical expressions,
         which(usually) take <i>left-hand side</i> and <i>right-hand side</i>,
-        operands instead of a common seperated argument list
-    Function-A unique memory location which repressents a stack of commands which operates on data,
+        operands instead of a common separated argument list
+    Function-A unique memory location which represents a stack of commands which operates on data,
         either declared anonymously(lambdas/closures) or bound to a textual identifier.
 <p class='tip'>    In javascript functions can be 'new'ed to mimic classes/objects,
 which copies the code and allocates a new portion of memory for it,
@@ -305,21 +305,21 @@ increasing memory consumption(by duplicating executable source).
 <b>DO NOT</b> <i>new</i> functions unless syntactically and contextually appropriate.
 </p>
     Class-Encapsulates a single related collection of data and functions,
-        which may(or may not, in the case of class which entierly contain static methods)
-        be instansiated 
+        which may(or may not, in the case of class which entirely contain static methods)
+        be instantiated 
     Namespace-Encapsulates related collections of data, functions, classes and other namespaces.
-        Namespace are never instansiated (and often best used to represent <i>static classes/interfaces</i>).
+        Namespace are never instantiated (and often best used to represent <i>static classes/interfaces</i>).
     Class-Encapsulates a related collection of data and functions which,
 when an instance is initialized/allocated/returned,
 possess a unique memory location(in part or in whole).
 <p class='tip'> The HTML and CSS 'class' attribute/selector is not the same as
-that of the OOP concept(as neither are programing languages)</p>
+that of the OOP concept(as neither are programming languages)</p>
     Namespace-Encapsulates related variables, functions, classes and other namespaces,
-        which is never instansiated, has static duration(in compiled languages,
+        which is never instantiated, has static duration(in compiled languages,
         these are a compile-time construct, used in name mangling)
 </pre>
 <h4 id='cfnDU'>Declaration and Usage</h4><hr>
-<pre>   All gloabally accessable classes are declared (unless prefixed with a namespace, eg: aoVehicle, pasGet, dbConnect),
+<pre>   All globally accessible classes are declared (unless prefixed with a namespace, eg: aoVehicle, pasGet, dbConnect),
 with CamelCase(starting with a capital).
     Functions and variables that are private or protected(or for languages like JS which have no protection, those with the intent of being used as such)
 
@@ -369,7 +369,7 @@ var ao = {
         return;
     },
     doStuff:function(args){
-        //public accesser, which calls a private/protected method
+        //public accessors, which calls a private/protected method
         this._privDoStuff();
         return;
     }
@@ -378,7 +378,7 @@ var ao = {
 its members are accessed with dot (.) notation, as its a global object(more akin to a static class),
 and not accessible (in other scripts) until the script has been parsed by the browser.
     Technically javascript's dynamic nature allows the modification any of the fields in the previous script,
-so these naming conventions are purely synatictical and are enforced as a human readbility concern,
+so these naming conventions are purely syntactical and are enforced as a human readability concern,
 as the programmer must be able to properly, clearly and easily express their intent.
 <hr>
 PHP:
@@ -409,28 +409,28 @@ class Stuff{
 ?&gt;</p></code><p class='tip'>    PHP allows for a namespace mechanism, which is only supported in v5 or greater.
 As the current webhost(GoDaddy) does not use that language version,
 the feature is not used in any studio scripts and will not be mentioned or referenced in examples.</p>
-    One fundemental aspect of OOP and the concept of <i>classes</i> is the encapsulation of data,
+    One fundamental aspect of OOP and the concept of <i>classes</i> is the encapsulation of data,
 along with functions which either return(get) or modify(set) data contained
-within an instansiated object or statically allocated class members/functions.
+within an instantiated object or statically allocated class members/functions.
 <p class='tip'>    With dynamic languages(generally) functions and their bindings,
 This is known as reflection and allows for run-time introspection and mutation
-of a program's source code, essentailly allowing for the potential for 'sentient'
+of a program's source code, essentially allowing for the potential for 'sentient'
 programs which can modify their behaviour based on an AI and input from its execution environment.
 </p>    Getters and Setters which are public are prefixed with 'get' and 'set', respectively,
 along with a clear, conciece, name relating to (and ideally being a shortened version) of the member being accessed or modified.
 <p class='tip'>    Typing less is always better! Programming should be easy and quick while maintaining
 clearity and functionality.
     Make internal class or local function vars very descriptive,
-as these as less frequently accessed/readed(as they are local to their enclosed structure)
+as these as less frequently accessed/read(as they are local to their enclosed structure)
 and are(usually) not accessed from outside the containing scope.
     While, with more frequent, globally accessible interfaces shorter and more concise,
-as they are more fequently used(and easier to remember, by their sharp, short names),
+as they are more frequently used(and easier to remember, by their sharp, short names),
 resulting in less typing.
 </p>
     Protected and private (non-static/const) members are declared <i>camelCased</i>,
 except further prefixed with an underscore(_), as convention dictates.
 Not only is this easier to read, but also means,
-with the auto complete functionality of modern text editers,
+with the auto complete functionality of modern text editors,
 when accessing local vars, one needs to type no fewer than 2 keys,
 as the (_) will first display ALL vars to select from without having to
 remeber what its specific name begins with!
@@ -476,10 +476,10 @@ class thing{
 <pre><h4 id='imgAR'>Aspect Ratios:</h4>    The aspect ratio is an important relation between its size and height and is calculated and expressed as, w/h, or w:h,
 and is expressed in the lowest common denominator.
     This relation is useful when preforming calculations and transforms on the image,
-as well as applyin more complex matrix operations(for displaying images using GPU programming).
+as well as applying more complex matrix operations(for displaying images using GPU programming).
 <p class='tip'>Common Aspect Ratios:
     Computer Monitors-4:3 for standards and 16:9 for widescreens,
-    Mobile-4:3, 3:2, 4:5, 5:3, 16:9(exclussively iPhone5 or Greater)
+    Mobile-4:3, 3:2, 4:5, 5:3, 16:9(exclusively iPhone5 or Greater)
     Blackberry-1:1 and 16:9
     Tablets(iPad and Android)-4:3
     
@@ -489,22 +489,22 @@ if landscape and portrait are considered.
     It is helpful(to avoid image stretch) to have image resources adopt the same aspect ratio as the display rendering them,
     but as various devices have varying aspect ratios
 but an aspect ratio of 1:1 can also be acceptable,
-as the preportions are scaled so stretching appears relatively undistorted.
+as the proportions are scaled so stretching appears relatively undistorted.
 <h4 id='imgFD'>Image Formats and Dimensions:</h4>    All large (non-transparent)image resources, such as backgrounds, car photos assume the JPG format.
 Logos for advertising are currently 385x85 .png, as they are small images where retention of resolution is important.
-    Since the previous project did not have standardized image sizes the image library is uncessicarily bloated and chaotic,
+    Since the previous project did not have standardized image sizes the image library is unnecessarily bloated and chaotic,
 as a result file range from very small(32kb), to very large(2mb) and various aspect ratios (most common aspect resolutions 4/3 (1.33) or 3/2(1.5) ).
-    This results in transfer for images being extremely slow, as many very large images have to be transfered, quite frequently, on screen transions, across manny pages.
+    This results in transfer for images being extremely slow, as many very large images have to be transferred, quite frequently, on screen transitions, across many pages.
 increasing bandwidth, slowing execution drastically(eg. the garage or auction select screens).
     After reducing file size from the original source,
 storage of the vehicle image library reduced from ~246mb(0.24gb) to less than 28mb(0.03gb at 720p),
 resulting in a ~81% reduction(of it original size) which,
-is a reduction of 215mb which does not need to be stored and transfered,
+is a reduction of 215mb which does not need to be stored and transferred,
 at no loss to resolution or image quality!
 
     As a result all vehicle images shall be a height of 720.
-If issues with resoulton arise, increase to full 1080 resolution and/or widescreen aspect ratio,
-or reduce to 640, for increased preformance!
+If issues with resolution arise, increase to full 1080 resolution and/or widescreen aspect ratio,
+or reduce to 640, for increased performance!
 
 The resulting images sizes then become:
     (4/3 = 853x640)
@@ -630,9 +630,9 @@ This makes for rather cumbersome syntax which is less flexible.</pre><code class
 <code class='php'>
 <p class='bad'>$jsonStr = "{\"id\":\"string data\"}";</p>
 <p class='good'>$jsonStr = '{"id":"string"}';</p>
-<pre><p class='tip'>    To create properly formated JSON strings in PHP,
-create an assosiative array, then use json_encode() to convert to an object string!</p>
-//prefered way to generate a json string from an 'object':
+<pre><p class='tip'>    To create properly formatted JSON strings in PHP,
+create an associative array, then use json_encode() to convert to an object string!</p>
+//preferred way to generate a json string from an 'object':
 $obj = array('val0'=>0,'val1'=>'second');
 $jsonStr = json_encode($obj);
 ?&gt;</pre></code>
@@ -689,7 +689,7 @@ if(isset($_GET) && !empty($_GET) ){
 //else no args being passed to the script
 ?&gt;</code>
 <p class='tip'>Pro tip:
-    With .htaccess files, using URL rewritting can use RegExes
+    With .htaccess files, using URL rewriting can use RegExes
 to validate input parameters and to restrict the format of the URL,
 which prevents the user from brute forcing additional arguments
 should the presented url not match the expected pattern,
@@ -973,21 +973,34 @@ purchasing a car copies the data from aoCars(entries are never removed from aoCa
 </pre>
 <h3 id='owning'>Garage-life</h3><hr>
 <pre>   At this point users may View, Upgrade, or Sell vehicles they have previously purchased.
-View a car does not change any.
+View a car does not change any, instead it allows the user a full detailed view of a specific vehicle.
+Once upgraded sufficiently, a user may choose to sell a vehicle to make a return on their investment.
+
 </pre>
 <h3 id='selling'>Making money</h3><hr>
 <pre>   Processing in-game funds is managed by the server in PHP.
 If the user is not a registered user, processing is off-loaded 
 to the browser to simulate the interaction(as guests do not have access to the databases).
-    An Ajax POST request is made to the server (from js),
+    An Ajax POST request is made to the server (from js using jQuery),
 where the transaction is validated and processed by the server,
 before updating the user's table entry with the script returning their new funds,
 which then uses jQuery to update the DOM to display the new values.
 </pre>
-<h3>Repairs and upgrades</h3><hr>
-<pre>    Vehicle upgrades and repairs are represented by bitfields,
-
-    Each field is represented by 4(8-bit) bytes taking the form {XXXX,FFFF}.
+<h3 id='UandR'>Upgrades and Repairs</h3><hr>
+<pre>    Purchased vehicles may be repaired and upgraded, as described below.
+These modifications can be purchased using the user's funds.
+<p class='tip'>    Mods purchased for the guest are saved directly to the user's
+Garage in Local Storage in the javascript. When logged in, ajax requests are sent
+to the server, where the updates are performed, returning the results to the browser
+upon success when it is then updated to the Garage and local storage.
+</p>
+    Vehicle upgrades and repairs are represented by (separate) bitfields.
+Bitfields are a convenient binary representations of groups of boolean values.
+They are most easily represented and conceived of as unsigned integers,
+where each bit has a specific significance.
+</pre>
+<h4 id='vehicleUpgrades'>Vehicle Upgrades</h4>
+<pre>    Each field is represented by 4 bytes(8-bits each), taking the form {XXXX,FFFF}.
 Each group of 4 bits represents a single part of the car.
 The X's aRE reserved and not used.
     
@@ -1032,10 +1045,28 @@ pending updates/overhaul could be reduced to (16-bytes)
     interior/docs uint(4)
     repairs uint(4)
 </pre>
-    <h3 id='ai'>AI</h3><hr>
-	
+<h4 id='vehicleRepairs'>Vehicle Repairs</h4>
+<pre>    Each bit represents the state of one of the 4 components of a part bay.
+When fully repaired all bits are full(0xF), with the field values appearing as such:
+    {documents,interior, body, drivetrain}
+    drivetrain(bits 0-7)
+    body(bits 8-15)
+    interior(bits 16-23)
+    documents(bits 24-31), these are reserved are are always 0
+
+Binary Visual:
+    {0000,0000,0000,0000}    //new part
+    {0000,1111,1111,1111}   //field fully repaired
+
+Hex Visual:
+    {0x0,0x0,0x0,0x0}       //new
+    {0x0,0xF,0xF,0xF}       //maxed
+  
+</pre>
+    <h3 id='ai'>AI</h3><hr>	
 <pre>   The AI drives the user's bidding experience.
 To bypass the complexity of interacting peer to peer, randomized AI are implemented to simulate an engaging user experience.
+
 <br>
 <h3>TODO >>>>> The software is not adjusting the pricing to reflect the adjusted condition of the vehicle. See below for an example:</h3>
 If a car shows in the spreadsheet I provided for $100000 that is the value of the vehicle at 100% condition

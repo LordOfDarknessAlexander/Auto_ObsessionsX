@@ -2,7 +2,8 @@
 if(!headers_sent() ){
     header('Content-type: application/javascript; charset: UTF-8');
 }
-function drs(){?>div#RepairShop<?php
+function drs(){
+    ?>div#RepairShop<?php
 }
 function drsDiv(){
     drs();?> div<?php
@@ -39,7 +40,7 @@ jq.RepairShop = {
 };
 //
 function playRepairAudio(){
-    if (audioEnabled()) {
+    if(audioEnabled()) {
         assetLoader.sounds.repair.pause();
         console.log('Repair Audio Play');
         assetLoader.sounds.repair.play();

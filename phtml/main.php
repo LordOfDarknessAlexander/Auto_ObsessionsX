@@ -13,6 +13,15 @@ $AS_NAME = 'Alexander Sanchez';
 $AB_NAME = 'Andrew Best';
 $BM_NAME = 'Brendan McCracken';
 $JM_NAME = 'Johnathan McLaughlin';
+//$NAMES = array(
+    //'OWNER'=>'Adam Glazer',
+    //'AO'=>'Auto Obsessions',
+    //'TD'=>'Tyler Drury',
+    //'AS'=>'Alexander Sanchez',
+    //'AB'=>'Andrew Best',
+    //'BM'=>'Brendan McCracken',
+    //'JM'=>'Johnathan McLaughlin',
+//);
 
 //this is not working on site without a new session
 //session_start();

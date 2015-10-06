@@ -435,14 +435,7 @@ class user{
             if($res){
                 $r = $res->fetch_assoc();
                 
-                return carDataFromArray($r);    //array(
-                    //$CID=>intval($r[$CID]),
-                    //$DT=>intval($r[$DT]),
-                    //$B=>intval($r[$B]),
-                    //$I=>intval($r[$I]),
-                    //$D=>intval($r[$D]),
-                    //$R=>intval($r[$R])
-                //);
+                return carDataFromArray($r);
             }
             else{
                 $aoCarSalesDB->eErr();

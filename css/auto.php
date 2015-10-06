@@ -1,6 +1,7 @@
 <?php
 //core/meta ui element stylings,
 //which apply to all elements across the page
+//this css is included in
 require_once 'ui.php';
 //as long as the required file does not output anything this is fine,
 //normally header() should be first line in file, after comments
@@ -13,8 +14,10 @@ css::header();
 //function divStatBar(){
     //echo 'div#statBar';
 //}
-//@import url("menu.css");
-//@import url("credits.css");
+function btn(){
+    //
+    ?>button<?php
+}
 ?>
 *, *:before, *:after {
     box-sizing: border-box;
@@ -161,31 +164,31 @@ div#loginfields{
 /*
 Button styles
 */
-button{
+<?php btn();?>{
     /*all button elements will share this background (and other properties) unless otherwise specified*/
 	background: url('../images/defaultBtn.png') no-repeat 0 0;
     background-size:100% 100%;
 	color:red;
     cursor:pointer;	
 }
-button:hover {
+<?php btn();?>:hover {
     /*mouse over*/
 	background: url('../images/defaultBtn2.png') no-repeat 0 0;
 	background-size:100% 100%;
     color:yellow;
     border: 2px yellow solid;
 }
-button.select{
+<?php btn();?>.select{
     /*mouse clicked and active*/
 	background: url('../images/icons/btnSelect.png') no-repeat 0 0;
 	background-size:100% 100%;
     color:green;
 }
-button:active {
+<?php btn();?>:active {
     /*mouse pressed*/
     color:yellow;
 }
-button#backBtn{
+<?php btn();?>#backBtn{
     /*sets properties for all button tags with id backBtn*/
 <?php
     posAbs();
@@ -198,7 +201,7 @@ button#backBtn{
 
 	left:5%;
 }
-button#homeBtn{
+<?php btn();?>#homeBtn{
 <?php
     posAbs();
     css::size('5%', '7.5%');
@@ -253,11 +256,11 @@ Document root
 */
 .wrapper{
 <?php
-    css::size('100%', '100%');
     posAbs();
+    css::left('0%');
+    css::top('0%');
+    css::size('100%', '100%');
 ?>
-    top: 0%;
-    left: 0%;
     /*z-index:1;*/
     color:red;
 }
@@ -272,15 +275,14 @@ img#aoLogo{
     object-fit:contain;
 }
 img#adBar{
-	/*background:url('../images/logos/AutoZone.png') no-repeat 0 0;*/
 <?php
     posAbs();
+    css::left('20%');
     css::size('60%', '8%');
     css::marginBtm();
 ?>
-	left:20%;
-
     z-index:3;
+    /*background:url('../images/logos/AutoZone.png') no-repeat 0 0;*/
 }
 <?php //Game Screen/State stylings?>
 #Register{
@@ -303,13 +305,12 @@ img#adBar{
 div#statBar{
 <?php
     posAbs();
+    css::top('0%');
+    css::left('0%');
     css::size('100%', '15%');
     css::txtAlignL();
 ?>
-	background: url('../images/statBarTile.png');
-	top:0%;
-	left:0%;
-	
+	background: url('../images/statBarTile.png');	
 	/*child elements inherit values, unless otherwise specified*/
 	font-family:"Kozuka Gothic Pro B";
 	color:red;
