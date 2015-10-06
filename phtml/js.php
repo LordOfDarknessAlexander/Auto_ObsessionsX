@@ -24,8 +24,8 @@ $paths = array(
     'state/Auction',
     'state/AuctionSell',
 	'allowance',
-    'program'	,
-	'miniSlots'//main javascript program	
+    'program'	//,
+	//'miniSlots'//main javascript program	
 );
 $php = array(
     'globals',

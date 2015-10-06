@@ -2,7 +2,7 @@
 require_once './html.php';
 require_once './ao.php';
 require_once './user.php';
-
+require_once './js/state/slots.php';
 
 ?>
 <html lang=en>

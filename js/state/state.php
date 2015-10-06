@@ -16,7 +16,7 @@ require_once 'AuctionSelect.php';
 require_once 'SaleView.php';
 require_once 'profile.php';
 require_once 'repair.php';
-//require_once 'slots.php';
+require_once 'slots.php';
 //require_once 'AuctionSell.php';
 //require_once 'AuctionSelect.php';
 ?>

@@ -25,82 +25,69 @@ jq.Slots = {
 	
 };
 
-	var slot1Canvas = document.getElementById('slot1'),
-	slot1Context = slot1Canvas.getContext('2d'),
-	
-	//slot1Context = $("slot1").get(0);
-	slot2Canvas = document.getElementById('slot2'),
-	slot2Context = slot2Canvas.getContext('2d'),
-	//slot2Context = $("slot2").get(0);
-	slot3Canvas = document.getElementById('slot3'),
-	//slot3Context = $("slot3").get(0);
-	slot3Context = slot3Canvas.getContext('2d');
+
+var slot1Canvas = document.getElementById('slot1'),
+		slot1Context = slot1Canvas.getContext('2d'),
 		
+		//slot1Context = $("slot1").get(0);
+		slot2Canvas = document.getElementById('slot2'),
+		slot2Context = slot2Canvas.getContext('2d'),
+		//slot2Context = $("slot2").get(0);
+		slot3Canvas = document.getElementById('slot3'),
+		//slot3Context = $("slot3").get(0);
+		slot3Context = slot3Canvas.getContext('2d');
 		
+
 $(document).ready(
 function(){
+    //update to use jQuery
+	//Reels 
+//slots
+	//Buttons
+    var spinButton = document.getElementById('spinButton');
+	
+	var slot1 = [];
+	var slot2 = [];
+	var slot3 = [];
+	//var jq;
+    //
+	var userStats = [];
+	var slot1spin = true,
+        slot2spin = true,
+        slot3spin = true;
+
+	var slot1curr = currFrame,
+        slot2curr = currFrame,
+        slot3curr = currFrame;
+   
+	var randSlot1 = 0,
+        randSlot2 = 0,
+        randSlot3 = 0;
 		
-
-		
-		var spinButton = document.getElementById('spinButton');
+	var rand = 0;
+	var currFrame = 0;	
+	//Values
+	var tokens = 0;
+	//Images
+	var slotImage1 = new Image(),
+        slotImage2 = new Image(),
+        slotImage3 = new Image();	
+	//Sounds
+	var startSpinSound = document.getElementById('startSpin'),
+        reelsSpinning = document.getElementById('reelSpinning'),
+        noWin = document.getElementById('youLose'),
+        youWin = document.getElementById('winSound');
 	
-		var slot1 = [];
-		var slot2 = [];
-		var slot3 = [];
-		//var jq;
-		//
-		var userStats = [];
-		var slot1spin = true,
-			slot2spin = true,
-			slot3spin = true;
-
-		var slot1curr = currFrame,
-			slot2curr = currFrame,
-			slot3curr = currFrame;
-
-		var randSlot1 = 0,
-			randSlot2 = 0,
-			randSlot3 = 0;
-			
-		var rand = 0;
-		var currFrame = 0;	
-		//Values
-		var tokens = 0;
-		//Images
-		var slotImage1 = new Image(),
-			slotImage2 = new Image(),
-			slotImage3 = new Image();	
-		//Sounds
-		var startSpinSound = document.getElementById('startSpin'),
-			reelsSpinning = document.getElementById('reelSpinning'),
-			noWin = document.getElementById('youLose'),
-			youWin = document.getElementById('winSound');
-
-		var gameFinished = false;
-		var spins = false;
-		var val = 0;
-		
-var Slots = {
-	_slots : null,
+	var gameFinished = false;
+	var spins = false;
+	var val = 0;
 	
-	
-	
-	
-	init:function(index){
-        //call to start an auction for car		
-        //console.log(index);
-        //disable/enable sounds before ajax call
-        
-        if(audioEnabled() ){
-            console.log('audio enabled-Slots');
-            var s = assetLoader.sounds;
-            s.gameOver.pause();
-            //s.going.pause();
-            s.sold.pause();
-            //s.bg.currentTime = 0;
-            //s.bg.loop = true;
-            //s.bg.play();
-        }
+	function init(){		
+		//initialize bank
+		//will need accsess to the mamber datbase so that this can be set according to the clients information
+		//aoTimer.update();
+    
+		//var now = getTimestamp(), //in milliseconds
 		//dt = aoTimer.getDT();
 		tokens = 3;
 		
@@ -110,22 +97,34 @@ var Slots = {
 	
 		document.addEventListener('keyup',keyUpHandler, false);
 		turnOffLights();
+	}
+	function update(){
+		window.requestAnimationFrame(update, $('canvas#slot1Canvas'));
 		
-		jq.Slots.menu.hide();
-		jq.Slots.menu.show();
-		
-
-        var funcName = 'Slots.php, Auction::init()';
-		appState = GAME_MODE.Slots;
-		
-	},
-	
-	close : function(){
-        jq.carImg.hide();
-	},
-	stop : function(){
-		
-		//stop reel from spinning
+		this.slot1Context.clearRect(0, 0, slot1Canvas.width, slot1Canvas.height);
+		this.slot2Context.clearRect(0, 0, slot2Canvas.width, slot2Canvas.height);
+		this.slot3Context.clearRect(0, 0, slot3Canvas.width, slot3Canvas.height);
+		drawReels();
+ 		spinReels();
+		tokens == val;
+		if(gameFinished == true){
+			reelsSpinning.pause();
+			reelSpinning.loop = false;
+			startSpinSound.pause();
+			startSpinSound.loop = false;
+			stop();
+		}
+		if(spins == true){
+			spinTimer --;
+			//tokens --;
+		}
+		if( tokens <= 0)
+		{
+			gameFinished = true;
+		}
+	}
+	function stop(){
+        //stop reel from spinning
 		if(slot1spin == true){
 			slot1spin = false;
 			return;
@@ -147,10 +146,10 @@ var Slots = {
 			checkForWin();
 
 		}
-	},
-	checkForWin : function(){
-		
-		 var res = $('div#resultsTextDiv');
+	}
+	function checkForWin(){
+        //
+        var res = $('div#resultsTextDiv');
         
 		if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1){
 			tokens ++;
@@ -244,8 +243,9 @@ var Slots = {
 		
         $('div#bankValue').text('You have ' + tokens + ' tokens');
 		console.log(tokens);
-	},
-	startSpin: function(){
+	}
+
+	function startSpin(){
 		if(this.gameFinished == false){
 			//winnings = 0;
 			//tokens = 0;
@@ -260,122 +260,22 @@ var Slots = {
 		
 		}
 		else{
-			this.stop();
+			stop();
 			
 		}
-		this.update();
-	},
-	keyUpHandler: function(event){
+		update();
+	}
+	function keyUpHandler(event){
 		var keyPressed = event.keyCode;
 		
         if (keyPressed == 32){
 			turnOffLights();
 			//playReelSpin();
-			this.startSpin();
+			startSpin();
 		}
-	},
-	spinReels: function(){
-		if(slot1spin == true){
-			slot1curr = this.randomNum();//slot1[randomNum()];
-			this.playReelSpin();			
-		}
-        
-		if(slot2spin == true){
-			slot2curr = this.randomNum();//slot2[randomNum()];
-			this.playReelSpin();
-		}
-        
-		if(slot3spin == true){
-			slot3curr = this.randomNum();//slot3[randomNum()];
-			this.playReelSpin();
-		}
-		
-		if((slot1spin == true)&& (slot2spin == true) && (slot3spin == true)){
-			this.gameFinished == true;
-		}
-	},
-	playWinSound: function(){
-		//stop other sounds
-		startSpinSound.pause();
-		reelSpinning.pause();	
-		//Set volume and play sound
-		youWin.currTime = 0.0;
-		youWin.volume = 0.5;
-		youWin.play();
-	},
-	playLossSound: function(){
-		//stop othe sounds
-		startSpinSound .pause();
-		reelSpinning.pause();		
-		//set volume and play sound
-		noWin.currTime = 0.0;
-		noWin.volume = 0.5;
-		noWin.play();
-	},
-	playReelSpin: function(){
-		//stop all other sound		
-		noWin.pause();
-		youWin.pause();
+	}
 	
-		//set volume and play sound
-		startSpinSound.currTime = 0.0;
-		startSpinSound.volume = 0.5;
-		startSpinSound.play();
-		
-		reelSpinning.currTime == 0.0;
-		reelsSpinning.volume = 0.5;
-		reelsSpinning.play();
-		//reelSpinning.loop = true;	
-	},
-	
-	randomNum: function(){
-		rand = Math.floor(Math.random() * 100);
-		var num = 0;
-		
-		if(rand <= 30){
-			num = 6;
-		}
-		else if(rand < 53 && rand > 30){
-			num = 5;
-		}
-		else if(rand < 71 && rand > 52){
-			num = 4;
-		}
-		else if(rand < 85 && rand > 70){
-			num = 3;
-		}
-		else if(rand < 95 && rand > 84){
-			num = 2;
-		}
-		else if(rand <= 100 && rand > 94){
-			num = 1;
-		}
-		return num;
-	},
-	update : function(){
-		window.requestAnimationFrame(update, $('canvas#slot1Canvas'));
-		slot1Context.clearRect(0, 0, slot1Canvas.width, slot1Canvas.height);
-		slot2Context.clearRect(0, 0, slot2Canvas.width, slot2Canvas.height);
-		slot3Context.clearRect(0, 0, slot3Canvas.width, slot3Canvas.height);
-		this.drawReels();
- 		this.spinReels();
-		tokens == val;
-		if(gameFinished == true){
-			reelsSpinning.pause();
-			reelSpinning.loop = false;
-			startSpinSound.pause();
-			startSpinSound.loop = false;
-			this.stop();
-		}
-		if(spins == true){
-			this.spinTimer --;
-		}
-		if( tokens <= 0)
-		{
-			this.gameFinished = true;
-		}
-	},
-	drawReels : function(){
+	function drawReels(){
 		//slot 1
         src = 'images/ReelImages/';
         
@@ -460,9 +360,90 @@ var Slots = {
             slotImage3.width * 1.5, 
             slotImage3.height * 1.5
         );
-	},
-	turnOnLights: function(){
-		 var state = {
+	}
+	
+	function spinReels(){
+		
+		if(slot1spin == true){
+			slot1curr = randomNum();//slot1[randomNum()];
+			playReelSpin();			
+		}
+        
+		if(slot2spin == true){
+			slot2curr = randomNum();//slot2[randomNum()];
+			playReelSpin();
+		}
+        
+		if(slot3spin == true){
+			slot3curr = randomNum();//slot3[randomNum()];
+			playReelSpin();
+		}
+		
+		if((slot1spin == true)&& (slot2spin == true) && (slot3spin == true)){
+			gameFinished == true;
+		}
+	}
+	function randomNum(){
+		rand = Math.floor(Math.random() * 100);
+		var num = 0;
+		
+		if(rand <= 30){
+			num = 6;
+		}
+		else if(rand < 53 && rand > 30){
+			num = 5;
+		}
+		else if(rand < 71 && rand > 52){
+			num = 4;
+		}
+		else if(rand < 85 && rand > 70){
+			num = 3;
+		}
+		else if(rand < 95 && rand > 84){
+			num = 2;
+		}
+		else if(rand <= 100 && rand > 94){
+			num = 1;
+		}
+		return num;
+	}
+	
+	function playWinSound(){
+		//stop other sounds
+		startSpinSound.pause();
+		reelSpinning.pause();	
+		//Set volume and play sound
+		youWin.currTime = 0.0;
+		youWin.volume = 0.5;
+		youWin.play();
+	}
+	function playLossSound(){
+		//stop othe sounds
+		startSpinSound .pause();
+		reelSpinning.pause();		
+		//set volume and play sound
+		noWin.currTime = 0.0;
+		noWin.volume = 0.5;
+		noWin.play();
+	}
+	function playReelSpin(){
+		//stop all other sound		
+		noWin.pause();
+		youWin.pause();
+	
+		//set volume and play sound
+		startSpinSound.currTime = 0.0;
+		startSpinSound.volume = 0.5;
+		startSpinSound.play();
+		
+		reelSpinning.currTime == 0.0;
+		reelsSpinning.volume = 0.5;
+		reelsSpinning.play();
+		//reelSpinning.loop = true;		
+	}
+	
+	function turnOnLights(){
+        var state = {
             'display':'block',
             'moz-animation-play-state':'running',
             '-webkit-animation-play-state':'running',
@@ -478,9 +459,9 @@ var Slots = {
 		$('div#upperRightSmall').css(state);		
 		$('div#lowerRightSmall').css(state);
 		$('div#RightFog').css(state);
-	},
-	turnOffLights: function(){
-		var state = {
+	}
+	function turnOffLights(){
+        var state = {
             'display':'none', 'moz-animation-play-state':'paused',
             '-webkit-animation-play-state':'paused',
             '-ms-animation-play-state':'paused',
@@ -495,10 +476,37 @@ var Slots = {
 		$('div#upperRightSmall').css(state);		
 		$('div#lowerRightSmall').css(state);
 		$('div#RightFog').css(state);
-	},
-	setTokens : function(){
-		//<php
-//if(DEBUG){>
+	}	
+	
+	$('.spinButton').click(
+	function(){
+		startSpin();
+		if(gameFinished == false){
+			tokens --;
+			turnOffLights();
+			setTokens(val);
+			//playReelSpin();
+			
+			$('div#bankValue').text('You have ' + tokens);
+			$('div#resultsTextDiv').text('');
+			$('div#wonTextDiv').text('');
+			
+			slot1spin = true;
+			slot2spin = true;
+			slot3spin = true;
+			//gameFinished = false;			
+		}
+		
+		update();
+	});
+	//jq.statBar();
+	//jq.setStatBar();
+	//jq.setStatBar.setTokens();
+
+	function setTokens(val){
+	//<php
+	//if(loggedIn() ){>
+		//jq.get(
 		if(val !== null &&
 			val !== undefined &&
 			val >= 0 &&
@@ -512,84 +520,57 @@ var Slots = {
 			//jq.Msg('No more tokens, go to the store to purchase more!')
 			console.log('No more tokens , go to the store to purchase more');
 		}
-//<php
-//}
-//>  
 	}
 	
-};
-//
-//Slots jQuery bindings
-
-$('.spinButton').click(
-function(){
-	Slots.startSpin();
-	if(gameFinished == false){
-		tokens --;
-		Slots.turnOffLights();
-		Slots.setTokens(val);
-		//playReelSpin();
-		
-		$('div#bankValue').text('You have ' + tokens);
-		$('div#resultsTextDiv').text('');
-		$('div#wonTextDiv').text('');
-		
-		slot1spin = true;
-		slot2spin = true;
-		slot3spin = true;
-		//gameFinished = false;			
-	}
-	
-	Slots.update();
-});
-//
-$('.slotStop').click(
+	$('.slotStop').click(
 	function(){
 		
-		Slots.spinTimer = 200;
-		Slots.spins = true;
-		Slots.update();
-		Slots.setTokens(val);
-		console.log(Slots.spinTimer);
-		if((Slots.slot1spin == true) && (Slots.spinTimer < 200)){
-			Slots.slot1curr = randomNum();//slot1[randomNum()];
-			Slots.playReelSpin();
-			Slots.slot1spin = false;
-			Slots.spins = true;
+		spinTimer = 200;
+		spins = true;
+		update();
+		setTokens(val);
+		console.log(spinTimer);
+		if((slot1spin == true) && (spinTimer < 200)){
+			slot1curr = randomNum();//slot1[randomNum()];
+			playReelSpin();
+			slot1spin = false;
+			spins = true;
 			//spinTimer --;
-			Slots.update();
+			update();
 		}
-		else if((Slots.slot2spin == true) && (Slots.spinTimer < 100)){
-			slot2curr = Slots.randomNum();//slot2[randomNum()];
-			Slots.playReelSpin();
-			Slots.slot2spin = false;
-			Slots.spins = true;
-			Slots.spinTimer --;
-			Slots.update();
+		else if((slot2spin == true) && (spinTimer < 100)){
+			slot2curr = randomNum();//slot2[randomNum()];
+			playReelSpin();
+			slot2spin = false;
+			spins = true;
+			spinTimer --;
+			update();
 		}
-		else if((Slots.slot3spin == true)&& (Slots.spinTimer < 50)){
-			Slots.slot3curr = Slots.randomNum();//slot3[randomNum()];
-			Slots.playReelSpin();
-			Slots.slot3spin = false;
-			Slots.spins = true;
+		else if((slot3spin == true)&& (spinTimer < 50)){
+			slot3curr = randomNum();//slot3[randomNum()];
+			playReelSpin();
+			slot3spin = false;
+			spins = true;
 			//spinTimer --;
-			Slots.update();
+			update();
 		}
 		
-		if(Slots.gameFinished == false){
-			Slots.stop();
-			Slots.checkForWin();
-			Slots.slot1spin = false;
-			Slots.slot2spin = false;
-			Slots.slot3spin = false; 
+		if(gameFinished == false){
+			stop();
+			checkForWin();
+			slot1spin = false;
+			slot2spin = false;
+			slot3spin = false; 
 		}
 		else{
 			return;
 		}
 	
-	Slots.stop();
+	stop();
+	});
+
+	init();
 });
 
-
-init();
-});
+//Slots.init();
+//});

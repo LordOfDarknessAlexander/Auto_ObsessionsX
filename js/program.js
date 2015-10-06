@@ -170,8 +170,8 @@ function switchStates(){
 		
 		case GAME_MODE.SLOTS:
 			//slots.update();
-			slots();
-			 setStatBar();
+			//slots();
+			// setStatBar();
 		 break;
 			
 		default:
