@@ -135,7 +135,7 @@ Page Switch, for different components
 }
 <?php drsSwitchBtn();?>#dt{
 <?php
-	css::defaultBG('../images/drivetrain.png');
+	css::defaultBG('../images/parts/drivetrain/icon.png');
     css::bgSize('100%', '100%');
     css::left('0%');
     css::top('0%');
@@ -144,7 +144,7 @@ Page Switch, for different components
 <?php drsSwitchBtn();?>#dt:hover{
 <?php
     //mouse over
-    css::defaultBG('../images/drivetrain_hover.png');
+    css::defaultBG('../images/parts/drivetrain/iconHover.png');
     css::bgSize('100%', '100%');
 	css::left('0%');
     css::top('0%');
@@ -153,7 +153,7 @@ Page Switch, for different components
 }
 <?php drsSwitchBtn();?>#body{
 <?php
-	css::defaultBG('../images/body.png');
+	css::defaultBG('../images/parts/body/icon.png');
     css::bgSize('100%', '100%');
     css::left('0%');
     css::bottom('0%');
@@ -161,7 +161,7 @@ Page Switch, for different components
 }
 <?php drsSwitchBtn();?>#body:hover{
 <?php
-    css::defaultBG('../images/body_hover.png');
+    css::defaultBG('../images/parts/body/iconHover.png');
     css::bgSize('100%', '100%');
     css::left('0%');
     css::bottom('0%');
@@ -169,7 +169,7 @@ Page Switch, for different components
 }
 <?php drsSwitchBtn();?>#inter{
 <?php
-	css::defaultBG('../images/interior.png');
+	css::defaultBG('../images/parts/interior/icon.png');
     css::bgSize('100%', '100%');
     css::right('0%');
     css::top('0%');
@@ -177,7 +177,7 @@ Page Switch, for different components
 }
 <?php drsSwitchBtn();?>#inter:hover{
 <?php
-    css::defaultBG('../images/interior_hover.png');
+    css::defaultBG('../images/parts/interior/iconHover.png');
     css::bgSize('100%', '100%');
     css::right('0%');
     css::top('0%');
@@ -185,7 +185,7 @@ Page Switch, for different components
 }
 <?php drsSwitchBtn();?>#docs{	
 <?php
-	css::defaultBG('../images/documents.png');
+	css::defaultBG('../images/parts/documents/icon.png');
     css::bgSize('100%', '100%');
     css::right('0%');
     css::bottom('0%');
@@ -193,7 +193,7 @@ Page Switch, for different components
 }
 <?php drsSwitchBtn();?>#docs:hover{	
 <?php
-    css::defaultBG('../images/documents_hover.png');
+    css::defaultBG('../images/parts/documents/iconHover.png');
     css::bgSize('100%', '100%');
     css::right('0%');
     css::bottom('0%');
