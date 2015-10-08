@@ -18,7 +18,7 @@ html::simpleHead('Login');
     <h1>Auto-Obsessions Login</h1>
     <div id='reg-navigation'>
         <a href='registerUser.php'>Register</a>
-        <a href='index.php'>Cancel</a>
+        <a href='index.php'>Play Game</a>
     </div>
 </div>
 <div id='container'>

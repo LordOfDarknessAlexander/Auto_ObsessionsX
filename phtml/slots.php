@@ -3,20 +3,12 @@ require_once './html.php';
 require_once './ao.php';
 require_once './user.php';
 require_once './js/state/slots.php';
-
-?>
-<html lang=en>
-<head>
-<?php
-
 html::slotStyles();
 html::simpleHead('Auto-Obsessions Slots');
-
 ?>
-<script type='text/javascript' src='//code.jquery.com/jquery-2.1.0.min.js'></script>
-<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+<html lang=en>
 
-</head>
+<body>
 <div id='container'>
 
 	<div id='Slots'><!-- Start of the page-specific content. -->
@@ -66,6 +58,7 @@ html::simpleHead('Auto-Obsessions Slots');
         <!-- End of the page-specific content. -->
     </div>
 </div>	<!-- End of the slots container content. -->
+</body>
 <?php
 //require './legal.php';
 //require_once './js/state/slots.php';

@@ -443,7 +443,7 @@ class html
 		background-image:url('images/SlotMachine.png');
 		background-repeat:no-repeat;
 		/*background-position:center center;*/
-		/*background-color:black;*/
+	    background-color:black;
 		background-size:100% 100%;
 		margin:0%;
 		z-index:0;

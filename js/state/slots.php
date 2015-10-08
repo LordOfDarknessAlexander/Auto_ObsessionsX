@@ -2,13 +2,13 @@
 if(!headers_sent() ){
     header('Content-type: application/javascript; charset: UTF-8');
 }
-//SaleView State Object
+
 //require_once '../../dbConnect.php';
 //require_once '../../vehicles/vehicle.php';
 //require_once '../pasMeta.php';
 //
-$userID = getUID();
-$tableName =  getUserTableName();
+//$userID = getUID();
+//$tableName =  getUserTableName();
 //
 $fileName = 'js/state/slots.php';//__FILE__;
 $funcName = '';
@@ -16,16 +16,6 @@ $funcName = '';
 function ds(){?>div#Slots<?php
 }
 ?>
-
-jq.Slots = {
-	menu : $('div#Slots'),
-	backBtn : $('div#Slots button#backBtn'),
-	homeBtn : $('div#Slots button#homeBtn')
-	
-	
-};
-
-
 var slot1Canvas = document.getElementById('slot1'),
 		slot1Context = slot1Canvas.getContext('2d'),
 		
@@ -571,6 +561,6 @@ function(){
 
 	init();
 });
+<?php
 
-//Slots.init();
-//});
+?>
