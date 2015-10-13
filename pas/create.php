@@ -108,7 +108,9 @@ class pasCreate
         //escape and sanitize input string, incase someone tries an sql injection attack
         $tableName = "user$userID";  //getUserTableName();
         $PID = 'pid';
-        $uint = 'int unsigned';
+        $DT = 'datetime';
+        $UINT = 'int unsigned';
+        $NN = 'NOT NULL';
 
         $defaultCharset = 'DEFAULT CHARSET = utf8';
         $defaultEngine = 'ENGINE = InnoDB';
@@ -116,9 +118,12 @@ class pasCreate
         //so must use reqular queries
         $res = $aoPurchasesDB->query(
            "CREATE TABLE IF NOT EXISTS $tableName(
-                $PID $uint NOT NULL PRIMARY KEY
+                $PID $UINT $NN PRIMARY KEY
             )$defaultEngine $defaultCharset"
-            //auto-increment id
+            //initDate $DT $NN
+            //completeDate $DT
+            //confirm bool $NN
+            //auto-increment pid
         );
         //$SD $date,
         //$ED $date,
@@ -270,7 +275,10 @@ class pasCreate
             if(pasCreate::userTable($uid) {
                 if(pasCreate::userSalesTable($uid) ){
                     if(pasCreate::auctionLossTable($uid) ){
+                        //if(pasCreate::userPurchases($uid)){
                         return true;
+                        //}
+                        //echo 'Could not create user PayPal Purchase Table';
                     }
                     echo 'Could not create Auction Loss Table';
                 }
@@ -282,14 +290,6 @@ class pasCreate
     }
 }
 
-/*if(isset($_GET) && !empty($_GET) ){
-    //args being passed vai the url
-    $op = (isset($_GET['op']) && isAlpha($_GET['op']) ) ? $_GET['op'] : '';
-    if($op == 'asc'){
-        getAuctionCars();
-        exit();
-    }
-}*/
 if($ps){
     $cid = 'carID';
     

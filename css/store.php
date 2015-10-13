@@ -28,6 +28,12 @@ function l0(){
 function t0(){
     css::top('0%');
 }
+function r0(){
+    css::right('0%');
+}
+//function b0(){
+    //css::bottom('0%');
+//}
 //function wh100(){
     //css::size('100%', '100%');
 //}

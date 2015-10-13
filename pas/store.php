@@ -21,6 +21,7 @@ if(isSetG() ){
             // //user initializes cash purchase before being renavigated to paypal store
             //$res = $aoPurchases->query(
                 //"UPDATE $tn
+                    //$PID='',
                     //op=$op,
                    // $V=$val,
                     //startDate=DATE(),

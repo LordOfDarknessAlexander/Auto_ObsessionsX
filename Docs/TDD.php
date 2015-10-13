@@ -194,7 +194,13 @@ This document describes the technical standards used in the development of the A
                     <li><a href='#selling'>Selling</a></li>
                 </ol>
             </li>
-            <li><a href=''>Repairs and Upgrades</a></li>
+            <li>
+            <a href='#UandR'>Repairs and Upgrades</a>
+            <ol>
+            <li><a href='#vehicleUpgrades'>Vehicle Upgrades</a></li>
+            <li><a href='#vehicleRepairs'>Vehicles Repairs</a></li>
+            </ol>
+            </li>
             <li><a href='#ai'>AI</a></li>
             <li><a href='#store'>Store</a></li>
         </ol>
